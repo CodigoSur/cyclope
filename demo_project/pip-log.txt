@@ -1,0 +1,116 @@
+--editable=git://github.com/matthiask/feincms.git is not the right format; it must have #egg=Package
+Exception information:
+Traceback (most recent call last):
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/basecommand.py", line 115, in main
+    self.run(options, args)
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/commands/install.py", line 151, in run
+    InstallRequirement.from_editable(name, default_vcs=options.default_vcs))
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/req.py", line 60, in from_editable
+    name, url = parse_editable(editable_req, default_vcs)
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/req.py", line 1360, in parse_editable
+    % editable_req)
+InstallationError: --editable=git://github.com/matthiask/feincms.git is not the right format; it must have #egg=Package
+------------------------------------------------------------
+/var/www/pyclope.nicoechaniz.com.ar/workenv/bin/pip run on Fri Feb 12 11:02:53 2010
+Requirement 'hg+tp://code.tabo.pe/django-treebeard/#egg=django-treebeard' looks like a filename, but the file does not exist
+Unpacking ./hg+tp:/code.tabo.pe/django-treebeard/#egg=django-treebeard
+Exception:
+Traceback (most recent call last):
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/basecommand.py", line 115, in main
+    self.run(options, args)
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/commands/install.py", line 155, in run
+    requirement_set.install_files(finder, force_root_egg_info=self.bundle, bundle=self.bundle)
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/req.py", line 830, in install_files
+    self.unpack_url(url, location, self.is_download)
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/req.py", line 918, in unpack_url
+    self.unpack_file(source, location, content_type, link)
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/req.py", line 1055, in unpack_file
+    or tarfile.is_tarfile(filename)
+  File "/usr/lib/python2.6/tarfile.py", line 2523, in is_tarfile
+    t = open(name)
+  File "/usr/lib/python2.6/tarfile.py", line 1647, in open
+    return func(name, "r", fileobj, **kwargs)
+  File "/usr/lib/python2.6/tarfile.py", line 1709, in gzopen
+    fileobj = bltn_open(name, mode + "b")
+IOError: [Errno 2] No such file or directory: '/var/www/pyclope.nicoechaniz.com.ar/dj_project/hg+tp:/code.tabo.pe/django-treebeard/#egg=django-treebeard'
+------------------------------------------------------------
+/var/www/pyclope.nicoechaniz.com.ar/workenv/bin/pip run on Mon Feb 22 10:53:16 2010
+Downloading/unpacking django
+  Getting page http://pypi.python.org/simple/django
+  URLs to search for versions for django:
+  * http://pypi.python.org/simple/django/
+  Getting page http://pypi.python.org/simple/django/
+  Getting page http://www.djangoproject.com/
+  Skipping page http://media.djangoproject.com/releases/1.0.3/Django-1.0.3.tar.gz (from http://pypi.python.org/simple/Django/) because of Content-Type: application/octet-stream
+  Skipping page http://media.djangoproject.com/releases/1.1/Django-1.1.tar.gz (from http://pypi.python.org/simple/Django/) because of Content-Type: application/octet-stream
+  Skipping page http://media.djangoproject.com/releases/1.1.1/Django-1.1.1.tar.gz (from http://pypi.python.org/simple/Django/) because of Content-Type: application/octet-stream
+  Skipping page http://media.djangoproject.com/releases/1.0.1/Django-1.0.1-final.tar.gz (from http://pypi.python.org/simple/Django/) because of Content-Type: application/octet-stream
+  Skipping page http://media.djangoproject.com/releases/1.0.2/Django-1.0.2-final.tar.gz (from http://pypi.python.org/simple/Django/) because of Content-Type: application/octet-stream
+  Getting page http://www.djangoproject.com/download/1.0.1-beta-1/tarball/
+  Skipping page http://media.djangoproject.com/releases/1.0.4/Django-1.0.4.tar.gz (from http://pypi.python.org/simple/Django/) because of Content-Type: application/octet-stream
+  Analyzing links from page http://pypi.python.org/simple/Django/
+    Found link http://pypi.python.org/packages/source/D/Django/Django-1.0.2-final.tar.gz#md5=89353e3749668778f1370d2e444f3adc (from http://pypi.python.org/simple/Django/), version: 1.0.2-final
+    Found link http://pypi.python.org/packages/source/D/Django/Django-1.0.3.tar.gz#md5=3c5435b015d8cde602b17a5f0c9873dc (from http://pypi.python.org/simple/Django/), version: 1.0.3
+    Found link http://pypi.python.org/packages/source/D/Django/Django-1.0.1-final.tar.gz#md5=441efb2f6609ac8f4fab651d4eb0c091 (from http://pypi.python.org/simple/Django/), version: 1.0.1-final
+    Found link http://pypi.python.org/packages/source/D/Django/Django-1.1.1.tar.gz#md5=d7839c192e115f9c4dd8777de24dc21c (from http://pypi.python.org/simple/Django/), version: 1.1.1
+    Found link http://pypi.python.org/packages/source/D/Django/Django-1.1.tar.gz#md5=b2d75b4457a39c405fa2b36bf826bf6b (from http://pypi.python.org/simple/Django/), version: 1.1
+    Found link http://pypi.python.org/packages/source/D/Django/Django-1.0.4.tar.gz#md5=ad1d5eb37ba5b6ec9b7f8ce6af1b5562 (from http://pypi.python.org/simple/Django/), version: 1.0.4
+    Found link http://pypi.python.org/packages/source/D/Django/Django-1.0.1%20beta%201.tar.gz#md5=af2b47bbc4149bb07e03935e7ff2353e (from http://pypi.python.org/simple/Django/), version: 1.0.1
+    Skipping link http://www.djangoproject.com/ (from http://pypi.python.org/simple/Django/); not a file
+    Found link http://media.djangoproject.com/releases/1.0.3/Django-1.0.3.tar.gz (from http://pypi.python.org/simple/Django/), version: 1.0.3
+    Found link http://media.djangoproject.com/releases/1.1/Django-1.1.tar.gz (from http://pypi.python.org/simple/Django/), version: 1.1
+    Found link http://media.djangoproject.com/releases/1.1.1/Django-1.1.1.tar.gz (from http://pypi.python.org/simple/Django/), version: 1.1.1
+    Found link http://media.djangoproject.com/releases/1.0.1/Django-1.0.1-final.tar.gz (from http://pypi.python.org/simple/Django/), version: 1.0.1-final
+    Found link http://media.djangoproject.com/releases/1.0.2/Django-1.0.2-final.tar.gz (from http://pypi.python.org/simple/Django/), version: 1.0.2-final
+    Skipping link http://www.djangoproject.com/download/1.0.1-beta-1/tarball/ (from http://pypi.python.org/simple/Django/); not a file
+    Found link http://media.djangoproject.com/releases/1.0.4/Django-1.0.4.tar.gz (from http://pypi.python.org/simple/Django/), version: 1.0.4
+  Analyzing links from page http://www.djangoproject.com/
+    Skipping link http://media.djangoproject.com/css/homepage.css (from http://www.djangoproject.com/); unknown archive format: .css
+    Skipping link http://media.djangoproject.com/css/print.css (from http://www.djangoproject.com/); unknown archive format: .css
+    Skipping link http://www.djangoproject.com/download/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://docs.djangoproject.com/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://www.djangoproject.com/weblog/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://www.djangoproject.com/community/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://code.djangoproject.com/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://c2.com/cgi/wiki?DontRepeatYourself (from http://www.djangoproject.com/); not a file
+    Skipping link http://docs.djangoproject.com/en/dev/intro/overview/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://docs.djangoproject.com/en/dev/intro/install/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://docs.djangoproject.com/en/dev/intro/tutorial01/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://docs.djangoproject.com/en/dev/topics/db/models/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://docs.djangoproject.com/en/dev/topics/db/queries/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://docs.djangoproject.com/en/dev/intro/tutorial02/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://docs.djangoproject.com/en/dev/topics/http/urls/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://docs.djangoproject.com/en/dev/topics/templates/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://docs.djangoproject.com/en/dev/topics/cache/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://docs.djangoproject.com/en/dev/topics/i18n/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://code.djangoproject.com/browser/django/trunk/LICENSE (from http://www.djangoproject.com/); not a file
+    Skipping link http://www.lawrence.com/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://projects.washingtonpost.com/congress/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://www.everyblock.com/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://www.ljworld.com/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://www.tabblo.com/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://www.torontolife.com/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://code.djangoproject.com/wiki/DjangoPoweredSites (from http://www.djangoproject.com/); not a file
+    Skipping link http://www.djangoproject.com/weblog/2010/feb/06/12-beta-1/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://www.djangoproject.com/weblog/2010/jan/06/12-alpha-1/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://www.djangoproject.com/weblog/2010/jan/05/djangoski/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://www.clearwind.ca/djangoski/register.html (from http://www.djangoproject.com/); unknown archive format: .html
+    Skipping link http://www.djangoproject.com/weblog/2009/dec/05/sprint-dec-2009/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://www.djangoproject.com/foundation/ (from http://www.djangoproject.com/); not a file
+    Skipping link http://mediatemple.net/ (from http://www.djangoproject.com/); not a file
+  Analyzing links from page http://media.djangoproject.com/releases/1.0.1/Django-1.0.1_beta_1.tar.gz
+  Using version 1.1.1 (newest of versions: 1.1.1, 1.1.1, 1.1, 1.1, 1.0.4, 1.0.4, 1.0.3, 1.0.3, 1.0.2-final, 1.0.2-final, 1.0.1-final, 1.0.1-final, 1.0.1)
+  Downloading from URL http://pypi.python.org/packages/source/D/Django/Django-1.1.1.tar.gz#md5=d7839c192e115f9c4dd8777de24dc21c (from http://pypi.python.org/simple/Django/)
+Exception:
+Traceback (most recent call last):
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/basecommand.py", line 115, in main
+    self.run(options, args)
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/commands/install.py", line 155, in run
+    requirement_set.install_files(finder, force_root_egg_info=self.bundle, bundle=self.bundle)
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/req.py", line 830, in install_files
+    self.unpack_url(url, location, self.is_download)
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/req.py", line 998, in unpack_url
+    logger.show_progress('%3i%%  %s' % (100*downloaded/total_length, format_size(downloaded)))
+  File "/var/www/pyclope.nicoechaniz.com.ar/workenv/lib/python2.6/site-packages/pip-0.6.3-py2.6.egg/pip/log.py", line 110, in show_progress
+    padding = ' ' * max(0, len(self.last_message)-len(message))
+KeyboardInterrupt
