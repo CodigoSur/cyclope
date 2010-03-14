@@ -1,0 +1,23 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}{{ block.super }}
+{% url admin:jsi18n as jsi18nurl %}
+<script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+{{ media }}
+
+<script type="text/javascript">
+$(function() {
+  $("select[id^='id_regionview_set-'][id$='-region']").each(function(i, sel){
+    $(sel).chainedSelect({
+        parent: '#id_template',
+        // this /cyclope/ url should not be hard_coded here
+        url: '/cyclope/layout_regions_json',
+        value: 'region_name',
+        label: 'verbose_name'
+    });
+  });
+});
+
+</script>
+
+{% endblock %}

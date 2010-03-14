@@ -3,4 +3,4 @@ syntax: glob
 *.pyo
 *~
 *.kpf
-
+pip-log.txt 

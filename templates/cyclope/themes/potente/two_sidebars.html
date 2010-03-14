@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+Plantilla Potente para Cyclope GPL
+Esta plantilla fue desarrollada por Codigo Sur: www.codigosur.org
+Participaron en su realizacion: Franca Grasselli, Domingo Lechon y Santiago Hoerth.
+Traducida de Smarty a Django por: NicoEchániz
+Codigo HTML realizado bajo licencia GPL (copialo, mejoralo, pasalo)
+Ver licencia en: http://creativecommons.org/licenses/GPL/2.0/deed.es_AR
+Ten en cuenta que las imagenes, los nombres y los logos de este sitio no pueden usarse. Solo el codigo HTML es GPL. Gracias :)
+Gracias a Radioteca.net y Unesco.
+Si modificas no borres estas lineas :)
+ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>{{ site_settings.title }}</title>
+  <meta name="Keywords" content="{{ site_settings.keywords }}" />
+  <meta name="Description" content="{{ site_settings.description }}" />
+  <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/potente.css" rel="stylesheet" type="text/css"/>
+
+<!-- !N FALTA IMPLEMENTAR
+<link href="/rss.php" title="RSS" type="application/rss+xml" rel="alternate">
+-->
+
+  <script src="{{ CYCLOPE_THEME_MEDIA_URL }}js/mootools.v1.11.js" type="text/javascript"></script>
+
+  <script language="javascript" type="text/javascript">
+  function abrir_popup(name) {
+window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar=no,scrollbars=yes');
+}
+  </script>
+
+  <!--
+  !N FALTA IMPLEMENTAR
+  {$menujs}
+  -->
+  </head>
+
+  <body>
+    <div id="mascara">
+
+      <div id="cabezal">
+        <div class="buscar">
+          <form action="/busqueda.php" method="post">
+            <input type="text" name="consulta" class="field" />
+            <input type="submit" value="BUSCAR" class="btn"/>
+          </form>
+        </div>
+        <div class="logo">
+          <h1><a href="{{ site_settings.url }}">{{ site_settings.title }}</a></h1>
+          <h2><a href="{{ site_settings.url }}">{{ site_settings.url }}</a></h2>
+        </div>
+      </div><!-- TERMINA CABEZAL -->
+
+      {% if menu %}
+      <div class="menuh">
+        <ul>
+          {% for item in menu %}
+          <li><a href="{{item.url}}"><span>{{ item.name }}</span></a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <div class="clear"></div>
+
+      <div id="medianera">
+        <div id="contenedor">
+          <div class="pre-cycloparser" /> <!-- !N HABÍA UN DIV SIN CERRAR Y CERRÉ ESTE -->
+
+          <!-- INICIA ESPACIO AGUA -->
+          <div id="agua">
+            <div class="top"></div>
+
+            <!-- !N FALTA IMPLEMENTAR: menu de secciones
+                 {$menu}
+            -->
+            <ul id="etiquetas">
+              <div class="top"><li class="title">Etiquetas</li> </div>
+              <div class="mid">
+                <div class="box">
+                  <!-- !N FALTA IMPLEMENTAR: tag-cloud-->
+                </div>
+              </div>
+              <div class="bottom"><div></div></div>
+            </ul>
+
+            <div id="rss"><a href="/rss.php">Suscripción RSS</a></div>
+            <div id="banners">
+              <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO" target="_blank">
+                <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_cc.png" alt="Licencia Creative Commons" width="94 height="15" border="0" />
+                </a><br />
+                <a href="http://cyclope.codigosur.org">
+                  <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_cyclope.png" alt="Administrado con Cyclope" width="94" height="15" border="0" />
+                  </a><br />
+                  <a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank">
+                    <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_css.png" alt="CSS Válido" width="94" height="15" border="0" />
+                    </a><br />
+            </div>
+            <!-- TERMINA BANNERS -->
+
+            <div id="logos">
+              Realizado con el apoyo de:    <br />
+              <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/logos.png" width="184" height="51" border="0" usemap="#map" />
+              <map name="map">
+                <!-- #$-:Image map file created by GIMP Image Map plug-in -->
+                <!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+                <!-- #$-:Please do not edit lines starting with "#$" -->
+                <!-- #$VERSION:2.3 -->
+                <!-- #$AUTHOR:sh -->
+                <area shape="rect" coords="8,2,55,50" alt="Radioteca.net" title="Radioteca.net" target="radioteca" href="http://www.radioteca.net" />
+                <area shape="rect" coords="64,1,119,50" alt="Código Sur" title="Código Sur" target="codigosur" href="http://www.codigosur.org" />
+                <area shape="rect" coords="130,1,183,50" alt="UNESCO" title="UNESCO" target="unesco" href="http://www.unesco.org" />
+              </map>
+            </div><!-- TERMINA logos -->
+            <div class="bottom"></div>
+          </div>
+          <!-- TERMINA ESPACIO AGUA -->
+
+          <!-- INICIA ESPACIO AIRE -->
+          <div id="aire">
+            <!-- INICIA TERCIARIA -->
+
+            <div id="{{ terciaria.label }}">
+              <div class="top"><span>{{ terciaria.label }}</span> </div>
+              <div class="box">
+                {% for article in terciaria.articles.all %}
+                <h6 class="fecha">{{ article.date }}</h6>
+                <h1><a href="articles/{{ article.slug }}">{{ article.label }}</a></h1>
+                  {% if article.author %}
+                  <h4>{{ article.author }}</h4>
+                  {% endif %}
+                  {% if article.photos %}
+                  <a href="articles/{{ article.slug }}">
+                    <img src="{{ article.thumbnail }}" width="60" border="0"/>
+                  </a>
+                  {% endif %}
+                <h2>{{ article.summary }} <a href="articles/{{ article.slug }}">Más.</a></h2>
+                <hr />
+                {% endfor %}
+              </div><!-- TERMINA box -->
+              <div class="bottom"></div>
+            </div>
+            <!-- TERMINA TERCIARIA -->
+
+            <!-- INICIA CUATERNARIA -->
+            <div id="{{ cuaternaria.label }}">
+              <div class="top"><span>{{ cuaternaria.label }}</span> </div>
+              <div class="box">
+                {% for article in cuaternaria.articles.all %}
+                <h6 class="fecha">{{ article.date }}</h6>
+                <h1><a href="articles/{{ article.slug }}">{{ article.label }}</a></h1>
+                  {% if article.author %}
+                  <h4>{{ article.author }}</h4>
+                  {% endif %}
+                  {% if article.photos %}
+                  <a href="articles/{{ article.slug }}">
+                    <img src="{{ article.thumbnail }}" width="60" border="0"/>
+                  </a>
+                  {% endif %}
+                <h2>{{ article.summary }} <a href="articles/{{ article.slug }}">Más.</a></h2>
+                <hr />
+                {% endfor %}
+              </div><!-- TERMINA box -->
+              <div class="bottom"></div>
+            </div>
+            <!-- TERMINA CUATERNARIA -->
+          </div>
+          <!-- TERMINA ESPACIO AIRE -->
+
+
+          <!-- INICIA ESPACIO FUEGO -->
+          <div id="fuego">
+            <!-- INICIA PRINCIPAL -->
+            <div id="principal">
+              <div class="top"><span>contenido</span></div>
+              {% block content %}
+              {% endblock %}
+              
+              {% include the_content%}
+
+{% comment %}
+              {section name=notaprincipal loop=$principal}
+              {if  $principal[notaprincipal].pretitulo != ''}
+              <h6 class="pretitulo">{ $principal[notaprincipal].pretitulo} |
+              </h6>
+              {/if}
+              <h6 class="fecha">{$principal[notaprincipal].fecha}</h6>
+              <h1><a href="{$principal[notaprincipal].link}">{$principal[notaprincipal].titulo}</a></h1>
+              {if $principal[notaprincipal].foto != ''}
+              <a href="{$principal[notaprincipal].link}">
+                <img src="{$principal[notaprincipal].foto}" align="middle" border="0"/>
+              </a>
+              {/if}
+              <h2>{$principal[notaprincipal].copete}.
+              <a href="{$principal[notaprincipal].link}" class="leermas">Más.</a>
+              </h2>
+              {if $principal[notaprincipal].autor != ''}
+              <h4>{$principal[notaprincipal].autor} </h4>
+              {/if}
+              {$principal[notaprincipal].etiquetas}
+              <ul class="compartir">
+                <li class="recomendar">
+                  <a href="/compartir.php?id={$principal[notaprincipal].id}" onclick="abrir_popup(this);return false">Compartir información</a>
+                </li>
+                {$principal[notaprincipal].cantcomentarios}
+              </ul>
+              <hr />
+
+              <div class="bottom"></div>
+{% endcomment %}
+            </div>
+            <!-- TERMINA PRINCIPAL -->
+
+          <!-- TERMINA ESPACIO FUEGO-->
+
+        </div> <!-- TERMINA contenedor-->
+      </div> <!-- TERMINA medianera -->
+
+      <div id="espaciopie"></div>
+      <div id="pie">
+        <a href="http://www.radioteca.net">Radioteca</a>, <a href="http://www.unesco.org">UNESCO</a> y <a href="http://www.codigosur.org">Código Sur</a> apoyan la construcción de esta web, pero no necesariamente comparten y adhieren a los contenidos publicados, siendo estos absoluta responsabilidad de las organizaciones usuarias.<br/>
+        Los contenidos de este sitio web están bajo una <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO"> Licencia Creative Commons Reconocimiento-NoComercial-SinObraDerivada 3.0</a>.<br/>
+        Este sitio ha sido diseñado por <a href="http://www.codigosur.org">Código Sur</a> y es administrado con el editor dinámico de contenidos <a href="http://cyclope.codigosur.org">Cyclope 2.0</a> que ha sido desarrollado por <a href="http://www.codigosur.org">Código Sur</a>.<br/>
+        Este sitio ha sido desarrollado sobre estándares de diseño web, cualquier navegador de calidad lo visualizará correctamente: <br/>
+        <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/navegadores.png" width="246" height="36" border="0" usemap="#map-nav" alt=""/>
+        <map name="map-nav" id="map-nav">
+  <!-- #$-:Image map file created by GIMP Image Map plug-in -->
+  <!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+  <!-- #$-:Please do not edit lines starting with "#$" -->
+  <!-- #$VERSION:2.3 -->
+  <!-- #$AUTHOR:sh -->
+        <area shape="rect" coords="48,1,85,35" alt="Konkeror" title="Konkeror" href="http://www.konqueror.org/" />
+        <area shape="rect" coords="6,1,41,35" alt="Mozilla Firefox" title="Mozilla Firefox" href="http://www.mozilla-europe.org/es/firefox/" />
+        <area shape="rect" coords="88,0,120,36" alt="Epiphany" title="Epiphany" href="http://projects.gnome.org/epiphany/" />
+        <area shape="rect" coords="126,1,158,35" alt="Opera" title="Opera" href="http://www.opera.com/download/" />
+        <area shape="rect" coords="162,3,199,34" alt="Safari" title="Safari" href= "http://www.apple.com/es/safari/download/" />
+        <area shape="rect" coords="206,4,242,34" alt="Google Chrome" title="Google Chrome" href="http://www.google.com/chrome/index.html?hl=es" />
+        </map>
+      </div>
+    </div> <!-- TERMINA mascara -->
+    <!-- {$urchin}{$piwik} -->
+  </body>
+</html>

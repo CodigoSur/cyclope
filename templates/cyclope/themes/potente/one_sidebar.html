@@ -16,13 +16,13 @@ Si modificas no borres estas lineas :)
   <title>{{ site_settings.title }}</title>
   <meta name="Keywords" content="{{ site_settings.keywords }}" />
   <meta name="Description" content="{{ site_settings.description }}" />
-  <link href="{{ CYCLOPE_MEDIA_URL }}css/potente.css" rel="stylesheet" type="text/css"/>
+  <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/potente.css" rel="stylesheet" type="text/css"/>
 
 <!-- !N FALTA IMPLEMENTAR
 <link href="/rss.php" title="RSS" type="application/rss+xml" rel="alternate">
 -->
 
-  <script src="{{ CYCLOPE_MEDIA_URL }}js/mootools.v1.11.js" type="text/javascript"></script>
+  <script src="{{ CYCLOPE_THEME_MEDIA_URL }}js/mootools.v1.11.js" type="text/javascript"></script>
 
   <script language="javascript" type="text/javascript">
   function abrir_popup(name) {
@@ -52,10 +52,10 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
         </div>
       </div><!-- TERMINA CABEZAL -->
 
-      {% if menuh %}
+      {% if menu %}
       <div class="menuh">
         <ul>
-          {% for item in menuh %}
+          {% for item in menu %}
           <li><a href="{{item.url}}"><span>{{ item.name }}</span></a></li>
           {% endfor %}
         </ul>
@@ -88,20 +88,20 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
             <div id="rss"><a href="/rss.php">Suscripción RSS</a></div>
             <div id="banners">
               <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO" target="_blank">
-                <img src="{{ CYCLOPE_MEDIA_URL }}images/banners/banners_cc.png" alt="Licencia Creative Commons" width="94 height="15" border="0" />
+                <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_cc.png" alt="Licencia Creative Commons" width="94 height="15" border="0" />
                 </a><br />
                 <a href="http://cyclope.codigosur.org">
-                  <img src="{{ CYCLOPE_MEDIA_URL }}images/banners/banners_cyclope.png" alt="Administrado con Cyclope" width="94" height="15" border="0" />
+                  <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_cyclope.png" alt="Administrado con Cyclope" width="94" height="15" border="0" />
                   </a><br />
                   <a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank">
-                    <img src="{{ CYCLOPE_MEDIA_URL }}images/banners/banners_css.png" alt="CSS Válido" width="94" height="15" border="0" />
+                    <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_css.png" alt="CSS Válido" width="94" height="15" border="0" />
                     </a><br />
             </div>
             <!-- TERMINA BANNERS -->
 
             <div id="logos">
               Realizado con el apoyo de:    <br />
-              <img src="{{ CYCLOPE_MEDIA_URL }}images/banners/logos.png" width="184" height="51" border="0" usemap="#map" />
+              <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/logos.png" width="184" height="51" border="0" usemap="#map" />
               <map name="map">
                 <!-- #$-:Image map file created by GIMP Image Map plug-in -->
                 <!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
@@ -173,7 +173,13 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
           <div id="fuego">
             <!-- INICIA PRINCIPAL -->
             <div id="principal">
-              <div class="top"><span>{$nombres.principal}</span></div>
+              <div class="top"><span>contenido</span></div>
+              {% block content %}
+              {% endblock %}
+              
+              {% include the_content%}
+
+{% comment %}
               {section name=notaprincipal loop=$principal}
               {if  $principal[notaprincipal].pretitulo != ''}
               <h6 class="pretitulo">{ $principal[notaprincipal].pretitulo} |
@@ -202,44 +208,10 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
               <hr />
 
               <div class="bottom"></div>
-              {/section}
+{% endcomment %}
             </div>
             <!-- TERMINA PRINCIPAL -->
 
-
-            <!-- INICIA SECUNDARIA -->
-            <div id="secundaria">
-              <div class="top"><span>{$nombres.secundaria}</span></div>
-              {section name=bucle loop=$secundaria}
-              {if  $secundaria[bucle].pretitulo != ''}
-              <h6 class="pretitulo">{ $secundaria[bucle].pretitulo} |
-              </h6>
-              {/if}
-              <h6 class="fecha">{$secundaria[bucle].fecha}</h6>
-              {if $secundaria[bucle].foto != ''}
-              <a href="{$secundaria[bucle].link}">
-                <img src="{$secundaria[bucle].foto}" width="88" border="0"/>
-              </a>
-              {/if}
-              <h1><a href="{$secundaria[bucle].link}">{$secundaria[bucle].titulo}</a></h1>
-              <h2>{$secundaria[bucle].copete} <a href="{$secundaria[bucle].link}">Más.</a></h2>
-              {if $secundaria[bucle].autor != ''}
-              <h4>{$secundaria[bucle].autor} </h4>
-              {/if}
-              {$secundaria[bucle].etiquetas}
-              <ul class="compartir">
-                <li class="recomendar">
-                  <a href="/compartir.php?id={$secundaria[bucle].id}" onclick="abrir_popup(this);return false">Compartir información
-                  </a>
-                </li>
-                {$secundaria[bucle].cantcomentarios}
-              </ul>
-              <hr />
-              {/section}
-              <div class="bottom"></div>
-            </div>
-            <!-- TERMINA SECUNDARIA -->
-          </div>
           <!-- TERMINA ESPACIO FUEGO-->
 
         </div> <!-- TERMINA contenedor-->
@@ -251,7 +223,7 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
         Los contenidos de este sitio web están bajo una <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO"> Licencia Creative Commons Reconocimiento-NoComercial-SinObraDerivada 3.0</a>.<br/>
         Este sitio ha sido diseñado por <a href="http://www.codigosur.org">Código Sur</a> y es administrado con el editor dinámico de contenidos <a href="http://cyclope.codigosur.org">Cyclope 2.0</a> que ha sido desarrollado por <a href="http://www.codigosur.org">Código Sur</a>.<br/>
         Este sitio ha sido desarrollado sobre estándares de diseño web, cualquier navegador de calidad lo visualizará correctamente: <br/>
-        <img src="{$templatedir}/imagenes/css/navegadores.png" width="246" height="36" border="0" usemap="#map-nav" alt=""/>
+        <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/navegadores.png" width="246" height="36" border="0" usemap="#map-nav" alt=""/>
         <map name="map-nav" id="map-nav">
   <!-- #$-:Image map file created by GIMP Image Map plug-in -->
   <!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
@@ -267,6 +239,6 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
         </map>
       </div>
     </div> <!-- TERMINA mascara -->
-    {$urchin}{$piwik}
+    <!-- {$urchin}{$piwik} -->
   </body>
 </html>

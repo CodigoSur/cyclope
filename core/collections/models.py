@@ -14,7 +14,7 @@ class Collection(models.Model):
     A facility for creating custom content collections
     """
     name = models.CharField(_('name'), max_length=50, unique=True)
-    slug = AutoSlugField(populate_from='name')
+    slug = AutoSlugField(populate_from='name', always_update=True)
     is_navigation_root = models.BooleanField(_('is navigation root'), default=False)
     content_types = models.ManyToManyField(ContentType,
                                 verbose_name=_('content types'), db_index=True)
@@ -34,7 +34,7 @@ class Category(models.Model):
         verbose_name=_('collection'), related_name=_('collection categories'))
     name = models.CharField(_('name'), max_length=50)
     slug = AutoSlugField(populate_from='name',
-                         unique_with=('parent', 'collection'))
+                         unique_with=('parent', 'collection'), always_update=True)
     parent = models.ForeignKey('self', verbose_name=_('parent'),
                                related_name=_('children'), null=True, blank=True)
     active = models.BooleanField(_('active'), default=True, db_index=True)
@@ -49,8 +49,13 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         # this is needed for the feincms.editor.TreeEditor to correctly display the hierarchy
-        return self.__unicode__()
-    #
+#        return self.__unicode__()
+        pass
+
+    def valid_parents(self):
+        return Category.tree.filter(pk__isnot=self.pk)
+
+
     class Meta:
         unique_together = ('collection', 'name')
         verbose_name = _('category')

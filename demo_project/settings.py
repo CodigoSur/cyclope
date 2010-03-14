@@ -92,12 +92,13 @@ INSTALLED_APPS = (
     'mptt',
 
 #    'south',
+    'ajax_filtered_fields',
+    'debug_toolbar',
+
     'cyclope',
     'cyclope.core.collections',
 #    'cyclope.apps.articles',
 #    'demo_project.website',
-
-    'debug_toolbar',
 
 )
 

@@ -67,6 +67,7 @@ FilterSpec.filter_specs.insert(0, (lambda f: getattr(f, 'category_filter', False
 
 class CategoryForm(forms.ModelForm):
     description = forms.CharField(widget=WYMEditor(), required=False)
+    parent = TreeNodeChoiceField(queryset=Category.tree.all(), required=False)
 
     class Meta:
         model = Category
