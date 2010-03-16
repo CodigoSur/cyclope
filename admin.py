@@ -14,7 +14,6 @@ from cyclope.forms import StaticPageAdminForm,\
 from cyclope.core.collections.admin import CollectibleAdmin
 
 
-
 class BaseContentAdmin(admin.ModelAdmin):
     # updates related menu_items information when a BaseContent is saved
     form = BaseContentAdminForm
@@ -37,6 +36,7 @@ class BaseContentAdmin(admin.ModelAdmin):
 
 admin.site.register(BaseContent, BaseContentAdmin)
 
+
 class MenuItemAdmin(editor.TreeEditor):
     form = MenuItemAdminForm
 #    readonly_fields = ['content_object']
@@ -53,13 +53,12 @@ class MenuItemAdmin(editor.TreeEditor):
 admin.site.register(MenuItem, MenuItemAdmin)
 admin.site.register(Menu)
 
-from django import forms
-from cyclope.widgets import WYMEditor
 
 class StaticPageAdmin(CollectibleAdmin, BaseContentAdmin):
     form = StaticPageAdminForm
 
 admin.site.register(StaticPage, StaticPageAdmin)
+
 
 class RegionViewInline(admin.StackedInline):
     form = RegionViewInlineForm
@@ -74,6 +73,7 @@ class LayoutAdmin(admin.ModelAdmin):
     inlines = (RegionViewInline, )
 
 admin.site.register(Layout, LayoutAdmin)
+
 
 class SiteSettingsAdmin(admin.ModelAdmin):
     form = SiteSettingsAdminForm

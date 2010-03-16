@@ -70,6 +70,10 @@ class CyclopeSite(object):
         return self.get_urls()
     urls = property(urls)
 
+    def get_default_view_name(self, model):
+        return [ view_config for view_config in self._registry[model]
+                if view_config['is_default'] == True ][0]['view_name']
+
 
 #### Site Views ####
 #
@@ -123,10 +127,11 @@ class CyclopeSite(object):
         theme_name = SiteSettings.objects.get().theme
         theme_settings = getattr(cyc_settings.CYCLOPE_THEMES, theme_name)
         regions = theme_settings.layout_templates[template_filename]['regions']
-        regions_data = [ {'region_name': region_name,
-                          'verbose_name': verbose_name}
-                         for region_name, verbose_name in regions.items()
-                         if region_name != 'content' ]
+        regions_data = [{'region_name': '', 'verbose_name': '------'}]
+        regions_data.extend([ {'region_name': region_name,
+                               'verbose_name': verbose_name}
+                            for region_name, verbose_name in regions.items()
+                            if region_name != 'content' ])
         json_data = simplejson.dumps(regions_data)
         return HttpResponse(json_data, mimetype='application/json')
 

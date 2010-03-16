@@ -3,12 +3,14 @@
 from django.contrib import admin
 from django.utils.translation import ugettext as _
 from django import forms
-from feincms.admin import editor
-from cyclope.widgets import WYMEditor
-from mptt.forms import TreeNodeChoiceField
+from django.db.models import get_model
 from django.contrib.contenttypes import generic
 from django.db import models
 
+from mptt.forms import TreeNodeChoiceField
+from feincms.admin import editor
+
+from cyclope.widgets import WYMEditor
 from models import *
 
 ####

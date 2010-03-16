@@ -16,10 +16,6 @@ import cyclope
 
 class SiteSettings(models.Model):
     site = models.ForeignKey(Site, unique=True)
-    #name = models.CharField(_('domain'),max_length=250,
-    #                             db_index=True, blank=False, unique=True)
-    #
-    #slug = AutoSlugField(populate_from='site__name')
     theme = models.CharField(_('templating theme'), max_length=250)
     default_layout = models.ForeignKey('Layout',
                                        verbose_name=_('default layout'),
@@ -63,7 +59,8 @@ class MenuItem(models.Model):
                               related_name=_('children'), null=True, blank=True)
     slug = AutoSlugField(populate_from='name', unique_with='parent',
                          always_update=True)
-    custom_url = models.CharField(_('custom URL'), max_length=200, blank=True,
+    custom_url = models.CharField(_('custom URL'), max_length=200,
+                                  blank=True, default='',
                                   help_text=_(u"Either set an URL here or \
                                               select a content type and view."))
 #    url = models.URLField(editable=False, )
@@ -78,14 +75,14 @@ class MenuItem(models.Model):
                      blank=True, null=True)
     # content_view choices are set through an AJAX view
     content_view = models.CharField(_('view'), max_length=255,
-                                    blank=True, null=True)
+                                    blank=True, default='')
 
     def save(self):
         # check that data is consistent
         #ToDo: raise appropriate exceptions
         if self.content_object and not self.content_type:
             self.content_type = ContentType.objects.get_for_model(self.content_object)
-        if self.content_view and not self.content_type:
+        if self.content_view != '' and not self.content_type:
             raise Exception(_(u'No content selected'))
 
         if self.content_object:
@@ -95,41 +92,21 @@ class MenuItem(models.Model):
                 raise Exception(
                     _(u'%s: "%s" does not exist' % \
                       (self.content_type.model, self.content_object)))
-        #    try:
-        #
-        #    object_type = ContentType.objects.get_for_model(self.content_object)
-        #    if object_type != self.content_type:
-        #        print object_type, self.content_type
 
-        if self.content_type and not self.content_view:
+        if self.content_type and self.content_view == '':
             model = get_model(self.content_type.app_label,
                               self.content_type.model)
-            self.content_view = [
-                view_config for view_config in cyclope.site._registry[model]
-                if view_config['is_default'] == True ][0]['view_name']
+            self.content_view = cyclope.site.get_default_view_name(model)
 
         if not self.content_type and not self.custom_url:
             self.active = False
 
         super(MenuItem, self).save()
 
-
-    def get_content_view(self):
-        if self.content_type and not self.content_view:
-            if self.content_object:
-                model = self.content_object
-            else:
-                model = get_model(self.content_type.app_label,
-                                  self.content_type.model)
-            self.content_view = [
-                view_config for view_config in cyclope.site._registry[model]
-                if view_config['is_default'] == True ][0]['view_name']
-
-
     @property
     def url(self):
         if self.custom_url:
-            return cyclope.site.CYCLOPE_PREFIX + self.custom_url
+            return cycope.site.CYCLOPE_PREFIX + self.custom_url
         else:
             model = get_model(self.content_type.app_label,
                               self.content_type.model)
@@ -178,10 +155,10 @@ class BaseContent(models.Model):
         return '%s/%s/%s'\
                 % (cls._meta.app_label, cls._meta.object_name.lower(), view)
 
-    #@classmethod
-    #def get_view_params(cls):
-    #    return {'queryset': cls.objects,
-    #            'template_object_name': cls._meta.object_name.lower()}
+    @classmethod
+    def default_detail_params(cls):
+        return {'queryset': cls.objects,
+                'template_object_name': cls._meta.object_name.lower()}
 
     def __unicode__(self):
         return self.name
@@ -216,8 +193,6 @@ class StaticPage(BaseCommentedContent, Collectible):
 
 class RegionView(models.Model):
     layout = models.ForeignKey('Layout')
-#    view = models.CharField(_('view'), max_length=100)
-#    block_view = models.ForeignKey('BlockView')
     content_type = models.ForeignKey(ContentType,
                      verbose_name=_('type'), related_name='region_views',
                      blank=True, null=True)
@@ -225,9 +200,9 @@ class RegionView(models.Model):
                      verbose_name=_('object'), related_name='region_views',
                      blank=True, null=True)
     content_view = models.CharField(_('view'), max_length=255,
-                                    blank=True, null=True)
+                                    blank=True, default='')
     region = models.CharField(_('region'), max_length=100,
-                              blank=True, null=True)
+                              blank=True, default='')
     weight = models.PositiveIntegerField(verbose_name=_('weight'), default=0,
                                          blank=True, null=True)
 
@@ -239,7 +214,6 @@ class Layout(models.Model):
     name = models.CharField(_('name'), max_length=50, db_index=True)
     # template choices are set in the form
     template = models.CharField(_('layout template'), max_length=100)
-#    blocks = models.ManyToManyField('BlockView', through=RegionView)
 
     def __unicode__(self):
         return self.name

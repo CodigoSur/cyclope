@@ -4,6 +4,7 @@ from django.conf import settings as django_settings
 from django.utils.translation import ugettext as _
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
+from django.db.models import get_model
 
 from mptt.forms import TreeNodeChoiceField
 
@@ -40,7 +41,6 @@ class BaseContentAdminForm(forms.ModelForm):
         if self.instance.id is not None:
             selected_items = [ values[0] for values in MenuItem.objects.filter(
                 content_object__id=self.instance.id).values_list('id') ]
-            print selected_items
             self.fields['menu_items'].initial = selected_items
 
 
@@ -59,15 +59,22 @@ class MenuItemAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(MenuItemAdminForm, self).__init__(*args, **kwargs)
+        if self.instance.id is not None:
+            # chainedSelect will show the selected choice
+            # if it is present before filling the choices through AJAX
+            selected_view = MenuItem.objects.get(id=self.instance.id).content_view
+            self.fields['content_view'].choices = [(selected_view, selected_view)]
         populate_type_choices(self)
 
     def clean(self):
+        #ToDo: data consistency is being done at model level see models.MenuItem.save(). Implement form validation.
         obj = self.instance
         if obj.custom_url and \
         (obj.content_type or obj.content_object or obj.content_view):
             raise ValidationError(
                 _(u'You can not set a Custom URL for menu entries \
                     with associated content'))
+        return super(MenuItemAdminForm, self).clean()
 
     class Meta:
         model = MenuItem
@@ -122,7 +129,37 @@ class RegionViewInlineForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(RegionViewInlineForm, self).__init__(*args, **kwargs)
+        if self.instance.id is not None:
+            # chainedSelect will show the selected choice
+            # if it is present before filling the choices through AJAX
+            # so we set them here at __init__ time
+            obj = RegionView.objects.get(id=self.instance.id)
+            if obj.region:
+                selected_region = obj.region
+                self.fields['region'].choices = [(selected_region,
+                                                  selected_region)]
+            if obj.content_view:
+                selected_view = obj.content_view
+                self.fields['content_view'].choices = [(selected_view,
+                                                        selected_view)]
         populate_type_choices(self)
+
+    def clean(self):
+        obj = self.instance
+        if not obj.content_type:
+            raise(ValidationError(_(u'Content type can not be empty')))
+        if obj.content_object:
+            try:
+                getattr(obj.content_object, obj.content_type.model)
+            except:
+                raise(ValidationError(_(u'Content object does not match content type')))
+        if obj.content_type:
+            if (obj.content_view == '' or not obj.content_view):
+                raise(ValidationError(_(u'You need to select a content view')))
+            if not obj.region:
+                raise(ValidationError(_(u'You need to select a region')))
+
+        return super(RegionViewInlineForm, self).clean()
 
 
     class Media:
