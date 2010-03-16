@@ -2,10 +2,9 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.conf.urls.defaults import *
+from django.utils.translation import ugettext as _
 
 from cyclope import settings as cyc_settings
-
-#from core.collections import models
 
 from django.contrib.contenttypes.models import ContentType
 from cyclope.models import BaseContent, Menu, MenuItem, SiteSettings
@@ -13,68 +12,20 @@ from cyclope.models import BaseContent, Menu, MenuItem, SiteSettings
 from django.utils.importlib import import_module
 from django.utils import simplejson
 
-##########
-## autodiscover() is an almost exact copy of django.contrib.admin.autodiscover()
-
-# A flag to tell us if autodiscover is running.  autodiscover will set this to
-# True while running, and False when it finishes.
-LOADING = False
-
-def autodiscover():
-    """
-    Auto-discover INSTALLED_APPS frontend.py modules and fail silently when
-    not present. This forces an import on them to register any frontend bits they
-    may want.
-    """
-    global LOADING
-    if LOADING:
-        return
-    LOADING = True
-
-    import imp
-    from django.conf import settings
-
-    for app in settings.INSTALLED_APPS:
-        mod = import_module(app)
-        try:
-            app_path = mod.__path__
-        except AttributeError:
-            continue
-        try:
-            imp.find_module('frontend', app_path)
-        except ImportError:
-            continue
-        import_module("%s.frontend" % app)
-    LOADING = False
-
-################
-
-#
-#class ModelDisplay(object):
-#    """
-#    Encapsulates frontend display options and functionality for a given model display.
-#    Each model can be associated with many Displays using site.register()
-#    """
-#    def __init__(self, model, name):
-#        self.model = model
-#        self.name = name
-
-
-
 class CyclopeSite(object):
     """
     Handles frontend display of models.
     """
     def __init__(self):
         self._registry = {}
-#        self.root_collections = models.Collection.objects.filter(is_navigation_root=True)
-#        self.root_categories = models.Category.objects.filter(is_navigation_root=True)
 
     def register_view(self, model, view, view_name=None,
-                      verbose_name=None, is_default=False, view_params= {}, extra_context={}):
+                      verbose_name=None, is_default=False,
+                      view_params= {}, extra_context={}):
 
         if not issubclass(model, BaseContent):
-            raise TypeError('%s does not inherit from BaseContent' % model.__class__)
+            raise TypeError(
+                '%s does not inherit from BaseContent' % model.__class__)
 
         if not view_name:
             view_name = view.__name__
@@ -119,42 +70,125 @@ class CyclopeSite(object):
         return self.get_urls()
     urls = property(urls)
 
+
+#### Site Views ####
+#
     def index(self, request):
-        menu = Menu.objects.get(pk=1)
+        #ToDo: Return prettier messages. Adapt for multi-site.
+
+        # we are asuming there's only one site. but this should be modified
+        # if we start using the sites framework and make cyclope multi-site
+        try:
+            site_settings = SiteSettings.objects.get()
+        except:
+            return HttpResponse(_(u'You need to create your site settings.'))
+
+        if not site_settings.default_layout:
+            return HttpResponse(
+                _(u'Improperly configured site. No default layout selected.'))
+
+        try:
+            current_theme = site_settings.theme
+        except:
+            return HttpResponse(
+                _(u'Improperly configured site. No theme selected.'))
+
+        menu = Menu.objects.get(main_menu=True)
         menu_items = MenuItem.objects.filter(menu=menu)
-        return render_to_response('cyclope/themes/%s/base.html' \
-                % cyc_settings.CYCLOPE_THEME,
-                RequestContext(request,
-                {'CYCLOPE_THEME_MEDIA_URL': cyc_settings.CYCLOPE_THEME_MEDIA_URL,
-                 'menu': menu_items,
-                 }))
+        try:
+            menu = Menu.objects.get(main_menu=True)
+            menu_items = MenuItem.objects.filter(menu=menu)
+        except:
+            menu_items = []
+
+        theme_media_url = '%sthemes/%s/' % (cyc_settings.CYCLOPE_MEDIA_URL,
+                                                    current_theme)
+        return render_to_response(
+            '%sthemes/%s/%s' % (
+                cyc_settings.CYCLOPE_PREFIX,
+                current_theme,
+                site_settings.default_layout.template),
+                RequestContext(
+                    request,
+                    {'CYCLOPE_THEME_MEDIA_URL': theme_media_url,
+                    'main_menu': menu_items,
+                    'site_settings': site_settings},
+                    )
+                )
+
+### JSON ##
 
     def layout_regions_json(self, request):
         template_filename = request.GET['q']
         theme_name = SiteSettings.objects.get().theme
         theme_settings = getattr(cyc_settings.CYCLOPE_THEMES, theme_name)
         regions = theme_settings.layout_templates[template_filename]['regions']
-        regions_data = [{'region_name': region_name,
-                               'verbose_name': verbose_name}
-                                for region_name, verbose_name in regions.items()
-                                if region_name != 'content'
-                       ]
+        regions_data = [ {'region_name': region_name,
+                          'verbose_name': verbose_name}
+                         for region_name, verbose_name in regions.items()
+                         if region_name != 'content' ]
         json_data = simplejson.dumps(regions_data)
         return HttpResponse(json_data, mimetype='application/json')
 
     def registered_views_json(self, request):
-#        print self._registry
         content_type_id = request.GET['q']
         model = ContentType.objects.get(pk=content_type_id).model_class()
-        print "EL MODELO", model
-        views = [ {'view_name': view_config['view_name'],
-                   'verbose_name': view_config['verbose_name'] }
-                  for view_config in self._registry[model] ]
+        views = [{'view_name': '', 'verbose_name': '------'}]
+        views.extend([ {'view_name': view_config['view_name'],
+                        'verbose_name': view_config['verbose_name']}
+                       for view_config in self._registry[model] ])
         json_data = simplejson.dumps(views)
         return HttpResponse(json_data, mimetype='application/json')
+#
+####
 
 site = CyclopeSite()
 
 
-#/collections/coll_slug/cat_slug
-#/collections/coll_slug/cat_slug/obj_slug u obj_id
+##########
+## autodiscover() is an almost exact copy of django.contrib.admin.autodiscover()
+
+# A flag to tell us if autodiscover is running.  autodiscover will set this to
+# True while running, and False when it finishes.
+LOADING = False
+
+def autodiscover():
+    """
+    Auto-discover INSTALLED_APPS frontend.py modules and fail silently when
+    not present.
+    This forces an import on them to register frontend views.
+    """
+    global LOADING
+    if LOADING:
+        return
+    LOADING = True
+
+    import imp
+    from django.conf import settings
+
+    for app in settings.INSTALLED_APPS:
+        mod = import_module(app)
+        try:
+            app_path = mod.__path__
+        except AttributeError:
+            continue
+        try:
+            imp.find_module('frontend', app_path)
+        except ImportError:
+            continue
+        import_module('%s.frontend' % app)
+#    import cyclope
+#    for model in cyclope.site._registry:
+    for model in site._registry:
+        default_view = [ view_config
+                        for view_config in site._registry[model]
+                        if view_config['is_default'] == True ]
+        if len(default_view) == 0:
+            raise(Exception(_(u'No default view set for %s' % model)))
+        elif len(default_view) > 1:
+            raise(Exception(
+                _(u'You can set only one default view for %s' % model)))
+
+    LOADING = False
+
+################

@@ -6,16 +6,20 @@ from django.contrib.contenttypes import generic
 from django import forms
 from cyclope.widgets import WYMEditor
 from cyclope.core.collections.admin import CollectibleAdmin
+from cyclope.admin import BaseContentAdmin
+from cyclope.forms import BaseContentAdminForm
+
 from models import *
 
-class ArticleForm(forms.ModelForm):
+class ArticleForm(BaseContentAdminForm):
     summary = forms.CharField(widget=WYMEditor())
     text = forms.CharField(widget=WYMEditor())
 
     class Meta:
         model = Article
 
-class ArticleAdmin(CollectibleAdmin):
+
+class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
     form = ArticleForm
     list_filter = CollectibleAdmin.list_filter + \
                   ('creation_date', 'author', 'source')

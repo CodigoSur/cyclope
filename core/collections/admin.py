@@ -43,7 +43,8 @@ class CategoryFilterSpec(ChoicesFilterSpec):
         # select categories available for the content type of the object
         qs = Category.tree.filter(collection__content_types=object_ctype)
         # create list of choices and the corresponding indented labels
-        self.lookup_choices = [(item.slug, u'%s%s' % ('-'* item.level, item.name)) \
+        self.lookup_choices = [(item.slug, u'%s%s' % \
+                                ('-'* item.level, item.name)) \
                                 for item in qs ]
         self.model = model
 
@@ -54,13 +55,14 @@ class CategoryFilterSpec(ChoicesFilterSpec):
                 'display': _('All')}
         for [val, display] in self.lookup_choices:
             yield {'selected': smart_unicode(val) == self.lookup_val,
-                    'query_string': cl.get_query_string({self.lookup_kwarg: val}),
-                    'display': display}
+                  'query_string': cl.get_query_string({self.lookup_kwarg: val}),
+                  'display': display}
 
     def title(self):
         return _('%s categories' % self.model._meta.verbose_name)
 
-FilterSpec.filter_specs.insert(0, (lambda f: getattr(f, 'category_filter', False),
+FilterSpec.filter_specs.insert(0, (lambda f: \
+                                   getattr(f, 'category_filter', False),
                                    CategoryFilterSpec))
 ####
 
@@ -85,6 +87,9 @@ class CategoryAdmin(editor.TreeEditor):
         }),
     )
 
+admin.site.register(Category, CategoryAdmin)
+
+
 class CategoryMapForm(forms.ModelForm):
     # we need to declare this field in order to make it accessible from
     # CategoryMapInline through form.declared_fields and override the queryset
@@ -92,7 +97,8 @@ class CategoryMapForm(forms.ModelForm):
 
 class CategoryMapInline(generic.GenericTabularInline):
     """
-    Limits choices to those suitable for the content type of the object being created / changed
+    Limits choices to those suitable for the content type
+    of the object being created / changed
     """
     form = CategoryMapForm
     model = CategoryMap
@@ -100,8 +106,8 @@ class CategoryMapInline(generic.GenericTabularInline):
 
     def queryset(self, request):
         # we only override the queryset for the category field
-        # this piece of code is here because it we need it to be called when showing the form
-        # it still looks like quite a "hacky" a place to put it...
+        # this piece of code is here because we need it to be called when showing the form
+        # it still looks like quite "hacky" a place to put it...
         req_app, req_model = request.path.rstrip('/').split('/')[-3:-1]
         req_model = models.get_model(req_app, req_model)
         req_model_ctype = ContentType.objects.get_for_model(req_model)
@@ -111,16 +117,11 @@ class CategoryMapInline(generic.GenericTabularInline):
             Category.tree.filter(collection__content_types=req_model_ctype)
         return super(CategoryMapInline, self).queryset(request)
 
-
 class CollectibleAdmin (admin.ModelAdmin):
     """
     Base Admin model for Collectible based objects.
-    list_filter and inlines in the inheriting object must be set as: ...
-
     """
     list_filter = ('categories',)
     inlines = [ CategoryMapInline, ]
 
-
 admin.site.register(Collection)
-admin.site.register(Category, CategoryAdmin)

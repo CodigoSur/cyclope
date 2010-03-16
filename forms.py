@@ -1,18 +1,47 @@
 
 from django import forms
 from django.conf import settings as django_settings
-#from django.db.models import get_model
+from django.utils.translation import ugettext as _
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ValidationError
+
 from mptt.forms import TreeNodeChoiceField
 
 from cyclope.widgets import WYMEditor
 from cyclope.models import StaticPage, MenuItem, SiteSettings, Layout, RegionView
 from cyclope import site as cyc_site, settings as cyc_settings
 
+class AjaxChoiceField(forms.ChoiceField):
+    """
+    ChoiceField that always return true for validate()
+    """
+    # we always return true because we don't know what choices were available
+    # at submit time, because they were populated through AJAX.
+    #ToDo: see if there's a way to find out which choices are valid.
+    def validate(self, value):
+        return True
+
+def populate_type_choices(myform):
+    ctype_choices = [('', '------')]
+    for model in cyc_site._registry:
+        ctype = ContentType.objects.get_for_model(model)
+        ctype_choices.append((ctype.id, ctype.name))
+    myform.fields['content_type'].choices = ctype_choices
+
+
+
 class BaseContentAdminForm(forms.ModelForm):
     menu_items = forms.ModelMultipleChoiceField(
-                    queryset = MenuItem.objects.all(),
-                    required=False
+                    queryset = MenuItem.tree.all(), required=False,
                     )
+
+    def __init__(self, *args, **kwargs):
+        super(BaseContentAdminForm, self).__init__(*args, **kwargs)
+        if self.instance.id is not None:
+            selected_items = [ values[0] for values in MenuItem.objects.filter(
+                content_object__id=self.instance.id).values_list('id') ]
+            print selected_items
+            self.fields['menu_items'].initial = selected_items
 
 
 class StaticPageAdminForm(BaseContentAdminForm):
@@ -21,43 +50,24 @@ class StaticPageAdminForm(BaseContentAdminForm):
 
     class Meta:
         model = StaticPage
-#        model = get_model('cyclope', 'static_page')
+
 
 class MenuItemAdminForm(forms.ModelForm):
-    # Choices get populated through javascript when a template is selected
-    # the corresponding json view is CyclopeSite.layout_regions_json()
-
-    content_view = forms.ChoiceField(required=False)
+    # content_view choices get populated through javascript when a template is selected
+    content_view = AjaxChoiceField(required=False)
     parent = TreeNodeChoiceField(queryset=MenuItem.tree.all(), required=False)
 
-    #def __init__(self, *args, **kwargs):
-    #    super(MenuItemAdminForm, self).__init__(*args, **kwargs)
-    #    choices = [('', '------')]
-    #
-    #    if self.instance.pk is not None and self.instance.content_object:
-    #        base_content = self.instance.content_object
-    #        related = base_content._meta.get_all_related_objects()
-    #
-    #        for obj in related:
-    #            related_content_model = obj.model
-    #            rel_name = related_content_model._meta.object_name.lower()
-    #            try:
-    #                related_content = getattr(base_content, rel_name)
-    #                break
-    #            except:
-    #                continue
-    #
-    #        if related_content_model in cyc_site._registry:
-    #            related_content_instance = related_content_model.objects.get(pk=self.instance.content_object.pk)
-    #
-    #            for view_config in cyc_site._registry[obj.model]:
-    #                if view_config['is_default']:
-    #                    url = related_content_instance.get_instance_url()
-    #                else:
-    #                    url = related_content_instance.get_instance_url(view_config['view_name'])
-    #                choices.append((url, view_config['verbose_name']))
-    #
-    #    self.fields['content_view'].choices = choices
+    def __init__(self, *args, **kwargs):
+        super(MenuItemAdminForm, self).__init__(*args, **kwargs)
+        populate_type_choices(self)
+
+    def clean(self):
+        obj = self.instance
+        if obj.custom_url and \
+        (obj.content_type or obj.content_object or obj.content_view):
+            raise ValidationError(
+                _(u'You can not set a Custom URL for menu entries \
+                    with associated content'))
 
     class Meta:
         model = MenuItem
@@ -82,14 +92,17 @@ class LayoutAdminForm(forms.ModelForm):
     template = forms.ChoiceField(required=True)
 
     def __init__(self, *args, **kwargs):
-        from cyclope.utils import themes
         super(LayoutAdminForm, self).__init__(*args, **kwargs)
+        from cyclope.utils import themes
 
         # we are asuming there's only one site. but this should be modified
         # if we start using the sites framework and make cyclope multi-site
-        theme_name = SiteSettings.objects.get().theme
+        #ToDo: adapt for multi-site
+        try:
+            theme_name = SiteSettings.objects.get().theme
+        except:
+            return
         theme_settings = getattr(cyc_settings.CYCLOPE_THEMES, theme_name)
-
         tpl_choices = [(tpl, tpl_settings['verbose_name'])
                        for tpl, tpl_settings
                        in theme_settings.layout_templates.items()]
@@ -99,11 +112,18 @@ class LayoutAdminForm(forms.ModelForm):
     class Meta:
         model = Layout
 
+
 class RegionViewInlineForm(forms.ModelForm):
 
-    # Choices get populated through javascript when a template is selected
+    # Region choices get populated through javascript when a template is selected
     # the corresponding json view is CyclopeSite.layout_regions_json()
-    region = forms.ChoiceField(required=False)
+    region = AjaxChoiceField(required=False)
+    content_view = AjaxChoiceField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        super(RegionViewInlineForm, self).__init__(*args, **kwargs)
+        populate_type_choices(self)
+
 
     class Media:
         js = (

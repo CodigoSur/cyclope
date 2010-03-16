@@ -18,7 +18,7 @@ DATABASE_NAME = os.path.join(os.path.dirname(__file__), 'example.db')
 
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
-LANGUAGE_CODE = 'es-ar'
+LANGUAGE_CODE = 'es'
 
 SITE_ID = 1
 
@@ -97,22 +97,13 @@ INSTALLED_APPS = (
 
     'cyclope',
     'cyclope.core.collections',
-#    'cyclope.apps.articles',
+    'cyclope.apps.articles',
 #    'demo_project.website',
 
 )
 
 # make sure you point this to your Feincms media files.
 FEINCMS_ADMIN_MEDIA = MEDIA_URL + 'feincms/'
-#FEINCMS_ADMIN_MEDIA_LOCATION = MEDIA_ROOT + 'FEINCMS_ADMIN_MEDIA'
 # TreeEditor throws an exception in the admin for Category (as of 2010-02-19)
-# if this is set to True (default)
+# if this is set to True
 FEINCMS_TREE_EDITOR_INCLUDE_ANCESTORS = False
-
-
-#APPEND_SLASH = False
-
-#try:
-#    from local_settings import *
-#except ImportError:
-#    pass

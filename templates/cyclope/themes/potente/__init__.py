@@ -3,6 +3,7 @@ from django.utils.translation import ugettext as _
 verbose_name = _('potente theme')
 
 layout_templates = {
+
     'one_sidebar.html':
         {
         'verbose_name': _('One sidebar'),
@@ -13,6 +14,7 @@ layout_templates = {
             'footer': _('footer'),
             }
         },
+
     'two_sidebars.html':
         {
         'verbose_name': _('Two sidebars'),

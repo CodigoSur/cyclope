@@ -1,19 +1,36 @@
 {% extends "admin/change_form.html" %}
 
-{% block extrahead %}{{ block.super }}
-{% url admin:jsi18n as jsi18nurl %}
-<script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
-{{ media }}
+{% block after_related_objects %}
 
 <script type="text/javascript">
-$(function() {
-  $("select[id^='id_regionview_set-'][id$='-region']").each(function(i, sel){
-    $(sel).chainedSelect({
-        parent: '#id_template',
-        // this /cyclope/ url should not be hard_coded here
-        url: '/cyclope/layout_regions_json',
-        value: 'region_name',
-        label: 'verbose_name'
+
+jQuery.noConflict()
+jQuery(document).ready(function($) {
+  $(function() {
+    $("select[id^='id_regionview_set-'][id$='-region']").each(function(i, sel){
+      $(sel).chainedSelect({
+          parent: '#id_template',
+          // this /cyclope/ url should not be hard_coded here
+          url: '/cyclope/layout_regions_json',
+          value: 'region_name',
+          label: 'verbose_name'
+      });
+    });
+
+// ToDo: register each content_view select with it's related content_type not just the first one. Need to make this work for each dinamically added formset
+    $("#id_regionview_set-0-content_view").chainedSelect({
+          parent: '#id_regionview_set-0-content_type',
+          // this /cyclope/ url should not be hard_coded here
+          url: '/cyclope/registered_views_json',
+          value: 'view_name',
+          label: 'verbose_name'
+    });
+    $("#id_regionview_set-1-content_view").chainedSelect({
+          parent: '#id_regionview_set-1-content_type',
+          // this /cyclope/ url should not be hard_coded here
+          url: '/cyclope/registered_views_json',
+          value: 'view_name',
+          label: 'verbose_name'
     });
   });
 });

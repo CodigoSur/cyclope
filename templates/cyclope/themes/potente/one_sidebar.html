@@ -47,15 +47,15 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
           </form>
         </div>
         <div class="logo">
-          <h1><a href="{{ site_settings.url }}">{{ site_settings.title }}</a></h1>
+          <h1><a href="{{ site_settings.url }}">{{ site_settings.title }} one sidebar</a></h1>
           <h2><a href="{{ site_settings.url }}">{{ site_settings.url }}</a></h2>
         </div>
       </div><!-- TERMINA CABEZAL -->
 
-      {% if menu %}
+      {% if main_menu %}
       <div class="menuh">
         <ul>
-          {% for item in menu %}
+          {% for item in main_menu %}
           <li><a href="{{item.url}}"><span>{{ item.name }}</span></a></li>
           {% endfor %}
         </ul>
@@ -176,7 +176,7 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
               <div class="top"><span>contenido</span></div>
               {% block content %}
               {% endblock %}
-              
+
               {% include the_content%}
 
 {% comment %}

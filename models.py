@@ -1,6 +1,7 @@
 # *-- coding:utf-8 --*
 
 from django.db import models
+from django.db.models import get_model
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -11,75 +12,132 @@ import mptt
 from autoslug.fields import AutoSlugField
 
 from cyclope.core.collections.models import Collectible
+import cyclope
 
 class SiteSettings(models.Model):
     site = models.ForeignKey(Site, unique=True)
     #name = models.CharField(_('domain'),max_length=250,
     #                             db_index=True, blank=False, unique=True)
     #
-    #slug = AutoSlugField(populate_from='name')
+    #slug = AutoSlugField(populate_from='site__name')
     theme = models.CharField(_('templating theme'), max_length=250)
-    default_layout = models.ForeignKey('Layout', verbose_name=_('default layout'), null=True, blank=True)
+    default_layout = models.ForeignKey('Layout',
+                                       verbose_name=_('default layout'),
+                                       null=True, blank=True)
     allow_comments = models.CharField(_('allow comments'), max_length=4,
                                       choices = (
                                                  ('YES',_('enabled')),
                                                  ('NO',_('disabled'))
                                     ))
 
-    global_title = models.CharField(_('global title'), max_length=250, blank=True, default='')
+    global_title = models.CharField(_('global title'),
+                                    max_length=250, blank=True, default='')
     keywords = models.TextField(_('keywords'), blank=True, default='')
     description = models.TextField(_('description'), blank=True, default='')
 
     def __unicode__(self):
         return self.site.name
 
+    class Meta:
+        verbose_name = _('site settings')
+        verbose_name_plural = _('site settings')
+
 
 class Menu(models.Model):
     name = models.CharField(_('name'), max_length=50, db_index=True)
+    main_menu = models.BooleanField(default=False)
+
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name = _('menu')
+        verbose_name_plural = _('menus')
+
 
 class MenuItem(models.Model):
-# this class could inherit from Category but mptt does not support it.
+# this class could inherit from Category but mptt does not inheritance well
     menu = models.ForeignKey(Menu, verbose_name=_('menu'), db_index=True)
     name = models.CharField(_('name'), max_length=50, db_index=True)
     parent = models.ForeignKey('self', verbose_name=_('parent'),
-                               related_name=_('children'), null=True, blank=True)
-    slug = AutoSlugField(populate_from='name', unique_with='parent', always_update=True)
-    custom_url = models.URLField(_('custom URL'), blank=True) #help=_('If set, overides other settings'))
-    url = models.URLField(editable=False)
+                              related_name=_('children'), null=True, blank=True)
+    slug = AutoSlugField(populate_from='name', unique_with='parent',
+                         always_update=True)
+    custom_url = models.CharField(_('custom URL'), max_length=200, blank=True,
+                                  help_text=_(u"Either set an URL here or \
+                                              select a content type and view."))
+#    url = models.URLField(editable=False, )
     active = models.BooleanField(default=True)
-    layout = models.ForeignKey('Layout', verbose_name=_('layout'), null=True, blank=True)
-
-    content_type = models.ForeignKey(ContentType,
-                     verbose_name=_('type'), related_name='menu_entries', blank=True, null=True)
+    layout = models.ForeignKey('Layout', verbose_name=_('layout'),
+                               null=True, blank=True)
+    content_type = models.ForeignKey(ContentType, verbose_name=_('type'),
+                                     related_name='menu_entries',
+                                     blank=True, null=True)
     content_object = models.ForeignKey('BaseContent',
-                     verbose_name=_('object'), related_name='menu_entries', blank=True, null=True)
-
-    content_view = models.CharField(_('view'), max_length=255, blank=True, null=True)
-    # content_view choices ar overriden by the form definition
-
+                     verbose_name=_('object'), related_name='menu_entries',
+                     blank=True, null=True)
+    # content_view choices are set through an AJAX view
+    content_view = models.CharField(_('view'), max_length=255,
+                                    blank=True, null=True)
 
     def save(self):
-        #if self.content_object:
-        #    #if view_config['is_default']:
-        #    #    url = related_content_instance.get_instance_url()
-        #    #else:
-        #    #    url = '%s/%s' % (related_content_instance.get_instance_url(),
-        #    #                     view_config['view_name'])
-        #    #if self.content_view:
-        #    #    self.url = self.content_object.get_instance_url()
-        #    #else:
-        #    #    self.url = self.content_object.get_instance_url(self.content_view)
-        #
-        #    self.url = self.content_object.get_instance_url(self.content_view)
-        #
-        #super(MenuItem, self).save()
+        # check that data is consistent
+        #ToDo: raise appropriate exceptions
+        if self.content_object and not self.content_type:
+            self.content_type = ContentType.objects.get_for_model(self.content_object)
+        if self.content_view and not self.content_type:
+            raise Exception(_(u'No content selected'))
 
         if self.content_object:
-            self.url = self.content_view
+            try:
+                getattr(self.content_object, self.content_type.model)
+            except:
+                raise Exception(
+                    _(u'%s: "%s" does not exist' % \
+                      (self.content_type.model, self.content_object)))
+        #    try:
+        #
+        #    object_type = ContentType.objects.get_for_model(self.content_object)
+        #    if object_type != self.content_type:
+        #        print object_type, self.content_type
+
+        if self.content_type and not self.content_view:
+            model = get_model(self.content_type.app_label,
+                              self.content_type.model)
+            self.content_view = [
+                view_config for view_config in cyclope.site._registry[model]
+                if view_config['is_default'] == True ][0]['view_name']
+
+        if not self.content_type and not self.custom_url:
+            self.active = False
+
         super(MenuItem, self).save()
+
+
+    def get_content_view(self):
+        if self.content_type and not self.content_view:
+            if self.content_object:
+                model = self.content_object
+            else:
+                model = get_model(self.content_type.app_label,
+                                  self.content_type.model)
+            self.content_view = [
+                view_config for view_config in cyclope.site._registry[model]
+                if view_config['is_default'] == True ][0]['view_name']
+
+
+    @property
+    def url(self):
+        if self.custom_url:
+            return cyclope.site.CYCLOPE_PREFIX + self.custom_url
+        else:
+            model = get_model(self.content_type.app_label,
+                              self.content_type.model)
+            if self.content_object:
+                obj = model.objects.get(pk=self.content_object.pk)
+                return obj.get_absolute_url()
+            else:
+                return model.get_model_url(self.content_view)
 
     def __unicode__(self):
         return self.name
@@ -100,20 +158,25 @@ class BaseContent(models.Model):
     slug = AutoSlugField(populate_from='name', unique=True,
                          db_index=True, always_update=True)
 
-
-    def get_instance_url(self, view_name=None):
+    def get_absolute_url(self, view_name=None):
         if not view_name:
             return '%s/%s/%s' % (self._meta.app_label,
                                  self._meta.object_name.lower(), self.slug)
         else:
             return '%s/%s/%s/%s' % (self._meta.app_label,
-                                 self._meta.object_name.lower(), self.slug, view_name)
+                                    self._meta.object_name.lower(),
+                                    self.slug, view_name)
 
 
     @classmethod
     def get_url_pattern(cls):
         return '%s/%s/(?P<slug>.*)'\
                 % (cls._meta.app_label, cls._meta.object_name.lower())
+
+    @classmethod
+    def get_model_url(cls, view):
+        return '%s/%s/%s'\
+                % (cls._meta.app_label, cls._meta.object_name.lower(), view)
 
     #@classmethod
     #def get_view_params(cls):
@@ -146,6 +209,10 @@ class StaticPage(BaseCommentedContent, Collectible):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name = _('static page')
+        verbose_name_plural = _('static pages')
+
 
 class RegionView(models.Model):
     layout = models.ForeignKey('Layout')
@@ -157,8 +224,10 @@ class RegionView(models.Model):
     content_object = models.ForeignKey('BaseContent',
                      verbose_name=_('object'), related_name='region_views',
                      blank=True, null=True)
-    content_view = models.CharField(_('view'), max_length=255, blank=True, null=True)
-    region = models.CharField(_('region'), max_length=100)
+    content_view = models.CharField(_('view'), max_length=255,
+                                    blank=True, null=True)
+    region = models.CharField(_('region'), max_length=100,
+                              blank=True, null=True)
     weight = models.PositiveIntegerField(verbose_name=_('weight'), default=0,
                                          blank=True, null=True)
 
@@ -175,11 +244,6 @@ class Layout(models.Model):
     def __unicode__(self):
         return self.name
 
-
-#class BlockView(models.Model):
-#    # view choices must be set from site._registry
-#    view = models.CharField(_('layout template'),
-#                   max_length=100)
-#
-#    def __unicode__(self):
-#        return self.view
+    class Meta:
+        verbose_name = _('layout')
+        verbose_name_plural = _('layouts')
