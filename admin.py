@@ -39,7 +39,6 @@ admin.site.register(BaseContent, BaseContentAdmin)
 
 class MenuItemAdmin(editor.TreeEditor):
     form = MenuItemAdminForm
-#    readonly_fields = ['content_object']
     raw_id_fields = ['content_object']
     fieldsets = ((None,
                   {'fields': ('menu', 'parent', 'name', 'custom_url',
@@ -66,7 +65,9 @@ class RegionViewInline(admin.StackedInline):
     raw_id_fields = ['content_object']
     model = RegionView
     # ToDo: extra should be 1 or 0 but we are using 2 here to be able to test this until we fix the chainedSelect registry for dinamically added formsets. See ToDo note in templates/admin/cyclope/layout/change_form.html
-    extra = 2
+    extra = 3
+    max_num = 3
+
 
 class LayoutAdmin(admin.ModelAdmin):
     form = LayoutAdminForm

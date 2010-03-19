@@ -4,13 +4,16 @@
 ## It's just an idea that could replace the way views are handled and registered
 ## in the cyclope.site
 
-class FrontendView(object):
+class ModelFrontendView(object):
+    "Frontend view of a model"
+    view_callable = None
+    name = ''
+    verbose_name = ''
+    is_default = False
+    view_params = {}
 
-    def __init__(self, name, verbose_name, is_default, is_instance_view):
-        self.name = name
-        self.verbose_name = verbose_name
-        self.is_default = is_default
-        self.is_instance_view = is_instance_view
+    #def __init__(self, model):
+    #    self.model = model
 
     def __call__(self):
         """
@@ -18,29 +21,27 @@ class FrontendView(object):
         """
         return
 
-    def get_url(self):
-        """
-        This method must be provided by the inheriting class and provide the urlpattern for this view
-        """
-        return
+    #def get_url_pattern(self):
+    #    #"""
+    #    #This method must be provided by the inheriting class and provide the urlpattern for this view
+    #    #"""
+    #    return self.model.get_url_pattern()
 
-class ModelFrontend(object):
-    view_name=''
-    verbose_view_name=_('full detail')
-    is_default = False
+#class ModelFrontend(object):
+#
+#    def __init__(self, model):
+#        self.model = model
+#        self.views = []
+#
+#    def register(self, view):
+#        self.views.append(view)
+#
+#    def get_urls(self):
+#        patterns = []
+#        for view in self.views:
+#            patterns.append(view.get_url())
+#        return patterns
 
-    def __init__(self, model):
-        self.model = model
-        self.views = []
-
-    def register(self, view):
-        self.views.append(view)
-
-    def get_urls(self):
-        patterns = []
-        for view in self.views:
-            patterns.append(view.get_url())
-        return patterns
 #
 #
 #############

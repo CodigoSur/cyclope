@@ -8,6 +8,7 @@ from cyclope import settings as cyc_settings
 
 from django.contrib.contenttypes.models import ContentType
 from cyclope.models import BaseContent, Menu, MenuItem, SiteSettings
+from cyclope.core.collections.models import Collection, Category
 
 from django.utils.importlib import import_module
 from django.utils import simplejson
@@ -18,25 +19,40 @@ class CyclopeSite(object):
     """
     def __init__(self):
         self._registry = {}
+        self._patterns = {}
 
     def register_view(self, model, view, view_name=None,
                       verbose_name=None, is_default=False,
                       view_params= {}, extra_context={}):
 
-        if not issubclass(model, BaseContent):
+        for base_class in [BaseContent, Menu, MenuItem, Collection, Category]:
+            if issubclass(model, base_class):
+                break
+        else:
             raise TypeError(
-                '%s does not inherit from BaseContent' % model.__class__)
+                'Cannot register %s models.' % model.__class__)
+
+        #if not issubclass(model, BaseContent)\
+        #  and not issubclass(model, Menu)\
+        #  and not issubclass(model, MenuItem)\
+        #  and not issubclass(model, Collection)\
+        #  and not issubclass(model, Category):
+        #    raise TypeError(
+        #        '%s does not inherit from BaseContent' % model.__class__)
 
         if not view_name:
             view_name = view.__name__
         if not verbose_name:
             verbose_name = view_name
 
+        view_pattern = model.get_url_pattern()
         view_config = ({'view': view,
                         'view_name': view_name,
                         'verbose_name': verbose_name,
                         'is_default': is_default,
                         'view_params': view_params,
+                        'extra_context': extra_context,
+                        'view_pattern': view_pattern,
                         })
 
         if not model in self._registry:
@@ -53,16 +69,35 @@ class CyclopeSite(object):
             url(r'^registered_views_json$', self.registered_views_json),
         )
 
+        #ToDo: Fix for multi-site
+        try:
+            site_settings = SiteSettings.objects.get()
+            default_layout = site_settings.default_layout
+        except:
+            default_layout = ''
+
         for model, model_views in self._registry.items():
             for view_config in model_views:
-                if view_config['is_default']:
-                    view_pattern = '%s$' % model.get_url_pattern()
+                try:
+                    menu_item = MenuItem.objects.select_related().get(url=req_url)
+                except:
+                    menu_item = None
+                if menu_item:
+                    host_template = menu_item.layout.template
                 else:
-                    view_pattern = '%s/%s$' % (model.get_url_pattern(),
-                                               view_config['view_name'])
+                    host_template = cyc_settings.CYCLOPE_DEFAULT_TEMPLATE
+                #if view_config['is_default']:
+                #    view_pattern = '%s$' % model.get_url_pattern()
+                #else:
+                #    view_pattern = '%s/%s$' % (model.get_url_pattern(),
+                #                               view_config['view_name'])
+                view_pattern = view_config['view_pattern']
+                self._patterns[view_pattern] = view_pattern
+                view_params = dict(host_template=host_template,
+                                   **view_config['view_params'])
                 urlpatterns += patterns('',
                                         url(view_pattern, view_config['view'],
-                                            view_config['view_params'])
+                                            view_params)
                                         )
         return urlpatterns
 
@@ -74,51 +109,36 @@ class CyclopeSite(object):
         return [ view_config for view_config in self._registry[model]
                 if view_config['is_default'] == True ][0]['view_name']
 
+    def get_view_config(self, model, view_name):
+        return [ view_config for view_config in self._registry[model]
+                if view_config['view_name'] == view_name ][0]
 
 #### Site Views ####
 #
     def index(self, request):
-        #ToDo: Return prettier messages. Adapt for multi-site.
 
-        # we are asuming there's only one site. but this should be modified
-        # if we start using the sites framework and make cyclope multi-site
-        try:
-            site_settings = SiteSettings.objects.get()
-        except:
-            return HttpResponse(_(u'You need to create your site settings.'))
+        if not cyc_settings.CYCLOPE_SITE_SETTINGS:
+            # the site has not been set up in the admin interface yet
+            return HttpResponse(_(u'You need to create you site settings'))
+        else:
+            #menu = Menu.objects.get(main_menu=True)
+            #main_menu_items = MenuItem.objects.filter(menu=menu)
+            #context = {'main_menu': main_menu_items,}
+            #try:
+            #    menu = Menu.objects.get(main_menu=True)
+            #    menu_items = MenuItem.objects.filter(menu=menu)
+            #except:
+            #    menu_items = []
+            #
+            #return render_to_response(cyc_settings.CYCLOPE_DEFAULT_TEMPLATE,
+            #                          RequestContext(
+            #                            request, context,
+            #                            )
+            #                          )
+            return render_to_response(cyc_settings.CYCLOPE_DEFAULT_TEMPLATE,
+                                      RequestContext(request)
+                                      )
 
-        if not site_settings.default_layout:
-            return HttpResponse(
-                _(u'Improperly configured site. No default layout selected.'))
-
-        try:
-            current_theme = site_settings.theme
-        except:
-            return HttpResponse(
-                _(u'Improperly configured site. No theme selected.'))
-
-        menu = Menu.objects.get(main_menu=True)
-        menu_items = MenuItem.objects.filter(menu=menu)
-        try:
-            menu = Menu.objects.get(main_menu=True)
-            menu_items = MenuItem.objects.filter(menu=menu)
-        except:
-            menu_items = []
-
-        theme_media_url = '%sthemes/%s/' % (cyc_settings.CYCLOPE_MEDIA_URL,
-                                                    current_theme)
-        return render_to_response(
-            '%sthemes/%s/%s' % (
-                cyc_settings.CYCLOPE_PREFIX,
-                current_theme,
-                site_settings.default_layout.template),
-                RequestContext(
-                    request,
-                    {'CYCLOPE_THEME_MEDIA_URL': theme_media_url,
-                    'main_menu': menu_items,
-                    'site_settings': site_settings},
-                    )
-                )
 
 ### JSON ##
 

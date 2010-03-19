@@ -63,8 +63,8 @@ class MenuItem(models.Model):
                                   blank=True, default='',
                                   help_text=_(u"Either set an URL here or \
                                               select a content type and view."))
-#    url = models.URLField(editable=False, )
-    active = models.BooleanField(default=True)
+    url = models.CharField(editable=False, max_length=255, unique=True, db_index=True)
+    active = models.BooleanField(default=True, db_index=True)
     layout = models.ForeignKey('Layout', verbose_name=_('layout'),
                                null=True, blank=True)
     content_type = models.ForeignKey(ContentType, verbose_name=_('type'),
@@ -101,18 +101,25 @@ class MenuItem(models.Model):
         if not self.content_type and not self.custom_url:
             self.active = False
 
+        self.url = self.get_content_url()
         super(MenuItem, self).save()
 
-    @property
-    def url(self):
+#    @property
+    def get_content_url(self):
         if self.custom_url:
-            return cycope.site.CYCLOPE_PREFIX + self.custom_url
+            #if self.custom_url.startswith('/'):
+            #    custom_url = self.custom_url[self.custom_url.find('/')+1:]
+            #    return cyclope.settings.CYCLOPE_PREFIX + custom_url
+            #else:
+            #    return self.custom_url
+            print self.custom_url
+            return self.custom_url
         else:
             model = get_model(self.content_type.app_label,
                               self.content_type.model)
             if self.content_object:
                 obj = model.objects.get(pk=self.content_object.pk)
-                return obj.get_absolute_url()
+                return obj.get_absolute_url(self.content_view)
             else:
                 return model.get_model_url(self.content_view)
 
@@ -140,7 +147,7 @@ class BaseContent(models.Model):
             return '%s/%s/%s' % (self._meta.app_label,
                                  self._meta.object_name.lower(), self.slug)
         else:
-            return '%s/%s/%s/%s' % (self._meta.app_label,
+            return '%s/%s/%s?view=%s' % (self._meta.app_label,
                                     self._meta.object_name.lower(),
                                     self.slug, view_name)
 
@@ -152,7 +159,7 @@ class BaseContent(models.Model):
 
     @classmethod
     def get_model_url(cls, view):
-        return '%s/%s/%s'\
+        return '%s/%s?view=%s'\
                 % (cls._meta.app_label, cls._meta.object_name.lower(), view)
 
     @classmethod
@@ -207,11 +214,12 @@ class RegionView(models.Model):
                                          blank=True, null=True)
 
     def __unicode__(self):
-        return ''
+        return '%s/%s' % (self.content_type.model, self.content_view)
 
 
 class Layout(models.Model):
-    name = models.CharField(_('name'), max_length=50, db_index=True)
+    name = models.CharField(_('name'), max_length=50, db_index=True, unique=True)
+    slug = AutoSlugField(populate_from='name', db_index=True, always_update=True)
     # template choices are set in the form
     template = models.CharField(_('layout template'), max_length=100)
 

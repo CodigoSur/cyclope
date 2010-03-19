@@ -32,6 +32,13 @@ jQuery(document).ready(function($) {
           value: 'view_name',
           label: 'verbose_name'
     });
+    $("#id_regionview_set-2-content_view").chainedSelect({
+          parent: '#id_regionview_set-2-content_type',
+          // this /cyclope/ url should not be hard_coded here
+          url: '/cyclope/registered_views_json',
+          value: 'view_name',
+          label: 'verbose_name'
+    });
   });
 });
 
