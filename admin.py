@@ -18,6 +18,7 @@ class BaseContentAdmin(admin.ModelAdmin):
     # updates related menu_items information when a BaseContent is saved
     form = BaseContentAdminForm
     def save_model(self, request, obj, form, change):
+        super(BaseContentAdmin, self).save_model(request, obj, form, change)
         selected_items_ids = form.data.getlist('menu_items')
         selected_items = set(MenuItem.objects.filter(pk__in=selected_items_ids))
         old_items = set(MenuItem.objects.filter(content_object=obj))
@@ -32,7 +33,6 @@ class BaseContentAdmin(admin.ModelAdmin):
             menu_item.content_type = ContentType.objects.get_for_model(obj)
             menu_item.content_object = obj
             menu_item.save()
-        super(BaseContentAdmin, self).save_model(request, obj, form, change)
 
 admin.site.register(BaseContent, BaseContentAdmin)
 

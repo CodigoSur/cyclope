@@ -98,7 +98,7 @@ INSTALLED_APPS = (
 
     'cyclope',
     'cyclope.core.collections',
-    'cyclope.apps.articles',
+#    'cyclope.apps.articles',
 #    'demo_project.website',
 
 )

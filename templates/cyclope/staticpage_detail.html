@@ -1,5 +1,9 @@
 {% extends host_template %}
 
 {% block content %}
-<p>{{ staticpage.name }} detail</p>
+
+<p>{{ staticpage.name }} <br/>detail view</p>
+<p>{{ staticpage.text|safe }}</p>
+      <div id="pruebas"> <a href="{% url staticpage-detail staticpage.slug %}"> {{  staticpage.slug}}</a></div>
+
 {% endblock content%}

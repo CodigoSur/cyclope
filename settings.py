@@ -29,7 +29,6 @@ def get_site_settings():
         site_settings = SiteSettings.objects.get()
     except:
         site_settings = None
-#        raise Exception(_(u'You need to create your site settings.'))
     return site_settings
 CYCLOPE_SITE_SETTINGS = get_site_settings()
 

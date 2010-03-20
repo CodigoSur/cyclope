@@ -1,47 +1,22 @@
 
-############
-## This is not being used anywhere.
-## It's just an idea that could replace the way views are handled and registered
-## in the cyclope.site
-
-class ModelFrontendView(object):
-    "Frontend view of a model"
-    view_callable = None
+class FrontendView(object):
+    """
+    Parent class for frontend views that will be registered in cyclope.site
+    """
     name = ''
     verbose_name = ''
     is_default = False
-    view_params = {}
+    template_name = ''
+    extra_context = {}
+    is_instanceview = True
+    params = {}
 
-    #def __init__(self, model):
-    #    self.model = model
+    def __call__(self, request, *args, **kwargs):
+        if self.params:
+            kwargs.update(self.params)
+        response = self.get_response(request, *args, **kwargs)
+        return response
 
-    def __call__(self):
-        """
-        Must be overriden to implement the actual view.
-        """
-        return
+    def get_response(self, request, *args, **kwargs):
+        raise NotImplementedError()
 
-    #def get_url_pattern(self):
-    #    #"""
-    #    #This method must be provided by the inheriting class and provide the urlpattern for this view
-    #    #"""
-    #    return self.model.get_url_pattern()
-
-#class ModelFrontend(object):
-#
-#    def __init__(self, model):
-#        self.model = model
-#        self.views = []
-#
-#    def register(self, view):
-#        self.views.append(view)
-#
-#    def get_urls(self):
-#        patterns = []
-#        for view in self.views:
-#            patterns.append(view.get_url())
-#        return patterns
-
-#
-#
-#############

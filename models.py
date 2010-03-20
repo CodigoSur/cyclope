@@ -52,7 +52,8 @@ class Menu(models.Model):
 
 
 class MenuItem(models.Model):
-# this class could inherit from Category but mptt does not inheritance well
+# this class could inherit from Category but mptt does not support inheritance well
+# maybe we should try django-polymorphic or change MPTT for Treebeard
     menu = models.ForeignKey(Menu, verbose_name=_('menu'), db_index=True)
     name = models.CharField(_('name'), max_length=50, db_index=True)
     parent = models.ForeignKey('self', verbose_name=_('parent'),
@@ -100,19 +101,12 @@ class MenuItem(models.Model):
 
         if not self.content_type and not self.custom_url:
             self.active = False
-
-        self.url = self.get_content_url()
+        else:
+            self.url = self.get_content_url()
         super(MenuItem, self).save()
 
-#    @property
     def get_content_url(self):
         if self.custom_url:
-            #if self.custom_url.startswith('/'):
-            #    custom_url = self.custom_url[self.custom_url.find('/')+1:]
-            #    return cyclope.settings.CYCLOPE_PREFIX + custom_url
-            #else:
-            #    return self.custom_url
-            print self.custom_url
             return self.custom_url
         else:
             model = get_model(self.content_type.app_label,
@@ -142,24 +136,27 @@ class BaseContent(models.Model):
     slug = AutoSlugField(populate_from='name', unique=True,
                          db_index=True, always_update=True)
 
-    def get_absolute_url(self, view_name=None):
-        if not view_name:
-            return '%s/%s/%s' % (self._meta.app_label,
-                                 self._meta.object_name.lower(), self.slug)
-        else:
-            return '%s/%s/%s?view=%s' % (self._meta.app_label,
-                                    self._meta.object_name.lower(),
-                                    self.slug, view_name)
-
-
+    def get_absolute_url(self, view_name):
+        return '%s/%s/%s/View/%s'\
+                % (self._meta.app_label,
+                   self._meta.object_name.lower(),
+                   self.slug, view_name)
     @classmethod
-    def get_url_pattern(cls):
-        return '%s/%s/(?P<slug>.*)'\
-                % (cls._meta.app_label, cls._meta.object_name.lower())
+    def get_url_pattern(cls, view):
+        view_name = view.name
+        is_instanceview = view.is_instanceview
+        if is_instanceview:
+            return '%s/%s/(?P<slug>.*)/View/%s'\
+                    % (cls._meta.app_label,
+                       cls._meta.object_name.lower(), view_name)
+        else:
+            return '%s/%s/View/%s'\
+                    % (cls._meta.app_label,
+                       cls._meta.object_name.lower(), view_name)
 
     @classmethod
     def get_model_url(cls, view):
-        return '%s/%s?view=%s'\
+        return '%s/%s/View/%s'\
                 % (cls._meta.app_label, cls._meta.object_name.lower(), view)
 
     @classmethod
@@ -185,8 +182,6 @@ class BaseCommentedContent(BaseContent):
 
 # should this be moved to it's own app? should we just use flatpages?
 class StaticPage(BaseCommentedContent, Collectible):
-    #menuitem = models.ForeignKey(MenuItem, verbose_name=_('menu item'),
-    #                             blank=True, null=True)
     summary = models.TextField(_('summary'), blank=True)
     text = models.TextField(_('text'))
 

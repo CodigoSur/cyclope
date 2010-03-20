@@ -10,6 +10,8 @@ Ten en cuenta que las imagenes, los nombres y los logos de este sitio no pueden 
 Gracias a Radioteca.net y Unesco.
 Si modificas no borres estas lineas :)
  -->
+
+{% load layout %}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -47,8 +49,8 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
           </form>
         </div>
         <div class="logo">
-          <h1><a href="{{ site_settings.url }}">{{ site_settings.title }} one sidebar</a></h1>
-          <h2><a href="{{ site_settings.url }}">{{ site_settings.url }}</a></h2>
+          <h1><a href="{{ CYCLOPE_SITE_SETTINGS.url }}">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
+          <h2><a href="{{ CYCLOPE_SITE_SETTINGS.url }}">{{ CYCLOPE_SITE_SETTINGS.url }} one sidebar</a></h2>
         </div>
       </div><!-- TERMINA CABEZAL -->
 
@@ -71,7 +73,7 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
           <!-- INICIA ESPACIO AGUA -->
           <div id="agua">
             <div class="top"></div>
-           {{ left_region }}
+           {% region 'left' %}
             <!-- !N FALTA IMPLEMENTAR: menu de secciones
                  {$menu}
             -->
@@ -120,13 +122,13 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
           <!-- INICIA ESPACIO AIRE -->
           <div id="aire">
             <!-- INICIA TERCIARIA -->
-
+<!--
             <div id="{{ terciaria.label }}">
-              <div class="top"><span>{{ terciaria.label }}</span> </div>
-              <div class="box">
-                {% for article in terciaria.articles.all %}
-                <h6 class="fecha">{{ article.date }}</h6>
-                <h1><a href="articles/{{ article.slug }}">{{ article.label }}</a></h1>
+              <div class="top"><span>{{ terciaria.label }} lorem ipsum</span> </div>
+              <div class="box">lorem ipsum
+{%comment%}                {% for article in terciaria.articles.all %}{%endcomment%}
+                <h6 class="fecha">{{ article.date }}lorem ipsum</h6>
+                <h1><a href="articles/{{ article.slug }}">{{ article.label }}lorem ipsum</a></h1>
                   {% if article.author %}
                   <h4>{{ article.author }}</h4>
                   {% endif %}
@@ -137,10 +139,11 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
                   {% endif %}
                 <h2>{{ article.summary }} <a href="articles/{{ article.slug }}">Más.</a></h2>
                 <hr />
-                {% endfor %}
+{% comment %}                {% endfor %}  {%endcomment%}
               </div><!-- TERMINA box -->
               <div class="bottom"></div>
             </div>
+-->
             <!-- TERMINA TERCIARIA -->
 
             <!-- INICIA CUATERNARIA -->
@@ -174,10 +177,7 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
             <!-- INICIA PRINCIPAL -->
             <div id="principal">
               <div class="top"><span>contenido</span></div>
-              {% block content %}
-              {% endblock %}
-
-              {% include the_content%}
+              {% block content %} {% endblock %}
 
 {% comment %}
               {section name=notaprincipal loop=$principal}

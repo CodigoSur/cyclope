@@ -2,8 +2,6 @@ import os
 
 # we should consider the security problems of this whole approach
 # and evaluate other possibilities.
-
-
 def configure(themes_dir):
     """
     Reads configuration files for available themes and returns the data in a dictionary
