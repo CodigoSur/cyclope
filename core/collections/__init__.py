@@ -1,0 +1,1 @@
+"Generic content type categorization."

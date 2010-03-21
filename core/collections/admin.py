@@ -27,8 +27,9 @@ from django.contrib.admin.filterspecs import FilterSpec, ChoicesFilterSpec
 from django.utils.encoding import smart_unicode
 
 class CategoryFilterSpec(ChoicesFilterSpec):
-    """
-    Adds filtering by categories. To be used by Collectible based objects.
+    """Adds filtering by categories.
+
+    To be used by Collectible based objects.
     categories.category_filter must be set to True in the model
     for this filter to be active.
     """
@@ -93,23 +94,23 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class CategoryMapForm(forms.ModelForm):
-    # we need to declare this field in order to make it accessible from
-    # CategoryMapInline through form.declared_fields and override the queryset
+    # We need to declare this field in order to make it accessible from
+    # CategoryMapInline through form.declared_fields and override the queryset.
     category = TreeNodeChoiceField(queryset=None, required=True)
 
 class CategoryMapInline(generic.GenericTabularInline):
-    """
-    Limits choices to those suitable for the content type
-    of the object being created / changed
+    """Limits choices to those suitable for the content type
+    of the object being created / changed.
     """
     form = CategoryMapForm
     model = CategoryMap
     extra = 0
 
     def queryset(self, request):
-        # we only override the queryset for the category field
-        # this piece of code is here because we need it to be called when showing the form
-        # it still looks like quite "hacky" a place to put it...
+        # We only override the queryset for the category field.
+        # This piece of code is here because we need it to be called
+        # when showing the form.
+        # It still looks like quite "hacky" a place to put it...
         req_app, req_model = request.path.rstrip('/').split('/')[-3:-1]
         req_model = models.get_model(req_app, req_model)
         req_model_ctype = ContentType.objects.get_for_model(req_model)
@@ -120,8 +121,7 @@ class CategoryMapInline(generic.GenericTabularInline):
         return super(CategoryMapInline, self).queryset(request)
 
 class CollectibleAdmin (admin.ModelAdmin):
-    """
-    Base Admin model for Collectible based objects.
+    """Base admin class for models that inherit from Collectible.
     """
     list_filter = ('categories',)
     inlines = [ CategoryMapInline, ]

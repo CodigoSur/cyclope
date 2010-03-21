@@ -1,3 +1,7 @@
+{% comment %}
+template to insert views inside layout regions
+{% endcomment %}
+
 <div class="region {{ layout_name }}_region" id={{ region_name }}>
   {% for view_params in views %}
     <div class="regionview" id="{{ region_name }}_{{ view_params.name }}">

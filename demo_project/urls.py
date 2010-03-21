@@ -1,12 +1,13 @@
 from django.conf.urls.defaults import *
-from django.contrib import admin
 from django.conf import settings as django_settings
 from django.utils.translation import ugettext as _
 from django.conf import settings as django_settings
 
+# cyclope.autodiscover will install the urls registered in frontend.py files
 import cyclope
-
 cyclope.autodiscover()
+
+from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',

@@ -8,9 +8,8 @@ import mptt
 from autoslug.fields import AutoSlugField
 
 class Collection(models.Model):
-    """
-    A facility for creating custom content collections
-    """
+    """A facility for creating custom content collections."""
+
     name = models.CharField(_('name'), max_length=50, unique=True)
     slug = AutoSlugField(populate_from='name', always_update=True)
     is_navigation_root = models.BooleanField(_('is navigation root'),
@@ -26,10 +25,10 @@ class Collection(models.Model):
 
 
 class Category(models.Model):
+    """Categories are associated with a specific Collection,
+    and can be generically usable with any content type.
     """
-    Categories are associated with a specific Collection,
-    and can be generically usable with any contenttype
-    """
+
     collection = models.ForeignKey(Collection,
         verbose_name=_('collection'), related_name=_('collection categories'))
     name = models.CharField(_('name'), max_length=50)
@@ -59,24 +58,29 @@ mptt.register(Category)
 
 
 class CategoryMapManager(models.Manager):
+
     def get_for_object(self, obj):
+        """Get all Category Maps for an instance of a content object.
+
+        Args:
+          obj: a model or instance
         """
-        Get all Category Maps for an instance of a content object
-        """
+
         ctype = ContentType.objects.get_for_model(obj)
         return self.filter(content_type__pk=ctype.pk, object_id=obj.pk)
 
     def get_for_ctype(self, ctype):
-        """
-        Get all Collection Categories available for this content_type
+        """Get all Collection Categories available for this content_type.
+
+        Args:
+          ctype: a ContentType instance
         """
         return self.filter(content_type__pk=ctype.pk)
 
 
 class CategoryMap(models.Model):
-    """
-    Mappings between a content object and it's categories
-    """
+    """Mappings between a content object and it's associated categories."""
+
     category = models.ForeignKey('Category', verbose_name=_('category'),
                                  db_index=True)
     content_type = models.ForeignKey(ContentType, db_index=True,

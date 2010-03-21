@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.conf.urls.defaults import *
 from django.utils.translation import ugettext as _
 
-from cyclope import settings as cyc_settings
+import cyclope.settings as cyc_settings
 
 from django.contrib.contenttypes.models import ContentType
 from cyclope.models import BaseContent, Menu, MenuItem, SiteSettings
@@ -49,7 +49,7 @@ class CyclopeSite(object):
 
         for model, model_views in self._registry.items():
             for view in model_views:
-                url_pattern = model.get_url_pattern(view)
+                url_pattern = view.get_url_pattern(model)
                 urlpatterns += patterns(
                     '',
                     url(url_pattern,
@@ -75,10 +75,13 @@ class CyclopeSite(object):
 #### Site Views ####
 #
     def index(self, request):
-
+#TODO(nicoechaniz): return prettier messages.
         if not cyc_settings.CYCLOPE_SITE_SETTINGS:
             # the site has not been set up in the admin interface yet
             return HttpResponse(_(u'You need to create you site settings'))
+        elif cyc_settings.CYCLOPE_DEFAULT_LAYOUT is None:
+            return HttpResponse(
+                _(u'You need to select a layout for the site'))
         else:
             try:
                 menu = Menu.objects.get(main_menu=True)
@@ -124,7 +127,8 @@ site = CyclopeSite()
 
 
 ##########
-## autodiscover() is an almost exact copy of django.contrib.admin.autodiscover()
+# autodiscover() is an almost exact copy of
+# django.contrib.admin.autodiscover()
 
 # A flag to tell us if autodiscover is running.  autodiscover will set this to
 # True while running, and False when it finishes.
@@ -161,7 +165,8 @@ def autodiscover():
                         for view in site._registry[model]
                         if view.is_default == True ]
         if len(default_view) == 0:
-            raise(Exception(_(u'No default view has been set for %s' % model)))
+            raise(Exception(
+                _(u'No default view has been set for %s' % model)))
         elif len(default_view) > 1:
             raise(Exception(
                 _(u'You can set only one default view for %s' % model)))

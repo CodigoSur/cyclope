@@ -1,3 +1,10 @@
+"""Configuration for the Potente theme templates and regions.
+
+Attributes:
+    verbose_name: name of theme to be displayed in the admin interface
+    layout_templates: dictionary defining regions for the available templates
+"""
+
 from django.utils.translation import ugettext as _
 
 verbose_name = _('potente theme')

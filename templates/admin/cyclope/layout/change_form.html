@@ -1,5 +1,10 @@
 {% extends "admin/change_form.html" %}
 
+{% comment %}
+Configures chainedSelect for regions in relation to template
+and for views in relation to selected content type for each region
+{% endcomment %}
+
 {% block after_related_objects %}
 
 <script type="text/javascript">
@@ -17,7 +22,7 @@ jQuery(document).ready(function($) {
       });
     });
 
-// ToDo: register each content_view select with it's related content_type not just the first one. Need to make this work for each dinamically added formset
+//TODO(nicoechaniz): register each content_view select with it's related content_type not just the first 3. We need to make this work for each dinamically added formset.
     $("#id_regionview_set-0-content_view").chainedSelect({
           parent: '#id_regionview_set-0-content_type',
           // this /cyclope/ url should not be hard_coded here

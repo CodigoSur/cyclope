@@ -119,58 +119,6 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
           </div>
           <!-- TERMINA ESPACIO AGUA -->
 
-          <!-- INICIA ESPACIO AIRE -->
-          <div id="aire">
-            <!-- INICIA TERCIARIA -->
-<!--
-            <div id="{{ terciaria.label }}">
-              <div class="top"><span>{{ terciaria.label }} lorem ipsum</span> </div>
-              <div class="box">lorem ipsum
-{%comment%}                {% for article in terciaria.articles.all %}{%endcomment%}
-                <h6 class="fecha">{{ article.date }}lorem ipsum</h6>
-                <h1><a href="articles/{{ article.slug }}">{{ article.label }}lorem ipsum</a></h1>
-                  {% if article.author %}
-                  <h4>{{ article.author }}</h4>
-                  {% endif %}
-                  {% if article.photos %}
-                  <a href="articles/{{ article.slug }}">
-                    <img src="{{ article.thumbnail }}" width="60" border="0"/>
-                  </a>
-                  {% endif %}
-                <h2>{{ article.summary }} <a href="articles/{{ article.slug }}">Más.</a></h2>
-                <hr />
-{% comment %}                {% endfor %}  {%endcomment%}
-              </div><!-- TERMINA box -->
-              <div class="bottom"></div>
-            </div>
--->
-            <!-- TERMINA TERCIARIA -->
-
-            <!-- INICIA CUATERNARIA -->
-            <div id="{{ cuaternaria.label }}">
-              <div class="top"><span>{{ cuaternaria.label }}</span> </div>
-              <div class="box">
-                {% for article in cuaternaria.articles.all %}
-                <h6 class="fecha">{{ article.date }}</h6>
-                <h1><a href="articles/{{ article.slug }}">{{ article.label }}</a></h1>
-                  {% if article.author %}
-                  <h4>{{ article.author }}</h4>
-                  {% endif %}
-                  {% if article.photos %}
-                  <a href="articles/{{ article.slug }}">
-                    <img src="{{ article.thumbnail }}" width="60" border="0"/>
-                  </a>
-                  {% endif %}
-                <h2>{{ article.summary }} <a href="articles/{{ article.slug }}">Más.</a></h2>
-                <hr />
-                {% endfor %}
-              </div><!-- TERMINA box -->
-              <div class="bottom"></div>
-            </div>
-            <!-- TERMINA CUATERNARIA -->
-          </div>
-          <!-- TERMINA ESPACIO AIRE -->
-
 
           <!-- INICIA ESPACIO FUEGO -->
           <div id="fuego">

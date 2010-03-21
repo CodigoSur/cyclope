@@ -1,5 +1,10 @@
 {% extends host_template %}
 
+{% comment %}
+When inserted in a layout region the host template is just a wrapper.
+When showing the StaticPage as the main content of the view, the host_template is the layout template.
+{% endcomment %}
+
 {% block content %}
 
 <p>{{ staticpage.name }} <br/>detail view</p>

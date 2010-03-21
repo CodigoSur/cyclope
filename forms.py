@@ -10,11 +10,12 @@ from mptt.forms import TreeNodeChoiceField
 
 from cyclope.widgets import WYMEditor
 from cyclope.models import StaticPage, MenuItem, SiteSettings, Layout, RegionView
-from cyclope import site as cyc_site, settings as cyc_settings
+import cyclope.settings as cyc_settings
+from cyclope import site as cyc_site
 
 class AjaxChoiceField(forms.ChoiceField):
     """
-    ChoiceField that always return true for validate()
+    ChoiceField that always returns true for validate()
     """
     # we always return true because we don't know what choices were available
     # at submit time, because they were populated through AJAX.
@@ -102,8 +103,8 @@ class LayoutAdminForm(forms.ModelForm):
         super(LayoutAdminForm, self).__init__(*args, **kwargs)
         from cyclope.utils import themes
 
-        # we are asuming there's only one site. but this should be modified
-        # if we start using the sites framework and make cyclope multi-site
+        # We are asuming there's only one site but this should be modified
+        # if we start using the sites framework and make cyclope multi-site.
         #ToDo: adapt for multi-site
         try:
             theme_name = SiteSettings.objects.get().theme
@@ -122,8 +123,9 @@ class LayoutAdminForm(forms.ModelForm):
 
 class RegionViewInlineForm(forms.ModelForm):
 
-    # Region choices get populated through javascript when a template is selected
-    # the corresponding json view is CyclopeSite.layout_regions_json()
+    # Region choices get populated through javascript
+    # when a template is selected.
+    # The corresponding json view is CyclopeSite.layout_regions_json()
     region = AjaxChoiceField(required=False)
     content_view = AjaxChoiceField(required=False)
 
@@ -152,10 +154,12 @@ class RegionViewInlineForm(forms.ModelForm):
             try:
                 getattr(obj.content_object, obj.content_type.model)
             except:
-                raise(ValidationError(_(u'Content object does not match content type')))
+                raise(ValidationError(
+                    _(u'Content object does not match content type')))
         if obj.content_type:
             if (obj.content_view == '' or not obj.content_view):
-                raise(ValidationError(_(u'You need to select a content view')))
+                raise(ValidationError(
+                    _(u'You need to select a content view')))
             if not obj.region:
                 raise(ValidationError(_(u'You need to select a region')))
 

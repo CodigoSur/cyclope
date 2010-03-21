@@ -52,18 +52,21 @@ class Menu(models.Model):
 
 
 class MenuItem(models.Model):
-# this class could inherit from Category but mptt does not support inheritance well
+# this class could inherit from Category
+# but mptt does not support inheritance well
 # maybe we should try django-polymorphic or change MPTT for Treebeard
     menu = models.ForeignKey(Menu, verbose_name=_('menu'), db_index=True)
     name = models.CharField(_('name'), max_length=50, db_index=True)
     parent = models.ForeignKey('self', verbose_name=_('parent'),
-                              related_name=_('children'), null=True, blank=True)
+                              related_name=_('children'),
+                              null=True, blank=True)
     slug = AutoSlugField(populate_from='name', unique_with='parent',
                          always_update=True)
     custom_url = models.CharField(_('custom URL'), max_length=200,
                                   blank=True, default='',
-                                  help_text=_(u"Either set an URL here or \
-                                              select a content type and view."))
+                                  help_text=_(
+                                    u"Either set an URL here or \
+                                    select a content type and view."))
     url = models.CharField(editable=False, max_length=255, unique=True, db_index=True)
     active = models.BooleanField(default=True, db_index=True)
     layout = models.ForeignKey('Layout', verbose_name=_('layout'),
@@ -82,7 +85,8 @@ class MenuItem(models.Model):
         # check that data is consistent
         #ToDo: raise appropriate exceptions
         if self.content_object and not self.content_type:
-            self.content_type = ContentType.objects.get_for_model(self.content_object)
+            self.content_type = ContentType.objects.get_for_model(
+                self.content_object)
         if self.content_view != '' and not self.content_type:
             raise Exception(_(u'No content selected'))
 
@@ -141,18 +145,18 @@ class BaseContent(models.Model):
                 % (self._meta.app_label,
                    self._meta.object_name.lower(),
                    self.slug, view_name)
-    @classmethod
-    def get_url_pattern(cls, view):
-        view_name = view.name
-        is_instanceview = view.is_instanceview
-        if is_instanceview:
-            return '%s/%s/(?P<slug>.*)/View/%s'\
-                    % (cls._meta.app_label,
-                       cls._meta.object_name.lower(), view_name)
-        else:
-            return '%s/%s/View/%s'\
-                    % (cls._meta.app_label,
-                       cls._meta.object_name.lower(), view_name)
+    #@classmethod
+    #def get_url_pattern(cls, view):
+    #    view_name = view.name
+    #    is_instance_view = view.is_instance_view
+    #    if is_instanceview:
+    #        return '%s/%s/(?P<slug>.*)/View/%s'\
+    #                % (cls._meta.app_label,
+    #                   cls._meta.object_name.lower(), view_name)
+    #    else:
+    #        return '%s/%s/View/%s'\
+    #                % (cls._meta.app_label,
+    #                   cls._meta.object_name.lower(), view_name)
 
     @classmethod
     def get_model_url(cls, view):
@@ -213,8 +217,10 @@ class RegionView(models.Model):
 
 
 class Layout(models.Model):
-    name = models.CharField(_('name'), max_length=50, db_index=True, unique=True)
-    slug = AutoSlugField(populate_from='name', db_index=True, always_update=True)
+    name = models.CharField(_('name'), max_length=50,
+                            db_index=True, unique=True)
+    slug = AutoSlugField(populate_from='name', db_index=True,
+                         always_update=True)
     # template choices are set in the form
     template = models.CharField(_('layout template'), max_length=100)
 

@@ -1,3 +1,5 @@
+"""Theme configurations."""
+
 import os
 
 # hacky stuff...

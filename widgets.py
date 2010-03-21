@@ -3,7 +3,6 @@ from django.utils.safestring import mark_safe
 from django.conf import settings
 
 class WYMEditor(forms.Textarea):
-#    pass
     class Media:
         js = (
             'admin/js/jquery.min.js',
