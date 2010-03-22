@@ -4,3 +4,5 @@ syntax: glob
 *~
 *.kpf
 pip-log.txt 
+dbutils.py
+mine_initial_data.py
