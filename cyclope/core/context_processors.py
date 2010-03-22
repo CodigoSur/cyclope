@@ -1,6 +1,6 @@
 # *-- coding:utf-8 --*
 
-import cyclope.settings as cyc_settings
+from cyclope import settings as cyc_settings
 
 def site_settings(request):
     """Exposes all the settings in cyclope.settings to the template.

@@ -2,10 +2,10 @@
 
 from copy import copy
 from django import template
-import cyclope.settings as cyc_settings
-from cyclope import site as cyc_site
+from cyclope import settings as cyc_settings
 from cyclope.models import MenuItem, RegionView
 from cyclope.utils import layout_for_request
+from cyclope.core import frontend
 
 register = template.Library()
 
@@ -37,7 +37,7 @@ def region(context, region_name):
 
     for regionview in regionviews:
         view_vars={}
-        view = cyc_site.get_view(
+        view = frontend.site.get_view(
             regionview.content_type.model_class(),
             regionview.content_view,
             )

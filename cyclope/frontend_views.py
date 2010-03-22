@@ -4,10 +4,8 @@
 from django.utils.translation import ugettext as _
 from django.views.generic.list_detail import object_list
 
-import cyclope.settings as cyc_settings
-from cyclope import site as cyc_site
+from cyclope import settings as cyc_settings
 from cyclope.core import frontend
-
 from cyclope.models import StaticPage
 from cyclope import views
 
@@ -33,7 +31,7 @@ class StaticPageDetailView(frontend.FrontendView):
     def get_response(self, request, *args, **kwargs):
         return views.object_detail(request, *args, **kwargs)
 
-cyc_site.register_view(StaticPage, StaticPageDetailView())
+frontend.site.register_view(StaticPage, StaticPageDetailView())
 
 
 class StaticPageListView(frontend.FrontendView):
@@ -52,6 +50,6 @@ class StaticPageListView(frontend.FrontendView):
                            template_object_name= 'staticpage',
                            *args, **kwargs)
 
-cyc_site.register_view(StaticPage, StaticPageListView())
+frontend.site.register_view(StaticPage, StaticPageListView())
 
 #############

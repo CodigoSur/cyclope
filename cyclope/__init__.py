@@ -69,4 +69,23 @@ If you need to contact the development team you can write to the adress: nicoech
 VERSION = (0, 1, 0)
 __version__ = '.'.join(map(str, VERSION))
 
-from sites import site, autodiscover
+# We import site settings as FeinCMS does
+# not using Django settings at module level as recommended
+from django.utils.functional import LazyObject
+
+class LazySettings(LazyObject):
+    def _setup(self):
+        from cyclope import default_settings
+        self._wrapped = Settings(default_settings)
+
+class Settings(object):
+    def __init__(self, settings_module):
+        for setting in dir(settings_module):
+            if setting == setting.upper():
+                setattr(self, setting, getattr(settings_module, setting))
+
+settings = LazySettings()
+
+#__all__ = [name for name in locals().keys()]
+#
+#print __all__

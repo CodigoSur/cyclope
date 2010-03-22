@@ -3,7 +3,6 @@
 from django.utils.translation import ugettext as _
 from django.views.generic.list_detail import object_detail, object_list
 
-from cyclope import site as cyc_site
 from cyclope.core import frontend
 from cyclope import views
 
@@ -21,4 +20,4 @@ class ArticleDetailView(frontend.FrontendView):
     def get_response(self, request, *args, **kwargs):
         return views.object_detail(request, *args, **kwargs)
 
-cyc_site.register_view(StaticPage, StaticPageDetailView())
+frontend.site.register_view(StaticPage, StaticPageDetailView())

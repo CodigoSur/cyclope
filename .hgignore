@@ -6,3 +6,6 @@ syntax: glob
 pip-log.txt 
 dbutils.py
 mine_initial_data.py
+workenv
+testworkenv
+requirements.txt

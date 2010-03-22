@@ -7,18 +7,18 @@ from django.template import RequestContext
 from django.conf.urls.defaults import *
 from django.utils.translation import ugettext as _
 
-import cyclope.settings as cyc_settings
-
 from django.contrib.contenttypes.models import ContentType
 from cyclope.models import BaseContent, Menu, MenuItem, SiteSettings
 from cyclope.core.collections.models import Collection, Category
 
-from django.utils.importlib import import_module
 from django.utils import simplejson
+
+from cyclope import settings as cyc_settings
 
 class CyclopeSite(object):
     """Handles frontend display of models.
     """
+
     def __init__(self):
         self._registry = {}
 
@@ -141,53 +141,3 @@ class CyclopeSite(object):
 ####
 
 site = CyclopeSite()
-
-
-##########
-# autodiscover() is an almost exact copy of
-# django.contrib.admin.autodiscover()
-
-# A flag to tell us if autodiscover is running.  autodiscover will set this to
-# True while running, and False when it finishes.
-LOADING = False
-
-def autodiscover():
-    """Auto-discover INSTALLED_APPS frontend.py modules and fail silently when
-    not present.
-
-    This forces an import on them to register frontend views.
-    """
-    global LOADING
-    if LOADING:
-        return
-    LOADING = True
-
-    import imp
-    from django.conf import settings
-
-    for app in settings.INSTALLED_APPS:
-        mod = import_module(app)
-        try:
-            app_path = mod.__path__
-        except AttributeError:
-            continue
-        try:
-            imp.find_module('frontend', app_path)
-        except ImportError:
-            continue
-        import_module('%s.frontend' % app)
-
-    for model in site._registry:
-        default_view = [ view
-                        for view in site._registry[model]
-                        if view.is_default == True ]
-        if len(default_view) == 0:
-            raise(Exception(
-                _(u'No default view has been set for %s' % model)))
-        elif len(default_view) > 1:
-            raise(Exception(
-                _(u'You can set only one default view for %s' % model)))
-
-    LOADING = False
-
-################

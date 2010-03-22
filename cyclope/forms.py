@@ -13,8 +13,8 @@ from mptt.forms import TreeNodeChoiceField
 from cyclope.widgets import WYMEditor
 from cyclope.models import StaticPage, MenuItem,\
                            SiteSettings, Layout, RegionView
-import cyclope.settings as cyc_settings
-from cyclope import site as cyc_site
+from cyclope import settings as cyc_settings
+from cyclope.core import frontend
 
 class AjaxChoiceField(forms.ChoiceField):
     """
@@ -28,7 +28,7 @@ class AjaxChoiceField(forms.ChoiceField):
 
 def populate_type_choices(myform):
     ctype_choices = [('', '------')]
-    for model in cyc_site._registry:
+    for model in frontend.site._registry:
         ctype = ContentType.objects.get_for_model(model)
         ctype_choices.append((ctype.id, ctype.name))
     myform.fields['content_type'].choices = ctype_choices
@@ -108,7 +108,6 @@ class LayoutAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(LayoutAdminForm, self).__init__(*args, **kwargs)
-        from cyclope.utils import themes
 
         # We are asuming there's only one site but this should be modified
         # if we start using the sites framework and make cyclope multi-site.

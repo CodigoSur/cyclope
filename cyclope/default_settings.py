@@ -25,7 +25,7 @@ Attributes:
 
 from django.conf import settings
 from django.utils.translation import ugettext as _
-from utils import themes
+#from utils import themes
 import sys, os
 from django.db.models.signals import post_save
 from cyclope.models import SiteSettings
