@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from copy import copy
 from django import template
 import cyclope.settings as cyc_settings
@@ -35,7 +37,7 @@ def region(context, region_name):
 
     for regionview in regionviews:
         view_vars={}
-        view = cyc_site.get_view_options(
+        view = cyc_site.get_view(
             regionview.content_type.model_class(),
             regionview.content_view,
             )

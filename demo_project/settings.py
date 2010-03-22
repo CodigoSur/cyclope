@@ -1,4 +1,6 @@
-# Django settings for dj_project
+#!/usr/bin/env python
+
+# Django settings for demo_project
 
 import os
 

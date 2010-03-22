@@ -1,3 +1,5 @@
+# *-- coding:utf-8 --*
+
 from django.utils.translation import ugettext as _
 from django.views.generic.list_detail import object_detail, object_list
 
@@ -8,6 +10,7 @@ from cyclope import views
 from cyclope.apps.articles.models import Article
 
 class ArticleDetailView(frontend.FrontendView):
+    """Detail view for Articles"""
     name='detail'
     verbose_name=_('full detail')
     is_default = True

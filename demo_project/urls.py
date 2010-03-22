@@ -1,9 +1,12 @@
+#!/usr/bin/env python
+
 from django.conf.urls.defaults import *
 from django.conf import settings as django_settings
 from django.utils.translation import ugettext as _
 from django.conf import settings as django_settings
 
-# cyclope.autodiscover will install the urls registered in frontend.py files
+# cyclope.autodiscover will search inside installed apps folders
+# for frontend.py files and register the views/urls declared.
 import cyclope
 cyclope.autodiscover()
 

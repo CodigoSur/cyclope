@@ -1,9 +1,12 @@
+# *-- coding:utf-8 --*
+"""General utilities."""
+
 import cyclope
 
 def layout_for_request(request):
     """
     Returns the layout corresponding to the MenuItem matching the request
-    or the default site layout if no matching MenuItem is found
+    or the default site layout if no matching MenuItem is found.
     """
     from cyclope.models import MenuItem
 
@@ -27,8 +30,9 @@ def layout_for_request(request):
 
 def template_for_request(request):
     """
-    Returns the layout corresponding to the MenuItem matching the request
-    or the default site template if no matching MenuItem is found
+    Returns the template corresponding to the MenuItem.layout
+    matching the request or the default site template
+    if no matching MenuItem is found.
     """
     layout = layout_for_request(request)
     template = '%sthemes/%s/%s' % (

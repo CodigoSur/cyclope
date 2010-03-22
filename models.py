@@ -1,4 +1,5 @@
 # *-- coding:utf-8 --*
+"""Django models"""
 
 from django.db import models
 from django.db.models import get_model
@@ -133,7 +134,7 @@ mptt.register(MenuItem)
 
 class BaseContent(models.Model):
     """
-    Base model for content elements.
+    Parent class for every content model.
     """
     name = models.CharField(_('name'), max_length=250,
                              db_index=True, blank=False)
@@ -173,6 +174,7 @@ class BaseContent(models.Model):
 
 
 class BaseCommentedContent(BaseContent):
+    """Parent class for content objects that can have comments."""
     allow_comments = models.CharField(_('allow comments'), max_length=4,
                                 choices = (
                                     ('SITE',_('default')),

@@ -1,3 +1,5 @@
+# *-- coding:utf-8 --*
+
 import inspect
 
 class FrontendView(object):
@@ -8,7 +10,8 @@ class FrontendView(object):
         verbose_name
         params(dict): keyword arguments that will be passed to get_response
         is_default(boolean): is this the default view for the model?
-        is_instance_view(boolean): is the view associated to an object instance?
+        is_instance_view(boolean): is the view always associated
+                                   to an object instance?
     """
     name = ''
     verbose_name = ''
@@ -19,7 +22,7 @@ class FrontendView(object):
     params = {}
 
     def __call__(self, request, *args, **kwargs):
-        # check if we are being called from a region templatetag
+        inline = self.__called_from_region
         if inspect.stack()[1][3] == 'region':
             inline = True
         else:
@@ -44,3 +47,11 @@ class FrontendView(object):
             return '%s/%s/View/%s'\
                     % (model._meta.app_label,
                        model._meta.object_name.lower(), self.name)
+
+    @property
+    def __called_from_region(self):
+        """Checks if the view is being called from a region templatetag"""
+        if inspect.stack()[1][3] == 'region':
+            return True
+        else:
+            return False

@@ -1,3 +1,6 @@
+# *-- coding:utf-8 --*
+"""Views URL handling and dispatching."""
+
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -14,14 +17,21 @@ from django.utils.importlib import import_module
 from django.utils import simplejson
 
 class CyclopeSite(object):
-    """
-    Handles frontend display of models.
+    """Handles frontend display of models.
     """
     def __init__(self):
         self._registry = {}
 
-
     def register_view(self, model, view):
+        """Register a view for a model.
+
+        Registered views will be available for use in the admin interface.
+
+        Arguments:
+            model: a model derived from BaseContent, Menu, MenuItem,
+                   core.collections.Collection or core.collections.Category
+            view: a view derived from core.frontend.FrontendView
+        """
 
         for base_class in [BaseContent, Menu, MenuItem, Collection, Category]:
             if issubclass(model, base_class):
@@ -60,22 +70,28 @@ class CyclopeSite(object):
         return urlpatterns
 
     def urls(self):
+        """The site registered views URLs.
+        """
         return self.get_urls()
     urls = property(urls)
 
     def get_default_view_name(self, model):
-        return [ view_options.name for view_options in self._registry[model]
-                if view_options.is_default == True ][0]
+        """Returns the view name for the default view of the given model
+        """
+        return [ view.name for view in self._registry[model]
+                if view.is_default == True ][0]
 
-    def get_view_options(self, model, view_name):
-        return [ view_options for view_options in self._registry[model]
-                if view_options.name == view_name ][0]
+    def get_view(self, model, view_name):
+        return [ view for view in self._registry[model]
+                if view.name == view_name ][0]
 
 
 #### Site Views ####
 #
     def index(self, request):
-#TODO(nicoechaniz): return prettier messages.
+        """The root Cyclope URL view"""
+
+        #TODO(nicoechaniz): return prettier messages.
         if not cyc_settings.CYCLOPE_SITE_SETTINGS:
             # the site has not been set up in the admin interface yet
             return HttpResponse(_(u'You need to create you site settings'))
@@ -99,6 +115,7 @@ class CyclopeSite(object):
 ### JSON ##
 
     def layout_regions_json(self, request):
+        """View to dynamically update template regions select in the admin."""
         template_filename = request.GET['q']
         theme_name = SiteSettings.objects.get().theme
         theme_settings = getattr(cyc_settings.CYCLOPE_THEMES, theme_name)
@@ -135,9 +152,9 @@ site = CyclopeSite()
 LOADING = False
 
 def autodiscover():
-    """
-    Auto-discover INSTALLED_APPS frontend.py modules and fail silently when
+    """Auto-discover INSTALLED_APPS frontend.py modules and fail silently when
     not present.
+
     This forces an import on them to register frontend views.
     """
     global LOADING

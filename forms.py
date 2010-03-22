@@ -1,3 +1,5 @@
+# *-- coding:utf-8 --*
+"""Custom ``Cyclope`` forms."""
 
 from django import forms
 from django.conf import settings as django_settings
@@ -9,17 +11,18 @@ from django.db.models import get_model
 from mptt.forms import TreeNodeChoiceField
 
 from cyclope.widgets import WYMEditor
-from cyclope.models import StaticPage, MenuItem, SiteSettings, Layout, RegionView
+from cyclope.models import StaticPage, MenuItem,\
+                           SiteSettings, Layout, RegionView
 import cyclope.settings as cyc_settings
 from cyclope import site as cyc_site
 
 class AjaxChoiceField(forms.ChoiceField):
     """
-    ChoiceField that always returns true for validate()
+    ChoiceField that always returns true for validate().
     """
     # we always return true because we don't know what choices were available
     # at submit time, because they were populated through AJAX.
-    #ToDo: see if there's a way to find out which choices are valid.
+    #TODO(nicoechaniz): see if there's a way to validate this dynamic choices
     def validate(self, value):
         return True
 
@@ -31,7 +34,6 @@ def populate_type_choices(myform):
     myform.fields['content_type'].choices = ctype_choices
 
 
-
 class BaseContentAdminForm(forms.ModelForm):
     menu_items = forms.ModelMultipleChoiceField(
                     queryset = MenuItem.tree.all(), required=False,
@@ -40,7 +42,8 @@ class BaseContentAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(BaseContentAdminForm, self).__init__(*args, **kwargs)
         if self.instance.id is not None:
-            selected_items = [ values[0] for values in MenuItem.objects.filter(
+            selected_items = [
+                values[0] for values in MenuItem.objects.filter(
                 content_object__id=self.instance.id).values_list('id') ]
             self.fields['menu_items'].initial = selected_items
 
@@ -54,7 +57,8 @@ class StaticPageAdminForm(BaseContentAdminForm):
 
 
 class MenuItemAdminForm(forms.ModelForm):
-    # content_view choices get populated through javascript when a template is selected
+    # content_view choices get populated through javascript
+    # when a template is selected
     content_view = AjaxChoiceField(required=False)
     parent = TreeNodeChoiceField(queryset=MenuItem.tree.all(), required=False)
 
@@ -63,12 +67,14 @@ class MenuItemAdminForm(forms.ModelForm):
         if self.instance.id is not None:
             # chainedSelect will show the selected choice
             # if it is present before filling the choices through AJAX
-            selected_view = MenuItem.objects.get(id=self.instance.id).content_view
-            self.fields['content_view'].choices = [(selected_view, selected_view)]
+            selected_view = MenuItem.objects.get(
+                id=self.instance.id).content_view
+            self.fields['content_view'].choices = [(selected_view,
+                                                    selected_view)]
         populate_type_choices(self)
 
     def clean(self):
-        #ToDo: data consistency is being done at model level see models.MenuItem.save(). Implement form validation.
+        #TODO(nicoechaniz): a data consistency check is being done at model level (see models.MenuItem.save()). Implement form validation.
         obj = self.instance
         if obj.custom_url and \
         (obj.content_type or obj.content_object or obj.content_view):
@@ -82,14 +88,15 @@ class MenuItemAdminForm(forms.ModelForm):
 
     class Media:
         js = (
-             cyc_settings.CYCLOPE_MEDIA_URL +"js/jquery.chainedSelect.js",
-             )
+             cyc_settings.CYCLOPE_MEDIA_URL +"js/jquery.chainedSelect.js",)
+
 
 class SiteSettingsAdminForm(forms.ModelForm):
     theme = forms.ChoiceField(
-        choices=[ (theme_name,
-                  getattr(cyc_settings.CYCLOPE_THEMES, theme_name).verbose_name)
-                  for theme_name in cyc_settings.CYCLOPE_THEMES.available ],
+        choices=[
+            (theme_name,  getattr(cyc_settings.CYCLOPE_THEMES,
+            theme_name).verbose_name)
+            for theme_name in cyc_settings.CYCLOPE_THEMES.available ],
         required=True)
 
     class Meta:
@@ -105,7 +112,7 @@ class LayoutAdminForm(forms.ModelForm):
 
         # We are asuming there's only one site but this should be modified
         # if we start using the sites framework and make cyclope multi-site.
-        #ToDo: adapt for multi-site
+        #TODO(nicoechaniz): adapt for multi-site
         try:
             theme_name = SiteSettings.objects.get().theme
         except:

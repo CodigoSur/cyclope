@@ -1,3 +1,6 @@
+# *-- coding:utf-8 --*
+"""Views for ``Cyclope`` models."""
+
 from django.utils.translation import ugettext as _
 from django.views.generic.list_detail import object_list
 
@@ -14,6 +17,12 @@ def custom_list(request, *args, **kwargs):
     return response
 
 class StaticPageDetailView(frontend.FrontendView):
+    """Detail view of a StaticPage
+
+    Returns:
+        a string if the view is called from within a region templatetag
+        an HttpResponse otherwise
+    """
     name='detail'
     verbose_name=_('full detail')
     is_default = True
@@ -28,6 +37,8 @@ cyc_site.register_view(StaticPage, StaticPageDetailView())
 
 
 class StaticPageListView(frontend.FrontendView):
+    """Simple list view for a StaticPage.
+    """
     name='list'
     verbose_name=_('page list')
     #params = {'queryset': StaticPage.objects,

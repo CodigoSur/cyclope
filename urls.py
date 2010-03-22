@@ -1,10 +1,5 @@
-from django.conf.urls.defaults import *
+# -*- coding: utf-8 -*-
+# urls should be set at project level using cyclope.site.autodiscover()
+# to populate cyclope.site.urls
 
-#from django.views.generic.list_detail import object_list, object_detail
-#from cyclope.models import Article
-#article_properties = {'queryset': Article.objects,
-#                      'template_object_name': 'article'}
-
-#urlpatterns = patterns('cyclope.views',
-#    (r'^$', 'index'),
-#)
+# see demo_project for an example

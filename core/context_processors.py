@@ -1,3 +1,5 @@
+# *-- coding:utf-8 --*
+
 import cyclope.settings as cyc_settings
 
 def site_settings(request):

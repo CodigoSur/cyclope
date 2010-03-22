@@ -1,3 +1,4 @@
+# *-- coding:utf-8 --*
 """Theme configurations."""
 
 import os

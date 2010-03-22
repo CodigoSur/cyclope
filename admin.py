@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+"""``Cyclope`` configuration for the Django admin"""
 
 from django.contrib import admin
 from django.utils.translation import ugettext as _
@@ -15,6 +16,8 @@ from cyclope.core.collections.admin import CollectibleAdmin
 
 
 class BaseContentAdmin(admin.ModelAdmin):
+    """Parent class for BaseContent derived objects to use instead of admin.ModelAdmin to register with the admin.site"""
+
     # updates related menu_items information when a BaseContent is saved
     form = BaseContentAdminForm
     def save_model(self, request, obj, form, change):

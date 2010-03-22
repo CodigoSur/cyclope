@@ -1,3 +1,4 @@
+# *-- coding:utf-8 --*
 """Configuration for the Potente theme templates and regions.
 
 Attributes:

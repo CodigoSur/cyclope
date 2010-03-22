@@ -1,4 +1,6 @@
-"""Sets the default and automatic settings.
+# *-- coding:utf-8 --*
+
+"""Sets the default and dynamic (db based) settings.
 
 All settings will be available to templates if the site_settings context processor is installed.
 

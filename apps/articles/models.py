@@ -1,4 +1,5 @@
 # *-- coding:utf-8 --*
+"""Django models for the articles app."""
 
 from django.db import models
 from django.utils.translation import ugettext as _

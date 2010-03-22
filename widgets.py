@@ -1,8 +1,11 @@
+# *-- coding:utf-8 --*
+
 from django import forms
 from django.utils.safestring import mark_safe
 from django.conf import settings
 
 class WYMEditor(forms.Textarea):
+    """Widget to replace a standard textarea with WYMEditor"""
     class Media:
         js = (
             'admin/js/jquery.min.js',
