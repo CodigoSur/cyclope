@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-# Django settings for demo_project
-
 import os
 
 DEBUG = True
@@ -66,12 +64,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+#    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
-DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
+#DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
 
-ROOT_URLCONF = 'demo_project.urls'
+ROOT_URLCONF = 'cyclope_demo.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates".
@@ -84,8 +82,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.comments',
-    'django.contrib.humanize',
-    'django.contrib.databrowse',
+#    'django.contrib.humanize',
+#    'django.contrib.databrowse',
     'django.contrib.admin',
 
 #    'tagging',
@@ -95,8 +93,8 @@ INSTALLED_APPS = (
     'mptt',
 
 #    'south',
-    'ajax_filtered_fields',
-    'debug_toolbar',
+#    'ajax_filtered_fields',
+#    'debug_toolbar',
 
     'cyclope',
     'cyclope.core.collections',

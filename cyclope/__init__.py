@@ -51,7 +51,7 @@ Demo project
 You can test ``Cyclope`` by running:
 :command:`python manage.py runserver`
 
-from the provided demo_project/ folder.
+from the provided cyclope_demo/ folder.
 
 The admin interface will be accessible at http://localhost:8000/admin
 

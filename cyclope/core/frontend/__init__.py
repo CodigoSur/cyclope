@@ -23,18 +23,24 @@ class FrontendView(object):
     params = {}
 
     def __call__(self, request, *args, **kwargs):
-        inline = self.__called_from_region
-        if inspect.stack()[1][3] == 'region':
-            inline = True
-        else:
-            inline = False
+        print "llaman view", self.name
         if self.params:
             kwargs.update(self.params)
-        response = self.get_response(request, inline=inline, *args, **kwargs)
+        # check if the view was called from a region templatetag
+        if inspect.stack()[1][3] == 'region':
+            response = self.get_string_response(request, *args, **kwargs)
+        else:
+            response = self.get_http_response(request, *args, **kwargs)
         return response
 
-    def get_response(self, request, *args, **kwargs):
+    def get_http_response(self, request, *args, **kwargs):
         """Must be overriden by inheriting class and return a proper response.
+        """
+        raise NotImplementedError()
+
+    def get_string_response(self, request, *args, **kwargs):
+        """Must be overriden by inheriting class and return a proper response
+        to be embedded in the calling template region.
         """
         raise NotImplementedError()
 
@@ -96,7 +102,6 @@ def autodiscover():
         import_module('%s.frontend_views' % app)
 
     for model in site._registry:
-        print model
         default_view = [ view
                         for view in site._registry[model]
                         if view.is_default == True ]

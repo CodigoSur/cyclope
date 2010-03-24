@@ -11,7 +11,7 @@ from django.db.models import get_model
 from mptt.forms import TreeNodeChoiceField
 
 from cyclope.widgets import WYMEditor
-from cyclope.models import StaticPage, MenuItem,\
+from cyclope.models import StaticPage, MenuItem, BaseContent,\
                            SiteSettings, Layout, RegionView
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
@@ -138,9 +138,9 @@ class RegionViewInlineForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(RegionViewInlineForm, self).__init__(*args, **kwargs)
         if self.instance.id is not None:
-            # chainedSelect will show the selected choice
+            # chainedSelect.js will show the selected choice
             # if it is present before filling the choices through AJAX
-            # so we set them here at __init__ time
+            # so we set all choices here at __init__ time
             obj = RegionView.objects.get(id=self.instance.id)
             if obj.region:
                 selected_region = obj.region
@@ -153,20 +153,21 @@ class RegionViewInlineForm(forms.ModelForm):
         populate_type_choices(self)
 
     def clean(self):
-        obj = self.instance
-        if not obj.content_type:
+        data = self.cleaned_data
+        if not data['content_type']:
             raise(ValidationError(_(u'Content type can not be empty')))
-        if obj.content_object:
+        if data['content_object']:
             try:
-                getattr(obj.content_object, obj.content_type.model)
+                getattr(data['content_object'], data['content_type'].model)
             except:
                 raise(ValidationError(
                     _(u'Content object does not match content type')))
-        if obj.content_type:
-            if (obj.content_view == '' or not obj.content_view):
+
+        if data['content_type']:
+            if (data['content_view'] == '' or not data['content_view']):
                 raise(ValidationError(
                     _(u'You need to select a content view')))
-            if not obj.region:
+            if not data['region']:
                 raise(ValidationError(_(u'You need to select a region')))
 
         return super(RegionViewInlineForm, self).clean()

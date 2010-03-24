@@ -30,7 +30,7 @@ import sys, os
 from django.db.models.signals import post_save
 from cyclope.models import SiteSettings
 
-CYCLOPE_PREFIX = getattr(settings, 'CYCLOPE_ROOT_URL', \
+CYCLOPE_PREFIX = getattr(settings, 'CYCLOPE_PREFIX', \
                            'cyclope/')
 CYCLOPE_MEDIA_URL = getattr(settings, 'CYCLOPE_MEDIA_URL', \
                            '%scyclope/' % settings.MEDIA_URL)

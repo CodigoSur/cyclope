@@ -44,6 +44,15 @@ class Menu(models.Model):
     name = models.CharField(_('name'), max_length=50, db_index=True)
     main_menu = models.BooleanField(default=False)
 
+    def save(self):
+        # set main_menu to False on other instances if this one is set main_menu
+        if self.main_menu:
+            main = self.objects.filter(main_menu=True)
+            for menu in main:
+                menu.main_menu = False
+                menu.save()
+        super(Menu, self).save()
+
     def __unicode__(self):
         return self.name
 
@@ -56,7 +65,8 @@ class MenuItem(models.Model):
 # this class could inherit from Category
 # but mptt does not support inheritance well
 # maybe we should try django-polymorphic or change MPTT for Treebeard
-    menu = models.ForeignKey(Menu, verbose_name=_('menu'), db_index=True)
+    menu = models.ForeignKey(Menu, verbose_name=_('menu'),
+                             db_index=True, related_name='menu_items')
     name = models.CharField(_('name'), max_length=50, db_index=True)
     parent = models.ForeignKey('self', verbose_name=_('parent'),
                               related_name=_('children'),

@@ -111,6 +111,8 @@ class CyclopeSite(object):
                                         request, context,
                                         )
                                       )
+            #return render_to_response(cyc_settings.CYCLOPE_DEFAULT_TEMPLATE,
+            #                          RequestContext(request))
 
 ### JSON ##
 
