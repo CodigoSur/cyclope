@@ -44,7 +44,7 @@ class MenuItemAdmin(editor.TreeEditor):
     form = MenuItemAdminForm
     raw_id_fields = ['content_object']
     fieldsets = ((None,
-                  {'fields': ('menu', 'parent', 'name', 'custom_url',
+                  {'fields': ('menu', 'parent', 'name', 'site_home', 'custom_url',
                               'layout', 'active')}),
                  (_('content details'),
                   {'classes': ('collapse',),

@@ -77,7 +77,7 @@ if CYCLOPE_SITE_SETTINGS:
             CYCLOPE_PREFIX, CYCLOPE_CURRENT_THEME,
             CYCLOPE_DEFAULT_LAYOUT.template)
 
-
+#TODO(nicoechaniz): this is not working since we are using LazyObject for settings see cyclope.__init__. We should try to make this work again or evaluate if LazyObject for settings is a good idea. The current setup.py depends on that to be able to import cyclope. In the meantime, the server needs to be restarted to refresh dynamic settings.
 def _refresh_site_settings(sender, instance, created, **kwargs):
     "Callback to refresh site settings when they are modified in the database"
     global CYCLOPE_SITE_SETTINGS

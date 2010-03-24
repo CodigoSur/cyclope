@@ -26,7 +26,6 @@ class MainMenuView(frontend.FrontendView):
               }
 
     def get_string_response(self, request, inline=False, *args, **kwargs):
-        print "nos llaman"
         main_menu = self.params['queryset'].get(main_menu=True)
         c = RequestContext(request, {'menu':main_menu})
         t = loader.get_template("cyclope/menu_flat_list.html")

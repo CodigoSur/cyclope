@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
+from django.core.exceptions import ObjectDoesNotExist
 
 import mptt
 from autoslug.fields import AutoSlugField
@@ -42,15 +43,17 @@ class SiteSettings(models.Model):
 
 class Menu(models.Model):
     name = models.CharField(_('name'), max_length=50, db_index=True)
-    main_menu = models.BooleanField(default=False)
+    main_menu = models.BooleanField(_('main menu'), default=False)
 
     def save(self):
-        # set main_menu to False on other instances if this one is set main_menu
+        # set main_menu to False on previous main menu if main_menu is True
         if self.main_menu:
-            main = self.objects.filter(main_menu=True)
-            for menu in main:
-                menu.main_menu = False
-                menu.save()
+            try:
+                old_main = self.__class__.objects.get(main_menu=True)
+                old_main.main_menu = False
+                old_main.save()
+            except ObjectDoesNotExist:
+                pass
         super(Menu, self).save()
 
     def __unicode__(self):
@@ -73,6 +76,7 @@ class MenuItem(models.Model):
                               null=True, blank=True)
     slug = AutoSlugField(populate_from='name', unique_with='parent',
                          always_update=True)
+    site_home = models.BooleanField(_('site home'), default=False)
     custom_url = models.CharField(_('custom URL'), max_length=200,
                                   blank=True, default='',
                                   help_text=_(
@@ -112,13 +116,27 @@ class MenuItem(models.Model):
         if self.content_type and self.content_view == '':
             model = get_model(self.content_type.app_label,
                               self.content_type.model)
-            self.content_view = cyclope.site.get_default_view_name(model)
+            self.content_view = cyclope.core.frontend.site.get_default_view_name(model)
 
         if not self.content_type and not self.custom_url:
             self.active = False
+        if self.site_home:
+            print dir(self._meta)
+            #try:
+            #    old_home_item = self.__class__.objects.get(site_home=True)
+            #    print "oh", old_home_item
+            #    old_home_item.site_home = False
+            #    old_home.save()
+            #except ObjectDoesNotExist:
+            #    pass
+            #finally:
+            #    self.url = ""
         else:
             self.url = self.get_content_url()
         super(MenuItem, self).save()
+
+    def post_save():
+        print "POST SAVE!"
 
     def get_content_url(self):
         if self.custom_url:

@@ -23,7 +23,6 @@ class FrontendView(object):
     params = {}
 
     def __call__(self, request, *args, **kwargs):
-        print "llaman view", self.name
         if self.params:
             kwargs.update(self.params)
         # check if the view was called from a region templatetag

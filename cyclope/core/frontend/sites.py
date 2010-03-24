@@ -100,19 +100,15 @@ class CyclopeSite(object):
                 _(u'You need to select a layout for the site'))
         else:
             try:
-                menu = Menu.objects.get(main_menu=True)
-                main_menu_items = MenuItem.objects.filter(menu=menu)
-            except:
-                main_menu_items = []
-            context = {'main_menu': main_menu_items,}
+                home_item = MenuItem.objects.get(site_home=True)
+            except ObjectDoesNotExist:
+                return HttpResponse(
+                    _(u'No content has been set for your home page'))
 
-            return render_to_response(cyc_settings.CYCLOPE_DEFAULT_TEMPLATE,
-                                      RequestContext(
-                                        request, context,
-                                        )
-                                      )
-            #return render_to_response(cyc_settings.CYCLOPE_DEFAULT_TEMPLATE,
-            #                          RequestContext(request))
+            obj = getattr(home_item.content_object, home_item.content_type.model)
+            view = self.get_view(obj.__class__, home_item.content_view)
+
+            return view(request, slug=obj.slug)
 
 ### JSON ##
 
