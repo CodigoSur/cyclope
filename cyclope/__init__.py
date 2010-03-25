@@ -70,7 +70,10 @@ VERSION = (0, 1, 0)
 __version__ = '.'.join(map(str, VERSION))
 
 # We import site settings as FeinCMS does
-# not using Django settings at module level as recommended
+# not using Django settings at module level
+# this allows us to import cyclope in setup.py
+# but breaks automatica of update dynamic settings
+# see TODO note in default_settings.py
 from django.utils.functional import LazyObject
 
 class LazySettings(LazyObject):
@@ -85,7 +88,3 @@ class Settings(object):
                 setattr(self, setting, getattr(settings_module, setting))
 
 settings = LazySettings()
-
-#__all__ = [name for name in locals().keys()]
-#
-#print __all__

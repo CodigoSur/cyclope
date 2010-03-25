@@ -11,10 +11,7 @@ def layout_for_request(request):
     from cyclope.models import MenuItem
 
     req_url= request.META['PATH_INFO']
-
-    #ToDo: this check is just to make the URL: /cyclope/ work (correct later)
-    if req_url[1:] != cyclope.settings.CYCLOPE_PREFIX:
-        req_url = req_url[len(cyclope.settings.CYCLOPE_PREFIX)+1:]
+    req_url = req_url[len(cyclope.settings.CYCLOPE_PREFIX)+1:]
 
     try:
         menu_item = MenuItem.objects.select_related().get(url=req_url)
@@ -35,8 +32,7 @@ def template_for_request(request):
     if no matching MenuItem is found.
     """
     layout = layout_for_request(request)
-    template = '%sthemes/%s/%s' % (
-                cyclope.settings.CYCLOPE_PREFIX,
+    template = 'cyclope/themes/%s/%s' % (
                 cyclope.settings.CYCLOPE_CURRENT_THEME,
                 layout.template
                 )

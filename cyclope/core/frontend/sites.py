@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.conf.urls.defaults import *
 from django.utils.translation import ugettext as _
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib.contenttypes.models import ContentType
 from cyclope.models import BaseContent, Menu, MenuItem, SiteSettings

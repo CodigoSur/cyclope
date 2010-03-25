@@ -121,22 +121,17 @@ class MenuItem(models.Model):
         if not self.content_type and not self.custom_url:
             self.active = False
         if self.site_home:
-            print dir(self._meta)
-            #try:
-            #    old_home_item = self.__class__.objects.get(site_home=True)
-            #    print "oh", old_home_item
-            #    old_home_item.site_home = False
-            #    old_home.save()
-            #except ObjectDoesNotExist:
-            #    pass
-            #finally:
-            #    self.url = ""
+            try:
+                old_home_item = self.__class__.objects.get(site_home=True)
+                old_home_item.site_home = False
+                old_home_item.save()
+            except ObjectDoesNotExist:
+                pass
+            finally:
+                self.url = ""
         else:
             self.url = self.get_content_url()
         super(MenuItem, self).save()
-
-    def post_save():
-        print "POST SAVE!"
 
     def get_content_url(self):
         if self.custom_url:

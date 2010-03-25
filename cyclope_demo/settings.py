@@ -107,3 +107,5 @@ FEINCMS_ADMIN_MEDIA = MEDIA_URL + 'feincms/'
 # TreeEditor throws an exception in the admin for Category (as of 2010-02-19)
 # if this is set to True
 FEINCMS_TREE_EDITOR_INCLUDE_ANCESTORS = False
+
+CYCLOPE_PREFIX = ''
