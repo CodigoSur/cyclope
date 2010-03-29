@@ -1,5 +1,9 @@
 # *-- coding:utf-8 --*
-"""Views URL handling and dispatching."""
+"""
+core.frontend.sites
+-------------------
+Frontend views' URL handling.
+"""
 
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -71,7 +75,7 @@ class CyclopeSite(object):
         return urlpatterns
 
     def urls(self):
-        """The site registered views URLs.
+        """URLs for the site's registered frontend views.
         """
         return self.get_urls()
     urls = property(urls)

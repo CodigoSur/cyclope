@@ -1,5 +1,8 @@
 # *-- coding:utf-8 --*
-"""Custom ``Cyclope`` forms."""
+"""
+forms
+-----
+"""
 
 from django import forms
 from django.conf import settings as django_settings
@@ -74,15 +77,15 @@ class MenuItemAdminForm(forms.ModelForm):
         populate_type_choices(self)
 
     def clean(self):
-        #TODO(nicoechaniz): a data consistency check is being done at model level (see models.MenuItem.save()). Implement form validation.
         data = self.cleaned_data
-#        obj = self.instance
-        if data['custom_url'] and \
-        (data['content_type'] or data['content_object'] or data['content_view']):
+        if data['custom_url'] and (data['content_type']
+                                   or data['content_object']
+                                   or data['content_view']):
             raise ValidationError(
                 _(u'You can not set a Custom URL for menu entries \
                     with associated content'))
-        if  data['site_home'] and not (data['content_type'] or data['content_object']):
+        if  data['site_home'] and not (data['content_type']
+                                       or data['content_object']):
             raise ValidationError(
                 _(u'You need to set content data if this is the site home'))
         return super(MenuItemAdminForm, self).clean()

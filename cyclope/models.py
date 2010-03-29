@@ -1,5 +1,8 @@
 # *-- coding:utf-8 --*
-"""Django models"""
+"""
+models
+------
+"""
 
 from django.db import models
 from django.db.models import get_model
@@ -164,33 +167,16 @@ class BaseContent(models.Model):
     slug = AutoSlugField(populate_from='name', unique=True,
                          db_index=True, always_update=True)
 
-    def get_absolute_url(self, view_name):
+    def get_instance_url(self, view_name):
         return '%s/%s/%s/View/%s'\
                 % (self._meta.app_label,
                    self._meta.object_name.lower(),
                    self.slug, view_name)
-    #@classmethod
-    #def get_url_pattern(cls, view):
-    #    view_name = view.name
-    #    is_instance_view = view.is_instance_view
-    #    if is_instanceview:
-    #        return '%s/%s/(?P<slug>.*)/View/%s'\
-    #                % (cls._meta.app_label,
-    #                   cls._meta.object_name.lower(), view_name)
-    #    else:
-    #        return '%s/%s/View/%s'\
-    #                % (cls._meta.app_label,
-    #                   cls._meta.object_name.lower(), view_name)
 
     @classmethod
     def get_model_url(cls, view):
         return '%s/%s/View/%s'\
                 % (cls._meta.app_label, cls._meta.object_name.lower(), view)
-
-    @classmethod
-    def default_detail_params(cls):
-        return {'queryset': cls.objects,
-                'template_object_name': cls._meta.object_name.lower()}
 
     def __unicode__(self):
         return self.name

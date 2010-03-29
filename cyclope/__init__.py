@@ -5,14 +5,11 @@ What is Cyclope
 ===============
 
 :synopsys: ``Cyclope`` is a `Django`_ based CMS. It is built around the idea of collections of categorized content objects which can be displayed using different associated views.
-:copyright: 2010 by `Código Sur <http://www.codigosur.org>`_
+:copyright: 2010 by `Código Sur <http://www.codigosur.org>`_ -  Nuestra América Asoc. Civil / Fundación Pacificar
+:authors: Nicolás Echániz, Santiago Hoerth (see AUTHORS.txt for a full list of contributors)
 :url: http://bitbucket.org/nicoechaniz/django-cyclope/
 :version: 0.1.0
 :licence: GPL v3
-
-``Cyclope`` provides a Category model which is attached to any model that derives from the provided BaseContent class.
-
-Content models can register their views to make them available for display in the different site layouts.
 
 Target audience
 ---------------
@@ -21,11 +18,11 @@ Target audience
 
 1. Developers:
 
-    We developed ``Cyclope`` thinking of those developers that actually like to code in their language of choice: Python. They don't really look for a product that will let them accomplish even the most complex stuff from a web-based UI.
+    We created ``Cyclope`` thinking of those developers that actually like to code in their language of choice: Python. They don't really look for a product that will let them accomplish even the most complex stuff from a web-based UI.
 
     We just aim at providing developers with the tools necessary to easily expose their content types and views for site managers to work with in the admin interface.
 
-    Custom created content types and views can easily be packed in modules for drop-in reutilization in other projects.
+    Custom created content types and views can easily be packed in modules for drop-in re-utilization.
 
 2. Site managers:
 
@@ -33,7 +30,7 @@ Target audience
 
 3. Content editors:
 
-    Will use the Django admin interface to create categories and content for the different content types and collections available in the website.
+    Will have access to a customized Django admin interface to create categories and content for the different content types and collections available in the website.
 
 
 Documentation
@@ -48,12 +45,9 @@ Installation
 Demo project
 ------------
 
-You can test ``Cyclope`` by running:
-:command:`python manage.py runserver`
+You can test ``Cyclope`` by running: :command:`python manage.py runserver` in the provided cyclope_demo/ folder.
 
-from the provided cyclope_demo/ folder.
-
-The admin interface will be accessible at http://localhost:8000/admin
+The admin interface will be accessible at http://localhost:8000/admin and the fronted at: http://localhost:8000
 
 Default username is: admin and the password: password.
 
@@ -61,7 +55,7 @@ Default username is: admin and the password: password.
 Contact and Support
 -------------------
 
-If you need to contact the development team you can write to the adress: nicoechaniz@codigosur.org
+If you need to contact the development team you can reach us by e-mail: nicoechaniz@codigosur.org
 
 
 """

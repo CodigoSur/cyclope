@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""
+core.collections.admin
+----------------------
+"""
 
 from django.contrib import admin
 from django.utils.translation import ugettext as _
@@ -30,6 +34,7 @@ class CategoryFilterSpec(ChoicesFilterSpec):
     """Adds filtering by categories.
 
     To be used by Collectible based objects.
+
     categories.category_filter must be set to True in the model
     for this filter to be active.
     """

@@ -1,19 +1,19 @@
 # *-- coding:utf-8 --*
-
-"""Sets the default and dynamic (db based) settings.
+"""
+Default and dynamic (db based) settings.
 
 All settings will be available to templates if the site_settings context processor is installed.
 
 Attributes:
 
-  Overideable by the project settings.py:
+  Overidable by the project settings.py:
 
     CYCLOPE_PREFIX: prefix for cyclope URLs, defaults to 'cyclope/'
     CYCLOPE_MEDIA_URL: URL to cyclope media files
     CYCLOPE_MEDIA_ROOT: defaults to cyclope/ folder of the project's MEDIA_ROOT
     CYCLOPE_THEMES_ROOT: path to the themes package
 
-  Automatic (cannot be overriden):
+  Automatic (based on database values):
 
     CYCLOPE_THEMES: the themes package
     CYCLOPE_SITE_SETTINGS: the SiteSettings instance

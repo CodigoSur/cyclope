@@ -1,5 +1,9 @@
 # *-- coding:utf-8 --*
-"""Django models for generic categorization of content objects."""
+"""
+core.collections.models
+-----------------------
+Django models for generic categorization of content objects
+"""
 
 from django.db import models
 from django.utils.translation import ugettext as _
@@ -83,7 +87,7 @@ class CategoryMap(models.Model):
     """Mappings between a content object and it's associated categories."""
 
     category = models.ForeignKey('Category', verbose_name=_('category'),
-                                 db_index=True)
+                                 db_index=True, related_name='category_maps')
     content_type = models.ForeignKey(ContentType, db_index=True,
                                      verbose_name=_('content type'))
     object_id = models.PositiveIntegerField(db_index=True)

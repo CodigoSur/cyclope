@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-
+"""
+templatetags.layout
+-------------------
+"""
 from copy import copy
 from django import template
 from cyclope import settings as cyc_settings
@@ -11,7 +14,7 @@ register = template.Library()
 
 @register.inclusion_tag('cyclope/region.html', takes_context=True)
 def region(context, region_name):
-    """A region where views can be inserted in a template.
+    """Defines aregion where views can be inserted in a template.
 
     The views that will actualy be inserted are defined in a Layout.
 
@@ -19,8 +22,8 @@ def region(context, region_name):
 
         {% region 'region_name' %}
 
-    The region name should be one of the regions available to the template
-    according to the theme configuration (check the theme's __init__ file)
+    The region name must be one of the regions available to the template
+    according to the theme configuration (as defined in the theme's __init__ file)
 
     """
 

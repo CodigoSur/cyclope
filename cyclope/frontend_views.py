@@ -1,5 +1,5 @@
 # *-- coding:utf-8 --*
-"""Views for ``Cyclope`` models."""
+"""cyclope.frontend_views"""
 
 from django.utils.translation import ugettext as _
 from django.views.generic.list_detail import object_list
@@ -25,7 +25,7 @@ class MainMenuView(frontend.FrontendView):
               'template_object_name': 'menu',
               }
 
-    def get_string_response(self, request, inline=False, *args, **kwargs):
+    def get_string_response(self, request, *args, **kwargs):
         main_menu = self.params['queryset'].get(main_menu=True)
         c = RequestContext(request, {'menu':main_menu})
         t = loader.get_template("cyclope/menu_flat_list.html")
@@ -68,12 +68,16 @@ class StaticPageListView(frontend.FrontendView):
     is_instance_view = False
 
     def get_http_response(self, request, *args, **kwargs):
+        # FrontendView.__call__ will determine if the view is inline or not
+        # and set inline kwarg accordingly
         return object_list(request,
                            queryset=StaticPage.objects.all(),
                            template_object_name= 'staticpage',
                            *args, **kwargs)
 
     def get_string_response(self, request, *args, **kwargs):
+        # FrontendView.__call__ will determine if the view is inline or not
+        # and set inline kwarg accordingly
         return object_list(request,
                            queryset=StaticPage.objects.all(),
                            template_object_name= 'staticpage',

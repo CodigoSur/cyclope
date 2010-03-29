@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
       $(sel).chainedSelect({
           parent: '#id_template',
           // this /cyclope/ url should not be hard_coded here
-          url: '/cyclope/layout_regions_json',
+          url: '/{{CYCLOPE_PREFIX}}layout_regions_json',
           value: 'region_name',
           label: 'verbose_name'
       });
@@ -26,21 +26,21 @@ jQuery(document).ready(function($) {
     $("#id_regionview_set-0-content_view").chainedSelect({
           parent: '#id_regionview_set-0-content_type',
           // this /cyclope/ url should not be hard_coded here
-          url: '/cyclope/registered_views_json',
+          url: '/{{CYCLOPE_PREFIX}}registered_views_json',
           value: 'view_name',
           label: 'verbose_name'
     });
     $("#id_regionview_set-1-content_view").chainedSelect({
           parent: '#id_regionview_set-1-content_type',
           // this /cyclope/ url should not be hard_coded here
-          url: '/cyclope/registered_views_json',
+          url: '/{{CYCLOPE_PREFIX}}registered_views_json',
           value: 'view_name',
           label: 'verbose_name'
     });
     $("#id_regionview_set-2-content_view").chainedSelect({
           parent: '#id_regionview_set-2-content_type',
           // this /cyclope/ url should not be hard_coded here
-          url: '/cyclope/registered_views_json',
+          url: '/{{CYCLOPE_PREFIX}}registered_views_json',
           value: 'view_name',
           label: 'verbose_name'
     });

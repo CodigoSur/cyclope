@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-"""``Cyclope`` configuration for the Django admin"""
+"""
+admin
+-----
+configuration for the Django admin
+"""
 
 from django.contrib import admin
 from django.utils.translation import ugettext as _

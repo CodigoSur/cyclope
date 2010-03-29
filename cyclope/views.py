@@ -1,5 +1,9 @@
 # *-- coding:utf-8 --*
-"""Standard views for Cyclope models, to be used by FrontEndView derived objects which are declared in frontend.py files."""
+"""
+views
+-----
+Standard views for Cyclope models, to be used by FrontEndView derived objects
+which should be declared in a frontend_views.py file for each app."""
 
 # cyclope views are declared and registered
 # in frontend.py files for each app

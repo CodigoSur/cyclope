@@ -1,11 +1,14 @@
 # *-- coding:utf-8 --*
-"""General utilities."""
+"""
+utils
+-----
+"""
 
 import cyclope
 
 def layout_for_request(request):
     """
-    Returns the layout corresponding to the MenuItem matching the request
+    Returns the layout corresponding to the MenuItem matching the request URL
     or the default site layout if no matching MenuItem is found.
     """
     from cyclope.models import MenuItem

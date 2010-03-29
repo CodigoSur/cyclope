@@ -1,16 +1,25 @@
+"""
+core.frontend
+-------------
+"""
+
 # *-- coding:utf-8 --*
 import inspect
 from sites import site
-
 
 class FrontendView(object):
     """Parent class for frontend views.
 
     Class Attributes:
+
         name: name of the view (must be unique among registered views)
+
         verbose_name
+
         params(dict): keyword arguments that will be passed to get_response
+
         is_default(boolean): is this the default view for the model?
+
         is_instance_view(boolean): is the view always associated
                                    to an object instance?
     """
@@ -71,11 +80,9 @@ class FrontendView(object):
 # True while running, and False when it finishes.
 LOADING = False
 
-
-
 def autodiscover():
-    """Auto-discover INSTALLED_APPS frontend.py modules and fail silently when
-    not present.
+    """Auto-discover frontend_views module for each INSTALLED_APP
+    and fail silently when not present.
 
     This forces an import on them to register frontend views.
     """
