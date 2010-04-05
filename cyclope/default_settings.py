@@ -30,6 +30,8 @@ import sys, os
 from django.db.models.signals import post_save
 from cyclope.models import SiteSettings
 
+settings.TEMPLATE_DIRS += (os.path.join(os.path.dirname(__file__), 'templates'),)
+
 CYCLOPE_PREFIX = getattr(settings, 'CYCLOPE_PREFIX', \
                            'cyclope/')
 CYCLOPE_MEDIA_URL = getattr(settings, 'CYCLOPE_MEDIA_URL', \
@@ -73,8 +75,8 @@ if CYCLOPE_SITE_SETTINGS:
     CYCLOPE_DEFAULT_LAYOUT = CYCLOPE_SITE_SETTINGS.default_layout
 
     if CYCLOPE_DEFAULT_LAYOUT is not None:
-        CYCLOPE_DEFAULT_TEMPLATE = '%sthemes/%s/%s' % (
-            CYCLOPE_PREFIX, CYCLOPE_CURRENT_THEME,
+        CYCLOPE_DEFAULT_TEMPLATE = 'cyclope/themes/%s/%s' % (
+            CYCLOPE_CURRENT_THEME,
             CYCLOPE_DEFAULT_LAYOUT.template)
 
 #TODO(nicoechaniz): this is not working since we are using LazyObject for settings see cyclope.__init__. We should try to make this work again or evaluate if LazyObject for settings is a good idea. The current setup.py depends on that to be able to import cyclope. In the meantime, the server needs to be restarted to refresh dynamic settings.

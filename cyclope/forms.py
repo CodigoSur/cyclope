@@ -78,16 +78,19 @@ class MenuItemAdminForm(forms.ModelForm):
 
     def clean(self):
         data = self.cleaned_data
-        if data['custom_url'] and (data['content_type']
+        if not (data['custom_url'] or data['content_type']):
+            raise ValidationError(
+                _(u'You must provide either content details or a custom URL'))
+        elif data['custom_url'] and (data['content_type']
                                    or data['content_object']
                                    or data['content_view']):
             raise ValidationError(
                 _(u'You can not set a Custom URL for menu entries \
                     with associated content'))
-        if  data['site_home'] and not (data['content_type']
-                                       or data['content_object']):
+        if  data['site_home'] and not (data['content_type']):
             raise ValidationError(
-                _(u'You need to set content data if this is the site home'))
+                _(u'You need to set content details if this is the site home'))
+
         return super(MenuItemAdminForm, self).clean()
 
     class Meta:
@@ -141,6 +144,7 @@ class RegionViewInlineForm(forms.ModelForm):
     # The corresponding json view is CyclopeSite.layout_regions_json()
     region = AjaxChoiceField(required=False)
     content_view = AjaxChoiceField(required=False)
+    object_id = AjaxChoiceField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(RegionViewInlineForm, self).__init__(*args, **kwargs)
@@ -148,27 +152,26 @@ class RegionViewInlineForm(forms.ModelForm):
             # chainedSelect.js will show the selected choice
             # if it is present before filling the choices through AJAX
             # so we set all choices here at __init__ time
-            obj = RegionView.objects.get(id=self.instance.id)
-            if obj.region:
-                selected_region = obj.region
+            region_view = RegionView.objects.get(id=self.instance.id)
+            if region_view.region:
+                selected_region = region_view.region
                 self.fields['region'].choices = [(selected_region,
                                                   selected_region)]
-            if obj.content_view:
-                selected_view = obj.content_view
+            if region_view.content_view:
+                selected_view = region_view.content_view
                 self.fields['content_view'].choices = [(selected_view,
                                                         selected_view)]
+            if region_view.content_object:
+                content_object = region_view.content_object
+                self.fields['object_id'].choices = [(content_object.id,
+                                                        content_object.name)]
+
         populate_type_choices(self)
 
     def clean(self):
         data = self.cleaned_data
         if not data['content_type']:
             raise(ValidationError(_(u'Content type can not be empty')))
-        if data['content_object']:
-            try:
-                getattr(data['content_object'], data['content_type'].model)
-            except:
-                raise(ValidationError(
-                    _(u'Content object does not match content type')))
 
         if data['content_type']:
             if (data['content_view'] == '' or not data['content_view']):

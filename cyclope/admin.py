@@ -51,7 +51,8 @@ class MenuItemAdmin(editor.TreeEditor):
                   {'fields': ('menu', 'parent', 'name', 'site_home', 'custom_url',
                               'layout', 'active')}),
                  (_('content details'),
-                  {'classes': ('collapse',),
+                  {
+#                    'classes': ('collapse',),
                   'fields':('content_type', 'content_view', 'content_object')})
                 )
     list_filter = ('menu',)
@@ -69,11 +70,13 @@ admin.site.register(StaticPage, StaticPageAdmin)
 class RegionViewInline(admin.StackedInline):
     form = RegionViewInlineForm
 #    template = "admin/cyclope/regionview/stacked_inline.html"
-    raw_id_fields = ['content_object']
+#    raw_id_fields = ['content_object']
+#    raw_id_fields = ['object_id']
+
     model = RegionView
     # ToDo: extra should be 1 or 0 but we are using 2 here to be able to test this until we fix the chainedSelect registry for dinamically added formsets. See ToDo note in templates/admin/cyclope/layout/change_form.html
-    extra = 3
-    max_num = 3
+    extra = 1
+#    max_num = 3
 
 
 class LayoutAdmin(admin.ModelAdmin):

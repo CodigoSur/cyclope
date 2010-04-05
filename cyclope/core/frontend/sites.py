@@ -58,6 +58,7 @@ class CyclopeSite(object):
             #JSON views for AJAX updating of admin fields
             url(r'^layout_regions_json$', self.layout_regions_json),
             url(r'^registered_views_json$', self.registered_views_json),
+            url(r'^objects_for_ctype_json$', self.objects_for_ctype_json),
         )
 
         #ToDo: Fix for multi-site
@@ -113,7 +114,7 @@ class CyclopeSite(object):
             obj = getattr(home_item.content_object, home_item.content_type.model)
             view = self.get_view(obj.__class__, home_item.content_view)
 
-            return view(request, slug=obj.slug)
+            return view(request, content_object=obj)
 
 ### JSON ##
 
@@ -135,11 +136,26 @@ class CyclopeSite(object):
         content_type_id = request.GET['q']
         model = ContentType.objects.get(pk=content_type_id).model_class()
         views = [{'view_name': '', 'verbose_name': '------'}]
-        views.extend([ {'view_name': view_options.name,
-                        'verbose_name': view_options.name}
-                       for view_options in self._registry[model] ])
+        views.extend([ {'view_name': view.name,
+                        'verbose_name': view.verbose_name}
+                       for view in self._registry[model] ])
         json_data = simplejson.dumps(views)
         return HttpResponse(json_data, mimetype='application/json')
+
+    def objects_for_ctype_json(self, request):
+        content_type_id = request.GET['q']
+        model = ContentType.objects.get(pk=content_type_id).model_class()
+        if hasattr(model, 'tree'):
+            objs = model.tree.all()
+        else:
+            objs = model.objects.all()
+        objects = [{'object_id': '', 'verbose_name': '------'}]
+        objects.extend([ {'object_id': obj.id,
+                        'verbose_name': obj.name}
+                       for obj in objs ])
+        json_data = simplejson.dumps(objects)
+        return HttpResponse(json_data, mimetype='application/json')
+
 #
 ####
 

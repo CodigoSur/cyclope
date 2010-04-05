@@ -167,16 +167,21 @@ class BaseContent(models.Model):
     slug = AutoSlugField(populate_from='name', unique=True,
                          db_index=True, always_update=True)
 
-    def get_instance_url(self, view_name):
+    def get_absolute_url(self, view_name):
         return '%s/%s/%s/View/%s'\
                 % (self._meta.app_label,
                    self._meta.object_name.lower(),
                    self.slug, view_name)
 
     @classmethod
-    def get_model_url(cls, view):
+    def get_model_url(cls, view_name):
         return '%s/%s/View/%s'\
-                % (cls._meta.app_label, cls._meta.object_name.lower(), view)
+                % (cls._meta.app_label, cls._meta.object_name.lower(), view_name)
+
+    #@classmethod
+    #def default_detail_params(cls):
+    #    return {'queryset': cls.objects,
+    #            'template_object_name': cls._meta.object_name.lower()}
 
     def __unicode__(self):
         return self.name
@@ -209,19 +214,21 @@ class StaticPage(BaseCommentedContent, Collectible):
 
 
 class RegionView(models.Model):
+    region = models.CharField(_('region'), max_length=100,
+                              blank=True, default='')
     layout = models.ForeignKey('Layout')
     content_type = models.ForeignKey(ContentType,
                      verbose_name=_('type'), related_name='region_views',
                      blank=True, null=True)
-    content_object = models.ForeignKey('BaseContent',
-                     verbose_name=_('object'), related_name='region_views',
-                     blank=True, null=True)
     content_view = models.CharField(_('view'), max_length=255,
                                     blank=True, default='')
-    region = models.CharField(_('region'), max_length=100,
-                              blank=True, default='')
+
     weight = models.PositiveIntegerField(verbose_name=_('weight'), default=0,
                                          blank=True, null=True)
+    object_id = models.PositiveIntegerField(
+        db_index=True, verbose_name=_('object'),
+        blank=True, null=True)
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
 
     def __unicode__(self):
         return '%s/%s' % (self.content_type.model, self.content_view)

@@ -5,6 +5,8 @@ import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+BASE_DIR = os.path.dirname(__file__)
+
 INTERNAL_IPS = ('127.0.0.1',)
 
 ADMINS = (
@@ -14,7 +16,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'
-DATABASE_NAME = os.path.join(os.path.dirname(__file__), 'example.db')
+DATABASE_NAME = os.path.join(BASE_DIR, 'example.db')
 
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
@@ -25,7 +27,7 @@ SITE_ID = 1
 USE_I18N = True
 
 # Absolute path to the directory that holds media.
-MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 #MEDIA_ROOT = '/var/www/pyclope.nicoechaniz.com.ar/htdocs/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
@@ -43,7 +45,7 @@ ADMIN_MEDIA_PREFIX = '/media/admin/'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
-    'django.template.loaders.eggs.load_template_source',
+#    'django.template.loaders.eggs.load_template_source',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -74,6 +76,7 @@ ROOT_URLCONF = 'cyclope_demo.urls'
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates".
     # Don't forget to use absolute paths, not relative paths.
+    #os.path.join(BASE_DIR, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -82,7 +85,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.comments',
-#    'django.contrib.humanize',
+    'django.contrib.humanize',
 #    'django.contrib.databrowse',
     'django.contrib.admin',
 
@@ -108,4 +111,4 @@ FEINCMS_ADMIN_MEDIA = MEDIA_URL + 'feincms/'
 # if this is set to True
 FEINCMS_TREE_EDITOR_INCLUDE_ANCESTORS = False
 
-CYCLOPE_PREFIX = ''
+CYCLOPE_PREFIX = 'cyclope/'

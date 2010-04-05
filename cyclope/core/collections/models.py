@@ -54,6 +54,17 @@ class Category(models.Model):
     def valid_parents(self):
         return Category.tree.filter(pk__isnot=self.pk)
 
+    def get_absolute_url(self, view_name):
+        return '%s/%s/%s/View/%s'\
+                % (self._meta.app_label,
+                   self._meta.object_name.lower(),
+                   self.slug, view_name)
+
+    @classmethod
+    def get_model_url(cls, view_name):
+        return '%s/%s/View/%s'\
+                % (cls._meta.app_label, cls._meta.object_name.lower(), view_name)
+
     class Meta:
         unique_together = ('collection', 'name')
         verbose_name = _('category')

@@ -15,7 +15,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from cyclope.utils import template_for_request
 
-def object_detail(request, queryset, slug=None, inline=False,
+def object_detail(request, content_object=None, slug=None, queryset=None, inline=False,
         template_name=None, extra_context=None,
         context_processors=None, template_object_name='object',
         mimetype=None):
@@ -32,16 +32,19 @@ def object_detail(request, queryset, slug=None, inline=False,
     """
     if extra_context is None: extra_context = {}
     model = queryset.model
-    if slug:
-        queryset = queryset.filter(**{'slug': slug})
-    else:
-        raise AttributeError("Generic detail view must be called "
-                             "with an object slug.")
-    try:
-        obj = queryset.get()
-    except ObjectDoesNotExist:
-        raise Http404(
-            "No %s found matching the query" % (model._meta.verbose_name))
+
+    obj = content_object
+
+    if obj is None:
+        if queryset and slug:
+            try:
+                obj = queryset.get(slug=slug)
+            except ObjectDoesNotExist:
+                raise Http404(
+                    "No %s found matching the query" % (model._meta.verbose_name))
+        else:
+            raise AttributeError("Generic detail view must be called "
+                                 "with a content_object or a slug.")
     if not template_name:
         template_name = "%s/%s_detail.html" % (
             model._meta.app_label, model._meta.object_name.lower())

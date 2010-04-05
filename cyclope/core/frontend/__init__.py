@@ -63,15 +63,6 @@ class FrontendView(object):
                     % (model._meta.app_label,
                        model._meta.object_name.lower(), self.name)
 
-    @property
-    def __called_from_region(self):
-        """Checks if the view is being called from a region templatetag"""
-        if inspect.stack()[1][3] == 'region':
-            return True
-        else:
-            return False
-
-
 ##########
 # autodiscover() is an almost exact copy of
 # django.contrib.admin.autodiscover()

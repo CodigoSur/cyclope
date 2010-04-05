@@ -20,32 +20,49 @@ jQuery(document).ready(function($) {
           value: 'region_name',
           label: 'verbose_name'
       });
+
+      $("#id_regionview_set-"+ i +"-content_view").chainedSelect({
+          parent: '#id_regionview_set-'+ i +'-content_type',
+          // this /cyclope/ url should not be hard_coded here
+          url: '/{{CYCLOPE_PREFIX}}registered_views_json',
+          value: 'view_name',
+          label: 'verbose_name'
+      });
+
+      $("#id_regionview_set-"+ i +"-object_id").chainedSelect({
+          parent: '#id_regionview_set-'+ i +'-content_type',
+          // this /cyclope/ url should not be hard_coded here
+          url: '/{{CYCLOPE_PREFIX}}objects_for_ctype_json',
+          value: 'object_id',
+          label: 'verbose_name'
+      });
+
     });
 
-//TODO(nicoechaniz): register each content_view select with it's related content_type not just the first 3. We need to make this work for each dinamically added formset.
-    $("#id_regionview_set-0-content_view").chainedSelect({
-          parent: '#id_regionview_set-0-content_type',
-          // this /cyclope/ url should not be hard_coded here
-          url: '/{{CYCLOPE_PREFIX}}registered_views_json',
-          value: 'view_name',
-          label: 'verbose_name'
+//TODO(nicoechaniz): this was an attempt at using the same widget as raw_id_fields for a generic related. This version is not working but it would be nice to have.
+/*
+    $(".object_id").each(function(i, o){
+        ct_id = "id_regionview_set-"+i+"-content_type";
+        obj_id = "id_regionview_set-"+i+"-object_id"
+        $(o).append("<a id='lookup_"+obj_id+"'>aa</a>");
+
+        $("#"+ct_id).change(function () {
+            var type = $("#"+ct_id+" option:selected").text();
+            var good_choice = true;
+            var link_root = '../../../cyclope/';
+            m = $("#lookup_"+obj_id)
+            $("#lookup_"+obj_id).html("<a onclick='return showRelatedObjectLookupPopup(this);' id='lookup_"+obj_id+"' class='related-lookup' href='../../../cyclope/region/'>lookup</a>");
+            $("#lookup_"+obj_id).text("Lookup " + type);
+            $("#lookup_"+obj_id).attr('href', link_root + type + '/?t=id');
+        }).change();
     });
-    $("#id_regionview_set-1-content_view").chainedSelect({
-          parent: '#id_regionview_set-1-content_type',
-          // this /cyclope/ url should not be hard_coded here
-          url: '/{{CYCLOPE_PREFIX}}registered_views_json',
-          value: 'view_name',
-          label: 'verbose_name'
-    });
-    $("#id_regionview_set-2-content_view").chainedSelect({
-          parent: '#id_regionview_set-2-content_type',
-          // this /cyclope/ url should not be hard_coded here
-          url: '/{{CYCLOPE_PREFIX}}registered_views_json',
-          value: 'view_name',
-          label: 'verbose_name'
-    });
+*/
+
   });
 });
+
+
+
 
 </script>
 

@@ -4,7 +4,7 @@
 
 <div class="menuh">
   <ul>
-  {% for menu_item in menu.menu_items.all %}
+  {% for menu_item in menu_items %}
     <li><a href="/{{CYCLOPE_PREFIX}}{{menu_item.url}}"><span>{{ menu_item.name }}</span></a></li>
   {% endfor %}
   </ul>

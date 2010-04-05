@@ -4,7 +4,7 @@ template used to insert views inside layout regions
 
 <div class="region {{ layout_name }}_region" id={{ region_name }}>
   {% for view_params in views %}
-    <div class="regionview" id="{{ region_name }}_{{ view_params.name }}">
+    <div class="regionview {{ view_params.model }}_{{ view_params.name }}">
       {{ view_params.output|safe }}
     </div>
   {% endfor %}

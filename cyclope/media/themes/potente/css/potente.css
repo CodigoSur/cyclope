@@ -2,9 +2,9 @@
 Plantilla FRECUENCIA para Cyclope 2.0
 Esta plantilla fue desarrollada por Codigo Sur: www.codigosur.org
 Participaron en su realizacion: Franca Grasselli y Domingo M. Lechón.
-Codigo HTML realizado bajo licencia GPL (copialo, mejoralo, pasalo) 
-Ver licencia en: http://creativecommons.org/licenses/GPL/2.0/deed.es_AR 
-Ten en cuenta que las imagenes, los nombres y los logos de este sitio no pueden usarse. Solo el codigo CSS es GPL. Gracias :) 
+Codigo HTML realizado bajo licencia GPL (copialo, mejoralo, pasalo)
+Ver licencia en: http://creativecommons.org/licenses/GPL/2.0/deed.es_AR
+Ten en cuenta que las imagenes, los nombres y los logos de este sitio no pueden usarse. Solo el codigo CSS es GPL. Gracias :)
 Gracias a Radioteca.net y Unesco.
 Si modificas no borres estas lineas :)
 */
@@ -63,7 +63,7 @@ p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
 #cabezal {height:220px; background: url(../images/css/cabezal.png) 0 10px no-repeat;padding:0;}
 .logo {height:68px; margin-left:25px; padding-right:35px; padding-top:35px;}
 .logo h1, .logo h2 {text-align:left;color:#000;}
-.logo h1 a  {font-size:1.2em;color:#000; text-decoration:none;} 
+.logo h1 a  {font-size:1.2em;color:#000; text-decoration:none;}
 .logo h2 a {font-size:1.2em;color:#fff; text-decoration:none;}
 .logo h1 {font-size:1.6em;}
 .logo h2 {font-size:0.8em;}
@@ -165,7 +165,7 @@ p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
 #cuaternaria span {font-weight:700;color:#fff;display:block;text-align:center;text-transform:uppercase;font-size:0.9em;padding:0 20px;margin:0 0 0 -10px;background: url(../images/css/cuaternaria-medio.png) 10px 0 no-repeat; height:66px;}
 #cuaternaria img {width:140px;margin:10px 0; padding:0 20px; border:none;}
 #cuaternaria h1 {display:block;font-size:1em;padding:0 20px;}
-#cuaternaria h1 a {color:#ffff00;} 
+#cuaternaria h1 a {color:#ffff00;}
 #cuaternaria h2 {margin:0; font-size:0.7em; color:#fff;padding:0 20px;}
 #cuaternaria h2 a {color:#ffff00;}
 #cuaternaria h4 {font-size:0.75em; margin:0;padding:0 20px;color:#fff;font-weight:700;}
@@ -200,21 +200,21 @@ p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
 #paginador span a {font-weight:bold; color:#0000ff;}
 #paginador span a:hover {color:#ff0000;}
 
-#paginador  span.current {font-size:1.3em;color:#333;padding:0 10px;font-weight:700;} 
+#paginador  span.current {font-size:1.3em;color:#333;padding:0 10px;font-weight:700;}
 #indice .pagEspacio{height:12px; clear:both;}
-#indice .pagEspacioMapa{height:25px;}	
-#indice .espacio{height:32px;}	
-.indice {margin-bottom:20px; padding-bottom:10px;border-bottom:1px dotted #aaa; float:left; width:100%;}	
-.indice h1 {padding:0;font-size:1.3em; margin-top:4px; margin:0; border:none;}	
+#indice .pagEspacioMapa{height:25px;}
+#indice .espacio{height:32px;}
+.indice {margin-bottom:20px; padding-bottom:10px;border-bottom:1px dotted #aaa; float:left; width:100%;}
+.indice h1 {padding:0;font-size:1.3em; margin-top:4px; margin:0; border:none;}
 .indice h1 a{color:#be0a26; text-decoration:none;}
 .indice h1 a:hover {text-decoration:underline; color:#000;}
 .indice h4 {font-size:0.8em; padding:5px 0 0;font-weight:700;color:#666; margin-right:15px; display:inline;}
-.indice h3 {font-size:0.8em; padding:5px 0 10px 0; color:#039; margin:0;}	
+.indice h3 {font-size:0.8em; padding:5px 0 10px 0; color:#039; margin:0;}
 .indice h3 a {color:#008a2e;}
 .indice h3 a:hover {color: #333;}
-.indice h2 {font-size:0.85em;font-weight:normal;padding:5px 0;margin:0;}	
-.indice h2 a {text-decoration:none;}	
-.indice h2 a:hover {text-decoration:underline;}		
+.indice h2 {font-size:0.85em;font-weight:normal;padding:5px 0;margin:0;}
+.indice h2 a {text-decoration:none;}
+.indice h2 a:hover {text-decoration:underline;}
 .indice h6 {display:inline;font-size:0.65em;color:#666;font-weight:normal;text-transform:uppercase;margin-bottom:px;}
 .indice img{padding:3px; background-color:#eee; border:1px solid #ccc;margin:3px 0 6px 15px; float:right;}
 
@@ -223,17 +223,17 @@ p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
 #leer h2 {padding: 15px 0 10px 0;margin:0;font-weight:700;font-size:0.95em;}
 #leer h3 {margin:15px 0;padding:15px; font-size:0.85em;color:#b40404;border:1px solid #ccc;background:#eee;}
 #leer h3 a {color:#08088a;}
-#leer h4 {font-size:0.85em; font-weight:400;}	
+#leer h4 {font-size:0.85em; font-weight:400;}
 #leer h4 img {border:1px solid #999;color: #666;padding:0;margin:0 15px 0 0;float:left;}
-#leer h4 p {font-weight:500;font-size:1.15em;color:#666; padding:0; margin:0;}		
+#leer h4 p {font-weight:500;font-size:1.15em;color:#666; padding:0; margin:0;}
 #leer h4 div {clear:left;}
 #leer h5 {color:#333; font-size:0.85em; font-weight:400; margin:0 0 10px; padding:0 0 20px;border-bottom: 1px dotted #999;}
 #leer h5 ul {list-style:square;padding:3px 0 3px 10px;margin:30px;}
 #leer h6.fuente  {margin:10px 0;font-weight:400;font-size:0.75em;color:#666; padding:0 0 15px;}
 #leer h6.fecha {font-weight:400;font-size:0.75em;margin:15px 0 0;color:#666;}
-#leer h6.pretitulo {color:#666; margin:25px 0 0 0; font-size:0.85em; text-transform:uppercase;}/*Campos y opciones Cyclope segun aparicion en plantilla por defecto*/ 
+#leer h6.pretitulo {color:#666; margin:25px 0 0 0; font-size:0.85em; text-transform:uppercase;}/*Campos y opciones Cyclope segun aparicion en plantilla por defecto*/
 #leer hr {border-bottom:1px solid #EEE;}
-.herramientas {margin:0;padding:0;}	
+.herramientas {margin:0;padding:0;}
 .herramientas ul {text-align:left;margin:0;padding:0;list-style:none;font-weight:bold;font-size:0.8em;}
 .herramientas ul a:hover {text-decoration:underline;}
 .herramientas li  {display:inline;}
@@ -245,13 +245,13 @@ p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
 	.foto_box {padding:5px;background-color:#E0E6EB;border: 2px solid #b1b1b1;margin:15px 0 5px 5px;float:right;max-width:300px;text-align:right;}
 	.foto_box img {border:0;}
 	.foto_box .autor {font-style:italic;font-size:0.6em;padding:5px 0 5px 0;color:#333;}
-	.foto_box .epigrafe {font-size:0.7em;font-weight:400;text-align:right;margin-top:5px;color:#000;}	
+	.foto_box .epigrafe {font-size:0.7em;font-weight:400;text-align:right;margin-top:5px;color:#000;}
 	.foto_box .cantidad {font-size:0.7em;text-align:right;color:#333;}
-	.foto_box .cantidad img {padding:2px;}		
+	.foto_box .cantidad img {padding:2px;}
 
 /*Definiciones Globales para Adjuntos, Relacionadas y Comentarios*/
 #adjuntos h6,#comentarios h6,#relacionadas h6 {font-size:1em;padding:12px 0 12px 12px;margin:30px 0 12px ;color:#333;border-bottom:1px solid #666;background:#dbdbdb;}
- 
+
 #adjuntos {width:50%;font-weight:700;color:#030;margin:7px 0;text-align:left;}
 #adjuntos img, #relacionadas img, #comentarios img {padding:0 0 5px;margin:0;}
 #adjuntos .adjuntos_box {font-size:0.85em;padding:10px 10px 10px;border:1px dotted #ccc;margin:10px 0 30px;}
@@ -260,7 +260,7 @@ p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
 #relacionadas a {color: #666;padding: 0;font-weight: bold;}
 #relacionadas .info {padding: 0;font-weight: bold;}
 #relacionadas ul {padding:10px 10px 15px;margin:0 0 20px;}
-#relacionadas li {color: #0000FF;list-style: none;	padding:0 0 5px 20px;margin:0 0 10px 0;background: transparent url(../images/css/relacionadas_vin.png) no-repeat;}	
+#relacionadas li {color: #0000FF;list-style: none;	padding:0 0 5px 20px;margin:0 0 10px 0;background: transparent url(../images/css/relacionadas_vin.png) no-repeat;}
 #relacionadas li a {font-size: 0.9em;color: #0000FF;font-weight: normal;}
 #comentarios {text-align:left;color:#0000FF;margin:10px 0 0 0;}
 #comentarios h2{border:1px dotted #666;border-bottom:none;font-size:0.9em;background:#f2f2f2;;padding:5px 5px 5px 15px;margin:10px 0 0;color:#333;}
@@ -268,13 +268,13 @@ p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
 #comentarios h3{font-size:0.8em;padding:16px 5px;margin:0;color:#333;font-weight:400;border:1px dotted #666;}
 #comentarios h4{font-size:1em;padding:10px;margin:15px 0 0;color:#ca3c55;font-weight:700;}
 #comentarios small {display:block; padding:5px 0 20px; font-weight:400; width:350px; color:#333;}
-#comentarios form {padding:10px;margin:0;font-weight:700;display: block;}				
+#comentarios form {padding:10px;margin:0;font-weight:700;display: block;}
 #comentarios label {display:block;color:#333;font-size:0.85em;padding:0;margin: 0;}
 #comentarios .field {width:50%;background-color:#eee;padding:4px;margin:7px 0 15px;border:1px solid #999;font-size: 1em;color:#000;}
 #comentarios .btn  {margin:7px 15px 0 0;font-size:0.9em;padding:3px 6px; font-weight:700;}
 #comentarios .comenta {}
 #comentarios .datos {float:right;}
-#comentarios .codigo {}		
+#comentarios .codigo {}
 
 
 /*Mapa*/
@@ -290,7 +290,7 @@ p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
 
 /* Contacto */
 #contacto h5{font-weight:700;padding:0 0 20px;margin:0; color:#333; font-size:1em;}
-#contacto h6 {font-weight:400;font-size:0.8em;padding:0 0 10px;margin:0;}	
+#contacto h6 {font-weight:400;font-size:0.8em;padding:0 0 10px;margin:0;}
 #contacto form {text-align:left;padding:0;margin:0;}
 #contacto form h5{padding:15px 0;}
 #contacto form h6 {padding:0;}
@@ -306,19 +306,19 @@ p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
 .busqueda {border-top:1px solid #ccc;padding:10px 10px 15px;margin:33px 0;color:#666;width:81%;}
 .busqueda a:hover {font-size:1em;font-weight:700;}
 .busqueda p {color:#333;padding:0;margin:0 0;font-weight:700;}
-.busqueda span {font-size:1.3em;color:#333;padding:0 10px;font-weight:700;}          
+.busqueda span {font-size:1.3em;color:#333;padding:0 10px;font-weight:700;}
 .busqueda .field {padding:3px;margin:7px 0 1px 0;border:1px solid #999;color:#333; width:60%;}
 .busqueda .btn {font-weight:700;padding:3px 4px 3px;margin:0 15px 0 5px;}
 
 /* CONTENIDO DEL LEER y CONTACTO*/
 
 
-	
 
 
 
-	
-	
+
+
+
 /* Adjuntos, relacionadas y comentarios. */
 
 
@@ -342,12 +342,118 @@ p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
 #pie a:hover {color:#000; text-decoration:none;}
 #pie img {padding:10px 0 0;}
 
-#banners {display:block;padding:0 55px 8px;width:235px;margin:0 auto;}	
-#banners img {margin:0 auto 8px auto;}	
-#rss {padding:0 0 8px 20px;margin:15px 0 12px 20px;background: url("../images/css/rss_logo.png") 0 3px no-repeat;}	
-#rss a {color:#DD5800;text-decoration:none;font-weight:bold;}	
-#rss a:hover {	text-decoration:underline;}		
-.creditos {font-size:11px;margin:15px 0 0 0;}	
-.creditos img {	padding:7px 0 0 0;}	
-#logos {text-align:center;font-size: 0.7em;padding:1px 0 20px 0;margin:10px auto;}	
-#logos img {padding:7px 0 0;}	
+#banners {display:block;padding:0 55px 8px;width:235px;margin:0 auto;}
+#banners img {margin:0 auto 8px auto;}
+#rss {padding:0 0 8px 20px;margin:15px 0 12px 20px;background: url("../images/css/rss_logo.png") 0 3px no-repeat;}
+#rss a {color:#DD5800;text-decoration:none;font-weight:bold;}
+#rss a:hover {	text-decoration:underline;}
+.creditos {font-size:11px;margin:15px 0 0 0;}
+.creditos img {	padding:7px 0 0 0;}
+#logos {text-align:center;font-size: 0.7em;padding:1px 0 20px 0;margin:10px auto;}
+#logos img {padding:7px 0 0;}
+
+
+/* Cyclope GPL views*/
+
+/* Category root_items_list (as content) */
+
+#content.category_root_items_list span{
+  background: none;
+  color: black;
+}
+#content.category_root_items_list ul{
+  list-style: none;
+}
+#content.category_root_items_list a{
+  text-decoration: underline
+}
+
+
+/* Category root_items_list (inside regonview) */
+
+.regionview.category_root_items_list {margin:0 10px 20px 10px;}
+.regionview.category_root_items_list span {display:block;}
+.regionview.category_root_items_list ul{margin:0; padding:0; list-style:none; width:190px;}
+.regionview.category_root_items_list ul li {
+  padding: 0 0 0 30px;
+  background: url(../images/css/menuv.png) 0 0 no-repeat;
+  }
+
+.regionview.category_root_items_list  ul li a{
+  display: inline;
+  font-size:0.9em;
+  text-decoration:none;
+  color:#036;
+  font-weight:700;
+  margin: 0px;
+}
+
+
+.regionview.category_root_items_list  ul ul li{
+  padding: 0 0px 0 8px;
+  width: 150px;
+}
+.regionview.category_root_items_list  ul li a:hover{
+  text-decoration:underline;
+}
+.regionview.category_root_items_list  ul ul li {
+  list-style-image: url(../images/css/menuv-sub.png);
+//  background: url(../images/css/menuv-sub.png) 0 0 no-repeat;
+  background: transparent;
+  list-style-position: ;
+  margin: 0 0 0 0px;
+}
+
+
+/* Collection categories_hierarchy */
+
+.collection_categories_hierarchy {margin:0 10px;}
+.collection_categories_hierarchy span {display:block;}
+.collection_categories_hierarchy ul{margin:0; padding:0; list-style:none; width:190px;}
+.collection_categories_hierarchy ul li {
+  margin: 4px 0;
+  padding: 0 0 0 30px;
+  background:url(../images/css/menuv.png) 0 0 no-repeat;
+  line-height: 30px;
+  }
+.collection_categories_hierarchy ul ul li{
+  padding: 0 0px 0 8px;
+  width: 150px;
+}
+.collection_categories_hierarchy ul li a{
+  display: inline;
+  font-size:0.9em;
+  text-decoration:none;
+  color:#036;
+  font-weight:700;
+  padding: 0 0px 0 8px;
+  margin: 0px;
+}
+.collection_categories_hierarchy ul li a:hover{
+  text-decoration:underline;
+}
+.collection_categories_hierarchy ul ul li {
+  list-style-image: url(../images/css/menuv-sub.png);
+//  background:url(../images/css/menuv-sub.png) 0 0 no-repeat;
+  background: transparent;
+  list-style-position: ;
+  margin: 0 0 0 0px;
+}
+.collection_categories_hierarchy ul ul a {
+  padding:0;
+  font-size:0.70em;
+  color:#000;
+}
+.collection_categories_hierarchy .has_children{
+  text-decoration: underline;
+}
+.expand_collapse{
+  font-weight: bold;
+  clear: none;
+  margin: 0px;
+  padding: 0px;
+  color: red;
+  float: right;
+  margin-right: 7px;
+  cursor: pointer;
+}

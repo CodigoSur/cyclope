@@ -9,6 +9,8 @@ from cyclope import settings as cyc_settings
 from cyclope.models import MenuItem, RegionView
 from cyclope.utils import layout_for_request
 from cyclope.core import frontend
+from cyclope.models import BaseContent
+
 
 register = template.Library()
 
@@ -44,14 +46,16 @@ def region(context, region_name):
             regionview.content_type.model_class(),
             regionview.content_view,
             )
-        if regionview.content_object:
+        if (regionview.content_object
+            and isinstance(regionview.content_object, BaseContent)):
             slug = regionview.content_object.slug
         else:
             slug=None
 
-#        view_vars['output'] = view(context['request'], inline=True, slug=slug)
-        view_vars['output'] = view(context['request'], slug=slug)
+        view_vars['output'] = view(context['request'], slug=slug,
+                                   content_object=regionview.content_object)
         view_vars['name'] = regionview.content_view
+        view_vars['model'] = regionview.content_type.name
         views.append(view_vars)
 
     region_vars['views'] = views

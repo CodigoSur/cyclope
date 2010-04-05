@@ -127,10 +127,10 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
           <!-- INICIA ESPACIO AIRE -->
           <div id="aire">
             <!-- INICIA TERCIARIA -->
-            <div id="{{ terciaria.label }}">
-              <div class="top"><span>{{ terciaria.label }}</span> </div>
-              {% region  'right' %}
+            <div id="terciaria">
+              <div class="top"><span>{{ terciaria.label }}Hola</span> </div>
               <div class="box">
+                {% region  'right' %}
                 {% for article in terciaria.articles.all %}
                 <h6 class="fecha">{{ article.date }}</h6>
                 <h1><a href="articles/{{ article.slug }}">{{ article.label }}</a></h1>

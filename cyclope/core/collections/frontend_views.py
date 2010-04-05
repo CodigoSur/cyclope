@@ -3,38 +3,103 @@
 
 from django.utils.translation import ugettext as _
 from django.template import loader, RequestContext
+from django.http import Http404, HttpResponse
 
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 from cyclope.core.collections.models import Collection, Category
+#from cyclope.utils import get_descendants_nested_list
+
 
 def custom_list(request, *args, **kwargs):
     host_template = template_for_request(request)
     response = HttpResponse("hola %s" % host_template)
     return response
 
-class CategoryFlatListView(frontend.FrontendView):
-    """A list view of the menuitems for the main menu.
+
+class CategoryRootItemsList(frontend.FrontendView):
+    """A flat list view of category members.
     """
-    name='category_flat_list'
-    verbose_name=_('flat list of category root items')
+    name='root_items_list'
+    verbose_name=_('list of root items for the selected Category')
     is_default = True
-    params = {'queryset': Category.objects,
-              'template_object_name': 'menu',
-              }
 
-    def get_string_response(self, request, slug, *args, **kwargs):
-        if slug==None:
-            slug = 'novedades'
-        category = self.params['queryset'].get(slug=slug)
-        elements = []
-        for mapping in category.category_maps.all():
-            elements.append(mapping.content_object)
-            print mapping.content_type.app_label, mapping.content_type.model
-
+    def get_string_response(self, request, content_object, *args, **kwargs):
+        category = content_object
         c = RequestContext(request, {'category_maps': category.category_maps.all()})
-        t = loader.get_template("collections/category_flat_list.html")
+        t = loader.get_template("collections/category_root_items_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
         return t.render(c)
 
-frontend.site.register_view(Category, CategoryFlatListView())
+    def get_http_response(self, request, slug, *args, **kwargs):
+        category = Category.objects.get(slug=slug)
+        c = RequestContext(request, {'category_maps': category.category_maps.all()})
+        t = loader.get_template("collections/category_root_items_list.html")
+        c['host_template'] = cyc_settings.CYCLOPE_DEFAULT_TEMPLATE
+        return HttpResponse(t.render(c))
+
+frontend.site.register_view(Category, CategoryRootItemsList())
+
+
+class CollectionCategoriesHierarchy(frontend.FrontendView):
+    """A full list view of the categories in a collection.
+    """
+    name='categories_hierarchy'
+    verbose_name=_('hierarchical list of Categories in a Collection')
+    is_default = True
+
+    def get_string_response(self, request, content_object, *args, **kwargs):
+        collection = content_object
+        categories = Category.tree.filter(collection=collection, level=0)
+        category_list = []
+        for category in categories:
+            category_list.extend(self._get_categories_nested_list(category))
+        c = RequestContext(request, {'categories': category_list})
+        t = loader.get_template("collections/collection_categories_hierarchy.html")
+        c['host_template'] = 'cyclope/inline_view.html'
+        return t.render(c)
+
+    def _get_categories_nested_list(self, base_category, name_field='name'):
+        """Creates a nested list to be uses with unordered_list template tag
+        """
+        #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
+        #TODO(nicoechaniz): only show categories which have children or content.
+        #TODO(nicoechaniz): do not add a link for categories that do not have content
+        from django.template import Template, Context
+        link_template = Template(
+            '{% if has_content %}'
+            '<a href="/{{url}}" class="{{class}}">{{ name }}</a>'
+            '{% else %}{{ name }}'
+            '{% endif %}'
+            '{% if has_children %}'
+              '<span class="expand_collapse">+</span>'
+            '{% endif %}'
+            )
+        nested_list = []
+        for child in base_category.get_children():
+            if child.get_descendant_count()>0:
+                nested_list.extend(self._get_categories_nested_list(
+                    child, name_field=name_field))
+            else:
+                url = cyc_settings.CYCLOPE_PREFIX + \
+                      child.get_absolute_url('root_items_list')
+                name = getattr(child, name_field)
+                has_content = child.category_maps.exists()
+                nested_list.append(link_template.render(
+                    Context({'name':name,
+                             'url': url,
+                             'has_content': has_content,})))
+
+        url = cyc_settings.CYCLOPE_PREFIX + \
+              base_category.get_absolute_url('root_items_list')
+        name = getattr(base_category, name_field)
+        has_content = base_category.category_maps.exists()
+        include = link_template.render(
+            Context({'name':name,
+                     'url': url,
+                     'has_content': has_content,
+                     'has_children': True}))
+        return [include, nested_list]
+
+
+frontend.site.register_view(Collection, CollectionCategoriesHierarchy())

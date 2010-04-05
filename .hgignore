@@ -10,3 +10,4 @@ workenv
 testworkenv
 requirements.txt
 doc
+.svn
