@@ -1,0 +1,15 @@
+{% extends host_template %}
+
+{% block content %}
+
+
+<ul>
+{% for cm in category_maps %}
+  <li>
+    <a href="/{{CYCLOPE_PREFIX}}{{ cm.content_type.app_label }}/{{ cm.content_type.model }}/{{ cm.content_object.slug }}/View/detail">
+      <span>{{ cm.content_object.name }}</span>
+    </a>
+  </li>
+{% endfor %}
+</ul>
+{% endblock content%}
