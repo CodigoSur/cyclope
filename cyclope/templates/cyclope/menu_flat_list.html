@@ -1,12 +1,9 @@
 {% extends host_template %}
 
 {% block content %}
-
-<div class="menuh">
   <ul>
   {% for menu_item in menu_items %}
     <li><a href="/{{CYCLOPE_PREFIX}}{{menu_item.url}}"><span>{{ menu_item.name }}</span></a></li>
   {% endfor %}
   </ul>
-</div>
 {% endblock content%}

@@ -49,15 +49,15 @@ p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
 
 
 /*Menu horizontal*/
-.menuh  {margin-right:30px; margin-top:-20px; float:right; margin-bottom:0px;padding:0;}
-.menuh ul {margin:0; padding:0; list-style:none;}
-.menuh li {float:left; margin:0; margin-left:15px;}
-.menuh a {background:url(../images/css/tabmenuh.png) no-repeat top left; float:left; padding:0 0 0 5px; text-decoration:none;}
-.menuh span {color:#fff; font-size:0.75em; font-weight:bold; display:block; padding:6px 15px 6px 6px; float:left; cursor:pointer; background:url(../images/css/tabmenuh.png) no-repeat 100% -30px;}
-.menuh a:hover {color:#000; background-position: 0 -60px;}
-.menuh a:hover span {color:#f4f4f4; background-position: 100% -90px;}
-.menuh li.current a  {background-position: 0 -60px;}
-.menuh li.current a span {color:#f4f4f4; background-position: 100% -90px;}
+#menu_principal  {margin-right:30px; margin-top:-20px; float:right; margin-bottom:0px;padding:0;}
+#menu_principal ul {margin:0; padding:0; list-style:none;}
+#menu_principal li {float:left; margin:0; margin-left:15px;}
+#menu_principal a {background:url(../images/css/tabmenuh.png) no-repeat top left; float:left; padding:0 0 0 5px; text-decoration:none;}
+#menu_principal span {color:#fff; font-size:0.75em; font-weight:bold; display:block; padding:6px 15px 6px 6px; float:left; cursor:pointer; background:url(../images/css/tabmenuh.png) no-repeat 100% -30px;}
+#menu_principal a:hover {color:#000; background-position: 0 -60px;}
+#menu_principal a:hover span {color:#f4f4f4; background-position: 100% -90px;}
+#menu_principal li.current a  {background-position: 0 -60px;}
+#menu_principal li.current a span {color:#f4f4f4; background-position: 100% -90px;}
 
 /*Cabezal*/
 #cabezal {height:220px; background: url(../images/css/cabezal.png) 0 10px no-repeat;padding:0;}
@@ -353,7 +353,7 @@ p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
 #logos img {padding:7px 0 0;}
 
 
-/* Cyclope GPL views*/
+/******* Cyclope GPL views ********/
 
 /* Category root_items_list (as content) */
 
@@ -369,7 +369,7 @@ p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
 }
 
 
-/* Category root_items_list (inside regonview) */
+/* Category root_items_list (inside region) */
 
 .regionview.category_root_items_list {margin:0 10px 20px 10px;}
 .regionview.category_root_items_list span {display:block;}

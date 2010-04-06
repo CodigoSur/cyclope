@@ -64,12 +64,12 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
         """
         #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
         #TODO(nicoechaniz): only show categories which have children or content.
-        #TODO(nicoechaniz): do not add a link for categories that do not have content
         from django.template import Template, Context
         link_template = Template(
             '{% if has_content %}'
-            '<a href="/{{url}}" class="{{class}}">{{ name }}</a>'
-            '{% else %}{{ name }}'
+              '<a href="{% url category-root_items_list slug %}"'
+                 'class="{{class}}">{{ name }}</a>'
+            '  {% else %} {{ name }}'
             '{% endif %}'
             '{% if has_children %}'
               '<span class="expand_collapse">+</span>'
@@ -81,22 +81,18 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
                 nested_list.extend(self._get_categories_nested_list(
                     child, name_field=name_field))
             else:
-                url = cyc_settings.CYCLOPE_PREFIX + \
-                      child.get_absolute_url('root_items_list')
                 name = getattr(child, name_field)
                 has_content = child.category_maps.exists()
                 nested_list.append(link_template.render(
-                    Context({'name':name,
-                             'url': url,
+                    Context({'name': name,
+                             'slug': child.slug,
                              'has_content': has_content,})))
 
-        url = cyc_settings.CYCLOPE_PREFIX + \
-              base_category.get_absolute_url('root_items_list')
         name = getattr(base_category, name_field)
         has_content = base_category.category_maps.exists()
         include = link_template.render(
-            Context({'name':name,
-                     'url': url,
+            Context({'name': name,
+                     'slug': base_category.slug,
                      'has_content': has_content,
                      'has_children': True}))
         return [include, nested_list]

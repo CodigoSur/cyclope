@@ -45,7 +45,8 @@ class SiteSettings(models.Model):
 
 
 class Menu(models.Model):
-    name = models.CharField(_('name'), max_length=50, db_index=True)
+    name = models.CharField(_('name'), max_length=50, db_index=True, unique=True)
+    slug = AutoSlugField(populate_from='name', always_update=True)
     main_menu = models.BooleanField(_('main menu'), default=False)
 
     def save(self):

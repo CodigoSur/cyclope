@@ -1,7 +1,7 @@
 {% extends host_template %}
 
 {% comment %}
-When inserted in a layout region the host template is just a wrapper.
+When inserted in a layout region the host template used is just a wrapper (see inline_view.html).
 When showing the StaticPage as the main content of the view, the host_template is the layout template.
 {% endcomment %}
 
@@ -9,6 +9,6 @@ When showing the StaticPage as the main content of the view, the host_template i
 
 <p>{{ staticpage.name }} <br/>detail view</p>
 <p>{{ staticpage.text|safe }}</p>
-      <div id="pruebas"> <a href="{% url staticpage-detail staticpage.slug %}"> {{  staticpage.slug}}</a></div>
+      <div> <a href="{% url staticpage-detail staticpage.slug %}"> {{  staticpage.slug}}</a></div>
 
 {% endblock content%}

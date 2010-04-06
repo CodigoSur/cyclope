@@ -46,8 +46,7 @@ def region(context, region_name):
             regionview.content_type.model_class(),
             regionview.content_view,
             )
-        if (regionview.content_object
-            and isinstance(regionview.content_object, BaseContent)):
+        if regionview.content_object:
             slug = regionview.content_object.slug
         else:
             slug=None
@@ -56,6 +55,8 @@ def region(context, region_name):
                                    content_object=regionview.content_object)
         view_vars['name'] = regionview.content_view
         view_vars['model'] = regionview.content_type.name
+        if slug:
+            view_vars['slug'] = slug
         views.append(view_vars)
 
     region_vars['views'] = views
