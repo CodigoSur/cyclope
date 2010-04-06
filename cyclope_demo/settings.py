@@ -106,9 +106,11 @@ INSTALLED_APPS = (
 )
 
 # make sure you point this to your Feincms media files.
-FEINCMS_ADMIN_MEDIA = MEDIA_URL + 'feincms/'
+FEINCMS_ADMIN_MEDIA = '/feincms_media/'
+
 # TreeEditor throws an exception in the admin for Category (as of 2010-02-19)
 # if this is set to True
 FEINCMS_TREE_EDITOR_INCLUDE_ANCESTORS = False
 
-CYCLOPE_PREFIX = 'cyclope/'
+#CYCLOPE_PREFIX = 'cyclope/'
+CYCLOPE_PREFIX = ''

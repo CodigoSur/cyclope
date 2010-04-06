@@ -16,7 +16,7 @@ def custom_list(request, *args, **kwargs):
     return response
 
 class MenuRootItemsList(frontend.FrontendView):
-    """A flat list view of the menuitems for a given menu.
+    """A flat list view of the root MenuItems for a given Menu.
     """
     name='root_items_list'
     verbose_name=_('list of root items for the selected Menu')
@@ -25,7 +25,7 @@ class MenuRootItemsList(frontend.FrontendView):
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         menu_items = MenuItem.tree.filter(menu=content_object, level=0)
         c = RequestContext(request, {'menu_items': menu_items})
-        t = loader.get_template("cyclope/menu_flat_list.html")
+        t = loader.get_template("cyclope/menu_root_items_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
         return t.render(c)
 

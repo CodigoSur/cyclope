@@ -32,6 +32,14 @@ if django_settings.DEBUG:
             {'document_root': django_settings.MEDIA_ROOT, 'show_indexes': True})
     )
 
+    import os, feincms
+    feincms_root = os.path.join(feincms.__path__[0], 'media/feincms/')
+    urlpatterns+= patterns('',
+        url(r'^feincms_media/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': feincms_root, 'show_indexes': True})
+    )
+
+
 if 'rosetta' in django_settings.INSTALLED_APPS:
     urlpatterns += patterns('',
         url(r'^rosetta/', include('rosetta.urls')),
