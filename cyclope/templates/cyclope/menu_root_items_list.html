@@ -3,7 +3,15 @@
 {% block content %}
   <ul>
   {% for menu_item in menu_items %}
-    <li><a href="/{{CYCLOPE_PREFIX}}{{menu_item.url}}"><span>{{ menu_item.name }}</span></a></li>
+    <li>
+      {% if menu_item.custom_url %}
+        <a href="{{menu_item.url}}">
+      {% else %}
+        <a href="/{{CYCLOPE_PREFIX}}{{menu_item.url}}">
+      {% endif %}
+        <span>{{ menu_item.name }}</span>
+      </a>
+    </li>
   {% endfor %}
   </ul>
 {% endblock content%}

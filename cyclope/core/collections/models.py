@@ -54,7 +54,7 @@ class Category(models.Model):
     def valid_parents(self):
         return Category.tree.filter(pk__isnot=self.pk)
 
-    def get_absolute_url(self, view_name):
+    def get_absolute_url(self, view_name=None):
         return '%s/%s/%s/View/%s'\
                 % (self._meta.app_label,
                    self._meta.object_name.lower(),
