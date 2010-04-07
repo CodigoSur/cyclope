@@ -128,7 +128,7 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
           <div id="aire">
             <!-- INICIA TERCIARIA -->
             <div id="terciaria">
-              <div class="top"><span>{{ terciaria.label }}Hola</span> </div>
+              <div class="top"><span>{{ terciaria.label }}</span> </div>
               <div class="box">
                 {% region  'right' %}
                 {% for article in terciaria.articles.all %}
@@ -223,7 +223,7 @@ window.open(name,'popup1','width=750,height=580,resizable=yes,menubar=no,toolbar
       </div> <!-- TERMINA medianera -->
 
       <div id="espaciopie"></div>
-      <div id="pie">
+      <div id="pie">{% region 'footer' %}
         <a href="http://www.radioteca.net">Radioteca</a>, <a href="http://www.unesco.org">UNESCO</a> y <a href="http://www.codigosur.org">Código Sur</a> apoyan la construcción de esta web, pero no necesariamente comparten y adhieren a los contenidos publicados, siendo estos absoluta responsabilidad de las organizaciones usuarias.<br/>
         Los contenidos de este sitio web están bajo una <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO"> Licencia Creative Commons Reconocimiento-NoComercial-SinObraDerivada 3.0</a>.<br/>
         Este sitio ha sido diseñado por <a href="http://www.codigosur.org">Código Sur</a> y es administrado con el editor dinámico de contenidos <a href="http://cyclope.codigosur.org">Cyclope 2.0</a> que ha sido desarrollado por <a href="http://www.codigosur.org">Código Sur</a>.<br/>
