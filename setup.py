@@ -11,13 +11,15 @@ Distribution({
     ],
 })
 
-import cyclope
+#import cyclope
 
 setup(
     name='django-cyclope',
-    version=cyclope.__version__,
+#    version=cyclope.__version__,
+    version='0.1.0',
     description="CMS for pythonistas who like to code instead of using a web UI for every task.",
-    long_description=cyclope.__doc__,
+#    long_description=cyclope.__doc__,
+    long_description="CMS for pythonistas who like to code instead of using a web UI for every task.",
     author='Nicolás Echániz & Santiago Hoerth',
     author_email='nico@rakar.com',
     url='http://bitbucket.org/nicoechaniz/django-cyclope/',
