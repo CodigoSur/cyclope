@@ -2,18 +2,12 @@
 """cyclope.frontend_views"""
 
 from django.utils.translation import ugettext as _
-from django.views.generic.list_detail import object_list
 from django.template import loader, RequestContext
 
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 from cyclope.models import StaticPage, Menu, MenuItem
 from cyclope import views
-
-def custom_list(request, *args, **kwargs):
-    host_template = template_for_request(request)
-    response = HttpResponse("hola %s" % host_template)
-    return response
 
 class MenuRootItemsList(frontend.FrontendView):
     """A flat list view of the root MenuItems for a given Menu.
@@ -46,11 +40,13 @@ class StaticPageDetail(frontend.FrontendView):
               'template_object_name': 'staticpage',
              }
 
-    def get_http_response(self, request, *args, **kwargs):
-        return views.object_detail(request, inline=False, *args, **kwargs)
+    def get_http_response(self, request, slug=None, *args, **kwargs):
+        return views.object_detail(request, slug=slug,
+                                   inline=False, *args, **kwargs)
 
-    def get_string_response(self, request, *args, **kwargs):
-        return views.object_detail(request, inline=True, *args, **kwargs)
+    def get_string_response(self, request, content_object=None, *args, **kwargs):
+        return views.object_detail(request, content_object=content_object,
+                                   inline=True, *args, **kwargs)
 
 frontend.site.register_view(StaticPage, StaticPageDetail())
 
@@ -68,7 +64,7 @@ class StaticPageList(frontend.FrontendView):
     def get_http_response(self, request, *args, **kwargs):
         # FrontendView.__call__ will determine if the view is inline or not
         # and set inline kwarg accordingly
-        return object_list(request,
+        return views.object_list(request,
                            queryset=StaticPage.objects.all(),
                            template_object_name= 'staticpage',
                            *args, **kwargs)
@@ -76,7 +72,7 @@ class StaticPageList(frontend.FrontendView):
     def get_string_response(self, request, *args, **kwargs):
         # FrontendView.__call__ will determine if the view is inline or not
         # and set inline kwarg accordingly
-        return object_list(request,
+        return views.object_list(request, inline=True,
                            queryset=StaticPage.objects.all(),
                            template_object_name= 'staticpage',
                            *args, **kwargs)

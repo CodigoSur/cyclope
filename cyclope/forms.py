@@ -179,6 +179,8 @@ class RegionViewInlineForm(forms.ModelForm):
                     _(u'You need to select a content view')))
             if not data['region']:
                 raise(ValidationError(_(u'You need to select a region')))
+            if data['object_id'] == '':
+                data['object_id'] = None
 
         return super(RegionViewInlineForm, self).clean()
 

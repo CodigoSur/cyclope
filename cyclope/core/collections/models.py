@@ -11,6 +11,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 import mptt
 from autoslug.fields import AutoSlugField
+import cyclope
 
 class Collection(models.Model):
     """A facility for creating custom content collections."""
@@ -54,11 +55,17 @@ class Category(models.Model):
     def valid_parents(self):
         return Category.tree.filter(pk__isnot=self.pk)
 
-    def get_absolute_url(self, view_name=None):
-        return '%s/%s/%s/View/%s'\
-                % (self._meta.app_label,
-                   self._meta.object_name.lower(),
-                   self.slug, view_name)
+    def get_absolute_url(self, view_name):
+        view = cyclope.core.frontend.site.get_view(self.__class__, view_name)
+        if view.is_instance_view:
+            return '%s/%s/%s/View/%s'\
+                    % (self._meta.app_label,
+                       self._meta.object_name.lower(),
+                       self.slug, view_name)
+        else:
+            return '%s/%s/View/%s'\
+                    % (self._meta.app_label,
+                       self._meta.object_name.lower(), view_name)
 
     @classmethod
     def get_model_url(cls, view_name):

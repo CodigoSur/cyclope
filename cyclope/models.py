@@ -169,10 +169,17 @@ class BaseContent(models.Model):
                          db_index=True, always_update=True)
 
     def get_absolute_url(self, view_name):
-        return '%s/%s/%s/View/%s'\
-                % (self._meta.app_label,
-                   self._meta.object_name.lower(),
-                   self.slug, view_name)
+        view = cyclope.core.frontend.site.get_view(self.__class__, view_name)
+        if view.is_instance_view:
+            return '%s/%s/%s/View/%s'\
+                    % (self._meta.app_label,
+                       self._meta.object_name.lower(),
+                       self.slug, view_name)
+        else:
+            return '%s/%s/View/%s'\
+                    % (self._meta.app_label,
+                       self._meta.object_name.lower(), view_name)
+
 
     @classmethod
     def get_model_url(cls, view_name):

@@ -31,6 +31,22 @@ class FrontendView(object):
     is_instance_view = True
     params = {}
 
+    def __init__(self):
+        self._is_region_view = self._is_standard_view = True
+        print self.name
+        try:
+            self.get_http_response(None)
+        except NotImplementedError:
+            self.is_standard_view = False
+        except:
+            pass
+        try:
+            self.get_string_response(None)
+        except NotImplementedError:
+            self.is_region_view = False
+        except:
+            pass
+
     def __call__(self, request, *args, **kwargs):
         if self.params:
             kwargs.update(self.params)
@@ -42,12 +58,12 @@ class FrontendView(object):
         return response
 
     def get_http_response(self, request, *args, **kwargs):
-        """Must be overriden by inheriting class and return a proper response.
+        """Must be overriden by inheriting class and return a proper HttpResponse.
         """
         raise NotImplementedError()
 
-    def get_string_response(self, request, *args, **kwargs):
-        """Must be overriden by inheriting class and return a proper response
+    def get_string_response(self, request=None, *args, **kwargs):
+        """Must be overriden by inheriting class and return a string response
         to be embedded in the calling template region.
         """
         raise NotImplementedError()

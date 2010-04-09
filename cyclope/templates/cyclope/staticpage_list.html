@@ -1,12 +1,13 @@
-{% comment %} {% extends host_template %} {% endcomment %}
+{% extends host_template %}
 
 {% block content %}
-
+<ul>
 {% for staticpage in staticpage_list %}
-<div id="pruebas">
-  <a href="{% url staticpage-detail staticpage.slug %}">
+  <li>
+    <a href="{% url staticpage-detail staticpage.slug %}">
     {{  staticpage.name}}
-  </a>
-</div>
+    </a>
+  </li>
 {% endfor %}
+</ul>
 {% endblock content%}

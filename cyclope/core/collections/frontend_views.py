@@ -24,14 +24,14 @@ class CategoryRootItemsList(frontend.FrontendView):
     verbose_name=_('list of root items for the selected Category')
     is_default = True
 
-    def get_string_response(self, request, content_object, *args, **kwargs):
+    def get_string_response(self, request, content_object=None, *args, **kwargs):
         category = content_object
         c = RequestContext(request, {'category_maps': category.category_maps.all()})
         t = loader.get_template("collections/category_root_items_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
         return t.render(c)
 
-    def get_http_response(self, request, slug, *args, **kwargs):
+    def get_http_response(self, request, slug=None, *args, **kwargs):
         category = Category.objects.get(slug=slug)
         c = RequestContext(request, {'category_maps': category.category_maps.all()})
         t = loader.get_template("collections/category_root_items_list.html")
@@ -48,7 +48,7 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
     verbose_name=_('hierarchical list of Categories in a Collection')
     is_default = True
 
-    def get_string_response(self, request, content_object, *args, **kwargs):
+    def get_string_response(self, request, content_object=None, *args, **kwargs):
         collection = content_object
         categories = Category.tree.filter(collection=collection, level=0)
         category_list = []
@@ -67,7 +67,7 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
         from django.template import Template, Context
         link_template = Template(
             '{% if has_content %}'
-              '<a href="{% url category-root_items_list slug %}"'
+              '<a href="{% url category-root_items_list slug %}" '
                  'class="{{class}}">{{ name }}</a>'
             '  {% else %} {{ name }}'
             '{% endif %}'
