@@ -114,7 +114,9 @@ class CategoryMap(models.Model):
     objects = CategoryMapManager()
 
     def __unicode__(self):
-        return '%s: %s' % (self.category.collection.name, self.category.name)
+        return '%(collection_name)s: %(category_name)s' % {
+            'collection_name': self.category.collection.name,
+            'category_name': self.category.name}
 
     class Meta:
         verbose_name = _('category map')

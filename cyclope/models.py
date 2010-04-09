@@ -114,8 +114,8 @@ class MenuItem(models.Model):
                 getattr(self.content_object, self.content_type.model)
             except:
                 raise Exception(
-                    _(u'%s: "%s" does not exist' % \
-                      (self.content_type.model, self.content_object)))
+                    _(u'%(ct_model)s: "%(co)s" does not exist' % \
+                      {'ct_model': self.content_type.model, 'co':self.content_object}))
 
         if self.content_type and self.content_view == '':
             model = get_model(self.content_type.app_label,
