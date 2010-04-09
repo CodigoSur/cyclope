@@ -33,7 +33,6 @@ class FrontendView(object):
 
     def __init__(self):
         self._is_region_view = self._is_standard_view = True
-        print self.name
         try:
             self.get_http_response(None)
         except NotImplementedError:
