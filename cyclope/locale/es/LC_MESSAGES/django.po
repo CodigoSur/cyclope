@@ -3,14 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-04-09 15:11-0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2010-04-09 16:14-0300\n"
+"Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,9 +24,7 @@ msgid "You must provide either content details or a custom URL"
 msgstr "Debe proveer detalles de contenido o una URL"
 
 #: forms.py:88
-msgid ""
-"You can not set a Custom URL for menu entries                     with "
-"associated content"
+msgid "You can not set a Custom URL for menu entries                     with associated content"
 msgstr "No puede setear una URL para Entradas de Menú con contenido asociado."
 
 #: forms.py:92
@@ -52,7 +49,7 @@ msgstr "lista de items raíz para el Menú seleccionado"
 
 #: frontend_views.py:37
 msgid "detailed view of the selected Static Page"
-msgstr ""
+msgstr "vista detallada de la página estatica"
 
 #: frontend_views.py:58
 msgid "list of Static Pages"
@@ -60,124 +57,142 @@ msgstr "lista de Páginas Estáticas"
 
 #: models.py:24
 msgid "templating theme"
-msgstr ""
+msgstr "tema de la plantilla"
 
 #: models.py:26
 msgid "default layout"
-msgstr ""
+msgstr "dispocición por defecto"
 
-#: models.py:28 models.py:200
+#: models.py:28
+#: models.py:200
 msgid "allow comments"
-msgstr ""
+msgstr "permitir comentarios"
 
-#: models.py:30 models.py:203
+#: models.py:30
+#: models.py:203
 msgid "enabled"
-msgstr ""
+msgstr "habilitado"
 
-#: models.py:31 models.py:204
+#: models.py:31
+#: models.py:204
 msgid "disabled"
-msgstr ""
+msgstr "deshabilitado"
 
 #: models.py:34
 msgid "global title"
-msgstr ""
+msgstr "titulo global"
 
 #: models.py:36
 msgid "keywords"
-msgstr ""
+msgstr "palabra clave"
 
-#: models.py:37 apps/articles/models.py:66 core/collections/models.py:46
+#: models.py:37
+#: apps/articles/models.py:66
+#: core/collections/models.py:46
 msgid "description"
-msgstr ""
+msgstr "descrición"
 
-#: models.py:43 models.py:44
+#: models.py:43
+#: models.py:44
 msgid "site settings"
-msgstr ""
+msgstr "configuración del sitio"
 
-#: models.py:48 models.py:77 models.py:166 models.py:246
-#: apps/articles/models.py:22 apps/articles/models.py:33
-#: core/collections/models.py:19 core/collections/models.py:40
+#: models.py:48
+#: models.py:77
+#: models.py:166
+#: models.py:246
+#: apps/articles/models.py:22
+#: apps/articles/models.py:33
+#: core/collections/models.py:19
+#: core/collections/models.py:40
 msgid "name"
-msgstr ""
+msgstr "nombre"
 
 #: models.py:50
 msgid "main menu"
-msgstr ""
+msgstr "menu principal"
 
-#: models.py:67 models.py:75
+#: models.py:67
+#: models.py:75
 msgid "menu"
-msgstr ""
+msgstr "menu"
 
 #: models.py:68
 msgid "menus"
-msgstr ""
+msgstr "menus"
 
-#: models.py:78 core/collections/models.py:43
+#: models.py:78
+#: core/collections/models.py:43
 msgid "parent"
-msgstr ""
+msgstr "relacionado"
 
-#: models.py:79 core/collections/models.py:44
+#: models.py:79
+#: core/collections/models.py:44
 msgid "children"
-msgstr ""
+msgstr "hijo"
 
 #: models.py:83
 msgid "site home"
-msgstr ""
+msgstr "página de inicio"
 
 #: models.py:84
 msgid "custom URL"
-msgstr ""
+msgstr "URL personalizada"
 
 #: models.py:87
-msgid ""
-"Either set an URL here or                                     select a "
-"content type and view."
-msgstr ""
+msgid "Either set an URL here or                                     select a content type and view."
+msgstr "configura la URL aquí o selecciona un tipo de contenido y vista"
 
-#: models.py:91 models.py:257
+#: models.py:91
+#: models.py:257
 msgid "layout"
-msgstr ""
+msgstr "dispocisión"
 
-#: models.py:93 models.py:229
+#: models.py:93
+#: models.py:229
 msgid "type"
-msgstr ""
+msgstr "tipo"
 
-#: models.py:97 models.py:237
+#: models.py:97
+#: models.py:237
 msgid "object"
-msgstr ""
+msgstr "objeto"
 
-#: models.py:100 models.py:231
+#: models.py:100
+#: models.py:231
 msgid "view"
-msgstr ""
+msgstr "vista"
 
 #: models.py:110
 msgid "No content selected"
-msgstr ""
+msgstr "No ha seleccionado contenido"
 
 #: models.py:117
 #, python-format
 msgid "%(ct_model)s: \"%(co)s\" does not exist"
-msgstr ""
+msgstr "no existe %(ct_model)s: \"%(co)s\""
 
 #: models.py:156
 msgid "menu item"
-msgstr ""
+msgstr "item de menu"
 
 #: models.py:157
 msgid "menu items"
-msgstr ""
+msgstr "items de menu"
 
 #: models.py:202
 msgid "default"
-msgstr ""
+msgstr "por defecto"
 
-#: models.py:213 apps/articles/models.py:45
+#: models.py:213
+#: apps/articles/models.py:45
 msgid "summary"
-msgstr ""
+msgstr "sumario"
 
-#: models.py:214 apps/articles/models.py:46
+#: models.py:214
+#: apps/articles/models.py:46
 msgid "text"
-msgstr ""
+msgstr "texto"
 
 #: models.py:220
 #, fuzzy
@@ -191,96 +206,97 @@ msgstr "lista de Páginas Estáticas"
 
 #: models.py:225
 msgid "region"
-msgstr ""
+msgstr "región"
 
 #: models.py:234
 msgid "weight"
-msgstr ""
+msgstr "peso"
 
 #: models.py:251
 msgid "layout template"
-msgstr ""
+msgstr "dispocisión de la plantila"
 
 #: models.py:258
 msgid "layouts"
-msgstr ""
+msgstr "dispociciones"
 
 #: apps/articles/frontend_views.py:14
 msgid "full detail"
-msgstr ""
+msgstr "detalle"
 
 #: apps/articles/models.py:19
 msgid "yes"
-msgstr ""
+msgstr "sí"
 
 #: apps/articles/models.py:19
 msgid "no"
-msgstr ""
+msgstr "no"
 
 #: apps/articles/models.py:27
 msgid "notes"
-msgstr ""
+msgstr "notas"
 
 #: apps/articles/models.py:37
 msgid "link"
-msgstr ""
+msgstr "enlace"
 
 #: apps/articles/models.py:44
 msgid "pre-title"
-msgstr ""
+msgstr "pre-titulo"
 
 #: apps/articles/models.py:47
 msgid "author"
-msgstr ""
+msgstr "autor"
 
 #: apps/articles/models.py:48
 msgid "source"
-msgstr ""
+msgstr "fuente"
 
 #: apps/articles/models.py:50
 msgid "creation date"
-msgstr ""
+msgstr "día de creación"
 
 #: apps/articles/models.py:52
 msgid "date"
-msgstr ""
+msgstr "día"
 
-#: apps/articles/models.py:55 apps/articles/models.py:64
+#: apps/articles/models.py:55
+#: apps/articles/models.py:64
 msgid "article"
-msgstr ""
+msgstr "articulo"
 
 #: apps/articles/models.py:56
 msgid "articles"
-msgstr ""
+msgstr "articulos"
 
 #: apps/articles/models.py:60
 msgid "title"
-msgstr ""
+msgstr "titulo"
 
 #: apps/articles/models.py:65
 msgid "attachments"
-msgstr ""
+msgstr "adjuntos"
 
 #: apps/articles/models.py:68
 msgid "file"
-msgstr ""
+msgstr "archivo"
 
 #: apps/articles/models.py:70
 msgid "downloads"
-msgstr ""
+msgstr "bajadas"
 
 #: core/collections/admin.py:63
 msgid "All"
-msgstr ""
+msgstr "Todos"
 
 #: core/collections/admin.py:70
 #, python-format
 msgid "%s categories"
-msgstr ""
+msgstr "%s categorias"
 
 #: core/collections/admin.py:92
 msgid "Extra info"
-msgstr ""
+msgstr "Información extra"
 
 #: core/collections/frontend_views.py:24
 #, fuzzy
@@ -289,40 +305,43 @@ msgstr "lista de items raíz para el Menú seleccionado"
 
 #: core/collections/frontend_views.py:48
 msgid "hierarchical list of Categories in a Collection"
-msgstr ""
+msgstr "lista jerarquizada de categorias en las colecciones"
 
 #: core/collections/models.py:21
 msgid "is navigation root"
-msgstr ""
+msgstr "es la raiz de navegación"
 
 #: core/collections/models.py:24
 #, fuzzy
 msgid "content types"
 msgstr "detalles de contenido"
 
-#: core/collections/models.py:29 core/collections/models.py:39
+#: core/collections/models.py:29
+#: core/collections/models.py:39
 msgid "collection"
-msgstr ""
+msgstr "coleción"
 
 #: core/collections/models.py:30
 msgid "collections"
-msgstr ""
+msgstr "colecciones"
 
 #: core/collections/models.py:39
 msgid "collection categories"
-msgstr ""
+msgstr "categorias de colecciones"
 
 #: core/collections/models.py:45
 msgid "active"
-msgstr ""
+msgstr "activo"
 
-#: core/collections/models.py:77 core/collections/models.py:107
+#: core/collections/models.py:77
+#: core/collections/models.py:107
 msgid "category"
-msgstr ""
+msgstr "categoria"
 
-#: core/collections/models.py:78 core/collections/models.py:132
+#: core/collections/models.py:78
+#: core/collections/models.py:132
 msgid "categories"
-msgstr ""
+msgstr "categorias"
 
 #: core/collections/models.py:110
 #, fuzzy
@@ -331,21 +350,21 @@ msgstr "detalles de contenido"
 
 #: core/collections/models.py:122
 msgid "category map"
-msgstr ""
+msgstr "mapa de la categoria"
 
 #: core/collections/models.py:123
 msgid "category maps"
-msgstr ""
+msgstr "mapa de las categorias"
 
 #: core/frontend/__init__.py:123
 #, python-format
 msgid "No default view has been set for %s"
-msgstr ""
+msgstr "No hay una vista por defecto para %s"
 
 #: core/frontend/__init__.py:126
 #, python-format
 msgid "You can set only one default view for %s"
-msgstr ""
+msgstr "Puedes definir solo una vista por defecto para %s"
 
 #: core/frontend/sites.py:103
 #, fuzzy
@@ -359,29 +378,29 @@ msgstr "Debe seleccionar una Vista del contenido"
 
 #: core/frontend/sites.py:112
 msgid "No content has been set for your home page"
-msgstr ""
+msgstr "No hay contenido definido para la pagina de inicio"
 
 #: templates/admin/base_site.html:4
 msgid "Cyclope site admin"
-msgstr ""
+msgstr "Administración de cyclope"
 
 #: templates/cyclope/themes/potente/__init__.py:11
 msgid "potente theme"
-msgstr ""
+msgstr "tema potente"
 
 #: templates/cyclope/themes/potente/__init__.py:17
 msgid "One sidebar"
-msgstr ""
+msgstr "una barra lateral"
 
 #: templates/cyclope/themes/potente/__init__.py:19
 #: templates/cyclope/themes/potente/__init__.py:30
 msgid "header"
-msgstr ""
+msgstr "encabezado"
 
 #: templates/cyclope/themes/potente/__init__.py:20
 #: templates/cyclope/themes/potente/__init__.py:31
 msgid "left"
-msgstr ""
+msgstr "izquierda"
 
 #: templates/cyclope/themes/potente/__init__.py:21
 #: templates/cyclope/themes/potente/__init__.py:32
@@ -392,12 +411,13 @@ msgstr "detalles de contenido"
 #: templates/cyclope/themes/potente/__init__.py:22
 #: templates/cyclope/themes/potente/__init__.py:34
 msgid "footer"
-msgstr ""
+msgstr "pie de página"
 
 #: templates/cyclope/themes/potente/__init__.py:28
 msgid "Two sidebars"
-msgstr ""
+msgstr "Dos barras laterales"
 
 #: templates/cyclope/themes/potente/__init__.py:33
 msgid "right"
-msgstr ""
+msgstr "derecha"
+
