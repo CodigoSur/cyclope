@@ -55,7 +55,7 @@ class Category(models.Model):
     def valid_parents(self):
         return Category.tree.filter(pk__isnot=self.pk)
 
-    def get_absolute_url(self, view_name):
+    def get_instance_url(self, view_name=None):
         view = cyclope.core.frontend.site.get_view(self.__class__, view_name)
         if view.is_instance_view:
             return '%s/%s/%s/View/%s'\

@@ -145,7 +145,7 @@ class MenuItem(models.Model):
                               self.content_type.model)
             if self.content_object:
                 obj = model.objects.get(pk=self.content_object.pk)
-                return obj.get_absolute_url(self.content_view)
+                return obj.get_instance_url(self.content_view)
             else:
                 return model.get_model_url(self.content_view)
 
@@ -168,7 +168,7 @@ class BaseContent(models.Model):
     slug = AutoSlugField(populate_from='name', unique=True,
                          db_index=True, always_update=True)
 
-    def get_absolute_url(self, view_name):
+    def get_instance_url(self, view_name):
         view = cyclope.core.frontend.site.get_view(self.__class__, view_name)
         if view.is_instance_view:
             return '%s/%s/%s/View/%s'\
