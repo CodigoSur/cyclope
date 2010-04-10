@@ -32,11 +32,12 @@ class FrontendView(object):
     params = {}
 
     def __init__(self):
-        self._is_region_view = self._is_standard_view = True
+        self.is_region_view = self.is_standard_view = True
         try:
             self.get_http_response(None)
         except NotImplementedError:
             self.is_standard_view = False
+        #other exceptions raise because we are not using proper arguments
         except:
             pass
         try:

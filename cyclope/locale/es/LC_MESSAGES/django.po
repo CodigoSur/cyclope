@@ -115,11 +115,11 @@ msgstr "menu principal"
 #: models.py:67
 #: models.py:75
 msgid "menu"
-msgstr "menu"
+msgstr "menú"
 
 #: models.py:68
 msgid "menus"
-msgstr "menus"
+msgstr "menúes"
 
 #: models.py:78
 #: core/collections/models.py:43
@@ -146,7 +146,7 @@ msgstr "configura la URL aquí o selecciona un tipo de contenido y vista"
 #: models.py:91
 #: models.py:257
 msgid "layout"
-msgstr "dispocisión"
+msgstr "layout"
 
 #: models.py:93
 #: models.py:229
@@ -174,11 +174,11 @@ msgstr "no existe %(ct_model)s: \"%(co)s\""
 
 #: models.py:156
 msgid "menu item"
-msgstr "item de menu"
+msgstr "item de menú"
 
 #: models.py:157
 msgid "menu items"
-msgstr "items de menu"
+msgstr "items de menú"
 
 #: models.py:202
 msgid "default"
@@ -187,7 +187,7 @@ msgstr "por defecto"
 #: models.py:213
 #: apps/articles/models.py:45
 msgid "summary"
-msgstr "sumario"
+msgstr "resumen"
 
 #: models.py:214
 #: apps/articles/models.py:46
@@ -202,7 +202,7 @@ msgstr "lista de Páginas Estáticas"
 #: models.py:221
 #, fuzzy
 msgid "static pages"
-msgstr "lista de Páginas Estáticas"
+msgstr "páginas estáticas"
 
 #: models.py:225
 msgid "region"
@@ -214,7 +214,7 @@ msgstr "peso"
 
 #: models.py:251
 msgid "layout template"
-msgstr "dispocisión de la plantila"
+msgstr "template para este layout"
 
 #: models.py:258
 msgid "layouts"
@@ -222,7 +222,7 @@ msgstr "dispociciones"
 
 #: apps/articles/frontend_views.py:14
 msgid "full detail"
-msgstr "detalle"
+msgstr "detalle completo"
 
 #: apps/articles/models.py:19
 msgid "yes"
@@ -242,7 +242,7 @@ msgstr "enlace"
 
 #: apps/articles/models.py:44
 msgid "pre-title"
-msgstr "pre-titulo"
+msgstr "pre-título"
 
 #: apps/articles/models.py:47
 msgid "author"
@@ -254,24 +254,24 @@ msgstr "fuente"
 
 #: apps/articles/models.py:50
 msgid "creation date"
-msgstr "día de creación"
+msgstr "fecha de creación"
 
 #: apps/articles/models.py:52
 msgid "date"
-msgstr "día"
+msgstr "fecha"
 
 #: apps/articles/models.py:55
 #: apps/articles/models.py:64
 msgid "article"
-msgstr "articulo"
+msgstr "artículo"
 
 #: apps/articles/models.py:56
 msgid "articles"
-msgstr "articulos"
+msgstr "artículos"
 
 #: apps/articles/models.py:60
 msgid "title"
-msgstr "titulo"
+msgstr "título"
 
 #: apps/articles/models.py:65
 msgid "attachments"
@@ -292,7 +292,7 @@ msgstr "Todos"
 #: core/collections/admin.py:70
 #, python-format
 msgid "%s categories"
-msgstr "%s categorias"
+msgstr "%s categorías"
 
 #: core/collections/admin.py:92
 msgid "Extra info"
@@ -301,25 +301,25 @@ msgstr "Información extra"
 #: core/collections/frontend_views.py:24
 #, fuzzy
 msgid "list of root items for the selected Category"
-msgstr "lista de items raíz para el Menú seleccionado"
+msgstr "lista de items raíz para la Categoría seleccionada"
 
 #: core/collections/frontend_views.py:48
 msgid "hierarchical list of Categories in a Collection"
-msgstr "lista jerarquizada de categorias en las colecciones"
+msgstr "lista jerarquizada de las Categorias de una Colección"
 
 #: core/collections/models.py:21
 msgid "is navigation root"
-msgstr "es la raiz de navegación"
+msgstr "es la raíz de navegación"
 
 #: core/collections/models.py:24
 #, fuzzy
 msgid "content types"
-msgstr "detalles de contenido"
+msgstr "tipos de contenido"
 
 #: core/collections/models.py:29
 #: core/collections/models.py:39
 msgid "collection"
-msgstr "coleción"
+msgstr "colección"
 
 #: core/collections/models.py:30
 msgid "collections"
@@ -336,17 +336,17 @@ msgstr "activo"
 #: core/collections/models.py:77
 #: core/collections/models.py:107
 msgid "category"
-msgstr "categoria"
+msgstr "categoría"
 
 #: core/collections/models.py:78
 #: core/collections/models.py:132
 msgid "categories"
-msgstr "categorias"
+msgstr "categorías"
 
 #: core/collections/models.py:110
 #, fuzzy
 msgid "content type"
-msgstr "detalles de contenido"
+msgstr "tipo de contenido"
 
 #: core/collections/models.py:122
 msgid "category map"
@@ -354,7 +354,7 @@ msgstr "mapa de la categoria"
 
 #: core/collections/models.py:123
 msgid "category maps"
-msgstr "mapa de las categorias"
+msgstr "mapas de categorías"
 
 #: core/frontend/__init__.py:123
 #, python-format
@@ -369,12 +369,12 @@ msgstr "Puedes definir solo una vista por defecto para %s"
 #: core/frontend/sites.py:103
 #, fuzzy
 msgid "You need to create you site settings"
-msgstr "Debe seleccionar una región"
+msgstr "Su sitio aún no ha sido configurado"
 
 #: core/frontend/sites.py:106
 #, fuzzy
 msgid "You need to select a layout for the site"
-msgstr "Debe seleccionar una Vista del contenido"
+msgstr "Debe seleccionar un layout para el sitio"
 
 #: core/frontend/sites.py:112
 msgid "No content has been set for your home page"
@@ -382,7 +382,7 @@ msgstr "No hay contenido definido para la pagina de inicio"
 
 #: templates/admin/base_site.html:4
 msgid "Cyclope site admin"
-msgstr "Administración de cyclope"
+msgstr "Administración de Cyclope"
 
 #: templates/cyclope/themes/potente/__init__.py:11
 msgid "potente theme"
@@ -390,7 +390,7 @@ msgstr "tema potente"
 
 #: templates/cyclope/themes/potente/__init__.py:17
 msgid "One sidebar"
-msgstr "una barra lateral"
+msgstr "Una barra lateral"
 
 #: templates/cyclope/themes/potente/__init__.py:19
 #: templates/cyclope/themes/potente/__init__.py:30
@@ -406,7 +406,7 @@ msgstr "izquierda"
 #: templates/cyclope/themes/potente/__init__.py:32
 #, fuzzy
 msgid "content"
-msgstr "detalles de contenido"
+msgstr "contenido"
 
 #: templates/cyclope/themes/potente/__init__.py:22
 #: templates/cyclope/themes/potente/__init__.py:34
