@@ -102,12 +102,12 @@ class MenuItem(models.Model):
 
     def save(self):
         # check that data is consistent
-        #ToDo: raise appropriate exceptions
+        #TODO(nicoechaniz): raise appropriate exceptions
         if self.content_object and not self.content_type:
             self.content_type = ContentType.objects.get_for_model(
                 self.content_object)
         if self.content_view != '' and not self.content_type:
-            raise Exception(_(u'No content selected'))
+            self.content_view = ''
 
         if self.content_object:
             try:
@@ -115,39 +115,20 @@ class MenuItem(models.Model):
             except:
                 raise Exception(
                     _(u'%(ct_model)s: "%(co)s" does not exist' % \
-                      {'ct_model': self.content_type.model, 'co':self.content_object}))
+                      {'ct_model': self.content_type.model,
+                       'co':self.content_object}))
 
         if self.content_type and self.content_view == '':
             model = get_model(self.content_type.app_label,
                               self.content_type.model)
             self.content_view = cyclope.core.frontend.site.get_default_view_name(model)
 
-        if not self.content_type and not self.custom_url:
-            self.active = False
-        if self.site_home:
-            try:
-                old_home_item = self.__class__.objects.get(site_home=True)
-                old_home_item.site_home = False
-                old_home_item.save()
-            except ObjectDoesNotExist:
-                pass
-            finally:
-                self.url = ""
-        else:
-            self.url = self.get_content_url()
-        super(MenuItem, self).save()
-
-    def get_content_url(self):
         if self.custom_url:
-            return self.custom_url
+            self.url = self.custom_url
         else:
-            model = get_model(self.content_type.app_label,
-                              self.content_type.model)
-            if self.content_object:
-                obj = model.objects.get(pk=self.content_object.pk)
-                return obj.get_instance_url(self.content_view)
-            else:
-                return model.get_model_url(self.content_view)
+            self.url = "/".join([a.slug for a in self.get_ancestors()]+[self.slug])
+
+        super(MenuItem, self).save()
 
     def __unicode__(self):
         return self.name

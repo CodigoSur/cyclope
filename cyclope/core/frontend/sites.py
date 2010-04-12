@@ -7,7 +7,7 @@ Frontend views' URL handling.
 
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
-from django.template import RequestContext
+from django.template import RequestContext, loader
 from django.conf.urls.defaults import *
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ObjectDoesNotExist
@@ -61,8 +61,8 @@ class CyclopeSite(object):
             url(r'^objects_for_ctype_json$', self.objects_for_ctype_json),
         )
 
-        #ToDo: Fix for multi-site
-
+        #TODO(nicoechaniz): Fix for multi-site ?
+        # url patterns for registered views
         for model, model_views in self._registry.items():
             for view in model_views:
                 url_pattern = view.get_url_pattern(model)
@@ -73,6 +73,25 @@ class CyclopeSite(object):
                     name="%s-%s" %
                     (model._meta.object_name.lower(), view.name) )
                 )
+        # url patterns for menu items
+        for item in MenuItem.tree.all():
+            if item.custom_url:
+                continue
+            if item.content_object is not None:
+                obj = getattr(item.content_object, item.content_type.model)
+                view = self.get_view(obj.__class__, item.content_view)
+                urlpatterns += patterns(
+                    '', url('^%s$' % item.url, view, {'slug': obj.slug}))
+            elif item.content_type is not None:
+                mdl = item.content_type.model_class()
+                view = self.get_view(mdl, item.content_view)
+                urlpatterns += patterns(
+                    '', url('^%s$' % item.url, view))
+            # this menu item has no content so we will only display the layout
+            else:
+                urlpatterns += patterns(
+                    '', url(r'^%s$' % item.url, self.no_content_layout_view,
+                            {'layout': item.layout}))
         return urlpatterns
 
     def urls(self):
@@ -115,6 +134,18 @@ class CyclopeSite(object):
             view = self.get_view(obj.__class__, home_item.content_view)
 
             return view(request, content_object=obj)
+
+    def no_content_layout_view(self, request, layout):
+        """"View of a layout with no specific content associated"""
+        
+        template = 'cyclope/themes/%s/%s' % (
+                    cyc_settings.CYCLOPE_CURRENT_THEME,
+                    layout.template
+                    )
+        t = loader.get_template(template)
+        c = RequestContext(request)
+        return HttpResponse(t.render(c))
+
 
 ### JSON ##
 

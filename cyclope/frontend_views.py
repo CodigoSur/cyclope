@@ -10,7 +10,7 @@ from cyclope.models import StaticPage, Menu, MenuItem
 from cyclope import views
 
 class MenuRootItemsList(frontend.FrontendView):
-    """A flat list view of the root MenuItems for a given Menu.
+    """A list view of the root MenuItems for a given Menu.
     """
     name='root_items_list'
     verbose_name=_('list of root items for the selected Menu')
@@ -24,6 +24,21 @@ class MenuRootItemsList(frontend.FrontendView):
         return t.render(c)
 
 frontend.site.register_view(Menu, MenuRootItemsList())
+
+class MenuFlatItemsList(frontend.FrontendView):
+    """A flat list view of all the MenuItems for a given Menu.
+    """
+    name='flat_items_list'
+    verbose_name=_('flat list of all items for the selected Menu')
+
+    def get_string_response(self, request, content_object=None, *args, **kwargs):
+        menu_items = MenuItem.tree.filter(menu=content_object)
+        c = RequestContext(request, {'menu_items': menu_items})
+        t = loader.get_template("cyclope/menu_root_items_list.html")
+        c['host_template'] = 'cyclope/inline_view.html'
+        return t.render(c)
+
+frontend.site.register_view(Menu, MenuFlatItemsList())
 
 
 class StaticPageDetail(frontend.FrontendView):

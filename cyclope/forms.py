@@ -78,19 +78,12 @@ class MenuItemAdminForm(forms.ModelForm):
 
     def clean(self):
         data = self.cleaned_data
-        if not (data['custom_url'] or data['content_type']):
-            raise ValidationError(
-                _(u'You must provide either content details or a custom URL'))
-        elif data['custom_url'] and (data['content_type']
+        if data['custom_url'] and (data['content_type']
                                    or data['content_object']
                                    or data['content_view']):
             raise ValidationError(
                 _(u'You can not set a Custom URL for menu entries \
                     with associated content'))
-        if  data['site_home'] and not (data['content_type']):
-            raise ValidationError(
-                _(u'You need to set content details if this is the site home'))
-
         return super(MenuItemAdminForm, self).clean()
 
     class Meta:
