@@ -17,21 +17,24 @@ layout_templates = {
         'verbose_name': _('One sidebar'),
         'regions' : {
             'header': _('header'),
-            'left': _('left'),
-            'content': _('content'),
+            'sidebar': _('sidebar'),
+            'before_content': _('before content'),
+            'after_content': _('after content'),
             'footer': _('footer'),
             }
         },
 
-    'two_sidebars.html':
+    'sidebar_and_four_panes.html':
         {
-        'verbose_name': _('Two sidebars'),
+        'verbose_name': _('One sidebar and four panes'),
         'regions' : {
             'header': _('header'),
-            'left': _('left'),
-            'content': _('content'),
-            'right': _('right'),
+            'sidebar': _('sidebar'),
             'footer': _('footer'),
+            'first_pane': _('first pane'),
+            'second_pane': _('second pane'),
+            'third_pane': _('third pane'),
+            'fourth_pane': _('fourth pane'),
             }
         },
 }

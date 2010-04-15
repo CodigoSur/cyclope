@@ -57,7 +57,8 @@ class CyclopeSite(object):
             url(r'^$', self.index, name='index'),
             #JSON views for AJAX updating of admin fields
             url(r'^layout_regions_json$', self.layout_regions_json),
-            url(r'^registered_views_json$', self.registered_views_json),
+            url(r'^registered_region_views_json$', self.registered_region_views_json),
+            url(r'^registered_standard_views_json$', self.registered_standard_views_json),
             url(r'^objects_for_ctype_json$', self.objects_for_ctype_json),
         )
 
@@ -137,7 +138,7 @@ class CyclopeSite(object):
 
     def no_content_layout_view(self, request, layout):
         """"View of a layout with no specific content associated"""
-        
+
         template = 'cyclope/themes/%s/%s' % (
                     cyc_settings.CYCLOPE_CURRENT_THEME,
                     layout.template
@@ -163,14 +164,29 @@ class CyclopeSite(object):
         json_data = simplejson.dumps(regions_data)
         return HttpResponse(json_data, mimetype='application/json')
 
-    def registered_views_json(self, request):
+    def _registered_views(self, request, region_views=False):
         content_type_id = request.GET['q']
         model = ContentType.objects.get(pk=content_type_id).model_class()
         views = [{'view_name': '', 'verbose_name': '------'}]
-        views.extend([ {'view_name': view.name,
-                        'verbose_name': view.verbose_name}
-                       for view in self._registry[model] ])
-        json_data = simplejson.dumps(views)
+        if region_views:
+            views.extend([ {'view_name': view.name,
+                            'verbose_name': view.verbose_name}
+                           for view in self._registry[model]
+                           if view.is_region_view])
+        else:
+            views.extend([ {'view_name': view.name,
+                            'verbose_name': view.verbose_name}
+                           for view in self._registry[model]
+                           if view.is_standard_view])
+
+        return simplejson.dumps(views)
+
+    def registered_region_views_json(self, request):
+        json_data = self._registered_views(request, region_views=True)
+        return HttpResponse(json_data, mimetype='application/json')
+
+    def registered_standard_views_json(self, request):
+        json_data = self._registered_views(request)
         return HttpResponse(json_data, mimetype='application/json')
 
     def objects_for_ctype_json(self, request):

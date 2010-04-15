@@ -13,7 +13,7 @@ Configures chainedSelect for views in relation to content type
 $(function() {
   $("#id_content_view").chainedSelect({
         parent: '#id_content_type',
-        url: '/{{CYCLOPE_PREFIX}}registered_views_json',
+        url: '/{{CYCLOPE_PREFIX}}registered_standard_views_json',
         value: 'view_name',
         label: 'verbose_name'
     });

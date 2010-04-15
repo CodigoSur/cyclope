@@ -73,6 +73,9 @@ if CYCLOPE_SITE_SETTINGS:
     CYCLOPE_THEME_MEDIA_URL = '%sthemes/%s/' % (CYCLOPE_MEDIA_URL,
                                                 CYCLOPE_CURRENT_THEME)
     CYCLOPE_DEFAULT_LAYOUT = CYCLOPE_SITE_SETTINGS.default_layout
+    CYCLOPE_THEME_PREFIX = 'cyclope/themes/%s/' % CYCLOPE_CURRENT_THEME
+    CYCLOPE_THEME_BASE_TEMPLATE = 'cyclope/themes/%s/base.html' \
+                                   % CYCLOPE_CURRENT_THEME
 
     if CYCLOPE_DEFAULT_LAYOUT is not None:
         CYCLOPE_DEFAULT_TEMPLATE = 'cyclope/themes/%s/%s' % (

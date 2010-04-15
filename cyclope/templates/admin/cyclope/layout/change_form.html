@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
       $("#id_regionview_set-"+ i +"-content_view").chainedSelect({
           parent: '#id_regionview_set-'+ i +'-content_type',
           // this /cyclope/ url should not be hard_coded here
-          url: '/{{CYCLOPE_PREFIX}}registered_views_json',
+          url: '/{{CYCLOPE_PREFIX}}registered_region_views_json',
           value: 'view_name',
           label: 'verbose_name'
       });

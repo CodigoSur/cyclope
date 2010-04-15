@@ -103,12 +103,12 @@ class MenuItem(models.Model):
     def save(self):
         # check that data is consistent
         #TODO(nicoechaniz): raise appropriate exceptions
+        # a content object without a content type is invalid so we unset it
         if self.content_object and not self.content_type:
-            self.content_type = ContentType.objects.get_for_model(
-                self.content_object)
+            self.content_object = None
+        # a content view without a content type is invalid so we unset it
         if self.content_view != '' and not self.content_type:
             self.content_view = ''
-
         if self.content_object:
             try:
                 getattr(self.content_object, self.content_type.model)
@@ -127,6 +127,9 @@ class MenuItem(models.Model):
             self.url = self.custom_url
         else:
             self.url = "/".join([a.slug for a in self.get_ancestors()]+[self.slug])
+
+        if self.layout is None:
+            self.layout = cyclope.settings.CYCLOPE_DEFAULT_LAYOUT
 
         super(MenuItem, self).save()
 
