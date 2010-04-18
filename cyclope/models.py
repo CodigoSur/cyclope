@@ -224,6 +224,10 @@ class RegionView(models.Model):
 
     def __unicode__(self):
         return '%s/%s' % (self.content_type.model, self.content_view)
+        #if self.content_type and self.content_view:
+        #    return '%s/%s' % (self.content_type.model, self.content_view)
+        #else:
+        #    return self.region
 
 
 class Layout(models.Model):

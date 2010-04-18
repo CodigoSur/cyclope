@@ -16,10 +16,13 @@ def layout_for_request(request):
     req_url= request.META['PATH_INFO']
     req_url = req_url[len(cyclope.settings.CYCLOPE_PREFIX)+1:]
 
-    try:
-        menu_item = MenuItem.objects.select_related().get(url=req_url)
-    except:
-        menu_item = None
+    if req_url == '':
+        menu_item = MenuItem.objects.select_related().get(site_home=True)
+    else:
+        try:
+            menu_item = MenuItem.objects.select_related().get(url=req_url)
+        except:
+            menu_item = None
     if menu_item and menu_item.layout:
         layout = menu_item.layout
     else:

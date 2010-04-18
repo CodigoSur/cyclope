@@ -8,7 +8,7 @@ Attributes:
 
 from django.utils.translation import ugettext as _
 
-verbose_name = _('potente theme')
+verbose_name = _('Neutrona theme')
 
 layout_templates = {
 
@@ -24,17 +24,16 @@ layout_templates = {
             }
         },
 
-    'sidebar_and_four_panes.html':
+    'two_sidebars.html':
         {
-        'verbose_name': _('One sidebar and four panes'),
+        'verbose_name': _('Two sidebars'),
         'regions' : {
             'header': _('header'),
-            'sidebar': _('sidebar'),
+            'left_sidebar': _('left sidebar'),
+            'right_sidebar': _('right sidebar'),
+            'before_content': _('before content'),
+            'after_content': _('after content'),
             'footer': _('footer'),
-            'first_pane': _('first pane'),
-            'second_pane': _('second pane'),
-            'third_pane': _('third pane'),
-            'fourth_pane': _('fourth pane'),
             }
         },
 }

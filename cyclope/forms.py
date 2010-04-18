@@ -163,17 +163,18 @@ class RegionViewInlineForm(forms.ModelForm):
 
     def clean(self):
         data = self.cleaned_data
-        if not data['content_type']:
-            raise(ValidationError(_(u'Content type can not be empty')))
+        if not data['DELETE']:
+            if not data['content_type']:
+                raise(ValidationError(_(u'Content type can not be empty')))
 
-        if data['content_type']:
-            if (data['content_view'] == '' or not data['content_view']):
-                raise(ValidationError(
-                    _(u'You need to select a content view')))
-            if not data['region']:
-                raise(ValidationError(_(u'You need to select a region')))
-            if data['object_id'] == '':
-                data['object_id'] = None
+            if data['content_type']:
+                if (data['content_view'] == '' or not data['content_view']):
+                    raise(ValidationError(
+                        _(u'You need to select a content view')))
+                if not data['region']:
+                    raise(ValidationError(_(u'You need to select a region')))
+                if data['object_id'] == '':
+                    data['object_id'] = None
 
         return super(RegionViewInlineForm, self).clean()
 

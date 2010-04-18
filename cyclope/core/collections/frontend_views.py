@@ -66,13 +66,13 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
         #TODO(nicoechaniz): only show categories which have children or content.
         from django.template import Template, Context
         link_template = Template(
+            '{% if has_children %}'
+              '<span class="expand_collapse">+</span>\n'
+            '{% endif %}'
             '{% if has_content %}'
               '<a href="{% url category-root_items_list slug %}" '
-                 'class="{{class}}">{{ name }}</a>'
-            '  {% else %} {{ name }}'
-            '{% endif %}'
-            '{% if has_children %}'
-              '<span class="expand_collapse">+</span>'
+                 'class="{{class}}"><span>{{ name }}</span></a>'
+            '{% else %} {{ name }}'
             '{% endif %}'
             )
         nested_list = []

@@ -1,0 +1,85 @@
+{% extends CYCLOPE_THEME_BASE_TEMPLATE %}
+
+{% load layout %}
+
+{% block page_content %}
+
+<div id="aire">
+  <div id="busqueda">
+    <div class="top"></div>
+    <div class="box">
+      <form action="/busqueda" method="post"><input type="text" value="" name="consulta" class="field"  />
+        <input type="submit" value="" class="btn"/>
+      </form>
+    </div>
+    <div class="bottom"></div>
+  </div>
+
+  <!-- INICIA SECUNDARIA -->
+  <div id="secundaria">
+    <div class="top">
+    </div>
+    <div class="box">
+      {% region 'right_sidebar'%}
+    </div>
+
+<!--
+    <div class="top">
+      <span>{$nombres.secundaria}{section name=bucle loop=$secundaria}</span>
+    </div>
+    <div class="box">
+      <h6 class="fecha">{$secundaria[bucle].fecha}</h6>
+      <h1><a href="{$secundaria[bucle].link}">{$secundaria[bucle].titulo}</a></h1>
+      {if $secundaria[bucle].autor != ''}
+        <h4>{$secundaria[bucle].autor}</h4>
+      {/if}
+      <h2>
+        {$secundaria[bucle].copete}
+        <a href="{$secundaria[bucle].link}"> M&aacute;s.</a>
+      </h2>
+      <hr>
+    {/section}
+    </div>
+-->
+    <div class="bottom"></div>
+  </div>
+</div><!-- TERMINA ESPACIO AIRE -->
+
+
+<div id="contenido">
+  {% block content %} {% endblock %}
+</div>
+
+
+<div id="fuego">
+<!-- INICIA PRINCIPAL -->
+  <div id="principal">
+    {% region 'after_content' %}
+<!--
+    {section name=notaprincipal loop=$principal}
+    {if  $principal[notaprincipal].pretitulo != ''}
+      <span class="pretitulo">{ $principal[notaprincipal].pretitulo} | </span>
+    {/if}
+    <span class="fecha">{$principal[notaprincipal].fecha}</span>
+    <h2 class="titulo">
+      <a href="{$principal[notaprincipal].link}">{$principal[notaprincipal].titulo}</a>
+    </h2>
+    {if $principal[notaprincipal].foto != ''}
+    <a href="{$principal[notaprincipal].link}">
+      <img src="{$principal[notaprincipal].foto}" align="middle" border="0"/>
+    </a>
+    {/if}
+    <p class="descripcion">
+      {$principal[notaprincipal].copete}.
+      <a href="{$principal[notaprincipal].link}" class="leermas">M&aacute;s.</a>
+    </p>
+    {if $principal[notaprincipal].autor != ''}
+    <span class="autor">{$principal[notaprincipal].autor} </span>
+    {/if}
+    <span class="etiquetas">{$principal[notaprincipal].etiquetas}</span>
+    <div class="bottom"></div>
+    {/section}
+-->
+  </div><!-- TERMINA PRINCIPAL -->
+
+{% endblock %}

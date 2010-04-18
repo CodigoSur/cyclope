@@ -1,0 +1,365 @@
+/*
+Plantilla Neutrona para Cyclope 2.0
+Esta plantilla fue desarrollada por Codigo Sur: www.codigosur.org
+Diseno conceptual + HTML + CSS: Santiago Hoerth
+Codigo HTML realizado bajo licencia GPL (copialo, mejoralo, pasalo)
+Ver licencia en: http://creativecommons.org/licenses/GPL/2.0/deed.es_AR
+Ten en cuenta que las imagenes, los nombres y los logos de este sitio no pueden usarse. Solo el codigo HTML y CSS es GPL. Gracias :)
+Si modificas no borres estas lineas :)
+*/
+
+
+body{font-family: Arial, Verdana, Helvetica, Sans-serif; margin: 0; font-size:12pt; background-color:#c8b7b7;}
+* {margin:0; padding:0;}
+a {color:#666; text-decoration:none;outline:none;}
+a:hover {text-decoration:underline;}
+h3 {}
+h3 a {}
+h3 a:hover {}
+h4{}
+h4 a{}
+h4 a:hover{}
+img {border:none;}
+.clear {clear:both;padding:0;margin:0;}
+
+ul.compartir {list-style:none; font-size:0.8em; margin:0;padding:5px 0 20px 0;}
+ul.compartir li {display:inline;}
+ul.compartir li.recomendar a {color: #008a2e; background:url(../images/css/recomendar.png) no-repeat left center ; padding-left:20px; text-decoration:none; margin-right:30px;}
+ul.compartir li.comentarios a {color: #008a2e; background:url(../images/css/comentarios.png) no-repeat left center ; padding:0; padding-left:20px; text-decoration:none;}
+ul.compartir li a:hover {text-decoration:underline;}
+
+/*Anidacion y estructura General*/
+#mascara {width:990px; margin:0 auto; background:#fff;padding:0;}
+#medianera {padding:15px 0 0;margin:0 auto;}
+/*#contenido{margin-left:235px; padding-right:10px;}*/
+#agua {width:210px; float:left;background-color:#e6e6e6;margin:0 10px;}
+#agua .top {background:url(../images/css/agua-top.png) no-repeat;height:12px;}
+#agua .bottom {background:url(../images/css/agua-bottom.png) no-repeat;height:12px;}
+#aire {width:205px; float:right;margin:0 10px 0 0;}
+p.tabB span {width:230px; text-align: center; font-size:0.7em; font-weight:700; background-color:transparent; padding:6px 65px; }
+p.tabB {padding:5px 0 2px 15px;}
+p.tabB span.tabC {color:#fff;}
+#aire .clearB {height:20px; background:none;}
+#aire p.tabB {margin-bottom:15px; width: 230px; background-color:transparent;}
+#fuego {margin-left:240px; margin-right:240px;}
+p.tabA span {color:#349153; font-size:0.8em; font-weight:800; background-color:transparent; padding:3px 1px; }
+p.tabA {border-bottom:2px solid #349153; padding:5px 0 2px 1px;}
+
+
+/*Menu horizontal*/
+.menu_root_items_list ul {list-style:none;}
+#header .menu_root_items_list ul {margin-right:30px; float:right; padding:0}
+#header .menu_root_items_list li{float:left; margin:0; margin-left:15px;}
+#header .menu_root_items_list a {background:url(../images/css/tabmenuh.png) no-repeat top left; float:left; padding:0 0 0 5px; text-decoration:none;}
+#header .menu_root_items_list span {color:#fff; font-size:0.75em; font-weight:bold; display:block; padding:6px 15px 6px 6px; float:left; cursor:pointer; background:url(../images/css/tabmenuh.png) no-repeat 100% -30px;}
+.menu_root_items_list a:hover {color:#000; background-position: 0 -61px;}
+.menu_root_items_list a:hover span {color:#f4f4f4; background-position: 100% -91px;}
+.menu_root_items_list li.current a  {background-position: 0 -60px;}
+.menu_root_items_list li.current a span {color:#f4f4f4; background-position: 100% -90px;}
+#header .menu_root_items_list {display:block;height:27px;padding:10px 0 0; background-color:#fff;}
+#footer .menu_root_items_list {display:block;height:37px;padding:0 0 20px 0;}
+#footer .menu_root_items_list ul {margin-right:10px; float:right; list-style:none;}
+#footer .menu_root_items_list li{float:left; margin:0; margin-left:15px; list-style:none;}
+
+/*Cabezal*/
+#cabezal {height:170px; background: url(../images/css/cabezal.png) 0 0 no-repeat;padding:0;}
+.logo {height:68px; margin-left:25px; padding-right:35px; padding-top:35px;}
+.logo h1, .logo h2 {text-align:left;color:#fff;}
+.logo h1 a {color:#fff; text-decoration:none;}
+.logo h2 a {color:#ccc; text-decoration:none;}
+.logo h1 {font-size:1.8em;}
+.logo h2 {font-size:0.8em;}
+.buscar {float:right; width:315px; height:34px; background:none; margin-right:200px; margin-top: 85px;}
+#cabezal form {text-align:left; width:300px; margin-right:0px; padding-top:2px; }
+#cabezal form .field {background:url(../images/css/buscarfondo.png) no-repeat; height:34px; width:190px; padding:11px 2px 2px 30px; margin:0px; font-size:0.8em; color:#fff; border:none;}
+#cabezal form .btn {background:url(../images/css/fondo_buscar.png) no-repeat left top; font-size:0.75em;font-weight:bold;height:34px; width:63px; color:#fff;background-color:none;border: none;padding:0px;margin:2px 5px 1px 5px;}
+
+
+/*Menu vertical*/
+.collection_categories_hierarchy {margin:0 4px;}
+.collection_categories_hierarchy span {display:block;}
+.collection_categories_hierarchy ul{margin:0 0 0 5px; padding:0; list-style:none; width:190px;}
+.collection_categories_hierarchy ul li {margin:4px 0; padding:0;border:1px solid #ccc;background-color:#eee;}
+.collection_categories_hierarchy ul li a, .collection_categories_hierarchy ul ul a {display:block;text-decoration:none; color:#036; font-weight:700;padding: 6px 0 3px 15px; font-size:0.8em;}
+.collection_categories_hierarchy ul li a:hover{text-decoration:underline;}
+.collection_categories_hierarchy ul ul {padding:0 0 0 0; margin:0;}
+.collection_categories_hierarchy ul ul li {padding:0 0 0 8px;border:1px dotted #ccc;margin:4px 0;background-color:#fff;}
+.collection_categories_hierarchy ul ul a {padding: 6px 0 3px 15px; font-size:0.75em; color:#000;}
+
+/*Recuadro de Etiquetas*/
+#etiquetas {width:190px;font-size:0.75em;margin:20px 10px;}
+#etiquetas li.title {color:#036; font-weight:bold; font-size:1.3em; list-style-type:none; margin-left:0; margin-bottom:2px; text-decoration:underline;}
+#etiquetas a {color:#666;line-height:180%;}
+#etiquetas a:hover {text-decoration:underline;font-weight:700;color:#333;}
+#etiquetas .box {margin:0 15px 0 10px;  }
+#etiquetas .mid {padding:4px 0; background:#fff;}
+#etiquetas .top { height:17px;padding:2px 0 0 0 ; background:none;background-color:#ccc; text-align: center; }
+#etiquetas .top .title {color:#333; font-weight:bold; font-size:0.9em; list-style-type:none; margin-left:0; margin-bottom:0; text-decoration:none;}
+#etiquetas .bottom {height:8px; width:190px;background:none;}
+
+
+
+/*Areas de publicacion*/
+#principal {padding-bottom:18px; margin-top:15px; float:left;}
+
+#principal .pretitulo {text-transform:uppercase;margin:0 0 5px;}
+#principal img {clear:both;float:right;margin:4px 2px 9px 10px;text-align:center;height:150px;}
+#principal li a{color:#008a2e;}
+#principal li a:hover{color: #000;}
+#principal .top {border-bottom:2px solid #349153;color:#fff; font-size:0.9em; font-weight:800;padding:3px 0 0;display:block;margin:0 0 13px 0;}
+#principal .bottom {padding:0 0 30px;border-bottom:6px dashed #eee;margin:0 0 30px 0;}
+
+#secundaria {width:205px;margin:10px 10px 0 0;padding:0;}
+#secundaria .box {padding:0 30px 0 20px;margin:0;background:url(../images/css/secundaria-content.png) repeat-y;}
+#secundaria .top {height:25px;padding:0 20px;background:url(../images/css/secundaria-top.png) no-repeat; text-align: center; color:#fff; font-size: 0.85em; font-weight: bold;}
+#secundaria span {padding:7px 0;display:block;text-align:center;margin:0 0 0 -10px;color:#666;}
+#secundaria .bottom {height:25px;background:url(../images/css/secundaria-bottom.png) no-repeat;margin:0;padding:0 20px;}
+#secundaria img {margin: 0 0 0 7px;float:right;padding:2px;border:1px solid #999;}
+#secundaria .mid LI {font-size:0.9em; padding: 2px;}
+#secundaria .mid LI a{color: #008a2e;}
+#secundaria .mid LI a:hover{color: #000; text-decoration: underline;}
+#secundaria h1 {font-size:0.8em; margin:0 0 3px 0; }
+#secundaria h1 a{text-decoration: none; color: #666;}
+#secundaria h1 a:hover{text-decoration: underline; color: #000;}
+#secundaria h2 {font-size:0.7em; font-weight:400;margin:0 0 10px;}
+#secundaria h2 a{text-decoration: underline;color: #999; }
+#secundaria h2 a:hover{color: #000; text-decoration: none;}
+#secundaria h4 {font-size:0.75em;margin:0;padding:0 0 7px;color:#666;font-weight:700;}
+#secundaria h6 {font-size:0.7em;padding:4px 0 0;color:#666;font-weight:400;}
+#secundaria hr {border:none;border-top:1px dotted #666;padding:0 0 10px;}
+
+/*Definiciones Globales de Profundidad de Navegacion*/
+span.ruta {font-size:0.8em;background:#fff;border-bottom:1px solid #ccc;display:block;font-weight:normal; padding:5px 0; margin:0 0 20px;}
+span.ruta a {font-weight:bold; color:#999;}
+span.ruta a:hover {color:#333;}
+
+/*Definiciones Globales para Indice, Mapa, Contacto y Busqueda*/
+.titulares {font-weight:700;display:block;border-bottom:1px solid #ccc;color:#be0a26;font-size:1.8em;padding:0 0 25px;margin:20px 0;}
+
+/* Indice */
+
+#indice big {color:#666;border-bottom:none;margin:20px 0 10px;}
+#indice .paginador {text-align:left;background-color:#f3f3f3;border:1px solid #DDD;padding:5px 10px; margin-bottom:20px;font-size:0.75em;color:#666;}
+#indice .paginadora {margin-right:200px;}
+#indice .paginadorb{width:200px; padding-top:3px; float:right; text-align:right;}
+#indice .paginadora p{float:left;}
+#indice .paginadorb p{float:right;}
+#indice .paginador a {color:#0000ff;padding:0 3px;}
+#indice .paginador a:hover {font-size:1em;font-weight:700;}
+#indice .paginador span.current {font-size:1.3em;color:#333;padding:0 10px;font-weight:700;}
+#indice .pagEspacio{height:12px; clear:both;}
+#indice .pagEspacioMapa{height:25px;}
+#indice .espacio{height:32px;}
+.indice {margin-bottom:20px; padding-bottom:10px;border-bottom:6px dashed #eee; float:left; width:100%;}
+
+.indice h4 {font-size:0.8em; padding:5px 0 0;font-weight:700;color:#666; margin-right:15px; display:inline;}
+.indice h8 {font-size:0.85em;font-weight:normal;padding:5px 0;margin:0;}
+.indice h8 a {text-decoration:none;}
+.indice h8 a:hover {text-decoration:underline;}
+.indice h6 {font-size:0.65em;color:#666;font-weight:normal;text-transform:uppercase;margin-bottom:px;}
+.indice img{padding:3px; background-color:#eee; border:1px solid #ccc;margin:3px 0 6px 15px; float:right;}
+
+.pretitulo, .fecha {font-size:0.65em;text-transform:uppercase;margin:0 0 5px;font-weight:400;color:#666;display:inline;}
+.titulo {color:#333;padding:0;margin-top:4px; margin:0; border:none;font-size:1.5em;}
+.titulo a {color:#000; text-decoration:none;}
+.titulo a:hover {color:#666;text-decoration:underline;}
+.descripcion {font-weight:400;padding:10px 0;font-size:0.9em;color:#333;}
+.descripcion a {color:#666;text-decoration:underline;}
+.autor {display:block;font-size:0.8em;margin:0 0 12px;font-weight:700;color:#000;}
+.etiquetas {padding-bottom:12px; padding-top:5px; font-size:0.7em;}
+.etiquetas a {}
+.etiquetas a:hover {color:#000; text-decoration:underline;}
+.texto {font-size:0.9em;padding:0;}
+.fuente  {font-size:0.75em;margin:0 0 5px;font-weight:400;color:#666;padding:30px 0 20px;display:block;}
+
+.texto ul {padding:0;margin:0 0 0 30px;list-style:square;}
+.texto li {padding:15px 0 0;}
+/*Leer*/
+#leer h1 {font-size:1.6em;margin:0 0 7px;padding:0 0 5px;}
+#leer h2 {padding: 15px 0 10px 0;margin:0;font-weight:700;font-size:0.95em;}
+#leer span.ruta {margin:0 0 5px;}
+#leer .etiquetas {display:block;font-size:0.6em;font-weight:400;padding:0 0 20px;}
+#leer .descripcion {font-size:1em;}
+#leer h4 {font-size:0.85em; font-weight:400;}
+#leer .autor {margin:0 0 25px;padding:0 0;color:#666;}
+#autor img {border:none:border-left:1px solid #ccc;padding:0;margin:15px 5px 0 0;}
+#leer h4 p {font-weight:500;font-size:1.15em;color:#666; padding:0; margin:0;}
+#leer h4 div {clear:left;}
+#leer h6.fuente  {margin:10px 0;font-weight:400;font-size:0.75em;color:#666; padding:0 0 15px;}
+#leer h6.fecha {font-weight:400;font-size:0.75em;margin:15px 0 0;color:#666;}
+#leer h6.pretitulo {color:#666; margin:25px 0 0 0; font-size:0.85em; text-transform:uppercase;}/*Campos y opciones Cyclope segun aparicion en plantilla por defecto*/
+#leer hr {border-bottom:1px solid #EEE;}
+.herramientas {margin:0 0 10px;padding:0 0 10px;}
+.herramientas ul {text-align:left;margin:0;padding:0;list-style:none;font-weight:bold;font-size:0.8em;}
+.herramientas ul a:hover {text-decoration:underline;}
+.herramientas li  {display:inline;}
+.herramientas li .imprimir {color: #999; background: transparent url(../images/css/imprimir.png) left top no-repeat;padding:0 0 10px 20px;margin:0;}
+.herramientas li .recomendar {color: #999; background: transparent url(../images/css/recomendar.png) no-repeat;padding:0 0 10px 20px;;margin:0 0 0 15px;}
+.herramientas li .comentarios {color: #999; background: transparent url(../images/css/comentarios.png) no-repeat;padding:0 0 10px 20px;;margin:0 0 0 15px;}
+.herramientas li .aumentar {background: transparent url(../images/css/leer_aumentar.png) no-repeat;padding:0 0 10px 20px;;margin:0 0 0 15px;}
+.herramientas li .reducir {background: transparent url(../images/css/leer_reducir.png) no-repeat;padding:0 0 10px 20px;;margin:0 0 0 15px;}
+.foto_box {padding:5px;background-color:#E0E6EB;border: 2px solid #b1b1b1;margin:15px 0 5px 5px;max-width:300px;text-align:right;}
+.foto_box img {border:0;}
+.foto_box .autor {font-style:italic;font-size:0.6em;padding:5px 0 5px 0;color:#333;}
+.foto_box .epigrafe {font-size:0.7em;font-weight:400;text-align:right;margin-top:5px;color:#000;}
+.foto_box .cantidad {font-size:0.7em;text-align:right;color:#333;}
+.foto_box .cantidad img {padding:2px;}
+#redsocial {font-size:0.75em;display:block;padding:0 0 10px;border-top:2px solid #eee;text-align:right;}
+#redsocial img {margin:5px 3px -8px 0;padding:6px 0 0;}
+#redsocial small {margin:0;padding:5px 5px 0 0;color:#666;text-align:right;}
+/*Definiciones Globales para Adjuntos, Relacionadas y Comentarios*/
+#adjuntos h6 {color:#666;margin:0 0 10px 0;padding:5px 0 15px;font-weight:700;font-size:0.85em;}
+#adjuntos {width:50%;color:#030;margin:0 0 20px;text-align:left;background-color:#eee;border:1px solid #ddd;}
+#adjuntos img, #relacionadas img, #comentarios img {padding:0 0 5px;margin:0;}
+#adjuntos p {margin:0 0 0 20px;font-size:0.75em;padding:0 0 7px;}
+#adjuntos p a {color:#666;}
+#adjuntos p a:hover {color:#000;font-weight:700;}
+#adjuntos .adjuntos_box {padding:0 10px;margin:10px 0;}
+#adjuntos p img {margin:-10px 0 0;}
+
+#relacionadas h6 {font-size:1em;padding:0;margin:0;color:#666;}
+#relacionadas {font-weight:bold;color:#003300;background:#eee;padding:10px;margin:0;width:50%;}
+#relacionadas a {color: #666;padding: 0;font-weight: bold;}
+#relacionadas .info {padding: 0;font-weight: bold;}
+#relacionadas ul {padding:10px 0 0;margin:0;list-style:square;}
+#relacionadas li {color: #999;padding:0 10px 5px 0;margin:0 0 0 20px;}
+#relacionadas li a {font-size:0.8em;color:#666;font-weight:400;}
+#relacionadas li a:hover {color:#000;font-weight:700;}
+/*comentarios*/
+#comentarios {width:550px;text-align:left;color:#0000FF;margin:25px 0 0;background-color:#fff;}
+#comentarios .top {height:30px;}
+.who {color:#666;float:left;margin:0 20px 0 0;text-align:right;font-size:0.65em;}
+.who a {color:#000;font-weight:700;font-size:1.2em;}
+.data {background-color:#ccc;float:none;}
+#comentarios .bottom {height:18px; }
+#comentarios .content {border:none;padding:20px 0;font-weight:400;}
+#comentarios h5 {font-size:0.8em;padding:3px 0;margin:0 0 15px;color:#333;font-weight:700;}
+#comentarios h5 a {color:#CC0000;font-weight:700;}
+/*#comentarios span {display:block;font-size:1em;padding:5px 0 4px;margin:0;color:#333;}*/
+#comentarios h6 {background-color:#fff;color:#666;margin:0 0 10px 0;padding:5px 0;font-weight:700;font-size:0.9em;}
+#comentarios h6 img {margin:-3px 7px 0 0;}
+#comentarios small {color:#666; font-weight:400; display:block; padding:5px 0; width:350px;}
+#comentarios p {color:#333;font-size:0.9em;padding:0;margin: 0;}
+#comentarios .btn  {width:100px;margin:7px 15px 0 0;font-size:0.9em;}
+#comentarios .post {background-color:#eee;border:1px solid #ddd;padding:10px;}
+#comentarios .post p {font-size:0.8em;color:#666;float:left;padding:0 0 0 20px;border-left:2px solid #ddd;margin:0 0 0 10px;}
+#comentarios .bottom-post {margin:20px 0;border:none;border-top:6px dashed #eee;}#comentarios .responder {background:url(../images/css/comentarios-responder-fondo.png) no-repeat;text-transform:uppercase;float:right;padding:3px 0 0 ;margin:-25px 0 20px;width:100px;height:17px;font-size:0.7em;font-weight:400;text-align:center;}
+#comentarios .responder a {background:url(../images/css/comentarios-responder.png) no-repeat;padding:0 0 0 16px;margin: 0 0;color:#0000ff;}
+#comentarios .respuesta {text-align:left;color:#0000FF; margin:0; }
+#comentarios .respuesta img {float:left;margin:12px 2px 2px 0; }
+#comentarios .respuesta span {font-size:0.9em;padding:12px 25px 4px 10px;margin: 0 0 0 40px; color:#333;font-weight:400;background:none;}
+#comentarios .respuesta h5 {text-transform:none;background:none;border:none;margin:0 0 15px 40px;padding:0 0 0 10px;font-size:0.8em;font-weight:700;}
+#comentarios .box {color:#333; margin:0;width:644px;}
+#comentarios .box-top {height:8px;padding:0;margin:15px 0 0 26px;}
+#comentarios .box h4 {font-size:1em;padding:0 3px 2px 13px;margin:-4px 0 0 26px;color:#000;font-weight:700;}
+#comentarios .box form {padding:0 0 30px 0;margin:0 0 0 0;}
+#comentarios .box .btn {padding:0;margin:0;width:212px;height:34px;border:1px;color:#ff0000;font-weight:700;}
+#comentarios .box label {margin:0;padding:0 0;display:block;width:285px;font-size:0.8em;font-weight:400;}
+#comentarios .field {width:550px;background-color:#fff;padding:4px;margin:0 0 15px;border:1px solid #999;font-size: 1em;color:#465C7D;display:block;}
+#comentarios .field #comment{width:80%;}
+#comentarios small {clear:both;margin:0;width:280px;}
+#comentarios small.reglas {margin:65px 0 0;width:100%;}
+#comentarios img {margin:10px 0;}
+#comentarios fieldset {display: block;	margin: 0 0 0 0;padding: 5px 0;border:none;}
+#comentarios fieldset.radio{margin: 1em 0 2em 0;}
+#comentarios fieldset.radio input {clear: both;float: left;width: auto;}
+#comentarios fieldset.radio label {font-weight: normal;}
+#comentarios input {background-color:#fff;padding:4px;margin:0 0 5px;border:1px solid #999;font-size: 1em;color:#465C7D;display: block;width:93%;}
+#comentarios input.submit {color:#eee;clear: both;background-color:#666;border:1px solid #000;width:250px;margin:30px 0 0 140px;}
+#comentarios label {float: left;display: block;margin: 2em 1em 0 0;font-weight: 400;}
+#comentarios select {display: block;}
+
+
+
+
+/*Mapa*/
+
+#mapa ul {list-style:none;margin:0 0 0 30px;padding:0;}
+#mapa ul li {background: transparent url(../images/css/carpeta-abierta.png) 0% 3px no-repeat;padding:0 0 10px 15px;margin:5px 0 0 15px;font-weight:700;font-size:1em;}
+#mapa ul li ul {margin:10px 0 0;}
+#mapa li li {background: transparent url(../images/css/carpeta.png) 0% 3px no-repeat;padding:0 0 10px 15px;;margin:5px 0 0 15px;}
+#mapa ul li ul li {margin:0;padding:0 0 0 15px;font-weight:400;}
+#mapa a {color:#0000ff;}
+#mapa a:hover {color:#ff0000;}
+
+/* Contacto */
+#contacto h5{font-weight:700;padding:0 0 20px;margin:0; color:#333; font-size:1em;}
+#contacto h6 {font-weight:400;font-size:0.8em;padding:0 0 10px;margin:0;}
+#contacto form {text-align:left;padding:0;margin:0;}
+#contacto form h5{padding:15px 0;}
+#contacto form h6 {padding:0;}
+#contacto p {width:80%;margin:0;padding:0;font-size:0.8em;}
+#contacto .nota {border-top:1px solid #ccc;font-style:italic;font-size:0.7em;padding:3px 0;width:30%;color:#999;}
+#contacto .field {width:65%;border:1px solid #999; padding:5px; margin-bottom:20px;}
+#contacto .btn {display:block;margin:10px 0;font-size:0.9em; padding:3px 6px; font-weight:700;}
+#contacto select{width:65%; padding:5px;}
+#contacto img {display:block;padding:15px 0;}
+
+#busqueda {width:205px;margin:0 10px 0 0;}
+#busqueda .busqueda {border-top:none;margin:15px 0 0;padding:0;}
+#busqueda big {color:#000;}
+#busqueda .box {padding:0 20px;margin:0;background:url(../images/css/busqueda-content.png) repeat-y;}
+#busqueda .top {height:20px;padding:0 20px;background:url(../images/css/busqueda-top.png) no-repeat; text-align: center; color:#fff; font-size: 0.85em; font-weight: bold;}
+#busqueda .bottom {height:20px;background:url(../images/css/busqueda-bottom.png) no-repeat;margin:0;padding:0 20px;}
+#busqueda .field {padding:3px 0;margin:7px 0 1px 0;border:1px solid #999;color:#333;width:120px;}
+#busqueda .btn {border:none;padding:3px 0;margin:0 0 0 0;width:32px;height:32px;background:url(../images/css/btn.png) no-repeat;}
+
+.busqueda {border-top:1px solid #ccc;padding:10px 10px 15px;margin:33px 0;color:#666;width:81%;}
+.busqueda a:hover {font-size:1em;font-weight:700;}
+.busqueda p {color:#333;padding:0;margin:0 0;font-weight:700;}
+.busqueda span {font-size:1.3em;color:#333;padding:0 10px;font-weight:700;}
+.busqueda .field {padding:3px;margin:7px 0 1px 0;border:1px solid #999;color:#333;width:150px;}
+.busqueda .btn {font-weight:700;padding:3px 4px 3px;margin:0 15px 0 5px;width:15px;}
+
+/* CONTENIDO DEL LEER y CONTACTO*/
+
+
+
+
+
+
+
+
+/* Adjuntos, relacionadas y comentarios. */
+
+
+/* COMPARTIR */
+
+#compartir {margin:0 25px;padding:0;}
+#compartir h5 {background:#be0a26; color:#fff; font-size:1em; padding:10px;}
+#compartir span {font-size:1em;font-style:italic;padding:10px;display:block;}
+#compartir .error {background:#FFE1C4;border:2px solid #990000;margin:20px 10px;font-style:normal;color:#990000;line-height:160%;}
+#compartir .error a {color:#0000ff;}
+#compartir form {display: block;}
+#compartir p {font-size:0.85em;margin:6px 10px 0;}
+#compartir .datos {margin:0 20px 0 10px;font-weight:700;padding:10px 0 0;}
+#compartir .field {background-color:#fff;border:1px solid #ccc;font-size: 1em;color:#333;width:90%;margin:3px 10px 10px}
+#compartir .btn  {margin:15px 10px;font-size:0.75em; background-color:#666;border:1px solid #000; padding:3px 6px; font-weight:700; color:#fff;}
+
+#espaciopie {width:990px; margin: 20px 0 0 0 ; clear:both; height:23px;}
+
+#pie {width:990px; border-top:0px solid #258ABA; padding-left: -20px; padding-top:15px; padding-bottom:15px; color:#ccc; font-size:0.75em; text-align:center; background-color:#333 ;}
+#pie a {color:#eee; text-decoration:underline;}
+#pie a:hover {color:#000; text-decoration:none;}
+#pie img {padding:10px 0 0;}
+
+#banners {display:block;padding:0 55px 8px;width:235px;margin:0 auto;}
+#banners img {margin:0 auto 8px auto;}
+#rss {padding:0 0 8px 20px;margin:15px 0 12px 20px;background: url("../images/css/rss_logo.png") 0 3px no-repeat;}
+#rss a {color:#999;text-decoration:none;font-weight:bold;}
+#rss a:hover {	text-decoration:underline;}
+.creditos {font-size:11px;margin:15px 0 0 0;}
+.creditos img {	padding:7px 0 0 0;}
+#logos {text-align:center;font-size: 0.7em;padding:1px 0 20px 0;margin:10px auto;}
+#logos img {padding:7px 0 0;}
+
+.expand_collapse{
+  font-weight: bold;
+  clear: none;
+  margin: 0px;
+  padding: 0px;
+  color: black;
+  float: left;
+  margin: 0 4px 0 4px;
+  cursor: pointer;
+}
