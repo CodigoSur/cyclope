@@ -90,11 +90,12 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
 
         name = getattr(base_category, name_field)
         has_content = base_category.category_maps.exists()
+        print base_category.get_descendant_count()
         include = link_template.render(
             Context({'name': name,
                      'slug': base_category.slug,
                      'has_content': has_content,
-                     'has_children': True}))
+                     'has_children': base_category.get_descendant_count()}))
         return [include, nested_list]
 
 

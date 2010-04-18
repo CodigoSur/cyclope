@@ -1,1 +1,8 @@
-<p>Article: {{ article.name }} detail template</p>
+{% extends host_template %}
+
+{% block content %}
+
+<h1>{{ article.name }} </h1>
+<p>{{ article.text|safe }}</p>
+
+{% endblock content%}
