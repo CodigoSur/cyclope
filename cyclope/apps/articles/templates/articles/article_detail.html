@@ -1,8 +1,210 @@
 {% extends host_template %}
 
+{% comment%}
+TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
+{% endcomment%}
+
+{% load comments %}
+
 {% block content %}
 
-<h1>{{ article.name }} </h1>
-<p>{{ article.text|safe }}</p>
+<div class="article detail">
+
+ {% get_comment_count for article as comment_count %}
+
+<!-- TODO(nicoechaniz): uncomment and fix when breadcrumbs and tagging are implemented
+  <span  class="ruta">Profundidad de navegaci&oacute;n: <a href="/">Principal</a> / {$ruta}</span>
+  <span class="etiquetas">{$articulo.etiquetas}</span>
+-->
+
+  {% if article.pretitle %}
+    <span class="pretitulo">{{ article.pretitle }}</span>
+  {% endif %}
+  <h1 class="titulo">{{ article.name }}</h1>
+
+  <!-- herramientas -->
+  <div class="herramientas">
+    <ul>
+      <li><a href="javascript:window.print()" class="imprimir">Imprimir</a></li>
+      <li>
+        <a href="/share?slug={{ article.slug }}" onclick="abrir_popup(this);return false" class="recomendar">
+          Compartir
+        </a>
+      </li>
+
+      {% if comment_count %}
+      <li>
+        <a href="#comments" class="comentarios">Comentarios ({{ comment_count }})</a>
+      </li>
+{% endif %}
+    </ul>
+  </div>
+  <!-- /herramientas -->
+
+  <!-- descripcion -->
+  {% if article.summary %}<p class="descripcion">{{ article.summary|safe }}</p>{% endif%}
+  <!-- /descripcion -->
+
+<!-- TODO(nicoechaniz): uncomment and fix when photos are implemented
+
+           {if $articulo.tienefotos eq 'si'}
+           <div class="foto_box">
+          <div id="foto_box">
+
+           {section name=bucle loop=$fotos}
+<div class="imageElement">
+<h3></h3>
+<p>{$fotos[bucle].epigrafe}</p>
+<a href="#" title="-" class="open"></a>
+<img src="{$fotos[bucle].url}" class="full" />
+<img src="{$fotos[bucle].urlmini}" class="thumbnail" />
+</div>
+{/section}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+function startGallery() {
+var foto_box = new gallery($('foto_box'), {
+timed: false
+});
+}
+window.addEvent('domready', startGallery);
+</script>
+{/literal}
+
+{/if}
+-->
+
+
+
+           <!-- autor -->
+            {% if article.author %}
+          <span id="autor">
+          {% if article.author.foto %}
+          <img src="/scripts/phpThumb.php?src=/imagenes/web/autores/{$articulo.fotoautor}&w=60" width="60"  />
+          {% endif %}
+            <span class="autor">{{ article.author }}</span>
+          </span>
+          {% endif %}
+          <!-- /autor -->
+
+    <!-- descargas -->
+
+<!-- TODO(nicoechaniz): uncomment and fix when attachments are implemented
+
+            {if $articulo.downloads eq 'si'}
+
+          <div id="adjuntos">
+          <div class="adjuntos_box">
+            <h6><img src="{$templatedir}/imagenes/css/leer_adjuntos.png" alt="Adjuntos"  width="16" height="16" border="0" align="absmiddle" /> Archivos para descargar </h6>
+             {section name=bucle loop=$downloads}
+            <p><img src="http://codigosur.org/imagenes/icons/{$downloads[bucle].ext}.gif" width="20" height="22" border="0" align="middle"> <a href="{$downloads[bucle].link}" title="{$downloads[bucle].desc}" >{$downloads[bucle].nombre}</a></p>
+            {/section}
+           </div>
+          </div>
+
+          {/if}
+-->
+          <!-- /descargas -->
+          <span class="texto">{{ article.text|safe }}</span>
+
+  <span class="fuente">--<br>
+    Fecha: {{ article.date }}{% if article.source %} | Fuente: {article.source}{% endif %}
+  </span>
+
+
+	<!-- relacionadas -->
+<!--
+TODO(nicoechaniz): uncomment and fix if related articles are implemented
+           {if $articulo.relacionadas eq 'si'}
+          <div id="relacionadas">
+            <h6>Más información:</h6>
+            <ul>
+            {section name=bucle loop=$relacionadas}
+              <li> <a href="{$relacionadas[bucle].link}">{$relacionadas[bucle].titulo}</a></li>
+              {/section}
+            </ul>
+          </div>
+          {/if}
+-->
+              <!-- /relacionadas -->
+
+{% comment %}
+
+	      <div class="clear"></div>
+     <!-- redsocial -->
+           <div id="redsocial"><small>Comparte en tu red social:</small>
+<a href="http://www.facebook.com" rel="nofollow" onclick="sbs_facebook(); return false;"><img src="/imagenes/redsocial/facebook.png" border="0" alt="Compartir en Facebook" title="Compartir en Facebook" height="24" width="24" /></a>
+<a href="http://www.del.icio.us" rel="nofollow" onclick="sbs_delicious(); return false;"><img src="/imagenes/redsocial/delicious.png" border="0" alt="Compartir en Delicious" title="Compartir en Delicious" height="24" width="24" /></a>
+<a href="http://www.yahoo.com" rel="nofollow" onclick="sbs_yahoobm(); return false;"><img src="/imagenes/redsocial/yahoo.png" border="0" alt="Compartir en Yahoo" title="Compartir en Yahoo" height="24" width="24" /></a>
+<a href="http://www.google.com" rel="nofollow" onclick="sbs_googlebm(); return false;"><img src="/imagenes/redsocial/google.png" border="0" alt="Compartir en Google" title="Compartir en Google" height="24" width="24" /></a>
+  	</div>
+          <!-- /redsocial -->
+
+            <div class="clear"></div>
+
+{% endcomment %}
+
+
+<!--COMENTARIOS -->
+ {% get_comment_count for article as comment_count %}
+
+  <div id="comments">
+    <div class="top"><h6>Hay {{ comment_count }} comentarios</h6></div>
+    {% render_comment_list for article %}
+    <div class="clear"></div>
+    <div class="bottom"></div>
+
+    <!--enviar comentario -->
+    <div class="box-top"></div>
+    <div class="box">
+
+    <!--form comentario -->
+    {% render_comment_form for article %}
+
+{%comment%}
+<form action="/grabarcomentario.php" method="post" name="form2" id="form2">
+         <fieldset>
+          <label>Envía tu comentario<textarea name="comentario" rows="8" class="field" id="comment"></textarea></label>
+        </fieldset>
+
+       <fieldset>
+       {if $soloreg != 'si' }
+                            <label>Nombre y Apellido
+       <input name="nombre" type="text" {$usercomment.nombre} />
+       <!-- hay que revisar este campo pues me da un error <input name="reg" value="{$articulo.id}" type="hidden" />-->
+      </label>
+                        {if $usercomment.nombre eq ''}
+                     <label>Correo electrónico <input name="email" type="text"/>
+
+                            </fieldset>
+            <fieldset>
+    <label>Web/Blog:<input name="web" type="text"/></label>
+    {else}
+     <input name="reg" value="si" type="hidden" />
+{/if}
+<label>Códido de Seguridad<input name="code" type="text" id="code"/><img src="/contacto/captcha.php" alt="CAPTCHA" border="0" /><small> Por razones de seguridad es necesario que ingrese el c&oacute;digo verificador que le muestra la imagen en el casillero que se encuentra debajo. </small></label>
+
+
+    </fieldset>
+
+            <input name="Input" type="submit" class="submit" value="¡Publica tu comentario!" />
+            </label>
+            {else}
+          <br><p><h5>Solo los usuarios registrados pueden comentar. <a href="/modulos/usuarios-web/login.php">Ingresar</a> / <a href="/modulos/usuarios-web/formulario.php">Registrarse</a>.</h5></p>
+          {/if}
+
+
+      {/if}
+              <!--termina enviar comentario -->
+          </form>
+{%endcomment%}
+          <!--termina form comentario -->
+
+    </div> <!-- termina box -->
+    <div class="bottom"></div>
+  </div><!--termina comments -->
+</div> <!--termina article_detail -->
 
 {% endblock content%}

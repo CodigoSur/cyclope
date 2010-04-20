@@ -164,6 +164,9 @@ class BaseContent(models.Model):
                     % (self._meta.app_label,
                        self._meta.object_name.lower(), view_name)
 
+    def get_absolute_url(self):
+        view_name = cyclope.core.frontend.site.get_default_view_name(self.__class__)
+        return "/"+ self.get_instance_url(view_name)
 
     @classmethod
     def get_model_url(cls, view_name):

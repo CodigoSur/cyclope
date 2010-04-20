@@ -1,0 +1,27 @@
+{% load comments i18n %}
+<form action="{% comment_form_target %}" method="post">{% csrf_token %}
+  {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
+  {% for field in form %}
+    {% if field.is_hidden %}
+      {{ field }}
+    {% else %}
+      {% ifequal field.name "honeypot" %}
+        <div  style="display:none;">
+          {{ field.label_tag }} {{ field }}
+        </div>
+      {% else %}
+        {{ field.label_tag }}
+        {% ifequal field.name "captcha" %}
+          <small>
+            {% trans "For security reasons you need to type the text displayed in the following image" %}
+          </small>
+        {% endifequal %}
+        {{ field }}
+      {% endifequal %}
+
+    {% endif %}
+  {% endfor %}
+  <p class="submit">
+    <input type="submit" name="post" class="submit" value="{% trans "Post you comment" %}" />
+  </p>
+</form>

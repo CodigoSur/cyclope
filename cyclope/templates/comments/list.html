@@ -1,0 +1,19 @@
+{% load comments i18n %}
+
+{% for comment in comment_list %}
+<div class="comment" id="c{{ comment.id }}">
+  <div class="data">
+    <span class="when_who">
+      {{ comment.submit_date }}
+      {% if comment.name %}
+           - {{ comment.name }}
+      {% endif %}
+      <a href="{% get_comment_permalink comment %}">
+        - permalink
+      </a>
+    </span>
+    <p><br/>{{ comment.comment }}</p>
+  </div>
+  <div class="clear"></div>
+</div>
+{% endfor %}

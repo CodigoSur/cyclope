@@ -88,12 +88,14 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 #    'django.contrib.databrowse',
     'django.contrib.admin',
+    'django.contrib.comments',
 
 #    'tagging',
 #   'rosetta'
     'autoslug',
     'feincms',
     'mptt',
+    'captcha',
 
 #    'south',
 #    'ajax_filtered_fields',
@@ -101,9 +103,16 @@ INSTALLED_APPS = (
 
     'cyclope',
     'cyclope.core.collections',
+    'cyclope.core.captcha_comments',
     'cyclope.apps.articles',
-
 )
+
+COMMENTS_APP = 'cyclope.core.captcha_comments'
+
+CAPTCHA_NOISE_FUNCTIONS=('captcha.helpers.noise_arcs',)
+CAPTCHA_FONT_SIZE=30
+CAPTCHA_LETTER_ROTATION=(-15,15)
+
 
 # make sure you point this to your Feincms media files.
 FEINCMS_ADMIN_MEDIA = '/feincms_media/'

@@ -48,9 +48,10 @@ setup(
 
     install_requires=[
         'Django>=1.2-beta-1,==dev',
-        'django-autoslug>=1.4.1,==dev',
+        'django-autoslug>=1.4.1',
         'FeinCms>=1.0.99,==dev',
         'django-mptt>=0.3-pre,==dev',
+        'django-simple-captcha>=0.1.7',
     ],
 
     packages=find_packages(),

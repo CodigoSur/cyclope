@@ -21,9 +21,14 @@ urlpatterns = patterns('',
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     (r'^admin/', include(admin.site.urls)),
+    (r'^comments/', include('django.contrib.comments.urls')),
     (r'^%s' % cyc_settings.CYCLOPE_PREFIX,
      include(frontend.site.urls)),
      #include(cyclope.sites.site.urls)),
+)
+
+urlpatterns += patterns('',
+    url(r'^captcha/', include('captcha.urls')),
 )
 
 if django_settings.DEBUG:
