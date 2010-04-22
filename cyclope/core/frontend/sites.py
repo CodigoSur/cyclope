@@ -129,11 +129,13 @@ class CyclopeSite(object):
                 home_item = MenuItem.objects.get(site_home=True)
             except ObjectDoesNotExist:
                 return HttpResponse(
-                    _(u'No content has been set for your home page'))
+                    _(u'The site home page has not been set.'))
+
+            if not home_item.content_object:
+                return self.no_content_layout_view(request, home_item.layout)
 
             obj = getattr(home_item.content_object, home_item.content_type.model)
             view = self.get_view(obj.__class__, home_item.content_view)
-
             return view(request, content_object=obj)
 
     def no_content_layout_view(self, request, layout):

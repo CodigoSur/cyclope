@@ -1,0 +1,66 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-22 16:17-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: shoes/frontend_views.py:14
+msgid "full detail"
+msgstr "detalle completo"
+
+#: shoes/frontend_views.py:30
+msgid "list of Shoes"
+msgstr "lista de Zapatos"
+
+#: shoes/models.py:11
+msgid "cut"
+msgstr "corte"
+
+#: shoes/models.py:12
+msgid "material"
+msgstr "material"
+
+#: shoes/models.py:13
+msgid "sole"
+msgstr "suela"
+
+#: shoes/models.py:20
+msgid "shoe"
+msgstr "zapato"
+
+#: shoes/models.py:21
+msgid "shoes"
+msgstr "zapatos"
+
+#: shoes/templates/shoes/shoe_detail.html:7
+msgid "Name"
+msgstr "Nombre"
+
+#: shoes/templates/shoes/shoe_detail.html:8
+msgid "Cut"
+msgstr "Corte"
+
+#: shoes/templates/shoes/shoe_detail.html:9
+msgid "Material"
+msgstr "Maerial"
+
+#: shoes/templates/shoes/shoe_detail.html:10
+msgid "Sole"
+msgstr "Suela"
+
+#: shoes/templates/shoes/shoe_detail.html:11
+msgid "Colors"
+msgstr "Colores"

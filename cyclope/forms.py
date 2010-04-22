@@ -52,7 +52,7 @@ class BaseContentAdminForm(forms.ModelForm):
 
 
 class StaticPageAdminForm(BaseContentAdminForm):
-    summary = forms.CharField(widget=WYMEditor())
+    summary = forms.CharField(widget=WYMEditor(), required=False)
     text = forms.CharField(widget=WYMEditor())
 
     class Meta:

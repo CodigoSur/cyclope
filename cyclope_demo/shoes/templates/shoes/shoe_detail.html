@@ -1,0 +1,13 @@
+{% extends host_template %}
+
+{% load i18n%}
+
+{% block content %}
+
+<h1>{% trans "Name" %}: {{ shoe.name}} </h1>
+<p>{% trans "Cut" %}: {{ shoe.cut|default:"-"}}</p>
+<p>{% trans "Material" %}: {{ shoe.material|default:"-" }}</p>
+<p>{% trans "Sole" %}: {{ shoe.sole|default:"-" }}</p>
+<p>{% trans "Colors" %}: {{ shoe.colors.all|join:", " }}</p>
+
+{% endblock content%}

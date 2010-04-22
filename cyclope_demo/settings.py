@@ -84,9 +84,8 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django.contrib.comments',
     'django.contrib.humanize',
-#    'django.contrib.databrowse',
+    'django.contrib.databrowse',
     'django.contrib.admin',
     'django.contrib.comments',
 
@@ -105,6 +104,8 @@ INSTALLED_APPS = (
     'cyclope.core.collections',
     'cyclope.core.captcha_comments',
     'cyclope.apps.articles',
+
+    'cyclope_demo.shoes',
 )
 
 COMMENTS_APP = 'cyclope.core.captcha_comments'
