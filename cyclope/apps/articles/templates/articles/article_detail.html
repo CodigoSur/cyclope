@@ -163,45 +163,6 @@ TODO(nicoechaniz): uncomment and fix if related articles are implemented
     <!--form comentario -->
     {% render_comment_form for article %}
 
-{%comment%}
-<form action="/grabarcomentario.php" method="post" name="form2" id="form2">
-         <fieldset>
-          <label>Envía tu comentario<textarea name="comentario" rows="8" class="field" id="comment"></textarea></label>
-        </fieldset>
-
-       <fieldset>
-       {if $soloreg != 'si' }
-                            <label>Nombre y Apellido
-       <input name="nombre" type="text" {$usercomment.nombre} />
-       <!-- hay que revisar este campo pues me da un error <input name="reg" value="{$articulo.id}" type="hidden" />-->
-      </label>
-                        {if $usercomment.nombre eq ''}
-                     <label>Correo electrónico <input name="email" type="text"/>
-
-                            </fieldset>
-            <fieldset>
-    <label>Web/Blog:<input name="web" type="text"/></label>
-    {else}
-     <input name="reg" value="si" type="hidden" />
-{/if}
-<label>Códido de Seguridad<input name="code" type="text" id="code"/><img src="/contacto/captcha.php" alt="CAPTCHA" border="0" /><small> Por razones de seguridad es necesario que ingrese el c&oacute;digo verificador que le muestra la imagen en el casillero que se encuentra debajo. </small></label>
-
-
-    </fieldset>
-
-            <input name="Input" type="submit" class="submit" value="¡Publica tu comentario!" />
-            </label>
-            {else}
-          <br><p><h5>Solo los usuarios registrados pueden comentar. <a href="/modulos/usuarios-web/login.php">Ingresar</a> / <a href="/modulos/usuarios-web/formulario.php">Registrarse</a>.</h5></p>
-          {/if}
-
-
-      {/if}
-              <!--termina enviar comentario -->
-          </form>
-{%endcomment%}
-          <!--termina form comentario -->
-
     </div> <!-- termina box -->
     <div class="bottom"></div>
   </div><!--termina comments -->
