@@ -12,9 +12,7 @@ from django.contrib.contenttypes import generic
 
 from autoslug.fields import AutoSlugField
 from cyclope.core.collections.models import Collectible
-from cyclope.models import BaseContent, BaseCommentedContent
-
-#from tagging.fields import TagField
+from cyclope.models import BaseContent, NamedImage
 
 YES_NO = (('YES', _('yes')), ('NO', _('no')),)
 
@@ -40,7 +38,7 @@ class Source(models.Model):
         return self.name
 
 
-class Article(BaseCommentedContent, Collectible):
+class Article(BaseContent, Collectible):
     pretitle = models.CharField(_('pre-title'), max_length=250, blank=True)
     summary = models.TextField(_('summary'))
     text = models.TextField(_('text'))
@@ -50,6 +48,14 @@ class Article(BaseCommentedContent, Collectible):
     creation_date = models.DateTimeField(_('creation date'),
                                      auto_now_add=True, editable=False)
     date = models.DateTimeField(_('date'), blank=True, null=True)
+    images = generic.GenericRelation(NamedImage, null=True, blank=True,)
+
+    allow_comments = models.CharField(_('allow comments'), max_length=4,
+                                choices = (
+                                    ('SITE',_('default')),
+                                    ('YES',_('enabled')),
+                                    ('NO',_('disabled'))
+                                ), default='SITE')
 
     class Meta:
         verbose_name = _('article')

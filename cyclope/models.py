@@ -13,11 +13,16 @@ from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist
 
+#from tagging.fields import TagField
+#from tagging_autocomplete.models import TagAutocompleteField
+from imagekit.models import ImageModel
+
 import mptt
 from autoslug.fields import AutoSlugField
 
 from cyclope.core.collections.models import Collectible
 import cyclope
+
 
 class SiteSettings(models.Model):
     site = models.ForeignKey(Site, unique=True)
@@ -151,8 +156,10 @@ class BaseContent(models.Model):
                              db_index=True, blank=False)
     slug = AutoSlugField(populate_from='name', unique=True,
                          db_index=True, always_update=True)
+#    tags = TagAutocompleteField()
 
     def get_instance_url(self, view_name):
+        #TODO(nicoechaniz): this seems like a wrong name. it returns the URL for an instance and for a non-instance as well.
         view = cyclope.core.frontend.site.get_view(self.__class__, view_name)
         if view.is_instance_view:
             return '%s/%s/%s/View/%s'\
@@ -173,13 +180,37 @@ class BaseContent(models.Model):
         return '%s/%s/View/%s'\
                 % (cls._meta.app_label, cls._meta.object_name.lower(), view_name)
 
-    #@classmethod
-    #def default_detail_params(cls):
-    #    return {'queryset': cls.objects,
-    #            'template_object_name': cls._meta.object_name.lower()}
+    def __unicode__(self):
+        return self.name
+
+
+class NamedImage(ImageModel):
+    #TODO(nicoechaniz): when we make BaseContent abstract make this model inherit from that.
+    name = models.CharField(_('name'), max_length=50, db_index=True)
+    slug = AutoSlugField(populate_from='name',
+                         db_index=True, always_update=True)
+    original_image = models.ImageField(_('image'), upload_to='uploads/images')
+    num_views = models.PositiveIntegerField(editable=False, default=0)
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey()
+
+    class IKOptions:
+        # This inner class is where we define the ImageKit options for the model
+        spec_module = 'cyclope.imagekit_default_specs'
+        cache_dir = 'uploads/images'
+        image_field = 'original_image'
+        save_count_as = 'num_views'
+
+    def thumbnail(self):
+        return '<img src="%s"/>' % self.thumbnail_image.url
 
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _('image')
+        verbose_name_plural = _('images')
 
 
 class BaseCommentedContent(BaseContent):
@@ -196,7 +227,7 @@ class BaseCommentedContent(BaseContent):
 
 
 # should this be moved to it's own app? should we just use flatpages?
-class StaticPage(BaseCommentedContent, Collectible):
+class StaticPage(BaseContent, Collectible):
     summary = models.TextField(_('summary'), blank=True)
     text = models.TextField(_('text'))
 

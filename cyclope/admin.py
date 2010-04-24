@@ -90,3 +90,7 @@ class SiteSettingsAdmin(admin.ModelAdmin):
     form = SiteSettingsAdminForm
 
 admin.site.register(SiteSettings, SiteSettingsAdmin)
+
+
+class NamedImagesInline(generic.GenericTabularInline):
+    model = NamedImage

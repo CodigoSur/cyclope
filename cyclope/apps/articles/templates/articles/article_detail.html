@@ -4,7 +4,7 @@
 TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
 {% endcomment%}
 
-{% load comments %}
+{% load comments i18n %}
 
 {% block content %}
 
@@ -18,7 +18,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 -->
 
   {% if article.pretitle %}
-    <span class="pretitulo">{{ article.pretitle }}</span>
+  <span class="pretitulo">{{ article.pretitle }}</span>
   {% endif %}
   <h1 class="titulo">{{ article.name }}</h1>
 
@@ -36,58 +36,44 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
       <li>
         <a href="#comments" class="comentarios">Comentarios ({{ comment_count }})</a>
       </li>
-{% endif %}
+      {% endif %}
     </ul>
   </div>
   <!-- /herramientas -->
 
   <!-- descripcion -->
-  {% if article.summary %}<p class="descripcion">{{ article.summary|safe }}</p>{% endif%}
+  {% if article.summary %}
+  <p class="descripcion">{{ article.summary|safe }}</p>
+  {% endif%}
   <!-- /descripcion -->
 
-<!-- TODO(nicoechaniz): uncomment and fix when photos are implemented
+  {% if article.images %}
+  <div id="gallery">
+    <ul>
+      {% for image in article.images.all %}
+      <li {% if not forloop.first %} style="display:none;" {% endif %}}>
+        <a href="{{ image.display.url }}"  title="{{ image.name }}">
+          <img src="{{ image.thumbnail_image.url }}" alt="{{ image.name }}"/>
+        </a>
+        <p>{{ image.name }}</p>
 
-           {if $articulo.tienefotos eq 'si'}
-           <div class="foto_box">
-          <div id="foto_box">
-
-           {section name=bucle loop=$fotos}
-<div class="imageElement">
-<h3></h3>
-<p>{$fotos[bucle].epigrafe}</p>
-<a href="#" title="-" class="open"></a>
-<img src="{$fotos[bucle].url}" class="full" />
-<img src="{$fotos[bucle].urlmini}" class="thumbnail" />
-</div>
-{/section}
-</div>
-</div>
-{literal}
-<script type="text/javascript">
-function startGallery() {
-var foto_box = new gallery($('foto_box'), {
-timed: false
-});
-}
-window.addEvent('domready', startGallery);
-</script>
-{/literal}
-
-{/if}
--->
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
 
 
-
-           <!-- autor -->
-            {% if article.author %}
-          <span id="autor">
-          {% if article.author.foto %}
-          <img src="/scripts/phpThumb.php?src=/imagenes/web/autores/{$articulo.fotoautor}&w=60" width="60"  />
-          {% endif %}
-            <span class="autor">{{ article.author }}</span>
-          </span>
-          {% endif %}
-          <!-- /autor -->
+  <!-- autor -->
+  {% if article.author %}
+  <span id="autor">
+    {% if article.author.foto %}
+    <img src="/scripts/phpThumb.php?src=/imagenes/web/autores/{$articulo.fotoautor}&w=60" width="60"  />
+    {% endif %}
+    <span class="autor">{{ article.author }}</span>
+  </span>
+  {% endif %}
+  <!-- /autor -->
 
     <!-- descargas -->
 
@@ -107,10 +93,12 @@ window.addEvent('domready', startGallery);
           {/if}
 -->
           <!-- /descargas -->
-          <span class="texto">{{ article.text|safe }}</span>
+
+  <span class="texto">{{ article.text|safe }}</span>
 
   <span class="fuente">--<br>
-    Fecha: {{ article.date }}{% if article.source %} | Fuente: {article.source}{% endif %}
+    Fecha: {{ article.date }}{% if article.source %} |
+    Fuente: {article.source}{% endif %}
   </span>
 
 

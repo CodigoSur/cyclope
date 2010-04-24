@@ -6,13 +6,13 @@ from django.contrib.contenttypes import generic
 from django import forms
 from cyclope.widgets import WYMEditor
 from cyclope.core.collections.admin import CollectibleAdmin
-from cyclope.admin import BaseContentAdmin
+from cyclope.admin import BaseContentAdmin, NamedImagesInline
 from cyclope.forms import BaseContentAdminForm
 
 from models import *
 
 class ArticleForm(BaseContentAdminForm):
-    summary = forms.CharField(widget=WYMEditor())
+    summary = forms.CharField(widget=WYMEditor(), required=False)
     text = forms.CharField(widget=WYMEditor())
 
     class Meta:
@@ -25,6 +25,7 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
                   ('creation_date', 'author', 'source')
     list_display = ('name', 'is_orphan',)
     search_fields = ('name', 'pretitle', 'summary', 'text', )
+    inlines = CollectibleAdmin.inlines + [NamedImagesInline]
 
 
 admin.site.register(Article, ArticleAdmin)

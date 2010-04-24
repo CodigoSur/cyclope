@@ -89,7 +89,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.comments',
 
-#    'tagging',
+    'tagging',
+#    'tagging_autocomplete',
+    'imagekit',
 #   'rosetta'
     'autoslug',
     'feincms',

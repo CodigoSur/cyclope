@@ -9,7 +9,7 @@ Ten en cuenta que las imagenes, los nombres y los logos de este sitio no pueden 
 Si modificas no borres estas lineas :)
  -->
 
-{% load layout %}
+{% load layout i18n %}
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
   <head>
@@ -21,16 +21,28 @@ Si modificas no borres estas lineas :)
         TODO(nicoechaniz): implement RSS
         <link href="/rss.php" title="RSS" type="application/rss+xml" rel="alternate" /> -->
 
-    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/neutrona.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/neutrona.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="{{ CYCLOPE_MEDIA_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
     <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/jquery-1.4.2.min.js"></script>
-
-    <script language="javascript" type="text/javascript">
-      function abrir_popup(name) {
-        window.open(name,'popup1','width=400,height=350,resizable=yes,menubar=no,toolbar=no,scrollbars=yes');
-      }
+    <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $('#gallery a').lightBox({
+            overlayBgColor:         '#000',
+            overlayOpacity:         0.8,
+            fixedNavigation:        false,
+            imageLoading:           '{{ CYCLOPE_MEDIA_URL }}js/lightbox/images/lightbox-ico-loading.gif',
+            imageBtnPrev:           '{{ CYCLOPE_MEDIA_URL }}js/lightbox/images/lightbox-btn-prev.gif',
+            imageBtnNext:           '{{ CYCLOPE_MEDIA_URL }}js/lightbox/images/lightbox-btn-next.gif',
+            imageBtnClose:          '{{ CYCLOPE_MEDIA_URL }}js/lightbox/images/lightbox-btn-close.gif',
+            imageBlank:             '{{ CYCLOPE_MEDIA_URL }}js/lightbox/images/lightbox-blank.gif',
+            containerBorderSize:    10,
+            containerResizeSpeed:   400,
+            txtImage:               '{% trans "Image"%}',
+            txtOf:                  '{% trans "of"%}',
+        });
+    });
     </script>
-
-
   </head>
 
   <body>

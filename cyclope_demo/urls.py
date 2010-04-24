@@ -22,14 +22,16 @@ urlpatterns = patterns('',
 
     (r'^admin/', include(admin.site.urls)),
     (r'^comments/', include('django.contrib.comments.urls')),
+    (r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
+    (r'^captcha/', include('captcha.urls')),
     (r'^%s' % cyc_settings.CYCLOPE_PREFIX,
      include(frontend.site.urls)),
      #include(cyclope.sites.site.urls)),
 )
 
-urlpatterns += patterns('',
-    url(r'^captcha/', include('captcha.urls')),
-)
+#urlpatterns += patterns('',
+#    url(r'^captcha/', include('captcha.urls')),
+#)
 
 if django_settings.DEBUG:
     urlpatterns+= patterns('',
