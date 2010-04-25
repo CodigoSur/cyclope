@@ -1,32 +1,125 @@
+# *-- coding:utf-8 --*
+
 from django.test import TestCase
 from django.test.utils import setup_test_environment
-from cyclope.models import SiteSettings, StaticPage, MenuItem
+
 from django.contrib.sites.models import Site
-from cyclope.core import frontend
 from django.conf import settings
+
+from cyclope.models import SiteSettings, StaticPage, Menu, MenuItem, Layout
+from cyclope.core import frontend
 from cyclope import settings as cyc_settings
 
 def create_static_page():
     static_page = StaticPage(name='A page')
     static_page.save()
 
+def export_fixture(apps, filename=None):
+    """
+    Return dumpdata from apps. If filename write dumpdata to file.
+    """
+    from django.core.management.commands.dumpdata import Command as Dumpdata
+    cmd = Dumpdata()
+    dump = cmd.handle(*apps)
+    if filename:
+        f = open(filename, "w")
+        f.write(dump)
+        f.close()
+    else:
+        return dump
+
+class SiteSettingsTestCase(TestCase):
+    def setUp(self):
+        self.site = Site(domain="mydomain.com", name="mydomain")
+        self.site.save()
+
+    def test_create_site(self):
+        theme = cyc_settings.CYCLOPE_THEMES.available[0]
+        site_settings = SiteSettings(site=self.site,
+                                theme=theme,
+                                allow_comments='YES')
+        site_settings.save()
+        self.assertEqual(site_settings.site, self.site)
+
+
+class SiteTestCase(TestCase):
+    def testSimplestSite(self):
+        """
+        Test the simplest creation of a Cyclope-site.
+        """
+        site = Site(domain="mydomain.com", name="mydomain")
+        site.save()
+
+        menu = Menu(name="Main menu", main_menu=True)
+        menu.save()
+
+        layout = Layout(name="one sidebar", template='one_sidebar.html')
+        layout.save()
+
+        menu_item = MenuItem(menu=menu, name="home", site_home=True, active=True, layout=layout)
+        menu_item.save()
+
+        theme = cyc_settings.CYCLOPE_THEMES.available[0]
+        site_settings = SiteSettings(site=site,
+                                theme=theme,
+                                default_layout=layout,
+                                allow_comments='YES')
+
+
+
+        site_settings.save()
+        response = self.client.get("/")
+        self.assertTemplateUsed(response, u'cyclope/themes/neutrona/one_sidebar.html')
+
+        # FIXME: add some more usefull asserts
+
+    def testBugWithoutLayout(self):
+        site = Site(domain="mydomain.com", name="mydomain")
+        site.save()
+        menu = Menu(name="Main menu", main_menu=True)
+        menu.save()
+        menu_item = MenuItem(menu=menu, name="home", site_home=True, active=True)
+        menu_item.save()
+
+        theme = cyc_settings.CYCLOPE_THEMES.available[0]
+        site_settings = SiteSettings(site=site,
+                                theme=theme,
+                                allow_comments='YES')
+        site_settings.save()
+        response = self.client.get("/")
+
+    def testWithoutHomeMenuitem(self):
+        site = Site(domain="mydomain.com", name="mydomain")
+        site.save()
+        theme = cyc_settings.CYCLOPE_THEMES.available[0]
+        site_settings = SiteSettings(site=site,
+                                theme=theme,
+                                allow_comments='YES')
+
+        site_settings.save()
+        response = self.client.get("/")
+        self.assertEqual(response.content,'La página de inicio no ha sido establecida.' )
+
+
+class RegionTestCase(TestCase):
+    fixtures = ['simplest_site.json']
+
+    def setUp(self):
+        pass
+
+    def testAddRegion(self):
+        raise NotImplementedError
+
 
 class ModelTestCase(TestCase):
     """Test that models can be created"""
 
     def setUp(self):
-        site = Site(domain="mydomain.com", name="mydomain")
-        site.save()
+        pass
+
 
     def test_site_settings_creation(self):
-        site = Site.objects.get(name='mydomain')
-        theme = cyc_settings.CYCLOPE_THEMES.available[0]
-        instance = SiteSettings(site=site,
-                                theme=theme,
-                                allow_comments='YES')
-        instance.save()
-        saved_instance = SiteSettings.objects.get(site=site)
-        self.assertEqual(saved_instance.site, site)
+        pass
 
     def test_menu_creation(self):
         pass
