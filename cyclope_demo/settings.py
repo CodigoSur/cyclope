@@ -90,7 +90,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
 
     'tagging',
-#    'tagging_autocomplete',
+    'tagging_autocomplete',
     'imagekit',
 #   'rosetta'
     'autoslug',

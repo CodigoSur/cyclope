@@ -12,3 +12,4 @@ requirements.txt
 doc
 .svn
 initial_data.json.init
+initial_data.json

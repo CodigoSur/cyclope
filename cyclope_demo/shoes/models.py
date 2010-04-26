@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 
+from tagging_autocomplete.models import TagAutocompleteField
 from cyclope.models import BaseContent
 from cyclope.core.collections.models import Collectible
 
@@ -12,6 +13,7 @@ class Shoe(BaseContent, Collectible):
     material = models.CharField(_('material'), max_length=100, blank=True)
     sole = models.CharField(_('sole'), max_length=100, blank=True)
     colors = models.ManyToManyField(Color, blank=True, null=True)
+    tags = TagAutocompleteField()
 
     def __unicode__(self):
         return self.name

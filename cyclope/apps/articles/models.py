@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
+from tagging_autocomplete.models import TagAutocompleteField
 from autoslug.fields import AutoSlugField
 from cyclope.core.collections.models import Collectible
 from cyclope.models import BaseContent, NamedImage
@@ -56,6 +57,7 @@ class Article(BaseContent, Collectible):
                                     ('YES',_('enabled')),
                                     ('NO',_('disabled'))
                                 ), default='SITE')
+    tags = TagAutocompleteField()
 
     class Meta:
         verbose_name = _('article')

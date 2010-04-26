@@ -7,12 +7,10 @@ from django.conf import settings as django_settings
 
 from cyclope import settings as cyc_settings
 
-# cyclope.autodiscover will search inside installed apps folders
-# for frontend.py files and register the views/urls declared.
+# autodiscover will search inside installed apps folders
+# for frontend_views.py files and register the views/urls declared.
 from cyclope.core import frontend
 frontend.autodiscover()
-#import cyclope.sites
-#cyclope.sites.autodiscover()
 
 from django.contrib import admin
 admin.autodiscover()
@@ -23,14 +21,10 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^comments/', include('django.contrib.comments.urls')),
     (r'^captcha/', include('captcha.urls')),
+    (r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
     (r'^%s' % cyc_settings.CYCLOPE_PREFIX,
      include(frontend.site.urls)),
-     #include(cyclope.sites.site.urls)),
 )
-
-#urlpatterns += patterns('',
-#    url(r'^captcha/', include('captcha.urls')),
-#)
 
 if django_settings.DEBUG:
     urlpatterns+= patterns('',

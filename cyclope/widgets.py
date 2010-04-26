@@ -11,7 +11,6 @@ class WYMEditor(forms.Textarea):
     """Widget to replace a standard textarea with WYMEditor"""
     class Media:
         js = (
-            'admin/js/jquery.min.js',
             'cyclope/js/wymeditor/jquery.wymeditor.pack.js',
         )
 
@@ -31,3 +30,5 @@ class WYMEditor(forms.Textarea):
                 lang: '%s',
             });
             </script>''' % (name, self.language))
+
+

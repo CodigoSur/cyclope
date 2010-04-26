@@ -1,0 +1,1 @@
+// jQuery is already loaded by the admin, so this is a dummy file to avoid tagging_autocomplete from loading jQuery again.

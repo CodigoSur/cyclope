@@ -13,8 +13,6 @@ from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist
 
-#from tagging.fields import TagField
-#from tagging_autocomplete.models import TagAutocompleteField
 from imagekit.models import ImageModel
 
 import mptt
@@ -156,7 +154,6 @@ class BaseContent(models.Model):
                              db_index=True, blank=False)
     slug = AutoSlugField(populate_from='name', unique=True,
                          db_index=True, always_update=True)
-#    tags = TagAutocompleteField()
 
     def get_instance_url(self, view_name):
         #TODO(nicoechaniz): this seems like a wrong name. it returns the URL for an instance and for a non-instance as well.
