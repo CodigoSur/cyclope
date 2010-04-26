@@ -139,7 +139,7 @@ class CyclopeSite(object):
             return view(request, content_object=obj)
 
     def no_content_layout_view(self, request, layout):
-        """"View of a layout with no specific content associated"""
+        """View of a layout with no specific content associated"""
 
         template = 'cyclope/themes/%s/%s' % (
                     cyc_settings.CYCLOPE_CURRENT_THEME,

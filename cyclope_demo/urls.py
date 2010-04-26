@@ -22,7 +22,6 @@ urlpatterns = patterns('',
 
     (r'^admin/', include(admin.site.urls)),
     (r'^comments/', include('django.contrib.comments.urls')),
-    (r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
     (r'^captcha/', include('captcha.urls')),
     (r'^%s' % cyc_settings.CYCLOPE_PREFIX,
      include(frontend.site.urls)),
