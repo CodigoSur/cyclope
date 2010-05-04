@@ -76,8 +76,10 @@ FilterSpec.filter_specs.insert(0, (lambda f: \
 
 
 class CategoryForm(forms.ModelForm):
-    description = forms.CharField(widget=WYMEditor(), required=False)
-    parent = TreeNodeChoiceField(queryset=Category.tree.all(), required=False)
+    description = forms.CharField(label=_('Description'),
+                                  widget=WYMEditor(), required=False)
+    parent = TreeNodeChoiceField(label=_('Parent'),
+                                 queryset=Category.tree.all(), required=False)
 
     class Meta:
         model = Category
@@ -101,7 +103,7 @@ admin.site.register(Category, CategoryAdmin)
 class CategoryMapForm(forms.ModelForm):
     # We need to declare this field in order to make it accessible from
     # CategoryMapInline through form.declared_fields and override the queryset.
-    category = TreeNodeChoiceField(queryset=None, required=True)
+    category = TreeNodeChoiceField(label=_('Category'), queryset=None, required=True)
 
 class CategoryMapInline(generic.GenericTabularInline):
     """Limits choices to those suitable for the content type

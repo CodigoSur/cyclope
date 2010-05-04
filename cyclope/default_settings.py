@@ -22,12 +22,12 @@ Attributes:
     CYCLOPE_DEFAULT_LAYOUT
     CYCLOPE_DEFAULT_TEMPLATE
 """
+import sys, os
 
 from django.conf import settings
 from django.utils.translation import ugettext as _
-#from utils import themes
-import sys, os
 from django.db.models.signals import post_save
+
 from cyclope.models import SiteSettings
 
 settings.TEMPLATE_DIRS += (os.path.join(os.path.dirname(__file__), 'templates'),)

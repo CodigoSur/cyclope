@@ -17,6 +17,14 @@ $(function() {
         value: 'view_name',
         label: 'verbose_name'
     });
+
+  $("#id_object_id").chainedSelect({
+        parent: '#id_content_type',
+        // this /cyclope/ url should not be hard_coded here
+        url: '/{{CYCLOPE_PREFIX}}objects_for_ctype_json',
+        value: 'object_id',
+        label: 'verbose_name'
+      });
 });
 </script>
 

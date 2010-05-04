@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-03 10:11-0300\n"
+"POT-Creation-Date: 2010-05-04 19:38-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,21 +19,53 @@ msgstr ""
 msgid "content details"
 msgstr "detalles de contenido"
 
-#: forms.py:85
+#: forms.py:41
+msgid "Menu items"
+msgstr "Items de menú"
+
+#: forms.py:55 apps/articles/admin.py:17
+msgid "Text"
+msgstr "Texto"
+
+#: forms.py:64 forms.py:147
+msgid "View"
+msgstr "Vista"
+
+#: forms.py:65 forms.py:148
+msgid "Content object"
+msgstr "Contenido"
+
+#: forms.py:66 core/collections/admin.py:81
+msgid "Parent"
+msgstr "Padre"
+
+#: forms.py:89
 msgid ""
 "You can not set a Custom URL for menu entries                     with "
 "associated content"
 msgstr "No puede setear una URL para Entradas de Menú con contenido asociado."
 
-#: forms.py:168
+#: forms.py:106
+msgid "Theme"
+msgstr "Tema"
+
+#: forms.py:118
+msgid "Template"
+msgstr "Plantilla"
+
+#: forms.py:146
+msgid "Region"
+msgstr "Región"
+
+#: forms.py:176
 msgid "Content type can not be empty"
 msgstr "El Tipo de contenido no debe estar vacío"
 
-#: forms.py:173
+#: forms.py:181
 msgid "You need to select a content view"
 msgstr "Debe seleccionar una Vista del contenido"
 
-#: forms.py:175
+#: forms.py:183
 msgid "You need to select a region"
 msgstr "Debe seleccionar una región"
 
@@ -53,152 +85,155 @@ msgstr "vista detallada de la página estatica"
 msgid "list of Static Pages"
 msgstr "lista de Páginas Estáticas"
 
-#: models.py:27
+#: models.py:28
 msgid "templating theme"
 msgstr "tema de la plantilla"
 
-#: models.py:29
+#: models.py:30
 msgid "default layout"
 msgstr "esquema por defecto"
 
-#: models.py:31 models.py:215 apps/articles/models.py:54
+#: models.py:32 models.py:195 apps/articles/models.py:53
 msgid "allow comments"
 msgstr "permitir comentarios"
 
-#: models.py:33 models.py:218 apps/articles/models.py:57
+#: models.py:34 models.py:198 apps/articles/models.py:56
 msgid "enabled"
 msgstr "habilitado"
 
-#: models.py:34 models.py:219 apps/articles/models.py:58
+#: models.py:35 models.py:199 apps/articles/models.py:57
 msgid "disabled"
 msgstr "deshabilitado"
 
-#: models.py:37
+#: models.py:38
 msgid "global title"
 msgstr "titulo global"
 
-#: models.py:39
+#: models.py:40
 msgid "keywords"
-msgstr "palabra clave"
+msgstr "palabras clave"
 
-#: models.py:40 apps/articles/models.py:78 core/collections/models.py:46
+#: models.py:41 apps/articles/models.py:76 core/collections/models.py:46
 msgid "description"
 msgstr "descrición"
 
-#: models.py:46 models.py:47
+#: models.py:47 models.py:48
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:51 models.py:80 models.py:153 models.py:186 models.py:265
-#: apps/articles/models.py:21 apps/articles/models.py:32
+#: models.py:52 models.py:81 models.py:158 models.py:273
+#: apps/articles/models.py:20 apps/articles/models.py:31
 #: core/collections/models.py:19 core/collections/models.py:40
 msgid "name"
 msgstr "nombre"
 
-#: models.py:53
+#: models.py:54
 msgid "main menu"
 msgstr "menu principal"
 
-#: models.py:70 models.py:78
+#: models.py:71 models.py:79
 msgid "menu"
 msgstr "menú"
 
-#: models.py:71
+#: models.py:72
 msgid "menus"
 msgstr "menúes"
 
-#: models.py:81 core/collections/models.py:43
+#: models.py:82 core/collections/models.py:43
 msgid "parent"
 msgstr "relacionado"
 
-#: models.py:82 core/collections/models.py:44
+#: models.py:83 core/collections/models.py:44
 msgid "children"
 msgstr "hijo"
 
-#: models.py:86
+#: models.py:87
 msgid "site home"
 msgstr "página de inicio"
 
-#: models.py:87
+#: models.py:88
 msgid "custom URL"
 msgstr "URL personalizada"
 
-#: models.py:90
+#: models.py:91
 msgid ""
 "Either set an URL here or                                     select a "
 "content type and view."
 msgstr "configura la URL aquí o selecciona un tipo de contenido y vista"
 
-#: models.py:94 models.py:276
+#: models.py:95 models.py:284
 msgid "layout"
 msgstr "esquema"
 
-#: models.py:96 models.py:244
+#: models.py:99 models.py:252
 msgid "type"
 msgstr "tipo"
 
-#: models.py:100 models.py:252
+#: models.py:101 models.py:260
 msgid "object"
 msgstr "objeto"
 
-#: models.py:103 models.py:246
+#: models.py:107 models.py:254
 msgid "view"
 msgstr "vista"
 
-#: models.py:120
-#, python-format
-msgid "%(ct_model)s: \"%(co)s\" does not exist"
-msgstr "no existe %(ct_model)s: \"%(co)s\""
+#: models.py:140 core/frontend/sites.py:129
+msgid "You need to create you site settings"
+msgstr "Su sitio aún no ha sido configurado"
 
-#: models.py:143
+#: models.py:148
 msgid "menu item"
 msgstr "item de menú"
 
-#: models.py:144
+#: models.py:149
 msgid "menu items"
 msgstr "items de menú"
 
-#: models.py:189 models.py:209
-msgid "image"
-msgstr "imagen"
+#: models.py:162
+msgid "tags"
+msgstr "etiquetas"
 
-#: models.py:210
-msgid "images"
-msgstr "imágenes"
-
-#: models.py:217 apps/articles/models.py:56
+#: models.py:197 apps/articles/models.py:55
 msgid "default"
 msgstr "por defecto"
 
-#: models.py:228 apps/articles/models.py:44
+#: models.py:210 models.py:230
+msgid "image"
+msgstr "imagen"
+
+#: models.py:231
+msgid "images"
+msgstr "imágenes"
+
+#: models.py:236 apps/articles/models.py:43
 msgid "summary"
 msgstr "resumen"
 
-#: models.py:229 apps/articles/models.py:45
+#: models.py:237 apps/articles/models.py:44
 msgid "text"
 msgstr "texto"
 
-#: models.py:235
+#: models.py:243
 msgid "static page"
 msgstr "página estática"
 
-#: models.py:236
+#: models.py:244
 msgid "static pages"
 msgstr "páginas estáticas"
 
-#: models.py:240
+#: models.py:248
 msgid "region"
 msgstr "región"
 
-#: models.py:249
+#: models.py:257
 msgid "weight"
 msgstr "peso"
 
-#: models.py:270
+#: models.py:278
 msgid "layout template"
-msgstr "template para este esquema"
+msgstr "plantilla para este esquema"
 
-#: models.py:277
+#: models.py:285
 msgid "layouts"
 msgstr "esquemas"
 
@@ -210,67 +245,68 @@ msgstr "vista detallada del Artículo seleccionado"
 msgid "list of Article teasers"
 msgstr "lista de resúmenes de Artículos"
 
-#: apps/articles/models.py:18
+#: apps/articles/models.py:17
 msgid "yes"
 msgstr "sí"
 
-#: apps/articles/models.py:18
+#: apps/articles/models.py:17
 msgid "no"
 msgstr "no"
 
-#: apps/articles/models.py:26
+#: apps/articles/models.py:25
 msgid "notes"
 msgstr "notas"
 
-#: apps/articles/models.py:36
+#: apps/articles/models.py:35
 msgid "link"
 msgstr "enlace"
 
-#: apps/articles/models.py:43
+#: apps/articles/models.py:42
 msgid "pre-title"
 msgstr "pre-título"
 
-#: apps/articles/models.py:46
+#: apps/articles/models.py:45
 msgid "author"
 msgstr "autor"
 
-#: apps/articles/models.py:47
+#: apps/articles/models.py:46
 msgid "source"
 msgstr "fuente"
 
-#: apps/articles/models.py:49
+#: apps/articles/models.py:48
 msgid "creation date"
 msgstr "fecha de creación"
 
-#: apps/articles/models.py:51
+#: apps/articles/models.py:50
 msgid "date"
 msgstr "fecha"
 
-#: apps/articles/models.py:67 apps/articles/models.py:76
+#: apps/articles/models.py:65 apps/articles/models.py:74
 msgid "article"
 msgstr "artículo"
 
-#: apps/articles/models.py:68
+#: apps/articles/models.py:66
 msgid "articles"
 msgstr "artículos"
 
-#: apps/articles/models.py:72
+#: apps/articles/models.py:70
 msgid "title"
 msgstr "título"
 
-#: apps/articles/models.py:77
+#: apps/articles/models.py:75
 msgid "attachments"
 msgstr "adjuntos"
 
-#: apps/articles/models.py:80
+#: apps/articles/models.py:78
 msgid "file"
 msgstr "archivo"
 
-#: apps/articles/models.py:82
+#: apps/articles/models.py:80
 msgid "downloads"
 msgstr "bajadas"
 
 #: apps/articles/templates/articles/article_detail.html:17
+#: core/collections/templates/collections/category_teaser_list.html:7
 msgid "Breadcrumb"
 msgstr "Profundidad de navegación"
 
@@ -278,11 +314,11 @@ msgstr "Profundidad de navegación"
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: apps/articles/templates/articles/article_detail.html:100
+#: apps/articles/templates/articles/article_detail.html:99
 msgid "Date"
 msgstr "Fecha"
 
-#: apps/articles/templates/articles/article_detail.html:101
+#: apps/articles/templates/articles/article_detail.html:100
 msgid "Source"
 msgstr "Fuente"
 
@@ -303,15 +339,27 @@ msgstr "Todos"
 msgid "%s categories"
 msgstr "%s categorías"
 
-#: core/collections/admin.py:92
+#: core/collections/admin.py:79
+msgid "Description"
+msgstr "Descrición"
+
+#: core/collections/admin.py:94
 msgid "Extra info"
 msgstr "Información extra"
+
+#: core/collections/admin.py:106
+msgid "Category"
+msgstr "Categoría"
 
 #: core/collections/frontend_views.py:24
 msgid "list of root items for the selected Category"
 msgstr "lista de items raíz para la Categoría seleccionada"
 
-#: core/collections/frontend_views.py:48
+#: core/collections/frontend_views.py:49
+msgid "teaser list of Category members"
+msgstr "lista de resúmenes de miembros de una Categoría" 
+
+#: core/collections/frontend_views.py:74
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
@@ -359,27 +407,27 @@ msgstr "mapeo de categoría"
 msgid "category maps"
 msgstr "mapeos de categorías"
 
-#: core/frontend/__init__.py:124
+#: core/frontend/__init__.py:125
 #, python-format
 msgid "No default view has been set for %s"
 msgstr "No hay una vista por defecto para %s"
 
-#: core/frontend/__init__.py:127
+#: core/frontend/__init__.py:128
 #, python-format
 msgid "You can set only one default view for %s"
 msgstr "Puedes definir solo una vista por defecto para %s"
 
-#: core/frontend/sites.py:123
-msgid "You need to create you site settings"
-msgstr "Su sitio aún no ha sido configurado"
-
-#: core/frontend/sites.py:126
+#: core/frontend/sites.py:132
 msgid "You need to select a layout for the site"
 msgstr "Debe seleccionar un esquema para el sitio"
 
-#: core/frontend/sites.py:132
+#: core/frontend/sites.py:138
 msgid "The site home page has not been set."
 msgstr "La página de inicio no ha sido establecida."
+
+#: core/frontend/sites.py:149
+msgid "No content object selected"
+msgstr "No ha seleccionado contenido"
 
 #: templates/admin/base_site.html:4
 msgid "Cyclope site admin"
@@ -507,14 +555,14 @@ msgstr "tercer panel"
 msgid "fourth pane"
 msgstr "cuarto panel"
 
+#~ msgid "%(ct_model)s: \"%(co)s\" does not exist"
+#~ msgstr "no existe %(ct_model)s: \"%(co)s\""
+
 #~ msgid "You must provide either content details or a custom URL"
 #~ msgstr "Debe proveer detalles de contenido o una URL"
 
 #~ msgid "You need to set content details if this is the site home"
 #~ msgstr "Debe establecer detalles de contenido si esta es la página inicial"
-
-#~ msgid "No content selected"
-#~ msgstr "No ha seleccionado contenido"
 
 #~ msgid "full detail"
 #~ msgstr "detalle completo"

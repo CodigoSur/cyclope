@@ -8,12 +8,13 @@ from cyclope.widgets import WYMEditor
 from cyclope.core.collections.admin import CollectibleAdmin
 from cyclope.admin import BaseContentAdmin, NamedImagesInline
 from cyclope.forms import BaseContentAdminForm
+from django.utils.translation import ugettext as _
 
 from models import *
 
 class ArticleForm(BaseContentAdminForm):
 #    summary = forms.CharField(widget=WYMEditor())
-    text = forms.CharField(widget=WYMEditor())
+    text = forms.CharField(label=_('Text'), widget=WYMEditor())
 
     class Meta:
         model = Article

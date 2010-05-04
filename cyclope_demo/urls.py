@@ -23,7 +23,7 @@ urlpatterns = patterns('',
     (r'^captcha/', include('captcha.urls')),
     (r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
     (r'^%s' % cyc_settings.CYCLOPE_PREFIX,
-     include(frontend.site.urls)),
+     include(frontend.site.get_urls())),
 )
 
 if django_settings.DEBUG:

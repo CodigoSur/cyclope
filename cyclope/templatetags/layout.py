@@ -41,7 +41,7 @@ def region(context, region_name):
             regionview.content_type.model_class(),
             regionview.content_view,
             )
-        # instance views need instance data
+        # instance views need instance data -> slug
         if view.is_instance_view:
             slug = regionview.content_object.slug
             view_vars['output'] = view(context['request'],

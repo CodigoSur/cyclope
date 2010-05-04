@@ -11,8 +11,9 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 
+from tagging_autocomplete.models import TagAutocompleteField
 from imagekit.models import ImageModel
 
 import mptt
@@ -74,7 +75,7 @@ class Menu(models.Model):
 class MenuItem(models.Model):
 # this class could inherit from Category
 # but mptt does not support inheritance well
-# maybe we should try django-polymorphic or change MPTT for Treebeard
+# maybe we should try django-polymorphic and see how MPTT behaves
     menu = models.ForeignKey(Menu, verbose_name=_('menu'),
                              db_index=True, related_name='menu_items')
     name = models.CharField(_('name'), max_length=50, db_index=True)
@@ -93,12 +94,15 @@ class MenuItem(models.Model):
     active = models.BooleanField(default=True, db_index=True)
     layout = models.ForeignKey('Layout', verbose_name=_('layout'),
                                null=True, blank=True)
-    content_type = models.ForeignKey(ContentType, verbose_name=_('type'),
-                                     related_name='menu_entries',
-                                     blank=True, null=True)
-    content_object = models.ForeignKey('BaseContent',
-                     verbose_name=_('object'), related_name='menu_entries',
+
+    content_type = models.ForeignKey(ContentType,
+                     verbose_name=_('type'), related_name='menu_entries',
                      blank=True, null=True)
+    object_id = models.PositiveIntegerField(_('object'),
+        db_index=True, blank=True, null=True)
+    content_object = generic.GenericForeignKey(
+        'content_type', 'object_id')
+
     # content_view choices are set through an AJAX view
     content_view = models.CharField(_('view'), max_length=255,
                                     blank=True, default='')
@@ -107,20 +111,12 @@ class MenuItem(models.Model):
         # check that data is consistent
         #TODO(nicoechaniz): raise appropriate exceptions
         # a content object without a content type is invalid so we unset it
-        if self.content_object and not self.content_type:
-            self.content_object = None
+        if self.object_id and not self.content_type:
+            self.object_id = None
         # a content view without a content type is invalid so we unset it
         if self.content_view != '' and not self.content_type:
             self.content_view = ''
-        if self.content_object:
-            try:
-                getattr(self.content_object, self.content_type.model)
-            except:
-                raise Exception(
-                    _(u'%(ct_model)s: "%(co)s" does not exist' % \
-                      {'ct_model': self.content_type.model,
-                       'co':self.content_object}))
-
+        # get the default view for the content_type if no view is selected
         if self.content_type and self.content_view == '':
             model = get_model(self.content_type.app_label,
                               self.content_type.model)
@@ -129,10 +125,19 @@ class MenuItem(models.Model):
         if self.custom_url:
             self.url = self.custom_url
         else:
+            # when the item is being created, slug is populated on save,
+            # so we generate it manualy in order to set the URL.
+            if not self.slug:
+                slug_field = self._meta.get_field_by_name('slug')[0]
+                populate_value = getattr(self, slug_field.populate_from)
+                self.slug = slug_field.slugify(populate_value)
             self.url = "/".join([a.slug for a in self.get_ancestors()]+[self.slug])
 
         if self.layout is None:
-            self.layout = cyclope.settings.CYCLOPE_DEFAULT_LAYOUT
+            try:
+                self.layout = cyclope.settings.CYCLOPE_DEFAULT_LAYOUT
+            except AttributeError:
+                raise ImproperlyConfigured(_('You need to create you site settings'))
 
         super(MenuItem, self).save()
 
@@ -154,6 +159,7 @@ class BaseContent(models.Model):
                              db_index=True, blank=False)
     slug = AutoSlugField(populate_from='name', unique=True,
                          db_index=True, always_update=True)
+    tags = TagAutocompleteField(_('tags'))
 
     def get_instance_url(self, view_name):
         #TODO(nicoechaniz): this seems like a wrong name. it returns the URL for an instance and for a non-instance as well.
@@ -180,12 +186,27 @@ class BaseContent(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        abstract = True
 
-class NamedImage(ImageModel):
+
+class BaseCommentedContent(BaseContent):
+    """Parent class for content objects that can have comments."""
+    allow_comments = models.CharField(_('allow comments'), max_length=4,
+                                choices = (
+                                    ('SITE',_('default')),
+                                    ('YES',_('enabled')),
+                                    ('NO',_('disabled'))
+                                ), default='SITE')
+    class Meta:
+        abstract = True
+
+
+class NamedImage(ImageModel, BaseContent):
     #TODO(nicoechaniz): when we make BaseContent abstract make this model inherit from that.
-    name = models.CharField(_('name'), max_length=50, db_index=True)
-    slug = AutoSlugField(populate_from='name',
-                         db_index=True, always_update=True)
+    #name = models.CharField(_('name'), max_length=50, db_index=True)
+    #slug = AutoSlugField(populate_from='name',
+    #                     db_index=True, always_update=True)
     original_image = models.ImageField(_('image'), upload_to='uploads/images')
     num_views = models.PositiveIntegerField(editable=False, default=0)
     content_type = models.ForeignKey(ContentType)
@@ -208,19 +229,6 @@ class NamedImage(ImageModel):
     class Meta:
         verbose_name = _('image')
         verbose_name_plural = _('images')
-
-
-class BaseCommentedContent(BaseContent):
-    """Parent class for content objects that can have comments."""
-    allow_comments = models.CharField(_('allow comments'), max_length=4,
-                                choices = (
-                                    ('SITE',_('default')),
-                                    ('YES',_('enabled')),
-                                    ('NO',_('disabled'))
-                                ), default='SITE')
-
-    class Meta:
-        abstract = True
 
 
 # should this be moved to it's own app? should we just use flatpages?

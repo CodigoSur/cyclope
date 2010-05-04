@@ -9,7 +9,7 @@ Ten en cuenta que las imagenes, los nombres y los logos de este sitio no pueden 
 Si modificas no borres estas lineas :)
  -->
 
-{% load layout i18n %}
+{% load layout i18n tagging_tags %}
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
   <head>
@@ -82,11 +82,14 @@ Si modificas no borres estas lineas :)
             <!-- /buscar -->
 
             <!-- lista_etiquetas --> <!-- TODO(nicoechaniz): implement tags -->
-            <div id="etiquetas">
+            <div id="tags">
               <span class="title">Etiquetas</span>
               <div class="box">
               <a href="{{ tag.link}}">
-                {{ tag }}
+                {% tag_cloud_for_model articles.Article as article_tags with min_count=1 distribution=log%}
+                {% for tag in article_tags %}
+                  <a href="/tag/{{ tag }}" class="tag{{tag.font_size}}">{{tag.name}}</a>
+                {% endfor %}
                 </a>&nbsp&nbsp
               </div>
             </div>

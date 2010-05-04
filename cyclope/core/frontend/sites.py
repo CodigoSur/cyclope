@@ -10,9 +10,10 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext, loader
 from django.conf.urls.defaults import *
 from django.utils.translation import ugettext as _
-from django.core.exceptions import ObjectDoesNotExist
-
+from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.contrib.contenttypes.models import ContentType
+from django.db.models.signals import post_save
+
 from cyclope.models import BaseContent, Menu, MenuItem, SiteSettings
 from cyclope.core.collections.models import Collection, Category
 
@@ -60,6 +61,7 @@ class CyclopeSite(object):
             url(r'^registered_region_views_json$', self.registered_region_views_json),
             url(r'^registered_standard_views_json$', self.registered_standard_views_json),
             url(r'^objects_for_ctype_json$', self.objects_for_ctype_json),
+#            url(r'(?P<path>.*)$', self.menu_item_views)
         )
 
         #TODO(nicoechaniz): Fix for multi-site ?
@@ -75,11 +77,16 @@ class CyclopeSite(object):
                     (model._meta.object_name.lower(), view.name) )
                 )
         # url patterns for menu items
+        return self.get_menuitem_urls(urlpatterns)
+
+
+    def get_menuitem_urls(self, urlpatterns):
         for item in MenuItem.tree.all():
+            # custom urls are not supposed to be handled by Cyclope
             if item.custom_url:
                 continue
             if item.content_object is not None:
-                obj = getattr(item.content_object, item.content_type.model)
+                obj = item.content_object
                 view = self.get_view(obj.__class__, item.content_view)
                 urlpatterns += patterns(
                     '', url('^%s$' % item.url, view, {'slug': obj.slug}))
@@ -95,11 +102,11 @@ class CyclopeSite(object):
                             {'layout': item.layout}))
         return urlpatterns
 
-    def urls(self):
-        """URLs for the site's registered frontend views.
-        """
-        return self.get_urls()
-    urls = property(urls)
+    #def urls(self):
+    #    """URLs for the site's registered frontend views.
+    #    """
+    #    return self.get_urls()
+    #urls = property(urls)
 
     def get_default_view_name(self, model):
         """Returns the view name for the default view of the given model
@@ -110,7 +117,6 @@ class CyclopeSite(object):
     def get_view(self, model, view_name):
         return [ view for view in self._registry[model]
                 if view.name == view_name ][0]
-
 
 #### Site Views ####
 #
@@ -134,11 +140,13 @@ class CyclopeSite(object):
             if home_item.content_type:
                 view = self.get_view(home_item.content_type.model_class(),
                                      home_item.content_view)
-                if home_item.content_object:
-                    obj = getattr(home_item.content_object, home_item.content_type.model)
+                if home_item.content_object and view.is_instance_view:
+                    obj = home_item.content_object
                     return view(request, content_object=obj)
-                else:
+                elif not view.is_instance_view:
                     return view(request)
+                else:
+                    raise ImproperlyConfigured(_('No content object selected'))
             else:
                 return self.no_content_layout_view(request, home_item.layout)
 
@@ -214,3 +222,11 @@ class CyclopeSite(object):
 ####
 
 site = CyclopeSite()
+
+def _refresh_site_urls(sender, instance, created, **kwargs):
+    "Callback to refresh site url patterns when a MenuItem is modified"
+    from django.conf import settings
+    import sys
+    return reload(sys.modules[settings.ROOT_URLCONF])
+
+post_save.connect(_refresh_site_urls, sender=MenuItem)

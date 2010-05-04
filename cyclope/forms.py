@@ -33,12 +33,12 @@ def populate_type_choices(myform):
     ctype_choices = [('', '------')]
     for model in frontend.site._registry:
         ctype = ContentType.objects.get_for_model(model)
-        ctype_choices.append((ctype.id, ctype.name))
+        ctype_choices.append((ctype.id, model._meta.verbose_name))
     myform.fields['content_type'].choices = ctype_choices
 
 
 class BaseContentAdminForm(forms.ModelForm):
-    menu_items = forms.ModelMultipleChoiceField(
+    menu_items = forms.ModelMultipleChoiceField(label=_('Menu items'),
                     queryset = MenuItem.tree.all(), required=False,
                     )
 
@@ -47,13 +47,12 @@ class BaseContentAdminForm(forms.ModelForm):
         if self.instance.id is not None:
             selected_items = [
                 values[0] for values in MenuItem.objects.filter(
-                content_object__id=self.instance.id).values_list('id') ]
+                object_id=self.instance.id).values_list('id') ]
             self.fields['menu_items'].initial = selected_items
 
 
 class StaticPageAdminForm(BaseContentAdminForm):
-    summary = forms.CharField(widget=WYMEditor(), required=False)
-    text = forms.CharField(widget=WYMEditor())
+    text = forms.CharField(label=_('Text'), widget=WYMEditor())
 
     class Meta:
         model = StaticPage
@@ -62,28 +61,37 @@ class StaticPageAdminForm(BaseContentAdminForm):
 class MenuItemAdminForm(forms.ModelForm):
     # content_view choices get populated through javascript
     # when a template is selected
-    content_view = AjaxChoiceField(required=False)
-    parent = TreeNodeChoiceField(queryset=MenuItem.tree.all(), required=False)
+    content_view = AjaxChoiceField(label=_('View'), required=False)
+    object_id = AjaxChoiceField(label=_('Content object'), required=False)
+    parent = TreeNodeChoiceField(label=_('Parent'), queryset=MenuItem.tree.all(), required=False)
 
     def __init__(self, *args, **kwargs):
         super(MenuItemAdminForm, self).__init__(*args, **kwargs)
         if self.instance.id is not None:
             # chainedSelect will show the selected choice
             # if it is present before filling the choices through AJAX
-            selected_view = MenuItem.objects.get(
-                id=self.instance.id).content_view
+            menu_item = MenuItem.objects.get(id=self.instance.id)
+            selected_view = menu_item.content_view
             self.fields['content_view'].choices = [(selected_view,
                                                     selected_view)]
+            if menu_item.content_object:
+                content_object = menu_item.content_object
+                self.fields['object_id'].choices = [(content_object.id,
+                                                        content_object.name)]
         populate_type_choices(self)
 
     def clean(self):
         data = self.cleaned_data
         if data['custom_url'] and (data['content_type']
-                                   or data['content_object']
+                                   or data['object_id']
                                    or data['content_view']):
             raise ValidationError(
                 _(u'You can not set a Custom URL for menu entries \
                     with associated content'))
+
+        if data['object_id'] == '':
+            data['object_id'] = None
+
         return super(MenuItemAdminForm, self).clean()
 
     class Meta:
@@ -95,7 +103,7 @@ class MenuItemAdminForm(forms.ModelForm):
 
 
 class SiteSettingsAdminForm(forms.ModelForm):
-    theme = forms.ChoiceField(
+    theme = forms.ChoiceField(label=_('Theme'),
         choices=[
             (theme_name,  getattr(cyc_settings.CYCLOPE_THEMES,
             theme_name).verbose_name)
@@ -107,7 +115,7 @@ class SiteSettingsAdminForm(forms.ModelForm):
 
 
 class LayoutAdminForm(forms.ModelForm):
-    template = forms.ChoiceField(required=True)
+    template = forms.ChoiceField(label=_('Template'), required=True)
 
     def __init__(self, *args, **kwargs):
         super(LayoutAdminForm, self).__init__(*args, **kwargs)
@@ -135,9 +143,9 @@ class RegionViewInlineForm(forms.ModelForm):
     # Region choices get populated through javascript
     # when a template is selected.
     # The corresponding json view is CyclopeSite.layout_regions_json()
-    region = AjaxChoiceField(required=False)
-    content_view = AjaxChoiceField(required=False)
-    object_id = AjaxChoiceField(required=False)
+    region = AjaxChoiceField(label=_('Region'), required=False)
+    content_view = AjaxChoiceField(label=_('View'), required=False)
+    object_id = AjaxChoiceField(label=_('Content object'), required=False)
 
     def __init__(self, *args, **kwargs):
         super(RegionViewInlineForm, self).__init__(*args, **kwargs)

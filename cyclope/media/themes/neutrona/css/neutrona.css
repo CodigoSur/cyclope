@@ -80,9 +80,15 @@ img {border:none;}
 /*etiquetas*/
 #tags {width:190px; margin:20px 10px;}
 #tags .title {text-align:center;display:block;color:#333; font-weight:bold; font-size:0.8em; margin:0;padding:3px 0;background-color:#ccc;}
-#tags a {color:#666;line-height:180%;}
-#tags a:hover {text-decoration:underline;font-weight:700;color:#333;}
+#tags a {color:#666; line-height:180%;}
+#tags a:hover {text-decoration:underline; color:#333;}
 #tags .box {padding:5px 15px;margin:0;background:#fff;font-size:0.75em;}
+.tag1 {font-size: 1em}
+.tag2 {font-size: 1.1em}
+.tag3 {font-size: 1.2em}
+.tag4 {font-size: 1.3em}
+.tag5 {font-size: 1.4em}
+
 /*//etiquetas*/
 
 /*tagueado de notas (rige para index, leer e indice)*/
