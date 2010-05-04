@@ -131,12 +131,17 @@ class CyclopeSite(object):
                 return HttpResponse(
                     _(u'The site home page has not been set.'))
 
-            if not home_item.content_object:
+            if home_item.content_type:
+                view = self.get_view(home_item.content_type.model_class(),
+                                     home_item.content_view)
+                if home_item.content_object:
+                    obj = getattr(home_item.content_object, home_item.content_type.model)
+                    return view(request, content_object=obj)
+                else:
+                    return view(request)
+            else:
                 return self.no_content_layout_view(request, home_item.layout)
 
-            obj = getattr(home_item.content_object, home_item.content_type.model)
-            view = self.get_view(obj.__class__, home_item.content_view)
-            return view(request, content_object=obj)
 
     def no_content_layout_view(self, request, layout):
         """View of a layout with no specific content associated"""

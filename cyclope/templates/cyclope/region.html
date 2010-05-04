@@ -2,7 +2,7 @@
 template used to insert views inside layout regions
 {% endcomment %}
 
-<div class="region {{ layout_name }}_region" id="{{ region_name }}">
+<div class="{{ layout_name }} region" id="{{ region_name }}">
   {% for view_params in views %}
     <div class="regionview {{ view_params.model }} {{ view_params.name }}" {% if view_params.slug %} id="{{ view_params.slug }}_{{ view_params.model }}" {% endif %}>
       {{ view_params.output|safe }}

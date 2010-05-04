@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-24 01:04-0300\n"
+"POT-Creation-Date: 2010-05-03 10:01-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,23 +25,23 @@ msgstr "detalle completo"
 msgid "list of Shoes"
 msgstr "lista de Zapatos"
 
-#: shoes/models.py:11
+#: shoes/models.py:12
 msgid "cut"
 msgstr "corte"
 
-#: shoes/models.py:12
+#: shoes/models.py:13
 msgid "material"
 msgstr "material"
 
-#: shoes/models.py:13
+#: shoes/models.py:14
 msgid "sole"
 msgstr "suela"
 
-#: shoes/models.py:20
+#: shoes/models.py:22
 msgid "shoe"
 msgstr "zapato"
 
-#: shoes/models.py:21
+#: shoes/models.py:23
 msgid "shoes"
 msgstr "zapatos"
 

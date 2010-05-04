@@ -3,14 +3,9 @@
 templatetags.layout
 -------------------
 """
-from copy import copy
 from django import template
-from cyclope import settings as cyc_settings
-from cyclope.models import MenuItem, RegionView
 from cyclope.utils import layout_for_request
 from cyclope.core import frontend
-from cyclope.models import BaseContent
-
 
 register = template.Library()
 

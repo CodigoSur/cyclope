@@ -34,6 +34,7 @@ class FrontendView(object):
 
     def __init__(self):
         self.is_region_view = self.is_standard_view = True
+        # we set these vars according to what methods have been overriden
         try:
             self.get_http_response(None)
         except NotImplementedError:

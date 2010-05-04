@@ -12,7 +12,7 @@ from cyclope.forms import BaseContentAdminForm
 from models import *
 
 class ArticleForm(BaseContentAdminForm):
-    summary = forms.CharField(widget=WYMEditor(), required=False)
+#    summary = forms.CharField(widget=WYMEditor())
     text = forms.CharField(widget=WYMEditor())
 
     class Meta:

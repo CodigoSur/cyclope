@@ -1,0 +1,22 @@
+  <div class="article teaser">
+    {% if  article.pretitle %}
+    <span class="pretitle">{{ article.pretitle }} | </span>
+    {% endif%}
+    <span class="date">{{ article.date }}</span>
+     <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name }}</a></h2>
+      {% if article.images.count %}
+      <a href="{% url article-detail article.slug %}">
+        <img src="{{ article.first_image.thumbnail_image.url }}" width="135" border="0"/>
+      </a>
+      {% endif %}
+    <p class="summary">
+      {{ article.summary }} (<a href="{% url article-detail article.slug %}">leer todo</a>).
+    </p>
+    {% if article.author %}
+    <span class="author">{{ article.author }}</span>
+    {% endif %}
+    <span class="tags">
+      {{ article.tags }}
+    </span>
+    <div class="clear"></div>
+  </div>

@@ -13,14 +13,14 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
  {% get_comment_count for article as comment_count %}
 
 <!-- TODO(nicoechaniz): uncomment and fix when breadcrumbs and tagging are implemented
-  <span  class="ruta">Profundidad de navegaci&oacute;n: <a href="/">Principal</a> / {$ruta}</span>
-  <span class="etiquetas">{$articulo.etiquetas}</span>
 -->
+  <span  class="breadcrumb">{% trans "Breadcrumb" %}: <a href="/">Principal</a> / {$ruta}</span>
+  <span class="tags">{% trans "Tags" %}: {{ article.tags }}</span>
 
   {% if article.pretitle %}
-  <span class="pretitulo">{{ article.pretitle }}</span>
+  <span class="pretitle">{{ article.pretitle }}</span>
   {% endif %}
-  <h1 class="titulo">{{ article.name }}</h1>
+  <h1 class="title">{{ article.name }}</h1>
 
   <!-- herramientas -->
   <div class="herramientas">
@@ -43,20 +43,19 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
   <!-- descripcion -->
   {% if article.summary %}
-  <p class="descripcion">{{ article.summary|safe }}</p>
+  <p class="summary">{{ article.summary|safe }}</p>
   {% endif%}
   <!-- /descripcion -->
 
-  {% if article.images %}
+  {% if article.images.count %}
   <div id="gallery">
     <ul>
       {% for image in article.images.all %}
       <li {% if not forloop.first %} style="display:none;" {% endif %}}>
         <a href="{{ image.display.url }}"  title="{{ image.name }}">
-          <img src="{{ image.thumbnail_image.url }}" alt="{{ image.name }}"/>
+          <img src="{{ image.thumbnail_image.url }}" alt="{{ image.name }}" />
         </a>
         <p>{{ image.name }}</p>
-
       </li>
       {% endfor %}
     </ul>
@@ -64,13 +63,13 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   {% endif %}
 
 
-  <!-- autor -->
+  <!-- author -->
   {% if article.author %}
-  <span id="autor">
-    {% if article.author.foto %}
-    <img src="/scripts/phpThumb.php?src=/imagenes/web/autores/{$articulo.fotoautor}&w=60" width="60"  />
+  <span id="author">
+    {% if article.author.photo %}
+    <img src="{{ article.author.photo.thumbrnail_image.url }}" width="60"  />
     {% endif %}
-    <span class="autor">{{ article.author }}</span>
+    <span class="author">{{ article.author }}</span>
   </span>
   {% endif %}
   <!-- /autor -->
@@ -83,7 +82,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
           <div id="adjuntos">
           <div class="adjuntos_box">
-            <h6><img src="{$templatedir}/imagenes/css/leer_adjuntos.png" alt="Adjuntos"  width="16" height="16" border="0" align="absmiddle" /> Archivos para descargar </h6>
+            <h6><img src="{$templatedir}{{ CYCLOPE_THEME_MEDIA_URL }}images/css/leer_adjuntos.png" alt="Adjuntos"  width="16" height="16" border="0" align="absmiddle" /> Archivos para descargar </h6>
              {section name=bucle loop=$downloads}
             <p><img src="http://codigosur.org/imagenes/icons/{$downloads[bucle].ext}.gif" width="20" height="22" border="0" align="middle"> <a href="{$downloads[bucle].link}" title="{$downloads[bucle].desc}" >{$downloads[bucle].nombre}</a></p>
             {/section}
@@ -94,11 +93,11 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 -->
           <!-- /descargas -->
 
-  <span class="texto">{{ article.text|safe }}</span>
+  <span class="text">{{ article.text|safe }}</span>
 
-  <span class="fuente">--<br>
-    Fecha: {{ article.date }}{% if article.source %} |
-    Fuente: {article.source}{% endif %}
+  <span class="source">--<br>
+    {% trans "Date" %}: {{ article.date }}{% if article.source %} |
+    {% trans "Source" %}: {article.source}{% endif %}
   </span>
 
 
@@ -118,21 +117,18 @@ TODO(nicoechaniz): uncomment and fix if related articles are implemented
 -->
               <!-- /relacionadas -->
 
-{% comment %}
 
 	      <div class="clear"></div>
      <!-- redsocial -->
            <div id="redsocial"><small>Comparte en tu red social:</small>
-<a href="http://www.facebook.com" rel="nofollow" onclick="sbs_facebook(); return false;"><img src="/imagenes/redsocial/facebook.png" border="0" alt="Compartir en Facebook" title="Compartir en Facebook" height="24" width="24" /></a>
-<a href="http://www.del.icio.us" rel="nofollow" onclick="sbs_delicious(); return false;"><img src="/imagenes/redsocial/delicious.png" border="0" alt="Compartir en Delicious" title="Compartir en Delicious" height="24" width="24" /></a>
-<a href="http://www.yahoo.com" rel="nofollow" onclick="sbs_yahoobm(); return false;"><img src="/imagenes/redsocial/yahoo.png" border="0" alt="Compartir en Yahoo" title="Compartir en Yahoo" height="24" width="24" /></a>
-<a href="http://www.google.com" rel="nofollow" onclick="sbs_googlebm(); return false;"><img src="/imagenes/redsocial/google.png" border="0" alt="Compartir en Google" title="Compartir en Google" height="24" width="24" /></a>
+<a href="http://www.facebook.com" rel="nofollow" onclick="sbs_facebook(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/facebook.png" border="0" alt="Compartir en Facebook" title="Compartir en Facebook" height="24" width="24" /></a>
+<a href="http://www.del.icio.us" rel="nofollow" onclick="sbs_delicious(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/delicious.png" border="0" alt="Compartir en Delicious" title="Compartir en Delicious" height="24" width="24" /></a>
+<a href="http://www.yahoo.com" rel="nofollow" onclick="sbs_yahoobm(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/yahoo.png" border="0" alt="Compartir en Yahoo" title="Compartir en Yahoo" height="24" width="24" /></a>
+<a href="http://www.google.com" rel="nofollow" onclick="sbs_googlebm(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/google.png" border="0" alt="Compartir en Google" title="Compartir en Google" height="24" width="24" /></a>
   	</div>
           <!-- /redsocial -->
 
             <div class="clear"></div>
-
-{% endcomment %}
 
 
 <!--COMENTARIOS -->

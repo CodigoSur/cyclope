@@ -59,6 +59,10 @@ class Article(BaseContent, Collectible):
                                 ), default='SITE')
     tags = TagAutocompleteField()
 
+    def first_image(self):
+        if self.images.count() > 0:
+            return self.images.all()[0]
+
     class Meta:
         verbose_name = _('article')
         verbose_name_plural = _('articles')

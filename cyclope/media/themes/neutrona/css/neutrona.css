@@ -12,7 +12,7 @@ Si modificas no borres estas lineas :)
 body{font-family: Arial, Verdana, Helvetica, Sans-serif; margin: 0; font-size:12pt; background-color:#c8b7b7;}
 * {margin:0; padding:0;}
 a {color:#666; text-decoration:none;outline:none;}
-a:hover {text-decoration:underline;}
+a:hover {text-decoration:underline; color: #000;}
 img {border:none;}
 .clear {clear:both;padding:0;margin:0;}
 /*//parametros generales x default*/
@@ -20,12 +20,16 @@ img {border:none;}
 /*esqueleto general*/
 #mascara {width:990px; margin:0 auto; background:#fff;padding:0;}
 #medianera {padding:15px 0 0;margin:0 auto;}
-#page_content{margin-left:235px; padding-right:10px; width: 100% -235px;}
-#agua {width:210px; float:left;background-color:#e6e6e6;margin:0 10px;}
-#agua .top {background:url(../images/css/agua-top.png) no-repeat;height:12px;}
-#agua .bottom {background:url(../images/css/agua-bottom.png) no-repeat;height:12px;}
-#aire {width:205px; float:right;margin:0 10px 0 0;}
-#fuego {margin-left:240px; margin-right:240px;}
+#page_content {padding-right:10px;}
+/*.one_sidebar #page_content{margin-left:235px; width: 100% -235px;}*/
+#left_sidebar_container {width:210px; float:left;background-color:#e6e6e6;margin:0 10px;}
+#left_sidebar_container .top {background:url(../images/css/agua-top.png) no-repeat;height:12px;}
+#left_sidebar_container .bottom {background:url(../images/css/agua-bottom.png) no-repeat;height:12px;}
+/*#right_sidebar_container {width:205px; float:right;margin:0 10px 0 0;}*/
+#right_sidebar_container {width:205px; float:right;margin:10px 10px 0 0;padding:0;}
+/*#content_container {margin-left:240px; margin-right:240px;}*/
+#content_container {margin-left:240px;}
+.two_sidebars #content_container {margin-right: 240px;}
 /*//esqueleto general*/
 
 /*.menu_root_items_list*/
@@ -34,10 +38,10 @@ img {border:none;}
 #header .menu.root_items_list li{float:left; margin:0; margin-left:15px;}
 #header .menu.root_items_list a {background:url(../images/css/tabmenuh.png) no-repeat top left; float:left; padding:0 0 0 5px; text-decoration:none;}
 #header .menu.root_items_list span {color:#fff; font-size:0.75em; font-weight:bold; display:block; padding:6px 15px 6px 6px; float:left; cursor:pointer; background:url(../images/css/tabmenuh.png) no-repeat 100% -30px;}
-.menu.root_items_list a:hover {color:#000; background-position: 0 -61px;}
-.menu.root_items_list a:hover span {color:#f4f4f4; background-position: 100% -91px;}
-.menu.root_items_list li.current a  {background-position: 0 -60px;}
-.menu.root_items_list li.current a span {color:#f4f4f4; background-position: 100% -90px;}
+#header .menu.root_items_list a:hover {color:#000; background-position: 0 -61px;}
+#header .menu.root_items_list a:hover span {color:#f4f4f4; background-position: 100% -91px;}
+#header .menu.root_items_list li.current a  {background-position: 0 -60px;}
+#header .menu.root_items_list li.current a span {color:#f4f4f4; background-position: 100% -90px;}
 #header .menu.root_items_list {display:block;height:27px;padding:10px 0 0; background-color:#fff;}
 
 #footer .menu.root_items_list {display:block;height:37px;padding:0 0 20px 0;}
@@ -74,66 +78,66 @@ img {border:none;}
 /* // Menu vertical */
 
 /*etiquetas*/
-#etiquetas {width:190px;margin:20px 10px;}
-#etiquetas .title {text-align:center;display:block;color:#333; font-weight:bold; font-size:0.8em; margin:0;padding:3px 0;background-color:#ccc;}
-#etiquetas a {color:#666;line-height:180%;}
-#etiquetas a:hover {text-decoration:underline;font-weight:700;color:#333;}
-#etiquetas .box {padding:5px 15px;margin:0;background:#fff;font-size:0.75em;}
+#tags {width:190px; margin:20px 10px;}
+#tags .title {text-align:center;display:block;color:#333; font-weight:bold; font-size:0.8em; margin:0;padding:3px 0;background-color:#ccc;}
+#tags a {color:#666;line-height:180%;}
+#tags a:hover {text-decoration:underline;font-weight:700;color:#333;}
+#tags .box {padding:5px 15px;margin:0;background:#fff;font-size:0.75em;}
 /*//etiquetas*/
 
 /*tagueado de notas (rige para index, leer e indice)*/
-.pretitulo, .fecha {font-size:0.65em;text-transform:uppercase;margin:0 0 5px;font-weight:400;color:#666;display:inline;}
-.titulo {color:#333;padding:0;margin-top:4px; margin:0; border:none;font-size:1.5em;}
-.titulo a {color:#000; text-decoration:none;}
-.titulo a:hover {color:#666;text-decoration:underline;}
-.descripcion {font-weight:400;padding:10px 0;font-size:0.9em;color:#333;}
-.descripcion a {color:#666;text-decoration:underline;}
-.autor {display:block;font-size:0.8em;margin:0 0 12px;font-weight:700;color:#000;}
-.etiquetas {margin-bottom:20px; padding-top:5px; font-size:0.7em;display:block;}
-.etiquetas a {}
-.etiquetas a:hover {color:#000; text-decoration:underline;}
-.texto {font-size:0.9em;padding:0;}
-.texto ul {padding:0;margin:0 0 0 30px;list-style:square;}
-.texto li {padding:15px 0 0;}
-.fuente  {font-size:0.75em;margin:0 0 5px;font-weight:400;color:#666;padding:30px 0 20px;display:block;}
+.pretitle, .date {font-size:0.65em;text-transform:uppercase;margin:0 0 5px;font-weight:400;color:#666;display:inline;}
+.title {color:#333;padding:0;margin-top:4px; margin:0; border:none;font-size:1.5em;}
+.title a {color:#000; text-decoration:none;}
+.title a:hover {color:#666;text-decoration:underline;}
+.summary {font-weight:400;padding:10px 0;font-size:0.9em;color:#333;}
+.summary a {color:#666;text-decoration:underline;}
+.author {display:block;font-size:0.8em;margin:0 0 12px;font-weight:700;color:#000;}
+.tags {margin-bottom:20px; padding-top:5px; font-size:0.7em;display:block;}
+.tags a {color: #666}
+.tags a:hover {color:#000; text-decoration:underline;}
+.text {font-size:0.9em;padding:0;}
+.text ul {padding:0;margin:0 0 0 30px;list-style:square;}
+.text li {padding:15px 0 0;}
+.source  {font-size:0.75em;margin:0 0 5px;font-weight:400;color:#666;padding:30px 0 20px;display:block;}
 /*//tagueado de notas (rige para index, leer e indice)*/
 
 /*definiciones globales de profundidad de navegacion*/
-span.ruta {font-size:0.8em;background:#fff;border-bottom:1px solid #ccc;display:block;font-weight:normal; padding:5px 0; margin:0 0 20px;}
-span.ruta a {font-weight:bold; color:#999;}
-span.ruta a:hover {color:#333;}
+span.breadcrumb {font-size:0.8em;background:#fff;border-bottom:1px solid #ccc;display:block;font-weight:normal; padding:5px 0; margin:0 0 0px;}
+span.breadcrumb a {font-weight:bold; color:#999;}
+span.breadcrumb a:hover {color:#333;}
 /*//definiciones globales de profundidad de navegacion*/
 
 /*titulos globales para indice, mapa, contacto y busqueda*/
-.titulares {border-left:6px solid #ddd;background-color:#eee;font-weight:700;color:#666;font-size:1.5em;padding:10px 25px;margin:0 0 25px;display:block;}
+.category_title {border-left:6px solid #ddd;background-color:#eee;font-weight:700;color:#666;font-size:1.5em;padding:10px 25px;margin:0 0 25px;display:block;}
 
-/*areas*/
+/*areas
 #principal {padding-bottom:18px; margin-top:15px; float:left;}
-#principal .pretitulo {text-transform:uppercase;margin:0 0 5px;}
+#principal .pretitle {text-transform:uppercase;margin:0 0 5px;}
 #principal img {clear:both;float:right;margin:4px 2px 9px 10px;text-align:center;height:150px;}
 #principal li a{color:#008a2e;}
 #principal li a:hover{color: #000;}
 #principal .top {border-bottom:2px solid #349153;color:#fff; font-size:0.9em; font-weight:800;padding:3px 0 0;display:block;margin:0 0 13px 0;}
 #principal .bottom {padding:0 0 30px;border-bottom:6px dashed #eee;margin:0 0 30px 0;}
+*/
 
-#secundaria {width:205px;margin:10px 10px 0 0;padding:0;}
-#secundaria .box {padding:0 30px 0 20px;margin:0;background:url(../images/css/secundaria-content.png) repeat-y;}
-#secundaria .top {height:25px;padding:0 20px;background:url(../images/css/secundaria-top.png) no-repeat; text-align: center; color:#fff; font-size: 0.85em; font-weight: bold;}
-#secundaria span {padding:7px 0;display:block;text-align:center;margin:0 0 0 -10px;color:#666;}
-#secundaria .bottom {height:25px;background:url(../images/css/secundaria-bottom.png) no-repeat;margin:0;padding:0 20px;}
-#secundaria img {margin: 0 0 0 7px;float:right;padding:2px;border:1px solid #999;}
-#secundaria .mid LI {font-size:0.9em; padding: 2px;}
-#secundaria .mid LI a{color: #008a2e;}
-#secundaria .mid LI a:hover{color: #000; text-decoration: underline;}
-#secundaria h1 {font-size:0.8em; margin:0 0 3px 0; }
-#secundaria h1 a{text-decoration: none; color: #666;}
-#secundaria h1 a:hover{text-decoration: underline; color: #000;}
-#secundaria h2 {font-size:0.7em; font-weight:400;margin:0 0 10px;}
-#secundaria h2 a{text-decoration: underline;color: #999; }
-#secundaria h2 a:hover{color: #000; text-decoration: none;}
-#secundaria h4 {font-size:0.75em;margin:0;padding:0 0 7px;color:#666;font-weight:700;}
-#secundaria h6 {font-size:0.7em;padding:4px 0 0;color:#666;font-weight:400;}
-#secundaria hr {border:none;border-top:1px dotted #666;padding:0 0 10px;}
+#right_sidebar_container .box {padding:0 30px 0 20px;margin:0;background:url(../images/css/secundaria-content.png) repeat-y;}
+#right_sidebar_container .top {height:25px;padding:0 20px;background:url(../images/css/secundaria-top.png) no-repeat; text-align: center; color:#fff; font-size: 0.85em; font-weight: bold;}
+#right_sidebar_container span {padding:7px 0;display:block;text-align:center;margin:0 0 0 -10px;color:#666;}
+#right_sidebar_container .bottom {height:25px;background:url(../images/css/secundaria-bottom.png) no-repeat;margin:0;padding:0 20px;}
+#right_sidebar_container img {margin: 0 0 0 7px;float:right;padding:2px;border:1px solid #999;}
+#right_sidebar_container .mid LI {font-size:0.9em; padding: 2px;}
+#right_sidebar_container .mid LI a{color: #008a2e;}
+#right_sidebar_container .mid LI a:hover{color: #000; text-decoration: underline;}
+#right_sidebar_container h1 {font-size:0.8em; margin:0 0 3px 0; }
+#right_sidebar_container h1 a{text-decoration: none; color: #666;}
+#right_sidebar_container h1 a:hover{text-decoration: underline; color: #000;}
+#right_sidebar_container h2 {font-size:0.7em; font-weight:400;margin:0 0 10px;}
+#right_sidebar_container h2 a{text-decoration: underline;color: #999; }
+#right_sidebar_container h2 a:hover{color: #000; text-decoration: none;}
+#right_sidebar_container h4 {font-size:0.75em;margin:0;padding:0 0 7px;color:#666;font-weight:700;}
+#right_sidebar_container h6 {font-size:0.7em;padding:4px 0 0;color:#666;font-weight:400;}
+#right_sidebar_container hr {border:none;border-top:1px dotted #666;padding:0 0 10px;}
 
 /* indice.html */
 .paginador {text-align:left;background-color:#f3f3f3;border:1px solid #ddd;padding:5px 10px; margin-bottom:20px;font-size:0.75em;color:#666;}
@@ -147,18 +151,19 @@ span.ruta a:hover {color:#333;}
 .pagEspacio{height:12px; clear:both;}
 .pagEspacioMapa{height:25px;}
 .espacio{height:32px;}
-.indice {margin-bottom:20px; padding-bottom:5px;border-bottom:6px dashed #eee; float:left; width:100%;}
-.indice h4 {font-size:0.8em; padding:5px 0 0;font-weight:700;color:#666; margin-right:15px; display:inline;}
-.indice h6 {font-size:0.65em;color:#666;font-weight:normal;text-transform:uppercase;margin-bottom:px;}
-.indice img{padding:3px; background-color:#eee; border:1px solid #ccc;margin:3px 0 6px 15px; float:right;}
+.article.teaser {margin-bottom:20px; padding-bottom:5px;border-bottom:6px dashed #eee; float:left; width:100%;}
+.article.teaser h4 {font-size:0.8em; padding:5px 0 0;font-weight:700;color:#666; margin-right:15px; display:inline;}
+.article.teaser h6 {font-size:0.65em;color:#666;font-weight:normal;text-transform:uppercase;margin-bottom:px;}
+.article.teaser img{padding:3px; background-color:#eee; border:1px solid #ccc;margin:3px 0 6px 15px; float:right;}
 
-/*leer.html*/
-#leer span.ruta {margin:0 0 5px;}
-#leer .etiquetas {display:block;font-size:0.6em;font-weight:400;padding:0 0 20px;margin:0;}
-#leer .descripcion {font-size:1em;margin:0 0 20px;}
-#leer .autor {margin:0 0 25px;padding:0 0;color:#666;}
+/*leer.html
+#leer span.breadcrumb {margin:0 0 5px;}
+#leer .tags {display:block;font-size:0.6em;font-weight:400;padding:0 0 20px;margin:0;}
+#leer .summary {font-size:1em;margin:0 0 20px;}
+#leer .author {margin:0 0 25px;padding:0 0;color:#666;}
 #leer hr {border-bottom:1px solid #EEE;}
-#autor img {border:none:border-left:1px solid #ccc;padding:0;margin:0 5px 0 0;}
+*/
+#author img {border:none:border-left:1px solid #ccc;padding:0;margin:0 5px 0 0;}
 .herramientas {margin:10px 0;padding:0 0;}
 .herramientas ul {text-align:left;margin:0;padding:0;list-style:none;font-weight:bold;font-size:0.8em;}
 .herramientas ul a:hover {text-decoration:underline;}
@@ -167,7 +172,7 @@ span.ruta a:hover {color:#333;}
 .herramientas li .recomendar {color: #999; background: transparent url(../images/css/recomendar.png) no-repeat;padding:0 0 10px 20px;;margin:0 0 0 15px;}
 .herramientas li .comentarios {color: #999; background: transparent url(../images/css/comentarios.png) no-repeat;padding:0 0 10px 20px;;margin:0 0 0 15px;}
 
-.photo_box {padding:5px;background-color:#E0E6EB;border: 2px solid #b1b1b1;margin:15px 0 5px 5px;max-width:300px;text-align:right;}
+.photo_box {padding:5px 15px; background-color:#E0E6EB; border: 1px solid #b1b1b1; margin:15px 0 5px 5px; max-width:300px; text-align:right;}
 .photo_box img {border:0;}
 .photo_box .autor {font-style:italic;font-size:0.6em;padding:5px 0 5px 0;color:#333;}
 .photo_box .epigrafe {font-size:0.7em;font-weight:400;text-align:right;margin-top:5px;color:#000;}
@@ -330,11 +335,13 @@ span.ruta a:hover {color:#333;}
 #gallery ul { list-style: none; }
 #gallery ul li { display: inline; }
 #gallery ul img {
-    border: 2px solid #ddd;
+    border: 1px solid #bbb;
     padding: 5px;
+    width: 250px;
+    height: 250px;
 }
 #gallery ul a:hover img {
-    border: 2px solid #3e3e3e;
+    border: 1px solid #3e3e3e;
     color: #fff;
 }
 #gallery ul a:hover { color: #fff; }

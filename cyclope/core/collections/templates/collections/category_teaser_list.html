@@ -1,0 +1,25 @@
+{% extends host_template %}
+
+{% load i18n cyclope_utils %}
+
+{% block content %}
+
+  <span class="breadcrumb">{% trans "Breadcrumb" %}: <a href="/">Principal</a> / {{ breadcrumb }}</span>
+  <big class="category_title">{{ category.name }}</big>
+  {% for cm in category_maps %}
+    {% join cm.content_type.app_label  "/" cm.content_type.model "_teaser.html" as template_path %}
+
+    {% comment %}
+      we alias the actual object with the model name
+      so the included template can access the object more explicitly
+    {% endcomment %}
+
+    {% alias cm.content_object as cm.content_type.model %}
+    {% include template_path %}
+  {% endfor %}
+
+  <div class="pagEspacio"></div>
+
+<!-- {include file="paginador.html" } -->
+
+{% endblock %}

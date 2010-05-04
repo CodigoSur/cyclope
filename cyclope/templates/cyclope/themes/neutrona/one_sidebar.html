@@ -1,7 +1,10 @@
 {% extends CYCLOPE_THEME_BASE_TEMPLATE %}
 
-{% block page_content %}
+{% block body_class %}one_sidebar{% endblock %}
 
-            {% block content %} {% endblock %}
+{% block page_content %}
+  <div id="content_container">
+    {% block content %} {% endblock %}
+  </div>
 
 {% endblock %}

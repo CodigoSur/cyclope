@@ -26,20 +26,46 @@ class CategoryRootItemsList(frontend.FrontendView):
 
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         category = content_object
-        c = RequestContext(request, {'category_maps': category.category_maps.all()})
+        c = RequestContext(request,
+                           {'category_maps': category.category_maps.all()})
         t = loader.get_template("collections/category_root_items_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
         return t.render(c)
 
     def get_http_response(self, request, slug=None, *args, **kwargs):
         category = Category.objects.get(slug=slug)
-        c = RequestContext(request, {'category_maps': category.category_maps.all()})
+        c = RequestContext(request,
+                           {'category_maps': category.category_maps.all()})
         t = loader.get_template("collections/category_root_items_list.html")
         c['host_template'] = cyc_settings.CYCLOPE_DEFAULT_TEMPLATE
         return HttpResponse(t.render(c))
 
 frontend.site.register_view(Category, CategoryRootItemsList())
 
+class CategoryTeaserList(frontend.FrontendView):
+    """A teaser list view of category members.
+    """
+    name='teaser_list'
+    verbose_name=_('teaser list of Category members')
+
+    def get_string_response(self, request, content_object=None, *args, **kwargs):
+        category = content_object
+        c = RequestContext(request,
+                           {'category_maps': category.category_maps.all()})
+        t = loader.get_template("collections/category_teaser_list.html")
+        c['host_template'] = 'cyclope/inline_view.html'
+        return t.render(c)
+
+    def get_http_response(self, request, slug=None, *args, **kwargs):
+        category = Category.objects.get(slug=slug)
+        c = RequestContext(request,
+                           {'category_maps': category.category_maps.all(),
+                            'category': category })
+        t = loader.get_template("collections/category_teaser_list.html")
+        c['host_template'] = cyc_settings.CYCLOPE_DEFAULT_TEMPLATE
+        return HttpResponse(t.render(c))
+
+frontend.site.register_view(Category, CategoryTeaserList())
 
 class CollectionCategoriesHierarchy(frontend.FrontendView):
     """A full list view of the categories in a collection.
@@ -70,7 +96,7 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
               '<span class="expand_collapse">+</span>\n'
             '{% endif %}'
             '{% if has_content %}'
-              '<a href="{% url category-root_items_list slug %}" '
+              '<a href="{% url category-teaser_list slug %}" '
                  'class="{{class}}"><span>{{ name }}</span></a>'
             '{% else %} {{ name }}'
             '{% endif %}'
@@ -90,7 +116,6 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
 
         name = getattr(base_category, name_field)
         has_content = base_category.category_maps.exists()
-        print base_category.get_descendant_count()
         include = link_template.render(
             Context({'name': name,
                      'slug': base_category.slug,

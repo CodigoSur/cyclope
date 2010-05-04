@@ -44,6 +44,7 @@ setup(
         'django-imagekit>=0.3.2',
         'django-simple-captcha>=0.1.7',
         'django-tagging>=0.3.1',
+        'django-tagging-autocomplete>=0.3.1'
     ],
 
     packages=find_packages(),

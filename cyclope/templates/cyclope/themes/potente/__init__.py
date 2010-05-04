@@ -8,7 +8,7 @@ Attributes:
 
 from django.utils.translation import ugettext as _
 
-verbose_name = _('potente theme')
+verbose_name = _('Potente theme')
 
 layout_templates = {
 

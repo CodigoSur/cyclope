@@ -67,7 +67,7 @@ frontend.site.register_view(StaticPage, StaticPageDetail())
 
 
 class StaticPageList(frontend.FrontendView):
-    """Simple list view for a StaticPage.
+    """Simple list view for StaticPages.
     """
     name='list'
     verbose_name=_('list of Static Pages')
@@ -77,16 +77,12 @@ class StaticPageList(frontend.FrontendView):
     is_instance_view = False
 
     def get_http_response(self, request, *args, **kwargs):
-        # FrontendView.__call__ will determine if the view is inline or not
-        # and set inline kwarg accordingly
         return views.object_list(request,
                            queryset=StaticPage.objects.all(),
                            template_object_name= 'staticpage',
                            *args, **kwargs)
 
     def get_string_response(self, request, *args, **kwargs):
-        # FrontendView.__call__ will determine if the view is inline or not
-        # and set inline kwarg accordingly
         return views.object_list(request, inline=True,
                            queryset=StaticPage.objects.all(),
                            template_object_name= 'staticpage',

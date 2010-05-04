@@ -45,7 +45,7 @@ Si modificas no borres estas lineas :)
     </script>
   </head>
 
-  <body>
+  <body class="{% block body_class %}{%endblock%}">
 
     <div id="mascara">
       {% region 'header' %}
@@ -67,8 +67,8 @@ Si modificas no borres estas lineas :)
         <!-- contenedor -->
         <div id="contenedor">
 
-          <!-- agua -->
-          <div id="agua">
+          <!-- left_sidebar -->
+          <div id="left_sidebar_container">
             <div class="top"></div>
             {% region 'left_sidebar' %}
 
@@ -109,10 +109,10 @@ Si modificas no borres estas lineas :)
             <div class="bottom"></div>
 
           </div>
-          <!-- /agua -->
+          <!-- /left_sidebar -->
 
           <div id="page_content">
-            {% block page_content %} {% endblock %}
+              {% block page_content %} {% endblock %}
           </div>
 
         </div>
