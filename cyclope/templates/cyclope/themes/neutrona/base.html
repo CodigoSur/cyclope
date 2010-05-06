@@ -51,7 +51,7 @@ Si modificas no borres estas lineas :)
       {% region 'header' %}
 
       <!-- cabezal -->
-      <div id="cabezal">
+      <div id="branding">
         <div class="logo">
           <h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
           <h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
@@ -73,8 +73,8 @@ Si modificas no borres estas lineas :)
             {% region 'left_sidebar' %}
 
             <!-- buscar -->
-            <div id="buscar_h">
-              <form action="/busqueda" method="post">
+            <div id="searchbox">
+              <form action="/search" method="post">
                 <input type="text" name="consulta"/>
                 <input type="submit" value="" class="submit"/>
               </form>
@@ -88,7 +88,7 @@ Si modificas no borres estas lineas :)
               <a href="{{ tag.link}}">
                 {% tag_cloud_for_model articles.Article as article_tags with min_count=1 distribution=log%}
                 {% for tag in article_tags %}
-                  <a href="/tag/{{ tag }}" class="tag{{tag.font_size}}">{{tag.name}}</a>
+                  <a href="/tag/{{ tag.name|slugify }}" class="tag{{tag.font_size}}">{{tag.name}}</a>
                 {% endfor %}
                 </a>&nbsp&nbsp
               </div>

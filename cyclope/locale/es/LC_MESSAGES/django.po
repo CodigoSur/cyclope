@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-04 19:38-0300\n"
+"POT-Creation-Date: 2010-05-05 20:16-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,53 +19,53 @@ msgstr ""
 msgid "content details"
 msgstr "detalles de contenido"
 
-#: forms.py:41
+#: forms.py:32
 msgid "Menu items"
 msgstr "Items de menú"
 
-#: forms.py:55 apps/articles/admin.py:17
+#: forms.py:46 apps/articles/admin.py:17
 msgid "Text"
 msgstr "Texto"
 
-#: forms.py:64 forms.py:147
+#: forms.py:55 forms.py:138
 msgid "View"
 msgstr "Vista"
 
-#: forms.py:65 forms.py:148
+#: forms.py:56 forms.py:139
 msgid "Content object"
 msgstr "Contenido"
 
-#: forms.py:66 core/collections/admin.py:81
+#: forms.py:57 core/collections/admin.py:84
 msgid "Parent"
 msgstr "Padre"
 
-#: forms.py:89
+#: forms.py:80
 msgid ""
 "You can not set a Custom URL for menu entries                     with "
 "associated content"
 msgstr "No puede setear una URL para Entradas de Menú con contenido asociado."
 
-#: forms.py:106
+#: forms.py:97
 msgid "Theme"
 msgstr "Tema"
 
-#: forms.py:118
+#: forms.py:109
 msgid "Template"
 msgstr "Plantilla"
 
-#: forms.py:146
+#: forms.py:137
 msgid "Region"
 msgstr "Región"
 
-#: forms.py:176
+#: forms.py:167
 msgid "Content type can not be empty"
 msgstr "El Tipo de contenido no debe estar vacío"
 
-#: forms.py:181
+#: forms.py:172
 msgid "You need to select a content view"
 msgstr "Debe seleccionar una Vista del contenido"
 
-#: forms.py:183
+#: forms.py:174
 msgid "You need to select a region"
 msgstr "Debe seleccionar una región"
 
@@ -113,7 +113,7 @@ msgstr "titulo global"
 msgid "keywords"
 msgstr "palabras clave"
 
-#: models.py:41 apps/articles/models.py:76 core/collections/models.py:46
+#: models.py:41 apps/articles/models.py:77 core/collections/models.py:46
 msgid "description"
 msgstr "descrición"
 
@@ -281,36 +281,37 @@ msgstr "fecha de creación"
 msgid "date"
 msgstr "fecha"
 
-#: apps/articles/models.py:65 apps/articles/models.py:74
+#: apps/articles/models.py:66 apps/articles/models.py:75
 msgid "article"
 msgstr "artículo"
 
-#: apps/articles/models.py:66
+#: apps/articles/models.py:67
 msgid "articles"
 msgstr "artículos"
 
-#: apps/articles/models.py:70
+#: apps/articles/models.py:71
 msgid "title"
 msgstr "título"
 
-#: apps/articles/models.py:75
+#: apps/articles/models.py:76
 msgid "attachments"
 msgstr "adjuntos"
 
-#: apps/articles/models.py:78
+#: apps/articles/models.py:79
 msgid "file"
 msgstr "archivo"
 
-#: apps/articles/models.py:80
+#: apps/articles/models.py:81
 msgid "downloads"
 msgstr "bajadas"
 
 #: apps/articles/templates/articles/article_detail.html:17
-#: core/collections/templates/collections/category_teaser_list.html:7
+#: core/collections/templates/collections/category_teaser_list.html:8
 msgid "Breadcrumb"
 msgstr "Profundidad de navegación"
 
 #: apps/articles/templates/articles/article_detail.html:18
+#: apps/articles/templates/articles/article_teaser.html:24
 msgid "Tags"
 msgstr "Etiquetas"
 
@@ -322,6 +323,14 @@ msgstr "Fecha"
 msgid "Source"
 msgstr "Fuente"
 
+#: apps/articles/templates/articles/article_teaser.html:16
+msgid "More"
+msgstr "Más"
+
+#: apps/articles/templates/articles/article_teaser.html:20
+msgid "By"
+msgstr "Por"
+
 #: core/captcha_comments/forms.py:7
 msgid "Website or Blog"
 msgstr "Sitio web o Blog"
@@ -330,42 +339,42 @@ msgstr "Sitio web o Blog"
 msgid "Security code"
 msgstr "Código de seguridad"
 
-#: core/collections/admin.py:63
+#: core/collections/admin.py:66
 msgid "All"
 msgstr "Todos"
 
-#: core/collections/admin.py:70
+#: core/collections/admin.py:73
 #, python-format
 msgid "%s categories"
 msgstr "%s categorías"
 
-#: core/collections/admin.py:79
+#: core/collections/admin.py:82
 msgid "Description"
 msgstr "Descrición"
 
-#: core/collections/admin.py:94
+#: core/collections/admin.py:97
 msgid "Extra info"
 msgstr "Información extra"
 
-#: core/collections/admin.py:106
+#: core/collections/admin.py:109
 msgid "Category"
 msgstr "Categoría"
 
-#: core/collections/frontend_views.py:24
+#: core/collections/frontend_views.py:17
 msgid "list of root items for the selected Category"
 msgstr "lista de items raíz para la Categoría seleccionada"
 
-#: core/collections/frontend_views.py:49
+#: core/collections/frontend_views.py:42
 msgid "teaser list of Category members"
-msgstr "lista de resúmenes de miembros de una Categoría" 
+msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:74
+#: core/collections/frontend_views.py:69
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
 #: core/collections/models.py:21
-msgid "is navigation root"
-msgstr "es la raíz de navegación"
+msgid "in navigation"
+msgstr "mostrar en navegación"
 
 #: core/collections/models.py:24
 msgid "content types"

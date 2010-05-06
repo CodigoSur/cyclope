@@ -18,8 +18,8 @@ class Collection(models.Model):
 
     name = models.CharField(_('name'), max_length=50, unique=True)
     slug = AutoSlugField(populate_from='name', always_update=True)
-    is_navigation_root = models.BooleanField(_('is navigation root'),
-                                             default=False)
+    is_navigation_root = models.BooleanField(_('in navigation'),
+                                             default=True)
     content_types = models.ManyToManyField(ContentType, db_index=True,
                                            verbose_name=_('content types'))
     def __unicode__(self):

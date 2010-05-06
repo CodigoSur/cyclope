@@ -21,13 +21,10 @@ img {border:none;}
 #mascara {width:990px; margin:0 auto; background:#fff;padding:0;}
 #medianera {padding:15px 0 0;margin:0 auto;}
 #page_content {padding-right:10px;}
-/*.one_sidebar #page_content{margin-left:235px; width: 100% -235px;}*/
 #left_sidebar_container {width:210px; float:left;background-color:#e6e6e6;margin:0 10px;}
 #left_sidebar_container .top {background:url(../images/css/agua-top.png) no-repeat;height:12px;}
 #left_sidebar_container .bottom {background:url(../images/css/agua-bottom.png) no-repeat;height:12px;}
-/*#right_sidebar_container {width:205px; float:right;margin:0 10px 0 0;}*/
-#right_sidebar_container {width:205px; float:right;margin:10px 10px 0 0;padding:0;}
-/*#content_container {margin-left:240px; margin-right:240px;}*/
+#right_sidebar_container {width:205px; float:right;margin:0px 0px 0 0;padding:0;}
 #content_container {margin-left:240px;}
 .two_sidebars #content_container {margin-right: 240px;}
 /*//esqueleto general*/
@@ -51,14 +48,14 @@ img {border:none;}
 
 
 /*cabezal*/
-#cabezal {height:170px; background: url(../images/css/cabezal.png) 0 0 no-repeat;padding:0;}
+#branding {height:170px; background: url(../images/css/cabezal.png) 0 0 no-repeat;padding:0;}
 .logo {height:68px; margin-left:25px; padding-right:35px; padding-top:35px;}
 .logo h1, .logo h2 {text-align:left;color:#fff;}
 .logo h1 a {color:#fff; text-decoration:none;}
 .logo h2 a {color:#ccc; text-decoration:none;}
 .logo h1 {font-size:1.8em;}
 .logo h2 {font-size:0.8em;}
-.buscar {float:right; width:315px; height:34px; background:none; margin-right:200px; margin-top: 85px;}
+/*.buscar {float:right; width:315px; height:34px; background:none; margin-right:200px; margin-top: 85px;}*/
 #cabezal form {text-align:left; width:300px; margin-right:0px; padding-top:2px; }
 #cabezal form .field {background:url(../images/css/buscarfondo.png) no-repeat; height:34px; width:190px; padding:11px 2px 2px 30px; margin:0px; font-size:0.8em; color:#fff; border:none;}
 #cabezal form .btn {background:url(../images/css/fondo_buscar.png) no-repeat left top; font-size:0.75em;font-weight:bold;height:34px; width:63px; color:#fff;background-color:none;border: none;padding:0px;margin:2px 5px 1px 5px;}
@@ -109,7 +106,7 @@ img {border:none;}
 /*//tagueado de notas (rige para index, leer e indice)*/
 
 /*definiciones globales de profundidad de navegacion*/
-span.breadcrumb {font-size:0.8em;background:#fff;border-bottom:1px solid #ccc;display:block;font-weight:normal; padding:5px 0; margin:0 0 0px;}
+span.breadcrumb {font-size:0.8em;background:#fff;border-bottom:1px solid #ccc;display:block;font-weight:normal; padding:5px 0; margin:0 0 20px;}
 span.breadcrumb a {font-weight:bold; color:#999;}
 span.breadcrumb a:hover {color:#333;}
 /*//definiciones globales de profundidad de navegacion*/
@@ -128,22 +125,8 @@ span.breadcrumb a:hover {color:#333;}
 */
 
 #right_sidebar_container .box {padding:0 30px 0 20px;margin:0;background:url(../images/css/secundaria-content.png) repeat-y;}
-#right_sidebar_container .top {height:25px;padding:0 20px;background:url(../images/css/secundaria-top.png) no-repeat; text-align: center; color:#fff; font-size: 0.85em; font-weight: bold;}
-#right_sidebar_container span {padding:7px 0;display:block;text-align:center;margin:0 0 0 -10px;color:#666;}
+#right_sidebar_container .top {height:25px;padding:0 20px;background:url(../images/css/secundaria-top.png) no-repeat;}
 #right_sidebar_container .bottom {height:25px;background:url(../images/css/secundaria-bottom.png) no-repeat;margin:0;padding:0 20px;}
-#right_sidebar_container img {margin: 0 0 0 7px;float:right;padding:2px;border:1px solid #999;}
-#right_sidebar_container .mid LI {font-size:0.9em; padding: 2px;}
-#right_sidebar_container .mid LI a{color: #008a2e;}
-#right_sidebar_container .mid LI a:hover{color: #000; text-decoration: underline;}
-#right_sidebar_container h1 {font-size:0.8em; margin:0 0 3px 0; }
-#right_sidebar_container h1 a{text-decoration: none; color: #666;}
-#right_sidebar_container h1 a:hover{text-decoration: underline; color: #000;}
-#right_sidebar_container h2 {font-size:0.7em; font-weight:400;margin:0 0 10px;}
-#right_sidebar_container h2 a{text-decoration: underline;color: #999; }
-#right_sidebar_container h2 a:hover{color: #000; text-decoration: none;}
-#right_sidebar_container h4 {font-size:0.75em;margin:0;padding:0 0 7px;color:#666;font-weight:700;}
-#right_sidebar_container h6 {font-size:0.7em;padding:4px 0 0;color:#666;font-weight:400;}
-#right_sidebar_container hr {border:none;border-top:1px dotted #666;padding:0 0 10px;}
 
 /* indice.html */
 .paginador {text-align:left;background-color:#f3f3f3;border:1px solid #ddd;padding:5px 10px; margin-bottom:20px;font-size:0.75em;color:#666;}
@@ -157,10 +140,34 @@ span.breadcrumb a:hover {color:#333;}
 .pagEspacio{height:12px; clear:both;}
 .pagEspacioMapa{height:25px;}
 .espacio{height:32px;}
-.article.teaser {margin-bottom:20px; padding-bottom:5px;border-bottom:6px dashed #eee; float:left; width:100%;}
+
+.article.teaser { margin-bottom:20px; padding-bottom:5px; float:left; border-bottom:6px dashed #eee; width:100%; }
 .article.teaser h4 {font-size:0.8em; padding:5px 0 0;font-weight:700;color:#666; margin-right:15px; display:inline;}
 .article.teaser h6 {font-size:0.65em;color:#666;font-weight:normal;text-transform:uppercase;margin-bottom:px;}
 .article.teaser img{padding:3px; background-color:#eee; border:1px solid #ccc;margin:3px 0 6px 15px; float:right;}
+
+#right_sidebar .article.teaser { float: none; }
+#right_sidebar .article.teaser { padding: 0; border-bottom: black dotted 1px;}
+#right_sidebar .article.teaser { margin: 7px 0 0 0;}
+
+#right_sidebar .category_title {padding:0 0 7px 0;display:block; text-align:center; margin:0; color:#666; background-color: transparent; text-align: center; font-size: 0.85em; font-weight: bold; border: 0;}
+#right_sidebar .article.teaser img {margin: 0 0 0 7px;float:right;padding:2px;border:1px solid #999;}
+
+#right_sidebar .article.teaser .title {font-size:0.8em; margin:0 0 3px 0; font-weight: bold;}
+#right_sidebar .article.teaser .title a{text-decoration: none; color: #666;}
+#right_sidebar .article.teaser .title a:hover{text-decoration: underline; color: #000;}
+
+#right_sidebar .article.teaser .summary {font-size:0.7em; font-weight:400;margin:0 0 10px; padding: 0;}
+#right_sidebar .article.teaser .summary a{text-decoration: underline;color: #999; }
+#right_sidebar .article.teaser .summary a:hover{color: #000; text-decoration: none;}
+
+#right_sidebar LI {font-size:0.9em; padding: 2px;}
+#right_sidebar LI a{color: #008a2e;}
+#right_sidebar LI a:hover{color: #000; text-decoration: underline;}
+
+/*.regionview .article.teaser h4 {font-size:0.75em;margin:0;padding:0 0 7px;color:#666;font-weight:700;}/*
+.regionview .article.teaser .date {font-size:0.7em;padding:4px 0 0;color:#666;font-weight:400;}
+
 
 /*leer.html
 #leer span.breadcrumb {margin:0 0 5px;}
@@ -260,6 +267,7 @@ span.breadcrumb a:hover {color:#333;}
 #contacto .hidden {border:none;display:none;}
 /* //contacto.html */
 
+/*
 #buscar {width:205px;margin:0 10px 0 0;}
 #buscar .busquedaz {border-top:none;margin:15px 0 0;padding:0;}
 #buscar .box {padding:0 20px;margin:0;background:url(../images/css/busqueda-content.png) repeat-y;}
@@ -267,10 +275,10 @@ span.breadcrumb a:hover {color:#333;}
 #buscar .bottom {height:20px;background:url(../images/css/busqueda-bottom.png) no-repeat;margin:0;padding:0 20px;}
 #buscar input {padding:3px 0;margin:7px 0 1px 0;border:1px solid #999;color:#333;width:120px;}
 #buscar input.submit {border:none;padding:3px 0;margin:0 0 0 0;width:32px;height:32px;background:url(../images/css/btn.png) no-repeat;}
-
-#buscar_h {width:170px;margin:0;padding:15px 10px 0 15px;}
-#buscar_h input {padding:3px 0;margin:7px 0 1px 0;border:1px solid #999;color:#333;width:130px;}
-#buscar_h input.submit {border:none;padding:3px 0;margin:0 0 0 0;width:32px;height:32px;background:url(../images/css/btn.png) no-repeat;}
+*/
+#searchbox {width:170px;margin:0;padding:15px 10px 0 15px;}
+#searchbox input {padding:3px 0;margin:7px 0 1px 0;border:1px solid #999;color:#333;width:130px;}
+#searchbox input.submit {border:none;padding:3px 0;margin:0 0 0 0;width:32px;height:32px;background:url(../images/css/btn.png) no-repeat;}
 
 
 /*busqueda.html*/

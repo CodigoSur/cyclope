@@ -8,14 +8,7 @@ from django.http import Http404, HttpResponse
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 from cyclope.core.collections.models import Collection, Category
-#from cyclope.utils import get_descendants_nested_list
-
-
-def custom_list(request, *args, **kwargs):
-    host_template = template_for_request(request)
-    response = HttpResponse("hola %s" % host_template)
-    return response
-
+from cyclope.utils import template_for_request
 
 class CategoryRootItemsList(frontend.FrontendView):
     """A flat list view of category members.
@@ -37,7 +30,7 @@ class CategoryRootItemsList(frontend.FrontendView):
         c = RequestContext(request,
                            {'category_maps': category.category_maps.all()})
         t = loader.get_template("collections/category_root_items_list.html")
-        c['host_template'] = cyc_settings.CYCLOPE_DEFAULT_TEMPLATE
+        c['host_template'] = template_for_request(request)
         return HttpResponse(t.render(c))
 
 frontend.site.register_view(Category, CategoryRootItemsList())
@@ -51,7 +44,9 @@ class CategoryTeaserList(frontend.FrontendView):
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         category = content_object
         c = RequestContext(request,
-                           {'category_maps': category.category_maps.all()})
+                           {'category_maps': category.category_maps.all(),
+                            'category': category,
+                            'region_view': True})
         t = loader.get_template("collections/category_teaser_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
         return t.render(c)
@@ -62,7 +57,7 @@ class CategoryTeaserList(frontend.FrontendView):
                            {'category_maps': category.category_maps.all(),
                             'category': category })
         t = loader.get_template("collections/category_teaser_list.html")
-        c['host_template'] = cyc_settings.CYCLOPE_DEFAULT_TEMPLATE
+        c['host_template'] = template_for_request(request)
         return HttpResponse(t.render(c))
 
 frontend.site.register_view(Category, CategoryTeaserList())

@@ -4,21 +4,29 @@
 
 {% block content %}
 
+  {% if not region_view %}
   <span class="breadcrumb">{% trans "Breadcrumb" %}: <a href="/">Principal</a> / {{ breadcrumb }}</span>
+  {% endif %}
+
   <big class="category_title">{{ category.name }}</big>
+
+  {% comment %}
+  For every category mapping we include a teaser view of the object.
+  {% endcomment %}
   {% for cm in category_maps %}
     {% join cm.content_type.app_label  "/" cm.content_type.model "_teaser.html" as template_path %}
 
     {% comment %}
       we alias the actual object with the model name
-      so the included template can access the object more explicitly
+      so the included template is reusable
+      and can access the content object using an explicit name
     {% endcomment %}
 
     {% alias cm.content_object as cm.content_type.model %}
     {% include template_path %}
   {% endfor %}
 
-  <div class="pagEspacio"></div>
+<!--  <div class="pagEspacio"></div> -->
 
 <!-- {include file="paginador.html" } -->
 

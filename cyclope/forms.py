@@ -7,7 +7,6 @@ forms
 from django import forms
 from django.conf import settings as django_settings
 from django.utils.translation import ugettext as _
-from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db.models import get_model
 
@@ -17,7 +16,7 @@ from cyclope.widgets import WYMEditor
 from cyclope.models import StaticPage, MenuItem, BaseContent,\
                            SiteSettings, Layout, RegionView
 from cyclope import settings as cyc_settings
-from cyclope.core import frontend
+from cyclope.utils import populate_type_choices
 
 class AjaxChoiceField(forms.ChoiceField):
     """
@@ -28,14 +27,6 @@ class AjaxChoiceField(forms.ChoiceField):
     #TODO(nicoechaniz): see if there's a way to validate this dynamic choices
     def validate(self, value):
         return True
-
-def populate_type_choices(myform):
-    ctype_choices = [('', '------')]
-    for model in frontend.site._registry:
-        ctype = ContentType.objects.get_for_model(model)
-        ctype_choices.append((ctype.id, model._meta.verbose_name))
-    myform.fields['content_type'].choices = ctype_choices
-
 
 class BaseContentAdminForm(forms.ModelForm):
     menu_items = forms.ModelMultipleChoiceField(label=_('Menu items'),

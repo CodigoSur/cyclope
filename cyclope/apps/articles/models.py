@@ -56,6 +56,7 @@ class Article(BaseContent, Collectible):
                                     ('YES',_('enabled')),
                                     ('NO',_('disabled'))
                                 ), default='SITE')
+#    promoted =  models.BooleanField(_('promoted'), default=False)
 
     def first_image(self):
         if self.images.count() > 0:

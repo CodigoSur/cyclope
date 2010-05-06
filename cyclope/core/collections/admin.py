@@ -15,7 +15,10 @@ from mptt.forms import TreeNodeChoiceField
 from feincms.admin import editor
 
 from cyclope.widgets import WYMEditor
+from cyclope.core import frontend
+
 from models import *
+from cyclope.models import Menu
 
 ####
 # custom FilterSpec
@@ -127,10 +130,30 @@ class CategoryMapInline(generic.GenericTabularInline):
             Category.tree.filter(collection__content_types=req_model_ctype)
         return super(CategoryMapInline, self).queryset(request)
 
+
 class CollectibleAdmin (admin.ModelAdmin):
     """Base admin class for models that inherit from Collectible.
     """
     list_filter = ('categories',)
     inlines = [ CategoryMapInline, ]
 
-admin.site.register(Collection)
+
+class CollectionAdminForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CollectionAdminForm, self).__init__(*args, **kwargs)
+        ctype_choices = [('', '------')]
+        for model in frontend.site._registry:
+            if model not in [Category, Collection, Menu]:
+                ctype = ContentType.objects.get_for_model(model)
+                ctype_choices.append((ctype.id, model._meta.verbose_name))
+        self.fields['content_types'].choices = ctype_choices
+
+    class Meta:
+        model = Collection
+
+class CollectionAdmin (admin.ModelAdmin):
+    """Base admin class for models that inherit from Collectible.
+    """
+    form = CollectionAdminForm
+
+admin.site.register(Collection, CollectionAdmin)

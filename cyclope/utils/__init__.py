@@ -3,8 +3,9 @@
 utils
 -----
 """
-
+from django.contrib.contenttypes.models import ContentType
 import cyclope
+from cyclope.core import frontend
 
 def layout_for_request(request):
     """
@@ -43,3 +44,11 @@ def template_for_request(request):
                 layout.template
                 )
     return template
+
+def populate_type_choices(myform):
+    ctype_choices = [('', '------')]
+    for model in frontend.site._registry:
+        ctype = ContentType.objects.get_for_model(model)
+        ctype_choices.append((ctype.id, model._meta.verbose_name))
+    myform.fields['content_type'].choices = ctype_choices
+
