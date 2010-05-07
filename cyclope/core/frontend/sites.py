@@ -15,7 +15,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import post_save
 from django.utils import simplejson
 
-from cyclope.models import BaseContent, Menu, MenuItem, SiteSettings
+from cyclope.models import BaseContent, Menu, MenuItem, SiteSettings, NamedImage
 from cyclope.core.collections.models import Collection, Category
 
 from cyclope import settings as cyc_settings
@@ -39,7 +39,8 @@ class CyclopeSite(object):
             view: a view derived from core.frontend.FrontendView
         """
 
-        for base_class in [BaseContent, Menu, MenuItem, Collection, Category]:
+        for base_class in [BaseContent, Menu, MenuItem, Collection, Category,
+                           NamedImage]:
             if issubclass(model, base_class):
                 break
         else:

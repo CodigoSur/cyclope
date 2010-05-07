@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-05 20:16-0300\n"
+"POT-Creation-Date: 2010-05-07 17:30-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,15 +93,15 @@ msgstr "tema de la plantilla"
 msgid "default layout"
 msgstr "esquema por defecto"
 
-#: models.py:32 models.py:195 apps/articles/models.py:53
+#: models.py:32 models.py:189 apps/articles/models.py:53
 msgid "allow comments"
 msgstr "permitir comentarios"
 
-#: models.py:34 models.py:198 apps/articles/models.py:56
+#: models.py:34 models.py:192 apps/articles/models.py:56
 msgid "enabled"
 msgstr "habilitado"
 
-#: models.py:35 models.py:199 apps/articles/models.py:57
+#: models.py:35 models.py:193 apps/articles/models.py:57
 msgid "disabled"
 msgstr "deshabilitado"
 
@@ -113,7 +113,7 @@ msgstr "titulo global"
 msgid "keywords"
 msgstr "palabras clave"
 
-#: models.py:41 apps/articles/models.py:77 core/collections/models.py:46
+#: models.py:41 apps/articles/models.py:77 core/collections/models.py:50
 msgid "description"
 msgstr "descrición"
 
@@ -121,9 +121,9 @@ msgstr "descrición"
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:52 models.py:81 models.py:158 models.py:273
+#: models.py:52 models.py:81 models.py:152 models.py:267
 #: apps/articles/models.py:20 apps/articles/models.py:31
-#: core/collections/models.py:19 core/collections/models.py:40
+#: core/collections/models.py:19 core/collections/models.py:44
 msgid "name"
 msgstr "nombre"
 
@@ -139,11 +139,11 @@ msgstr "menú"
 msgid "menus"
 msgstr "menúes"
 
-#: models.py:82 core/collections/models.py:43
+#: models.py:82 core/collections/models.py:47
 msgid "parent"
 msgstr "relacionado"
 
-#: models.py:83 core/collections/models.py:44
+#: models.py:83 core/collections/models.py:48
 msgid "children"
 msgstr "hijo"
 
@@ -161,79 +161,75 @@ msgid ""
 "content type and view."
 msgstr "configura la URL aquí o selecciona un tipo de contenido y vista"
 
-#: models.py:95 models.py:284
+#: models.py:95 models.py:278
 msgid "layout"
 msgstr "esquema"
 
-#: models.py:99 models.py:252
+#: models.py:99 models.py:246
 msgid "type"
 msgstr "tipo"
 
-#: models.py:101 models.py:260
+#: models.py:101 models.py:254
 msgid "object"
 msgstr "objeto"
 
-#: models.py:107 models.py:254
+#: models.py:107 models.py:248
 msgid "view"
 msgstr "vista"
 
-#: models.py:140 core/frontend/sites.py:129
-msgid "You need to create you site settings"
-msgstr "Su sitio aún no ha sido configurado"
-
-#: models.py:148
+#: models.py:142
 msgid "menu item"
 msgstr "item de menú"
 
-#: models.py:149
+#: models.py:143
 msgid "menu items"
 msgstr "items de menú"
 
-#: models.py:162
+#: models.py:156
 msgid "tags"
 msgstr "etiquetas"
 
-#: models.py:197 apps/articles/models.py:55
+#: models.py:191 apps/articles/models.py:55
 msgid "default"
 msgstr "por defecto"
 
-#: models.py:210 models.py:230
+#: models.py:204 models.py:224
 msgid "image"
 msgstr "imagen"
 
-#: models.py:231
+#: models.py:225
 msgid "images"
 msgstr "imágenes"
 
-#: models.py:236 apps/articles/models.py:43
+#: models.py:230 apps/articles/models.py:43
 msgid "summary"
 msgstr "resumen"
 
-#: models.py:237 apps/articles/models.py:44
+#: models.py:231 apps/articles/models.py:44
 msgid "text"
 msgstr "texto"
 
-#: models.py:243
+#: models.py:237
 msgid "static page"
 msgstr "página estática"
 
-#: models.py:244
+#: models.py:238
 msgid "static pages"
 msgstr "páginas estáticas"
 
-#: models.py:248
+#: models.py:242
 msgid "region"
 msgstr "región"
 
-#: models.py:257
+#: models.py:251
 msgid "weight"
 msgstr "peso"
 
-#: models.py:278
+#: models.py:272
 msgid "layout template"
 msgstr "plantilla para este esquema"
 
-#: models.py:285
+#: models.py:279
 msgid "layouts"
 msgstr "esquemas"
 
@@ -311,7 +307,7 @@ msgid "Breadcrumb"
 msgstr "Profundidad de navegación"
 
 #: apps/articles/templates/articles/article_detail.html:18
-#: apps/articles/templates/articles/article_teaser.html:24
+#: apps/articles/templates/articles/article_teaser.html:25
 msgid "Tags"
 msgstr "Etiquetas"
 
@@ -373,46 +369,50 @@ msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
 #: core/collections/models.py:21
-msgid "in navigation"
-msgstr "mostrar en navegación"
+msgid "visible"
+msgstr "visible"
 
-#: core/collections/models.py:24
+#: core/collections/models.py:25
+msgid "navigation root"
+msgstr "raíz de navegación"
+
+#: core/collections/models.py:28
 msgid "content types"
 msgstr "tipos de contenido"
 
-#: core/collections/models.py:29 core/collections/models.py:39
+#: core/collections/models.py:33 core/collections/models.py:43
 msgid "collection"
 msgstr "colección"
 
-#: core/collections/models.py:30
+#: core/collections/models.py:34
 msgid "collections"
 msgstr "colecciones"
 
-#: core/collections/models.py:39
+#: core/collections/models.py:43
 msgid "collection categories"
 msgstr "categorias de colecciones"
 
-#: core/collections/models.py:45
+#: core/collections/models.py:49
 msgid "active"
 msgstr "activo"
 
-#: core/collections/models.py:77 core/collections/models.py:107
+#: core/collections/models.py:81 core/collections/models.py:111
 msgid "category"
 msgstr "categoría"
 
-#: core/collections/models.py:78 core/collections/models.py:132
+#: core/collections/models.py:82 core/collections/models.py:136
 msgid "categories"
 msgstr "categorías"
 
-#: core/collections/models.py:110
+#: core/collections/models.py:114
 msgid "content type"
 msgstr "tipo de contenido"
 
-#: core/collections/models.py:122
+#: core/collections/models.py:126
 msgid "category map"
 msgstr "mapeo de categoría"
 
-#: core/collections/models.py:123
+#: core/collections/models.py:127
 msgid "category maps"
 msgstr "mapeos de categorías"
 
@@ -426,15 +426,19 @@ msgstr "No hay una vista por defecto para %s"
 msgid "You can set only one default view for %s"
 msgstr "Puedes definir solo una vista por defecto para %s"
 
-#: core/frontend/sites.py:132
+#: core/frontend/sites.py:121
+msgid "You need to create you site settings"
+msgstr "Su sitio aún no ha sido configurado"
+
+#: core/frontend/sites.py:126
 msgid "You need to select a layout for the site"
 msgstr "Debe seleccionar un esquema para el sitio"
 
-#: core/frontend/sites.py:138
+#: core/frontend/sites.py:132
 msgid "The site home page has not been set."
 msgstr "La página de inicio no ha sido establecida."
 
-#: core/frontend/sites.py:149
+#: core/frontend/sites.py:143
 msgid "No content object selected"
 msgstr "No ha seleccionado contenido"
 

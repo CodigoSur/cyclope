@@ -14,12 +14,18 @@ from autoslug.fields import AutoSlugField
 import cyclope
 
 class Collection(models.Model):
-    """A facility for creating custom content collections."""
+    """A facility for creating custom content collections.
+    """
 
     name = models.CharField(_('name'), max_length=50, unique=True)
     slug = AutoSlugField(populate_from='name', always_update=True)
-    is_navigation_root = models.BooleanField(_('in navigation'),
+    # collections that aren't visible can be used to customize content behaviour
+    visible = models.BooleanField(_('visible'),
                                              default=True)
+    # the idea with navigation_root collections is that
+    # URLS for these collections should be simplified. not used at the moment.
+    navigation_root = models.BooleanField(_('navigation root'),
+                                             default=False)
     content_types = models.ManyToManyField(ContentType, db_index=True,
                                            verbose_name=_('content types'))
     def __unicode__(self):

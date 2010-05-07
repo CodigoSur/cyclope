@@ -2,17 +2,21 @@
 
 from django.test import TestCase
 from django.test.utils import setup_test_environment
-
 from django.contrib.sites.models import Site
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
+from django.template import TemplateSyntaxError
 
-from cyclope.models import SiteSettings, StaticPage, Menu, MenuItem, Layout
+from cyclope.models import SiteSettings, StaticPage, Menu, MenuItem, Layout, RegionView
 from cyclope.core import frontend
 from cyclope.utils import TestCaseWithSettingsFixture
 
-def create_static_page():
-    static_page = StaticPage(name='A page')
+def create_static_page(name=None):
+    if name is None:
+        name = 'A page'
+    static_page = StaticPage(name=name)
     static_page.save()
+    return static_page
 
 def export_fixture(apps, filename=None):
     """
@@ -72,7 +76,7 @@ class SiteTestCase(TestCase):
         #export_fixture(['sites','cyclope'],
         #    filename='../cyclope/fixtures/simplest_site.json')
 
-    def testMenuItemWithoutLayout(self):
+    def testBugMenuItemWithoutLayout(self):
         # saving a MenuItem without setting a default site Layout failed
         site = Site(domain="mydomain.com", name="mydomain")
         site.save()
@@ -96,7 +100,8 @@ class SiteTestCase(TestCase):
         site_settings.save()
         response = self.client.get("/")
         self.assertEqual(response.content,'Debe seleccionar un esquema para el sitio' )
-        #TODO(nicoechaniz): testing for the response is weak; look for a better option
+        #TODO(nicoechaniz): testing for the response content is weak; look for a better option
+        # this view should use a standard error template and we should check that the template was used and some message id
 
 
     def testSiteWithoutHomeMenuitem(self):
@@ -114,18 +119,55 @@ class SiteTestCase(TestCase):
 
         response = self.client.get("/")
         self.assertEqual(response.content,'La página de inicio no ha sido establecida.' )
-        #TODO(nicoechaniz): testing for the response is weak; look for a better option
+        #TODO(nicoechaniz): testing for the response content is weak; look for a better option
 
 
-class RegionTestCase(TestCaseWithSettingsFixture):
+class RegionViewTestCase(TestCaseWithSettingsFixture):
     fixtures = ['simplest_site.json']
 
     def setUp(self):
         pass
 
-    def testAddRegion(self):
-        pass
-        #raise NotImplementedError
+    def testAddLayoutRegionView(self):
+        layout = Layout.objects.all()[0]
+        content_type = ContentType.objects.get(model='staticpage')
+        content_view = 'list'
+        region = 'header'
+        region_view = RegionView(layout=layout, content_type=content_type,
+                                 content_view=content_view, region=region)
+        region_view.save()
+        response = self.client.get("/")
+        self.assertContains(response,'class="regionview staticpage list"', count=1)
+
+    def testAddLayoutRegionViewInstanceViewWithoutContent(self):
+        """If the view in a region needs a content object and none is provided
+        a template error will be raised when visiting a page using this layout"""
+        layout = Layout.objects.all()[0]
+        content_type = ContentType.objects.get(model='staticpage')
+        content_view = 'detail'
+        region = 'header'
+        region_view = RegionView(layout=layout, content_type=content_type,
+                                 content_view=content_view, region=region)
+        region_view.save()
+        self.assertRaises(TemplateSyntaxError, self.client.get, "/")
+
+
+    def testAddLayoutRegionViewInstanceView(self):
+        layout = Layout.objects.get(slug='default')
+        region_view = RegionView(layout=layout)
+        content_type = ContentType.objects.get(model='staticpage')
+
+        content_view = 'detail'
+        static_page = create_static_page(
+            name='test add layout region view instance view')
+        object_id = static_page.id
+        region = 'header'
+        region_view = RegionView(
+            layout=layout, content_type=content_type, content_view=content_view,
+            object_id=object_id, region=region)
+        region_view.save()
+        response = self.client.get("/")
+        self.assertContains(response,'class="regionview staticpage detail', count=1)
 
     def tearDown(self):
         pass

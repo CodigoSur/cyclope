@@ -51,7 +51,7 @@ def region(context, region_name):
             view_vars['output'] = view(context['request'])
 
         view_vars['name'] = regionview.content_view
-        view_vars['model'] = regionview.content_type.name
+        view_vars['model'] = regionview.content_type.model
         views.append(view_vars)
 
     region_vars['views'] = views
