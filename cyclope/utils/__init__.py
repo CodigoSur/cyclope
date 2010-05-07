@@ -5,7 +5,6 @@ utils
 """
 from django.contrib.contenttypes.models import ContentType
 import cyclope
-from cyclope.core import frontend
 
 def layout_for_request(request):
     """
@@ -47,8 +46,18 @@ def template_for_request(request):
 
 def populate_type_choices(myform):
     ctype_choices = [('', '------')]
-    for model in frontend.site._registry:
+    for model in cyclope.core.frontend.site._registry:
         ctype = ContentType.objects.get_for_model(model)
         ctype_choices.append((ctype.id, model._meta.verbose_name))
     myform.fields['content_type'].choices = ctype_choices
 
+
+
+# TODO(nicoechaniz): this should be moved to a more logical place when testing is better organized
+from django.test import TestCase
+
+class TestCaseWithSettingsFixture(TestCase):
+    def _pre_setup(self):
+        cyclope.settings._testing = True
+        super(TestCaseWithSettingsFixture, self)._pre_setup()
+        cyclope.settings._testing = False

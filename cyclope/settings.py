@@ -30,6 +30,7 @@ from django.db.models.signals import post_save
 
 from cyclope.models import SiteSettings
 
+
 settings.TEMPLATE_DIRS += (os.path.join(os.path.dirname(__file__), 'templates'),)
 
 CYCLOPE_PREFIX = getattr(settings, 'CYCLOPE_PREFIX', \
@@ -58,8 +59,9 @@ def get_site_settings():
     from django.core.exceptions import ObjectDoesNotExist
 
     try:
-        site_settings = SiteSettings.objects.get()
-    except ObjectDoesNotExist:
+        #TODO(nicoechaniz): Fix for multi-site
+        site_settings = SiteSettings.objects.all()[0]
+    except IndexError:
         site_settings = None
 
     return site_settings
@@ -68,24 +70,35 @@ CYCLOPE_SITE_SETTINGS = get_site_settings()
 
 # If the site has already been set up we read some settings
 # and make them available at module level
-if CYCLOPE_SITE_SETTINGS:
+if CYCLOPE_SITE_SETTINGS is not None:
     CYCLOPE_CURRENT_THEME = CYCLOPE_SITE_SETTINGS.theme
     CYCLOPE_THEME_MEDIA_URL = '%sthemes/%s/' % (CYCLOPE_MEDIA_URL,
                                                 CYCLOPE_CURRENT_THEME)
-    CYCLOPE_DEFAULT_LAYOUT = CYCLOPE_SITE_SETTINGS.default_layout
     CYCLOPE_THEME_PREFIX = 'cyclope/themes/%s/' % CYCLOPE_CURRENT_THEME
     CYCLOPE_THEME_BASE_TEMPLATE = 'cyclope/themes/%s/base.html' \
                                    % CYCLOPE_CURRENT_THEME
 
-    if CYCLOPE_DEFAULT_LAYOUT is not None:
+    if CYCLOPE_SITE_SETTINGS.default_layout_id:
+        CYCLOPE_DEFAULT_LAYOUT = CYCLOPE_SITE_SETTINGS.default_layout
+
         CYCLOPE_DEFAULT_TEMPLATE = 'cyclope/themes/%s/%s' % (
             CYCLOPE_CURRENT_THEME,
             CYCLOPE_DEFAULT_LAYOUT.template)
 
-#TODO(nicoechaniz): this is not working since we are using LazyObject for settings see cyclope.__init__. We should try to make this work again or evaluate if LazyObject for settings is a good idea. The current setup.py depends on that to be able to import cyclope. In the meantime, the server needs to be restarted to refresh dynamic settings.
+# _testing must be set to True when loading test fixtures
+# containing SiteSettings data or _refresh_site_settings will fail
+# because of the mutual dependance of Layout and SiteSettings information.
+_testing = False
+
 def _refresh_site_settings(sender, instance, created, **kwargs):
     "Callback to refresh site settings when they are modified in the database"
-    global CYCLOPE_SITE_SETTINGS
-    CYCLOPE_SITE_SETTINGS = instance
+    # we remove our keys from globals, otherwise deleted db_based settings don't
+    # get deleted at module level
+    if not _testing:
+        cyc_keys = [ key for key in globals() if key.startswith('CYCLOPE')]
+        for key in cyc_keys:
+            globals().pop(key)
+        import sys
+        reload(sys.modules[__name__])
 
 post_save.connect(_refresh_site_settings, sender=SiteSettings)

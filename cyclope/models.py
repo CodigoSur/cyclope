@@ -133,12 +133,6 @@ class MenuItem(models.Model):
                 self.slug = slug_field.slugify(populate_value)
             self.url = "/".join([a.slug for a in self.get_ancestors()]+[self.slug])
 
-        if self.layout is None:
-            try:
-                self.layout = cyclope.settings.CYCLOPE_DEFAULT_LAYOUT
-            except AttributeError:
-                raise ImproperlyConfigured(_('You need to create you site settings'))
-
         super(MenuItem, self).save()
 
     def __unicode__(self):

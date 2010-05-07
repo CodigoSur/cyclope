@@ -13,13 +13,13 @@ from django.utils.translation import ugettext as _
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import post_save
+from django.utils import simplejson
 
 from cyclope.models import BaseContent, Menu, MenuItem, SiteSettings
 from cyclope.core.collections.models import Collection, Category
 
-from django.utils import simplejson
-
 from cyclope import settings as cyc_settings
+from cyclope.utils import layout_for_request
 
 class CyclopeSite(object):
     """Handles frontend display of models.
@@ -61,7 +61,6 @@ class CyclopeSite(object):
             url(r'^registered_region_views_json$', self.registered_region_views_json),
             url(r'^registered_standard_views_json$', self.registered_standard_views_json),
             url(r'^objects_for_ctype_json$', self.objects_for_ctype_json),
-#            url(r'(?P<path>.*)$', self.menu_item_views)
         )
 
         #TODO(nicoechaniz): Fix for multi-site ?
@@ -98,15 +97,8 @@ class CyclopeSite(object):
             # this menu item has no content so we will only display the layout
             else:
                 urlpatterns += patterns(
-                    '', url(r'^%s$' % item.url, self.no_content_layout_view,
-                            {'layout': item.layout}))
+                    '', url(r'^%s$' % item.url, self.no_content_layout_view))
         return urlpatterns
-
-    #def urls(self):
-    #    """URLs for the site's registered frontend views.
-    #    """
-    #    return self.get_urls()
-    #urls = property(urls)
 
     def get_default_view_name(self, model):
         """Returns the view name for the default view of the given model
@@ -127,7 +119,9 @@ class CyclopeSite(object):
         if not cyc_settings.CYCLOPE_SITE_SETTINGS:
             # the site has not been set up in the admin interface yet
             return HttpResponse(_(u'You need to create you site settings'))
-        elif cyc_settings.CYCLOPE_DEFAULT_LAYOUT is None:
+
+        elif not hasattr(cyc_settings, 'CYCLOPE_DEFAULT_LAYOUT')\
+        or cyc_settings.CYCLOPE_DEFAULT_LAYOUT is None:
             return HttpResponse(
                 _(u'You need to select a layout for the site'))
         else:
@@ -148,12 +142,12 @@ class CyclopeSite(object):
                 else:
                     raise ImproperlyConfigured(_('No content object selected'))
             else:
-                return self.no_content_layout_view(request, home_item.layout)
+                return self.no_content_layout_view(request)
 
 
-    def no_content_layout_view(self, request, layout):
+    def no_content_layout_view(self, request):
         """View of a layout with no specific content associated"""
-
+        layout = layout_for_request(request)
         template = 'cyclope/themes/%s/%s' % (
                     cyc_settings.CYCLOPE_CURRENT_THEME,
                     layout.template
@@ -227,6 +221,9 @@ def _refresh_site_urls(sender, instance, created, **kwargs):
     "Callback to refresh site url patterns when a MenuItem is modified"
     from django.conf import settings
     import sys
-    return reload(sys.modules[settings.ROOT_URLCONF])
-
+    try:
+        return reload(sys.modules[settings.ROOT_URLCONF])
+    except KeyError:
+        # fails when testing...
+        pass
 post_save.connect(_refresh_site_urls, sender=MenuItem)

@@ -63,22 +63,3 @@ If you need to contact the development team you can reach us by e-mail: nicoecha
 VERSION = (0, 1, 0)
 __version__ = '.'.join(map(str, VERSION))
 
-# We import site settings as FeinCMS does
-# not using Django settings at module level
-# this allows us to import cyclope in setup.py
-# but breaks automatica of update dynamic settings
-# see TODO note in default_settings.py
-from django.utils.functional import LazyObject
-
-class LazySettings(LazyObject):
-    def _setup(self):
-        from cyclope import default_settings
-        self._wrapped = Settings(default_settings)
-
-class Settings(object):
-    def __init__(self, settings_module):
-        for setting in dir(settings_module):
-            if setting == setting.upper():
-                setattr(self, setting, getattr(settings_module, setting))
-
-settings = LazySettings()

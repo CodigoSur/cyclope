@@ -56,9 +56,10 @@ img {border:none;}
 .logo h1 {font-size:1.8em;}
 .logo h2 {font-size:0.8em;}
 /*.buscar {float:right; width:315px; height:34px; background:none; margin-right:200px; margin-top: 85px;}*/
-#cabezal form {text-align:left; width:300px; margin-right:0px; padding-top:2px; }
+/*#cabezal form {text-align:left; width:300px; margin-right:0px; padding-top:2px; }
 #cabezal form .field {background:url(../images/css/buscarfondo.png) no-repeat; height:34px; width:190px; padding:11px 2px 2px 30px; margin:0px; font-size:0.8em; color:#fff; border:none;}
 #cabezal form .btn {background:url(../images/css/fondo_buscar.png) no-repeat left top; font-size:0.75em;font-weight:bold;height:34px; width:63px; color:#fff;background-color:none;border: none;padding:0px;margin:2px 5px 1px 5px;}
+*/
 /*//cabezal*/
 
 /* Menu vertical */

@@ -2,13 +2,11 @@
 from setuptools import setup, find_packages
 from setuptools.dist import Distribution
 
-import cyclope
-
 setup(
     name='django-cyclope',
-    version=cyclope.__version__,
+    version=__import__('cyclope').__version__,
     description="CMS for pythonistas who like to code instead of using a web UI for every task.",
-    long_description=cyclope.__doc__,
+    long_description=__import__('cyclope').__doc__,
     author='Nicolás Echániz & Santiago Hoerth',
     author_email='nico@rakar.com',
     url='http://bitbucket.org/nicoechaniz/django-cyclope/',
