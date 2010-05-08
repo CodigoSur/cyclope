@@ -17,6 +17,7 @@ from cyclope.models import StaticPage, MenuItem, BaseContent,\
                            SiteSettings, Layout, RegionView
 from cyclope import settings as cyc_settings
 from cyclope.utils import populate_type_choices
+from cyclope.core.frontend import site
 
 class AjaxChoiceField(forms.ChoiceField):
     """
@@ -24,7 +25,7 @@ class AjaxChoiceField(forms.ChoiceField):
     """
     # we always return true because we don't know what choices were available
     # at submit time, because they were populated through AJAX.
-    #TODO(nicoechaniz): see if there's a way to validate this dynamic choices
+    #TODO(nicoechaniz): generate valid choices at init time to avoid this hack
     def validate(self, value):
         return True
 
@@ -73,6 +74,9 @@ class MenuItemAdminForm(forms.ModelForm):
 
     def clean(self):
         data = self.cleaned_data
+        if data['object_id'] == '':
+            data['object_id'] = None
+
         if data['custom_url'] and (data['content_type']
                                    or data['object_id']
                                    or data['content_view']):
@@ -80,8 +84,21 @@ class MenuItemAdminForm(forms.ModelForm):
                 _(u'You can not set a Custom URL for menu entries \
                     with associated content'))
 
-        if data['object_id'] == '':
-            data['object_id'] = None
+        else:
+            if data['content_type']:
+                if data['content_view'] == '' or not data['content_view']:
+                    raise(ValidationError(
+                        _(u'You need to select a content view')))
+                else:
+                    view = site.get_view(data['content_type'].model_class(),
+                                         data['content_view'])
+                    if view.is_instance_view and data['object_id'] is None:
+                        raise(ValidationError(
+                            _(u'The selected view requires a content object')))
+                    elif not view.is_instance_view:
+                        # if not an instance it does not need a content object
+                        if data['object_id'] is not None:
+                            data['object_id'] = None
 
         return super(MenuItemAdminForm, self).clean()
 
@@ -131,9 +148,7 @@ class LayoutAdminForm(forms.ModelForm):
 
 class RegionViewInlineForm(forms.ModelForm):
 
-    # Region choices get populated through javascript
-    # when a template is selected.
-    # The corresponding json view is CyclopeSite.layout_regions_json()
+    # Choices for these fields get populated through javascript/JSON.
     region = AjaxChoiceField(label=_('Region'), required=False)
     content_view = AjaxChoiceField(label=_('View'), required=False)
     object_id = AjaxChoiceField(label=_('Content object'), required=False)
@@ -161,19 +176,32 @@ class RegionViewInlineForm(forms.ModelForm):
         populate_type_choices(self)
 
     def clean(self):
+        #TODO(nicoechaniz): this whole form validation could be simplified if we were not using our custom AjaxChoiceField and fields were actually marked as not null in the model definition. The problem is that the standard form validation will check for valid choices, so we should set choices to valid ones for each choicefield at form init time.
+
         data = self.cleaned_data
         if not data['DELETE']:
+            if data['object_id'] == '':
+                data['object_id'] = None
+
             if not data['content_type']:
                 raise(ValidationError(_(u'Content type can not be empty')))
 
-            if data['content_type']:
-                if (data['content_view'] == '' or not data['content_view']):
-                    raise(ValidationError(
-                        _(u'You need to select a content view')))
+            else:
                 if not data['region']:
                     raise(ValidationError(_(u'You need to select a region')))
-                if data['object_id'] == '':
-                    data['object_id'] = None
+                if data['content_view'] == '' or not data['content_view']:
+                    raise(ValidationError(
+                        _(u'You need to select a content view')))
+                else:
+                    view = site.get_view(data['content_type'].model_class(),
+                                         data['content_view'])
+                    if view.is_instance_view and data['object_id'] is None:
+                        raise(ValidationError(
+                            _(u'The selected view requires a content object')))
+                    elif not view.is_instance_view:
+                        # if not an instance it does not need a content object
+                        if data['object_id'] is not None:
+                            data['object_id'] = None
 
         return super(RegionViewInlineForm, self).clean()
 

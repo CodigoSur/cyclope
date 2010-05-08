@@ -141,7 +141,8 @@ class RegionViewTestCase(TestCaseWithSettingsFixture):
 
     def testAddLayoutRegionViewInstanceViewWithoutContent(self):
         """If the view in a region needs a content object and none is provided
-        a template error will be raised when visiting a page using this layout"""
+        a template error will be raised when visiting a page using this layout."""
+        #TODO(nicoechaniz): this is prevented at admin form level, but should also be checked at data level. See note in forms.py RegionViewInlineForm.clean() method
         layout = Layout.objects.all()[0]
         content_type = ContentType.objects.get(model='staticpage')
         content_view = 'detail'
@@ -200,27 +201,27 @@ class ModelTestCase(TestCase):
         self.assertEqual(an_instance.name, 'An instance')
 
 
-class AutodiscoveredViewsTestCase(TestCaseWithSettingsFixture):
-    urls = 'cyclope.test_urls'
-    fixtures = ['cyclope_demo.json']
-
-    #TODO(nicoechaniz): each view should have it's own test.
-    def test_autodiscovered_views(self):
-#        setup_test_environment()
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
-        for model in frontend.site._registry:
-            for view in frontend.site._registry[model]:
-                # we don't test region views here
-                if not view.is_standard_view:
-                    continue
-                obj = model.objects.all()[0]
-                view_url = obj.get_instance_url(view.name)
-                response = self.client.get("/"+view_url)
-                self.assertEqual(response.status_code, 200)
-
-
-    #    # make sure the correct template was used
-    #    self.assertTemplateUSed(response, 'myapp/myview.html')
-    #    # make sure the template was passed the correct context
-    #    self.assertEqual(response.context['foo'], 'bar')
+#class AutodiscoveredViewsTestCase(TestCaseWithSettingsFixture):
+#    urls = 'cyclope.test_urls'
+#    fixtures = ['cyclope_demo.json']
+#
+#    #TODO(nicoechaniz): each view should have it's own test.
+#    def test_autodiscovered_views(self):
+##        setup_test_environment()
+#        response = self.client.get('/')
+#        self.assertEqual(response.status_code, 200)
+#        for model in frontend.site._registry:
+#            for view in frontend.site._registry[model]:
+#                # we don't test region views here
+#                if not view.is_standard_view:
+#                    continue
+#                obj = model.objects.all()[0]
+#                view_url = obj.get_instance_url(view.name)
+#                response = self.client.get("/"+view_url)
+#                self.assertEqual(response.status_code, 200)
+#
+#
+#    #    # make sure the correct template was used
+#    #    self.assertTemplateUSed(response, 'myapp/myview.html')
+#    #    # make sure the template was passed the correct context
+#    #    self.assertEqual(response.context['foo'], 'bar')
