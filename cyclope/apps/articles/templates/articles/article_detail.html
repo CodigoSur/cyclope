@@ -9,13 +9,8 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 {% block content %}
 
 <div class="article detail">
-
- {% get_comment_count for article as comment_count %}
-
-<!-- TODO(nicoechaniz): uncomment and fix when breadcrumbs and tagging are implemented
--->
-  <span  class="breadcrumb">{% trans "Breadcrumb" %}: <a href="/">Principal</a> / </span>
   <span class="tags">{% trans "Tags" %}: {{ article.tags }}</span>
+ {% get_comment_count for article as comment_count %}
 
   {% if article.pretitle %}
   <span class="pretitle">{{ article.pretitle }}</span>
@@ -23,18 +18,18 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   <h1 class="title">{{ article.name }}</h1>
 
   <!-- herramientas -->
-  <div class="herramientas">
+  <div class="tools">
     <ul>
-      <li><a href="javascript:window.print()" class="imprimir">Imprimir</a></li>
+      <li><a href="javascript:window.print()" class="print">Imprimir</a></li>
       <li>
-        <a href="/share?slug={{ article.slug }}" onclick="abrir_popup(this);return false" class="recomendar">
+        <a href="/share?slug={{ article.slug }}" onclick="abrir_popup(this);return false" class="share">
           Compartir
         </a>
       </li>
 
       {% if comment_count %}
       <li>
-        <a href="#comments" class="comentarios">Comentarios ({{ comment_count }})</a>
+        <a href="#comments" class="comments_link">Comentarios ({{ comment_count }})</a>
       </li>
       {% endif %}
     </ul>
@@ -69,7 +64,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
     {% if article.author.photo %}
     <img src="{{ article.author.photo.thumbrnail_image.url }}" width="60"  />
     {% endif %}
-    <span class="author">{{ article.author }}</span>
+    <span class="author">{% trans "By"%} {{ article.author }}</span>
   </span>
   {% endif %}
   <!-- /autor -->
@@ -80,8 +75,8 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
             {if $articulo.downloads eq 'si'}
 
-          <div id="adjuntos">
-          <div class="adjuntos_box">
+          <div id="attachments">
+          <div class="attachments_box">
             <h6><img src="{$templatedir}{{ CYCLOPE_THEME_MEDIA_URL }}images/css/leer_adjuntos.png" alt="Adjuntos"  width="16" height="16" border="0" align="absmiddle" /> Archivos para descargar </h6>
              {section name=bucle loop=$downloads}
             <p><img src="http://codigosur.org/imagenes/icons/{$downloads[bucle].ext}.gif" width="20" height="22" border="0" align="middle"> <a href="{$downloads[bucle].link}" title="{$downloads[bucle].desc}" >{$downloads[bucle].nombre}</a></p>
@@ -105,7 +100,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 <!--
 TODO(nicoechaniz): uncomment and fix if related articles are implemented
            {if $articulo.relacionadas eq 'si'}
-          <div id="relacionadas">
+          <div id="related">
             <h6>Más información:</h6>
             <ul>
             {section name=bucle loop=$relacionadas}
@@ -120,7 +115,7 @@ TODO(nicoechaniz): uncomment and fix if related articles are implemented
 
 	      <div class="clear"></div>
      <!-- redsocial -->
-           <div id="redsocial"><small>Comparte en tu red social:</small>
+           <div id="socialnetworks"><small>{% trans "Share in your social networks"%}:</small>
 <a href="http://www.facebook.com" rel="nofollow" onclick="sbs_facebook(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/facebook.png" border="0" alt="Compartir en Facebook" title="Compartir en Facebook" height="24" width="24" /></a>
 <a href="http://www.del.icio.us" rel="nofollow" onclick="sbs_delicious(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/delicious.png" border="0" alt="Compartir en Delicious" title="Compartir en Delicious" height="24" width="24" /></a>
 <a href="http://www.yahoo.com" rel="nofollow" onclick="sbs_yahoobm(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/yahoo.png" border="0" alt="Compartir en Yahoo" title="Compartir en Yahoo" height="24" width="24" /></a>

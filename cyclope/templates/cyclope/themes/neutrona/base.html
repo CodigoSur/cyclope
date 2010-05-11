@@ -47,7 +47,7 @@ Si modificas no borres estas lineas :)
 
   <body class="{% block body_class %}{%endblock%}">
 
-    <div id="mascara">
+    <div id="page_wrapper">
       {% region 'header' %}
 
       <!-- cabezal -->
@@ -61,71 +61,60 @@ Si modificas no borres estas lineas :)
 
       <div class="clear"></div>
 
-      <!-- medianera -->
-      <div id="medianera">
+      <!-- middle_wrapper -->
+      <div id="middle_wrapper">
 
-        <!-- contenedor -->
-        <div id="contenedor">
+        <!-- left_sidebar -->
+        <div id="left_sidebar_container">
+          <div class="top"></div>
+          {% region 'left_sidebar' %}
 
-          <!-- left_sidebar -->
-          <div id="left_sidebar_container">
-            <div class="top"></div>
-            {% region 'left_sidebar' %}
-
-            <!-- buscar -->
-            <div id="searchbox">
-              <form action="/search" method="post">
-                <input type="text" name="consulta"/>
-                <input type="submit" value="" class="submit"/>
-              </form>
-            </div>
-            <!-- /buscar -->
-
-            <!-- lista_etiquetas --> <!-- TODO(nicoechaniz): implement tags -->
-            <div id="tags">
-              <span class="title">Etiquetas</span>
-              <div class="box">
-              <a href="{{ tag.link}}">
-                {% tag_cloud_for_model articles.Article as article_tags with min_count=1 distribution=log%}
-                {% for tag in article_tags %}
-                  <a href="/tag/{{ tag.name|slugify }}" class="tag{{tag.font_size}}">{{tag.name}}</a>
-                {% endfor %}
-                </a>&nbsp&nbsp
-              </div>
-            </div>
-            <!-- /lista_etiquetas -->
-
-            <!-- bannercitos -->
-            <div id="rss"><a href="/rss">Suscripción RSS</a></div>
-            <div id="banners">
-              <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO" target="_blank">
-                <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_cc.png" alt="Licencia Creative Commons" width="94" height="15" border="0" />
-              </a><br/>
-              <a href="http://cyclope.codigosur.org">
-                <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_cyclope.png" alt="Administrado con Cyclope" width="94" height="15" border="0" />
-              </a><br/>
-              <a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank">
-                <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_css.png" alt="CSS Válido" width="94" height="15" border="0" />
-              </a><br />
-            </div>
-            <!-- /bannercitos -->
-            <div class="bottom"></div>
-
+          <div id="searchbox">
+            <form action="/search" method="post">
+              <input type="text" name="consulta"/>
+              <input type="submit" value="" class="submit"/>
+            </form>
           </div>
-          <!-- /left_sidebar -->
 
-          <div id="page_content">
-              {% block page_content %} {% endblock %}
+          <div id="tags">
+            <span class="title">Etiquetas</span>
+            <div class="box">
+            <a href="{{ tag.link}}">
+              {% tag_cloud_for_model articles.Article as article_tags with min_count=1 distribution=log%}
+              {% for tag in article_tags %}
+                <a href="/tag/{{ tag.name|slugify }}" class="tag{{tag.font_size}}">{{tag.name}}</a>
+              {% endfor %}
+              </a>&nbsp&nbsp
+            </div>
           </div>
+
+          <div id="rss"><a href="/rss">Suscripción RSS</a></div>
+          <!-- banners -->
+          <div id="banners">
+            <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO" target="_blank">
+              <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_cc.png" alt="Licencia Creative Commons" width="94" height="15" border="0" />
+            </a><br/>
+            <a href="http://cyclope.codigosur.org">
+              <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_cyclope.png" alt="Administrado con Cyclope" width="94" height="15" border="0" />
+            </a><br/>
+            <a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank">
+              <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_css.png" alt="CSS Válido" width="94" height="15" border="0" />
+            </a><br />
+          </div>
+          <!-- /banners -->
+          <div class="bottom"></div>
 
         </div>
-        <!-- /contenedor -->
+        <!-- /left_sidebar -->
+
+        {% block page_content %} {% endblock %}
+
       </div>
-      <!-- /medianera -->
+      <!-- /middle wrapper -->
 
-      <div id="espaciopie"></div>
+      <div id="footer_separator"></div>
 
-      <div id="pie">
+      <div id="footer">
         {% region 'footer' %}
         Los contenidos de este sitio web están bajo una
         <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO">

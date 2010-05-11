@@ -1,12 +1,12 @@
 {% load i18n tagging_tags %}
 
   <div class="article teaser">
-    {% if  article.pretitle %}
+    {% if  article.pretitle and not simplified_view %}
     <span class="pretitle">{{ article.pretitle }} | </span>
     {% endif%}
     {% if article.date %}<span class="date">{{ article.date }}</span>{% endif %}
      <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name }}</a></h2>
-      {% if article.images.count and not region_view %}
+      {% if article.images.count and not simplified_view %}
       <a href="{% url article-detail article.slug %}">
         <img src="{{ article.first_image.thumbnail_image.url }}" width="135" border="0"/>
       </a>
@@ -15,7 +15,7 @@
       {{ article.summary }}
       <a href="{% url article-detail article.slug %}">{% trans "More" %}</a>
     </p>
-    {% if not region_view %}
+    {% if not simplified_view %}
         {% if article.author %}
         <span class="author">{% trans "By" %} {{ article.author }}</span>
         {% endif %}

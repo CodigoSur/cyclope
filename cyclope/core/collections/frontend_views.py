@@ -35,6 +35,7 @@ class CategoryRootItemsList(frontend.FrontendView):
 
 frontend.site.register_view(Category, CategoryRootItemsList())
 
+
 class CategoryTeaserList(frontend.FrontendView):
     """A teaser list view of category members.
     """
@@ -45,8 +46,7 @@ class CategoryTeaserList(frontend.FrontendView):
         category = content_object
         c = RequestContext(request,
                            {'category_maps': category.category_maps.all(),
-                            'category': category,
-                            'region_view': True})
+                            'category': category})
         t = loader.get_template("collections/category_teaser_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
         return t.render(c)
@@ -61,6 +61,26 @@ class CategoryTeaserList(frontend.FrontendView):
         return HttpResponse(t.render(c))
 
 frontend.site.register_view(Category, CategoryTeaserList())
+
+
+class CategorySimplifiedTeaserList(frontend.FrontendView):
+    """A teaser list view of category members.
+    """
+    name='simplified_teaser_list'
+    verbose_name=_('simplified teaser list of Category members')
+
+    def get_string_response(self, request, content_object=None, *args, **kwargs):
+        category = content_object
+        c = RequestContext(request,
+                           {'category_maps': category.category_maps.all(),
+                            'category': category,
+                            'simplified_view': True})
+        t = loader.get_template("collections/category_teaser_list.html")
+        c['host_template'] = 'cyclope/inline_view.html'
+        return t.render(c)
+
+frontend.site.register_view(Category, CategorySimplifiedTeaserList())
+
 
 class CollectionCategoriesHierarchy(frontend.FrontendView):
     """A full list view of the categories in a collection.

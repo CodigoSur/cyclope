@@ -4,11 +4,9 @@
 
 {% block content %}
 
-  {% if not region_view %}
-  <span class="breadcrumb">{% trans "Breadcrumb" %}: <a href="/">Principal</a> / {{ breadcrumb }}</span>
-  {% endif %}
-
+  {% if category.collection.visible %}
   <big class="category_title">{{ category.name }}</big>
+  {% endif %}
 
   {% comment %}
   For every category mapping we include a teaser view of the object.

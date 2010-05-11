@@ -14,6 +14,7 @@ from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import post_save
 from django.utils import simplejson
+from django.contrib.sites.models import Site
 
 from cyclope.models import BaseContent, Menu, MenuItem, SiteSettings, NamedImage
 from cyclope.core.collections.models import Collection, Category
@@ -40,12 +41,12 @@ class CyclopeSite(object):
         """
 
         for base_class in [BaseContent, Menu, MenuItem, Collection, Category,
-                           NamedImage]:
+                           NamedImage, Site]:
             if issubclass(model, base_class):
                 break
         else:
             raise TypeError(
-                'Cannot register %s models.' % model.__class__)
+                'Cannot register %s models.' % model)
 
         if not model in self._registry:
             self._registry[model] = [view]
