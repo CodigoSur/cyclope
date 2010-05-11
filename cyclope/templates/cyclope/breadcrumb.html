@@ -1,0 +1,11 @@
+{% extends host_template %}
+
+{% load i18n %}
+
+{% block content %}
+
+  <span class="breadcrumb">
+    {% trans "Breadcrumb" %}: <a href="/">Principal</a> / {{ breadcrumb }}
+  </span>
+
+{% endblock %}
