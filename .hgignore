@@ -13,3 +13,4 @@ doc
 .svn
 initial_data.json.init
 initial_data.json
+django_cyclope.egg-info
