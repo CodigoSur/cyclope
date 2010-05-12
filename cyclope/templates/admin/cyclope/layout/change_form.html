@@ -9,8 +9,6 @@ and for views in relation to selected content type for each region
 
 <script type="text/javascript">
 
-jQuery.noConflict()
-jQuery(document).ready(function($) {
   $(function() {
     $("select[id^='id_regionview_set-'][id$='-region']").each(function(i, sel){
       $(sel).chainedSelect({
@@ -59,7 +57,6 @@ jQuery(document).ready(function($) {
 */
 
   });
-});
 
 
 
