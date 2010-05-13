@@ -53,8 +53,6 @@ Si modificas no borres estas lineas :)
       <!-- cabezal -->
       <div id="branding">
         <div class="logo">
-          <h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
-          <h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
         </div>
       </div>
       <!-- /cabezal -->
@@ -114,22 +112,23 @@ Si modificas no borres estas lineas :)
 
       <div id="footer_separator"></div>
 
-      <div id="footer">
+      <div id="footer_container">
         {% region 'footer' %}
-        Los contenidos de este sitio web están bajo una
+        <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/navegadores.png" width="246" height="36" border="0" usemap="#map-nav" alt=""/>
+        <p>Los contenidos de este sitio web están bajo una
         <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO">
           Licencia Creative Commons Reconocimiento-NoComercial-SinObraDerivada 3.0
-        </a>.<br/>
+        </a>.
         Este sitio ha sido diseñado por
         <a href="http://www.codigosur.org">Código Sur</a>
         y es administrado con el editor dinámico de contenidos
         <a href="http://cyclope.codigosur.org">Cyclope GPL</a>
         que ha sido desarrollado por
-        <a href="http://www.codigosur.org">Código Sur</a>.<br/>
+        <a href="http://www.codigosur.org">Código Sur</a>.
         Este sitio ha sido desarrollado sobre estándares de diseño web,
-        cualquier navegador de calidad lo visualizará correctamente: <br/>
+        cualquier navegador de calidad lo visualizará correctamente:
+        </p>
 
-        <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/navegadores.png" width="246" height="36" border="0" usemap="#map-nav" alt=""/>
         <map name="map-nav" id="map-nav">
           <!-- #$-:Image map file created by GIMP Image Map plug-in -->
           <!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
