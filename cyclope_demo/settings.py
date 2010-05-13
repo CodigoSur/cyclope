@@ -76,7 +76,7 @@ ROOT_URLCONF = 'cyclope_demo.urls'
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates".
     # Don't forget to use absolute paths, not relative paths.
-    #os.path.join(BASE_DIR, 'templates'),
+    os.path.join(BASE_DIR, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -126,3 +126,7 @@ FEINCMS_TREE_EDITOR_INCLUDE_ANCESTORS = False
 
 #CYCLOPE_PREFIX = 'cyclope/'
 CYCLOPE_PREFIX = ''
+
+CYCLOPE_LOCAL_THEMES_DIR = os.path.join(BASE_DIR, 'templates/cyclope/themes/')
+CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/media/local_themes/'
+#CYCLOPE_LOCAL_THEMES_MEDIA = ''

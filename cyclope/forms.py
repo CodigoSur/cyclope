@@ -107,6 +107,7 @@ class MenuItemAdminForm(forms.ModelForm):
 
     class Media:
         js = (
+             cyc_settings.CYCLOPE_MEDIA_URL +"js/jquery-1.4.2.min.js",
              cyc_settings.CYCLOPE_MEDIA_URL +"js/jquery.chainedSelect.js",)
 
 
@@ -208,6 +209,7 @@ class RegionViewInlineForm(forms.ModelForm):
 
     class Media:
         js = (
+             cyc_settings.CYCLOPE_MEDIA_URL +"js/jquery-1.4.2.min.js",
              cyc_settings.CYCLOPE_MEDIA_URL +"js/jquery.chainedSelect.js",
              )
 
