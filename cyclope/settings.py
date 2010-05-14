@@ -72,8 +72,13 @@ CYCLOPE_SITE_SETTINGS = get_site_settings()
 # and make them available at module level
 if CYCLOPE_SITE_SETTINGS is not None:
     CYCLOPE_CURRENT_THEME = CYCLOPE_SITE_SETTINGS.theme
-    CYCLOPE_THEME_MEDIA_URL = '%sthemes/%s/' % (CYCLOPE_MEDIA_URL,
-                                                CYCLOPE_CURRENT_THEME)
+    if CYCLOPE_CURRENT_THEME in CYCLOPE_THEMES.local_themes:
+        CYCLOPE_THEME_MEDIA_URL = '%s%s/' % (
+            settings.CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX, CYCLOPE_CURRENT_THEME)
+    else:
+        CYCLOPE_THEME_MEDIA_URL = '%sthemes/%s/' % (CYCLOPE_MEDIA_URL,
+                                                    CYCLOPE_CURRENT_THEME)
+
     CYCLOPE_THEME_PREFIX = 'cyclope/themes/%s/' % CYCLOPE_CURRENT_THEME
     CYCLOPE_THEME_BASE_TEMPLATE = 'cyclope/themes/%s/base.html' \
                                    % CYCLOPE_CURRENT_THEME
