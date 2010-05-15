@@ -199,7 +199,13 @@ class ModelTestCase(TestCase):
         instance.save()
         an_instance = StaticPage.objects.get(slug='an-instance')
         self.assertEqual(an_instance.name, 'An instance')
-
+       
+class StaticPageTestCase(TestCase):
+    def test_static_url(self):
+	sp = StaticPage(name="static")
+	sp.save()
+	response = self.client.get(sp.get_absolute_url())
+	self.assertEqual(response, 200)
 
 #class AutodiscoveredViewsTestCase(TestCaseWithSettingsFixture):
 #    urls = 'cyclope.test_urls'
@@ -225,3 +231,7 @@ class ModelTestCase(TestCase):
 #    #    self.assertTemplateUSed(response, 'myapp/myview.html')
 #    #    # make sure the template was passed the correct context
 #    #    self.assertEqual(response.context['foo'], 'bar')
+
+class TemplateTagsTestCase(TestCase):
+    def test_join(self):
+        pass
