@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.utils.translation import ugettext as _
 
-# hacky stuff...
+# todo(nicoechaniz): This whole theme setting through direct imports is quite hacky. Reevaluate.
 
 # skip __init.py and __init__.pyc
 available = [ item for item in os.listdir(
@@ -37,6 +37,4 @@ if hasattr(settings, 'CYCLOPE_LOCAL_THEMES_DIR'):
 
 
 for theme in available:
-#    importlib.import_module(theme)
-    print theme
     exec 'import %s' % theme

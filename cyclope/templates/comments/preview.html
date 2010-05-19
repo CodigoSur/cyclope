@@ -5,6 +5,7 @@
 
 {% block page_content %}
   {% load comments %}
+<div id="content_container">
 <div id="comments">
   <form action="{% comment_form_target %}" method="post">{% csrf_token %}
     {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
@@ -33,5 +34,6 @@
     <input type="submit" name="submit" class="submit" value="{% trans "Post" %}" />
     </p>
   </form>
+</div>
 </div>
 {% endblock %}

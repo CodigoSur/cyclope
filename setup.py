@@ -28,13 +28,12 @@ setup(
     # revision number is indicated in the dependency_links for packages
     # that are downloaded from source to ensure a tested revision is used.
     dependency_links=[
-        'svn+http://code.djangoproject.com/svn/django/trunk/#egg=django-dev',
         'git+http://github.com/matthiask/feincms.git#egg=feincms-dev',
         'git+http://github.com/matthiask/django-mptt.git#egg=django-mptt-3.0-pre',
     ],
 
     install_requires=[
-        'Django>=1.2-beta-1,==dev',
+        'Django>=1.2',
         'FeinCms>=1.0.99,==dev',
         'django-autoslug>=1.4.1',
         'django-mptt>=0.3-pre,==dev',

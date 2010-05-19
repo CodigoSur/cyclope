@@ -6,12 +6,14 @@ widgets
 from django import forms
 from django.utils.safestring import mark_safe
 from django.conf import settings
+from cyclope import settings as cyc_settings
 
 class WYMEditor(forms.Textarea):
     """Widget to replace a standard textarea with WYMEditor"""
     class Media:
         js = (
-            'cyclope/js/wymeditor/jquery.wymeditor.pack.js',
+            cyc_settings.CYCLOPE_MEDIA_URL +'js/jquery-1.4.2.min.js',
+            cyc_settings.CYCLOPE_MEDIA_URL +'js/wymeditor/jquery.wymeditor.pack.js',
         )
 
     def __init__(self, language=None, attrs=None):
@@ -30,5 +32,3 @@ class WYMEditor(forms.Textarea):
                 lang: '%s',
             });
             </script>''' % (name, self.language))
-
-
