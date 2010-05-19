@@ -38,7 +38,7 @@ class MenuRootItemsList(frontend.FrontendView):
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         menu_items = MenuItem.tree.filter(menu=content_object, level=0)
         c = RequestContext(request, {'menu_items': menu_items})
-        t = loader.get_template("cyclope/menu_root_items_list.html")
+        t = loader.get_template("cyclope/menu_flat_items_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
         return t.render(c)
 
@@ -54,7 +54,7 @@ class MenuFlatItemsList(frontend.FrontendView):
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         menu_items = MenuItem.tree.filter(menu=content_object)
         c = RequestContext(request, {'menu_items': menu_items})
-        t = loader.get_template("cyclope/menu_root_items_list.html")
+        t = loader.get_template("cyclope/menu_flat_items_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
         return t.render(c)
 

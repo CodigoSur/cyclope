@@ -3,7 +3,7 @@
 {% block content %}
   <ul>
   {% for menu_item in menu_items %}
-    <li>
+    <li {% if request.path_info|slice:'1:' == menu_item.url %} class="current{% if menu_item.site_home %} site_home{% endif %}" {% endif %}>
       {% if menu_item.custom_url %}
         <a href="{{menu_item.url}}">
       {% else %}
