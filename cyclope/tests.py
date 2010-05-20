@@ -5,11 +5,13 @@ from django.test.utils import setup_test_environment
 from django.contrib.sites.models import Site
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
-from django.template import TemplateSyntaxError
+from django.template import TemplateSyntaxError, Template, Context
+from django import template
 
 from cyclope.models import SiteSettings, StaticPage, Menu, MenuItem, Layout, RegionView
 from cyclope.core import frontend
 from cyclope.utils import TestCaseWithSettingsFixture
+from cyclope.templatetags.cyclope_utils import do_join
 
 def create_static_page(name=None):
     if name is None:
@@ -233,5 +235,14 @@ class StaticPageTestCase(TestCase):
 #    #    self.assertEqual(response.context['foo'], 'bar')
 
 class TemplateTagsTestCase(TestCase):
-    def test_join(self):
-        pass
+    def setUp(self):    
+        register = template.Library()
+        register.tag(name='join', compile_function=do_join) 
+    
+    def test_join_strings(self):
+        t = Template("{% load cyclope_utils %}{% join 'Cy' 'clo' 'pe' as variable %}{{ variable }}")
+        c = Context({})
+        response = t.render(c)
+        self.assertEqual(response, "Cyclope")
+
+   #def test_join_variables(self):
