@@ -240,7 +240,9 @@ class TemplateTagsTestCase(TestCase):
         register.tag(name='join', compile_function=do_join) 
     
     def test_join_strings(self):
-        t = Template("{% load cyclope_utils %}{% join 'Cy' 'clo' 'pe' as variable %}{{ variable }}")
+        t = Template("{% load cyclope_utils %}"
+                     "{% join 'Cy' 'clo' 'pe' as variable %}"
+                     "{{ variable }}")
         c = Context({})
         response = t.render(c)
         self.assertEqual(response, "Cyclope")
