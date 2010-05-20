@@ -8,7 +8,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.template import TemplateSyntaxError, Template, Context
 from django import template
 
-from cyclope.models import SiteSettings, StaticPage, Menu, MenuItem, Layout, RegionView
+from cyclope.models import SiteSettings, StaticPage, Menu, MenuItem
+from cyclope.models import Layout, RegionView
 from cyclope.core import frontend
 from cyclope.utils import TestCaseWithSettingsFixture
 from cyclope.templatetags.cyclope_utils import do_join
@@ -63,7 +64,8 @@ class SiteTestCase(TestCase):
         layout = Layout(name="default", template='one_sidebar.html')
         layout.save()
 
-        menu_item = MenuItem(menu=menu, name="home", site_home=True, active=True, layout=layout)
+        menu_item = MenuItem(menu=menu, name="home", site_home=True, 
+                             active=True, layout=layout)
         menu_item.save()
 
         site_settings = SiteSettings(site=site,
@@ -72,7 +74,8 @@ class SiteTestCase(TestCase):
                                 allow_comments='YES')
         site_settings.save()
         response = self.client.get("/")
-        self.assertTemplateUsed(response, u'cyclope/themes/neutrona/one_sidebar.html')
+        self.assertTemplateUsed(response,
+                                u'cyclope/themes/neutrona/one_sidebar.html')
         #TOTO(SAn): add some more usefull asserts
 
         #export_fixture(['sites','cyclope'],
@@ -101,7 +104,7 @@ class SiteTestCase(TestCase):
                                 allow_comments='YES')
         site_settings.save()
         response = self.client.get("/")
-        self.assertEqual(response.content,'Debe seleccionar un esquema para el sitio' )
+        self.assertEqual(response.content, 'Debe seleccionar un esquema para el sitio')
         #TODO(nicoechaniz): testing for the response content is weak; look for a better option
         # this view should use a standard error template and we should check that the template was used and some message id
 
@@ -120,7 +123,7 @@ class SiteTestCase(TestCase):
         site_settings.save()
 
         response = self.client.get("/")
-        self.assertEqual(response.content,'La página de inicio no ha sido establecida.' )
+        self.assertEqual(response.content, 'La página de inicio no ha sido establecida.')
         #TODO(nicoechaniz): testing for the response content is weak; look for a better option
 
 
@@ -139,7 +142,7 @@ class RegionViewTestCase(TestCaseWithSettingsFixture):
                                  content_view=content_view, region=region)
         region_view.save()
         response = self.client.get("/")
-        self.assertContains(response,'class="regionview staticpage list"', count=1)
+        self.assertContains(response, 'class="regionview staticpage list"', count=1)
 
     def testAddLayoutRegionViewInstanceViewWithoutContent(self):
         """If the view in a region needs a content object and none is provided
@@ -170,7 +173,7 @@ class RegionViewTestCase(TestCaseWithSettingsFixture):
             object_id=object_id, region=region)
         region_view.save()
         response = self.client.get("/")
-        self.assertContains(response,'class="regionview staticpage detail', count=1)
+        self.assertContains(response, 'class="regionview staticpage detail', count=1)
 
     def tearDown(self):
         pass
