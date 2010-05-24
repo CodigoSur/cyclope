@@ -8,8 +8,7 @@ When showing the StaticPage as the main content of the view, the host_template i
 {% block content %}
 
 <div class="staticpage detail">
-  <h1>{{ staticpage.name }} </h1>
-  <p>{{ staticpage.text|safe }}</p>
+  {{ staticpage.text|safe }}
 </div>
 
 {% endblock content%}

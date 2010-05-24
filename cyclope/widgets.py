@@ -12,7 +12,8 @@ class WYMEditor(forms.Textarea):
     """Widget to replace a standard textarea with WYMEditor"""
     class Media:
         js = (
-            cyc_settings.CYCLOPE_MEDIA_URL +'js/jquery-1.4.2.min.js',
+            cyc_settings.CYCLOPE_MEDIA_URL +'js/reuse_django_jquery.js',
+            cyc_settings.CYCLOPE_MEDIA_URL +'js/jquery.wymeditor.filebrowser.js',
             cyc_settings.CYCLOPE_MEDIA_URL +'js/wymeditor/jquery.wymeditor.pack.js',
         )
 
@@ -30,5 +31,6 @@ class WYMEditor(forms.Textarea):
                 updateSelector: '.submit-row input[type=submit]',
                 updateEvent: 'click',
                 lang: '%s',
+                postInitDialog: wymeditor_filebrowser,
             });
             </script>''' % (name, self.language))

@@ -79,10 +79,11 @@ Si modificas no borres estas lineas :)
           <div id="tags">
             <span class="title">Etiquetas</span>
             <div class="box">
-            <a href="{{ tag.link}}">
-              {% tag_cloud_for_model articles.Article as article_tags with min_count=1 distribution=log%}
+              {% tag_cloud_for_model articles.Article as article_tags with min_count=1 distribution=log %}
               {% for tag in article_tags %}
-                <a href="/tag/{{ tag.name|slugify }}" class="tag{{tag.font_size}}">{{tag.name}}</a>
+                <a href="/tag/{{ tag.name|slugify }}" class="tag{{tag.font_size}}">
+                  {{tag.name}}
+                </a>
               {% endfor %}
               </a>&nbsp&nbsp
             </div>

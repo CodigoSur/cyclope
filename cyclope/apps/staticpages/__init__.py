@@ -1,6 +1,6 @@
 # *-- coding:utf-8 --*
 """
-apps.articles
+apps.staticpages
 -------------
-Standard news article content.
+Basic Static Page content.
 """

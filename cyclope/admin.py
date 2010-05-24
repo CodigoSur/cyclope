@@ -10,8 +10,7 @@ from django.utils.translation import ugettext as _
 from feincms.admin import editor
 
 from cyclope.models import *
-from cyclope.forms import StaticPageAdminForm,\
-                          MenuItemAdminForm,\
+from cyclope.forms import MenuItemAdminForm,\
                           BaseContentAdminForm,\
                           SiteSettingsAdminForm,\
                           LayoutAdminForm,\
@@ -61,12 +60,6 @@ admin.site.register(MenuItem, MenuItemAdmin)
 admin.site.register(Menu)
 
 
-class StaticPageAdmin(CollectibleAdmin, BaseContentAdmin):
-    form = StaticPageAdminForm
-
-admin.site.register(StaticPage, StaticPageAdmin)
-
-
 class RegionViewInline(admin.StackedInline):
     form = RegionViewInlineForm
     model = RegionView
@@ -85,5 +78,5 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 admin.site.register(SiteSettings, SiteSettingsAdmin)
 
 
-class NamedImagesInline(generic.GenericTabularInline):
-    model = NamedImage
+class PictureInline(generic.GenericTabularInline):
+    model = Picture

@@ -8,11 +8,11 @@ from django.contrib.contenttypes.models import ContentType
 from django.template import TemplateSyntaxError, Template, Context
 from django import template
 
-from cyclope.models import SiteSettings, StaticPage, Menu, MenuItem
+from cyclope.models import SiteSettings, Menu, MenuItem
 from cyclope.models import Layout, RegionView
 from cyclope.core import frontend
-from cyclope.utils import TestCaseWithSettingsFixture
 from cyclope.templatetags.cyclope_utils import do_join
+from cyclope.apps.staticpages.models import StaticPage
 
 def create_static_page(name=None):
     if name is None:
@@ -64,7 +64,7 @@ class SiteTestCase(TestCase):
         layout = Layout(name="default", template='one_sidebar.html')
         layout.save()
 
-        menu_item = MenuItem(menu=menu, name="home", site_home=True, 
+        menu_item = MenuItem(menu=menu, name="home", site_home=True,
                              active=True, layout=layout)
         menu_item.save()
 
@@ -127,7 +127,7 @@ class SiteTestCase(TestCase):
         #TODO(nicoechaniz): testing for the response content is weak; look for a better option
 
 
-class RegionViewTestCase(TestCaseWithSettingsFixture):
+class RegionViewTestCase(TestCase):
     fixtures = ['simplest_site.json']
 
     def setUp(self):
@@ -178,26 +178,8 @@ class RegionViewTestCase(TestCaseWithSettingsFixture):
     def tearDown(self):
         pass
 
-class ModelTestCase(TestCase):
-    """Test that models can be created"""
 
-    def setUp(self):
-        pass
-
-    def test_site_settings_creation(self):
-        pass
-
-    def test_menu_creation(self):
-        pass
-
-    def test_menuitem_creation(self):
-        pass
-
-    def test_layout_creation(self):
-        pass
-
-    def test_regionview_creation(self):
-        pass
+class StaticPageTestCase(TestCase):
 
     def test_staticpage_creation(self):
         instance = StaticPage(name='An instance')
@@ -205,12 +187,11 @@ class ModelTestCase(TestCase):
         an_instance = StaticPage.objects.get(slug='an-instance')
         self.assertEqual(an_instance.name, 'An instance')
 
-class StaticPageTestCase(TestCase):
     def test_static_url(self):
         sp = StaticPage(name="static")
         sp.save()
         response = self.client.get(sp.get_absolute_url())
-        self.assertEqual(response, 200)
+        self.assertEqual(response.status_code, 200)
 
 #class AutodiscoveredViewsTestCase(TestCaseWithSettingsFixture):
 #    urls = 'cyclope.test_urls'
@@ -237,11 +218,12 @@ class StaticPageTestCase(TestCase):
 #    #    # make sure the template was passed the correct context
 #    #    self.assertEqual(response.context['foo'], 'bar')
 
+
 class TemplateTagsTestCase(TestCase):
-    def setUp(self):    
+    def setUp(self):
         register = template.Library()
-        register.tag(name='join', compile_function=do_join) 
-    
+        register.tag(name='join', compile_function=do_join)
+
     def test_join_strings(self):
         t = Template("{% load cyclope_utils %}"
                      "{% join 'Cy' 'clo' 'pe' as variable %}"
@@ -249,5 +231,3 @@ class TemplateTagsTestCase(TestCase):
         c = Context({})
         response = t.render(c)
         self.assertEqual(response, "Cyclope")
-
-   #def test_join_variables(self):

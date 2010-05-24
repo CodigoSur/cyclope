@@ -53,11 +53,3 @@ def populate_type_choices(myform):
 
 
 
-# TODO(nicoechaniz): this should be moved to a more logical place when testing is better organized
-from django.test import TestCase
-
-class TestCaseWithSettingsFixture(TestCase):
-    def _pre_setup(self):
-        cyclope.settings._testing = True
-        super(TestCaseWithSettingsFixture, self)._pre_setup()
-        cyclope.settings._testing = False

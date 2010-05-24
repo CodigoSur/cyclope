@@ -11,7 +11,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 import mptt
 from autoslug.fields import AutoSlugField
-import cyclope
+from cyclope.core import frontend
+from cyclope.models import Picture
 
 class Collection(models.Model):
     """A facility for creating custom content collections.
@@ -28,6 +29,9 @@ class Collection(models.Model):
                                              default=False)
     content_types = models.ManyToManyField(ContentType, db_index=True,
                                            verbose_name=_('content types'))
+    picture = models.ForeignKey(Picture,
+                                verbose_name=_('picture'), blank=True, null=True)
+
     def __unicode__(self):
         return self.name
 
@@ -62,7 +66,7 @@ class Category(models.Model):
         return Category.tree.filter(pk__isnot=self.pk)
 
     def get_instance_url(self, view_name=None):
-        view = cyclope.core.frontend.site.get_view(self.__class__, view_name)
+        view = get_view(self.__class__, view_name)
         if view.is_instance_view:
             return '%s/%s/%s/View/%s'\
                     % (self._meta.app_label,

@@ -30,6 +30,7 @@ setup(
     dependency_links=[
         'git+http://github.com/matthiask/feincms.git#egg=feincms-dev',
         'git+http://github.com/matthiask/django-mptt.git#egg=django-mptt-3.0-pre',
+        'git+http://github.com/alexvasi/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-dev',
     ],
 
     install_requires=[
@@ -41,7 +42,8 @@ setup(
         'django-imagekit>=0.3.2',
         'django-simple-captcha>=0.1.7',
         'django-tagging>=0.3.1',
-        'django-tagging-autocomplete>=0.3.1'
+        'django-tagging-autocomplete>=0.3.1',
+        'django-filebrowser>=3.0,==dev',
     ],
 
     packages=find_packages(),

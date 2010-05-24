@@ -106,6 +106,7 @@ INSTALLED_APPS = (
     'cyclope.core.collections',
     'cyclope.core.captcha_comments',
     'cyclope.apps.articles',
+    'cyclope.apps.staticpages',
 
     'cyclope_demo.shoes',
 )

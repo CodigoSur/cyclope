@@ -13,7 +13,7 @@ from django.db.models import get_model
 from mptt.forms import TreeNodeChoiceField
 
 from cyclope.widgets import WYMEditor
-from cyclope.models import StaticPage, MenuItem, BaseContent,\
+from cyclope.models import MenuItem, BaseContent,\
                            SiteSettings, Layout, RegionView
 from cyclope import settings as cyc_settings
 from cyclope.utils import populate_type_choices
@@ -41,13 +41,6 @@ class BaseContentAdminForm(forms.ModelForm):
                 values[0] for values in MenuItem.objects.filter(
                 object_id=self.instance.id).values_list('id') ]
             self.fields['menu_items'].initial = selected_items
-
-
-class StaticPageAdminForm(BaseContentAdminForm):
-    text = forms.CharField(label=_('Text'), widget=WYMEditor())
-
-    class Meta:
-        model = StaticPage
 
 
 class MenuItemAdminForm(forms.ModelForm):
@@ -107,7 +100,7 @@ class MenuItemAdminForm(forms.ModelForm):
 
     class Media:
         js = (
-             cyc_settings.CYCLOPE_MEDIA_URL +"js/jquery-1.4.2.min.js",
+             cyc_settings.CYCLOPE_MEDIA_URL +'js/reuse_django_jquery.js',
              cyc_settings.CYCLOPE_MEDIA_URL +"js/jquery.chainedSelect.js",)
 
 
@@ -209,7 +202,7 @@ class RegionViewInlineForm(forms.ModelForm):
 
     class Media:
         js = (
-             cyc_settings.CYCLOPE_MEDIA_URL +"js/jquery-1.4.2.min.js",
+             cyc_settings.CYCLOPE_MEDIA_URL +'js/reuse_django_jquery.js',
              cyc_settings.CYCLOPE_MEDIA_URL +"js/jquery.chainedSelect.js",
              )
 

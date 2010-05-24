@@ -16,8 +16,7 @@ from django.db.models.signals import post_save
 from django.utils import simplejson
 from django.contrib.sites.models import Site
 
-from cyclope.models import BaseContent, Menu, MenuItem, SiteSettings, NamedImage
-from cyclope.core.collections.models import Collection, Category
+from cyclope.models import MenuItem, SiteSettings
 
 from cyclope import settings as cyc_settings
 from cyclope.utils import layout_for_request
@@ -39,14 +38,6 @@ class CyclopeSite(object):
                    core.collections.Collection or core.collections.Category
             view: a view derived from core.frontend.FrontendView
         """
-
-        for base_class in [BaseContent, Menu, MenuItem, Collection, Category,
-                           NamedImage, Site]:
-            if issubclass(model, base_class):
-                break
-        else:
-            raise TypeError(
-                'Cannot register %s models.' % model)
 
         if not model in self._registry:
             self._registry[model] = [view]

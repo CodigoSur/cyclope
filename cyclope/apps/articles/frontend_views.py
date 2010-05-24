@@ -1,12 +1,11 @@
 # *-- coding:utf-8 --*
 
 from django.utils.translation import ugettext as _
-from django.views.generic.list_detail import object_detail, object_list
 
 from cyclope.core import frontend
 from cyclope import views
 
-from cyclope.apps.articles.models import Article
+from models import Article
 
 
 class ArticleDetailView(frontend.FrontendView):

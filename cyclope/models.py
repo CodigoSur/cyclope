@@ -18,8 +18,6 @@ from imagekit.models import ImageModel
 
 import mptt
 from autoslug.fields import AutoSlugField
-
-from cyclope.core.collections.models import Collectible
 import cyclope
 
 
@@ -154,9 +152,11 @@ class BaseContent(models.Model):
     slug = AutoSlugField(populate_from='name', unique=True,
                          db_index=True, always_update=True)
     tags = TagAutocompleteField(_('tags'))
+    published =  models.BooleanField(_('published'), default=True)
+
 
     def get_instance_url(self, view_name):
-        #TODO(nicoechaniz): this seems like a wrong name. it returns the URL for an instance and for a non-instance as well.
+        #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well.
         view = cyclope.core.frontend.site.get_view(self.__class__, view_name)
         if view.is_instance_view:
             return '%s/%s/%s/View/%s'\
@@ -196,11 +196,7 @@ class BaseCommentedContent(BaseContent):
         abstract = True
 
 
-class NamedImage(ImageModel, BaseContent):
-    #TODO(nicoechaniz): when we make BaseContent abstract make this model inherit from that.
-    #name = models.CharField(_('name'), max_length=50, db_index=True)
-    #slug = AutoSlugField(populate_from='name',
-    #                     db_index=True, always_update=True)
+class Picture(ImageModel, BaseContent):
     original_image = models.ImageField(_('image'), upload_to='uploads/images')
     num_views = models.PositiveIntegerField(editable=False, default=0)
     content_type = models.ForeignKey(ContentType)
@@ -210,7 +206,7 @@ class NamedImage(ImageModel, BaseContent):
     class IKOptions:
         # This inner class is where we define the ImageKit options for the model
         spec_module = 'cyclope.imagekit_default_specs'
-        cache_dir = 'uploads/images'
+        cache_dir = 'image_cache'
         image_field = 'original_image'
         save_count_as = 'num_views'
 
@@ -223,20 +219,6 @@ class NamedImage(ImageModel, BaseContent):
     class Meta:
         verbose_name = _('image')
         verbose_name_plural = _('images')
-
-
-# should this be moved to it's own app? should we just use flatpages?
-class StaticPage(BaseContent, Collectible):
-    summary = models.TextField(_('summary'), blank=True)
-    text = models.TextField(_('text'))
-
-    def __unicode__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = _('static page')
-        verbose_name_plural = _('static pages')
-
 
 class RegionView(models.Model):
     region = models.CharField(_('region'), max_length=100,

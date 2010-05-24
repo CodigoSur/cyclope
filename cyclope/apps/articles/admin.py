@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from models import *
-from django.contrib.contenttypes import generic
 from django import forms
+from django.utils.translation import ugettext as _
+
 from cyclope.widgets import WYMEditor
 from cyclope.core.collections.admin import CollectibleAdmin
-from cyclope.admin import BaseContentAdmin, NamedImagesInline
+from cyclope.admin import BaseContentAdmin, PictureInline
 from cyclope.forms import BaseContentAdminForm
-from django.utils.translation import ugettext as _
 
 from models import *
 
@@ -26,7 +25,7 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
                   ('creation_date', 'author', 'source')
     list_display = ('name', 'is_orphan',)
     search_fields = ('name', 'pretitle', 'summary', 'text', )
-    inlines = CollectibleAdmin.inlines + [NamedImagesInline]
+    inlines = CollectibleAdmin.inlines + [PictureInline]
 
 
 admin.site.register(Article, ArticleAdmin)

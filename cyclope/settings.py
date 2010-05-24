@@ -57,11 +57,12 @@ def get_site_settings():
 
     """
     from django.core.exceptions import ObjectDoesNotExist
-
+    from django.db.utils import DatabaseError
     try:
         #TODO(nicoechaniz): Fix for multi-site
         site_settings = SiteSettings.objects.all()[0]
-    except IndexError:
+    # catch exceptions if the database is not available or no settings created
+    except (DatabaseError, IndexError):
         site_settings = None
 
     return site_settings
@@ -90,16 +91,11 @@ if CYCLOPE_SITE_SETTINGS is not None:
             CYCLOPE_CURRENT_THEME,
             CYCLOPE_DEFAULT_LAYOUT.template)
 
-# _testing must be set to True when loading test fixtures
-# containing SiteSettings data or _refresh_site_settings will fail
-# because of the mutual dependance of Layout and SiteSettings information.
-_testing = False
-
 def _refresh_site_settings(sender, instance, created, **kwargs):
     "Callback to refresh site settings when they are modified in the database"
     # we remove our keys from globals, otherwise deleted db_based settings don't
     # get deleted at module level
-    if not _testing:
+    if not kwargs.get('raw', True):
         cyc_keys = [ key for key in globals() if key.startswith('CYCLOPE')]
         for key in cyc_keys:
             globals().pop(key)
