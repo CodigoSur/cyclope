@@ -2,6 +2,13 @@
 
 import os
 
+#workaround for PIL when importing Image using different methods.
+# see http://jaredforsyth.com/blog/2010/apr/28/accessinit-hash-collision-3-both-1-and-1/
+# and https://sourceforge.net/tracker/?func=detail&atid=422030&aid=2993756&group_id=38414
+import sys
+import PIL.Image
+sys.modules['Image'] = PIL.Image
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -45,7 +52,7 @@ ADMIN_MEDIA_PREFIX = '/media/admin/'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
-#    'django.template.loaders.eggs.load_template_source',
+    'django.template.loaders.eggs.load_template_source',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -97,6 +104,7 @@ INSTALLED_APPS = (
     'feincms',
     'mptt',
     'captcha',
+    'filebrowser',
 
 #    'south',
 #    'ajax_filtered_fields',
@@ -124,6 +132,10 @@ FEINCMS_ADMIN_MEDIA = '/feincms_media/'
 # TreeEditor throws an exception in the admin for Category (as of 2010-02-19)
 # if this is set to True
 FEINCMS_TREE_EDITOR_INCLUDE_ANCESTORS = False
+
+FILEBROWSER_DEBUG = False
+FILEBROWSER_DIRECTORY = 'uploads/images'
+
 
 #CYCLOPE_PREFIX = 'cyclope/'
 CYCLOPE_PREFIX = ''
