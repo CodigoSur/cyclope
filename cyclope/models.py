@@ -22,6 +22,10 @@ import cyclope
 
 
 class SiteSettings(models.Model):
+    """Model to store site-wide settings.
+
+    Updating SiteSettings will update related cyclope.settings values.
+    """
     site = models.ForeignKey(Site, unique=True)
     theme = models.CharField(_('templating theme'), max_length=250)
     default_layout = models.ForeignKey('Layout',
@@ -47,6 +51,11 @@ class SiteSettings(models.Model):
 
 
 class Menu(models.Model):
+    """Model for site menus.
+
+    Only one Menu can be set to main_menu == True. If another is set to main,
+    the previous main menu will be updated to main_menu == False.
+    """
     name = models.CharField(_('name'), max_length=50, db_index=True, unique=True)
     slug = AutoSlugField(populate_from='name', always_update=True)
     main_menu = models.BooleanField(_('main menu'), default=False)
@@ -71,6 +80,10 @@ class Menu(models.Model):
 
 
 class MenuItem(models.Model):
+    """Items for a Menu.
+
+    Items always belong to one menu and they can be ordered in a tree structure.
+    """
 # this class could inherit from Category
 # but mptt does not support inheritance well
 # maybe we should try django-polymorphic and see how MPTT behaves
@@ -144,8 +157,7 @@ mptt.register(MenuItem)
 
 
 class BaseContent(models.Model):
-    """
-    Parent class for every content model.
+    """Parent class for every content model.
     """
     name = models.CharField(_('name'), max_length=250,
                              db_index=True, blank=False)
@@ -184,19 +196,9 @@ class BaseContent(models.Model):
         abstract = True
 
 
-class BaseCommentedContent(BaseContent):
-    """Parent class for content objects that can have comments."""
-    allow_comments = models.CharField(_('allow comments'), max_length=4,
-                                choices = (
-                                    ('SITE',_('default')),
-                                    ('YES',_('enabled')),
-                                    ('NO',_('disabled'))
-                                ), default='SITE')
-    class Meta:
-        abstract = True
-
-
 class Picture(ImageModel, BaseContent):
+    """Basic Picture model which holds an image and it's label.
+    """
     original_image = models.ImageField(_('image'), upload_to='uploads/images')
     num_views = models.PositiveIntegerField(editable=False, default=0)
     content_type = models.ForeignKey(ContentType)
@@ -220,7 +222,10 @@ class Picture(ImageModel, BaseContent):
         verbose_name = _('image')
         verbose_name_plural = _('images')
 
+
 class RegionView(models.Model):
+    """Holds configuration data for a frontend view to be displayed in a region of a particular Layout.
+    """
     region = models.CharField(_('region'), max_length=100,
                               blank=True, default='')
     layout = models.ForeignKey('Layout')
@@ -239,13 +244,11 @@ class RegionView(models.Model):
 
     def __unicode__(self):
         return '%s/%s' % (self.content_type.model, self.content_view)
-        #if self.content_type and self.content_view:
-        #    return '%s/%s' % (self.content_type.model, self.content_view)
-        #else:
-        #    return self.region
 
 
 class Layout(models.Model):
+    """Given a theme template, a Layout configures which frontend views will be displayed in each region.
+    """
     name = models.CharField(_('name'), max_length=50,
                             db_index=True, unique=True)
     slug = AutoSlugField(populate_from='name', db_index=True,

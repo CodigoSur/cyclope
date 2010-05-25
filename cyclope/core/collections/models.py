@@ -14,6 +14,7 @@ from autoslug.fields import AutoSlugField
 from cyclope.core import frontend
 from cyclope.models import Picture
 
+
 class Collection(models.Model):
     """A facility for creating custom content collections.
     """
