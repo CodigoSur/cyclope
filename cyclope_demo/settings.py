@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+gettext = lambda s: s
 
 #workaround for PIL when importing Image using different methods.
 # see http://jaredforsyth.com/blog/2010/apr/28/accessinit-hash-collision-3-both-1-and-1/
@@ -98,7 +99,7 @@ INSTALLED_APPS = (
 
     'tagging',
     'tagging_autocomplete',
-    'imagekit',
+#    'imagekit',
 #   'rosetta'
     'autoslug',
     'feincms',
@@ -115,6 +116,7 @@ INSTALLED_APPS = (
     'cyclope.core.captcha_comments',
     'cyclope.apps.articles',
     'cyclope.apps.staticpages',
+    'cyclope.apps.medialibrary',
 
     'cyclope_demo.shoes',
 )
@@ -134,7 +136,47 @@ FEINCMS_ADMIN_MEDIA = '/feincms_media/'
 FEINCMS_TREE_EDITOR_INCLUDE_ANCESTORS = False
 
 FILEBROWSER_DEBUG = False
-FILEBROWSER_DIRECTORY = 'uploads/images'
+FILEBROWSER_DIRECTORY = 'uploads/'
+FILEBROWSER_EXTENSIONS = {
+    'Folder': [''],
+    'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
+    'Video': ['.ogg', '.mov','.wmv','.mpeg','.mpg','.avi','.rm'],
+    'Document': ['.odt', 'docx', '.pdf','.doc','.rtf','.txt',
+                 '.ods', '.xls','.csv'],
+    'Audio': ['.ogg', '.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
+    'Code': ['.html','.py','.js','.css'],
+    'Flash': ['.swf']
+}
+
+FILEBROWSER_SELECT_FORMATS = {
+    'File': ['Folder','Document',],
+    'Image': ['Image'],
+    'Media': ['Video','Sound'],
+    'Document': ['Document'],
+    'Flash': ['Flash'],
+    # for TinyMCE we also have to define lower-case items
+    'image': ['Image'],
+    'file': ['Folder','Image','Document',],
+}
+
+FILEBROWSER_VERSIONS_BASEDIR = '_versions_'
+
+FILEBROWSER_VERSIONS = {
+    'fb_thumb': {'verbose_name': gettext('Admin Thumbnail'),
+                 'width': 60, 'height': 60, 'opts': 'crop upscale'},
+    'thumbnail': {'verbose_name': gettext('Thumbnail (140px)'),
+                  'width': 140, 'height': '', 'opts': ''},
+    'small': {'verbose_name': gettext('Small Square(300px)'),
+              'width': 300, 'height': 300, 'opts': 'crop'},
+    'medium': {'verbose_name': gettext('Medium (460px)'),
+               'width': 460, 'height': '', 'opts': ''},
+    'big': {'verbose_name': gettext('Big (620px)'),
+            'width': 620, 'height': '', 'opts': ''},
+    'cropped': {'verbose_name': gettext('Cropped (60x60px)'),
+                'width': 60, 'height': 60, 'opts': 'crop'},
+    'croppedthumbnail': {'verbose_name': gettext('Cropped Thumbnail (140x140px)'),
+                         'width': 140, 'height': 140, 'opts': 'crop'},
+}
 
 
 #CYCLOPE_PREFIX = 'cyclope/'

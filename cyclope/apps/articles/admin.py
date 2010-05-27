@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _
 
 from cyclope.widgets import WYMEditor
 from cyclope.core.collections.admin import CollectibleAdmin
-from cyclope.admin import BaseContentAdmin, PictureInline
+from cyclope.admin import BaseContentAdmin
 from cyclope.forms import BaseContentAdminForm
 
 from models import *
@@ -25,8 +25,8 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
                   ('creation_date', 'author', 'source')
     list_display = ('name', 'is_orphan',)
     search_fields = ('name', 'pretitle', 'summary', 'text', )
-    inlines = CollectibleAdmin.inlines + [PictureInline]
-
+#    inlines = CollectibleAdmin.inlines + [PictureInline]
+    raw_id_fields = ('pictures',)
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Author)

@@ -129,7 +129,7 @@ class CyclopeSite(object):
                                      home_item.content_view)
                 if home_item.content_object and view.is_instance_view:
                     obj = home_item.content_object
-                    return view(request, content_object=obj)
+                    return view(request, slug=obj.slug)
                 elif not view.is_instance_view:
                     return view(request)
                 else:

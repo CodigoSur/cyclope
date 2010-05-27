@@ -11,8 +11,10 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 import mptt
 from autoslug.fields import AutoSlugField
+from filebrowser.fields import FileBrowseField
+
 from cyclope.core import frontend
-from cyclope.models import Picture
+#from cyclope.apps.medialibrary.models import Picture
 
 
 class Collection(models.Model):
@@ -30,8 +32,9 @@ class Collection(models.Model):
                                              default=False)
     content_types = models.ManyToManyField(ContentType, db_index=True,
                                            verbose_name=_('content types'))
-    picture = models.ForeignKey(Picture,
-                                verbose_name=_('picture'), blank=True, null=True)
+    description = models.TextField(_('description'), blank=True, null=True)
+    image =  FileBrowseField(_('image'), max_length=250, format='Image',
+                             blank=True)
 
     def __unicode__(self):
         return self.name
@@ -55,6 +58,8 @@ class Category(models.Model):
                               related_name=_('children'), null=True, blank=True)
     active = models.BooleanField(_('active'), default=True, db_index=True)
     description = models.TextField(_('description'), blank=True, null=True)
+    image =  FileBrowseField(_('image'), max_length=250, format='Image',
+                             blank=True)
 
     def __unicode__(self):
         return self.name
@@ -138,7 +143,7 @@ class Collectible(models.Model):
     """
     Base class for collectible objects
     """
-    categories = generic.GenericRelation(CategoryMap,
+    categories = generic.GenericRelation('CategoryMap',
         content_type_field='content_type', object_id_field='object_id',
         verbose_name = _('categories'))
 

@@ -1,0 +1,15 @@
+{% extends host_template %}
+{% load fb_versions %}
+
+{% block content %}
+
+<div class="media detail">
+  {{ media.name }}
+  {% if media.image %}
+    <img src="{% version media.image.path 'small' %}"/>
+
+  {% endif%}
+  {{ media.description|safe }}
+</div>
+
+{% endblock content%}

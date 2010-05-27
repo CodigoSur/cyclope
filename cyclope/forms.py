@@ -9,6 +9,7 @@ from django.conf import settings as django_settings
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ValidationError
 from django.db.models import get_model
+from django.contrib.contenttypes.models import ContentType
 
 from mptt.forms import TreeNodeChoiceField
 
@@ -37,9 +38,12 @@ class BaseContentAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(BaseContentAdminForm, self).__init__(*args, **kwargs)
         if self.instance.id is not None:
+            instance_type = ContentType.objects.get_for_model(self.instance)
             selected_items = [
-                values[0] for values in MenuItem.objects.filter(
-                object_id=self.instance.id).values_list('id') ]
+                values[0] for values in
+                MenuItem.objects.filter(
+                    content_type=instance_type,
+                    object_id=self.instance.id).values_list('id') ]
             self.fields['menu_items'].initial = selected_items
 
 

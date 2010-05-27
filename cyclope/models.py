@@ -14,10 +14,9 @@ from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 
 from tagging_autocomplete.models import TagAutocompleteField
-from imagekit.models import ImageModel
-
 import mptt
 from autoslug.fields import AutoSlugField
+
 import cyclope
 
 
@@ -93,7 +92,7 @@ class MenuItem(models.Model):
     parent = models.ForeignKey('self', verbose_name=_('parent'),
                               related_name=_('children'),
                               null=True, blank=True)
-    slug = AutoSlugField(populate_from='name', unique_with='parent',
+    slug = AutoSlugField(populate_from='name', unique_with=('parent'),
                          always_update=True)
     site_home = models.BooleanField(_('site home'), default=False)
     custom_url = models.CharField(_('custom URL'), max_length=200,
@@ -166,7 +165,6 @@ class BaseContent(models.Model):
     tags = TagAutocompleteField(_('tags'))
     published =  models.BooleanField(_('published'), default=True)
 
-
     def get_instance_url(self, view_name):
         #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well.
         view = cyclope.core.frontend.site.get_view(self.__class__, view_name)
@@ -194,33 +192,6 @@ class BaseContent(models.Model):
 
     class Meta:
         abstract = True
-
-
-class Picture(ImageModel, BaseContent):
-    """Basic Picture model which holds an image and it's label.
-    """
-    original_image = models.ImageField(_('image'), upload_to='uploads/images')
-    num_views = models.PositiveIntegerField(editable=False, default=0)
-    content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey()
-
-    class IKOptions:
-        # This inner class is where we define the ImageKit options for the model
-        spec_module = 'cyclope.imagekit_default_specs'
-        cache_dir = 'image_cache'
-        image_field = 'original_image'
-        save_count_as = 'num_views'
-
-    def thumbnail(self):
-        return '<img src="%s"/>' % self.thumbnail_image.url
-
-    def __unicode__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = _('image')
-        verbose_name_plural = _('images')
 
 
 class RegionView(models.Model):

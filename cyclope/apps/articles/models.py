@@ -12,7 +12,8 @@ from django.contrib.contenttypes import generic
 
 from autoslug.fields import AutoSlugField
 from cyclope.core.collections.models import Collectible
-from cyclope.models import BaseContent, Picture
+from cyclope.models import BaseContent
+from cyclope.apps.medialibrary.models import Picture
 
 YES_NO = (('YES', _('yes')), ('NO', _('no')),)
 
@@ -48,7 +49,7 @@ class Article(BaseContent, Collectible):
     creation_date = models.DateTimeField(_('creation date'),
                                      auto_now_add=True, editable=False)
     date = models.DateTimeField(_('date'), blank=True, null=True)
-    images = generic.GenericRelation(Picture, null=True, blank=True,)
+    pictures = models.ManyToManyField(Picture, null=True, blank=True,)
 
     allow_comments = models.CharField(_('allow comments'), max_length=4,
                                 choices = (
@@ -57,9 +58,9 @@ class Article(BaseContent, Collectible):
                                     ('NO',_('disabled'))
                                 ), default='SITE')
 
-    def first_image(self):
-        if self.images.count() > 0:
-            return self.images.all()[0]
+    def first_picture(self):
+        if self.pictures.count() > 0:
+            return self.pictures.all()[0]
 
     class Meta:
         verbose_name = _('article')

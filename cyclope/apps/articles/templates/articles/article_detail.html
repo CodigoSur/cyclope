@@ -4,7 +4,7 @@
 TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
 {% endcomment%}
 
-{% load comments i18n %}
+{% load comments i18n fb_versions %}
 
 {% block content %}
 
@@ -42,13 +42,13 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   {% endif%}
   <!-- /descripcion -->
 
-  {% if article.images.count %}
+  {% if article.pictures.count %}
   <div id="gallery">
     <ul>
-      {% for image in article.images.all %}
+      {% for picture in article.pictures.all %}
       <li {% if not forloop.first %} style="display:none;" {% endif %}}>
-        <a href="{{ image.display.url }}"  title="{{ image.name }}">
-          <img src="{{ image.thumbnail_image.url }}" alt="{{ image.name }}" />
+        <a href="{% version picture.image.path 'medium' %}"  title="{{ picture.name }}">
+          <img src="{% version picture.image.path 'small' %}" alt="{{ picture.name }}" />
         </a>
         <p>{{ image.name }}</p>
       </li>
@@ -62,7 +62,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   {% if article.author %}
   <span id="author">
     {% if article.author.photo %}
-    <img src="{{ article.author.photo.thumbrnail_image.url }}" width="60"  />
+    <img src="" width="60"  />
     {% endif %}
     <span class="author">{% trans "By"%} {{ article.author }}</span>
   </span>

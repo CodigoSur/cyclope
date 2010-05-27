@@ -6,7 +6,7 @@ from django import forms
 from django.utils.translation import ugettext as _
 
 from cyclope.core.collections.admin import CollectibleAdmin
-from cyclope.admin import BaseContentAdmin, PictureInline
+from cyclope.admin import BaseContentAdmin
 from cyclope.forms import BaseContentAdminForm
 from cyclope.widgets import WYMEditor
 

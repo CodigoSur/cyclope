@@ -96,7 +96,7 @@ class CategoryAdmin(editor.TreeEditor):
         }),
         (_('Extra info'),{
             'classes': ('collapse',),
-            'fields': ('active', 'description'),
+            'fields': ('active', 'description', 'image',),
         }),
     )
 
@@ -139,6 +139,8 @@ class CollectibleAdmin (admin.ModelAdmin):
 
 
 class CollectionAdminForm(forms.ModelForm):
+    raw_id_fields = ['picture',]
+
     def __init__(self, *args, **kwargs):
         super(CollectionAdminForm, self).__init__(*args, **kwargs)
         ctype_choices = [('', '------')]

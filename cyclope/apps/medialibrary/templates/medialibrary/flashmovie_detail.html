@@ -1,0 +1,15 @@
+{% extends host_template %}
+
+{% block content %}
+
+<div class="media detail">
+  {{ media.name }}
+  <object type="application/x-shockwave-flash" data="{{ media.flash }}">
+    <param name="movie" value="{{ media.flash }}" />
+    <img src="{{ media.image }}" alt="" />
+  </object>
+
+  {{ media.description|safe }}
+</div>
+
+{% endblock content%}
