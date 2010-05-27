@@ -4,21 +4,22 @@
 
 {% block content %}
 
-  {% if collection.visible %}
-  <big class="collection_title">{{ collection.name }}</big>
-  {% endif %}
+  <div class="collection">
+    {% if collection.visible %}
+    <big class="title">{{ collection.name }}</big>
+    {% endif %}
 
-  {% if collection.image %}
-  <img src="{% version collection.image.path 'small' %}" width="85" border="0"/>
-  {% endif %}
+    {% if collection.image %}
+    <img src="{% version collection.image.path 'small' %}" width="85" border="0"/>
+    {% endif %}
 
-  {% if collection.description %}
-  <p class="text">
-    {{ collection.description|safe }}
-  </p>
-  {% endif %}
+    {% if collection.description %}
+    <p class="text">
+      {{ collection.description|safe }}
+    </p>
+    {% endif %}
 
-  {% for category in categories %}
+    {% for category in categories %}
 
     <div class="category teaser">
        <h2 class="title"><a href="{% url category-teaser_list category.slug %}">{{ category.name }}</a></h2>
@@ -32,9 +33,8 @@
       </p>
     </div>
     <div class="bottom"></div>
-
-  {% endfor %}
-
+    {% endfor %}
+  </div>
 <!--  <div class="pagEspacio"></div> -->
 
 <!-- {include file="paginador.html" } -->
