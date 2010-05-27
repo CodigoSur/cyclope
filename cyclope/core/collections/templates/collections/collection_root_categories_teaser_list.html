@@ -1,0 +1,42 @@
+{% extends host_template %}
+
+{% load i18n cyclope_utils tagging_tags fb_versions %}
+
+{% block content %}
+
+  {% if collection.visible %}
+  <big class="collection_title">{{ collection.name }}</big>
+  {% endif %}
+
+  {% if collection.image %}
+  <img src="{% version collection.image.path 'small' %}" width="85" border="0"/>
+  {% endif %}
+
+  {% if collection.description %}
+  <p class="text">
+    {{ collection.description|safe }}
+  </p>
+  {% endif %}
+
+  {% for category in categories %}
+
+    <div class="category teaser">
+       <h2 class="title"><a href="{% url category-teaser_list category.slug %}">{{ category.name }}</a></h2>
+        {% if category.image %}
+        <a href="{%  url category-teaser_list category.slug %}">
+          <img src="{% version category.image.path 'small' %}" width="85" border="0"/>
+        </a>
+        {% endif %}
+      <p class="text">
+        {{ category.description|safe }}
+      </p>
+    </div>
+    <div class="bottom"></div>
+
+  {% endfor %}
+
+<!--  <div class="pagEspacio"></div> -->
+
+<!-- {include file="paginador.html" } -->
+
+{% endblock %}

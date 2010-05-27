@@ -82,6 +82,25 @@ class CategorySimplifiedTeaserList(frontend.FrontendView):
 frontend.site.register_view(Category, CategorySimplifiedTeaserList())
 
 
+class CollectionRootCategoriesTeaserList(frontend.FrontendView):
+    """ A teaser list of the root categories of a collection
+    """
+    name = 'root_categories_teaser_list'
+    verbose_name=_('teaser list of the root Categories of a Collection')
+
+    def get_http_response(self, request, slug=None, *args, **kwargs):
+        collection = Collection.objects.get(slug=slug)
+        c = RequestContext(
+            request,
+            {'categories': Category.tree.filter(collection=collection, level=0),
+             'collection': collection })
+        t = loader.get_template("collections/collection_root_categories_teaser_list.html")
+        c['host_template'] = template_for_request(request)
+        return HttpResponse(t.render(c))
+
+frontend.site.register_view(Collection, CollectionRootCategoriesTeaserList())
+
+
 class CollectionCategoriesHierarchy(frontend.FrontendView):
     """A full list view of the categories in a collection.
     """
@@ -137,6 +156,5 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
                      'has_content': has_content,
                      'has_children': base_category.get_descendant_count()}))
         return [include, nested_list]
-
 
 frontend.site.register_view(Collection, CollectionCategoriesHierarchy())
