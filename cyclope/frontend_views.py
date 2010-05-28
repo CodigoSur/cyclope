@@ -36,7 +36,7 @@ class MenuRootItemsList(frontend.FrontendView):
     is_default = True
 
     def get_string_response(self, request, content_object=None, *args, **kwargs):
-        menu_items = MenuItem.tree.filter(menu=content_object, level=0)
+        menu_items = MenuItem.tree.filter(menu=content_object, level=0, active=True)
         c = RequestContext(request, {'menu_items': menu_items})
         t = loader.get_template("cyclope/menu_flat_items_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
@@ -52,7 +52,7 @@ class MenuFlatItemsList(frontend.FrontendView):
     verbose_name=_('flat list of all items for the selected Menu')
 
     def get_string_response(self, request, content_object=None, *args, **kwargs):
-        menu_items = MenuItem.tree.filter(menu=content_object)
+        menu_items = MenuItem.tree.filter(menu=content_object, active=True)
         c = RequestContext(request, {'menu_items': menu_items})
         t = loader.get_template("cyclope/menu_flat_items_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
