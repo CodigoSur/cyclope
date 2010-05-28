@@ -4,7 +4,7 @@
 
 {% block content %}
 
-  <div class="collection">
+  <div class="collection {{ collection.slug }}">
     {% if collection.visible %}
     <big class="title">{{ collection.name }}</big>
     {% endif %}
@@ -14,25 +14,20 @@
     {% endif %}
 
     {% if collection.description %}
-    <p class="text">
+    <div class="text">
       {{ collection.description|safe }}
-    </p>
+    </div>
     {% endif %}
 
     {% for category in categories %}
 
     <div class="category teaser">
-       <h2 class="title"><a href="{% url category-teaser_list category.slug %}">{{ category.name }}</a></h2>
-        {% if category.image %}
-        <a href="{%  url category-teaser_list category.slug %}">
-          <img src="{% version category.image.path 'small' %}" width="85" border="0"/>
-        </a>
-        {% endif %}
-      <p class="text">
+      <h2 class="title"><a href="{% url category-teaser_list category.slug %}">{{ category.name }}</a></h2>
+      <div class="text">
         {{ category.description|safe }}
-      </p>
+      </div>
+      <div class="bottom"></div>
     </div>
-    <div class="bottom"></div>
     {% endfor %}
   </div>
 <!--  <div class="pagEspacio"></div> -->
