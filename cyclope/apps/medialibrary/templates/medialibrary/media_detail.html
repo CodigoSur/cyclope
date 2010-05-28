@@ -1,15 +1,68 @@
 {% extends host_template %}
-{% load fb_versions %}
+
+{% comment%}
+TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
+{% endcomment%}
+
+{% load comments i18n fb_versions %}
 
 {% block content %}
 
 <div class="media detail">
-  {{ media.name }}
-  {% if media.image %}
-    <img src="{% version media.image.path 'small' %}"/>
+  <span class="tags">{% trans "Tags" %}: {{ media.tags }}</span>
+ {% get_comment_count for media as comment_count %}
 
+
+  <h1 class="title">{{ media.name }}</h1>
+  <!-- herramientas -->
+  <div class="tools">
+    <ul>
+      {% if comment_count %}
+      <li>
+        <a href="#comments" class="comments_link">Comentarios ({{ comment_count }})</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+  <!-- /herramientas -->
+
+
+  <!-- author -->
+  {% if media.author %}
+  <span id="author">
+    <span class="author">{% trans "By"%} {{ media.author }}</span>
+  </span>
+  {% endif %}
+  <!-- /autor -->
+
+  {% if media.image %}
+    <img src="{% version media.image.path 'big' %}"/>
   {% endif%}
-  {{ media.description|safe }}
-</div>
+
+  <span class="text">{{ media.description|safe }}</span>
+
+<!--COMENTARIOS -->
+
+  {% if not media.allow_comments == 'NO' %}
+    {% get_comment_count for media as comment_count %}
+
+    <div id="comments">
+      <div class="top">
+        <h6>Comentarios</h6>
+      </div>
+      <div class="bottom"></div>
+      {% render_comment_list for media %}
+      <!--enviar comentario -->
+      <div class="box-top"></div>
+      <div class="box">
+
+      <!--form comentario -->
+      {% render_comment_form for media %}
+
+      </div> <!-- termina box -->
+      <div class="bottom"></div>
+    </div><!--termina comments -->
+  {% endif %}
+</div> <!--termina media_detail -->
 
 {% endblock content%}

@@ -27,10 +27,12 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
         </a>
       </li>
 
-      {% if comment_count %}
-      <li>
-        <a href="#comments" class="comments_link">Comentarios ({{ comment_count }})</a>
-      </li>
+      {% if not article.allow_comments == 'NO' %}
+        {% if comment_count %}
+        <li>
+          <a href="#comments" class="comments_link">{% trans "Comentarios" %} ({{ comment_count }})</a>
+        </li>
+        {% endif %}
       {% endif %}
     </ul>
   </div>
@@ -127,24 +129,28 @@ TODO(nicoechaniz): uncomment and fix if related articles are implemented
 
 
 <!--COMENTARIOS -->
- {% get_comment_count for article as comment_count %}
+  {% if not article.allow_comments == 'NO' %}
 
-  <div id="comments">
-    <div class="top"><h6>Hay {{ comment_count }} comentarios</h6></div>
-    {% render_comment_list for article %}
-    <div class="clear"></div>
-    <div class="bottom"></div>
+    {% get_comment_count for article as comment_count %}
 
-    <!--enviar comentario -->
-    <div class="box-top"></div>
-    <div class="box">
+    <div id="comments">
+      <div class="top"><h6>Hay {{ comment_count }} comentarios</h6></div>
+      {% render_comment_list for article %}
+      <div class="clear"></div>
+      <div class="bottom"></div>
 
-    <!--form comentario -->
-    {% render_comment_form for article %}
+      <!--enviar comentario -->
+      <div class="box-top"></div>
+      <div class="box">
 
-    </div> <!-- termina box -->
-    <div class="bottom"></div>
-  </div><!--termina comments -->
+      <!--form comentario -->
+      {% render_comment_form for article %}
+
+      </div> <!-- termina box -->
+      <div class="bottom"></div>
+    </div><!--termina comments -->
+  {% endif %}
+
 </div> <!--termina article_detail -->
 
 {% endblock content%}
