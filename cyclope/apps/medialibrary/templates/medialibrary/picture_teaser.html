@@ -1,0 +1,8 @@
+{% load i18n tagging_tags fb_versions %}
+
+  <div class="media teaser">
+    <a href="{% url picture-detail picture.slug %}">
+      <img src="{% version picture.image.path 'small' %}" width="135" border="0"/>
+    </a>
+    <span class="label"><a href="{% url picture-detail picture.slug %}">{{ picture.name }}</a></span>
+  </div>
