@@ -30,7 +30,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
       {% if not article.allow_comments == 'NO' %}
         {% if comment_count %}
         <li>
-          <a href="#comments" class="comments_link">{% trans "Comentarios" %} ({{ comment_count }})</a>
+          <a href="#comments" class="comments_link">{% trans "Comments" %} ({{ comment_count }})</a>
         </li>
         {% endif %}
       {% endif %}
@@ -134,7 +134,7 @@ TODO(nicoechaniz): uncomment and fix if related articles are implemented
     {% get_comment_count for article as comment_count %}
 
     <div id="comments">
-      <div class="top"><h6>Hay {{ comment_count }} comentarios</h6></div>
+      <div class="top"><h6>{{ comment_count }} {% trans "Comments" %} </h6></div>
       {% render_comment_list for article %}
       <div class="clear"></div>
       <div class="bottom"></div>
