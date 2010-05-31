@@ -143,6 +143,11 @@ class MenuItem(models.Model):
                 self.slug = slug_field.slugify(populate_value)
             self.url = "/".join([a.slug for a in self.get_ancestors()]+[self.slug])
 
+        if self.site_home:
+            old_home = MenuItem.objects.filter(site_home=True)
+            for item in old_home:
+                item.site_home = False
+                item.save()
         super(MenuItem, self).save()
 
     def __unicode__(self):
