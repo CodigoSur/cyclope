@@ -65,6 +65,7 @@ class Article(BaseContent, Collectible):
     class Meta:
         verbose_name = _('article')
         verbose_name_plural = _('articles')
+        ordering = ('-creation_date', 'name')
 
 
 class Attachment(models.Model):

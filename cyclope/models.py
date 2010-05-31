@@ -101,6 +101,7 @@ class MenuItem(models.Model):
                                     u"Either set an URL here or \
                                     select a content type and view."))
     url = models.CharField(editable=False, max_length=255, unique=True, db_index=True)
+#    open_in_new_window = models.BooleanField(default=False)
     active = models.BooleanField(default=True, db_index=True)
     layout = models.ForeignKey('Layout', verbose_name=_('layout'),
                                null=True, blank=True)

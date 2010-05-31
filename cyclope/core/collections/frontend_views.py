@@ -45,7 +45,7 @@ class CategoryTeaserList(frontend.FrontendView):
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         category = content_object
         c = RequestContext(request,
-                           {'category_maps': category.category_maps.all(),
+                           {'category_maps': category.category_maps.order_by('article__date'),
                             'category': category})
         t = loader.get_template("collections/category_teaser_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
@@ -54,7 +54,7 @@ class CategoryTeaserList(frontend.FrontendView):
     def get_http_response(self, request, slug=None, *args, **kwargs):
         category = Category.objects.get(slug=slug)
         c = RequestContext(request,
-                           {'category_maps': category.category_maps.all(),
+                           {'category_maps': category.category_maps.order_by('article__date'),
                             'category': category })
         t = loader.get_template("collections/category_teaser_list.html")
         c['host_template'] = template_for_request(request)
