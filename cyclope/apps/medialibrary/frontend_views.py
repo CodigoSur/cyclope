@@ -58,7 +58,7 @@ class MovieClipDetail(MediaDetail):
         an HttpResponse otherwise
     """
     params = {'template_object_name': 'media',
-              'template_name': 'medialibrary/media_detail.html',
+              'template_name': 'medialibrary/movieclip_detail.html',
               'queryset': MovieClip.objects,
              }
     verbose_name=_('detailed view of the selected Movie Clip')
@@ -109,4 +109,3 @@ class RegularFileDetail(MediaDetail):
     verbose_name=_('detailed view of the selected File')
 
 frontend.site.register_view(RegularFile, RegularFileDetail())
-

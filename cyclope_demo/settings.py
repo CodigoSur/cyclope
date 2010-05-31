@@ -140,7 +140,7 @@ FILEBROWSER_DIRECTORY = 'uploads/'
 FILEBROWSER_EXTENSIONS = {
     'Folder': [''],
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
-    'Video': ['.ogg', '.mov','.wmv','.mpeg','.mpg','.avi','.rm'],
+    'Video': ['.ogg', '.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.flv'],
     'Document': ['.odt', 'docx', '.pdf','.doc','.rtf','.txt',
                  '.ods', '.xls','.csv'],
     'Audio': ['.ogg', '.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
@@ -154,6 +154,7 @@ FILEBROWSER_SELECT_FORMATS = {
     'Media': ['Video','Sound'],
     'Document': ['Document'],
     'Flash': ['Flash'],
+    'Video': ['Video'],
     # for TinyMCE we also have to define lower-case items
     'image': ['Image'],
     'file': ['Folder','Image','Document',],

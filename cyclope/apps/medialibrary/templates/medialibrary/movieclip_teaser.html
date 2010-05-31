@@ -1,0 +1,14 @@
+{% load i18n tagging_tags fb_versions %}
+
+  <div class="media teaser">
+    <a href="{% url movieclip-detail movieclip.slug %}">
+      {% if movieclip.still %}
+      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/video.png" width="48px" border="0"/>
+      <img src="{% version movieclip.still.path 'small' %}" width="135" border="0"/>
+      {% else %}
+      <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/video.png" width="135" border="0"/>
+      {% endif %}
+
+    </a>
+    <span class="label"><a href="{% url movieclip-detail movieclip.slug %}">{{ movieclip.name }}</a></span>
+  </div>

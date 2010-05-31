@@ -25,7 +25,8 @@
           {% trans "Tags" %}:
           {% tag_cloud_for_model articles.Article as article_tags with min_count=1 distribution=log %}
           {% for tag in article_tags %}
-            <a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>{% if not forloop.last%},{% endif%}
+            <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
+            {{tag.name}}{% if not forloop.last%},{% endif%}
 
           {% endfor %}
           </h3>

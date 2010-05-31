@@ -2,7 +2,8 @@
 
   <div class="media teaser">
     <a href="{% url picture-detail picture.slug %}">
-      <img src="{% version picture.image.path 'small' %}" width="135" border="0"/>
+      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/image.png" width="48px" border="0"/>
+      <img class="icon" src="{% version picture.image.path 'small' %}" width="135" border="0"/>
     </a>
     <span class="label"><a href="{% url picture-detail picture.slug %}">{{ picture.name }}</a></span>
   </div>
