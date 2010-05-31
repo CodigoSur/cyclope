@@ -19,7 +19,7 @@ class ArticleForm(BaseContentAdminForm):
         model = Article
 
 
-class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
+class ArticleAdmin(CollectibleAdmin):
     form = ArticleForm
     list_filter = CollectibleAdmin.list_filter + \
                   ('creation_date', 'author', 'source')

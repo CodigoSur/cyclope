@@ -7,7 +7,7 @@ from cyclope.admin import BaseContentAdmin
 
 from models import *
 
-class MediaAdmin(CollectibleAdmin, BaseContentAdmin):
+class MediaAdmin(CollectibleAdmin):
     pass
 
 admin.site.register(Picture, MediaAdmin)
