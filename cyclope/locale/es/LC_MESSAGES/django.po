@@ -345,7 +345,7 @@ msgstr "vista detallada del Documento seleccionado"
 
 #: apps/medialibrary/frontend_views.py:94
 msgid "detailed view of the selected Flash Movie"
-msgstr "vista detallada de la Película Flash seleccionada"
+msgstr "vista detallada del elemento Flash seleccionado"
 
 #: apps/medialibrary/frontend_views.py:109
 msgid "detailed view of the selected File"
@@ -407,11 +407,11 @@ msgstr "flash"
 
 #: apps/medialibrary/models.py:82
 msgid "flash movie"
-msgstr "película flash"
+msgstr "flash"
 
 #: apps/medialibrary/models.py:83
 msgid "flash movies"
-msgstr "películas flash"
+msgstr "flash"
 
 #: apps/medialibrary/models.py:96
 msgid "files"
