@@ -1,10 +1,8 @@
 {% extends host_template %}
-
 {% load comments i18n fb_versions %}
 
 {% block extra_head %}
 <script type='text/javascript' src='/media/cyclope/jwplayer/swfobject.js'></script>
-
 {% endblock %}
 
 {% block content %}
@@ -36,18 +34,18 @@
   {% endif %}
   <!-- /autor -->
 
-  <div id='video'>This text will be replaced</div>
+  <div id='audio'>This text will be replaced</div>
 
   <script type='text/javascript'>
-    var so = new SWFObject('/media/cyclope/jwplayer/player-viral.swf','ply','470','320','9','#ffffff');
+    var so = new SWFObject('/media/cyclope/jwplayer/player-viral.swf','ply','470','24','9','#ffffff');
     so.addParam('allowfullscreen','true');
     so.addParam('allowscriptaccess','always');
     so.addParam('wmode','opaque');
-    so.addVariable('file','{{ media.video }}');
-    so.write('video');
+    so.addVariable('file','{{ media.audio }}');
+    so.write('audio');
   </script>
 
-  <span id="download_link"><a href="{{ media.video }}">{% trans "download file" %}</a></span>
+  <span id="download_link"><a href="{{ media.audio }}">{% trans "download file" %}</a></span>
 
   <span class="text">{{ media.description|safe }}</span>
 

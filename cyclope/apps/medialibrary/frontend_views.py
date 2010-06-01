@@ -43,7 +43,7 @@ class SoundTrackDetail(MediaDetail):
         an HttpResponse otherwise
     """
     params = {'template_object_name': 'media',
-              'template_name': 'medialibrary/media_detail.html',
+              'template_name': 'medialibrary/soundtrack_detail.html',
               'queryset': SoundTrack.objects,
              }
     verbose_name=_('detailed view of the selected Audio Track')

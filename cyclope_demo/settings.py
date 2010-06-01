@@ -155,6 +155,7 @@ FILEBROWSER_SELECT_FORMATS = {
     'Document': ['Document'],
     'Flash': ['Flash'],
     'Video': ['Video'],
+    'Audio': ['Audio'],
     # for TinyMCE we also have to define lower-case items
     'image': ['Image'],
     'file': ['Folder','Image','Document',],

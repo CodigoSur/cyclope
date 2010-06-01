@@ -36,6 +36,8 @@ class Picture(BaseMedia):
 class SoundTrack(BaseMedia):
     """AudioTrack model.
     """
+#   image = FileBrowseField(_('image'), max_length=100, format='Image',
+#                             directory='pictures/')
     audio =  FileBrowseField(_('audio'), max_length=250, format='Audio',
                              directory='sound_tracks/')
 
@@ -94,4 +96,3 @@ class RegularFile(BaseMedia):
     class Meta:
         verbose_name = _('file')
         verbose_name_plural = _('files')
-
