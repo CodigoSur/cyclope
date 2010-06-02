@@ -46,11 +46,11 @@ class Alias(template.Node):
         if alias[0] not in ['"', "'"]:
             self.alias = template.Variable(alias)
         else:
-            self.alias = alias
+            self.alias = alias[1:-1]
 
     def render(self, context):
         if isinstance(self.alias, template.Variable):
-            context[self.alias.resolve(context)] = self.value.resolve(context)
+            context[unicode(self.alias.resolve(context))] = self.value.resolve(context)
         else:
             context[self.alias] = self.value.resolve(context)
         return ''
