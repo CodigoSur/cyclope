@@ -1,7 +1,9 @@
 {% load i18n comments %}
 
+  {% if media.tags %}
   <span class="tags">{% trans "Tags" %}: {{ media.tags }}</span>
-
+  {% endif %}
+  
   <h1 class="title">{{ current_object.name }}</h1>
 
   <!-- herramientas -->

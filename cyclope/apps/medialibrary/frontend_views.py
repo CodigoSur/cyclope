@@ -93,6 +93,20 @@ class FlashMovieDetail(MediaDetail):
              }
     verbose_name=_('detailed view of the selected Flash Movie')
 
+    def get_http_response(self, request, slug=None, *args, **kwargs):
+        fmovie = FlashMovie.objects.get(slug=slug)
+        base = fmovie.flash.url_full[:fmovie.flash.url_full.rfind('/')+1]
+        return views.object_detail(request, slug=slug,
+                                   inline=False, extra_context={'url_base':base},
+                                   *args, **kwargs)
+
+    def get_string_response(self, request, content_object=None, *args, **kwargs):
+        base = content_object.flash.url_full[
+            :content_object.flash.url_full.rfind('/')+1]
+        return views.object_detail(request, content_object=content_object,
+                                   inline=True, extra_context={'url_base':base},
+                                   *args, **kwargs)
+
 frontend.site.register_view(FlashMovie, FlashMovieDetail())
 
 
