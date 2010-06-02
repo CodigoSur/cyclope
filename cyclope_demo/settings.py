@@ -145,7 +145,7 @@ FILEBROWSER_EXTENSIONS = {
                  '.ods', '.xls','.csv'],
     'Audio': ['.ogg', '.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
     'Code': ['.html','.py','.js','.css'],
-    'Flash': ['.swf']
+    'Flash': ['.swf', '.flv'],
 }
 
 FILEBROWSER_SELECT_FORMATS = {

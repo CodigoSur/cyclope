@@ -1,19 +1,16 @@
 {% extends host_template %}
 
-{% load i18n cyclope_utils %}
+{% load i18n cyclope_utils fb_versions %}
 
 {% block content %}
 
 {% alias media as 'current_object' %}
-{% alias media.audio as 'media_file' %}
 
-<div class="soundtrack media detail">
+<div class="picture media detail">
 
   {% include 'medialibrary/media_detail_header.html' %}
 
-  {% assign player_height '24' %}
-  {% include 'medialibrary/media_player.html' %}
-
+  <img src="{% version media.image.path 'big' %}"/>
   <span class="text">{{ media.description|safe }}</span>
 
   <!--COMENTARIOS -->

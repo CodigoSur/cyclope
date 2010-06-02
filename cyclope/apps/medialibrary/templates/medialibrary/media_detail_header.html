@@ -1,0 +1,26 @@
+{% load i18n comments %}
+
+  <span class="tags">{% trans "Tags" %}: {{ media.tags }}</span>
+
+  <h1 class="title">{{ current_object.name }}</h1>
+
+  <!-- herramientas -->
+ {% get_comment_count for current_object as comment_count %}
+  <div class="tools">
+    <ul>
+      {% if comment_count %}
+      <li>
+        <a href="#comments" class="comments_link">Comentarios ({{ comment_count }})</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+  <!-- /herramientas -->
+
+  <!-- author -->
+  {% if current_object.author %}
+  <span id="author">
+    <span class="author">{% trans "By"%} {{ current_object.author }}</span>
+  </span>
+  {% endif %}
+  <!-- /autor -->

@@ -28,7 +28,7 @@ class PictureDetail(MediaDetail):
         an HttpResponse otherwise
     """
     params = {'template_object_name': 'media',
-              'template_name': 'medialibrary/media_detail.html',
+              'template_name': 'medialibrary/picture_detail.html',
               'queryset': Picture.objects,
              }
     verbose_name=_('detailed view of the selected Picture')

@@ -1,0 +1,17 @@
+{% load i18n %}
+
+{% block extra_head %}
+<script type='text/javascript' src='/media/cyclope/jwplayer/swfobject.js'></script>
+{% endblock %}
+
+
+  <div class='video_player' id="{{ current_object.slug }}_player">This text will be replaced</div>
+  <script type='text/javascript'>
+    var so = new SWFObject('/media/cyclope/jwplayer/player.swf','ply','470','{{ player_height }}','9','#ffffff');
+    so.addParam('allowfullscreen','true');
+    so.addParam('allowscriptaccess','always');
+    so.addParam('wmode','opaque');
+    so.addVariable('file','{{ media_file }}');
+    so.write('{{ current_object.slug }}_player');
+  </script>
+  <span class="download_link"><a href="{{ media_file }}">{% trans "download file" %}</a></span>

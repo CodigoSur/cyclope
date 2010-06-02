@@ -1,15 +1,25 @@
 {% extends host_template %}
 
+{% load i18n cyclope_utils %}
+
 {% block content %}
 
-<div class="media detail">
-  {{ media.name }}
-  <object type="application/x-shockwave-flash" data="{{ media.flash }}">
-    <param name="movie" value="{{ media.flash }}" />
-    <img src="{{ media.image }}" alt="" />
-  </object>
+{% alias media as 'current_object' %}
 
-  {{ media.description|safe }}
-</div>
+<div class="movieclip media detail">
+
+  {% include 'medialibrary/media_detail_header.html' %}
+
+<object type="application/x-shockwave-flash" data="{{ media.flash}}"
+uality="high" bgcolor="#10153f" align="middle" allowScriptAccess="sameDomain" allowFullScreen="true" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" >
+  <param name="movie" value="{{ media.flash}}" />
+</object>
+
+  <span class="text">{{ media.description|safe }}</span>
+
+  <!--COMENTARIOS -->
+  {% include 'comments/comments_block.html' %}
+
+</div> <!--termina media_detail -->
 
 {% endblock content%}

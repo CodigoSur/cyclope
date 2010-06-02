@@ -1,0 +1,23 @@
+{% load comments i18n %}
+
+  {% if not current_object.allow_comments == 'NO' %}
+    {% get_comment_count for current_object as comment_count %}
+
+    <div id="comments">
+      <div class="top">
+        <h6>{% blocktrans %} There are {{ comment_count }} comments {% endblocktrans %}</h6>
+      </div>
+      <div class="bottom"></div>
+      {% render_comment_list for current_object %}
+      <!--enviar comentario -->
+      <div class="box-top"></div>
+      <div class="box">
+
+      <!--form comentario -->
+      {% render_comment_form for current_object %}
+
+      </div> <!-- termina box -->
+      <div class="bottom"></div>
+    </div><!--termina comments -->
+
+  {% endif %}
