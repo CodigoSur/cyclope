@@ -39,6 +39,7 @@ def do_join(parser, token):
         raise template.TemplateSyntaxError, "Missing 'as' argument for '%s' tag" % bits[0]
     return JoinedStrings(bits[1:-2], bits[-1])
 
+
 class Alias(template.Node):
     def __init__(self, origin, alias):
         self.value = template.Variable(origin)
@@ -63,3 +64,32 @@ def do_alias(parser, token):
     if bits[-2] != 'as':
         raise template.TemplateSyntaxError, "Missing 'as' argument for '%s' tag" % bits[0]
     return Alias(bits[1], bits[3])
+
+
+# code from http://djangosnippets.org/snippets/539/
+class AssignNode(template.Node):
+    def __init__(self, name, value):
+        self.name = name
+        self.value = value
+
+    def render(self, context):
+        context[self.name] = self.value.resolve(context, True)
+        return ''
+
+@register.tag('assign')
+def do_assign(parser, token):
+    """
+    Assign an expression to a variable in the current context.
+
+    Syntax::
+        {% assign [name] [value] %}
+    Example::
+        {% assign list entry.get_related %}
+
+    """
+    bits = token.contents.split()
+    if len(bits) != 3:
+        raise template.TemplateSyntaxError("'%s' tag takes two arguments" % bits[0])
+    value = parser.compile_filter(bits[2])
+    return AssignNode(bits[1], value)
+
