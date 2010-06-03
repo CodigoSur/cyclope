@@ -78,7 +78,10 @@ class FlashMovie(BaseMedia):
     image = FileBrowseField(_('image'), max_length=100, format='Image',
                             directory='flashmovie_images/', blank=True)
     flash =  FileBrowseField(_('flash'), max_length=100, format='Flash',
-                                  directory='flashmovies/')
+                                  directory='flashmovies/', blank=True)
+    #html_container_url = models.CharField(_('html container url'),
+    #                                      max_length=100, blank=True)
+    #new_window = models.BooleanField(_('open in new window'), default=False)
 
     class Meta:
         verbose_name = _('flash movie')
@@ -96,3 +99,17 @@ class RegularFile(BaseMedia):
     class Meta:
         verbose_name = _('file')
         verbose_name_plural = _('files')
+
+
+class ExternalContent(BaseMedia):
+    """ExternalContent. For media that's displayed with custom html.
+    """
+    image = FileBrowseField(_('image'), max_length=100, format='Image',
+                            directory='external_content/', blank=True)
+    content_url = models.CharField(_('content url'), max_length=100)
+    new_window = models.BooleanField(_('open in new window'), default=False)
+    skip_detail = models.BooleanField(_('skip detailed view'), default=False)
+
+    class Meta:
+        verbose_name = _('external content')
+        verbose_name_plural = _('external contents')

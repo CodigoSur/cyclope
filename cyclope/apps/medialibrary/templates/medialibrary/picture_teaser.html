@@ -1,6 +1,6 @@
-{% load i18n tagging_tags fb_versions %}
+{% load fb_versions %}
 
-  <div class="media teaser">
+  <div class="media teaser picture">
     <a href="{% url picture-detail picture.slug %}">
       <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/image.png" width="48px" border="0"/>
       <img class="icon" src="{% version picture.image.path 'thumbnail' %}" width="135" border="0"/>

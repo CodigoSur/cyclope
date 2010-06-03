@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-02 19:04-0300\n"
+"POT-Creation-Date: 2010-06-03 10:57-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -282,8 +282,8 @@ msgstr "título"
 msgid "attachments"
 msgstr "adjuntos"
 
-#: apps/articles/models.py:80 apps/medialibrary/models.py:93
-#: apps/medialibrary/models.py:97
+#: apps/articles/models.py:80 apps/medialibrary/models.py:96
+#: apps/medialibrary/models.py:100
 msgid "file"
 msgstr "archivo"
 
@@ -344,13 +344,18 @@ msgstr "vista detallada del Documento seleccionado"
 msgid "detailed view of the selected Flash Movie"
 msgstr "vista detallada del elemento Flash seleccionado"
 
-#: apps/medialibrary/frontend_views.py:109
+#: apps/medialibrary/frontend_views.py:123
 msgid "detailed view of the selected File"
 msgstr "vista detallada del Archivo seleccionado"
 
+#: apps/medialibrary/frontend_views.py:138
+msgid "detailed view of the selected External Content"
+msgstr "vista detallada del Contenido Externo seleccionado"
+
 #: apps/medialibrary/models.py:28 apps/medialibrary/models.py:65
-#: apps/medialibrary/models.py:78 apps/medialibrary/models.py:91
-#: core/collections/models.py:36 core/collections/models.py:61
+#: apps/medialibrary/models.py:78 apps/medialibrary/models.py:94
+#: apps/medialibrary/models.py:107 core/collections/models.py:36
+#: core/collections/models.py:61
 msgid "image"
 msgstr "imagen"
 
@@ -402,19 +407,47 @@ msgstr "documentos"
 msgid "flash"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:84
+#: apps/medialibrary/models.py:87
 msgid "flash movie"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:85
+#: apps/medialibrary/models.py:88
 msgid "flash movies"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:98
+#: apps/medialibrary/models.py:101
 msgid "files"
 msgstr "archivos"
 
-#: apps/medialibrary/templates/medialibrary/flashmovie_detail.html:23
+#: apps/medialibrary/models.py:109
+msgid "content url"
+msgstr "URL del contenido"
+
+#: apps/medialibrary/models.py:110
+msgid "open in new window"
+msgstr "abrir en ventana nueva"
+
+#: apps/medialibrary/models.py:111
+msgid "skip detailed view"
+msgstr "saltear vista detallada"
+
+#: apps/medialibrary/models.py:114
+msgid "external content"
+msgstr "contenido externo"
+
+#: apps/medialibrary/models.py:115
+msgid "external contents"
+msgstr "contenidos externos"
+
+#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:22
+msgid "Open external content"
+msgstr "Abrir contenido externo"
+
+#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:22
+msgid " (in new window)"
+msgstr " (en ventana nueva)"
+
+#: apps/medialibrary/templates/medialibrary/flashmovie_detail.html:24
 msgid "full screen view (new window)"
 msgstr "pantalla completa (en ventana nueva)"
 
@@ -568,7 +601,7 @@ msgstr "Administración de Cyclope"
 #: templates/comments/comments_block.html:8
 #, python-format
 msgid " There are %(comment_count)s comments "
-msgstr ""
+msgstr " Hay %(comment_count)s comentarios "
 
 #: templates/comments/form.html:16
 msgid ""

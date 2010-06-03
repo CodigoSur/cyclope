@@ -1,0 +1,33 @@
+{% extends host_template %}
+
+{% load i18n cyclope_utils fb_versions %}
+
+{% block content %}
+
+{% alias media as 'current_object' %}
+
+<div class="exterrnalcontent media detail">
+
+  {% include 'medialibrary/media_detail_header.html' %}
+
+  {% if media.image %}
+  <a href="{{ media.content_url }}"
+  {% if media.new_window %}target="_blank"{% endif%}>
+    <img src="{% version media.image.path 'medium' %}"/>
+  </a>
+  {% endif %}
+
+  <span class="download_link">
+    <a href="{{ media.content_url }}" {% if media.new_window %}target="_blank"{% endif%}>
+    {% trans "Open external content"%} {% if media.new_window %}{% trans " (in new window)"%}{% endif%}
+    </a>
+  </span>
+  <span class="text">{{ media.description|safe }}</span>
+
+  <!--COMENTARIOS -->
+  {% include 'comments/comments_block.html' %}
+
+</div> <!--termina media_detail -->
+
+
+{% endblock content%}

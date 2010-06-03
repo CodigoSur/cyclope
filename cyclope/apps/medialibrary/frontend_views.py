@@ -123,3 +123,18 @@ class RegularFileDetail(MediaDetail):
     verbose_name=_('detailed view of the selected File')
 
 frontend.site.register_view(RegularFile, RegularFileDetail())
+
+
+class ExternalContentDetail(MediaDetail):
+    """Detail view of external content.
+    Returns:
+        a string if the view is called from within a region templatetag
+        an HttpResponse otherwise
+    """
+    params = {'template_object_name': 'media',
+              'template_name': 'medialibrary/externalcontent_detail.html',
+              'queryset': ExternalContent.objects,
+             }
+    verbose_name=_('detailed view of the selected External Content')
+
+frontend.site.register_view(ExternalContent, ExternalContentDetail())

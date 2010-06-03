@@ -1,0 +1,18 @@
+{% load fb_versions %}
+
+  <div class="media teaser externalcontent">
+      <a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
+      {% if externalcontent.image %}
+      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/external.png" width="48px" border="0"/>
+      <img src="{% version externalcontent.image.path 'thumbnail' %}" width="135" border="0"/>
+      {% else %}
+      <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/external.png" width="135" border="0"/>
+      {% endif %}
+
+    </a>
+    <span class="label">
+      <a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
+      {{ externalcontent.name }}
+    </a>
+    </span>
+  </div>
