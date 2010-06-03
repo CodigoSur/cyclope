@@ -73,7 +73,7 @@ class DocumentDetail(MediaDetail):
         an HttpResponse otherwise
     """
     params = {'template_object_name': 'media',
-              'template_name': 'medialibrary/media_detail.html',
+              'template_name': 'medialibrary/document_detail.html',
               'queryset': Document.objects,
              }
     verbose_name=_('detailed view of the selected Document')
@@ -117,7 +117,7 @@ class RegularFileDetail(MediaDetail):
         an HttpResponse otherwise
     """
     params = {'template_object_name': 'media',
-              'template_name': 'medialibrary/media_detail.html',
+              'template_name': 'medialibrary/regularfile_detail.html',
               'queryset': RegularFile.objects,
              }
     verbose_name=_('detailed view of the selected File')

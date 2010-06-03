@@ -8,7 +8,7 @@
     </h2>
     {% if externalcontent.image %}
       <a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
-        <img src="{% version externalcontent.image.path 'small' %}" width="135" border="0"/>
+        <img src="{% version externalcontent.image.path 'small' %}" border="0"/>
     </a>
     {% endif %}
 
