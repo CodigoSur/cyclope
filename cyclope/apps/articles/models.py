@@ -41,7 +41,7 @@ class Source(models.Model):
 
 class Article(BaseContent, Collectible):
     pretitle = models.CharField(_('pre-title'), max_length=250, blank=True)
-    summary = models.TextField(_('summary'))
+    summary = models.TextField(_('summary'), blank=True)
     text = models.TextField(_('text'))
     author = models.ForeignKey(Author, verbose_name=_('author'))
     source = models.ForeignKey(Source, verbose_name=_('source'),

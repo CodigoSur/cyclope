@@ -8,7 +8,7 @@ setup(
     description="CMS for pythonistas who like to code instead of using a web UI for every task.",
     long_description=__import__('cyclope').__doc__,
     author='Nicolás Echániz & Santiago Hoerth',
-    author_email='nico@rakar.com',
+    author_email='nicoechaniz@codigosur.org',
     url='http://bitbucket.org/nicoechaniz/django-cyclope/',
     license='GPL v3',
     platforms=['OS Independent'],

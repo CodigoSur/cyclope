@@ -8,11 +8,15 @@
      <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name }}</a></h2>
       {% if article.pictures.count and not simplified_view %}
       <a href="{% url article-detail article.slug %}">
-        <img src="{% version article.first_picture.image.path 'small' %}" width="135" border="0"/>
+        <img class="teaser_icon" src="{% version article.first_picture.image.path 'small' %}" width="135" border="0"/>
       </a>
       {% endif %}
     <p class="summary">
-      {{ article.summary }}
+      {% if article.summary %}
+        {{ article.summary }}
+      {% else %}
+        {{ article.text|truncatewords:40|safe }}
+      {% endif %}
       <a href="{% url article-detail article.slug %}">{% trans "More" %}</a>
     </p>
     {% if not simplified_view %}

@@ -6,7 +6,6 @@ What is Cyclope
 
 :synopsys: ``Cyclope`` is a `Django`_ based CMS. It is built around the idea of collections of categorized content objects which can be displayed using different associated views.
 :copyright: 2010 by `Código Sur <http://www.codigosur.org>`_ -  Nuestra América Asoc. Civil / Fundación Pacificar
-:authors: Nicolás Echániz, Santiago Hoerth (see AUTHORS.txt for a full list of contributors)
 :url: http://bitbucket.org/nicoechaniz/django-cyclope/
 :version: 0.1.0
 :licence: GPL v3
@@ -39,7 +38,8 @@ Documentation
 
 Installation
 ------------
-...
+
+Please visit: codigo.cyclope.ws for installation instructions.
 
 
 Demo project
@@ -62,4 +62,3 @@ If you need to contact the development team you can reach us by e-mail: nicoecha
 
 VERSION = (0, 1, 0)
 __version__ = '.'.join(map(str, VERSION))
-
