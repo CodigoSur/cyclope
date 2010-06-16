@@ -10,7 +10,7 @@
     {% endif %}
 
     {% if collection.image %}
-    <img class="teaser_icon" src="{% version collection.image.path 'medium' %}" border="0"/>
+    <img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
     {% endif %}
 
     {% if collection.description %}
@@ -21,11 +21,11 @@
 
     {% for category in categories %}
 
-    <div class="category teaser">
+    <div class="category teaser {% if category.image %}clear_right{% endif%}" >
       <h2 class="title"><a href="{% url category-teaser_list category.slug %}">{{ category.name }}</a></h2>
       {% if category.image %}
       <a href="{% url category-teaser_list category.slug %}">
-        <img src="{% version category.image.path 'thumbnail' %}" border="0"/>
+        <img class="icon" src="{% version category.image.path 'thumbnail' %}" border="0"/>
       </a>
       {% endif %}
 
@@ -33,9 +33,6 @@
         {{ category.description|safe }}
       </div>
 
-      {% if category.image %}
-      <div class="clear_right"></div>
-      {% endif %}
       <div class="bottom"></div>
     </div>
     {% endfor %}
