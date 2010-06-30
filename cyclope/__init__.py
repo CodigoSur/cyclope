@@ -4,9 +4,9 @@
 What is Cyclope
 ===============
 
-:synopsys: ``Cyclope`` is a `Django`_ based CMS. It is built around the idea of collections of categorized content objects which can be displayed using different associated views.
+:synopsys: Cyclope 3 is a django based CMS for pythonistas who don't mind coding a bit and dislike overly-complex user interfaces. It is based on the concept of categorized collections of heterogeneous content types with associated front-end views that can be laid out in the website's page regions. The goal of this project is to create a CMS that is friendly to the end user and versatile for the developer. It won't solve every complex problem at UI level but will let you "expose" the solution.
 :copyright: 2010 by `Código Sur <http://www.codigosur.org>`_ -  Nuestra América Asoc. Civil / Fundación Pacificar
-:url: http://bitbucket.org/nicoechaniz/django-cyclope/
+:url: http://codigo.cyclope.ws/
 :version: 0.1.0
 :licence: GPL v3
 

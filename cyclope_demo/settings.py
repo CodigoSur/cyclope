@@ -106,8 +106,8 @@ INSTALLED_APPS = (
     'mptt',
     'captcha',
     'filebrowser',
+    'south',
 
-#    'south',
 #    'ajax_filtered_fields',
 #    'debug_toolbar',
 

@@ -161,7 +161,8 @@ class CyclopeSite(object):
         regions_data = [{'region_name': '', 'verbose_name': '------'}]
         regions_data.extend([ {'region_name': region_name,
                                'verbose_name': verbose_name}
-                            for region_name, verbose_name in regions.items()
+                            for region_name, verbose_name
+                            in sorted(regions.items(), key=lambda r: r[1])
                             if region_name != 'content' ])
         json_data = simplejson.dumps(regions_data)
         return HttpResponse(json_data, mimetype='application/json')

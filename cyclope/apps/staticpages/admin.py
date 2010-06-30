@@ -13,7 +13,7 @@ from cyclope.widgets import WYMEditor
 from models import StaticPage
 
 class StaticPageAdminForm(BaseContentAdminForm):
-#    text = forms.CharField(label=_('Text'), widget=WYMEditor())
+    text = forms.CharField(label=_('Text'), widget=WYMEditor())
 
     class Meta:
         model = StaticPage

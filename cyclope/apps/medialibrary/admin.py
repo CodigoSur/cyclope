@@ -3,7 +3,6 @@
 from django.contrib import admin
 
 from cyclope.core.collections.admin import CollectibleAdmin
-from cyclope.admin import BaseContentAdmin
 
 from models import *
 

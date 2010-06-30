@@ -16,8 +16,14 @@ from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from tagging_autocomplete.models import TagAutocompleteField
 import mptt
 from autoslug.fields import AutoSlugField
+from filebrowser.fields import FileBrowseField
 
 import cyclope
+
+# we add South introspection rules for custom field TagAutocompleteField
+# this shouldn't be necessary once South incorporates this rule
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], ["^tagging_autocomplete\.models\.TagAutocompleteField"])
 
 
 class SiteSettings(models.Model):
@@ -83,9 +89,6 @@ class MenuItem(models.Model):
 
     Items always belong to one menu and they can be ordered in a tree structure.
     """
-# this class could inherit from Category
-# but mptt does not support inheritance well
-# maybe we should try django-polymorphic and see how MPTT behaves
     menu = models.ForeignKey(Menu, verbose_name=_('menu'),
                              db_index=True, related_name='menu_items')
     name = models.CharField(_('name'), max_length=50, db_index=True)
@@ -161,45 +164,6 @@ class MenuItem(models.Model):
 mptt.register(MenuItem)
 
 
-class BaseContent(models.Model):
-    """Parent class for every content model.
-    """
-    name = models.CharField(_('name'), max_length=250,
-                             db_index=True, blank=False)
-    slug = AutoSlugField(populate_from='name', unique=True,
-                         db_index=True, always_update=True)
-    tags = TagAutocompleteField(_('tags'))
-    published =  models.BooleanField(_('published'), default=True)
-
-    def get_instance_url(self, view_name):
-        #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well.
-        view = cyclope.core.frontend.site.get_view(self.__class__, view_name)
-        if view.is_instance_view:
-            return '%s/%s/%s/View/%s'\
-                    % (self._meta.app_label,
-                       self._meta.object_name.lower(),
-                       self.slug, view_name)
-        else:
-            return '%s/%s/View/%s'\
-                    % (self._meta.app_label,
-                       self._meta.object_name.lower(), view_name)
-
-    def get_absolute_url(self):
-        view_name = cyclope.core.frontend.site.get_default_view_name(self.__class__)
-        return "/"+ self.get_instance_url(view_name)
-
-    @classmethod
-    def get_model_url(cls, view_name):
-        return '%s/%s/View/%s'\
-                % (cls._meta.app_label, cls._meta.object_name.lower(), view_name)
-
-    def __unicode__(self):
-        return self.name
-
-    class Meta:
-        abstract = True
-
-
 class RegionView(models.Model):
     """Holds configuration data for a frontend view to be displayed in a region of a particular Layout.
     """
@@ -239,3 +203,76 @@ class Layout(models.Model):
     class Meta:
         verbose_name = _('layout')
         verbose_name_plural = _('layouts')
+
+
+class BaseContent(models.Model):
+    """Parent class for every content model.
+    """
+    name = models.CharField(_('name'), max_length=250,
+                             db_index=True, blank=False)
+    slug = AutoSlugField(populate_from='name', unique=True,
+                         db_index=True, always_update=True)
+    tags = TagAutocompleteField(_('tags'))
+    published =  models.BooleanField(_('published'), default=True)
+
+    def get_instance_url(self, view_name):
+        #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well.
+        view = cyclope.core.frontend.site.get_view(self.__class__, view_name)
+        if view.is_instance_view:
+            return '%s/%s/%s/View/%s'\
+                    % (self._meta.app_label,
+                       self._meta.object_name.lower(),
+                       self.slug, view_name)
+        else:
+            return '%s/%s/View/%s'\
+                    % (self._meta.app_label,
+                       self._meta.object_name.lower(), view_name)
+
+    def get_absolute_url(self):
+        view_name = cyclope.core.frontend.site.get_default_view_name(self.__class__)
+        return "/"+ self.get_instance_url(view_name)
+
+    @classmethod
+    def get_model_url(cls, view_name):
+        return '%s/%s/View/%s'\
+                % (cls._meta.app_label, cls._meta.object_name.lower(), view_name)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        abstract = True
+
+
+class Author(models.Model):
+    """Model to be used for every content that needs an author.
+
+    This referes to the author of the content, not to the user uploading it.
+    """
+    name = models.CharField(_('name'), max_length=250,
+                             db_index=True, blank=False)
+    slug = AutoSlugField(populate_from='name', unique=True,
+                         db_index=True, always_update=True)
+    image = FileBrowseField(_('image'), max_length=100, format='Image',
+                            directory='author_images/',
+                            blank=True, default='')
+    origin = models.CharField(_('origin'), max_length=250, db_index=True,
+                               blank=True, default='')
+    notes = models.TextField(_('notes'), blank=True, default='')
+    content_types = models.ManyToManyField(
+        ContentType, db_index=True, verbose_name=_('content types'),
+        help_text=_('Select the content types this author is related to.'),)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Source(models.Model):
+    name = models.CharField(_('name'),max_length=250,
+                             db_index=True, blank=False, unique=True)
+    slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
+                         always_update=True)
+    link = models.CharField(_('link'), max_length=250, blank=True, default='')
+
+    def __unicode__(self):
+        return self.name

@@ -17,8 +17,18 @@ from cyclope.widgets import WYMEditor
 from cyclope.models import MenuItem, BaseContent,\
                            SiteSettings, Layout, RegionView
 from cyclope import settings as cyc_settings
-from cyclope.utils import populate_type_choices
 from cyclope.core.frontend import site
+
+
+def populate_ctype_choices_from_registry(myform):
+    ctype_choices = [('', '------')]
+    registry = sorted(site._registry, key=lambda mdl: mdl._meta.verbose_name)
+
+    for model in registry:
+        ctype = ContentType.objects.get_for_model(model)
+        ctype_choices.append((ctype.id, model._meta.verbose_name))
+    myform.fields['content_type'].choices = ctype_choices
+
 
 class AjaxChoiceField(forms.ChoiceField):
     """
@@ -67,7 +77,7 @@ class MenuItemAdminForm(forms.ModelForm):
                 content_object = menu_item.content_object
                 self.fields['object_id'].choices = [(content_object.id,
                                                         content_object.name)]
-        populate_type_choices(self)
+        populate_ctype_choices_from_registry(self)
 
     def clean(self):
         data = self.cleaned_data
@@ -171,7 +181,7 @@ class RegionViewInlineForm(forms.ModelForm):
                 self.fields['object_id'].choices = [(content_object.id,
                                                         content_object.name)]
 
-        populate_type_choices(self)
+        populate_ctype_choices_from_registry(self)
 
     def clean(self):
         #TODO(nicoechaniz): this whole form validation could be simplified if we were not using our custom AjaxChoiceField and fields were actually marked as not null in the model definition. The problem is that the standard form validation will check for valid choices, so we should set choices to valid ones for each choicefield at form init time.

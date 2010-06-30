@@ -8,12 +8,20 @@ from cyclope.widgets import WYMEditor
 from cyclope.core.collections.admin import CollectibleAdmin
 from cyclope.admin import BaseContentAdmin
 from cyclope.forms import BaseContentAdminForm
+from cyclope.models import Author
 
 from models import *
 
 class ArticleForm(BaseContentAdminForm):
-#    summary = forms.CharField(widget=WYMEditor())
     text = forms.CharField(label=_('Text'), widget=WYMEditor())
+
+    def __init__(self, *args, **kwargs):
+        super(ArticleForm, self).__init__(*args, **kwargs)
+        author_choices = [('', '------')]
+        for author in Author.objects.all():
+            if  Article in [ctype.model_class() for ctype in author.content_types.all()]:
+                author_choices.append((author.id, author.name))
+        self.fields['author'].choices = author_choices
 
     class Meta:
         model = Article

@@ -5,7 +5,6 @@ from django.utils.translation import ugettext as _
 from django.contrib.contenttypes.models import ContentType
 
 from autoslug.fields import AutoSlugField
-#from imagekit.models import ImageModel
 from filebrowser.fields import FileBrowseField
 
 from cyclope.models import BaseContent
@@ -36,8 +35,6 @@ class Picture(BaseMedia):
 class SoundTrack(BaseMedia):
     """AudioTrack model.
     """
-#   image = FileBrowseField(_('image'), max_length=100, format='Image',
-#                             directory='pictures/')
     audio =  FileBrowseField(_('audio'), max_length=250, format='Audio',
                              directory='sound_tracks/')
 
@@ -79,9 +76,6 @@ class FlashMovie(BaseMedia):
                             directory='flashmovie_images/', blank=True)
     flash =  FileBrowseField(_('flash'), max_length=100, format='Flash',
                                   directory='flashmovies/', blank=True)
-    #html_container_url = models.CharField(_('html container url'),
-    #                                      max_length=100, blank=True)
-    #new_window = models.BooleanField(_('open in new window'), default=False)
 
     class Meta:
         verbose_name = _('flash movie')

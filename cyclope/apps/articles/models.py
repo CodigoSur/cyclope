@@ -12,32 +12,10 @@ from django.contrib.contenttypes import generic
 
 from autoslug.fields import AutoSlugField
 from cyclope.core.collections.models import Collectible
-from cyclope.models import BaseContent
+from cyclope.models import BaseContent, Author, Source
 from cyclope.apps.medialibrary.models import Picture
 
 YES_NO = (('YES', _('yes')), ('NO', _('no')),)
-
-class Author(models.Model):
-    name = models.CharField(_('name'),max_length=250,
-                             db_index=True, blank=False, unique=True)
-    slug = AutoSlugField(populate_from='name', unique=True, db_index=True)
-    country = models.CharField(max_length=250, db_index=True,
-                               blank=True, default='')
-    notes = models.TextField(_('notes'), blank=True, default='')
-    def __unicode__(self):
-        return self.name
-
-
-class Source(models.Model):
-    name = models.CharField(_('name'),max_length=250,
-                             db_index=True, blank=False, unique=True)
-    slug = AutoSlugField(populate_from='name', unique=True, db_index=True)
-
-    link = models.CharField(_('link'), max_length=250, blank=True, default='')
-
-    def __unicode__(self):
-        return self.name
-
 
 class Article(BaseContent, Collectible):
     pretitle = models.CharField(_('pre-title'), max_length=250, blank=True)

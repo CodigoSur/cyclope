@@ -44,12 +44,10 @@ def template_for_request(request):
                 )
     return template
 
-def populate_type_choices(myform):
+
+def populate_base_ctype_choices(myform):
     ctype_choices = [('', '------')]
-    for model in cyclope.core.frontend.site._registry:
-        ctype = ContentType.objects.get_for_model(model)
-        ctype_choices.append((ctype.id, model._meta.verbose_name))
+    for ctype in ContentType.objects.all():
+        if issubclass(ctype.model_class(), BaseContent):
+            ctype_choices.append((ctype.id, ctype.model))
     myform.fields['content_type'].choices = ctype_choices
-
-
-

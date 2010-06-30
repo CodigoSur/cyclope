@@ -13,7 +13,7 @@ setup(
     license='GPL v3',
     platforms=['OS Independent'],
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Environment :: Web Environment",
         "Framework :: Django",
         "Intended Audience :: Developers",
@@ -44,6 +44,7 @@ setup(
         'django-tagging>=0.3.1',
         'django-tagging-autocomplete>=0.3.1',
         'django-filebrowser>=3.0,==dev',
+        'South>=0.7.1',
     ],
 
     packages=find_packages(),

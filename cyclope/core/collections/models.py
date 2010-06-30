@@ -14,7 +14,6 @@ from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 
 from cyclope.core import frontend
-#from cyclope.apps.medialibrary.models import Picture
 
 
 class Collection(models.Model):
@@ -63,10 +62,6 @@ class Category(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    # this is needed for the feincms.editor.TreeEditor to correctly display the hierarchy
-#    def get_absolute_url(self):
-#        return self.__unicode__()
 
     def valid_parents(self):
         return Category.tree.filter(pk__isnot=self.pk)
@@ -140,8 +135,7 @@ class CategoryMap(models.Model):
 
 
 class Collectible(models.Model):
-    """
-    Base class for collectible objects
+    """Base class for collectible objects
     """
     categories = generic.GenericRelation('CategoryMap',
         content_type_field='content_type', object_id_field='object_id',
