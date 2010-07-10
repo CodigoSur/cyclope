@@ -295,14 +295,14 @@ class Image(models.Model):
         verbose_name_plural = _('images')
 
 
-class Attachment(models.Model):
-    """A simple attachment model.
-    """
-    attachment =  FileField(_('image'), max_length=100, format='Image',
-                                    directory='pictures/')
-    name = models.CharField(_('name'),max_length=250,
-                             db_index=True, blank=False, unique=True)
+#class Attachment(models.Model):
+#    """A simple attachment model.
+#    """
+#    attachment =  models.FileField(_('image'), max_length=100, format='Image',
+#                                    directory='pictures/')
+#    name = models.CharField(_('name'),max_length=250,
+#                             db_index=True, blank=False, unique=True)
     
-    class Meta:
-        verbose_name = _('attachment')
-        verbose_name_plural = _('attachment')
+#    class Meta:
+#        verbose_name = _('attachment')
+#        verbose_name_plural = _('attachment')
