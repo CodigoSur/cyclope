@@ -47,12 +47,12 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   {% if article.images.count %}
   <div id="gallery">
     <ul>
-      {% for image in article.images.all %}
+      {% for imagedata in article.articleimagedata_set.all %}
       <li {% if not forloop.first %} style="display:none;" {% endif %}}>
-        <a href="{% version image.image.path 'medium' %}"  title="{{ image.label}}">
-          <img src="{% version image.image.path 'small' %}" alt="{{ image.label }}" />
+        <a href="{% version imagedata.image.image.path 'medium' %}"  title="{{ imagedata.label}}">
+          <img src="{% version imagedata.image.image.path 'small' %}" alt="{{ imagedata.label }}" />
         </a>
-        <p>{{ image.name }}</p>
+        <p>{{ imagedata.label }}</p>
       </li>
       {% endfor %}
     </ul>

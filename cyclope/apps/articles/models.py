@@ -28,7 +28,6 @@ class Article(BaseContent, Collectible):
     creation_date = models.DateTimeField(_('creation date'),
                                      auto_now_add=True, editable=False)
     date = models.DateTimeField(_('date'), blank=True, null=True)
-    pictures = models.ManyToManyField(Picture, null=True, blank=True,)
     images = models.ManyToManyField(Image, null=True, blank=True,
                                     through='ArticleImageData')
 
@@ -49,8 +48,8 @@ class Article(BaseContent, Collectible):
         ordering = ('-creation_date', 'name')
 
 class ArticleImageData(models.Model):
-    article = models.ForeignKey(Article)
-    image = models.ForeignKey(Image)
+    article = models.ForeignKey(Article, verbose_name=_('article'))
+    image = models.ForeignKey(Image, verbose_name=_('image'))
     label = models.CharField(_('label'), max_length=250)
     
     def __unicode__(self):

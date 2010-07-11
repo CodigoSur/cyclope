@@ -47,6 +47,14 @@ class ArticleAdmin(CollectibleAdmin):
     search_fields = ('name', 'pretitle', 'summary', 'text', )
     inlines = CollectibleAdmin.inlines + [ArticleImageDataInline]
 
+    fieldsets = ((None,
+                  {'fields': ('name', 'author', 'text', 'published')}),
+                 (_('Publication data'),
+                  {
+                    'classes': ('collapse',),
+                    'fields':('source', 'tags', 'pretitle',
+                              'summary', 'date', 'allow_comments')}),
+                )
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Author)
