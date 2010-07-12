@@ -1,0 +1,15 @@
+{% extends CYCLOPE_DEFAULT_TEMPLATE %}
+{% load i18n %}
+
+{% block page_content %}
+
+<div id="content_container">
+  <form action="" method="post">
+  {{form.as_p}}
+  <input type="submit">
+  </form>
+
+{{ next_page }}
+</div>
+
+{% endblock %}

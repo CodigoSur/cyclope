@@ -3,6 +3,8 @@ syntax: glob
 *.pyo
 *~
 *.kpf
+*.geany
+.svn
 pip-log.txt 
 dbutils.py
 mine_initial_data.py
@@ -10,7 +12,6 @@ workenv
 testworkenv
 requirements.txt
 doc
-.svn
 initial_data.json.init
 initial_data.json
 django_cyclope.egg-info

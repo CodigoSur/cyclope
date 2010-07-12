@@ -1,0 +1,10 @@
+{% load i18n %}
+{% blocktrans %}
+Thank you for registering to {{site}}
+
+You can finish your registration by clicking on this link:
+{% endblocktrans %}
+http://{{site.domain}}{% url registration_activate activation_key %}
+{% blocktrans %}
+This activation key will expire in {{expiration_days}} days.
+{% endblocktrans %}

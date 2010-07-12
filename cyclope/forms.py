@@ -222,3 +222,12 @@ class RegionViewInlineForm(forms.ModelForm):
 
     class Meta:
         model = RegionView
+
+
+from registration.forms import RegistrationForm
+from captcha.fields import CaptchaField
+
+class RegistrationFormWithCaptcha(RegistrationForm):
+    captcha = CaptchaField(label=_("Security code"))
+
+

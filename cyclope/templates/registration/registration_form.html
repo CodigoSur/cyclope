@@ -1,0 +1,21 @@
+{% extends CYCLOPE_DEFAULT_TEMPLATE %}
+{% load i18n %}
+
+{% block page_content%}
+
+<div id="content_container">
+  <div id="comments">
+    <h3>
+      {% trans "Please fill in your user profile data" %}
+    </h3>
+    <form action="" method="post">{% csrf_token %}
+
+    {{ form }}
+    <p class="submit">
+      <input type="submit" name="post" class="submit" value="{% trans "Register" %}" />
+    </p>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

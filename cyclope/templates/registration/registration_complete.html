@@ -1,0 +1,15 @@
+{% extends CYCLOPE_DEFAULT_TEMPLATE %}
+{% load i18n %}
+
+{% block title %}{% trans "Registration complete" %}.{% endblock %}
+
+{% block page_content %}
+<script type="text/javascript">
+  setTimeout('window.location = ""', 3000);
+</script>
+
+<div id="content_container">
+  <h3>{% trans "Please check your e-mail and follow the provided link in order to complete your account activation." %}.</h3>
+  <p><a href="">{% trans "return." %}</a></p>
+</div>
+{% endblock %}
