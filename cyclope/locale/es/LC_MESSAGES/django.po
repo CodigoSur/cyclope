@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-03 10:57-0300\n"
+"POT-Creation-Date: 2010-07-11 00:08-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,53 +19,53 @@ msgstr ""
 msgid "content details"
 msgstr "detalles de contenido"
 
-#: forms.py:34
+#: forms.py:44
 msgid "Menu items"
 msgstr "Items de menú"
 
-#: forms.py:53 forms.py:151
+#: forms.py:63 forms.py:161
 msgid "View"
 msgstr "Vista"
 
-#: forms.py:54 forms.py:152
+#: forms.py:64 forms.py:162
 msgid "Content object"
 msgstr "Contenido"
 
-#: forms.py:55 core/collections/admin.py:84
+#: forms.py:65 core/collections/admin.py:84
 msgid "Parent"
 msgstr "Padre"
 
-#: forms.py:81
+#: forms.py:91
 msgid ""
 "You can not set a Custom URL for menu entries                     with "
 "associated content"
 msgstr "No puede setear una URL para Entradas de Menú con contenido asociado."
 
-#: forms.py:88 forms.py:192
+#: forms.py:98 forms.py:202
 msgid "You need to select a content view"
 msgstr "Debe seleccionar una Vista del contenido"
 
-#: forms.py:94 forms.py:198
+#: forms.py:104 forms.py:208
 msgid "The selected view requires a content object"
 msgstr "La vista seleccionada requiere que elija un objeto de contenido"
 
-#: forms.py:112
+#: forms.py:122
 msgid "Theme"
 msgstr "Tema"
 
-#: forms.py:124
+#: forms.py:134
 msgid "Template"
 msgstr "Plantilla"
 
-#: forms.py:150
+#: forms.py:160
 msgid "Region"
 msgstr "Región"
 
-#: forms.py:185
+#: forms.py:195
 msgid "Content type can not be empty"
 msgstr "El Tipo de contenido no debe estar vacío"
 
-#: forms.py:189
+#: forms.py:199
 msgid "You need to select a region"
 msgstr "Debe seleccionar una región"
 
@@ -81,134 +81,189 @@ msgstr "lista de items raíz para el Menú seleccionado"
 msgid "flat list of all items for the selected Menu"
 msgstr "lista sin jerarquía de los items del Menú"
 
-#: models.py:29
+#: models.py:35
 msgid "templating theme"
 msgstr "tema de la plantilla"
 
-#: models.py:31
+#: models.py:37
 msgid "default layout"
 msgstr "esquema por defecto"
 
-#: models.py:33 apps/articles/models.py:54
+#: models.py:39 apps/articles/models.py:34
 msgid "allow comments"
 msgstr "permitir comentarios"
 
-#: models.py:35 apps/articles/models.py:57
+#: models.py:41 apps/articles/models.py:37
 msgid "enabled"
 msgstr "habilitado"
 
-#: models.py:36 apps/articles/models.py:58
+#: models.py:42 apps/articles/models.py:38
 msgid "disabled"
 msgstr "deshabilitado"
 
-#: models.py:39
+#: models.py:45
 msgid "global title"
 msgstr "titulo global"
 
-#: models.py:41
+#: models.py:47
 msgid "keywords"
 msgstr "palabras clave"
 
-#: models.py:42 apps/articles/models.py:78 apps/medialibrary/models.py:19
-#: core/collections/models.py:35 core/collections/models.py:60
+#: models.py:48 apps/articles/models.py:70 apps/medialibrary/models.py:18
+#: core/collections/models.py:34 core/collections/models.py:59
 msgid "description"
 msgstr "descripción"
 
-#: models.py:48 models.py:49
+#: models.py:54 models.py:55
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:58 models.py:91 models.py:167 models.py:229
-#: apps/articles/models.py:21 apps/articles/models.py:32
-#: core/collections/models.py:24 core/collections/models.py:54
+#: models.py:64 models.py:94 models.py:193 models.py:211 models.py:252
+#: models.py:271 core/collections/models.py:23 core/collections/models.py:53
 msgid "name"
 msgstr "nombre"
 
-#: models.py:60
+#: models.py:66
 msgid "main menu"
 msgstr "menu principal"
 
-#: models.py:77 models.py:89
+#: models.py:83 models.py:92
 msgid "menu"
 msgstr "menú"
 
-#: models.py:78
+#: models.py:84
 msgid "menus"
 msgstr "menúes"
 
-#: models.py:92 core/collections/models.py:57
+#: models.py:95 core/collections/models.py:56
 msgid "parent"
 msgstr "relacionado"
 
-#: models.py:93 core/collections/models.py:58
+#: models.py:96 core/collections/models.py:57
 msgid "children"
 msgstr "hijo"
 
-#: models.py:97
+#: models.py:100
 msgid "site home"
 msgstr "página de inicio"
 
-#: models.py:98
+#: models.py:101
 msgid "custom URL"
 msgstr "URL personalizada"
 
-#: models.py:101
+#: models.py:104
 msgid ""
 "Either set an URL here or                                     select a "
 "content type and view."
 msgstr "configura la URL aquí o selecciona un tipo de contenido y vista"
 
-#: models.py:106 models.py:240
+#: models.py:109 models.py:204
 msgid "layout"
 msgstr "esquema"
 
-#: models.py:110 models.py:210
+#: models.py:113 models.py:174
 msgid "type"
 msgstr "tipo"
 
-#: models.py:112 models.py:218
+#: models.py:115 models.py:182
 msgid "object"
 msgstr "objeto"
 
-#: models.py:118 models.py:212
+#: models.py:121 models.py:176
 msgid "view"
 msgstr "vista"
 
-#: models.py:158
+#: models.py:161
 msgid "menu item"
 msgstr "item de menú"
 
-#: models.py:159
+#: models.py:162
 msgid "menu items"
 msgstr "items de menú"
 
-#: models.py:171
-msgid "tags"
-msgstr "etiquetas"
-
-#: models.py:172
-msgid "published"
-msgstr "publicar"
-
-#: models.py:206
+#: models.py:170
 msgid "region"
 msgstr "región"
 
-#: models.py:215
+#: models.py:179
 msgid "weight"
 msgstr "peso"
 
-#: models.py:234
+#: models.py:198
 msgid "layout template"
 msgstr "plantilla para este esquema"
 
-#: models.py:241
+#: models.py:205
 msgid "layouts"
 msgstr "esquemas"
 
-#: apps/articles/admin.py:16
+#: models.py:215
+msgid "tags"
+msgstr "etiquetas"
+
+#: models.py:216
+msgid "published"
+msgstr "publicar"
+
+#: models.py:256 models.py:284 models.py:294 apps/articles/models.py:52
+#: apps/medialibrary/models.py:27 apps/medialibrary/models.py:62
+#: apps/medialibrary/models.py:75 apps/medialibrary/models.py:88
+#: apps/medialibrary/models.py:101 core/collections/models.py:35
+#: core/collections/models.py:60
+msgid "image"
+msgstr "imagen"
+
+#: models.py:259
+msgid "origin"
+msgstr "origen"
+
+#: models.py:261
+msgid "notes"
+msgstr "notas"
+
+#: models.py:263 core/collections/models.py:33
+msgid "content types"
+msgstr "tipos de contenido"
+
+#: models.py:264
+msgid "Select the content types this author is related to."
+msgstr "Seleccione los tipos de contenido que corresponden a este autor"
+
+#: models.py:275
+msgid "link"
+msgstr "enlace"
+
+#: models.py:290
+msgid "Thumbnail Image"
+msgstr "Imagen miniatura"
+
+#: models.py:295
+msgid "images"
+msgstr "imágenes"
+
+#: widgets.py:41
+msgid "toggle editor"
+msgstr "encender/apagar editor"
+
+#: widgets.py:41
+msgid "on"
+msgstr "off"
+
+#: widgets.py:41
+msgid "off"
+msgstr "on"
+
+#: widgets.py:97
+msgid "Lookup"
+msgstr "Buscar"
+
+#: apps/articles/admin.py:17
 msgid "Text"
 msgstr "Texto"
+
+#: apps/articles/admin.py:52
+msgid "Publication data"
+msgstr "Datos de la publicación"
 
 #: apps/articles/frontend_views.py:14
 msgid "detailed view of the selected Article"
@@ -226,73 +281,78 @@ msgstr "sí"
 msgid "no"
 msgstr "no"
 
-#: apps/articles/models.py:26
-msgid "notes"
-msgstr "notas"
-
-#: apps/articles/models.py:36
-msgid "link"
-msgstr "enlace"
-
-#: apps/articles/models.py:43
+#: apps/articles/models.py:22
 msgid "pre-title"
 msgstr "pre-título"
 
-#: apps/articles/models.py:44 apps/staticpages/models.py:10
+#: apps/articles/models.py:23 apps/staticpages/models.py:10
 msgid "summary"
 msgstr "resumen"
 
-#: apps/articles/models.py:45 apps/staticpages/models.py:11
+#: apps/articles/models.py:24 apps/staticpages/models.py:11
 msgid "text"
 msgstr "texto"
 
-#: apps/articles/models.py:46 apps/medialibrary/models.py:17
+#: apps/articles/models.py:25 apps/medialibrary/models.py:16
 msgid "author"
 msgstr "autor"
 
-#: apps/articles/models.py:47
+#: apps/articles/models.py:26
 msgid "source"
 msgstr "fuente"
 
-#: apps/articles/models.py:49
+#: apps/articles/models.py:28
 msgid "creation date"
 msgstr "fecha de creación"
 
-#: apps/articles/models.py:51
+#: apps/articles/models.py:30
 msgid "date"
 msgstr "fecha"
 
-#: apps/articles/models.py:56
+#: apps/articles/models.py:36
 msgid "default"
 msgstr "por defecto"
 
-#: apps/articles/models.py:66 apps/articles/models.py:76
+#: apps/articles/models.py:46 apps/articles/models.py:51
+#: apps/articles/models.py:68
 msgid "article"
 msgstr "artículo"
 
-#: apps/articles/models.py:67
+#: apps/articles/models.py:47
 msgid "articles"
 msgstr "artículos"
 
-#: apps/articles/models.py:72
+#: apps/articles/models.py:53
+msgid "label"
+msgstr "etiqueta"
+
+#: apps/articles/models.py:59
+msgid "article image"
+msgstr "imagen de artículo"
+
+#: apps/articles/models.py:60
+msgid "article images"
+msgstr "imágenes de artículo"
+
+#: apps/articles/models.py:64
 msgid "title"
 msgstr "título"
 
-#: apps/articles/models.py:77
+#: apps/articles/models.py:69
 msgid "attachments"
 msgstr "adjuntos"
 
-#: apps/articles/models.py:80 apps/medialibrary/models.py:96
-#: apps/medialibrary/models.py:100
+#: apps/articles/models.py:72 apps/medialibrary/models.py:90
+#: apps/medialibrary/models.py:94
 msgid "file"
 msgstr "archivo"
 
-#: apps/articles/models.py:82
+#: apps/articles/models.py:74
 msgid "downloads"
 msgstr "bajadas"
 
 #: apps/articles/templates/articles/article_detail.html:12
-#: apps/articles/templates/articles/article_teaser.html:25
+#: apps/articles/templates/articles/article_teaser.html:29
 #: apps/medialibrary/templates/medialibrary/media_detail_header.html:4
 msgid "Tags"
 msgstr "Etiquetas"
@@ -302,7 +362,7 @@ msgid "Comments"
 msgstr "Comentarios"
 
 #: apps/articles/templates/articles/article_detail.html:69
-#: apps/articles/templates/articles/article_teaser.html:20
+#: apps/articles/templates/articles/article_teaser.html:24
 #: apps/medialibrary/templates/medialibrary/media_detail_header.html:25
 #: templates/comments/list.html:9
 msgid "By"
@@ -320,7 +380,8 @@ msgstr "Fuente"
 msgid "Share in your social networks"
 msgstr "Compartir en redes sociales"
 
-#: apps/articles/templates/articles/article_teaser.html:16
+#: apps/articles/templates/articles/article_teaser.html:20
+#: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:20
 msgid "More"
 msgstr "Más"
 
@@ -352,108 +413,104 @@ msgstr "vista detallada del Archivo seleccionado"
 msgid "detailed view of the selected External Content"
 msgstr "vista detallada del Contenido Externo seleccionado"
 
-#: apps/medialibrary/models.py:28 apps/medialibrary/models.py:65
-#: apps/medialibrary/models.py:78 apps/medialibrary/models.py:94
-#: apps/medialibrary/models.py:107 core/collections/models.py:36
-#: core/collections/models.py:61
-msgid "image"
-msgstr "imagen"
-
-#: apps/medialibrary/models.py:32
+#: apps/medialibrary/models.py:31
 msgid "picture"
 msgstr "imagen"
 
-#: apps/medialibrary/models.py:33
+#: apps/medialibrary/models.py:32
 msgid "pictures"
 msgstr "imágenes"
 
-#: apps/medialibrary/models.py:41
+#: apps/medialibrary/models.py:38
 msgid "audio"
 msgstr "audio"
 
-#: apps/medialibrary/models.py:45
+#: apps/medialibrary/models.py:42
 msgid "sound track"
 msgstr "pista de sonido"
 
-#: apps/medialibrary/models.py:46
+#: apps/medialibrary/models.py:43
 msgid "sound tracks"
 msgstr "pistas de sonido"
 
-#: apps/medialibrary/models.py:52
+#: apps/medialibrary/models.py:49
 msgid "still"
 msgstr "cuadro de muestra"
 
-#: apps/medialibrary/models.py:54
+#: apps/medialibrary/models.py:51
 msgid "video"
 msgstr "video"
 
-#: apps/medialibrary/models.py:58
+#: apps/medialibrary/models.py:55
 msgid "movie clip"
 msgstr "video"
 
-#: apps/medialibrary/models.py:59
+#: apps/medialibrary/models.py:56
 msgid "movie clips"
 msgstr "video"
 
-#: apps/medialibrary/models.py:67 apps/medialibrary/models.py:71
+#: apps/medialibrary/models.py:64 apps/medialibrary/models.py:68
 msgid "document"
 msgstr "documento"
 
-#: apps/medialibrary/models.py:72
+#: apps/medialibrary/models.py:69
 msgid "documents"
 msgstr "documentos"
 
-#: apps/medialibrary/models.py:80
+#: apps/medialibrary/models.py:77
 msgid "flash"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:87
+#: apps/medialibrary/models.py:81
 msgid "flash movie"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:88
+#: apps/medialibrary/models.py:82
 msgid "flash movies"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:101
+#: apps/medialibrary/models.py:95
 msgid "files"
 msgstr "archivos"
 
-#: apps/medialibrary/models.py:109
+#: apps/medialibrary/models.py:103
 msgid "content url"
 msgstr "URL del contenido"
 
-#: apps/medialibrary/models.py:110
+#: apps/medialibrary/models.py:104
 msgid "open in new window"
 msgstr "abrir en ventana nueva"
 
-#: apps/medialibrary/models.py:111
+#: apps/medialibrary/models.py:105
 msgid "skip detailed view"
 msgstr "saltear vista detallada"
 
-#: apps/medialibrary/models.py:114
+#: apps/medialibrary/models.py:108
 msgid "external content"
 msgstr "contenido externo"
 
-#: apps/medialibrary/models.py:115
+#: apps/medialibrary/models.py:109
 msgid "external contents"
 msgstr "contenidos externos"
 
+#: apps/medialibrary/templates/medialibrary/document_detail.html:16
+#: apps/medialibrary/templates/medialibrary/media_player.html:17
+msgid "download file"
+msgstr "descargar archivo"
+
 #: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:22
+#: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:30
 msgid "Open external content"
 msgstr "Abrir contenido externo"
 
 #: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:22
+#: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:30
 msgid " (in new window)"
 msgstr " (en ventana nueva)"
 
 #: apps/medialibrary/templates/medialibrary/flashmovie_detail.html:24
 msgid "full screen view (new window)"
 msgstr "pantalla completa (en ventana nueva)"
-
-#: apps/medialibrary/templates/medialibrary/media_player.html:17
-msgid "download file"
-msgstr "descargar archivo"
 
 #: apps/staticpages/frontend_views.py:18
 msgid "detailed view of the selected Static Page"
@@ -520,51 +577,47 @@ msgstr "lista de resúmenes de las Categorías raíz de una Colección"
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
-#: core/collections/models.py:27
+#: core/collections/models.py:26
 msgid "visible"
 msgstr "visible"
 
-#: core/collections/models.py:31
+#: core/collections/models.py:30
 msgid "navigation root"
 msgstr "raíz de navegación"
 
-#: core/collections/models.py:34
-msgid "content types"
-msgstr "tipos de contenido"
-
-#: core/collections/models.py:43 core/collections/models.py:53
+#: core/collections/models.py:42 core/collections/models.py:52
 msgid "collection"
 msgstr "colección"
 
-#: core/collections/models.py:44
+#: core/collections/models.py:43
 msgid "collections"
 msgstr "colecciones"
 
-#: core/collections/models.py:53
+#: core/collections/models.py:52
 msgid "collection categories"
 msgstr "categorias de colecciones"
 
-#: core/collections/models.py:59
+#: core/collections/models.py:58
 msgid "active"
 msgstr "activo"
 
-#: core/collections/models.py:93 core/collections/models.py:123
+#: core/collections/models.py:88 core/collections/models.py:118
 msgid "category"
 msgstr "categoría"
 
-#: core/collections/models.py:94 core/collections/models.py:148
+#: core/collections/models.py:89 core/collections/models.py:142
 msgid "categories"
 msgstr "categorías"
 
-#: core/collections/models.py:126
+#: core/collections/models.py:121
 msgid "content type"
 msgstr "tipo de contenido"
 
-#: core/collections/models.py:138
+#: core/collections/models.py:133
 msgid "category map"
 msgstr "mapeo de categoría"
 
-#: core/collections/models.py:139
+#: core/collections/models.py:134
 msgid "category maps"
 msgstr "mapeos de categorías"
 
@@ -750,26 +803,3 @@ msgstr "tercer panel"
 msgid "fourth pane"
 msgstr "cuarto panel"
 
-#~ msgid "images"
-#~ msgstr "imágenes"
-
-#~ msgid "%(ct_model)s: \"%(co)s\" does not exist"
-#~ msgstr "no existe %(ct_model)s: \"%(co)s\""
-
-#~ msgid "You must provide either content details or a custom URL"
-#~ msgstr "Debe proveer detalles de contenido o una URL"
-
-#~ msgid "You need to set content details if this is the site home"
-#~ msgstr "Debe establecer detalles de contenido si esta es la página inicial"
-
-#~ msgid "full detail"
-#~ msgstr "detalle completo"
-
-#~ msgid "No content has been set for your home page"
-#~ msgstr "No hay contenido definido para la pagina de inicio"
-
-#~ msgid "left"
-#~ msgstr "izquierda"
-
-#~ msgid "right"
-#~ msgstr "derecha"

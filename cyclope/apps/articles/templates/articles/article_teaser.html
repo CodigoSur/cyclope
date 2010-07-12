@@ -6,9 +6,9 @@
     {% endif%}
     {% if article.date %}<span class="date">{{ article.date }}</span>{% endif %}
      <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name }}</a></h2>
-      {% if article.pictures.count and not simplified_view %}
+      {% if article.images.count and not simplified_view %}
       <a href="{% url article-detail article.slug %}">
-        <img class="teaser_icon" src="{% version article.first_picture.image.path 'small' %}" width="135" border="0"/>
+        <img class="teaser_icon" src="{% version article.first_image.image.path 'small' %}" width="135" border="0"/>
       </a>
       {% endif %}
     <p class="summary">

@@ -78,3 +78,8 @@ class SiteSettingsAdmin(admin.ModelAdmin):
     form = SiteSettingsAdminForm
 
 admin.site.register(SiteSettings, SiteSettingsAdmin)
+
+class ImageAdmin(admin.ModelAdmin):
+	list_display = ['thumbnail']
+
+admin.site.register(Image, ImageAdmin)

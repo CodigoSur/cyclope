@@ -276,3 +276,33 @@ class Source(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class Image(models.Model):
+    """A simple image model.
+    """
+    image =  FileBrowseField(_('image'), max_length=100, format='Image',
+                             directory='pictures/')
+    
+    def thumbnail(self):
+        return '<img src="%s"/>' % self.image.url_thumbnail
+
+    thumbnail.short_description = _('Thumbnail Image')
+    thumbnail.allow_tags = True       			
+
+    class Meta:
+        verbose_name = _('image')
+        verbose_name_plural = _('images')
+
+
+#class Attachment(models.Model):
+#    """A simple attachment model.
+#    """
+#    attachment =  models.FileField(_('image'), max_length=100, format='Image',
+#                                    directory='pictures/')
+#    name = models.CharField(_('name'),max_length=250,
+#                             db_index=True, blank=False, unique=True)
+    
+#    class Meta:
+#        verbose_name = _('attachment')
+#        verbose_name_plural = _('attachment')

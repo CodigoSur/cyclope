@@ -12,10 +12,11 @@ from django.contrib.contenttypes import generic
 
 from autoslug.fields import AutoSlugField
 from cyclope.core.collections.models import Collectible
-from cyclope.models import BaseContent, Author, Source
+from cyclope.models import BaseContent, Author, Source, Image
 from cyclope.apps.medialibrary.models import Picture
 
 YES_NO = (('YES', _('yes')), ('NO', _('no')),)
+
 
 class Article(BaseContent, Collectible):
     pretitle = models.CharField(_('pre-title'), max_length=250, blank=True)
@@ -27,7 +28,8 @@ class Article(BaseContent, Collectible):
     creation_date = models.DateTimeField(_('creation date'),
                                      auto_now_add=True, editable=False)
     date = models.DateTimeField(_('date'), blank=True, null=True)
-    pictures = models.ManyToManyField(Picture, null=True, blank=True,)
+    images = models.ManyToManyField(Image, null=True, blank=True,
+                                    through='ArticleImageData')
 
     allow_comments = models.CharField(_('allow comments'), max_length=4,
                                 choices = (
@@ -36,14 +38,26 @@ class Article(BaseContent, Collectible):
                                     ('NO',_('disabled'))
                                 ), default='SITE')
 
-    def first_picture(self):
-        if self.pictures.count() > 0:
-            return self.pictures.all()[0]
+    def first_image(self):
+        if self.images.count() > 0:
+            return self.images.all()[0]
 
     class Meta:
         verbose_name = _('article')
         verbose_name_plural = _('articles')
         ordering = ('-creation_date', 'name')
+
+class ArticleImageData(models.Model):
+    article = models.ForeignKey(Article, verbose_name=_('article'))
+    image = models.ForeignKey(Image, verbose_name=_('image'))
+    label = models.CharField(_('label'), max_length=250)
+    
+    def __unicode__(self):
+		return ""
+
+    class Meta:
+        verbose_name = _('article image')
+        verbose_name_plural = _('article images')
 
 
 class Attachment(models.Model):
