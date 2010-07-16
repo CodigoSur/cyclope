@@ -209,29 +209,29 @@ span.breadcrumb a:hover {color:#333;}
 #related li a:hover {color:#000;font-weight:700;}
 
 /*comentarios*/
-#comments {width:550px;text-align:left;margin:25px 0 0;background-color:#fff;}
-#comments .comment {background-color:#eee;border:1px solid #ddd;padding:10px;}
-#comments .comment p {font-size:0.8em;color:#666;float:left;padding:0 0 0 20px;border-left:2px solid #ddd;margin:0 0 0 10px;}
-#comments .data {background-color:#ccc;float:none;}
-#comments .when_who {color:#666;float:left;margin:0 20px 0 0;text-align:right;font-size:0.65em;}
-#comments .when_who a {color:#000;font-weight:700;font-size:1em;}
-#comments .bottom {margin:20px 0;border:none;border-top:6px dashed #eee;}
-#comments .box {color:#333; margin:0;width:644px;}
-#comments textarea {width:550px;background-color:#fff;padding:4px;margin:0 0 15px;border:1px solid #999;font-size: 1em;color:#333;display:block;}
-#comments h6 {background-color:#fff;color:#666;margin:0 0 10px 0;padding:5px 0;font-weight:700;font-size:0.9em;}
-#comments p {color:#333;font-size:0.9em;padding:0;margin: 0;}
-#comments img {margin:10px 0;display:block;}
-#comments form {padding:0 0 30px 0;margin:0 0 0 0;}
-/*#comments fieldset {display: block; margin: 0 0 0 0;padding:5px 0;border:none;}*/
-#comments label {display: block; width:250px;margin:0 0;font-weight:400;font-size:0.8em;}
-#comments input {background-color:#fff;padding:4px;margin:0 0 10px;border:1px solid #999;color:#333;}
-#comments input.submit {color:#fff;clear: both;background-color:#666;border:1px solid #000;width:250px;margin:10px 0 0;font-weight:400;}
-#comments  img {}
-#comments small {margin:0;color:#666;font-weight:400;display:block padding:3px 0;width:350px;clear:both;font-size:0.7em;}
-#comments .hidden {border:none;display:none;}
-#comments .errorlist {color: red; font-size:1em; list-style: none;}
+.user_input {width:550px;text-align:left;margin:25px 0 0;background-color:#fff;}
+.user_input .comment {background-color:#eee;border:1px solid #ddd;padding:10px;}
+.user_input .comment p {font-size:0.8em;color:#666;float:left;padding:0 0 0 20px;border-left:2px solid #ddd;margin:0 0 0 10px;}
+.user_input .data {background-color:#ccc;float:none;}
+.user_input .when_who {color:#666;float:left;margin:0 20px 0 0;text-align:right;font-size:0.65em;}
+.user_input .when_who a {color:#000;font-weight:700;font-size:1em;}
+.user_input .bottom {margin:20px 0;border:none;border-top:6px dashed #eee;}
+.user_input .box {color:#333; margin:0;width:644px;}
+.user_input textarea {width:550px;background-color:#fff;padding:4px;margin:0 0 15px;border:1px solid #999;font-size: 1em;color:#333;display:block;}
+.user_input h6 {background-color:#fff;color:#666;margin:0 0 10px 0;padding:5px 0;font-weight:700;font-size:0.9em;}
+.user_input p {color:#333;font-size:0.9em;padding:0;margin: 0;}
+.user_input img {margin:10px 0;display:block;}
+.user_input form {padding:0 0 30px 0;margin:0 0 0 0;}
+/*.user_input fieldset {display: block; margin: 0 0 0 0;padding:5px 0;border:none;}*/
+.user_input label {display: block; width:250px;margin:0 0;font-weight:400;font-size:0.8em;}
+.user_input input {background-color:#fff;padding:4px;margin:0 0 10px;border:1px solid #999;color:#333;}
+.user_input input.submit {color:#fff;clear: both;background-color:#666;border:1px solid #000;width:250px;margin:10px 0 0;font-weight:400;}
+.user_input  img {}
+.user_input small {margin:0;color:#666;font-weight:400;display:block padding:3px 0;width:350px;clear:both;font-size:0.7em;}
+.user_input .hidden {border:none;display:none;}
+.user_input .errorlist {color: red; font-size:1em; list-style: none;}
 
-#attachments img, #related img, #comments img {padding:0 0 5px;margin:0;}
+#attachments img, #related img, .user_input img {padding:0 0 5px;margin:0;}
 
 #searchbox {width:170px;margin:0;padding:15px 10px 0 15px;}
 #searchbox input {padding:3px 0;margin:7px 0 1px 0;border:1px solid #999;color:#333;width:130px;}
@@ -364,3 +364,12 @@ span.breadcrumb a:hover {color:#333;}
 #compartir .field {background-color:#fff;border:1px solid #ccc;font-size: 1em;color:#333;width:90%;margin:3px 10px 10px}
 #compartir .btn  {margin:15px 10px;font-size:0.75em; background-color:#666;border:1px solid #000; padding:3px 6px; font-weight:700; color:#fff;}
 compartir.html*/
+
+.region#after_content{
+    margin-top: 40px;
+}
+
+.help_text {
+    font-size: 8pt;
+    color: #555;
+}

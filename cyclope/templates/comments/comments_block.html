@@ -3,7 +3,7 @@
   {% if not current_object.allow_comments == 'NO' %}
     {% get_comment_count for current_object as comment_count %}
 
-    <div id="comments">
+    <div class="user_input">
       <div class="top">
         <h6>{% blocktrans %} There are {{ comment_count }} comments {% endblocktrans %}</h6>
       </div>

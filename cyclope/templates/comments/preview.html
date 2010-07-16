@@ -6,7 +6,7 @@
 {% block page_content %}
   {% load comments %}
 <div id="content_container">
-<div id="comments">
+<div class="user_input">
   <form action="{% comment_form_target %}" method="post">{% csrf_token %}
     {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
     {% if form.errors %}

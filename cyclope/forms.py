@@ -15,7 +15,7 @@ from mptt.forms import TreeNodeChoiceField
 
 from cyclope.widgets import WYMEditor
 from cyclope.models import MenuItem, BaseContent,\
-                           SiteSettings, Layout, RegionView
+                           SiteSettings, Layout, RegionView, UserProfile
 from cyclope import settings as cyc_settings
 from cyclope.core.frontend import site
 
@@ -224,10 +224,27 @@ class RegionViewInlineForm(forms.ModelForm):
         model = RegionView
 
 
-from registration.forms import RegistrationForm
+from registration.forms import RegistrationFormUniqueEmail
 from captcha.fields import CaptchaField
 
-class RegistrationFormWithCaptcha(RegistrationForm):
+class RegistrationFormWithCaptcha(RegistrationFormUniqueEmail):
     captcha = CaptchaField(label=_("Security code"))
 
 
+class UserProfileForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        self.fields['avatar'].initial = "blabla"
+
+    def clean_avatar(self):
+        from django.core.files.images import get_image_dimensions
+        avatar = self.cleaned_data['avatar']
+        w, h = get_image_dimensions(avatar)
+        if w > 300 or h > 300:
+            raise forms.ValidationError(_('Your avatar image is too big'))
+        return avatar
+
+    class Meta:
+        model = UserProfile
+        exclude = ('user',)

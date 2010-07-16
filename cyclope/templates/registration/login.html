@@ -4,12 +4,24 @@
 {% block page_content %}
 
 <div id="content_container">
-  <form action="" method="post">
-  {{form.as_p}}
-  <input type="submit">
-  </form>
+  <div class="user_input">
+    <h6>{% trans "Please enter your credentials"%}</h6>
+    <form action="" method="post">
+    {{form.as_p}}
+    <input type="submit">
+    </form>
+  </div>
 
-{{ next_page }}
+  <h4>{% blocktrans %}
+     If you have not yet created an account you need to
+     <a href="/accounts/register?next={{next}}">register</a>
+     before you may login.
+     {% endblocktrans %}
+  </h4>
 </div>
+
+<script type="text/javascript">
+    document.getElementById('id_username').focus()
+</script>
 
 {% endblock %}

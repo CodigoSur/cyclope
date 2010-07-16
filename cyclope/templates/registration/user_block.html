@@ -1,0 +1,10 @@
+{% load i18n %}
+
+<div id="user_status">
+{% if user.is_authenticated %}
+  <a href="/profiles/edit/"><strong>{{ user }}</strong></a> /
+  <a href="/accounts/logout/?next={{ request.path}}">{% trans "Log out" %}</a>
+{% else %}
+  <a href="/accounts/login/?next={{ request.path}}">{% trans "Log in" %}</a>
+{% endif %}
+</div>

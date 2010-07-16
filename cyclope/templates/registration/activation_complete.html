@@ -5,7 +5,8 @@
 {% block page_content %}
 
 <div id="content_container">
-  <h3>{% trans "Your account is now active" %}</h3S>
+  <h3>{% trans "Your account is now active" %}</h3>
+  <p>{% trans "You may now" %} <a href="/accounts/login?next={{next}}">{% trans "login" %}</a></p>
 </div>
 
 {% endblock %}

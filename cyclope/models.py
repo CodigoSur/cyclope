@@ -283,12 +283,12 @@ class Image(models.Model):
     """
     image =  FileBrowseField(_('image'), max_length=100, format='Image',
                              directory='pictures/')
-    
+
     def thumbnail(self):
         return '<img src="%s"/>' % self.image.url_thumbnail
 
     thumbnail.short_description = _('Thumbnail Image')
-    thumbnail.allow_tags = True       			
+    thumbnail.allow_tags = True
 
     class Meta:
         verbose_name = _('image')
@@ -302,7 +302,32 @@ class Image(models.Model):
 #                                    directory='pictures/')
 #    name = models.CharField(_('name'),max_length=250,
 #                             db_index=True, blank=False, unique=True)
-    
+
 #    class Meta:
 #        verbose_name = _('attachment')
 #        verbose_name_plural = _('attachment')
+
+
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, unique=True)
+
+    avatar = models.ImageField(_('avatar'), max_length=100,
+                               blank=True, upload_to="uploads/avatars/")
+    city = models.CharField(_('city'), max_length=100, blank=True)
+    about = models.TextField(_('about myself'), max_length=1000, blank=True)
+
+    public = models.BooleanField(
+        _('public'), default=True,
+        help_text=_('Choose whether your profile info should be publicly visible or not'))
+
+    def get_absolute_url(self):
+        return ('profiles_profile_detail', (), { 'username': self.user.username })
+    get_absolute_url = models.permalink(get_absolute_url)
+
+from registration_backends import CaptchaBackend
+from registration import signals
+
+def _create_profile_upon_activation(*args, **kwargs):
+    UserProfile.objects.create(user=kwargs['user'])
+
+signals.user_activated.connect(_create_profile_upon_activation)

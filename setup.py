@@ -30,6 +30,7 @@ setup(
     dependency_links=[
         'git+http://github.com/matthiask/feincms.git#egg=feincms-dev',
         'git+http://github.com/matthiask/django-mptt.git#egg=django-mptt-3.0-pre',
+        'hg+http://bitbucket.org/ubernostrum/django-registration/@d36a38202ee3d09d342b000f4ff634296f90df49#egg=django_registration-dev'
         'git+http://github.com/alexvasi/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-dev',
     ],
 
@@ -45,6 +46,8 @@ setup(
         'django-tagging-autocomplete>=0.3.1',
         'django-filebrowser>=3.0,==dev',
         'South>=0.7.1',
+        'django-registration>=0.8,==dev',
+        'django-profiles>=0.2',
     ],
 
     packages=find_packages(),
