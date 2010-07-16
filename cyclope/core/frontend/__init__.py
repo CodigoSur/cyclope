@@ -72,14 +72,16 @@ class FrontendView(object):
 
 
     def get_url_pattern(self, model):
+        if self.is_default:
+            return '%s/(?P<slug>[\w-]+)/$'\
+                    % (model._meta.object_name.lower())
+
         if self.is_instance_view:
-            return '%s/%s/(?P<slug>.*)/View/%s'\
-                    % (model._meta.app_label,
-                       model._meta.object_name.lower(), self.name)
+            return '%s/(?P<slug>[\w-]+)/View/%s'\
+                    % (model._meta.object_name.lower(), self.name)
         else:
-            return '%s/%s/View/%s'\
-                    % (model._meta.app_label,
-                       model._meta.object_name.lower(), self.name)
+            return '%s/View/%s'\
+                    % (model._meta.object_name.lower(), self.name)
 
 ##########
 # autodiscover() is an almost exact copy of

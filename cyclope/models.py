@@ -215,18 +215,23 @@ class BaseContent(models.Model):
     tags = TagAutocompleteField(_('tags'))
     published =  models.BooleanField(_('published'), default=True)
 
+
     def get_instance_url(self, view_name):
         #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well.
         view = cyclope.core.frontend.site.get_view(self.__class__, view_name)
+
+        if view.is_default:
+            return '%s/%s'\
+                    % (self._meta.object_name.lower(),
+                       self.slug)
+
         if view.is_instance_view:
-            return '%s/%s/%s/View/%s'\
-                    % (self._meta.app_label,
-                       self._meta.object_name.lower(),
+            return '%s/%s/View/%s'\
+                    % (self._meta.object_name.lower(),
                        self.slug, view_name)
         else:
-            return '%s/%s/View/%s'\
-                    % (self._meta.app_label,
-                       self._meta.object_name.lower(), view_name)
+            return '%s/View/%s'\
+                    % (self._meta.object_name.lower(), view_name)
 
     def get_absolute_url(self):
         view_name = cyclope.core.frontend.site.get_default_view_name(self.__class__)
@@ -234,8 +239,8 @@ class BaseContent(models.Model):
 
     @classmethod
     def get_model_url(cls, view_name):
-        return '%s/%s/View/%s'\
-                % (cls._meta.app_label, cls._meta.object_name.lower(), view_name)
+        return '%s/View/%s'\
+                % (cls._meta.object_name.lower(), view_name)
 
     def __unicode__(self):
         return self.name

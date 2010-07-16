@@ -15,7 +15,6 @@ class CategoryRootItemsList(frontend.FrontendView):
     """
     name='root_items_list'
     verbose_name=_('list of root items for the selected Category')
-    is_default = True
 
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         category = content_object
@@ -41,9 +40,11 @@ class CategoryTeaserList(frontend.FrontendView):
     """
     name='teaser_list'
     verbose_name=_('teaser list of Category members')
+    is_default = True
 
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         category = content_object
+        #TODO(nicoechaniz): this article__date ordering looks bad. categories can hold any baseontent derivative
         c = RequestContext(request,
                            {'category_maps': category.category_maps.order_by('article__date'),
                             'category': category})
