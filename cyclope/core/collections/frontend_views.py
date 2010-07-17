@@ -88,6 +88,7 @@ class CollectionRootCategoriesTeaserList(frontend.FrontendView):
     """
     name = 'root_categories_teaser_list'
     verbose_name=_('teaser list of the root Categories of a Collection')
+    is_default = True
 
     def get_http_response(self, request, slug=None, *args, **kwargs):
         collection = Collection.objects.get(slug=slug)
@@ -107,7 +108,6 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
     """
     name='categories_hierarchy'
     verbose_name=_('hierarchical list of Categories in a Collection')
-    is_default = True
 
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         collection = content_object

@@ -221,7 +221,7 @@ class BaseContent(models.Model):
         view = cyclope.core.frontend.site.get_view(self.__class__, view_name)
 
         if view.is_default:
-            return '%s/%s'\
+            return '%s/%s/'\
                     % (self._meta.object_name.lower(),
                        self.slug)
 
@@ -234,8 +234,7 @@ class BaseContent(models.Model):
                     % (self._meta.object_name.lower(), view_name)
 
     def get_absolute_url(self):
-        view_name = cyclope.core.frontend.site.get_default_view_name(self.__class__)
-        return "/"+ self.get_instance_url(view_name)
+        return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
 
     @classmethod
     def get_model_url(cls, view_name):
