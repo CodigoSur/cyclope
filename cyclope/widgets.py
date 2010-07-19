@@ -34,7 +34,7 @@ class WYMEditor(forms.Textarea):
             <p style="clear:both; margin: 0px; padding: 0 0 5px 0;">
             %s:
             <select class="wymtoggle">
-                <option value="on">%s</option>
+                <option value="on" selected="selected" >%s</option>
                 <option value="off">%s</option>
             </select>
             </p>
@@ -75,7 +75,7 @@ class ForeignKeyImageRawIdWidget(ForeignKeyRawIdWidget):
     in a <select> box.
     """
     input_type = 'hidden'
-    
+
     def render(self, name, value, attrs=None):
         if attrs is None:
             attrs = {}
@@ -90,13 +90,11 @@ class ForeignKeyImageRawIdWidget(ForeignKeyRawIdWidget):
         output = [super(ForeignKeyRawIdWidget, self).render(name, value, attrs)]
         if value:
             output.append(self.thumbnail_for_value(value))
-        # TODO: "id_" is hard-coded here. This should instead use the correct
-        # API to determine the ID dynamically.
         output.append('<a href="%s%s" class="related-lookup" id="lookup_id_%s" onclick="return showRelatedObjectLookupPopup(this);"> ' % \
             (related_url, url, name))
         output.append('<img src="%simg/admin/selector-search.gif" width="16" height="16" alt="%s" /></a>' % (settings.ADMIN_MEDIA_PREFIX, _('Lookup')))
         return mark_safe(u''.join(output))
-        
+
     def thumbnail_for_value(self, value):
         key = self.rel.get_related_field().name
         try:

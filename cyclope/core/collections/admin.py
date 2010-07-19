@@ -19,6 +19,7 @@ from cyclope.core import frontend
 
 from models import *
 from cyclope.models import Menu
+from cyclope import settings as cyc_settings
 
 ####
 # custom FilterSpec
@@ -104,30 +105,46 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class CategoryMapForm(forms.ModelForm):
-    # We need to declare this field in order to make it accessible from
-    # CategoryMapInline through form.declared_fields and override the queryset.
+    # We declare these fields and override their querysets later.
+    collection = forms.ModelChoiceField(
+        label=_('Collection'),
+        queryset=Collection.objects.all().order_by('-name'), required=False)
     category = TreeNodeChoiceField(label=_('Category'), queryset=None, required=True)
 
-class CategoryMapInline(generic.GenericTabularInline):
+    def __init__(self, *args, **kwargs):
+        super(CategoryMapForm, self).__init__(*args, **kwargs)
+        if self.instance.id is not None:
+            self.fields['collection'].initial = self.instance.category.collection.pk
+
+
+class CategoryMapInline(generic.GenericStackedInline):
     """Limits choices to those suitable for the content type
     of the object being created / changed.
     """
     form = CategoryMapForm
     model = CategoryMap
     extra = 0
+    fieldsets = (
+        (None, {
+            'fields': ('collection', 'category',)
+        }),
+    )
 
     def queryset(self, request):
-        # We only override the queryset for the category field.
+        # TODO(nicoechaniz):We only override the queryset for the category field.
         # This piece of code is here because we need it to be called
-        # when showing the form.
+        # when showing the form. So __init__ can't be used
         # It still looks like quite "hacky" a place to put it...
-        req_app, req_model = request.path.rstrip('/').split('/')[-3:-1]
-        req_model = models.get_model(req_app, req_model)
-        req_model_ctype = ContentType.objects.get_for_model(req_model)
+        req_model_ctype = ContentType.objects.get_for_model(self.parent_model)
 
-        qs = Category.tree.filter(collection__content_types=req_model_ctype)
-        self.form.declared_fields['category'].queryset = \
-            Category.tree.filter(collection__content_types=req_model_ctype)
+        self.form.base_fields['category'].queryset = \
+            Category.tree.filter(
+            collection__content_types=req_model_ctype).order_by('collection__name')
+
+        self.form.base_fields['collection'].queryset = \
+            Collection.objects.filter(
+            content_types=req_model_ctype).order_by('name')
+
         return super(CategoryMapInline, self).queryset(request)
 
 

@@ -15,6 +15,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import post_save
 from django.utils import simplejson
 from django.contrib.sites.models import Site
+from django.db.models import get_model
 
 from cyclope.models import MenuItem, SiteSettings
 
@@ -50,6 +51,7 @@ class CyclopeSite(object):
         urlpatterns = patterns('',
             url(r'^$', self.index, name='index'),
             #JSON views for AJAX updating of admin fields
+            url(r'^collection_categories_json$', self.collection_categories_json),
             url(r'^layout_regions_json$', self.layout_regions_json),
             url(r'^registered_region_views_json$', self.registered_region_views_json),
             url(r'^registered_standard_views_json$', self.registered_standard_views_json),
@@ -152,6 +154,19 @@ class CyclopeSite(object):
 
 ### JSON ##
 
+    def collection_categories_json(self, request):
+        """Returns the categories that belong to the sellected collection."""
+        Collection = get_model('collections','collection')
+        Category = get_model('collections','category')
+        collection = Collection.objects.get(pk=request.GET['q'])
+        categories = [{'category_id': '', 'category_name': '------'}]
+        categories.extend([
+            {'category_id': category.id,
+             'category_name': category.name}
+            for category in Category.tree.filter(collection=collection)])
+        json_data = simplejson.dumps(categories)
+        return HttpResponse(json_data, mimetype='application/json')
+        
     def layout_regions_json(self, request):
         """View to dynamically update template regions select in the admin."""
         template_filename = request.GET['q']

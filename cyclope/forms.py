@@ -112,11 +112,6 @@ class MenuItemAdminForm(forms.ModelForm):
     class Meta:
         model = MenuItem
 
-    class Media:
-        js = (
-             cyc_settings.CYCLOPE_MEDIA_URL +'js/reuse_django_jquery.js',
-             cyc_settings.CYCLOPE_MEDIA_URL +"js/jquery.chainedSelect.js",)
-
 
 class SiteSettingsAdminForm(forms.ModelForm):
     theme = forms.ChoiceField(label=_('Theme'),
@@ -213,13 +208,6 @@ class RegionViewInlineForm(forms.ModelForm):
 
         return super(RegionViewInlineForm, self).clean()
 
-
-    class Media:
-        js = (
-             cyc_settings.CYCLOPE_MEDIA_URL +'js/reuse_django_jquery.js',
-             cyc_settings.CYCLOPE_MEDIA_URL +"js/jquery.chainedSelect.js",
-             )
-
     class Meta:
         model = RegionView
 
@@ -233,9 +221,9 @@ class RegistrationFormWithCaptcha(RegistrationFormUniqueEmail):
 
 class UserProfileForm(forms.ModelForm):
 
-    def __init__(self, *args, **kwargs):
-        super(UserProfileForm, self).__init__(*args, **kwargs)
-        self.fields['avatar'].initial = "blabla"
+    #def __init__(self, *args, **kwargs):
+    #    super(UserProfileForm, self).__init__(*args, **kwargs)
+    #    self.fields['avatar'].initial = ""
 
     def clean_avatar(self):
         from django.core.files.images import get_image_dimensions

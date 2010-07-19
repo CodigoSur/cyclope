@@ -63,6 +63,11 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+  # this is needed for the feincms.editor.TreeEditor to correctly display the hierarchy
+    def get_absolute_url(self):
+        return self.__unicode__()
+
+
     def valid_parents(self):
         return Category.tree.filter(pk__isnot=self.pk)
 

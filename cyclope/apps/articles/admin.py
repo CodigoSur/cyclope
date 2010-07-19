@@ -26,7 +26,7 @@ class ArticleForm(BaseContentAdminForm):
 
     class Meta:
         model = Article
-       
+
 
 class ArticleImageDataInline(admin.StackedInline):
     model = ArticleImageData
@@ -38,7 +38,7 @@ class ArticleImageDataInline(admin.StackedInline):
             field.widget = ForeignKeyImageRawIdWidget(db_field.rel)
         return field
 
-    
+
 class ArticleAdmin(CollectibleAdmin):
     form = ArticleForm
     list_filter = CollectibleAdmin.list_filter + \
