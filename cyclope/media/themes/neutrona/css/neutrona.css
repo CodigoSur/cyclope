@@ -231,6 +231,8 @@ span.breadcrumb a:hover {color:#333;}
 .user_input .hidden {border:none;display:none;}
 .user_input .errorlist {color: red; font-size:1em; list-style: none;}
 
+#user_status {float: left; font-size: 10pt; margin: 2px 0 0 10px}
+
 #attachments img, #related img, .user_input img {padding:0 0 5px;margin:0;}
 
 #searchbox {width:170px;margin:0;padding:15px 10px 0 15px;}

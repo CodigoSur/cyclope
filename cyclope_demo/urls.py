@@ -4,6 +4,8 @@ from django.conf.urls.defaults import *
 from django.conf import settings as django_settings
 from django.utils.translation import ugettext as _
 from django.conf import settings as django_settings
+from registration.views import register
+from cyclope.forms import UserProfileForm
 
 from cyclope import settings as cyc_settings
 
@@ -18,11 +20,22 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^admin/filebrowser/', include('filebrowser.urls')),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
     (r'^admin/', include(admin.site.urls)),
+
     (r'^comments/', include('django.contrib.comments.urls')),
     (r'^captcha/', include('captcha.urls')),
     (r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
+    url(r'^accounts/register/$', 'registration.views.register',
+        {'backend': 'cyclope.registration_backends.CaptchaBackend'},
+        name='registration_register'),
+    (r'^accounts/', include('registration.backends.default.urls')),
+    (r'^profiles/create/$', 'profiles.views.create_profile',
+     {'form_class': UserProfileForm}),
+    (r'^profiles/edit/$', 'profiles.views.edit_profile',
+     {'form_class': UserProfileForm}),
+
+    (r'^profiles/', include('profiles.urls')),
+
     (r'^%s' % cyc_settings.CYCLOPE_PREFIX,
      include(frontend.site.get_urls())),
 )

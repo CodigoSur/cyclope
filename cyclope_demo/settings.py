@@ -99,16 +99,15 @@ INSTALLED_APPS = (
 
     'tagging',
     'tagging_autocomplete',
-#    'imagekit',
-#   'rosetta'
     'autoslug',
     'feincms',
     'mptt',
     'captcha',
     'filebrowser',
     'south',
+    'registration',
+    'profiles',
 
-#    'ajax_filtered_fields',
 #    'debug_toolbar',
 
     'cyclope',
@@ -117,35 +116,35 @@ INSTALLED_APPS = (
     'cyclope.apps.articles',
     'cyclope.apps.staticpages',
     'cyclope.apps.medialibrary',
-
-    'cyclope_demo.shoes',
 )
 
+# comments settings
 COMMENTS_APP = 'cyclope.core.captcha_comments'
 
+# captcha settings
 CAPTCHA_NOISE_FUNCTIONS=('captcha.helpers.noise_arcs',)
 CAPTCHA_FONT_SIZE=30
 CAPTCHA_LETTER_ROTATION=(-15,15)
 
-
-# make sure you point this to your Feincms media files.
+# feincms settings
 FEINCMS_ADMIN_MEDIA = '/feincms_media/'
-
 # TreeEditor throws an exception in the admin for Category (as of 2010-02-19)
 # if this is set to True
 FEINCMS_TREE_EDITOR_INCLUDE_ANCESTORS = False
 
+# filebrowser settings
 FILEBROWSER_DEBUG = False
 FILEBROWSER_DIRECTORY = 'uploads/'
 FILEBROWSER_EXTENSIONS = {
     'Folder': [''],
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
-    'Video': ['.ogg', '.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.flv'],
+    'Video': ['.ogg', '.mov','.wmv','.mpeg','.mpg','.avi','.rm',],
     'Document': ['.odt', 'docx', '.pdf','.doc','.rtf','.txt',
                  '.ods', '.xls','.csv'],
     'Audio': ['.ogg', '.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
     'Code': ['.html','.py','.js','.css'],
-    'Flash': ['.swf', '.flv'],
+    'Flash_App': ['.swf',],
+    'Flash_Movie': ['.flv',],
 }
 
 FILEBROWSER_SELECT_FORMATS = {
@@ -153,22 +152,20 @@ FILEBROWSER_SELECT_FORMATS = {
     'Image': ['Image'],
     'Media': ['Video','Sound'],
     'Document': ['Document'],
-    'Flash': ['Flash'],
-    'Video': ['Video'],
+    'Flash': ['Flash_App', 'Flash_Movie'],
+    'Video': ['Video', 'Flash_Movie',],
     'Audio': ['Audio'],
     # for TinyMCE we also have to define lower-case items
     'image': ['Image'],
     'file': ['Folder','Image','Document',],
 }
 
-FILEBROWSER_VERSIONS_BASEDIR = '_versions_'
-
 FILEBROWSER_VERSIONS = {
     'fb_thumb': {'verbose_name': gettext('Admin Thumbnail'),
                  'width': 60, 'height': 60, 'opts': 'crop upscale'},
     'thumbnail': {'verbose_name': gettext('Thumbnail (140px)'),
                   'width': 140, 'height': '', 'opts': ''},
-    'small': {'verbose_name': gettext('Small Square(300px)'),
+    'small': {'verbose_name': gettext('Small (300px)'),
               'width': 300, 'height': 300, 'opts': 'crop'},
     'medium': {'verbose_name': gettext('Medium (460px)'),
                'width': 460, 'height': '', 'opts': ''},
@@ -180,6 +177,26 @@ FILEBROWSER_VERSIONS = {
                          'width': 140, 'height': 140, 'opts': 'crop'},
 }
 
+FILEBROWSER_MAX_UPLOAD_SIZE = 1048576
 
-#CYCLOPE_PREFIX = 'cyclope/'
+# django-registration settings
+ACCOUNT_ACTIVATION_DAYS = 7
+LOGIN_REDIRECT_URL = '/inicio'
+
+# profile settings
+AUTH_PROFILE_MODULE = "cyclope.userprofile"
+
+# cyclope settings
 CYCLOPE_PREFIX = ''
+#CYCLOPE_LOCAL_THEMES_DIR = os.path.join(BASE_DIR, 'templates/cyclope/themes/')
+#CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/media/local_themes/'
+
+# tagging settings
+FORCE_LOWERCASE_TAGS = True
+
+
+# import local settings if they are present
+try:
+    from local_settings import *
+except:
+    pass

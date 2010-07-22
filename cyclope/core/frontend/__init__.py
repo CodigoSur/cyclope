@@ -52,6 +52,7 @@ class FrontendView(object):
     def __call__(self, request, *args, **kwargs):
         if self.params:
             kwargs.update(self.params)
+        #TODO(nicoechaniz): hackish?
         # check if the view was called from a region templatetag
         if inspect.stack()[1][3] == 'region':
             response = self.get_string_response(request, *args, **kwargs)
