@@ -19,6 +19,7 @@ class CustomIndexDashboard(Dashboard):
 
         self.children.append(modules.Group(
             title=_('Content'),
+            css_classes = ('dbmodule-content',),
             display="tabs",
             draggable = False,
             deletable = False,
@@ -27,12 +28,14 @@ class CustomIndexDashboard(Dashboard):
             children = (
                 modules.ModelList(
                     title=_('Main'),
+                    css_classes = ('dbmodule-content_main',),
                     include_list=[
                         'cyclope.apps.articles.models.Article',
                         'cyclope.apps.staticpages.models.StaticPage',
                         ]),
                 modules.ModelList(
                     title=_('Multimedia Library'),
+                    css_classes = ('dbmodule-content_media_library',),
                     include_list=[
                         'cyclope.apps.medialibrary.models.Picture',
                         'cyclope.apps.medialibrary.models.MovieClip',
@@ -44,6 +47,7 @@ class CustomIndexDashboard(Dashboard):
                         ]),
                 modules.ModelList(
                     title=_('Authors and Sources'),
+                    css_classes = ('dbmodule-content_authors_and_sources',),
                     include_list=[
                         'cyclope.models.Author',
                         'cyclope.models.Source',
@@ -52,6 +56,7 @@ class CustomIndexDashboard(Dashboard):
 
         self.children.append(modules.ModelList(
             title=_('Categorization'),
+            css_classes = ('dbmodule-categorization',),
             draggable = False,
             deletable = False,
             collapsible= False,
@@ -62,6 +67,7 @@ class CustomIndexDashboard(Dashboard):
 
         self.children.append(modules.ModelList(
             title=_('Site structure'),
+            css_classes = ('dbmodule-site_structure',),
             draggable = False,
             deletable = False,
             collapsible= False,
@@ -73,6 +79,7 @@ class CustomIndexDashboard(Dashboard):
 
         self.children.append(modules.ModelList(
             title=_('Global settings'),
+            css_classes = ('dbmodule-global_settings',),
             draggable = False,
             deletable = False,
             collapsible= False,
@@ -82,6 +89,7 @@ class CustomIndexDashboard(Dashboard):
 
         self.children.append(modules.ModelList(
             title=_('Comments'),
+            css_classes = ('dbmodule-comments',),
             pre_content = _('Review and moderate user comments'),
             draggable = False,
             deletable = False,
@@ -92,6 +100,7 @@ class CustomIndexDashboard(Dashboard):
 
         self.children.append(modules.AppList(
             title=_('Advanced'),
+            css_classes = ('dbmodule-advanced',),
             draggable = False,
             deletable = False,
             collapsible= False,

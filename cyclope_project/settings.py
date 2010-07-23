@@ -204,6 +204,8 @@ FORCE_LOWERCASE_TAGS = True
 
 ADMIN_TOOLS_INDEX_DASHBOARD = 'cyclope.dashboard.CustomIndexDashboard'
 ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'cyclope.dashboard.CustomAppIndexDashboard'
+ADMIN_TOOLS_THEMING_CSS = 'cyclope/css/admin_tools_theming.css'
+
 
 # import local settings if they are present
 try:
