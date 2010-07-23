@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     (r'^admin/filebrowser/', include('filebrowser.urls')),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
+    url(r'^admin_tools/', include('admin_tools.urls')),
 
     (r'^comments/', include('django.contrib.comments.urls')),
     (r'^captcha/', include('captcha.urls')),

@@ -30,7 +30,7 @@ setup(
     dependency_links=[
         'git+http://github.com/matthiask/feincms.git#egg=feincms-dev',
         'git+http://github.com/matthiask/django-mptt.git#egg=django-mptt-3.0-pre',
-       'hg+http://bitbucket.org/ubernostrum/django-registration#egg=django-registration-dev',
+        'hg+http://bitbucket.org/ubernostrum/django-registration#egg=django-registration-dev',
         'git+http://github.com/alexvasi/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-dev',
     ],
 

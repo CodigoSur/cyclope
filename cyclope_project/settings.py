@@ -24,7 +24,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'
-DATABASE_NAME = os.path.join(BASE_DIR, 'example.db')
+DATABASE_NAME = os.path.join(BASE_DIR, 'db/site.db')
 
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
@@ -61,8 +61,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
+    "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
-    "cyclope.core.context_processors.site_settings"
+    "cyclope.core.context_processors.site_settings",
 )
 
 
@@ -79,7 +80,7 @@ MIDDLEWARE_CLASSES = (
 
 #DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
 
-ROOT_URLCONF = 'cyclope_demo.urls'
+ROOT_URLCONF = 'cyclope_project.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates".
@@ -88,6 +89,11 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'admin_tools',
+    'admin_tools.theming',
+    'admin_tools.menu',
+    'admin_tools.dashboard',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -188,12 +194,16 @@ AUTH_PROFILE_MODULE = "cyclope.userprofile"
 
 # cyclope settings
 CYCLOPE_PREFIX = ''
-#CYCLOPE_LOCAL_THEMES_DIR = os.path.join(BASE_DIR, 'templates/cyclope/themes/')
-#CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/media/local_themes/'
+CYCLOPE_LOCAL_THEMES_DIR = os.path.join(BASE_DIR, 'templates/cyclope/themes/')
+CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/media/local_themes/'
 
 # tagging settings
 FORCE_LOWERCASE_TAGS = True
 
+# admin-toolls settings
+
+ADMIN_TOOLS_INDEX_DASHBOARD = 'cyclope.dashboard.CustomIndexDashboard'
+ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'cyclope.dashboard.CustomAppIndexDashboard'
 
 # import local settings if they are present
 try:
