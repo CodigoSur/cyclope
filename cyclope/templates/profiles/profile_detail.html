@@ -5,7 +5,7 @@
 
 <div id="content_container">
 <h3>{{ profile.user.username }}</h3>
-<img src="{{MEDIA_URL}}/{{ profile.avatar }}" alt=""></img>
+{% if profile.avatar %}<img src="{{MEDIA_URL}}/{{ profile.avatar }}" alt=""></img>{% endif %}
 <br/>
 <a href="{{request.META.HTTP_REFERER}}">{% trans "Return" %}</a>
 </div>

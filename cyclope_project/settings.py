@@ -28,7 +28,7 @@ DATABASE_NAME = os.path.join(BASE_DIR, 'db/site.db')
 
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
-LANGUAGE_CODE = 'es'
+#LANGUAGE_CODE = 'es'
 
 SITE_ID = 1
 

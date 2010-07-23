@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-23 00:42-0300\n"
+"POT-Creation-Date: 2010-07-23 15:41-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,10 @@ msgstr "detalles de contenido"
 #: dashboard.py:17
 msgid "Site Administration"
 msgstr "Administración del sitio"
+
+#: dashboard.py:21
+msgid "Content"
+msgstr "Contenidos"
 
 #: dashboard.py:26
 msgid "Create, delete or modify content for your website"
@@ -171,7 +175,7 @@ msgid "site settings"
 msgstr "configuración del sitio"
 
 #: models.py:64 models.py:94 models.py:193 models.py:211 models.py:256
-#: models.py:275 core/collections/models.py:23 core/collections/models.py:53
+#: models.py:279 core/collections/models.py:23 core/collections/models.py:53
 msgid "name"
 msgstr "nombre"
 
@@ -257,7 +261,7 @@ msgstr "etiquetas"
 msgid "published"
 msgstr "publicar"
 
-#: models.py:260 models.py:288 models.py:298 apps/articles/models.py:52
+#: models.py:260 models.py:295 models.py:305 apps/articles/models.py:52
 #: apps/medialibrary/models.py:27 apps/medialibrary/models.py:62
 #: apps/medialibrary/models.py:75 apps/medialibrary/models.py:88
 #: apps/medialibrary/models.py:101 core/collections/models.py:35
@@ -281,35 +285,51 @@ msgstr "tipos de contenido"
 msgid "Select the content types this author is related to."
 msgstr "Seleccione los tipos de contenido que corresponden a este autor"
 
-#: models.py:279
+#: models.py:274 apps/articles/models.py:25 apps/medialibrary/models.py:16
+msgid "author"
+msgstr "autor"
+
+#: models.py:275
+msgid "authors"
+msgstr "autores"
+
+#: models.py:283
 msgid "link"
 msgstr "enlace"
 
-#: models.py:294
+#: models.py:289 apps/articles/models.py:26
+msgid "source"
+msgstr "fuente"
+
+#: models.py:290
+msgid "sources"
+msgstr "fuentes"
+
+#: models.py:301
 msgid "Thumbnail Image"
 msgstr "Imagen miniatura"
 
-#: models.py:299
+#: models.py:306
 msgid "images"
 msgstr "imágenes"
 
-#: models.py:318
+#: models.py:325
 msgid "avatar"
 msgstr "tu imagen"
 
-#: models.py:320
+#: models.py:327
 msgid "city"
 msgstr "ciudad"
 
-#: models.py:321
+#: models.py:328
 msgid "about myself"
 msgstr "sobre mí"
 
-#: models.py:324
+#: models.py:331
 msgid "public"
 msgstr "público"
 
-#: models.py:325
+#: models.py:332
 msgid "Choose whether your profile info should be publicly visible or not"
 msgstr "Elije si deseas que tu información de perfil sea pública"
 
@@ -364,14 +384,6 @@ msgstr "resumen"
 #: apps/articles/models.py:24 apps/staticpages/models.py:11
 msgid "text"
 msgstr "texto"
-
-#: apps/articles/models.py:25 apps/medialibrary/models.py:16
-msgid "author"
-msgstr "autor"
-
-#: apps/articles/models.py:26
-msgid "source"
-msgstr "fuente"
 
 #: apps/articles/models.py:28
 msgid "creation date"
@@ -428,6 +440,14 @@ msgstr "bajadas"
 #: apps/medialibrary/templates/medialibrary/media_detail_header.html:4
 msgid "Tags"
 msgstr "Etiquetas"
+
+#: apps/articles/templates/articles/article_detail.html:23
+msgid "Print"
+msgstr "Imprimir"
+
+#: apps/articles/templates/articles/article_detail.html:26
+msgid "Share"
+msgstr "Compartir"
 
 #: apps/articles/templates/articles/article_detail.html:69
 #: apps/articles/templates/articles/article_teaser.html:24
@@ -865,6 +885,10 @@ msgstr "Imagen"
 msgid "of"
 msgstr "de"
 
+#: templates/cyclope/themes/neutrona/base.html:94
+msgid "Subscribe to RSS"
+msgstr ""
+
 #: templates/cyclope/themes/potente/__init__.py:11
 msgid "Potente theme"
 msgstr "tema Potente"
@@ -979,8 +1003,8 @@ msgid ""
 "Enter your e-mail address in the form below and we will send you a link for "
 "resetting your password."
 msgstr ""
-"Ingresa tu dirección de correo electrónico y te enviaremos un enlace para"
-"re-configurar tu clave."
+"Ingresa tu dirección de correo electrónico y te enviaremos un enlace parare-"
+"configurar tu clave."
 
 #: templates/registration/password_reset_form.html:13
 msgid "Reset Password"

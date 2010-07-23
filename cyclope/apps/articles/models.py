@@ -5,7 +5,7 @@ apps.articles.models
 """
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
@@ -51,7 +51,7 @@ class ArticleImageData(models.Model):
     article = models.ForeignKey(Article, verbose_name=_('article'))
     image = models.ForeignKey(Image, verbose_name=_('image'))
     label = models.CharField(_('label'), max_length=250)
-    
+
     def __unicode__(self):
 		return ""
 

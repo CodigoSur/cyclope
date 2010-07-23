@@ -6,7 +6,7 @@ models
 
 from django.db import models
 from django.db.models import get_model
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
@@ -270,6 +270,10 @@ class Author(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name = _('author')
+        verbose_name_plural = _('authors')
+
 
 class Source(models.Model):
     name = models.CharField(_('name'),max_length=250,
@@ -281,6 +285,9 @@ class Source(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name = _('source')
+        verbose_name_plural = _('sources')
 
 class Image(models.Model):
     """A simple image model.

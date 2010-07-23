@@ -6,7 +6,7 @@ Attributes:
     layout_templates: dictionary defining regions for the available templates
 """
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 verbose_name = _('Potente theme')
 

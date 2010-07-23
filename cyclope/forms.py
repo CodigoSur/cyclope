@@ -6,7 +6,7 @@ forms
 
 from django import forms
 from django.conf import settings as django_settings
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.db.models import get_model
 from django.contrib.contenttypes.models import ContentType

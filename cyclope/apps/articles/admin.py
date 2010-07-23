@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 from django import forms
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from cyclope.widgets import WYMEditor, ForeignKeyImageRawIdWidget
 from cyclope.core.collections.admin import CollectibleAdmin

@@ -5,7 +5,7 @@ import os, sys
 from django.utils import importlib
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 # todo(nicoechaniz): This whole theme setting through direct imports is quite hacky. Reevaluate.
 

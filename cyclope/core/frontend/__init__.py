@@ -6,7 +6,7 @@ core.frontend
 # *-- coding:utf-8 --*
 import inspect
 from sites import site
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 class FrontendView(object):
     """Parent class for frontend views.

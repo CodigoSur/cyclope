@@ -6,7 +6,7 @@ configuration for the Django admin
 """
 
 from django.contrib import admin
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 
 from feincms.admin import editor

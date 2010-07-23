@@ -1,7 +1,7 @@
 # *-- coding:utf-8 --*
 """cyclope.frontend_views"""
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.template import loader, RequestContext
 from django.contrib.sites.models import Site
 

@@ -18,7 +18,7 @@ class CustomIndexDashboard(Dashboard):
         self.columns = 2
 
         self.children.append(modules.Group(
-            title="Content",
+            title=_('Content'),
             display="tabs",
             draggable = False,
             deletable = False,
@@ -99,41 +99,6 @@ class CustomIndexDashboard(Dashboard):
                 'django.contrib.sites', 'django.contrib.auth',
                 'tagging', 'registration'),
             ))
-
-# sites, auth,
-        #self.children.append(modules.AppList(
-        #    title=_('Applications'),
-        #    exclude_list=('django.contrib', 'tagging', 'registration'),
-        #))
-        #
-        #self.children.append(modules.Group(
-        #    title="Content",
-        #    display="stacked",
-        #    children=[
-        #        modules.AppList(
-        #            title='',
-        #            include_list=('cyclope.apps.articles',
-        #                          'cyclope.apps.staticpages',
-        #                          'cyclope.apps.medialibrary',)
-        #        ),
-        #        #modules.AppList(
-        #        #    title='',
-        #        #    exclude_list=('django.contrib',)
-        #        #)
-        #    ]
-        #))
-
-        ## append an app list module for "Applications"
-        #self.children.append(modules.AppList(
-        #    title=_('Applications'),
-        #    exclude_list=('django.contrib', 'tagging', 'registration'),
-        #))
-
-        ## append an app list module for "Administration"
-        #self.children.append(modules.AppList(
-        #    title=_('Administration'),
-        #    include_list=('django.contrib', 'tagging', 'registration'),
-        #))
 
 
         ## append a link list module for "quick links"

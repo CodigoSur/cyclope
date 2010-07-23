@@ -9,7 +9,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext, loader
 from django.conf.urls.defaults import *
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import post_save
@@ -166,7 +166,7 @@ class CyclopeSite(object):
             for category in Category.tree.filter(collection=collection)])
         json_data = simplejson.dumps(categories)
         return HttpResponse(json_data, mimetype='application/json')
-        
+
     def layout_regions_json(self, request):
         """View to dynamically update template regions select in the admin."""
         template_filename = request.GET['q']

@@ -5,7 +5,7 @@ core.collections.admin
 """
 
 from django.contrib import admin
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django import forms
 from django.db.models import get_model
 from django.contrib.contenttypes import generic
