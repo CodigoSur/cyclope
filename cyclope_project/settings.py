@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(__file__)
 INTERNAL_IPS = ('127.0.0.1',)
 
 ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
+    ('Your Name', 'your_email@domain.com'),
 )
 
 MANAGERS = ADMINS
@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'cyclope.apps.articles',
     'cyclope.apps.staticpages',
     'cyclope.apps.medialibrary',
+    'contact_form'
 )
 
 # comments settings

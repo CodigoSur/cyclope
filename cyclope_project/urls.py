@@ -37,6 +37,7 @@ urlpatterns = patterns('',
 
     (r'^profiles/', include('profiles.urls')),
 
+    (r'^contact/', include('contact_form.urls')),
     (r'^%s' % cyc_settings.CYCLOPE_PREFIX,
      include(frontend.site.get_urls())),
 )

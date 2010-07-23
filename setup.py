@@ -32,6 +32,7 @@ setup(
         'git+http://github.com/matthiask/django-mptt.git#egg=django-mptt-3.0-pre',
         'hg+http://bitbucket.org/ubernostrum/django-registration#egg=django-registration-dev',
         'git+http://github.com/alexvasi/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-dev',
+        'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-dev',
     ],
 
     install_requires=[
@@ -48,6 +49,7 @@ setup(
         'django-registration>=0.8-alpha-1,==dev',
         'django-profiles>=0.2',
         'django-admin-tools>=0.3.0',
+        'django-contact-form>=0.4a1',
     ],
 
     packages=find_packages(),
