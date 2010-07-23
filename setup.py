@@ -47,6 +47,7 @@ setup(
         'South>=0.7.1',
         'django-registration>=0.8-alpha-1,==dev',
         'django-profiles>=0.2',
+        'django-admin-tools>=0.3.0',
     ],
 
     packages=find_packages(),
