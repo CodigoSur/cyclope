@@ -194,8 +194,8 @@ AUTH_PROFILE_MODULE = "cyclope.userprofile"
 
 # cyclope settings
 CYCLOPE_PREFIX = ''
-CYCLOPE_LOCAL_THEMES_DIR = os.path.join(BASE_DIR, 'templates/cyclope/themes/')
-CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/media/local_themes/'
+#CYCLOPE_LOCAL_THEMES_DIR = os.path.join(BASE_DIR, 'templates/cyclope/themes/')
+#CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/media/local_themes/'
 
 # tagging settings
 FORCE_LOWERCASE_TAGS = True
