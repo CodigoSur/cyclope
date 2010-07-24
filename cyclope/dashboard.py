@@ -85,6 +85,7 @@ class CustomIndexDashboard(Dashboard):
             collapsible= False,
             include_list=[
                 'cyclope.models.SiteSettings',
+                'contact_form.models.ContactFormSettings',
                 ]))
 
         self.children.append(modules.ModelList(

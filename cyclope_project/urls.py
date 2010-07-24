@@ -6,6 +6,8 @@ from django.utils.translation import ugettext as _
 from django.conf import settings as django_settings
 from registration.views import register
 from cyclope.forms import UserProfileForm
+from cyclope.core.captcha_contact_form.forms import  \
+                                       AdminSettingsContactFormWithCaptcha
 
 from cyclope import settings as cyc_settings
 
@@ -37,6 +39,9 @@ urlpatterns = patterns('',
 
     (r'^profiles/', include('profiles.urls')),
 
+    url(r'^contact/$', 'contact_form.views.contact_form',
+        {'form_class': AdminSettingsContactFormWithCaptcha},
+        name='contact_form'),
     (r'^contact/', include('contact_form.urls')),
     (r'^%s' % cyc_settings.CYCLOPE_PREFIX,
      include(frontend.site.get_urls())),
