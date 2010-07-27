@@ -1,0 +1,12 @@
+{% extends  'admin/change_list.html' %}
+{% load i18n %}
+
+{% block help %}
+{{ block.super }}
+{% blocktrans %}
+<p>
+Articles are a rich content type that you may use to publish categorized information on your website.
+</p>
+{% endblocktrans %}
+
+{% endblock %}

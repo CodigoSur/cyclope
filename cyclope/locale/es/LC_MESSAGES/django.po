@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-27 00:11-0300\n"
+"POT-Creation-Date: 2010-07-27 01:13-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: admin.py:54
+#: admin.py:56
 msgid "content details"
 msgstr "detalles de contenido"
 
@@ -752,20 +752,43 @@ msgstr "Historial"
 msgid "View on site"
 msgstr "Ven en el sitio"
 
-#: templates/admin/change_form.html:42 templates/admin/change_list.html:67
+#: templates/admin/change_form.html:42 templates/admin/change_list.html:74
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] "Por favor corrija el error detallado"
 msgstr[1] "Por favor corrija los errores detallados"
 
-#: templates/admin/change_list.html:59
+#: templates/admin/change_list.html:57
+#, python-format
+msgid ""
+"You may use the filters and search form to narrow the list of %(plural_name)"
+"s displayed."
+msgstr ""
+"Puedes utilizar los filtros y el formulario de búsqueda para acotar el listado"
+" de %(plural_name)s."
+
+#: templates/admin/change_list.html:66
 #, python-format
 msgid "Add %(name)s"
 msgstr "Agregar %(name)s"
 
-#: templates/admin/change_list.html:78
+#: templates/admin/change_list.html:85
 msgid "Filter"
 msgstr "Filtro"
+
+#: templates/admin/articles/change_list.html:6
+msgid ""
+"\n"
+"<p>\n"
+"Articles are a rich content type that you may use to publish categorized "
+"information on your website.\n"
+"</p>\n"
+msgstr ""
+"\n"
+"<p>\n"
+"Los Artículos son un tipo de contenido rico, que puedes utilizar "
+"para publicar material categorizado en tu sitio.\n"
+"</p>\n"
 
 #: templates/comments/comments_block.html:8
 #, python-format

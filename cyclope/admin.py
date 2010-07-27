@@ -25,6 +25,7 @@ class BaseContentAdmin(admin.ModelAdmin):
     """
     # updates related menu_items information when a BaseContent is saved
     form = BaseContentAdminForm
+
     def save_model(self, request, obj, form, change):
         super(BaseContentAdmin, self).save_model(request, obj, form, change)
         object_type = ContentType.objects.get_for_model(obj)
@@ -43,6 +44,7 @@ class BaseContentAdmin(admin.ModelAdmin):
             menu_item.content_type = object_type
             menu_item.object_id = obj.id
             menu_item.save()
+
 
 #    def render_change_form(self):
 

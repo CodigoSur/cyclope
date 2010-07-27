@@ -73,7 +73,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+#    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 #DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
@@ -112,7 +112,7 @@ INSTALLED_APPS = (
     'registration',
     'profiles',
 
-    'debug_toolbar',
+#    'debug_toolbar',
 
     'cyclope',
     'cyclope.core.collections',
