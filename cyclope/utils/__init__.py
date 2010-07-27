@@ -51,3 +51,17 @@ def populate_base_ctype_choices(myform):
         if issubclass(ctype.model_class(), BaseContent):
             ctype_choices.append((ctype.id, ctype.model))
     myform.fields['content_type'].choices = ctype_choices
+
+
+from django.utils.functional import Promise
+from django.utils.translation import force_unicode
+from django.utils.simplejson import JSONEncoder
+
+# snippet from http://code.djangoproject.com/ticket/5868
+# to fix json encoding of lazy translated strings
+class LazyJSONEncoder(JSONEncoder):
+    def default(self, o):
+        if isinstance(o, Promise):
+            return force_unicode(o)
+        else:
+            return super(LazyJSONEncoder, self).default(o)

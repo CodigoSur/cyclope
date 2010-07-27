@@ -15,7 +15,6 @@ Attributes:
 
   Automatic (based on database values):
 
-    CYCLOPE_THEMES: the themes package
     CYCLOPE_SITE_SETTINGS: the SiteSettings instance
     CYCLOPE_CURRENT_THEME
     CYCLOPE_THEME_MEDIA_URL
@@ -46,7 +45,8 @@ CYCLOPE_THEMES_ROOT = getattr(settings, 'CYCLOPE_THEMES_ROOT',
 #TODO(nicoechaniz): re-evaluate the way we are handling these dynamic settings, it is practical but seems hacky and error-prone.
 
 sys.path.append(os.path.join(CYCLOPE_THEMES_ROOT, '../'))
-import themes as CYCLOPE_THEMES
+#import themes as CYCLOPE_THEMES
+import themes
 
 #TODO(nicoechaniz): adapt for multi-site.
 def get_site_settings():
@@ -73,7 +73,7 @@ CYCLOPE_SITE_SETTINGS = get_site_settings()
 # and make them available at module level
 if CYCLOPE_SITE_SETTINGS is not None:
     CYCLOPE_CURRENT_THEME = CYCLOPE_SITE_SETTINGS.theme
-    if CYCLOPE_CURRENT_THEME in CYCLOPE_THEMES.local_themes:
+    if CYCLOPE_CURRENT_THEME in themes.local_themes:
         CYCLOPE_THEME_MEDIA_URL = '%s%s/' % (
             settings.CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX, CYCLOPE_CURRENT_THEME)
     else:

@@ -9,7 +9,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext, loader
 from django.conf.urls.defaults import *
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, ugettext
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import post_save
@@ -20,7 +20,7 @@ from django.db.models import get_model
 from cyclope.models import MenuItem, SiteSettings
 
 from cyclope import settings as cyc_settings
-from cyclope.utils import layout_for_request
+from cyclope.utils import layout_for_request, LazyJSONEncoder
 
 class CyclopeSite(object):
     """Handles frontend display of models.
@@ -113,18 +113,18 @@ class CyclopeSite(object):
         #TODO(nicoechaniz): return prettier messages.
         if not cyc_settings.CYCLOPE_SITE_SETTINGS:
             # the site has not been set up in the admin interface yet
-            return HttpResponse(_(u'You need to create you site settings'))
+            return HttpResponse(ugettext('You need to create you site settings'))
 
         elif not hasattr(cyc_settings, 'CYCLOPE_DEFAULT_LAYOUT')\
         or cyc_settings.CYCLOPE_DEFAULT_LAYOUT is None:
             return HttpResponse(
-                _(u'You need to select a layout for the site'))
+                ugettext('You need to select a layout for the site'))
         else:
             try:
                 home_item = MenuItem.objects.get(site_home=True)
             except ObjectDoesNotExist:
                 return HttpResponse(
-                    _(u'The site home page has not been set.'))
+                    ugettext('The site home page has not been set.'))
 
             if home_item.content_type:
                 view = self.get_view(home_item.content_type.model_class(),
@@ -135,7 +135,7 @@ class CyclopeSite(object):
                 elif not view.is_instance_view:
                     return view(request)
                 else:
-                    raise ImproperlyConfigured(_('No content object selected'))
+                    raise ImproperlyConfigured(ugettext('No content object selected'))
             else:
                 return self.no_content_layout_view(request)
 
@@ -171,7 +171,7 @@ class CyclopeSite(object):
         """View to dynamically update template regions select in the admin."""
         template_filename = request.GET['q']
         theme_name = SiteSettings.objects.get().theme
-        theme_settings = getattr(cyc_settings.CYCLOPE_THEMES, theme_name)
+        theme_settings = getattr(cyc_settings.themes, theme_name)
         regions = theme_settings.layout_templates[template_filename]['regions']
         regions_data = [{'region_name': '', 'verbose_name': '------'}]
         regions_data.extend([ {'region_name': region_name,
@@ -179,7 +179,7 @@ class CyclopeSite(object):
                             for region_name, verbose_name
                             in sorted(regions.items(), key=lambda r: r[1])
                             if region_name != 'content' ])
-        json_data = simplejson.dumps(regions_data)
+        json_data = simplejson.dumps(regions_data, cls=LazyJSONEncoder)
         return HttpResponse(json_data, mimetype='application/json')
 
     def _registered_views(self, request, region_views=False):
@@ -196,8 +196,9 @@ class CyclopeSite(object):
                             'verbose_name': view.verbose_name}
                            for view in self._registry[model]
                            if view.is_standard_view])
+        json_data = simplejson.dumps(views, cls=LazyJSONEncoder)
 
-        return simplejson.dumps(views)
+        return json_data
 
     def registered_region_views_json(self, request):
         json_data = self._registered_views(request, region_views=True)

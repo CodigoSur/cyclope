@@ -53,7 +53,7 @@ class ArticleImageData(models.Model):
     label = models.CharField(_('label'), max_length=250)
 
     def __unicode__(self):
-		return ""
+        return ""
 
     class Meta:
         verbose_name = _('article image')

@@ -115,7 +115,7 @@ class SiteTestCase(TestCase):
                                 allow_comments='YES')
         site_settings.save()
         response = self.client.get("/")
-        self.assertEqual(response.content, 'Debe seleccionar un esquema para el sitio')
+        self.assertEqual(response.content, 'You need to select a layout for the site')
         #TODO(nicoechaniz): testing for the response content is weak; look for a better option
         # this view should use a standard error template and we should check that the template was used and some message id
 
@@ -134,7 +134,7 @@ class SiteTestCase(TestCase):
         site_settings.save()
 
         response = self.client.get("/")
-        self.assertEqual(response.content, 'La página de inicio no ha sido establecida.')
+        self.assertEqual(response.content, 'The site home page has not been set.')
         #TODO(nicoechaniz): testing for the response content is weak; look for a better option
 
 

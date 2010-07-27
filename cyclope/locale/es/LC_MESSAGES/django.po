@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-23 15:41-0300\n"
+"POT-Creation-Date: 2010-07-27 00:11-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: admin.py:53
+#: admin.py:54
 msgid "content details"
 msgstr "detalles de contenido"
 
@@ -27,43 +27,43 @@ msgstr "Administración del sitio"
 msgid "Content"
 msgstr "Contenidos"
 
-#: dashboard.py:26
+#: dashboard.py:27
 msgid "Create, delete or modify content for your website"
 msgstr "Crea, borra o modifica el contenido del sitio web"
 
-#: dashboard.py:29
+#: dashboard.py:30
 msgid "Main"
 msgstr "Principal"
 
-#: dashboard.py:35
+#: dashboard.py:37
 msgid "Multimedia Library"
 msgstr "Biblioteca Multimedia"
 
-#: dashboard.py:46
+#: dashboard.py:49
 msgid "Authors and Sources"
 msgstr "Autores y Fuentes"
 
-#: dashboard.py:54
+#: dashboard.py:58
 msgid "Categorization"
 msgstr "Categorización"
 
-#: dashboard.py:64
+#: dashboard.py:69
 msgid "Site structure"
 msgstr "Estructura del sitio"
 
-#: dashboard.py:75
+#: dashboard.py:81
 msgid "Global settings"
 msgstr "Configuración global"
 
-#: dashboard.py:84 apps/articles/templates/articles/article_detail.html:33
+#: dashboard.py:92 apps/articles/templates/articles/article_detail.html:33
 msgid "Comments"
 msgstr "Comentarios"
 
-#: dashboard.py:85
+#: dashboard.py:94
 msgid "Review and moderate user comments"
 msgstr "Revisa y modera los comentarios recibidos"
 
-#: dashboard.py:94
+#: dashboard.py:103
 msgid "Advanced"
 msgstr "Avanzado"
 
@@ -118,6 +118,7 @@ msgid "You need to select a region"
 msgstr "Debe seleccionar una región"
 
 #: forms.py:219 core/captcha_comments/forms.py:8
+#: core/captcha_contact_form/forms.py:7
 msgid "Security code"
 msgstr "Código de seguridad"
 
@@ -624,10 +625,10 @@ msgstr "Sitio web o Blog"
 msgid "All"
 msgstr "Todos"
 
-#: core/collections/admin.py:74
-#, python-format
-msgid "%s categories"
-msgstr "%s categorías"
+#: core/collections/admin.py:74 core/collections/models.py:98
+#: core/collections/models.py:151
+msgid "categories"
+msgstr "categorías"
 
 #: core/collections/admin.py:83
 msgid "Description"
@@ -693,10 +694,6 @@ msgstr "activo"
 msgid "category"
 msgstr "categoría"
 
-#: core/collections/models.py:98 core/collections/models.py:151
-msgid "categories"
-msgstr "categorías"
-
 #: core/collections/models.py:130
 msgid "content type"
 msgstr "tipo de contenido"
@@ -739,7 +736,7 @@ msgstr "No ha seleccionado contenido"
 msgid "Cyclope site admin"
 msgstr "Administración de Cyclope"
 
-#: templates/admin/change_form.html:21
+#: templates/admin/change_form.html:21 templates/admin/change_list.html:42
 msgid "Home"
 msgstr "Inicio"
 
@@ -755,11 +752,20 @@ msgstr "Historial"
 msgid "View on site"
 msgstr "Ven en el sitio"
 
-#: templates/admin/change_form.html:42
+#: templates/admin/change_form.html:42 templates/admin/change_list.html:67
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] "Por favor corrija el error detallado"
 msgstr[1] "Por favor corrija los errores detallados"
+
+#: templates/admin/change_list.html:59
+#, python-format
+msgid "Add %(name)s"
+msgstr "Agregar %(name)s"
+
+#: templates/admin/change_list.html:78
+msgid "Filter"
+msgstr "Filtro"
 
 #: templates/comments/comments_block.html:8
 #, python-format
@@ -773,9 +779,9 @@ msgid ""
 msgstr ""
 "Por razones de seguridad, debe ingresar el texto que se muestra en la imagen."
 
-#: templates/comments/form.html:25
-msgid "Post you comment"
-msgstr "Enviar el comentario"
+#: templates/comments/form.html:25 templates/comments/preview.html:18
+msgid "Post your comment"
+msgstr "Enviar comentario"
 
 #: templates/comments/posted.html:4
 msgid "Thanks for commenting"
@@ -804,16 +810,20 @@ msgid "and"
 msgstr "y"
 
 #: templates/comments/preview.html:18
-msgid "Post your comment"
-msgstr "Enviar comentario"
-
-#: templates/comments/preview.html:18
 msgid "or make changes"
 msgstr "o haga cambios"
 
 #: templates/comments/preview.html:34
 msgid "Post"
 msgstr "Enviar"
+
+#: templates/contact_form/contact_form.html:12
+msgid "Send"
+msgstr "Enviar"
+
+#: templates/contact_form/contact_form_sent.html:6
+msgid "Thank you for contacting us!"
+msgstr "Gracias por su comentario!"
 
 #: templates/cyclope/breadcrumb.html:8
 msgid "Breadcrumb"
@@ -887,7 +897,7 @@ msgstr "de"
 
 #: templates/cyclope/themes/neutrona/base.html:94
 msgid "Subscribe to RSS"
-msgstr ""
+msgstr "Subscripción RSS"
 
 #: templates/cyclope/themes/potente/__init__.py:11
 msgid "Potente theme"
@@ -1033,3 +1043,9 @@ msgstr "Cerrar sesión"
 #: templates/registration/user_block.html:8
 msgid "Log in"
 msgstr "Ingresar"
+
+#~ msgid "Post you comment"
+#~ msgstr "Enviar el comentario"
+
+#~ msgid "%s categories"
+#~ msgstr "%s categorías"

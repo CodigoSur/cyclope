@@ -5,6 +5,7 @@ syntax: glob
 *.kpf
 *.geany
 .svn
+*.orig
 pip-log.txt 
 dbutils.py
 mine_initial_data.py

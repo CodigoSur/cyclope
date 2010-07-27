@@ -116,9 +116,9 @@ class MenuItemAdminForm(forms.ModelForm):
 class SiteSettingsAdminForm(forms.ModelForm):
     theme = forms.ChoiceField(label=_('Theme'),
         choices=[
-            (theme_name,  getattr(cyc_settings.CYCLOPE_THEMES,
+            (theme_name,  getattr(cyc_settings.themes,
             theme_name).verbose_name)
-            for theme_name in cyc_settings.CYCLOPE_THEMES.available ],
+            for theme_name in cyc_settings.themes.available ],
         required=True)
 
     class Meta:
@@ -138,7 +138,7 @@ class LayoutAdminForm(forms.ModelForm):
             theme_name = SiteSettings.objects.get().theme
         except:
             return
-        theme_settings = getattr(cyc_settings.CYCLOPE_THEMES, theme_name)
+        theme_settings = getattr(cyc_settings.themes, theme_name)
         tpl_choices = [(tpl, tpl_settings['verbose_name'])
                        for tpl, tpl_settings
                        in theme_settings.layout_templates.items()]

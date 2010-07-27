@@ -44,6 +44,7 @@ class BaseContentAdmin(admin.ModelAdmin):
             menu_item.object_id = obj.id
             menu_item.save()
 
+#    def render_change_form(self):
 
 class MenuItemAdmin(editor.TreeEditor):
     form = MenuItemAdminForm
