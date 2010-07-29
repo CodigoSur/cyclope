@@ -15,11 +15,11 @@ class CustomIndexDashboard(Dashboard):
     def __init__(self, **kwargs):
         Dashboard.__init__(self, **kwargs)
         self.title = _('Site Administration')
-        self.columns = 2
+        self.columns = 1
 
         self.children.append(modules.Group(
             title=_('Content'),
-            css_classes = ('dbmodule-content',),
+            css_classes = ('dbmodule-content', 'main-area-modules',),
             display="tabs",
             draggable = False,
             deletable = False,
@@ -55,19 +55,56 @@ class CustomIndexDashboard(Dashboard):
                 )))
 
         self.children.append(modules.ModelList(
-            title=_('Categorization'),
-            css_classes = ('dbmodule-categorization',),
+            title=_('Comments'),
+            css_classes = ('dbmodule-comments', 'main-area-modules',),
+            pre_content = _('Review and moderate user comments'),
             draggable = False,
             deletable = False,
             collapsible= False,
             include_list=[
-                'cyclope.core.collections.models.Collection',
-                'cyclope.core.collections.models.Category',
+                'django.contrib.comments.models.Comment',
                 ]))
+
+        #self.children.append(modules.ModelList(
+        #    title=_('Categorization'),
+        #    css_classes = ('dbmodule-categorization', 'main-area-modules',),
+        #    pre_content = _('Ordena y clasifica el contenido'),
+        #    draggable = False,
+        #    deletable = False,
+        #    collapsible= False,
+        #    include_list=[
+        #        'cyclope.core.collections.models.Collection',
+        #        'cyclope.core.collections.models.Category',
+        #        ]))
+
+        self.children.append(modules.Group(
+            title=_('Categorization'),
+            css_classes = ('dbmodule-categorization', 'main-area-modules',),
+            display="tabs",
+            draggable = False,
+            deletable = False,
+            collapsible= False,
+            pre_content = _('Ordenar y clasificar el contenido'),
+            children = (
+                modules.ModelList(
+                    title=_('Collections'),
+                    css_classes = ('dbmodule-content_collection',),
+                    include_list=[
+                       'cyclope.core.collections.models.Collection',
+                       'cyclope.core.collections.models.Category',
+                        ]),
+                modules.ModelList(
+                    title=_('Tagging'),
+                    css_classes = ('dbmodule-content_tagging',),
+                    include_list=[
+                        'tagging',
+                        ]),
+                )))
 
         self.children.append(modules.ModelList(
             title=_('Site structure'),
-            css_classes = ('dbmodule-site_structure',),
+            css_classes = ('dbmodule-site_structure', 'main-area-modules',),
+            pre_content = _('Menues y posicion de bloques de contenido'),
             draggable = False,
             deletable = False,
             collapsible= False,
@@ -79,7 +116,7 @@ class CustomIndexDashboard(Dashboard):
 
         self.children.append(modules.ModelList(
             title=_('Global settings'),
-            css_classes = ('dbmodule-global_settings',),
+            css_classes = ('dbmodule-global_settings', 'main-area-modules',),
             draggable = False,
             deletable = False,
             collapsible= False,
@@ -88,27 +125,71 @@ class CustomIndexDashboard(Dashboard):
                 'contact_form.models.ContactFormSettings',
                 ]))
 
-        self.children.append(modules.ModelList(
-            title=_('Comments'),
-            css_classes = ('dbmodule-comments',),
-            pre_content = _('Review and moderate user comments'),
-            draggable = False,
-            deletable = False,
-            collapsible= False,
-            include_list=[
-                'django.contrib.comments.models.Comment',
-                ]))
+        #self.children.append(modules.AppList(
+        #    title=_('Advanced'),
+        #    css_classes = ('dbmodule-advanced', 'main-area-modules',),
+        #    draggable = False,
+        #    deletable = False,
+        #    collapsible= False,
+        #    include_list=(
+        #        'django.contrib.sites', 'django.contrib.auth',
+        #        'tagging', 'registration'),
+        #    ))
 
-        self.children.append(modules.AppList(
+
+
+        self.children.append(modules.Group(
             title=_('Advanced'),
-            css_classes = ('dbmodule-advanced',),
+            css_classes = ('dbmodule-advanced', 'main-area-modules',),
+            display="tabs",
             draggable = False,
             deletable = False,
             collapsible= False,
-            include_list=(
-                'django.contrib.sites', 'django.contrib.auth',
-                'tagging', 'registration'),
-            ))
+            pre_content = _('Advanced configuration'),
+            children = (
+                modules.ModelList(
+                    title=_('Auth'),
+                    css_classes = ('dbmodule-content_auth',),
+                    include_list=[
+                        'django.contrib.auth',
+                        ]),
+                modules.ModelList(
+                    title=_('Registration'),
+                    css_classes = ('dbmodule-content_registration',),
+                    include_list=[
+                        'registration',
+                        ]),
+                modules.ModelList(
+                    title=_('Sites'),
+                    css_classes = ('dbmodule-content_sites',),
+                    include_list=[
+                        'django.contrib.sites',
+                        ]),
+                )))
+
+
+	## RIGHT PANEL MODULES ##
+
+        # append a recent actions module
+        self.children.append(modules.RecentActions(
+            title=_('Recent Actions'),
+            css_classes = ('dbmodule-recent-actions', 'right-area-modules'),
+            draggable = False,
+            deletable = False,
+            collapsible= False,
+            limit=5
+        ))
+
+        # append a feed module
+        self.children.append(modules.Feed(
+            title=_('Codigo Sur, ultimas noticias'),
+            css_classes = ('dbmodule-feed', 'right-area-modules',),
+            draggable = False,
+            deletable = False,
+            collapsible= False,
+            feed_url='http://codigosur.org/rss.php/36',
+            limit=6
+        ))
 
 
         ## append a link list module for "quick links"
@@ -134,18 +215,7 @@ class CustomIndexDashboard(Dashboard):
         #    ]
         #))
 
-        ## append a recent actions module
-        #self.children.append(modules.RecentActions(
-        #    title=_('Recent Actions'),
-        #    limit=5
-        #))
 
-        ## append a feed module
-        #self.children.append(modules.Feed(
-        #    title=_('Latest Django News'),
-        #    feed_url='http://www.djangoproject.com/rss/weblog/',
-        #    limit=5
-        #))
 
         ## append another link list module for "support".
         #self.children.append(modules.LinkList(

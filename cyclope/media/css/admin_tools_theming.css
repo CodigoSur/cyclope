@@ -4,20 +4,22 @@
  */
 
 #header {
-    background: url(/media/admin_tools/images/admin-tools.png) 0 0 repeat-x;
+    /* background: url(/media/admin_tools/images/admin-tools.png) 0 0 repeat-x; */
+  background-color: #800000;
 }
 
 #header #branding h1 {
     margin: 0;
     padding: 5px 10px;
     text-indent: -9999px;
-    background: transparent url(../images/isologo_cyclope.png) 10px 5px no-repeat;
+    background: transparent url(../images/cyclope-admin-top.png) no-repeat 0px 0px;
     height: 31px;
-    width: 108px;
+    width: 155px;
 }
 
 div.breadcrumbs {
     display: block;
+    /* display: none; */
     padding: 10px 15px;
     border: 0;
     background-position: 0 -8px;
@@ -26,4 +28,568 @@ div.breadcrumbs {
 
 div.breadcrumbs a {
     display: inline;
+}
+
+/* ########## clear django styles ############  */
+
+body, .ui-widget {
+ font-family: 'Liberation Sans', Arial, sans-serif;
+}
+
+
+
+
+/* ===== misc ======
+
+.addlink {
+ background: url("../images/icon_addlink.png") no-repeat scroll 0 1px transparent;
+}
+.changelink {
+ background: url("../images/icon_changelink.png") no-repeat scroll 0 0 transparent;
+}
+
+/* ===== default module styles ===== */
+
+
+/* ========= change list ======== */
+
+.change-list #content, .change-form #content{ 
+width: 960px;
+}
+
+#changelist {
+padding: 10px; width: auto;
+}
+
+#changelist #toolbar{ 
+padding: 0;
+background: none no-repeat 0 0 transparent;
+border: none;
+}
+
+.change-list .filtered table, .change-list .filtered .paginator, .filtered #toolbar, .filtered div.xfull, .filtered .actions {
+ margin-right:190px !important;
+}
+
+/* --- change list search ---- */
+
+#changelist #toolbar #changelist-search{ 
+-moz-border-radius: 8px;
+padding: 8px 12px 8px 8px;
+background: none no-repeat 0 0 white;
+display: inline-block;
+margin-bottom: 15px;
+}
+
+
+#changelist .actions {
+ background: url('../images/actions.png') no-repeat 12px 10px #C3D5F0;
+padding-left: 35px;
+color: #555;
+}
+
+/* ---- change list top links ---- */
+
+#changelist .xfull {
+ margin-bottom: 12px;
+}
+
+#changelist ul.toplinks{ 
+background: none no-repeat 0 0 transparent;
+/* border-bottom: 2px solid #C3D5F0 !important; */
+border: none !important;
+}
+
+#changelist ul.toplinks li{ 
+padding:2px 6px;
+width: auto;
+border: 1px solid #C3D5F0;
+}
+
+/* --- change list tables ---- */
+
+.change-list .filtered table{
+margin-bottom: 15px;
+width:745px !important;
+border-left: 1px solid #83a9de;
+border-right: none;
+}
+
+.change-list table {
+margin-bottom: 15px;
+width: inherit;
+display: inline-block;
+border-left: 1px solid #83a9de;
+border-right: none;
+}
+
+.change-list .filtered table thead {
+
+}
+
+.change-list .filtered table thead th,
+.change-list table thead th{
+background: none no-repeat 0 0 #83a9de;
+color: white;
+border-right: 1px solid #83a9de;
+font-weight: normal;
+}
+
+table th, table td{
+border-right: 1px solid #83a9de !important;
+border-bottom: 1px solid #83a9de;
+padding: 8px 10px 8px 6px;
+}
+
+table tbody tr {
+border-bottom: 1px solid #83a9de ;
+}
+
+.change-list .filtered table thead th a, .change-list table thead th a{
+color: #fff;
+}
+
+.change-list .filtered table thead th.sorted a,
+.change-list table thead th.sorted a{
+color: #fff;
+padding-right: 0;
+margin-right: 10px;
+}
+
+/* ---- change list actions toolbar --- */
+
+#changelist .actions select {
+border: 1px solid #83a9de;
+margin: 0;
+padding: 4px;
+}
+
+#changelist .actions select option{
+padding: 3px;
+}
+
+#changelist .actions label {
+font-size: 15px;
+color: #fff;
+font-weight: bold;
+}
+
+#changelist .actions .button {
+font-size:12px;
+padding:2px 4px;
+border: 2px solid #83a9de;
+}
+
+/* ---- change list filter ---- */
+
+#changelist-filter {
+ border-left: 2px solid #C3D5F0;
+ border-bottom: 2px solid #C3D5F0;
+-moz-border-radius: 0px 0px 0px 16px;
+ background-color: white;
+width: 180px;
+}
+
+#changelist-filter h2{
+ background: url('../images/filter.png') no-repeat 1px 3px #C3D5F0;
+ padding-left: 33px !important;
+}
+
+#changelist-filter h3, #changelist-filter ul {
+ margin: 0; padding: 0;
+}
+
+#changelist-filter h3 {
+ background-color: #83a9de;
+ margin: 12px 11px 0px 11px;
+ padding: 2px 3px 2px 7px;
+ color: white;
+ font-size: 11px;
+}
+
+#changelist-filter ul {
+ margin: 6px 11px;
+}
+
+#changelist-filter li{
+margin-left: 0; padding-left: 12px;
+}
+
+#changelist-filter li.selected {
+border: none;
+margin-left: 0; padding-left: 12px;
+background: url('../images/filter-on.png') no-repeat 0 0 transparent;
+}
+
+/* --- change list paginator ---- */
+
+#changelist .actions, #changelist p.paginator {
+-moz-border-radius: 8px;
+background: none no-repeat 0 0 #C3D5F0;
+border: none;
+padding: 8px 12px;
+margin-bottom: 15px;
+}
+
+#changelist p.paginator {
+text-align: center;
+}
+
+/* --- change list forms --- */
+
+
+select {
+background-color:#FFFFFF;
+border:1px solid #83a9de;
+font:12px/20px 'Liberation Sans', Arial, sans-serif;
+height:2em;
+padding:4px;
+vertical-align:top;
+}
+
+.button, input[type="submit"], input[type="button"], .submit-row input {
+background: none no-repeat 0 0 white;
+border: 2px solid #C3D5F0;
+color:black;
+-moz-border-radius: 5px;
+padding:2px 4px;
+margin-left: 3px;
+}
+
+.button:hover, input[type="submit"]:hover, input[type="button"]:hover, .submit-row input:hover {
+background: none no-repeat 0 0 #C3D5F0;
+}
+
+.button, input[type="text"] {
+background: none no-repeat 0 0 white;
+border: 1px solid #C3D5F0;
+}
+
+/* ------- object tool button (top-right)------- */
+
+.object-tools{
+ font-family: 'Liberation Sans', Arial, Helvetica, sans-serif;
+ margin: -53px 0 0 0; padding: 0;
+}
+
+.object-tools li {
+ background: none no-repeat 0 0 transparent;
+ padding: 10px 10px;
+ border: 2px solid #008000;
+ background: none no-repeat 0 0 #cfeecf;
+ -moz-border-radius: 8px;
+}
+
+.object-tools li:hover {
+  background: none no-repeat 0 0 #008000;
+}
+
+.object-tools li a {
+ font-size: 14px;
+ line-height: 18px
+ float: none; display: inline;
+ padding: 0px 0; margin: 0;
+ height: auto;
+}
+
+.object-tools a.addlink{
+  float: none; display: inline;
+  padding: 0px 0 0 23px; margin: 0;
+  background: url('../images/add-small.png') no-repeat 0 0px transparent;
+  color: #008000;
+}
+
+.object-tools li:hover a, .object-tools a.addlink:hover, .object-tools a:hover{
+  background: url('../images/add-small.png') no-repeat 0 0px #008000;
+  color: white;
+}
+/* ---- change list help ---- */
+
+.help{
+padding: 6px 10px;
+margin: 0px 0 10px 10px;
+width: 66%;
+}
+
+.help p{
+margin: 0;
+font-size: 14px;
+}
+
+/* --- change list titles --- */
+
+.change-list #content h1, .change-form #content h1 { 
+}
+
+.change-list #content h2, .change-form #content h2 { 
+font-size: 14px;
+padding: 7px 12px;
+-moz-border-radius: 0px 5px 0px 0px;
+}
+
+.change-list #content h3, .change-form #content h3 { 
+}
+
+.change-list .module, .change-list .filtered { 
+display: block;
+-moz-border-radius: 12px;
+border: 2px solid #c3d5f0;
+background: none !important;
+background-color: #e8eff9 !important;
+}
+
+/* ===== dashboard ===== */
+
+/* ===== default module ===== */
+
+.dashboard-module {
+-moz-border-radius: none;
+border: none;
+margin: 0;
+padding: 0;
+}
+
+.group .dashboard-module {
+padding: 0;
+margin: 0;
+}
+
+.dashboard-module  h2 {
+background: url("../images/engranaje.png") no-repeat scroll 8px 7px #800000;
+color: white;
+padding-left: 35px;
+color: white;
+-moz-border-radius: 6px 6px 6px 6px;
+font-weight: bold;
+
+}
+
+.dashboard-module-content {
+border: none;
+padding-top: 12px;
+}
+
+.dashboard-module-content > ul > li { 
+display: block;
+height: 67px; 
+margin: 0 0 13px 0;
+-moz-border-radius: 6px 6px 6px 6px;
+border: 2px solid #c3d5f0;
+background-color: #e8eff9;
+}
+
+.dashboard-module-content > ul > li:hover { 
+background-color: #fff;
+}
+
+.dashboard-module-content > ul > li > a {
+display: block;
+padding-left: 58px;
+margin: 11px 0 0 11px;
+font-size: 18px;
+font-weight: bold;
+color: #2b5ea9;
+height: 58px;
+}
+
+.dashboard-module-content > ul > li > ul {
+float: none;
+margin: -37px 0 0 64px;
+}
+
+.dashboard-module-content > ul > li > ul > li > a{
+color: #2B5EA9;
+}
+
+/* =========== main area dashboard ========= */
+
+.dashboard-container { 
+width: 960px; padding: 0px;
+}
+
+.main-area-modules { 
+width: 645px;
+float: left;
+margin-top: 20px;
+}
+
+
+
+.main-area-modules  h2 {
+background: url("../images/estrella.png") no-repeat scroll 8px 7px #2b5ea9;
+padding-left: 30px;
+width: 584px;
+font-weight: bold;
+
+}
+
+.main-area-modules .dashboard-module-content p {
+color: white;
+font-style: italic;
+text-align: right;
+margin: -38px 38px 21px 0px;
+}
+
+.main-area-modules .dashboard-module-content > ul > li { 
+display: inline-block;
+width: 280px;
+margin: 0 19px 13px 0;
+}
+
+
+/* ========== right-area ========= */
+
+.right-area-modules { 
+width: 300px;
+margin-left: 650px;
+-moz-border-radius: 0;
+margin-top: 20px;
+/* display: none; */
+}
+
+.right-area-modules .float-right {
+float: none;
+display: block;
+margin-right: 6px;
+
+}
+
+.right-area-modules .dashboard-module-content {
+padding-top: 0;
+}
+.right-area-modules .dashboard-module-content > ul > li {
+-moz-border-radius: 0;
+background: none no-repeat 0 0 transparent;
+border: none;
+border-top: 1px solid #efdede;
+height: auto;
+display: block;
+width: auto;
+margin: 0;
+}
+
+.right-area-modules .dashboard-module-content > ul > li.odd {
+background: none no-repeat 0 0 transparent;
+-moz-border-radius: 0;
+} 
+
+.right-area-modules .dashboard-module-content > ul > li > a {
+display: block;
+padding: 0 15px;
+margin: 0;
+font-size: 14px;
+font-weight: normal;
+color: #666;
+height: auto;
+}
+
+.right-area-modules {
+border: 2px solid #800000;
+-moz-border-radius: 6px;
+}
+
+.right-area-modules h2 {
+background: url("../images/acciones_recientes.png") no-repeat scroll 8px 7px #800000;
+-moz-border-radius: 3px 3px 0 0;
+}
+
+/* --- feeds --- */
+
+.dbmodule-feed ul li a.external-link {
+background: url('../images/codigo_sur-ext-link.png') no-repeat 0 5px transparent;
+}
+
+
+
+/* ====== iconos ======== */
+
+.dashboard-module-content > ul > li > a[href="/admin/articles/article/"] {
+background: url("../images/admin-articles-article.png") no-repeat scroll 0 1px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/staticpages/staticpage/"] {
+background: url("../images/admin-staticpages-staticpage.png") no-repeat scroll 0 1px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/cyclope/layout/"] {
+background: url("../images/admin-cyclope-layout.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/cyclope/menuitem/"] {
+background: url("../images/admin-cyclope-menuitem.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/cyclope/menu/"] {
+background: url("../images/admin-cyclope-menu.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/registration/registrationprofile/"] {
+background: url("../images/admin-registration-registrationprofile.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/medialibrary/soundtrack/"] {
+background: url("../images/admin-medialibrary-soundtrack.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/medialibrary/movieclip/"] {
+background: url("../images/admin-medialibrary-movieclip.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/medialibrary/picture/"] {
+background: url("../images/admin-medialibrary-picture.png") no-repeat scroll 0 2px transparent;
+}
+
+
+.dashboard-module-content > ul > li > a[href="/admin/medialibrary/regularfile/"] {
+background: url("../images/admin-medialibrary-regularfile.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/medialibrary/document/"] {
+background: url("../images/admin-medialibrary-document.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/medialibrary/externalcontent/"] {
+background: url("../images/admin-medialibrary-externalcontent.png") no-repeat scroll 0 2px transparent;
+}
+
+
+.dashboard-module-content > ul > li > a[href="/admin/cyclope/author/"] {
+background: url("../images/admin-cyclope-author.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/cyclope/source/"] {
+background: url("../images/admin-cyclope-source.png") no-repeat scroll 0 2px transparent;
+}
+
+
+.dashboard-module-content > ul > li > a[href="/admin/auth/user/"] {
+background: url("../images/admin-auth-user.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/auth/group/"] {
+background: url("../images/admin-auth-group.png") no-repeat scroll 0 0px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/cyclope/sitesetting/"] {
+background: url("../images/admin-cyclope-sitesettings.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/cyclope/image/"] {
+background: url("../images/admin-cyclope-image.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/comments/comment/"] {
+background: url("../images/admin-comments-comment.png") no-repeat scroll 0 3px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/collections/collection/"] {
+background: url("../images/admin-collections-collection.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/collections/category/"] {
+background: url("../images/admin-collections-category.png") no-repeat scroll -2px 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/cyclope/sitesettings/"] {
+background: url("../images/admin-cyclope-sitesettings.png") no-repeat scroll 0 2px transparent;
 }
