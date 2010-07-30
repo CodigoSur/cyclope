@@ -6,14 +6,24 @@ from django.utils.translation import ugettext_lazy as _
 
 from cyclope.widgets import WYMEditor, ForeignKeyImageRawIdWidget
 from cyclope.core.collections.admin import CollectibleAdmin
-from cyclope.admin import BaseContentAdmin
-from cyclope.forms import BaseContentAdminForm
 from cyclope.models import Author
+from cyclope.admin import BaseContentAdmin
 
 from models import *
 
 
-class ArticleForm(BaseContentAdminForm):
+class ArticleImageDataInline(admin.StackedInline):
+    model = ArticleImageData
+    raw_id_fields = ('image',)
+    extra = 0
+    def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
+        field = super(ArticleImageDataInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
+        if db_field.name == 'image':
+            field.widget = ForeignKeyImageRawIdWidget(db_field.rel)
+        return field
+
+
+class ArticleForm(forms.ModelForm):
     text = forms.CharField(label=_('Text'), widget=WYMEditor())
 
     def __init__(self, *args, **kwargs):
@@ -28,24 +38,13 @@ class ArticleForm(BaseContentAdminForm):
         model = Article
 
 
-class ArticleImageDataInline(admin.StackedInline):
-    model = ArticleImageData
-    raw_id_fields = ('image',)
-    extra = 0
-    def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
-        field = super(ArticleImageDataInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
-        if db_field.name == 'image':
-            field.widget = ForeignKeyImageRawIdWidget(db_field.rel)
-        return field
-
-
-class ArticleAdmin(CollectibleAdmin):
+class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
     form = ArticleForm
     list_filter = CollectibleAdmin.list_filter + \
                   ('creation_date', 'author', 'source')
     list_display = ('name', 'is_orphan',)
     search_fields = ('name', 'pretitle', 'summary', 'text', )
-    inlines = CollectibleAdmin.inlines + [ArticleImageDataInline]
+    inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines + [ArticleImageDataInline]
 
     fieldsets = ((None,
                   {'fields': ('name', 'author', 'text', 'published')}),

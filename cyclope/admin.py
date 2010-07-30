@@ -13,40 +13,25 @@ from feincms.admin import editor
 
 from cyclope.models import *
 from cyclope.forms import MenuItemAdminForm,\
-                          BaseContentAdminForm,\
                           SiteSettingsAdminForm,\
                           LayoutAdminForm,\
-                          RegionViewInlineForm
+                          RegionViewInlineForm,\
+                          RelatedContentForm
 from cyclope.core.collections.admin import CollectibleAdmin
 
 
+class RelatedContentInline(generic.GenericStackedInline):
+    form = RelatedContentForm
+    ct_field = 'self_type'
+    ct_fk_field = 'self_id'
+    model = RelatedContent
+    extra = 0
+
+
 class BaseContentAdmin(admin.ModelAdmin):
-    """Parent class for BaseContent derived objects to use instead of admin.ModelAdmin to register with the admin.site
+    """Base class for content models to use instead of admin.ModelAdmin
     """
-    # updates related menu_items information when a BaseContent is saved
-    form = BaseContentAdminForm
-
-    def save_model(self, request, obj, form, change):
-        super(BaseContentAdmin, self).save_model(request, obj, form, change)
-        object_type = ContentType.objects.get_for_model(obj)
-        selected_items_ids = form.data.getlist('menu_items')
-        selected_items = set(MenuItem.objects.filter(pk__in=selected_items_ids))
-        old_items = set(MenuItem.objects.filter(content_type=object_type,
-                                                object_id=obj.id))
-        discarded_items = old_items.difference(selected_items)
-        new_items = selected_items.difference(old_items)
-        for menu_item in discarded_items:
-            menu_item.content_type = None
-            menu_item.object_id = None
-            menu_item.content_view = None
-            menu_item.save()
-        for menu_item in new_items:
-            menu_item.content_type = object_type
-            menu_item.object_id = obj.id
-            menu_item.save()
-
-
-#    def render_change_form(self):
+    inlines = [RelatedContentInline]
 
 class MenuItemAdmin(editor.TreeEditor):
     form = MenuItemAdminForm

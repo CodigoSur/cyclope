@@ -59,11 +59,11 @@
 
 
 {% comment %}
-All chainSelect configuration for every particular model that needs it is done here.
+CYCLOPE: All chainSelect configuration for every particular model that needs it is done here.
 {% endcomment %}
 
 
-{% comment %} chainedSelect for Collectible derived clases {% endcomment %}
+{% comment %} CYCLOPE:  chainedSelect for Collectible derived clases {% endcomment %}
 <script type="text/javascript">
 function setup_chainedSelect_for_categorymap(i) {
     $("#id_collections-categorymap-content_type-object_id-"+ i +"-category").chainedSelect({
@@ -72,7 +72,7 @@ function setup_chainedSelect_for_categorymap(i) {
         value: 'category_id',
         label: 'category_name'
     });
-}
+};
 
 jQuery(document).ready(function($){
   $("select[id^='id_collections-categorymap-content_type-object_id-'][id$='-category']").each(function(i, sel){
@@ -87,7 +87,8 @@ jQuery(document).ready(function($){
 });
 </script>
 
-{% comment %} chainedSelect for Layout {% endcomment %}
+{% comment %} CYCLOPE: chainedSelect for Layout {% endcomment %}
+
 <script type="text/javascript">
 
   function setup_chainedSelect_for_layout(i) {
@@ -125,7 +126,7 @@ jQuery(document).ready(function($){
 
 </script>
 
-{% comment %} chainedSelect for MenuItem {% endcomment %}
+{% comment %} CYCLOPE: chainedSelect for MenuItem {% endcomment %}
 
 <script type="text/javascript">
 $(function() {
@@ -145,6 +146,33 @@ $(function() {
       });
 });
 </script>
+
+{% comment %} CYCLOPE: chainedSelect for RelatedContent {% endcomment %}
+
+<script type="text/javascript">
+function setup_chainedSelect_for_relatedcontent(i) {
+    $('#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_id').chainedSelect({
+        parent: '#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_type',
+        url: "/{{CYCLOPE_PREFIX}}objects_for_ctype_json",
+        value: 'object_id',
+        label: 'verbose_name'
+    });
+};
+
+jQuery(document).ready(function($){
+  $("select[id^='id_cyclope-relatedcontent-self_type-self_id-'][id$='-other_id']").each(function(i, sel){
+        setup_chainedSelect_for_relatedcontent(i);
+  });
+
+  $("#cyclope-relatedcontent-self_type-self_id-group .add-row a").click(
+    function(){
+      i = $("select[id^='id_cyclope-relatedcontent-self_type-self_id-'][id$='-other_id']").length - 2
+      setup_chainedSelect_for_relatedcontent(i);
+    });
+});
+
+</script>
+
 
 {% endblock %}
 

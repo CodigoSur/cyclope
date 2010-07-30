@@ -13,8 +13,6 @@ import mptt
 from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 
-from cyclope.core import frontend
-
 
 class Collection(models.Model):
     """A facility for creating custom content collections.
@@ -86,11 +84,6 @@ class Category(models.Model):
         else:
             return '%s/View/%s'\
                     % (self._meta.object_name.lower(), view_name)
-
-    @classmethod
-    def get_model_url(cls, view_name):
-        return '%s/View/%s'\
-                % (cls._meta.object_name.lower(), view_name)
 
     class Meta:
         unique_together = ('collection', 'name')

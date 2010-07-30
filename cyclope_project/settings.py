@@ -199,7 +199,7 @@ CYCLOPE_PREFIX = ''
 # tagging settings
 FORCE_LOWERCASE_TAGS = True
 
-# admin-toolls settings
+# admin-tools settings
 
 ADMIN_TOOLS_INDEX_DASHBOARD = 'cyclope.dashboard.CustomIndexDashboard'
 ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'cyclope.dashboard.CustomAppIndexDashboard'

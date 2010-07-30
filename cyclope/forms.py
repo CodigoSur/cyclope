@@ -31,30 +31,27 @@ def populate_ctype_choices_from_registry(myform):
 
 
 class AjaxChoiceField(forms.ChoiceField):
-    """
-    ChoiceField that always returns true for validate().
+    """ChoiceField that always returns true for validate().
     """
     # we always return true because we don't know what choices were available
     # at submit time, because they were populated through AJAX.
-    #TODO(nicoechaniz): generate valid choices at init time to avoid this hack
+    # we use this in cases where providing all the posible choices at init time
+    # would be too expensive
+    #TODO(nicoechaniz): generate valid choices at init time to avoid this hack when possible?
     def validate(self, value):
         return True
 
-class BaseContentAdminForm(forms.ModelForm):
-    menu_items = forms.ModelMultipleChoiceField(label=_('Menu items'),
-                    queryset = MenuItem.tree.all(), required=False,
-                    )
+
+class RelatedContentForm(forms.ModelForm):
+    other_id= AjaxChoiceField(label=_('Content object'),)
 
     def __init__(self, *args, **kwargs):
-        super(BaseContentAdminForm, self).__init__(*args, **kwargs)
+        super(RelatedContentForm, self).__init__(*args, **kwargs)
+
         if self.instance.id is not None:
-            instance_type = ContentType.objects.get_for_model(self.instance)
-            selected_items = [
-                values[0] for values in
-                MenuItem.objects.filter(
-                    content_type=instance_type,
-                    object_id=self.instance.id).values_list('id') ]
-            self.fields['menu_items'].initial = selected_items
+            content_object = self.instance.other_object
+            self.fields['other_id'].choices = [(content_object.id,
+                                                        content_object.name)]
 
 
 class MenuItemAdminForm(forms.ModelForm):

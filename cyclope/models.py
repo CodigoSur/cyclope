@@ -205,6 +205,32 @@ class Layout(models.Model):
         verbose_name_plural = _('layouts')
 
 
+class RelatedContent(models.Model):
+    """Relation between BaseContent derived models."""
+
+    self_type = models.ForeignKey(ContentType, db_index=True,
+                                     verbose_name=_('content type'),
+                                     related_name='related_contents_lt')
+    self_id = models.PositiveIntegerField(db_index=True)
+
+    other_type = models.ForeignKey(ContentType, db_index=True,
+                                     verbose_name=_('content type'),
+                                     related_name='related_contents_rt')
+    other_id = models.PositiveIntegerField(db_index=True)
+
+    self_object = generic.GenericForeignKey(ct_field='self_type',
+                                                  fk_field='self_id')
+    other_object = generic.GenericForeignKey(ct_field='other_type',
+                                                  fk_field='other_id')
+
+    def __unicode__(self):
+        return self.other_object.name
+
+    class Meta:
+        verbose_name = _('related content')
+        verbose_name_plural = _('related contents')
+
+
 class BaseContent(models.Model):
     """Parent class for every content model.
     """
@@ -214,7 +240,17 @@ class BaseContent(models.Model):
                          db_index=True, always_update=True)
     tags = TagAutocompleteField(_('tags'))
     published =  models.BooleanField(_('published'), default=True)
-
+    related_contents = generic.GenericRelation(RelatedContent,
+                                               object_id_field='self_id',
+                                               content_type_field='self_type')
+    def pictures(self):
+        if self.related_contents:
+            pic_model = get_model('medialibrary', 'picture')
+            ctype = ContentType.objects.get_for_model(pic_model)
+            rel_contents = self.related_contents.filter(other_type__pk=ctype.pk)
+            return [ r.other_object for r in rel_contents ]
+        else:
+            return None
 
     def get_instance_url(self, view_name):
         #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well.
@@ -235,11 +271,6 @@ class BaseContent(models.Model):
 
     def get_absolute_url(self):
         return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
-
-    @classmethod
-    def get_model_url(cls, view_name):
-        return '%s/View/%s'\
-                % (cls._meta.object_name.lower(), view_name)
 
     def __unicode__(self):
         return self.name

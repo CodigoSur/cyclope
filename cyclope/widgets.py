@@ -6,7 +6,7 @@ widgets
 from django import forms
 from django.utils.safestring import mark_safe
 from django.conf import settings
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.utils.html import escape
 from django.utils.text import truncate_words
 from django.contrib.admin.widgets import ForeignKeyRawIdWidget
@@ -30,7 +30,7 @@ class WYMEditor(forms.Textarea):
         super(WYMEditor, self).__init__(attrs)
 
     def render(self, name, value, attrs=None):
-        editor_toggle = '''
+        editor_toggle = u'''
             <p style="clear:both; margin: 0px; padding: 0 0 5px 0;">
             %s:
             <select class="wymtoggle">
