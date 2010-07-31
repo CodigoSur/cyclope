@@ -30,14 +30,11 @@ div.breadcrumbs a {
     display: inline;
 }
 
-/* ########## clear django styles ############  */
+/* ########## fonts ############  */
 
 body, .ui-widget {
  font-family: 'Liberation Sans', Arial, sans-serif;
 }
-
-
-
 
 /* ===== misc ======
 
@@ -47,9 +44,6 @@ body, .ui-widget {
 .changelink {
  background: url("../images/icon_changelink.png") no-repeat scroll 0 0 transparent;
 }
-
-/* ===== default module styles ===== */
-
 
 /* ========= change list ======== */
 
@@ -74,7 +68,7 @@ border: none;
 /* --- change list search ---- */
 
 #changelist #toolbar #changelist-search{ 
--moz-border-radius: 8px;
+-moz-border-radius: 8px 8px 8px 8px;
 padding: 8px 12px 8px 8px;
 background: none no-repeat 0 0 white;
 display: inline-block;
@@ -84,8 +78,12 @@ margin-bottom: 15px;
 
 #changelist .actions {
  background: url('../images/actions.png') no-repeat 12px 10px #C3D5F0;
-padding-left: 35px;
-color: #555;
+ padding: 8px 12px 8px 35px;
+ color: #555;
+ -moz-border-radius: 8px 8px 8px 8px;
+ border: none;
+ margin-bottom: 15px;
+
 }
 
 /* ---- change list top links ---- */
@@ -223,16 +221,18 @@ background: url('../images/filter-on.png') no-repeat 0 0 transparent;
 
 /* --- change list paginator ---- */
 
-#changelist .actions, #changelist p.paginator {
--moz-border-radius: 8px;
-background: none no-repeat 0 0 #C3D5F0;
-border: none;
-padding: 8px 12px;
-margin-bottom: 15px;
+#changelist p.paginator {
+
 }
 
 #changelist p.paginator {
+background: none no-repeat 0 0 #C3D5F0;
+padding: 8px 12px;
 text-align: center;
+border: none;
+-moz-border-radius: 8px 8px 8px 8px;
+margin-bottom: 15px;
+
 }
 
 /* --- change list forms --- */
@@ -251,7 +251,7 @@ vertical-align:top;
 background: none no-repeat 0 0 white;
 border: 2px solid #C3D5F0;
 color:black;
--moz-border-radius: 5px;
+-moz-border-radius: 5px 5px 5px 5px;
 padding:2px 4px;
 margin-left: 3px;
 }
@@ -277,7 +277,7 @@ border: 1px solid #C3D5F0;
  padding: 10px 10px;
  border: 2px solid #008000;
  background: none no-repeat 0 0 #cfeecf;
- -moz-border-radius: 8px;
+ -moz-border-radius: 8px 8px 8px 8px;
 }
 
 .object-tools li:hover {
@@ -332,18 +332,18 @@ padding: 7px 12px;
 
 .change-list .module, .change-list .filtered { 
 display: block;
--moz-border-radius: 12px;
+-moz-border-radius: 12px 12px 12px 12px;
 border: 2px solid #c3d5f0;
 background: none !important;
 background-color: #e8eff9 !important;
 }
 
-/* ===== dashboard ===== */
+/* ################## dashboard ################## */
 
 /* ===== default module ===== */
 
 .dashboard-module {
--moz-border-radius: none;
+-moz-border-radius: 0px 0px 0px 0px;
 border: none;
 margin: 0;
 padding: 0;
@@ -413,8 +413,6 @@ float: left;
 margin-top: 20px;
 }
 
-
-
 .main-area-modules  h2 {
 background: url("../images/estrella.png") no-repeat scroll 8px 7px #2b5ea9;
 padding-left: 30px;
@@ -442,7 +440,7 @@ margin: 0 19px 13px 0;
 .right-area-modules { 
 width: 300px;
 margin-left: 650px;
--moz-border-radius: 0;
+-moz-border-radius: 0px 0px 0px 0px;
 margin-top: 20px;
 /* display: none; */
 }
@@ -458,7 +456,7 @@ margin-right: 6px;
 padding-top: 0;
 }
 .right-area-modules .dashboard-module-content > ul > li {
--moz-border-radius: 0;
+-moz-border-radius: 0px 0px 0px 0px;
 background: none no-repeat 0 0 transparent;
 border: none;
 border-top: 1px solid #efdede;
@@ -470,7 +468,7 @@ margin: 0;
 
 .right-area-modules .dashboard-module-content > ul > li.odd {
 background: none no-repeat 0 0 transparent;
--moz-border-radius: 0;
+-moz-border-radius: 0px 0px 0px 0px;
 } 
 
 .right-area-modules .dashboard-module-content > ul > li > a {
@@ -485,12 +483,12 @@ height: auto;
 
 .right-area-modules {
 border: 2px solid #800000;
--moz-border-radius: 6px;
+-moz-border-radius: 6px 6px 6px 6px;
 }
 
 .right-area-modules h2 {
 background: url("../images/acciones_recientes.png") no-repeat scroll 8px 7px #800000;
--moz-border-radius: 3px 3px 0 0;
+-moz-border-radius: 3px 3px 0px 0px;
 }
 
 /* --- feeds --- */
@@ -593,3 +591,28 @@ background: url("../images/admin-collections-category.png") no-repeat scroll -2p
 .dashboard-module-content > ul > li > a[href="/admin/cyclope/sitesettings/"] {
 background: url("../images/admin-cyclope-sitesettings.png") no-repeat scroll 0 2px transparent;
 }
+
+.dashboard-module-content > ul > li > a[href="/admin/tagging/taggeditem/"] {
+background: url("../images/admin-tagging-taggeditem.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/tagging/tag/"] {
+background: url("../images/admin-tagging-tag.png") no-repeat scroll 0 2px transparent;
+}
+
+
+
+
+.dashboard-module-content > ul > li > a[href="/admin/contact_form/contactformsettings/"] {
+background: url("../images/admin-contact_form-contactformsettings.png") no-repeat scroll 0 2px transparent;
+}
+
+/* ####### !! ####### */
+html[lang="es-ar"] .dashboard-module-content > ul > li > a[href="/admin/contact_form/contactformsettings/"] {
+background: url("../images/admin-contact_form-contactformsettings.png") no-repeat scroll 0 2px transparent;
+/* texto demasiado largo de contact:_form !! */
+margin:9px 0 11px 11px;
+font-size: 14px;
+line-height: 16px;
+}
+/* ####### !! ####### */

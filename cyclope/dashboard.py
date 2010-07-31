@@ -84,7 +84,7 @@ class CustomIndexDashboard(Dashboard):
             draggable = False,
             deletable = False,
             collapsible= False,
-            pre_content = _('Ordenar y clasificar el contenido'),
+            pre_content = _('Organise and classify the content'),
             children = (
                 modules.ModelList(
                     title=_('Collections'),
@@ -104,7 +104,7 @@ class CustomIndexDashboard(Dashboard):
         self.children.append(modules.ModelList(
             title=_('Site structure'),
             css_classes = ('dbmodule-site_structure', 'main-area-modules',),
-            pre_content = _('Menues y posicion de bloques de contenido'),
+            pre_content = _('Configure navigation menu and content blocks position'),
             draggable = False,
             deletable = False,
             collapsible= False,
@@ -120,6 +120,7 @@ class CustomIndexDashboard(Dashboard):
             draggable = False,
             deletable = False,
             collapsible= False,
+            pre_content = _('Cyclope global options'),
             include_list=[
                 'cyclope.models.SiteSettings',
                 'contact_form.models.ContactFormSettings',
@@ -182,7 +183,7 @@ class CustomIndexDashboard(Dashboard):
 
         # append a feed module
         self.children.append(modules.Feed(
-            title=_('Codigo Sur, ultimas noticias'),
+            title=_('Codigo Sur, Last News'),
             css_classes = ('dbmodule-feed', 'right-area-modules',),
             draggable = False,
             deletable = False,

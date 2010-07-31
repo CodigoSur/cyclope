@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-27 01:13-0300\n"
+"POT-Creation-Date: 2010-07-29 18:57-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,29 +43,73 @@ msgstr "Biblioteca Multimedia"
 msgid "Authors and Sources"
 msgstr "Autores y Fuentes"
 
-#: dashboard.py:58
-msgid "Categorization"
-msgstr "Categorización"
-
-#: dashboard.py:69
-msgid "Site structure"
-msgstr "Estructura del sitio"
-
-#: dashboard.py:81
-msgid "Global settings"
-msgstr "Configuración global"
-
-#: dashboard.py:92 apps/articles/templates/articles/article_detail.html:33
+#: dashboard.py:58 apps/articles/templates/articles/article_detail.html:33
 msgid "Comments"
 msgstr "Comentarios"
 
-#: dashboard.py:94
+#: dashboard.py:60
 msgid "Review and moderate user comments"
 msgstr "Revisa y modera los comentarios recibidos"
 
-#: dashboard.py:103
+#: dashboard.py:81
+msgid "Categorization"
+msgstr "Categorización"
+
+#: dashboard.py:87
+msgid "Organise and classify the content"
+msgstr "Organiza y clasifica el contenido"
+
+#: dashboard.py:90
+msgid "Collections"
+msgstr "Colecciones"
+
+#: dashboard.py:97
+msgid "Tagging"
+msgstr "Etiquetado"
+
+#: dashboard.py:105
+msgid "Site structure"
+msgstr "Estructura del sitio"
+
+#: dashboard.py:107
+msgid "Configure navigation menu and content blocks position"
+msgstr "Configurar los menúes y la posición de los bloques de contenido"
+
+#: dashboard.py:118
+msgid "Global settings"
+msgstr "Configuración global"
+
+#: dashboard.py:123
+msgid "Cyclope global options"
+msgstr "Opciones globales de Cyclope"
+
+#: dashboard.py:143
 msgid "Advanced"
 msgstr "Avanzado"
+
+#: dashboard.py:149
+msgid "Advanced configuration"
+msgstr "Configuración avanzada"
+
+#: dashboard.py:152
+msgid "Auth"
+msgstr "Permisos"
+
+#: dashboard.py:158
+msgid "Registration"
+msgstr "Registro"
+
+#: dashboard.py:164
+msgid "Sites"
+msgstr "Sitios"
+
+#: dashboard.py:176
+msgid "Recent Actions"
+msgstr "Acciones recientes"
+
+#: dashboard.py:186
+msgid "Codigo Sur, Last News"
+msgstr "Código Sur, últimas noticias"
 
 #: forms.py:44
 msgid "Menu items"
@@ -752,27 +796,27 @@ msgstr "Historial"
 msgid "View on site"
 msgstr "Ven en el sitio"
 
-#: templates/admin/change_form.html:42 templates/admin/change_list.html:74
+#: templates/admin/change_form.html:42 templates/admin/change_list.html:76
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] "Por favor corrija el error detallado"
 msgstr[1] "Por favor corrija los errores detallados"
 
-#: templates/admin/change_list.html:57
+#: templates/admin/change_list.html:58
 #, python-format
 msgid ""
 "You may use the filters and search form to narrow the list of %(plural_name)"
 "s displayed."
 msgstr ""
-"Puedes utilizar los filtros y el formulario de búsqueda para acotar el listado"
-" de %(plural_name)s."
+"Puedes utilizar los filtros y el formulario de búsqueda para acotar el "
+"listado de %(plural_name)s."
 
-#: templates/admin/change_list.html:66
+#: templates/admin/change_list.html:68
 #, python-format
 msgid "Add %(name)s"
 msgstr "Agregar %(name)s"
 
-#: templates/admin/change_list.html:85
+#: templates/admin/change_list.html:87
 msgid "Filter"
 msgstr "Filtro"
 
@@ -786,8 +830,8 @@ msgid ""
 msgstr ""
 "\n"
 "<p>\n"
-"Los Artículos son un tipo de contenido rico, que puedes utilizar "
-"para publicar material categorizado en tu sitio.\n"
+"Los Artículos son un tipo de contenido rico, que puedes utilizar para "
+"publicar material categorizado en tu sitio.\n"
 "</p>\n"
 
 #: templates/comments/comments_block.html:8
