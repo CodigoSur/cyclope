@@ -17,7 +17,7 @@ from django.utils import simplejson
 from django.contrib.sites.models import Site
 from django.db.models import get_model
 
-from cyclope.models import MenuItem, SiteSettings
+from cyclope.models import MenuItem, SiteSettings, BaseContent
 
 from cyclope import settings as cyc_settings
 from cyclope.utils import layout_for_request, LazyJSONEncoder
@@ -28,6 +28,9 @@ class CyclopeSite(object):
 
     def __init__(self):
         self._registry = {}
+        self.base_content_types = {}
+        self._base_ctype_choices = [('', '------')]
+        self._registry_ctype_choices = [('', '------')]
 
     def register_view(self, model, view):
         """Register a view for a model.
@@ -39,12 +42,23 @@ class CyclopeSite(object):
                    core.collections.Collection or core.collections.Category
             view: a view derived from core.frontend.FrontendView
         """
-
         if not model in self._registry:
             self._registry[model] = [view]
+            ctype = ContentType.objects.get_for_model(model)
+            if issubclass(model, BaseContent):
+                self.base_content_types[model] = ctype
+                self._base_ctype_choices.append((ctype.id,
+                                                model._meta.verbose_name))
+            self._registry_ctype_choices.append((ctype.id,
+                                                model._meta.verbose_name))
         else:
             self._registry[model].append(view)
 
+    def get_base_ctype_choices(self):
+        return sorted(self._base_ctype_choices, key=lambda choice: choice[1])
+
+    def get_registry_ctype_choices(self):
+        return sorted(self._registry_ctype_choices, key=lambda choice: choice[1])
 
     def get_urls(self):
         from django.conf.urls.defaults import patterns, url

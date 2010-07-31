@@ -18,6 +18,8 @@ class StaticPageAdminForm(forms.ModelForm):
 #    text = forms.CharField(label=_('Text'), widget=WYMEditor())
 
     def __init__(self, *args, **kwargs):
+    # this was initially written to be used for any BaseContent, that's
+    # why we don't assume the content_type to be pre-determined
         super(forms.ModelForm, self).__init__(*args, **kwargs)
         if self.instance.id is not None:
             instance_type = ContentType.objects.get_for_model(self.instance)

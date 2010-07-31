@@ -56,5 +56,3 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
                 )
 
 admin.site.register(Article, ArticleAdmin)
-admin.site.register(Author)
-admin.site.register(Source)

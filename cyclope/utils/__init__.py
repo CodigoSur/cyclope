@@ -45,14 +45,6 @@ def template_for_request(request):
     return template
 
 
-def populate_base_ctype_choices(myform):
-    ctype_choices = [('', '------')]
-    for ctype in ContentType.objects.all():
-        if issubclass(ctype.model_class(), BaseContent):
-            ctype_choices.append((ctype.id, ctype.model))
-    myform.fields['content_type'].choices = ctype_choices
-
-
 from django.utils.functional import Promise
 from django.utils.translation import force_unicode
 from django.utils.simplejson import JSONEncoder

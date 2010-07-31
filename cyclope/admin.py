@@ -16,7 +16,9 @@ from cyclope.forms import MenuItemAdminForm,\
                           SiteSettingsAdminForm,\
                           LayoutAdminForm,\
                           RegionViewInlineForm,\
-                          RelatedContentForm
+                          RelatedContentForm,\
+                          AuthorAdminForm
+
 from cyclope.core.collections.admin import CollectibleAdmin
 
 
@@ -32,6 +34,7 @@ class BaseContentAdmin(admin.ModelAdmin):
     """Base class for content models to use instead of admin.ModelAdmin
     """
     inlines = [RelatedContentInline]
+
 
 class MenuItemAdmin(editor.TreeEditor):
     form = MenuItemAdminForm
@@ -71,3 +74,10 @@ class ImageAdmin(admin.ModelAdmin):
 	list_display = ['thumbnail']
 
 admin.site.register(Image, ImageAdmin)
+
+class AuthorAdmin(admin.ModelAdmin):
+    form = AuthorAdminForm
+
+admin.site.register(Author, AuthorAdmin)
+
+admin.site.register(Source)

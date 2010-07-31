@@ -160,12 +160,7 @@ class CollectionAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(CollectionAdminForm, self).__init__(*args, **kwargs)
-        ctype_choices = [('', '------')]
-        for model in frontend.site._registry:
-            if model not in [Category, Collection, Menu]:
-                ctype = ContentType.objects.get_for_model(model)
-                ctype_choices.append((ctype.id, model._meta.verbose_name))
-        self.fields['content_types'].choices = ctype_choices
+        self.fields['content_types'].choices = frontend.site.get_base_ctype_choices()
 
     class Meta:
         model = Collection
