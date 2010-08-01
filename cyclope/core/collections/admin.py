@@ -71,7 +71,7 @@ class CategoryFilterSpec(ChoicesFilterSpec):
                   'display': display}
 
     def title(self):
-        return u"%s %s" %( self.model._meta.verbose_name, _('categories'))
+        return _('categories')
 
 FilterSpec.filter_specs.insert(0, (lambda f: \
                                    getattr(f, 'category_filter', False),

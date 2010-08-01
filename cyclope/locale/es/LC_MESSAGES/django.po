@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-27 01:13-0300\n"
+"POT-Creation-Date: 2010-07-31 14:50-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: admin.py:56
+#: admin.py:44
 msgid "content details"
 msgstr "detalles de contenido"
 
@@ -23,106 +23,142 @@ msgstr "detalles de contenido"
 msgid "Site Administration"
 msgstr "Administración del sitio"
 
-#: dashboard.py:21
+#: dashboard.py:79
 msgid "Content"
 msgstr "Contenidos"
 
-#: dashboard.py:27
+#: dashboard.py:85
 msgid "Create, delete or modify content for your website"
 msgstr "Crea, borra o modifica el contenido del sitio web"
 
-#: dashboard.py:30
+#: dashboard.py:88
 msgid "Main"
 msgstr "Principal"
 
-#: dashboard.py:37
+#: dashboard.py:95
 msgid "Multimedia Library"
 msgstr "Biblioteca Multimedia"
 
-#: dashboard.py:49
+#: dashboard.py:107
 msgid "Authors and Sources"
 msgstr "Autores y Fuentes"
 
-#: dashboard.py:58
-msgid "Categorization"
-msgstr "Categorización"
-
-#: dashboard.py:69
-msgid "Site structure"
-msgstr "Estructura del sitio"
-
-#: dashboard.py:81
-msgid "Global settings"
-msgstr "Configuración global"
-
-#: dashboard.py:92 apps/articles/templates/articles/article_detail.html:33
+#: dashboard.py:117 apps/articles/templates/articles/article_detail.html:33
 msgid "Comments"
 msgstr "Comentarios"
 
-#: dashboard.py:94
+#: dashboard.py:119
 msgid "Review and moderate user comments"
 msgstr "Revisa y modera los comentarios recibidos"
 
-#: dashboard.py:103
+#: dashboard.py:128
+msgid "Categorization"
+msgstr "Categorización"
+
+#: dashboard.py:134
+msgid "Classify the content in your website"
+msgstr "Clasifica el contenido de tu sitio"
+
+#: dashboard.py:137
+msgid "Collections"
+msgstr "Colecciones"
+
+#: dashboard.py:144
+msgid "Tagging"
+msgstr "Etiquetado"
+
+#: dashboard.py:152
+msgid "Site structure"
+msgstr "Estructura del sitio"
+
+#: dashboard.py:154
+msgid "Modify the menus and site layouts"
+msgstr "Administra los menúes y la disposición del contenido"
+
+#: dashboard.py:165
+msgid "Global settings"
+msgstr "Configuración global"
+
+#: dashboard.py:178
 msgid "Advanced"
 msgstr "Avanzado"
 
-#: forms.py:44
-msgid "Menu items"
-msgstr "Items de menú"
+#: dashboard.py:184
+msgid "Advanced configuration"
+msgstr "Configuración avanzada"
 
-#: forms.py:63 forms.py:156
-msgid "View"
-msgstr "Vista"
+#: dashboard.py:187
+msgid "Auth"
+msgstr "Permisos"
 
-#: forms.py:64 forms.py:157
+#: dashboard.py:193
+msgid "Registration"
+msgstr "Registración"
+
+#: dashboard.py:199
+msgid "Sites"
+msgstr "Sitios"
+
+#: dashboard.py:210
+msgid "Recent Actions"
+msgstr "Acciones Recientes"
+
+#: dashboard.py:220
+msgid "Codigo Sur, latest news"
+msgstr "Código Sur, últimas noticias"
+
+#: forms.py:36 forms.py:53 forms.py:146
 msgid "Content object"
 msgstr "Contenido"
 
-#: forms.py:65 core/collections/admin.py:85
+#: forms.py:52 forms.py:145
+msgid "View"
+msgstr "Vista"
+
+#: forms.py:54 core/collections/admin.py:85
 msgid "Parent"
 msgstr "Padre"
 
-#: forms.py:91
+#: forms.py:80
 msgid ""
 "You can not set a Custom URL for menu entries                     with "
 "associated content"
 msgstr "No puede setear una URL para Entradas de Menú con contenido asociado."
 
-#: forms.py:98 forms.py:197
+#: forms.py:87 forms.py:186
 msgid "You need to select a content view"
 msgstr "Debe seleccionar una Vista del contenido"
 
-#: forms.py:104 forms.py:203
+#: forms.py:93 forms.py:192
 msgid "The selected view requires a content object"
 msgstr "La vista seleccionada requiere que elija un objeto de contenido"
 
-#: forms.py:117
+#: forms.py:106
 msgid "Theme"
 msgstr "Tema"
 
-#: forms.py:129
+#: forms.py:118
 msgid "Template"
 msgstr "Plantilla"
 
-#: forms.py:155
+#: forms.py:144
 msgid "Region"
 msgstr "Región"
 
-#: forms.py:190
+#: forms.py:179
 msgid "Content type can not be empty"
 msgstr "El Tipo de contenido no debe estar vacío"
 
-#: forms.py:194
+#: forms.py:183
 msgid "You need to select a region"
 msgstr "Debe seleccionar una región"
 
-#: forms.py:219 core/captcha_comments/forms.py:8
+#: forms.py:214 core/captcha_comments/forms.py:8
 #: core/captcha_contact_form/forms.py:7
 msgid "Security code"
 msgstr "Código de seguridad"
 
-#: forms.py:233
+#: forms.py:228
 msgid "Your avatar image is too big"
 msgstr "La imagen enviada es demasiado grande"
 
@@ -167,7 +203,7 @@ msgid "keywords"
 msgstr "palabras clave"
 
 #: models.py:48 apps/articles/models.py:70 apps/medialibrary/models.py:18
-#: core/collections/models.py:34 core/collections/models.py:59
+#: core/collections/models.py:32 core/collections/models.py:57
 msgid "description"
 msgstr "descripción"
 
@@ -175,8 +211,8 @@ msgstr "descripción"
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:64 models.py:94 models.py:193 models.py:211 models.py:256
-#: models.py:279 core/collections/models.py:23 core/collections/models.py:53
+#: models.py:64 models.py:94 models.py:193 models.py:237 models.py:287
+#: models.py:310 core/collections/models.py:21 core/collections/models.py:51
 msgid "name"
 msgstr "nombre"
 
@@ -192,11 +228,11 @@ msgstr "menú"
 msgid "menus"
 msgstr "menúes"
 
-#: models.py:95 core/collections/models.py:56
+#: models.py:95 core/collections/models.py:54
 msgid "parent"
 msgstr "relacionado"
 
-#: models.py:96 core/collections/models.py:57
+#: models.py:96 core/collections/models.py:55
 msgid "children"
 msgstr "hijo"
 
@@ -254,83 +290,95 @@ msgstr "plantilla para este esquema"
 msgid "layouts"
 msgstr "esquemas"
 
-#: models.py:215
+#: models.py:212 models.py:217 core/collections/models.py:123
+msgid "content type"
+msgstr "tipo de contenido"
+
+#: models.py:230
+msgid "related content"
+msgstr "contenido relacionado"
+
+#: models.py:231
+msgid "related contents"
+msgstr "contenidos relacionados"
+
+#: models.py:241
 msgid "tags"
 msgstr "etiquetas"
 
-#: models.py:216
+#: models.py:242
 msgid "published"
 msgstr "publicar"
 
-#: models.py:260 models.py:295 models.py:305 apps/articles/models.py:52
+#: models.py:291 models.py:326 models.py:336 apps/articles/models.py:52
 #: apps/medialibrary/models.py:27 apps/medialibrary/models.py:62
 #: apps/medialibrary/models.py:75 apps/medialibrary/models.py:88
-#: apps/medialibrary/models.py:101 core/collections/models.py:35
-#: core/collections/models.py:60
+#: apps/medialibrary/models.py:101 core/collections/models.py:33
+#: core/collections/models.py:58
 msgid "image"
 msgstr "imagen"
 
-#: models.py:263
+#: models.py:294
 msgid "origin"
 msgstr "origen"
 
-#: models.py:265
+#: models.py:296
 msgid "notes"
 msgstr "notas"
 
-#: models.py:267 core/collections/models.py:33
+#: models.py:298 core/collections/models.py:31
 msgid "content types"
 msgstr "tipos de contenido"
 
-#: models.py:268
+#: models.py:299
 msgid "Select the content types this author is related to."
 msgstr "Seleccione los tipos de contenido que corresponden a este autor"
 
-#: models.py:274 apps/articles/models.py:25 apps/medialibrary/models.py:16
+#: models.py:305 apps/articles/models.py:25 apps/medialibrary/models.py:16
 msgid "author"
 msgstr "autor"
 
-#: models.py:275
+#: models.py:306
 msgid "authors"
 msgstr "autores"
 
-#: models.py:283
+#: models.py:314
 msgid "link"
 msgstr "enlace"
 
-#: models.py:289 apps/articles/models.py:26
+#: models.py:320 apps/articles/models.py:26
 msgid "source"
 msgstr "fuente"
 
-#: models.py:290
+#: models.py:321
 msgid "sources"
 msgstr "fuentes"
 
-#: models.py:301
+#: models.py:332
 msgid "Thumbnail Image"
 msgstr "Imagen miniatura"
 
-#: models.py:306
+#: models.py:337
 msgid "images"
 msgstr "imágenes"
 
-#: models.py:325
+#: models.py:356
 msgid "avatar"
 msgstr "tu imagen"
 
-#: models.py:327
+#: models.py:358
 msgid "city"
 msgstr "ciudad"
 
-#: models.py:328
+#: models.py:359
 msgid "about myself"
 msgstr "sobre mí"
 
-#: models.py:331
+#: models.py:362
 msgid "public"
 msgstr "público"
 
-#: models.py:332
+#: models.py:363
 msgid "Choose whether your profile info should be publicly visible or not"
 msgstr "Elije si deseas que tu información de perfil sea pública"
 
@@ -350,11 +398,11 @@ msgstr "apagado"
 msgid "Lookup"
 msgstr "Buscar"
 
-#: apps/articles/admin.py:17
+#: apps/articles/admin.py:27
 msgid "Text"
 msgstr "Texto"
 
-#: apps/articles/admin.py:52
+#: apps/articles/admin.py:51
 msgid "Publication data"
 msgstr "Datos de la publicación"
 
@@ -601,6 +649,10 @@ msgstr " (en ventana nueva)"
 msgid "full screen view (new window)"
 msgstr "pantalla completa (en ventana nueva)"
 
+#: apps/staticpages/admin.py:15
+msgid "Menu items"
+msgstr "Items de menú"
+
 #: apps/staticpages/frontend_views.py:18
 msgid "detailed view of the selected Static Page"
 msgstr "vista detallada de la página estatica"
@@ -625,8 +677,8 @@ msgstr "Sitio web o Blog"
 msgid "All"
 msgstr "Todos"
 
-#: core/collections/admin.py:74 core/collections/models.py:98
-#: core/collections/models.py:151
+#: core/collections/admin.py:74 core/collections/models.py:91
+#: core/collections/models.py:144
 msgid "categories"
 msgstr "categorías"
 
@@ -666,43 +718,39 @@ msgstr "lista de resúmenes de las Categorías raíz de una Colección"
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
-#: core/collections/models.py:26
+#: core/collections/models.py:24
 msgid "visible"
 msgstr "visible"
 
-#: core/collections/models.py:30
+#: core/collections/models.py:28
 msgid "navigation root"
 msgstr "raíz de navegación"
 
-#: core/collections/models.py:42 core/collections/models.py:52
+#: core/collections/models.py:40 core/collections/models.py:50
 msgid "collection"
 msgstr "colección"
 
-#: core/collections/models.py:43
+#: core/collections/models.py:41
 msgid "collections"
 msgstr "colecciones"
 
-#: core/collections/models.py:52
+#: core/collections/models.py:50
 msgid "collection categories"
 msgstr "categorias de colecciones"
 
-#: core/collections/models.py:58
+#: core/collections/models.py:56
 msgid "active"
 msgstr "activo"
 
-#: core/collections/models.py:97 core/collections/models.py:127
+#: core/collections/models.py:90 core/collections/models.py:120
 msgid "category"
 msgstr "categoría"
 
-#: core/collections/models.py:130
-msgid "content type"
-msgstr "tipo de contenido"
-
-#: core/collections/models.py:142
+#: core/collections/models.py:135
 msgid "category map"
 msgstr "mapeo de categoría"
 
-#: core/collections/models.py:143
+#: core/collections/models.py:136
 msgid "category maps"
 msgstr "mapeos de categorías"
 
@@ -716,19 +764,19 @@ msgstr "No hay una vista por defecto para %s"
 msgid "You can set only one default view for %s"
 msgstr "Puedes definir solo una vista por defecto para %s"
 
-#: core/frontend/sites.py:116
+#: core/frontend/sites.py:130
 msgid "You need to create you site settings"
 msgstr "Su sitio aún no ha sido configurado"
 
-#: core/frontend/sites.py:121
+#: core/frontend/sites.py:135
 msgid "You need to select a layout for the site"
 msgstr "Debe seleccionar un esquema para el sitio"
 
-#: core/frontend/sites.py:127
+#: core/frontend/sites.py:141
 msgid "The site home page has not been set."
 msgstr "La página de inicio no ha sido establecida."
 
-#: core/frontend/sites.py:138
+#: core/frontend/sites.py:152
 msgid "No content object selected"
 msgstr "No ha seleccionado contenido"
 
@@ -752,27 +800,27 @@ msgstr "Historial"
 msgid "View on site"
 msgstr "Ven en el sitio"
 
-#: templates/admin/change_form.html:42 templates/admin/change_list.html:74
+#: templates/admin/change_form.html:42 templates/admin/change_list.html:76
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] "Por favor corrija el error detallado"
 msgstr[1] "Por favor corrija los errores detallados"
 
-#: templates/admin/change_list.html:57
+#: templates/admin/change_list.html:58
 #, python-format
 msgid ""
 "You may use the filters and search form to narrow the list of %(plural_name)"
 "s displayed."
 msgstr ""
-"Puedes utilizar los filtros y el formulario de búsqueda para acotar el listado"
-" de %(plural_name)s."
+"Puedes utilizar los filtros y el formulario de búsqueda para acotar el "
+"listado de %(plural_name)s."
 
-#: templates/admin/change_list.html:66
+#: templates/admin/change_list.html:68
 #, python-format
 msgid "Add %(name)s"
 msgstr "Agregar %(name)s"
 
-#: templates/admin/change_list.html:85
+#: templates/admin/change_list.html:87
 msgid "Filter"
 msgstr "Filtro"
 
@@ -786,8 +834,8 @@ msgid ""
 msgstr ""
 "\n"
 "<p>\n"
-"Los Artículos son un tipo de contenido rico, que puedes utilizar "
-"para publicar material categorizado en tu sitio.\n"
+"Los Artículos son un tipo de contenido rico, que puedes utilizar para "
+"publicar material categorizado en tu sitio.\n"
 "</p>\n"
 
 #: templates/comments/comments_block.html:8
