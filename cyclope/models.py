@@ -223,6 +223,7 @@ class RelatedContent(models.Model):
     other_object = generic.GenericForeignKey(ct_field='other_type',
                                                   fk_field='other_id')
 
+
     def __unicode__(self):
         return self.other_object.name
 
@@ -243,6 +244,17 @@ class BaseContent(models.Model):
     related_contents = generic.GenericRelation(RelatedContent,
                                                object_id_field='self_id',
                                                content_type_field='self_type')
+
+    def delete(self, using=None):
+        # the cascade delete does not delete the RelatedContent elements
+        # where this object is the related content, so we do it here.
+        ctype = ContentType.objects.get_for_model(self)
+        related_from = RelatedContent.objects.filter(other_type=ctype,
+                                                    other_id=self.id)
+        for obj in related_from:
+            obj.delete()
+        super(BaseContent, self).delete(using)
+
     def pictures(self):
         if self.related_contents:
             pic_model = get_model('medialibrary', 'picture')

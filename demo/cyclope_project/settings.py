@@ -14,6 +14,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 BASE_DIR = os.path.dirname(__file__)
+print BASE_DIR
 
 INTERNAL_IPS = ('127.0.0.1',)
 
