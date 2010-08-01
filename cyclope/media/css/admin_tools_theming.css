@@ -1,6 +1,6 @@
-/** 
+/**
  * theming styles
- * 
+ *
  */
 
 #header {
@@ -53,7 +53,7 @@ body, .ui-widget {
 
 /* ========= change list ======== */
 
-.change-list #content, .change-form #content{ 
+.change-list #content, .change-form #content{
 width: 960px;
 }
 
@@ -61,7 +61,7 @@ width: 960px;
 padding: 10px; width: auto;
 }
 
-#changelist #toolbar{ 
+#changelist #toolbar{
 padding: 0;
 background: none no-repeat 0 0 transparent;
 border: none;
@@ -73,7 +73,7 @@ border: none;
 
 /* --- change list search ---- */
 
-#changelist #toolbar #changelist-search{ 
+#changelist #toolbar #changelist-search{
 -moz-border-radius: 8px;
 padding: 8px 12px 8px 8px;
 background: none no-repeat 0 0 white;
@@ -94,13 +94,13 @@ color: #555;
  margin-bottom: 12px;
 }
 
-#changelist ul.toplinks{ 
+#changelist ul.toplinks{
 background: none no-repeat 0 0 transparent;
 /* border-bottom: 2px solid #C3D5F0 !important; */
 border: none !important;
 }
 
-#changelist ul.toplinks li{ 
+#changelist ul.toplinks li{
 padding:2px 6px;
 width: auto;
 border: 1px solid #C3D5F0;
@@ -242,7 +242,7 @@ select {
 background-color:#FFFFFF;
 border:1px solid #83a9de;
 font:12px/20px 'Liberation Sans', Arial, sans-serif;
-height:2em;
+/*height:2em;*/
 padding:4px;
 vertical-align:top;
 }
@@ -318,19 +318,19 @@ font-size: 14px;
 
 /* --- change list titles --- */
 
-.change-list #content h1, .change-form #content h1 { 
+.change-list #content h1, .change-form #content h1 {
 }
 
-.change-list #content h2, .change-form #content h2 { 
+.change-list #content h2, .change-form #content h2 {
 font-size: 14px;
 padding: 7px 12px;
 -moz-border-radius: 0px 5px 0px 0px;
 }
 
-.change-list #content h3, .change-form #content h3 { 
+.change-list #content h3, .change-form #content h3 {
 }
 
-.change-list .module, .change-list .filtered { 
+.change-list .module, .change-list .filtered {
 display: block;
 -moz-border-radius: 12px;
 border: 2px solid #c3d5f0;
@@ -369,16 +369,16 @@ border: none;
 padding-top: 12px;
 }
 
-.dashboard-module-content > ul > li { 
+.dashboard-module-content > ul > li {
 display: block;
-height: 67px; 
+height: 67px;
 margin: 0 0 13px 0;
 -moz-border-radius: 6px 6px 6px 6px;
 border: 2px solid #c3d5f0;
 background-color: #e8eff9;
 }
 
-.dashboard-module-content > ul > li:hover { 
+.dashboard-module-content > ul > li:hover {
 background-color: #fff;
 }
 
@@ -403,11 +403,11 @@ color: #2B5EA9;
 
 /* =========== main area dashboard ========= */
 
-.dashboard-container { 
+.dashboard-container {
 width: 960px; padding: 0px;
 }
 
-.main-area-modules { 
+.main-area-modules {
 width: 645px;
 float: left;
 margin-top: 20px;
@@ -430,7 +430,7 @@ text-align: right;
 margin: -38px 38px 21px 0px;
 }
 
-.main-area-modules .dashboard-module-content > ul > li { 
+.main-area-modules .dashboard-module-content > ul > li {
 display: inline-block;
 width: 280px;
 margin: 0 19px 13px 0;
@@ -439,7 +439,7 @@ margin: 0 19px 13px 0;
 
 /* ========== right-area ========= */
 
-.right-area-modules { 
+.right-area-modules {
 width: 300px;
 margin-left: 650px;
 -moz-border-radius: 0;
@@ -471,7 +471,7 @@ margin: 0;
 .right-area-modules .dashboard-module-content > ul > li.odd {
 background: none no-repeat 0 0 transparent;
 -moz-border-radius: 0;
-} 
+}
 
 .right-area-modules .dashboard-module-content > ul > li > a {
 display: block;

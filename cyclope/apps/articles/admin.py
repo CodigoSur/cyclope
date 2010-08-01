@@ -44,7 +44,7 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
                   ('creation_date', 'author', 'source')
     list_display = ('name', 'is_orphan',)
     search_fields = ('name', 'pretitle', 'summary', 'text', )
-    inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines + [ArticleImageDataInline]
+    inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines #+ [ArticleImageDataInline]
 
     fieldsets = ((None,
                   {'fields': ('name', 'author', 'text', 'published')}),
