@@ -1,9 +1,9 @@
-{% load fb_versions %}
+{% load fb_versions cyclope_utils %}
 
   <div class="media teaser picture">
     <a href="{% url picture-detail picture.slug %}">
       <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/image.png" width="48px" border="0"/>
       <img class="icon" src="{% version picture.image.path 'thumbnail' %}" width="135" border="0"/>
     </a>
-    <span class="label"><a href="{% url picture-detail picture.slug %}">{{ picture.name }}</a></span>
+    <span class="label"><a href="{% url picture-detail picture.slug %}">{{ picture.name|truncatechars:40 }}</a></span>
   </div>

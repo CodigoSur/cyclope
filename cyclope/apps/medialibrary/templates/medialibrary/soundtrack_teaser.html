@@ -1,4 +1,4 @@
-{% load fb_versions %}
+{% load fb_versions cyclope_utils %}
 
   <div class="media teaser soundtrack">
     <a href="{% url soundtrack-detail soundtrack.slug %}">
@@ -10,5 +10,5 @@
       {% endif %}
 
     </a>
-    <span class="label"><a href="{% url soundtrack-detail soundtrack.slug %}">{{ soundtrack.name }}</a></span>
+    <span class="label"><a href="{% url soundtrack-detail soundtrack.slug %}">{{ soundtrack.name|truncatechars:40 }}</a></span>
   </div>

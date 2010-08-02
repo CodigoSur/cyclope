@@ -1,4 +1,4 @@
-{% load fb_versions %}
+{% load fb_versions cyclope_utils %}
 
   <div class="media teaser movieclip">
     <a href="{% url document-detail document.slug %}">
@@ -10,5 +10,5 @@
       {% endif %}
 
     </a>
-    <span class="label"><a href="{% url document-detail document.slug %}">{{ document.name }}</a></span>
+    <span class="label"><a href="{% url document-detail document.slug %}">{{ document.name|truncatechars:40 }}</a></span>
   </div>

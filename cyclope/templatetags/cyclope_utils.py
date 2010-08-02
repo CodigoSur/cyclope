@@ -93,3 +93,10 @@ def do_assign(parser, token):
     value = parser.compile_filter(bits[2])
     return AssignNode(bits[1], value)
 
+@register.filter
+# truncate after a certain number of characters
+def truncatechars(value, arg):
+    if len(value) < arg:
+        return value
+    else:
+        return value[:arg] + '...'
