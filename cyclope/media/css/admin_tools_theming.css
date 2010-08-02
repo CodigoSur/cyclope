@@ -81,7 +81,7 @@ margin-bottom: 15px;
 
 
 #changelist .actions {
- background: url('../images/actions.png') no-repeat 12px 10px #C3D5F0;
+ background: url('../images/actions.png') no-repeat 12px 14px #C3D5F0;
  padding: 8px 12px 8px 35px;
  color: #555;
  -moz-border-radius: 8px 8px 8px 8px;
@@ -318,7 +318,22 @@ border: 1px solid #C3D5F0;
   color: #008000;
 }
 
-#content-main ul.object-tools li:hover a, #content-main ul.object-tools a.addlink:hover, #content-main ul.object-tools a:hover{
+#content-main ul.object-tools a.historylink:hover,
+#content-main ul.object-tools li:hover a.historylink{
+  background: url('../images/history-small.png') no-repeat 0 0px #008000;
+  color: white;
+}
+
+#content-main ul.object-tools a.viewsitelink:hover,
+#content-main ul.object-tools li:hover a.viewsitelink{
+  background: none no-repeat 0 0px #008000;
+  color: white;
+}
+
+
+#content-main ul.object-tools li:hover a, 
+#content-main ul.object-tools a.addlink:hover, 
+#content-main ul.object-tools a:hover{
   background: url('../images/add-small.png') no-repeat 0 0px #008000;
   color: white;
 }
