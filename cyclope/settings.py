@@ -32,15 +32,18 @@ from cyclope.models import SiteSettings
 
 settings.TEMPLATE_DIRS += (os.path.join(os.path.dirname(__file__), 'templates'),)
 
-CYCLOPE_PREFIX = getattr(settings, 'CYCLOPE_PREFIX', \
+CYCLOPE_PREFIX = getattr(settings, 'CYCLOPE_PREFIX',
                            'cyclope/')
-CYCLOPE_MEDIA_URL = getattr(settings, 'CYCLOPE_MEDIA_URL', \
+CYCLOPE_MEDIA_URL = getattr(settings, 'CYCLOPE_MEDIA_URL',
                            '%scyclope/' % settings.MEDIA_URL)
-CYCLOPE_MEDIA_ROOT = getattr(settings, 'CYCLOPE_MEDIA_ROOT', \
+CYCLOPE_MEDIA_ROOT = getattr(settings, 'CYCLOPE_MEDIA_ROOT',
                             '%scyclope/' % settings.MEDIA_ROOT)
 CYCLOPE_THEMES_ROOT = getattr(settings, 'CYCLOPE_THEMES_ROOT',
                               os.path.join(os.path.dirname(__file__),
                                            "templates/cyclope/themes/"))
+CYCLOPE_STATICPAGE_RICH_EDITOR = getattr(settings,
+                                            'CYCLOPE_STATICPAGE_RICH_EDITOR',
+                                            True)
 
 #TODO(nicoechaniz): re-evaluate the way we are handling these dynamic settings, it is practical but seems hacky and error-prone.
 

@@ -9,13 +9,15 @@ from django.contrib.contenttypes.models import ContentType
 from cyclope.core.collections.admin import CollectibleAdmin
 from cyclope.widgets import WYMEditor
 from cyclope.models import MenuItem
+from cyclope import settings as cyc_settings
 from models import StaticPage
 
 class StaticPageAdminForm(forms.ModelForm):
     menu_items = forms.ModelMultipleChoiceField(label=_('Menu items'),
                     queryset = MenuItem.tree.all(), required=False,
                     )
-#    text = forms.CharField(label=_('Text'), widget=WYMEditor())
+    if cyc_settings.CYCLOPE_STATICPAGE_RICH_EDITOR:
+        text = forms.CharField(label=_('Text'), widget=WYMEditor())
 
     def __init__(self, *args, **kwargs):
     # this was initially written to be used for any BaseContent, that's
