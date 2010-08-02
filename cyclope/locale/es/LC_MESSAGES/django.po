@@ -798,7 +798,7 @@ msgstr "Historial"
 
 #: templates/admin/change_form.html:32
 msgid "View on site"
-msgstr "Ven en el sitio"
+msgstr "Ver en el sitio"
 
 #: templates/admin/change_form.html:42 templates/admin/change_list.html:76
 msgid "Please correct the error below."
