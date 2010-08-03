@@ -284,6 +284,14 @@ class BaseContent(models.Model):
     def get_absolute_url(self):
         return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
 
+    @classmethod
+    def get_app_label(cls):
+        return cls._meta.app_label
+
+    @classmethod
+    def get_object_name(cls):
+        return cls._meta.object_name.lower()
+
     def __unicode__(self):
         return self.name
 

@@ -29,6 +29,7 @@ from django.db.models.signals import post_save
 
 from cyclope.models import SiteSettings
 
+from cyclope.core.frontend.sites import site
 
 settings.TEMPLATE_DIRS += (os.path.join(os.path.dirname(__file__), 'templates'),)
 
@@ -69,6 +70,8 @@ def get_site_settings():
         site_settings = None
 
     return site_settings
+
+CYCLOPE_BASE_CONTENT_TYPES = site.base_content_types
 
 CYCLOPE_SITE_SETTINGS = get_site_settings()
 

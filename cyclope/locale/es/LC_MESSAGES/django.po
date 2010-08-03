@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-31 14:50-0300\n"
+"POT-Creation-Date: 2010-08-03 18:16-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -43,7 +44,7 @@ msgstr "Biblioteca Multimedia"
 msgid "Authors and Sources"
 msgstr "Autores y Fuentes"
 
-#: dashboard.py:117 apps/articles/templates/articles/article_detail.html:33
+#: dashboard.py:117
 msgid "Comments"
 msgstr "Comentarios"
 
@@ -211,8 +212,8 @@ msgstr "descripción"
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:64 models.py:94 models.py:193 models.py:237 models.py:287
-#: models.py:310 core/collections/models.py:21 core/collections/models.py:51
+#: models.py:64 models.py:94 models.py:193 models.py:238 models.py:307
+#: models.py:330 core/collections/models.py:21 core/collections/models.py:51
 msgid "name"
 msgstr "nombre"
 
@@ -294,23 +295,23 @@ msgstr "esquemas"
 msgid "content type"
 msgstr "tipo de contenido"
 
-#: models.py:230
+#: models.py:231
 msgid "related content"
 msgstr "contenido relacionado"
 
-#: models.py:231
+#: models.py:232
 msgid "related contents"
 msgstr "contenidos relacionados"
 
-#: models.py:241
+#: models.py:242
 msgid "tags"
 msgstr "etiquetas"
 
-#: models.py:242
+#: models.py:243
 msgid "published"
 msgstr "publicar"
 
-#: models.py:291 models.py:326 models.py:336 apps/articles/models.py:52
+#: models.py:311 models.py:346 models.py:356 apps/articles/models.py:52
 #: apps/medialibrary/models.py:27 apps/medialibrary/models.py:62
 #: apps/medialibrary/models.py:75 apps/medialibrary/models.py:88
 #: apps/medialibrary/models.py:101 core/collections/models.py:33
@@ -318,67 +319,67 @@ msgstr "publicar"
 msgid "image"
 msgstr "imagen"
 
-#: models.py:294
+#: models.py:314
 msgid "origin"
 msgstr "origen"
 
-#: models.py:296
+#: models.py:316
 msgid "notes"
 msgstr "notas"
 
-#: models.py:298 core/collections/models.py:31
+#: models.py:318 core/collections/models.py:31
 msgid "content types"
 msgstr "tipos de contenido"
 
-#: models.py:299
+#: models.py:319
 msgid "Select the content types this author is related to."
 msgstr "Seleccione los tipos de contenido que corresponden a este autor"
 
-#: models.py:305 apps/articles/models.py:25 apps/medialibrary/models.py:16
+#: models.py:325 apps/articles/models.py:25 apps/medialibrary/models.py:16
 msgid "author"
 msgstr "autor"
 
-#: models.py:306
+#: models.py:326
 msgid "authors"
 msgstr "autores"
 
-#: models.py:314
+#: models.py:334
 msgid "link"
 msgstr "enlace"
 
-#: models.py:320 apps/articles/models.py:26
+#: models.py:340 apps/articles/models.py:26
 msgid "source"
 msgstr "fuente"
 
-#: models.py:321
+#: models.py:341
 msgid "sources"
 msgstr "fuentes"
 
-#: models.py:332
+#: models.py:352
 msgid "Thumbnail Image"
 msgstr "Imagen miniatura"
 
-#: models.py:337
+#: models.py:357
 msgid "images"
 msgstr "imágenes"
 
-#: models.py:356
+#: models.py:376
 msgid "avatar"
 msgstr "tu imagen"
 
-#: models.py:358
+#: models.py:378
 msgid "city"
 msgstr "ciudad"
 
-#: models.py:359
+#: models.py:379
 msgid "about myself"
 msgstr "sobre mí"
 
-#: models.py:362
+#: models.py:382
 msgid "public"
 msgstr "público"
 
-#: models.py:363
+#: models.py:383
 msgid "Choose whether your profile info should be publicly visible or not"
 msgstr "Elije si deseas que tu información de perfil sea pública"
 
@@ -398,7 +399,7 @@ msgstr "apagado"
 msgid "Lookup"
 msgstr "Buscar"
 
-#: apps/articles/admin.py:27
+#: apps/articles/admin.py:27 apps/staticpages/admin.py:20
 msgid "Text"
 msgstr "Texto"
 
@@ -483,44 +484,6 @@ msgstr "archivo"
 #: apps/articles/models.py:74
 msgid "downloads"
 msgstr "bajadas"
-
-#: apps/articles/templates/articles/article_detail.html:12
-#: apps/articles/templates/articles/article_teaser.html:29
-#: apps/medialibrary/templates/medialibrary/media_detail_header.html:4
-msgid "Tags"
-msgstr "Etiquetas"
-
-#: apps/articles/templates/articles/article_detail.html:23
-msgid "Print"
-msgstr "Imprimir"
-
-#: apps/articles/templates/articles/article_detail.html:26
-msgid "Share"
-msgstr "Compartir"
-
-#: apps/articles/templates/articles/article_detail.html:69
-#: apps/articles/templates/articles/article_teaser.html:24
-#: apps/medialibrary/templates/medialibrary/media_detail_header.html:25
-#: templates/comments/list.html:9
-msgid "By"
-msgstr "Por"
-
-#: apps/articles/templates/articles/article_detail.html:96
-msgid "Date"
-msgstr "Fecha"
-
-#: apps/articles/templates/articles/article_detail.html:97
-msgid "Source"
-msgstr "Fuente"
-
-#: apps/articles/templates/articles/article_detail.html:120
-msgid "Share in your social networks"
-msgstr "Compartir en redes sociales"
-
-#: apps/articles/templates/articles/article_teaser.html:20
-#: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:20
-msgid "More"
-msgstr "Más"
 
 #: apps/medialibrary/frontend_views.py:34
 msgid "detailed view of the selected Picture"
@@ -630,26 +593,7 @@ msgstr "contenido externo"
 msgid "external contents"
 msgstr "contenidos externos"
 
-#: apps/medialibrary/templates/medialibrary/document_detail.html:16
-#: apps/medialibrary/templates/medialibrary/media_player.html:17
-msgid "download file"
-msgstr "descargar archivo"
-
-#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:22
-#: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:30
-msgid "Open external content"
-msgstr "Abrir contenido externo"
-
-#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:22
-#: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:30
-msgid " (in new window)"
-msgstr " (en ventana nueva)"
-
-#: apps/medialibrary/templates/medialibrary/flashmovie_detail.html:24
-msgid "full screen view (new window)"
-msgstr "pantalla completa (en ventana nueva)"
-
-#: apps/staticpages/admin.py:15
+#: apps/staticpages/admin.py:16
 msgid "Menu items"
 msgstr "Items de menú"
 
@@ -764,141 +708,25 @@ msgstr "No hay una vista por defecto para %s"
 msgid "You can set only one default view for %s"
 msgstr "Puedes definir solo una vista por defecto para %s"
 
-#: core/frontend/sites.py:130
+#: core/frontend/sites.py:131
 msgid "You need to create you site settings"
 msgstr "Su sitio aún no ha sido configurado"
 
-#: core/frontend/sites.py:135
+#: core/frontend/sites.py:136
 msgid "You need to select a layout for the site"
 msgstr "Debe seleccionar un esquema para el sitio"
 
-#: core/frontend/sites.py:141
+#: core/frontend/sites.py:142
 msgid "The site home page has not been set."
 msgstr "La página de inicio no ha sido establecida."
 
-#: core/frontend/sites.py:152
+#: core/frontend/sites.py:153
 msgid "No content object selected"
 msgstr "No ha seleccionado contenido"
 
-#: templates/admin/base_site.html:4
-msgid "Cyclope site admin"
-msgstr "Administración de Cyclope"
-
-#: templates/admin/change_form.html:21 templates/admin/change_list.html:42
-msgid "Home"
-msgstr "Inicio"
-
-#: templates/admin/change_form.html:24
-msgid "Add"
-msgstr "Agregar"
-
-#: templates/admin/change_form.html:31
-msgid "History"
-msgstr "Historial"
-
-#: templates/admin/change_form.html:32
-msgid "View on site"
-msgstr "Ver en el sitio"
-
-#: templates/admin/change_form.html:42 templates/admin/change_list.html:76
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] "Por favor corrija el error detallado"
-msgstr[1] "Por favor corrija los errores detallados"
-
-#: templates/admin/change_list.html:58
-#, python-format
-msgid ""
-"You may use the filters and search form to narrow the list of %(plural_name)"
-"s displayed."
+#: templates/contact_form/contact_form.txt:2
+msgid "wrote"
 msgstr ""
-"Puedes utilizar los filtros y el formulario de búsqueda para acotar el "
-"listado de %(plural_name)s."
-
-#: templates/admin/change_list.html:68
-#, python-format
-msgid "Add %(name)s"
-msgstr "Agregar %(name)s"
-
-#: templates/admin/change_list.html:87
-msgid "Filter"
-msgstr "Filtro"
-
-#: templates/admin/articles/change_list.html:6
-msgid ""
-"\n"
-"<p>\n"
-"Articles are a rich content type that you may use to publish categorized "
-"information on your website.\n"
-"</p>\n"
-msgstr ""
-"\n"
-"<p>\n"
-"Los Artículos son un tipo de contenido rico, que puedes utilizar para "
-"publicar material categorizado en tu sitio.\n"
-"</p>\n"
-
-#: templates/comments/comments_block.html:8
-#, python-format
-msgid " There are %(comment_count)s comments "
-msgstr " Hay %(comment_count)s comentarios "
-
-#: templates/comments/form.html:16
-msgid ""
-"For security reasons you need to type the text displayed in the following "
-"image"
-msgstr ""
-"Por razones de seguridad, debe ingresar el texto que se muestra en la imagen."
-
-#: templates/comments/form.html:25 templates/comments/preview.html:18
-msgid "Post your comment"
-msgstr "Enviar comentario"
-
-#: templates/comments/posted.html:4
-msgid "Thanks for commenting"
-msgstr "Gracias por su comentario"
-
-#: templates/comments/posted.html:12
-msgid "Thank you for your comment"
-msgstr "Gracias por su comentario"
-
-#: templates/comments/posted.html:13
-msgid "return."
-msgstr "volver."
-
-#: templates/comments/preview.html:4 templates/comments/preview.html.py:15
-msgid "Preview your comment"
-msgstr "Vista previa de su comentario"
-
-#: templates/comments/preview.html:13
-msgid "Please correct the error below"
-msgid_plural "Please correct the errors below"
-msgstr[0] "Por favor corrija el error detallado"
-msgstr[1] "Por favor corrija los errores detallados"
-
-#: templates/comments/preview.html:18
-msgid "and"
-msgstr "y"
-
-#: templates/comments/preview.html:18
-msgid "or make changes"
-msgstr "o haga cambios"
-
-#: templates/comments/preview.html:34
-msgid "Post"
-msgstr "Enviar"
-
-#: templates/contact_form/contact_form.html:12
-msgid "Send"
-msgstr "Enviar"
-
-#: templates/contact_form/contact_form_sent.html:6
-msgid "Thank you for contacting us!"
-msgstr "Gracias por su comentario!"
-
-#: templates/cyclope/breadcrumb.html:8
-msgid "Breadcrumb"
-msgstr "Profundidad de navegación"
 
 #: templates/cyclope/themes/__init__.py:22
 msgid "You need to set CYCLOPE_LOCAL_THEMES_PREFIX in your settings file"
@@ -958,18 +786,6 @@ msgstr "Dos barras laterales"
 msgid "right sidebar"
 msgstr "barra lateral derecha"
 
-#: templates/cyclope/themes/neutrona/base.html:41
-msgid "Image"
-msgstr "Imagen"
-
-#: templates/cyclope/themes/neutrona/base.html:42
-msgid "of"
-msgstr "de"
-
-#: templates/cyclope/themes/neutrona/base.html:94
-msgid "Subscribe to RSS"
-msgstr "Subscripción RSS"
-
 #: templates/cyclope/themes/potente/__init__.py:11
 msgid "Potente theme"
 msgstr "tema Potente"
@@ -998,122 +814,275 @@ msgstr "tercer panel"
 msgid "fourth pane"
 msgstr "cuarto panel"
 
-#: templates/profiles/edit_profile.html:9
-#: templates/registration/registration_form.html:9
-msgid "Please fill in your user profile data"
-msgstr "Por favor complete sus datos"
-
-#: templates/profiles/edit_profile.html:25
-msgid "Send data"
-msgstr "Enviar datos"
-
-#: templates/profiles/profile_detail.html:10
-#: templates/profiles/profile_list.html:11
-msgid "Return"
-msgstr "Volver"
-
-#: templates/registration/activate.html:9
-msgid "The activation key you posted is invalid."
-msgstr "La clave de activación es inválida."
-
-#: templates/registration/activate.html:10
-msgid "Please make sure that:"
-msgstr "Por favor, asegúrese de que:"
-
-#: templates/registration/activate.html:12
-msgid "You haven't already activated your account"
-msgstr "Su cuenta no haya sido activada previamente"
-
-#: templates/registration/activate.html:13
-msgid "Your key hasn't expired"
-msgstr "Su clave de activación no haya expirado"
-
-#: templates/registration/activate.html:14
-msgid "Your activation link wasn't split or malformed"
-msgstr "El enlace que utilizó para la activación no estuviera mal formado"
-
-#: templates/registration/activate.html:19
-msgid "Welcome! Your account has been successfully activated. "
-msgstr "Felicitaciones! Tu cuenta ha sido activada con éxito. "
-
-#: templates/registration/activation_complete.html:8
-msgid "Your account is now active"
-msgstr "Tu cuenta ya está activa"
-
-#: templates/registration/activation_complete.html:9
-msgid "You may now"
-msgstr "Ahora puedes"
-
-#: templates/registration/activation_complete.html:9
-msgid "login"
-msgstr "ingresar"
-
-#: templates/registration/login.html:8
-msgid "Please enter your credentials"
-msgstr "Por favor introduzca sus datos de ingreso"
-
-#: templates/registration/login.html:15
+#: templates/registration/activation_email.txt:2
 #, python-format
 msgid ""
 "\n"
-"     If you have not yet created an account you need to\n"
-"     <a href=\"/accounts/register?next=%(next)s\">register</a>\n"
-"     before you may login.\n"
-"     "
+"Thank you for registering to %(site)s\n"
+"\n"
+"You can finish your registration by clicking on this link:\n"
 msgstr ""
 "\n"
-"     Si aún no has creado una cuenta, deberás\n"
-"     <a href=\"/accounts/register?next=%(next)s\">registrarte</a>\n"
-"     antes de poder ingresar.\n"
-"     "
+"Gracias por registrarse a %(site)s\n"
+"\n"
+"Para completar su registración haga click aquí:\n"
 
-#: templates/registration/logout.html:7
-msgid "You have logged out"
-msgstr "Haz cerrado tu sesión"
-
-#: templates/registration/password_reset_done.html:7
-msgid "Your password has been reset"
-msgstr "Tu clave ha sido re-generada"
-
-#: templates/registration/password_reset_form.html:8
-msgid "Forgot your password?"
-msgstr "Olvidaste tu clave?"
-
-#: templates/registration/password_reset_form.html:10
+#: templates/registration/activation_email.txt:8
+#, python-format
 msgid ""
-"Enter your e-mail address in the form below and we will send you a link for "
-"resetting your password."
+"\n"
+"This activation key will expire in %(expiration_days)s days.\n"
 msgstr ""
-"Ingresa tu dirección de correo electrónico y te enviaremos un enlace parare-"
-"configurar tu clave."
+"\n"
+"Esta llave de activación caducará en %(expiration_days)s días.\n"
 
-#: templates/registration/password_reset_form.html:13
-msgid "Reset Password"
-msgstr "Re-configurar Clave"
+#: templates/registration/activation_email_subject.txt:2
+msgid "Account activation for"
+msgstr "Actviación de cuenta para"
 
-#: templates/registration/registration_complete.html:4
-msgid "Registration complete"
-msgstr "Registración completada"
+#~ msgid "Tags"
+#~ msgstr "Etiquetas"
 
-#: templates/registration/registration_complete.html:9
-msgid ""
-"Please check your e-mail and follow the provided link in order to complete "
-"your account activation."
-msgstr ""
-"Por favor revisa tu correo electrónico y sigue el enlace provisto para "
-"completar la activación de tu cuenta."
+#~ msgid "Print"
+#~ msgstr "Imprimir"
 
-#: templates/registration/registration_form.html:15
-msgid "Register"
-msgstr "Registrarse"
+#~ msgid "Share"
+#~ msgstr "Compartir"
 
-#: templates/registration/user_block.html:6
-msgid "Log out"
-msgstr "Cerrar sesión"
+#~ msgid "By"
+#~ msgstr "Por"
 
-#: templates/registration/user_block.html:8
-msgid "Log in"
-msgstr "Ingresar"
+#~ msgid "Date"
+#~ msgstr "Fecha"
+
+#~ msgid "Source"
+#~ msgstr "Fuente"
+
+#~ msgid "Share in your social networks"
+#~ msgstr "Compartir en redes sociales"
+
+#~ msgid "More"
+#~ msgstr "Más"
+
+#~ msgid "download file"
+#~ msgstr "descargar archivo"
+
+#~ msgid "Open external content"
+#~ msgstr "Abrir contenido externo"
+
+#~ msgid " (in new window)"
+#~ msgstr " (en ventana nueva)"
+
+#~ msgid "full screen view (new window)"
+#~ msgstr "pantalla completa (en ventana nueva)"
+
+#~ msgid "Cyclope site admin"
+#~ msgstr "Administración de Cyclope"
+
+#~ msgid "Home"
+#~ msgstr "Inicio"
+
+#~ msgid "Add"
+#~ msgstr "Agregar"
+
+#~ msgid "History"
+#~ msgstr "Historial"
+
+#~ msgid "View on site"
+#~ msgstr "Ver en el sitio"
+
+#~ msgid "Please correct the error below."
+#~ msgid_plural "Please correct the errors below."
+#~ msgstr[0] "Por favor corrija el error detallado"
+#~ msgstr[1] "Por favor corrija los errores detallados"
+
+#~ msgid ""
+#~ "You may use the filters and search form to narrow the list of "
+#~ "%(plural_name)s displayed."
+#~ msgstr ""
+#~ "Puedes utilizar los filtros y el formulario de búsqueda para acotar el "
+#~ "listado de %(plural_name)s."
+
+#~ msgid "Add %(name)s"
+#~ msgstr "Agregar %(name)s"
+
+#~ msgid "Filter"
+#~ msgstr "Filtro"
+
+#~ msgid ""
+#~ "\n"
+#~ "<p>\n"
+#~ "Articles are a rich content type that you may use to publish categorized "
+#~ "information on your website.\n"
+#~ "</p>\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<p>\n"
+#~ "Los Artículos son un tipo de contenido rico, que puedes utilizar para "
+#~ "publicar material categorizado en tu sitio.\n"
+#~ "</p>\n"
+
+#~ msgid " There are %(comment_count)s comments "
+#~ msgstr " Hay %(comment_count)s comentarios "
+
+#~ msgid ""
+#~ "For security reasons you need to type the text displayed in the following "
+#~ "image"
+#~ msgstr ""
+#~ "Por razones de seguridad, debe ingresar el texto que se muestra en la "
+#~ "imagen."
+
+#~ msgid "Post your comment"
+#~ msgstr "Enviar comentario"
+
+#~ msgid "Thanks for commenting"
+#~ msgstr "Gracias por su comentario"
+
+#~ msgid "Thank you for your comment"
+#~ msgstr "Gracias por su comentario"
+
+#~ msgid "return."
+#~ msgstr "volver."
+
+#~ msgid "Preview your comment"
+#~ msgstr "Vista previa de su comentario"
+
+#~ msgid "Please correct the error below"
+#~ msgid_plural "Please correct the errors below"
+#~ msgstr[0] "Por favor corrija el error detallado"
+#~ msgstr[1] "Por favor corrija los errores detallados"
+
+#~ msgid "and"
+#~ msgstr "y"
+
+#~ msgid "or make changes"
+#~ msgstr "o haga cambios"
+
+#~ msgid "Post"
+#~ msgstr "Enviar"
+
+#~ msgid "Send"
+#~ msgstr "Enviar"
+
+#~ msgid "Thank you for contacting us!"
+#~ msgstr "Gracias por su comentario!"
+
+#~ msgid "Breadcrumb"
+#~ msgstr "Profundidad de navegación"
+
+#~ msgid "Image"
+#~ msgstr "Imagen"
+
+#~ msgid "of"
+#~ msgstr "de"
+
+#~ msgid "Subscribe to RSS"
+#~ msgstr "Subscripción RSS"
+
+#~ msgid "Please fill in your user profile data"
+#~ msgstr "Por favor complete sus datos"
+
+#~ msgid "Send data"
+#~ msgstr "Enviar datos"
+
+#~ msgid "Return"
+#~ msgstr "Volver"
+
+#~ msgid "The activation key you posted is invalid."
+#~ msgstr "La clave de activación es inválida."
+
+#~ msgid "Please make sure that:"
+#~ msgstr "Por favor, asegúrese de que:"
+
+#~ msgid "You haven't already activated your account"
+#~ msgstr "Su cuenta no haya sido activada previamente"
+
+#~ msgid "Your key hasn't expired"
+#~ msgstr "Su clave de activación no haya expirado"
+
+#~ msgid "Your activation link wasn't split or malformed"
+#~ msgstr "El enlace que utilizó para la activación no estuviera mal formado"
+
+#~ msgid "Welcome! Your account has been successfully activated. "
+#~ msgstr "Felicitaciones! Tu cuenta ha sido activada con éxito. "
+
+#~ msgid "Your account is now active"
+#~ msgstr "Tu cuenta ya está activa"
+
+#~ msgid "You may now"
+#~ msgstr "Ahora puedes"
+
+#~ msgid "login"
+#~ msgstr "ingresar"
+
+#~ msgid "Please enter your credentials"
+#~ msgstr "Por favor introduzca sus datos de ingreso"
+
+#~ msgid ""
+#~ "\n"
+#~ "     If you have not yet created an account you need to\n"
+#~ "     <a href=\"/accounts/register?next=%(next)s\">register</a>\n"
+#~ "     before you may login.\n"
+#~ "     "
+#~ msgstr ""
+#~ "\n"
+#~ "     Si aún no has creado una cuenta, deberás\n"
+#~ "     <a href=\"/accounts/register?next=%(next)s\">registrarte</a>\n"
+#~ "     antes de poder ingresar.\n"
+#~ "     "
+
+#~ msgid "You have logged out"
+#~ msgstr "Haz cerrado tu sesión"
+
+#~ msgid "Your password has been reset"
+#~ msgstr "Tu clave ha sido re-generada"
+
+#~ msgid "Forgot your password?"
+#~ msgstr "Olvidaste tu clave?"
+
+#~ msgid ""
+#~ "Enter your e-mail address in the form below and we will send you a link "
+#~ "for resetting your password."
+#~ msgstr ""
+#~ "Ingresa tu dirección de correo electrónico y te enviaremos un enlace "
+#~ "parare-configurar tu clave."
+
+#~ msgid "Reset Password"
+#~ msgstr "Re-configurar Clave"
+
+#~ msgid "Registration complete"
+#~ msgstr "Registración completada"
+
+#~ msgid ""
+#~ "Please check your e-mail and follow the provided link in order to "
+#~ "complete your account activation."
+#~ msgstr ""
+#~ "Por favor revisa tu correo electrónico y sigue el enlace provisto para "
+#~ "completar la activación de tu cuenta."
+
+#~ msgid "Register"
+#~ msgstr "Registrarse"
+
+#~ msgid "Log out"
+#~ msgstr "Cerrar sesión"
+
+#~ msgid "Log in"
+#~ msgstr "Ingresar"
+
+#~ msgid "Advanced search"
+#~ msgstr "Búsqueda avanzada"
+
+#~ msgid "Search"
+#~ msgstr "Buscar"
+
+#~ msgid "Results"
+#~ msgstr "Resultados"
+
+#~ msgid "No results found."
+#~ msgstr "No se encontró ningún resultado"
+
+#~ msgid "Search In"
+#~ msgstr "Buscar en"
 
 #~ msgid "Post you comment"
 #~ msgstr "Enviar el comentario"

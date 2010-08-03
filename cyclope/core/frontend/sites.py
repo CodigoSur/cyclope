@@ -19,7 +19,8 @@ from django.db.models import get_model
 
 from cyclope.models import MenuItem, SiteSettings, BaseContent
 
-from cyclope import settings as cyc_settings
+import cyclope
+
 from cyclope.utils import layout_for_request, LazyJSONEncoder
 
 class CyclopeSite(object):
@@ -125,12 +126,12 @@ class CyclopeSite(object):
         """The root Cyclope URL view"""
 
         #TODO(nicoechaniz): return prettier messages.
-        if not cyc_settings.CYCLOPE_SITE_SETTINGS:
+        if not cyclope.settings.CYCLOPE_SITE_SETTINGS:
             # the site has not been set up in the admin interface yet
             return HttpResponse(ugettext('You need to create you site settings'))
 
-        elif not hasattr(cyc_settings, 'CYCLOPE_DEFAULT_LAYOUT')\
-        or cyc_settings.CYCLOPE_DEFAULT_LAYOUT is None:
+        elif not hasattr(cyclope.settings, 'CYCLOPE_DEFAULT_LAYOUT')\
+        or cyclope.settings.CYCLOPE_DEFAULT_LAYOUT is None:
             return HttpResponse(
                 ugettext('You need to select a layout for the site'))
         else:
@@ -158,7 +159,7 @@ class CyclopeSite(object):
         """View of a layout with no specific content associated"""
         layout = layout_for_request(request)
         template = 'cyclope/themes/%s/%s' % (
-                    cyc_settings.CYCLOPE_CURRENT_THEME,
+                    cyclope.settings.CYCLOPE_CURRENT_THEME,
                     layout.template
                     )
         t = loader.get_template(template)
@@ -185,7 +186,7 @@ class CyclopeSite(object):
         """View to dynamically update template regions select in the admin."""
         template_filename = request.GET['q']
         theme_name = SiteSettings.objects.get().theme
-        theme_settings = getattr(cyc_settings.themes, theme_name)
+        theme_settings = getattr(cyclope.settings.themes, theme_name)
         regions = theme_settings.layout_templates[template_filename]['regions']
         regions_data = [{'region_name': '', 'verbose_name': '------'}]
         regions_data.extend([ {'region_name': region_name,

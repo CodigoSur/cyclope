@@ -120,7 +120,8 @@ INSTALLED_APPS = (
     'cyclope.apps.articles',
     'cyclope.apps.staticpages',
     'cyclope.apps.medialibrary',
-    'contact_form'
+    'contact_form',
+    'haystack',
 )
 
 # comments settings
@@ -205,6 +206,10 @@ ADMIN_TOOLS_INDEX_DASHBOARD = 'cyclope.dashboard.CustomIndexDashboard'
 ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'cyclope.dashboard.CustomAppIndexDashboard'
 ADMIN_TOOLS_THEMING_CSS = 'cyclope/css/admin_tools_theming.css'
 
+# django-haystack settings
+HAYSTACK_SITECONF = 'cyclope_project.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
+HAYSTACK_WHOOSH_PATH = os.path.join(BASE_DIR, 'cyclope_project_index')
 
 # import local settings if they are present
 try:
