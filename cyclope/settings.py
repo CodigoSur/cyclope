@@ -25,7 +25,7 @@ import sys, os
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_delete
 
 from cyclope.models import SiteSettings
 
@@ -109,3 +109,19 @@ def _refresh_site_settings(sender, instance, created, **kwargs):
         reload(sys.modules[__name__])
 
 post_save.connect(_refresh_site_settings, sender=SiteSettings)
+
+from django.contrib.contenttypes.models import ContentType
+from cyclope.models import RelatedContent
+
+def _delete_related_contents(sender, instance, **kwargs):
+    # the cascade delete does not delete the RelatedContent elements
+    # where this object is the related content, so we do it here.
+    ctype = ContentType.objects.get_for_model(sender)
+    if hasattr(instance, 'id'):
+        print "instance:", instance.id
+        related_from = RelatedContent.objects.filter(other_type=ctype,
+                                                    other_id=instance.id)
+        for obj in related_from:
+            obj.delete()
+
+pre_delete.connect(_delete_related_contents)
