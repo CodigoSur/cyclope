@@ -50,6 +50,8 @@ setup(
         'django-profiles>=0.2',
         'django-admin-tools>=0.3.0',
         'django-contact-form>=0.4a1',
+        'Whoosh==0.3.18',
+        'django-haystack>=1.0.1',
     ],
 
     packages=find_packages(),

@@ -1,7 +1,8 @@
 {% extends CYCLOPE_DEFAULT_TEMPLATE %}
 {% load i18n cyclope_utils%}
 
-{% block content %}
+{% block page_content %}
+<div id="content_container">
     <div id='advanced_sarch' class='user_input'>
         <h6>{% trans "Advanced search" %}</h6>
 
@@ -31,9 +32,10 @@
                     {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
                 </div>
             {% endif %}
-        <div />
+        </div>
     {% else %}
         {# TODO(diegoM): Show advanced search div #}
         {# Show some example queries to run, maybe query syntax, something else? #}
     {% endif %}
+</div>
 {% endblock %}
