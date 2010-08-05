@@ -1,4 +1,24 @@
-# *-- coding:utf-8 --*
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+#
+# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# All rights reserved.
+#
+# This file is part of Cyclope.
+#
+# Cyclope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Cyclope is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 """
 Default and dynamic (db based) settings.
 
@@ -114,7 +134,7 @@ from django.contrib.contenttypes.models import ContentType
 from cyclope.models import RelatedContent
 
 def _delete_related_contents(sender, instance, **kwargs):
-    # the cascade delete does not delete the RelatedContent elements
+    # cascade delete does not delete the RelatedContent elements
     # where this object is the related content, so we do it here.
     ctype = ContentType.objects.get_for_model(sender)
     if hasattr(instance, 'id'):
