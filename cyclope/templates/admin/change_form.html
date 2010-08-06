@@ -65,9 +65,9 @@ CYCLOPE: All chainSelect configuration for every particular model that needs it 
 
 {% comment %} CYCLOPE:  chainedSelect for Collectible derived clases {% endcomment %}
 <script type="text/javascript">
-function setup_chainedSelect_for_categorymap(i) {
-    $("#id_collections-categorymap-content_type-object_id-"+ i +"-category").chainedSelect({
-        parent: '#id_collections-categorymap-content_type-object_id-'+ i +'-collection',
+function setup_chainedSelect_for_categorization(i) {
+    $("#id_collections-categorization-content_type-object_id-"+ i +"-category").chainedSelect({
+        parent: '#id_collections-categorization-content_type-object_id-'+ i +'-collection',
         url: "/{{CYCLOPE_PREFIX}}collection_categories_json",
         value: 'category_id',
         label: 'category_name'
@@ -75,14 +75,14 @@ function setup_chainedSelect_for_categorymap(i) {
 };
 
 jQuery(document).ready(function($){
-  $("select[id^='id_collections-categorymap-content_type-object_id-'][id$='-category']").each(function(i, sel){
-        setup_chainedSelect_for_categorymap(i);
+  $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-category']").each(function(i, sel){
+        setup_chainedSelect_for_categorization(i);
   });
 
-  $("#collections-categorymap-content_type-object_id-group .add-row a").click(
+  $("#collections-categorization-content_type-object_id-group .add-row a").click(
     function(){
-      i = $("select[id^='id_collections-categorymap-content_type-object_id-'][id$='-category']").length - 2
-      setup_chainedSelect_for_categorymap(i);
+      i = $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-category']").length - 2
+      setup_chainedSelect_for_categorization(i);
     });
 });
 </script>

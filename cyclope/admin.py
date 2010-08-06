@@ -57,6 +57,8 @@ class BaseContentAdmin(admin.ModelAdmin):
     inlines = [RelatedContentInline]
 
 
+from django.utils.functional import update_wrapper
+
 class MenuItemAdmin(editor.TreeEditor):
     form = MenuItemAdminForm
     fieldsets = ((None,
@@ -68,6 +70,13 @@ class MenuItemAdmin(editor.TreeEditor):
                   'fields':('content_type', 'content_view', 'object_id')})
                 )
     list_filter = ('menu',)
+
+
+    def changelist_view(self, request, extra_context=None):
+        main_menu_id = Menu.objects.get(main_menu=True).id
+        if not request.GET:
+            request.GET = {u'menu__id__exact': unicode(main_menu_id)}
+        return super(MenuItemAdmin, self).changelist_view(request, extra_context)
 
 admin.site.register(MenuItem, MenuItemAdmin)
 admin.site.register(Menu)

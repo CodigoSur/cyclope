@@ -113,10 +113,10 @@ class Category(models.Model):
 mptt.register(Category)
 
 
-class CategoryMapManager(models.Manager):
+class CategorizationManager(models.Manager):
 
     def get_for_object(self, obj):
-        """Get all Category Maps for an instance of a content object.
+        """Get all Categorizations for an instance of a content object.
 
         Args:
           obj: a model or instance
@@ -126,7 +126,7 @@ class CategoryMapManager(models.Manager):
         return self.filter(content_type__pk=ctype.pk, object_id=obj.pk)
 
     def get_for_ctype(self, ctype):
-        """Get all Collection Categories available for this content_type.
+        """Get all Categorizations available for this content_type.
 
         Args:
           ctype: a ContentType instance
@@ -134,17 +134,17 @@ class CategoryMapManager(models.Manager):
         return self.filter(content_type__pk=ctype.pk)
 
 
-class CategoryMap(models.Model):
-    """Mappings between a content object and it's associated categories."""
+class Categorization(models.Model):
+    """Represents the association of a catergory and a content object."""
 
     category = models.ForeignKey('Category', verbose_name=_('category'),
-                                 db_index=True, related_name='category_maps')
+                                 db_index=True, related_name='categorizations')
     content_type = models.ForeignKey(ContentType, db_index=True,
                                      verbose_name=_('content type'))
     object_id = models.PositiveIntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    objects = CategoryMapManager()
+    objects = CategorizationManager()
 
     def __unicode__(self):
         return '%(collection_name)s: %(category_name)s' % {
@@ -152,14 +152,14 @@ class CategoryMap(models.Model):
             'category_name': self.category.name}
 
     class Meta:
-        verbose_name = _('category map')
-        verbose_name_plural = _('category maps')
+        verbose_name = _('categorization')
+        verbose_name_plural = _('categorizations')
 
 
 class Collectible(models.Model):
     """Base class for collectible objects
     """
-    categories = generic.GenericRelation('CategoryMap',
+    categories = generic.GenericRelation('Categorization',
         content_type_field='content_type', object_id_field='object_id',
         verbose_name = _('categories'))
 

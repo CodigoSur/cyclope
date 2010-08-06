@@ -39,7 +39,7 @@ class CategoryRootItemsList(frontend.FrontendView):
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         category = content_object
         c = RequestContext(request,
-                           {'category_maps': category.category_maps.all()})
+                           {'categorizations': category.categorizations.all()})
         t = loader.get_template("collections/category_root_items_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
         return t.render(c)
@@ -47,7 +47,7 @@ class CategoryRootItemsList(frontend.FrontendView):
     def get_http_response(self, request, slug=None, *args, **kwargs):
         category = Category.objects.get(slug=slug)
         c = RequestContext(request,
-                           {'category_maps': category.category_maps.all()})
+                           {'categorizations': category.categorizations.all()})
         t = loader.get_template("collections/category_root_items_list.html")
         c['host_template'] = template_for_request(request)
         return HttpResponse(t.render(c))
@@ -66,7 +66,7 @@ class CategoryTeaserList(frontend.FrontendView):
         category = content_object
         #TODO(nicoechaniz): this article__date ordering looks bad. categories can hold any baseontent derivative
         c = RequestContext(request,
-                           {'category_maps': category.category_maps.order_by('article__date'),
+                           {'categorizations': category.categorizations.order_by('article__date'),
                             'category': category})
         t = loader.get_template("collections/category_teaser_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
@@ -74,8 +74,9 @@ class CategoryTeaserList(frontend.FrontendView):
 
     def get_http_response(self, request, slug=None, *args, **kwargs):
         category = Category.objects.get(slug=slug)
+        # TODO(nicoechaniz):this hardcoded order_by es wrong. fix it.
         c = RequestContext(request,
-                           {'category_maps': category.category_maps.order_by('article__date'),
+                           {'categorizations': category.categorizations.order_by('article__date'),
                             'category': category })
         t = loader.get_template("collections/category_teaser_list.html")
         c['host_template'] = template_for_request(request)
@@ -93,7 +94,7 @@ class CategorySimplifiedTeaserList(frontend.FrontendView):
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         category = content_object
         c = RequestContext(request,
-                           {'category_maps': category.category_maps.all(),
+                           {'categorizations': category.categorizations.all(),
                             'category': category,
                             'simplified_view': True})
         t = loader.get_template("collections/category_teaser_list.html")
@@ -163,14 +164,14 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
                     child, name_field=name_field))
             else:
                 name = getattr(child, name_field)
-                has_content = child.category_maps.exists()
+                has_content = child.categorizations.exists()
                 nested_list.append(link_template.render(
                     Context({'name': name,
                              'slug': child.slug,
                              'has_content': has_content,})))
 
         name = getattr(base_category, name_field)
-        has_content = base_category.category_maps.exists()
+        has_content = base_category.categorizations.exists()
         include = link_template.render(
             Context({'name': name,
                      'slug': base_category.slug,

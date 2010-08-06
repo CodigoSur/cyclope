@@ -7,10 +7,10 @@ TODO(nicoechaniz): adapt this view to work in the same way as category_teaser_li
 {% endcomment %}
 
 <ul>
-{% for cm in category_maps %}
+{% for categorization in categorizations %}
   <li>
-    <a href="/{{CYCLOPE_PREFIX}}{{ cm.content_type.app_label }}/{{ cm.content_type.model }}/{{ cm.content_object.slug }}">
-      <span>{{ cm.content_object.name }}</span>
+    <a href="/{{CYCLOPE_PREFIX}}{{ categorization.content_type.app_label }}/{{ categorization.content_type.model }}/{{ categorization.content_object.slug }}">
+      <span>{{ categorization.content_object.name }}</span>
     </a>
   </li>
 {% endfor %}

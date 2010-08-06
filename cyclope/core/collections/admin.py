@@ -124,7 +124,7 @@ class CategoryAdmin(editor.TreeEditor):
 admin.site.register(Category, CategoryAdmin)
 
 
-class CategoryMapForm(forms.ModelForm):
+class CategorizationForm(forms.ModelForm):
     # We declare these fields and override their querysets later.
     collection = forms.ModelChoiceField(
         label=_('Collection'),
@@ -132,17 +132,17 @@ class CategoryMapForm(forms.ModelForm):
     category = TreeNodeChoiceField(label=_('Category'), queryset=None, required=True)
 
     def __init__(self, *args, **kwargs):
-        super(CategoryMapForm, self).__init__(*args, **kwargs)
+        super(CategorizationForm, self).__init__(*args, **kwargs)
         if self.instance.id is not None:
             self.fields['collection'].initial = self.instance.category.collection.pk
 
 
-class CategoryMapInline(generic.GenericStackedInline):
+class CategorizationInline(generic.GenericStackedInline):
     """Limits choices to those suitable for the content type
     of the object being created / changed.
     """
-    form = CategoryMapForm
-    model = CategoryMap
+    form = CategorizationForm
+    model = Categorization
     extra = 0
     fieldsets = (
         (None, {
@@ -165,14 +165,14 @@ class CategoryMapInline(generic.GenericStackedInline):
             Collection.objects.filter(
             content_types=req_model_ctype).order_by('name')
 
-        return super(CategoryMapInline, self).queryset(request)
+        return super(CategorizationInline, self).queryset(request)
 
 
 class CollectibleAdmin (admin.ModelAdmin):
     """Base admin class for models that inherit from Collectible.
     """
     list_filter = ('categories',)
-    inlines = [ CategoryMapInline, ]
+    inlines = [ CategorizationInline, ]
 
 
 class CollectionAdminForm(forms.ModelForm):

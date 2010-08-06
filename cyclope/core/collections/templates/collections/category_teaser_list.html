@@ -9,10 +9,11 @@
   {% endif %}
 
   {% comment %}
-  For every category mapping we include a teaser view of the object.
+  We show a teaser view of every object belonging to this category.
   {% endcomment %}
-  {% for cm in category_maps %}
-    {% join cm.content_type.app_label  "/" cm.content_type.model "_teaser.html" as template_path %}
+
+  {% for categorization in categorizations %}
+    {% join categorization.content_type.app_label  "/" categorization.content_type.model "_teaser.html" as template_path %}
 
     {% comment %}
       we alias the actual object with the model name
@@ -20,7 +21,7 @@
       and can access the content object using an explicit name
     {% endcomment %}
 
-    {% alias cm.content_object as cm.content_type.model %}
+    {% alias categorization.content_object as categorization.content_type.model %}
     {% include template_path %}
   {% endfor %}
 
