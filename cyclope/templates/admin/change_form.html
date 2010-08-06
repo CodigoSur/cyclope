@@ -147,6 +147,20 @@ $(function() {
 });
 </script>
 
+{% comment %} CYCLOPE: Change parent for MenuItem when menu is changed {% endcomment %}
+
+<script type="text/javascript">
+$(function() {
+  $("#id_parent").chainedSelect({
+        parent: '#id_menu',
+        url: '/{{CYCLOPE_PREFIX}}menu_items_for_menu_json',
+        value: 'object_id',
+        label: 'verbose_name'
+    });
+
+});
+</script>
+
 {% comment %} CYCLOPE: chainedSelect for RelatedContent {% endcomment %}
 
 <script type="text/javascript">

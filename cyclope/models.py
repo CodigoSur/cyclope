@@ -142,8 +142,8 @@ class MenuItem(models.Model):
                                     blank=True, default='')
 
     def save(self):
+        #TODO(nicoechaniz): Review this method
         # check that data is consistent
-        #TODO(nicoechaniz): raise appropriate exceptions
         # a content object without a content type is invalid so we unset it
         if self.object_id and not self.content_type:
             self.object_id = None
@@ -156,22 +156,29 @@ class MenuItem(models.Model):
                               self.content_type.model)
             self.content_view = cyclope.core.frontend.site.get_default_view_name(model)
 
-        if self.custom_url:
-            self.url = self.custom_url
-        else:
-            # when the item is being created, slug is populated on save,
-            # so we generate it manualy in order to set the URL.
-            if not self.slug:
-                slug_field = self._meta.get_field_by_name('slug')[0]
-                populate_value = getattr(self, slug_field.populate_from)
-                self.slug = slug_field.slugify(populate_value)
-            self.url = "/".join([a.slug for a in self.get_ancestors()]+[self.slug])
-
         if self.site_home:
             old_home = MenuItem.objects.filter(site_home=True)
             for item in old_home:
                 item.site_home = False
                 item.save()
+
+        # If is not a new MenuItem and the Menu is changed, we change move all
+        # the childrens to the new Menu.
+        if self.pk is not None:
+            old_menu_item = MenuItem.objects.get(pk=self.pk)
+            if old_menu_item.menu != self.menu:
+                for child in self.get_descendants():
+                    child.menu = self.menu
+                    child.save()
+
+        # We have to save, to be able to generate an url
+        super(MenuItem, self).save()
+
+        if self.custom_url:
+            self.url = self.custom_url
+        else:
+            self.url = "/".join([a.slug for a in self.get_ancestors()]+[self.slug])
+
         super(MenuItem, self).save()
 
     def __unicode__(self):

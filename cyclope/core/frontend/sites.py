@@ -91,6 +91,7 @@ class CyclopeSite(object):
             url(r'^registered_region_views_json$', self.registered_region_views_json),
             url(r'^registered_standard_views_json$', self.registered_standard_views_json),
             url(r'^objects_for_ctype_json$', self.objects_for_ctype_json),
+            url(r'^menu_items_for_menu_json$', self.menu_items_for_menu_json),
         )
 
         #TODO(nicoechaniz): Fix for multi-site ?
@@ -241,6 +242,25 @@ class CyclopeSite(object):
 
     def registered_standard_views_json(self, request):
         json_data = self._registered_views(request)
+        return HttpResponse(json_data, mimetype='application/json')
+
+    def menu_items_for_menu_json(self, request):
+        id_menu = request.GET['q']
+
+        action_or_id = request.META['HTTP_REFERER'].split('/')[-2]
+        if action_or_id == 'add':
+            id_menu_item = None
+        else:
+            id_menu_item = int(action_or_id)
+            menu_item = MenuItem.objects.get(id = id_menu_item)
+
+        menu_items =  MenuItem.objects.filter(menu = id_menu)
+        choices = [{'object_id': '', 'verbose_name': '------'}]
+        choices.extend([ {'object_id': item.id,
+                        'verbose_name': item.name}
+                       for item in menu_items if item.id != id_menu_item and
+                                          item not in menu_item.get_descendants()])
+        json_data = simplejson.dumps(choices)
         return HttpResponse(json_data, mimetype='application/json')
 
     def objects_for_ctype_json(self, request):
