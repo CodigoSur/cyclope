@@ -127,7 +127,6 @@ def truncatechars(value, arg):
 def admin_list_filter_without_all(cl, spec):
     choices = list(spec.choices(cl))
     choices.pop(0) # Remove "all" option
-    print dir(spec.choices(cl))
     return {'title': spec.title(), 'choices' : choices}
 admin_list_filter_without_all = register.inclusion_tag('admin/filter.html')(admin_list_filter_without_all)
 

@@ -250,16 +250,19 @@ class CyclopeSite(object):
         action_or_id = request.META['HTTP_REFERER'].split('/')[-2]
         if action_or_id == 'add':
             id_menu_item = None
+            descendants = []
         else:
             id_menu_item = int(action_or_id)
             menu_item = MenuItem.objects.get(id = id_menu_item)
+            descendants = menu_item.get_descendants()
 
         menu_items =  MenuItem.objects.filter(menu = id_menu)
+
         choices = [{'object_id': '', 'verbose_name': '------'}]
         choices.extend([ {'object_id': item.id,
                         'verbose_name': item.name}
                        for item in menu_items if item.id != id_menu_item and
-                                          item not in menu_item.get_descendants()])
+                                                 item not in descendants])
         json_data = simplejson.dumps(choices)
         return HttpResponse(json_data, mimetype='application/json')
 
