@@ -24,6 +24,7 @@
 from django.utils.translation import ugettext_lazy as _
 from django.template import loader, RequestContext
 from django.http import Http404, HttpResponse
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
@@ -75,8 +76,26 @@ class CategoryTeaserList(frontend.FrontendView):
     def get_http_response(self, request, slug=None, *args, **kwargs):
         category = Category.objects.get(slug=slug)
         # TODO(nicoechaniz):this hardcoded order_by es wrong. fix it.
+        categorizations_list = category.categorizations.order_by('article__date')
+
+        paginator = Paginator(categorizations_list, cyc_settings.CYCLOPE_PAGINATION['TEASER'])
+
+        # Make sure page request is an int. If not, deliver first page.
+        try:
+            page_number = int(request.GET.get('page', '1'))
+        except ValueError:
+            page_number = 1
+
+        # DjangoDocs uses page differently
+        # If page request (9999) is out of range, deliver last page of results.
+        try:
+            page = paginator.page(page_number)
+        except (EmptyPage, InvalidPage):
+            page = paginator.page(paginator.num_pages)
+
         c = RequestContext(request,
-                           {'categorizations': category.categorizations.order_by('article__date'),
+                           {'categorizations': page.object_list,
+                            'page': page,
                             'category': category })
         t = loader.get_template("collections/category_teaser_list.html")
         c['host_template'] = template_for_request(request)

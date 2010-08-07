@@ -66,6 +66,12 @@ CYCLOPE_STATICPAGE_RICH_EDITOR = getattr(settings,
                                             'CYCLOPE_STATICPAGE_RICH_EDITOR',
                                             True)
 
+
+# pagination
+CYCLOPE_PAGINATION = getattr(settings, 'CYCLOPE_PAGINATION',
+                             { 'TEASER' : 1,
+                               'LABELED_ICON' : 1,})
+
 #TODO(nicoechaniz): re-evaluate the way we are handling these dynamic settings, it is practical but seems hacky and error-prone.
 
 sys.path.append(os.path.join(CYCLOPE_THEMES_ROOT, '../'))

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-03 18:16-0300\n"
+"POT-Creation-Date: 2010-08-07 18:20-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,717 +16,938 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: admin.py:44
+#: admin.py:67
 msgid "content details"
 msgstr "detalles de contenido"
 
-#: dashboard.py:17
+#: dashboard.py:38
 msgid "Site Administration"
 msgstr "Administración del sitio"
 
-#: dashboard.py:79
+#: dashboard.py:100
 msgid "Content"
 msgstr "Contenidos"
 
-#: dashboard.py:85
+#: dashboard.py:106
 msgid "Create, delete or modify content for your website"
 msgstr "Crea, borra o modifica el contenido del sitio web"
 
-#: dashboard.py:88
+#: dashboard.py:109
 msgid "Main"
 msgstr "Principal"
 
-#: dashboard.py:95
+#: dashboard.py:116
 msgid "Multimedia Library"
 msgstr "Biblioteca Multimedia"
 
-#: dashboard.py:107
+#: dashboard.py:128
 msgid "Authors and Sources"
 msgstr "Autores y Fuentes"
 
-#: dashboard.py:117
+#: dashboard.py:138 apps/articles/templates/articles/article_detail.html:33
 msgid "Comments"
 msgstr "Comentarios"
 
-#: dashboard.py:119
+#: dashboard.py:140
 msgid "Review and moderate user comments"
 msgstr "Revisa y modera los comentarios recibidos"
 
-#: dashboard.py:128
+#: dashboard.py:149
 msgid "Categorization"
 msgstr "Categorización"
 
-#: dashboard.py:134
+#: dashboard.py:155
 msgid "Classify the content in your website"
 msgstr "Clasifica el contenido de tu sitio"
 
-#: dashboard.py:137
+#: dashboard.py:158
 msgid "Collections"
 msgstr "Colecciones"
 
-#: dashboard.py:144
+#: dashboard.py:165
 msgid "Tagging"
 msgstr "Etiquetado"
 
-#: dashboard.py:152
+#: dashboard.py:173
 msgid "Site structure"
 msgstr "Estructura del sitio"
 
-#: dashboard.py:154
+#: dashboard.py:175
 msgid "Modify the menus and site layouts"
 msgstr "Administra los menúes y la disposición del contenido"
 
-#: dashboard.py:165
+#: dashboard.py:186
 msgid "Global settings"
 msgstr "Configuración global"
 
-#: dashboard.py:178
+#: dashboard.py:199
 msgid "Advanced"
 msgstr "Avanzado"
 
-#: dashboard.py:184
+#: dashboard.py:205
 msgid "Advanced configuration"
 msgstr "Configuración avanzada"
 
-#: dashboard.py:187
+#: dashboard.py:208
 msgid "Auth"
 msgstr "Permisos"
 
-#: dashboard.py:193
+#: dashboard.py:214
 msgid "Registration"
 msgstr "Registración"
 
-#: dashboard.py:199
+#: dashboard.py:220
 msgid "Sites"
 msgstr "Sitios"
 
-#: dashboard.py:210
+#: dashboard.py:231
 msgid "Recent Actions"
 msgstr "Acciones Recientes"
 
-#: dashboard.py:220
+#: dashboard.py:241
 msgid "Codigo Sur, latest news"
 msgstr "Código Sur, últimas noticias"
 
-#: forms.py:36 forms.py:53 forms.py:146
+#: default_settings.py:147
+#, fuzzy
+msgid "Admin Thumbnail"
+msgstr "Imagen miniatura"
+
+#: default_settings.py:149
+#, fuzzy
+msgid "Thumbnail (140px)"
+msgstr "Imagen miniatura"
+
+#: default_settings.py:151
+msgid "Small (300px)"
+msgstr ""
+
+#: default_settings.py:153
+msgid "Medium (460px)"
+msgstr ""
+
+#: default_settings.py:155
+msgid "Big (620px)"
+msgstr ""
+
+#: default_settings.py:157
+msgid "Cropped (60x60px)"
+msgstr ""
+
+#: default_settings.py:159
+msgid "Cropped Thumbnail (140x140px)"
+msgstr ""
+
+#: forms.py:56 forms.py:73 forms.py:166
 msgid "Content object"
 msgstr "Contenido"
 
-#: forms.py:52 forms.py:145
+#: forms.py:72 forms.py:165
 msgid "View"
 msgstr "Vista"
 
-#: forms.py:54 core/collections/admin.py:85
+#: forms.py:74 core/collections/admin.py:105
 msgid "Parent"
 msgstr "Padre"
 
-#: forms.py:80
+#: forms.py:100
 msgid ""
 "You can not set a Custom URL for menu entries                     with "
 "associated content"
 msgstr "No puede setear una URL para Entradas de Menú con contenido asociado."
 
-#: forms.py:87 forms.py:186
+#: forms.py:107 forms.py:206
 msgid "You need to select a content view"
 msgstr "Debe seleccionar una Vista del contenido"
 
-#: forms.py:93 forms.py:192
+#: forms.py:113 forms.py:212
 msgid "The selected view requires a content object"
 msgstr "La vista seleccionada requiere que elija un objeto de contenido"
 
-#: forms.py:106
+#: forms.py:126
 msgid "Theme"
 msgstr "Tema"
 
-#: forms.py:118
+#: forms.py:138
 msgid "Template"
 msgstr "Plantilla"
 
-#: forms.py:144
+#: forms.py:164
 msgid "Region"
 msgstr "Región"
 
-#: forms.py:179
+#: forms.py:199
 msgid "Content type can not be empty"
 msgstr "El Tipo de contenido no debe estar vacío"
 
-#: forms.py:183
+#: forms.py:203
 msgid "You need to select a region"
 msgstr "Debe seleccionar una región"
 
-#: forms.py:214 core/captcha_comments/forms.py:8
-#: core/captcha_contact_form/forms.py:7
+#: forms.py:234 core/captcha_comments/forms.py:29
+#: core/captcha_contact_form/forms.py:28
 msgid "Security code"
 msgstr "Código de seguridad"
 
-#: forms.py:228
+#: forms.py:248
 msgid "Your avatar image is too big"
 msgstr "La imagen enviada es demasiado grande"
 
-#: frontend_views.py:17
+#: frontend_views.py:40
 msgid "navigation breadcrumb"
 msgstr "profundidad de navegación"
 
-#: frontend_views.py:35
+#: frontend_views.py:58
 msgid "list of root items for the selected Menu"
 msgstr "lista de items raíz para el Menú seleccionado"
 
-#: frontend_views.py:52
+#: frontend_views.py:75
 msgid "flat list of all items for the selected Menu"
 msgstr "lista sin jerarquía de los items del Menú"
 
-#: models.py:35
+#: models.py:55
 msgid "templating theme"
 msgstr "tema de la plantilla"
 
-#: models.py:37
+#: models.py:57
 msgid "default layout"
 msgstr "esquema por defecto"
 
-#: models.py:39 apps/articles/models.py:34
+#: models.py:59 apps/articles/models.py:55
 msgid "allow comments"
 msgstr "permitir comentarios"
 
-#: models.py:41 apps/articles/models.py:37
+#: models.py:61 apps/articles/models.py:58
 msgid "enabled"
 msgstr "habilitado"
 
-#: models.py:42 apps/articles/models.py:38
+#: models.py:62 apps/articles/models.py:59
 msgid "disabled"
 msgstr "deshabilitado"
 
-#: models.py:45
+#: models.py:65
 msgid "global title"
 msgstr "titulo global"
 
-#: models.py:47
+#: models.py:67
 msgid "keywords"
 msgstr "palabras clave"
 
-#: models.py:48 apps/articles/models.py:70 apps/medialibrary/models.py:18
-#: core/collections/models.py:32 core/collections/models.py:57
+#: models.py:68 apps/articles/models.py:91 apps/medialibrary/models.py:37
+#: core/collections/models.py:52 core/collections/models.py:77
 msgid "description"
 msgstr "descripción"
 
-#: models.py:54 models.py:55
+#: models.py:74 models.py:75
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:64 models.py:94 models.py:193 models.py:238 models.py:307
-#: models.py:330 core/collections/models.py:21 core/collections/models.py:51
+#: models.py:84 models.py:114 models.py:220 models.py:265 models.py:323
+#: models.py:346 core/collections/models.py:41 core/collections/models.py:71
 msgid "name"
 msgstr "nombre"
 
-#: models.py:66
+#: models.py:86
 msgid "main menu"
 msgstr "menu principal"
 
-#: models.py:83 models.py:92
+#: models.py:103 models.py:112
 msgid "menu"
 msgstr "menú"
 
-#: models.py:84
+#: models.py:104
 msgid "menus"
 msgstr "menúes"
 
-#: models.py:95 core/collections/models.py:54
+#: models.py:115 core/collections/models.py:74
 msgid "parent"
 msgstr "relacionado"
 
-#: models.py:96 core/collections/models.py:55
+#: models.py:116 core/collections/models.py:75
 msgid "children"
 msgstr "hijo"
 
-#: models.py:100
+#: models.py:120
 msgid "site home"
 msgstr "página de inicio"
 
-#: models.py:101
+#: models.py:121
 msgid "custom URL"
 msgstr "URL personalizada"
 
-#: models.py:104
+#: models.py:124
 msgid ""
 "Either set an URL here or                                     select a "
 "content type and view."
 msgstr "configura la URL aquí o selecciona un tipo de contenido y vista"
 
-#: models.py:109 models.py:204
+#: models.py:129 models.py:231
 msgid "layout"
 msgstr "esquema"
 
-#: models.py:113 models.py:174
+#: models.py:133 models.py:201
 msgid "type"
 msgstr "tipo"
 
-#: models.py:115 models.py:182
+#: models.py:135 models.py:209
 msgid "object"
 msgstr "objeto"
 
-#: models.py:121 models.py:176
+#: models.py:141 models.py:203
 msgid "view"
 msgstr "vista"
 
-#: models.py:161
+#: models.py:188
 msgid "menu item"
 msgstr "item de menú"
 
-#: models.py:162
+#: models.py:189
 msgid "menu items"
 msgstr "items de menú"
 
-#: models.py:170
+#: models.py:197
 msgid "region"
 msgstr "región"
 
-#: models.py:179
+#: models.py:206
 msgid "weight"
 msgstr "peso"
 
-#: models.py:198
+#: models.py:225
 msgid "layout template"
 msgstr "plantilla para este esquema"
 
-#: models.py:205
+#: models.py:232
 msgid "layouts"
 msgstr "esquemas"
 
-#: models.py:212 models.py:217 core/collections/models.py:123
+#: models.py:239 models.py:244 core/collections/models.py:143
 msgid "content type"
 msgstr "tipo de contenido"
 
-#: models.py:231
+#: models.py:258
 msgid "related content"
 msgstr "contenido relacionado"
 
-#: models.py:232
+#: models.py:259
 msgid "related contents"
 msgstr "contenidos relacionados"
 
-#: models.py:242
+#: models.py:269
 msgid "tags"
 msgstr "etiquetas"
 
-#: models.py:243
+#: models.py:270
 msgid "published"
 msgstr "publicar"
 
-#: models.py:311 models.py:346 models.py:356 apps/articles/models.py:52
-#: apps/medialibrary/models.py:27 apps/medialibrary/models.py:62
-#: apps/medialibrary/models.py:75 apps/medialibrary/models.py:88
-#: apps/medialibrary/models.py:101 core/collections/models.py:33
-#: core/collections/models.py:58
+#: models.py:327 models.py:362 models.py:372 apps/articles/models.py:73
+#: apps/medialibrary/models.py:46 apps/medialibrary/models.py:81
+#: apps/medialibrary/models.py:94 apps/medialibrary/models.py:107
+#: apps/medialibrary/models.py:120 core/collections/models.py:53
+#: core/collections/models.py:78
 msgid "image"
 msgstr "imagen"
 
-#: models.py:314
+#: models.py:330
 msgid "origin"
 msgstr "origen"
 
-#: models.py:316
+#: models.py:332
 msgid "notes"
 msgstr "notas"
 
-#: models.py:318 core/collections/models.py:31
+#: models.py:334 core/collections/models.py:51
 msgid "content types"
 msgstr "tipos de contenido"
 
-#: models.py:319
+#: models.py:335
 msgid "Select the content types this author is related to."
 msgstr "Seleccione los tipos de contenido que corresponden a este autor"
 
-#: models.py:325 apps/articles/models.py:25 apps/medialibrary/models.py:16
+#: models.py:341 apps/articles/models.py:46 apps/medialibrary/models.py:35
 msgid "author"
 msgstr "autor"
 
-#: models.py:326
+#: models.py:342
 msgid "authors"
 msgstr "autores"
 
-#: models.py:334
+#: models.py:350
 msgid "link"
 msgstr "enlace"
 
-#: models.py:340 apps/articles/models.py:26
+#: models.py:356 apps/articles/models.py:47
 msgid "source"
 msgstr "fuente"
 
-#: models.py:341
+#: models.py:357
 msgid "sources"
 msgstr "fuentes"
 
-#: models.py:352
+#: models.py:368
 msgid "Thumbnail Image"
 msgstr "Imagen miniatura"
 
-#: models.py:357
+#: models.py:373
 msgid "images"
 msgstr "imágenes"
 
-#: models.py:376
+#: models.py:392
 msgid "avatar"
 msgstr "tu imagen"
 
-#: models.py:378
+#: models.py:394
 msgid "city"
 msgstr "ciudad"
 
-#: models.py:379
+#: models.py:395
 msgid "about myself"
 msgstr "sobre mí"
 
-#: models.py:382
+#: models.py:398
 msgid "public"
 msgstr "público"
 
-#: models.py:383
+#: models.py:399
 msgid "Choose whether your profile info should be publicly visible or not"
 msgstr "Elije si deseas que tu información de perfil sea pública"
 
-#: widgets.py:41
+#: widgets.py:61
 msgid "toggle editor"
 msgstr "encender o apagar editor"
 
-#: widgets.py:41
+#: widgets.py:61
 msgid "on"
 msgstr "encendido"
 
-#: widgets.py:41
+#: widgets.py:61
 msgid "off"
 msgstr "apagado"
 
-#: widgets.py:95
+#: widgets.py:115
 msgid "Lookup"
 msgstr "Buscar"
 
-#: apps/articles/admin.py:27 apps/staticpages/admin.py:20
+#: apps/articles/admin.py:47 apps/staticpages/admin.py:39
 msgid "Text"
 msgstr "Texto"
 
-#: apps/articles/admin.py:51
+#: apps/articles/admin.py:71
 msgid "Publication data"
 msgstr "Datos de la publicación"
 
-#: apps/articles/frontend_views.py:14
+#: apps/articles/frontend_views.py:34
 msgid "detailed view of the selected Article"
 msgstr "vista detallada del Artículo seleccionado"
 
-#: apps/articles/frontend_views.py:31
+#: apps/articles/frontend_views.py:51
 msgid "list of Article teasers"
 msgstr "lista de resúmenes de Artículos"
 
-#: apps/articles/models.py:18
+#: apps/articles/models.py:39
 msgid "yes"
 msgstr "sí"
 
-#: apps/articles/models.py:18
+#: apps/articles/models.py:39
 msgid "no"
 msgstr "no"
 
-#: apps/articles/models.py:22
+#: apps/articles/models.py:43
 msgid "pre-title"
 msgstr "pre-título"
 
-#: apps/articles/models.py:23 apps/staticpages/models.py:10
+#: apps/articles/models.py:44 apps/staticpages/models.py:29
 msgid "summary"
 msgstr "resumen"
 
-#: apps/articles/models.py:24 apps/staticpages/models.py:11
+#: apps/articles/models.py:45 apps/staticpages/models.py:30
 msgid "text"
 msgstr "texto"
 
-#: apps/articles/models.py:28
+#: apps/articles/models.py:49
 msgid "creation date"
 msgstr "fecha de creación"
 
-#: apps/articles/models.py:30
+#: apps/articles/models.py:51
 msgid "date"
 msgstr "fecha"
 
-#: apps/articles/models.py:36
+#: apps/articles/models.py:57
 msgid "default"
 msgstr "por defecto"
 
-#: apps/articles/models.py:46 apps/articles/models.py:51
-#: apps/articles/models.py:68
+#: apps/articles/models.py:67 apps/articles/models.py:72
+#: apps/articles/models.py:89
 msgid "article"
 msgstr "artículo"
 
-#: apps/articles/models.py:47
+#: apps/articles/models.py:68
 msgid "articles"
 msgstr "artículos"
 
-#: apps/articles/models.py:53
+#: apps/articles/models.py:74
 msgid "label"
 msgstr "etiqueta"
 
-#: apps/articles/models.py:59
+#: apps/articles/models.py:80
 msgid "article image"
 msgstr "imagen de artículo"
 
-#: apps/articles/models.py:60
+#: apps/articles/models.py:81
 msgid "article images"
 msgstr "imágenes de artículo"
 
-#: apps/articles/models.py:64
+#: apps/articles/models.py:85
 msgid "title"
 msgstr "título"
 
-#: apps/articles/models.py:69
+#: apps/articles/models.py:90
 msgid "attachments"
 msgstr "adjuntos"
 
-#: apps/articles/models.py:72 apps/medialibrary/models.py:90
-#: apps/medialibrary/models.py:94
+#: apps/articles/models.py:93 apps/medialibrary/models.py:109
+#: apps/medialibrary/models.py:113
 msgid "file"
 msgstr "archivo"
 
-#: apps/articles/models.py:74
+#: apps/articles/models.py:95
 msgid "downloads"
 msgstr "bajadas"
 
-#: apps/medialibrary/frontend_views.py:34
+#: apps/articles/templates/articles/article_detail.html:12
+#: apps/articles/templates/articles/article_teaser.html:29
+#: apps/medialibrary/templates/medialibrary/media_detail_header.html:4
+msgid "Tags"
+msgstr "Etiquetas"
+
+#: apps/articles/templates/articles/article_detail.html:23
+msgid "Print"
+msgstr "Imprimir"
+
+#: apps/articles/templates/articles/article_detail.html:26
+msgid "Share"
+msgstr "Compartir"
+
+#: apps/articles/templates/articles/article_detail.html:69
+#: apps/articles/templates/articles/article_teaser.html:24
+#: apps/medialibrary/templates/medialibrary/media_detail_header.html:25
+#: templates/comments/list.html:9
+msgid "By"
+msgstr "Por"
+
+#: apps/articles/templates/articles/article_detail.html:96
+msgid "Date"
+msgstr "Fecha"
+
+#: apps/articles/templates/articles/article_detail.html:97
+msgid "Source"
+msgstr "Fuente"
+
+#: apps/articles/templates/articles/article_detail.html:120
+msgid "Share in your social networks"
+msgstr "Compartir en redes sociales"
+
+#: apps/articles/templates/articles/article_teaser.html:20
+#: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:20
+msgid "More"
+msgstr "Más"
+
+#: apps/medialibrary/frontend_views.py:53
 msgid "detailed view of the selected Picture"
 msgstr "vista detallada de la Imagen seleccionada"
 
-#: apps/medialibrary/frontend_views.py:49
+#: apps/medialibrary/frontend_views.py:68
 msgid "detailed view of the selected Audio Track"
 msgstr "vista detallada de la Pista de Audio seleccionada"
 
-#: apps/medialibrary/frontend_views.py:64
+#: apps/medialibrary/frontend_views.py:83
 msgid "detailed view of the selected Movie Clip"
 msgstr "vista detallada del Video seleccionado"
 
-#: apps/medialibrary/frontend_views.py:79
+#: apps/medialibrary/frontend_views.py:98
 msgid "detailed view of the selected Document"
 msgstr "vista detallada del Documento seleccionado"
 
-#: apps/medialibrary/frontend_views.py:94
+#: apps/medialibrary/frontend_views.py:113
 msgid "detailed view of the selected Flash Movie"
 msgstr "vista detallada del elemento Flash seleccionado"
 
-#: apps/medialibrary/frontend_views.py:123
+#: apps/medialibrary/frontend_views.py:142
 msgid "detailed view of the selected File"
 msgstr "vista detallada del Archivo seleccionado"
 
-#: apps/medialibrary/frontend_views.py:138
+#: apps/medialibrary/frontend_views.py:157
 msgid "detailed view of the selected External Content"
 msgstr "vista detallada del Contenido Externo seleccionado"
 
-#: apps/medialibrary/models.py:31
+#: apps/medialibrary/models.py:50
 msgid "picture"
 msgstr "imagen"
 
-#: apps/medialibrary/models.py:32
+#: apps/medialibrary/models.py:51
 msgid "pictures"
 msgstr "imágenes"
 
-#: apps/medialibrary/models.py:38
+#: apps/medialibrary/models.py:57
 msgid "audio"
 msgstr "audio"
 
-#: apps/medialibrary/models.py:42
+#: apps/medialibrary/models.py:61
 msgid "sound track"
 msgstr "pista de sonido"
 
-#: apps/medialibrary/models.py:43
+#: apps/medialibrary/models.py:62
 msgid "sound tracks"
 msgstr "pistas de sonido"
 
-#: apps/medialibrary/models.py:49
+#: apps/medialibrary/models.py:68
 msgid "still"
 msgstr "cuadro de muestra"
 
-#: apps/medialibrary/models.py:51
+#: apps/medialibrary/models.py:70
 msgid "video"
 msgstr "video"
 
-#: apps/medialibrary/models.py:55
+#: apps/medialibrary/models.py:74
 msgid "movie clip"
 msgstr "video"
 
-#: apps/medialibrary/models.py:56
+#: apps/medialibrary/models.py:75
 msgid "movie clips"
 msgstr "video"
 
-#: apps/medialibrary/models.py:64 apps/medialibrary/models.py:68
+#: apps/medialibrary/models.py:83 apps/medialibrary/models.py:87
 msgid "document"
 msgstr "documento"
 
-#: apps/medialibrary/models.py:69
+#: apps/medialibrary/models.py:88
 msgid "documents"
 msgstr "documentos"
 
-#: apps/medialibrary/models.py:77
+#: apps/medialibrary/models.py:96
 msgid "flash"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:81
+#: apps/medialibrary/models.py:100
 msgid "flash movie"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:82
+#: apps/medialibrary/models.py:101
 msgid "flash movies"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:95
+#: apps/medialibrary/models.py:114
 msgid "files"
 msgstr "archivos"
 
-#: apps/medialibrary/models.py:103
+#: apps/medialibrary/models.py:122
 msgid "content url"
 msgstr "URL del contenido"
 
-#: apps/medialibrary/models.py:104
+#: apps/medialibrary/models.py:123
 msgid "open in new window"
 msgstr "abrir en ventana nueva"
 
-#: apps/medialibrary/models.py:105
+#: apps/medialibrary/models.py:124
 msgid "skip detailed view"
 msgstr "saltear vista detallada"
 
-#: apps/medialibrary/models.py:108
+#: apps/medialibrary/models.py:127
 msgid "external content"
 msgstr "contenido externo"
 
-#: apps/medialibrary/models.py:109
+#: apps/medialibrary/models.py:128
 msgid "external contents"
 msgstr "contenidos externos"
 
-#: apps/staticpages/admin.py:16
+#: apps/medialibrary/templates/medialibrary/document_detail.html:16
+#: apps/medialibrary/templates/medialibrary/media_player.html:17
+msgid "download file"
+msgstr "descargar archivo"
+
+#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:22
+#: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:30
+msgid "Open external content"
+msgstr "Abrir contenido externo"
+
+#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:22
+#: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:30
+msgid " (in new window)"
+msgstr " (en ventana nueva)"
+
+#: apps/medialibrary/templates/medialibrary/flashmovie_detail.html:24
+msgid "full screen view (new window)"
+msgstr "pantalla completa (en ventana nueva)"
+
+#: apps/staticpages/admin.py:35
 msgid "Menu items"
 msgstr "Items de menú"
 
-#: apps/staticpages/frontend_views.py:18
+#: apps/staticpages/frontend_views.py:37
 msgid "detailed view of the selected Static Page"
 msgstr "vista detallada de la página estatica"
 
-#: apps/staticpages/frontend_views.py:39
+#: apps/staticpages/frontend_views.py:58
 msgid "list of Static Pages"
 msgstr "lista de Páginas Estáticas"
 
-#: apps/staticpages/models.py:17
+#: apps/staticpages/models.py:36
 msgid "static page"
 msgstr "página estática"
 
-#: apps/staticpages/models.py:18
+#: apps/staticpages/models.py:37
 msgid "static pages"
 msgstr "páginas estáticas"
 
-#: core/captcha_comments/forms.py:7
+#: core/captcha_comments/forms.py:28
 msgid "Website or Blog"
 msgstr "Sitio web o Blog"
 
-#: core/collections/admin.py:67
+#: core/collections/admin.py:87
 msgid "All"
 msgstr "Todos"
 
-#: core/collections/admin.py:74 core/collections/models.py:91
-#: core/collections/models.py:144
+#: core/collections/admin.py:94 core/collections/models.py:111
+#: core/collections/models.py:164
 msgid "categories"
 msgstr "categorías"
 
-#: core/collections/admin.py:83
+#: core/collections/admin.py:103
 msgid "Description"
 msgstr "Descrición"
 
-#: core/collections/admin.py:98
+#: core/collections/admin.py:118
 msgid "Extra info"
 msgstr "Información extra"
 
-#: core/collections/admin.py:110
+#: core/collections/admin.py:130
 msgid "Collection"
 msgstr "Colección"
 
-#: core/collections/admin.py:112
+#: core/collections/admin.py:132
 msgid "Category"
 msgstr "Categoría"
 
-#: core/collections/frontend_views.py:17
+#: core/collections/frontend_views.py:39
 msgid "list of root items for the selected Category"
 msgstr "lista de items raíz para la Categoría seleccionada"
 
-#: core/collections/frontend_views.py:42
+#: core/collections/frontend_views.py:64
 msgid "teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:71
+#: core/collections/frontend_views.py:111
 msgid "simplified teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:90
+#: core/collections/frontend_views.py:130
 msgid "teaser list of the root Categories of a Collection"
 msgstr "lista de resúmenes de las Categorías raíz de una Colección"
 
-#: core/collections/frontend_views.py:110
+#: core/collections/frontend_views.py:150
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
-#: core/collections/models.py:24
+#: core/collections/models.py:44
 msgid "visible"
 msgstr "visible"
 
-#: core/collections/models.py:28
+#: core/collections/models.py:48
 msgid "navigation root"
 msgstr "raíz de navegación"
 
-#: core/collections/models.py:40 core/collections/models.py:50
+#: core/collections/models.py:60 core/collections/models.py:70
 msgid "collection"
 msgstr "colección"
 
-#: core/collections/models.py:41
+#: core/collections/models.py:61
 msgid "collections"
 msgstr "colecciones"
 
-#: core/collections/models.py:50
+#: core/collections/models.py:70
 msgid "collection categories"
 msgstr "categorias de colecciones"
 
-#: core/collections/models.py:56
+#: core/collections/models.py:76
 msgid "active"
 msgstr "activo"
 
-#: core/collections/models.py:90 core/collections/models.py:120
+#: core/collections/models.py:110 core/collections/models.py:140
 msgid "category"
 msgstr "categoría"
 
-#: core/collections/models.py:135
-msgid "category map"
-msgstr "mapeo de categoría"
+#: core/collections/models.py:155
+msgid "categorization"
+msgstr "Categorización"
 
-#: core/collections/models.py:136
-msgid "category maps"
-msgstr "mapeos de categorías"
+#: core/collections/models.py:156
+msgid "categorizations"
+msgstr "Categorizaciones"
 
-#: core/frontend/__init__.py:128
+#: core/frontend/__init__.py:148
 #, python-format
 msgid "No default view has been set for %s"
 msgstr "No hay una vista por defecto para %s"
 
-#: core/frontend/__init__.py:131
+#: core/frontend/__init__.py:151
 #, python-format
 msgid "You can set only one default view for %s"
 msgstr "Puedes definir solo una vista por defecto para %s"
 
-#: core/frontend/sites.py:131
+#: core/frontend/sites.py:152
 msgid "You need to create you site settings"
 msgstr "Su sitio aún no ha sido configurado"
 
-#: core/frontend/sites.py:136
+#: core/frontend/sites.py:157
 msgid "You need to select a layout for the site"
 msgstr "Debe seleccionar un esquema para el sitio"
 
-#: core/frontend/sites.py:142
+#: core/frontend/sites.py:163
 msgid "The site home page has not been set."
 msgstr "La página de inicio no ha sido establecida."
 
-#: core/frontend/sites.py:153
+#: core/frontend/sites.py:174
 msgid "No content object selected"
 msgstr "No ha seleccionado contenido"
 
-#: templates/contact_form/contact_form.txt:2
-msgid "wrote"
+#: templates/admin/base_site.html:4
+msgid "Cyclope site admin"
+msgstr "Administración de Cyclope"
+
+#: templates/admin/change_form.html:21 templates/admin/change_list.html:42
+msgid "Home"
+msgstr "Inicio"
+
+#: templates/admin/change_form.html:24
+msgid "Add"
+msgstr "Agregar"
+
+#: templates/admin/change_form.html:31
+msgid "History"
+msgstr "Historial"
+
+#: templates/admin/change_form.html:32
+msgid "View on site"
+msgstr "Ver en el sitio"
+
+#: templates/admin/change_form.html:42 templates/admin/change_list.html:76
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "Por favor corrija el error detallado"
+msgstr[1] "Por favor corrija los errores detallados"
+
+#: templates/admin/change_list.html:58
+#, python-format
+msgid ""
+"You may use the filters and search form to narrow the list of "
+"%(plural_name)s displayed."
 msgstr ""
+"Puedes utilizar los filtros y el formulario de búsqueda para acotar el "
+"listado de %(plural_name)s."
+
+#: templates/admin/change_list.html:68
+#, python-format
+msgid "Add %(name)s"
+msgstr "Agregar %(name)s"
+
+#: templates/admin/change_list.html:87
+#: templates/admin/feincms/tree_editor.html:140
+msgid "Filter"
+msgstr "Filtro"
+
+#: templates/admin/articles/change_list.html:6
+msgid ""
+"\n"
+"<p>\n"
+"Articles are a rich content type that you may use to publish categorized "
+"information on your website.\n"
+"</p>\n"
+msgstr ""
+"\n"
+"<p>\n"
+"Los Artículos son un tipo de contenido rico, que puedes utilizar para "
+"publicar material categorizado en tu sitio.\n"
+"</p>\n"
+
+#: templates/comments/comments_block.html:8
+#, python-format
+msgid " There are %(comment_count)s comments "
+msgstr " Hay %(comment_count)s comentarios "
+
+#: templates/comments/form.html:16
+msgid ""
+"For security reasons you need to type the text displayed in the following "
+"image"
+msgstr ""
+"Por razones de seguridad, debe ingresar el texto que se muestra en la imagen."
+
+#: templates/comments/form.html:25 templates/comments/preview.html:18
+msgid "Post your comment"
+msgstr "Enviar comentario"
+
+#: templates/comments/posted.html:4
+msgid "Thanks for commenting"
+msgstr "Gracias por su comentario"
+
+#: templates/comments/posted.html:12
+msgid "Thank you for your comment"
+msgstr "Gracias por su comentario"
+
+#: templates/comments/posted.html:13
+msgid "return."
+msgstr "volver."
+
+#: templates/comments/preview.html:4 templates/comments/preview.html.py:15
+msgid "Preview your comment"
+msgstr "Vista previa de su comentario"
+
+#: templates/comments/preview.html:13
+msgid "Please correct the error below"
+msgid_plural "Please correct the errors below"
+msgstr[0] "Por favor corrija el error detallado"
+msgstr[1] "Por favor corrija los errores detallados"
+
+#: templates/comments/preview.html:18
+msgid "and"
+msgstr "y"
+
+#: templates/comments/preview.html:18
+msgid "or make changes"
+msgstr "o haga cambios"
+
+#: templates/comments/preview.html:34
+msgid "Post"
+msgstr "Enviar"
+
+#: templates/contact_form/contact_form.html:12
+msgid "Send"
+msgstr "Enviar"
+
+#: templates/contact_form/contact_form_sent.html:6
+msgid "Thank you for contacting us!"
+msgstr "Gracias por su comentario!"
+
+#: templates/cyclope/breadcrumb.html:8
+msgid "Breadcrumb"
+msgstr "Profundidad de navegación"
+
+#: templates/cyclope/pagination_block.html:7
+msgid "previous"
+msgstr "anterior"
+
+#: templates/cyclope/pagination_block.html:11
+msgid "Page"
+msgstr "Página"
+
+#: templates/cyclope/pagination_block.html:11
+#: templates/cyclope/themes/neutrona/base.html:42
+msgid "of"
+msgstr "de"
+
+#: templates/cyclope/pagination_block.html:15
+msgid "next"
+msgstr "siguiente"
 
 #: templates/cyclope/themes/__init__.py:22
 msgid "You need to set CYCLOPE_LOCAL_THEMES_PREFIX in your settings file"
@@ -786,6 +1007,14 @@ msgstr "Dos barras laterales"
 msgid "right sidebar"
 msgstr "barra lateral derecha"
 
+#: templates/cyclope/themes/neutrona/base.html:41
+msgid "Image"
+msgstr "Imagen"
+
+#: templates/cyclope/themes/neutrona/base.html:97
+msgid "Subscribe to RSS"
+msgstr "Subscripción RSS"
+
 #: templates/cyclope/themes/potente/__init__.py:11
 msgid "Potente theme"
 msgstr "tema Potente"
@@ -814,272 +1043,165 @@ msgstr "tercer panel"
 msgid "fourth pane"
 msgstr "cuarto panel"
 
-#: templates/registration/activation_email.txt:2
+#: templates/profiles/edit_profile.html:9
+#: templates/registration/registration_form.html:9
+msgid "Please fill in your user profile data"
+msgstr "Por favor complete sus datos"
+
+#: templates/profiles/edit_profile.html:25
+msgid "Send data"
+msgstr "Enviar datos"
+
+#: templates/profiles/profile_detail.html:10
+#: templates/profiles/profile_list.html:11
+msgid "Return"
+msgstr "Volver"
+
+#: templates/registration/activate.html:9
+msgid "The activation key you posted is invalid."
+msgstr "La clave de activación es inválida."
+
+#: templates/registration/activate.html:10
+msgid "Please make sure that:"
+msgstr "Por favor, asegúrese de que:"
+
+#: templates/registration/activate.html:12
+msgid "You haven't already activated your account"
+msgstr "Su cuenta no haya sido activada previamente"
+
+#: templates/registration/activate.html:13
+msgid "Your key hasn't expired"
+msgstr "Su clave de activación no haya expirado"
+
+#: templates/registration/activate.html:14
+msgid "Your activation link wasn't split or malformed"
+msgstr "El enlace que utilizó para la activación no estuviera mal formado"
+
+#: templates/registration/activate.html:19
+msgid "Welcome! Your account has been successfully activated. "
+msgstr "Felicitaciones! Tu cuenta ha sido activada con éxito. "
+
+#: templates/registration/activation_complete.html:8
+msgid "Your account is now active"
+msgstr "Tu cuenta ya está activa"
+
+#: templates/registration/activation_complete.html:9
+msgid "You may now"
+msgstr "Ahora puedes"
+
+#: templates/registration/activation_complete.html:9
+msgid "login"
+msgstr "ingresar"
+
+#: templates/registration/login.html:8
+msgid "Please enter your credentials"
+msgstr "Por favor introduzca sus datos de ingreso"
+
+#: templates/registration/login.html:15
 #, python-format
 msgid ""
 "\n"
-"Thank you for registering to %(site)s\n"
-"\n"
-"You can finish your registration by clicking on this link:\n"
+"     If you have not yet created an account you need to\n"
+"     <a href=\"/accounts/register?next=%(next)s\">register</a>\n"
+"     before you may login.\n"
+"     "
 msgstr ""
 "\n"
-"Gracias por registrarse a %(site)s\n"
-"\n"
-"Para completar su registración haga click aquí:\n"
+"     Si aún no has creado una cuenta, deberás\n"
+"     <a href=\"/accounts/register?next=%(next)s\">registrarte</a>\n"
+"     antes de poder ingresar.\n"
+"     "
 
-#: templates/registration/activation_email.txt:8
-#, python-format
+#: templates/registration/logout.html:7
+msgid "You have logged out"
+msgstr "Haz cerrado tu sesión"
+
+#: templates/registration/password_reset_done.html:7
+msgid "Your password has been reset"
+msgstr "Tu clave ha sido re-generada"
+
+#: templates/registration/password_reset_form.html:8
+msgid "Forgot your password?"
+msgstr "Olvidaste tu clave?"
+
+#: templates/registration/password_reset_form.html:10
 msgid ""
-"\n"
-"This activation key will expire in %(expiration_days)s days.\n"
+"Enter your e-mail address in the form below and we will send you a link for "
+"resetting your password."
 msgstr ""
-"\n"
-"Esta llave de activación caducará en %(expiration_days)s días.\n"
+"Ingresa tu dirección de correo electrónico y te enviaremos un enlace parare-"
+"configurar tu clave."
 
-#: templates/registration/activation_email_subject.txt:2
-msgid "Account activation for"
-msgstr "Actviación de cuenta para"
+#: templates/registration/password_reset_form.html:13
+msgid "Reset Password"
+msgstr "Re-configurar Clave"
 
-#~ msgid "Tags"
-#~ msgstr "Etiquetas"
+#: templates/registration/registration_complete.html:4
+msgid "Registration complete"
+msgstr "Registración completada"
 
-#~ msgid "Print"
-#~ msgstr "Imprimir"
+#: templates/registration/registration_complete.html:9
+msgid ""
+"Please check your e-mail and follow the provided link in order to complete "
+"your account activation."
+msgstr ""
+"Por favor revisa tu correo electrónico y sigue el enlace provisto para "
+"completar la activación de tu cuenta."
 
-#~ msgid "Share"
-#~ msgstr "Compartir"
+#: templates/registration/registration_form.html:15
+msgid "Register"
+msgstr "Registrarse"
 
-#~ msgid "By"
-#~ msgstr "Por"
+#: templates/registration/user_block.html:6
+msgid "Log out"
+msgstr "Cerrar sesión"
 
-#~ msgid "Date"
-#~ msgstr "Fecha"
+#: templates/registration/user_block.html:8
+msgid "Log in"
+msgstr "Ingresar"
 
-#~ msgid "Source"
-#~ msgstr "Fuente"
+#: templates/search/search.html:7
+msgid "Advanced search"
+msgstr "Búsqueda avanzada"
 
-#~ msgid "Share in your social networks"
-#~ msgstr "Compartir en redes sociales"
+#: templates/search/search.html:11
+msgid "Search"
+msgstr "Buscar"
 
-#~ msgid "More"
-#~ msgstr "Más"
+#: templates/search/search.html:16
+msgid "Results"
+msgstr "Resultados"
 
-#~ msgid "download file"
-#~ msgstr "descargar archivo"
+#: templates/search/search.html:25
+msgid "No results found."
+msgstr "No se encontró ningún resultado"
 
-#~ msgid "Open external content"
-#~ msgstr "Abrir contenido externo"
+#~ msgid "category map"
+#~ msgstr "mapeo de categoría"
 
-#~ msgid " (in new window)"
-#~ msgstr " (en ventana nueva)"
-
-#~ msgid "full screen view (new window)"
-#~ msgstr "pantalla completa (en ventana nueva)"
-
-#~ msgid "Cyclope site admin"
-#~ msgstr "Administración de Cyclope"
-
-#~ msgid "Home"
-#~ msgstr "Inicio"
-
-#~ msgid "Add"
-#~ msgstr "Agregar"
-
-#~ msgid "History"
-#~ msgstr "Historial"
-
-#~ msgid "View on site"
-#~ msgstr "Ver en el sitio"
-
-#~ msgid "Please correct the error below."
-#~ msgid_plural "Please correct the errors below."
-#~ msgstr[0] "Por favor corrija el error detallado"
-#~ msgstr[1] "Por favor corrija los errores detallados"
-
-#~ msgid ""
-#~ "You may use the filters and search form to narrow the list of "
-#~ "%(plural_name)s displayed."
-#~ msgstr ""
-#~ "Puedes utilizar los filtros y el formulario de búsqueda para acotar el "
-#~ "listado de %(plural_name)s."
-
-#~ msgid "Add %(name)s"
-#~ msgstr "Agregar %(name)s"
-
-#~ msgid "Filter"
-#~ msgstr "Filtro"
+#~ msgid "category maps"
+#~ msgstr "mapeos de categorías"
 
 #~ msgid ""
 #~ "\n"
-#~ "<p>\n"
-#~ "Articles are a rich content type that you may use to publish categorized "
-#~ "information on your website.\n"
-#~ "</p>\n"
+#~ "Thank you for registering to %(site)s\n"
+#~ "\n"
+#~ "You can finish your registration by clicking on this link:\n"
 #~ msgstr ""
 #~ "\n"
-#~ "<p>\n"
-#~ "Los Artículos son un tipo de contenido rico, que puedes utilizar para "
-#~ "publicar material categorizado en tu sitio.\n"
-#~ "</p>\n"
-
-#~ msgid " There are %(comment_count)s comments "
-#~ msgstr " Hay %(comment_count)s comentarios "
-
-#~ msgid ""
-#~ "For security reasons you need to type the text displayed in the following "
-#~ "image"
-#~ msgstr ""
-#~ "Por razones de seguridad, debe ingresar el texto que se muestra en la "
-#~ "imagen."
-
-#~ msgid "Post your comment"
-#~ msgstr "Enviar comentario"
-
-#~ msgid "Thanks for commenting"
-#~ msgstr "Gracias por su comentario"
-
-#~ msgid "Thank you for your comment"
-#~ msgstr "Gracias por su comentario"
-
-#~ msgid "return."
-#~ msgstr "volver."
-
-#~ msgid "Preview your comment"
-#~ msgstr "Vista previa de su comentario"
-
-#~ msgid "Please correct the error below"
-#~ msgid_plural "Please correct the errors below"
-#~ msgstr[0] "Por favor corrija el error detallado"
-#~ msgstr[1] "Por favor corrija los errores detallados"
-
-#~ msgid "and"
-#~ msgstr "y"
-
-#~ msgid "or make changes"
-#~ msgstr "o haga cambios"
-
-#~ msgid "Post"
-#~ msgstr "Enviar"
-
-#~ msgid "Send"
-#~ msgstr "Enviar"
-
-#~ msgid "Thank you for contacting us!"
-#~ msgstr "Gracias por su comentario!"
-
-#~ msgid "Breadcrumb"
-#~ msgstr "Profundidad de navegación"
-
-#~ msgid "Image"
-#~ msgstr "Imagen"
-
-#~ msgid "of"
-#~ msgstr "de"
-
-#~ msgid "Subscribe to RSS"
-#~ msgstr "Subscripción RSS"
-
-#~ msgid "Please fill in your user profile data"
-#~ msgstr "Por favor complete sus datos"
-
-#~ msgid "Send data"
-#~ msgstr "Enviar datos"
-
-#~ msgid "Return"
-#~ msgstr "Volver"
-
-#~ msgid "The activation key you posted is invalid."
-#~ msgstr "La clave de activación es inválida."
-
-#~ msgid "Please make sure that:"
-#~ msgstr "Por favor, asegúrese de que:"
-
-#~ msgid "You haven't already activated your account"
-#~ msgstr "Su cuenta no haya sido activada previamente"
-
-#~ msgid "Your key hasn't expired"
-#~ msgstr "Su clave de activación no haya expirado"
-
-#~ msgid "Your activation link wasn't split or malformed"
-#~ msgstr "El enlace que utilizó para la activación no estuviera mal formado"
-
-#~ msgid "Welcome! Your account has been successfully activated. "
-#~ msgstr "Felicitaciones! Tu cuenta ha sido activada con éxito. "
-
-#~ msgid "Your account is now active"
-#~ msgstr "Tu cuenta ya está activa"
-
-#~ msgid "You may now"
-#~ msgstr "Ahora puedes"
-
-#~ msgid "login"
-#~ msgstr "ingresar"
-
-#~ msgid "Please enter your credentials"
-#~ msgstr "Por favor introduzca sus datos de ingreso"
+#~ "Gracias por registrarse a %(site)s\n"
+#~ "\n"
+#~ "Para completar su registración haga click aquí:\n"
 
 #~ msgid ""
 #~ "\n"
-#~ "     If you have not yet created an account you need to\n"
-#~ "     <a href=\"/accounts/register?next=%(next)s\">register</a>\n"
-#~ "     before you may login.\n"
-#~ "     "
+#~ "This activation key will expire in %(expiration_days)s days.\n"
 #~ msgstr ""
 #~ "\n"
-#~ "     Si aún no has creado una cuenta, deberás\n"
-#~ "     <a href=\"/accounts/register?next=%(next)s\">registrarte</a>\n"
-#~ "     antes de poder ingresar.\n"
-#~ "     "
+#~ "Esta llave de activación caducará en %(expiration_days)s días.\n"
 
-#~ msgid "You have logged out"
-#~ msgstr "Haz cerrado tu sesión"
-
-#~ msgid "Your password has been reset"
-#~ msgstr "Tu clave ha sido re-generada"
-
-#~ msgid "Forgot your password?"
-#~ msgstr "Olvidaste tu clave?"
-
-#~ msgid ""
-#~ "Enter your e-mail address in the form below and we will send you a link "
-#~ "for resetting your password."
-#~ msgstr ""
-#~ "Ingresa tu dirección de correo electrónico y te enviaremos un enlace "
-#~ "parare-configurar tu clave."
-
-#~ msgid "Reset Password"
-#~ msgstr "Re-configurar Clave"
-
-#~ msgid "Registration complete"
-#~ msgstr "Registración completada"
-
-#~ msgid ""
-#~ "Please check your e-mail and follow the provided link in order to "
-#~ "complete your account activation."
-#~ msgstr ""
-#~ "Por favor revisa tu correo electrónico y sigue el enlace provisto para "
-#~ "completar la activación de tu cuenta."
-
-#~ msgid "Register"
-#~ msgstr "Registrarse"
-
-#~ msgid "Log out"
-#~ msgstr "Cerrar sesión"
-
-#~ msgid "Log in"
-#~ msgstr "Ingresar"
-
-#~ msgid "Advanced search"
-#~ msgstr "Búsqueda avanzada"
-
-#~ msgid "Search"
-#~ msgstr "Buscar"
-
-#~ msgid "Results"
-#~ msgstr "Resultados"
-
-#~ msgid "No results found."
-#~ msgstr "No se encontró ningún resultado"
+#~ msgid "Account activation for"
+#~ msgstr "Actviación de cuenta para"
 
 #~ msgid "Search In"
 #~ msgstr "Buscar en"

@@ -26,7 +26,8 @@
   {% endfor %}
 
 <!--  <div class="pagEspacio"></div> -->
-
-<!-- {include file="paginador.html" } -->
+  {% if page %}
+    {% include 'cyclope/pagination_block.html' %}
+  {% endif %}
 
 {% endblock %}
