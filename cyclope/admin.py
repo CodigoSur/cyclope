@@ -73,6 +73,9 @@ class MenuItemAdmin(editor.TreeEditor):
 
 
     def changelist_view(self, request, extra_context=None):
+        # menuitems changelist should only show items from one menu.
+        # so we activate the filter to display main menu items when no filters
+        # have been selected by the user
         main_menu_id = Menu.objects.get(main_menu=True).id
         if not request.GET:
             request.GET = {u'menu__id__exact': unicode(main_menu_id)}

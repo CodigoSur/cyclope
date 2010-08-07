@@ -35,7 +35,7 @@ class StaticPageAdminForm(forms.ModelForm):
     menu_items = forms.ModelMultipleChoiceField(label=_('Menu items'),
                     queryset = MenuItem.tree.all(), required=False,
                     )
-    if cyc_settings.CYCLOPE_STATICPAGE_RICH_EDITOR:
+    if cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE ==  'wysiwyg':
         text = forms.CharField(label=_('Text'), widget=WYMEditor())
 
     def __init__(self, *args, **kwargs):

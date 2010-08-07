@@ -51,11 +51,23 @@ TEMPLATE_DIRS = (
 
 LOGIN_REDIRECT_URL = '/inicio'
 
+
 # cyclope settings
-CYCLOPE_PREFIX = ''
 
 #CYCLOPE_LOCAL_THEMES_DIR = os.path.join(BASE_DIR, 'templates/cyclope/themes/')
 #CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/media/local_themes/'
+
+CYCLOPE_PREFIX = ''
+
+# possible values for TEXT_STYLE are:
+# textile, markdown or restructuredtext (saves markup, renders with corresponding filter)
+# wysiwyg (rich text editor, saves HTML, renders with safe filter)
+# raw (simple text area saves the raw input, renders with safe filter)
+#CYCLOPE_STATICPAGE_TEXT_STYLE = 'textile'
+#CYCLOPE_ARTICLE_TEXT_STYLE = 'textile'
+
+#CYCLOPE_STATICPAGE_TEXT_STYLE = 'wysiwyg'
+#CYCLOPE_ARTICLE_TEXT_STYLE = 'wysiwyg'
 
 HAYSTACK_WHOOSH_PATH = os.path.join(BASE_DIR, 'cyclope_project_index')
 

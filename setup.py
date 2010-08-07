@@ -72,6 +72,7 @@ setup(
         'django-contact-form>=0.4a1',
         'Whoosh==0.3.18',
         'django-haystack>=1.0.1',
+        'textile>=2.1.4',
     ],
 
     packages=find_packages(),

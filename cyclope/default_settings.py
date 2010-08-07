@@ -19,6 +19,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+"""This file holds default values related to settings that need to change when
+a new app is installed.
+"""
+
 import os
 gettext = lambda s: s
 
@@ -77,6 +81,7 @@ INSTALLED_APPS = (
     'django.contrib.databrowse',
     'django.contrib.admin',
     'django.contrib.comments',
+    'django.contrib.markup',
 
     'tagging',
     'tagging_autocomplete',
@@ -167,9 +172,6 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 # profile settings
 AUTH_PROFILE_MODULE = "cyclope.userprofile"
-
-# cyclope settings
-CYCLOPE_PREFIX = ''
 
 # tagging settings
 FORCE_LOWERCASE_TAGS = True

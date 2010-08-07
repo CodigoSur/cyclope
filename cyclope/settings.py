@@ -62,11 +62,14 @@ CYCLOPE_MEDIA_ROOT = getattr(settings, 'CYCLOPE_MEDIA_ROOT',
 CYCLOPE_THEMES_ROOT = getattr(settings, 'CYCLOPE_THEMES_ROOT',
                               os.path.join(os.path.dirname(__file__),
                                            "templates/cyclope/themes/"))
-CYCLOPE_STATICPAGE_RICH_EDITOR = getattr(settings,
-                                            'CYCLOPE_STATICPAGE_RICH_EDITOR',
-                                            True)
-
-
+CYCLOPE_STATICPAGE_TEXT_STYLE = getattr(settings,
+                                            'CYCLOPE_STATICPAGE_TEXT_STYLE',
+                                            'textile'
+                                            )
+CYCLOPE_ARTICLE_TEXT_STYLE = getattr(settings,
+                                            'CYCLOPE_ARTICLE_TEXT_STYLE',
+                                            'textile'
+                                            )
 # pagination
 CYCLOPE_PAGINATION = getattr(settings, 'CYCLOPE_PAGINATION',
                              { 'TEASER' : 1,

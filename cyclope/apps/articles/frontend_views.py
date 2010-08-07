@@ -65,3 +65,25 @@ class ArticleTeaserList(frontend.FrontendView):
                            *args, **kwargs)
 
 frontend.site.register_view(Article, ArticleTeaserList())
+
+class ArticleLabeledIconList(ArticleTeaserList):
+    """Labeled icon list view for Articles.
+    """
+    name='labeled_icon_list'
+    verbose_name=_('list of Article labeled icons')
+    is_instance_view = False
+    params = { 'template_name': 'articles/article_labeled_icon_list.html' }
+
+    #def get_http_response(self, request, *args, **kwargs):
+    #    return views.object_list(request,
+    #                       queryset=Article.objects.all(),
+    #                       template_object_name= 'article',
+    #                       *args, **kwargs)
+    #
+    #def get_string_response(self, request, *args, **kwargs):
+    #    return views.object_list(request, inline=True,
+    #                       queryset=Article.objects.all(),
+    #                       template_object_name= 'article',
+    #                       *args, **kwargs)
+
+frontend.site.register_view(Article, ArticleLabeledIconList())

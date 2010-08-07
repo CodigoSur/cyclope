@@ -148,6 +148,30 @@ span.breadcrumb a:hover {color:#333;}
 .article.teaser h6 {font-size:0.65em;color:#666;font-weight:normal;text-transform:uppercase;margin-bottom:px;}
 .article.teaser img{padding:3px; background-color:#eee; border:1px solid #ccc;margin:3px 0 6px 15px; float:right;}
 
+
+.labeled_icon {
+  float: left;
+  height: 210px;
+  margin: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  text-align: center;
+  width: 155px;
+}
+
+.labeled_icon {
+  display: block;
+  margin: 7px;
+}
+
+.type_icon {
+  border: 0px;
+  margin: 0px;
+  position: absolute;
+}
+
 #right_sidebar .article.teaser { float: none; }
 #right_sidebar .article.teaser { padding: 7px 0 0 0;; border-bottom: black dotted 1px;}
 #right_sidebar .article.teaser { margin: 0;}

@@ -1,0 +1,14 @@
+{% load fb_versions cyclope_utils %}
+
+  <div class="article labeled_icon">
+    <a href="{% url article-detail article.slug %}">
+      {% if article.pictures %}
+        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" width="48px" border="0"/>
+        <img src="{% version article.pictures.0.image.path 'thumbnail' %}" width="135" border="0"/>
+      {% else %}
+        <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" width="135" border="0"/>
+      {% endif %}
+
+    </a>
+    <span class="label"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:40 }}</a></span>
+  </div>

@@ -4,7 +4,7 @@
 TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
 {% endcomment%}
 
-{% load comments i18n fb_versions cyclope_utils %}
+{% load comments i18n fb_versions cyclope_utils markup %}
 
 {% block content %}
 
@@ -90,7 +90,19 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 -->
           <!-- /descargas -->
 
-  <span class="text">{{ article.text|safe }}</span>
+  <span class="text">
+    {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'raw' or CYCLOPE_ARTICLE_TEXT_STYLE == 'wysiwyg'%}
+      {{ article.text|safe }}
+    {% else %}
+        {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'textile' %}
+        {{ article.text|textile }}
+        {% else %}
+          {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'markdown'%}
+          {{ article.text|markdown }}
+          {% endif %}
+        {% endif %}
+    {% endif %}
+  </span>
 
   <span class="source">--<br>
     {% trans "Date" %}: {{ article.date }}{% if article.source %} |

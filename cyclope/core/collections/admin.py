@@ -120,6 +120,14 @@ class CategoryAdmin(editor.TreeEditor):
             'fields': ('active', 'description', 'image',),
         }),
     )
+    def changelist_view(self, request, extra_context=None):
+        # category changelist should only show items from one collection.
+        # so we activate the filter to display categories from one collection
+        # when no filters have been selected by the user
+        a_collection = Collection.objects.all()[0].id
+        if not request.GET:
+            request.GET = {u'collection__id__exact': unicode(a_collection)}
+        return super(CategoryAdmin, self).changelist_view(request, extra_context)
 
 admin.site.register(Category, CategoryAdmin)
 

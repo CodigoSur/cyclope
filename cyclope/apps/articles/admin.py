@@ -28,6 +28,7 @@ from cyclope.widgets import WYMEditor, ForeignKeyImageRawIdWidget
 from cyclope.core.collections.admin import CollectibleAdmin
 from cyclope.models import Author
 from cyclope.admin import BaseContentAdmin
+from cyclope import settings as cyc_settings
 
 from models import *
 
@@ -44,7 +45,8 @@ class ArticleImageDataInline(admin.StackedInline):
 
 
 class ArticleForm(forms.ModelForm):
-    text = forms.CharField(label=_('Text'), widget=WYMEditor())
+    if cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE.lower() ==  'wysiwyg':
+        text = forms.CharField(label=_('Text'), widget=WYMEditor())
 
     def __init__(self, *args, **kwargs):
         super(ArticleForm, self).__init__(*args, **kwargs)

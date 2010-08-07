@@ -1,0 +1,13 @@
+{% extends host_template %}
+
+{% load i18n %}
+
+{% block content %}
+
+  {% for article in article_list %}
+    {% include "articles/article_labeled_icon.html" %}
+  {% endfor %}
+
+<!-- {include file="paginador.html" } -->
+
+{% endblock %}
