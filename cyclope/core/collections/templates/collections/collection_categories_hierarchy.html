@@ -4,9 +4,9 @@
 
 <script type="text/javascript">
 jQuery(document).ready(function(){
-  $('.collection.categories_hierarchy ul').css('display', 'none');
-  $(".collection.categories_hierarchy ul").first().css('display', 'block');
-  $('.expand_collapse').click(function() {
+  $('#{{ collection_slug }}_collection ul').css('display', 'none');
+  $("#{{ collection_slug }}_collection ul").first().css('display', 'block');
+  $('#{{ collection_slug }}_collection .expand_collapse').click(function() {
     if ($(this).text() == '+') $(this).text('-');
     else $(this).text('+');
     $(this).parent().children('ul').toggle();

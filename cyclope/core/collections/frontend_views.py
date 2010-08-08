@@ -155,7 +155,8 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
         category_list = []
         for category in categories:
             category_list.extend(self._get_categories_nested_list(category))
-        c = RequestContext(request, {'categories': category_list})
+        c = RequestContext(request, {'categories': category_list,
+                                     'collection_slug': collection.slug})
         t = loader.get_template("collections/collection_categories_hierarchy.html")
         c['host_template'] = 'cyclope/inline_view.html'
         return t.render(c)

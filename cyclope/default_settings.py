@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -126,7 +126,7 @@ FILEBROWSER_DIRECTORY = 'uploads/'
 FILEBROWSER_EXTENSIONS = {
     'Folder': [''],
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
-    'Video': ['.ogg', '.mov','.wmv','.mpeg','.mpg','.avi','.rm',],
+    'Video': ['.ogv', '.ogg', '.mov','.wmv','.mpeg','.mpg','.avi','.rm',],
     'Document': ['.odt', 'docx', '.pdf','.doc','.rtf','.txt',
                  '.ods', '.xls','.csv'],
     'Audio': ['.ogg', '.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
@@ -187,4 +187,3 @@ LOCALE_PATHS = (os.path.join(os.path.dirname(__file__), "locale_external"), )
 # django-haystack settings
 HAYSTACK_SITECONF = 'cyclope_project.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
-
