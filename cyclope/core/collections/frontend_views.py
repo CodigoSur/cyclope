@@ -62,14 +62,14 @@ class CategoryTeaserList(frontend.FrontendView):
     name='teaser_list'
     verbose_name=_('teaser list of Category members')
     is_default = True
-
+    template = "collections/category_teaser_list.html"
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         category = content_object
         #TODO(nicoechaniz): this article__date ordering looks bad. categories can hold any baseontent derivative
         c = RequestContext(request,
                            {'categorizations': category.categorizations.order_by('article__date'),
                             'category': category})
-        t = loader.get_template("collections/category_teaser_list.html")
+        t = loader.get_template(self.template)
         c['host_template'] = 'cyclope/inline_view.html'
         return t.render(c)
 
@@ -97,12 +97,21 @@ class CategoryTeaserList(frontend.FrontendView):
                            {'categorizations': page.object_list,
                             'page': page,
                             'category': category })
-        t = loader.get_template("collections/category_teaser_list.html")
+        t = loader.get_template(self.template)
         c['host_template'] = template_for_request(request)
         return HttpResponse(t.render(c))
 
 frontend.site.register_view(Category, CategoryTeaserList())
 
+class CategoryLabeledIconList(CategoryTeaserList):
+    """A labeled icon list view of category members.
+    """
+    name='labeled_icon_list'
+    verbose_name=_('Labeled icon list of Category members')
+    template = "collections/category_labeled_icon_list.html"
+    is_default = False
+
+frontend.site.register_view(Category, CategoryLabeledIconList())
 
 class CategorySimplifiedTeaserList(frontend.FrontendView):
     """A teaser list view of category members.

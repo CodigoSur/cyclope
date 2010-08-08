@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-08 14:27-0300\n"
+"POT-Creation-Date: 2010-08-08 19:42-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,7 @@ msgstr "Biblioteca Multimedia"
 msgid "Authors and Sources"
 msgstr "Autores y Fuentes"
 
-#: dashboard.py:138 apps/articles/templates/articles/article_detail.html:33
+#: dashboard.py:138 apps/articles/templates/articles/article_detail.html:36
 msgid "Comments"
 msgstr "Comentarios"
 
@@ -446,9 +446,8 @@ msgid "list of Article teasers"
 msgstr "lista de resúmenes de Artículos"
 
 #: apps/articles/frontend_views.py:73
-#, fuzzy
 msgid "list of Article labeled icons"
-msgstr "lista de resúmenes de Artículos"
+msgstr "lista de iconos con nombre"
 
 #: apps/articles/models.py:39
 msgid "yes"
@@ -520,40 +519,54 @@ msgstr "archivo"
 msgid "downloads"
 msgstr "bajadas"
 
-#: apps/articles/templates/articles/article_detail.html:12
-#: apps/articles/templates/articles/article_teaser.html:29
+#: apps/articles/templates/articles/article_detail.html:15
+#: apps/articles/templates/articles/article_teaser.html:30
+#: apps/medialibrary/templates/medialibrary/document_teaser.html:18
+#: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:18
 #: apps/medialibrary/templates/medialibrary/media_detail_header.html:6
+#: apps/medialibrary/templates/medialibrary/movieclip_teaser.html:18
+#: apps/medialibrary/templates/medialibrary/picture_teaser.html:17
+#: apps/medialibrary/templates/medialibrary/regularfile_teaser.html:18
+#: apps/medialibrary/templates/medialibrary/soundtrack_teaser.html:15
+#: apps/staticpages/templates/staticpages/staticpage_teaser.html:15
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: apps/articles/templates/articles/article_detail.html:23
+#: apps/articles/templates/articles/article_detail.html:26
 msgid "Print"
 msgstr "Imprimir"
 
-#: apps/articles/templates/articles/article_detail.html:26
+#: apps/articles/templates/articles/article_detail.html:29
 msgid "Share"
 msgstr "Compartir"
 
-#: apps/articles/templates/articles/article_detail.html:69
-#: apps/articles/templates/articles/article_teaser.html:24
+#: apps/articles/templates/articles/article_detail.html:72
+#: apps/articles/templates/articles/article_teaser.html:25
+#: apps/medialibrary/templates/medialibrary/document_teaser.html:13
+#: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:13
 #: apps/medialibrary/templates/medialibrary/media_detail_header.html:27
+#: apps/medialibrary/templates/medialibrary/movieclip_teaser.html:13
+#: apps/medialibrary/templates/medialibrary/picture_teaser.html:12
+#: apps/medialibrary/templates/medialibrary/regularfile_teaser.html:13
+#: apps/medialibrary/templates/medialibrary/soundtrack_teaser.html:10
+#: apps/staticpages/templates/staticpages/staticpage_teaser.html:10
 #: templates/comments/list.html:9
 msgid "By"
 msgstr "Por"
 
-#: apps/articles/templates/articles/article_detail.html:108
+#: apps/articles/templates/articles/article_detail.html:111
 msgid "Date"
 msgstr "Fecha"
 
-#: apps/articles/templates/articles/article_detail.html:109
+#: apps/articles/templates/articles/article_detail.html:112
 msgid "Source"
 msgstr "Fuente"
 
-#: apps/articles/templates/articles/article_detail.html:132
+#: apps/articles/templates/articles/article_detail.html:135
 msgid "Share in your social networks"
 msgstr "Compartir en redes sociales"
 
-#: apps/articles/templates/articles/article_teaser.html:20
+#: apps/articles/templates/articles/article_teaser.html:21
 #: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:20
 msgid "More"
 msgstr "Más"
@@ -668,6 +681,7 @@ msgstr "contenidos externos"
 
 #: apps/medialibrary/templates/medialibrary/document_detail.html:16
 #: apps/medialibrary/templates/medialibrary/media_player.html:17
+#: apps/medialibrary/templates/medialibrary/regularfile_detail.html:16
 msgid "download file"
 msgstr "descargar archivo"
 
@@ -742,15 +756,19 @@ msgstr "lista de items raíz para la Categoría seleccionada"
 msgid "teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:111
+#: core/collections/frontend_views.py:110
+msgid "Labeled icon list of Category members"
+msgstr "lista de iconos con nombre de los miembros de una Categoría"
+
+#: core/collections/frontend_views.py:120
 msgid "simplified teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:130
+#: core/collections/frontend_views.py:139
 msgid "teaser list of the root Categories of a Collection"
 msgstr "lista de resúmenes de las Categorías raíz de una Colección"
 
-#: core/collections/frontend_views.py:150
+#: core/collections/frontend_views.py:159
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
@@ -941,20 +959,20 @@ msgstr "Gracias por su comentario!"
 msgid "Breadcrumb"
 msgstr "Profundidad de navegación"
 
-#: templates/cyclope/pagination_block.html:7
+#: templates/cyclope/pagination_block.html:8
 msgid "previous"
 msgstr "anterior"
 
-#: templates/cyclope/pagination_block.html:11
+#: templates/cyclope/pagination_block.html:12
 msgid "Page"
 msgstr "Página"
 
-#: templates/cyclope/pagination_block.html:11
+#: templates/cyclope/pagination_block.html:12
 #: templates/cyclope/themes/neutrona/base.html:42
 msgid "of"
 msgstr "de"
 
-#: templates/cyclope/pagination_block.html:15
+#: templates/cyclope/pagination_block.html:16
 msgid "next"
 msgstr "siguiente"
 

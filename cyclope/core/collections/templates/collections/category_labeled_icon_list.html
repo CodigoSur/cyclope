@@ -1,0 +1,33 @@
+{% extends host_template %}
+
+{% load i18n cyclope_utils %}
+
+{% block content %}
+
+  {% if category.collection.visible %}
+  <big class="category_title">{{ category.name }}</big>
+  {% endif %}
+
+  {% comment %}
+  We show a teaser view of every object belonging to this category.
+  {% endcomment %}
+
+  {% for categorization in categorizations %}
+    {% join categorization.content_type.app_label  "/" categorization.content_type.model "_labeled_icon.html" as template_path %}
+
+    {% comment %}
+      we alias the actual object with the model name
+      so the included template is reusable
+      and can access the content object using an explicit name
+    {% endcomment %}
+
+    {% alias categorization.content_object as categorization.content_type.model %}
+    {% include template_path %}
+  {% endfor %}
+
+<!--  <div class="pagEspacio"></div> -->
+  {% if page %}
+    {% include 'cyclope/pagination_block.html' %}
+  {% endif %}
+
+{% endblock %}
