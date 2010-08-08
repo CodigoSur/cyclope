@@ -72,8 +72,8 @@ CYCLOPE_ARTICLE_TEXT_STYLE = getattr(settings,
                                             )
 # pagination
 CYCLOPE_PAGINATION = getattr(settings, 'CYCLOPE_PAGINATION',
-                             { 'TEASER' : 1,
-                               'LABELED_ICON' : 1,})
+                             { 'TEASER' : 10,
+                               'LABELED_ICON' : 30,})
 
 #TODO(nicoechaniz): re-evaluate the way we are handling these dynamic settings, it is practical but seems hacky and error-prone.
 
