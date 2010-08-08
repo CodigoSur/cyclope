@@ -85,7 +85,7 @@ class Menu(models.Model):
     slug = AutoSlugField(populate_from='name', always_update=True)
     main_menu = models.BooleanField(_('main menu'), default=False)
 
-    def save(self):
+    def save(self, **kwargs):
         # set main_menu to False on previous main menu if main_menu is True
         if self.main_menu:
             try:
@@ -94,7 +94,7 @@ class Menu(models.Model):
                 old_main.save()
             except ObjectDoesNotExist:
                 pass
-        super(Menu, self).save()
+        super(Menu, self).save(**kwargs)
 
     def __unicode__(self):
         return self.name
@@ -141,7 +141,7 @@ class MenuItem(models.Model):
     content_view = models.CharField(_('view'), max_length=255,
                                     blank=True, default='')
 
-    def save(self):
+    def save(self, **kwargs):
         #TODO(nicoechaniz): Review this method
         # check that data is consistent
         # a content object without a content type is invalid so we unset it
@@ -162,7 +162,7 @@ class MenuItem(models.Model):
                 item.site_home = False
                 item.save()
 
-        # If is not a new MenuItem and the Menu is changed, we change move all
+        # If is not a new MenuItem and the Menu is changed, we "move" all
         # the childrens to the new Menu.
         if self.pk is not None:
             old_menu_item = MenuItem.objects.get(pk=self.pk)
@@ -179,7 +179,7 @@ class MenuItem(models.Model):
         else:
             self.url = "/".join([a.slug for a in self.get_ancestors()]+[self.slug])
 
-        super(MenuItem, self).save()
+        super(MenuItem, self).save(**kwargs)
 
     def __unicode__(self):
         return self.name

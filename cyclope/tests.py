@@ -126,6 +126,7 @@ class SiteTestCase(TestCase):
         site_settings.save()
         response = self.client.get("/")
 
+
     def testSiteWithoutDefaultLayout(self):
         site = Site(domain="mydomain.com", name="mydomain")
         site.save()
@@ -155,6 +156,24 @@ class SiteTestCase(TestCase):
         response = self.client.get("/")
         self.assertEqual(response.content, 'The site home page has not been set.')
         #TODO(nicoechaniz): testing for the response content is weak; look for a better option
+
+
+class RegressionTests(TestCase):
+
+    def setUp(self):
+        site = Site(domain="mydomain.com", name="mydomain")
+        site.save()
+        menu = Menu.objects.create(name="Main menu", main_menu=True)
+        menu_item = MenuItem(menu=menu, name="home",
+                                            site_home=True, active=True)
+        menu_item.save()
+        layout = Layout(name="default", template='one_sidebar.html')
+        layout.save()
+        site_settings = SiteSettings.objects.create(site=site,
+                                theme="neutrona",
+                                allow_comments='YES')
+        site_settings.default_layout = layout
+        site_settings.save()
 
 
 class RegionViewTestCase(TestCase):

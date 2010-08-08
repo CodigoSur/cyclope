@@ -29,6 +29,7 @@ from cyclope.core.collections.admin import CollectibleAdmin
 from cyclope.widgets import WYMEditor
 from cyclope.models import MenuItem
 from cyclope import settings as cyc_settings
+from cyclope.core import frontend
 from models import StaticPage
 
 class StaticPageAdminForm(forms.ModelForm):
@@ -75,6 +76,7 @@ class StaticPageAdmin(CollectibleAdmin):
             menu_item.save()
         for menu_item in new_items:
             menu_item.content_type = object_type
+            menu_item.content_view = frontend.site.get_default_view_name(StaticPage)
             menu_item.object_id = obj.id
             menu_item.save()
 
