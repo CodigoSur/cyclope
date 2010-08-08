@@ -67,7 +67,7 @@ MIDDLEWARE_CLASSES = (
 
 
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'admin_tools',
     'admin_tools.theming',
     'admin_tools.menu',
@@ -104,7 +104,7 @@ INSTALLED_APPS = (
     'cyclope.apps.medialibrary',
     'contact_form',
     'haystack',
-)
+]
 
 # comments settings
 COMMENTS_APP = 'cyclope.core.captcha_comments'
@@ -187,3 +187,4 @@ LOCALE_PATHS = (os.path.join(os.path.dirname(__file__), "locale_external"), )
 # django-haystack settings
 HAYSTACK_SITECONF = 'cyclope_project.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
+
