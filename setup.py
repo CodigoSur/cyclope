@@ -53,6 +53,7 @@ setup(
         'hg+http://bitbucket.org/ubernostrum/django-registration#egg=django-registration-dev',
         'git+http://github.com/alexvasi/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-dev',
         'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-dev',
+        'git+http://github.com/toastdriven/django-haystack.git#egg=django-haystack-dev',
     ],
 
     install_requires=[
