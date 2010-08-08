@@ -1,0 +1,16 @@
+{% load i18n cyclope_utils %}
+{% if current_object.categories.values %}
+<span class="categories">
+    {% trans "Categories" %}:
+    <ul>
+        {% for categorization in current_object.categories.all %}
+            {% alias categorization.category as 'category' %}
+            {% if category.collection.visible %}
+                <li>
+                    <a href="{% url category-teaser_list category.slug %}">{{ category.name }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</span>
+{% endif %}

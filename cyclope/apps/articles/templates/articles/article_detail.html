@@ -8,7 +8,10 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
 {% block content %}
 
+{% alias article as 'current_object' %}
+
 <div class="article detail">
+  {% include 'collections/categories_navigation_block.html' %}
   <span class="tags">{% trans "Tags" %}: {{ article.tags }}</span>
  {% get_comment_count for article as comment_count %}
 
@@ -141,7 +144,6 @@ TODO(nicoechaniz): uncomment and fix if related articles are implemented
 
 
 <!--COMENTARIOS -->
-  {% alias article as 'current_object' %}
   {% include 'comments/comments_block.html' %}
 
 </div> <!--termina article_detail -->
