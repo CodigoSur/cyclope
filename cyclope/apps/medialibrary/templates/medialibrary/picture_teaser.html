@@ -1,0 +1,27 @@
+{% load i18n tagging_tags fb_versions %}
+
+  <div class="picture teaser">
+     <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/image.png"/>
+     <h2 class="title"><a href="{% url picture-detail picture.slug %}">{{ picture.name }}</a></h2>
+      <a href="{% url picture-detail picture.slug %}">
+        <img class="teaser_icon" src="{% version picture.image.path 'thumbnail' %}"/>
+      </a>
+      {% if picture.description %}<p class="description">{{ picture.description }}</p>
+      {% endif %}
+    {% if picture.author %}
+        <span class="author">{% trans "By" %} {{ picture.author }}</span>
+    {% endif %}
+    {% if picture.tags %}
+        <span class="tags">
+          <h3>
+          {% trans "Tags" %}:
+          {% tags_for_object picture as picture_tags %}
+          {% for tag in picture_tags %}
+            <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
+            {{tag.name}}{% if not forloop.last%},{% endif%}
+          {% endfor %}
+          </h3>
+        </span>
+    {% endif %}
+    <div class="clear"></div>
+  </div>

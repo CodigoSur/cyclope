@@ -1,0 +1,28 @@
+{% load i18n tagging_tags fb_versions %}
+
+  <div class="movieclip teaser">
+     <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/video.png" />
+     <h2 class="title"><a href="{% url movieclip-detail movieclip.slug %}">{{ movieclip.name }}</a></h2>
+    {% if movieclip.image %}
+      <img class="teaser_icon" src="{% version movieclip.image.path 'thumbnail' %}"/>
+    {% endif %}
+    {% if movieclip.description %}
+      <p class="description">{{ movieclip.description }}</p>
+    {% endif %}
+    {% if movieclip.author %}
+      <span class="author">{% trans "By" %} {{ movieclip.author }}</span>
+    {% endif %}
+    {% if movieclip.tags %}
+        <span class="tags">
+          <h3>
+          {% trans "Tags" %}:
+          {% tags_for_object movieclip as movieclip_tags %}
+          {% for tag in movieclip_tags %}
+            <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
+            {{tag.name}}{% if not forloop.last%},{% endif%}
+          {% endfor %}
+          </h3>
+        </span>
+    {% endif %}
+    <div class="clear"></div>
+  </div>
