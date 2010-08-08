@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -71,7 +71,7 @@ setup(
         'django-admin-tools>=0.3.0',
         'django-contact-form>=0.4a1',
         'Whoosh==0.3.18',
-        'django-haystack>=1.0.1',
+        'django-haystack>=1.1.0-alpha',
         'textile>=2.1.4',
     ],
 

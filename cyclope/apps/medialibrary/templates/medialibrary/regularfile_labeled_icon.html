@@ -1,0 +1,14 @@
+{% load fb_versions cyclope_utils %}
+
+  <div class="media labeled_icon movieclip">
+    <a href="{% url regularfile-detail regularfile.slug %}">
+      {% if regularfile.image %}
+      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/regularfile.png"/>
+      <img src="{% version regularfile.image.path 'thumbnail' %}"/>
+      {% else %}
+      <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/regularfile.png"/>
+      {% endif %}
+
+    </a>
+    <span class="label"><a href="{% url regularfile-detail regularfile.slug %}">{{ regularfile.name|truncatechars:40 }}</a></span>
+  </div>

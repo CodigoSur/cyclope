@@ -5,6 +5,7 @@
     <span class="pretitle">{{ article.pretitle }} | </span>
     {% endif%}
     {% if article.date %}<span class="date">{{ article.date }}</span>{% endif %}
+     <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" />
      <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name }}</a></h2>
       {% if article.pictures and not simplified_view %}
       <a href="{% url article-detail article.slug %}">

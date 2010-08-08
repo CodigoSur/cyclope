@@ -1,0 +1,14 @@
+{% load fb_versions cyclope_utils %}
+
+  <div class="labeled_icon staticpage">
+    <a href="{% url staticpage-detail staticpage.slug %}">
+      {% if staticpage.image %}
+      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png"/>
+      <img src="{% version staticpage.image.path 'thumbnail' %}"/>
+      {% else %}
+      <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png"/>
+      {% endif %}
+
+    </a>
+    <span class="label"><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name|truncatechars:40 }}</a></span>
+  </div>

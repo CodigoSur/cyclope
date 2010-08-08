@@ -1,0 +1,25 @@
+{% load i18n tagging_tags fb_versions %}
+
+  <div class="staticpage teaser">
+     <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png" />
+     <h2 class="title"><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a></h2>
+    {% if staticpage.description %}
+      <p class="description">{{ staticpage.description }}</p>
+    {% endif %}
+    {% if staticpage.author %}
+      <span class="author">{% trans "By" %} {{ staticpage.author }}</span>
+    {% endif %}
+    {% if staticpage.tags %}
+        <span class="tags">
+          <h3>
+          {% trans "Tags" %}:
+          {% tags_for_object staticpage as staticpage_tags %}
+          {% for tag in staticpage_tags %}
+            <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
+            {{tag.name}}{% if not forloop.last%},{% endif%}
+          {% endfor %}
+          </h3>
+        </span>
+    {% endif %}
+    <div class="clear"></div>
+  </div>

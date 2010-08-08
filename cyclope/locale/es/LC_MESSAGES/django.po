@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-07 18:20-0300\n"
+"POT-Creation-Date: 2010-08-08 19:42-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,7 @@ msgstr "Biblioteca Multimedia"
 msgid "Authors and Sources"
 msgstr "Autores y Fuentes"
 
-#: dashboard.py:138 apps/articles/templates/articles/article_detail.html:33
+#: dashboard.py:138 apps/articles/templates/articles/article_detail.html:36
 msgid "Comments"
 msgstr "Comentarios"
 
@@ -108,33 +108,33 @@ msgstr "Acciones Recientes"
 msgid "Codigo Sur, latest news"
 msgstr "Código Sur, últimas noticias"
 
-#: default_settings.py:147
+#: default_settings.py:152
 #, fuzzy
 msgid "Admin Thumbnail"
 msgstr "Imagen miniatura"
 
-#: default_settings.py:149
+#: default_settings.py:154
 #, fuzzy
 msgid "Thumbnail (140px)"
 msgstr "Imagen miniatura"
 
-#: default_settings.py:151
+#: default_settings.py:156
 msgid "Small (300px)"
 msgstr ""
 
-#: default_settings.py:153
+#: default_settings.py:158
 msgid "Medium (460px)"
 msgstr ""
 
-#: default_settings.py:155
+#: default_settings.py:160
 msgid "Big (620px)"
 msgstr ""
 
-#: default_settings.py:157
+#: default_settings.py:162
 msgid "Cropped (60x60px)"
 msgstr ""
 
-#: default_settings.py:159
+#: default_settings.py:164
 msgid "Cropped Thumbnail (140x140px)"
 msgstr ""
 
@@ -242,8 +242,8 @@ msgstr "descripción"
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:84 models.py:114 models.py:220 models.py:265 models.py:323
-#: models.py:346 core/collections/models.py:41 core/collections/models.py:71
+#: models.py:84 models.py:114 models.py:220 models.py:265 models.py:327
+#: models.py:350 core/collections/models.py:41 core/collections/models.py:71
 msgid "name"
 msgstr "nombre"
 
@@ -341,7 +341,7 @@ msgstr "etiquetas"
 msgid "published"
 msgstr "publicar"
 
-#: models.py:327 models.py:362 models.py:372 apps/articles/models.py:73
+#: models.py:331 models.py:366 models.py:376 apps/articles/models.py:73
 #: apps/medialibrary/models.py:46 apps/medialibrary/models.py:81
 #: apps/medialibrary/models.py:94 apps/medialibrary/models.py:107
 #: apps/medialibrary/models.py:120 core/collections/models.py:53
@@ -349,67 +349,67 @@ msgstr "publicar"
 msgid "image"
 msgstr "imagen"
 
-#: models.py:330
+#: models.py:334
 msgid "origin"
 msgstr "origen"
 
-#: models.py:332
+#: models.py:336
 msgid "notes"
 msgstr "notas"
 
-#: models.py:334 core/collections/models.py:51
+#: models.py:338 core/collections/models.py:51
 msgid "content types"
 msgstr "tipos de contenido"
 
-#: models.py:335
+#: models.py:339
 msgid "Select the content types this author is related to."
 msgstr "Seleccione los tipos de contenido que corresponden a este autor"
 
-#: models.py:341 apps/articles/models.py:46 apps/medialibrary/models.py:35
+#: models.py:345 apps/articles/models.py:46 apps/medialibrary/models.py:35
 msgid "author"
 msgstr "autor"
 
-#: models.py:342
+#: models.py:346
 msgid "authors"
 msgstr "autores"
 
-#: models.py:350
+#: models.py:354
 msgid "link"
 msgstr "enlace"
 
-#: models.py:356 apps/articles/models.py:47
+#: models.py:360 apps/articles/models.py:47
 msgid "source"
 msgstr "fuente"
 
-#: models.py:357
+#: models.py:361
 msgid "sources"
 msgstr "fuentes"
 
-#: models.py:368
+#: models.py:372
 msgid "Thumbnail Image"
 msgstr "Imagen miniatura"
 
-#: models.py:373
+#: models.py:377
 msgid "images"
 msgstr "imágenes"
 
-#: models.py:392
+#: models.py:396
 msgid "avatar"
 msgstr "tu imagen"
 
-#: models.py:394
+#: models.py:398
 msgid "city"
 msgstr "ciudad"
 
-#: models.py:395
+#: models.py:399
 msgid "about myself"
 msgstr "sobre mí"
 
-#: models.py:398
+#: models.py:402
 msgid "public"
 msgstr "público"
 
-#: models.py:399
+#: models.py:403
 msgid "Choose whether your profile info should be publicly visible or not"
 msgstr "Elije si deseas que tu información de perfil sea pública"
 
@@ -429,11 +429,11 @@ msgstr "apagado"
 msgid "Lookup"
 msgstr "Buscar"
 
-#: apps/articles/admin.py:47 apps/staticpages/admin.py:39
+#: apps/articles/admin.py:49 apps/staticpages/admin.py:39
 msgid "Text"
 msgstr "Texto"
 
-#: apps/articles/admin.py:71
+#: apps/articles/admin.py:73
 msgid "Publication data"
 msgstr "Datos de la publicación"
 
@@ -444,6 +444,10 @@ msgstr "vista detallada del Artículo seleccionado"
 #: apps/articles/frontend_views.py:51
 msgid "list of Article teasers"
 msgstr "lista de resúmenes de Artículos"
+
+#: apps/articles/frontend_views.py:73
+msgid "list of Article labeled icons"
+msgstr "lista de iconos con nombre"
 
 #: apps/articles/models.py:39
 msgid "yes"
@@ -515,40 +519,54 @@ msgstr "archivo"
 msgid "downloads"
 msgstr "bajadas"
 
-#: apps/articles/templates/articles/article_detail.html:12
-#: apps/articles/templates/articles/article_teaser.html:29
-#: apps/medialibrary/templates/medialibrary/media_detail_header.html:4
+#: apps/articles/templates/articles/article_detail.html:15
+#: apps/articles/templates/articles/article_teaser.html:30
+#: apps/medialibrary/templates/medialibrary/document_teaser.html:18
+#: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:18
+#: apps/medialibrary/templates/medialibrary/media_detail_header.html:6
+#: apps/medialibrary/templates/medialibrary/movieclip_teaser.html:18
+#: apps/medialibrary/templates/medialibrary/picture_teaser.html:17
+#: apps/medialibrary/templates/medialibrary/regularfile_teaser.html:18
+#: apps/medialibrary/templates/medialibrary/soundtrack_teaser.html:15
+#: apps/staticpages/templates/staticpages/staticpage_teaser.html:15
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: apps/articles/templates/articles/article_detail.html:23
+#: apps/articles/templates/articles/article_detail.html:26
 msgid "Print"
 msgstr "Imprimir"
 
-#: apps/articles/templates/articles/article_detail.html:26
+#: apps/articles/templates/articles/article_detail.html:29
 msgid "Share"
 msgstr "Compartir"
 
-#: apps/articles/templates/articles/article_detail.html:69
-#: apps/articles/templates/articles/article_teaser.html:24
-#: apps/medialibrary/templates/medialibrary/media_detail_header.html:25
+#: apps/articles/templates/articles/article_detail.html:72
+#: apps/articles/templates/articles/article_teaser.html:25
+#: apps/medialibrary/templates/medialibrary/document_teaser.html:13
+#: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:13
+#: apps/medialibrary/templates/medialibrary/media_detail_header.html:27
+#: apps/medialibrary/templates/medialibrary/movieclip_teaser.html:13
+#: apps/medialibrary/templates/medialibrary/picture_teaser.html:12
+#: apps/medialibrary/templates/medialibrary/regularfile_teaser.html:13
+#: apps/medialibrary/templates/medialibrary/soundtrack_teaser.html:10
+#: apps/staticpages/templates/staticpages/staticpage_teaser.html:10
 #: templates/comments/list.html:9
 msgid "By"
 msgstr "Por"
 
-#: apps/articles/templates/articles/article_detail.html:96
+#: apps/articles/templates/articles/article_detail.html:111
 msgid "Date"
 msgstr "Fecha"
 
-#: apps/articles/templates/articles/article_detail.html:97
+#: apps/articles/templates/articles/article_detail.html:112
 msgid "Source"
 msgstr "Fuente"
 
-#: apps/articles/templates/articles/article_detail.html:120
+#: apps/articles/templates/articles/article_detail.html:135
 msgid "Share in your social networks"
 msgstr "Compartir en redes sociales"
 
-#: apps/articles/templates/articles/article_teaser.html:20
+#: apps/articles/templates/articles/article_teaser.html:21
 #: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:20
 msgid "More"
 msgstr "Más"
@@ -663,6 +681,7 @@ msgstr "contenidos externos"
 
 #: apps/medialibrary/templates/medialibrary/document_detail.html:16
 #: apps/medialibrary/templates/medialibrary/media_player.html:17
+#: apps/medialibrary/templates/medialibrary/regularfile_detail.html:16
 msgid "download file"
 msgstr "descargar archivo"
 
@@ -721,31 +740,35 @@ msgstr "Descrición"
 msgid "Extra info"
 msgstr "Información extra"
 
-#: core/collections/admin.py:130
+#: core/collections/admin.py:138
 msgid "Collection"
 msgstr "Colección"
 
-#: core/collections/admin.py:132
+#: core/collections/admin.py:140
 msgid "Category"
 msgstr "Categoría"
 
-#: core/collections/frontend_views.py:39
+#: core/collections/frontend_views.py:38
 msgid "list of root items for the selected Category"
 msgstr "lista de items raíz para la Categoría seleccionada"
 
-#: core/collections/frontend_views.py:64
+#: core/collections/frontend_views.py:63
 msgid "teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:111
+#: core/collections/frontend_views.py:110
+msgid "Labeled icon list of Category members"
+msgstr "lista de iconos con nombre de los miembros de una Categoría"
+
+#: core/collections/frontend_views.py:120
 msgid "simplified teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:130
+#: core/collections/frontend_views.py:139
 msgid "teaser list of the root Categories of a Collection"
 msgstr "lista de resúmenes de las Categorías raíz de una Colección"
 
-#: core/collections/frontend_views.py:150
+#: core/collections/frontend_views.py:159
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
@@ -784,6 +807,10 @@ msgstr "Categorización"
 #: core/collections/models.py:156
 msgid "categorizations"
 msgstr "Categorizaciones"
+
+#: core/collections/templates/collections/categories_navigation_block.html:4
+msgid "Categories"
+msgstr "Categorías"
 
 #: core/frontend/__init__.py:148
 #, python-format
@@ -932,20 +959,20 @@ msgstr "Gracias por su comentario!"
 msgid "Breadcrumb"
 msgstr "Profundidad de navegación"
 
-#: templates/cyclope/pagination_block.html:7
+#: templates/cyclope/pagination_block.html:8
 msgid "previous"
 msgstr "anterior"
 
-#: templates/cyclope/pagination_block.html:11
+#: templates/cyclope/pagination_block.html:12
 msgid "Page"
 msgstr "Página"
 
-#: templates/cyclope/pagination_block.html:11
+#: templates/cyclope/pagination_block.html:12
 #: templates/cyclope/themes/neutrona/base.html:42
 msgid "of"
 msgstr "de"
 
-#: templates/cyclope/pagination_block.html:15
+#: templates/cyclope/pagination_block.html:16
 msgid "next"
 msgstr "siguiente"
 
@@ -1175,6 +1202,10 @@ msgstr "Resultados"
 #: templates/search/search.html:25
 msgid "No results found."
 msgstr "No se encontró ningún resultado"
+
+#, fuzzy
+#~ msgid "Categories for this"
+#~ msgstr "categorías"
 
 #~ msgid "category map"
 #~ msgstr "mapeo de categoría"

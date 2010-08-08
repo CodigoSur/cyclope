@@ -308,6 +308,10 @@ class BaseContent(models.Model):
     def get_object_name(cls):
         return cls._meta.object_name.lower()
 
+    @classmethod
+    def get_verbose_name(cls):
+        return cls._meta.verbose_name
+
     def __unicode__(self):
         return self.name
 

@@ -31,9 +31,11 @@ from django.conf import settings as django_settings
 from django.utils.translation import ugettext as _
 from django.contrib import admin
 from registration.views import register
+from haystack.views import SearchView, search_view_factory
 from cyclope.forms import UserProfileForm
 from cyclope.core.captcha_contact_form.forms import  \
                                        AdminSettingsContactFormWithCaptcha
+import cyclope.settings as cyc_settings
 
 urlpatterns = patterns('',
     (r'^admin/filebrowser/', include('filebrowser.urls')),
@@ -58,7 +60,10 @@ urlpatterns = patterns('',
     url(r'^contact/$', 'contact_form.views.contact_form',
         {'form_class': AdminSettingsContactFormWithCaptcha},
         name='contact_form'),
-    (r'^search/', include('haystack.urls')),
+    url(r'^search/', search_view_factory(
+        view_class=SearchView,
+        results_per_page=cyc_settings.CYCLOPE_PAGINATION['TEASER'],
+    ), name='haystack_search'),
     (r'^contact/', include('contact_form.urls')),
 )
 
