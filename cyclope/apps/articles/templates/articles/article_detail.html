@@ -12,7 +12,11 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
 <div class="article detail">
   {% include 'collections/categories_navigation_block.html' %}
-  <span class="tags">{% trans "Tags" %}: {{ article.tags }}</span>
+
+  {% if article.tags %}
+    <span class="tags">{% trans "Tags" %}: {{ article.tags }}</span>
+  {% endif %}
+
  {% get_comment_count for article as comment_count %}
 
   {% if article.pretitle %}
