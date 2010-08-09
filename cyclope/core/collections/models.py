@@ -105,6 +105,19 @@ class Category(models.Model):
             return '%s/View/%s'\
                     % (self._meta.object_name.lower(), view_name)
 
+    def save(self):
+
+        # If is not a new Category and the Collection is changed, we move all
+        # childrens to the new Collection.
+        if self.pk is not None:
+            old_category = Category.objects.get(pk=self.pk)
+            if old_category.collection != self.collection:
+                for child in self.get_descendants():
+                    child.collection = self.collection
+                    child.save()
+
+        super(Category, self).save()
+
     class Meta:
         unique_together = ('collection', 'name')
         verbose_name = _('category')

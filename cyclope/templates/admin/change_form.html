@@ -160,6 +160,20 @@ $(function() {
 });
 </script>
 
+{% comment %} CYCLOPE: Change parent for Category when collection is changed {% endcomment %}
+
+<script type="text/javascript">
+$(function() {
+  $("#id_parent").chainedSelect({
+        parent: '#id_collection',
+        url: '/{{CYCLOPE_PREFIX}}collection_categories_json',
+        value: 'category_id',
+        label: 'category_name'
+    });
+
+});
+</script>
+
 {% comment %} CYCLOPE: chainedSelect for RelatedContent {% endcomment %}
 
 <script type="text/javascript">
