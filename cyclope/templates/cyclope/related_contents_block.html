@@ -1,0 +1,20 @@
+{% load comments i18n cyclope_utils %}
+  {% if content_relations %}
+  {% regroup content_relations by other_type as relations %}
+  <div class="related_contents">
+    <ul>
+    {% for relation in relations %}
+      <li class='related_type'> {{ relation.grouper }}
+        <ul>
+        {% for rel in relation.list %}
+        {% alias rel.other_object as 'content' %}
+        <li class='related_content {{ content.get_object_name }}'>
+          <a href="{{ content.get_absolute_url }}">{{ content.name }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
