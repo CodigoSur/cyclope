@@ -256,13 +256,15 @@ class CyclopeSite(object):
             menu_item = MenuItem.objects.get(id = id_menu_item)
             descendants = menu_item.get_descendants()
 
-        menu_items =  MenuItem.objects.filter(menu = id_menu)
-
         choices = [{'object_id': '', 'verbose_name': '------'}]
-        choices.extend([ {'object_id': item.id,
-                        'verbose_name': item.name}
-                       for item in menu_items if item.id != id_menu_item and
-                                                 item not in descendants])
+
+        if not id_menu == '':
+            menu_items =  MenuItem.objects.filter(menu = id_menu)
+
+            choices.extend([ {'object_id': item.id,
+                            'verbose_name': u'%s %s' % ('---' * item.level, item.name)}
+                           for item in menu_items if item.id != id_menu_item and
+                                                     item not in descendants])
         json_data = simplejson.dumps(choices)
         return HttpResponse(json_data, mimetype='application/json')
 
