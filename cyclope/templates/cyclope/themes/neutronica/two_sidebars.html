@@ -1,0 +1,22 @@
+{% extends CYCLOPE_THEME_BASE_TEMPLATE %}
+
+{% load layout %}
+
+{% block body_class %}two_sidebars{% endblock %}
+
+{% block page_content %}
+
+<div id="right_sidebar_container">
+  <div class="top"></div>
+  <div class="box">
+    {% region 'right_sidebar'%}
+  </div>
+  <div class="bottom"></div>
+</div>
+
+<div id="content_container">
+    {% region 'before_content' %}
+    {% block content %}{% endblock %}
+    {% region 'after_content' %}
+</div>
+{% endblock %}
