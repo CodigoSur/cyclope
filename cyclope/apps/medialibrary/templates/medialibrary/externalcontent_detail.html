@@ -17,15 +17,18 @@
   </a>
   {% endif %}
 
-  <span class="download_link">
+  <div><span class="download_link">
     <a href="{{ media.content_url }}" {% if media.new_window %}target="_blank"{% endif%}>
     {% trans "Open external content"%} {% if media.new_window %}{% trans " (in new window)"%}{% endif%}
     </a>
-  </span>
-  <span class="text">{{ media.description|safe }}</span>
+  </span></div>
+  <div><span class="html-text">{{ media.description|safe }}</span></div>
+
+  {% include 'medialibrary/media_detail_footer.html' %}
 
   {% include 'cyclope/related_contents_block.html' %}
 
+  <hr>
 
   <!--COMENTARIOS -->
   {% include 'comments/comments_block.html' %}

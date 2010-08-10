@@ -8,7 +8,7 @@ When showing the StaticPage as the main content of the view, the host_template i
 
 {% block content %}
 
-<div class="staticpage detail">
+<div class="content-view staticpage detail staticpage-detail">
     {% if CYCLOPE_STATICPAGE_TEXT_STYLE == 'raw' or CYCLOPE_STATICPAGE_TEXT_STYLE == 'wysiwyg'%}
       {{ staticpage.text|safe }}
     {% else %}
@@ -19,6 +19,7 @@ When showing the StaticPage as the main content of the view, the host_template i
           {{ staticpage.text|markdown }}
           {% endif %}
         {% endif %}
-    {% endif %}</div>
+    {% endif %}
+</div>
 
 {% endblock content%}

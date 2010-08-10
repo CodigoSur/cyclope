@@ -92,7 +92,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 -->
           <!-- /descargas -->
 
-  <div><span class="text">
+  <div><span class="html-text">
     {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'raw' or CYCLOPE_ARTICLE_TEXT_STYLE == 'wysiwyg'%}
       {{ article.text|safe }}
     {% else %}
@@ -146,6 +146,7 @@ TODO(nicoechaniz): uncomment and fix if related articles are implemented
 
             <div class="clear"></div>
 
+  <hr>
 
 <!--COMENTARIOS -->
   {% include 'comments/comments_block.html' %}

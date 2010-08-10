@@ -284,7 +284,7 @@ img {
  */
 hr {
   height: 1px;
-  border: 1px solid #666;
+  border: 1px solid gray;
 }
 
 /*
@@ -313,13 +313,13 @@ fieldset {
 #content_container {
 }
 
-#right_sidebar, #left_sidebar, #footer {
+#right_sidebar, #left_sidebar, #footer_container {
  font-size: 0.875em; /* 16px X 0.875em = 14px */
  line-height: 1.5em;
 }
 
 #footer_separator {
- margin-bottom: 2em;
+ margin-bottom: 3em;
 }
 
 
@@ -344,7 +344,8 @@ fieldset {
  margin-top: 1em;
 }
 
-.content-view div.first {
+.content-view div.first, 
+.content-view div:first-child {
   margin-top: 0;
 }
 
@@ -368,11 +369,16 @@ fieldset {
 .content-view .tools,
 .content-view .author,
 .content-view .source,
+.content-view .download_link,
 .content-view .socialnetworks {
  font-size: 0.75em; /* 16px X 0.75em = 12px */
 }
 
 /* misc html inside .content-view */
+
+.content-view .download_link {
+ font-weight: bold;
+}
 
 .content-view .pretitle-container {
  margin-bottom: 0;
@@ -417,18 +423,23 @@ fieldset {
 
 /* standarize html inside text */
 
-.content-view .text {
+/* NOTA: excepto por static-pages el resto de las vistas de contenido 
+   debe tener su contenido html dentro en la clase "html-text" 
+   para controlar y acotar el efecto del html que pueda introducir el usuario
+*/
+
+.content-view .html-text, {
 }
 
-.content-view .text h1
-.content-view .text h2
-.content-view .text h3 {
+.content-view .html-text h1,
+.content-view .html-text h2,
+.content-view .html-text h3 {
  font-size:  0.9375em ; /* 15px */
 }
 
-.content-view .text h4
-.content-view .text h5
-.content-view .text h6 {
+.content-view .html-text h4,
+.content-view .html-text h5,
+.content-view .html-text h6 {
  font-size: 0.875em; /* 16px X 0.875em = 14px */
 }
 
@@ -437,6 +448,16 @@ fieldset {
 .content-view img.teaser_icon {
  float: left;
  margin-right: 1em;
+}
+
+.content-view .detail_picture img {
+ width: 100%;
+}
+
+/* comments & user_input separator */
+
+.content-view hr {
+ margin: 1em 0 2em;
 }
 
 /* comments & user_input form */
@@ -491,9 +512,15 @@ fieldset {
 }
 
 
-/* ### vistas ### */
+/* ### ? ### */
 
 .picture .type_icon{
- position
+}
 
+
+
+/* ##### footer #####*/
+
+#footer_container {
+ text-align: center;
 }

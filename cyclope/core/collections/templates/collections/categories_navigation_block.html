@@ -1,6 +1,6 @@
 {% load i18n cyclope_utils %}
 {% if current_object.categories.values %}
-<span class="categories">
+<div><span class="categories">
     {% trans "Categories" %}:
     <ul>
         {% for categorization in current_object.categories.all %}
@@ -12,5 +12,5 @@
             {% endif %}
         {% endfor %}
     </ul>
-</span>
+</span></div>
 {% endif %}

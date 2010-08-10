@@ -1,10 +1,5 @@
 {% load i18n comments %}
 
-  {% include 'collections/categories_navigation_block.html' %}
-
-  {% if media.tags %}
-  <span class="tags">{% trans "Tags" %}: {{ media.tags }}</span>
-  {% endif %}
 
   <h1 class="title">{{ current_object.name }}</h1>
 
@@ -23,8 +18,11 @@
 
   <!-- author -->
   {% if current_object.author %}
-  <span id="author">
+  <div><span id="author">
     <span class="author">{% trans "By"%} {{ current_object.author }}</span>
-  </span>
+  </span></div>
   {% endif %}
   <!-- /autor -->
+
+
+

@@ -10,10 +10,16 @@
 
   {% include 'medialibrary/media_detail_header.html' %}
 
-  <img src="{% version media.image.path 'big' %}"/>
-  <span class="text">{{ media.description|safe }}</span>
+  <div class="detail_picture"><img src="{% version media.image.path 'big' %}"/></div>
+
+  <div><span class="html-text">{{ media.description|safe }}</span></div>
+
+  {% include 'medialibrary/media_detail_footer.html' %}
 
   {% include 'cyclope/related_contents_block.html' %}
+
+  <hr>
+
   <!--COMENTARIOS -->
   {% include 'comments/comments_block.html' %}
 
