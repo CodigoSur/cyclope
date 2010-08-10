@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-08 19:42-0300\n"
+"POT-Creation-Date: 2010-08-09 21:19-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,7 @@ msgstr "Biblioteca Multimedia"
 msgid "Authors and Sources"
 msgstr "Autores y Fuentes"
 
-#: dashboard.py:138 apps/articles/templates/articles/article_detail.html:36
+#: dashboard.py:138 apps/articles/templates/articles/article_detail.html:40
 msgid "Comments"
 msgstr "Comentarios"
 
@@ -193,17 +193,18 @@ msgstr "Código de seguridad"
 msgid "Your avatar image is too big"
 msgstr "La imagen enviada es demasiado grande"
 
-#: frontend_views.py:40
-msgid "navigation breadcrumb"
-msgstr "profundidad de navegación"
-
-#: frontend_views.py:58
+#: frontend_views.py:54
 msgid "list of root items for the selected Menu"
 msgstr "lista de items raíz para el Menú seleccionado"
 
-#: frontend_views.py:75
+#: frontend_views.py:71
 msgid "flat list of all items for the selected Menu"
 msgstr "lista sin jerarquía de los items del Menú"
+
+#: frontend_views.py:103
+#, fuzzy
+msgid "list view of sub-items for the selected menu item"
+msgstr "lista de items raíz para el Menú seleccionado"
 
 #: models.py:55
 msgid "templating theme"
@@ -321,7 +322,7 @@ msgstr "plantilla para este esquema"
 msgid "layouts"
 msgstr "esquemas"
 
-#: models.py:239 models.py:244 core/collections/models.py:143
+#: models.py:239 models.py:244 core/collections/models.py:156
 msgid "content type"
 msgstr "tipo de contenido"
 
@@ -429,7 +430,7 @@ msgstr "apagado"
 msgid "Lookup"
 msgstr "Buscar"
 
-#: apps/articles/admin.py:49 apps/staticpages/admin.py:39
+#: apps/articles/admin.py:49 apps/staticpages/admin.py:40
 msgid "Text"
 msgstr "Texto"
 
@@ -519,7 +520,7 @@ msgstr "archivo"
 msgid "downloads"
 msgstr "bajadas"
 
-#: apps/articles/templates/articles/article_detail.html:15
+#: apps/articles/templates/articles/article_detail.html:17
 #: apps/articles/templates/articles/article_teaser.html:30
 #: apps/medialibrary/templates/medialibrary/document_teaser.html:18
 #: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:18
@@ -532,15 +533,15 @@ msgstr "bajadas"
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: apps/articles/templates/articles/article_detail.html:26
+#: apps/articles/templates/articles/article_detail.html:30
 msgid "Print"
 msgstr "Imprimir"
 
-#: apps/articles/templates/articles/article_detail.html:29
+#: apps/articles/templates/articles/article_detail.html:33
 msgid "Share"
 msgstr "Compartir"
 
-#: apps/articles/templates/articles/article_detail.html:72
+#: apps/articles/templates/articles/article_detail.html:76
 #: apps/articles/templates/articles/article_teaser.html:25
 #: apps/medialibrary/templates/medialibrary/document_teaser.html:13
 #: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:13
@@ -554,15 +555,15 @@ msgstr "Compartir"
 msgid "By"
 msgstr "Por"
 
-#: apps/articles/templates/articles/article_detail.html:111
+#: apps/articles/templates/articles/article_detail.html:115
 msgid "Date"
 msgstr "Fecha"
 
-#: apps/articles/templates/articles/article_detail.html:112
+#: apps/articles/templates/articles/article_detail.html:116
 msgid "Source"
 msgstr "Fuente"
 
-#: apps/articles/templates/articles/article_detail.html:135
+#: apps/articles/templates/articles/article_detail.html:139
 msgid "Share in your social networks"
 msgstr "Compartir en redes sociales"
 
@@ -699,7 +700,7 @@ msgstr " (en ventana nueva)"
 msgid "full screen view (new window)"
 msgstr "pantalla completa (en ventana nueva)"
 
-#: apps/staticpages/admin.py:35
+#: apps/staticpages/admin.py:36
 msgid "Menu items"
 msgstr "Items de menú"
 
@@ -727,8 +728,8 @@ msgstr "Sitio web o Blog"
 msgid "All"
 msgstr "Todos"
 
-#: core/collections/admin.py:94 core/collections/models.py:111
-#: core/collections/models.py:164
+#: core/collections/admin.py:94 core/collections/models.py:124
+#: core/collections/models.py:177
 msgid "categories"
 msgstr "categorías"
 
@@ -796,15 +797,15 @@ msgstr "categorias de colecciones"
 msgid "active"
 msgstr "activo"
 
-#: core/collections/models.py:110 core/collections/models.py:140
+#: core/collections/models.py:123 core/collections/models.py:153
 msgid "category"
 msgstr "categoría"
 
-#: core/collections/models.py:155
+#: core/collections/models.py:168
 msgid "categorization"
 msgstr "Categorización"
 
-#: core/collections/models.py:156
+#: core/collections/models.py:169
 msgid "categorizations"
 msgstr "Categorizaciones"
 
@@ -846,19 +847,19 @@ msgstr "Administración de Cyclope"
 msgid "Home"
 msgstr "Inicio"
 
-#: templates/admin/change_form.html:24
+#: templates/admin/change_form.html:23
 msgid "Add"
 msgstr "Agregar"
 
-#: templates/admin/change_form.html:31
+#: templates/admin/change_form.html:30
 msgid "History"
 msgstr "Historial"
 
-#: templates/admin/change_form.html:32
+#: templates/admin/change_form.html:31
 msgid "View on site"
 msgstr "Ver en el sitio"
 
-#: templates/admin/change_form.html:42 templates/admin/change_list.html:76
+#: templates/admin/change_form.html:41 templates/admin/change_list.html:76
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] "Por favor corrija el error detallado"
@@ -1202,6 +1203,9 @@ msgstr "Resultados"
 #: templates/search/search.html:25
 msgid "No results found."
 msgstr "No se encontró ningún resultado"
+
+#~ msgid "navigation breadcrumb"
+#~ msgstr "profundidad de navegación"
 
 #, fuzzy
 #~ msgid "Categories for this"

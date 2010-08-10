@@ -23,11 +23,12 @@
 from django.contrib import admin
 
 from cyclope.core.collections.admin import CollectibleAdmin
+from cyclope.admin import BaseContentAdmin
 
 from models import *
 
-class MediaAdmin(CollectibleAdmin):
-    pass
+class MediaAdmin(CollectibleAdmin, BaseContentAdmin):
+    inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines
 
 admin.site.register(Picture, MediaAdmin)
 admin.site.register(SoundTrack, MediaAdmin)

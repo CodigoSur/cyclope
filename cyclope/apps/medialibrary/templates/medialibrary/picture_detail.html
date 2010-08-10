@@ -13,6 +13,7 @@
   <img src="{% version media.image.path 'big' %}"/>
   <span class="text">{{ media.description|safe }}</span>
 
+  {% include 'cyclope/related_contents_block.html' %}
   <!--COMENTARIOS -->
   {% include 'comments/comments_block.html' %}
 

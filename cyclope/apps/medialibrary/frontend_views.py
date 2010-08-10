@@ -31,7 +31,11 @@ class MediaDetail(frontend.FrontendView):
     is_default = True
 
     def get_http_response(self, request, slug=None, *args, **kwargs):
-        return views.object_detail(request, slug=slug,
+
+        content_object = self.params['queryset'].get(slug=slug)
+        context = {'content_relations':
+                   content_object.related_contents.all().order_by('other_type')}
+        return views.object_detail(request, slug=slug, extra_context = context,
                                    inline=False, *args, **kwargs)
 
     def get_string_response(self, request, content_object=None, *args, **kwargs):
