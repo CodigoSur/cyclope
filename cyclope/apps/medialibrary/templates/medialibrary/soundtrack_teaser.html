@@ -1,25 +1,27 @@
 {% load i18n tagging_tags fb_versions %}
 
   <div class="content-view soundtrack teaser soundtrack-teaser">
-     <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/audio.png" />
-     <h2 class="title"><a href="{% url soundtrack-detail soundtrack.slug %}">{{ soundtrack.name }}</a></h2>
+
+    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/audio.png" /><a href="{% url soundtrack-detail soundtrack.slug %}">{{ soundtrack.name }}</a></h2>
+
+    {% if soundtrack.author %}
+      <div class="teaser_icon_container"><span class="author">{% trans "By" %} {{ soundtrack.author }}</span></div>
+    {% endif %}
+
     {% if soundtrack.description %}
       <p class="description">{{ soundtrack.description }}</p>
     {% endif %}
-    {% if soundtrack.author %}
-      <span class="author">{% trans "By" %} {{ soundtrack.author }}</span>
-    {% endif %}
+
     {% if soundtrack.tags %}
-        <span class="tags">
-          <h3>
+        <div><span class="tags">
           {% trans "Tags" %}:
           {% tags_for_object soundtrack as soundtrack_tags %}
           {% for tag in soundtrack_tags %}
             <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
             {{tag.name}}{% if not forloop.last%},{% endif%}
           {% endfor %}
-          </h3>
-        </span>
+        </span></div>
     {% endif %}
+
     <div class="clear"></div>
   </div>

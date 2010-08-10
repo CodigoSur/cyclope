@@ -1,15 +1,13 @@
 {% load i18n tagging_tags fb_versions cyclope_utils %}
 
   <div class="content-view externalcontent teaser externalcontent-teaser">
-    <h2 class="title">
-      <a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
-        {{ externalcontent.name|truncatechars:40 }}
-      </a>
-    </h2>
+
+    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/external.png" /><a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>{{ externalcontent.name|truncatechars:40 }}</a></h2>
+
     {% if externalcontent.image %}
-      <a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
+      <div class="teaser_icon_container"><a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
         <img src="{% version externalcontent.image.path 'small' %}" border="0"/>
-    </a>
+      </a></div>
     {% endif %}
 
     {% if externalcontent.description %}
@@ -25,10 +23,11 @@
 
     {% if externalcontent.skip_detail %}
     <p>
-      <br/>
       <a href="{{ externalcontent.content_url }}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
       {% trans "Open external content"%} {% if externalcontent.new_window %}{% trans " (in new window)"%}{% endif%}
       </a>
     </p>
+
     {% endif %}
+
   </div>

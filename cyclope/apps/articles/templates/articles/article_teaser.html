@@ -1,34 +1,39 @@
 {% load i18n tagging_tags fb_versions %}
 
   <div class="content-view article teaser article-teaser">
+
     <div class="pretitle-container first">
-    {% if  article.pretitle and not simplified_view %}
-    <span class="pretitle">{{ article.pretitle }} | </span>
-    {% endif%}
-    {% if article.date %}
-    <span class="date">{{ article.date }}</span>
-    {% endif %}
-    </div>
-     <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" />
-     <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name }}</a></h2>
-      {% if article.pictures and not simplified_view %}
-      <a href="{% url article-detail article.slug %}">
-        <img class="teaser_icon" src="{% version article.pictures.0.image.path 'small' %}" width="135" border="0"/>
-      </a>
+      {% if  article.pretitle and not simplified_view %}
+      <span class="pretitle">{{ article.pretitle }} | </span>
+      {% endif%}
+      {% if article.date %}
+      <span class="date">{{ article.date }}</span>
       {% endif %}
+    </div>
+
+    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" /><a href="{% url article-detail article.slug %}">{{ article.name }}</a></h2>
+
+    {% if article.pictures and not simplified_view %}
+      <div class="teaser_icon_container"><a href="{% url article-detail article.slug %}">
+        <img class="teaser_icon" src="{% version article.pictures.0.image.path 'small' %}" width="135" border="0"/>
+      </a></div>
+    {% endif %}
+
     {% if not simplified_view %}
         {% if article.author %}
         <div><span class="author">{% trans "By" %} {{ article.author }}</span></div>
         {% endif %}
     {% endif %}
+
     <div class="summary">
       {% if article.summary %}
         {{ article.summary }}
       {% else %}
-        <span class="text">{{ article.text|truncatewords:40|safe }}</span>
+        <span class="html-text">{{ article.text|truncatewords:40|safe }}</span>
       {% endif %}
       <a href="{% url article-detail article.slug %}"> {% trans "More" %}</a>
     </div>
+
     {% if not simplified_view %}
         {% if article.tags %}
         <div><span class="tags">
@@ -43,4 +48,5 @@
         {% endif %}
     <div class="clear"></div>
     {% endif %}
+
   </div>

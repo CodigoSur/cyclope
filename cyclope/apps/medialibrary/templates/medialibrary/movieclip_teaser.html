@@ -1,28 +1,31 @@
 {% load i18n tagging_tags fb_versions %}
 
   <div class="content-view movieclip teaser">
-     <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/video.png" />
-     <h2 class="title"><a href="{% url movieclip-detail movieclip.slug %}">{{ movieclip.name }}</a></h2>
-    {% if movieclip.image %}
-      <img class="teaser_icon" src="{% version movieclip.image.path 'thumbnail' %}"/>
-    {% endif %}
-    {% if movieclip.description %}
-      <p class="description">{{ movieclip.description }}</p>
-    {% endif %}
-    {% if movieclip.author %}
-      <span class="author">{% trans "By" %} {{ movieclip.author }}</span>
-    {% endif %}
-    {% if movieclip.tags %}
-        <span class="tags">
-          <h3>
-          {% trans "Tags" %}:
-          {% tags_for_object movieclip as movieclip_tags %}
-          {% for tag in movieclip_tags %}
-            <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
-            {{tag.name}}{% if not forloop.last%},{% endif%}
-          {% endfor %}
-          </h3>
-        </span>
-    {% endif %}
+
+     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/video.png" /><a href="{% url movieclip-detail movieclip.slug %}">{{ movieclip.name }}</a></h2>
+
+     {% if movieclip.image %}
+       <div class="teaser_icon_container"><img class="teaser_icon" src="{% version movieclip.image.path 'thumbnail' %}"/></div>
+     {% endif %}
+
+     {% if movieclip.author %}
+       <div><span class="author">{% trans "By" %} {{ movieclip.author }}</span></div>
+     {% endif %}
+
+     {% if movieclip.description %}
+       <p class="description">{{ movieclip.description }}</p>
+     {% endif %}
+
+     {% if movieclip.tags %}
+         <div><span class="tags">
+           {% trans "Tags" %}:
+           {% tags_for_object movieclip as movieclip_tags %}
+           {% for tag in movieclip_tags %}
+             <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
+             {{tag.name}}{% if not forloop.last%},{% endif%}
+           {% endfor %}
+         </span></div>
+     {% endif %}
+
     <div class="clear"></div>
   </div>

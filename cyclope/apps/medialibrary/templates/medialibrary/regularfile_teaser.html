@@ -1,28 +1,31 @@
 {% load i18n tagging_tags fb_versions %}
 
-  <div class="content-view regularfile teaser">
-     <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/regularfile.png" />
-     <h2 class="title"><a href="{% url regularfile-detail regularfile.slug %}">{{ regularfile.name }}</a></h2>
+  <div class="content-view regularfile teaser regularfile-teaser">
+
+    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/regularfile.png" /><a href="{% url regularfile-detail regularfile.slug %}">{{ regularfile.name }}</a></h2>
+
     {% if regularfile.image %}
-      <img class="teaser_icon" src="{% version regularfile.image.path 'thumbnail' %}"/>
+      <div class="teaser_icon_container"><img class="teaser_icon" src="{% version regularfile.image.path 'thumbnail' %}"/></div>
     {% endif %}
+
+    {% if regularfile.author %}
+      <div><span class="author">{% trans "By" %} {{ regularfile.author }}</span></div>
+    {% endif %}
+
     {% if regularfile.description %}
       <p class="description">{{ regularfile.description }}</p>
     {% endif %}
-    {% if regularfile.author %}
-      <span class="author">{% trans "By" %} {{ regularfile.author }}</span>
-    {% endif %}
+
     {% if regularfile.tags %}
-        <span class="tags">
-          <h3>
+        <div><span class="tags">
           {% trans "Tags" %}:
           {% tags_for_object regularfile as regularfile_tags %}
           {% for tag in regularfile_tags %}
             <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
             {{tag.name}}{% if not forloop.last%},{% endif%}
           {% endfor %}
-          </h3>
-        </span>
+        </span></div>
     {% endif %}
+
     <div class="clear"></div>
   </div>
