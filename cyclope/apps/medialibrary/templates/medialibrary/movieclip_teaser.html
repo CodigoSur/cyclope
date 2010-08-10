@@ -1,6 +1,6 @@
 {% load i18n tagging_tags fb_versions %}
 
-  <div class="movieclip teaser">
+  <div class="content-view movieclip teaser">
      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/video.png" />
      <h2 class="title"><a href="{% url movieclip-detail movieclip.slug %}">{{ movieclip.name }}</a></h2>
     {% if movieclip.image %}

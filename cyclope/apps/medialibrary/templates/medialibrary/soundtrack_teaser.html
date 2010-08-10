@@ -1,6 +1,6 @@
 {% load i18n tagging_tags fb_versions %}
 
-  <div class="soundtrack teaser soundtrack-teaser">
+  <div class="content-view soundtrack teaser soundtrack-teaser">
      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/audio.png" />
      <h2 class="title"><a href="{% url soundtrack-detail soundtrack.slug %}">{{ soundtrack.name }}</a></h2>
     {% if soundtrack.description %}

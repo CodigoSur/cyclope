@@ -1,6 +1,6 @@
 {% load i18n tagging_tags fb_versions %}
 
-  <div class="document teaser">
+  <div class="content-view document teaser">
      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/document.png" />
      <h2 class="title"><a href="{% url document-detail document.slug %}">{{ document.name }}</a></h2>
     {% if document.image %}

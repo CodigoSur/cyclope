@@ -1,6 +1,6 @@
 {% load fb_versions %}
 
-  <div class="media labeled_icon externalcontent">
+  <div class="content-view media labeled_icon externalcontent">
       <a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
       {% if externalcontent.image %}
       <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/external.png"/>

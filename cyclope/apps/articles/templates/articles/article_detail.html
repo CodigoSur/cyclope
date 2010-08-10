@@ -10,7 +10,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
 {% alias article as 'current_object' %}
 
-<div class="article detail article-detail">
+<div class="content-view article detail article-detail">
 
  {% get_comment_count for article as comment_count %}
 
@@ -117,10 +117,24 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
     <div><span class="tags">{% trans "Tags" %}: {{ article.tags }}</span></div>
   {% endif %}
 
-  {% include 'cyclope/related_contents_block.html' %}
+	<!-- relacionadas -->
+<!--
+TODO(nicoechaniz): uncomment and fix if related articles are implemented
+           {if $articulo.relacionadas eq 'si'}
+          <div id="related">
+            <h6>Más información:</h6>
+            <ul>
+            {section name=bucle loop=$relacionadas}
+              <li> <a href="{$relacionadas[bucle].link}">{$relacionadas[bucle].titulo}</a></li>
+              {/section}
+            </ul>
+          </div>
+          {/if}
+-->
+              <!-- /relacionadas -->
 
 
-          <div class="clear"></div>
+	      <div class="clear"></div>
      <!-- redsocial -->
            <div id="socialnetworks" class="socialnetworks">{% trans "Share in your social networks"%}: 
 <a href="http://www.facebook.com" rel="nofollow" onclick="sbs_facebook(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/facebook.png" border="0" alt="Compartir en Facebook" title="Compartir en Facebook" height="24" width="24" /></a>

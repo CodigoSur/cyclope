@@ -322,96 +322,94 @@ fieldset {
  margin-bottom: 2em;
 }
 
-/* teaser standar styles */
+
+
+
+
+/* ##### .content-view ##### */
 
 .teaser {
   margin-bottom: 2em;
 }
 
-.teaser img.type_icon {
+.detail {
+}
+
+.content-view img.type_icon {
   float: left;
   margin-right: 0.5em;
 }
 
-.teaser > div{
+.content-view > div {
  margin-top: 1em;
 }
 
-.teaser div.first {
+.content-view div.first {
   margin-top: 0;
 }
 
-.teaser h2.title {
- padding-left: 47px;
-}
-
-/* articles */
-
-.article {
-}
-
- /* elements inside article */
-
-h1.title {  /* detail */
+.content-view h1.title {  /* detail & ...? */
  font-size: 2em; /* 16px X 2em = 32px */
  margin-top: 0;
 }
 
-h2.title {  /* teasers */
+.content-view h2.title { /* teaser */
+ padding-left: 47px;
  font-size: 1.5em; /* 16px X 1.5em = 24px */
  margin-top: 0;
 }
 
-.article .categories,
-.article .tags,
-.article .pretitle,
-.article .date,
-.article .tools,
-.article .author,
-.article .source,
-.article .socialnetworks {
+ /* .content-view elements inside */
+
+.content-view .categories,
+.content-view .tags,
+.content-view .pretitle,
+.content-view .date,
+.content-view .tools,
+.content-view .author,
+.content-view .source,
+.content-view .socialnetworks {
  font-size: 0.75em; /* 16px X 0.75em = 12px */
 }
 
-/* misc html inside article elements */
+/* misc html inside .content-view */
 
-.article .pretitle-container{
+.content-view .pretitle-container {
  margin-bottom: 0;
 }
 
-.article #gallery ul,
-.article .categories ul,
-.article .tools ul
-{
+.content-view #gallery ul,
+.content-view .categories ul,
+.content-view .tools ul {
  list-style-type: none;
  padding-left: 0;
 }
 
-.article .tools ul li,
-.article .categories ul,
-.article .categories ul li{
+.content-view .tools ul li,
+.content-view .categories ul,
+.content-view .categories ul li{
  display: inline;
  margin-right: 1em;
 }
 
-.article #gallery ul li p {
+.content-view #gallery ul li p {
  margin-top: 0; /* image description */
  font-size: 0.875em;
 }
 
-.article .socialnetworks {
+.content-view .socialnetworks {
  text-align: right;
 }
 
-.article .socialnetworks img {
+.content-view .socialnetworks img {
  vertical-align: middle;
 }
 
-.article .tags h3 {
+.content-view.tags h3 {
  font-size: 1em; 
 }
 
-.article-detail .summary
+.content-view .summary
 {
  font-size: 0.875em;
  font-weight: bold;
@@ -419,24 +417,24 @@ h2.title {  /* teasers */
 
 /* standarize html inside text */
 
-.article .text {
+.content-view .text {
 }
 
-.article .text h1, 
-.article .text h2, 
-.article .text h3 {
+.content-view .text h1
+.content-view .text h2
+.content-view .text h3 {
  font-size:  0.9375em ; /* 15px */
 }
 
-.article .text h4, 
-.article .text h5, 
-.article .text h6 {
+.content-view .text h4
+.content-view .text h5
+.content-view .text h6 {
  font-size: 0.875em; /* 16px X 0.875em = 14px */
 }
 
 /* images */
 
-.article img.teaser_icon {
+.content-view img.teaser_icon {
  float: left;
  margin-right: 1em;
 }

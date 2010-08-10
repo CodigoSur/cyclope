@@ -7,14 +7,14 @@
 {% alias media as 'current_object' %}
 {% alias media.video as 'media_file' %}
 
-<div class="movieclip media detail">
+<div class="content-view movieclip media detail">
 
   {% include 'medialibrary/media_detail_header.html' %}
 
   {% assign player_height '320' %}
   {% include 'medialibrary/media_player.html' %}
 
-  <span class="text">{{ media.description|safe }}</span>
+  <div><span class="text">{{ media.description|safe }}</span></div>
 
   {% include 'cyclope/related_contents_block.html' %}
 

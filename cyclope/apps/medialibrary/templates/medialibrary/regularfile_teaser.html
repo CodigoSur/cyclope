@@ -1,6 +1,6 @@
 {% load i18n tagging_tags fb_versions %}
 
-  <div class="regularfile teaser">
+  <div class="content-view regularfile teaser">
      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/regularfile.png" />
      <h2 class="title"><a href="{% url regularfile-detail regularfile.slug %}">{{ regularfile.name }}</a></h2>
     {% if regularfile.image %}

@@ -1,6 +1,6 @@
 {% load i18n tagging_tags fb_versions %}
 
-  <div class="flashmovie teaser">
+  <div class="content-view flashmovie teaser">
      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/flash.png" />
      <h2 class="title"><a href="{% url flashmovie-detail flashmovie.slug %}">{{ flashmovie.name }}</a></h2>
     {% if flashmovie.image %}
