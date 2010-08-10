@@ -12,18 +12,20 @@
         <img class="teaser_icon" src="{% version article.pictures.0.image.path 'small' %}" width="135" border="0"/>
       </a>
       {% endif %}
+    {% if not simplified_view %}
+        {% if article.author %}
+        <span class="author">{% trans "By" %} {{ article.author }}</span>
+        {% endif %}
+    {% endif %}
     <p class="summary">
       {% if article.summary %}
         {{ article.summary }}
       {% else %}
         {{ article.text|truncatewords:40|safe }}
       {% endif %}
-      <a href="{% url article-detail article.slug %}">{% trans "More" %}</a>
+      <a href="{% url article-detail article.slug %}"> {% trans "More" %}</a>
     </p>
     {% if not simplified_view %}
-        {% if article.author %}
-        <span class="author">{% trans "By" %} {{ article.author }}</span>
-        {% endif %}
         {% if article.tags %}
         <span class="tags">
           <h3>
