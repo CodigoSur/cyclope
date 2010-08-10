@@ -29,6 +29,7 @@ from models import *
 
 class MediaAdmin(CollectibleAdmin, BaseContentAdmin):
     inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines
+    search_fields = ('name', 'author', 'description', )
 
 admin.site.register(Picture, MediaAdmin)
 admin.site.register(SoundTrack, MediaAdmin)

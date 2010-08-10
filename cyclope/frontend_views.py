@@ -33,19 +33,6 @@ from cyclope.core import frontend
 from cyclope.models import Menu, MenuItem
 from cyclope import views
 
-#class SiteBreadcrumb(frontend.FrontendView):
-#    """Navigation breadcrumb
-#    """
-#    name='breadcrumb'
-#    verbose_name=_('navigation breadcrumb')
-#    is_default = True
-#    is_instance_view = False
-#
-#    def get_string_response(self, request, content_object=None, *args, **kwargs):
-#        pass
-#
-#frontend.site.register_view(Site, SiteBreadcrumb())
-
 
 class MenuRootItemsList(frontend.FrontendView):
     """A list view of the root MenuItems for a given Menu.
@@ -114,21 +101,6 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
 frontend.site.register_view(MenuItem, MenuItemChildrenOfCurrentItem())
 
 
-#class MenuHierarchicalItemsList(frontend.FrontendView):
-#    """A hierarchical list view of all the MenuItems for a given Menu.
-#    """
-#    name='hierarchical_items_list'
-#    verbose_name=_('hierarchical list of all items for the current Menu')
-#
-#    def get_string_response(self, request, content_object=None, *args, **kwargs):
-#        menu_items = MenuItem.tree.filter(menu=content_object, active=True)
-#        c = RequestContext(request, {'menu_items': menu_items})
-#        t = loader.get_template("cyclope/menu_flat_items_list.html")
-#        c['host_template'] = 'cyclope/inline_view.html'
-#        return t.render(c)
-#
-#frontend.site.register_view(Menu, MenuFlatItemsList())
-
 # TODO(nicoechaniz): refactor this view and CollectionCategoriesHierarchy which share most of their code.
 class MenuMenuItemsHierarchy(frontend.FrontendView):
     """A hierarchical list view of the menu items in a menu.
@@ -185,4 +157,3 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
             return [include]
 
 frontend.site.register_view(Menu, MenuMenuItemsHierarchy())
-

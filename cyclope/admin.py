@@ -110,6 +110,7 @@ admin.site.register(Image, ImageAdmin)
 
 class AuthorAdmin(admin.ModelAdmin):
     form = AuthorAdminForm
+    search_fields = ('name', 'origin', 'notes')
 
 admin.site.register(Author, AuthorAdmin)
 

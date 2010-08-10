@@ -59,6 +59,7 @@ class StaticPageAdminForm(forms.ModelForm):
 class StaticPageAdmin(CollectibleAdmin):
     # updates related menu_items information when a StaticPaget is saved
     form = StaticPageAdminForm
+    search_fields = ('name', 'text', )
 
     def save_model(self, request, obj, form, change):
         super(CollectibleAdmin, self).save_model(request, obj, form, change)
