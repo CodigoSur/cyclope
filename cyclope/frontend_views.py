@@ -33,22 +33,18 @@ from cyclope.core import frontend
 from cyclope.models import Menu, MenuItem
 from cyclope import views
 
-class SiteBreadcrumb(frontend.FrontendView):
-    """Navigation breadcrumb
-    """
-    name='breadcrumb'
-    verbose_name=_('navigation breadcrumb')
-    is_default = True
-    is_instance_view = False
-
-    def get_string_response(self, request, content_object=None, *args, **kwargs):
-        menu_items = MenuItem.tree.filter(menu=content_object, level=0)
-        c = RequestContext(request, {'menu_items': menu_items})
-        t = loader.get_template("cyclope/breadcrumb.html")
-        c['host_template'] = 'cyclope/inline_view.html'
-        return t.render(c)
-
-frontend.site.register_view(Site, SiteBreadcrumb())
+#class SiteBreadcrumb(frontend.FrontendView):
+#    """Navigation breadcrumb
+#    """
+#    name='breadcrumb'
+#    verbose_name=_('navigation breadcrumb')
+#    is_default = True
+#    is_instance_view = False
+#
+#    def get_string_response(self, request, content_object=None, *args, **kwargs):
+#        pass
+#
+#frontend.site.register_view(Site, SiteBreadcrumb())
 
 
 class MenuRootItemsList(frontend.FrontendView):
@@ -82,5 +78,41 @@ class MenuFlatItemsList(frontend.FrontendView):
         return t.render(c)
 
 frontend.site.register_view(Menu, MenuFlatItemsList())
+
+
+#class MenuHierarchicalItemsList(frontend.FrontendView):
+#    """A hierarchical list view of all the MenuItems for a given Menu.
+#    """
+#    name='hierarchical_items_list'
+#    verbose_name=_('hierarchical list of all items for the selected Menu')
+#
+#    def get_string_response(self, request, content_object=None, *args, **kwargs):
+#        menu_items = MenuItem.tree.filter(menu=content_object, active=True)
+#        c = RequestContext(request, {'menu_items': menu_items})
+#        t = loader.get_template("cyclope/menu_flat_items_list.html")
+#        c['host_template'] = 'cyclope/inline_view.html'
+#        return t.render(c)
+#
+#frontend.site.register_view(Menu, MenuFlatItemsList())
+
+
+class MenuItemDescendantsOfCurrentItem(frontend.FrontendView):
+    """List view of all the sub-items for the currently selected MenuItem
+    """
+    name='subitems_list'
+    verbose_name=_('list view of sub-items for the selected menu item')
+    is_default = True
+    is_instance_view = False
+
+    def get_string_response(self, request, *args, **kwargs):
+        is_instance_view = False
+        current_url = request.path_info[1:]
+        menu_items = MenuItem.tree.get(url=current_url).get_descendants()
+        c = RequestContext(request, {'menu_items': menu_items})
+        t = loader.get_template("cyclope/menu_flat_items_list.html")
+        c['host_template'] = 'cyclope/inline_view.html'
+        return t.render(c)
+
+frontend.site.register_view(MenuItem, MenuItemDescendantsOfCurrentItem())
 
 #############
