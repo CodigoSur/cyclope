@@ -1,6 +1,6 @@
 {% load i18n tagging_tags fb_versions cyclope_utils %}
 
-  <div class="externalcontent teaser">
+  <div class="externalcontent teaser externalcontent-teaser">
     <h2 class="title">
       <a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
         {{ externalcontent.name|truncatechars:40 }}

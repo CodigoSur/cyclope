@@ -10,17 +10,12 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
 {% alias article as 'current_object' %}
 
-<div class="article detail">
-  {% include 'collections/categories_navigation_block.html' %}
-
-  {% if article.tags %}
-    <span class="tags">{% trans "Tags" %}: {{ article.tags }}</span>
-  {% endif %}
+<div class="article detail article-detail">
 
  {% get_comment_count for article as comment_count %}
 
   {% if article.pretitle %}
-  <span class="pretitle">{{ article.pretitle }}</span>
+  <div class="pretitle-container"><span class="pretitle">{{ article.pretitle }}</span></div>
   {% endif %}
   <h1 class="title">{{ article.name }}</h1>
 
@@ -52,10 +47,10 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   <!-- /descripcion -->
 
   {% if article.pictures %}
-    <div id="gallery">
+  <div id="gallery">
     <ul>
       {% for picture in article.pictures %}
-      <li {% if not forloop.first %} style="display:none;" {% endif %}}>
+      <li {% if not forloop.first %} style="display:none;" {% endif %} >
         <a href="{% version picture.image.path 'medium' %}"  title="{{ picture.name }}">
           <img src="{% version picture.image.path 'small' %}" alt="{{ picture.name }}" />
         </a>
@@ -69,12 +64,12 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
   <!-- author -->
   {% if article.author %}
-  <span id="author">
+  <div id="author">
     {% if article.author.image %}
     <img src="" width="60"  />
     {% endif %}
     <span class="author">{% trans "By"%} {{ article.author }}</span>
-  </span>
+  </div>
   {% endif %}
   <!-- /autor -->
 
@@ -97,7 +92,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 -->
           <!-- /descargas -->
 
-  <span class="text">
+  <div><span class="text">
     {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'raw' or CYCLOPE_ARTICLE_TEXT_STYLE == 'wysiwyg'%}
       {{ article.text|safe }}
     {% else %}
@@ -109,20 +104,25 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
           {% endif %}
         {% endif %}
     {% endif %}
-  </span>
+  </span></div>
 
-  <span class="source">--<br>
+  <div><span class="source">--<br>
     {% trans "Date" %}: {{ article.date }}{% if article.source %} |
     {% trans "Source" %}: {article.source}{% endif %}
-  </span>
+  </span></div>
 
+  <div>{% include 'collections/categories_navigation_block.html' %}</div>
+
+  {% if article.tags %}
+    <div><span class="tags">{% trans "Tags" %}: {{ article.tags }}</span></div>
+  {% endif %}
 
   {% include 'cyclope/related_contents_block.html' %}
 
 
           <div class="clear"></div>
      <!-- redsocial -->
-           <div id="socialnetworks"><small>{% trans "Share in your social networks"%}:</small>
+           <div id="socialnetworks" class="socialnetworks">{% trans "Share in your social networks"%}: 
 <a href="http://www.facebook.com" rel="nofollow" onclick="sbs_facebook(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/facebook.png" border="0" alt="Compartir en Facebook" title="Compartir en Facebook" height="24" width="24" /></a>
 <a href="http://www.del.icio.us" rel="nofollow" onclick="sbs_delicious(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/delicious.png" border="0" alt="Compartir en Delicious" title="Compartir en Delicious" height="24" width="24" /></a>
 <a href="http://www.yahoo.com" rel="nofollow" onclick="sbs_yahoobm(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/yahoo.png" border="0" alt="Compartir en Yahoo" title="Compartir en Yahoo" height="24" width="24" /></a>

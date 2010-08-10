@@ -300,7 +300,15 @@ fieldset {
   padding: 0.5em;
 }
 
-/* cyclope font-size sections base */
+
+
+
+
+
+
+
+
+/* font-size sections base */
 
 #content_container {
 }
@@ -310,67 +318,184 @@ fieldset {
  line-height: 1.5em;
 }
 
-h1, 
-h2, 
-h3 {
- font-size:  0.9375em ; /* 15px */
-}
-
-h4, 
-h5, 
-h6 {
- font-size: 0.875em; /* 16px X 0.875em = 14px */
-}
-
-
 #footer_separator {
  margin-bottom: 2em;
+}
+
+/* teaser standar styles */
+
+.teaser {
+  margin-bottom: 2em;
+}
+
+.teaser img.type_icon {
+  float: left;
+  margin-right: 0.5em;
+}
+
+.teaser > div{
+ margin-top: 1em;
+}
+
+.teaser div.first {
+  margin-top: 0;
+}
+
+.teaser h2.title {
+ padding-left: 47px;
 }
 
 /* articles */
 
 .article {
-  margin-bottom: 2em;
 }
 
-/* TODO usar <span> para todos! */
-.article span.categories,
-.article span.tags,
-.article span.pretitle,
-.article span.date,
-.article div.tools,
-.article span.author,
-.article span.source,
-.article div#socialnetworks {
- font-size: 0.75em; /* 16px X 0.75em = 12px */
-}
+ /* elements inside article */
 
-/* TODO NO usar small! */
-.article div#socialnetworks small {
- font-size: 1em; 
-}
-
-/* TODO ? */
-.article span.tags h3 {
- font-size: 1em; 
-}
-
-/* solo aparece en detail! */
-.article span.text {
- /* ? */
-}
-
-/* titles summary etc */
-
-/* detail */
-h1.title {
+h1.title {  /* detail */
  font-size: 2em; /* 16px X 2em = 32px */
  margin-top: 0;
 }
 
-
-/* teasers */
-h2.title {
+h2.title {  /* teasers */
  font-size: 1.5em; /* 16px X 1.5em = 24px */
  margin-top: 0;
+}
+
+.article .categories,
+.article .tags,
+.article .pretitle,
+.article .date,
+.article .tools,
+.article .author,
+.article .source,
+.article .socialnetworks {
+ font-size: 0.75em; /* 16px X 0.75em = 12px */
+}
+
+/* misc html inside article elements */
+
+.article .pretitle-container{
+ margin-bottom: 0;
+}
+
+.article #gallery ul,
+.article .categories ul,
+.article .tools ul
+{
+ list-style-type: none;
+ padding-left: 0;
+}
+
+.article .tools ul li,
+.article .categories ul,
+.article .categories ul li{
+ display: inline;
+ margin-right: 1em;
+}
+
+.article #gallery ul li p {
+ margin-top: 0; /* image description */
+ font-size: 0.875em;
+}
+
+.article .socialnetworks {
+ text-align: right;
+}
+
+.article .socialnetworks img {
+ vertical-align: middle;
+}
+
+.article .tags h3 {
+ font-size: 1em; 
+}
+
+.article-detail .summary
+{
+ font-size: 0.875em;
+ font-weight: bold;
+}
+
+/* standarize html inside text */
+
+.article .text {
+}
+
+.article .text h1, 
+.article .text h2, 
+.article .text h3 {
+ font-size:  0.9375em ; /* 15px */
+}
+
+.article .text h4, 
+.article .text h5, 
+.article .text h6 {
+ font-size: 0.875em; /* 16px X 0.875em = 14px */
+}
+
+/* images */
+
+.article img.teaser_icon {
+ float: left;
+ margin-right: 1em;
+}
+
+/* comments & user_input form */
+
+.user_input {
+}
+
+.comment {
+}
+
+.comment .when_who {
+ font-size: 0.875em; /* 16px X 0.875em = 14px */
+}
+
+.comment p {
+ margin-left: 1em;
+ margin-top: 0;
+}
+
+.comment p br:first-child {
+ display: none; /* fix <br> */
+}
+
+.user_input .box-top {
+ margin-top: 1em;
+}
+
+.user_input box {
+}
+
+.user_input form{
+ padding: 1em 2em; 
+ border: 1px solid black; /* colors_and_borders */
+}
+
+.user_input img.captcha {
+ display: block;
+ margin: 1em 0;
+}
+
+.user_input label {
+ font-size: 0.875em;
+ display: block;
+}
+
+.user_input input,
+.user_input textarea,
+.user_input form > small {
+ display: block;
+ margin-left: 1em;
+ margin-bottom: 1em;
+}
+
+
+/* ### vistas ### */
+
+.picture .type_icon{
+ position
+
 }

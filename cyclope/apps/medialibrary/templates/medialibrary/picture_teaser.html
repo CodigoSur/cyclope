@@ -1,10 +1,10 @@
 {% load i18n tagging_tags fb_versions %}
 
-  <div class="picture teaser">
+  <div class="picture teaser picture-teaser">
      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/image.png"/>
      <h2 class="title"><a href="{% url picture-detail picture.slug %}">{{ picture.name }}</a></h2>
       <a href="{% url picture-detail picture.slug %}">
-        <img class="teaser_icon" src="{% version picture.image.path 'thumbnail' %}"/>
+        <img class="teaser_icon" src="{% version picture.image.path 'thumbnail' %}" border="0" />
       </a>
       {% if picture.description %}<p class="description">{{ picture.description }}</p>
       {% endif %}

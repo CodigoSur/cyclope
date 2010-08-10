@@ -1,10 +1,14 @@
 {% load i18n tagging_tags fb_versions %}
 
   <div class="article teaser">
+    <div class="pretitle-container first">
     {% if  article.pretitle and not simplified_view %}
     <span class="pretitle">{{ article.pretitle }} | </span>
     {% endif%}
-    {% if article.date %}<span class="date">{{ article.date }}</span>{% endif %}
+    {% if article.date %}
+    <span class="date">{{ article.date }}</span>
+    {% endif %}
+    </div>
      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" />
      <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name }}</a></h2>
       {% if article.pictures and not simplified_view %}
@@ -14,21 +18,20 @@
       {% endif %}
     {% if not simplified_view %}
         {% if article.author %}
-        <span class="author">{% trans "By" %} {{ article.author }}</span>
+        <div><span class="author">{% trans "By" %} {{ article.author }}</span></div>
         {% endif %}
     {% endif %}
-    <p class="summary">
+    <div class="summary">
       {% if article.summary %}
         {{ article.summary }}
       {% else %}
-        {{ article.text|truncatewords:40|safe }}
+        <span class="text">{{ article.text|truncatewords:40|safe }}</span>
       {% endif %}
       <a href="{% url article-detail article.slug %}"> {% trans "More" %}</a>
-    </p>
+    </div>
     {% if not simplified_view %}
         {% if article.tags %}
-        <span class="tags">
-          <h3>
+        <div><span class="tags">
           {% trans "Tags" %}:
           {% tags_for_object article as article_tags %}
           {% for tag in article_tags %}
@@ -36,8 +39,7 @@
             {{tag.name}}{% if not forloop.last%},{% endif%}
 
           {% endfor %}
-          </h3>
-        </span>
+        </span></div>
         {% endif %}
     <div class="clear"></div>
     {% endif %}
