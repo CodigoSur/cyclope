@@ -55,8 +55,11 @@ class MenuRootItemsList(frontend.FrontendView):
     is_default = True
 
     def get_string_response(self, request, content_object=None, *args, **kwargs):
-        menu_items = MenuItem.tree.filter(menu=content_object, level=0, active=True)
-        c = RequestContext(request, {'menu_items': menu_items})
+        menu_items = MenuItem.tree.filter(menu=content_object,
+                                          level=0, active=True)
+        current_url = request.path_info[1:].split('/')[0]
+        c = RequestContext(request, {'menu_items': menu_items,
+                                     'current_url': current_url})
         t = loader.get_template("cyclope/menu_flat_items_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
         return t.render(c)
@@ -72,7 +75,9 @@ class MenuFlatItemsList(frontend.FrontendView):
 
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         menu_items = MenuItem.tree.filter(menu=content_object, active=True)
-        c = RequestContext(request, {'menu_items': menu_items})
+        current_url = request.path_info[1:].split('/')[0]
+        c = RequestContext(request, {'menu_items': menu_items,
+                                     'current_url': current_url})
         t = loader.get_template("cyclope/menu_flat_items_list.html")
         c['host_template'] = 'cyclope/inline_view.html'
         return t.render(c)
@@ -90,11 +95,11 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
 
     def get_string_response(self, request, *args, **kwargs):
         is_instance_view = False
-        current_url = request.path_info[1:].split('/')[0]
-        if current_url == '':
+        base_url = request.path_info[1:].split('/')[0]
+        if base_url == '':
             current_item = MenuItem.tree.filter(site_home=True)
         else:
-            current_item = MenuItem.tree.filter(url=current_url)
+            current_item = MenuItem.tree.filter(url=base_url)
 
         if current_item:
             children = current_item[0].get_children()
@@ -162,7 +167,6 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
                 nested_list.extend(self._get_menuitems_nested_list(
                     child, name_field=name_field))
             else:
-                print "url", child, child.url
                 name = getattr(child, name_field)
                 nested_list.append(link_template.render(
                     Context({'name': name,
