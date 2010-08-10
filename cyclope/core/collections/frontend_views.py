@@ -153,7 +153,7 @@ frontend.site.register_view(Collection, CollectionRootCategoriesTeaserList())
 
 
 class CollectionCategoriesHierarchy(frontend.FrontendView):
-    """A full list view of the categories in a collection.
+    """A hierarchical list view of the categories in a collection.
     """
     name='categories_hierarchy'
     verbose_name=_('hierarchical list of Categories in a Collection')
@@ -171,7 +171,7 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
         return t.render(c)
 
     def _get_categories_nested_list(self, base_category, name_field='name'):
-        """Creates a nested list to be uses with unordered_list template tag
+        """Creates a nested list to be used with unordered_list template tag
         """
         #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
         #TODO(nicoechaniz): only show categories which have children or content.
@@ -181,8 +181,8 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
               '<span class="expand_collapse">+</span>\n'
             '{% endif %}'
             '{% if has_content %}'
-              '<a href="{% url category-teaser_list slug %}" '
-                 'class="{{class}}"><span>{{ name }}</span></a>'
+              '<a href="{% url category-teaser_list slug %}">'
+                 '<span>{{ name }}</span></a>'
             '{% else %} {{ name }}'
             '{% endif %}'
             )

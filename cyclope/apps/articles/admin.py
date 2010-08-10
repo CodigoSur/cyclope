@@ -33,17 +33,6 @@ from cyclope import settings as cyc_settings
 from models import *
 
 
-class ArticleImageDataInline(admin.StackedInline):
-    model = ArticleImageData
-    raw_id_fields = ('image',)
-    extra = 0
-    def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
-        field = super(ArticleImageDataInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
-        if db_field.name == 'image':
-            field.widget = ForeignKeyImageRawIdWidget(db_field.rel)
-        return field
-
-
 class ArticleForm(forms.ModelForm):
     if cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE.lower() ==  'wysiwyg':
         text = forms.CharField(label=_('Text'), widget=WYMEditor())
@@ -66,7 +55,7 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
                   ('creation_date', 'author', 'source')
     list_display = ('name', 'is_orphan',)
     search_fields = ('name', 'pretitle', 'summary', 'text', )
-    inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines #+ [ArticleImageDataInline]
+    inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines
 
     fieldsets = ((None,
                   {'fields': ('name', 'author', 'text', 'published')}),
