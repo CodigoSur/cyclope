@@ -19,12 +19,6 @@
       </a></div>
     {% endif %}
 
-    {% if not simplified_view %}
-        {% if article.author %}
-        <div><span class="author">{% trans "By" %} {{ article.author }}</span></div>
-        {% endif %}
-    {% endif %}
-
     <div class="summary">
       {% if article.summary %}
         {{ article.summary }}
@@ -33,6 +27,16 @@
       {% endif %}
       <a href="{% url article-detail article.slug %}"> {% trans "More" %}</a>
     </div>
+
+    {% if not simplified_view %}
+        {% if article.author %}
+        <div><span class="author">{% trans "By" %} {{ article.author }}</span></div>
+        {% endif %}
+    {% endif %}
+
+    {% if article.pictures and not simplified_view %}
+    <br class="floating-img-clear" />
+    {% endif %}
 
     {% if not simplified_view %}
         {% if article.tags %}

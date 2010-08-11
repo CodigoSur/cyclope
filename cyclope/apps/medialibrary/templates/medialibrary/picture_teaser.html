@@ -5,15 +5,15 @@
      <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/image.png"/><a href="{% url picture-detail picture.slug %}">{{ picture.name }}</a></h2>
 
      <a href="{% url picture-detail picture.slug %}">
-        <div class="teaser_icon_container"><img class="teaser_icon" src="{% version picture.image.path 'thumbnail' %}" border="0" /></div>
+        <div class="teaser_icon_container"><img class="teaser_icon" src="{% version picture.image.path 'small' %}" border="0" /></div>
      </a>
-
-     {% if picture.author %}
-       <div><span class="author">{% trans "By" %} {{ picture.author }}</span></div>
-     {% endif %}
 
      {% if picture.description %}
        <p class="description">{{ picture.description }}</p>
+     {% endif %}
+
+     {% if picture.author %}
+       <div class="author_container"><span class="author">{% trans "By" %} {{ picture.author }}</span></div>
      {% endif %}
 
      {% if picture.tags %}

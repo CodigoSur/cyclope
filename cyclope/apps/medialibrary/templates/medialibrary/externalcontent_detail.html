@@ -13,7 +13,7 @@
   {% if media.image %}
   <a href="{{ media.content_url }}"
   {% if media.new_window %}target="_blank"{% endif%}>
-    <img src="{% version media.image.path 'medium' %}"/>
+    <img src="{% version media.image.path 'thumbnail' %}"/>
   </a>
   {% endif %}
 

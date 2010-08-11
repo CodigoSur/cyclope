@@ -4,9 +4,9 @@
     <a href="{% url flashmovie-detail flashmovie.slug %}">
       {% if flashmovie.image %}
       <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/flash.png"/>
-      <img src="{% version flashmovie.image.path 'thumbnail' %}"/>
+      <img src="{% version flashmovie.image.path 'thumbnail' %}" width="124" />
       {% else %}
-      <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/flash.png"/>
+      <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/flash-medium.png" />
       {% endif %}
 
     </a>

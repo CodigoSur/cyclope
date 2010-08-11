@@ -6,12 +6,12 @@
 
     {% if externalcontent.image %}
       <div class="teaser_icon_container"><a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
-        <img src="{% version externalcontent.image.path 'small' %}" border="0"/>
+        <img class="teaser_icon" src="{% version externalcontent.image.path 'thumbnail' %}" width="90" border="0"/>
       </a></div>
     {% endif %}
 
     {% if externalcontent.description %}
-    <p class="summary">
+    <p class="description">
       {{ externalcontent.description }}
     {% if not externalcontent.skip_detail %}
       <a href="{% url externalcontent-detail externalcontent.slug %}{">
@@ -19,6 +19,10 @@
       </a>
     {% endif %}
     </p>
+    {% endif %}
+
+    {% if externalcontent.image %}
+    <br class="floating-img-clear" />
     {% endif %}
 
     {% if externalcontent.skip_detail %}

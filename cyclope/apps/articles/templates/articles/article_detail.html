@@ -22,7 +22,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   <!-- herramientas -->
   <div class="tools">
     <ul>
-      <li><a href="javascript:window.print()" class="print">{% trans "Print" %}</a></li>
+      <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a></li>
       <li>
         <a href="/share?slug={{ article.slug }}" onclick="abrir_popup(this);return false" class="share">
           {% trans "Share" %}

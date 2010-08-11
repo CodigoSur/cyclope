@@ -4,9 +4,9 @@
     <a href="{% url soundtrack-detail soundtrack.slug %}">
       {% if soundtrack.image %}
       <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/audio.png"/>
-      <img src="{% version soundtrack.image.path 'thumbnail' %}"/>
+      <img src="{% version soundtrack.image.path 'thumbnail' %}" width="124" />
       {% else %}
-      <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/audio.png"/>
+      <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/audio-medium.png"/>
       {% endif %}
 
     </a>

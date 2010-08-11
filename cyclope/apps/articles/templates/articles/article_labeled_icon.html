@@ -3,10 +3,10 @@
   <div class="content-view article labeled_icon">
     <a href="{% url article-detail article.slug %}">
       {% if article.pictures %}
-        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" width="48px" border="0"/>
-        <img src="{% version article.pictures.0.image.path 'thumbnail' %}" width="135" border="0"/>
+        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
+        <img src="{% version article.pictures.0.image.path 'thumbnail' %}" width="124" border="0"/>
       {% else %}
-        <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" width="135" border="0"/>
+        <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article-medium.png" border="0"/>
       {% endif %}
 
     </a>

@@ -4,9 +4,9 @@
     <a href="{% url regularfile-detail regularfile.slug %}">
       {% if regularfile.image %}
       <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/regularfile.png"/>
-      <img src="{% version regularfile.image.path 'thumbnail' %}"/>
+      <img src="{% version regularfile.image.path 'thumbnail' %}" width="124" />
       {% else %}
-      <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/regularfile.png"/>
+      <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/regularfile-medium.png"/>
       {% endif %}
 
     </a>
