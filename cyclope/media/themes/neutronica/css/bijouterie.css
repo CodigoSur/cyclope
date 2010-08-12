@@ -1,6 +1,6 @@
 body {
  padding: 0; margin: 0;
- background-color: yellow;
+ background-color: #fff1c9;
 }
 
 #branding {
@@ -12,7 +12,7 @@ body {
 }
 
 #branding a{
-  color: yellow;
+  color: #fff1c9;
 }
 
 #branding a:hover{
@@ -43,12 +43,12 @@ body {
 }
 
 a {
- color: red;
+ color: #de2121;
 }
 
 #after_content > div,
 #before_content > div {
- background-color: yellow;
+ background-color: #fff1c9;
  margin-bottom: 1em;
  padding-top: 0px;
 }
@@ -67,9 +67,9 @@ a {
   padding: 12px 20px;
   margin-left: 16px;
   margin-right: 16px;
-  border-top: 2px solid gray;   border-bottom: 2px solid gray;
+  border-top: 2px solid #839882;   border-bottom: 2px solid #839882;
   text-transform: uppercase;
-  color: gray;
+  color: #839882;
   display: block;
   text-align: center;
   font-size: 20px;
@@ -93,7 +93,7 @@ a {
 
 #content_container .collection .category {
 
-  background-color: red;
+  background-color: #de2121;
   color: white;
   padding: 12px 20px 16px 20px;
   margin-left: 16px;
@@ -151,7 +151,7 @@ a {
  padding: 0 16px 12px 16px;
  margin: 0 16px 22px 16px;
  border: none;
- border-bottom: 2px solid gray;
+ border-bottom: 2px solid #839882;
  display: block;
 }
 
@@ -181,7 +181,7 @@ a {
 }
 
 #searchbox input[type="text"] {
- border: 2px solid red;
+ border: 2px solid #de2121;
  width: 100px; height: 22px;
  margin-right: 0px;
 }
@@ -211,7 +211,7 @@ a {
 }
 
 #tags a.tag1 {
- background-color: yellow;
+ background-color: #fff1c9;
  color: black;
  margin: 0 1px 5px 0;
  padding: 1px 3px;
@@ -227,12 +227,12 @@ a {
 
 #footer_container {
   padding: 25px 0 20px 0;
-  background-color: gray;
+  background-color: #839882;
   color: white;
 }
 
 #footer_container a{
-  color: yellow;
+  color: #fff1c9;
 }
 
 /* header menu */
@@ -256,7 +256,7 @@ a {
 
 #header .menu ul li a:hover{
  text-decoration: none;
- color: red;
+ color: #de2121;
 }
 
 #header .menu ul {
@@ -266,7 +266,7 @@ a {
 /* sidebar menu */
 
 .sidebar .root_items_list ul li {
- background-color: red;
+ background-color: #de2121;
  border: none;
  -moz-border-radius: 8px 8px 8px 8px;
  font-weight: bold;
@@ -289,7 +289,7 @@ a {
 /* sidebar categories_hierarchy */
 
 .sidebar .categories_hierarchy ul li {
- background-color: gray;
+ background-color: #839882;
  border: none;
  -moz-border-radius: 8px 8px 8px 8px;
  font-weight: bold;
@@ -316,7 +316,7 @@ a {
 
 .sidebar .categories_hierarchy ul li ul li {
  background-color: white;
- color: gray;
+ color: #839882;
 }
 
 .sidebar .categories_hierarchy ul li ul li:hover {
@@ -328,7 +328,7 @@ a {
  color: black;
 }
 .sidebar .categories_hierarchy ul li ul li a{
- color: gray;
+ color: #839882;
 }
 
 /* sidebar teaser_list */
@@ -337,6 +337,7 @@ a {
  text-align: center;
  display: block;
  padding-left: 0;  padding-right: 0;
+ border: none;
 }
 #right_sidebar #categories_navigation a{
  text-transform: uppercase;
@@ -350,10 +351,10 @@ a {
 #right_sidebar .teaser_list {
  border: none;
  color: white;
- background-color: gray;
+ background-color: #839882;
  padding-left: 0 !important; padding-right: 0 !important;
 /* -moz-border-radius: 8px 8px 8px 8px; */
-/* -moz-box-shadow: 3px 1px 10px gray;  */
+/* -moz-box-shadow: 3px 1px 10px #839882;  */
 }
 
 #right_sidebar .teaser_list .teaser > div,
@@ -375,7 +376,7 @@ a {
 }
 
 #right_sidebar .teaser_list .teaser .title {
-  background-color: red;
+  background-color: #495848;
   color: white;
   font-size: 15px;
   padding: 10px 16px 10px 48px;
@@ -401,6 +402,9 @@ a {
   left: 8px; top: 4px;
 }
 
+#content_container .teaser img.type_icon[src="/media/cyclope/themes/neutronica/images/icons/image.png"] {
+  top: 0px !important;
+}
 
 #right_sidebar .teaser_list .teaser .title a{
   color: white;
@@ -421,12 +425,12 @@ position:absolute;
 }
 
 #content_container  .pretitle-container {
- background-color: #999;
+ background-color: #a9b7a8;
  color: white;
  text-transform: uppercase;
  letter-spacing: 1px;
  padding: 0.3em 0.6em;
- margin-bottom: 5px;
+ margin-bottom: 9px;
 }
 
 
@@ -434,11 +438,11 @@ position:absolute;
   letter-spacing: -1px;
   font-size: 32px;
   line-height: 34px;
-  color: red;
+  color: #de2121;
 }
 
 #content_container .teaser .title a{
-  color: red;
+  color: #de2121;
 }
 
 #content_container .detail {
@@ -446,7 +450,7 @@ position:absolute;
 }
 
 #content_container .detail .title{
-  color: red;
+  color: #de2121;
   margin-top: -8px;
 }
 
@@ -460,7 +464,7 @@ position:absolute;
 /* icon */
 
 #content_container .labeled_icon {
- border: 2px solid red;
+ border: 2px solid #de2121;
  width: 122px;
 }
 
