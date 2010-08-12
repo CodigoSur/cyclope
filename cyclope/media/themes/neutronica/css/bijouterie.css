@@ -3,6 +3,10 @@ body {
  background-color: #fff1c9;
 }
 
+.one_sidebar #content_container {
+ margin-top: 12px;
+}
+
 #branding {
   background: url(../images/css/cabezal.png) no-repeat 0 0 transparent;
   height: 162px;
@@ -487,6 +491,22 @@ position:absolute;
 }
 
 /* */
+
+.download_link a{
+ display: inline-block;
+ background: url(../images/css/download.png) no-repeat 6px 6px #FFF1C9;
+ padding: 0 16px 0 30px;
+ line-height: 30px;
+ border: 1px solid #DE2121;
+}
+
+/* */
+
+.soundtrack-detail .video_player {
+ width: 470px;
+}
+
+/* */ 
 
 .pagination {
  text-align: center;
