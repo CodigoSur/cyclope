@@ -44,15 +44,13 @@
  float:right; /* (!) */
 }
 
-.alpha, 
-.two_sidebars #left_sidebar_container {
+.alpha {
 margin-left:0;
-}
+} /* .two_sidebars #left_sidebar_container */
 
-.omega, 
-#two_sidebars #right_sidebar_container {
+.omega {
  margin-right:0;
-}
+} /* .two_sidebars #right_sidebar_container */
 
 .omega, 
 .one_sidebar #content_container {

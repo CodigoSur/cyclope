@@ -13,7 +13,7 @@
     {% endif %}
 
     {% if document.author %}
-      <div class="author_container"><span class="author">{% trans "By" %} {{ document.author }}</span></div>
+      <div class="author_container meta-content"><span class="author">{% trans "By" %} {{ document.author }}</span></div>
     {% endif %}
 
     {% if document.image %}
@@ -21,8 +21,8 @@
     {% endif %}
 
     {% if document.tags %}
-        <div><span class="tags">
-          {% trans "Tags" %}:
+        <div class="meta-content" ><span class="tags">
+          <span class="tags-label">{% trans "Tags" %}:</span>
           {% tags_for_object document as document_tags %}
           {% for tag in document_tags %}
             <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->

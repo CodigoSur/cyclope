@@ -114,7 +114,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   <div>{% include 'collections/categories_navigation_block.html' %}</div>
 
   {% if article.tags %}
-    <div><span class="tags">{% trans "Tags" %}: {{ article.tags }}</span></div>
+    <div><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ article.tags }}</span></div>
   {% endif %}
 
 	<!-- relacionadas -->

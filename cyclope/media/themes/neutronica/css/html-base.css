@@ -472,8 +472,9 @@ fieldset {
 
 /* teaser & detail */
 
-#content_container .content-view {
- padding: 0 16px;
+#content_container .content-view,
+.categories_navigation {
+ padding: 12px 16px;
 }
 .teaser {
   margin-bottom: 2em;
@@ -516,8 +517,8 @@ fieldset {
  margin-top: 0;
 }
 
-.article-teaser h2.title {
-  padding-left: 0 !important;
+.content-view .article-teaser h2.title {
+  padding-left: 0;
 }
 
 
@@ -773,3 +774,14 @@ margin-bottom: 1em;
 #footer_container {
  text-align: center;
 }
+
+/*
+TODO: en los templates de las vistas
+para todos las vistas agregar clases
+- div.media-content para imagenes, flash, video
+- div.meta-content para tools, categorias, tags etc
+- div.html-content cuando el contenido tiene tags html
+- div.main-content para marcar el contenido mas importante de la vista
+*/
+
+

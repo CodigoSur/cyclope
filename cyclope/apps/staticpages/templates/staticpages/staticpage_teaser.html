@@ -1,6 +1,6 @@
 {% load i18n tagging_tags fb_versions %}
 
-  <div class="staticpage teaser">
+  <div class="content-view staticpage teaser staticpage-teaser">
 
     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png" /><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a></h2>
 
@@ -13,8 +13,8 @@
     {% endif %}
 
     {% if staticpage.tags %}
-        <div><span class="tags">
-          {% trans "Tags" %}:
+        <div class="meta-content"><span class="tags">
+          <span class="tags-label">{% trans "Tags" %}:</span>
           {% tags_for_object staticpage as staticpage_tags %}
           {% for tag in staticpage_tags %}
             <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->

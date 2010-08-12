@@ -14,7 +14,7 @@
 
     {% if soundtrack.tags %}
         <div><span class="tags">
-          {% trans "Tags" %}:
+          <span class="tags-label">{% trans "Tags" %}:</span>
           {% tags_for_object soundtrack as soundtrack_tags %}
           {% for tag in soundtrack_tags %}
             <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->

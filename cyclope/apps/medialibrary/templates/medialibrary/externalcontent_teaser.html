@@ -26,7 +26,7 @@
     {% endif %}
 
     {% if externalcontent.skip_detail %}
-    <p>
+    <p class="meta-content">
       <a href="{{ externalcontent.content_url }}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
       {% trans "Open external content"%} {% if externalcontent.new_window %}{% trans " (in new window)"%}{% endif%}
       </a>

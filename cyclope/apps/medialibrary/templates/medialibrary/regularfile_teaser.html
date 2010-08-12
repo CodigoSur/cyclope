@@ -22,7 +22,7 @@
 
     {% if regularfile.tags %}
         <div><span class="tags">
-          {% trans "Tags" %}:
+          <span class="tags-label">{% trans "Tags" %}:</span>
           {% tags_for_object regularfile as regularfile_tags %}
           {% for tag in regularfile_tags %}
             <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->

@@ -23,8 +23,8 @@ Si modificas no borres estas lineas :)
 
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/html-base.css" rel="stylesheet" type="text/css" media="screen"/>
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/layout.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/colors_and_borders.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/neutrona.css" rel="stylesheet" type="text/css" media="screen"/>
+    <!-- <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/colors_and_borders.css" rel="stylesheet" type="text/css" media="screen"/> -->
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/bijouterie.css" rel="stylesheet" type="text/css" media="screen"/>
     <link href="{{ CYCLOPE_MEDIA_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
     <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
@@ -70,7 +70,7 @@ Si modificas no borres estas lineas :)
       <div id="middle_wrapper">
 
         <!-- left_sidebar -->
-        <div id="left_sidebar_container">
+        <div id="left_sidebar_container" class="sidebar">
           <div class="top"></div>
           {% region 'left_sidebar' %}
 
@@ -117,7 +117,6 @@ Si modificas no borres estas lineas :)
         <!-- /left_sidebar -->
 
         {% block page_content %} {% endblock %}
-
       </div>
       <!-- /middle wrapper -->
 
@@ -154,6 +153,7 @@ Si modificas no borres estas lineas :)
         </map>
       </div>
       <!-- /pie -->
+     
     </div>
     <!-- /mascara -->
 

@@ -2,7 +2,7 @@
 
   <div class="content-view article teaser article-teaser">
 
-    <div class="pretitle-container first">
+    <div class="pretitle-container first meta-content">
       {% if  article.pretitle and not simplified_view %}
       <span class="pretitle">{{ article.pretitle }} | </span>
       {% endif%}
@@ -30,7 +30,7 @@
 
     {% if not simplified_view %}
         {% if article.author %}
-        <div><span class="author">{% trans "By" %} {{ article.author }}</span></div>
+        <div class="meta-content" ><span class="author">{% trans "By" %} {{ article.author }}</span></div>
         {% endif %}
     {% endif %}
 
@@ -40,8 +40,8 @@
 
     {% if not simplified_view %}
         {% if article.tags %}
-        <div><span class="tags">
-          {% trans "Tags" %}:
+        <div class="meta-content"><span class="tags">
+          <span class="tags-label">{% trans "Tags" %}:</span>
           {% tags_for_object article as article_tags %}
           {% for tag in article_tags %}
             <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->

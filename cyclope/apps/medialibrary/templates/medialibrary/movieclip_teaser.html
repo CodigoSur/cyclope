@@ -5,7 +5,7 @@
      <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/video.png" /><a href="{% url movieclip-detail movieclip.slug %}">{{ movieclip.name }}</a></h2>
 
      {% if movieclip.image %}
-       <div class="teaser_icon_container"><img class="teaser_icon" src="{% version movieclip.image.path 'small' %}" width="135" border="0" /></div>
+       <div class="teaser_icon_container meta-content"><img class="teaser_icon" src="{% version movieclip.image.path 'small' %}" width="135" border="0" /></div>
      {% endif %}
 
      {% if movieclip.description %}
@@ -13,12 +13,12 @@
      {% endif %}
 
      {% if movieclip.author %}
-       <div class="author_container"><span class="author">{% trans "By" %} {{ movieclip.author }}</span></div>
+       <div class="author_container meta-content"><span class="author">{% trans "By" %} {{ movieclip.author }}</span></div>
      {% endif %}
 
      {% if movieclip.tags %}
-         <div><span class="tags">
-           {% trans "Tags" %}:
+         <div class="meta-content"><span class="tags">
+           <span class="tags-label">{% trans "Tags" %}:</span>
            {% tags_for_object movieclip as movieclip_tags %}
            {% for tag in movieclip_tags %}
              <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
