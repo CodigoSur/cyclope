@@ -158,8 +158,10 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
     """
     name='categories_hierarchy'
     verbose_name=_('hierarchical list of Categories in a Collection')
+    target_view = 'teaser_list'
 
     def get_string_response(self, request, content_object=None, *args, **kwargs):
+
         collection = content_object
         categories = Category.tree.filter(collection=collection, level=0)
         category_list = []
@@ -172,6 +174,7 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
         return t.render(c)
 
     def _get_categories_nested_list(self, base_category, name_field='name'):
+
         """Creates a nested list to be used with unordered_list template tag
         """
         #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
@@ -182,7 +185,7 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
               '<span class="expand_collapse">+</span>\n'
             '{% endif %}'
             '{% if has_content %}'
-              '<a href="{% url category-teaser_list slug %}">'
+              '<a href="{% url category-'+self.target_view+' slug %}">'
                  '<span>{{ name }}</span></a>'
             '{% else %} {{ name }}'
             '{% endif %}'
@@ -210,3 +213,12 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
         return [include, nested_list]
 
 frontend.site.register_view(Collection, CollectionCategoriesHierarchy())
+
+class CollectionCategoriesHierarchyToIconlist(CollectionCategoriesHierarchy):
+    """A hierarchical list view of the categories in a collection that will show a labeled_icon list view of the category that the user selects.
+    """
+    name='categories_hierarchy_to_iconlist'
+    verbose_name=_('hierarchical list of Categories that will show an icon list on click')
+    target_view = 'labeled_icon_list'
+
+frontend.site.register_view(Collection, CollectionCategoriesHierarchyToIconlist())
