@@ -30,6 +30,8 @@
   We show a teaser view of every object belonging to this category.
   {% endcomment %}
 
+  <div class="icon_list_container">
+
   {% for categorization in categorizations %}
     {% join categorization.content_type.app_label  "/" categorization.content_type.model "_labeled_icon.html" as template_path %}
 
@@ -42,6 +44,8 @@
     {% alias categorization.content_object as categorization.content_type.model %}
     {% include template_path %}
   {% endfor %}
+
+  </div>
 
 <!--  <div class="pagEspacio"></div> -->
   {% if page %}
