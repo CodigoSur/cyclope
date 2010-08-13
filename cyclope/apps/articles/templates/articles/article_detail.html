@@ -12,7 +12,9 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
 <div class="content-view article detail article-detail">
 
- {% get_comment_count for article as comment_count %}
+  {% get_comment_count for article as comment_count %}
+
+  <div>{% include 'collections/categories_navigation_block.html' %}</div>
 
   {% if article.pretitle %}
   <div class="pretitle-container"><span class="pretitle">{{ article.pretitle }}</span></div>
@@ -111,32 +113,17 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
     {% trans "Source" %}: {article.source}{% endif %}
   </span></div>
 
-  <div>{% include 'collections/categories_navigation_block.html' %}</div>
-
   {% if article.tags %}
     <div><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ article.tags }}</span></div>
   {% endif %}
 
-	<!-- relacionadas -->
-<!--
-TODO(nicoechaniz): uncomment and fix if related articles are implemented
-           {if $articulo.relacionadas eq 'si'}
-          <div id="related">
-            <h6>Más información:</h6>
-            <ul>
-            {section name=bucle loop=$relacionadas}
-              <li> <a href="{$relacionadas[bucle].link}">{$relacionadas[bucle].titulo}</a></li>
-              {/section}
-            </ul>
-          </div>
-          {/if}
--->
-              <!-- /relacionadas -->
+
+  {% include 'cyclope/related_contents_block.html' %}
 
 
 	      <div class="clear"></div>
      <!-- redsocial -->
-           <div id="socialnetworks" class="socialnetworks">{% trans "Share in your social networks"%}: 
+           <div id="socialnetworks" class="socialnetworks">{% trans "Share in your social networks"%}:
 <a href="http://www.facebook.com" rel="nofollow" onclick="sbs_facebook(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/facebook.png" border="0" alt="Compartir en Facebook" title="Compartir en Facebook" height="24" width="24" /></a>
 <a href="http://www.del.icio.us" rel="nofollow" onclick="sbs_delicious(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/delicious.png" border="0" alt="Compartir en Delicious" title="Compartir en Delicious" height="24" width="24" /></a>
 <a href="http://www.yahoo.com" rel="nofollow" onclick="sbs_yahoobm(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/yahoo.png" border="0" alt="Compartir en Yahoo" title="Compartir en Yahoo" height="24" width="24" /></a>

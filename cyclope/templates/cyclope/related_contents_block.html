@@ -5,7 +5,7 @@
     <span>Relacionado: </span>
     <ul>
     {% for relation in relations %}
-      <li class='related_type'> {{ relation.grouper }}
+      <li class='related_type {{ relation.grouper }}'>
         <ul>
         {% for rel in relation.list %}
         {% alias rel.other_object as 'content' %}

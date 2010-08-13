@@ -4,10 +4,7 @@
 
 {% block content %}
 
-  {% if category.collection.visible %}
-  <big class="category_title">{{ category.name }}</big>
-  {% endif %}
-
+  {% if not region_view %}
   <div id="categories_navigation">
     {% if category.parent %}
       <a href="{% url category-teaser_list category.parent.slug %}" class="parent">{{ category.parent.name }}</a>
@@ -23,6 +20,12 @@
       </ul>
     {% endif %}
   </div>
+  {% endif%}
+
+  {% if category.collection.visible %}
+  <big class="category_title">{{ category.name }}</big>
+  {% endif %}
+
 
   {% comment %}
   We show a teaser view of every object belonging to this category.

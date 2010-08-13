@@ -68,6 +68,7 @@ class CategoryTeaserList(frontend.FrontendView):
         #TODO(nicoechaniz): this article__date ordering looks bad. categories can hold any baseontent derivative
         c = RequestContext(request,
                            {'categorizations': category.categorizations.order_by('article__date'),
+                            'region_view': True,
                             'category': category})
         t = loader.get_template(self.template)
         c['host_template'] = 'cyclope/inline_view.html'

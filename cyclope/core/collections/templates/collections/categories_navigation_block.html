@@ -1,7 +1,7 @@
 {% load i18n cyclope_utils %}
 {% if current_object.categories.values %}
 <div><span class="categories">
-    {% trans "Categories" %}:
+{% comment %}    {% trans "Categories" %}: {% endcomment %}
     <ul>
         {% for categorization in current_object.categories.all %}
             {% alias categorization.category as 'category' %}

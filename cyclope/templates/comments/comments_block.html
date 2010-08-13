@@ -1,23 +1,35 @@
 {% load comments i18n %}
-
   {% if not current_object.allow_comments == 'NO' %}
     {% get_comment_count for current_object as comment_count %}
-
-    <div class="user_input">
+   <div>
+    <script type="text/javascript">
+    jQuery(document).ready(function(){
+      $('#comment_form').hide();
+      $('#show_comment_form').click(function() {
+        $('#comment_form').toggle();
+      });
+    });
+    </script>
+    <div id="user_comments">
       <div class="top">
         <h6>{% blocktrans %} There are {{ comment_count }} comments {% endblocktrans %}</h6>
       </div>
       <div class="bottom"></div>
       {% render_comment_list for current_object %}
       <!--enviar comentario -->
+
+      <a name="comments" href="#comments" id="show_comment_form">
+        {% trans "comment on this content" %}
+      </a>
+
       <div class="box-top"></div>
       <div class="box">
-
-      <!--form comentario -->
-      {% render_comment_form for current_object %}
-
+        <div class="user_input" id="comment_form">
+        <!--form comentario -->
+        {% render_comment_form for current_object %}
+        </div>
       </div> <!-- termina box -->
       <div class="bottom"></div>
     </div><!--termina comments -->
-
+   </div>
   {% endif %}
