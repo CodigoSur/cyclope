@@ -126,7 +126,7 @@ FILEBROWSER_DIRECTORY = 'uploads/'
 FILEBROWSER_EXTENSIONS = {
     'Folder': [''],
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
-    'Video': ['.ogv', '.ogg', '.mov','.wmv','.mpeg','.mpg','.avi','.rm',],
+    'Video': ['.ogv', '.ogg', '.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.flv',],
     'Document': ['.odt', 'docx', '.pdf','.doc','.rtf','.txt',
                  '.ods', '.xls','.csv'],
     'Audio': ['.ogg', '.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
@@ -165,7 +165,7 @@ FILEBROWSER_VERSIONS = {
                          'width': 140, 'height': 140, 'opts': 'crop'},
 }
 
-FILEBROWSER_MAX_UPLOAD_SIZE = 1048576
+FILEBROWSER_MAX_UPLOAD_SIZE = 1048576 #1Mb
 
 # django-registration settings
 ACCOUNT_ACTIVATION_DAYS = 7
