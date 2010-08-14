@@ -63,6 +63,8 @@ class CategoryTeaserList(frontend.FrontendView):
     verbose_name=_('teaser list of Category members')
     is_default = True
     template = "collections/category_teaser_list.html"
+    items_per_page = cyc_settings.CYCLOPE_PAGINATION['TEASER']
+
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         category = content_object
         #TODO(nicoechaniz): this article__date ordering looks bad. categories can hold any baseontent derivative
@@ -79,7 +81,7 @@ class CategoryTeaserList(frontend.FrontendView):
         # TODO(nicoechaniz):this hardcoded order_by es wrong. fix it.
         categorizations_list = category.categorizations.order_by('article__date')
 
-        paginator = Paginator(categorizations_list, cyc_settings.CYCLOPE_PAGINATION['TEASER'])
+        paginator = Paginator(categorizations_list, self.items_per_page)
 
         # Make sure page request is an int. If not, deliver first page.
         try:
@@ -111,6 +113,7 @@ class CategoryLabeledIconList(CategoryTeaserList):
     verbose_name=_('Labeled icon list of Category members')
     template = "collections/category_labeled_icon_list.html"
     is_default = False
+    items_per_page = cyc_settings.CYCLOPE_PAGINATION['LABELED_ICON']
 
 frontend.site.register_view(Category, CategoryLabeledIconList())
 
