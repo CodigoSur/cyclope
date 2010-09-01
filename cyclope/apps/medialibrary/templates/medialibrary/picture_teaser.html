@@ -4,20 +4,18 @@
 
      <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/image.png"/><a href="{% url picture-detail picture.slug %}">{{ picture.name }}</a></h2>
 
-     <a href="{% url picture-detail picture.slug %}">
-        <div class="teaser_icon_container"><img class="teaser_icon" src="{% version picture.image.path 'small' %}" border="0" /></div>
-     </a>
+     <div class="media-content teaser_icon_container"><a href="{% url picture-detail picture.slug %}"><img class="teaser_icon" src="{% version picture.image.path 'small' %}" border="0" /></a></div>
 
      {% if picture.description %}
-       <p class="description">{{ picture.description }}</p>
+       <div class="html-content description">{{ picture.description }}</div>
      {% endif %}
 
      {% if picture.author %}
-       <div class="author_container"><span class="author">{% trans "By" %} {{ picture.author }}</span></div>
+       <div class="meta-content author_container"><span class="author">{% trans "By" %} {{ picture.author }}</span></div>
      {% endif %}
 
      {% if picture.tags %}
-        <div><span class="tags">
+        <div class="meta-content"><span class="tags">
           <span class="tags-label">{% trans "Tags" %}:</span>
           {% tags_for_object picture as picture_tags %}
           {% for tag in picture_tags %}

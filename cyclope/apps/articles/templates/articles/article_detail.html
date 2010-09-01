@@ -14,15 +14,15 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
   {% get_comment_count for article as comment_count %}
 
-  <div>{% include 'collections/categories_navigation_block.html' %}</div>
+  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
   {% if article.pretitle %}
-  <div class="pretitle-container"><span class="pretitle">{{ article.pretitle }}</span></div>
+  <div class="pretitle-container meta-content"><span class="pretitle">{{ article.pretitle }}</span></div>
   {% endif %}
   <h1 class="title">{{ article.name }}</h1>
 
   <!-- herramientas -->
-  <div class="tools">
+  <div class="tools meta-content">
     <ul>
       <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a></li>
       <li>
@@ -49,7 +49,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   <!-- /descripcion -->
 
   {% if article.pictures %}
-  <div id="gallery">
+  <div id="gallery" class="media-content">
     <ul>
       {% for picture in article.pictures %}
       <li {% if not forloop.first %} style="display:none;" {% endif %} >
@@ -66,7 +66,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
   <!-- author -->
   {% if article.author %}
-  <div id="author">
+  <div id="author" class="meta-content">
     {% if article.author.image %}
     <img src="" width="60"  />
     {% endif %}
@@ -94,7 +94,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 -->
           <!-- /descargas -->
 
-  <div><span class="html-text">
+  <div><span class="html-text html-content">
     {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'raw' or CYCLOPE_ARTICLE_TEXT_STYLE == 'wysiwyg'%}
       {{ article.text|safe }}
     {% else %}
@@ -108,13 +108,13 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
     {% endif %}
   </span></div>
 
-  <div><span class="source">--<br>
+  <div class="meta-content"><span class="source">--<br>
     {% trans "Date" %}: {{ article.date }}{% if article.source %} |
     {% trans "Source" %}: {article.source}{% endif %}
   </span></div>
 
   {% if article.tags %}
-    <div><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ article.tags }}</span></div>
+    <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ article.tags }}</span></div>
   {% endif %}
 
 

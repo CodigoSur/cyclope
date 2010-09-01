@@ -5,20 +5,20 @@
     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/external.png" /><a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>{{ externalcontent.name|truncatechars:40 }}</a></h2>
 
     {% if externalcontent.image %}
-      <div class="teaser_icon_container"><a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
+      <div class="teaser_icon_container media-content"><a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
         <img class="teaser_icon" src="{% version externalcontent.image.path 'thumbnail' %}" width="90" border="0"/>
       </a></div>
     {% endif %}
 
     {% if externalcontent.description %}
-    <p class="description">
+    <div class="description html-content">
       {{ externalcontent.description }}
     {% if not externalcontent.skip_detail %}
-      <a href="{% url externalcontent-detail externalcontent.slug %}{">
+      <span class="more"><a href="{% url externalcontent-detail externalcontent.slug %}"></span>
       {% trans "More"%}
       </a>
     {% endif %}
-    </p>
+    </div>
     {% endif %}
 
     {% if externalcontent.image %}

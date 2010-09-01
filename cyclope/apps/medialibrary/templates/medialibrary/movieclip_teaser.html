@@ -5,15 +5,15 @@
      <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/video.png" /><a href="{% url movieclip-detail movieclip.slug %}">{{ movieclip.name }}</a></h2>
 
      {% if movieclip.image %}
-       <div class="teaser_icon_container meta-content"><img class="teaser_icon" src="{% version movieclip.image.path 'small' %}" width="135" border="0" /></div>
+       <div class="media-content teaser_icon_container"><img class="teaser_icon" src="{% version movieclip.image.path 'small' %}" width="135" border="0" /></div>
      {% endif %}
 
      {% if movieclip.description %}
-       <p class="description">{{ movieclip.description }}</p>
+       <div class="html-content description">{{ movieclip.description }}</div>
      {% endif %}
 
      {% if movieclip.author %}
-       <div class="author_container meta-content"><span class="author">{% trans "By" %} {{ movieclip.author }}</span></div>
+       <div class="meta-content author_container"><span class="author">{% trans "By" %} {{ movieclip.author }}</span></div>
      {% endif %}
 
      {% if movieclip.tags %}

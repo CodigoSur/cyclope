@@ -23,7 +23,7 @@
   {% endif%}
 
   {% if category.collection.visible %}
-  <big class="category_title">{{ category.name }}</big>
+  <div class="category_title"><a href="{% url category-teaser_list category.slug %}">{{ category.name }}</a></div>
   {% endif %}
 
   {% comment %}
@@ -46,6 +46,7 @@
   {% endfor %}
 
   </div>
+  <br class="clear" />
 
 <!--  <div class="pagEspacio"></div> -->
   {% if page %}

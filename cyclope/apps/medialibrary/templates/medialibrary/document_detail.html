@@ -11,11 +11,11 @@
   {% include 'medialibrary/media_detail_header.html' %}
 
   {% if media.image %}
-    <img src="{% version media.image.path 'big' %}"/>
+    <div class="media-content"><img src="{% version media.image.path 'big' %}"/></div>
   {% endif %}
-  <div><span class="download_link"><a href="{{ media.document }}">{% trans "download file" %}</a></span></div>
+  <div class="action-content download_link"><a href="{{ media.document }}">{% trans "download file" %}</a></div>
 
-  <div><span class="html-text">{{ media.description|safe }}</span></div>
+  <div class="html-content description">{{ media.description|safe }}</div>
 
   {% include 'medialibrary/media_detail_footer.html' %}
 

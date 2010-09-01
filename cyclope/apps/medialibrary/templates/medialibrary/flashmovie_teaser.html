@@ -5,15 +5,15 @@
      <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/flash.png" /><a href="{% url flashmovie-detail flashmovie.slug %}">{{ flashmovie.name }}</a></h2>
 
      {% if flashmovie.image %}
-       <div class="teaser_icon_container"><img class="teaser_icon" src="{% version flashmovie.image.path 'small' %}" width="135"/></div>
+       <div class="media-content teaser_icon_container"><img class="teaser_icon" src="{% version flashmovie.image.path 'small' %}" width="135"/></div>
      {% endif %}
 
      {% if flashmovie.description %}
-       <p class="description">{{ flashmovie.description }}</p>
+       <div class="html-content description">{{ flashmovie.description }}</div>
      {% endif %}
 
      {% if flashmovie.author %}
-       <div class="author_container meta-content"><span class="author">{% trans "By" %} {{ flashmovie.author }}</span></div>
+       <div class="meta-content author_container"><span class="author">{% trans "By" %} {{ flashmovie.author }}</span></div>
      {% endif %}
 
     {% if flashmovie.tags %}

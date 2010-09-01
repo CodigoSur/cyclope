@@ -1,12 +1,12 @@
 {% load i18n comments %}
 
-  {% include 'collections/categories_navigation_block.html' %}
+  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
   <h1 class="title">{{ current_object.name }}</h1>
 
   <!-- herramientas -->
  {% get_comment_count for current_object as comment_count %}
-  <div class="tools">
+  <div class="meta-content tools">
     <ul>
       {% if comment_count %}
       <li class="first">
@@ -19,8 +19,8 @@
 
   <!-- author -->
   {% if current_object.author %}
-  <div><span id="author">
-    <span class="author">{% trans "By"%} {{ current_object.author }}</span>
-  </span></div>
+  <div class="meta-content">
+    <span id="author" class="author">{% trans "By"%} {{ current_object.author }}</span>
+  </div>
   {% endif %}
   <!-- /autor -->
