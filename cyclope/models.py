@@ -250,6 +250,7 @@ class RelatedContent(models.Model):
     other_object = generic.GenericForeignKey(ct_field='other_type',
                                                   fk_field='other_id')
 
+    order = models.IntegerField(blank = True, null = True, db_index=True)
 
     def __unicode__(self):
         return self.other_object.name
@@ -257,7 +258,7 @@ class RelatedContent(models.Model):
     class Meta:
         verbose_name = _('related content')
         verbose_name_plural = _('related contents')
-
+        ordering = ['order', ]
 
 class BaseContent(models.Model):
     """Parent class for every content model.

@@ -34,7 +34,7 @@ class MediaDetail(frontend.FrontendView):
 
         content_object = self.params['queryset'].get(slug=slug)
         context = {'content_relations':
-                   content_object.related_contents.all().order_by('other_type')}
+                   content_object.related_contents.all()}
         return views.object_detail(request, slug=slug, extra_context = context,
                                    inline=False, *args, **kwargs)
 
