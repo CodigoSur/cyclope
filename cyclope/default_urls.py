@@ -36,6 +36,7 @@ from cyclope.forms import UserProfileForm
 from cyclope.core.captcha_contact_form.forms import  \
                                        AdminSettingsContactFormWithCaptcha
 import cyclope.settings as cyc_settings
+from cyclope.feeds import CategoryFeed
 
 urlpatterns = patterns('',
     (r'^admin/filebrowser/', include('filebrowser.urls')),
@@ -65,6 +66,7 @@ urlpatterns = patterns('',
         results_per_page=cyc_settings.CYCLOPE_PAGINATION['TEASER'],
     ), name='haystack_search'),
     (r'^contact/', include('contact_form.urls')),
+    (r'^category/(?P<slug>[\w-]+)/rss/$', CategoryFeed()),
 )
 
 if django_settings.DEBUG:
