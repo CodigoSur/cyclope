@@ -31,7 +31,7 @@ from cyclope.utils import template_for_request
 from cyclope import views
 
 from models import Poll, Submission, Question
-from forms import QuestionForm
+from forms import QuestionForm, CaptchaForm
 
 class PollSubmissionView(frontend.FrontendView):
     """Show or process a Poll Submission form"""
@@ -47,8 +47,9 @@ class PollSubmissionView(frontend.FrontendView):
         for question in questions:
             form = QuestionForm(question, data=request.POST or None, prefix=question.pk)
             forms.append({'question': question.text, 'form': form})
+        captcha_form = CaptchaForm(data=request.POST or None)
 
-        if all( (d['form'].is_valid() for d in forms) ):
+        if all( (d['form'].is_valid() for d in forms) ) and captcha_form.is_valid():
             posted_answers = []
             for d in forms:
                 posted_answers.extend(d['form'].get_answers())
@@ -66,6 +67,7 @@ class PollSubmissionView(frontend.FrontendView):
                                {'host_template': template_for_request(request),
                                 'poll': Poll.objects.get(slug=slug),
                                 'forms': forms,
+                                'captcha_form': captcha_form,
                                 })
             return HttpResponse(t.render(c))
 

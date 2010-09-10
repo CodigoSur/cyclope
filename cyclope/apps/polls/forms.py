@@ -29,10 +29,14 @@ from django.conf import settings as django_settings
 from django.utils.translation import ugettext_lazy as _
 #from django.core.exceptions import ValidationError
 
+from captcha.fields import CaptchaField
 from cyclope.apps.polls.models import Submission, Poll, Answer
 
-class QuestionForm(forms.Form):
 
+class CaptchaForm(forms.Form):
+    captcha = CaptchaField(label=_("Security code"))
+
+class QuestionForm(forms.Form):
     def __init__(self, question, *args, **kwargs):
         super(QuestionForm, self).__init__(*args, **kwargs)
         self.question = question

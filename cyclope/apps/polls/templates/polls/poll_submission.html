@@ -26,6 +26,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
           {{ field }}
 	{% endfor %}
     {% endfor %}
+    {{ captcha_form.as_p }}
       <input type="submit" class="submit" value="{% trans "Send" %}" />
   </form>
 
