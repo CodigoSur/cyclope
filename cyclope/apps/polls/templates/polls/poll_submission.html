@@ -1,0 +1,34 @@
+{% extends host_template %}
+
+{% comment%}
+TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
+{% endcomment%}
+
+{% load comments i18n fb_versions cyclope_utils markup %}
+
+{% block content %}
+
+{% alias poll as 'current_object' %}
+
+<div class="content-view poll submission poll-submission">
+
+  {% get_comment_count for poll as comment_count %}
+
+  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+
+  <h1 class="title">{{ poll.name }}</h1>
+
+  <form action="" method="POST"> <!-- class="user_input"> -->
+    {% for form in forms %}
+      <p>{{ form.question }}</p>
+        {% for field in form.form %}
+	  {{ field.errors }}
+          {{ field }}
+	{% endfor %}
+    {% endfor %}
+      <input type="submit" class="submit" value="{% trans "Send" %}" />
+  </form>
+
+</div> <!--termina poll_detail -->
+
+{% endblock content%}
