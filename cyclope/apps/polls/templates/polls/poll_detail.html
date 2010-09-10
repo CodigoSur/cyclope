@@ -1,0 +1,79 @@
+{% extends host_template %}
+
+{% comment%}
+TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
+{% endcomment%}
+
+{% load comments i18n fb_versions cyclope_utils markup %}
+
+{% block content %}
+
+{% alias poll as 'current_object' %}
+
+<div class="content-view poll detail poll-detail">
+
+  {% get_comment_count for poll as comment_count %}
+
+  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+
+  <h1 class="title">{{ poll.name }}</h1>
+
+  <!-- herramientas -->
+  <div class="tools meta-content">
+    <ul>
+      <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a></li>
+      <li>
+        <a href="/share?slug={{ poll.slug }}" onclick="abrir_popup(this);return false" class="share">
+          {% trans "Share" %}
+        </a>
+      </li>
+
+      {% if not poll.allow_comments == 'NO' %}
+        {% if comment_count %}
+        <li>
+          <a href="#comments" class="comments_link">{% trans "Comments" %} ({{ comment_count }})</a>
+        </li>
+        {% endif %}
+      {% endif %}
+    </ul>
+  </div>
+  <!-- /herramientas -->
+
+  {% if poll.tags %}
+    <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ poll.tags }}</span></div>
+  {% endif %}
+
+    <div class="poll_results">
+      {% for question in poll.question_set.all %}
+        <p>{{ question.text }}</p>
+        <ul>
+          {% for answer in question.answer_set.all %}
+          <li> {{answer.text}} ({{answer.get_votes}}) </li>
+          {% endfor %}
+        </ul>
+      
+      {% endfor %}
+    </div>
+  {% include 'cyclope/related_contents_block.html' %}
+
+
+	      <div class="clear"></div>
+     <!-- redsocial -->
+           <div id="socialnetworks" class="socialnetworks">{% trans "Share in your social networks"%}:
+<a href="http://www.facebook.com" rel="nofollow" onclick="sbs_facebook(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/facebook.png" border="0" alt="Compartir en Facebook" title="Compartir en Facebook" height="24" width="24" /></a>
+<a href="http://www.del.icio.us" rel="nofollow" onclick="sbs_delicious(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/delicious.png" border="0" alt="Compartir en Delicious" title="Compartir en Delicious" height="24" width="24" /></a>
+<a href="http://www.yahoo.com" rel="nofollow" onclick="sbs_yahoobm(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/yahoo.png" border="0" alt="Compartir en Yahoo" title="Compartir en Yahoo" height="24" width="24" /></a>
+<a href="http://www.google.com" rel="nofollow" onclick="sbs_googlebm(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/google.png" border="0" alt="Compartir en Google" title="Compartir en Google" height="24" width="24" /></a>
+  	</div>
+          <!-- /redsocial -->
+
+            <div class="clear"></div>
+
+  <hr>
+
+<!--COMENTARIOS -->
+  {% include 'comments/comments_block.html' %}
+
+</div> <!--termina poll_detail -->
+
+{% endblock content%}

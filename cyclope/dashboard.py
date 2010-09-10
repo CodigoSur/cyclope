@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -131,6 +131,14 @@ class CustomIndexDashboard(Dashboard):
                         'cyclope.models.Author',
                         'cyclope.models.Source',
                         ]),
+                modules.ModelList(
+                    title=_('Polls'),
+                    css_classes = ('dbmodule-content_authors_and_sources',),
+                    include_list=[
+                        'cyclope.apps.polls.models.Poll',
+                        'cyclope.apps.polls.models.Question',
+                        ]),
+
                 )))
 
         if user in managers or user in admins:

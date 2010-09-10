@@ -102,6 +102,7 @@ INSTALLED_APPS = [
     'cyclope.apps.articles',
     'cyclope.apps.staticpages',
     'cyclope.apps.medialibrary',
+    'cyclope.apps.polls',
     'contact_form',
     'haystack',
 ]

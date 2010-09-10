@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# FIRST AUTHOR LeitoMonk <monk@gcoop.coop>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-14 03:44-0300\n"
+"POT-Creation-Date: 2010-09-09 21:51-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
-"Last-Translator: LeitoMonk <monk@gcoop.coop>\n"
+"Last-Translator: NicoEchániz <nicoechaniz@codigosur.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
-#: admin.py:67
+#: admin.py:74
 msgid "content details"
 msgstr "detalles de contenido"
 
@@ -44,95 +44,100 @@ msgstr "Biblioteca Multimedia"
 msgid "Authors and Sources"
 msgstr "Autores y Fuentes"
 
-#: dashboard.py:138 apps/articles/templates/articles/article_detail.html:37
+#: dashboard.py:135
+msgid "Polls"
+msgstr "Encuestas"
+
+#: dashboard.py:146 apps/articles/templates/articles/article_detail.html:37
+#: apps/polls/templates/polls/poll_detail.html:34
 msgid "Comments"
 msgstr "Comentarios"
 
-#: dashboard.py:140
+#: dashboard.py:148
 msgid "Review and moderate user comments"
 msgstr "Revisa y modera los comentarios recibidos"
 
-#: dashboard.py:149
+#: dashboard.py:157
 msgid "Categorization"
 msgstr "Categorización"
 
-#: dashboard.py:155
+#: dashboard.py:163
 msgid "Classify the content in your website"
 msgstr "Clasifica el contenido de tu sitio"
 
-#: dashboard.py:158
+#: dashboard.py:166
 msgid "Collections"
 msgstr "Colecciones"
 
-#: dashboard.py:165
+#: dashboard.py:173
 msgid "Tagging"
 msgstr "Etiquetado"
 
-#: dashboard.py:173
+#: dashboard.py:181
 msgid "Site structure"
 msgstr "Estructura del sitio"
 
-#: dashboard.py:175
+#: dashboard.py:183
 msgid "Modify the menus and site layouts"
 msgstr "Administra los menúes y la disposición del contenido"
 
-#: dashboard.py:186
+#: dashboard.py:194
 msgid "Global settings"
 msgstr "Configuración global"
 
-#: dashboard.py:199
+#: dashboard.py:207
 msgid "Advanced"
 msgstr "Avanzado"
 
-#: dashboard.py:205
+#: dashboard.py:213
 msgid "Advanced configuration"
 msgstr "Configuración avanzada"
 
-#: dashboard.py:208
+#: dashboard.py:216
 msgid "Auth"
 msgstr "Permisos"
 
-#: dashboard.py:214
+#: dashboard.py:222
 msgid "Registration"
 msgstr "Registración"
 
-#: dashboard.py:220
+#: dashboard.py:228
 msgid "Sites"
 msgstr "Sitios"
 
-#: dashboard.py:231
+#: dashboard.py:239
 msgid "Recent Actions"
 msgstr "Acciones Recientes"
 
-#: dashboard.py:241
+#: dashboard.py:249
 msgid "Codigo Sur, latest news"
 msgstr "Código Sur, últimas noticias"
 
-#: default_settings.py:152
+#: default_settings.py:153
 msgid "Admin Thumbnail"
 msgstr "Miniatura para sitio de administración"
 
-#: default_settings.py:154
+#: default_settings.py:155
 msgid "Thumbnail (140px)"
 msgstr "Imagen miniatura (140px)"
 
-#: default_settings.py:156
+#: default_settings.py:157
 msgid "Small (300px)"
 msgstr "Pequeña (300px)"
 
-#: default_settings.py:158
+#: default_settings.py:159
 msgid "Medium (460px)"
 msgstr "Mediana (460px)"
 
-#: default_settings.py:160
+#: default_settings.py:161
 msgid "Big (620px)"
 msgstr "Grande (620px)"
 
-#: default_settings.py:162
+#: default_settings.py:163
 msgid "Cropped (60x60px)"
 msgstr "Cortada (60x60px)"
 
-#: default_settings.py:164
+#: default_settings.py:165
 msgid "Cropped Thumbnail (140x140px)"
 msgstr "Miniatura cortada (140x140px)"
 
@@ -236,7 +241,8 @@ msgid "keywords"
 msgstr "palabras clave"
 
 #: models.py:68 apps/articles/models.py:91 apps/medialibrary/models.py:37
-#: core/collections/models.py:52 core/collections/models.py:77
+#: apps/polls/models.py:36 core/collections/models.py:52
+#: core/collections/models.py:77
 msgid "description"
 msgstr "descripción"
 
@@ -244,8 +250,8 @@ msgstr "descripción"
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:84 models.py:114 models.py:220 models.py:265 models.py:327
-#: models.py:350 core/collections/models.py:41 core/collections/models.py:71
+#: models.py:84 models.py:114 models.py:220 models.py:266 models.py:328
+#: models.py:351 core/collections/models.py:41 core/collections/models.py:71
 msgid "name"
 msgstr "nombre"
 
@@ -327,23 +333,23 @@ msgstr "esquemas"
 msgid "content type"
 msgstr "tipo de contenido"
 
-#: models.py:258
+#: models.py:259
 msgid "related content"
 msgstr "contenido relacionado"
 
-#: models.py:259
+#: models.py:260
 msgid "related contents"
 msgstr "contenidos relacionados"
 
-#: models.py:269
+#: models.py:270
 msgid "tags"
 msgstr "etiquetas"
 
-#: models.py:270
+#: models.py:271
 msgid "published"
 msgstr "publicar"
 
-#: models.py:331 models.py:366 models.py:376 apps/articles/models.py:73
+#: models.py:332 models.py:367 models.py:377 apps/articles/models.py:73
 #: apps/medialibrary/models.py:46 apps/medialibrary/models.py:81
 #: apps/medialibrary/models.py:94 apps/medialibrary/models.py:107
 #: apps/medialibrary/models.py:120 core/collections/models.py:53
@@ -351,67 +357,67 @@ msgstr "publicar"
 msgid "image"
 msgstr "imagen"
 
-#: models.py:334
+#: models.py:335
 msgid "origin"
 msgstr "origen"
 
-#: models.py:336
+#: models.py:337
 msgid "notes"
 msgstr "notas"
 
-#: models.py:338 core/collections/models.py:51
+#: models.py:339 core/collections/models.py:51
 msgid "content types"
 msgstr "tipos de contenido"
 
-#: models.py:339
+#: models.py:340
 msgid "Select the content types this author is related to."
 msgstr "Seleccione los tipos de contenido que corresponden a este autor"
 
-#: models.py:345 apps/articles/models.py:46 apps/medialibrary/models.py:35
+#: models.py:346 apps/articles/models.py:46 apps/medialibrary/models.py:35
 msgid "author"
 msgstr "autor"
 
-#: models.py:346
+#: models.py:347
 msgid "authors"
 msgstr "autores"
 
-#: models.py:354
+#: models.py:355
 msgid "link"
 msgstr "enlace"
 
-#: models.py:360 apps/articles/models.py:47
+#: models.py:361 apps/articles/models.py:47
 msgid "source"
 msgstr "fuente"
 
-#: models.py:361
+#: models.py:362
 msgid "sources"
 msgstr "fuentes"
 
-#: models.py:372
+#: models.py:373
 msgid "Thumbnail Image"
 msgstr "Imagen miniatura"
 
-#: models.py:377
+#: models.py:378
 msgid "images"
 msgstr "imágenes"
 
-#: models.py:396
+#: models.py:397
 msgid "avatar"
 msgstr "tu imagen"
 
-#: models.py:398
+#: models.py:399
 msgid "city"
 msgstr "ciudad"
 
-#: models.py:399
+#: models.py:400
 msgid "about myself"
 msgstr "sobre mí"
 
-#: models.py:402
+#: models.py:403
 msgid "public"
 msgstr "público"
 
-#: models.py:403
+#: models.py:404
 msgid "Choose whether your profile info should be publicly visible or not"
 msgstr "Elije si deseas que tu información de perfil sea pública"
 
@@ -467,7 +473,8 @@ msgstr "pre-título"
 msgid "summary"
 msgstr "resumen"
 
-#: apps/articles/models.py:45 apps/staticpages/models.py:30
+#: apps/articles/models.py:45 apps/polls/models.py:48 apps/polls/models.py:67
+#: apps/staticpages/models.py:30
 msgid "text"
 msgstr "texto"
 
@@ -522,10 +529,12 @@ msgid "downloads"
 msgstr "bajadas"
 
 #: apps/articles/templates/articles/article_detail.html:27
+#: apps/polls/templates/polls/poll_detail.html:24
 msgid "Print"
 msgstr "Imprimir"
 
 #: apps/articles/templates/articles/article_detail.html:30
+#: apps/polls/templates/polls/poll_detail.html:27
 msgid "Share"
 msgstr "Compartir"
 
@@ -535,7 +544,7 @@ msgstr "Compartir"
 #: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:16
 #: apps/medialibrary/templates/medialibrary/media_detail_header.html:23
 #: apps/medialibrary/templates/medialibrary/movieclip_teaser.html:16
-#: apps/medialibrary/templates/medialibrary/picture_teaser.html:16
+#: apps/medialibrary/templates/medialibrary/picture_teaser.html:14
 #: apps/medialibrary/templates/medialibrary/regularfile_teaser.html:16
 #: apps/medialibrary/templates/medialibrary/soundtrack_teaser.html:12
 #: apps/staticpages/templates/staticpages/staticpage_teaser.html:8
@@ -557,14 +566,16 @@ msgstr "Fuente"
 #: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:21
 #: apps/medialibrary/templates/medialibrary/media_detail_footer.html:4
 #: apps/medialibrary/templates/medialibrary/movieclip_teaser.html:21
-#: apps/medialibrary/templates/medialibrary/picture_teaser.html:21
+#: apps/medialibrary/templates/medialibrary/picture_teaser.html:19
 #: apps/medialibrary/templates/medialibrary/regularfile_teaser.html:25
 #: apps/medialibrary/templates/medialibrary/soundtrack_teaser.html:17
+#: apps/polls/templates/polls/poll_detail.html:43
 #: apps/staticpages/templates/staticpages/staticpage_teaser.html:17
 msgid "Tags"
 msgstr "Etiquetas"
 
 #: apps/articles/templates/articles/article_detail.html:126
+#: apps/polls/templates/polls/poll_detail.html:62
 msgid "Share in your social networks"
 msgstr "Compartir en redes sociales"
 
@@ -687,12 +698,12 @@ msgstr "contenidos externos"
 msgid "download file"
 msgstr "descargar archivo"
 
-#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:22
+#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:23
 #: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:31
 msgid "Open external content"
 msgstr "Abrir contenido externo"
 
-#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:22
+#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:23
 #: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:31
 msgid " (in new window)"
 msgstr " (en ventana nueva)"
@@ -700,6 +711,63 @@ msgstr " (en ventana nueva)"
 #: apps/medialibrary/templates/medialibrary/flashmovie_detail.html:24
 msgid "full screen view (new window)"
 msgstr "pantalla completa (en ventana nueva)"
+
+#: apps/polls/frontend_views.py:40
+msgid "Poll submission form"
+msgstr "Formulario de envío de encuesta"
+
+#: apps/polls/frontend_views.py:78
+msgid "detailed view of the selected Poll"
+msgstr "vista detallada de la Encuesta"
+
+#: apps/polls/models.py:42
+msgid "poll"
+msgstr "encuesta"
+
+#: apps/polls/models.py:43
+msgid "polls"
+msgstr "encuestas"
+
+#: apps/polls/models.py:52
+msgid "allow multiple answers"
+msgstr "permitir múltiples respuestas"
+
+#: apps/polls/models.py:60 apps/polls/models.py:66
+msgid "question"
+msgstr "pregunta"
+
+#: apps/polls/models.py:61
+msgid "questions"
+msgstr "preguntas"
+
+#: apps/polls/models.py:77
+msgid "answer"
+msgstr "respuesta"
+
+#: apps/polls/models.py:78 apps/polls/models.py:86
+msgid "answers"
+msgstr "respuestas"
+
+#: apps/polls/models.py:83
+msgid "user"
+msgstr "usuario"
+
+#: apps/polls/models.py:84
+msgid "foreign_user"
+msgstr "usuario externo"
+
+#: apps/polls/models.py:89
+msgid "submission"
+msgstr "envío"
+
+#: apps/polls/models.py:90
+msgid "submissions"
+msgstr "envíos"
+
+#: apps/polls/templates/polls/poll_submission.html:29
+#: templates/contact_form/contact_form.html:12
+msgid "Send"
+msgstr "Enviar"
 
 #: apps/staticpages/admin.py:36
 msgid "Menu items"
@@ -873,8 +941,8 @@ msgstr[1] "Por favor corrija los errores detallados"
 #: templates/admin/change_list.html:58
 #, python-format
 msgid ""
-"You may use the filters and search form to narrow the list of %(plural_name)"
-"s displayed."
+"You may use the filters and search form to narrow the list of "
+"%(plural_name)s displayed."
 msgstr ""
 "Puedes utilizar los filtros y el formulario de búsqueda para acotar el "
 "listado de %(plural_name)s."
@@ -910,7 +978,7 @@ msgstr " Hay %(comment_count)s comentarios "
 
 #: templates/comments/comments_block.html:22
 msgid "comment on this content"
-msgstr ""
+msgstr "comentar este contenido"
 
 #: templates/comments/form.html:16
 msgid ""
@@ -955,10 +1023,6 @@ msgstr "o haga cambios"
 
 #: templates/comments/preview.html:34
 msgid "Post"
-msgstr "Enviar"
-
-#: templates/contact_form/contact_form.html:12
-msgid "Send"
 msgstr "Enviar"
 
 #: templates/contact_form/contact_form_sent.html:6

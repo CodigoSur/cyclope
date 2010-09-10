@@ -41,6 +41,7 @@ from cyclope.forms import MenuItemAdminForm,\
                           AuthorAdminForm
 
 from cyclope.core.collections.admin import CollectibleAdmin
+import cyclope.settings as cyc_settings
 
 
 class RelatedContentInline(generic.GenericStackedInline):
@@ -55,6 +56,12 @@ class BaseContentAdmin(admin.ModelAdmin):
     """Base class for content models to use instead of admin.ModelAdmin
     """
     inlines = [RelatedContentInline]
+
+    class Media:
+        js = (
+            cyc_settings.CYCLOPE_MEDIA_URL + 'js/reuse_django_jquery.js',
+            cyc_settings.CYCLOPE_MEDIA_URL + 'js/jquery-ui-1.8.4.custom.min.js',
+        )
 
 
 from django.utils.functional import update_wrapper
