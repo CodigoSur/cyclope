@@ -244,16 +244,16 @@ class CustomIndexDashboard(Dashboard):
             limit=5
         ))
 
-        # append a feed module
-        self.children.append(modules.Feed(
-            title=_('Codigo Sur, latest news'),
-            css_classes = ('dbmodule-feed', 'right-area-modules',),
-            draggable = False,
-            deletable = False,
-            collapsible= False,
-            feed_url='http://codigosur.org/rss.php/36',
-            limit=6
-        ))
+        ## append a feed module
+        # self.children.append(modules.Feed(
+        #    title=_('Codigo Sur, latest news'),
+        #    css_classes = ('dbmodule-feed', 'right-area-modules',),
+        #    draggable = False,
+        #    deletable = False,
+        #    collapsible= False,
+        #    feed_url='http://codigosur.org/rss.php/36',
+        #    limit=6
+        #))
 
 
 class CustomAppIndexDashboard(AppIndexDashboard):
