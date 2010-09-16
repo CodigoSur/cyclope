@@ -27,11 +27,14 @@ cyclope.frontend_views
 from django.utils.translation import ugettext_lazy as _
 from django.template import loader, RequestContext
 from django.contrib.sites.models import Site
+from django.http import HttpResponse
 
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
+from cyclope.core.collections.models import Collection, Category
 from cyclope.models import Menu, MenuItem
 from cyclope import views
+from cyclope.utils import template_for_request
 
 
 class MenuRootItemsList(frontend.FrontendView):
@@ -81,7 +84,7 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
     is_instance_view = False
 
     def get_string_response(self, request, *args, **kwargs):
-        is_instance_view = False
+        is_instance_view = False #TODO(diegoM): is this necessary ?
         base_url = request.path_info[1:].split('/')[0]
         if base_url == '':
             current_item = MenuItem.tree.filter(site_home=True)
@@ -99,6 +102,41 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
             return ''
 
 frontend.site.register_view(MenuItem, MenuItemChildrenOfCurrentItem())
+
+class SiteMap(frontend.FrontendView):
+    """Show an expanded hierarchical list of all collection and menus
+    """
+    name='map'
+    verbose_name=_('expanded hierarchical list of all collection and menus')
+    is_default = True
+    is_instance_view = False
+
+    def get_http_response(self, request, *args, **kwargs):
+
+        from cyclope.core.collections.frontend_views import CollectionCategoriesHierarchy
+        collections_list = []
+        for collection in Collection.objects.filter(visible=True):
+            category_list = []
+            for category in Category.tree.filter(collection=collection, level=0):
+                # TODO(diegoM): Change this line when the refactorization is done
+                category_list.extend(CollectionCategoriesHierarchy()._get_categories_nested_list(category))
+            collections_list.extend([collection.name, category_list])
+
+        menus_list = []
+        for menu in Menu.objects.all():
+            menu_items_list = []
+            for item in MenuItem.tree.filter(menu=menu, level=0):
+                # TODO(diegoM): Change this line when the refactorization is done
+                menu_items_list.extend(MenuMenuItemsHierarchy()._get_menuitems_nested_list(item))
+            menus_list.extend([menu.name, menu_items_list])
+
+        c = RequestContext(request, {'collections':collections_list,
+                                     'menus':menus_list})
+        t = loader.get_template("cyclope/site_map.html")
+        c['host_template'] = template_for_request(request)
+        return HttpResponse(t.render(c))
+
+frontend.site.register_view(Site, SiteMap())
 
 
 # TODO(nicoechaniz): refactor this view and CollectionCategoriesHierarchy which share most of their code.

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-09 21:51-0300\n"
+"POT-Creation-Date: 2010-09-16 15:07-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: NicoEchániz <nicoechaniz@codigosur.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 #: admin.py:74
 msgid "content details"
@@ -109,10 +109,6 @@ msgstr "Sitios"
 msgid "Recent Actions"
 msgstr "Acciones Recientes"
 
-#: dashboard.py:249
-msgid "Codigo Sur, latest news"
-msgstr "Código Sur, últimas noticias"
-
 #: default_settings.py:153
 msgid "Admin Thumbnail"
 msgstr "Miniatura para sitio de administración"
@@ -187,7 +183,7 @@ msgstr "El Tipo de contenido no debe estar vacío"
 msgid "You need to select a region"
 msgstr "Debe seleccionar una región"
 
-#: forms.py:234 core/captcha_comments/forms.py:29
+#: forms.py:234 apps/polls/forms.py:37 core/captcha_comments/forms.py:29
 #: core/captcha_contact_form/forms.py:28
 msgid "Security code"
 msgstr "Código de seguridad"
@@ -196,19 +192,24 @@ msgstr "Código de seguridad"
 msgid "Your avatar image is too big"
 msgstr "La imagen enviada es demasiado grande"
 
-#: frontend_views.py:41
+#: frontend_views.py:44
 msgid "list of root items for the selected Menu"
 msgstr "lista de items raíz para el Menú seleccionado"
 
-#: frontend_views.py:61
+#: frontend_views.py:64
 msgid "flat list of all items for the selected Menu"
 msgstr "lista sin jerarquía de los items del Menú"
 
-#: frontend_views.py:79
+#: frontend_views.py:82
 msgid "list view of children of the current menu item"
 msgstr "lista de los hijos del item de menú que se encuentre seleccionado"
 
-#: frontend_views.py:109
+#: frontend_views.py:110
+#, fuzzy
+msgid "expanded hierarchical list of all collection and menus"
+msgstr "lista jerarquizada de todas las categorías y menúes"
+
+#: frontend_views.py:147
 msgid "hierarchical list of the items in the selected menu"
 msgstr "lista jerarquizada de los items del menú"
 
@@ -716,7 +717,7 @@ msgstr "pantalla completa (en ventana nueva)"
 msgid "Poll submission form"
 msgstr "Formulario de envío de encuesta"
 
-#: apps/polls/frontend_views.py:78
+#: apps/polls/frontend_views.py:80
 msgid "detailed view of the selected Poll"
 msgstr "vista detallada de la Encuesta"
 
@@ -764,7 +765,7 @@ msgstr "envío"
 msgid "submissions"
 msgstr "envíos"
 
-#: apps/polls/templates/polls/poll_submission.html:29
+#: apps/polls/templates/polls/poll_submission.html:30
 #: templates/contact_form/contact_form.html:12
 msgid "Send"
 msgstr "Enviar"
@@ -941,8 +942,8 @@ msgstr[1] "Por favor corrija los errores detallados"
 #: templates/admin/change_list.html:58
 #, python-format
 msgid ""
-"You may use the filters and search form to narrow the list of "
-"%(plural_name)s displayed."
+"You may use the filters and search form to narrow the list of %(plural_name)"
+"s displayed."
 msgstr ""
 "Puedes utilizar los filtros y el formulario de búsqueda para acotar el "
 "listado de %(plural_name)s."
@@ -1301,6 +1302,9 @@ msgstr "Resultados"
 #: templates/search/search.html:25
 msgid "No results found."
 msgstr "No se encontró ningún resultado"
+
+#~ msgid "Codigo Sur, latest news"
+#~ msgstr "Código Sur, últimas noticias"
 
 #~ msgid "navigation breadcrumb"
 #~ msgstr "profundidad de navegación"

@@ -1,0 +1,19 @@
+{% extends host_template %}
+
+{% block content %}
+<div class="content-view site map site-map">
+
+  <div class="menus-map">
+    <ul>
+      {{ menus|unordered_list }}
+    </ul>
+  </div>
+
+  <div class="collection-map">
+    <ul>
+      {{ collections|unordered_list }}
+    </ul>
+  </div>
+
+</div>
+{% endblock content%}
