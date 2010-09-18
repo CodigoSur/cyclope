@@ -32,7 +32,7 @@
 
   <div class="icon_list_container">
 
-  {% for categorization in categorizations %}
+  {% for categorization in categorizations|dictsortreversed:"object_modification_date" %}
     {% join categorization.content_type.app_label  "/" categorization.content_type.model "_labeled_icon.html" as template_path %}
 
     {% comment %}

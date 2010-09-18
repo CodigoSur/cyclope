@@ -30,7 +30,7 @@
   We show a teaser view of every object belonging to this category.
   {% endcomment %}
 
-  {% for categorization in categorizations %}
+  {% for categorization in categorizations|dictsortreversed:"object_modification_date" %}
     {% join categorization.content_type.app_label  "/" categorization.content_type.model "_teaser.html" as template_path %}
 
     {% comment %}
@@ -43,7 +43,6 @@
     {% include template_path %}
   {% endfor %}
 
-<!--  <div class="pagEspacio"></div> -->
   {% if page %}
     {% include 'cyclope/pagination_block.html' %}
   {% endif %}

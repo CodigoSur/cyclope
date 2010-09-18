@@ -89,9 +89,12 @@ Si modificas no borres estas lineas :)
             <div class="box">
               {% tag_cloud_for_model articles.Article as article_tags with min_count=1 distribution=log %}
               {% for tag in article_tags %}
+                  <a class="tag{{tag.font_size}}">{{tag.name}}</a>
+                {% comment %}
                 <a href="/tag/{{ tag.name|slugify }}" class="tag{{tag.font_size}}">
                   {{tag.name}}
                 </a>
+                {% endcomment %}
               {% endfor %}
               </a>&nbsp&nbsp
             </div>

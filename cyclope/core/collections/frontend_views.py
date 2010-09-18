@@ -67,9 +67,8 @@ class CategoryTeaserList(frontend.FrontendView):
 
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         category = content_object
-        #TODO(nicoechaniz): this article__date ordering looks bad. categories can hold any baseontent derivative
         c = RequestContext(request,
-                           {'categorizations': category.categorizations.order_by('article__date'),
+                           {'categorizations': category.categorizations.all(),
                             'region_view': True,
                             'category': category})
         t = loader.get_template(self.template)
@@ -78,8 +77,7 @@ class CategoryTeaserList(frontend.FrontendView):
 
     def get_http_response(self, request, slug=None, *args, **kwargs):
         category = Category.objects.get(slug=slug)
-        # TODO(nicoechaniz):this hardcoded order_by es wrong. fix it.
-        categorizations_list = category.categorizations.order_by('article__date')
+        categorizations_list = category.categorizations.all()
 
         paginator = Paginator(categorizations_list, self.items_per_page)
 

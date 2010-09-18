@@ -159,6 +159,11 @@ class Categorization(models.Model):
 
     objects = CategorizationManager()
 
+    @property
+    def object_modification_date(self):
+        return self.content_object.modification_date
+        
+        
     def __unicode__(self):
         return '%(collection_name)s: %(category_name)s' % {
             'collection_name': self.category.collection.name,
@@ -167,6 +172,7 @@ class Categorization(models.Model):
     class Meta:
         verbose_name = _('categorization')
         verbose_name_plural = _('categorizations')
+#        ordering = ('object_modification_date',)
 
 
 class Collectible(models.Model):

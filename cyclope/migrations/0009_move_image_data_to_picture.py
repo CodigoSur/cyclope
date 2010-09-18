@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -23,14 +23,13 @@ import datetime
 from south.db import db
 from south.v2 import DataMigration
 from django.db import models
-#from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
-from cyclope.apps.articles.models import Article, ArticleImageData
-from cyclope.apps.medialibrary.models import Picture
 
 class Migration(DataMigration):
 
     def forwards(self, orm):
+        from cyclope.apps.articles.models import Article, ArticleImageData
+        from cyclope.apps.medialibrary.models import Picture
         # we work with the actual models here because managing these generic relations with south is very complex
         for article in Article.objects.all():
             if article.images:

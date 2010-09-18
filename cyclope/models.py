@@ -23,6 +23,7 @@
 models
 ------
 """
+from datetime import datetime
 
 from django.db import models
 from django.db.models import get_model
@@ -272,14 +273,16 @@ class BaseContent(models.Model):
     related_contents = generic.GenericRelation(RelatedContent,
                                                object_id_field='self_id',
                                                content_type_field='self_type')
-    def pictures(self):
-        if self.related_contents:
-            pic_model = get_model('medialibrary', 'picture')
-            ctype = ContentType.objects.get_for_model(pic_model)
-            rel_contents = self.related_contents.filter(other_type__pk=ctype.pk)
-            return [ r.other_object for r in rel_contents ]
-        else:
-            return None
+    creation_date = models.DateTimeField(_('creation date'), auto_now_add=True,
+                                         editable=False, default=datetime.now())
+    modification_date = models.DateTimeField(_('modification date'), auto_now=True,
+                                             editable=False, default=datetime.now())
+    allow_comments = models.CharField(_('allow comments'), max_length=4,
+                                choices = (
+                                    ('SITE',_('default')),
+                                    ('YES',_('enabled')),
+                                    ('NO',_('disabled'))
+                                ), default='SITE')
 
     def get_instance_url(self, view_name):
         #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well.
@@ -376,19 +379,6 @@ class Image(models.Model):
     class Meta:
         verbose_name = _('image')
         verbose_name_plural = _('images')
-
-
-#class Attachment(models.Model):
-#    """A simple attachment model.
-#    """
-#    attachment =  models.FileField(_('image'), max_length=100, format='Image',
-#                                    directory='pictures/')
-#    name = models.CharField(_('name'),max_length=250,
-#                             db_index=True, blank=False, unique=True)
-
-#    class Meta:
-#        verbose_name = _('attachment')
-#        verbose_name_plural = _('attachment')
 
 
 class UserProfile(models.Model):
