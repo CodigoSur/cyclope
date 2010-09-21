@@ -66,7 +66,8 @@ urlpatterns = patterns('',
         results_per_page=cyc_settings.CYCLOPE_PAGINATION['TEASER'],
     ), name='haystack_search'),
     (r'^contact/', include('contact_form.urls')),
-    (r'^category/(?P<slug>[\w-]+)/rss/$', CategoryFeed()),
+    url(r'^category/(?P<slug>[\w-]+)/rss/$', CategoryFeed(),
+        name='category_feed'),
 )
 
 if django_settings.DEBUG:

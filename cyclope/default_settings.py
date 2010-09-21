@@ -95,6 +95,7 @@ INSTALLED_APPS = [
     'profiles',
 
 #    'debug_toolbar',
+#    'django_extensions',
 
     'cyclope',
     'cyclope.core.collections',

@@ -25,7 +25,7 @@ cyclope.frontend_views
 """
 
 from django.utils.translation import ugettext_lazy as _
-from django.template import loader, RequestContext
+from django.template import loader, RequestContext, Template, Context
 from django.contrib.sites.models import Site
 from django.http import HttpResponse
 
@@ -33,8 +33,8 @@ from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 from cyclope.core.collections.models import Collection, Category
 from cyclope.models import Menu, MenuItem
-from cyclope import views
 from cyclope.utils import template_for_request
+import cyclope.settings as cyc_settings
 
 
 class MenuRootItemsList(frontend.FrontendView):
@@ -113,14 +113,17 @@ class SiteMap(frontend.FrontendView):
 
     def get_http_response(self, request, *args, **kwargs):
 
-        from cyclope.core.collections.frontend_views import CollectionCategoriesHierarchy
         collections_list = []
         for collection in Collection.objects.filter(visible=True):
             category_list = []
             for category in Category.tree.filter(collection=collection, level=0):
                 # TODO(diegoM): Change this line when the refactorization is done
-                category_list.extend(CollectionCategoriesHierarchy()._get_categories_nested_list(category))
-            collections_list.extend([collection.name, category_list])
+                category_list.extend(self._get_categories_nested_list(category))
+            t = Template('{{ category }} <a href="{% url category_feed category.slug %}">'
+                         '<img src="{{ media_url }}images/css/rss_logo.png"/></a>')
+            include = t.render(Context({'category':category,
+                                        'media_url':cyc_settings.CYCLOPE_THEME_MEDIA_URL}))
+            collections_list.extend([include,category_list])
 
         menus_list = []
         for menu in Menu.objects.all():
@@ -136,6 +139,49 @@ class SiteMap(frontend.FrontendView):
         c['host_template'] = template_for_request(request)
         return HttpResponse(t.render(c))
 
+    def _get_categories_nested_list(self, base_category, name_field='name'):
+
+        """Creates a nested list to be used with unordered_list template tag
+        """
+        #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
+        link_template = Template(
+            '{% if has_children %}'
+              '<span class="expand_collapse">+</span>\n'
+            '{% endif %}'
+            '{% if has_content %}'
+              '<a href="{% url category-teaser_list slug %}">'
+                 '<span>{{ name }}</span></a>'
+            '{% else %} {{ name }}'
+            '{% endif %}'
+            ' <a href="{% url category_feed slug %}">'
+            '<img src="{{ media_url }}images/css/rss_logo.png"/></a>'
+            )
+        nested_list = []
+        for child in base_category.get_children():
+            if child.get_descendant_count()>0:
+                nested_list.extend(self._get_categories_nested_list(
+                    child, name_field=name_field))
+            else:
+                name = getattr(child, name_field)
+                has_content = child.categorizations.exists()
+                nested_list.append(link_template.render(
+                    Context({'name': name,
+                             'slug': child.slug,
+                             'has_content': has_content,
+                             'media_url':cyc_settings.CYCLOPE_THEME_MEDIA_URL,})))
+
+        name = getattr(base_category, name_field)
+        has_content = base_category.categorizations.exists()
+        include = link_template.render(
+            Context({'name': name,
+                     'slug': base_category.slug,
+                     'has_content': has_content,
+                     'has_children': base_category.get_descendant_count(),
+                     'media_url':cyc_settings.CYCLOPE_THEME_MEDIA_URL,}))
+        if nested_list:
+            return [include, nested_list]
+        else:
+            return [include]
 frontend.site.register_view(Site, SiteMap())
 
 

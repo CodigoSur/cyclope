@@ -23,29 +23,15 @@ from django.contrib.syndication.views import Feed, FeedDoesNotExist
 from django.shortcuts import get_object_or_404
 from cyclope.core.collections.models import Category
 from cyclope.models import BaseContent
-
-#TODO(diegoM): Should N be in the admin?
-N = 30
+import cyclope.settings as cyc_settings
 
 class CategoryFeed(Feed):
 
     def get_object(self, request, slug):
         return get_object_or_404(Category, slug=slug)
 
-#    # TODO(diegoM): Add title and description
-#    def title(self, category):
-
-#    def description(self, category):
-#
-
     def link(self, category):
         return category.get_absolute_url()
-
-#    def item_link(self, content):
-#        return content.get_absolute_url()
-
-#    def item_title(self, content):
-#        return content.name
 
     # TODO(diegoM): It would be better show the first paragraph?
     def item_description(self, content):
@@ -55,6 +41,7 @@ class CategoryFeed(Feed):
         return content.author.name
 
     def items(self, category):
-        # TODO(nicoechaniz):this hardcoded order_by es wrong. fix it.
+        N = cyc_settings.CYCLOPE_RSS_LIMIT
+        # TODO(nicoechaniz):this hardcoded order_by is wrong. fix it.
         return [c.content_object for c in
                 category.categorizations.order_by('-article__date')[:N]]

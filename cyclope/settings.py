@@ -74,6 +74,7 @@ CYCLOPE_ARTICLE_TEXT_STYLE = getattr(settings,
 CYCLOPE_PAGINATION = getattr(settings, 'CYCLOPE_PAGINATION',
                              { 'TEASER' : 10,
                                'LABELED_ICON' : 30,})
+CYCLOPE_RSS_LIMIT = 50
 
 #TODO(nicoechaniz): re-evaluate the way we are handling these dynamic settings, it is practical but seems hacky and error-prone.
 

@@ -211,7 +211,10 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
                      'slug': base_category.slug,
                      'has_content': has_content,
                      'has_children': base_category.get_descendant_count()}))
-        return [include, nested_list]
+        if nested_list:
+            return [include, nested_list]
+        else:
+            return [include]
 
 frontend.site.register_view(Collection, CollectionCategoriesHierarchy())
 
