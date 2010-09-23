@@ -1,0 +1,12 @@
+{% extends 'admin/change_list.html' %}
+{% load cyclope_utils i18n %}
+
+      {% block filters %}
+        {% if cl.has_filters %}
+          <div id="changelist-filter">
+            <h2>{% trans 'Filter' %}</h2>
+            {% for spec in cl.filter_specs %}{% admin_list_filter_without_all cl spec %}{% endfor %}
+          </div>
+        {% endif %}
+      {% endblock %}
+

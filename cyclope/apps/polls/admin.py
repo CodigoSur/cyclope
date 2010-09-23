@@ -22,6 +22,7 @@
 
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
+import cyclope.settings as cyc_settings
 
 from models import *
 
@@ -30,12 +31,32 @@ class AnswerInline(admin.StackedInline):
 
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [AnswerInline]
+    list_filter = ('poll',)
+    fields = ('text', 'allow_multiple_answers',)
+
+    def changelist_view(self, request, extra_context=None):
+        # questions changelist should only show items from one poll.
+        # so we activate the filter to display the last poll questions when no
+        # filters have been selected by the user
+        if Poll.objects.count():
+            last_poll_id = Poll.objects.order_by('-pk')[0].id
+            if not request.GET:
+                request.GET = {u'poll__id__exact': unicode(last_poll_id)}
+        return super(QuestionAdmin, self).changelist_view(request, extra_context)
 
 class QuestionInline(admin.StackedInline):
     model = Question
+    extra = 0
 
 class PollAdmin(admin.ModelAdmin):
     inlines = [QuestionInline]
+
+    class Media:
+        # This js is needed because drag&drop will be used
+        js = (
+            cyc_settings.CYCLOPE_MEDIA_URL + 'js/reuse_django_jquery.js',
+            cyc_settings.CYCLOPE_MEDIA_URL + 'js/jquery-ui-1.8.4.custom.min.js',
+        )
 
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Poll, PollAdmin)
