@@ -24,7 +24,7 @@ from haystack import site
 import cyclope.apps.articles.models
 
 
-class ArticleIndex(SearchIndex):
+class ArticleIndex(RealTimeSearchIndex):
     text = CharField(document=True, use_template=True) #template: pretitle, summary, text, author, source
     author = CharField(model_attr='author')
     source = CharField(model_attr='source', null=True)

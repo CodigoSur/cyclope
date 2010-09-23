@@ -1,3 +1,4 @@
+{{ object.name }}
 {{ object.pretitle }}
 {{ object.summary }}
 {{ object.author.name }}

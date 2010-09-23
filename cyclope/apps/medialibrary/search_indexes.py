@@ -24,7 +24,7 @@ from haystack import site
 import cyclope.apps.medialibrary.models
 
 
-class BaseMediaIndex(SearchIndex):
+class BaseMediaIndex(RealTimeSearchIndex):
     text = CharField(document=True, use_template=True) #template: author, description
     author = CharField(model_attr='author')
 

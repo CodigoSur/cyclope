@@ -21,10 +21,11 @@
 
 from haystack.indexes import *
 from haystack import site
-import cyclope.apps.staticpages.models
+import cyclope.apps.polls.models as models
 
 
-class StaticPageIndex(RealTimeSearchIndex):
-    text = CharField(document=True, use_template=True) #template: summary, text
+class PollIndex(RealTimeSearchIndex):
+    text = CharField(document=True, use_template=True) #template: name, description
+    pub_date = DateTimeField(model_attr='creation_date') #TODO: Maybe we have to add 'date'
 
-site.register(cyclope.apps.staticpages.models.StaticPage, StaticPageIndex)
+site.register(models.Poll, PollIndex)

@@ -210,12 +210,13 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
         #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
         from django.template import Template, Context
         link_template = Template(
-#            '{% if has_children %}'
-#              '<span class="expand_collapse">+</span>\n'
-#            '{% endif %}'
-              '<a href="/{{ item_url }}"">'
-              '<span>{{ name }}</span>'
-              '</a>'
+             '{% if menu_item.custom_url %}'
+             '   <a href="{{menu_item.url}}">'
+             '{% else %}'
+             '   <a href="/{{CYCLOPE_PREFIX}}{{menu_item.url}}">'
+             '{% endif %}'
+             '<span>{{ menu_item.name }}</span>'
+             '</a>'
             )
         nested_list = []
         for child in base_item.get_children():
@@ -225,16 +226,11 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
             else:
                 name = getattr(child, name_field)
                 nested_list.append(link_template.render(
-                    Context({'name': name,
-                             'item_url': child.url,
-                             })))
+                    Context({'menu_item': child})))
 
         name = getattr(base_item, name_field)
         include = link_template.render(
-            Context({'name': name,
-                     'has_children': base_item.get_descendant_count(),
-                     'item_url': base_item.url,
-                     }))
+            Context({'menu_item': base_item}))
         if nested_list:
             return [include, nested_list]
         else:
