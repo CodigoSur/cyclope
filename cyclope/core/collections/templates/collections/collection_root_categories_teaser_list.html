@@ -32,10 +32,12 @@
         <img class="icon" src="{% version category.image.path 'thumbnail' %}" border="0"/>
       </a>
       {% endif %}
-
+ 
+      {% if category.description %}
       <div class="text">
         {{ category.description|safe }}
       </div>
+      {% endif %}
 
       <div class="bottom"></div>
     </div>
