@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -34,7 +34,7 @@ from models import *
 
 
 class ArticleForm(forms.ModelForm):
-    if cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE.lower() ==  'wysiwyg':
+    if cyc_settings.CYCLOPE_ARTICLE_TEXT_STYLE.lower() ==  'wysiwyg':
         text = forms.CharField(label=_('Text'), widget=WYMEditor())
 
     def __init__(self, *args, **kwargs):
