@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -163,6 +163,9 @@ class Categorization(models.Model):
     def object_modification_date(self):
         return self.content_object.modification_date
         
+    @property
+    def object_creation_date(self):
+        return self.content_object.creation_date
         
     def __unicode__(self):
         return '%(collection_name)s: %(category_name)s' % {
