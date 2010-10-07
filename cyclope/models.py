@@ -120,10 +120,7 @@ class MenuItem(models.Model):
                          always_update=True)
     site_home = models.BooleanField(_('site home'), default=False)
     custom_url = models.CharField(_('custom URL'), max_length=200,
-                                  blank=True, default='',
-                                  help_text=_(
-                                    u"Either set an URL here or \
-                                    select a content type and view."))
+                                  blank=True, default='')
     url = models.CharField(editable=False, max_length=255, unique=True, db_index=True)
 #    open_in_new_window = models.BooleanField(default=False)
     active = models.BooleanField(default=True, db_index=True)

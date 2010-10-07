@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-16 15:07-0300\n"
+"POT-Creation-Date: 2010-10-07 18:36-0300\n"
 "PO-Revision-Date: 2010-04-09 16:14-0300\n"
 "Last-Translator: NicoEchániz <nicoechaniz@codigosur.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,9 +16,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: admin.py:74
+#: admin.py:73
 msgid "content details"
 msgstr "detalles de contenido"
+
+#: admin.py:78
+msgid "Either set an URL here or select a contenttype and view."
+msgstr "configura la URL aquí o selecciona un tipo de contenido y vista"
 
 #: dashboard.py:38
 msgid "Site Administration"
@@ -109,31 +113,31 @@ msgstr "Sitios"
 msgid "Recent Actions"
 msgstr "Acciones Recientes"
 
-#: default_settings.py:153
+#: default_settings.py:154
 msgid "Admin Thumbnail"
 msgstr "Miniatura para sitio de administración"
 
-#: default_settings.py:155
+#: default_settings.py:156
 msgid "Thumbnail (140px)"
 msgstr "Imagen miniatura (140px)"
 
-#: default_settings.py:157
+#: default_settings.py:158
 msgid "Small (300px)"
 msgstr "Pequeña (300px)"
 
-#: default_settings.py:159
+#: default_settings.py:160
 msgid "Medium (460px)"
 msgstr "Mediana (460px)"
 
-#: default_settings.py:161
+#: default_settings.py:162
 msgid "Big (620px)"
 msgstr "Grande (620px)"
 
-#: default_settings.py:163
+#: default_settings.py:164
 msgid "Cropped (60x60px)"
 msgstr "Cortada (60x60px)"
 
-#: default_settings.py:165
+#: default_settings.py:166
 msgid "Cropped Thumbnail (140x140px)"
 msgstr "Miniatura cortada (140x140px)"
 
@@ -205,156 +209,159 @@ msgid "list view of children of the current menu item"
 msgstr "lista de los hijos del item de menú que se encuentre seleccionado"
 
 #: frontend_views.py:110
-#, fuzzy
 msgid "expanded hierarchical list of all collection and menus"
-msgstr "lista jerarquizada de todas las categorías y menúes"
+msgstr "lista de todas las categorías y menúes"
 
-#: frontend_views.py:147
+#: frontend_views.py:193
 msgid "hierarchical list of the items in the selected menu"
 msgstr "lista jerarquizada de los items del menú"
 
-#: models.py:55
+#: models.py:56
 msgid "templating theme"
 msgstr "tema de la plantilla"
 
-#: models.py:57
+#: models.py:58
 msgid "default layout"
 msgstr "esquema por defecto"
 
-#: models.py:59 apps/articles/models.py:55
+#: models.py:60 models.py:277
 msgid "allow comments"
 msgstr "permitir comentarios"
 
-#: models.py:61 apps/articles/models.py:58
+#: models.py:62 models.py:280
 msgid "enabled"
 msgstr "habilitado"
 
-#: models.py:62 apps/articles/models.py:59
+#: models.py:63 models.py:281
 msgid "disabled"
 msgstr "deshabilitado"
 
-#: models.py:65
+#: models.py:66
 msgid "global title"
 msgstr "titulo global"
 
-#: models.py:67
+#: models.py:68
 msgid "keywords"
 msgstr "palabras clave"
 
-#: models.py:68 apps/articles/models.py:91 apps/medialibrary/models.py:37
-#: apps/polls/models.py:36 core/collections/models.py:52
-#: core/collections/models.py:77
+#: models.py:69 apps/medialibrary/models.py:37 apps/polls/models.py:36
+#: core/collections/models.py:52 core/collections/models.py:77
 msgid "description"
 msgstr "descripción"
 
-#: models.py:74 models.py:75
+#: models.py:75 models.py:76
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:84 models.py:114 models.py:220 models.py:266 models.py:328
+#: models.py:85 models.py:115 models.py:218 models.py:264 models.py:328
 #: models.py:351 core/collections/models.py:41 core/collections/models.py:71
 msgid "name"
 msgstr "nombre"
 
-#: models.py:86
+#: models.py:87
 msgid "main menu"
 msgstr "menu principal"
 
-#: models.py:103 models.py:112
+#: models.py:104 models.py:113
 msgid "menu"
 msgstr "menú"
 
-#: models.py:104
+#: models.py:105
 msgid "menus"
 msgstr "menúes"
 
-#: models.py:115 core/collections/models.py:74
+#: models.py:116 core/collections/models.py:74
 msgid "parent"
 msgstr "relacionado"
 
-#: models.py:116 core/collections/models.py:75
+#: models.py:117 core/collections/models.py:75
 msgid "children"
 msgstr "hijo"
 
-#: models.py:120
+#: models.py:121
 msgid "site home"
 msgstr "página de inicio"
 
-#: models.py:121
+#: models.py:122
 msgid "custom URL"
 msgstr "URL personalizada"
 
-#: models.py:124
-msgid ""
-"Either set an URL here or                                     select a "
-"content type and view."
-msgstr "configura la URL aquí o selecciona un tipo de contenido y vista"
-
-#: models.py:129 models.py:231
+#: models.py:127 models.py:229
 msgid "layout"
 msgstr "esquema"
 
-#: models.py:133 models.py:201
+#: models.py:131 models.py:199
 msgid "type"
 msgstr "tipo"
 
-#: models.py:135 models.py:209
+#: models.py:133 models.py:207
 msgid "object"
 msgstr "objeto"
 
-#: models.py:141 models.py:203
+#: models.py:139 models.py:201
 msgid "view"
 msgstr "vista"
 
-#: models.py:188
+#: models.py:186
 msgid "menu item"
 msgstr "item de menú"
 
-#: models.py:189
+#: models.py:187
 msgid "menu items"
 msgstr "items de menú"
 
-#: models.py:197
+#: models.py:195
 msgid "region"
 msgstr "región"
 
-#: models.py:206
+#: models.py:204
 msgid "weight"
 msgstr "peso"
 
-#: models.py:225
+#: models.py:223
 msgid "layout template"
 msgstr "plantilla para este esquema"
 
-#: models.py:232
+#: models.py:230
 msgid "layouts"
 msgstr "esquemas"
 
-#: models.py:239 models.py:244 core/collections/models.py:156
+#: models.py:237 models.py:242 core/collections/models.py:156
 msgid "content type"
 msgstr "tipo de contenido"
 
-#: models.py:259
+#: models.py:257
 msgid "related content"
 msgstr "contenido relacionado"
 
-#: models.py:260
+#: models.py:258
 msgid "related contents"
 msgstr "contenidos relacionados"
 
-#: models.py:270
+#: models.py:268
 msgid "tags"
 msgstr "etiquetas"
 
-#: models.py:271
+#: models.py:269
 msgid "published"
 msgstr "publicar"
 
-#: models.py:332 models.py:367 models.py:377 apps/articles/models.py:73
-#: apps/medialibrary/models.py:46 apps/medialibrary/models.py:81
-#: apps/medialibrary/models.py:94 apps/medialibrary/models.py:107
-#: apps/medialibrary/models.py:120 core/collections/models.py:53
-#: core/collections/models.py:78
+#: models.py:273
+msgid "creation date"
+msgstr "fecha de creación"
+
+#: models.py:275
+msgid "modification date"
+msgstr "fecha de modificación"
+
+#: models.py:279
+msgid "default"
+msgstr "por defecto"
+
+#: models.py:332 models.py:367 models.py:377 apps/medialibrary/models.py:46
+#: apps/medialibrary/models.py:81 apps/medialibrary/models.py:94
+#: apps/medialibrary/models.py:107 apps/medialibrary/models.py:120
+#: core/collections/models.py:53 core/collections/models.py:78
 msgid "image"
 msgstr "imagen"
 
@@ -402,23 +409,23 @@ msgstr "Imagen miniatura"
 msgid "images"
 msgstr "imágenes"
 
-#: models.py:397
+#: models.py:384
 msgid "avatar"
 msgstr "tu imagen"
 
-#: models.py:399
+#: models.py:386
 msgid "city"
 msgstr "ciudad"
 
-#: models.py:400
+#: models.py:387
 msgid "about myself"
 msgstr "sobre mí"
 
-#: models.py:403
+#: models.py:390
 msgid "public"
 msgstr "público"
 
-#: models.py:404
+#: models.py:391
 msgid "Choose whether your profile info should be publicly visible or not"
 msgstr "Elije si deseas que tu información de perfil sea pública"
 
@@ -480,54 +487,16 @@ msgid "text"
 msgstr "texto"
 
 #: apps/articles/models.py:49
-msgid "creation date"
-msgstr "fecha de creación"
-
-#: apps/articles/models.py:51
 msgid "date"
 msgstr "fecha"
 
-#: apps/articles/models.py:57
-msgid "default"
-msgstr "por defecto"
-
-#: apps/articles/models.py:67 apps/articles/models.py:72
-#: apps/articles/models.py:89
+#: apps/articles/models.py:61
 msgid "article"
 msgstr "artículo"
 
-#: apps/articles/models.py:68
+#: apps/articles/models.py:62
 msgid "articles"
 msgstr "artículos"
-
-#: apps/articles/models.py:74
-msgid "label"
-msgstr "etiqueta"
-
-#: apps/articles/models.py:80
-msgid "article image"
-msgstr "imagen de artículo"
-
-#: apps/articles/models.py:81
-msgid "article images"
-msgstr "imágenes de artículo"
-
-#: apps/articles/models.py:85
-msgid "title"
-msgstr "título"
-
-#: apps/articles/models.py:90
-msgid "attachments"
-msgstr "adjuntos"
-
-#: apps/articles/models.py:93 apps/medialibrary/models.py:109
-#: apps/medialibrary/models.py:113
-msgid "file"
-msgstr "archivo"
-
-#: apps/articles/models.py:95
-msgid "downloads"
-msgstr "bajadas"
 
 #: apps/articles/templates/articles/article_detail.html:27
 #: apps/polls/templates/polls/poll_detail.html:24
@@ -669,6 +638,10 @@ msgstr "flash"
 msgid "flash movies"
 msgstr "flash"
 
+#: apps/medialibrary/models.py:109 apps/medialibrary/models.py:113
+msgid "file"
+msgstr "archivo"
+
 #: apps/medialibrary/models.py:114
 msgid "files"
 msgstr "archivos"
@@ -799,7 +772,7 @@ msgid "All"
 msgstr "Todos"
 
 #: core/collections/admin.py:94 core/collections/models.py:124
-#: core/collections/models.py:177
+#: core/collections/models.py:183
 msgid "categories"
 msgstr "categorías"
 
@@ -827,23 +800,23 @@ msgstr "lista de items raíz para la Categoría seleccionada"
 msgid "teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:113
+#: core/collections/frontend_views.py:111
 msgid "Labeled icon list of Category members"
 msgstr "lista de iconos con nombre de los miembros de una Categoría"
 
-#: core/collections/frontend_views.py:124
+#: core/collections/frontend_views.py:122
 msgid "simplified teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:143
+#: core/collections/frontend_views.py:141
 msgid "teaser list of the root Categories of a Collection"
 msgstr "lista de resúmenes de las Categorías raíz de una Colección"
 
-#: core/collections/frontend_views.py:163
+#: core/collections/frontend_views.py:161
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
-#: core/collections/frontend_views.py:224
+#: core/collections/frontend_views.py:225
 msgid "hierarchical list of Categories that will show an icon list on click"
 msgstr "lista jerarquizada de las Categorias que llevará a una vista de íconos"
 
@@ -875,11 +848,11 @@ msgstr "activo"
 msgid "category"
 msgstr "categoría"
 
-#: core/collections/models.py:168
+#: core/collections/models.py:173
 msgid "categorization"
 msgstr "Categorización"
 
-#: core/collections/models.py:169
+#: core/collections/models.py:174
 msgid "categorizations"
 msgstr "Categorizaciones"
 
@@ -955,6 +928,7 @@ msgstr "Agregar %(name)s"
 
 #: templates/admin/change_list.html:87
 #: templates/admin/feincms/tree_editor.html:140
+#: templates/admin/polls/change_list.html:7
 msgid "Filter"
 msgstr "Filtro"
 
@@ -1044,7 +1018,7 @@ msgstr "Página"
 
 #: templates/cyclope/pagination_block.html:12
 #: templates/cyclope/themes/neutrona/base.html:42
-#: templates/cyclope/themes/neutronica/base.html:45
+#: templates/cyclope/themes/neutronica/base.html:44
 msgid "of"
 msgstr "de"
 
@@ -1124,12 +1098,12 @@ msgid "right sidebar"
 msgstr "barra lateral derecha"
 
 #: templates/cyclope/themes/neutrona/base.html:41
-#: templates/cyclope/themes/neutronica/base.html:44
+#: templates/cyclope/themes/neutronica/base.html:43
 msgid "Image"
 msgstr "Imagen"
 
 #: templates/cyclope/themes/neutrona/base.html:97
-#: templates/cyclope/themes/neutronica/base.html:100
+#: templates/cyclope/themes/neutronica/base.html:102
 msgid "Subscribe to RSS"
 msgstr "Subscripción RSS"
 
@@ -1302,6 +1276,24 @@ msgstr "Resultados"
 #: templates/search/search.html:25
 msgid "No results found."
 msgstr "No se encontró ningún resultado"
+
+#~ msgid "label"
+#~ msgstr "etiqueta"
+
+#~ msgid "article image"
+#~ msgstr "imagen de artículo"
+
+#~ msgid "article images"
+#~ msgstr "imágenes de artículo"
+
+#~ msgid "title"
+#~ msgstr "título"
+
+#~ msgid "attachments"
+#~ msgstr "adjuntos"
+
+#~ msgid "downloads"
+#~ msgstr "bajadas"
 
 #~ msgid "Codigo Sur, latest news"
 #~ msgstr "Código Sur, últimas noticias"

@@ -69,12 +69,15 @@ from django.utils.functional import update_wrapper
 class MenuItemAdmin(editor.TreeEditor):
     form = MenuItemAdminForm
     fieldsets = ((None,
-                  {'fields': ('menu', 'parent', 'name', 'site_home', 'custom_url',
-                              'layout', 'active')}),
+                  {'fields': ('menu', 'parent', 'name', 'site_home', 'active')}),
                  (_('content details'),
                   {
 #                    'classes': ('collapse',),
-                  'fields':('content_type', 'content_view', 'object_id')})
+                  'fields':('layout', 'custom_url', 'content_type',
+                            'content_view', 'object_id'),
+                  'description': _(u"Either set an URL here or select a content"
+                                    "type and view.")
+                  })
                 )
     list_filter = ('menu',)
 
