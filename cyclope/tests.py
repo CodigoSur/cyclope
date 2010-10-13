@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -34,6 +34,7 @@ from cyclope.templatetags.cyclope_utils import do_join
 from cyclope.apps.staticpages.models import StaticPage
 from cyclope.apps.articles.models import Article
 from cyclope.apps.medialibrary.models import *
+from cyclope.apps.polls.models import *
 
 def create_static_page(name=None):
     if name is None:
@@ -267,12 +268,15 @@ class ArticleTestCase(TestCase):
         frontend.autodiscover()
 
     def test_creation(self):
-        Article.objects.create(name='An instance')
+        author = Author.objects.create(name="the author")
+        Article.objects.create(name='An instance', author=author)
         an_instance = Article.objects.get(slug='an-instance')
         self.assertEqual(an_instance.name, 'An instance')
 
     def test_content_views(self):
-        content_urls = get_content_urls(Article)
+        author = Author.objects.create(name="the author")
+        an_instance = Article.objects.create(name='An instance', author=author)
+        content_urls = get_content_urls(Article, an_instance)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -364,5 +368,20 @@ class SoundTrackTestCase(TestCase):
 
     def test_content_views(self):
         content_urls = get_content_urls(SoundTrack)
+        for url in content_urls:
+            self.assertEqual(self.client.get(url).status_code, 200)
+
+
+class PollTestCase(TestCase):
+    def setUp(self):
+        frontend.autodiscover()
+
+    def test_creation(self):
+        Poll.objects.create(name='An instance')
+        an_instance = Poll.objects.get(slug='an-instance')
+        self.assertEqual(an_instance.name, 'An instance')
+
+    def test_content_views(self):
+        content_urls = get_content_urls(Poll)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)

@@ -63,7 +63,7 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
                   {
                     'classes': ('collapse',),
                     'fields':('source', 'tags', 'pretitle',
-                              'summary', 'date', 'allow_comments')}),
+                              'summary', 'date', 'allow_comments', 'creation_date')}),
                 )
 
 admin.site.register(Article, ArticleAdmin)

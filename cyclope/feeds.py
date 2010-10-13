@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -46,7 +46,7 @@ class WholeSiteFeed(Feed):
         N = cyc_settings.CYCLOPE_RSS_LIMIT
         objs = []
         for ctype in sites.site.base_content_types.keys():
-            objs.extend(list(ctype.objects.all().order_by('-creation_date')[:N]))
+            objs.extend(list(ctype.objects.all().order_by('-content_object__creation_date')[:N]))
         return sorted(objs, key=lambda x: x.creation_date, reverse = True)[:N]
 
 class ContentTypeFeed(WholeSiteFeed):
@@ -75,4 +75,4 @@ class CategoryFeed(WholeSiteFeed):
     def items(self, category):
         N = cyc_settings.CYCLOPE_RSS_LIMIT
         return [c.content_object for c in
-                category.categorizations.order_by('-creation_date')[:N]]
+                category.categorizations.all()[:N]]

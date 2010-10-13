@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -67,8 +67,10 @@ class CategoryTeaserList(frontend.FrontendView):
 
     def get_string_response(self, request, content_object=None, *args, **kwargs):
         category = content_object
+        categorizations_list = category.categorizations.all()
+
         c = RequestContext(request,
-                           {'categorizations': category.categorizations.all(),
+                           {'categorizations': categorizations_list,
                             'region_view': True,
                             'category': category})
         t = loader.get_template(self.template)

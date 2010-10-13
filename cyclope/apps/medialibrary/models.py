@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -38,6 +38,7 @@ class BaseMedia(BaseContent, Collectible):
 
     class Meta:
         abstract = True
+        ordering = ('-creation_date', 'name')
 
 
 class Picture(BaseMedia):

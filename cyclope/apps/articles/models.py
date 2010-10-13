@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -60,5 +60,5 @@ class Article(BaseContent, Collectible):
     class Meta:
         verbose_name = _('article')
         verbose_name_plural = _('articles')
-        ordering = ('-modification_date', 'name')
+        ordering = ('-creation_date', 'name')
 

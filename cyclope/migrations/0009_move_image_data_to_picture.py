@@ -28,9 +28,14 @@ from django.contrib.contenttypes.models import ContentType
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        from cyclope.apps.articles.models import Article, ArticleImageData
-        from cyclope.apps.medialibrary.models import Picture
-        # we work with the actual models here because managing these generic relations with south is very complex
+        # we work with the actual models here because managing these generic relations with south is very complex and we won't be migrating backwards
+
+        try:
+            from cyclope.apps.articles.models import Article, ArticleImageData
+            from cyclope.apps.medialibrary.models import Picture
+        except:
+            return
+        
         for article in Article.objects.all():
             if article.images:
                 for image in article.images.all():
