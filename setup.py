@@ -60,7 +60,7 @@ setup(
         'Django>=1.2',
         'FeinCms>=1.0.99,==dev',
         'django-autoslug>=1.4.1',
-        'django-mptt>=0.3-pre,==dev',
+        'django-mptt<0.4',
         'PIL>=1.1.7',
         'django-simple-captcha>=0.1.7',
         'django-tagging>=0.3.1',
