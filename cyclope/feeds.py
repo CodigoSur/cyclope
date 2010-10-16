@@ -46,7 +46,7 @@ class WholeSiteFeed(Feed):
         N = cyc_settings.CYCLOPE_RSS_LIMIT
         objs = []
         for ctype in sites.site.base_content_types.keys():
-            objs.extend(list(ctype.objects.all().order_by('-content_object__creation_date')[:N]))
+            objs.extend(list(ctype.objects.all()[:N]))
         return sorted(objs, key=lambda x: x.creation_date, reverse = True)[:N]
 
 class ContentTypeFeed(WholeSiteFeed):
