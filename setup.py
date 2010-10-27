@@ -54,6 +54,7 @@ setup(
         'git+http://github.com/alexvasi/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-dev',
         'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-dev',
         'git+http://github.com/toastdriven/django-haystack.git#egg=django-haystack-dev',
+        'hg+http://bitbucket.org/drmeers/django-dbgettext#egg=django-dbgettext',
     ],
 
     install_requires=[
@@ -71,9 +72,11 @@ setup(
         'django-profiles>=0.2',
         'django-admin-tools>=0.3.0',
         'django-contact-form>=0.4a1',
-        'Whoosh==0.3.18',
+        'Whoosh>=1.1.1',
         'django-haystack>=1.1.0-alpha',
         'textile>=2.1.4',
+        'django-dbgettext>=0.1,==dev',
+
     ],
 
     packages=find_packages(),

@@ -4,7 +4,7 @@
 TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
 {% endcomment%}
 
-{% load comments i18n fb_versions cyclope_utils markup %}
+{% load comments i18n fb_versions cyclope_utils markup dbgettext_tags%}
 
 {% block content %}
 
@@ -19,7 +19,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   {% if article.pretitle %}
   <div class="pretitle-container meta-content"><span class="pretitle">{{ article.pretitle }}</span></div>
   {% endif %}
-  <h1 class="title">{{ article.name }}</h1>
+  <h1 class="title">{% trans article.name  %}</h1>
 
   <!-- herramientas -->
   <div class="tools meta-content">
@@ -94,15 +94,15 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 -->
           <!-- /descargas -->
 
-  <div><span class="html-text html-content">
+  <div><span class="html-text html-content">00
     {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'raw' or CYCLOPE_ARTICLE_TEXT_STYLE == 'wysiwyg'%}
-      {{ article.text|safe }}
+      {{ article|parsed_gettext:"text"|safe }}aa
     {% else %}
         {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'textile' %}
-        {{ article.text|textile }}
+        {{ article.text|textile }}bb
         {% else %}
           {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'markdown'%}
-          {{ article.text|markdown }}
+          {{ article.text|markdown }}cc
           {% endif %}
         {% endif %}
     {% endif %}
