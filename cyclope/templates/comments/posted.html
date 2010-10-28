@@ -3,13 +3,12 @@
 
 {% block title %}{% trans "Thanks for commenting" %}.{% endblock %}
 
-{% block page_content %}
+{% block content %}
 <script type="text/javascript">
   setTimeout('window.location = "{{ comment.content_object.get_absolute_url }}"', 3000);
 </script>
 
-<div id="content_container">
-  <h2>{% trans "Thank you for your comment" %}.</h2>
-  <p><a href="{{ comment.content_object.get_absolute_url }}">{% trans "return." %}</a></p>
-</div>
+<h2>{% trans "Thank you for your comment" %}.</h2>
+<p><a href="{{ comment.content_object.get_absolute_url }}">{% trans "return." %}</a></p>
+
 {% endblock %}

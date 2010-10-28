@@ -1,12 +1,11 @@
 {% extends CYCLOPE_DEFAULT_TEMPLATE %}
 {% load i18n %}
 
-{% block page_content%}
+{% block content%}
 
-<div id="content_container">
 <h3>{{ profile.user.username }}</h3>
 {% if profile.avatar %}<img src="{{MEDIA_URL}}/{{ profile.avatar }}" alt=""></img>{% endif %}
 <br/>
 <a href="{{request.META.HTTP_REFERER}}">{% trans "Return" %}</a>
-</div>
+
 {% endblock %}

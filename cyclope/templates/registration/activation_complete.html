@@ -2,11 +2,9 @@
 {% load i18n %}
 
 
-{% block page_content %}
+{% block content %}
 
-<div id="content_container">
-  <h3>{% trans "Your account is now active" %}</h3>
-  <p>{% trans "You may now" %} <a href="/accounts/login?next={{next}}">{% trans "login" %}</a></p>
-</div>
+<h3>{% trans "Your account is now active" %}</h3>
+<p>{% trans "You may now" %} <a href="/accounts/login?next={{next}}">{% trans "login" %}</a></p>
 
 {% endblock %}

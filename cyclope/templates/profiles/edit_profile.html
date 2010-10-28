@@ -1,31 +1,29 @@
 {% extends CYCLOPE_DEFAULT_TEMPLATE %}
 {% load i18n %}
 
-{% block page_content%}
+{% block content%}
 
-<div id="content_container">
-  <div class="user_input">
-    <h6>
-      {% trans "Please fill in your user profile data" %}
-    </h6>
-    <form enctype="multipart/form-data" method="post">
-    {% csrf_token %}
+<div class="user_input">
+<h6>
+  {% trans "Please fill in your user profile data" %}
+</h6>
+<form enctype="multipart/form-data" method="post">
+{% csrf_token %}
 
-    {% for field in  form %}
-      {{ field.label_tag }}
-      {% if field.help_text %}<span class="help">{{ field.help_text }}</span> <br/> {% endif%}
-      {{ field.errors }}
-      {% if field.name ==  "avatar" and profile.avatar %}
-        <img src="{{MEDIA_URL}}/{{ profile.avatar }}" alt=""></img>
-      {% endif %}
+{% for field in  form %}
+  {{ field.label_tag }}
+  {% if field.help_text %}<span class="help">{{ field.help_text }}</span> <br/> {% endif%}
+  {{ field.errors }}
+  {% if field.name ==  "avatar" and profile.avatar %}
+    <img src="{{MEDIA_URL}}/{{ profile.avatar }}" alt=""></img>
+  {% endif %}
 
-      {{ field }}
-    {% endfor %}
-    <p class="submit">
-      <input type="submit" name="post" class="submit" value="{% trans "Send data" %}" />
-    </p>
-    </form>
-  </div>
+  {{ field }}
+{% endfor %}
+<p class="submit">
+  <input type="submit" name="post" class="submit" value="{% trans "Send data" %}" />
+</p>
+</form>
 </div>
 
 {% endblock %}

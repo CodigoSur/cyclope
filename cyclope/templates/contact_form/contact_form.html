@@ -1,16 +1,14 @@
 {% extends CYCLOPE_DEFAULT_TEMPLATE %}
 {% load i18n %}
 
-{% block page_content%}
-<div id="content_container">
-  <div class="user_input">
-    <h6>
-      {{ instructions }}
-    </h6>
-    <form action="{% url contact_form %}" method="post">
-      {{ form.as_p }}
-      <input type="submit" class="submit" value="{% trans "Send" %}" />
-    </form>
-  </div>
+{% block content%}
+<div class="user_input">
+<h6>
+  {{ instructions }}
+</h6>
+<form action="{% url contact_form %}" method="post">
+  {{ form.as_p }}
+  <input type="submit" class="submit" value="{% trans "Send" %}" />
+</form>
 </div>
 {% endblock %}
