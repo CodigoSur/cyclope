@@ -4,8 +4,8 @@ Transifex.net Token Verification
 The list of tokens bellow guarantee the respective users to be able to enable 
 submission on components using the following repository url:
 
-http://bitbucket.org/nicoechaniz/django-cyclope
+ssh://hg@bitbucket.org/nicoechaniz/django-cyclope-transifex
 
 Tokens:
 
-8gP3q7S2qK8tr6rt2zwpgg5wLaWQxrYY / nicoechaniz
+NJpBFVe64KJTByaZcm4BfrBzmLS2zxYJ / nicoechaniz
