@@ -24,6 +24,7 @@ models
 ------
 """
 from datetime import datetime
+import os
 
 from django.db import models
 from django.db.models import get_model
@@ -33,7 +34,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
+from django.conf import settings
 
+from rosetta.poutil import find_pos
 from tagging_autocomplete.models import TagAutocompleteField
 import mptt
 from autoslug.fields import AutoSlugField
@@ -312,6 +315,34 @@ class BaseContent(models.Model):
     @classmethod
     def get_verbose_name(cls):
         return cls._meta.verbose_name
+
+
+    def translations(self):
+        trans_links = []
+        
+        for lang in settings.LANGUAGES:
+            # we look for the number rosetta uses to identity an app
+            # which can be different for each language
+            lang_code = lang[0]
+            app_idx = None
+            for i, path in enumerate(find_pos(lang_code)):
+                project_path = cyclope.settings.CYCLOPE_PROJECT_PATH
+                common_prefix = os.path.commonprefix([path, project_path])
+                if common_prefix == project_path:
+                    # we found the position for our app
+                    app_idx = i
+                    break
+            if app_idx is not None:
+                signature = "%s/%s/%s/" % (self._meta.app_label,
+                                       self._meta.module_name, self.slug)
+                trans_links.append(
+                    u'<a href="/rosetta/select/%s/%s/?query=%s">%s</a> '
+                    % (lang[0], app_idx, signature, _(lang[1])))
+        trans_links = ''.join(trans_links)
+        return trans_links
+    
+    translations.allow_tags = True
+    translations.short_description = _('translations')
 
     def __unicode__(self):
         return self.name

@@ -7,14 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-07 18:36-0300\n"
-"PO-Revision-Date: 2010-04-09 16:14-0300\n"
-"Last-Translator: NicoEchániz <nicoechaniz@codigosur.org>\n"
+"POT-Creation-Date: 2010-11-02 21:14-0300\n"
+"PO-Revision-Date: 2010-10-29 22:16\n"
+"Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
+"X-Translated-Using: django-rosetta 0.5.6\n"
 
 #: admin.py:73
 msgid "content details"
@@ -22,7 +23,7 @@ msgstr "detalles de contenido"
 
 #: admin.py:78
 msgid "Either set an URL here or select a contenttype and view."
-msgstr "configura la URL aquí o selecciona un tipo de contenido y vista"
+msgstr "Configura la URL aquí o selecciona un tipo de contenido y vista."
 
 #: dashboard.py:38
 msgid "Site Administration"
@@ -113,31 +114,43 @@ msgstr "Sitios"
 msgid "Recent Actions"
 msgstr "Acciones Recientes"
 
-#: default_settings.py:154
+#: default_settings.py:42
+msgid "Spanish"
+msgstr "Español"
+
+#: default_settings.py:43
+msgid "English"
+msgstr "Inglés"
+
+#: default_settings.py:44
+msgid "Portuguese"
+msgstr "Portugués"
+
+#: default_settings.py:165
 msgid "Admin Thumbnail"
 msgstr "Miniatura para sitio de administración"
 
-#: default_settings.py:156
+#: default_settings.py:167
 msgid "Thumbnail (140px)"
 msgstr "Imagen miniatura (140px)"
 
-#: default_settings.py:158
+#: default_settings.py:169
 msgid "Small (300px)"
 msgstr "Pequeña (300px)"
 
-#: default_settings.py:160
+#: default_settings.py:171
 msgid "Medium (460px)"
 msgstr "Mediana (460px)"
 
-#: default_settings.py:162
+#: default_settings.py:173
 msgid "Big (620px)"
 msgstr "Grande (620px)"
 
-#: default_settings.py:164
+#: default_settings.py:175
 msgid "Cropped (60x60px)"
 msgstr "Cortada (60x60px)"
 
-#: default_settings.py:166
+#: default_settings.py:177
 msgid "Cropped Thumbnail (140x140px)"
 msgstr "Miniatura cortada (140x140px)"
 
@@ -216,218 +229,227 @@ msgstr "lista de todas las categorías y menúes"
 msgid "hierarchical list of the items in the selected menu"
 msgstr "lista jerarquizada de los items del menú"
 
-#: models.py:56
+#: models.py:59
 msgid "templating theme"
 msgstr "tema de la plantilla"
 
-#: models.py:58
+#: models.py:61
 msgid "default layout"
 msgstr "esquema por defecto"
 
-#: models.py:60 models.py:277
+#: models.py:63 models.py:280
 msgid "allow comments"
 msgstr "permitir comentarios"
 
-#: models.py:62 models.py:280
+#: models.py:65 models.py:283
 msgid "enabled"
 msgstr "habilitado"
 
-#: models.py:63 models.py:281
+#: models.py:66 models.py:284
 msgid "disabled"
 msgstr "deshabilitado"
 
-#: models.py:66
+#: models.py:69
 msgid "global title"
 msgstr "titulo global"
 
-#: models.py:68
+#: models.py:71
 msgid "keywords"
 msgstr "palabras clave"
 
-#: models.py:69 apps/medialibrary/models.py:37 apps/polls/models.py:36
-#: core/collections/models.py:52 core/collections/models.py:77
+#: models.py:72 apps/medialibrary/models.py:37 apps/polls/models.py:36
+#: conf/app_template/models.py:38 core/collections/models.py:52
+#: core/collections/models.py:77
 msgid "description"
 msgstr "descripción"
 
-#: models.py:75 models.py:76
+#: models.py:78 models.py:79
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:85 models.py:115 models.py:218 models.py:264 models.py:328
-#: models.py:351 core/collections/models.py:41 core/collections/models.py:71
+#: models.py:88 models.py:118 models.py:221 models.py:267 models.py:359
+#: models.py:382 core/collections/models.py:41 core/collections/models.py:71
 msgid "name"
 msgstr "nombre"
 
-#: models.py:87
+#: models.py:90
 msgid "main menu"
 msgstr "menu principal"
 
-#: models.py:104 models.py:113
+#: models.py:107 models.py:116
 msgid "menu"
 msgstr "menú"
 
-#: models.py:105
+#: models.py:108
 msgid "menus"
 msgstr "menúes"
 
-#: models.py:116 core/collections/models.py:74
+#: models.py:119 core/collections/models.py:74
 msgid "parent"
 msgstr "relacionado"
 
-#: models.py:117 core/collections/models.py:75
+#: models.py:120 core/collections/models.py:75
 msgid "children"
 msgstr "hijo"
 
-#: models.py:121
+#: models.py:124
 msgid "site home"
 msgstr "página de inicio"
 
-#: models.py:122
+#: models.py:125
 msgid "custom URL"
 msgstr "URL personalizada"
 
-#: models.py:127 models.py:229
+#: models.py:130 models.py:232
 msgid "layout"
 msgstr "esquema"
 
-#: models.py:131 models.py:199
+#: models.py:134 models.py:202
 msgid "type"
 msgstr "tipo"
 
-#: models.py:133 models.py:207
+#: models.py:136 models.py:210
 msgid "object"
 msgstr "objeto"
 
-#: models.py:139 models.py:201
+#: models.py:142 models.py:204
 msgid "view"
 msgstr "vista"
 
-#: models.py:186
+#: models.py:189
 msgid "menu item"
 msgstr "item de menú"
 
-#: models.py:187
+#: models.py:190
 msgid "menu items"
 msgstr "items de menú"
 
-#: models.py:195
+#: models.py:198
 msgid "region"
 msgstr "región"
 
-#: models.py:204
+#: models.py:207
 msgid "weight"
 msgstr "peso"
 
-#: models.py:223
+#: models.py:226
 msgid "layout template"
 msgstr "plantilla para este esquema"
 
-#: models.py:230
+#: models.py:233
 msgid "layouts"
 msgstr "esquemas"
 
-#: models.py:237 models.py:242 core/collections/models.py:156
+#: models.py:240 models.py:245 core/collections/models.py:156
 msgid "content type"
 msgstr "tipo de contenido"
 
-#: models.py:257
+#: models.py:260
 msgid "related content"
 msgstr "contenido relacionado"
 
-#: models.py:258
+#: models.py:261
 msgid "related contents"
 msgstr "contenidos relacionados"
 
-#: models.py:268
+#: models.py:271
 msgid "tags"
 msgstr "etiquetas"
 
-#: models.py:269
+#: models.py:272
 msgid "published"
 msgstr "publicar"
 
-#: models.py:273
+#: models.py:276
 msgid "creation date"
 msgstr "fecha de creación"
 
-#: models.py:275
+#: models.py:278
 msgid "modification date"
 msgstr "fecha de modificación"
 
-#: models.py:279
+#: models.py:282
 msgid "default"
 msgstr "por defecto"
 
-#: models.py:332 models.py:367 models.py:377 apps/medialibrary/models.py:46
-#: apps/medialibrary/models.py:81 apps/medialibrary/models.py:94
-#: apps/medialibrary/models.py:107 apps/medialibrary/models.py:120
+#: models.py:345
+msgid "translations"
+msgstr "traducciones"
+
+#: models.py:363 models.py:398 models.py:408 apps/medialibrary/models.py:47
+#: apps/medialibrary/models.py:82 apps/medialibrary/models.py:95
+#: apps/medialibrary/models.py:108 apps/medialibrary/models.py:121
 #: core/collections/models.py:53 core/collections/models.py:78
 msgid "image"
 msgstr "imagen"
 
-#: models.py:335
+#: models.py:366
 msgid "origin"
 msgstr "origen"
 
-#: models.py:337
+#: models.py:368
 msgid "notes"
 msgstr "notas"
 
-#: models.py:339 core/collections/models.py:51
+#: models.py:370 core/collections/models.py:51
 msgid "content types"
 msgstr "tipos de contenido"
 
-#: models.py:340
+#: models.py:371
 msgid "Select the content types this author is related to."
 msgstr "Seleccione los tipos de contenido que corresponden a este autor"
 
-#: models.py:346 apps/articles/models.py:46 apps/medialibrary/models.py:35
+#: models.py:377 apps/articles/models.py:46 apps/medialibrary/models.py:35
 msgid "author"
 msgstr "autor"
 
-#: models.py:347
+#: models.py:378
 msgid "authors"
 msgstr "autores"
 
-#: models.py:355
+#: models.py:386
 msgid "link"
 msgstr "enlace"
 
-#: models.py:361 apps/articles/models.py:47
+#: models.py:392 apps/articles/models.py:47
 msgid "source"
 msgstr "fuente"
 
-#: models.py:362
+#: models.py:393
 msgid "sources"
 msgstr "fuentes"
 
-#: models.py:373
+#: models.py:404
 msgid "Thumbnail Image"
 msgstr "Imagen miniatura"
 
-#: models.py:378
+#: models.py:409
 msgid "images"
 msgstr "imágenes"
 
-#: models.py:384
+#: models.py:415
 msgid "avatar"
 msgstr "tu imagen"
 
-#: models.py:386
+#: models.py:417
 msgid "city"
 msgstr "ciudad"
 
-#: models.py:387
+#: models.py:418
 msgid "about myself"
 msgstr "sobre mí"
 
-#: models.py:390
+#: models.py:421
 msgid "public"
 msgstr "público"
 
-#: models.py:391
+#: models.py:422
 msgid "Choose whether your profile info should be publicly visible or not"
 msgstr "Elije si deseas que tu información de perfil sea pública"
+
+#: settings.py:88
+msgid "You need to set the CYCLOPE_PROJECT_PATH in your settings file."
+msgstr "Debe establecer un valor para CYCLOPE_PROJECT_PATH en settings.py"
 
 #: widgets.py:61
 msgid "toggle editor"
@@ -582,87 +604,87 @@ msgstr "vista detallada del Archivo seleccionado"
 msgid "detailed view of the selected External Content"
 msgstr "vista detallada del Contenido Externo seleccionado"
 
-#: apps/medialibrary/models.py:50
+#: apps/medialibrary/models.py:51
 msgid "picture"
 msgstr "imagen"
 
-#: apps/medialibrary/models.py:51
+#: apps/medialibrary/models.py:52
 msgid "pictures"
 msgstr "imágenes"
 
-#: apps/medialibrary/models.py:57
+#: apps/medialibrary/models.py:58
 msgid "audio"
 msgstr "audio"
 
-#: apps/medialibrary/models.py:61
+#: apps/medialibrary/models.py:62
 msgid "sound track"
 msgstr "pista de sonido"
 
-#: apps/medialibrary/models.py:62
+#: apps/medialibrary/models.py:63
 msgid "sound tracks"
 msgstr "pistas de sonido"
 
-#: apps/medialibrary/models.py:68
+#: apps/medialibrary/models.py:69
 msgid "still"
 msgstr "cuadro de muestra"
 
-#: apps/medialibrary/models.py:70
+#: apps/medialibrary/models.py:71
 msgid "video"
 msgstr "video"
 
-#: apps/medialibrary/models.py:74
+#: apps/medialibrary/models.py:75
 msgid "movie clip"
 msgstr "video"
 
-#: apps/medialibrary/models.py:75
+#: apps/medialibrary/models.py:76
 msgid "movie clips"
 msgstr "video"
 
-#: apps/medialibrary/models.py:83 apps/medialibrary/models.py:87
+#: apps/medialibrary/models.py:84 apps/medialibrary/models.py:88
 msgid "document"
 msgstr "documento"
 
-#: apps/medialibrary/models.py:88
+#: apps/medialibrary/models.py:89
 msgid "documents"
 msgstr "documentos"
 
-#: apps/medialibrary/models.py:96
+#: apps/medialibrary/models.py:97
 msgid "flash"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:100
+#: apps/medialibrary/models.py:101
 msgid "flash movie"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:101
+#: apps/medialibrary/models.py:102
 msgid "flash movies"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:109 apps/medialibrary/models.py:113
+#: apps/medialibrary/models.py:110 apps/medialibrary/models.py:114
 msgid "file"
 msgstr "archivo"
 
-#: apps/medialibrary/models.py:114
+#: apps/medialibrary/models.py:115
 msgid "files"
 msgstr "archivos"
 
-#: apps/medialibrary/models.py:122
+#: apps/medialibrary/models.py:123
 msgid "content url"
 msgstr "URL del contenido"
 
-#: apps/medialibrary/models.py:123
+#: apps/medialibrary/models.py:124
 msgid "open in new window"
 msgstr "abrir en ventana nueva"
 
-#: apps/medialibrary/models.py:124
+#: apps/medialibrary/models.py:125
 msgid "skip detailed view"
 msgstr "saltear vista detallada"
 
-#: apps/medialibrary/models.py:127
+#: apps/medialibrary/models.py:128
 msgid "external content"
 msgstr "contenido externo"
 
-#: apps/medialibrary/models.py:128
+#: apps/medialibrary/models.py:129
 msgid "external contents"
 msgstr "contenidos externos"
 
@@ -763,16 +785,36 @@ msgstr "página estática"
 msgid "static pages"
 msgstr "páginas estáticas"
 
+#: conf/app_template/frontend_views.py:37
+msgid "detailed view of the selected Product"
+msgstr "vista detallada del Producto seleccionado"
+
+#: conf/app_template/frontend_views.py:54
+msgid "list of Products"
+msgstr "lista de Productos"
+
+#: conf/app_template/models.py:37
+msgid "price"
+msgstr "precio"
+
+#: conf/app_template/models.py:61
+msgid "product"
+msgstr "producto"
+
+#: conf/app_template/models.py:62
+msgid "products"
+msgstr "productos"
+
 #: core/captcha_comments/forms.py:28
 msgid "Website or Blog"
 msgstr "Sitio web o Blog"
 
-#: core/collections/admin.py:87
+#: core/collections/admin.py:87 templates/rosetta/pofile.html:59
 msgid "All"
 msgstr "Todos"
 
 #: core/collections/admin.py:94 core/collections/models.py:124
-#: core/collections/models.py:183
+#: core/collections/models.py:186
 msgid "categories"
 msgstr "categorías"
 
@@ -800,23 +842,23 @@ msgstr "lista de items raíz para la Categoría seleccionada"
 msgid "teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:111
+#: core/collections/frontend_views.py:113
 msgid "Labeled icon list of Category members"
 msgstr "lista de iconos con nombre de los miembros de una Categoría"
 
-#: core/collections/frontend_views.py:122
+#: core/collections/frontend_views.py:124
 msgid "simplified teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:141
+#: core/collections/frontend_views.py:143
 msgid "teaser list of the root Categories of a Collection"
 msgstr "lista de resúmenes de las Categorías raíz de una Colección"
 
-#: core/collections/frontend_views.py:161
+#: core/collections/frontend_views.py:163
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
-#: core/collections/frontend_views.py:225
+#: core/collections/frontend_views.py:227
 msgid "hierarchical list of Categories that will show an icon list on click"
 msgstr "lista jerarquizada de las Categorias que llevará a una vista de íconos"
 
@@ -848,13 +890,17 @@ msgstr "activo"
 msgid "category"
 msgstr "categoría"
 
-#: core/collections/models.py:173
+#: core/collections/models.py:176
 msgid "categorization"
 msgstr "Categorización"
 
-#: core/collections/models.py:174
+#: core/collections/models.py:177
 msgid "categorizations"
 msgstr "Categorizaciones"
+
+#: core/collections/models.py:193
+msgid "is orphan"
+msgstr "sin categorizar"
 
 #: core/collections/templates/collections/categories_navigation_block.html:4
 msgid "Categories"
@@ -886,11 +932,12 @@ msgstr "La página de inicio no ha sido establecida."
 msgid "No content object selected"
 msgstr "No ha seleccionado contenido"
 
-#: templates/admin/base_site.html:4
+#: templates/admin/base_site.html:4 templates/rosetta/base.html:5
 msgid "Cyclope site admin"
 msgstr "Administración de Cyclope"
 
 #: templates/admin/change_form.html:21 templates/admin/change_list.html:42
+#: templates/rosetta/pofile.html:46
 msgid "Home"
 msgstr "Inicio"
 
@@ -915,8 +962,8 @@ msgstr[1] "Por favor corrija los errores detallados"
 #: templates/admin/change_list.html:58
 #, python-format
 msgid ""
-"You may use the filters and search form to narrow the list of %(plural_name)"
-"s displayed."
+"You may use the filters and search form to narrow the list of "
+"%(plural_name)s displayed."
 msgstr ""
 "Puedes utilizar los filtros y el formulario de búsqueda para acotar el "
 "listado de %(plural_name)s."
@@ -1253,7 +1300,7 @@ msgstr ""
 msgid "Register"
 msgstr "Registrarse"
 
-#: templates/registration/user_block.html:6
+#: templates/registration/user_block.html:6 templates/rosetta/pofile.html:35
 msgid "Log out"
 msgstr "Cerrar sesión"
 
@@ -1261,13 +1308,113 @@ msgstr "Cerrar sesión"
 msgid "Log in"
 msgstr "Ingresar"
 
+#: templates/registration/user_block.html:17
+#, fuzzy, python-format
+msgid "%(lang_name)s "
+msgstr "Agregar %(name)s"
+
+#: templates/rosetta/base.html:5 templates/rosetta/pofile.html:47
+msgid "Translation"
+msgstr "Traducción"
+
+#: templates/rosetta/pofile.html:12
+msgid "Welcome,"
+msgstr ""
+
+#: templates/rosetta/pofile.html:20
+#, fuzzy
+msgid "Documentation"
+msgstr "documento"
+
+#: templates/rosetta/pofile.html:28
+#, fuzzy
+msgid "Change password"
+msgstr "Re-configurar Clave"
+
+#: templates/rosetta/pofile.html:49
+msgid "File is read-only: download the file when done editing!"
+msgstr ""
+
+#: templates/rosetta/pofile.html:50
+msgid ""
+"Some items in your last translation block couldn't be saved: this usually "
+"happens when the catalog file changes on disk after you last loaded it."
+msgstr ""
+
+#: templates/rosetta/pofile.html:54
+#, python-format
+msgid "Translate into %(rosetta_i18n_lang_name)s"
+msgstr ""
+
+#: templates/rosetta/pofile.html:55
+msgid "total progress: %(percent_translated)s%"
+msgstr "progreso total: %(percent_translated)s%"
+
+#: templates/rosetta/pofile.html:58
+msgid "Display:"
+msgstr "Mostrar:"
+
+#: templates/rosetta/pofile.html:60
+msgid "Untranslated only"
+msgstr "Sólo sin traducir"
+
+#: templates/rosetta/pofile.html:61
+msgid "Fuzzy only"
+msgstr "Sólo dudosos"
+
+#: templates/rosetta/pofile.html:62
+msgid "Translated only"
+msgstr "Sólo traducidos"
+
+#: templates/rosetta/pofile.html:69 templates/search/search.html:11
+msgid "Search"
+msgstr "Buscar"
+
+#: templates/rosetta/pofile.html:71
+msgid "Go"
+msgstr ""
+
+#: templates/rosetta/pofile.html:81
+msgid "Original"
+msgstr ""
+
+#: templates/rosetta/pofile.html:84
+msgid "Fuzzy"
+msgstr "Dudoso"
+
+#: templates/rosetta/pofile.html:109
+msgid "suggest"
+msgstr ""
+
+#: templates/rosetta/pofile.html:122
+#, python-format
+msgid "%(more_count)s more"
+msgid_plural "%(more_count)s more"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/rosetta/pofile.html:135
+msgid "Save"
+msgstr ""
+
+#: templates/rosetta/pofile.html:139
+msgid "Skip to page:"
+msgstr ""
+
+#: templates/rosetta/pofile.html:152
+msgid "Displaying:"
+msgstr ""
+
+#: templates/rosetta/pofile.html:154
+#, python-format
+msgid "%(hits)s/%(message_number)s message"
+msgid_plural "%(hits)s/%(message_number)s messages"
+msgstr[0] ""
+msgstr[1] ""
+
 #: templates/search/search.html:7
 msgid "Advanced search"
 msgstr "Búsqueda avanzada"
-
-#: templates/search/search.html:11
-msgid "Search"
-msgstr "Buscar"
 
 #: templates/search/search.html:16
 msgid "Results"
@@ -1276,6 +1423,9 @@ msgstr "Resultados"
 #: templates/search/search.html:25
 msgid "No results found."
 msgstr "No se encontró ningún resultado"
+
+#~ msgid "Translated"
+#~ msgstr "Traducciones"
 
 #~ msgid "label"
 #~ msgstr "etiqueta"
@@ -1301,7 +1451,6 @@ msgstr "No se encontró ningún resultado"
 #~ msgid "navigation breadcrumb"
 #~ msgstr "profundidad de navegación"
 
-#, fuzzy
 #~ msgid "Categories for this"
 #~ msgstr "categorías"
 

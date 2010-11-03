@@ -47,7 +47,7 @@ body, .ui-widget {
 
 /* ========= change list ======== */
 
-.change-list #content, .change-form #content{ 
+.change-list #content, .change-form #content, .rosetta #content{ 
 width: 960px;
 }
 

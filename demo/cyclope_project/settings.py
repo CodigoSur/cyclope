@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -25,7 +25,7 @@ import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-BASE_DIR = os.path.dirname(__file__)
+CYCLOPE_PROJECT_PATH = os.path.dirname(__file__)
 
 INTERNAL_IPS = ('127.0.0.1',)
 
@@ -36,16 +36,12 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'
-DATABASE_NAME = os.path.join(BASE_DIR, 'db/site.db')
+DATABASE_NAME = os.path.join(CYCLOPE_PROJECT_PATH, 'db/site.db')
 
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
-SITE_ID = 1
-
-USE_I18N = True
-
 # Absolute path to the directory that holds media.
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(CYCLOPE_PROJECT_PATH, 'media/')
 #MEDIA_ROOT = '/var/www/pyclope.nicoechaniz.com.ar/htdocs/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
@@ -63,7 +59,7 @@ ROOT_URLCONF = 'cyclope_project.urls'
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates".
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(CYCLOPE_PROJECT_PATH, 'templates'),
 )
 
 #FILEBROWSER_MAX_UPLOAD_SIZE = 1048576 # 10 MB
@@ -73,7 +69,7 @@ LOGIN_REDIRECT_URL = '/inicio'
 
 # cyclope settings
 
-#CYCLOPE_LOCAL_THEMES_DIR = os.path.join(BASE_DIR, 'templates/cyclope/themes/')
+#CYCLOPE_LOCAL_THEMES_DIR = os.path.join(CYCLOPE_PROJECT_PATH, 'templates/cyclope/themes/')
 #CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/media/local_themes/'
 
 CYCLOPE_PREFIX = ''
@@ -88,7 +84,7 @@ CYCLOPE_PREFIX = ''
 #CYCLOPE_STATICPAGE_TEXT_STYLE = 'wysiwyg'
 #CYCLOPE_ARTICLE_TEXT_STYLE = 'wysiwyg'
 
-HAYSTACK_WHOOSH_PATH = os.path.join(BASE_DIR, 'cyclope_project_index')
+HAYSTACK_WHOOSH_PATH = os.path.join(CYCLOPE_PROJECT_PATH, 'cyclope_project_index')
 
 # import local settings if they are present
 try:

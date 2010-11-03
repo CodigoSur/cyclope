@@ -24,7 +24,7 @@ a new app is installed.
 """
 
 import os
-gettext = lambda s: s
+ugettext = lambda s: s
 
 #workaround for PIL when importing Image using different methods.
 # see http://jaredforsyth.com/blog/2010/apr/28/accessinit-hash-collision-3-both-1-and-1/
@@ -33,6 +33,16 @@ import sys
 import PIL.Image
 sys.modules['Image'] = PIL.Image
 
+SITE_ID = 1
+USE_I18N = True
+## LANGUAGE_CODE = 'en'
+LANGUAGES = (
+#    ('es', gettext('Spanish')),
+# we use the es-ar translation because it's usually more complete than "es"
+    ('es-ar', ugettext('Spanish')),
+    ('en', ugettext('English')),
+    ('pt', ugettext('Portuguese')),
+)
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -63,10 +73,6 @@ MIDDLEWARE_CLASSES = (
 #    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
-#DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
-
-
-
 INSTALLED_APPS = [
     'admin_tools',
     'admin_tools.theming',
@@ -93,6 +99,9 @@ INSTALLED_APPS = [
     'south',
     'registration',
     'profiles',
+    'haystack',
+    'dbgettext',
+    'rosetta',
 
 #    'debug_toolbar',
 #    'django_extensions',
@@ -105,8 +114,10 @@ INSTALLED_APPS = [
     'cyclope.apps.medialibrary',
     'cyclope.apps.polls',
     'contact_form',
-    'haystack',
 ]
+
+# debug_toolbar settings
+#DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
 
 # comments settings
 COMMENTS_APP = 'cyclope.core.captcha_comments'
@@ -151,19 +162,19 @@ FILEBROWSER_SELECT_FORMATS = {
 }
 
 FILEBROWSER_VERSIONS = {
-    'fb_thumb': {'verbose_name': gettext('Admin Thumbnail'),
+    'fb_thumb': {'verbose_name': ugettext('Admin Thumbnail'),
                  'width': 60, 'height': 60, 'opts': 'crop upscale'},
-    'thumbnail': {'verbose_name': gettext('Thumbnail (140px)'),
+    'thumbnail': {'verbose_name': ugettext('Thumbnail (140px)'),
                   'width': 140, 'height': '', 'opts': ''},
-    'small': {'verbose_name': gettext('Small (300px)'),
+    'small': {'verbose_name': ugettext('Small (300px)'),
               'width': 300, 'height': 300, 'opts': 'crop'},
-    'medium': {'verbose_name': gettext('Medium (460px)'),
+    'medium': {'verbose_name': ugettext('Medium (460px)'),
                'width': 460, 'height': '', 'opts': ''},
-    'big': {'verbose_name': gettext('Big (620px)'),
+    'big': {'verbose_name': ugettext('Big (620px)'),
             'width': 620, 'height': '', 'opts': ''},
-    'cropped': {'verbose_name': gettext('Cropped (60x60px)'),
+    'cropped': {'verbose_name': ugettext('Cropped (60x60px)'),
                 'width': 60, 'height': 60, 'opts': 'crop'},
-    'croppedthumbnail': {'verbose_name': gettext('Cropped Thumbnail (140x140px)'),
+    'croppedthumbnail': {'verbose_name': ugettext('Cropped Thumbnail (140x140px)'),
                          'width': 140, 'height': 140, 'opts': 'crop'},
 }
 
@@ -189,3 +200,30 @@ LOCALE_PATHS = (os.path.join(os.path.dirname(__file__), "locale_external"), )
 # django-haystack settings
 HAYSTACK_SITECONF = 'cyclope_project.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
+
+# dbgettext options
+#DBGETTEXT_PROJECT_OPTIONS = 'cyclope.dbgettext_options'
+
+DBGETTEXT_SPLIT_SENTENCES = False
+DBGETTEXT_INLINE_HTML_TAGS = ('b','i','u','em','strong',)
+
+# rosetta settings
+ROSETTA_MESSAGES_SOURCE_LANGUAGE_CODE = 'es'
+#ROSETTA_MAIN_LANGUAGE = 'es'
+ROSETTA_MESSAGES_PER_PAGE = 15
+ROSETTA_EXCLUDED_APPLICATIONS = (
+    'admin_tools',
+    'tagging',
+    'tagging_autocomplete',
+    'autoslug',
+    'feincms',
+    'mptt',
+    'captcha',
+    'filebrowser',
+    'south',
+    'registration',
+    'profiles',
+    'haystack',
+    'dbgettext',
+    'rosetta',
+    )

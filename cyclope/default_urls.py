@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -43,6 +43,7 @@ urlpatterns = patterns('',
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
     url(r'^admin_tools/', include('admin_tools.urls')),
+    (r'^i18n/', include('django.conf.urls.i18n')),
 
     (r'^comments/', include('django.contrib.comments.urls')),
     (r'^captcha/', include('captcha.urls')),
@@ -87,9 +88,10 @@ if django_settings.DEBUG:
             {'document_root': feincms_root, 'show_indexes': True})
     )
 
-
 if 'rosetta' in django_settings.INSTALLED_APPS:
     urlpatterns += patterns('',
+        ## url(r'^rosetta/translate/(?P<langid>[\w\-]+)/(?P<idx>\d+)/',
+        ##     'cyclope.helper_views.rosetta_select_and_translate'),
         url(r'^rosetta/', include('rosetta.urls')),
     )
 
