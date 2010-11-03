@@ -48,35 +48,34 @@ setup(
     # revision number is indicated in the dependency_links for packages
     # that are downloaded from source to ensure a tested revision is used.
     dependency_links=[
-        'git+http://github.com/matthiask/feincms.git#egg=feincms-dev',
-        'git+http://github.com/matthiask/django-mptt.git#egg=django-mptt-3.0-pre',
-        'hg+http://bitbucket.org/ubernostrum/django-registration#egg=django-registration-dev',
-        'git+http://github.com/alexvasi/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-dev',
-        'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-dev',
-        'git+http://github.com/toastdriven/django-haystack.git#egg=django-haystack-dev',
-        'hg+http://bitbucket.org/drmeers/django-dbgettext#egg=django-dbgettext',
+        'hg+http://bitbucket.org/ubernostrum/django-registration@d36a38202ee3d09d342b000f4ff634296f90df49#egg=django-registration-0.8-alpha-1',
+        'git+http://github.com/toastdriven/django-haystack.git@9c4a69110f181b252690230d96713e8cbba36f8b#egg=django-haystack-1.1.0-alpha',
+        'hg+http://bitbucket.org/drmeers/django-dbgettext@fab7c71cab0cbc8cf73669fca4d408c7d3b24a9a#egg=django-dbgettext-0.1',
+        'git+http://github.com/nicoechaniz/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-no-grapelli-3.0',
+        'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-0.4a1',
+        'hg+http://bitbucket.org/nicoechaniz/django-rosetta_temp#egg=django-rosetta-temp-0.5.6',
     ],
 
     install_requires=[
         'Django>=1.2',
-        'FeinCms>=1.0.99,==dev',
-        'django-autoslug>=1.4.1',
-        'django-mptt<0.4',
-        'PIL>=1.1.7',
-        'django-simple-captcha>=0.1.7',
-        'django-tagging>=0.3.1',
-        'django-tagging-autocomplete>=0.3.1',
-        'django-filebrowser>=3.0,==dev',
-        'South>=0.7.1',
-        'django-registration>=0.8-alpha-1,==dev',
-        'django-profiles>=0.2',
-        'django-admin-tools>=0.3.0',
-        'django-contact-form>=0.4a1',
-        'Whoosh>=1.1.1',
-        'django-haystack>=1.1.0-alpha',
-        'textile>=2.1.4',
-        'django-dbgettext>=0.1,==dev',
-
+        'FeinCms==1.1.4',
+        'django-autoslug==1.4.1',
+        'django-mptt==0.3.1', # 0.4 breaks compatibility
+        'PIL>=1.1.7', # in PIL we trust
+        'django-simple-captcha==0.2.0',
+        'django-tagging==0.3.1',
+        'django-tagging-autocomplete==0.3.1',
+        'django-filebrowser-no-grapelli>=3.0', # installed from our clone
+        'South==0.7.2',
+        'django-registration>=0.8-alpha-1', # fixed revision in dep links
+        'django-profiles==0.2',
+        'django-admin-tools==0.3.0',
+        'django-contact-form>=0.4a1', # installed from our clone
+        'Whoosh==1.1.1',
+        'django-haystack>=1.1.0-alpha', # fixed revision in dep links
+        'textile==2.1.4',
+        'django-dbgettext>=0.1', # fixed revision in dep links
+        'django-rosetta-temp>=0.5.6', # installed from our clone
     ],
 
     packages=find_packages(),
