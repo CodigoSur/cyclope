@@ -73,7 +73,7 @@ class SiteSettingsTestCase(TestCase):
 
     def test_create_site(self):
         site_settings = SiteSettings(site=self.site,
-                                theme="neutrona",
+                                theme="neutronica",
                                 allow_comments='YES')
         site_settings.save()
         self.assertEqual(site_settings.site, self.site)
@@ -100,13 +100,13 @@ class SiteTestCase(TestCase):
         menu_item.save()
 
         site_settings = SiteSettings(site=site,
-                                theme="neutrona",
+                                theme="neutronica",
                                 default_layout=layout,
                                 allow_comments='YES')
         site_settings.save()
         response = self.client.get("/")
         self.assertTemplateUsed(response,
-                                u'cyclope/themes/neutrona/one_sidebar.html')
+                                u'cyclope/themes/neutronica/one_sidebar.html')
         #TOTO(SAn): add some more usefull asserts
 
 #        export_fixture(['sites','cyclope'],
@@ -122,7 +122,7 @@ class SiteTestCase(TestCase):
         menu_item.save()
 
         site_settings = SiteSettings(site=site,
-                                theme="neutrona",
+                                theme="neutronica",
                                 allow_comments='YES')
         site_settings.save()
         response = self.client.get("/")
@@ -132,7 +132,7 @@ class SiteTestCase(TestCase):
         site = Site(domain="mydomain.com", name="mydomain")
         site.save()
         site_settings = SiteSettings(site=site,
-                                theme="neutrona",
+                                theme="neutronica",
                                 allow_comments='YES')
         site_settings.save()
         response = self.client.get("/")
@@ -145,7 +145,7 @@ class SiteTestCase(TestCase):
         site = Site(domain="mydomain.com", name="mydomain")
         site.save()
         site_settings = SiteSettings(site=site,
-                                theme="neutrona",
+                                theme="neutronica",
                                 allow_comments='YES')
 
         site_settings.save()
@@ -171,7 +171,7 @@ class RegressionTests(TestCase):
         layout = Layout(name="default", template='one_sidebar.html')
         layout.save()
         site_settings = SiteSettings.objects.create(site=site,
-                                theme="neutrona",
+                                theme="neutronica",
                                 allow_comments='YES')
         site_settings.default_layout = layout
         site_settings.save()
