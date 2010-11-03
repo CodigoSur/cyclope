@@ -1,0 +1,51 @@
+{% load layout i18n tagging_tags %}
+
+<!-- left_sidebar -->
+<div id="left_sidebar_container" class="sidebar">
+  <div class="top"></div>
+  {% region 'left_sidebar' %}
+
+  <div id="searchbox">
+	  <form action="/search/" method="get">
+	 {% for model in CYCLOPE_BASE_CONTENT_TYPES %}
+	 <input type="hidden" name="models" value="{{model.get_app_label}}.{{model.get_object_name}}">
+	 {% endfor %} 
+	  <input type="text" name="q"/>
+	  <input type="submit" value="" class="submit"/>
+	</form>
+  </div>
+
+  <div id="tags">
+	<span class="title">Etiquetas</span>
+	<div class="box">
+	  {% tag_cloud_for_model articles.Article as article_tags with min_count=1 distribution=log %}
+	  {% for tag in article_tags %}
+		  <a class="tag{{tag.font_size}}">{{tag.name}}</a>
+		{% comment %}
+		<a href="/tag/{{ tag.name|slugify }}" class="tag{{tag.font_size}}">
+		  {{tag.name}}
+		</a>
+		{% endcomment %}
+	  {% endfor %}
+	  </a>&nbsp&nbsp
+	</div>
+  </div>
+
+  <div id="rss"><a href="/rss">{% trans "Subscribe to RSS" %}</a></div>
+  <!-- banners -->
+  <div id="banners">
+	<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO" target="_blank">
+	  <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_cc.png" alt="Licencia Creative Commons" width="94" height="15" border="0" />
+	</a><br/>
+	<a href="http://cyclope.codigosur.org">
+	  <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_cyclope.png" alt="Administrado con Cyclope" width="94" height="15" border="0" />
+	</a><br/>
+	<a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank">
+	  <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_css.png" alt="CSS Válido" width="94" height="15" border="0" />
+	</a><br />
+  </div>
+  <!-- /banners -->
+  <div class="bottom"></div>
+
+</div>
+<!-- /left_sidebar -->

@@ -2,23 +2,21 @@
 {% load i18n %}
 
 
-{% block page_content %}
+{% block content %}
 
-<div id="content_container">
-  {% if user %}
-  <h3>{% trans "The activation key you posted is invalid." %}</h3>
-  <p>{% trans "Please make sure that:" %}</p>
-  <ul>
-    <li>{% trans "You haven't already activated your account" %}</li>
-    <li>{% trans "Your key hasn't expired" %}</li>
-    <li>{% trans "Your activation link wasn't split or malformed" %}</li>
-  </ul>
-  {% else %}
+{% if user %}
+<h3>{% trans "The activation key you posted is invalid." %}</h3>
+<p>{% trans "Please make sure that:" %}</p>
+<ul>
+<li>{% trans "You haven't already activated your account" %}</li>
+<li>{% trans "Your key hasn't expired" %}</li>
+<li>{% trans "Your activation link wasn't split or malformed" %}</li>
+</ul>
+{% else %}
 
-  <h3>
-      {% trans "Welcome! Your account has been successfully activated. " %}
-  </h3>
-  {% endif %}
-</div>
+<h3>
+  {% trans "Welcome! Your account has been successfully activated. " %}
+</h3>
+{% endif %}
 
 {% endblock %}

@@ -1,14 +1,12 @@
 {% extends CYCLOPE_DEFAULT_TEMPLATE %}
 {% load i18n %}
 
-{% block page_content%}
+{% block content%}
 
-<div id="content_container">
 {% for profile in object_list %}
 <a href="/profiles/{{ profile.user.username }}/?next={{request.path}}">{{ profile.user.username }}</a>
 {% endfor %}
 <br/>
 <a href="{{request.META.HTTP_REFERER}}">{% trans "Return" %}</a>
-</div>
 
 {% endblock %}
