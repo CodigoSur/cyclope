@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n cyclope_utils %}
 
 <div id="user_status">
 {% if user.is_authenticated %}
@@ -6,5 +6,19 @@
   <a href="/accounts/logout/?next={{ request.path}}">{% trans "Log out" %}</a>
 {% else %}
   <a href="/accounts/login/?next={{ request.path}}">{% trans "Log in" %}</a>
+  
+  {% if LANGUAGES|length > 1 %} / 
+  <div id="language" class="user_input">
+    <form action="/i18n/setlang/" method="post" id="lang">
+      <select name="language" onChange="forms['lang'].submit();">
+	{% for lang_code, lang_name in LANGUAGES %}
+        <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected="selected" {% endif %}>
+	  {% trans lang_name  %}
+	</option>
+	{% endfor %}
+      </select>
+    </form>
+  </div>
+  {% endif %}
 {% endif %}
 </div>

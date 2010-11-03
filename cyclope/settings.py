@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -22,30 +22,35 @@
 """
 Default and dynamic (db based) settings.
 
-All settings will be available to templates if the site_settings context processor is installed.
+CYCLOPE_* settings will be available to templates through the site_settings context processor.
 
 Attributes:
 
   Overidable by the project settings.py:
 
-    CYCLOPE_PREFIX: prefix for cyclope URLs, defaults to 'cyclope/'
-    CYCLOPE_MEDIA_URL: URL to cyclope media files
+    CYCLOPE_PROJECT_PATH: path to the django project that will be serving Cyclope
+    CYCLOPE_PREFIX: prefix for Cyclope URLs, defaults to 'cyclope/'
+    CYCLOPE_MEDIA_URL: URL to Cyclope media files
     CYCLOPE_MEDIA_ROOT: defaults to cyclope/ folder of the project's MEDIA_ROOT
     CYCLOPE_THEMES_ROOT: path to the themes package
 
   Automatic (based on database values):
 
+    CYCLOPE_PROJECT_NAME
     CYCLOPE_SITE_SETTINGS: the SiteSettings instance
     CYCLOPE_CURRENT_THEME
     CYCLOPE_THEME_MEDIA_URL
     CYCLOPE_DEFAULT_LAYOUT
     CYCLOPE_DEFAULT_TEMPLATE
+
 """
+
 import sys, os
 
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, ugettext
 from django.db.models.signals import post_save, pre_delete
+from django.core.exceptions import ImproperlyConfigured
 
 from cyclope.models import SiteSettings
 
@@ -75,6 +80,16 @@ CYCLOPE_PAGINATION = getattr(settings, 'CYCLOPE_PAGINATION',
                              { 'TEASER' : 10,
                                'LABELED_ICON' : 30,})
 CYCLOPE_RSS_LIMIT = 50
+
+CYCLOPE_PROJECT_PATH = getattr(settings, 'CYCLOPE_PROJECT_PATH', None)
+
+if not CYCLOPE_PROJECT_PATH:
+    raise ImproperlyConfigured(
+        ugettext('You need to set the CYCLOPE_PROJECT_PATH in your settings file.'))
+# we normalize the path
+CYCLOPE_PROJECT_PATH = os.path.normpath(CYCLOPE_PROJECT_PATH)
+
+CYCLOPE_PROJECT_NAME = os.path.basename(CYCLOPE_PROJECT_PATH)
 
 #TODO(nicoechaniz): re-evaluate the way we are handling these dynamic settings, it is practical but seems hacky and error-prone.
 

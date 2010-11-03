@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -22,5 +22,5 @@
 # urls should be set at project level using cyclope.site.autodiscover()
 # to populate cyclope.site.urls
 
-# see cyclope_demo for an example
+# see demo/cyclope_project for an example
 

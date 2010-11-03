@@ -188,9 +188,9 @@ class Collectible(models.Model):
     # activate custom admin filter
     categories.category_filter = True
 
-    @property
     def is_orphan(self):
         return not self.categories.exists()
+    is_orphan.short_description = _('is orphan')
 
     class Meta:
         abstract = True
