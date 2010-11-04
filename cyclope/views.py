@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -33,68 +33,29 @@ from django.http import Http404, HttpResponse
 from django.core.xheaders import populate_xheaders
 from django.core.exceptions import ObjectDoesNotExist
 
-from cyclope.utils import template_for_request
-
-def object_detail(request, content_object=None, slug=None, queryset=None, inline=False,
+def object_detail(request, content_object,
         template_name=None, extra_context=None,
-        context_processors=None, template_object_name='object',
-        mimetype=None):
+        context_processors=None, template_object_name='object'):
     """
     Generic detail of an object.
-
-    Arguments:
-        ...
-
-    Templates: ``<app_label>/<model_name>_detail.html``
-    Context:
-        object
-            the object
     """
-    if extra_context is None: extra_context = {}
-    model = queryset.model
-
     obj = content_object
+    if not template_object_name:
+        template_object_name = obj._meta.object_name.lower()
 
-    if obj is None:
-        if queryset and slug:
-            try:
-                obj = queryset.get(slug=slug)
-            except ObjectDoesNotExist:
-                raise Http404(
-                    "No %s found matching the query" % (model._meta.verbose_name))
-        else:
-            raise AttributeError("Generic detail view must be called "
-                                 "with a content_object or a slug.")
     if not template_name:
         template_name = "%s/%s_detail.html" % (
-            model._meta.app_label, model._meta.object_name.lower())
+            obj._meta.app_label, obj._meta.object_name.lower())
     t = loader.get_template(template_name)
 
-    c = RequestContext(request, {
-        template_object_name: obj,
-    }, context_processors)
-    for key, value in extra_context.items():
-        if callable(value):
-            c[key] = value()
-        else:
-            c[key] = value
-
-    if not inline:
-        c['host_template'] = template_for_request(request)
-
-        #TODO(nicoechaniz): this would be useful for debugging but needs work
-        #import xml.dom.minidom as dom
-        #pretty = dom.parseString(t.render(c).encode('utf8')).toprettyxml()
-        #response = HttpResponse(pretty, mimetype=mimetype)
-
-        response = HttpResponse(t.render(c), mimetype=mimetype)
-        populate_xheaders(request, response, model,
-                          getattr(obj, obj._meta.pk.name))
-        return response
-
-    else:
-        c['host_template'] = 'cyclope/inline_view.html'
-        return t.render(c)
+    c = RequestContext(request, {template_object_name: obj}, context_processors)
+    if extra_context:
+        for key, value in extra_context.items():
+            if callable(value):
+                c[key] = value()
+            else:
+                c[key] = value
+    return t.render(c)
 
 
 def object_list(request, queryset, inline=False, paginate_by=None, page=None,
@@ -137,6 +98,9 @@ def object_list(request, queryset, inline=False, paginate_by=None, page=None,
     """
     if extra_context is None: extra_context = {}
     queryset = queryset._clone()
+    if not template_object_name:
+        template_object_name = queryset.model._meta.object_name.lower()
+
     if paginate_by:
         paginator = Paginator(queryset, paginate_by, allow_empty_first_page=allow_empty)
         if not page:
@@ -192,13 +156,4 @@ def object_list(request, queryset, inline=False, paginate_by=None, page=None,
         template_name = "%s/%s_list.html" % (model._meta.app_label, model._meta.object_name.lower())
     t = template_loader.get_template(template_name)
 
-#    return HttpResponse(t.render(c), mimetype=mimetype)
-
-    if not inline:
-        c['host_template'] = template_for_request(request)
-        response = HttpResponse(t.render(c), mimetype=mimetype)
-        return response
-
-    else:
-        c['host_template'] = 'cyclope/inline_view.html'
-        return t.render(c)
+    return t.render(c)

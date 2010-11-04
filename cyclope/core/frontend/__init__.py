@@ -24,9 +24,13 @@ core.frontend
 -------------
 """
 
-import inspect
+
+from django.http import HttpResponse
+
 from sites import site
 from django.utils.translation import ugettext_lazy as _
+
+from cyclope.utils import template_for_request
 
 class FrontendView(object):
     """Parent class for frontend views.
@@ -41,56 +45,52 @@ class FrontendView(object):
 
         is_default(boolean): is this the default view for the model?
 
-        is_instance_view(boolean): is the view always associated
-                                   to an object instance?
+        is_instance_view(boolean): sets whether the view needs a content_object
+
+        is_content_view(boolean): sets whether the view can be used for main page content
+
+        is_region_view(boolean): sets whether the view can be included in layout regions
+        
     """
     name = ''
     verbose_name = ''
     is_default = False
-    template_name = ''
-    extra_context = {}
     is_instance_view = True
+    is_content_view = False
+    is_region_view = False
+    extra_context = {}
     params = {}
 
-    def __init__(self):
-        self.is_region_view = self.is_standard_view = True
-        # we set these vars according to what methods have been overriden
-        try:
-            self.get_http_response(None)
-        except NotImplementedError:
-            self.is_standard_view = False
-        #other exceptions raise because we are not using proper arguments
-        except:
-            pass
-        try:
-            self.get_string_response(None)
-        except NotImplementedError:
-            self.is_region_view = False
-        except:
-            pass
-
-    def __call__(self, request, *args, **kwargs):
+    def __call__(self, request, inline=False, *args, **kwargs):
         if self.params:
             kwargs.update(self.params)
-        #TODO(nicoechaniz): hackish?
-        # check if the view was called from a region templatetag
-        if inspect.stack()[1][3] == 'region':
-            response = self.get_string_response(request, *args, **kwargs)
+
+        if inline:
+            extra_context={'host_template': 'cyclope/inline_view.html'}
         else:
-            response = self.get_http_response(request, *args, **kwargs)
+            extra_context={'host_template': template_for_request(request)}
+
+        if self.is_instance_view:
+            if 'content_object' in kwargs:
+                content_object = kwargs.pop('content_object')
+            else:
+                slug = kwargs['slug']
+                content_object = self.model.objects.get(slug=slug)
+            response = self.get_response(request, extra_context, content_object,
+                                         *args, **kwargs)
+        else:
+            response = self.get_response(request, extra_context)
+        
+        # inline will be True if the view was called from a region templatetag
+        if not inline:
+            response = HttpResponse(response)
+            
         return response
 
-    def get_http_response(self, request, *args, **kwargs):
-        """Must be overriden by inheriting class and return a proper HttpResponse.
+    def get_response(self, request, extra_context, content_object=None):
+        """Must be overriden by inheriting class and return a the view content
         """
         raise NotImplementedError()
-
-    def get_string_response(self, request=None, *args, **kwargs):
-        """Must be overriden by inheriting class and return a string response
-        to be embedded in the calling template region.
-        """
-        raise NotImplementedError()
-
 
     def get_url_pattern(self, model):
         if self.is_default:

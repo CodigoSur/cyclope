@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -68,11 +68,11 @@ def region(context, region_name):
         # instance views need instance data -> slug
         if view.is_instance_view:
             slug = regionview.content_object.slug
-            view_vars['output'] = view(context['request'],
+            view_vars['output'] = view(context['request'], inline=True,
                                        content_object=regionview.content_object)
             view_vars['slug'] = slug
         else:
-            view_vars['output'] = view(context['request'])
+            view_vars['output'] = view(context['request'], inline=True)
 
         view_vars['name'] = regionview.content_view
         view_vars['model'] = regionview.content_type.model

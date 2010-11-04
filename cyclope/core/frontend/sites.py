@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -38,15 +38,12 @@ from django.contrib.sites.models import Site
 from django.db.models import get_model
 
 from cyclope.models import MenuItem, SiteSettings, BaseContent
-
 import cyclope
-
 from cyclope.utils import layout_for_request, LazyJSONEncoder
 
 class CyclopeSite(object):
     """Handles frontend display of models.
     """
-
     def __init__(self):
         self._registry = {}
         self.base_content_types = {}
@@ -64,7 +61,7 @@ class CyclopeSite(object):
             view: a view derived from core.frontend.FrontendView
         """
         if not model in self._registry:
-            self._registry[model] = [view]
+            self._registry[model] = [view()]
             ctype = ContentType.objects.get_for_model(model)
             if issubclass(model, BaseContent):
                 self.base_content_types[model] = ctype
@@ -73,7 +70,7 @@ class CyclopeSite(object):
             self._registry_ctype_choices.append((ctype.id,
                                                 model._meta.verbose_name))
         else:
-            self._registry[model].append(view)
+            self._registry[model].append(view())
 
     def get_base_ctype_choices(self):
         return sorted(self._base_ctype_choices, key=lambda choice: choice[1])
@@ -231,7 +228,7 @@ class CyclopeSite(object):
             views.extend([ {'view_name': view.name,
                             'verbose_name': view.verbose_name}
                            for view in self._registry[model]
-                           if view.is_standard_view])
+                           if view.is_content_view])
         json_data = simplejson.dumps(views, cls=LazyJSONEncoder)
 
         return json_data
