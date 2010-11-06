@@ -33,9 +33,8 @@ from django.http import Http404, HttpResponse
 from django.core.xheaders import populate_xheaders
 from django.core.exceptions import ObjectDoesNotExist
 
-def object_detail(request, content_object,
-        template_name=None, extra_context=None,
-        context_processors=None, template_object_name='object'):
+def object_detail(request, host_template, content_object, extra_context=None, view_name='detail',
+        template_name=None, context_processors=None, template_object_name=None):
     """
     Generic detail of an object.
     """
@@ -44,24 +43,28 @@ def object_detail(request, content_object,
         template_object_name = obj._meta.object_name.lower()
 
     if not template_name:
-        template_name = "%s/%s_detail.html" % (
-            obj._meta.app_label, obj._meta.object_name.lower())
+        template_name = "%s/%s_%s.html" % (
+            obj._meta.app_label, obj._meta.object_name.lower(), view_name)
     t = loader.get_template(template_name)
 
-    c = RequestContext(request, {template_object_name: obj}, context_processors)
+    c = RequestContext(request,
+                       {template_object_name: obj, 'host_template': host_template},
+                       context_processors)
     if extra_context:
         for key, value in extra_context.items():
             if callable(value):
                 c[key] = value()
             else:
                 c[key] = value
+
     return t.render(c)
 
 
-def object_list(request, queryset, inline=False, paginate_by=None, page=None,
-        allow_empty=True, template_name=None, template_loader=loader,
-        extra_context=None, context_processors=None, template_object_name='object',
-        mimetype=None):
+def object_list(request, host_template, queryset, view_name='detail', inline=False,
+                paginate_by=None, page=None, allow_empty=True,
+                template_name=None, template_loader=loader,
+                extra_context=None, context_processors=None,
+                template_object_name='object', mimetype=None):
     """
     Generic list of objects.
 
@@ -118,7 +121,7 @@ def object_list(request, queryset, inline=False, paginate_by=None, page=None,
         except InvalidPage:
             raise Http404
         c = RequestContext(request, {
-            '%s_list' % template_object_name: page_obj.object_list,
+            '%s_%s' % (template_object_name, view_name): page_obj.object_list,
             'paginator': paginator,
             'page_obj': page_obj,
 
@@ -151,6 +154,7 @@ def object_list(request, queryset, inline=False, paginate_by=None, page=None,
             c[key] = value()
         else:
             c[key] = value
+    c['host_template'] = host_template
     if not template_name:
         model = queryset.model
         template_name = "%s/%s_list.html" % (model._meta.app_label, model._meta.object_name.lower())

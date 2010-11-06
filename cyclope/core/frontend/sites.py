@@ -60,8 +60,10 @@ class CyclopeSite(object):
                    core.collections.Collection or core.collections.Category
             view: a view derived from core.frontend.FrontendView
         """
+        view = view()
+        view.model = model
         if not model in self._registry:
-            self._registry[model] = [view()]
+            self._registry[model] = [view]
             ctype = ContentType.objects.get_for_model(model)
             if issubclass(model, BaseContent):
                 self.base_content_types[model] = ctype
@@ -70,7 +72,7 @@ class CyclopeSite(object):
             self._registry_ctype_choices.append((ctype.id,
                                                 model._meta.verbose_name))
         else:
-            self._registry[model].append(view())
+            self._registry[model].append(view)
 
     def get_base_ctype_choices(self):
         return sorted(self._base_ctype_choices, key=lambda choice: choice[1])

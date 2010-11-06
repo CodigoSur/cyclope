@@ -163,7 +163,6 @@ def _delete_related_contents(sender, instance, **kwargs):
     # where this object is the related content, so we do it here.
     ctype = ContentType.objects.get_for_model(sender)
     if hasattr(instance, 'id'):
-        print "instance:", instance.id
         related_from = RelatedContent.objects.filter(other_type=ctype,
                                                     other_id=instance.id)
         for obj in related_from:

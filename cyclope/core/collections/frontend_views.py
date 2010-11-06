@@ -23,7 +23,6 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django.template import loader, RequestContext
-from django.http import Http404, HttpResponse
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 from cyclope import settings as cyc_settings
@@ -32,53 +31,41 @@ from cyclope.core.collections.models import Collection, Category
 from cyclope.utils import template_for_request
 
 class CategoryRootItemsList(frontend.FrontendView):
-    """A flat list view of category members.
+    """A flat list view of the root members for a Category.
     """
     name='root_items_list'
     verbose_name=_('list of root items for the selected Category')
 
-    def get_string_response(self, request, content_object=None, *args, **kwargs):
+    is_content_view = True
+    is_region_view = True
+
+    def get_response(self, request, host_template, content_object):
         category = content_object
+        categorizations_list = category.categorizations.all()
+        template = "collections/category_root_items_list.html"
         c = RequestContext(request,
-                           {'categorizations': category.categorizations.all()})
-        t = loader.get_template("collections/category_root_items_list.html")
-        c['host_template'] = 'cyclope/inline_view.html'
+                           {'categorizations': categorizations_list })
+        t = loader.get_template(template)
+        c['host_template'] = host_template
         return t.render(c)
 
-    def get_http_response(self, request, slug=None, *args, **kwargs):
-        category = Category.objects.get(slug=slug)
-        c = RequestContext(request,
-                           {'categorizations': category.categorizations.all()})
-        t = loader.get_template("collections/category_root_items_list.html")
-        c['host_template'] = template_for_request(request)
-        return HttpResponse(t.render(c))
-
-frontend.site.register_view(Category, CategoryRootItemsList())
+frontend.site.register_view(Category, CategoryRootItemsList)
 
 
 class CategoryTeaserList(frontend.FrontendView):
-    """A teaser list view of category members.
+    """A teaser list view of Category members.
     """
     name='teaser_list'
     verbose_name=_('teaser list of Category members')
     is_default = True
-    template = "collections/category_teaser_list.html"
     items_per_page = cyc_settings.CYCLOPE_PAGINATION['TEASER']
+    is_content_view = True
+    is_region_view = True
 
-    def get_string_response(self, request, content_object=None, *args, **kwargs):
+    template = "collections/category_teaser_list.html"
+
+    def get_response(self, request, host_template, content_object):
         category = content_object
-        categorizations_list = category.categorizations.all()
-
-        c = RequestContext(request,
-                           {'categorizations': categorizations_list,
-                            'region_view': True,
-                            'category': category})
-        t = loader.get_template(self.template)
-        c['host_template'] = 'cyclope/inline_view.html'
-        return t.render(c)
-
-    def get_http_response(self, request, slug=None, *args, **kwargs):
-        category = Category.objects.get(slug=slug)
         categorizations_list = category.categorizations.all()
 
         paginator = Paginator(categorizations_list, self.items_per_page)
@@ -101,70 +88,81 @@ class CategoryTeaserList(frontend.FrontendView):
                             'page': page,
                             'category': category })
         t = loader.get_template(self.template)
-        c['host_template'] = template_for_request(request)
-        return HttpResponse(t.render(c))
+        c['host_template'] = host_template
+        return t.render(c)
 
-frontend.site.register_view(Category, CategoryTeaserList())
+frontend.site.register_view(Category, CategoryTeaserList)
+
 
 class CategoryLabeledIconList(CategoryTeaserList):
-    """A labeled icon list view of category members.
+    """A labeled icon list view of Category members.
     """
     name='labeled_icon_list'
     verbose_name=_('Labeled icon list of Category members')
-    template = "collections/category_labeled_icon_list.html"
     is_default = False
     items_per_page = cyc_settings.CYCLOPE_PAGINATION['LABELED_ICON']
+    template = "collections/category_labeled_icon_list.html"
 
-frontend.site.register_view(Category, CategoryLabeledIconList())
+frontend.site.register_view(Category, CategoryLabeledIconList)
+
 
 class CategorySimplifiedTeaserList(frontend.FrontendView):
     """A teaser list view of category members.
     """
     name='simplified_teaser_list'
     verbose_name=_('simplified teaser list of Category members')
-
-    def get_string_response(self, request, content_object=None, *args, **kwargs):
+    is_region_view = True
+    
+    def get_response(self, request, host_template, content_object):
         category = content_object
+        categorizations_list = category.categorizations.all()
+
+        template = "collections/category_teaser_list.html"
         c = RequestContext(request,
-                           {'categorizations': category.categorizations.all(),
-                            'category': category,
-                            'simplified_view': True})
-        t = loader.get_template("collections/category_teaser_list.html")
-        c['host_template'] = 'cyclope/inline_view.html'
+                           {'category': category,
+                            'categorizations': categorizations_list,
+#                            'region_view': True,
+                            'simplified_view': True,
+                            })
+        t = loader.get_template(template)
+        c['host_template'] = host_template
         return t.render(c)
 
-frontend.site.register_view(Category, CategorySimplifiedTeaserList())
+frontend.site.register_view(Category, CategorySimplifiedTeaserList)
 
 
 class CollectionRootCategoriesTeaserList(frontend.FrontendView):
-    """ A teaser list of the root categories of a collection
+    """ A teaser list of the root Categories of a Collection
     """
     name = 'root_categories_teaser_list'
     verbose_name=_('teaser list of the root Categories of a Collection')
     is_default = True
+    is_content_view = True
+    template = "collections/collection_root_categories_teaser_list.html"
 
-    def get_http_response(self, request, slug=None, *args, **kwargs):
-        collection = Collection.objects.get(slug=slug)
+    def get_response(self, request, host_template, content_object):
+        collection = content_object
         c = RequestContext(
             request,
             {'categories': Category.tree.filter(collection=collection, level=0),
              'collection': collection })
-        t = loader.get_template("collections/collection_root_categories_teaser_list.html")
-        c['host_template'] = template_for_request(request)
-        return HttpResponse(t.render(c))
+        t = loader.get_template(self.template)
+        c['host_template'] = host_template
+        return t.render(c)
 
-frontend.site.register_view(Collection, CollectionRootCategoriesTeaserList())
+frontend.site.register_view(Collection, CollectionRootCategoriesTeaserList)
 
 
 class CollectionCategoriesHierarchy(frontend.FrontendView):
-    """A hierarchical list view of the categories in a collection.
+    """A hierarchical list view of the Categories in a Collection.
     """
     name='categories_hierarchy'
     verbose_name=_('hierarchical list of Categories in a Collection')
     target_view = 'teaser_list'
-
-    def get_string_response(self, request, content_object=None, *args, **kwargs):
-
+    is_content_view = True
+    is_region_view = True
+    
+    def get_response(self, request, host_template, content_object):
         collection = content_object
         categories = Category.tree.filter(collection=collection, level=0)
         category_list = []
@@ -172,8 +170,9 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
             category_list.extend(self._get_categories_nested_list(category))
         c = RequestContext(request, {'categories': category_list,
                                      'collection_slug': collection.slug})
-        t = loader.get_template("collections/collection_categories_hierarchy.html")
-        c['host_template'] = 'cyclope/inline_view.html'
+        template = "collections/collection_categories_hierarchy.html"
+        t = loader.get_template(template)
+        c['host_template'] = host_template
         return t.render(c)
 
     def _get_categories_nested_list(self, base_category, name_field='name'):
@@ -218,13 +217,13 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
         else:
             return [include]
 
-frontend.site.register_view(Collection, CollectionCategoriesHierarchy())
+frontend.site.register_view(Collection, CollectionCategoriesHierarchy)
 
 class CollectionCategoriesHierarchyToIconlist(CollectionCategoriesHierarchy):
-    """A hierarchical list view of the categories in a collection that will show a labeled_icon list view of the category that the user selects.
+    """A hierarchical list view of the Categories in a Collection that will show a labeled_icon list view of the category that the user makes a selection.
     """
     name='categories_hierarchy_to_iconlist'
     verbose_name=_('hierarchical list of Categories that will show an icon list on click')
     target_view = 'labeled_icon_list'
 
-frontend.site.register_view(Collection, CollectionCategoriesHierarchyToIconlist())
+frontend.site.register_view(Collection, CollectionCategoriesHierarchyToIconlist)

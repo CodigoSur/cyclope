@@ -35,6 +35,7 @@ from cyclope.apps.staticpages.models import StaticPage
 from cyclope.apps.articles.models import Article
 from cyclope.apps.medialibrary.models import *
 from cyclope.apps.polls.models import *
+from cyclope.core.collections.models import *
 
 def create_static_page(name=None):
     if name is None:
@@ -55,14 +56,31 @@ def export_fixture(apps, filename=None):
     else:
         return dump
 
+def get_instance_url(model_instance, view_name):
+    #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well. Also this method is also used by tests and it's code is repeated en many model files.
+    view = cyclope.core.frontend.site.get_view(model_instance.__class__, view_name)
+
+    if view.is_default:
+        return '%s/%s/'\
+                % (model_instance._meta.object_name.lower(),
+                   model_instance.slug)
+
+    if view.is_instance_view:
+        return '%s/%s/View/%s'\
+                % (model_instance._meta.object_name.lower(),
+                   model_instance.slug, view_name)
+    else:
+        return '%s/View/%s'\
+                % (model_instance._meta.object_name.lower(), view_name)
+
+
 def get_content_urls(test_model, test_object=None):
     content_urls = []
     if not test_object:
         test_object = test_model.objects.create(name="something")
     for view in frontend.site._registry[test_model]:
-        if not view.is_standard_view:
-            continue
-        content_urls.append('/'+ test_object.get_instance_url(view.name))
+        if view.is_content_view:
+            content_urls.append('/'+ get_instance_url(test_object, view.name))
     return content_urls
 
 
@@ -223,7 +241,8 @@ class RegionViewTestCase(TestCase):
             object_id=object_id, region=region)
         region_view.save()
         response = self.client.get("/")
-        self.assertContains(response, 'class="regionview staticpage detail', count=1)
+        self.assertContains(response, 'class="regionview staticpage detail',
+                            count=1)
 
     def tearDown(self):
         pass
@@ -385,3 +404,123 @@ class PollTestCase(TestCase):
         content_urls = get_content_urls(Poll)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
+
+
+class PollTestCase(TestCase):
+    def setUp(self):
+        frontend.autodiscover()
+
+    def test_creation(self):
+        Poll.objects.create(name='An instance')
+        an_instance = Poll.objects.get(slug='an-instance')
+        self.assertEqual(an_instance.name, 'An instance')
+
+    def test_content_views(self):
+        content_urls = get_content_urls(Poll)
+        for url in content_urls:
+            self.assertEqual(self.client.get(url).status_code, 200)
+
+
+class CategoryTestCase(TestCase):
+    
+    def setUp(self):
+        frontend.autodiscover()
+
+    def test_creation(self):
+        col = Collection.objects.create(name='A collection')
+        cat = Category(name='An instance', collection=col)
+        cat.save()
+        an_instance = Category.objects.get(slug='an-instance')
+        self.assertEqual(an_instance.name, 'An instance')
+
+    def test_content_views(self):
+        col = Collection.objects.create(name='A collection')
+        cat = Category(name='An instance', collection=col)
+        cat.save()
+        content_urls = get_content_urls(Category, cat)
+        for url in content_urls:
+            self.assertEqual(self.client.get(url).status_code, 200)
+
+
+class CollectionTestCase(TestCase):
+    
+    def setUp(self):
+        frontend.autodiscover()
+
+    def test_creation(self):
+        col = Collection.objects.create(name='An instance')
+        col.save()
+        an_instance = Collection.objects.get(slug='an-instance')
+        self.assertEqual(an_instance.name, 'An instance')
+
+    def test_content_views(self):
+        col = Collection.objects.create(name='A collection')
+        col.save()
+        # most views list categories in the collection, so we create one
+        cat = Category(name='An instance', collection=col)
+        cat.save()
+        content_urls = get_content_urls(Collection, col)
+        for url in content_urls:
+            self.assertEqual(self.client.get(url).status_code, 200)
+
+
+class MenuItemTestCase(TestCase):
+    
+    def setUp(self):
+        frontend.autodiscover()
+
+    def test_creation(self):
+        menu = Menu.objects.create(name='menu')
+        m_i = MenuItem(name='An instance', menu=menu)
+        m_i.save()
+        an_instance = MenuItem.objects.get(slug='an-instance')
+        self.assertEqual(an_instance.name, 'An instance')
+
+    def test_content_views(self):
+        menu = Menu.objects.create(name='menu')
+        m_i = MenuItem(name='A menuitem', menu=menu)
+        m_i.save()
+        content_urls = get_content_urls(MenuItem, m_i)
+        for url in content_urls:
+            self.assertEqual(self.client.get(url).status_code, 200)
+
+
+class MenuTestCase(TestCase):
+    
+    def setUp(self):
+        frontend.autodiscover()
+
+    def test_creation(self):
+        menu = Menu.objects.create(name='An instance')
+        an_instance = Menu.objects.get(slug='an-instance')
+        self.assertEqual(an_instance.name, 'An instance')
+
+    def test_content_views(self):
+        menu = Menu.objects.create(name='menu')
+        content_urls = get_content_urls(Menu, menu)
+        MenuItem(name='A menuitem', menu=menu).save()
+        for url in content_urls:
+            self.assertEqual(self.client.get(url).status_code, 200)
+
+
+class SiteMapTestCase(TestCase):
+    
+    def setUp(self):
+        frontend.autodiscover()
+
+    def test_creation(self):
+        site = Site.objects.create(name='An instance')
+        an_instance = Site.objects.get(name='An instance')
+        self.assertEqual(an_instance.name, 'An instance')
+
+    def test_site_map_view(self):
+        site = Site.objects.create(name='site', domain='site')
+        col = Collection.objects.create(name='A collection')
+        cat = Category(name='An instance', collection=col)
+        cat.save()
+        menu = Menu.objects.create(name='menu')
+        content_type = ContentType.objects.get(model='site')
+        MenuItem(name='site map', menu=menu,
+                 content_type=content_type, content_view="map").save()
+        res = self.client.get('/site-map')
+        self.assertEqual(res.status_code, 200)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -33,16 +33,16 @@ from cyclope import views
 from models import Poll, Submission, Question
 from forms import QuestionForm, CaptchaForm
 
-class PollSubmissionView(frontend.FrontendView):
+class PollSubmission(frontend.FrontendView):
     """Show or process a Poll Submission form"""
 
     name = 'submission'
     verbose_name=_('Poll submission form')
+    is_content_view = True
 
-    def get_http_response(self, request, slug=None, *args, **kwargs):
+    def get_response(self, request, host_template, content_object):
         forms = []
-        
-        poll = Poll.objects.get(slug=slug)
+        poll = content_object
         questions = Question.objects.filter(poll=poll)
         for question in questions:
             form = QuestionForm(question, data=request.POST or None, prefix=question.pk)
@@ -55,7 +55,6 @@ class PollSubmissionView(frontend.FrontendView):
                 posted_answers.extend(d['form'].get_answers())
             submission = Submission(poll=poll)
             submission.save()
-            print posted_answers
             submission.answers = posted_answers
             submission.save()
             return redirect('/poll/%s' % poll.slug)
@@ -64,28 +63,25 @@ class PollSubmissionView(frontend.FrontendView):
         else:
             t = loader.get_template("polls/poll_submission.html")
             c = RequestContext(request,
-                               {'host_template': template_for_request(request),
-                                'poll': Poll.objects.get(slug=slug),
+                               {'host_template': host_template,
+                                'poll': poll,
                                 'forms': forms,
                                 'captcha_form': captcha_form,
                                 })
-            return HttpResponse(t.render(c))
+            return t.render(c)
 
-frontend.site.register_view(Poll, PollSubmissionView())
+frontend.site.register_view(Poll, PollSubmission)
 
 
-class PollDetailView(frontend.FrontendView):
+class PollDetail(frontend.FrontendView):
     """Detail view for Polls"""
     name = 'detail'
     verbose_name=_('detailed view of the selected Poll')
     is_default = True
-    params = {'queryset': Poll.objects,
-              'template_object_name': 'poll',
-             }
+    is_content_view = True
 
-    def get_http_response(self, request, slug=None, *args, **kwargs):
-        return views.object_detail(request, slug=slug,
-                                   inline=False, *args, **kwargs)
+    def get_response(self, request, host_template, content_object):
+        return views.object_detail(request, host_template, content_object)
     
-frontend.site.register_view(Poll, PollDetailView())
+frontend.site.register_view(Poll, PollDetail)
 

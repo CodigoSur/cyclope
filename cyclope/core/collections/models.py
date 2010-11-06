@@ -33,6 +33,7 @@ import mptt
 from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 
+import cyclope
 
 class Collection(models.Model):
     """A facility for creating custom content collections.
@@ -52,6 +53,9 @@ class Collection(models.Model):
     description = models.TextField(_('description'), blank=True, null=True)
     image =  FileBrowseField(_('image'), max_length=250, format='Image',
                              blank=True)
+
+    def get_absolute_url(self):
+        return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
 
     def __unicode__(self):
         return self.name
@@ -81,29 +85,11 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
-  # this is needed for the feincms.editor.TreeEditor to correctly display the hierarchy
     def get_absolute_url(self):
-        return self.__unicode__()
-
+        return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
 
     def valid_parents(self):
         return Category.tree.filter(pk__isnot=self.pk)
-
-    def get_instance_url(self, view_name=None):
-        view = get_view(self.__class__, view_name)
-
-        if view.is_default:
-            return '%s/%s'\
-                    % (self._meta.object_name.lower(),
-                       self.slug)
-
-        if view.is_instance_view:
-            return '%s/%s/View/%s'\
-                    % (self._meta.object_name.lower(),
-                       self.slug, view_name)
-        else:
-            return '%s/View/%s'\
-                    % (self._meta.object_name.lower(), view_name)
 
     def save(self):
 

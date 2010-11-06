@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-02 21:14-0300\n"
+"POT-Creation-Date: 2010-11-05 23:00-0300\n"
 "PO-Revision-Date: 2010-10-29 22:16\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,25 +209,25 @@ msgstr "Código de seguridad"
 msgid "Your avatar image is too big"
 msgstr "La imagen enviada es demasiado grande"
 
-#: frontend_views.py:44
+#: frontend_views.py:43
 msgid "list of root items for the selected Menu"
 msgstr "lista de items raíz para el Menú seleccionado"
 
-#: frontend_views.py:64
+#: frontend_views.py:67
 msgid "flat list of all items for the selected Menu"
 msgstr "lista sin jerarquía de los items del Menú"
 
-#: frontend_views.py:82
+#: frontend_views.py:90
+msgid "hierarchical list of the items in the selected menu"
+msgstr "lista jerarquizada de los items del menú"
+
+#: frontend_views.py:147
 msgid "list view of children of the current menu item"
 msgstr "lista de los hijos del item de menú que se encuentre seleccionado"
 
-#: frontend_views.py:110
+#: frontend_views.py:175
 msgid "expanded hierarchical list of all collection and menus"
 msgstr "lista de todas las categorías y menúes"
-
-#: frontend_views.py:193
-msgid "hierarchical list of the items in the selected menu"
-msgstr "lista jerarquizada de los items del menú"
 
 #: models.py:59
 msgid "templating theme"
@@ -237,15 +237,15 @@ msgstr "tema de la plantilla"
 msgid "default layout"
 msgstr "esquema por defecto"
 
-#: models.py:63 models.py:280
+#: models.py:63 models.py:279
 msgid "allow comments"
 msgstr "permitir comentarios"
 
-#: models.py:65 models.py:283
+#: models.py:65 models.py:282
 msgid "enabled"
 msgstr "habilitado"
 
-#: models.py:66 models.py:284
+#: models.py:66 models.py:283
 msgid "disabled"
 msgstr "deshabilitado"
 
@@ -258,8 +258,7 @@ msgid "keywords"
 msgstr "palabras clave"
 
 #: models.py:72 apps/medialibrary/models.py:37 apps/polls/models.py:36
-#: conf/app_template/models.py:38 core/collections/models.py:52
-#: core/collections/models.py:77
+#: core/collections/models.py:53 core/collections/models.py:81
 msgid "description"
 msgstr "descripción"
 
@@ -267,8 +266,8 @@ msgstr "descripción"
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:88 models.py:118 models.py:221 models.py:267 models.py:359
-#: models.py:382 core/collections/models.py:41 core/collections/models.py:71
+#: models.py:88 models.py:118 models.py:220 models.py:266 models.py:341
+#: models.py:364 core/collections/models.py:42 core/collections/models.py:75
 msgid "name"
 msgstr "nombre"
 
@@ -284,11 +283,11 @@ msgstr "menú"
 msgid "menus"
 msgstr "menúes"
 
-#: models.py:119 core/collections/models.py:74
+#: models.py:119 core/collections/models.py:78
 msgid "parent"
 msgstr "relacionado"
 
-#: models.py:120 core/collections/models.py:75
+#: models.py:120 core/collections/models.py:79
 msgid "children"
 msgstr "hijo"
 
@@ -300,150 +299,150 @@ msgstr "página de inicio"
 msgid "custom URL"
 msgstr "URL personalizada"
 
-#: models.py:130 models.py:232
+#: models.py:129 models.py:231
 msgid "layout"
 msgstr "esquema"
 
-#: models.py:134 models.py:202
+#: models.py:133 models.py:201
 msgid "type"
 msgstr "tipo"
 
-#: models.py:136 models.py:210
+#: models.py:135 models.py:209
 msgid "object"
 msgstr "objeto"
 
-#: models.py:142 models.py:204
+#: models.py:141 models.py:203
 msgid "view"
 msgstr "vista"
 
-#: models.py:189
+#: models.py:188
 msgid "menu item"
 msgstr "item de menú"
 
-#: models.py:190
+#: models.py:189
 msgid "menu items"
 msgstr "items de menú"
 
-#: models.py:198
+#: models.py:197
 msgid "region"
 msgstr "región"
 
-#: models.py:207
+#: models.py:206
 msgid "weight"
 msgstr "peso"
 
-#: models.py:226
+#: models.py:225
 msgid "layout template"
 msgstr "plantilla para este esquema"
 
-#: models.py:233
+#: models.py:232
 msgid "layouts"
 msgstr "esquemas"
 
-#: models.py:240 models.py:245 core/collections/models.py:156
+#: models.py:239 models.py:244 core/collections/models.py:142
 msgid "content type"
 msgstr "tipo de contenido"
 
-#: models.py:260
+#: models.py:259
 msgid "related content"
 msgstr "contenido relacionado"
 
-#: models.py:261
+#: models.py:260
 msgid "related contents"
 msgstr "contenidos relacionados"
 
-#: models.py:271
+#: models.py:270
 msgid "tags"
 msgstr "etiquetas"
 
-#: models.py:272
+#: models.py:271
 msgid "published"
 msgstr "publicar"
 
-#: models.py:276
+#: models.py:275
 msgid "creation date"
 msgstr "fecha de creación"
 
-#: models.py:278
+#: models.py:277
 msgid "modification date"
 msgstr "fecha de modificación"
 
-#: models.py:282
+#: models.py:281
 msgid "default"
 msgstr "por defecto"
 
-#: models.py:345
+#: models.py:327
 msgid "translations"
 msgstr "traducciones"
 
-#: models.py:363 models.py:398 models.py:408 apps/medialibrary/models.py:47
+#: models.py:345 models.py:380 models.py:390 apps/medialibrary/models.py:47
 #: apps/medialibrary/models.py:82 apps/medialibrary/models.py:95
 #: apps/medialibrary/models.py:108 apps/medialibrary/models.py:121
-#: core/collections/models.py:53 core/collections/models.py:78
+#: core/collections/models.py:54 core/collections/models.py:82
 msgid "image"
 msgstr "imagen"
 
-#: models.py:366
+#: models.py:348
 msgid "origin"
 msgstr "origen"
 
-#: models.py:368
+#: models.py:350
 msgid "notes"
 msgstr "notas"
 
-#: models.py:370 core/collections/models.py:51
+#: models.py:352 core/collections/models.py:52
 msgid "content types"
 msgstr "tipos de contenido"
 
-#: models.py:371
+#: models.py:353
 msgid "Select the content types this author is related to."
 msgstr "Seleccione los tipos de contenido que corresponden a este autor"
 
-#: models.py:377 apps/articles/models.py:46 apps/medialibrary/models.py:35
+#: models.py:359 apps/articles/models.py:46 apps/medialibrary/models.py:35
 msgid "author"
 msgstr "autor"
 
-#: models.py:378
+#: models.py:360
 msgid "authors"
 msgstr "autores"
 
-#: models.py:386
+#: models.py:368
 msgid "link"
 msgstr "enlace"
 
-#: models.py:392 apps/articles/models.py:47
+#: models.py:374 apps/articles/models.py:47
 msgid "source"
 msgstr "fuente"
 
-#: models.py:393
+#: models.py:375
 msgid "sources"
 msgstr "fuentes"
 
-#: models.py:404
+#: models.py:386
 msgid "Thumbnail Image"
 msgstr "Imagen miniatura"
 
-#: models.py:409
+#: models.py:391
 msgid "images"
 msgstr "imágenes"
 
-#: models.py:415
+#: models.py:397
 msgid "avatar"
 msgstr "tu imagen"
 
-#: models.py:417
+#: models.py:399
 msgid "city"
 msgstr "ciudad"
 
-#: models.py:418
+#: models.py:400
 msgid "about myself"
 msgstr "sobre mí"
 
-#: models.py:421
+#: models.py:403
 msgid "public"
 msgstr "público"
 
-#: models.py:422
+#: models.py:404
 msgid "Choose whether your profile info should be publicly visible or not"
 msgstr "Elije si deseas que tu información de perfil sea pública"
 
@@ -478,14 +477,6 @@ msgstr "Datos de la publicación"
 #: apps/articles/frontend_views.py:34
 msgid "detailed view of the selected Article"
 msgstr "vista detallada del Artículo seleccionado"
-
-#: apps/articles/frontend_views.py:55
-msgid "list of Article teasers"
-msgstr "lista de resúmenes de Artículos"
-
-#: apps/articles/frontend_views.py:77
-msgid "list of Article labeled icons"
-msgstr "lista de iconos con nombre"
 
 #: apps/articles/models.py:39
 msgid "yes"
@@ -576,33 +567,33 @@ msgstr "Compartir en redes sociales"
 msgid "More"
 msgstr "Más"
 
-#: apps/medialibrary/frontend_views.py:57
+#: apps/medialibrary/frontend_views.py:44
 msgid "detailed view of the selected Picture"
 msgstr "vista detallada de la Imagen seleccionada"
 
-#: apps/medialibrary/frontend_views.py:72
+#: apps/medialibrary/frontend_views.py:52
 msgid "detailed view of the selected Audio Track"
 msgstr "vista detallada de la Pista de Audio seleccionada"
 
-#: apps/medialibrary/frontend_views.py:87
+#: apps/medialibrary/frontend_views.py:60
 msgid "detailed view of the selected Movie Clip"
 msgstr "vista detallada del Video seleccionado"
 
-#: apps/medialibrary/frontend_views.py:102
+#: apps/medialibrary/frontend_views.py:68
 msgid "detailed view of the selected Document"
 msgstr "vista detallada del Documento seleccionado"
 
-#: apps/medialibrary/frontend_views.py:117
-msgid "detailed view of the selected Flash Movie"
-msgstr "vista detallada del elemento Flash seleccionado"
-
-#: apps/medialibrary/frontend_views.py:146
+#: apps/medialibrary/frontend_views.py:76
 msgid "detailed view of the selected File"
 msgstr "vista detallada del Archivo seleccionado"
 
-#: apps/medialibrary/frontend_views.py:161
+#: apps/medialibrary/frontend_views.py:84
 msgid "detailed view of the selected External Content"
 msgstr "vista detallada del Contenido Externo seleccionado"
+
+#: apps/medialibrary/frontend_views.py:92
+msgid "detailed view of the selected Flash Movie"
+msgstr "vista detallada del elemento Flash seleccionado"
 
 #: apps/medialibrary/models.py:51
 msgid "picture"
@@ -688,18 +679,18 @@ msgstr "contenido externo"
 msgid "external contents"
 msgstr "contenidos externos"
 
-#: apps/medialibrary/templates/medialibrary/document_detail.html:16
+#: apps/medialibrary/templates/medialibrary/document_detail.html:20
 #: apps/medialibrary/templates/medialibrary/media_player.html:17
 #: apps/medialibrary/templates/medialibrary/regularfile_detail.html:16
 msgid "download file"
 msgstr "descargar archivo"
 
-#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:23
+#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:24
 #: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:31
 msgid "Open external content"
 msgstr "Abrir contenido externo"
 
-#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:23
+#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:24
 #: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:31
 msgid " (in new window)"
 msgstr " (en ventana nueva)"
@@ -712,7 +703,7 @@ msgstr "pantalla completa (en ventana nueva)"
 msgid "Poll submission form"
 msgstr "Formulario de envío de encuesta"
 
-#: apps/polls/frontend_views.py:80
+#: apps/polls/frontend_views.py:79
 msgid "detailed view of the selected Poll"
 msgstr "vista detallada de la Encuesta"
 
@@ -761,7 +752,7 @@ msgid "submissions"
 msgstr "envíos"
 
 #: apps/polls/templates/polls/poll_submission.html:30
-#: templates/contact_form/contact_form.html:12
+#: templates/contact_form/contact_form.html:11
 msgid "Send"
 msgstr "Enviar"
 
@@ -773,7 +764,7 @@ msgstr "Items de menú"
 msgid "detailed view of the selected Static Page"
 msgstr "vista detallada de la página estatica"
 
-#: apps/staticpages/frontend_views.py:58
+#: apps/staticpages/frontend_views.py:51
 msgid "list of Static Pages"
 msgstr "lista de Páginas Estáticas"
 
@@ -785,26 +776,6 @@ msgstr "página estática"
 msgid "static pages"
 msgstr "páginas estáticas"
 
-#: conf/app_template/frontend_views.py:37
-msgid "detailed view of the selected Product"
-msgstr "vista detallada del Producto seleccionado"
-
-#: conf/app_template/frontend_views.py:54
-msgid "list of Products"
-msgstr "lista de Productos"
-
-#: conf/app_template/models.py:37
-msgid "price"
-msgstr "precio"
-
-#: conf/app_template/models.py:61
-msgid "product"
-msgstr "producto"
-
-#: conf/app_template/models.py:62
-msgid "products"
-msgstr "productos"
-
 #: core/captcha_comments/forms.py:28
 msgid "Website or Blog"
 msgstr "Sitio web o Blog"
@@ -813,8 +784,8 @@ msgstr "Sitio web o Blog"
 msgid "All"
 msgstr "Todos"
 
-#: core/collections/admin.py:94 core/collections/models.py:124
-#: core/collections/models.py:186
+#: core/collections/admin.py:94 core/collections/models.py:110
+#: core/collections/models.py:172
 msgid "categories"
 msgstr "categorías"
 
@@ -834,71 +805,71 @@ msgstr "Colección"
 msgid "Category"
 msgstr "Categoría"
 
-#: core/collections/frontend_views.py:38
+#: core/collections/frontend_views.py:37
 msgid "list of root items for the selected Category"
 msgstr "lista de items raíz para la Categoría seleccionada"
 
-#: core/collections/frontend_views.py:63
+#: core/collections/frontend_views.py:59
 msgid "teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:113
+#: core/collections/frontend_views.py:101
 msgid "Labeled icon list of Category members"
 msgstr "lista de iconos con nombre de los miembros de una Categoría"
 
-#: core/collections/frontend_views.py:124
+#: core/collections/frontend_views.py:113
 msgid "simplified teaser list of Category members"
-msgstr "lista de resúmenes de miembros de una Categoría"
+msgstr "lista simplificada de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:143
+#: core/collections/frontend_views.py:138
 msgid "teaser list of the root Categories of a Collection"
 msgstr "lista de resúmenes de las Categorías raíz de una Colección"
 
-#: core/collections/frontend_views.py:163
+#: core/collections/frontend_views.py:160
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
-#: core/collections/frontend_views.py:227
+#: core/collections/frontend_views.py:226
 msgid "hierarchical list of Categories that will show an icon list on click"
 msgstr "lista jerarquizada de las Categorias que llevará a una vista de íconos"
 
-#: core/collections/models.py:44
+#: core/collections/models.py:45
 msgid "visible"
 msgstr "visible"
 
-#: core/collections/models.py:48
+#: core/collections/models.py:49
 msgid "navigation root"
 msgstr "raíz de navegación"
 
-#: core/collections/models.py:60 core/collections/models.py:70
+#: core/collections/models.py:64 core/collections/models.py:74
 msgid "collection"
 msgstr "colección"
 
-#: core/collections/models.py:61
+#: core/collections/models.py:65
 msgid "collections"
 msgstr "colecciones"
 
-#: core/collections/models.py:70
+#: core/collections/models.py:74
 msgid "collection categories"
 msgstr "categorias de colecciones"
 
-#: core/collections/models.py:76
+#: core/collections/models.py:80
 msgid "active"
 msgstr "activo"
 
-#: core/collections/models.py:123 core/collections/models.py:153
+#: core/collections/models.py:109 core/collections/models.py:139
 msgid "category"
 msgstr "categoría"
 
-#: core/collections/models.py:176
+#: core/collections/models.py:162
 msgid "categorization"
 msgstr "Categorización"
 
-#: core/collections/models.py:177
+#: core/collections/models.py:163
 msgid "categorizations"
 msgstr "Categorizaciones"
 
-#: core/collections/models.py:193
+#: core/collections/models.py:179
 msgid "is orphan"
 msgstr "sin categorizar"
 
@@ -906,29 +877,29 @@ msgstr "sin categorizar"
 msgid "Categories"
 msgstr "Categorías"
 
-#: core/frontend/__init__.py:148
+#: core/frontend/__init__.py:149
 #, python-format
 msgid "No default view has been set for %s"
 msgstr "No hay una vista por defecto para %s"
 
-#: core/frontend/__init__.py:151
+#: core/frontend/__init__.py:152
 #, python-format
 msgid "You can set only one default view for %s"
 msgstr "Puedes definir solo una vista por defecto para %s"
 
-#: core/frontend/sites.py:152
+#: core/frontend/sites.py:151
 msgid "You need to create you site settings"
 msgstr "Su sitio aún no ha sido configurado"
 
-#: core/frontend/sites.py:157
+#: core/frontend/sites.py:156
 msgid "You need to select a layout for the site"
 msgstr "Debe seleccionar un esquema para el sitio"
 
-#: core/frontend/sites.py:163
+#: core/frontend/sites.py:162
 msgid "The site home page has not been set."
 msgstr "La página de inicio no ha sido establecida."
 
-#: core/frontend/sites.py:174
+#: core/frontend/sites.py:173
 msgid "No content object selected"
 msgstr "No ha seleccionado contenido"
 
@@ -1009,7 +980,7 @@ msgid ""
 msgstr ""
 "Por razones de seguridad, debe ingresar el texto que se muestra en la imagen."
 
-#: templates/comments/form.html:25 templates/comments/preview.html:18
+#: templates/comments/form.html:25 templates/comments/preview.html:17
 msgid "Post your comment"
 msgstr "Enviar comentario"
 
@@ -1017,33 +988,33 @@ msgstr "Enviar comentario"
 msgid "Thanks for commenting"
 msgstr "Gracias por su comentario"
 
-#: templates/comments/posted.html:12
+#: templates/comments/posted.html:11
 msgid "Thank you for your comment"
 msgstr "Gracias por su comentario"
 
-#: templates/comments/posted.html:13
+#: templates/comments/posted.html:12
 msgid "return."
 msgstr "volver."
 
-#: templates/comments/preview.html:4 templates/comments/preview.html.py:15
+#: templates/comments/preview.html:4 templates/comments/preview.html.py:14
 msgid "Preview your comment"
 msgstr "Vista previa de su comentario"
 
-#: templates/comments/preview.html:13
+#: templates/comments/preview.html:12
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
 msgstr[0] "Por favor corrija el error detallado"
 msgstr[1] "Por favor corrija los errores detallados"
 
-#: templates/comments/preview.html:18
+#: templates/comments/preview.html:17
 msgid "and"
 msgstr "y"
 
-#: templates/comments/preview.html:18
+#: templates/comments/preview.html:17
 msgid "or make changes"
 msgstr "o haga cambios"
 
-#: templates/comments/preview.html:34
+#: templates/comments/preview.html:33
 msgid "Post"
 msgstr "Enviar"
 
@@ -1064,7 +1035,6 @@ msgid "Page"
 msgstr "Página"
 
 #: templates/cyclope/pagination_block.html:12
-#: templates/cyclope/themes/neutrona/base.html:42
 #: templates/cyclope/themes/neutronica/base.html:44
 msgid "of"
 msgstr "de"
@@ -1082,162 +1052,107 @@ msgstr ""
 msgid "Your CYCLOPE_LOCAL_THEMES_DIR setting is invalid"
 msgstr "El valor de CYCLOPE_LOCAL_THEMES_DIR es inválido"
 
-#: templates/cyclope/themes/neutrona/__init__.py:11
-msgid "Neutrona theme"
-msgstr "tema Neutrona"
+#: templates/cyclope/themes/neutronica/__init__.py:11
+msgid "Neutronica theme"
+msgstr "tema Neutronica"
 
-#: templates/cyclope/themes/neutrona/__init__.py:17
 #: templates/cyclope/themes/neutronica/__init__.py:17
-#: templates/cyclope/themes/potente/__init__.py:17
 msgid "One sidebar"
 msgstr "Una barra lateral"
 
-#: templates/cyclope/themes/neutrona/__init__.py:19
-#: templates/cyclope/themes/neutrona/__init__.py:31
 #: templates/cyclope/themes/neutronica/__init__.py:19
 #: templates/cyclope/themes/neutronica/__init__.py:31
-#: templates/cyclope/themes/potente/__init__.py:19
-#: templates/cyclope/themes/potente/__init__.py:31
 msgid "header"
 msgstr "encabezado"
 
-#: templates/cyclope/themes/neutrona/__init__.py:20
-#: templates/cyclope/themes/neutrona/__init__.py:32
 #: templates/cyclope/themes/neutronica/__init__.py:20
 #: templates/cyclope/themes/neutronica/__init__.py:32
-#: templates/cyclope/themes/potente/__init__.py:20
 msgid "left sidebar"
 msgstr "barra lateral izquierda"
 
-#: templates/cyclope/themes/neutrona/__init__.py:21
-#: templates/cyclope/themes/neutrona/__init__.py:34
 #: templates/cyclope/themes/neutronica/__init__.py:21
 #: templates/cyclope/themes/neutronica/__init__.py:34
-#: templates/cyclope/themes/potente/__init__.py:21
 msgid "before content"
 msgstr "antes del contenido"
 
-#: templates/cyclope/themes/neutrona/__init__.py:22
-#: templates/cyclope/themes/neutrona/__init__.py:35
 #: templates/cyclope/themes/neutronica/__init__.py:22
 #: templates/cyclope/themes/neutronica/__init__.py:35
-#: templates/cyclope/themes/potente/__init__.py:22
 msgid "after content"
 msgstr "después del contenido"
 
-#: templates/cyclope/themes/neutrona/__init__.py:23
-#: templates/cyclope/themes/neutrona/__init__.py:36
 #: templates/cyclope/themes/neutronica/__init__.py:23
 #: templates/cyclope/themes/neutronica/__init__.py:36
-#: templates/cyclope/themes/potente/__init__.py:23
-#: templates/cyclope/themes/potente/__init__.py:33
 msgid "footer"
 msgstr "pie de página"
 
-#: templates/cyclope/themes/neutrona/__init__.py:29
 #: templates/cyclope/themes/neutronica/__init__.py:29
 msgid "Two sidebars"
 msgstr "Dos barras laterales"
 
-#: templates/cyclope/themes/neutrona/__init__.py:33
 #: templates/cyclope/themes/neutronica/__init__.py:33
 msgid "right sidebar"
 msgstr "barra lateral derecha"
-
-#: templates/cyclope/themes/neutrona/base.html:41
-#: templates/cyclope/themes/neutronica/base.html:43
-msgid "Image"
-msgstr "Imagen"
-
-#: templates/cyclope/themes/neutrona/base.html:97
-#: templates/cyclope/themes/neutronica/base.html:102
-msgid "Subscribe to RSS"
-msgstr "Subscripción RSS"
-
-#: templates/cyclope/themes/neutronica/__init__.py:11
-msgid "Neutronica theme"
-msgstr "tema Neutronica"
 
 #: templates/cyclope/themes/neutronica/__init__.py:40
 msgid "Empty"
 msgstr "Vacío"
 
-#: templates/cyclope/themes/potente/__init__.py:11
-msgid "Potente theme"
-msgstr "tema Potente"
+#: templates/cyclope/themes/neutronica/base.html:43
+msgid "Image"
+msgstr "Imagen"
 
-#: templates/cyclope/themes/potente/__init__.py:29
-msgid "One sidebar and four panes"
-msgstr "Una barra y cuatro paneles"
+#: templates/cyclope/themes/neutronica/left_sidebar_block.html:34
+msgid "Subscribe to RSS"
+msgstr "Subscripción RSS"
 
-#: templates/cyclope/themes/potente/__init__.py:32
-msgid "sidebar"
-msgstr "barra lateral"
-
-#: templates/cyclope/themes/potente/__init__.py:34
-msgid "first pane"
-msgstr "primer panel"
-
-#: templates/cyclope/themes/potente/__init__.py:35
-msgid "second pane"
-msgstr "segundo panel"
-
-#: templates/cyclope/themes/potente/__init__.py:36
-msgid "third pane"
-msgstr "tercer panel"
-
-#: templates/cyclope/themes/potente/__init__.py:37
-msgid "fourth pane"
-msgstr "cuarto panel"
-
-#: templates/profiles/edit_profile.html:9
-#: templates/registration/registration_form.html:9
+#: templates/profiles/edit_profile.html:8
+#: templates/registration/registration_form.html:8
 msgid "Please fill in your user profile data"
 msgstr "Por favor complete sus datos"
 
-#: templates/profiles/edit_profile.html:25
-#: templates/registration/password_change_form.html:11
+#: templates/profiles/edit_profile.html:24
+#: templates/registration/password_change_form.html:10
 msgid "Send data"
 msgstr "Enviar datos"
 
-#: templates/profiles/profile_detail.html:10
-#: templates/profiles/profile_list.html:11
+#: templates/profiles/profile_detail.html:9
+#: templates/profiles/profile_list.html:10
 msgid "Return"
 msgstr "Volver"
 
-#: templates/registration/activate.html:9
+#: templates/registration/activate.html:8
 msgid "The activation key you posted is invalid."
 msgstr "La clave de activación es inválida."
 
-#: templates/registration/activate.html:10
+#: templates/registration/activate.html:9
 msgid "Please make sure that:"
 msgstr "Por favor, asegúrese de que:"
 
-#: templates/registration/activate.html:12
+#: templates/registration/activate.html:11
 msgid "You haven't already activated your account"
 msgstr "Su cuenta no haya sido activada previamente"
 
-#: templates/registration/activate.html:13
+#: templates/registration/activate.html:12
 msgid "Your key hasn't expired"
 msgstr "Su clave de activación no haya expirado"
 
-#: templates/registration/activate.html:14
+#: templates/registration/activate.html:13
 msgid "Your activation link wasn't split or malformed"
 msgstr "El enlace que utilizó para la activación no estuviera mal formado"
 
-#: templates/registration/activate.html:19
+#: templates/registration/activate.html:18
 msgid "Welcome! Your account has been successfully activated. "
 msgstr "Felicitaciones! Tu cuenta ha sido activada con éxito. "
 
-#: templates/registration/activation_complete.html:8
+#: templates/registration/activation_complete.html:7
 msgid "Your account is now active"
 msgstr "Tu cuenta ya está activa"
 
-#: templates/registration/activation_complete.html:9
+#: templates/registration/activation_complete.html:8
 msgid "You may now"
 msgstr "Ahora puedes"
 
-#: templates/registration/activation_complete.html:9
+#: templates/registration/activation_complete.html:8
 msgid "login"
 msgstr "ingresar"
 
@@ -1260,7 +1175,7 @@ msgstr ""
 "     antes de poder ingresar.\n"
 "     "
 
-#: templates/registration/logout.html:7
+#: templates/registration/logout.html:6
 msgid "You have logged out"
 msgstr "Haz cerrado tu sesión"
 
@@ -1288,7 +1203,7 @@ msgstr "Re-configurar Clave"
 msgid "Registration complete"
 msgstr "Registración completada"
 
-#: templates/registration/registration_complete.html:9
+#: templates/registration/registration_complete.html:8
 msgid ""
 "Please check your e-mail and follow the provided link in order to complete "
 "your account activation."
@@ -1296,7 +1211,7 @@ msgstr ""
 "Por favor revisa tu correo electrónico y sigue el enlace provisto para "
 "completar la activación de tu cuenta."
 
-#: templates/registration/registration_form.html:15
+#: templates/registration/registration_form.html:14
 msgid "Register"
 msgstr "Registrarse"
 
@@ -1307,11 +1222,6 @@ msgstr "Cerrar sesión"
 #: templates/registration/user_block.html:8
 msgid "Log in"
 msgstr "Ingresar"
-
-#: templates/registration/user_block.html:17
-#, fuzzy, python-format
-msgid "%(lang_name)s "
-msgstr "Agregar %(name)s"
 
 #: templates/rosetta/base.html:5 templates/rosetta/pofile.html:47
 msgid "Translation"
@@ -1324,12 +1234,12 @@ msgstr ""
 #: templates/rosetta/pofile.html:20
 #, fuzzy
 msgid "Documentation"
-msgstr "documento"
+msgstr ""
 
 #: templates/rosetta/pofile.html:28
 #, fuzzy
 msgid "Change password"
-msgstr "Re-configurar Clave"
+msgstr ""
 
 #: templates/rosetta/pofile.html:49
 msgid "File is read-only: download the file when done editing!"
@@ -1366,7 +1276,7 @@ msgstr "Sólo dudosos"
 msgid "Translated only"
 msgstr "Sólo traducidos"
 
-#: templates/rosetta/pofile.html:69 templates/search/search.html:11
+#: templates/rosetta/pofile.html:69 templates/search/search.html:10
 msgid "Search"
 msgstr "Buscar"
 
@@ -1412,17 +1322,66 @@ msgid_plural "%(hits)s/%(message_number)s messages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/search/search.html:7
+#: templates/search/search.html:6
 msgid "Advanced search"
 msgstr "Búsqueda avanzada"
 
-#: templates/search/search.html:16
+#: templates/search/search.html:15
 msgid "Results"
 msgstr "Resultados"
 
-#: templates/search/search.html:25
+#: templates/search/search.html:24
 msgid "No results found."
 msgstr "No se encontró ningún resultado"
+
+#~ msgid "list of Article teasers"
+#~ msgstr "lista de resúmenes de Artículos"
+
+#~ msgid "list of Article labeled icons"
+#~ msgstr "lista de iconos con nombre"
+
+#~ msgid "detailed view of the selected Product"
+#~ msgstr "vista detallada del Producto seleccionado"
+
+#~ msgid "list of Products"
+#~ msgstr "lista de Productos"
+
+#~ msgid "price"
+#~ msgstr "precio"
+
+#~ msgid "product"
+#~ msgstr "producto"
+
+#~ msgid "products"
+#~ msgstr "productos"
+
+#~ msgid "Neutrona theme"
+#~ msgstr "tema Neutrona"
+
+#~ msgid "Potente theme"
+#~ msgstr "tema Potente"
+
+#~ msgid "One sidebar and four panes"
+#~ msgstr "Una barra y cuatro paneles"
+
+#~ msgid "sidebar"
+#~ msgstr "barra lateral"
+
+#~ msgid "first pane"
+#~ msgstr "primer panel"
+
+#~ msgid "second pane"
+#~ msgstr "segundo panel"
+
+#~ msgid "third pane"
+#~ msgstr "tercer panel"
+
+#~ msgid "fourth pane"
+#~ msgstr "cuarto panel"
+
+#, fuzzy
+#~ msgid "%(lang_name)s "
+#~ msgstr "Agregar %(name)s"
 
 #~ msgid "Translated"
 #~ msgstr "Traducciones"

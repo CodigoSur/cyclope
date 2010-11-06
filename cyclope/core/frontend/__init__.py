@@ -50,7 +50,6 @@ class FrontendView(object):
         is_content_view(boolean): sets whether the view can be used for main page content
 
         is_region_view(boolean): sets whether the view can be included in layout regions
-        
     """
     name = ''
     verbose_name = ''
@@ -61,33 +60,35 @@ class FrontendView(object):
     extra_context = {}
     params = {}
 
-    def __call__(self, request, inline=False, *args, **kwargs):
-        if self.params:
-            kwargs.update(self.params)
+    def __call__(self, request, inline=False, slug=None, content_object=None):
+        """
+        Arguments:
+            Either content_object or slug must be set
 
+        Returns:
+            a string if the view is called from within a region templatetag
+            an HttpResponse otherwise
+        """
+        
         if inline:
-            extra_context={'host_template': 'cyclope/inline_view.html'}
+            host_template = 'cyclope/inline_view.html'
         else:
-            extra_context={'host_template': template_for_request(request)}
+            host_template = template_for_request(request)
 
         if self.is_instance_view:
-            if 'content_object' in kwargs:
-                content_object = kwargs.pop('content_object')
-            else:
-                slug = kwargs['slug']
+            if not content_object:
                 content_object = self.model.objects.get(slug=slug)
-            response = self.get_response(request, extra_context, content_object,
-                                         *args, **kwargs)
+            response = self.get_response(request, host_template, content_object)
         else:
-            response = self.get_response(request, extra_context)
-        
+            response = self.get_response(request, host_template)
+
         # inline will be True if the view was called from a region templatetag
         if not inline:
             response = HttpResponse(response)
             
         return response
 
-    def get_response(self, request, extra_context, content_object=None):
+    def get_response(self, request, host_template, content_object=None):
         """Must be overriden by inheriting class and return a the view content
         """
         raise NotImplementedError()

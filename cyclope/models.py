@@ -125,7 +125,6 @@ class MenuItem(models.Model):
     custom_url = models.CharField(_('custom URL'), max_length=200,
                                   blank=True, default='')
     url = models.CharField(editable=False, max_length=255, unique=True, db_index=True)
-#    open_in_new_window = models.BooleanField(default=False)
     active = models.BooleanField(default=True, db_index=True)
     layout = models.ForeignKey('Layout', verbose_name=_('layout'),
                                null=True, blank=True)
@@ -283,23 +282,6 @@ class BaseContent(models.Model):
                                     ('YES',_('enabled')),
                                     ('NO',_('disabled'))
                                 ), default='SITE')
-
-    def get_instance_url(self, view_name):
-        #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well.
-        view = cyclope.core.frontend.site.get_view(self.__class__, view_name)
-
-        if view.is_default:
-            return '%s/%s/'\
-                    % (self._meta.object_name.lower(),
-                       self.slug)
-
-        if view.is_instance_view:
-            return '%s/%s/View/%s'\
-                    % (self._meta.object_name.lower(),
-                       self.slug, view_name)
-        else:
-            return '%s/View/%s'\
-                    % (self._meta.object_name.lower(), view_name)
 
     def get_absolute_url(self):
         return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)

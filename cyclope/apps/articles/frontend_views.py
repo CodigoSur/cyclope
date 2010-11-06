@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -28,66 +28,18 @@ from cyclope import views
 from models import Article
 
 
-class ArticleDetailView(frontend.FrontendView):
+class ArticleDetail(frontend.FrontendView):
     """Detail view for Articles"""
     name='detail'
     verbose_name=_('detailed view of the selected Article')
     is_default = True
-    params = {'queryset': Article.objects,
-              'template_object_name': 'article',
-             }
+    is_instance_view = True
+    is_content_view = True
 
-    def get_http_response(self, request, slug=None, *args, **kwargs):
+    def get_response(self, request, host_template, content_object):
+        context = {'content_relations': content_object.related_contents.all()}
+        return views.object_detail(request, host_template, content_object,
+                                   extra_context=context)
 
-        content_object = self.params['queryset'].get(slug=slug)
-        context = {'content_relations':
-                   content_object.related_contents.all()}
-        return views.object_detail(request, slug=slug, extra_context = context,
-                                   inline=False, *args, **kwargs)
+frontend.site.register_view(Article, ArticleDetail)
 
-frontend.site.register_view(Article, ArticleDetailView())
-
-
-class ArticleTeaserList(frontend.FrontendView):
-    """Teaser list view for Articles.
-    """
-    name='teaser_list'
-    verbose_name=_('list of Article teasers')
-    is_instance_view = False
-    params = { 'template_name': 'articles/article_teaser_list.html' }
-
-    def get_http_response(self, request, *args, **kwargs):
-        return views.object_list(request,
-                           queryset=Article.objects.all(),
-                           template_object_name= 'article',
-                           *args, **kwargs)
-
-    def get_string_response(self, request, *args, **kwargs):
-        return views.object_list(request, inline=True,
-                           queryset=Article.objects.all(),
-                           template_object_name= 'article',
-                           *args, **kwargs)
-
-frontend.site.register_view(Article, ArticleTeaserList())
-
-class ArticleLabeledIconList(ArticleTeaserList):
-    """Labeled icon list view for Articles.
-    """
-    name='labeled_icon_list'
-    verbose_name=_('list of Article labeled icons')
-    is_instance_view = False
-    params = { 'template_name': 'articles/article_labeled_icon_list.html' }
-
-    #def get_http_response(self, request, *args, **kwargs):
-    #    return views.object_list(request,
-    #                       queryset=Article.objects.all(),
-    #                       template_object_name= 'article',
-    #                       *args, **kwargs)
-    #
-    #def get_string_response(self, request, *args, **kwargs):
-    #    return views.object_list(request, inline=True,
-    #                       queryset=Article.objects.all(),
-    #                       template_object_name= 'article',
-    #                       *args, **kwargs)
-
-frontend.site.register_view(Article, ArticleLabeledIconList())

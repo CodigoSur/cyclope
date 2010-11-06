@@ -57,7 +57,7 @@ a {
  padding-top: 0px;
 }
 
-#after_content div.teaser_list {
+#after_content div.teaser_list, div.simplified_teaser_list {
  background-color: transparent;
 }
 
@@ -357,7 +357,7 @@ a {
 
 }
 
-#right_sidebar .teaser_list {
+#right_sidebar .teaser_list, #right_sidebar .simplified_teaser_list {
  border: none;
  color: white;
  background-color: #839882;
@@ -367,35 +367,43 @@ a {
 }
 
 #right_sidebar .teaser_list .teaser > div,
-#right_sidebar .teaser_list .teaser > p {
+#right_sidebar .teaser_list .teaser > p,
+#right_sidebar .simplified_teaser_list .teaser > div,
+#right_sidebar .simplified_teaser_list .teaser > p {
  display: block;
  padding-left: 16px;  padding-right: 16px;
 }
 
-#right_sidebar .teaser_list img.teaser_icon {
+#right_sidebar .teaser_list img.teaser_icon,
+#right_sidebar .simplified_teaser_list img.teaser_icon  {
  margin-top: 8px;
 }
 
-#right_sidebar .teaser_list .teaser > div span{
+#right_sidebar .teaser_list .teaser > div span,
+#right_sidebar .simplified_teaser_list > dic span {
  font-size: 12px;
 }
-#right_sidebar .teaser_list .teaser > p {
+#right_sidebar .teaser_list .teaser > p,
+#right_sidebar .simplified_teaser_list > p {
  font-size: 14px;
  line-height: 18px;
 }
 
-#right_sidebar .teaser_list .teaser .title {
+#right_sidebar .teaser_list .teaser .title,
+#right_sidebar .simplified_teaser_list .teaser .title {
   background-color: #495848;
   color: white;
   font-size: 15px;
   padding: 10px 16px 10px 48px;
 }
 
-#right_sidebar .teaser_list .article-teaser .title {
+#right_sidebar .teaser_list .article-teaser .title,
+#right_sidebar .simplified_teaser_list .article-teaser .title {
   padding-left: 16px; letter-spacing: 0px;
 }
 
-#right_sidebar .teaser_list .teaser .title img.type_icon {
+#right_sidebar .teaser_list .teaser .title img.type_icon,
+#right_sidebar .simplified_teaser_list .teaser .title img.type_icon {
   left: 10px; top: 8px;
 }
 

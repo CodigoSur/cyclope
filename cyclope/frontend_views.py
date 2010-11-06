@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -27,7 +27,6 @@ cyclope.frontend_views
 from django.utils.translation import ugettext_lazy as _
 from django.template import loader, RequestContext, Template, Context
 from django.contrib.sites.models import Site
-from django.http import HttpResponse
 
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
@@ -43,18 +42,22 @@ class MenuRootItemsList(frontend.FrontendView):
     name='root_items_list'
     verbose_name=_('list of root items for the selected Menu')
     is_default = True
+    is_region_view = True
 
-    def get_string_response(self, request, content_object=None, *args, **kwargs):
+#BORRAR \/
+    is_content_view = True
+
+    def get_response(self, request, host_template, content_object):
         menu_items = MenuItem.tree.filter(menu=content_object,
                                           level=0, active=True)
         current_url = request.path_info[1:].split('/')[0]
         c = RequestContext(request, {'menu_items': menu_items,
                                      'current_url': current_url})
         t = loader.get_template("cyclope/menu_flat_items_list.html")
-        c['host_template'] = 'cyclope/inline_view.html'
+        c['host_template'] = host_template
         return t.render(c)
 
-frontend.site.register_view(Menu, MenuRootItemsList())
+frontend.site.register_view(Menu, MenuRootItemsList)
 
 
 class MenuFlatItemsList(frontend.FrontendView):
@@ -62,17 +65,79 @@ class MenuFlatItemsList(frontend.FrontendView):
     """
     name='flat_items_list'
     verbose_name=_('flat list of all items for the selected Menu')
+    is_region_view = True
 
-    def get_string_response(self, request, content_object=None, *args, **kwargs):
+#BORRAR \/
+    is_content_view = True
+
+    def get_response(self, request, host_template, content_object):
         menu_items = MenuItem.tree.filter(menu=content_object, active=True)
         current_url = request.path_info[1:].split('/')[0]
         c = RequestContext(request, {'menu_items': menu_items,
                                      'current_url': current_url})
         t = loader.get_template("cyclope/menu_flat_items_list.html")
-        c['host_template'] = 'cyclope/inline_view.html'
+        c['host_template'] = host_template
         return t.render(c)
 
-frontend.site.register_view(Menu, MenuFlatItemsList())
+frontend.site.register_view(Menu, MenuFlatItemsList)
+
+
+# TODO(nicoechaniz): refactor this view and CollectionCategoriesHierarchy which share most of their code.
+class MenuMenuItemsHierarchy(frontend.FrontendView):
+    """A hierarchical list view of the menu items in a menu.
+    """
+    name='menuitems_hierarchy'
+    verbose_name=_('hierarchical list of the items in the selected menu')
+    is_region_view = True
+
+#BORRAR \/
+    is_content_view = True
+
+    def get_response(self, request, host_template, content_object):
+        menu = content_object
+        menu_items = MenuItem.tree.filter(menu=menu, level=0)
+        menu_items_list = []
+        for item in menu_items:
+            menu_items_list.extend(self._get_menuitems_nested_list(item))
+        c = RequestContext(request, {'menu_items': menu_items_list,
+                                     'menu_slug': menu.slug})
+        t = loader.get_template("cyclope/menu_menuitems_hierarchy.html")
+        c['host_template'] = host_template
+        return t.render(c)
+
+    def _get_menuitems_nested_list(self, base_item, name_field='name'):
+        """Creates a nested list to be used with unordered_list template tag
+        """
+        #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
+        from django.template import Template, Context
+        link_template = Template(
+             '{% if menu_item.custom_url %}'
+             '   <a href="{{menu_item.url}}">'
+             '{% else %}'
+             '   <a href="/{{CYCLOPE_PREFIX}}{{menu_item.url}}">'
+             '{% endif %}'
+             '<span>{{ menu_item.name }}</span>'
+             '</a>'
+            )
+        nested_list = []
+        for child in base_item.get_children():
+            if child.get_descendant_count()>0:
+                nested_list.extend(self._get_menuitems_nested_list(
+                    child, name_field=name_field))
+            else:
+                name = getattr(child, name_field)
+                nested_list.append(link_template.render(
+                    Context({'menu_item': child})))
+
+        name = getattr(base_item, name_field)
+        include = link_template.render(
+            Context({'menu_item': base_item}))
+        if nested_list:
+            return [include, nested_list]
+        else:
+            return [include]
+
+frontend.site.register_view(Menu, MenuMenuItemsHierarchy)
 
 
 class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
@@ -82,9 +147,9 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
     verbose_name=_('list view of children of the current menu item')
     is_default = True
     is_instance_view = False
+    is_region_view = True
 
-    def get_string_response(self, request, *args, **kwargs):
-        is_instance_view = False #TODO(diegoM): is this necessary ?
+    def get_response(self, request, host_template):
         base_url = request.path_info[1:].split('/')[0]
         if base_url == '':
             current_item = MenuItem.tree.filter(site_home=True)
@@ -96,12 +161,12 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
 
             c = RequestContext(request, {'menu_items': children })
             t = loader.get_template("cyclope/menu_flat_items_list.html")
-            c['host_template'] = 'cyclope/inline_view.html'
+            c['host_template'] = host_template
             return t.render(c)
         else:
             return ''
 
-frontend.site.register_view(MenuItem, MenuItemChildrenOfCurrentItem())
+frontend.site.register_view(MenuItem, MenuItemChildrenOfCurrentItem)
 
 class SiteMap(frontend.FrontendView):
     """Show an expanded hierarchical list of all collection and menus
@@ -110,8 +175,9 @@ class SiteMap(frontend.FrontendView):
     verbose_name=_('expanded hierarchical list of all collection and menus')
     is_default = True
     is_instance_view = False
+    is_content_view = True
 
-    def get_http_response(self, request, *args, **kwargs):
+    def get_response(self, request, host_template):
 
         collections_list = []
         for collection in Collection.objects.filter(visible=True):
@@ -136,8 +202,8 @@ class SiteMap(frontend.FrontendView):
         c = RequestContext(request, {'collections':collections_list,
                                      'menus':menus_list})
         t = loader.get_template("cyclope/site_map.html")
-        c['host_template'] = template_for_request(request)
-        return HttpResponse(t.render(c))
+        c['host_template'] = host_template
+        return t.render(c)
 
     def _get_categories_nested_list(self, base_category, name_field='name'):
 
@@ -182,58 +248,6 @@ class SiteMap(frontend.FrontendView):
             return [include, nested_list]
         else:
             return [include]
-frontend.site.register_view(Site, SiteMap())
+frontend.site.register_view(Site, SiteMap)
 
 
-# TODO(nicoechaniz): refactor this view and CollectionCategoriesHierarchy which share most of their code.
-class MenuMenuItemsHierarchy(frontend.FrontendView):
-    """A hierarchical list view of the menu items in a menu.
-    """
-    name='menuitems_hierarchy'
-    verbose_name=_('hierarchical list of the items in the selected menu')
-
-    def get_string_response(self, request, content_object=None, *args, **kwargs):
-        menu = content_object
-        menu_items = MenuItem.tree.filter(menu=menu, level=0)
-        menu_items_list = []
-        for item in menu_items:
-            menu_items_list.extend(self._get_menuitems_nested_list(item))
-        c = RequestContext(request, {'menu_items': menu_items_list,
-                                     'menu_slug': menu.slug})
-        t = loader.get_template("cyclope/menu_menuitems_hierarchy.html")
-        c['host_template'] = 'cyclope/inline_view.html'
-        return t.render(c)
-
-    def _get_menuitems_nested_list(self, base_item, name_field='name'):
-        """Creates a nested list to be used with unordered_list template tag
-        """
-        #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
-        from django.template import Template, Context
-        link_template = Template(
-             '{% if menu_item.custom_url %}'
-             '   <a href="{{menu_item.url}}">'
-             '{% else %}'
-             '   <a href="/{{CYCLOPE_PREFIX}}{{menu_item.url}}">'
-             '{% endif %}'
-             '<span>{{ menu_item.name }}</span>'
-             '</a>'
-            )
-        nested_list = []
-        for child in base_item.get_children():
-            if child.get_descendant_count()>0:
-                nested_list.extend(self._get_menuitems_nested_list(
-                    child, name_field=name_field))
-            else:
-                name = getattr(child, name_field)
-                nested_list.append(link_template.render(
-                    Context({'menu_item': child})))
-
-        name = getattr(base_item, name_field)
-        include = link_template.render(
-            Context({'menu_item': base_item}))
-        if nested_list:
-            return [include, nested_list]
-        else:
-            return [include]
-
-frontend.site.register_view(Menu, MenuMenuItemsHierarchy())
