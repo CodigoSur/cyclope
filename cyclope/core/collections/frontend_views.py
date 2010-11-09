@@ -51,13 +51,29 @@ class CategoryRootItemsList(frontend.FrontendView):
 
 frontend.site.register_view(Category, CategoryRootItemsList)
 
+class CategoryDefaultList(frontend.FrontendView):
+    name = 'default'
+    verbose_name = _('default view for the Collection')
+    is_default = True
+    is_content_view = True
+    
+    def get_response(self, request, host_template, content_object):
+        category = content_object
+        if category.collection.default_list_view not in ["", self.name]:
+            view_name = category.collection.default_list_view
+            view = frontend.site.get_view(content_object.__class__, view_name)
+        else:
+            view = frontend.site.get_view(content_object.__class__, 'teaser_list')
+        return view.get_response(request, host_template, content_object)
+
+frontend.site.register_view(Category, CategoryDefaultList)
+
 
 class CategoryTeaserList(frontend.FrontendView):
     """A teaser list view of Category members.
     """
-    name='teaser_list'
-    verbose_name=_('teaser list of Category members')
-    is_default = True
+    name = 'teaser_list'
+    verbose_name = _('teaser list of Category members')
     items_per_page = cyc_settings.CYCLOPE_PAGINATION['TEASER']
     is_content_view = True
     is_region_view = True
@@ -67,7 +83,6 @@ class CategoryTeaserList(frontend.FrontendView):
     def get_response(self, request, host_template, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
-
         paginator = Paginator(categorizations_list, self.items_per_page)
 
         # Make sure page request is an int. If not, deliver first page.
@@ -158,7 +173,7 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
     """
     name='categories_hierarchy'
     verbose_name=_('hierarchical list of Categories in a Collection')
-    target_view = 'teaser_list'
+    target_view = 'default'
     is_content_view = True
     is_region_view = True
     

@@ -26,9 +26,9 @@ core.frontend
 
 
 from django.http import HttpResponse
+from django.utils.translation import ugettext_lazy as _
 
 from sites import site
-from django.utils.translation import ugettext_lazy as _
 
 from cyclope.utils import template_for_request
 

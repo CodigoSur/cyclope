@@ -53,6 +53,8 @@ class Collection(models.Model):
     description = models.TextField(_('description'), blank=True, null=True)
     image =  FileBrowseField(_('image'), max_length=250, format='Image',
                              blank=True)
+    default_list_view = models.CharField(_('default list view'), max_length=255,
+                                    blank=True, default='')
 
     def get_absolute_url(self):
         return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)

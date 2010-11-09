@@ -93,18 +93,16 @@ class CyclopeSite(object):
             url(r'^menu_items_for_menu_json$', self.menu_items_for_menu_json),
         )
 
-        #TODO(nicoechaniz): Fix for multi-site ?
         # url patterns for registered views
         for model, model_views in self._registry.items():
             for view in model_views:
                 url_pattern = view.get_url_pattern(model)
-                urlpatterns += patterns(
-                    '',
-                    url(url_pattern,
-                    view,
-                    name="%s-%s" %
-                    (model._meta.object_name.lower(), view.name) )
-                )
+                model_name = model._meta.object_name.lower()
+                url_name = "%s-%s" % (model_name, view.name)
+                urlpatterns += patterns('', url(url_pattern, view, name=url_name))
+                if view.is_default:
+                    urlpatterns += patterns('', url(url_pattern, view, name=model_name))
+                
         # url patterns for menu items
         return self.get_menuitem_urls(urlpatterns)
 

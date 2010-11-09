@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -185,10 +185,16 @@ class CollectibleAdmin (admin.ModelAdmin):
 
 class CollectionAdminForm(forms.ModelForm):
     raw_id_fields = ['picture',]
+    default_list_view = forms.ChoiceField(label=_('Default category listing view'), required=False)
 
     def __init__(self, *args, **kwargs):
         super(CollectionAdminForm, self).__init__(*args, **kwargs)
         self.fields['content_types'].choices = frontend.site.get_base_ctype_choices()
+        model = get_model('collections', 'category')
+        views = [('', '------')] + [ (view.name, view.verbose_name)
+                                     for view in frontend.site._registry[model]
+                                     if view.name != 'default']
+        self.fields['default_list_view'].choices = views
 
     class Meta:
         model = Collection
