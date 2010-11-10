@@ -78,7 +78,8 @@ CYCLOPE_ARTICLE_TEXT_STYLE = getattr(settings,
 # pagination
 CYCLOPE_PAGINATION = getattr(settings, 'CYCLOPE_PAGINATION',
                              { 'TEASER' : 10,
-                               'LABELED_ICON' : 30,})
+                               'LABELED_ICON' : 30,
+                               'FORUM' : 30 })
 CYCLOPE_RSS_LIMIT = 50
 
 CYCLOPE_PROJECT_PATH = getattr(settings, 'CYCLOPE_PROJECT_PATH', None)

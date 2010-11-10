@@ -1,0 +1,31 @@
+{% extends host_template %}
+
+{% load i18n cyclope_utils %}
+
+{% block content %}
+
+{% include 'collections/hierarchycal_navigation_block.html' %}
+
+  <table >
+      <tr>
+        <th>{% trans 'Name' %}</th>
+        <th>{% trans 'Comments' %}</th>
+        <th>{% trans 'Created' %}</th>
+        <th>{% trans 'Last comment' %}</th>
+      </tr>
+      {% for categorization in categorizations %}
+       {% alias categorization.content_object as 'obj' %}
+     <tr>
+       <td><a href="{{ obj.url }}">{{ obj.name }}</a></td>
+       <td>{{ obj.comments_count }}</td>
+       <td>{{ obj.creation_date }}{% if obj.author %} {% trans 'by' %} {{ obj.author }} {% endif %}</td>
+       <td>{% if obj.last_comment_date %}{{ obj.last_comment_date }}  {% trans 'by' %} {{ obj.last_comment_author }} {% endif %}</td>
+      </tr>  
+      {% endfor %}
+  </table>
+
+  {% if page %}
+    {% include 'cyclope/pagination_block.html' %}
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends host_template %}
+
+{% load comments i18n fb_versions cyclope_utils markup dbgettext_tags%}
+
+{% block content %}
+
+{% alias topic as 'current_object' %}
+
+<div class="content-view topic detail topic-detail">
+  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+
+  <h2 class="title"> {{ topic.name }} </h2>
+  <span class="submitted">{{ topic.creation_date }}</span>
+  <div class="author_container">
+    <span class="author">{{ topic.author }}</span>
+    <div class="avatar">{% if avatar %}<img src="{{MEDIA_URL}}/{{ avatar }}" alt=""></img>{% endif %}</div>
+  </div>
+  {{ topic.text }}
+
+<!--COMENTARIOS -->
+  {% include 'comments/comments_block.html' %}
+</div>
+
+{% endblock content%}

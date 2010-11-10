@@ -113,6 +113,7 @@ INSTALLED_APPS = [
     'cyclope.apps.staticpages',
     'cyclope.apps.medialibrary',
     'cyclope.apps.polls',
+    'cyclope.apps.forum',
     'contact_form',
 ]
 

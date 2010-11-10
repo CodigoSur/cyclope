@@ -24,6 +24,9 @@
 from django.utils.translation import ugettext_lazy as _
 from django.template import loader, RequestContext
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.core.urlresolvers import reverse
+from django.contrib.comments.models import Comment
+from django.contrib.contenttypes.models import ContentType
 
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
@@ -88,7 +91,6 @@ class CategoryTeaserList(frontend.FrontendView):
         categorizations_list = sorted(categorizations_list,
                                       key=lambda c: c.object_modification_date,
                                       reverse=True)
-
 
         paginator = Paginator(categorizations_list, self.items_per_page)
 
@@ -249,3 +251,63 @@ class CollectionCategoriesHierarchyToIconlist(CollectionCategoriesHierarchy):
     target_view = 'labeled_icon_list'
 
 frontend.site.register_view(Collection, CollectionCategoriesHierarchyToIconlist)
+
+
+class CategoryListAsForum(frontend.FrontendView):
+    """ A list view of Category Members that will show a table with some extra
+        information of the content (creation_date, count of comments, etc)
+    """
+    name='list_as_forum'
+    verbose_name=_('list of Category members as forum view')
+    is_default = False
+    items_per_page = cyc_settings.CYCLOPE_PAGINATION['FORUM']
+    is_content_view = True
+    is_region_view = True
+
+    template = "collections/category_list_as_forum.html"
+
+    def get_response(self, request, host_template, content_object):
+        category = content_object
+        categorizations_list = category.categorizations.all()
+
+        # TODO(diegoM): ¡¡¡ No escala !!!
+        categorizations_list = sorted(categorizations_list,
+                                      key=lambda c: c.object_modification_date,
+                                      reverse=True)
+
+        paginator = Paginator(categorizations_list, self.items_per_page)
+
+        # Make sure page request is an int. If not, deliver first page.
+        try:
+            page_number = int(request.GET.get('page', '1'))
+        except ValueError:
+            page_number = 1
+
+        # DjangoDocs uses page differently
+        # If page request (9999) is out of range, deliver last page of results.
+        try:
+            page = paginator.page(page_number)
+        except (EmptyPage, InvalidPage):
+            page = paginator.page(paginator.num_pages)
+
+        for categorization in page.object_list:
+            obj = categorization.content_object
+            print obj.name
+            ct = ContentType.objects.get_for_model(obj)
+            qs = Comment.objects.filter(content_type=ct,object_pk=obj.pk)
+            obj.comments_count = qs.count()
+            obj.url = reverse(categorization.content_type.model, args=[obj.slug])
+            if obj.comments_count:
+                last_comment = qs.latest('submit_date')
+                obj.last_comment_date = last_comment.submit_date
+                obj.last_comment_author = obj.author
+
+        c = RequestContext(request,
+                           {'categorizations': page.object_list,
+                            'page': page,
+                            'category': category})
+        t = loader.get_template(self.template)
+        c['host_template'] = host_template
+        return t.render(c)
+
+frontend.site.register_view(Category, CategoryListAsForum)
