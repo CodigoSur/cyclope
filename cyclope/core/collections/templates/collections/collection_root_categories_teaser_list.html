@@ -25,10 +25,10 @@
 
     {% for category in categories %}
 
-    <div class="category teaser {% if category.image %}clear_right{% endif%}" >
-      <h2 class="title"><a href="{% url category-teaser_list category.slug %}">{{ category.name }}</a></h2>
+    <div class="category teaser {% if category.image %}clear_right{% endif %}" >
+      <h2 class="title"><a href="{% url category-default category.slug %}">{{ category.name }}</a></h2>
       {% if category.image %}
-      <a href="{% url category-teaser_list category.slug %}">
+      <a href="{% url category-default category.slug %}">
         <img class="icon" src="{% version category.image.path 'thumbnail' %}" border="0"/>
       </a>
       {% endif %}

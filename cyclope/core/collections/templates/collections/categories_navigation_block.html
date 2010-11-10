@@ -7,7 +7,7 @@
             {% alias categorization.category as 'category' %}
             {% if category.collection.visible %}
                 <li>
-                    <a href="{% url category-teaser_list category.slug %}">{{ category.name }}</a>
+                    <a href="{% url category-default category.slug %}">{{ category.name }}</a>
                 </li>
             {% endif %}
         {% endfor %}
