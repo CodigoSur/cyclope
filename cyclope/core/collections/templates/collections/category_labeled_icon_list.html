@@ -4,27 +4,7 @@
 
 {% block content %}
 
-  {% if not region_view %}
-  <div id="categories_navigation">
-    {% if category.parent %}
-      <a href="{% url category-teaser_list category.parent.slug %}" class="parent">{{ category.parent.name }}</a>
-    {% else %}
-      <a href="{% url collection-root_categories_teaser_list category.collection.slug %}" class="parent">{{ category.collection.name }}</a>
-    {% endif %}
-
-    {% if category.children.all %}
-      <ul>
-        {% for child in category.children.all %}
-          <li> <a href="{% url category-teaser_list child.slug %}" class="children">{{ child.name }}</a> </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  </div>
-  {% endif%}
-
-  {% if category.collection.visible %}
-  <div class="category_title"><a href="{% url category-teaser_list category.slug %}">{{ category.name }}</a></div>
-  {% endif %}
+{% include 'collections/hierarchycal_navigation_block.html' %}
 
   {% comment %}
   We show a teaser view of every object belonging to this category.
