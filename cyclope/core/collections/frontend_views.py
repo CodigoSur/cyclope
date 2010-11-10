@@ -56,7 +56,7 @@ class CategoryDefaultList(frontend.FrontendView):
     verbose_name = _('default view for the Collection')
     is_default = True
     is_content_view = True
-    
+
     def get_response(self, request, host_template, content_object):
         category = content_object
         if category.collection.default_list_view not in ["", self.name]:
@@ -83,6 +83,13 @@ class CategoryTeaserList(frontend.FrontendView):
     def get_response(self, request, host_template, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
+
+        # TODO(diegoM): ¡¡¡ No escala !!!
+        categorizations_list = sorted(categorizations_list,
+                                      key=lambda c: c.object_modification_date,
+                                      reverse=True)
+
+
         paginator = Paginator(categorizations_list, self.items_per_page)
 
         # Make sure page request is an int. If not, deliver first page.
@@ -127,7 +134,7 @@ class CategorySimplifiedTeaserList(frontend.FrontendView):
     name='simplified_teaser_list'
     verbose_name=_('simplified teaser list of Category members')
     is_region_view = True
-    
+
     def get_response(self, request, host_template, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
@@ -176,7 +183,7 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
     target_view = 'default'
     is_content_view = True
     is_region_view = True
-    
+
     def get_response(self, request, host_template, content_object):
         collection = content_object
         categories = Category.tree.filter(collection=collection, level=0)
