@@ -292,7 +292,6 @@ class CategoryListAsForum(frontend.FrontendView):
 
         for categorization in page.object_list:
             obj = categorization.content_object
-            print obj.name
             ct = ContentType.objects.get_for_model(obj)
             qs = Comment.objects.filter(content_type=ct,object_pk=obj.pk)
             obj.comments_count = qs.count()
