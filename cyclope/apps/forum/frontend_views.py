@@ -22,16 +22,21 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import redirect
+from django.contrib.contenttypes.models import ContentType
+from django.core.urlresolvers import reverse
 
 from cyclope.core import frontend
 from cyclope import views
+from cyclope.core.collections.models import Category
 
 from models import Topic
+from forms import CreateTopicForm
 
 
 class TopicDetail(frontend.FrontendView):
     name = 'detail'
-    verbose_name=_('detailed view of the selected Topic')
+    verbose_name= _('detailed view of the selected Topic')
     is_default = True
     is_instance_view = True
     is_content_view = True
@@ -49,3 +54,49 @@ class TopicDetail(frontend.FrontendView):
                                    extra_context=context)
 
 frontend.site.register_view(Topic, TopicDetail)
+
+class CreateTopic(frontend.FrontendView):
+    name = 'create-topic'
+    verbose_name = _('create a new topic in the Forum selected')
+    is_instance_view = True
+    is_content_view = True
+
+    def get_response(self, request, host_template, content_object):
+        category = content_object
+
+        context = {'forum': category.name}
+
+        topic_ctype = ContentType.objects.get_for_model(Topic)
+        if topic_ctype not in category.collection.content_types.all():
+            not_allowed = True
+            form = None
+        else:
+            not_allowed = False
+            if request.method == 'POST':
+                form = CreateTopicForm(data=request.POST)
+                if form.is_valid():
+                    # partial save
+                    topic = form.save(commit=False)
+                    topic.author = request.user
+                    topic.allow_comments = 'YES'
+                    topic.save()
+                    # category added
+                    topic.categories.get_or_create(category=category,
+                                    defaults={'category': category,
+                                              'content_type_id': topic_ctype.id,
+                                              'object_id': topic.id})
+                    topic.save()
+                    return redirect(topic)
+            else:
+                form = CreateTopicForm()
+
+        context.update({'form': form,
+                        'not_allowed': not_allowed,
+                        'action_url': reverse('category-create-topic',
+                                               args=[category.slug]),
+                       })
+
+        return views.object_detail(request, host_template, content_object,
+                                   view_name = self.name, extra_context=context)
+
+frontend.site.register_view(Category, CreateTopic)

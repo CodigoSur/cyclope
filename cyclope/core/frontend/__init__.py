@@ -69,7 +69,7 @@ class FrontendView(object):
             a string if the view is called from within a region templatetag
             an HttpResponse otherwise
         """
-        
+
         if inline:
             host_template = 'cyclope/inline_view.html'
         else:
@@ -84,8 +84,9 @@ class FrontendView(object):
 
         # inline will be True if the view was called from a region templatetag
         if not inline:
-            response = HttpResponse(response)
-            
+            if not isinstance(response, HttpResponse):
+                response = HttpResponse(response)
+
         return response
 
     def get_response(self, request, host_template, content_object=None):

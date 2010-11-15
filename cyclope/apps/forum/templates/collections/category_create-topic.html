@@ -1,0 +1,24 @@
+{% extends host_template %}
+
+{% load comments i18n fb_versions cyclope_utils markup dbgettext_tags%}
+
+{% block content %}
+
+{% if not_allowed %}
+  <h2>
+      {% blocktrans %} {{ forum }} is not a forum {% endblocktrans %}
+  </h2>
+
+{% else %}
+
+<div class="user_input">
+  <h2>
+      {% blocktrans %} New topic in  {{ forum }} forum {% endblocktrans %}
+  </h2>
+  <form action="{{ action_url }}" method="post">
+    {{ form.as_p }}
+    <input type="submit" class="submit" value="{% trans "Create" %}" />
+  </form>
+</div>
+{% endif %}
+{% endblock content%}
