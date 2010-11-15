@@ -1,0 +1,34 @@
+{% load i18n tagging_tags fb_versions markup comments %}
+
+  <div class="content-view topic teaser topic-teaser">
+
+    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/topid.png" /><a href="{% url topic-detail topic.slug %}">{{ topic.name }}</a></h2>
+
+    <div class="summary">
+      {{ topic.text|truncatewords:40 }}
+      <span class="more"><a href="{% url topic-detail topic.slug %}"> {% trans "More" %}</a></span>
+    </div>
+
+    {% if not simplified_view %}
+        <div class="meta-content" ><span class="author">{% trans "By" %} {{ topic.author }}</span></div>
+        <div class="meta-content" ><span class="creation-date">{{ topic.creation_date }}</span></div>
+        {% get_comment_count for topic as comment_count %}
+        <div class="meta-content" ><span class="replies-count">{% trans "Replies" %}: {{ comment_count }}</span></div>
+    {% endif %}
+
+    {% if not simplified_view %}
+        {% if topic.tags %}
+        <div class="meta-content"><span class="tags">
+          <span class="tags-label">{% trans "Tags" %}:</span>
+          {% tags_for_object topic as topic_tags %}
+          {% for tag in topic_tags %}
+            <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
+            {{tag.name}}{% if not forloop.last%},{% endif%}
+
+          {% endfor %}
+        </span></div>
+        {% endif %}
+    <div class="clear"></div>
+    {% endif %}
+
+  </div>
