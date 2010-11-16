@@ -26,6 +26,10 @@ from django.shortcuts import redirect
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 
+from django.http import HttpResponseRedirect
+from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.utils.http import urlquote
+
 from cyclope.core import frontend
 from cyclope import views
 from cyclope.core.collections.models import Category
@@ -62,6 +66,11 @@ class CreateTopic(frontend.FrontendView):
     is_content_view = True
 
     def get_response(self, request, host_template, content_object):
+        if not request.user.is_authenticated():
+            from django.conf import settings
+            tup = (settings.LOGIN_URL, REDIRECT_FIELD_NAME,
+                   urlquote(request.get_full_path()))
+            return HttpResponseRedirect('%s?%s=%s' % tup)
         category = content_object
 
         context = {'forum': category.name}
