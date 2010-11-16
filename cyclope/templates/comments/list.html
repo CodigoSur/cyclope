@@ -4,7 +4,7 @@
 <div class="comment" id="c{{ comment.id }}">
   <div class="data">
     <span class="when_who">
-      {{ comment.submit_date }}
+      {{ comment.submit_date|date:'DATETIME_FORMAT' }}
       {% if comment.name %}
            - {% trans 'By' %}: {{ comment.name }}
       {% endif %}
