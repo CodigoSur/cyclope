@@ -10,17 +10,26 @@
           {{ field.label_tag }} {{ field }}
         </div>
       {% else %}
-        {{ field.label_tag }}
-        {% ifequal field.name "captcha" %}
-          <small>
-            {% trans "For security reasons you need to type the text displayed in the following image" %}
-          </small>
-        {% endifequal %}
-        {{ field }}
+        {% if user.is_authenticated %}
+          {% ifequal field.name "comment" %}
+            {{ field.label_tag }}
+            {{ field }}
+          {% endifequal %}
+        {% else %}
+          {{ field.label_tag }}
+          {% ifequal field.name "captcha" %}
+            <small>
+              {% trans "For security reasons you need to type the text displayed in the following image" %}
+            </small>
+          {% endifequal %}
+          {{ field }}
+        {% endif %}
       {% endifequal %}
-
     {% endif %}
   {% endfor %}
+  {% if user.is_authenticated %}
+    <input id="id_captcha_" name="captcha_" type="hidden">
+  {% endif %}
   <div class="submit action-content submit-comment">
     <input type="submit" name="post" class="submit" value="{% trans "Post your comment" %}" />
   </div>

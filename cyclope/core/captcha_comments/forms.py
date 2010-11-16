@@ -27,3 +27,11 @@ from captcha.fields import CaptchaField
 class CommentFormWithCaptcha(CommentForm):
     url = forms.URLField(label=_("Website or Blog"), required=False)
     captcha = CaptchaField(label=_("Security code"))
+
+    def clean(self):
+
+        # captcha_ input only exists when the user is authenticated
+        if 'captcha_' in self.data:
+            if 'captcha' in self._errors:
+                self._errors.pop('captcha')
+        return self.cleaned_data
