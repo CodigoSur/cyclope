@@ -34,4 +34,4 @@ class CommentFormWithCaptcha(CommentForm):
         if 'captcha_' in self.data:
             if 'captcha' in self._errors:
                 self._errors.pop('captcha')
-        return self.cleaned_data
+        return super(CommentFormWithCaptcha, self).clean()
