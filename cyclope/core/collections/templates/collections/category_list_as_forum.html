@@ -6,6 +6,7 @@
 
 {% include 'collections/hierarchycal_navigation_block.html' %}
 
+<div id='link-create-topic'> <a href="{% url category-create_topic category.slug %}">{% trans 'Create a new topic' %}</div>
   <table >
       <tr>
         <th>{% trans 'Name' %}</th>

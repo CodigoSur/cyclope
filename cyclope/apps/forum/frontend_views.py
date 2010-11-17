@@ -60,7 +60,7 @@ class TopicDetail(frontend.FrontendView):
 frontend.site.register_view(Topic, TopicDetail)
 
 class CreateTopic(frontend.FrontendView):
-    name = 'create-topic'
+    name = 'create_topic'
     verbose_name = _('create a new topic in the Forum selected')
     is_instance_view = True
     is_content_view = True
@@ -101,7 +101,7 @@ class CreateTopic(frontend.FrontendView):
 
         context.update({'form': form,
                         'not_allowed': not_allowed,
-                        'action_url': reverse('category-create-topic',
+                        'action_url': reverse('category-create_topic',
                                                args=[category.slug]),
                        })
 
