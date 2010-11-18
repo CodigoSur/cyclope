@@ -1,8 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR LeitoMonk <monk@gcoop.coop>, 2010.
-#
+# Cyclope (cyclope.codigosur.org)
+# Código Sur (www.codigosur.org)
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -16,6 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Translated-Using: django-rosetta 0.5.6\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 
 #: admin.py:73
 msgid "content details"
@@ -47,7 +46,7 @@ msgstr "Biblioteca Multimedia"
 
 #: dashboard.py:128
 msgid "Authors and Sources"
-msgstr "Autores y Fuentes"
+msgstr "Autorías y Fuentes"
 
 #: dashboard.py:135
 msgid "Polls"
@@ -104,7 +103,7 @@ msgstr "Permisos"
 
 #: dashboard.py:222
 msgid "Registration"
-msgstr "Registración"
+msgstr "Registro"
 
 #: dashboard.py:228
 msgid "Sites"
@@ -168,7 +167,7 @@ msgstr "Padre"
 
 #: forms.py:100
 msgid ""
-"You can not set a Custom URL for menu entries                     with "
+"You can not set a Custom URL for menu entries with "
 "associated content"
 msgstr "No puede setear una URL para Entradas de Menú con contenido asociado."
 
@@ -396,15 +395,15 @@ msgstr "tipos de contenido"
 
 #: models.py:353
 msgid "Select the content types this author is related to."
-msgstr "Seleccione los tipos de contenido que corresponden a este autor"
+msgstr "Seleccione los tipos de contenido que corresponden a esta autoría"
 
 #: models.py:359 apps/articles/models.py:46 apps/medialibrary/models.py:35
 msgid "author"
-msgstr "autor"
+msgstr "autoría"
 
 #: models.py:360
 msgid "authors"
-msgstr "autores"
+msgstr "autorías"
 
 #: models.py:368
 msgid "link"
@@ -737,11 +736,11 @@ msgstr "respuestas"
 
 #: apps/polls/models.py:83
 msgid "user"
-msgstr "usuario"
+msgstr "usuario/a"
 
 #: apps/polls/models.py:84
 msgid "foreign_user"
-msgstr "usuario externo"
+msgstr "usuario/a externo"
 
 #: apps/polls/models.py:89
 msgid "submission"
@@ -889,7 +888,7 @@ msgstr "Puedes definir solo una vista por defecto para %s"
 
 #: core/frontend/sites.py:151
 msgid "You need to create you site settings"
-msgstr "Su sitio aún no ha sido configurado"
+msgstr "Tu sitio aún no ha sido configurado"
 
 #: core/frontend/sites.py:156
 msgid "You need to select a layout for the site"
@@ -1020,7 +1019,7 @@ msgstr "Enviar"
 
 #: templates/contact_form/contact_form_sent.html:6
 msgid "Thank you for contacting us!"
-msgstr "Gracias por su comentario!"
+msgstr "¡Gracias por contactarnos!"
 
 #: templates/cyclope/breadcrumb.html:8
 msgid "Breadcrumb"
@@ -1142,7 +1141,7 @@ msgstr "El enlace que utilizó para la activación no estuviera mal formado"
 
 #: templates/registration/activate.html:18
 msgid "Welcome! Your account has been successfully activated. "
-msgstr "Felicitaciones! Tu cuenta ha sido activada con éxito. "
+msgstr "¡Felicitaciones! Tu cuenta ha sido activada con éxito. "
 
 #: templates/registration/activation_complete.html:7
 msgid "Your account is now active"
@@ -1158,7 +1157,7 @@ msgstr "ingresar"
 
 #: templates/registration/login.html:8
 msgid "Please enter your credentials"
-msgstr "Por favor introduzca sus datos de ingreso"
+msgstr "Por favor introduzca sus datos de acceso"
 
 #: templates/registration/login.html:15
 #, python-format
@@ -1185,7 +1184,7 @@ msgstr "Tu clave ha sido re-generada"
 
 #: templates/registration/password_reset_form.html:8
 msgid "Forgot your password?"
-msgstr "Olvidaste tu clave?"
+msgstr "¿Olvidaste tu clave?"
 
 #: templates/registration/password_reset_form.html:10
 msgid ""
@@ -1201,7 +1200,7 @@ msgstr "Re-configurar Clave"
 
 #: templates/registration/registration_complete.html:4
 msgid "Registration complete"
-msgstr "Registración completada"
+msgstr "Registro completado"
 
 #: templates/registration/registration_complete.html:8
 msgid ""
@@ -1229,17 +1228,17 @@ msgstr "Traducción"
 
 #: templates/rosetta/pofile.html:12
 msgid "Welcome,"
-msgstr ""
+msgstr "Te damos la Bienvenida"
 
 #: templates/rosetta/pofile.html:20
 #, fuzzy
 msgid "Documentation"
-msgstr ""
+msgstr "Documentación"
 
 #: templates/rosetta/pofile.html:28
 #, fuzzy
 msgid "Change password"
-msgstr ""
+msgstr "Cambiar contraseña"
 
 #: templates/rosetta/pofile.html:49
 msgid "File is read-only: download the file when done editing!"
