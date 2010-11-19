@@ -524,3 +524,5 @@ class SiteMapTestCase(TestCase):
                  content_type=content_type, content_view="map").save()
         res = self.client.get('/site-map')
         self.assertEqual(res.status_code, 200)
+
+#class TopicTestCase(TestCase):

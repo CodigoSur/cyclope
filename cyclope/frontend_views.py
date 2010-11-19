@@ -32,7 +32,6 @@ from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 from cyclope.core.collections.models import Collection, Category
 from cyclope.models import Menu, MenuItem
-from cyclope.utils import template_for_request
 import cyclope.settings as cyc_settings
 
 
@@ -67,9 +66,6 @@ class MenuFlatItemsList(frontend.FrontendView):
     verbose_name=_('flat list of all items for the selected Menu')
     is_region_view = True
 
-#BORRAR \/
-    is_content_view = True
-
     def get_response(self, request, host_template, content_object):
         menu_items = MenuItem.tree.filter(menu=content_object, active=True)
         current_url = request.path_info[1:].split('/')[0]
@@ -89,9 +85,6 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
     name='menuitems_hierarchy'
     verbose_name=_('hierarchical list of the items in the selected menu')
     is_region_view = True
-
-#BORRAR \/
-    is_content_view = True
 
     def get_response(self, request, host_template, content_object):
         menu = content_object

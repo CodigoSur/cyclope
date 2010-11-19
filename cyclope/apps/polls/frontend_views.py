@@ -27,7 +27,6 @@ from django.forms.formsets import formset_factory
 from django.shortcuts import redirect
 
 from cyclope.core import frontend
-from cyclope.utils import template_for_request
 from cyclope import views
 
 from models import Poll, Submission, Question

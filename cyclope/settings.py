@@ -51,6 +51,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _, ugettext
 from django.db.models.signals import post_save, pre_delete
 from django.core.exceptions import ImproperlyConfigured
+from django.db.utils import DatabaseError
 
 from cyclope.models import SiteSettings
 
@@ -95,10 +96,8 @@ CYCLOPE_PROJECT_NAME = os.path.basename(CYCLOPE_PROJECT_PATH)
 #TODO(nicoechaniz): re-evaluate the way we are handling these dynamic settings, it is practical but seems hacky and error-prone.
 
 sys.path.append(os.path.join(CYCLOPE_THEMES_ROOT, '../'))
-#import themes as CYCLOPE_THEMES
 import themes
 
-#TODO(nicoechaniz): adapt for multi-site.
 def get_site_settings():
     """Get the SiteSettings object.
 
@@ -109,7 +108,7 @@ def get_site_settings():
     from django.core.exceptions import ObjectDoesNotExist
     from django.db.utils import DatabaseError
     try:
-        #TODO(nicoechaniz): Fix for multi-site
+        # a Cyclope project is supposed to have only one SiteSettings object
         site_settings = SiteSettings.objects.all()[0]
     # catch exceptions if the database is not available or no settings created
     except (DatabaseError, IndexError):
@@ -135,13 +134,18 @@ if CYCLOPE_SITE_SETTINGS is not None:
     CYCLOPE_THEME_PREFIX = 'cyclope/themes/%s/' % CYCLOPE_CURRENT_THEME
     CYCLOPE_THEME_BASE_TEMPLATE = 'cyclope/themes/%s/base.html' \
                                    % CYCLOPE_CURRENT_THEME
-
+    
     if CYCLOPE_SITE_SETTINGS.default_layout_id:
-        CYCLOPE_DEFAULT_LAYOUT = CYCLOPE_SITE_SETTINGS.default_layout
+        try:
+            CYCLOPE_DEFAULT_LAYOUT = CYCLOPE_SITE_SETTINGS.default_layout
 
-        CYCLOPE_DEFAULT_TEMPLATE = 'cyclope/themes/%s/%s' % (
-            CYCLOPE_CURRENT_THEME,
-            CYCLOPE_DEFAULT_LAYOUT.template)
+            CYCLOPE_DEFAULT_TEMPLATE = 'cyclope/themes/%s/%s' % (
+                CYCLOPE_CURRENT_THEME,
+                CYCLOPE_DEFAULT_LAYOUT.template)
+
+        #TODO(nicoechaniz): fix this workaround. It's here for migrations on the Layout model, which fail to complete with a DatabaseError when this module is imported. Eg: cyclope/migrations/0011...
+        except DatabaseError:
+            pass
 
 def _refresh_site_settings(sender, instance, created, **kwargs):
     "Callback to refresh site settings when they are modified in the database"

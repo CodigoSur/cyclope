@@ -128,6 +128,9 @@ class MenuItem(models.Model):
     active = models.BooleanField(default=True, db_index=True)
     layout = models.ForeignKey('Layout', verbose_name=_('layout'),
                                null=True, blank=True)
+    persistent_layout =  models.BooleanField(_('Persistent layout'), default=False,
+                                      help_text=_('If the layout is marked as persistent it will be in use until the user navigates to a menu item which explicitly specifies a different Layout'))
+    
 
     content_type = models.ForeignKey(ContentType,
                      verbose_name=_('type'), related_name='menu_entries',
@@ -181,6 +184,13 @@ class MenuItem(models.Model):
 
         super(MenuItem, self).save(**kwargs)
 
+    def get_layout(self):
+        if self.layout:
+            layout = self.layout
+        else:
+            layout = cyclope.settings.CYCLOPE_DEFAULT_LAYOUT
+        return layout
+        
     def __unicode__(self):
         return self.name
 

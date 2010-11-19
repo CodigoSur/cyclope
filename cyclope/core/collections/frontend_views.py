@@ -31,7 +31,7 @@ from django.contrib.contenttypes.models import ContentType
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 from cyclope.core.collections.models import Collection, Category
-from cyclope.utils import template_for_request
+
 
 class CategoryRootItemsList(frontend.FrontendView):
     """A flat list view of the root members for a Category.

@@ -36,6 +36,17 @@ layout_templates = {
             'footer': _('footer'),
             }
         },
+
+    'no_sidebars.html':
+        {'verbose_name': _('No sidebars'),
+        'regions' : {
+            'header': _('header'),
+            'before_content': _('before content'),
+            'after_content': _('after content'),
+            'footer': _('footer'),
+            }
+         },
+
     'empty.html':
         {'verbose_name': _('Empty'),
          'regions': {}

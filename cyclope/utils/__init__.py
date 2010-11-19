@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -27,29 +27,37 @@ Helper methods and classes.
 """
 
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q
+
 import cyclope
+from cyclope.models import MenuItem
+
+def menu_item_for_request(request):
+    req_url = request.path
+    url = req_url[len(cyclope.settings.CYCLOPE_PREFIX)+1:]
+    if url == '':
+        menu_item = MenuItem.objects.select_related().get(site_home=True)
+    else:
+        try:
+            # match menuitems with internal and external (custom) urls
+            menu_item = MenuItem.objects.select_related().get(Q(url=url)|Q(url=req_url))
+        except:
+            menu_item = None
+    return menu_item
 
 def layout_for_request(request):
     """
     Returns the layout corresponding to the MenuItem matching the request URL
     or the default site layout if no matching MenuItem is found.
     """
-    from cyclope.models import MenuItem
-
-    req_url= request.META['PATH_INFO']
-    req_url = req_url[len(cyclope.settings.CYCLOPE_PREFIX)+1:]
-
-    if req_url == '':
-        menu_item = MenuItem.objects.select_related().get(site_home=True)
+    menu_item = menu_item_for_request(request)
+    if menu_item:
+        layout = menu_item.get_layout()
     else:
-        try:
-            menu_item = MenuItem.objects.select_related().get(url=req_url)
-        except:
-            menu_item = None
-    if menu_item and menu_item.layout:
-        layout = menu_item.layout
-    else:
-        layout = cyclope.settings.CYCLOPE_DEFAULT_LAYOUT
+        if request.session.has_key('layout'):
+            layout = request.session['layout']
+        else:
+            layout = cyclope.settings.CYCLOPE_DEFAULT_LAYOUT
 
     return layout
 

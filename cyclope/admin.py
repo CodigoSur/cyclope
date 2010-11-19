@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -73,7 +73,7 @@ class MenuItemAdmin(editor.TreeEditor):
                  (_('content details'),
                   {
 #                    'classes': ('collapse',),
-                  'fields':('layout', 'custom_url', 'content_type',
+                  'fields':('layout', 'persistent_layout', 'custom_url', 'content_type',
                             'content_view', 'object_id'),
                   'description': _(u"Either set an URL here or select a content"
                                     "type and view.")
