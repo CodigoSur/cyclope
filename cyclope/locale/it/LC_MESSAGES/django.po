@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-08 19:06-0300\n"
+"POT-Creation-Date: 2010-11-19 04:17-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,6 +56,7 @@ msgstr ""
 
 #: dashboard.py:146 apps/articles/templates/articles/article_detail.html:37
 #: apps/polls/templates/polls/poll_detail.html:34
+#: core/collections/templates/collections/category_list_as_forum.html:13
 msgid "Comments"
 msgstr ""
 
@@ -127,31 +128,31 @@ msgstr ""
 msgid "Portuguese"
 msgstr ""
 
-#: default_settings.py:165
+#: default_settings.py:167
 msgid "Admin Thumbnail"
 msgstr ""
 
-#: default_settings.py:167
+#: default_settings.py:169
 msgid "Thumbnail (140px)"
 msgstr ""
 
-#: default_settings.py:169
+#: default_settings.py:171
 msgid "Small (300px)"
 msgstr ""
 
-#: default_settings.py:171
+#: default_settings.py:173
 msgid "Medium (460px)"
 msgstr ""
 
-#: default_settings.py:173
+#: default_settings.py:175
 msgid "Big (620px)"
 msgstr ""
 
-#: default_settings.py:175
+#: default_settings.py:177
 msgid "Cropped (60x60px)"
 msgstr ""
 
-#: default_settings.py:177
+#: default_settings.py:179
 msgid "Cropped Thumbnail (140x140px)"
 msgstr ""
 
@@ -210,23 +211,23 @@ msgstr ""
 msgid "Your avatar image is too big"
 msgstr ""
 
-#: frontend_views.py:43
+#: frontend_views.py:42
 msgid "list of root items for the selected Menu"
 msgstr ""
 
-#: frontend_views.py:67
+#: frontend_views.py:66
 msgid "flat list of all items for the selected Menu"
 msgstr ""
 
-#: frontend_views.py:90
+#: frontend_views.py:86
 msgid "hierarchical list of the items in the selected menu"
 msgstr ""
 
-#: frontend_views.py:147
+#: frontend_views.py:140
 msgid "list view of children of the current menu item"
 msgstr ""
 
-#: frontend_views.py:175
+#: frontend_views.py:168
 msgid "expanded hierarchical list of all collection and menus"
 msgstr ""
 
@@ -238,15 +239,15 @@ msgstr ""
 msgid "default layout"
 msgstr ""
 
-#: models.py:63 models.py:279
+#: models.py:63 models.py:289
 msgid "allow comments"
 msgstr ""
 
-#: models.py:65 models.py:282
+#: models.py:65 models.py:292
 msgid "enabled"
 msgstr ""
 
-#: models.py:66 models.py:283
+#: models.py:66 models.py:293
 msgid "disabled"
 msgstr ""
 
@@ -259,7 +260,7 @@ msgid "keywords"
 msgstr ""
 
 #: models.py:72 apps/medialibrary/models.py:37 apps/polls/models.py:36
-#: core/collections/models.py:53 core/collections/models.py:81
+#: core/collections/models.py:53 core/collections/models.py:83
 msgid "description"
 msgstr ""
 
@@ -267,8 +268,8 @@ msgstr ""
 msgid "site settings"
 msgstr ""
 
-#: models.py:88 models.py:118 models.py:220 models.py:266 models.py:341
-#: models.py:364 core/collections/models.py:42 core/collections/models.py:75
+#: models.py:88 models.py:118 models.py:230 models.py:276 models.py:351
+#: models.py:374 core/collections/models.py:42 core/collections/models.py:77
 msgid "name"
 msgstr ""
 
@@ -284,11 +285,11 @@ msgstr ""
 msgid "menus"
 msgstr ""
 
-#: models.py:119 core/collections/models.py:78
+#: models.py:119 core/collections/models.py:80
 msgid "parent"
 msgstr ""
 
-#: models.py:120 core/collections/models.py:79
+#: models.py:120 core/collections/models.py:81
 msgid "children"
 msgstr ""
 
@@ -300,154 +301,165 @@ msgstr ""
 msgid "custom URL"
 msgstr ""
 
-#: models.py:129 models.py:231
+#: models.py:129 models.py:241
 msgid "layout"
 msgstr ""
 
-#: models.py:133 models.py:201
+#: models.py:131
+msgid "Persistent layout"
+msgstr ""
+
+#: models.py:132
+msgid ""
+"If the layout is marked as persistent it will be in use until the user "
+"navigates to a menu item which explicitly specifies a different Layout"
+msgstr ""
+
+#: models.py:136 models.py:211
 msgid "type"
 msgstr ""
 
-#: models.py:135 models.py:209
+#: models.py:138 models.py:219
 msgid "object"
 msgstr ""
 
-#: models.py:141 models.py:203
+#: models.py:144 models.py:213
 msgid "view"
 msgstr ""
 
-#: models.py:188
+#: models.py:198
 msgid "menu item"
 msgstr ""
 
-#: models.py:189
+#: models.py:199
 msgid "menu items"
 msgstr ""
 
-#: models.py:197
+#: models.py:207
 msgid "region"
 msgstr ""
 
-#: models.py:206
+#: models.py:216
 msgid "weight"
 msgstr ""
 
-#: models.py:225
+#: models.py:235
 msgid "layout template"
 msgstr ""
 
-#: models.py:232
+#: models.py:242
 msgid "layouts"
 msgstr ""
 
-#: models.py:239 models.py:244 core/collections/models.py:142
+#: models.py:249 models.py:254 core/collections/models.py:144
 msgid "content type"
 msgstr ""
 
-#: models.py:259
+#: models.py:269
 msgid "related content"
 msgstr ""
 
-#: models.py:260
+#: models.py:270
 msgid "related contents"
 msgstr ""
 
-#: models.py:270
+#: models.py:280
 msgid "tags"
 msgstr ""
 
-#: models.py:271
+#: models.py:281
 msgid "published"
 msgstr ""
 
-#: models.py:275
+#: models.py:285
 msgid "creation date"
 msgstr ""
 
-#: models.py:277
+#: models.py:287
 msgid "modification date"
 msgstr ""
 
-#: models.py:281
+#: models.py:291
 msgid "default"
 msgstr ""
 
-#: models.py:327
+#: models.py:337
 msgid "translations"
 msgstr ""
 
-#: models.py:345 models.py:380 models.py:390 apps/medialibrary/models.py:47
+#: models.py:355 models.py:390 models.py:400 apps/medialibrary/models.py:47
 #: apps/medialibrary/models.py:82 apps/medialibrary/models.py:95
 #: apps/medialibrary/models.py:108 apps/medialibrary/models.py:121
-#: core/collections/models.py:54 core/collections/models.py:82
+#: core/collections/models.py:54 core/collections/models.py:84
 msgid "image"
 msgstr ""
 
-#: models.py:348
+#: models.py:358
 msgid "origin"
 msgstr ""
 
-#: models.py:350
+#: models.py:360
 msgid "notes"
 msgstr ""
 
-#: models.py:352 core/collections/models.py:52
+#: models.py:362 core/collections/models.py:52
 msgid "content types"
 msgstr ""
 
-#: models.py:353
+#: models.py:363
 msgid "Select the content types this author is related to."
 msgstr ""
 
-#: models.py:359 apps/articles/models.py:46 apps/medialibrary/models.py:35
+#: models.py:369 apps/articles/models.py:46 apps/forum/models.py:38
+#: apps/medialibrary/models.py:35
 msgid "author"
 msgstr ""
 
-#: models.py:360
+#: models.py:370
 msgid "authors"
 msgstr ""
 
-#: models.py:368
+#: models.py:378
 msgid "link"
 msgstr ""
 
-#: models.py:374 apps/articles/models.py:47
+#: models.py:384 apps/articles/models.py:47
 msgid "source"
 msgstr ""
 
-#: models.py:375
+#: models.py:385
 msgid "sources"
 msgstr ""
 
-#: models.py:386
+#: models.py:396
 msgid "Thumbnail Image"
 msgstr ""
 
-#: models.py:391
+#: models.py:401
 msgid "images"
 msgstr ""
 
-#: models.py:397
+#: models.py:407
 msgid "avatar"
 msgstr ""
 
-#: models.py:399
+#: models.py:409
 msgid "city"
 msgstr ""
 
-#: models.py:400
+#: models.py:410
 msgid "about myself"
 msgstr ""
 
-#: models.py:403
+#: models.py:413
 msgid "public"
 msgstr ""
 
-#: models.py:404
+#: models.py:414
 msgid "Choose whether your profile info should be publicly visible or not"
 msgstr ""
 
-#: settings.py:88
+#: settings.py:90
 msgid "You need to set the CYCLOPE_PROJECT_PATH in your settings file."
 msgstr ""
 
@@ -495,8 +507,8 @@ msgstr ""
 msgid "summary"
 msgstr ""
 
-#: apps/articles/models.py:45 apps/polls/models.py:48 apps/polls/models.py:67
-#: apps/staticpages/models.py:30
+#: apps/articles/models.py:45 apps/forum/models.py:39 apps/polls/models.py:48
+#: apps/polls/models.py:67 apps/staticpages/models.py:30
 msgid "text"
 msgstr ""
 
@@ -524,6 +536,7 @@ msgstr ""
 
 #: apps/articles/templates/articles/article_detail.html:73
 #: apps/articles/templates/articles/article_teaser.html:45
+#: apps/forum/templates/forum/topic_teaser.html:13
 #: apps/medialibrary/templates/medialibrary/document_teaser.html:16
 #: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:16
 #: apps/medialibrary/templates/medialibrary/media_detail_header.html:23
@@ -546,6 +559,7 @@ msgstr ""
 
 #: apps/articles/templates/articles/article_detail.html:117
 #: apps/articles/templates/articles/article_teaser.html:56
+#: apps/forum/templates/forum/topic_teaser.html:22
 #: apps/medialibrary/templates/medialibrary/document_teaser.html:25
 #: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:21
 #: apps/medialibrary/templates/medialibrary/media_detail_footer.html:4
@@ -564,8 +578,47 @@ msgid "Share in your social networks"
 msgstr ""
 
 #: apps/articles/templates/articles/article_teaser.html:40
+#: apps/forum/templates/forum/topic_teaser.html:9
 #: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:18
 msgid "More"
+msgstr ""
+
+#: apps/forum/forms.py:33
+msgid "subject"
+msgstr ""
+
+#: apps/forum/frontend_views.py:43
+msgid "detailed view of the selected Topic"
+msgstr ""
+
+#: apps/forum/frontend_views.py:64
+msgid "create a new topic in the Forum selected"
+msgstr ""
+
+#: apps/forum/models.py:42
+msgid "topic"
+msgstr ""
+
+#: apps/forum/models.py:43
+msgid "topics"
+msgstr ""
+
+#: apps/forum/templates/collections/category_create_topic.html:9
+#, python-format
+msgid " %(forum)s is not a forum "
+msgstr ""
+
+#: apps/forum/templates/collections/category_create_topic.html:16
+#, python-format
+msgid " New topic in  %(forum)s forum "
+msgstr ""
+
+#: apps/forum/templates/collections/category_create_topic.html:20
+msgid "Create"
+msgstr ""
+
+#: apps/forum/templates/forum/topic_teaser.html:16
+msgid "Replies"
 msgstr ""
 
 #: apps/medialibrary/frontend_views.py:44
@@ -700,11 +753,11 @@ msgstr ""
 msgid "full screen view (new window)"
 msgstr ""
 
-#: apps/polls/frontend_views.py:40
+#: apps/polls/frontend_views.py:39
 msgid "Poll submission form"
 msgstr ""
 
-#: apps/polls/frontend_views.py:79
+#: apps/polls/frontend_views.py:78
 msgid "detailed view of the selected Poll"
 msgstr ""
 
@@ -785,8 +838,8 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: core/collections/admin.py:94 core/collections/models.py:110
-#: core/collections/models.py:172
+#: core/collections/admin.py:94 core/collections/models.py:112
+#: core/collections/models.py:174
 msgid "categories"
 msgstr ""
 
@@ -806,32 +859,44 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: core/collections/frontend_views.py:37
+#: core/collections/admin.py:188
+msgid "Default category listing view"
+msgstr ""
+
+#: core/collections/frontend_views.py:40
 msgid "list of root items for the selected Category"
 msgstr ""
 
 #: core/collections/frontend_views.py:59
+msgid "default view for the Collection"
+msgstr ""
+
+#: core/collections/frontend_views.py:79
 msgid "teaser list of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:101
+#: core/collections/frontend_views.py:125
 msgid "Labeled icon list of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:113
+#: core/collections/frontend_views.py:137
 msgid "simplified teaser list of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:138
+#: core/collections/frontend_views.py:162
 msgid "teaser list of the root Categories of a Collection"
 msgstr ""
 
-#: core/collections/frontend_views.py:160
+#: core/collections/frontend_views.py:184
 msgid "hierarchical list of Categories in a Collection"
 msgstr ""
 
-#: core/collections/frontend_views.py:226
+#: core/collections/frontend_views.py:250
 msgid "hierarchical list of Categories that will show an icon list on click"
+msgstr ""
+
+#: core/collections/frontend_views.py:261
+msgid "list of Category members as forum view"
 msgstr ""
 
 #: core/collections/models.py:45
@@ -842,35 +907,39 @@ msgstr ""
 msgid "navigation root"
 msgstr ""
 
-#: core/collections/models.py:64 core/collections/models.py:74
+#: core/collections/models.py:56
+msgid "default list view"
+msgstr ""
+
+#: core/collections/models.py:66 core/collections/models.py:76
 msgid "collection"
 msgstr ""
 
-#: core/collections/models.py:65
+#: core/collections/models.py:67
 msgid "collections"
 msgstr ""
 
-#: core/collections/models.py:74
+#: core/collections/models.py:76
 msgid "collection categories"
 msgstr ""
 
-#: core/collections/models.py:80
+#: core/collections/models.py:82
 msgid "active"
 msgstr ""
 
-#: core/collections/models.py:109 core/collections/models.py:139
+#: core/collections/models.py:111 core/collections/models.py:141
 msgid "category"
 msgstr ""
 
-#: core/collections/models.py:162
+#: core/collections/models.py:164
 msgid "categorization"
 msgstr ""
 
-#: core/collections/models.py:163
+#: core/collections/models.py:165
 msgid "categorizations"
 msgstr ""
 
-#: core/collections/models.py:179
+#: core/collections/models.py:181
 msgid "is orphan"
 msgstr ""
 
@@ -878,29 +947,50 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: core/frontend/__init__.py:149
+#: core/collections/templates/collections/category_list_as_forum.html:9
+msgid "Create a new topic"
+msgstr ""
+
+#: core/collections/templates/collections/category_list_as_forum.html:12
+msgid "Name"
+msgstr ""
+
+#: core/collections/templates/collections/category_list_as_forum.html:14
+msgid "Created"
+msgstr ""
+
+#: core/collections/templates/collections/category_list_as_forum.html:15
+msgid "Last comment"
+msgstr ""
+
+#: core/collections/templates/collections/category_list_as_forum.html:22
+#: core/collections/templates/collections/category_list_as_forum.html:23
+msgid "by"
+msgstr ""
+
+#: core/frontend/__init__.py:150
 #, python-format
 msgid "No default view has been set for %s"
 msgstr ""
 
-#: core/frontend/__init__.py:152
+#: core/frontend/__init__.py:153
 #, python-format
 msgid "You can set only one default view for %s"
 msgstr ""
 
-#: core/frontend/sites.py:151
+#: core/frontend/sites.py:149
 msgid "You need to create you site settings"
 msgstr ""
 
-#: core/frontend/sites.py:156
+#: core/frontend/sites.py:154
 msgid "You need to select a layout for the site"
 msgstr ""
 
-#: core/frontend/sites.py:162
+#: core/frontend/sites.py:160
 msgid "The site home page has not been set."
 msgstr ""
 
-#: core/frontend/sites.py:173
+#: core/frontend/sites.py:171
 msgid "No content object selected"
 msgstr ""
 
@@ -967,13 +1057,13 @@ msgstr ""
 msgid "comment on this content"
 msgstr ""
 
-#: templates/comments/form.html:16
+#: templates/comments/form.html:22
 msgid ""
 "For security reasons you need to type the text displayed in the following "
 "image"
 msgstr ""
 
-#: templates/comments/form.html:25 templates/comments/preview.html:17
+#: templates/comments/form.html:34 templates/comments/preview.html:17
 msgid "Post your comment"
 msgstr ""
 
@@ -1054,6 +1144,7 @@ msgstr ""
 
 #: templates/cyclope/themes/neutronica/__init__.py:19
 #: templates/cyclope/themes/neutronica/__init__.py:31
+#: templates/cyclope/themes/neutronica/__init__.py:43
 msgid "header"
 msgstr ""
 
@@ -1064,16 +1155,19 @@ msgstr ""
 
 #: templates/cyclope/themes/neutronica/__init__.py:21
 #: templates/cyclope/themes/neutronica/__init__.py:34
+#: templates/cyclope/themes/neutronica/__init__.py:44
 msgid "before content"
 msgstr ""
 
 #: templates/cyclope/themes/neutronica/__init__.py:22
 #: templates/cyclope/themes/neutronica/__init__.py:35
+#: templates/cyclope/themes/neutronica/__init__.py:45
 msgid "after content"
 msgstr ""
 
 #: templates/cyclope/themes/neutronica/__init__.py:23
 #: templates/cyclope/themes/neutronica/__init__.py:36
+#: templates/cyclope/themes/neutronica/__init__.py:46
 msgid "footer"
 msgstr ""
 
@@ -1085,7 +1179,11 @@ msgstr ""
 msgid "right sidebar"
 msgstr ""
 
-#: templates/cyclope/themes/neutronica/__init__.py:40
+#: templates/cyclope/themes/neutronica/__init__.py:41
+msgid "No sidebars"
+msgstr ""
+
+#: templates/cyclope/themes/neutronica/__init__.py:51
 msgid "Empty"
 msgstr ""
 

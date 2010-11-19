@@ -1,11 +1,10 @@
 # Cyclope (cyclope.codigosur.org)
 # Código Sur (www.codigosur.org)
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-19 04:03-0300\n"
+"POT-Creation-Date: 2010-11-19 04:06-0300\n"
 "PO-Revision-Date: 2010-10-29 22:16\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -168,7 +167,7 @@ msgstr "Padre"
 
 #: forms.py:100
 msgid ""
-"You can not set a Custom URL for menu entries with "
+"You can not set a Custom URL for menu entries                     with "
 "associated content"
 msgstr "No puede setear una URL para Entradas de Menú con contenido asociado."
 
@@ -305,13 +304,14 @@ msgstr "esquema"
 
 #: models.py:131
 msgid "Persistent layout"
-msgstr ""
+msgstr "Esquema persistente"
 
 #: models.py:132
 msgid ""
 "If the layout is marked as persistent it will be in use until the user "
 "navigates to a menu item which explicitly specifies a different Layout"
-msgstr ""
+msgstr "Si el esquema es marcado como persistente se seguirá usando hasta que el usuario "
+"seleccione otro item de menú que especifique un esquema diferente"
 
 #: models.py:136 models.py:211
 msgid "type"
@@ -582,44 +582,42 @@ msgid "More"
 msgstr "Más"
 
 #: apps/forum/forms.py:33
-#, fuzzy
 msgid "subject"
-msgstr "objeto"
+msgstr "asunto"
 
 #: apps/forum/frontend_views.py:43
-#, fuzzy
 msgid "detailed view of the selected Topic"
-msgstr "vista detallada del Archivo seleccionado"
+msgstr "vista detallada del Tema seleccionado"
 
 #: apps/forum/frontend_views.py:64
 msgid "create a new topic in the Forum selected"
-msgstr ""
+msgstr "crear un nuevo tema en el foro seleccionado"
 
 #: apps/forum/models.py:42
 msgid "topic"
-msgstr ""
+msgstr "tema"
 
 #: apps/forum/models.py:43
 msgid "topics"
-msgstr ""
+msgstr "temas"
 
 #: apps/forum/templates/collections/category_create_topic.html:9
 #, python-format
 msgid " %(forum)s is not a forum "
-msgstr ""
+msgstr " %(forum)s no es un foro"
 
 #: apps/forum/templates/collections/category_create_topic.html:16
 #, python-format
 msgid " New topic in  %(forum)s forum "
-msgstr ""
+msgstr " Nuevo tema en el foro %(forum)s "
 
 #: apps/forum/templates/collections/category_create_topic.html:20
 msgid "Create"
-msgstr ""
+msgstr "Crear"
 
 #: apps/forum/templates/forum/topic_teaser.html:16
 msgid "Replies"
-msgstr ""
+msgstr "Respuestas"
 
 #: apps/medialibrary/frontend_views.py:44
 msgid "detailed view of the selected Picture"
@@ -861,16 +859,15 @@ msgstr "Categoría"
 
 #: core/collections/admin.py:188
 msgid "Default category listing view"
-msgstr ""
+msgstr "Vista por defecto para listados"
 
 #: core/collections/frontend_views.py:40
 msgid "list of root items for the selected Category"
 msgstr "lista de items raíz para la Categoría seleccionada"
 
 #: core/collections/frontend_views.py:59
-#, fuzzy
 msgid "default view for the Collection"
-msgstr "vista detallada del Archivo seleccionado"
+msgstr "vista por defecto para la Colección"
 
 #: core/collections/frontend_views.py:79
 msgid "teaser list of Category members"
@@ -897,9 +894,8 @@ msgid "hierarchical list of Categories that will show an icon list on click"
 msgstr "lista jerarquizada de las Categorias que llevará a una vista de íconos"
 
 #: core/collections/frontend_views.py:261
-#, fuzzy
 msgid "list of Category members as forum view"
-msgstr "lista de resúmenes de miembros de una Categoría"
+msgstr "listar la Categoría como un foro"
 
 #: core/collections/models.py:45
 msgid "visible"
@@ -910,9 +906,8 @@ msgid "navigation root"
 msgstr "raíz de navegación"
 
 #: core/collections/models.py:56
-#, fuzzy
 msgid "default list view"
-msgstr "esquema por defecto"
+msgstr "vista de listado por defecto"
 
 #: core/collections/models.py:66 core/collections/models.py:76
 msgid "collection"
@@ -952,25 +947,24 @@ msgstr "Categorías"
 
 #: core/collections/templates/collections/category_list_as_forum.html:9
 msgid "Create a new topic"
-msgstr ""
+msgstr "Crear nuevo tema"
 
 #: core/collections/templates/collections/category_list_as_forum.html:12
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: core/collections/templates/collections/category_list_as_forum.html:14
 msgid "Created"
-msgstr ""
+msgstr "Creado"
 
 #: core/collections/templates/collections/category_list_as_forum.html:15
-#, fuzzy
 msgid "Last comment"
-msgstr "Enviar el comentario"
+msgstr "Último comentario"
 
 #: core/collections/templates/collections/category_list_as_forum.html:22
 #: core/collections/templates/collections/category_list_as_forum.html:23
 msgid "by"
-msgstr ""
+msgstr "por"
 
 #: core/frontend/__init__.py:150
 #, python-format
@@ -1193,9 +1187,8 @@ msgid "right sidebar"
 msgstr "barra lateral derecha"
 
 #: templates/cyclope/themes/neutronica/__init__.py:41
-#, fuzzy
 msgid "No sidebars"
-msgstr "Dos barras laterales"
+msgstr "Sin barras laterales"
 
 #: templates/cyclope/themes/neutronica/__init__.py:51
 msgid "Empty"
@@ -1345,18 +1338,20 @@ msgstr "Cambiar contraseña"
 
 #: templates/rosetta/pofile.html:49
 msgid "File is read-only: download the file when done editing!"
-msgstr ""
+msgstr "El archivo es sólo-lectura: descargue el archivo cuando termine de editar!"
 
 #: templates/rosetta/pofile.html:50
 msgid ""
 "Some items in your last translation block couldn't be saved: this usually "
 "happens when the catalog file changes on disk after you last loaded it."
 msgstr ""
+"Algunos items en su último bloque de traducción no pudieron ser salvados: esto usualmente "
+"ocurre cuando el archivo cambia en el disco después de haberlo leído"
 
 #: templates/rosetta/pofile.html:54
 #, python-format
 msgid "Translate into %(rosetta_i18n_lang_name)s"
-msgstr ""
+msgstr "Traducie a %(rosetta_i18n_lang_name)s"
 
 #: templates/rosetta/pofile.html:55
 msgid "total progress: %(percent_translated)s%"
@@ -1384,11 +1379,11 @@ msgstr "Buscar"
 
 #: templates/rosetta/pofile.html:71
 msgid "Go"
-msgstr ""
+msgstr "Ir"
 
 #: templates/rosetta/pofile.html:81
 msgid "Original"
-msgstr ""
+msgstr "Original"
 
 #: templates/rosetta/pofile.html:84
 msgid "Fuzzy"
@@ -1396,33 +1391,33 @@ msgstr "Dudoso"
 
 #: templates/rosetta/pofile.html:109
 msgid "suggest"
-msgstr ""
+msgstr "sugerir"
 
 #: templates/rosetta/pofile.html:122
 #, python-format
 msgid "%(more_count)s more"
 msgid_plural "%(more_count)s more"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(more_count)s más"
+msgstr[1] "%(more_count)s más"
 
 #: templates/rosetta/pofile.html:135
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 #: templates/rosetta/pofile.html:139
 msgid "Skip to page:"
-msgstr ""
+msgstr "Ir a la página:"
 
 #: templates/rosetta/pofile.html:152
 msgid "Displaying:"
-msgstr ""
+msgstr "Mostrando:"
 
 #: templates/rosetta/pofile.html:154
 #, python-format
 msgid "%(hits)s/%(message_number)s message"
 msgid_plural "%(hits)s/%(message_number)s messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(hits)s/%(message_number)s mensaje"
+msgstr[1] "%(hits)s/%(message_number)s mensajes"
 
 #: templates/search/search.html:6
 msgid "Advanced search"
