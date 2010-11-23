@@ -2,10 +2,8 @@
 {% load i18n %}
 
 {% block content%}
-<div class="user_input">
-<h6>
-  {{ instructions }}
-</h6>
+<div id="contact" class="user_input">
+<h6 class="hiper-titles">{{ instructions }} </h6>
 <form action="{% url contact_form %}" method="post">
   {{ form.as_p }}
   <input type="submit" class="submit" value="{% trans "Send" %}" />

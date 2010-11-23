@@ -1,8 +1,8 @@
 {% extends host_template %}
 
 {% block content %}
-<div class="content-view site map site-map">
-
+<div id="map" class="content-view site map site-map">
+<h6 class="hiper-titles">{% trans 'Site map' %}</h6>
   <div class="menus-map">
     <ul>
       {{ menus|unordered_list }}
