@@ -22,10 +22,10 @@ Si modificas no borres estas lineas :)
     <link href="{{ CYCLOPE_MEDIA_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
     <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
-    <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/util-functions.js"></script>
-    <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/clear-default-text.js"></script> 
     <script type="text/javascript">
     $(function() {
+
+// setup galleries
         $('#gallery a').lightBox({
             overlayBgColor:         '#000',
             overlayOpacity:         0.8,
@@ -40,9 +40,27 @@ Si modificas no borres estas lineas :)
             txtImage:               '{% trans "Image"%}',
             txtOf:                  '{% trans "of"%}',
         });
+
+// search box events
+        
+        // clear input on focus
+	$('.cleardefault').focus(function() {
+            if( this.value == this.title ) {
+               this.value = '';
+            }
+	});	
+
+	// if field is empty afterward, add text again
+	$('.cleardefault').blur(function() {
+            if(!this.value.length) {
+              this.value = this.title;
+            }
+	});
     });
     </script>
+
     {% block extra_head %}{% endblock %}
+
   </head>
 
   <body class="{% block body_class %}{%endblock%}">
@@ -64,7 +82,7 @@ AIRE
              {% for model in CYCLOPE_BASE_CONTENT_TYPES %}
              <input type="hidden" name="models" value="{{model.get_app_label}}.{{model.get_object_name}}">
              {% endfor %}
-              <input type="text" value="Buscar en el sitio" name="q" class="cleardefault"/>
+              <input type="text" value="{% trans "Site wide search" %}" title="{% trans "Site wide search" %}" name="q" class="cleardefault"/>
               <input type="submit" value="" class="submit"/>
             </form>
           </div>

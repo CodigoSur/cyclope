@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-19 04:17-0300\n"
+"POT-Creation-Date: 2010-11-24 15:49-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -806,7 +806,7 @@ msgid "submissions"
 msgstr ""
 
 #: apps/polls/templates/polls/poll_submission.html:30
-#: templates/contact_form/contact_form.html:11
+#: templates/contact_form/contact_form.html:9
 msgid "Send"
 msgstr ""
 
@@ -1118,12 +1118,17 @@ msgid "Page"
 msgstr ""
 
 #: templates/cyclope/pagination_block.html:12
+#: templates/cyclope/themes/neutrona/base.html:41
 #: templates/cyclope/themes/neutronica/base.html:44
 msgid "of"
 msgstr ""
 
 #: templates/cyclope/pagination_block.html:16
 msgid "next"
+msgstr ""
+
+#: templates/cyclope/site_map.html:5
+msgid "Site map"
 msgstr ""
 
 #: templates/cyclope/themes/__init__.py:22
@@ -1134,65 +1139,89 @@ msgstr ""
 msgid "Your CYCLOPE_LOCAL_THEMES_DIR setting is invalid"
 msgstr ""
 
-#: templates/cyclope/themes/neutronica/__init__.py:11
-msgid "Neutronica theme"
+#: templates/cyclope/themes/neutrona/__init__.py:11
+msgid "Neutrona"
 msgstr ""
 
+#: templates/cyclope/themes/neutrona/__init__.py:17
 #: templates/cyclope/themes/neutronica/__init__.py:17
 msgid "One sidebar"
 msgstr ""
 
+#: templates/cyclope/themes/neutrona/__init__.py:19
+#: templates/cyclope/themes/neutrona/__init__.py:31
 #: templates/cyclope/themes/neutronica/__init__.py:19
 #: templates/cyclope/themes/neutronica/__init__.py:31
 #: templates/cyclope/themes/neutronica/__init__.py:43
 msgid "header"
 msgstr ""
 
+#: templates/cyclope/themes/neutrona/__init__.py:20
+#: templates/cyclope/themes/neutrona/__init__.py:32
 #: templates/cyclope/themes/neutronica/__init__.py:20
 #: templates/cyclope/themes/neutronica/__init__.py:32
 msgid "left sidebar"
 msgstr ""
 
+#: templates/cyclope/themes/neutrona/__init__.py:21
+#: templates/cyclope/themes/neutrona/__init__.py:34
 #: templates/cyclope/themes/neutronica/__init__.py:21
 #: templates/cyclope/themes/neutronica/__init__.py:34
 #: templates/cyclope/themes/neutronica/__init__.py:44
 msgid "before content"
 msgstr ""
 
+#: templates/cyclope/themes/neutrona/__init__.py:22
+#: templates/cyclope/themes/neutrona/__init__.py:35
 #: templates/cyclope/themes/neutronica/__init__.py:22
 #: templates/cyclope/themes/neutronica/__init__.py:35
 #: templates/cyclope/themes/neutronica/__init__.py:45
 msgid "after content"
 msgstr ""
 
+#: templates/cyclope/themes/neutrona/__init__.py:23
+#: templates/cyclope/themes/neutrona/__init__.py:36
 #: templates/cyclope/themes/neutronica/__init__.py:23
 #: templates/cyclope/themes/neutronica/__init__.py:36
 #: templates/cyclope/themes/neutronica/__init__.py:46
 msgid "footer"
 msgstr ""
 
+#: templates/cyclope/themes/neutrona/__init__.py:29
 #: templates/cyclope/themes/neutronica/__init__.py:29
 msgid "Two sidebars"
 msgstr ""
 
+#: templates/cyclope/themes/neutrona/__init__.py:33
 #: templates/cyclope/themes/neutronica/__init__.py:33
 msgid "right sidebar"
 msgstr ""
 
-#: templates/cyclope/themes/neutronica/__init__.py:41
-msgid "No sidebars"
-msgstr ""
-
+#: templates/cyclope/themes/neutrona/__init__.py:40
 #: templates/cyclope/themes/neutronica/__init__.py:51
 msgid "Empty"
 msgstr ""
 
+#: templates/cyclope/themes/neutrona/base.html:40
 #: templates/cyclope/themes/neutronica/base.html:43
 msgid "Image"
 msgstr ""
 
+#: templates/cyclope/themes/neutrona/base.html:85
+msgid "Site wide search"
+msgstr ""
+
+#: templates/cyclope/themes/neutrona/base.html:122
 #: templates/cyclope/themes/neutronica/left_sidebar_block.html:34
 msgid "Subscribe to RSS"
+msgstr ""
+
+#: templates/cyclope/themes/neutronica/__init__.py:11
+msgid "Neutronica theme"
+msgstr ""
+
+#: templates/cyclope/themes/neutronica/__init__.py:41
+msgid "No sidebars"
 msgstr ""
 
 #: templates/profiles/edit_profile.html:8

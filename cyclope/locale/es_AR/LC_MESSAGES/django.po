@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-19 04:06-0300\n"
+"POT-Creation-Date: 2010-11-24 15:47-0300\n"
 "PO-Revision-Date: 2010-10-29 22:16\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -310,8 +310,9 @@ msgstr "Esquema persistente"
 msgid ""
 "If the layout is marked as persistent it will be in use until the user "
 "navigates to a menu item which explicitly specifies a different Layout"
-msgstr "Si el esquema es marcado como persistente se seguirá usando hasta que el usuario "
-"seleccione otro item de menú que especifique un esquema diferente"
+msgstr ""
+"Si el esquema es marcado como persistente se seguirá usando hasta que el "
+"usuario seleccione otro item de menú que especifique un esquema diferente"
 
 #: models.py:136 models.py:211
 msgid "type"
@@ -804,7 +805,7 @@ msgid "submissions"
 msgstr "envíos"
 
 #: apps/polls/templates/polls/poll_submission.html:30
-#: templates/contact_form/contact_form.html:11
+#: templates/contact_form/contact_form.html:9
 msgid "Send"
 msgstr "Enviar"
 
@@ -1124,6 +1125,7 @@ msgid "Page"
 msgstr "Página"
 
 #: templates/cyclope/pagination_block.html:12
+#: templates/cyclope/themes/neutrona/base.html:41
 #: templates/cyclope/themes/neutronica/base.html:44
 msgid "of"
 msgstr "de"
@@ -1131,6 +1133,10 @@ msgstr "de"
 #: templates/cyclope/pagination_block.html:16
 msgid "next"
 msgstr "siguiente"
+
+#: templates/cyclope/site_map.html:5
+msgid "Site map"
+msgstr "Mapa del sitio"
 
 #: templates/cyclope/themes/__init__.py:22
 msgid "You need to set CYCLOPE_LOCAL_THEMES_PREFIX in your settings file"
@@ -1141,66 +1147,90 @@ msgstr ""
 msgid "Your CYCLOPE_LOCAL_THEMES_DIR setting is invalid"
 msgstr "El valor de CYCLOPE_LOCAL_THEMES_DIR es inválido"
 
-#: templates/cyclope/themes/neutronica/__init__.py:11
-msgid "Neutronica theme"
-msgstr "tema Neutronica"
+#: templates/cyclope/themes/neutrona/__init__.py:11
+msgid "Neutrona"
+msgstr "Neutrona"
 
+#: templates/cyclope/themes/neutrona/__init__.py:17
 #: templates/cyclope/themes/neutronica/__init__.py:17
 msgid "One sidebar"
 msgstr "Una barra lateral"
 
+#: templates/cyclope/themes/neutrona/__init__.py:19
+#: templates/cyclope/themes/neutrona/__init__.py:31
 #: templates/cyclope/themes/neutronica/__init__.py:19
 #: templates/cyclope/themes/neutronica/__init__.py:31
 #: templates/cyclope/themes/neutronica/__init__.py:43
 msgid "header"
 msgstr "encabezado"
 
+#: templates/cyclope/themes/neutrona/__init__.py:20
+#: templates/cyclope/themes/neutrona/__init__.py:32
 #: templates/cyclope/themes/neutronica/__init__.py:20
 #: templates/cyclope/themes/neutronica/__init__.py:32
 msgid "left sidebar"
 msgstr "barra lateral izquierda"
 
+#: templates/cyclope/themes/neutrona/__init__.py:21
+#: templates/cyclope/themes/neutrona/__init__.py:34
 #: templates/cyclope/themes/neutronica/__init__.py:21
 #: templates/cyclope/themes/neutronica/__init__.py:34
 #: templates/cyclope/themes/neutronica/__init__.py:44
 msgid "before content"
 msgstr "antes del contenido"
 
+#: templates/cyclope/themes/neutrona/__init__.py:22
+#: templates/cyclope/themes/neutrona/__init__.py:35
 #: templates/cyclope/themes/neutronica/__init__.py:22
 #: templates/cyclope/themes/neutronica/__init__.py:35
 #: templates/cyclope/themes/neutronica/__init__.py:45
 msgid "after content"
 msgstr "después del contenido"
 
+#: templates/cyclope/themes/neutrona/__init__.py:23
+#: templates/cyclope/themes/neutrona/__init__.py:36
 #: templates/cyclope/themes/neutronica/__init__.py:23
 #: templates/cyclope/themes/neutronica/__init__.py:36
 #: templates/cyclope/themes/neutronica/__init__.py:46
 msgid "footer"
 msgstr "pie de página"
 
+#: templates/cyclope/themes/neutrona/__init__.py:29
 #: templates/cyclope/themes/neutronica/__init__.py:29
 msgid "Two sidebars"
 msgstr "Dos barras laterales"
 
+#: templates/cyclope/themes/neutrona/__init__.py:33
 #: templates/cyclope/themes/neutronica/__init__.py:33
 msgid "right sidebar"
 msgstr "barra lateral derecha"
 
-#: templates/cyclope/themes/neutronica/__init__.py:41
-msgid "No sidebars"
-msgstr "Sin barras laterales"
-
+#: templates/cyclope/themes/neutrona/__init__.py:40
 #: templates/cyclope/themes/neutronica/__init__.py:51
 msgid "Empty"
 msgstr "Vacío"
 
+#: templates/cyclope/themes/neutrona/base.html:40
 #: templates/cyclope/themes/neutronica/base.html:43
 msgid "Image"
 msgstr "Imagen"
 
+#: templates/cyclope/themes/neutrona/base.html:85
+msgid "Site wide search"
+msgstr "Buscar en el sitio"
+
+#: templates/cyclope/themes/neutrona/base.html:122
 #: templates/cyclope/themes/neutronica/left_sidebar_block.html:34
 msgid "Subscribe to RSS"
 msgstr "Subscripción RSS"
+
+#: templates/cyclope/themes/neutronica/__init__.py:11
+msgid "Neutronica theme"
+msgstr "tema Neutronica"
+
+#: templates/cyclope/themes/neutronica/__init__.py:41
+msgid "No sidebars"
+msgstr "Sin barras laterales"
 
 #: templates/profiles/edit_profile.html:8
 #: templates/registration/registration_form.html:8
@@ -1338,15 +1368,17 @@ msgstr "Cambiar contraseña"
 
 #: templates/rosetta/pofile.html:49
 msgid "File is read-only: download the file when done editing!"
-msgstr "El archivo es sólo-lectura: descargue el archivo cuando termine de editar!"
+msgstr ""
+"El archivo es sólo-lectura: descargue el archivo cuando termine de editar!"
 
 #: templates/rosetta/pofile.html:50
 msgid ""
 "Some items in your last translation block couldn't be saved: this usually "
 "happens when the catalog file changes on disk after you last loaded it."
 msgstr ""
-"Algunos items en su último bloque de traducción no pudieron ser salvados: esto usualmente "
-"ocurre cuando el archivo cambia en el disco después de haberlo leído"
+"Algunos items en su último bloque de traducción no pudieron ser salvados: "
+"esto usualmente ocurre cuando el archivo cambia en el disco después de "
+"haberlo leído"
 
 #: templates/rosetta/pofile.html:54
 #, python-format
@@ -1451,9 +1483,6 @@ msgstr "No se encontró ningún resultado"
 
 #~ msgid "products"
 #~ msgstr "productos"
-
-#~ msgid "Neutrona theme"
-#~ msgstr "tema Neutrona"
 
 #~ msgid "Potente theme"
 #~ msgstr "tema Potente"
