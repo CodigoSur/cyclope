@@ -17,14 +17,13 @@ Si modificas no borres estas lineas :)
     <title>{{ CYCLOPE_SITE_SETTINGS.global_title }}</title>
     <meta name="Keywords" content="{{ CYCLOPE_SITE_SETTINGS.keywords }}" />
     <meta name="Description" content="{{ CYCLOPE_SITE_SETTINGS.description }}" />
-    <!--
-        TODO(nicoechaniz): implement RSS
-        <link href="/rss.php" title="RSS" type="application/rss+xml" rel="alternate" /> -->
-
+    <link href="/rss" title="RSS" type="application/rss+xml" rel="alternate">
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/neutrona.css" rel="stylesheet" type="text/css" media="screen"/>
     <link href="{{ CYCLOPE_MEDIA_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
     <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/util-functions.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/clear-default-text.js"></script> 
     <script type="text/javascript">
     $(function() {
         $('#gallery a').lightBox({
@@ -60,6 +59,15 @@ AIRE
           <h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
           <h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
         </div>
+        <div class="searchbox">
+              <form action="/search/" method="get">
+             {% for model in CYCLOPE_BASE_CONTENT_TYPES %}
+             <input type="hidden" name="models" value="{{model.get_app_label}}.{{model.get_object_name}}">
+             {% endfor %}
+              <input type="text" value="Buscar en el sitio" name="q" class="cleardefault"/>
+              <input type="submit" value="" class="submit"/>
+            </form>
+          </div>
       </div>
       
 
@@ -77,15 +85,7 @@ TIERRA
           <div class="top"></div>
           {% region 'left_sidebar' %}
 
-          <div class="searchbox">
-              <form action="/search/" method="get">
-             {% for model in CYCLOPE_BASE_CONTENT_TYPES %}
-             <input type="hidden" name="models" value="{{model.get_app_label}}.{{model.get_object_name}}">
-             {% endfor %} 
-              <input type="text" name="q"/>
-              <input type="submit" value="" class="submit"/>
-            </form>
-          </div>
+          
 
 {% comment %}
           <div id="tags">
@@ -100,9 +100,8 @@ TIERRA
               </a>&nbsp&nbsp
             </div>
           </div>
-
-          <div id="rss"><a href="/rss">{% trans "Subscribe to RSS" %}</a></div>
 {% endcomment %}
+          <div id="rss"><a href="/rss">{% trans "Subscribe to RSS" %}</a></div>
           <!-- banners -->
           <div class="banners">
             <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO" target="_blank">
