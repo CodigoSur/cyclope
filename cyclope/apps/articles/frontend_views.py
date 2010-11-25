@@ -43,3 +43,29 @@ class ArticleDetail(frontend.FrontendView):
 
 frontend.site.register_view(Article, ArticleDetail)
 
+
+class ArticleTeaserList(frontend.FrontendView):
+    """Teaser list view for Articles.
+    """
+    name='teaser_list'
+    verbose_name=_('list of Article teasers')
+    is_instance_view = False
+    is_content_view = True
+    is_region_view = True
+    params = {}
+    def get_response(self, request, host_template):
+        return views.object_list(request, host_template,
+                                 Article.objects.all(), **self.params)
+
+
+frontend.site.register_view(Article, ArticleTeaserList)
+
+class ArticleLabeledIconList(ArticleTeaserList):
+    """Labeled icon list view for Articles.
+    """
+    name='labeled_icon_list'
+    verbose_name=_('list of Article labeled icons')
+    is_instance_view = False
+    params = { 'template_name': 'articles/article_labeled_icon_list.html' }
+
+frontend.site.register_view(Article, ArticleLabeledIconList)
