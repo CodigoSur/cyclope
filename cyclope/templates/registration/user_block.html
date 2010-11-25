@@ -13,7 +13,7 @@
       <select name="language" onChange="forms['lang'].submit();">
 	{% for lang_code, lang_name in LANGUAGES %}
         <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected="selected" {% endif %}>
-	  {% trans lang_name  %}
+	  {{ lang_name }}
 	</option>
 	{% endfor %}
       </select>

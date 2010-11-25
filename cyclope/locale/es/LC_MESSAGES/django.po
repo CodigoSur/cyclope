@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-24 15:47-0300\n"
+"POT-Creation-Date: 2010-11-24 21:40-0300\n"
 "PO-Revision-Date: 2010-10-29 22:16\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,43 +113,31 @@ msgstr "Sitios"
 msgid "Recent Actions"
 msgstr "Acciones Recientes"
 
-#: default_settings.py:42
-msgid "Spanish"
-msgstr "Español"
-
-#: default_settings.py:43
-msgid "English"
-msgstr "Inglés"
-
-#: default_settings.py:44
-msgid "Portuguese"
-msgstr "Portugués"
-
-#: default_settings.py:167
+#: default_settings.py:166
 msgid "Admin Thumbnail"
 msgstr "Miniatura para sitio de administración"
 
-#: default_settings.py:169
+#: default_settings.py:168
 msgid "Thumbnail (140px)"
 msgstr "Imagen miniatura (140px)"
 
-#: default_settings.py:171
+#: default_settings.py:170
 msgid "Small (300px)"
 msgstr "Pequeña (300px)"
 
-#: default_settings.py:173
+#: default_settings.py:172
 msgid "Medium (460px)"
 msgstr "Mediana (460px)"
 
-#: default_settings.py:175
+#: default_settings.py:174
 msgid "Big (620px)"
 msgstr "Grande (620px)"
 
-#: default_settings.py:177
+#: default_settings.py:176
 msgid "Cropped (60x60px)"
 msgstr "Cortada (60x60px)"
 
-#: default_settings.py:179
+#: default_settings.py:178
 msgid "Cropped Thumbnail (140x140px)"
 msgstr "Miniatura cortada (140x140px)"
 
@@ -1462,6 +1450,15 @@ msgstr "Resultados"
 #: templates/search/search.html:24
 msgid "No results found."
 msgstr "No se encontró ningún resultado"
+
+#~ msgid "Spanish"
+#~ msgstr "Español"
+
+#~ msgid "English"
+#~ msgstr "Inglés"
+
+#~ msgid "Portuguese"
+#~ msgstr "Portugués"
 
 #~ msgid "list of Article teasers"
 #~ msgstr "lista de resúmenes de Artículos"

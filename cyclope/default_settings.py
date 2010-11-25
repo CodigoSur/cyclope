@@ -37,11 +37,10 @@ SITE_ID = 1
 USE_I18N = True
 ## LANGUAGE_CODE = 'en'
 LANGUAGES = (
-#    ('es', gettext('Spanish')),
-# we use the es-ar translation because it's usually more complete than "es"
-    ('es-ar', ugettext('Spanish')),
-    ('en', ugettext('English')),
-    ('pt', ugettext('Portuguese')),
+    ('es', u'Español'),
+    ('en', u'English'),
+    ('pt', u'Português'),
+    ('it', u'Italiano'),
 )
 
 # List of callables that know how to import templates from various sources.
