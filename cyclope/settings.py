@@ -52,6 +52,7 @@ from django.utils.translation import ugettext_lazy as _, ugettext
 from django.db.models.signals import post_save, pre_delete
 from django.core.exceptions import ImproperlyConfigured
 from django.db.utils import DatabaseError
+from django.db.models import get_model
 
 from cyclope.models import SiteSettings
 
@@ -173,4 +174,20 @@ def _delete_related_contents(sender, instance, **kwargs):
         for obj in related_from:
             obj.delete()
 
+def _delete_from_layouts_and_menuitems(sender, instance, **kwargs):
+    # when a content is part of a layout or a menu_item we need to
+    # clear this relation
+    if instance.__class__ in site._registry:
+        ctype = ContentType.objects.get_for_model(sender)
+
+        RegionView = get_model('cyclope', 'regionview')
+        RegionView.objects.filter(content_type=ctype, object_id=instance.id).delete()
+
+        MenuItem = get_model('cyclope', 'menuitem')
+        items = MenuItem.objects.filter(content_type=ctype, object_id=instance.id)
+        for item in items:
+            item.content_type = item.object_id = item.content_object = None
+            item.save()
+            
 pre_delete.connect(_delete_related_contents)
+pre_delete.connect(_delete_from_layouts_and_menuitems)
