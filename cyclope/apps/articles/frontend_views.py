@@ -52,10 +52,10 @@ class ArticleTeaserList(frontend.FrontendView):
     is_instance_view = False
     is_content_view = True
     is_region_view = True
-    params = {}
+    
     def get_response(self, request, host_template):
         return views.object_list(request, host_template,
-                                 Article.objects.all(), **self.params)
+                                 Article.objects.all(), view_name=self.name)
 
 
 frontend.site.register_view(Article, ArticleTeaserList)
@@ -66,6 +66,5 @@ class ArticleLabeledIconList(ArticleTeaserList):
     name='labeled_icon_list'
     verbose_name=_('list of Article labeled icons')
     is_instance_view = False
-    params = { 'template_name': 'articles/article_labeled_icon_list.html' }
 
 frontend.site.register_view(Article, ArticleLabeledIconList)

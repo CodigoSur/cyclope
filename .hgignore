@@ -18,5 +18,5 @@ initial_data.json.init
 initial_data.json
 django_cyclope.egg-info
 fulldb.json
-demo/cyclope_project/cyclope_project_index/
+demo/cyclope_project/cyclope_project_index/*
 .emacs*

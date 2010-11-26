@@ -36,7 +36,11 @@ def menu_item_for_request(request):
     req_url = request.path
     url = req_url[len(cyclope.settings.CYCLOPE_PREFIX)+1:]
     if url == '':
-        menu_item = MenuItem.objects.select_related().get(site_home=True)
+        try:
+            # when no home menuitem has yet been set this will fail
+            menu_item = MenuItem.objects.select_related().get(site_home=True)
+        except:
+            menu_item = None
     else:
         try:
             # match menuitems with internal and external (custom) urls

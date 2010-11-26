@@ -155,9 +155,12 @@ def object_list(request, host_template, queryset, view_name='detail', inline=Fal
         else:
             c[key] = value
     c['host_template'] = host_template
+
     if not template_name:
         model = queryset.model
-        template_name = "%s/%s_list.html" % (model._meta.app_label, model._meta.object_name.lower())
+        template_name = "%s/%s_%s.html" % (
+            model._meta.app_label, model._meta.object_name.lower(), view_name)
+
     t = template_loader.get_template(template_name)
 
     return t.render(c)

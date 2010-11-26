@@ -26,6 +26,7 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.template import TemplateSyntaxError, Template, Context
 from django import template
+from django.db.models import get_model
 
 from cyclope.models import SiteSettings, Menu, MenuItem
 from cyclope.models import Layout, RegionView, Author
@@ -424,6 +425,10 @@ class PollTestCase(TestCase):
 class CategoryTestCase(TestCase):
     
     def setUp(self):
+        User = get_model('auth', 'user')
+        u = User(username='admin')
+        u.set_password('password')
+        u.save()
         frontend.autodiscover()
 
     def test_creation(self):
@@ -438,6 +443,7 @@ class CategoryTestCase(TestCase):
         cat = Category(name='An instance', collection=col)
         cat.save()
         content_urls = get_content_urls(Category, cat)
+        self.client.login(username='admin', password='password')
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -525,4 +531,8 @@ class SiteMapTestCase(TestCase):
         res = self.client.get('/site-map')
         self.assertEqual(res.status_code, 200)
 
+
+#TODO(nicoechaniz)
 #class TopicTestCase(TestCase):
+#class DeleteRelatedContent(TestCase):
+#class DeleteFromLayoutsAndMenuItems(TestCase)
