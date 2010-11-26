@@ -109,7 +109,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   </span></div>
 
   <div class="meta-content"><span class="source">--<br>
-    {% trans "Date" %}: {{ article.date|date:'DATETIME_FORMAT' }}{% if article.source %} |
+    {% trans "Date" %}: {{ article.date|date:'SHORT_DATE_FORMAT' }}{% if article.source %} |
     {% trans "Source" %}: {article.source}{% endif %}
   </span></div>
 
