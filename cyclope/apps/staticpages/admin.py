@@ -24,6 +24,7 @@ from django import forms
 
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
+from markitup.widgets import AdminMarkItUpWidget
 
 from cyclope.core.collections.admin import CollectibleAdmin
 from cyclope.widgets import WYMEditor
@@ -32,12 +33,16 @@ from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 from models import StaticPage
 
+
 class StaticPageAdminForm(forms.ModelForm):
     menu_items = forms.ModelMultipleChoiceField(label=_('Menu items'),
                     queryset = MenuItem.tree.all(), required=False,
                     )
     if cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE ==  'wysiwyg':
         text = forms.CharField(label=_('Text'), widget=WYMEditor())
+    else:
+        text = forms.CharField(label=_('Text'), widget=AdminMarkItUpWidget())
+        
 
     def __init__(self, *args, **kwargs):
     # this was initially written to be used for any BaseContent, that's

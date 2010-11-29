@@ -73,6 +73,7 @@ urlpatterns = patterns('',
         name='whole_site_feed'),
     url(r'^rss/(?P<object_name>[\w-]+)/$', ContentTypeFeed(),
         name='content_type_feed'),
+    url(r'^markitup/', include('markitup.urls')),
 )
 
 if django_settings.DEBUG:
