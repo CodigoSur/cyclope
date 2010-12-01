@@ -84,6 +84,59 @@ def get_content_urls(test_object):
     return content_urls
 
 
+def get_region_views(test_model):
+    return [ view for view in frontend.site._registry[test_model]
+             if view.is_region_view ]
+
+def add_region_view(model, view_name, content_object=None):
+    layout = Layout.objects.all()[0]
+    content_type = ContentType.objects.get(model=model._meta.module_name)
+    content_view = view_name
+    region = 'header'
+    region_view = RegionView(layout=layout, content_type=content_type,
+                             content_view=content_view, region=region,
+                             content_object=content_object)
+    region_view = region_view.save()
+    return region_view
+
+
+class ViewableTestCase(TestCase):
+    # this is an "abstract" test case which should be inherited but not run
+
+#TODO (nicoechaniz): check how this base test class should be created to keep it out uf the test run
+
+    fixtures = ['simplest_site.json']
+
+    def setUp(self):
+        if hasattr(self, 'test_model') and not hasattr(self, 'test_object'):
+            self.test_object = self.test_model.objects.create(name='An instance')
+
+    def test_creation(self):
+        if hasattr(self, 'test_model'):
+            an_instance = self.test_model.objects.get(slug='an-instance')
+            self.assertEqual(an_instance.name, 'An instance')
+
+    def test_content_views(self):
+        if hasattr(self, 'test_object'):
+            content_urls = get_content_urls(self.test_object)
+            for url in content_urls:
+                self.assertEqual(self.client.get(url).status_code, 200)
+
+    def test_region_views(self):
+        if hasattr(self, 'test_model'):
+            model_region_views = get_region_views(self.test_model)
+            for view in model_region_views:
+                content_object = None
+                if view.is_region_view:
+                    content_object = self.test_object
+                add_region_view(self.test_model, view.name, content_object)
+                response = self.client.get("/")
+                self.assertContains(response,
+                                    'class="regionview %s %s"' %
+                                    (self.test_model._meta.module_name, view.name),
+                                    count=1)
+
+
 class SiteSettingsTestCase(TestCase):
     def setUp(self):
         self.site = Site(domain="mydomain.com", name="mydomain")
@@ -262,248 +315,9 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(response, "Cyclope")
 
 
-class StaticPageTestCase(TestCase):
-
-    def setUp(self):
-        frontend.autodiscover()
-
-    def test_creation(self):
-        StaticPage.objects.create(name='An instance')
-        an_instance = StaticPage.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        a_static_page = StaticPage.objects.create(name='An instance')
-        content_urls = get_content_urls(a_static_page)
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-    def test_region_views(self):
-        pass
-
-
-class ArticleTestCase(TestCase):
-
-    def setUp(self):
-        frontend.autodiscover()
-
-    def test_creation(self):
-        author = Author.objects.create(name="the author")
-        Article.objects.create(name='An instance', author=author)
-        an_instance = Article.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        author = Author.objects.create(name="the author")
-        an_article = Article.objects.create(name='An instance', author=author)
-        content_urls = get_content_urls(an_article)
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class DocumentTestCase(TestCase):
-    def setUp(self):
-        frontend.autodiscover()
-
-    def test_creation(self):
-        Document.objects.create(name='An instance')
-        an_instance = Document.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        a_document = Document.objects.create(name='An instance')
-        content_urls = get_content_urls(a_document)
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class ExternalContentTestCase(TestCase):
-    def setUp(self):
-        frontend.autodiscover()
-
-    def test_creation(self):
-        ExternalContent.objects.create(name='An instance')
-        an_instance = ExternalContent.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        an_external_content = ExternalContent.objects.create(name='An instance')
-        content_urls = get_content_urls(an_external_content)
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class FlashMovieTestCase(TestCase):
-    def setUp(self):
-        frontend.autodiscover()
-
-    def test_creation(self):
-        FlashMovie.objects.create(name='An instance')
-        an_instance = FlashMovie.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        a_flash_movie = FlashMovie.objects.create(name="something", flash="/")
-        content_urls = get_content_urls(a_flash_movie)
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class MovieClipTestCase(TestCase):
-    def setUp(self):
-        frontend.autodiscover()
-
-    def test_creation(self):
-        MovieClip.objects.create(name='An instance')
-        an_instance = MovieClip.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        a_movie_clip = MovieClip.objects.create(name='An instance')
-        content_urls = get_content_urls(a_movie_clip)
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class PictureTestCase(TestCase):
-    def setUp(self):
-        frontend.autodiscover()
-
-    def test_creation(self):
-        Picture.objects.create(name='An instance')
-        an_instance = Picture.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        a_picture = Picture.objects.create(name='An instance')
-        content_urls = get_content_urls(a_picture)
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class SoundTrackTestCase(TestCase):
-    def setUp(self):
-        frontend.autodiscover()
-
-    def test_creation(self):
-        SoundTrack.objects.create(name='An instance')
-        an_instance = SoundTrack.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        a_soundtrack = SoundTrack.objects.create(name='An instance')
-        content_urls = get_content_urls(a_soundtrack)
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class PollTestCase(TestCase):
-    def setUp(self):
-        frontend.autodiscover()
-
-    def test_creation(self):
-        Poll.objects.create(name='An instance')
-        an_instance = Poll.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        a_poll = Poll.objects.create(name='An instance')
-        content_urls = get_content_urls(a_poll)
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class CategoryTestCase(TestCase):
-    
-    def setUp(self):
-        User = get_model('auth', 'user')
-        self.user = User(username='admin')
-        self.user.set_password('password')
-        self.user.save()
-        frontend.autodiscover()
-
-    def test_creation(self):
-        col = Collection.objects.create(name='A collection')
-        cat = Category(name='An instance', collection=col)
-        cat.save()
-        an_instance = Category.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        col = Collection.objects.create(name='A collection')
-        a_category = Category(name='An instance', collection=col)
-        a_category.save()
-        content_urls = get_content_urls(a_category)
-        self.client.login(username='admin', password='password')
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class CollectionTestCase(TestCase):
-    
-    def setUp(self):
-        frontend.autodiscover()
-
-    def test_creation(self):
-        col = Collection.objects.create(name='An instance')
-        col.save()
-        an_instance = Collection.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        a_collection = Collection.objects.create(name='A collection')
-        a_collection.save()
-        # most views list categories in the collection, so we create one
-        cat = Category(name='An instance', collection=a_collection)
-        cat.save()
-        content_urls = get_content_urls(a_collection)
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class MenuItemTestCase(TestCase):
-    
-    def setUp(self):
-        frontend.autodiscover()
-
-    def test_creation(self):
-        menu = Menu.objects.create(name='menu')
-        m_i = MenuItem(name='An instance', menu=menu)
-        m_i.save()
-        an_instance = MenuItem.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        menu = Menu.objects.create(name='menu')
-        a_menu_item = MenuItem(name='A menuitem', menu=menu)
-        a_menu_item.save()
-        content_urls = get_content_urls(a_menu_item)
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class MenuTestCase(TestCase):
-    
-    def setUp(self):
-        frontend.autodiscover()
-
-    def test_creation(self):
-        menu = Menu.objects.create(name='An instance')
-        an_instance = Menu.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        a_menu = Menu.objects.create(name='menu')
-        content_urls = get_content_urls(a_menu)
-        MenuItem(name='A menuitem', menu=a_menu).save()
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class SiteMapTestCase(TestCase):
-    
-    def setUp(self):
-        frontend.autodiscover()
+class SiteMapViewTestCase(TestCase):
+    fixtures = ['simplest_site.json']
+    test_model = Site
 
     def test_creation(self):
         site = Site.objects.create(name='An instance')
@@ -523,28 +337,124 @@ class SiteMapTestCase(TestCase):
         self.assertEqual(res.status_code, 200)
 
 
-class TopicTestCase(TestCase):
+class StaticPageTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = StaticPage
+
+
+class ArticleTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = Article
+    
+    def setUp(self):
+        author = Author.objects.create(name="the author")
+        self.test_object = Article.objects.create(name='An instance', author=author)
+        frontend.autodiscover()
+
+
+class DocumentTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = Document
+
+
+class ExternalContentTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = ExternalContent
+
+
+class FlashMovieTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = FlashMovie
+    
+    def setUp(self):
+        self.test_object = FlashMovie.objects.create(name='An instance', flash="/")
+        frontend.autodiscover()
+
+
+class MovieClipTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = MovieClip
+
+    
+class PictureTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = Picture
+
+
+class SoundTrackTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = SoundTrack
+
+
+class PollTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = Poll
+
+
+class CategoryTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = Category
+
+    def setUp(self):
+        # we need an authenticated user for some category views
+        User = get_model('auth', 'user')
+        self.user = User(username='admin')
+        self.user.set_password('password')
+        self.user.save()
+        col = Collection.objects.create(name='A collection')
+        self.test_object = Category(name='An instance', collection=col)
+        self.test_object.save()
+        frontend.autodiscover()
+        
+
+    def test_content_views(self):
+        content_urls = get_content_urls(self.test_object)
+        self.client.login(username='admin', password='password')
+        for url in content_urls:
+            self.assertEqual(self.client.get(url).status_code, 200)
+
+
+class CollectionTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = Collection
+
+    def setUp(self):
+        self.test_object = Collection.objects.create(name='An instance')
+        self.test_object.save()
+        # most views list categories in the collection, so we create one
+        cat = Category(name='An instance', collection=self.test_object)
+        cat.save()
+        frontend.autodiscover()
+
+
+class MenuItemTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = MenuItem
+
+    def setUp(self):
+        menu = Menu.objects.create(name='menu')
+        self.test_object = MenuItem(name='An instance', menu=menu)
+        self.test_object.save()
+        frontend.autodiscover()
+
+
+class MenuTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = Menu
+
+
+class TopicTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = Topic
 
     def setUp(self):
         User = get_model('auth', 'user')
         self.user = User(username='admin')
         self.user.set_password('password')
         self.user.save()
+        self.test_object = Topic(name='An instance', author=self.user)
+        self.test_object.save()
         frontend.autodiscover()
-
-    def test_creation(self):
-        t = Topic(name='An instance', author=self.user)
-        t.save()
-        an_instance = Topic.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        a_topic = Topic(name='An instance', author=self.user)
-        a_topic.save()
-        content_urls = get_content_urls(a_topic)
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
 
 
 #TODO(nicoechaniz)
