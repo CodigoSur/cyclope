@@ -27,10 +27,18 @@ core.frontend
 
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
+from django.template import RequestContext
 
 from sites import site
 
 from cyclope.utils import template_for_request
+
+def get_view_template(request, inline=False):
+    if inline:
+        host_template = 'cyclope/inline_view.html'
+    else:
+        host_template = template_for_request(request)
+    
 
 class FrontendView(object):
     """Parent class for frontend views.
@@ -51,6 +59,7 @@ class FrontendView(object):
 
         is_region_view(boolean): sets whether the view can be included in layout regions
     """
+
     name = ''
     verbose_name = ''
     is_default = False
@@ -74,13 +83,18 @@ class FrontendView(object):
             host_template = 'cyclope/inline_view.html'
         else:
             host_template = template_for_request(request)
+            
+        req_context = RequestContext(request,{'host_template': host_template,
+                                              'region_view': inline})
 
         if self.is_instance_view:
             if not content_object:
                 content_object = self.model.objects.get(slug=slug)
-            response = self.get_response(request, host_template, content_object)
+#            response = self.get_response(request, host_template, content_object)
+            response = self.get_response(request, req_context, content_object)
         else:
-            response = self.get_response(request, host_template)
+            response = self.get_response(request, req_context)
+#            response = self.get_response(request, host_template)
 
         # inline will be True if the view was called from a region templatetag
         if not inline:

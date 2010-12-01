@@ -45,7 +45,7 @@ class TopicDetail(frontend.FrontendView):
     is_instance_view = True
     is_content_view = True
 
-    def get_response(self, request, host_template, content_object):
+    def get_response(self, request, req_context, content_object):
 
         try:
             profile = content_object.author.get_profile()
@@ -53,9 +53,8 @@ class TopicDetail(frontend.FrontendView):
         except ObjectDoesNotExist:
             avatar = None
 
-        context = {'avatar': avatar}
-        return views.object_detail(request, host_template, content_object,
-                                   extra_context=context)
+        req_context.update({'avatar': avatar})
+        return views.object_detail(request, req_context, content_object)
 
 frontend.site.register_view(Topic, TopicDetail)
 
@@ -65,7 +64,7 @@ class CreateTopic(frontend.FrontendView):
     is_instance_view = True
     is_content_view = True
 
-    def get_response(self, request, host_template, content_object):
+    def get_response(self, request, req_context, content_object):
         if not request.user.is_authenticated():
             from django.conf import settings
             tup = (settings.LOGIN_URL, REDIRECT_FIELD_NAME,
@@ -73,7 +72,7 @@ class CreateTopic(frontend.FrontendView):
             return HttpResponseRedirect('%s?%s=%s' % tup)
         category = content_object
 
-        context = {'forum': category.name}
+        req_context.update({'forum': category.name})
 
         topic_ctype = ContentType.objects.get_for_model(Topic)
         if topic_ctype not in category.collection.content_types.all():
@@ -99,13 +98,13 @@ class CreateTopic(frontend.FrontendView):
             else:
                 form = CreateTopicForm()
 
-        context.update({'form': form,
-                        'not_allowed': not_allowed,
-                        'action_url': reverse('category-create_topic',
+        req_context.update({'form': form,
+                            'not_allowed': not_allowed,
+                            'action_url': reverse('category-create_topic',
                                                args=[category.slug]),
-                       })
+                            })
 
-        return views.object_detail(request, host_template, content_object,
-                                   view_name = self.name, extra_context=context)
+        return views.object_detail(request, req_context, content_object,
+                                   view_name = self.name)
 
 frontend.site.register_view(Category, CreateTopic)

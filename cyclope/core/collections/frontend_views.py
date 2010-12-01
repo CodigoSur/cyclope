@@ -22,7 +22,7 @@
 """cyclope.frontend_views"""
 
 from django.utils.translation import ugettext_lazy as _
-from django.template import loader, RequestContext
+from django.template import loader
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
 from django.contrib.comments.models import Comment
@@ -42,17 +42,16 @@ class CategoryRootItemsList(frontend.FrontendView):
     is_content_view = True
     is_region_view = True
 
-    def get_response(self, request, host_template, content_object):
+    def get_response(self, request, req_context, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
         template = "collections/category_root_items_list.html"
-        c = RequestContext(request,
-                           {'categorizations': categorizations_list })
+        req_context['categorizations'] = categorizations_list
         t = loader.get_template(template)
-        c['host_template'] = host_template
-        return t.render(c)
+        return t.render(req_context)
 
 frontend.site.register_view(Category, CategoryRootItemsList)
+
 
 class CategoryDefaultList(frontend.FrontendView):
     name = 'default'
@@ -60,14 +59,14 @@ class CategoryDefaultList(frontend.FrontendView):
     is_default = True
     is_content_view = True
 
-    def get_response(self, request, host_template, content_object):
+    def get_response(self, request, req_context, content_object):
         category = content_object
         if category.collection.default_list_view not in ["", self.name]:
             view_name = category.collection.default_list_view
             view = frontend.site.get_view(content_object.__class__, view_name)
         else:
             view = frontend.site.get_view(content_object.__class__, 'teaser_list')
-        return view.get_response(request, host_template, content_object)
+        return view.get_response(request, req_context, content_object)
 
 frontend.site.register_view(Category, CategoryDefaultList)
 
@@ -83,7 +82,7 @@ class CategoryTeaserList(frontend.FrontendView):
 
     template = "collections/category_teaser_list.html"
 
-    def get_response(self, request, host_template, content_object):
+    def get_response(self, request, req_context, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
 
@@ -107,13 +106,11 @@ class CategoryTeaserList(frontend.FrontendView):
         except (EmptyPage, InvalidPage):
             page = paginator.page(paginator.num_pages)
 
-        c = RequestContext(request,
-                           {'categorizations': page.object_list,
+        req_context.update({'categorizations': page.object_list,
                             'page': page,
-                            'category': category })
+                            'category': category})
         t = loader.get_template(self.template)
-        c['host_template'] = host_template
-        return t.render(c)
+        return t.render(req_context)
 
 frontend.site.register_view(Category, CategoryTeaserList)
 
@@ -137,20 +134,17 @@ class CategorySimplifiedTeaserList(frontend.FrontendView):
     verbose_name=_('simplified teaser list of Category members')
     is_region_view = True
 
-    def get_response(self, request, host_template, content_object):
+    def get_response(self, request, req_context, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
 
         template = "collections/category_teaser_list.html"
-        c = RequestContext(request,
-                           {'category': category,
+        req_context.update({'category': category,
                             'categorizations': categorizations_list,
-#                            'region_view': True,
                             'simplified_view': True,
                             })
         t = loader.get_template(template)
-        c['host_template'] = host_template
-        return t.render(c)
+        return t.render(req_context)
 
 frontend.site.register_view(Category, CategorySimplifiedTeaserList)
 
@@ -164,15 +158,13 @@ class CollectionRootCategoriesTeaserList(frontend.FrontendView):
     is_content_view = True
     template = "collections/collection_root_categories_teaser_list.html"
 
-    def get_response(self, request, host_template, content_object):
+    def get_response(self, request, req_context, content_object):
         collection = content_object
-        c = RequestContext(
-            request,
+        req_context.update(
             {'categories': Category.tree.filter(collection=collection, level=0),
              'collection': collection })
         t = loader.get_template(self.template)
-        c['host_template'] = host_template
-        return t.render(c)
+        return t.render(req_context)
 
 frontend.site.register_view(Collection, CollectionRootCategoriesTeaserList)
 
@@ -186,18 +178,17 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
     is_content_view = True
     is_region_view = True
 
-    def get_response(self, request, host_template, content_object):
+    def get_response(self, request, req_context, content_object):
         collection = content_object
         categories = Category.tree.filter(collection=collection, level=0)
         category_list = []
         for category in categories:
             category_list.extend(self._get_categories_nested_list(category))
-        c = RequestContext(request, {'categories': category_list,
-                                     'collection_slug': collection.slug})
+        req_context.update({'categories': category_list,
+                            'collection_slug': collection.slug})
         template = "collections/collection_categories_hierarchy.html"
         t = loader.get_template(template)
-        c['host_template'] = host_template
-        return t.render(c)
+        return t.render(req_context)
 
     def _get_categories_nested_list(self, base_category, name_field='name'):
 
@@ -266,7 +257,7 @@ class CategoryListAsForum(frontend.FrontendView):
 
     template = "collections/category_list_as_forum.html"
 
-    def get_response(self, request, host_template, content_object):
+    def get_response(self, request, req_context, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
 
@@ -301,12 +292,10 @@ class CategoryListAsForum(frontend.FrontendView):
                 obj.last_comment_date = last_comment.submit_date
                 obj.last_comment_author = obj.author
 
-        c = RequestContext(request,
-                           {'categorizations': page.object_list,
+        req_context.update({'categorizations': page.object_list,
                             'page': page,
                             'category': category})
         t = loader.get_template(self.template)
-        c['host_template'] = host_template
-        return t.render(c)
+        return t.render(req_context)
 
 frontend.site.register_view(Category, CategoryListAsForum)

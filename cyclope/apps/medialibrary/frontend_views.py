@@ -33,10 +33,9 @@ class MediaDetail(frontend.FrontendView):
     is_content_view = True
     params = {'template_object_name': 'media'}
 
-    def get_response(self, request, host_template, content_object):
-        context = {'content_relations': content_object.related_contents.all()}
-        return views.object_detail(request, host_template, content_object,
-                                   extra_context=context, **self.params)
+    def get_response(self, request, req_context, content_object):
+        req_context.update({'content_relations': content_object.related_contents.all()})
+        return views.object_detail(request, req_context, content_object, **self.params)
 
 class PictureDetail(MediaDetail):
     """Detail view of a Picture.
@@ -91,13 +90,13 @@ class FlashMovieDetail(MediaDetail):
     """
     verbose_name=_('detailed view of the selected Flash Movie')
 
-    def get_response(self, request, host_template, content_object):
+    def get_response(self, request, req_context, content_object):
         p = content_object.flash.url_full
         i = p.rfind("/")+1
         base = p[:i]
-        context = {'url_base': base,
-                   'content_relations': content_object.related_contents.all()}
-        return views.object_detail(request, host_template, content_object,
-                                   extra_context=context, **self.params)
+        req_context.update({'url_base': base,
+                            'content_relations': content_object.related_contents.all()})
+        return views.object_detail(request, req_context, content_object,
+                                   **self.params)
 
 frontend.site.register_view(FlashMovie, FlashMovieDetail)

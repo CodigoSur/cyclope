@@ -39,7 +39,7 @@ class PollSubmission(frontend.FrontendView):
     verbose_name=_('Poll submission form')
     is_content_view = True
 
-    def get_response(self, request, host_template, content_object):
+    def get_response(self, request, req_context, content_object):
         forms = []
         poll = content_object
         questions = Question.objects.filter(poll=poll)
@@ -61,13 +61,9 @@ class PollSubmission(frontend.FrontendView):
 
         else:
             t = loader.get_template("polls/poll_submission.html")
-            c = RequestContext(request,
-                               {'host_template': host_template,
-                                'poll': poll,
-                                'forms': forms,
-                                'captcha_form': captcha_form,
-                                })
-            return t.render(c)
+            req_context.update({'poll': poll, 'forms': forms,
+                                'captcha_form': captcha_form})
+            return t.render(req_context)
 
 frontend.site.register_view(Poll, PollSubmission)
 
@@ -79,8 +75,8 @@ class PollDetail(frontend.FrontendView):
     is_default = True
     is_content_view = True
 
-    def get_response(self, request, host_template, content_object):
-        return views.object_detail(request, host_template, content_object)
+    def get_response(self, request, req_context, content_object):
+        return views.object_detail(request, req_context, content_object)
     
 frontend.site.register_view(Poll, PollDetail)
 

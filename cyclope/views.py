@@ -28,13 +28,13 @@ which should be declared in a frontend_views.py file for each app."""
 # cyclope views are declared and registered
 # in frontend.py files for each app
 
-from django.template import loader, RequestContext
+from django.template import loader
 from django.http import Http404, HttpResponse
 from django.core.xheaders import populate_xheaders
 from django.core.exceptions import ObjectDoesNotExist
 
-def object_detail(request, host_template, content_object, extra_context=None, view_name='detail',
-        template_name=None, context_processors=None, template_object_name=None):
+def object_detail(request, req_context, content_object, extra_context=None, view_name='detail',
+        template_name=None, template_object_name=None):
     """
     Generic detail of an object.
     """
@@ -47,24 +47,21 @@ def object_detail(request, host_template, content_object, extra_context=None, vi
             obj._meta.app_label, obj._meta.object_name.lower(), view_name)
     t = loader.get_template(template_name)
 
-    c = RequestContext(request,
-                       {template_object_name: obj, 'host_template': host_template},
-                       context_processors)
+    req_context.update({template_object_name: obj})
     if extra_context:
         for key, value in extra_context.items():
             if callable(value):
-                c[key] = value()
+                req_context[key] = value()
             else:
-                c[key] = value
+                req_context[key] = value
 
-    return t.render(c)
+    return t.render(req_context)
 
 
-def object_list(request, host_template, queryset, view_name='detail', inline=False,
+def object_list(request, req_context, queryset, view_name='detail', inline=False,
                 paginate_by=None, page=None, allow_empty=True,
                 template_name=None, template_loader=loader,
-                extra_context=None, context_processors=None,
-                template_object_name='object', mimetype=None):
+                extra_context=None, template_object_name='object', mimetype=None):
     """
     Generic list of objects.
 
@@ -120,7 +117,7 @@ def object_list(request, host_template, queryset, view_name='detail', inline=Fal
             page_obj = paginator.page(page_number)
         except InvalidPage:
             raise Http404
-        c = RequestContext(request, {
+        req_context.update({
             '%s_%s' % (template_object_name, view_name): page_obj.object_list,
             'paginator': paginator,
             'page_obj': page_obj,
@@ -139,22 +136,21 @@ def object_list(request, host_template, queryset, view_name='detail', inline=Fal
             'pages': paginator.num_pages,
             'hits': paginator.count,
             'page_range': paginator.page_range,
-        }, context_processors)
+            })
     else:
-        c = RequestContext(request, {
+        req_context.update({
             '%s_list' % template_object_name: queryset,
             'paginator': None,
             'page_obj': None,
             'is_paginated': False,
-        }, context_processors)
+            })
         if not allow_empty and len(queryset) == 0:
             raise Http404
     for key, value in extra_context.items():
         if callable(value):
-            c[key] = value()
+            req_context[key] = value()
         else:
-            c[key] = value
-    c['host_template'] = host_template
+            req_context[key] = value
 
     if not template_name:
         model = queryset.model
@@ -163,4 +159,4 @@ def object_list(request, host_template, queryset, view_name='detail', inline=Fal
 
     t = template_loader.get_template(template_name)
 
-    return t.render(c)
+    return t.render(req_context)

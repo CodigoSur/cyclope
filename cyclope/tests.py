@@ -110,6 +110,7 @@ class ViewableTestCase(TestCase):
     def setUp(self):
         if hasattr(self, 'test_model') and not hasattr(self, 'test_object'):
             self.test_object = self.test_model.objects.create(name='An instance')
+        frontend.autodiscover()
 
     def test_creation(self):
         if hasattr(self, 'test_model'):
