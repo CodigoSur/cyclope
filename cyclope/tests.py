@@ -31,12 +31,13 @@ from django.db.models import get_model
 from cyclope.models import SiteSettings, Menu, MenuItem
 from cyclope.models import Layout, RegionView, Author
 from cyclope.core import frontend
+from cyclope.core.collections.models import *
 from cyclope.templatetags.cyclope_utils import do_join
 from cyclope.apps.staticpages.models import StaticPage
 from cyclope.apps.articles.models import Article
 from cyclope.apps.medialibrary.models import *
 from cyclope.apps.polls.models import *
-from cyclope.core.collections.models import *
+from cyclope.apps.forum.models import *
 
 def create_static_page(name=None):
     if name is None:
@@ -58,7 +59,7 @@ def export_fixture(apps, filename=None):
         return dump
 
 def get_instance_url(model_instance, view_name):
-    #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well. Also this method is also used by tests and it's code is repeated en many model files.
+    #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well. Also this code is repeated in many model files.
     view = cyclope.core.frontend.site.get_view(model_instance.__class__, view_name)
 
     if view.is_default:
@@ -75,11 +76,9 @@ def get_instance_url(model_instance, view_name):
                 % (model_instance._meta.object_name.lower(), view_name)
 
 
-def get_content_urls(test_model, test_object=None):
+def get_content_urls(test_object):
     content_urls = []
-    if not test_object:
-        test_object = test_model.objects.create(name="something")
-    for view in frontend.site._registry[test_model]:
+    for view in frontend.site._registry[test_object.__class__]:
         if view.is_content_view:
             content_urls.append('/'+ get_instance_url(test_object, view.name))
     return content_urls
@@ -90,7 +89,7 @@ class SiteSettingsTestCase(TestCase):
         self.site = Site(domain="mydomain.com", name="mydomain")
         self.site.save()
 
-    def test_create_site(self):
+    def test_creation(self):
         site_settings = SiteSettings(site=self.site,
                                 theme="neutronica",
                                 allow_comments='YES')
@@ -274,7 +273,8 @@ class StaticPageTestCase(TestCase):
         self.assertEqual(an_instance.name, 'An instance')
 
     def test_content_views(self):
-        content_urls = get_content_urls(StaticPage)
+        a_static_page = StaticPage.objects.create(name='An instance')
+        content_urls = get_content_urls(a_static_page)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -295,8 +295,8 @@ class ArticleTestCase(TestCase):
 
     def test_content_views(self):
         author = Author.objects.create(name="the author")
-        an_instance = Article.objects.create(name='An instance', author=author)
-        content_urls = get_content_urls(Article, an_instance)
+        an_article = Article.objects.create(name='An instance', author=author)
+        content_urls = get_content_urls(an_article)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -311,7 +311,8 @@ class DocumentTestCase(TestCase):
         self.assertEqual(an_instance.name, 'An instance')
 
     def test_content_views(self):
-        content_urls = get_content_urls(Document)
+        a_document = Document.objects.create(name='An instance')
+        content_urls = get_content_urls(a_document)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -326,7 +327,8 @@ class ExternalContentTestCase(TestCase):
         self.assertEqual(an_instance.name, 'An instance')
 
     def test_content_views(self):
-        content_urls = get_content_urls(ExternalContent)
+        an_external_content = ExternalContent.objects.create(name='An instance')
+        content_urls = get_content_urls(an_external_content)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -341,8 +343,8 @@ class FlashMovieTestCase(TestCase):
         self.assertEqual(an_instance.name, 'An instance')
 
     def test_content_views(self):
-        flash_object = FlashMovie.objects.create(name="something", flash="/")
-        content_urls = get_content_urls(FlashMovie, flash_object)
+        a_flash_movie = FlashMovie.objects.create(name="something", flash="/")
+        content_urls = get_content_urls(a_flash_movie)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -357,7 +359,8 @@ class MovieClipTestCase(TestCase):
         self.assertEqual(an_instance.name, 'An instance')
 
     def test_content_views(self):
-        content_urls = get_content_urls(MovieClip)
+        a_movie_clip = MovieClip.objects.create(name='An instance')
+        content_urls = get_content_urls(a_movie_clip)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -372,7 +375,8 @@ class PictureTestCase(TestCase):
         self.assertEqual(an_instance.name, 'An instance')
 
     def test_content_views(self):
-        content_urls = get_content_urls(Picture)
+        a_picture = Picture.objects.create(name='An instance')
+        content_urls = get_content_urls(a_picture)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -387,7 +391,8 @@ class SoundTrackTestCase(TestCase):
         self.assertEqual(an_instance.name, 'An instance')
 
     def test_content_views(self):
-        content_urls = get_content_urls(SoundTrack)
+        a_soundtrack = SoundTrack.objects.create(name='An instance')
+        content_urls = get_content_urls(a_soundtrack)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -402,22 +407,8 @@ class PollTestCase(TestCase):
         self.assertEqual(an_instance.name, 'An instance')
 
     def test_content_views(self):
-        content_urls = get_content_urls(Poll)
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class PollTestCase(TestCase):
-    def setUp(self):
-        frontend.autodiscover()
-
-    def test_creation(self):
-        Poll.objects.create(name='An instance')
-        an_instance = Poll.objects.get(slug='an-instance')
-        self.assertEqual(an_instance.name, 'An instance')
-
-    def test_content_views(self):
-        content_urls = get_content_urls(Poll)
+        a_poll = Poll.objects.create(name='An instance')
+        content_urls = get_content_urls(a_poll)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -426,9 +417,9 @@ class CategoryTestCase(TestCase):
     
     def setUp(self):
         User = get_model('auth', 'user')
-        u = User(username='admin')
-        u.set_password('password')
-        u.save()
+        self.user = User(username='admin')
+        self.user.set_password('password')
+        self.user.save()
         frontend.autodiscover()
 
     def test_creation(self):
@@ -440,9 +431,9 @@ class CategoryTestCase(TestCase):
 
     def test_content_views(self):
         col = Collection.objects.create(name='A collection')
-        cat = Category(name='An instance', collection=col)
-        cat.save()
-        content_urls = get_content_urls(Category, cat)
+        a_category = Category(name='An instance', collection=col)
+        a_category.save()
+        content_urls = get_content_urls(a_category)
         self.client.login(username='admin', password='password')
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
@@ -460,12 +451,12 @@ class CollectionTestCase(TestCase):
         self.assertEqual(an_instance.name, 'An instance')
 
     def test_content_views(self):
-        col = Collection.objects.create(name='A collection')
-        col.save()
+        a_collection = Collection.objects.create(name='A collection')
+        a_collection.save()
         # most views list categories in the collection, so we create one
-        cat = Category(name='An instance', collection=col)
+        cat = Category(name='An instance', collection=a_collection)
         cat.save()
-        content_urls = get_content_urls(Collection, col)
+        content_urls = get_content_urls(a_collection)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -484,9 +475,9 @@ class MenuItemTestCase(TestCase):
 
     def test_content_views(self):
         menu = Menu.objects.create(name='menu')
-        m_i = MenuItem(name='A menuitem', menu=menu)
-        m_i.save()
-        content_urls = get_content_urls(MenuItem, m_i)
+        a_menu_item = MenuItem(name='A menuitem', menu=menu)
+        a_menu_item.save()
+        content_urls = get_content_urls(a_menu_item)
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -502,9 +493,9 @@ class MenuTestCase(TestCase):
         self.assertEqual(an_instance.name, 'An instance')
 
     def test_content_views(self):
-        menu = Menu.objects.create(name='menu')
-        content_urls = get_content_urls(Menu, menu)
-        MenuItem(name='A menuitem', menu=menu).save()
+        a_menu = Menu.objects.create(name='menu')
+        content_urls = get_content_urls(a_menu)
+        MenuItem(name='A menuitem', menu=a_menu).save()
         for url in content_urls:
             self.assertEqual(self.client.get(url).status_code, 200)
 
@@ -532,7 +523,30 @@ class SiteMapTestCase(TestCase):
         self.assertEqual(res.status_code, 200)
 
 
+class TopicTestCase(TestCase):
+
+    def setUp(self):
+        User = get_model('auth', 'user')
+        self.user = User(username='admin')
+        self.user.set_password('password')
+        self.user.save()
+        frontend.autodiscover()
+
+    def test_creation(self):
+        t = Topic(name='An instance', author=self.user)
+        t.save()
+        an_instance = Topic.objects.get(slug='an-instance')
+        self.assertEqual(an_instance.name, 'An instance')
+
+    def test_content_views(self):
+        a_topic = Topic(name='An instance', author=self.user)
+        a_topic.save()
+        content_urls = get_content_urls(a_topic)
+        for url in content_urls:
+            self.assertEqual(self.client.get(url).status_code, 200)
+
+
+
 #TODO(nicoechaniz)
-#class TopicTestCase(TestCase):
 #class DeleteRelatedContent(TestCase):
 #class DeleteFromLayoutsAndMenuItems(TestCase)
