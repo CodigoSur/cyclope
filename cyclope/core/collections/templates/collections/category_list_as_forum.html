@@ -6,7 +6,9 @@
 
 {% include 'collections/hierarchycal_navigation_block.html' %}
 
-<div id='link-create-topic'> <a href="{% url category-create_topic category.slug %}">{% trans 'Create a new topic' %}</div>
+  <div id='link-create-topic'>
+    <a href="{% url category-create_topic category.slug %}">{% trans 'Create a new topic' %}</a>
+  </div>
   <table >
       <tr>
         <th>{% trans 'Name' %}</th>
@@ -19,8 +21,11 @@
      <tr>
        <td><a href="{{ obj.url }}">{{ obj.name }}</a></td>
        <td>{{ obj.comments_count }}</td>
-       <td>{{ obj.creation_date|date:'DATETIME_FORMAT' }}{% if obj.author %} {% trans 'by' %} {{ obj.author }} {% endif %}</td>
-       <td>{% if obj.last_comment_date %}{{ obj.last_comment_date|date:'DATETIME_FORMAT' }}  {% trans 'by' %} {{ obj.last_comment_author }} {% endif %}</td>
+       <td>{{ obj.creation_date|date:'DATETIME_FORMAT' }}
+           {% if obj.author %} {% trans 'by' %} {{ obj.author }} {% endif %}
+       </td>
+       <td>{% if obj.last_comment_date %}{{ obj.last_comment_date|date:'DATETIME_FORMAT' }}  {% trans 'by' %} {{ obj.last_comment_author }} {% endif %}
+       </td>
       </tr>  
       {% endfor %}
   </table>
