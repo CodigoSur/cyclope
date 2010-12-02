@@ -24,11 +24,15 @@ widgets
 -------
 """
 from django import forms
-from django.utils.safestring import mark_safe
 from django.conf import settings
+from django.forms.util import flatatt
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import escape
 from django.utils.text import truncate_words
+from django.utils.html import conditional_escape
+from django.utils.encoding import force_unicode
+from django.core.urlresolvers import reverse
 from django.contrib.admin.widgets import ForeignKeyRawIdWidget
 
 from cyclope import settings as cyc_settings
@@ -122,3 +126,74 @@ class ForeignKeyImageRawIdWidget(ForeignKeyRawIdWidget):
         except self.rel.to.DoesNotExist:
             return ''
         return obj.thumbnail()
+
+class CKEditor(forms.Textarea):
+    """
+    Widget providing CKEditor for Rich Text Editing.
+    """
+    class Media:
+        js = (
+            cyc_settings.CYCLOPE_MEDIA_URL + 'ckeditor/ckeditor.js',
+        )
+
+    def render(self, name, value, attrs={}):
+        language = settings.LANGUAGE_CODE[:2]
+        if value is None: value = ''
+        final_attrs = self.build_attrs(attrs, name=name)
+        return mark_safe(u'''<textarea%s>%s</textarea>
+        <script type="text/javascript">
+
+            CKEDITOR.replace("%s",
+                {
+                    toolbar : // http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Toolbar
+                        [
+                            ['Cut','Copy','Paste','PasteText'],
+                            ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+                            ['BidiLtr', 'BidiRtl'],
+                            '/',
+                            ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+                            ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+                            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+                            ['Link','Unlink'],
+                            ['Image','Flash','Table','HorizontalRule'],
+                            '/',
+                            ['Styles','Format','Font','FontSize'],
+                            ['TextColor','BGColor']
+                        ],
+                    skin: "v2",
+                    height:"291",
+                    width:"618",
+                    filebrowserUploadUrl : "%s",
+                    filebrowserBrowseUrl : "%s",
+                    language : "%s",
+                }
+            );
+            // Customizing dialogs
+            CKEDITOR.on( 'dialogDefinition', function( ev ){
+                    var dialogName = ev.data.name;
+                    var dialogDefinition = ev.data.definition;
+                    if ( dialogName == 'link' )
+                    {
+                        dialogDefinition.removeContents( 'advanced' );
+                        dialogDefinition.removeContents( 'upload' );
+                    }
+
+                    if ( dialogName == 'image' )
+                    {
+                        dialogDefinition.removeContents( 'advanced' );
+                        dialogDefinition.removeContents( 'Upload' );
+                    }
+
+                    if ( dialogName == 'flash' )
+                    {
+                        dialogDefinition.removeContents( 'advanced' );
+                        dialogDefinition.removeContents( 'Upload' );
+                    }
+
+            });
+        </script>''' % (flatatt(final_attrs),
+                        conditional_escape(force_unicode(value)),
+                        final_attrs['id'],
+                        "/", # FIXME http://docs.cksource.com/CKEditor_3.x/Developers_Guide/File_Browser_%28Uploader%29
+                        reverse('fb_browse')+'?pop=3', # pop=3 is CKEditor
+                        language))

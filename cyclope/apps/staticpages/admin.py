@@ -27,7 +27,7 @@ from django.contrib.contenttypes.models import ContentType
 from markitup.widgets import AdminMarkItUpWidget
 
 from cyclope.core.collections.admin import CollectibleAdmin
-from cyclope.widgets import WYMEditor
+from cyclope.widgets import WYMEditor, CKEditor
 from cyclope.models import MenuItem
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
@@ -38,11 +38,10 @@ class StaticPageAdminForm(forms.ModelForm):
     menu_items = forms.ModelMultipleChoiceField(label=_('Menu items'),
                     queryset = MenuItem.tree.all(), required=False,
                     )
-    if cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE ==  'wysiwyg':
-        text = forms.CharField(label=_('Text'), widget=WYMEditor())
-    else:
+    if cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE ==  'textile':
         text = forms.CharField(label=_('Text'), widget=AdminMarkItUpWidget())
-        
+    elif cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE == 'wysiwyg':
+        text = forms.CharField(label=_('Text'), widget=CKEditor())
 
     def __init__(self, *args, **kwargs):
     # this was initially written to be used for any BaseContent, that's

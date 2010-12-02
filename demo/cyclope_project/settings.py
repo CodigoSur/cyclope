@@ -75,14 +75,12 @@ LOGIN_REDIRECT_URL = '/inicio'
 CYCLOPE_PREFIX = ''
 
 # possible values for TEXT_STYLE are:
-# textile, markdown or restructuredtext (saves markup, renders with corresponding filter)
+# textile (saves markup, renders with corresponding filter)
 # wysiwyg (rich text editor, saves HTML, renders with safe filter)
-# raw (simple text area saves the raw input, renders with safe filter)
-#CYCLOPE_STATICPAGE_TEXT_STYLE = 'textile'
-#CYCLOPE_ARTICLE_TEXT_STYLE = 'textile'
+# raw [default] (simple text area saves the raw input, renders with safe filter)
 
-#CYCLOPE_STATICPAGE_TEXT_STYLE = 'wysiwyg'
-#CYCLOPE_ARTICLE_TEXT_STYLE = 'wysiwyg'
+CYCLOPE_STATICPAGE_TEXT_STYLE = 'wysiwyg'
+CYCLOPE_ARTICLE_TEXT_STYLE = 'wysiwyg'
 
 HAYSTACK_WHOOSH_PATH = os.path.join(CYCLOPE_PROJECT_PATH, 'cyclope_project_index')
 
