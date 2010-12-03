@@ -34,7 +34,7 @@ from django.db import models
 from mptt.forms import TreeNodeChoiceField
 from feincms.admin import editor
 
-from cyclope.widgets import WYMEditor
+from cyclope.widgets import CKEditor
 from cyclope.core import frontend
 
 from models import *
@@ -101,7 +101,7 @@ FilterSpec.filter_specs.insert(0, (lambda f: \
 
 class CategoryForm(forms.ModelForm):
     description = forms.CharField(label=_('Description'),
-                                  widget=WYMEditor(), required=False)
+                                  widget=CKEditor(), required=False)
     parent = TreeNodeChoiceField(label=_('Parent'),
                                  queryset=Category.tree.all(), required=False)
 

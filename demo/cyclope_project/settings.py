@@ -77,7 +77,7 @@ CYCLOPE_PREFIX = ''
 # possible values for TEXT_STYLE are:
 # textile (saves markup, renders with corresponding filter)
 # wysiwyg (rich text editor, saves HTML, renders with safe filter)
-# raw [default] (simple text area saves the raw input, renders with safe filter)
+# raw (simple text area saves the raw input, renders with safe filter)
 
 CYCLOPE_STATICPAGE_TEXT_STYLE = 'wysiwyg'
 CYCLOPE_ARTICLE_TEXT_STYLE = 'wysiwyg'

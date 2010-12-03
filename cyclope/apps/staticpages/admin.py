@@ -27,7 +27,7 @@ from django.contrib.contenttypes.models import ContentType
 from markitup.widgets import AdminMarkItUpWidget
 
 from cyclope.core.collections.admin import CollectibleAdmin
-from cyclope.widgets import WYMEditor, CKEditor
+from cyclope.widgets import CKEditor
 from cyclope.models import MenuItem
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend

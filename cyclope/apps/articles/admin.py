@@ -25,7 +25,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from markitup.widgets import AdminMarkItUpWidget
 
-from cyclope.widgets import WYMEditor, ForeignKeyImageRawIdWidget, CKEditor
+from cyclope.widgets import ForeignKeyImageRawIdWidget, CKEditor
 from cyclope.core.collections.admin import CollectibleAdmin
 from cyclope.models import Author
 from cyclope.admin import BaseContentAdmin
