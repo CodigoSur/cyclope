@@ -41,51 +41,24 @@ class CustomIndexDashboard(Dashboard):
 
 
         ## append a link list module for "quick links"
-        #self.children.append(modules.LinkList(
-        #    title=_('Quick links'),
-        #    layout='inline',
-        #    draggable=False,
-        #    deletable=False,
-        #    collapsible=False,
-        #    children=[
-        #        {
-        #            'title': _('Return to site'),
-        #            'url': '/',
-        #        },
-        #        {
-        #            'title': _('Change password'),
-        #            'url': reverse('admin:password_change'),
-        #        },
-        #        {
-        #            'title': _('Log out'),
-        #            'url': reverse('admin:logout')
-        #        },
-        #    ]
-        #))
+        self.children.append(modules.LinkList(
+            title=_('Quick links'),
+            css_classes = ('main-area-modules',),
+            layout = 'inline',
+            draggable = False,
+            deletable = False,
+            children=[
+                {'title': _('Browse media files'),
+                 'url': reverse('fb_browse'),
+                 },
+                {'title': _('Return to site'),
+                 'url': '/',
+                 'external': True,
+                 },
+                ]
+        ))
 
 
-
-        ## append another link list module for "support".
-        #self.children.append(modules.LinkList(
-        #    title=_('Support'),
-        #    children=[
-        #        {
-        #            'title': _('Django documentation'),
-        #            'url': 'http://docs.djangoproject.com/',
-        #            'external': True,
-        #        },
-        #        {
-        #            'title': _('Django "django-users" mailing list'),
-        #            'url': 'http://groups.google.com/group/django-users',
-        #            'external': True,
-        #        },
-        #        {
-        #            'title': _('Django irc channel'),
-        #            'url': 'irc://irc.freenode.net/django',
-        #            'external': True,
-        #        },
-        #    ]
-        #))
 
     def init_with_context(self, context):
         """
@@ -242,6 +215,26 @@ class CustomIndexDashboard(Dashboard):
             deletable = False,
             collapsible= False,
             limit=5
+        ))
+
+        self.children.append(modules.LinkList(
+            title=_('Cyclope 3 community and support'),
+            css_classes = ('main-area-modules',),
+            layout = 'inline',
+            draggable = False,
+            deletable = False,
+            children = [
+                {
+                    'title': _('Official website'),
+                    'url': 'http://cyclope.codigosur.org',
+                    'external': True,
+                    },
+                {
+                    'title': _('Tutorials'),
+                    'url': 'http://tutorialcyclope3.codigosur.net/',
+                    'external': True,
+                    },
+                ]
         ))
 
         ## append a feed module
