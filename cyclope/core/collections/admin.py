@@ -71,13 +71,20 @@ class CategoryFilterSpec(ChoicesFilterSpec):
         self.lookup_val = request.GET.get(self.lookup_kwarg, None)
 
         object_ctype = ContentType.objects.get_for_model(model)
+        collections = Collection.objects.filter(content_types=object_ctype)
 
-        # select categories available for the content type of the object
-        qs = Category.tree.filter(collection__content_types=object_ctype)
-        # create list of choices and the corresponding indented labels
-        self.lookup_choices = [(item.slug, u'%s%s' % \
-                                ('-'* item.level, item.name)) \
-                                for item in qs ]
+        self.lookup_choices = []
+        for collection in collections:
+            # we hack a bit on the standard django way of displaying filters
+            # to allow for a collapsible sub-level
+            self.lookup_choices.append(
+                (None, "</a><div><span class='expand_collapse'>"+collection.name+"</span><ul>"))
+            categories = Category.tree.filter(collection=collection)
+            for category in categories:
+                self.lookup_choices.append((category.slug, u'%s%s' % \
+                                            ('--'* category.level, category.name)))
+            self.lookup_choices.append((None, "</a></ul></div>"))
+            
         self.model = model
 
     def choices(self, cl):
