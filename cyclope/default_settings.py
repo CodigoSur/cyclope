@@ -75,7 +75,22 @@ MIDDLEWARE_CLASSES = (
 #    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
+# the order of the INSTALLED_APPS is relevant to get the template load order right
 INSTALLED_APPS = [
+    'dbgettext',
+    'rosetta',
+    'haystack',
+
+    'cyclope.core.collections',
+    'cyclope.core.captcha_comments',
+    'cyclope.apps.articles',
+    'cyclope.apps.staticpages',
+    'cyclope.apps.medialibrary',
+    'cyclope.apps.polls',
+    'cyclope.apps.forum',
+    'cyclope.apps.newsletter',
+    'cyclope',
+
     'admin_tools',
     'admin_tools.theming',
     'admin_tools.menu',
@@ -101,22 +116,9 @@ INSTALLED_APPS = [
     'south',
     'registration',
     'profiles',
-    'haystack',
-    'dbgettext',
-    'rosetta',
-
+    'contact_form',
 #    'debug_toolbar',
 #    'django_extensions',
-
-    'cyclope',
-    'cyclope.core.collections',
-    'cyclope.core.captcha_comments',
-    'cyclope.apps.articles',
-    'cyclope.apps.staticpages',
-    'cyclope.apps.medialibrary',
-    'cyclope.apps.polls',
-    'cyclope.apps.forum',
-    'contact_form',
 ]
 
 # debug_toolbar settings
@@ -193,7 +195,6 @@ AUTH_PROFILE_MODULE = "cyclope.userprofile"
 FORCE_LOWERCASE_TAGS = True
 
 # admin-tools settings
-
 ADMIN_TOOLS_INDEX_DASHBOARD = 'cyclope.dashboard.CustomIndexDashboard'
 ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'cyclope.dashboard.CustomAppIndexDashboard'
 ADMIN_TOOLS_THEMING_CSS = 'cyclope/css/admin_tools_theming.css'
@@ -206,7 +207,6 @@ HAYSTACK_SEARCH_ENGINE = 'whoosh'
 
 # dbgettext options
 #DBGETTEXT_PROJECT_OPTIONS = 'cyclope.dbgettext_options'
-
 DBGETTEXT_SPLIT_SENTENCES = False
 DBGETTEXT_INLINE_HTML_TAGS = ('b','i','u','em','strong',)
 

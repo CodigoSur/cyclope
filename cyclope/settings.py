@@ -58,8 +58,6 @@ from cyclope.models import SiteSettings
 
 from cyclope.core.frontend.sites import site
 
-settings.TEMPLATE_DIRS += (os.path.join(os.path.dirname(__file__), 'templates'),)
-
 CYCLOPE_PREFIX = getattr(settings, 'CYCLOPE_PREFIX',
                            'cyclope/')
 CYCLOPE_MEDIA_URL = getattr(settings, 'CYCLOPE_MEDIA_URL',
