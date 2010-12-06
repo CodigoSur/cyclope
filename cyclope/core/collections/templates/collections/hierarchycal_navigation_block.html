@@ -1,3 +1,5 @@
+{% if category.collection.visible %}
+
   {% if not region_view %}
   <div id="categories_navigation" class="{{ category.collection.slug }} {{ category.slug }}">
     {% if category.parent %}
@@ -16,6 +18,10 @@
   </div>
   {% endif%}
 
-  {% if category.collection.visible %}
-  <div class="category_title"><h6 class="hiper-titles"><a href="{% url category-default category.slug %}">{{ category.name }}</a></h6></div>
-  {% endif %}
+<div class="category_title">
+  <h6 class="hiper-titles">
+    <a href="{% url category-default category.slug %}">{{ category.name }}</a>
+  </h6>
+</div>
+
+{% endif %}
