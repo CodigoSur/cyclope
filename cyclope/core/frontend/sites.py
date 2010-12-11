@@ -115,17 +115,17 @@ class CyclopeSite(object):
             if item.content_object is not None:
                 obj = item.content_object
                 view = self.get_view(obj.__class__, item.content_view)
-                urlpatterns += patterns(
-                    '', url('^%s$' % item.url, view, {'slug': obj.slug}))
+                urlpatterns += patterns('', url('^%s$' % item.url, view,
+                                                   {'slug': obj.slug}))
             elif item.content_type is not None:
                 mdl = item.content_type.model_class()
                 view = self.get_view(mdl, item.content_view)
-                urlpatterns += patterns(
-                    '', url('^%s$' % item.url, view))
+                urlpatterns += patterns('', url('^%s$' % item.url, view))
+                
             # this menu item has no content so we will only display the layout
             else:
-                urlpatterns += patterns(
-                    '', url(r'^%s$' % item.url, self.no_content_layout_view))
+                urlpatterns += patterns('', url(r'^%s$' % item.url,
+                                                   self.no_content_layout_view))
         return urlpatterns
 
     def get_default_view_name(self, model):
@@ -135,11 +135,18 @@ class CyclopeSite(object):
                 if view.is_default == True ][0]
 
     def get_view(self, model, view_name):
-        return [ view for view in self._registry[model]
-                if view.name == view_name ][0]
+        view_ocurrences = [ view for view in self._registry[model]
+                            if view.name == view_name ]
+        # if a view's name has changed this will be False
+        # we return the default view to avoid the site from breaking
+        if view_ocurrences:
+            return view_ocurrences[0]
+        else:
+            return [ view for view in self._registry[model]
+                     if view.is_default == True ][0]
 
 #### Site Views ####
-#
+
     def index(self, request):
         """The root Cyclope URL view"""
 
@@ -185,7 +192,7 @@ class CyclopeSite(object):
         return HttpResponse(t.render(c))
 
 
-### JSON ##
+#### JSON ####
 
     def collection_categories_json(self, request):
         """Returns the categories that belong to the sellected collection."""
@@ -281,7 +288,6 @@ class CyclopeSite(object):
         json_data = simplejson.dumps(objects)
         return HttpResponse(json_data, mimetype='application/json')
 
-#
 ####
 
 site = CyclopeSite()
