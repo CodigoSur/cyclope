@@ -195,7 +195,7 @@ class CyclopeSite(object):
         categories = [{'category_id': '', 'category_name': '------'}]
         categories.extend([
             {'category_id': category.id,
-             'category_name': u"%s %s" % ('---' * category.level, category.name)}
+             'category_name': u"%s %s" % ('--' * category.level, category.name)}
             for category in Category.tree.filter(collection=collection)])
         json_data = simplejson.dumps(categories)
         return HttpResponse(json_data, mimetype='application/json')
@@ -268,14 +268,16 @@ class CyclopeSite(object):
     def objects_for_ctype_json(self, request):
         content_type_id = request.GET['q']
         model = ContentType.objects.get(pk=content_type_id).model_class()
+        objects = [{'object_id': '', 'verbose_name': '------'}]
         if hasattr(model, 'tree'):
             objs = model.tree.all()
+            objects.extend([ {'object_id': obj.id,
+                            'verbose_name': '%s%s' % ('--'*obj.level, obj.name)}
+                           for obj in objs ])
         else:
             objs = model.objects.all()
-        objects = [{'object_id': '', 'verbose_name': '------'}]
-        objects.extend([ {'object_id': obj.id,
-                        'verbose_name': obj.name}
-                       for obj in objs ])
+            objects.extend([ {'object_id': obj.id,
+                            'verbose_name': obj.name} for obj in objs ])
         json_data = simplejson.dumps(objects)
         return HttpResponse(json_data, mimetype='application/json')
 
