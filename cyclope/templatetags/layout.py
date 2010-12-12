@@ -48,11 +48,8 @@ def region(context, region_name):
 
     """
 
-    # content should be a normal block, not a region.
-    if region_name == 'content':
-        return {}
-
-    layout = layout_for_request(context['request'])
+    # if we have a layout in the context use that one, otherwise guess it from the request
+    layout = context.get('layout', layout_for_request(context['request']))
     region_vars = {'layout_name': layout.slug, 'region_name': region_name}
 
     regionviews = layout.regionview_set.filter(

@@ -2,7 +2,6 @@ from dbgettext.registry import registry, Options
 from dbgettext.lexicons import html
 from django.db.models import get_model
 
-#from cyclope.apps.articles.models import Article
 from models import Article
 
 class ArticleOptions(Options):

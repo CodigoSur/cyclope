@@ -183,10 +183,7 @@ class CyclopeSite(object):
     def no_content_layout_view(self, request):
         """View of a layout with no specific content associated"""
         layout = layout_for_request(request)
-        template = 'cyclope/themes/%s/%s' % (
-                    cyclope.settings.CYCLOPE_CURRENT_THEME,
-                    layout.template
-                    )
+        template = cyclope.settings.CYCLOPE_THEME_PREFIX + layout.template
         t = loader.get_template(template)
         c = RequestContext(request)
         return HttpResponse(t.render(c))

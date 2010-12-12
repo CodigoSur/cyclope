@@ -84,17 +84,15 @@ class FrontendView(object):
         else:
             host_template = template_for_request(request)
             
-        req_context = RequestContext(request,{'host_template': host_template,
+        req_context = RequestContext(request, {'host_template': host_template,
                                               'region_view': inline})
 
         if self.is_instance_view:
             if not content_object:
                 content_object = self.model.objects.get(slug=slug)
-#            response = self.get_response(request, host_template, content_object)
             response = self.get_response(request, req_context, content_object)
         else:
             response = self.get_response(request, req_context)
-#            response = self.get_response(request, host_template)
 
         # inline will be True if the view was called from a region templatetag
         if not inline:

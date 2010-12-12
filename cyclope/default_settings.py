@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     'rosetta',
     'haystack',
 
+    'cyclope',
     'cyclope.core.collections',
     'cyclope.core.captcha_comments',
     'cyclope.apps.articles',
@@ -89,7 +90,6 @@ INSTALLED_APPS = [
     'cyclope.apps.polls',
     'cyclope.apps.forum',
     'cyclope.apps.newsletter',
-    'cyclope',
 
     'admin_tools',
     'admin_tools.theming',
@@ -101,7 +101,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.humanize',
-    'django.contrib.databrowse',
     'django.contrib.admin',
     'django.contrib.comments',
     'django.contrib.markup',

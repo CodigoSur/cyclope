@@ -110,7 +110,8 @@ class Category(models.Model):
         unique_together = ('collection', 'name')
         verbose_name = _('category')
         verbose_name_plural = _('categories')
-
+        get_latest_by = "pk"
+        
 mptt.register(Category)
 
 

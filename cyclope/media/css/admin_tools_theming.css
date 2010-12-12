@@ -223,6 +223,17 @@ margin-left: 0; padding-left: 12px;
 background: url('../images/filter-on.png') no-repeat 0 0 transparent;
 }
 
+#changelist-filter ul.categories-filter li {
+margin-left: 0; padding-left: 0px;
+}
+
+#changelist-filter ul.categories-filter li.selected {
+border: none;
+margin-left: 0; padding-left: 12px;
+background: url('../images/filter-on.png') no-repeat 0 0 transparent;
+}
+
+
 /* --- change list paginator ---- */
 
 #changelist p.paginator {

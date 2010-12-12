@@ -92,3 +92,15 @@ class LazyJSONEncoder(JSONEncoder):
             return force_unicode(o)
         else:
             return super(LazyJSONEncoder, self).default(o)
+
+# copied from django.templates.defaultfilters
+def slugify(value):
+    """
+    Normalizes string, converts to lowercase, removes non-alpha characters,
+    and converts spaces to hyphens.
+    """
+    import unicodedata, re
+    value = unicode(value)
+    value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
+    value = unicode(re.sub('[^\w\s-]', '', value).strip().lower())
+    return re.sub('[-\s]+', '-', value)

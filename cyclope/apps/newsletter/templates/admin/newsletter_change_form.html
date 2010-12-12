@@ -1,0 +1,12 @@
+{% extends "admin/change_form.html" %}
+{% load i18n  %}
+
+{% block object-tools %}
+{% if change %}{% if not is_popup %}
+  <ul class="object-tools">
+    <li><a href="/newsletter/preview/{{ object_id }}" class="viewsitelink" target="_blank">{% trans "Preview" %}</a></li>
+    <li><a href="/newsletter/send_test/{{ object_id }}/" class="viewsitelink">{% trans "Send test" %}</a></li>
+    <li><a href="/newsletter/send/{{ object_id }}/" class="viewsitelink">{% trans "Send e-mail" %}</a></li>
+  </ul>
+{% endif %}{% endif %}
+{% endblock %}

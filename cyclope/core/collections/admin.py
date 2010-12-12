@@ -78,7 +78,7 @@ class CategoryFilterSpec(ChoicesFilterSpec):
             # we hack a bit on the standard django way of displaying filters
             # to allow for a collapsible sub-level
             self.lookup_choices.append(
-                (None, "</a><div><span class='expand_collapse'>"+collection.name+"</span><ul>"))
+                (None, "</a><div><span class='expand_collapse'>"+collection.name+"</span><ul class='categories-filter'>"))
             categories = Category.tree.filter(collection=collection)
             for category in categories:
                 self.lookup_choices.append((category.slug, u'%s%s' % \
@@ -93,7 +93,10 @@ class CategoryFilterSpec(ChoicesFilterSpec):
                 'query_string': cl.get_query_string({}, [self.lookup_kwarg]),
                 'display': _('All')}
         for [val, display] in self.lookup_choices:
-            yield {'selected': smart_unicode(val) == self.lookup_val,
+            selected = smart_unicode(val) == self.lookup_val
+            if selected:
+                display = display.lstrip('-')
+            yield {'selected': selected,
                   'query_string': cl.get_query_string({self.lookup_kwarg: val}),
                   'display': display}
 

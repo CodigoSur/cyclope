@@ -43,6 +43,7 @@ from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 
 import cyclope
+from cyclope.core.collections.models import Collection
 
 # we add South introspection rules for custom field TagAutocompleteField
 # this shouldn't be necessary once South incorporates this rule
@@ -70,6 +71,9 @@ class SiteSettings(models.Model):
                                     max_length=250, blank=True, default='')
     keywords = models.TextField(_('keywords'), blank=True, default='')
     description = models.TextField(_('description'), blank=True, default='')
+    newsletter_collection = models.ForeignKey(Collection, blank=True, null=True,
+                                              verbose_name =_('newsletter collection'),
+                                              help_text=_('This is the collection that will group the contents for your newsletters.'))
 
     def __unicode__(self):
         return self.site.name

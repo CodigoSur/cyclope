@@ -62,17 +62,18 @@ urlpatterns = patterns('',
     url(r'^contact/$', 'contact_form.views.contact_form',
         {'form_class': AdminSettingsContactFormWithCaptcha},
         name='contact_form'),
+    (r'^contact/', include('contact_form.urls')),
     url(r'^search/', search_view_factory(
         view_class=SearchView,
         results_per_page=cyc_settings.CYCLOPE_PAGINATION['TEASER'],
     ), name='haystack_search'),
-    (r'^contact/', include('contact_form.urls')),
     url(r'^rss/category/(?P<slug>[\w-]+)/$', CategoryFeed(),
         name='category_feed'),
     url(r'^rss/$', WholeSiteFeed(),
         name='whole_site_feed'),
     url(r'^rss/(?P<object_name>[\w-]+)/$', ContentTypeFeed(),
         name='content_type_feed'),
+    (r'^newsletter/', include('cyclope.apps.newsletter.urls')),
 )
 
 if django_settings.DEBUG:

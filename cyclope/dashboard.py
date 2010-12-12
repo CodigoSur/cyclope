@@ -172,6 +172,7 @@ class CustomIndexDashboard(Dashboard):
                 include_list=[
                     'cyclope.models.SiteSettings',
                     'contact_form.models.ContactFormSettings',
+                    'cyclope.apps.newsletter.models.Newsletter',
                     ]))
 
 

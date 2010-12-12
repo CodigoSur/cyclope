@@ -26,16 +26,19 @@
 {# little script to expand and collapse category filters #}
 {# TODO(nicoechaniz): put this in a js file that loads only for BaseContent models #}
 <script type="text/javascript">
-jQuery(document).ready(function(){
-  $('.expand_collapse').css('cursor', 'pointer');
-  $('#changelist-filter ul').css('display', 'none');
-  $('#changelist-filter ul').first().css('display', 'block');
-  $('#changelist-filter .selected').parent().css('display', 'block');
-  $('#changelist-filter .expand_collapse').click(function() {
-    $(this).parent().children('ul').toggle();
-    return false;
-  });
-});
+(function($) {
+    $(document).ready(function($) {
+      $('.expand_collapse').css('cursor', 'pointer');
+      $('#changelist-filter ul').css('display', 'none');
+      $('#changelist-filter ul').first().css('display', 'block');
+      $('#changelist-filter .selected').parent().css('display', 'block');
+      $('#changelist-filter .expand_collapse').click(function() {
+        $(this).parent().children('ul').toggle();
+        return false;
+      });
+    });
+})(django.jQuery);
+
 </script>
 
 
