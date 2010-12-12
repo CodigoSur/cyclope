@@ -76,7 +76,7 @@ setup(
         'textile==2.1.4',
         'django-dbgettext>=0.1', # fixed revision in dep links
         'django-rosetta-temp>=0.5.6', # installed from our clone
-        'django-markitup',
+        'django-markitup==0.6.1',
     ],
 
     packages=find_packages(),
