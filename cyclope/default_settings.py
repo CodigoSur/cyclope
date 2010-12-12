@@ -116,6 +116,8 @@ INSTALLED_APPS = [
     'registration',
     'profiles',
     'contact_form',
+    'markitup',
+
 #    'debug_toolbar',
 #    'django_extensions',
 ]
@@ -229,3 +231,10 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
     'dbgettext',
     'rosetta',
     )
+
+# martkitup settings
+JQUERY_URL = "" # We dont want jquery to be included twice in the admin.
+MARKITUP_SET = 'markitup/sets/textile'
+MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
+
+

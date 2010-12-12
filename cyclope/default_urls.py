@@ -65,8 +65,8 @@ urlpatterns = patterns('',
     (r'^contact/', include('contact_form.urls')),
     url(r'^search/', search_view_factory(
         view_class=SearchView,
-        results_per_page=cyc_settings.CYCLOPE_PAGINATION['TEASER'],
-    ), name='haystack_search'),
+        results_per_page=cyc_settings.CYCLOPE_PAGINATION['TEASER']),
+        name='haystack_search'),
     url(r'^rss/category/(?P<slug>[\w-]+)/$', CategoryFeed(),
         name='category_feed'),
     url(r'^rss/$', WholeSiteFeed(),
@@ -74,6 +74,7 @@ urlpatterns = patterns('',
     url(r'^rss/(?P<object_name>[\w-]+)/$', ContentTypeFeed(),
         name='content_type_feed'),
     (r'^newsletter/', include('cyclope.apps.newsletter.urls')),
+    url(r'^markitup/', include('markitup.urls')),
 )
 
 if django_settings.DEBUG:

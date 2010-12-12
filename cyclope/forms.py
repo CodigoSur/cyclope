@@ -33,7 +33,6 @@ from django.contrib.contenttypes.models import ContentType
 
 from mptt.forms import TreeNodeChoiceField
 
-from cyclope.widgets import WYMEditor
 from cyclope.models import MenuItem, BaseContent,\
                            SiteSettings, Layout, RegionView, UserProfile
 from cyclope import settings as cyc_settings
