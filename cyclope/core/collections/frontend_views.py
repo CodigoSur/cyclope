@@ -31,7 +31,7 @@ from django.contrib.contenttypes.models import ContentType
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 from cyclope.core.collections.models import Collection, Category
-
+from cyclope.utils import NamePaginator
 
 class CategoryRootItemsList(frontend.FrontendView):
     """A flat list view of the root members for a Category.
@@ -299,3 +299,41 @@ class CategoryListAsForum(frontend.FrontendView):
         return t.render(req_context)
 
 frontend.site.register_view(Category, CategoryListAsForum)
+
+
+class CategoryAlphabeticTeaserList(frontend.FrontendView):
+    """ An alphabeticaly sorted list view of Category Members.
+    """
+    name='alphabetical_teaser_list'
+    verbose_name=_('alphabetical teaser list of Category members')
+    items_per_page = cyc_settings.CYCLOPE_PAGINATION['TEASER'] # FIXME
+    is_content_view = True
+    is_region_view = True
+
+    template = "collections/category_alphabetical_teaser_list.html" # FIXME
+
+    def get_response(self, request, req_context, content_object):
+        category = content_object
+        categorizations_list = category.categorizations.all()
+        paginator = NamePaginator(categorizations_list, on="content_object.name", per_page=self.items_per_page)
+
+        # Make sure page request is an int. If not, deliver first page.
+        try:
+            page_number = int(request.GET.get('page', '1'))
+        except ValueError:
+            page_number = 1
+
+        # DjangoDocs uses page differently
+        # If page request (9999) is out of range, deliver last page of results.
+        try:
+            page = paginator.page(page_number)
+        except (EmptyPage, InvalidPage):
+            page = paginator.page(paginator.num_pages)
+
+        req_context.update({'categorizations': page.object_list,
+                            'page': page,
+                            'category': category})
+        t = loader.get_template(self.template)
+        return t.render(req_context)
+
+frontend.site.register_view(Category, CategoryAlphabeticTeaserList)
