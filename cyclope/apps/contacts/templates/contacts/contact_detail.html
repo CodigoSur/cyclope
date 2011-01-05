@@ -1,0 +1,56 @@
+{% extends host_template %}
+
+{% load comments i18n fb_versions cyclope_utils markup dbgettext_tags%}
+
+{% block content %}
+
+{% alias contact as 'current_object' %}
+
+<div class="content-view contact detail contact-detail">
+
+  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+
+  <h1 class="title">{{contact}}</h1>
+
+  <!-- herramientas -->
+  <div class="tools meta-content">
+    <ul>
+      <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a></li>
+      {% if contact.email %}
+      <li>
+        <a href="mailto:{{contact.email}}">
+          {% trans "Send mail" %}
+        </a>
+      </li>
+     {% endif %}
+    </ul>
+  </div>
+  <!-- /herramientas -->
+
+  <ul>
+    <li>{% trans "Given name" %}: {{contact.given_name}}</li>
+    <li>{% trans "Family name" %}: {{contact.family_name}}</li>
+    <li>{% trans "Gender" %}: {{contact.get_gender_display}}</li>
+    <li>{% trans "Email" %}: {{contact.email}}</li>
+    <li>{% trans "Web" %}: {{contact.web}}</li>
+    <li>{% trans "Mobile" %}: {{contact.mobile_phone_number}}</li>
+  </ul>
+
+  <div class="meta-content">
+  {% if contact.has_profile %}
+
+
+    {% trans "Profile" %}
+    {% with contact.get_profile as profile %}
+        {% include CYCLOPE_CONTACTS_PROFILE_TEMPLATE %}
+    {% endwith %}
+  {% endif %}
+  </div>
+
+  {% if contact.tags %}
+    <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ contact.tags }}</span></div>
+  {% endif %}
+
+</div>
+
+{% endblock content%}

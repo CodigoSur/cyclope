@@ -90,6 +90,8 @@ INSTALLED_APPS = [
     'cyclope.apps.polls',
     'cyclope.apps.forum',
     'cyclope.apps.newsletter',
+    'cyclope.apps.contacts',
+    'cyclope.apps.locations',
 
     'admin_tools',
     'admin_tools.theming',

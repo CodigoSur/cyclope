@@ -93,8 +93,7 @@ class Category(models.Model):
     def valid_parents(self):
         return Category.tree.filter(pk__isnot=self.pk)
 
-    def save(self):
-
+    def save(self, *args, **kwargs):
         # If is not a new Category and the Collection is changed, we move all
         # childrens to the new Collection.
         if self.pk is not None:
@@ -104,14 +103,14 @@ class Category(models.Model):
                     child.collection = self.collection
                     child.save()
 
-        super(Category, self).save()
+        super(Category, self).save(*args, **kwargs)
 
     class Meta:
         unique_together = ('collection', 'name')
         verbose_name = _('category')
         verbose_name_plural = _('categories')
         get_latest_by = "pk"
-        
+
 mptt.register(Category)
 
 
@@ -151,11 +150,11 @@ class Categorization(models.Model):
     @property
     def object_modification_date(self):
         return self.content_object.modification_date
-        
+
     @property
     def object_creation_date(self):
         return self.content_object.creation_date
-        
+
     def __unicode__(self):
         return '%(collection_name)s: %(category_name)s' % {
             'collection_name': self.category.collection.name,

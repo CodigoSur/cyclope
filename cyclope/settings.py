@@ -42,6 +42,9 @@ Attributes:
     CYCLOPE_THEME_MEDIA_URL
     CYCLOPE_DEFAULT_LAYOUT
     CYCLOPE_DEFAULT_TEMPLATE
+    CYCLOPE_CONTACTS_PROFILE_MODULE
+    CYCLOPE_CONTACTS_PROFILE_ADMIN_INLINE_MODULE
+    CYCLOPE_CONTACTS_PROFILE_TEMPLATE
 
 """
 
@@ -75,6 +78,12 @@ CYCLOPE_ARTICLE_TEXT_STYLE = getattr(settings,
                                             'CYCLOPE_ARTICLE_TEXT_STYLE',
                                             'textile'
                                             )
+
+# Contacts Profile
+CYCLOPE_CONTACTS_PROFILE_MODULE = getattr(settings, 'CYCLOPE_CONTACTS_PROFILE_MODULE', None)
+CYCLOPE_CONTACTS_PROFILE_ADMIN_INLINE_MODULE = getattr(settings, 'CYCLOPE_CONTACTS_PROFILE_ADMIN_INLINE_MODULE', None)
+CYCLOPE_CONTACTS_PROFILE_TEMPLATE = getattr(settings, 'CYCLOPE_CONTACTS_PROFILE_TEMPLATE', None)
+
 # pagination
 CYCLOPE_PAGINATION = getattr(settings, 'CYCLOPE_PAGINATION',
                              { 'TEASER' : 10,
@@ -133,7 +142,7 @@ if CYCLOPE_SITE_SETTINGS is not None:
     CYCLOPE_THEME_PREFIX = 'cyclope/themes/%s/' % CYCLOPE_CURRENT_THEME
     CYCLOPE_THEME_BASE_TEMPLATE = 'cyclope/themes/%s/base.html' \
                                    % CYCLOPE_CURRENT_THEME
-    
+
     if CYCLOPE_SITE_SETTINGS.default_layout_id:
         try:
             CYCLOPE_DEFAULT_LAYOUT = CYCLOPE_SITE_SETTINGS.default_layout
@@ -186,6 +195,6 @@ def _delete_from_layouts_and_menuitems(sender, instance, **kwargs):
         for item in items:
             item.content_type = item.object_id = item.content_object = None
             item.save()
-            
+
 pre_delete.connect(_delete_related_contents)
 pre_delete.connect(_delete_from_layouts_and_menuitems)

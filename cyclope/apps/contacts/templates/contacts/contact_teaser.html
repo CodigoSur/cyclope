@@ -1,0 +1,25 @@
+{% load i18n %}
+
+  <div class="content-view contact teaser contact-teaser">
+
+    <div class="pretitle-container first meta-content">
+      <span class="pretitle">{{contact}}<span class="pretitle-separator"> | </span></span>
+      <span class="date">{{contact.email}}</span>
+    </div>
+
+    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png" /><a href="{% url contact-detail contact.slug %}">{{ contact }}</a></h2>
+
+    <div>
+      <ul>
+        <li>{% trans "Gender" %}: {{contact.gender}}</li>
+        <li>{% trans "Email" %}: {{contact.email}}</li>
+        <li>{% trans "Web" %}: {{contact.web}}</li>
+        <li>{% trans "Mobile" %}: {{contact.mobile_phone_number}}</li>
+      </ul>
+
+      <span class="more"><a href="{% url contact-detail contact.slug %}"> {% trans "More" %}</a></span>
+    </div>
+
+    <div class="clear"></div>
+
+  </div>
