@@ -35,6 +35,7 @@ from cyclope.core.collections.models import Collectible
 
 from cyclope.apps.locations.models import Location
 from autoslug.fields import AutoSlugField
+from filebrowser.fields import FileBrowseField
 
 ADDRESS_TYPE_CHOICES = (
     ('work', _('work')),
@@ -47,8 +48,11 @@ class ContactAddress(Location):
 
 class Contact(BaseContent, Collectible):
     given_name = models.CharField(_('given name'), max_length=255)
-    family_name = models.CharField(_('family name'), blank=True, max_length=255)
-    gender = models.CharField(max_length=1, choices=(('M', _('Male')), ('F', _('Female'))))
+    surname = models.CharField(_('surname'), blank=True, max_length=255)
+    gender = models.CharField(max_length=1, choices=(('M', _('Male')),
+                                                     ('F', _('Female'))))
+    photo = FileBrowseField(_('photo'), max_length=100, format='Image',
+                            directory='contact_images/', blank=True)
     email = models.EmailField(blank=True)
     web = models.CharField(max_length=255, blank=True)
     mobile_phone_number = models.CharField(max_length=40, blank=True)
@@ -58,15 +62,19 @@ class Contact(BaseContent, Collectible):
         verbose_name_plural = _('contacts')
 
     def __unicode__(self):
-        if self.family_name:
-            return u"%s %s" % (self.given_name, self.family_name)
-        else:
-            return self.given_name
+        return self.get_full_name()
 
     def save(self, *args, **kwargs):
         self.name = unicode(self)
         super(BaseContent, self).save(*args, **kwargs)
         super(Collectible, self).save(*args, **kwargs)
+
+    def get_full_name(self):
+        "Returns the first_name plus the last_name, with a space in between."
+        full_name = self.given_name
+        if self.surname:
+            full_name += u" %s" % self.surname
+        return full_name.strip()
 
     def get_profile(self):
         """

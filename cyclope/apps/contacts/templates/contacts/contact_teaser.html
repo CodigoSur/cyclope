@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n fb_versions %}
 
   <div class="content-view contact teaser contact-teaser">
 
@@ -9,6 +9,9 @@
 
     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png" /><a href="{% url contact-detail contact.slug %}">{{ contact }}</a></h2>
 
+    {% if contact.photo %}
+    <p><img src="{% version contact.photo 'cropped' %}" /></p>
+    {% endif %}
     <div>
       <ul>
         <li>{% trans "Gender" %}: {{contact.gender}}</li>

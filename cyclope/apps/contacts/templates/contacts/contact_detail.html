@@ -27,9 +27,13 @@
   </div>
   <!-- /herramientas -->
 
+  {% if contact.photo %}
+  <p><img src="{% version contact.photo 'cropped' %}" /></p>
+  {% endif %}
+
   <ul>
     <li>{% trans "Given name" %}: {{contact.given_name}}</li>
-    <li>{% trans "Family name" %}: {{contact.family_name}}</li>
+    <li>{% trans "Surname" %}: {{contact.surname}}</li>
     <li>{% trans "Gender" %}: {{contact.get_gender_display}}</li>
     <li>{% trans "Email" %}: {{contact.email}}</li>
     <li>{% trans "Web" %}: {{contact.web}}</li>

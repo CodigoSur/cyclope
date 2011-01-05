@@ -40,12 +40,12 @@ class ContactAddressInline(admin.TabularInline):
 class ContactAdmin(CollectibleAdmin, BaseContentAdmin):
     inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines + [ContactAddressInline]
 
-    list_filter = ('given_name', 'family_name', 'gender')
-    list_display = ('given_name', 'family_name', 'gender')
+    list_filter = ('given_name', 'surname', 'gender')
+    list_display = ('given_name', 'surname', 'gender', 'email', 'web', 'mobile_phone_number')
 
     fieldsets = (
         (None, {
-            'fields': ('given_name', 'family_name', 'gender', 'email', 'web', 'mobile_phone_number')
+            'fields': ('given_name', 'surname', 'photo', 'gender', 'email', 'web', 'mobile_phone_number')
         }),
     )
 
