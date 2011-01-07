@@ -134,7 +134,7 @@ class MenuItem(models.Model):
                                null=True, blank=True)
     persistent_layout =  models.BooleanField(_('Persistent layout'), default=False,
                                       help_text=_('If the layout is marked as persistent it will be in use until the user navigates to a menu item which explicitly specifies a different Layout'))
-    
+
 
     content_type = models.ForeignKey(ContentType,
                      verbose_name=_('type'), related_name='menu_entries',
@@ -194,7 +194,7 @@ class MenuItem(models.Model):
         else:
             layout = cyclope.settings.CYCLOPE_DEFAULT_LAYOUT
         return layout
-        
+
     def __unicode__(self):
         return self.name
 
@@ -202,8 +202,10 @@ class MenuItem(models.Model):
         verbose_name = _('menu item')
         verbose_name_plural = _('menu items')
 
-mptt.register(MenuItem)
-
+try:
+    mptt.register(MenuItem)
+except mptt.AlreadyRegistered:
+    pass
 
 class RegionView(models.Model):
     """Holds configuration data for a frontend view to be displayed in a region of a particular Layout.
@@ -315,7 +317,7 @@ class BaseContent(models.Model):
 
     def translations(self):
         trans_links = []
-        
+
         for lang in settings.LANGUAGES:
             # we look for the number rosetta uses to identity an app
             # which can be different for each language
@@ -336,7 +338,7 @@ class BaseContent(models.Model):
                     % (lang[0], app_idx, signature, _(lang[1])))
         trans_links = ''.join(trans_links)
         return trans_links
-    
+
     translations.allow_tags = True
     translations.short_description = _('translations')
 
