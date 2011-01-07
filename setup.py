@@ -79,6 +79,8 @@ setup(
         'django-markitup==0.6.1',
     ],
 
+    scripts=['cyclope/management/commands/startcyclopeproject.py'],
+
     packages=find_packages(),
 
     include_package_data=True,
