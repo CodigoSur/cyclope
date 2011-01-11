@@ -29,6 +29,14 @@ from cyclope.apps.articles.models import Article
 #
 # ADMIN_TOOLS_INDEX_DASHBOARD = 'cyclope_project.dashboard.CustomIndexDashboard'
 
+class ModuleNotFound(Exception):
+    """Dashboard module not found in dashboard children"""
+    def __init__(self, module_title):
+        self.title = module_title
+
+    def __str__(self):
+        return "Module %s not found in dashboard children" % repr(self.title)
+
 class CustomIndexDashboard(Dashboard):
     """
     Custom index dashboard for cyclope_project.
@@ -174,7 +182,15 @@ class CustomIndexDashboard(Dashboard):
                     'contact_form.models.ContactFormSettings',
                     'cyclope.apps.newsletter.models.Newsletter',
                     ]))
-
+            self.children.append(modules.ModelList(
+                title=_('Contacts'),
+                css_classes = ('dbmodule-contacts', 'main-area-modules',),
+                draggable = False,
+                deletable = False,
+                collapsible= False,
+                include_list=[
+                    'cyclope.apps.contacts.models.Contact',
+                    ]))
 
         if user in admins:
             self.children.append(modules.Group(
@@ -248,6 +264,15 @@ class CustomIndexDashboard(Dashboard):
         #    feed_url='http://codigosur.org/rss.php/36',
         #    limit=6
         #))
+
+    def get_module(self, title):
+        """
+        Get dashboard module by title.
+        """
+        for c in self.children:
+            if c.title == title:
+                return c
+        raise ModuleNotFound(title)
 
 
 class CustomAppIndexDashboard(AppIndexDashboard):

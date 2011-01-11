@@ -28,5 +28,4 @@ def site_settings(request):
     for setting in dir(cyc_settings):
         if setting == setting.upper() and setting.startswith('CYCLOPE'):
             settings_dict[setting] = getattr(cyc_settings, setting)
-
     return settings_dict

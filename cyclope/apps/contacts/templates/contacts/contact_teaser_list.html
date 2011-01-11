@@ -1,0 +1,13 @@
+{% extends host_template %}
+
+
+{% load i18n %}
+
+{% block content %}
+
+  {% for contact in object_list %}
+
+    {% include "contacts/contact_teaser.html" %}
+  {% endfor %}
+
+{% endblock %}
