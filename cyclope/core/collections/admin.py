@@ -191,6 +191,13 @@ class CollectibleAdmin (admin.ModelAdmin):
     """
     list_filter = ('categories',)
     inlines = [ CategorizationInline, ]
+    valid_lookups = ('categories',)
+
+    def lookup_allowed(self, lookup):
+        if lookup.startswith(self.valid_lookups):
+            return True
+        else:
+            return super(CollectibleAdmin, self).lookup_allowed(lookup)
 
 
 class CollectionAdminForm(forms.ModelForm):
