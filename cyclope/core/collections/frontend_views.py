@@ -30,7 +30,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
-from cyclope.core.collections.models import Collection, Category
+from cyclope.core.collections.models import Collection, Category, Categorization
 from cyclope.utils import NamePaginator
 
 class CategoryRootItemsList(frontend.FrontendView):
@@ -243,6 +243,43 @@ class CollectionCategoriesHierarchyToIconlist(CollectionCategoriesHierarchy):
 
 frontend.site.register_view(Collection, CollectionCategoriesHierarchyToIconlist)
 
+class CollectionCategoriesMembersAlphabeticTeaserList(frontend.FrontendView):
+    """An alphabetic teaser list of all the members of the collection's categories.
+    """
+    name='collection_all_items_teaser_list'
+    verbose_name=_("alphabetical teaser list of all the members of the Collection's Categories")
+    is_content_view = True
+    is_region_view = True
+    items_per_page = cyc_settings.CYCLOPE_PAGINATION['TEASER']
+
+    template = "collections/collection_all_items_alphabetical_teaser_list.html"
+
+    def get_response(self, request, req_context, content_object):
+        collection = content_object
+        categorizations_list = Categorization.objects.filter(category__in=collection.categories.all())
+        paginator = NamePaginator(categorizations_list, on="content_object.name", per_page=self.items_per_page)
+
+        # Make sure page request is an int. If not, deliver first page.
+        try:
+            page_number = int(request.GET.get('page', '1'))
+        except ValueError:
+            page_number = 1
+
+        # DjangoDocs uses page differently
+        # If page request (9999) is out of range, deliver last page of results.
+        try:
+            page = paginator.page(page_number)
+        except (EmptyPage, InvalidPage):
+            page = paginator.page(paginator.num_pages)
+
+        req_context.update({'categorizations': page.object_list,
+                            'page': page,
+                            'collection': collection
+                            })
+        t = loader.get_template(self.template)
+        return t.render(req_context)
+
+frontend.site.register_view(Collection, CollectionCategoriesMembersAlphabeticTeaserList)
 
 class CategoryListAsForum(frontend.FrontendView):
     """ A list view of Category Members that will show a table with some extra
@@ -306,11 +343,11 @@ class CategoryAlphabeticTeaserList(frontend.FrontendView):
     """
     name='alphabetical_teaser_list'
     verbose_name=_('alphabetical teaser list of Category members')
-    items_per_page = cyc_settings.CYCLOPE_PAGINATION['TEASER'] # FIXME
+    items_per_page = cyc_settings.CYCLOPE_PAGINATION['TEASER']
     is_content_view = True
     is_region_view = True
 
-    template = "collections/category_alphabetical_teaser_list.html" # FIXME
+    template = "collections/category_alphabetical_teaser_list.html"
 
     def get_response(self, request, req_context, content_object):
         category = content_object
