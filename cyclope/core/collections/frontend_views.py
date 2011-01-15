@@ -257,7 +257,9 @@ class CollectionCategoriesMembersAlphabeticTeaserList(frontend.FrontendView):
     def get_response(self, request, req_context, content_object):
         collection = content_object
         categorizations_list = Categorization.objects.filter(category__in=collection.categories.all())
-        paginator = NamePaginator(categorizations_list, on="content_object.name", per_page=self.items_per_page)
+        object_list = list(set([cat.content_object for cat in categorizations_list]))
+
+        paginator = NamePaginator(object_list, on="name", per_page=self.items_per_page)
 
         # Make sure page request is an int. If not, deliver first page.
         try:
@@ -272,7 +274,7 @@ class CollectionCategoriesMembersAlphabeticTeaserList(frontend.FrontendView):
         except (EmptyPage, InvalidPage):
             page = paginator.page(paginator.num_pages)
 
-        req_context.update({'categorizations': page.object_list,
+        req_context.update({'object_list': page.object_list,
                             'page': page,
                             'collection': collection
                             })

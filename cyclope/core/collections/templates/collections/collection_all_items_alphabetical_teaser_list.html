@@ -4,24 +4,7 @@
 
 {% block content %}
 
-  <div class="collection {{ collection.slug }}">
-    <div class="collection_header">
-      {% if collection.visible %}
-        <big class="title">{{ collection.name }}</big>
-
-        {% if collection.image %}
-        <img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
-        {% endif %}
-
-        {% if collection.description %}
-        <div class="text">
-          {{ collection.description|safe }}
-        </div>
-        {% endif %}
-      {% endif %}
-      <br class="clear"/>
-    </div>
-  </div>
+  {% include 'collections/collection_info.html' %}
 
   {% if page %}
     {% for p in page.paginator.pages %}
@@ -38,8 +21,8 @@
   We show a teaser view of every object belonging to this category.
   {% endcomment %}
 
-  {% for categorization in categorizations %}
-    {% join categorization.content_type.app_label  "/" categorization.content_type.model "_teaser.html" as template_path %}
+  {% for object in object_list %}
+    {% join object.get_app_label  "/" object.get_object_name "_teaser.html" as template_path %}
 
     {% comment %}
       we alias the actual object with the model name
@@ -47,7 +30,7 @@
       and can access the content object using an explicit name
     {% endcomment %}
 
-    {% alias categorization.content_object as categorization.content_type.model %}
+    {% alias object as object.get_object_name %}
     {% include template_path %}
   {% endfor %}
 

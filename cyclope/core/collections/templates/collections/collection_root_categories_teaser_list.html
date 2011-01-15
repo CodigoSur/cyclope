@@ -4,24 +4,7 @@
 
 {% block content %}
 
-  <div class="collection {{ collection.slug }}">
-    <div class="collection_header">
-      {% if collection.visible %}
-        <big class="title">{{ collection.name }}</big>
-
-        {% if collection.image %}
-        <img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
-        {% endif %}
-
-        {% if collection.description %}
-        <div class="text">
-          {{ collection.description|safe }}
-        </div>
-        {% endif %}
-      {% endif %}
-      <br class="clear"/>
-    </div>
-
+    {% include 'collections/collection_info.html' %}
 
     {% for category in categories %}
 
@@ -32,7 +15,7 @@
         <img class="icon" src="{% version category.image.path 'thumbnail' %}" border="0"/>
       </a>
       {% endif %}
- 
+
       {% if category.description %}
       <div class="text">
         {{ category.description|safe }}
