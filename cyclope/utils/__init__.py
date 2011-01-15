@@ -170,7 +170,7 @@ class NamePaginator(object):
     def page(self, num):
         """Returns a Page object for the given 1-based page number."""
         if len(self.pages) == 0:
-            return None
+            return NamePage(self)
         elif num > 0 and num <= len(self.pages):
             return self.pages[num-1]
         else:
@@ -214,7 +214,9 @@ class NamePage(object):
         if letter: self.letters.append(letter)
 
     def __repr__(self):
+        if not self.start_letter:
+            return "<Page: empty>"
         if self.start_letter == self.end_letter:
-            return self.start_letter
+            return u"<Page: %c>" % (self.start_letter, )
         else:
-            return u'%c-%c' % (self.start_letter, self.end_letter)
+            return u'<Page: %c-%c>' % (self.start_letter, self.end_letter)

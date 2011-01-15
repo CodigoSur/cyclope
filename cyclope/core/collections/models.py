@@ -73,12 +73,12 @@ class Category(models.Model):
     """
 
     collection = models.ForeignKey(Collection,
-        verbose_name=_('collection'), related_name=_('collection categories'))
+        verbose_name=_('collection'), related_name='categories')
     name = models.CharField(_('name'), max_length=50)
     slug = AutoSlugField(populate_from='name', always_update=True,
                          unique_with=('parent', 'collection'))
     parent = models.ForeignKey('self', verbose_name=_('parent'),
-                              related_name=_('children'), null=True, blank=True)
+                              related_name='children', null=True, blank=True)
     active = models.BooleanField(_('active'), default=True, db_index=True)
     description = models.TextField(_('description'), blank=True, null=True)
     image =  FileBrowseField(_('image'), max_length=250, format='Image',
