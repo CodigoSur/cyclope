@@ -23,7 +23,6 @@
 # http://github.com/shestera/django-multisite
 
 import cyclope
-from cyclope.models import MenuItem
 
 class LayoutMiddleware(object):
     """Sets session['layout'] if the current menu item has a persistent layout and clears it when another menu_item changes the layout.
