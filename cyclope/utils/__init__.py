@@ -217,6 +217,6 @@ class NamePage(object):
         if not self.start_letter:
             return "<Page: empty>"
         if self.start_letter == self.end_letter:
-            return u"<Page: %c>" % (self.start_letter, )
+            return u"%c" % (self.start_letter, )
         else:
-            return u'<Page: %c-%c>' % (self.start_letter, self.end_letter)
+            return u'%c-%c' % (self.start_letter, self.end_letter)
