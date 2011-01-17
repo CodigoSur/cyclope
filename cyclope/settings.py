@@ -86,9 +86,11 @@ CYCLOPE_CONTACTS_PROFILE_TEMPLATE = getattr(settings, 'CYCLOPE_CONTACTS_PROFILE_
 
 # pagination
 CYCLOPE_PAGINATION = getattr(settings, 'CYCLOPE_PAGINATION',
-                             { 'TEASER' : 10,
+                             { 'TEASER' : 5,
                                'LABELED_ICON' : 30,
-                               'FORUM' : 30 })
+                               'FORUM' : 30,
+                               'DETAIL' : 9999,
+                               })
 CYCLOPE_RSS_LIMIT = 50
 
 CYCLOPE_PROJECT_PATH = getattr(settings, 'CYCLOPE_PROJECT_PATH', None)

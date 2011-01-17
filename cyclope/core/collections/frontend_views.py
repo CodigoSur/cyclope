@@ -81,6 +81,7 @@ class CategoryTeaserList(frontend.FrontendView):
     is_region_view = True
 
     template = "collections/category_teaser_list.html"
+    inline_view_name = 'teaser'
 
     def get_response(self, request, req_context, content_object):
         category = content_object
@@ -108,7 +109,8 @@ class CategoryTeaserList(frontend.FrontendView):
 
         req_context.update({'categorizations': page.object_list,
                             'page': page,
-                            'category': category})
+                            'category': category,
+                            'inline_view_name': self.inline_view_name})
         t = loader.get_template(self.template)
         return t.render(req_context)
 
@@ -122,7 +124,9 @@ class CategoryLabeledIconList(CategoryTeaserList):
     verbose_name=_('Labeled icon list of Category members')
     is_default = False
     items_per_page = cyc_settings.CYCLOPE_PAGINATION['LABELED_ICON']
+
     template = "collections/category_labeled_icon_list.html"
+    inline_view_name = 'teaser'
 
 frontend.site.register_view(Category, CategoryLabeledIconList)
 
@@ -142,11 +146,59 @@ class CategorySimplifiedTeaserList(frontend.FrontendView):
         req_context.update({'category': category,
                             'categorizations': categorizations_list,
                             'simplified_view': True,
+                            'inline_view_name': 'teaser',
                             })
         t = loader.get_template(template)
         return t.render(req_context)
 
 frontend.site.register_view(Category, CategorySimplifiedTeaserList)
+
+
+class CategoryContents(CategoryTeaserList):
+    """Full content of Category members.
+    """
+    name = 'contents'
+    verbose_name = _('full content of Category members')
+    items_per_page = cyc_settings.CYCLOPE_PAGINATION['DETAIL']
+    is_content_view = True
+    is_region_view = False
+
+    template = "collections/category_contents.html"
+    inline_view_name = 'inline_detail'
+
+frontend.site.register_view(Category, CategoryContents)
+
+
+## class CategoryContentss(frontend.FrontendView):
+##     """The full content of Category members.
+##     """
+##     name = 'contentss'
+##     verbose_name = _('full content of Category memberss')
+##     is_content_view = True
+##     is_region_view = False
+
+##     template = "collections/category_contents.html"
+
+##     def get_response(self, request, req_context, content_object):
+##         category = content_object
+##         categorizations_list = category.categorizations.all()
+
+##         categorizations_list = sorted(categorizations_list,
+##                                       key=lambda c: c.object_modification_date,
+##                                       reverse=True)
+
+##         for categorization in categorizations_list:
+##             view = frontend.site.get_view(categorization.content_object.__class__, 'detail')
+##             content_detail = view.get_response(request, req_context, content_object, inline=True)
+##             contents.append(content_detail)
+
+##         req_context.update({'contents': contents,
+##                             'category': category})
+##         t = loader.get_template(self.template)
+##         return t.render(req_context)
+
+## frontend.site.register_view(Category, CategoryContentss)
+
 
 
 class CollectionRootCategoriesTeaserList(frontend.FrontendView):

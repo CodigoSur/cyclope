@@ -46,28 +46,6 @@ class CustomIndexDashboard(Dashboard):
         self.title = _('Site Administration')
         self.columns = 1
 
-
-
-        ## append a link list module for "quick links"
-        self.children.append(modules.LinkList(
-            title=_('Quick links'),
-            css_classes = ('main-area-modules',),
-            layout = 'inline',
-            draggable = False,
-            deletable = False,
-            children=[
-                {'title': _('Browse media files'),
-                 'url': reverse('fb_browse'),
-                 },
-                {'title': _('Return to site'),
-                 'url': '/',
-                 'external': True,
-                 },
-                ]
-        ))
-
-
-
     def init_with_context(self, context):
         """
         Use this method if you need to access the request context.
@@ -180,8 +158,18 @@ class CustomIndexDashboard(Dashboard):
                 include_list=[
                     'cyclope.models.SiteSettings',
                     'contact_form.models.ContactFormSettings',
+                    ]))
+
+            self.children.append(modules.ModelList(
+                title=_('Plugins'),
+                css_classes = ('dbmodule-global_settings', 'main-area-modules',),
+                draggable = False,
+                deletable = False,
+                collapsible= False,
+                include_list=[
                     'cyclope.apps.newsletter.models.Newsletter',
                     ]))
+
             self.children.append(modules.ModelList(
                 title=_('Contacts'),
                 css_classes = ('dbmodule-contacts', 'main-area-modules',),
@@ -224,6 +212,25 @@ class CustomIndexDashboard(Dashboard):
 
 	## RIGHT PANEL MODULES ##
 
+        ## append a link list module for "quick links"
+        self.children.append(modules.LinkList(
+            title=_('Quick links'),
+            css_classes = ('right-area-modules',),
+            layout = 'inline',
+            draggable = False,
+            deletable = False,
+            collapsible= False,
+            children=[
+                {'title': _('Browse media files'),
+                 'url': reverse('fb_browse'),
+                 },
+                {'title': _('Return to site'),
+                 'url': '/',
+                 'external': True,
+                 },
+                ]
+        ))
+
         # append a recent actions module
         self.children.append(modules.RecentActions(
             title=_('Recent Actions'),
@@ -235,11 +242,12 @@ class CustomIndexDashboard(Dashboard):
         ))
 
         self.children.append(modules.LinkList(
-            title=_('Cyclope 3 community and support'),
-            css_classes = ('main-area-modules',),
+            title=_('Community and support'),
+            css_classes = ('right-area-modules',),
             layout = 'inline',
             draggable = False,
             deletable = False,
+            collapsible= False,
             children = [
                 {
                     'title': _('Official website'),

@@ -7,6 +7,3 @@ EMAIL_PORT='587'
 #DEFAULT_FROM_EMAIL = ""
 #SERVER_EMAIL = ""
 EMAIL_USE_TLS = True  # we set this to True for the sample email config
-
-CYCLOPE_PAGINATION = { 'TEASER' : 3, 'LABELED_ICON' : 5,
-                       'FORUM' : 2}

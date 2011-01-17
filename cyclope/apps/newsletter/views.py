@@ -8,18 +8,32 @@ from django.core.mail import EmailMessage
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from models import Newsletter
 from cyclope.core import frontend
 from cyclope import settings as cyc_settings
+from cyclope.core.collections.models import Category
+from models import Newsletter
+
 
 def _newsletter_html(newsletter, request):
     template_name = cyc_settings.CYCLOPE_THEME_PREFIX + newsletter.layout.template
     nl_template = loader.get_template(template_name)
+    categorizations_list = newsletter.content_category.categorizations.all()
+    categorizations_list = sorted(categorizations_list,
+                                  key=lambda c: c.object_modification_date,
+                                  reverse=True)
+    
+    contents = newsletter.content_category
     context = RequestContext(request, {'host_template': nl_template,
                                        'layout': newsletter.layout,
-                                       'newsletter': newsletter})
-    content_view = frontend.site.get_view(Newsletter, 'current_content')
-    html = content_view.get_response(request, context, newsletter)
+                                       'newsletter': newsletter,
+                                       'categorizations': categorizations_list,
+                                       'show_ToC': True,
+                                       })
+#    content_view = frontend.site.get_view(Newsletter, 'current_content')
+#    content_view = frontend.site.get_view(Category, newsletter.view)
+    content_view = frontend.site.get_view(Category, 'contents')
+
+    html = content_view.get_response(request, context, newsletter.content_category)
     return html
 
 

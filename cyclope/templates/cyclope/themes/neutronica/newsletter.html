@@ -14,7 +14,7 @@ Si modificas no borres estas lineas :)
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <base href="http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}" target="_top"> 
+<!--    <base href="http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}" target="_top"> -->
     <style>
 /* ******** layout.css ******** */
 
@@ -1440,11 +1440,27 @@ padding:4px;
       <div id="middle_wrapper">
         <div id="content_container">
           {% region 'before_content' %}
+
           <div id="newsletter_header">
             {{ newsletter.header|safe }}
           </div>
+
+          {% if show_ToC %}
+          <div id="ToC">
+            <a name="ToC">{% trans "Table of Contents" %}</a>
+            {% for categorization in categorizations %}
+            <ul>
+              <li>
+                <a href='#{{ categorization.content_type.model }}__{{ categorization.content_object.slug }}'>{{ categorization.content_object.name }}</a>
+              </li>
+            </ul>
+            {% endfor %}
+          </div>
+          {% endif %}
+
           {% block content %}{% endblock %}
           {% region 'after_content' %}
+
         </div>
       </div>
       <!-- /middle wrapper -->

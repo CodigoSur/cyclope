@@ -7,10 +7,10 @@ from cyclope.apps.newsletter.models import Newsletter
 from cyclope.core.collections.models import Category
 
 
-class NewsletterCurrentContent(frontend.FrontendView):
+class NewsletterCurrentContentTeasers(frontend.FrontendView):
     """Teaser list of the current content for a Newsletter"""
-    name='current_content'
-    verbose_name=_('show the current content for the selected Newsletter')
+    name='current_content_teasers'
+    verbose_name=_('show the current content teasers for the selected Newsletter')
     is_default = True
     is_instance_view = True
     is_content_view = True
@@ -23,7 +23,7 @@ class NewsletterCurrentContent(frontend.FrontendView):
             request, req_context, content_object=newsletter.content_category)
         return teaser_list_result
 
-frontend.site.register_view(Newsletter, NewsletterCurrentContent)
+frontend.site.register_view(Newsletter, NewsletterCurrentContentTeasers)
 
 
 class NewsletterHeader(frontend.FrontendView):

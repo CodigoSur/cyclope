@@ -38,6 +38,8 @@ class Newsletter(models.Model):
     last_sent_date = models.DateTimeField(_('sent date'),
                                           editable=False, null=True, blank=True)
     content_category = models.ForeignKey(Category)
+#   view = models.CharField(_('view'), max_length=255, default='default')
+#    show_ToC = models.BooleanField(verbose_name=_("show table of contents"), default=True)
     header = models.TextField(verbose_name=_('header'), help_text="Text that will always be added on top of the content.", blank=True)
     layout = models.ForeignKey(Layout, verbose_name=_('layout'), help_text="Layout to use to build the resulting HTML.")
     sender = models.EmailField(verbose_name=_('sender'), help_text="e-mail address that will be used to send the newsletter.")
