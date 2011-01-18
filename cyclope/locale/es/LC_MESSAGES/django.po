@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-18 00:12-0300\n"
+"POT-Creation-Date: 2011-01-18 00:38-0300\n"
 "PO-Revision-Date: 2010-10-29 22:16\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -898,16 +898,18 @@ msgstr ""
 "boletín."
 
 #: apps/newsletter/frontend_views.py:12
-msgid "show the current content teasers for the selected Newsletter"
-msgstr "mostrar los resúmenes del contenido actual del Newsletter"
+#, fuzzy
+msgid "show content teasers linked to the website"
+msgstr "mostrar resúmenes del contenido enlazados al sitio web"
 
 #: apps/newsletter/frontend_views.py:33
-msgid "show the current content for the selected Newsletter"
-msgstr "mostrar el contenido actual del Newsletter"
+msgid "show the full content (no external links)"
+msgstr "mostrar el contenido completo (sin enlaces externos)"
 
 #: apps/newsletter/frontend_views.py:47
-msgid "show the header text of the selected Newsletter"
-msgstr "mostrar el encabezado del Boletín seleccionado"
+#, fuzzy
+msgid "Header"
+msgstr "encabezado"
 
 #: apps/newsletter/models.py:38
 msgid "sent date"
@@ -1709,6 +1711,12 @@ msgstr "Resultados"
 #: templates/search/search.html:24
 msgid "No results found."
 msgstr "No se encontró ningún resultado"
+
+#~ msgid "show the current content for the selected Newsletter"
+#~ msgstr "mostrar el contenido actual del Newsletter"
+
+#~ msgid "show the header text of the selected Newsletter"
+#~ msgstr "mostrar el encabezado del Boletín seleccionado"
 
 #~ msgid "toggle editor"
 #~ msgstr "encender o apagar editor"

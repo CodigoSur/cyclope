@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-18 00:12-0300\n"
+"POT-Creation-Date: 2011-01-18 00:38-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -896,15 +896,15 @@ msgid ""
 msgstr ""
 
 #: apps/newsletter/frontend_views.py:12
-msgid "show the current content teasers for the selected Newsletter"
+msgid "show content teasers linked to the website"
 msgstr ""
 
 #: apps/newsletter/frontend_views.py:33
-msgid "show the current content for the selected Newsletter"
+msgid "show the full content (no external links)"
 msgstr ""
 
 #: apps/newsletter/frontend_views.py:47
-msgid "show the header text of the selected Newsletter"
+msgid "Header"
 msgstr ""
 
 #: apps/newsletter/models.py:38

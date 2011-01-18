@@ -9,7 +9,7 @@ from cyclope.core.collections.models import Category
 class NewsletterCurrentContentTeasers(frontend.FrontendView):
     """Teaser list of the current content for a Newsletter"""
     name='current_content_teasers'
-    verbose_name=_('show the current content teasers for the selected Newsletter')
+    verbose_name=_('show content teasers linked to the website')
     is_default = True
     is_instance_view = True
     is_content_view = True
@@ -30,7 +30,7 @@ frontend.site.register_view(Newsletter, NewsletterCurrentContentTeasers)
 class NewsletterCurrentContent(NewsletterCurrentContentTeasers):
     """List of the current content for a Newsletter"""
     name='current_content'
-    verbose_name=_('show the current content for the selected Newsletter')
+    verbose_name=_('show the full content (no external links)')
     is_default = False
     is_instance_view = True
     is_content_view = True
@@ -44,7 +44,7 @@ frontend.site.register_view(Newsletter, NewsletterCurrentContent)
 class NewsletterHeader(frontend.FrontendView):
     """Header of a Newsletter"""
     name='header'
-    verbose_name=_('show the header text of the selected Newsletter')
+    verbose_name=_('Header')
     is_instance_view = True
     is_region_view = True
     
