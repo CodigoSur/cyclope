@@ -27,13 +27,9 @@ def _newsletter_html(newsletter, request):
                                        'layout': newsletter.layout,
                                        'newsletter': newsletter,
                                        'categorizations': categorizations_list,
-                                       'show_ToC': True,
                                        })
-#    content_view = frontend.site.get_view(Newsletter, 'current_content')
-#    content_view = frontend.site.get_view(Category, newsletter.view)
-    content_view = frontend.site.get_view(Category, 'contents')
-
-    html = content_view.get_response(request, context, newsletter.content_category)
+    content_view = frontend.site.get_view(Newsletter, newsletter.view)
+    html = content_view.get_response(request, context, newsletter)
     return html
 
 

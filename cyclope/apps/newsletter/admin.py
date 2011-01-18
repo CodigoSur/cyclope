@@ -28,17 +28,25 @@ from mptt.forms import TreeNodeChoiceField
 from cyclope.apps.newsletter.models import Newsletter
 from cyclope.core.collections.models import Category
 from cyclope.models import SiteSettings
+from cyclope.core.frontend.sites import site
 
 class NewsletterAdminForm(forms.ModelForm):
     content_category = TreeNodeChoiceField(
         queryset=Category.tree.all(), label=_('Current content category'),
         help_text=_('This is the category which groups the content that will be sent with the newsletter.'))
-
+    view = forms.ChoiceField()
+    
     def __init__(self, *args, **kwargs):
         super(NewsletterAdminForm, self).__init__(*args, **kwargs)
         nl_collection = SiteSettings.objects.all()[0].newsletter_collection
         self.fields['content_category'].queryset = Category.tree.filter(collection=nl_collection)
         self.fields['content_category'].initial = Category.objects.latest()
+
+        views = [('', '------')]
+        views.extend([(view.name, view.verbose_name)
+                       for view in site._registry[Newsletter]
+                       if view.is_content_view])
+        self.fields['view'].choices = views        
     
     class Meta:
         model = Newsletter

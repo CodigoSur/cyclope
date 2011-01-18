@@ -6,7 +6,6 @@ from cyclope.core import frontend
 from cyclope.apps.newsletter.models import Newsletter
 from cyclope.core.collections.models import Category
 
-
 class NewsletterCurrentContentTeasers(frontend.FrontendView):
     """Teaser list of the current content for a Newsletter"""
     name='current_content_teasers'
@@ -14,16 +13,32 @@ class NewsletterCurrentContentTeasers(frontend.FrontendView):
     is_default = True
     is_instance_view = True
     is_content_view = True
-    is_region_view = True
+    is_region_view = False
+
+    category_view = 'teaser_list'    
 
     def get_response(self, request, req_context, content_object):
         newsletter = content_object
-        teaser_list_view = frontend.site.get_view(Category, 'teaser_list')
-        teaser_list_result = teaser_list_view.get_response(
-            request, req_context, content_object=newsletter.content_category)
-        return teaser_list_result
+        view = frontend.site.get_view(Category, self.category_view)
+        result = view.get_response(request, req_context,
+                                   content_object=newsletter.content_category)
+        return result
 
 frontend.site.register_view(Newsletter, NewsletterCurrentContentTeasers)
+
+
+class NewsletterCurrentContent(NewsletterCurrentContentTeasers):
+    """List of the current content for a Newsletter"""
+    name='current_content'
+    verbose_name=_('show the current content for the selected Newsletter')
+    is_default = False
+    is_instance_view = True
+    is_content_view = True
+    is_region_view = False
+
+    category_view = 'contents'
+    
+frontend.site.register_view(Newsletter, NewsletterCurrentContent)
 
 
 class NewsletterHeader(frontend.FrontendView):

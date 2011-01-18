@@ -1445,7 +1445,7 @@ padding:4px;
             {{ newsletter.header|safe }}
           </div>
 
-          {% if show_ToC %}
+          {% if newsletter.show_ToC %}
           <div id="ToC">
             <a name="ToC">{% trans "Table of Contents" %}</a>
             {% for categorization in categorizations %}
