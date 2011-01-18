@@ -898,7 +898,6 @@ msgstr ""
 "boletín."
 
 #: apps/newsletter/frontend_views.py:12
-#, fuzzy
 msgid "show content teasers linked to the website"
 msgstr "mostrar resúmenes del contenido enlazados al sitio web"
 
