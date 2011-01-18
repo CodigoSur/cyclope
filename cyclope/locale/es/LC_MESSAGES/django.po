@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-17 21:23-0300\n"
+"POT-Creation-Date: 2011-01-18 00:12-0300\n"
 "PO-Revision-Date: 2010-10-29 22:16\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -177,7 +177,7 @@ msgstr "Miniatura cortada (140x140px)"
 msgid "Content object"
 msgstr "Contenido"
 
-#: forms.py:71 forms.py:164
+#: forms.py:71 forms.py:164 apps/newsletter/admin.py:37
 msgid "View"
 msgstr "Vista"
 
@@ -915,7 +915,7 @@ msgstr "fecha de envío"
 
 #: apps/newsletter/models.py:42
 msgid "show table of contents"
-msgstr "contenidos externos"
+msgstr "mostrar sumario"
 
 #: apps/newsletter/models.py:43
 #: templates/cyclope/themes/neutrona/__init__.py:19
@@ -1632,6 +1632,7 @@ msgid "Translate into %(rosetta_i18n_lang_name)s"
 msgstr "Traducie a %(rosetta_i18n_lang_name)s"
 
 #: templates/rosetta/pofile.html:55
+#, fuzzy, python-format
 msgid "total progress: %(percent_translated)s%%"
 msgstr "progreso total: %(percent_translated)s%"
 

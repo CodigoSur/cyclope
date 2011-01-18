@@ -34,7 +34,7 @@ class NewsletterAdminForm(forms.ModelForm):
     content_category = TreeNodeChoiceField(
         queryset=Category.tree.all(), label=_('Current content category'),
         help_text=_('This is the category which groups the content that will be sent with the newsletter.'))
-    view = forms.ChoiceField()
+    view = forms.ChoiceField(label=_('View'))
     
     def __init__(self, *args, **kwargs):
         super(NewsletterAdminForm, self).__init__(*args, **kwargs)
