@@ -7,6 +7,7 @@ syntax: glob
 .svn
 *.orig
 *.dbbk
+*.bak
 pip-log.txt 
 dbutils.py
 mine_initial_data.py

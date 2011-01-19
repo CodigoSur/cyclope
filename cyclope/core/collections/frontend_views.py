@@ -169,38 +169,6 @@ class CategoryContents(CategoryTeaserList):
 frontend.site.register_view(Category, CategoryContents)
 
 
-## class CategoryContentss(frontend.FrontendView):
-##     """The full content of Category members.
-##     """
-##     name = 'contentss'
-##     verbose_name = _('full content of Category memberss')
-##     is_content_view = True
-##     is_region_view = False
-
-##     template = "collections/category_contents.html"
-
-##     def get_response(self, request, req_context, content_object):
-##         category = content_object
-##         categorizations_list = category.categorizations.all()
-
-##         categorizations_list = sorted(categorizations_list,
-##                                       key=lambda c: c.object_modification_date,
-##                                       reverse=True)
-
-##         for categorization in categorizations_list:
-##             view = frontend.site.get_view(categorization.content_object.__class__, 'detail')
-##             content_detail = view.get_response(request, req_context, content_object, inline=True)
-##             contents.append(content_detail)
-
-##         req_context.update({'contents': contents,
-##                             'category': category})
-##         t = loader.get_template(self.template)
-##         return t.render(req_context)
-
-## frontend.site.register_view(Category, CategoryContentss)
-
-
-
 class CollectionRootCategoriesTeaserList(frontend.FrontendView):
     """ A teaser list of the root Categories of a Collection
     """

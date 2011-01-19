@@ -1,0 +1,54 @@
+{% extends host_template %}
+
+{% load i18n cyclope_utils markup fb_versions dbgettext_tags %}
+
+{% block content %}
+
+  {% for categorization in categorizations %}
+    {% alias categorization.content_object as 'article' %}
+
+<table>
+  <tr>
+    <td>
+      <br/>
+      <span class="pretitle"><a name="editorial">{{ article.pretitle }}</a></span>
+      {% if newsletter.show_ToC %}
+      <span class="show-ToC"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></span>
+      {% endif %}
+      <a name="article__{{ article.slug }}">
+        <h3 class="title">{% trans article.name  %}</h3>
+      </a>
+      <h4>{{ article.summary|safe }}</h4>
+      {% if article.author %}
+      <h5>{% trans "By"%} {{ article.author }}</h5>
+      {% endif %}
+
+
+      <p class="article_content">
+        {% if article.pictures %}
+        <img src="{% version article.pictures.0.image.path 'small' %}" alt="{{ article.pictures.0.name }}" hspace="0" vspace="0" align="right" />
+        {% endif %}
+
+        <span class="html-text html-content">
+        {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'raw' or CYCLOPE_ARTICLE_TEXT_STYLE == 'wysiwyg'%}
+          {{ article|parsed_gettext:"text"|safe }}
+        {% else %}
+          {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'textile' %}
+            {{ article.text|textile }}
+          {% else %}
+            {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'markdown'%}
+              {{ article.text|markdown }}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+        </span>
+      </p>
+      <span class="permalink"><a href="{% url article-detail article.slug %}">{% trans "Visit website" %}</a></span>
+    </td>
+  </tr>
+</table>
+<hr/>
+
+  {% endfor %}
+
+{% endblock %}

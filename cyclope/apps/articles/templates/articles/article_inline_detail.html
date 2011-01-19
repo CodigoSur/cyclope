@@ -1,46 +1,36 @@
-{% load comments i18n fb_versions cyclope_utils markup dbgettext_tags%}
+{% load comments i18n fb_versions cyclope_utils markup dbgettext_tags %}
 
 {% block content %}
 
 <div class="content-view article inline_detail article-inline_detail">
 
   {% if article.pretitle %}
-  <div class="pretitle-container meta-content">
-    <span class="pretitle">{{ article.pretitle }}</span>
-  </div>
+  <span class="pretitle">{{ article.pretitle }}</span>
   {% endif %}
 
   {% if show_ToC %}
-    <span><a href="#ToC">{% trans "Return to Table of Contents" %} </a></span>
+    <span class="ToC_link"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></span>
   {% endif %}
 
-  <a name="article__{{ article.slug }}">
-    <h1 class="title">{% trans article.name  %}</h1>
+  <a name="article__{{ article.slug }}" href="{% url article-detail article.slug %}">
+    <h3 class="title">{% trans article.name  %}</h3>
   </a>
 
-
-  <!-- descripcion -->
   {% if article.summary %}
-  <p class="summary">{{ article.summary|safe }}</p>
+  <h4 class="summary">{{ article.summary|safe }}</h4>
   {% endif%}
-  <!-- /descripcion -->
 
-  {% if article.pictures %}
-  <img src="{% version article.pictures.0.image.path 'small' %}" alt="{{ article.pictures.0.name }}" />
-  {% endif %}
-
-  <!-- author -->
   {% if article.author %}
   <div id="author" class="meta-content">
-    {% if article.author.image %}
-    <img src="" width="60"  />
-    {% endif %}
     <span class="author">{% trans "By"%} {{ article.author }}</span>
   </div>
   {% endif %}
-  <!-- /autor -->
 
-  <div>
+  <p class="article_content">
+    {% if article.pictures %}
+      <img src="{% version article.pictures.0.image.path 'small' %}" alt="{{ article.pictures.0.name }}" hspace="0" vspace="0" align="right" />
+    {% endif %}
+
     <span class="html-text html-content">
       {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'raw' or CYCLOPE_ARTICLE_TEXT_STYLE == 'wysiwyg'%}
         {{ article|parsed_gettext:"text"|safe }}
@@ -54,9 +44,7 @@
         {% endif %}
       {% endif %}
     </span>
-  </div>
-
-  <div class="clear"></div>
+  </p>
 
 </div> <!--termina article_detail -->
 

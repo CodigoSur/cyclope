@@ -1,55 +1,60 @@
 from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponse
-from django.template.loader import get_template
+from django.template import loader
 
 from cyclope.core import frontend
 from cyclope.apps.newsletter.models import Newsletter
 from cyclope.core.collections.models import Category
 
-class NewsletterCurrentContentTeasers(frontend.FrontendView):
-    """Teaser list of the current content for a Newsletter"""
-    name='current_content_teasers'
+class NewsletterContentTeasers(frontend.FrontendView):
+    """Teaser list for a Newsletter rendered as a table"""
+    name='content_teasers_as_table'
     verbose_name=_('show content teasers linked to the website')
     is_default = True
     is_instance_view = True
     is_content_view = True
     is_region_view = False
 
-    category_view = 'teaser_list'    
+    template = "newsletter/content_teasers.html"
 
     def get_response(self, request, req_context, content_object):
         newsletter = content_object
-        view = frontend.site.get_view(Category, self.category_view)
-        result = view.get_response(request, req_context,
-                                   content_object=newsletter.content_category)
-        return result
+        category = newsletter.content_category
+        categorizations_list = category.categorizations.all()
 
-frontend.site.register_view(Newsletter, NewsletterCurrentContentTeasers)
+        req_context.update({'category': category,
+                            'newsletter': newsletter,
+                            'categorizations': categorizations_list,
+                            'inline_view_name': 'newsletter_teaser',
+                            })
+        t = loader.get_template(self.template)
+        return t.render(req_context)
+
+frontend.site.register_view(Newsletter, NewsletterContentTeasers)
 
 
-class NewsletterCurrentContent(NewsletterCurrentContentTeasers):
-    """List of the current content for a Newsletter"""
-    name='current_content'
+class NewsletterContent(NewsletterContentTeasers):
+    """Teaser list for a Newsletter rendered as a table"""
+    name='content'
     verbose_name=_('show the full content (no external links)')
     is_default = False
     is_instance_view = True
     is_content_view = True
     is_region_view = False
 
-    category_view = 'contents'
+    template = "newsletter/content.html"
+
+frontend.site.register_view(Newsletter, NewsletterContent)
+
+## class NewsletterHeader(frontend.FrontendView):
+##     """Header of a Newsletter"""
+##     name='header'
+##     verbose_name=_('Header')
+##     is_instance_view = True
+##     is_region_view = True
     
-frontend.site.register_view(Newsletter, NewsletterCurrentContent)
+##     def get_response(self, request, req_context, content_object):
+##         newsletter = content_object
+##         return newsletter.header
 
-
-class NewsletterHeader(frontend.FrontendView):
-    """Header of a Newsletter"""
-    name='header'
-    verbose_name=_('Header')
-    is_instance_view = True
-    is_region_view = True
-    
-    def get_response(self, request, req_context, content_object):
-        newsletter = content_object
-        return newsletter.header
-
-frontend.site.register_view(Newsletter, NewsletterHeader)
+## frontend.site.register_view(Newsletter, NewsletterHeader)

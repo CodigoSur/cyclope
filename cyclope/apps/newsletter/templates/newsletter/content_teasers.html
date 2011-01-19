@@ -1,0 +1,44 @@
+{% extends host_template %}
+
+{% load i18n cyclope_utils markup fb_versions dbgettext_tags %}
+
+{% block content %}
+
+  {% for categorization in categorizations %}
+    {% alias categorization.content_object as 'article' %}
+
+<table>
+  <tr>
+    <td>
+      <br/>
+      <span class="pretitle"><a name="editorial">{{ article.pretitle }}</a></span>
+      {% if newsletter.show_ToC %}
+      <span class="show-ToC"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></span>
+      {% endif %}
+
+      <a name="article__{{ article.slug }}" href="{% url article-detail article.slug %}">
+        <h3 class="title">{% trans article.name  %}</h3>
+      </a>
+
+      {% if article.pictures %}
+      <a href="{% url article-detail article.slug %}">
+        <img src="{% version article.pictures.0.image.path 'thumbnail' %}" alt="{{ article.pictures.0.name }}" hspace="0" vspace="0" align="right" border="0" />
+      </a>
+      {% endif %}
+
+      <a href="{% url article-detail article.slug %}">
+        <h4>{{ article.summary|safe }}</h4>
+      </a>
+      {% if article.author %}
+      <h5>{% trans "By"%} {{ article.author }}</h5>
+      {% endif %}
+
+
+    </td>
+  </tr>
+</table>
+<hr/>
+
+  {% endfor %}
+
+{% endblock %}
