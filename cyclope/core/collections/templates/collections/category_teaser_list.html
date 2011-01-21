@@ -1,6 +1,6 @@
 {% extends host_template %}
 
-{% load i18n cyclope_utils fb_versions %}
+{% load i18n cyclope_utils fb_versions markup %}
 
 {% block content %}
 
@@ -12,7 +12,7 @@
 
 {% if category.description %}
 <div class="category_description text">
-  {{ category.description|safe }}
+  {{ category.description|textile }}
 </div>
 {% endif %}
 

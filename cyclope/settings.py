@@ -133,6 +133,7 @@ CYCLOPE_SITE_SETTINGS = get_site_settings()
 # If the site has already been set up we read some settings
 # and make them available at module level
 if CYCLOPE_SITE_SETTINGS is not None:
+    CYCLOPE_BASE_URL = "http://"+ CYCLOPE_SITE_SETTINGS.site.domain
     CYCLOPE_CURRENT_THEME = CYCLOPE_SITE_SETTINGS.theme
     if CYCLOPE_CURRENT_THEME in themes.local_themes:
         CYCLOPE_THEME_MEDIA_URL = '%s%s/' % (

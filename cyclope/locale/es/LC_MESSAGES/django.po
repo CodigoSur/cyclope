@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-18 00:38-0300\n"
+"POT-Creation-Date: 2011-01-20 16:42-0300\n"
 "PO-Revision-Date: 2010-10-29 22:16\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -564,7 +564,7 @@ msgid "Share"
 msgstr "Compartir"
 
 #: apps/articles/templates/articles/article_detail.html:73
-#: apps/articles/templates/articles/article_inline_detail.html:38
+#: apps/articles/templates/articles/article_inline_detail.html:25
 #: apps/articles/templates/articles/article_teaser.html:45
 #: apps/forum/templates/forum/topic_teaser.html:13
 #: apps/medialibrary/templates/medialibrary/document_teaser.html:16
@@ -574,8 +574,12 @@ msgstr "Compartir"
 #: apps/medialibrary/templates/medialibrary/picture_teaser.html:14
 #: apps/medialibrary/templates/medialibrary/regularfile_teaser.html:16
 #: apps/medialibrary/templates/medialibrary/soundtrack_teaser.html:12
+#: apps/newsletter/templates/newsletter/content.html:23
+#: apps/newsletter/templates/newsletter/content_teasers.html:33
 #: apps/staticpages/templates/staticpages/staticpage_teaser.html:8
 #: templates/comments/list.html:9
+#: templates/cyclope/themes/neutrona/newsletter.html:108
+#: templates/cyclope/themes/neutronica/newsletter.html:108
 msgid "By"
 msgstr "Por"
 
@@ -608,7 +612,9 @@ msgstr "Etiquetas"
 msgid "Share in your social networks"
 msgstr "Compartir en redes sociales"
 
-#: apps/articles/templates/articles/article_inline_detail.html:14
+#: apps/articles/templates/articles/article_inline_detail.html:12
+#: apps/newsletter/templates/newsletter/content.html:16
+#: apps/newsletter/templates/newsletter/content_teasers.html:16
 msgid "Return to Table of Contents"
 msgstr "Volver al Sumario"
 
@@ -901,14 +907,9 @@ msgstr ""
 msgid "show content teasers linked to the website"
 msgstr "mostrar resúmenes del contenido enlazados al sitio web"
 
-#: apps/newsletter/frontend_views.py:33
+#: apps/newsletter/frontend_views.py:39
 msgid "show the full content (no external links)"
 msgstr "mostrar el contenido completo (sin enlaces externos)"
-
-#: apps/newsletter/frontend_views.py:47
-#, fuzzy
-msgid "Header"
-msgstr "encabezado"
 
 #: apps/newsletter/models.py:38
 msgid "sent date"
@@ -959,6 +960,10 @@ msgstr "Enviar prueba"
 #: apps/newsletter/templates/admin/newsletter_change_form.html:9
 msgid "Send e-mail"
 msgstr "Enviar correo"
+
+#: apps/newsletter/templates/newsletter/content.html:46
+msgid "Visit website"
+msgstr "Ver en el sitio web"
 
 #: apps/newsletter/templates/newsletter/mail_sent.html:5
 msgid "The e-mail has been sent for newsletter "
@@ -1115,29 +1120,29 @@ msgstr "lista simplificada de resúmenes de miembros de una Categoría"
 msgid "full content of Category members"
 msgstr "contenido completo de una Categoría"
 
-#: core/collections/frontend_views.py:208
+#: core/collections/frontend_views.py:176
 msgid "teaser list of the root Categories of a Collection"
 msgstr "lista de resúmenes de las Categorías raíz de una Colección"
 
-#: core/collections/frontend_views.py:228
+#: core/collections/frontend_views.py:196
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
-#: core/collections/frontend_views.py:293
+#: core/collections/frontend_views.py:261
 msgid "hierarchical list of Categories that will show an icon list on click"
 msgstr "lista jerarquizada de las Categorias que llevará a una vista de íconos"
 
-#: core/collections/frontend_views.py:302
+#: core/collections/frontend_views.py:270
 msgid ""
 "alphabetical teaser list of all the members of the Collection's Categories"
 msgstr ""
 "lista alfabética de resúmenes de los contenidos completos de una Colección"
 
-#: core/collections/frontend_views.py:343
+#: core/collections/frontend_views.py:311
 msgid "list of Category members as forum view"
 msgstr "listar la Categoría como un foro"
 
-#: core/collections/frontend_views.py:399
+#: core/collections/frontend_views.py:367
 msgid "alphabetical teaser list of Category members"
 msgstr "lista alfabética de resúmenes de los miembros de una Categoría"
 
@@ -1463,6 +1468,26 @@ msgstr "Buscar en el sitio"
 msgid "Subscribe to RSS"
 msgstr "Subscripción RSS"
 
+#: templates/cyclope/themes/neutrona/newsletter.html:32
+#: templates/cyclope/themes/neutronica/newsletter.html:32
+msgid "Visit our website"
+msgstr "Ir al sitio web"
+
+#: templates/cyclope/themes/neutrona/newsletter.html:32
+#: templates/cyclope/themes/neutronica/newsletter.html:32
+msgid "View archives"
+msgstr "Ver archivo"
+
+#: templates/cyclope/themes/neutrona/newsletter.html:32
+#: templates/cyclope/themes/neutronica/newsletter.html:32
+msgid "Subscription options"
+msgstr "Opciones de subscripción"
+
+#: templates/cyclope/themes/neutrona/newsletter.html:96
+#: templates/cyclope/themes/neutronica/newsletter.html:96
+msgid "Table of Contents"
+msgstr "Sumario"
+
 #: templates/cyclope/themes/neutronica/__init__.py:11
 msgid "Neutronica theme"
 msgstr "tema Neutronica"
@@ -1474,10 +1499,6 @@ msgstr "Sin barras laterales"
 #: templates/cyclope/themes/neutronica/__init__.py:57
 msgid "Newsletter"
 msgstr "Boletín"
-
-#: templates/cyclope/themes/neutronica/newsletter.html:1450
-msgid "Table of Contents"
-msgstr "Sumario"
 
 #: templates/profiles/edit_profile.html:8
 #: templates/registration/registration_form.html:8
@@ -1633,9 +1654,8 @@ msgid "Translate into %(rosetta_i18n_lang_name)s"
 msgstr "Traducie a %(rosetta_i18n_lang_name)s"
 
 #: templates/rosetta/pofile.html:55
-#, fuzzy, python-format
 msgid "total progress: %(percent_translated)s%%"
-msgstr "progreso total: %(percent_translated)s%"
+msgstr "progreso total: %(percent_translated)s%%"
 
 #: templates/rosetta/pofile.html:58
 msgid "Display:"
@@ -1710,6 +1730,10 @@ msgstr "Resultados"
 #: templates/search/search.html:24
 msgid "No results found."
 msgstr "No se encontró ningún resultado"
+
+#, fuzzy
+#~ msgid "Header"
+#~ msgstr "encabezado"
 
 #~ msgid "show the current content for the selected Newsletter"
 #~ msgstr "mostrar el contenido actual del Newsletter"

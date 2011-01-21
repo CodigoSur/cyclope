@@ -31,10 +31,12 @@ from django.db.models import get_model
 from django.contrib.contenttypes import generic
 from django.db import models
 
+from markitup.widgets import AdminMarkItUpWidget
 from mptt.forms import TreeNodeChoiceField
 from feincms.admin import editor
 
-from cyclope.widgets import CKEditor
+#from cyclope.widgets import CKEditor
+
 from cyclope.core import frontend
 
 from models import *
@@ -111,7 +113,7 @@ FilterSpec.filter_specs.insert(0, (lambda f: \
 
 class CategoryForm(forms.ModelForm):
     description = forms.CharField(label=_('Description'),
-                                  widget=CKEditor(), required=False)
+                                  widget=AdminMarkItUpWidget(), required=False)
     parent = TreeNodeChoiceField(label=_('Parent'),
                                  queryset=Category.tree.all(), required=False)
 
@@ -138,6 +140,13 @@ class CategoryAdmin(editor.TreeEditor):
         if not request.GET:
             request.GET = {u'collection__id__exact': unicode(a_collection)}
         return super(CategoryAdmin, self).changelist_view(request, extra_context)
+
+
+    class Media:
+        js = (
+            cyc_settings.CYCLOPE_MEDIA_URL + 'js/reuse_django_jquery.js',
+#            cyc_settings.CYCLOPE_MEDIA_URL + 'js/jquery-ui-1.8.4.custom.min.js',
+        )
 
 admin.site.register(Category, CategoryAdmin)
 

@@ -1,4 +1,5 @@
 from string import strip
+from premailer import Premailer
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
@@ -14,7 +15,8 @@ from cyclope.core.collections.models import Category
 from models import Newsletter
 
 
-def _newsletter_html(request, newsletter, category):
+def _newsletter_html(request, newsletter):
+    category = newsletter.content_category
     template_name = cyc_settings.CYCLOPE_THEME_PREFIX + newsletter.layout.template
     nl_template = loader.get_template(template_name)
     categorizations_list = category.categorizations.all()
@@ -34,23 +36,31 @@ def _newsletter_html(request, newsletter, category):
 
 
 @permission_required('newsletter.can_modify')
-def preview(request, id, category=None):
+def preview(request, id):
     newsletter = Newsletter.objects.get(id=id)
-    nl_category = category if category else newsletter.content_category
-    result = _newsletter_html(request, newsletter, nl_category)
+
+    # some of these are the default parameters but we include them in case some tunning is needed later on. Premailer documentation is scarce
+    pm = Premailer(_newsletter_html(request, newsletter),
+                   base_url=cyc_settings.CYCLOPE_BASE_URL,
+                   exclude_pseudoclasses=False,
+                   keep_style_tags=False, include_star_selectors=False,
+                   external_styles=None)
+    result = pm.transform()
     return HttpResponse(result)
 
 
 @permission_required('newsletter.can_modify')
 def send(request, id, test=False):
-    nl = Newsletter.objects.get(id=id)    
-    subject = nl.name
-    html_message = _newsletter_html(nl, request)
-    sender = nl.sender
+    newsletter = Newsletter.objects.get(id=id)
+    subject = newsletter.name
+    pm = Premailer(_newsletter_html(request, newsletter),
+                   base_url=cyc_settings.CYCLOPE_BASE_URL)
+    html_message = pm.transform()
+    sender = newsletter.sender
     if test:
-        recipients = map(strip, nl.test_recipients.split(','))
+        recipients = map(strip, newsletter.test_recipients.split(','))
     else:
-        recipients = map(strip, nl.recipients.split(','))
+        recipients = map(strip, newsletter.recipients.split(','))
 
     msg = EmailMessage(subject, html_message, sender, recipients)
     msg.content_subtype = "html"
