@@ -42,6 +42,7 @@ def preview(request, id):
     # some of these are the default parameters but we include them in case some tunning is needed later on. Premailer documentation is scarce
     pm = Premailer(_newsletter_html(request, newsletter),
                    base_url=cyc_settings.CYCLOPE_BASE_URL,
+                   preserve_internal_links=True,
                    exclude_pseudoclasses=False,
                    keep_style_tags=False, include_star_selectors=False,
                    external_styles=None)
@@ -54,7 +55,9 @@ def send(request, id, test=False):
     newsletter = Newsletter.objects.get(id=id)
     subject = newsletter.name
     pm = Premailer(_newsletter_html(request, newsletter),
-                   base_url=cyc_settings.CYCLOPE_BASE_URL)
+                   base_url=cyc_settings.CYCLOPE_BASE_URL,
+                   preserve_internal_links=True,
+                   )
     html_message = pm.transform()
     sender = newsletter.sender
     if test:

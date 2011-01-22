@@ -40,4 +40,13 @@ layout_templates = {
         {'verbose_name': _('Empty'),
          'regions': {}
          },
+
+    'newsletter.html':
+        {'verbose_name': _('Newsletter'),
+        'regions' : {
+            'header': _('header'),
+            'before_content': _('before content'),
+            'after_content': _('after content'),
+            }
+         },
 }
