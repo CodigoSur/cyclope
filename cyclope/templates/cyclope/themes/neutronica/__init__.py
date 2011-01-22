@@ -59,7 +59,6 @@ layout_templates = {
             'header': _('header'),
             'before_content': _('before content'),
             'after_content': _('after content'),
-            'footer': _('footer'),
             }
         },
 

@@ -49,6 +49,7 @@
       .pie a {color:#fff;text-decoration:none;}
       .clear {clear:both;}
 
+      .newsletter-header{color: white; margin-left:10px;}
       .pretitle {color:#000;font-family:Arial,Helvetica,sans-serif;font-size:12px;padding:5px;background:#ccc;}
       .pretitle a {color:#000;text-decoration:none;}
       .show-ToC {font-family:Arial,Helvetica,sans-serif;font-size:11px;padding:5px;margin: 0 10px;float:right;}
@@ -81,7 +82,7 @@
             <tr>
               <td height="124" valign="middle">
                 <h1 class="titulo">{{ newsletter.name }}</h1>
-                <span class="newsletter-header">{{ newsletter.header|safe }}</span>
+                <span class="newsletter-header">{{ newsletter.header }}</span>
               </td>
             </tr>
           </table>
