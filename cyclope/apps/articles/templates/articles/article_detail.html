@@ -25,12 +25,6 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   <div class="tools meta-content">
     <ul>
       <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a></li>
-      <li>
-        <a href="/share?slug={{ article.slug }}" onclick="abrir_popup(this);return false" class="share">
-          {% trans "Share" %}
-        </a>
-      </li>
-
       {% if not article.allow_comments == 'NO' %}
         {% if comment_count %}
         <li>
@@ -108,10 +102,13 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
     {% endif %}
   </span></div>
 
-  <div class="meta-content"><span class="source">--<br>
-    {% trans "Date" %}: {{ article.date|date:'SHORT_DATE_FORMAT' }}{% if article.source %} |
-    {% trans "Source" %}: {article.source}{% endif %}
-  </span></div>
+  {% if article.date %}
+  <div class="meta-content">
+    <span class="source">--<br>
+      {% trans "Date" %}: {{ article.date|date:'SHORT_DATE_FORMAT' }}{% if article.source %} | {% trans "Source" %}: {article.source}{% endif %}
+    </span>
+  </div>
+  {% endif %}
 
   {% if article.tags %}
     <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ article.tags }}</span></div>
