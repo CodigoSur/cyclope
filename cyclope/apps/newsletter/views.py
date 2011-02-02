@@ -1,5 +1,9 @@
 from string import strip
-from premailer import Premailer
+
+try:
+    from premailer import Premailer
+except:
+    pass
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
