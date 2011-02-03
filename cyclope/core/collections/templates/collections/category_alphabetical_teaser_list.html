@@ -6,16 +6,7 @@
 
 {% include 'collections/hierarchycal_navigation_block.html' %}
 
-  {% if page %}
-    {% for p in page.paginator.pages %}
-      {% if p == page %}
-          <span class="selected">{{page}}</span>
-      {% else %}
-        <a href="?{% if query %}q={{ query }}&amp;{% endif %}page={{ p.number }}">{{p}}</a>
-      {% endif %}
-      {% if not forloop.last %}|{% endif %}
-    {% endfor %}
-  {% endif %}
+  {% include 'cyclope/alphabetical_pagination_block.html' %}
 
   {% comment %}
   We show a teaser view of every object belonging to this category.

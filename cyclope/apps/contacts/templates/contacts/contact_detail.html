@@ -31,6 +31,9 @@
   <p><img src="{% version contact.photo 'cropped' %}" /></p>
   {% endif %}
 
+
+  {% trans "Last update" %}: {{contact.modification_date}}
+
   <ul>
     <li>{% trans "Given name" %}: {{contact.given_name}}</li>
     <li>{% trans "Surname" %}: {{contact.surname}}</li>
@@ -40,11 +43,11 @@
     <li>{% trans "Mobile" %}: {{contact.mobile_phone_number}}</li>
   </ul>
 
-  <div class="meta-content">
+  (XXX) ADDRESSES (XXX)
+
+  <div class="profile">
   {% if contact.has_profile %}
 
-
-    {% trans "Profile" %}
     {% with contact.get_profile as profile %}
         {% include CYCLOPE_CONTACTS_PROFILE_TEMPLATE %}
     {% endwith %}
