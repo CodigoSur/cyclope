@@ -24,6 +24,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from cyclope.core import frontend
 from cyclope import views
+from cyclope import settings as cyc_settings
 
 from models import Contact
 
@@ -59,3 +60,37 @@ class ContactTeaserList(frontend.FrontendView):
 
 
 frontend.site.register_view(Contact, ContactTeaserList)
+
+class ContactAlphabeticalTeaserList(frontend.FrontendView):
+    """ An alphabeticaly sorted list view of contacts.
+    """
+    name='alphabetical_teaser_list'
+    verbose_name=_('alphabetical teaser list of Contact members')
+    items_per_page = cyc_settings.CYCLOPE_PAGINATION['TEASER']
+    is_content_view = True
+    is_region_view = True
+
+    template = "contacts/alphabetical_teaser_list.html"
+
+    def get_response(self, request, req_context, content_object):
+        paginator = NamePaginator(Contact.objects.all(), on="name", per_page=self.items_per_page)
+
+        # Make sure page request is an int. If not, deliver first page.
+        try:
+            page_number = int(request.GET.get('page', '1'))
+        except ValueError:
+            page_number = 1
+
+        # DjangoDocs uses page differently
+        # If page request (9999) is out of range, deliver last page of results.
+        try:
+            page = paginator.page(page_number)
+        except (EmptyPage, InvalidPage):
+            page = paginator.page(paginator.num_pages)
+
+        req_context.update({'contacts': page.object_list,
+                            'page': page})
+        t = loader.get_template(self.template)
+        return t.render(req_context)
+
+frontend.site.register_view(Contact, ContactAlphabeticalTeaserList)
