@@ -80,6 +80,8 @@ INSTALLED_APPS = [
     'dbgettext',
     'rosetta',
     'haystack',
+    'tagging',
+    'tagging_autocomplete',
 
     'cyclope',
     'cyclope.core.collections',
@@ -107,8 +109,6 @@ INSTALLED_APPS = [
     'django.contrib.comments',
     'django.contrib.markup',
 
-    'tagging',
-    'tagging_autocomplete',
     'autoslug',
     'feincms',
     'mptt',
