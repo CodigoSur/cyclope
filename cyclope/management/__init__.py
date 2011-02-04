@@ -6,17 +6,21 @@ def create_site(app, created_models, verbosity, db, **kwargs):
     from cyclope.models import Menu, MenuItem, Layout, SiteSettings
     if all([model in created_models for model in (Menu, MenuItem, Layout, SiteSettings)]) and \
         not Menu.objects.all():
-        msg = "\nDomain name (leave empty for default: localhost:8000): "
-        domain = raw_input(msg)
-        if not domain:
-            domain = "localhost:8000"
-        msg = "\nSite name (leave empty for default: cyclope demo): "
-        name = raw_input(msg)
-        if not name:
-            name = "cyclope demo"
+        # Domain name
+        domain = "localhost:8000"
+        if kwargs.get('interactive', True):
+            msg = "\nDomain name (leave empty for default: %s: " % domain
+            input_domain = raw_input(msg)
+            domain = input_domain or domain
+        # Site name
+        site_name = "Cyclope demo"
+        if kwargs.get('interactive', True):
+            msg = "\nSite name (leave empty for default: %s): " % site_name
+            input_name = raw_input(msg)
+            site_name = input_name or site_name
         site = Site.objects.all()[0]
         site.domain = domain
-        site.name = name
+        site.name = site_name
         site.save(using=db)
 
         menu, created = Menu.objects.get_or_create(name="Main menu", main_menu=True)
