@@ -41,6 +41,7 @@ from tagging_autocomplete.models import TagAutocompleteField
 import mptt
 from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
+from jsonfield import JSONField
 
 import cyclope
 from cyclope.core.collections.models import Collection
@@ -147,6 +148,8 @@ class MenuItem(models.Model):
     # content_view choices are set through an AJAX view
     content_view = models.CharField(_('view'), max_length=255,
                                     blank=True, default='')
+
+    view_options = JSONField(default="{}") # default is taken from ViewOptionsForm
 
     def save(self, **kwargs):
         #TODO(nicoechaniz): Review this method

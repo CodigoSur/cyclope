@@ -38,7 +38,7 @@ def get_view_template(request, inline=False):
         host_template = 'cyclope/inline_view.html'
     else:
         host_template = template_for_request(request)
-    
+
 
 class FrontendView(object):
     """Parent class for frontend views.
@@ -50,6 +50,8 @@ class FrontendView(object):
         verbose_name
 
         params(dict): keyword arguments that will be passed to get_response
+
+        options_form(form): a forms.Form subclass defining options for the view
 
         is_default(boolean): is this the default view for the model?
 
@@ -68,8 +70,9 @@ class FrontendView(object):
     is_region_view = False
     extra_context = {}
     params = {}
+    options_form = None
 
-    def __call__(self, request, inline=False, slug=None, content_object=None):
+    def __call__(self, request, inline=False, slug=None, content_object=None, view_options=None):
         """
         Arguments:
             Either content_object or slug must be set
@@ -78,12 +81,12 @@ class FrontendView(object):
             a string if the view is called from within a region templatetag
             an HttpResponse otherwise
         """
-
+        self.options = view_options or self.get_default_options()
         if inline:
             host_template = 'cyclope/inline_view.html'
         else:
             host_template = template_for_request(request)
-            
+
         req_context = RequestContext(request, {'host_template': host_template,
                                               'region_view': inline})
 
@@ -117,6 +120,15 @@ class FrontendView(object):
         else:
             return '%s/View/%s'\
                     % (model._meta.object_name.lower(), self.name)
+
+    def get_default_options(self):
+        options = {}
+        if self.options_form:
+            form = self.options_form()
+            options = form.fields.copy()
+            for field in form.fields:
+                options[field] = options[field].initial
+        return options
 
 ##########
 # autodiscover() is an almost exact copy of

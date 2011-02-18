@@ -12,7 +12,7 @@
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/forms.css" />
 <style>
 #collection-tabs-container {
-    border-bottom: 6px #abd solid; 
+    border-bottom: 6px #abd solid;
     padding-bottom: 0px;
     margin-bottom: 0px;
 }
@@ -46,12 +46,12 @@
 .tab:hover, .current-tab{
     background-color: #abd;
     color: #446;
-} 
+}
 
 #collection-tabs-list li:hover a,
 #collection-tabs-list li.current-tab a{
     color: white;
-} 
+}
 
 
 </style>
@@ -188,6 +188,38 @@ $(function() {
         value: 'object_id',
         label: 'verbose_name'
       });
+
+    $.cyclope = {
+        access_number : 0,
+    };
+
+    $("#id_content_view").change(function() {
+        $.cyclope.access_number += 1;
+        if ($.cyclope.access_number >= 3){
+            /*
+            $.cyclope.access_number >= 3 because 2 changes are made by the
+            cainedSelect in page load. So the third is the first change made by
+            the user.
+            */
+            var view_name = $("#id_content_view option:selected").val();
+            var content_type_id = $("#id_content_type option:selected").val();
+            if (view_name && content_type_id){
+                $.get("/{{CYCLOPE_PREFIX}}options_view_widget_html",
+                   { content_type_id: content_type_id, view_name: view_name },
+                   function(data){
+                       if (data){
+                        $("#view_options_multiple").replaceWith(data);
+                        }
+                        else{
+                            $("#view_options_multiple").html("");
+                        }
+                   });
+            }
+        }
+
+
+    });
+
 });
 </script>
 
@@ -277,7 +309,7 @@ jQuery(document).ready(function($){
                 }
             });
         current_collection = collection;
-        
+
         $('li[id^=id_collections-tab-]').each(function(i){
             $(this).removeClass('current-tab')
         });
@@ -295,7 +327,7 @@ jQuery(document).ready(function($){
                 var link_id = "id_collections-tab-"+ collection //$(this).parent().attr('id')
                 $('#collection-tabs-list').append('<li class="tab" id="'+link_id+'"><a href="javascript:void(0)" >'+this.text+'</a></li>');
 //                $('#collections-categorization-content_type-object_id-group h2').after('<span class="collection-tab" ><a href="javascript:void(0)" id="'+link_id+'" >'+this.text+'</a></span>');
-                
+
                 $("#"+link_id).click(function(){
                     select_collection(collection);
                 });
@@ -306,7 +338,7 @@ jQuery(document).ready(function($){
     $('#collections-categorization-content_type-object_id-group > .add-row a')
         .click(function(){
             i = $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-collection']").length - 2
-            sel = '#id_collections-categorization-content_type-object_id-'+i+'-collection' 
+            sel = '#id_collections-categorization-content_type-object_id-'+i+'-collection'
             $(sel).val(current_collection);
             select_collection(current_collection);
             $(sel).change();

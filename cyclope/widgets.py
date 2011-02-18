@@ -23,6 +23,9 @@
 widgets
 -------
 """
+
+import re
+
 from django import forms
 from django.conf import settings
 from django.forms.util import flatatt
@@ -142,3 +145,32 @@ class CKEditor(forms.Textarea):
                         "/", # FIXME http://docs.cksource.com/CKEditor_3.x/Developers_Guide/File_Browser_%28Uploader%29
                         reverse('fb_browse')+'?pop=3', # pop=3 is CKEditor
                         language))
+
+
+class MultipleWidget(forms.Widget):
+    """
+    Widget formed by multiple fields. Use with MultipleField.
+    """
+    def __init__(self, fields, *args, **kwargs):
+        self.fields = fields
+        super(MultipleWidget, self).__init__(*args, **kwargs)
+        self._field_regexp = re.compile("multiple_(.*)")
+
+    def render(self, name, value, *args, **kwargs):
+        if value is None or value is u"":
+            value = {}
+        out_names = ['%s_multiple_%s' % (name, field_name) for field_name in self.fields.keys()]
+        out = []
+        field_names, fields = self.fields.iterkeys(), self.fields.itervalues()
+        for field_name, field, out_name in zip(field_names, fields, out_names):
+            out.append(unicode(field.label)+u": " )
+            out.append(field.widget.render(out_name, value.get(field_name)))
+        return mark_safe(u"<div id='%s_multiple'><ul>" % name + u'\n'.join(out) +u"</ul></div>")
+
+    def value_from_datadict(self, data, files, name):
+        out_names = ['%s_multiple_%s' % (name, field_name) for field_name in self.fields.keys()]
+        values = {}
+        for out_name in out_names:
+            field_name = self._field_regexp.search(out_name).groups()[0]
+            values[field_name] = data.get(out_name)
+        return values

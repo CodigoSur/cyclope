@@ -91,6 +91,7 @@ class CyclopeSite(object):
             url(r'^registered_standard_views_json$', self.registered_standard_views_json),
             url(r'^objects_for_ctype_json$', self.objects_for_ctype_json),
             url(r'^menu_items_for_menu_json$', self.menu_items_for_menu_json),
+            url(r'^options_view_widget_html$', self.options_view_widget_html),
         )
 
         # url patterns for registered views
@@ -102,7 +103,7 @@ class CyclopeSite(object):
                 urlpatterns += patterns('', url(url_pattern, view, name=url_name))
                 if view.is_default:
                     urlpatterns += patterns('', url(url_pattern, view, name=model_name))
-                
+
         # url patterns for menu items
         return self.get_menuitem_urls(urlpatterns)
 
@@ -112,16 +113,20 @@ class CyclopeSite(object):
             # custom urls are not supposed to be handled by Cyclope
             if item.custom_url:
                 continue
-            if item.content_object is not None:
+            if item.content_object is not None: # if True: content_type should not be None
                 obj = item.content_object
                 view = self.get_view(obj.__class__, item.content_view)
+                view_options = item.view_options
                 urlpatterns += patterns('', url('^%s$' % item.url, view,
-                                                   {'slug': obj.slug}))
+                                                   {'slug': obj.slug,
+                                                    'view_options':view_options}))
             elif item.content_type is not None:
                 mdl = item.content_type.model_class()
                 view = self.get_view(mdl, item.content_view)
-                urlpatterns += patterns('', url('^%s$' % item.url, view))
-                
+                view_options = item.view_options
+                urlpatterns += patterns('', url('^%s$' % item.url, view,
+                                        {'view_options':view_options}))
+
             # this menu item has no content so we will only display the layout
             else:
                 urlpatterns += patterns('', url(r'^%s$' % item.url,
@@ -171,7 +176,8 @@ class CyclopeSite(object):
                                      home_item.content_view)
                 if home_item.content_object and view.is_instance_view:
                     obj = home_item.content_object
-                    return view(request, slug=obj.slug)
+                    view_options = home_item.view_options
+                    return view(request, slug=obj.slug, view_options=view_options)
                 elif not view.is_instance_view:
                     return view(request)
                 else:
@@ -284,6 +290,21 @@ class CyclopeSite(object):
         json_data = simplejson.dumps(objects)
         return HttpResponse(json_data, mimetype='application/json')
 
+    def options_view_widget_html(self, request):
+        """Returns the html with the options of a frontend view"""
+        content_type_id = request.GET['content_type_id']
+        model = ContentType.objects.get(pk=content_type_id).model_class()
+        view_name = request.GET['view_name']
+        frontend_view = self.get_view(model, view_name)
+        if frontend_view.options_form is None:
+            return HttpResponse("")
+        form = frontend_view.options_form()
+        from cyclope.fields import MultipleField
+        view_options = MultipleField(label=_('View options'), form=form, required=False)
+        html = view_options.widget.render(name="view_options", value=frontend_view.get_default_options())
+        return HttpResponse(html)
+
+
 ####
 
 site = CyclopeSite()
@@ -297,4 +318,4 @@ def _refresh_site_urls(sender, instance, created, **kwargs):
     except KeyError:
         # fails when testing...
         pass
-post_save.connect(_refresh_site_urls, sender=MenuItem)
+post_save.connect(_refresh_site_urls, sender=MenuItem, dispatch_uid="cyclope.core.frontend.sites")

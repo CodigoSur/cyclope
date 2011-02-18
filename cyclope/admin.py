@@ -74,7 +74,7 @@ class MenuItemAdmin(editor.TreeEditor):
                   {
 #                    'classes': ('collapse',),
                   'fields':('layout', 'persistent_layout', 'custom_url', 'content_type',
-                            'content_view', 'object_id'),
+                            'content_view', 'view_options', 'object_id'),
                   'description': _(u"Either set an URL here or select a content"
                                     "type and view.")
                   })

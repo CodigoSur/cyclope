@@ -35,9 +35,9 @@ from mptt.forms import TreeNodeChoiceField
 
 from cyclope.models import MenuItem, BaseContent,\
                            SiteSettings, Layout, RegionView, UserProfile
+from cyclope.fields import MultipleField
 from cyclope import settings as cyc_settings
 from cyclope.core.frontend import site
-
 
 class AjaxChoiceField(forms.ChoiceField):
     """ChoiceField that always returns true for validate().
@@ -50,6 +50,7 @@ class AjaxChoiceField(forms.ChoiceField):
     def validate(self, value):
         return True
 
+from django.utils.safestring import mark_safe
 
 class RelatedContentForm(forms.ModelForm):
     other_id= AjaxChoiceField(label=_('Content object'),)
@@ -71,9 +72,11 @@ class MenuItemAdminForm(forms.ModelForm):
     content_view = AjaxChoiceField(label=_('View'), required=False)
     object_id = AjaxChoiceField(label=_('Content object'), required=False)
     parent = TreeNodeChoiceField(label=_('Parent'), queryset=MenuItem.tree.all(), required=False)
+    view_options = MultipleField(label=_('View options'), form=None, required=False)
 
     def __init__(self, *args, **kwargs):
         super(MenuItemAdminForm, self).__init__(*args, **kwargs)
+
         if self.instance.id is not None:
             # chainedSelect will show the selected choice
             # if it is present before filling the choices through AJAX
@@ -81,6 +84,14 @@ class MenuItemAdminForm(forms.ModelForm):
             selected_view = menu_item.content_view
             self.fields['content_view'].choices = [(selected_view,
                                                     selected_view)]
+            view_name = menu_item.content_view
+            model = menu_item.content_type.model_class()
+            view = site.get_view(model, view_name)
+
+            self.fields["view_options"] = MultipleField(form=view.options_form, required=False)
+            initial_options = self.fields["view_options"].initial
+            self.initial["view_options"] = menu_item.view_options or initial_options
+
             if menu_item.content_object:
                 content_object = menu_item.content_object
                 self.fields['object_id'].choices = [(content_object.id,
@@ -88,6 +99,7 @@ class MenuItemAdminForm(forms.ModelForm):
         self.fields['content_type'].choices = site.get_registry_ctype_choices()
 
     def clean(self):
+
         data = self.cleaned_data
         if data['object_id'] == '':
             data['object_id'] = None
@@ -107,6 +119,16 @@ class MenuItemAdminForm(forms.ModelForm):
                 else:
                     view = site.get_view(data['content_type'].model_class(),
                                          data['content_view'])
+                    # Now we need to instance view_options field with the form of the
+                    # current view, and re_clean all the fields including this one,
+                    # because view_options field was cleaned with and old view
+                    # options form. Be aware that it's a hacky way of re-cleaning
+                    # the fields, a nicer one is needed.
+                    self.fields["view_options"] = MultipleField(form=view.options_form,
+                                                                required=False)
+                    self._errors = type(self._errors)()
+                    self.cleaned_data = {}
+                    self._clean_fields()
                     if view.is_instance_view and data['object_id'] is None:
                         raise(ValidationError(
                             _(u'The selected view requires a content object')))

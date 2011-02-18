@@ -19,6 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from django import forms
 from django.test import TestCase
 from django.test.utils import setup_test_environment
 from django.contrib.sites.models import Site
@@ -38,6 +39,7 @@ from cyclope.apps.articles.models import Article
 from cyclope.apps.medialibrary.models import *
 from cyclope.apps.polls.models import *
 from cyclope.apps.forum.models import *
+from cyclope.fields import MultipleField
 
 def create_static_page(name=None):
     if name is None:
@@ -346,7 +348,7 @@ class StaticPageTestCase(ViewableTestCase):
 class ArticleTestCase(ViewableTestCase):
     fixtures = ['simplest_site.json']
     test_model = Article
-    
+
     def setUp(self):
         author = Author.objects.create(name="the author")
         self.test_object = Article.objects.create(name='An instance', author=author)
@@ -366,7 +368,7 @@ class ExternalContentTestCase(ViewableTestCase):
 class FlashMovieTestCase(ViewableTestCase):
     fixtures = ['simplest_site.json']
     test_model = FlashMovie
-    
+
     def setUp(self):
         self.test_object = FlashMovie.objects.create(name='An instance', flash="/")
         frontend.autodiscover()
@@ -376,7 +378,7 @@ class MovieClipTestCase(ViewableTestCase):
     fixtures = ['simplest_site.json']
     test_model = MovieClip
 
-    
+
 class PictureTestCase(ViewableTestCase):
     fixtures = ['simplest_site.json']
     test_model = Picture
@@ -406,7 +408,7 @@ class CategoryTestCase(ViewableTestCase):
         self.test_object = Category(name='An instance', collection=col)
         self.test_object.save()
         frontend.autodiscover()
-        
+
 
     def test_content_views(self):
         content_urls = get_content_urls(self.test_object)
@@ -457,6 +459,19 @@ class TopicTestCase(ViewableTestCase):
         self.test_object.save()
         frontend.autodiscover()
 
+class MultipleFieldTestCase(TestCase):
+    def setUp(self):
+        class CategoryTeaserListOptions(forms.Form):
+            items_per_page = forms.IntegerField(label='Items per page', initial=3, min_value=1)
+            labeled = forms.BooleanField(label='Labeled', initial=False, required=False)
+
+        class TestForm(forms.Form):
+            field = MultipleField(form=CategoryTeaserListOptions())
+
+        self.form = TestForm()
+
+    def test_initial_values(self):
+        self.assertIn('value="3"', self.form.as_p())
 
 #TODO(nicoechaniz)
 #class DeleteRelatedContent(TestCase):

@@ -21,17 +21,19 @@
 
 """cyclope.frontend_views"""
 
-from django.utils.translation import ugettext_lazy as _
+from django import forms
 from django.template import loader
-from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.urlresolvers import reverse
 from django.contrib.comments.models import Comment
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
-from cyclope import settings as cyc_settings
 from cyclope.core import frontend
-from cyclope.core.collections.models import Collection, Category, Categorization
 from cyclope.utils import NamePaginator
+from cyclope import settings as cyc_settings
+from cyclope.core.collections.models import Collection, Category, Categorization
+
 
 class CategoryRootItemsList(frontend.FrontendView):
     """A flat list view of the root members for a Category.
@@ -70,13 +72,17 @@ class CategoryDefaultList(frontend.FrontendView):
 
 frontend.site.register_view(Category, CategoryDefaultList)
 
+class CategoryTeaserListOptions(forms.Form):
+    items_per_page = forms.IntegerField(label=_('Items per page'), initial=3, min_value=1)
+    labeled = forms.BooleanField(label=_('Labeled'), initial=False, required=False)
 
 class CategoryTeaserList(frontend.FrontendView):
     """A teaser list view of Category members.
     """
     name = 'teaser_list'
     verbose_name = _('teaser list of Category members')
-    items_per_page = cyc_settings.CYCLOPE_PAGINATION['TEASER']
+
+    options_form = CategoryTeaserListOptions
     is_content_view = True
     is_region_view = True
 
@@ -92,7 +98,7 @@ class CategoryTeaserList(frontend.FrontendView):
                                       key=lambda c: c.object_modification_date,
                                       reverse=True)
 
-        paginator = Paginator(categorizations_list, self.items_per_page)
+        paginator = Paginator(categorizations_list, self.options["items_per_page"])
 
         # Make sure page request is an int. If not, deliver first page.
         try:
