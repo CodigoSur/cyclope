@@ -171,11 +171,7 @@ class SiteMap(frontend.FrontendView):
             for category in Category.tree.filter(collection=collection, level=0):
                 # TODO(diegoM): Change this line when the refactorization is done
                 category_list.extend(self._get_categories_nested_list(category))
-            t = Template('{{ category }} <a href="{% url category_feed category.slug %}">'
-                         '<img src="{{ media_url }}images/css/rss_logo.png"/></a>')
-            include = t.render(Context({'category':category,
-                                        'media_url':cyc_settings.CYCLOPE_THEME_MEDIA_URL}))
-            collections_list.extend([include,category_list])
+            collections_list.extend([collection,category_list])
 
         menus_list = []
         for menu in Menu.objects.all():
@@ -196,9 +192,6 @@ class SiteMap(frontend.FrontendView):
         """
         #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
         link_template = Template(
-            '{% if has_children %}'
-              '<span class="expand_collapse">+</span>\n'
-            '{% endif %}'
             '{% if has_content %}'
               '<a href="{% url category-teaser_list slug %}">'
                  '<span>{{ name }}</span></a>'
