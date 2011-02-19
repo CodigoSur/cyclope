@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -84,13 +84,14 @@ class MenuItemAdminForm(forms.ModelForm):
             selected_view = menu_item.content_view
             self.fields['content_view'].choices = [(selected_view,
                                                     selected_view)]
-            view_name = menu_item.content_view
-            model = menu_item.content_type.model_class()
-            view = site.get_view(model, view_name)
+            if menu_item.content_type:
+                view_name = menu_item.content_view
+                model = menu_item.content_type.model_class()
+                view = site.get_view(model, view_name)
 
-            self.fields["view_options"] = MultipleField(form=view.options_form, required=False)
-            initial_options = self.fields["view_options"].initial
-            self.initial["view_options"] = menu_item.view_options or initial_options
+                self.fields["view_options"] = MultipleField(form=view.options_form, required=False)
+                initial_options = self.fields["view_options"].initial
+                self.initial["view_options"] = menu_item.view_options or initial_options
 
             if menu_item.content_object:
                 content_object = menu_item.content_object

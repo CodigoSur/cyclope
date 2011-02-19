@@ -71,13 +71,17 @@ class MenuItemAdmin(editor.TreeEditor):
     fieldsets = ((None,
                   {'fields': ('menu', 'parent', 'name', 'site_home', 'active')}),
                  (_('content details'),
-                  {
-#                    'classes': ('collapse',),
-                  'fields':('layout', 'persistent_layout', 'custom_url', 'content_type',
-                            'content_view', 'view_options', 'object_id'),
+                  {'fields':('custom_url', 'content_type', 'content_view',
+                             'view_options', 'object_id'),
                   'description': _(u"Either set an URL here or select a content"
                                     "type and view.")
-                  })
+                  }),
+                 (_('layout'),
+                  {'fields':('layout', 'persistent_layout'),
+                   'classes': ('collapse',),
+                   'description': _(u"Set the layout that will be used when this "
+                                    "menuitem is selected.")
+                   }),
                 )
     list_filter = ('menu',)
 

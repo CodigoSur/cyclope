@@ -172,7 +172,7 @@ class MenuItem(models.Model):
                 item.site_home = False
                 item.save()
 
-        # If is not a new MenuItem and the Menu is changed, we "move" all
+        # If this is not a new MenuItem and the Menu is changed, we "move" all
         # the childrens to the new Menu.
         if self.pk is not None:
             old_menu_item = MenuItem.objects.get(pk=self.pk)
