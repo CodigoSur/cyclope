@@ -99,8 +99,30 @@ class MenuItemAdminForm(forms.ModelForm):
                                                         content_object.name)]
         self.fields['content_type'].choices = site.get_registry_ctype_choices()
 
-    def clean(self):
+    def clean_view_options(self):
+        # Retrieve content_view and content_type of current data
+        values = {}
+        field_names = ['content_type', "content_view"]
+        for name in field_names:
+            field, widget = self.fields[name], self.fields[name].widget
+            values[name] = widget.value_from_datadict(self.data, None,
+                                                      self.add_prefix(name))
+            values[name] = field.clean(values[name])
+        cleaned_value = {}
+        if all(values.values()):
+            view = site.get_view(values['content_type'].model_class(),
+                                 values['content_view'])
+            # Now we need to instance view_options field with the viw of the current
+            # form, and clean it.
+            self.fields["view_options"] = MultipleField(form=view.options_form,
+                                                        required=False)
+            field = self.fields["view_options"]
+            value = field.widget.value_from_datadict(self.data, None,
+                                                     self.add_prefix("view_options"))
+            cleaned_value = field.clean(value, validate=True)
+        return cleaned_value
 
+    def clean(self):
         data = self.cleaned_data
         if data['object_id'] == '':
             data['object_id'] = None
@@ -120,16 +142,6 @@ class MenuItemAdminForm(forms.ModelForm):
                 else:
                     view = site.get_view(data['content_type'].model_class(),
                                          data['content_view'])
-                    # Now we need to instance view_options field with the form of the
-                    # current view, and re_clean all the fields including this one,
-                    # because view_options field was cleaned with and old view
-                    # options form. Be aware that it's a hacky way of re-cleaning
-                    # the fields, a nicer one is needed.
-                    self.fields["view_options"] = MultipleField(form=view.options_form,
-                                                                required=False)
-                    self._errors = type(self._errors)()
-                    self.cleaned_data = {}
-                    self._clean_fields()
                     if view.is_instance_view and data['object_id'] is None:
                         raise(ValidationError(
                             _(u'The selected view requires a content object')))

@@ -71,15 +71,17 @@ class MultipleField(forms.Field):
             raise ValidationError(errors)
         return fields
 
-    def clean(self, value):
+    def clean(self, value, validate=False):
         """
         Validates the given value and returns its "cleaned" value as an
         appropriate Python object.
 
         Raises ValidationError for any errors.
         """
-        value = self.to_python(value)
-        self.validate(value)
-        self.run_validators(value)
-        # FIXME: run all validate and validator of data?
+        if not validate:
+            value = {}
+        else:
+            value = self.to_python(value)
+            self.validate(value)
+            self.run_validators(value)
         return value
