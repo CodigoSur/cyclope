@@ -56,10 +56,10 @@ setup(
     ],
 
     install_requires=[
-        'Django>=1.2',
-        'FeinCms==1.1.4',
+        'Django==1.2.4',
+        'FeinCms==1.2.1',
         'django-autoslug==1.4.1',
-        'django-mptt==0.3.1', # 0.4 breaks compatibility
+        'django-mptt==0.4.2', # 0.4 breaks compatibility
         'PIL>=1.1.7', # in PIL we trust
         'django-simple-captcha==0.2.0',
         'django-tagging==0.3.1',
