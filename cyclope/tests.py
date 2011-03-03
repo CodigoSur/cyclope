@@ -91,7 +91,7 @@ def get_region_views(test_model):
              if view.is_region_view ]
 
 def add_region_view(model, view_name, content_object=None):
-    layout = Layout.objects.all()[0]
+    layout = get_default_layout()
     content_type = ContentType.objects.get(model=model._meta.module_name)
     content_view = view_name
     region = 'header'
@@ -100,6 +100,21 @@ def add_region_view(model, view_name, content_object=None):
                              content_object=content_object)
     region_view = region_view.save()
     return region_view
+
+
+def get_default_site():
+    if get_default_site.cache is None:
+       get_default_site.cache = Site.objects.get_current()
+    return get_default_site.cache
+
+get_default_site.cache = None
+
+def get_default_layout():
+    if get_default_layout.cache is None:
+       get_default_layout.cache = Layout.objects.all()[0]
+    return get_default_layout.cache
+
+get_default_layout.cache = None
 
 
 class ViewableTestCase(TestCase):
@@ -158,78 +173,48 @@ class SiteTestCase(TestCase):
         """
         Test the simplest creation of a Cyclope-site.
         """
-        site = Site.objects.all()[0]
-        site.domain = "localhost:8000"
-        site.name = "test domain"
-        site.save()
-
-        menu = Menu(name="Main menu", main_menu=True)
-        menu.save()
-
-        layout = Layout(name="default", template='one_sidebar.html')
-        layout.save()
-
-        menu_item = MenuItem(menu=menu, name="home", site_home=True,
-                             active=True, layout=layout)
-        menu_item.save()
-
-        site_settings = SiteSettings(site=site,
-                                theme="neutronica",
-                                default_layout=layout,
-                                allow_comments='YES')
-        site_settings.save()
+        # Simplest site should be created by syncdb
         response = self.client.get("/")
         self.assertTemplateUsed(response,
                                 u'cyclope/themes/neutronica/one_sidebar.html')
-        #TOTO(SAn): add some more usefull asserts
-
-#        export_fixture(['sites','cyclope'],
-#            filename='../cyclope/fixtures/simplest_site.json')
 
     def testBugMenuItemWithoutLayout(self):
         # saving a MenuItem without setting a default site Layout failed
-        site = Site(domain="mydomain.com", name="mydomain")
-        site.save()
-        menu = Menu(name="Main menu", main_menu=True)
-        menu.save()
-        menu_item = MenuItem(menu=menu, name="home", site_home=True, active=True)
+        site = get_default_site()
+        menu = Menu.objects.get(main_menu=True)
+        menu_item = MenuItem(menu=menu, name="without_layout", active=True)
         menu_item.save()
 
-        site_settings = SiteSettings(site=site,
-                                theme="neutronica",
-                                allow_comments='YES')
+        site_settings = SiteSettings.objects.get(site=site)
         site_settings.save()
         response = self.client.get("/")
 
 
     def testSiteWithoutDefaultLayout(self):
-        site = Site(domain="mydomain.com", name="mydomain")
-        site.save()
-        site_settings = SiteSettings(site=site,
-                                theme="neutronica",
-                                allow_comments='YES')
+        site = get_default_site()
+        site_settings = SiteSettings.objects.get(site=site)
+        site_settings.default_layout = None
         site_settings.save()
         response = self.client.get("/")
         self.assertEqual(response.content, 'You need to select a layout for the site')
+        site_settings.default_layout = get_default_layout()
+        site_settings.save()
+        response = self.client.get("/")
+        self.assertNotEqual(response.content, 'You need to select a layout for the site')
         #TODO(nicoechaniz): testing for the response content is weak; look for a better option
         # this view should use a standard error template and we should check that the template was used and some message id
 
 
     def testSiteWithoutHomeMenuitem(self):
-        site = Site(domain="mydomain.com", name="mydomain")
-        site.save()
-        site_settings = SiteSettings(site=site,
-                                theme="neutronica",
-                                allow_comments='YES')
-
-        site_settings.save()
-        layout = Layout(name="default", template='one_sidebar.html')
-        layout.save()
-        site_settings.default_layout = layout
-        site_settings.save()
-
+        home = MenuItem.objects.get(site_home=True)
+        home.site_home = False
+        home.save()
         response = self.client.get("/")
         self.assertEqual(response.content, 'The site home page has not been set.')
+        home.site_home = True
+        home.save()
+        response = self.client.get("/")
+        self.assertNotEqual(response.content, 'The site home page has not been set.')
         #TODO(nicoechaniz): testing for the response content is weak; look for a better option
 
 
@@ -258,7 +243,7 @@ class RegionViewTestCase(TestCase):
         pass
 
     def testAddLayoutRegionView(self):
-        layout = Layout.objects.all()[0]
+        layout = get_default_layout()
         content_type = ContentType.objects.get(model='staticpage')
         content_view = 'list'
         region = 'header'
@@ -272,7 +257,7 @@ class RegionViewTestCase(TestCase):
         """If the view in a region needs a content object and none is provided
         a template error will be raised when visiting a page using this layout."""
         #TODO(nicoechaniz): this is prevented at admin form level, but should also be checked at data level. See note in forms.py RegionViewInlineForm.clean() method
-        layout = Layout.objects.all()[0]
+        layout = get_default_layout()
         content_type = ContentType.objects.get(model='staticpage')
         content_view = 'detail'
         region = 'header'
@@ -283,7 +268,7 @@ class RegionViewTestCase(TestCase):
 
 
     def testAddLayoutRegionViewInstanceView(self):
-        layout = Layout.objects.get(slug='default')
+        layout = get_default_layout()
         region_view = RegionView(layout=layout)
         content_type = ContentType.objects.get(model='staticpage')
 

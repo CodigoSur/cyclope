@@ -18,7 +18,10 @@ def create_site(app, created_models, verbosity, db, **kwargs):
             msg = "\nSite name (leave empty for default: %s): " % site_name
             input_name = raw_input(msg)
             site_name = input_name or site_name
-        site, created = Site.objects.get_or_create(id=0)
+        if Site.objects.all():
+            site = Site.objects.all()[0]
+        else:
+            site = Site()
         site.domain = domain
         site.name = site_name
         site.save(using=db)
