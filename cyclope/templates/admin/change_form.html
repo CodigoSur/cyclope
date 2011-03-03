@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/forms.css" />
-<style>
+<style type="text/css">
 #collection-tabs-container {
     border-bottom: 6px #abd solid;
     padding-bottom: 0px;
@@ -109,6 +109,7 @@ CYCLOPE: All chainSelect configuration for every particular model that needs it 
 
 {% comment %} CYCLOPE:  chainedSelect for Collectible derived clases {% endcomment %}
 <script type="text/javascript">
+//<![CDATA[
 function setup_chainedSelect_for_categorization(i) {
     $("#id_collections-categorization-content_type-object_id-"+ i +"-category").chainedSelect({
         parent: '#id_collections-categorization-content_type-object_id-'+ i +'-collection',
@@ -129,11 +130,13 @@ jQuery(document).ready(function($){
       setup_chainedSelect_for_categorization(i);
     });
 });
+//]]>
 </script>
 
 {% comment %} CYCLOPE: chainedSelect for Layout {% endcomment %}
 
 <script type="text/javascript">
+//<![CDATA[
 
   function setup_chainedSelect_for_layout(i) {
       $("#id_regionview_set-" + i + "-region").chainedSelect({
@@ -167,12 +170,13 @@ jQuery(document).ready(function($){
         setup_chainedSelect_for_layout($("select[id^='id_regionview_set-'][id$='-region']").length - 2);
     });
   });
-
+//]]>
 </script>
 
 {% comment %} CYCLOPE: chainedSelect for MenuItem {% endcomment %}
 
 <script type="text/javascript">
+//<![CDATA[
 $(function() {
   $("#id_content_view").chainedSelect({
         parent: '#id_content_type',
@@ -221,11 +225,13 @@ $(function() {
     });
 
 });
+//]]>
 </script>
 
 {% comment %} CYCLOPE: Change parent for MenuItem when menu is changed {% endcomment %}
 
 <script type="text/javascript">
+//<![CDATA[
 $(function() {
   $("#id_parent").chainedSelect({
         parent: '#id_menu',
@@ -235,11 +241,13 @@ $(function() {
     });
 
 });
+//]]>
 </script>
 
 {% comment %} CYCLOPE: Change parent for Category when collection is changed {% endcomment %}
 
 <script type="text/javascript">
+//<![CDATA[
 $(function() {
   $("#id_parent").chainedSelect({
         parent: '#id_collection',
@@ -249,11 +257,13 @@ $(function() {
     });
 
 });
+//]]>
 </script>
 
 {% comment %} CYCLOPE: chainedSelect for RelatedContent {% endcomment %}
 
 <script type="text/javascript">
+//<![CDATA[
 function setup_chainedSelect_for_relatedcontent(i) {
     $('#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_id').chainedSelect({
         parent: '#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_type',
@@ -274,7 +284,7 @@ jQuery(document).ready(function($){
       setup_chainedSelect_for_relatedcontent(i);
     });
 });
-
+//]]>
 </script>
 
 {% if original.related_contents.count >= 0 %}
@@ -294,7 +304,7 @@ jQuery(document).ready(function($){
 
 {# TODO(nicoechaniz): the collection tabs code is messy. needs lots of love but it works... #}
 <script type="text/javascript">
-
+//<![CDATA[
 var current_collection = null;
 
 jQuery(document).ready(function($){
@@ -347,7 +357,7 @@ jQuery(document).ready(function($){
     select_collection(initial);
 
 })
-
+//]]>
 </script>
 
 </div>
