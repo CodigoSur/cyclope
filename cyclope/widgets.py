@@ -165,7 +165,7 @@ class MultipleWidget(forms.Widget):
         for field_name, field, out_name in zip(field_names, fields, out_names):
             out.append(unicode(field.label)+u": " )
             out.append(field.widget.render(out_name, value.get(field_name)))
-        return mark_safe(u"<div id='%s_multiple'><ul>" % name + u'\n'.join(out) +u"</ul></div>")
+        return mark_safe(u"<div id='%s_multiple'>" % name + u'\n'.join(out) +u"</div>")
 
     def value_from_datadict(self, data, files, name):
         out_names = ['%s_multiple_%s' % (name, field_name) for field_name in self.fields.keys()]

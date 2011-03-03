@@ -197,6 +197,11 @@ $(function() {
         access_number : 0,
     };
 
+    var div_container = $("#view_options_multiple").parent().parent();
+    if ($("#view_options_multiple").html() === ""){
+        div_container.hide();
+    }
+
     $("#id_content_view").change(function() {
         $.cyclope.access_number += 1;
         if ($.cyclope.access_number >= 3){
@@ -207,15 +212,18 @@ $(function() {
             */
             var view_name = $("#id_content_view option:selected").val();
             var content_type_id = $("#id_content_type option:selected").val();
+            // $("#view_options_multiple").parent().parent().hide();
             if (view_name && content_type_id){
                 $.get("/{{CYCLOPE_PREFIX}}options_view_widget_html",
                    { content_type_id: content_type_id, view_name: view_name },
                    function(data){
                        if (data){
-                        $("#view_options_multiple").replaceWith(data);
+                            $("#view_options_multiple").replaceWith(data);
+                            div_container.show();
                         }
                         else{
                             $("#view_options_multiple").html("");
+                            div_container.hide();
                         }
                    });
             }
