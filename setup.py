@@ -68,7 +68,7 @@ setup(
         'South==0.7.2',
         'django-registration>=0.8-alpha-1', # fixed revision in dep links
         'django-profiles==0.2',
-        'django-admin-tools==0.3.0',
+        'django-admin-tools==0.4.0',
         'django-contact-form>=0.4a1', # installed from our clone
         'Whoosh==1.1.1',
         'django-haystack>=1.1.0-alpha', # fixed revision in dep links

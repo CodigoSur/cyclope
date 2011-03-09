@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-19 18:32-0300\n"
+"POT-Creation-Date: 2011-03-09 10:55-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,125 +34,126 @@ msgstr ""
 msgid "Set the layout that will be used when this menuitem is selected."
 msgstr ""
 
-#: dashboard.py:46
+#: dashboard.py:51
 msgid "Site Administration"
 msgstr ""
 
-#: dashboard.py:59
+#: dashboard.py:64
 msgid "Content"
 msgstr ""
 
-#: dashboard.py:65
+#: dashboard.py:70
 msgid "Create, delete or modify content for your website"
 msgstr ""
 
-#: dashboard.py:68
+#: dashboard.py:73
 msgid "Main"
 msgstr ""
 
-#: dashboard.py:75
+#: dashboard.py:80
 msgid "Multimedia Library"
 msgstr ""
 
-#: dashboard.py:87
+#: dashboard.py:92
 msgid "Authors and Sources"
 msgstr ""
 
-#: dashboard.py:94
-msgid "Polls"
-msgstr ""
-
-#: dashboard.py:105 apps/articles/templates/articles/article_detail.html:31
+#: dashboard.py:100 apps/articles/templates/articles/article_detail.html:31
 #: apps/polls/templates/polls/poll_detail.html:34
 #: core/collections/templates/collections/category_list_as_forum.html:15
 msgid "Comments"
 msgstr ""
 
-#: dashboard.py:107
+#: dashboard.py:102
 msgid "Review and moderate user comments"
 msgstr ""
 
-#: dashboard.py:116
-msgid "Categorization"
-msgstr ""
-
-#: dashboard.py:122
-msgid "Classify the content in your website"
-msgstr ""
-
-#: dashboard.py:125
-msgid "Collections"
-msgstr ""
-
-#: dashboard.py:132
-msgid "Tagging"
-msgstr ""
-
-#: dashboard.py:140
+#: dashboard.py:112
 msgid "Site structure"
 msgstr ""
 
-#: dashboard.py:142
-msgid "Modify the menus and site layouts"
+#: dashboard.py:114
+msgid "Modify your site layout and collections"
 msgstr ""
 
-#: dashboard.py:153
+#: dashboard.py:122
+msgid "Collections"
+msgstr ""
+
+#: dashboard.py:129
+msgid "Menus"
+msgstr ""
+
+#: dashboard.py:136
+msgid "Layouts"
+msgstr ""
+
+#: dashboard.py:144
 msgid "Global settings"
 msgstr ""
 
-#: dashboard.py:164
+#: dashboard.py:155
 msgid "Plugins"
 msgstr ""
 
-#: dashboard.py:174
+#: dashboard.py:164
+msgid "Polls"
+msgstr ""
+
+#: dashboard.py:171 templates/cyclope/themes/neutrona/__init__.py:45
+#: templates/cyclope/themes/neutronica/__init__.py:57
+msgid "Newsletter"
+msgstr ""
+
+#: dashboard.py:177
 msgid "Contacts"
 msgstr ""
 
-#: dashboard.py:185
+#: dashboard.py:188
 msgid "Advanced"
 msgstr ""
 
-#: dashboard.py:191
+#: dashboard.py:194
 msgid "Advanced configuration"
 msgstr ""
 
-#: dashboard.py:194
+#: dashboard.py:197
 msgid "Auth"
 msgstr ""
 
-#: dashboard.py:200
+#: dashboard.py:203
 msgid "Registration"
 msgstr ""
 
-#: dashboard.py:206
+#: dashboard.py:209
 msgid "Sites"
 msgstr ""
 
-#: dashboard.py:217
+#: dashboard.py:220
 msgid "Quick links"
 msgstr ""
 
-#: dashboard.py:224
+#: dashboard.py:227
 msgid "Browse media files"
 msgstr ""
 
-#: dashboard.py:227
+#: dashboard.py:230
 msgid "Return to site"
 msgstr ""
 
-#: dashboard.py:236
+#: dashboard.py:239
 msgid "Recent Actions"
 msgstr ""
 
-#: dashboard.py:245
+#: dashboard.py:248
 msgid "Community and support"
 msgstr ""
 
-#: dashboard.py:253
+#: dashboard.py:256
 msgid "Official website"
 msgstr ""
 
-#: dashboard.py:258
+#: dashboard.py:261
 msgid "Tutorials"
 msgstr ""
 
@@ -184,64 +185,62 @@ msgstr ""
 msgid "Cropped Thumbnail (140x140px)"
 msgstr ""
 
-#: forms.py:56 forms.py:73 forms.py:200 forms_mal.py:56 forms_mal.py:73
-#: forms_mal.py:213
+#: forms.py:56 forms.py:73 forms.py:200
 msgid "Content object"
 msgstr ""
 
-#: forms.py:72 forms.py:199 forms_mal.py:72 forms_mal.py:212
-#: apps/newsletter/admin.py:37
+#: forms.py:72 forms.py:199 apps/newsletter/admin.py:37
 msgid "View"
 msgstr ""
 
-#: forms.py:74 forms_mal.py:74 core/collections/admin.py:117
+#: forms.py:74 core/collections/admin.py:117
 msgid "Parent"
 msgstr ""
 
-#: forms.py:75 forms_mal.py:75 core/frontend/sites.py:303
+#: forms.py:75 core/frontend/sites.py:307
 msgid "View options"
 msgstr ""
 
-#: forms.py:134 forms_mal.py:137
+#: forms.py:134
 msgid ""
 "You can not set a Custom URL for menu entries                     with "
 "associated content"
 msgstr ""
 
-#: forms.py:141 forms.py:240 forms_mal.py:144 forms_mal.py:253
+#: forms.py:141 forms.py:240
 msgid "You need to select a content view"
 msgstr ""
 
-#: forms.py:147 forms.py:246 forms_mal.py:160 forms_mal.py:259
+#: forms.py:147 forms.py:246
 msgid "The selected view requires a content object"
 msgstr ""
 
-#: forms.py:160 forms_mal.py:173
+#: forms.py:160
 msgid "Theme"
 msgstr ""
 
-#: forms.py:172 forms_mal.py:185
+#: forms.py:172
 msgid "Template"
 msgstr ""
 
-#: forms.py:198 forms_mal.py:211
+#: forms.py:198
 msgid "Region"
 msgstr ""
 
-#: forms.py:233 forms_mal.py:246
+#: forms.py:233
 msgid "Content type can not be empty"
 msgstr ""
 
-#: forms.py:237 forms_mal.py:250
+#: forms.py:237
 msgid "You need to select a region"
 msgstr ""
 
-#: forms.py:268 forms_mal.py:281 apps/polls/forms.py:37
-#: core/captcha_comments/forms.py:29 core/captcha_contact_form/forms.py:28
+#: forms.py:268 apps/polls/forms.py:37 core/captcha_comments/forms.py:29
+#: core/captcha_contact_form/forms.py:28
 msgid "Security code"
 msgstr ""
 
-#: forms.py:282 forms_mal.py:295
+#: forms.py:282
 msgid "Your avatar image is too big"
 msgstr ""
 
@@ -464,7 +463,7 @@ msgstr ""
 msgid "link"
 msgstr ""
 
-#: models.py:393 apps/articles/models.py:47
+#: models.py:393 apps/articles/models.py:48
 msgid "source"
 msgstr ""
 
@@ -550,15 +549,15 @@ msgstr ""
 msgid "text"
 msgstr ""
 
-#: apps/articles/models.py:49
+#: apps/articles/models.py:50
 msgid "date"
 msgstr ""
 
-#: apps/articles/models.py:61
+#: apps/articles/models.py:62
 msgid "article"
 msgstr ""
 
-#: apps/articles/models.py:62
+#: apps/articles/models.py:63
 msgid "articles"
 msgstr ""
 
@@ -1295,7 +1294,7 @@ msgid "Add %(name)s"
 msgstr ""
 
 #: templates/admin/change_list.html:107
-#: templates/admin/feincms/tree_editor.html:140
+#: templates/admin/feincms/tree_editor.html:43
 #: templates/admin/polls/change_list.html:7
 msgid "Filter"
 msgstr ""
@@ -1312,6 +1311,18 @@ msgid ""
 "Articles are a rich content type that you may use to publish categorized "
 "information on your website.\n"
 "</p>\n"
+msgstr ""
+
+#: templates/admin/feincms/tree_editor.html:38
+msgid "Shortcuts"
+msgstr ""
+
+#: templates/admin/feincms/tree_editor.html:40
+msgid "Collapse tree"
+msgstr ""
+
+#: templates/admin/feincms/tree_editor.html:41
+msgid "Expand tree"
 msgstr ""
 
 #: templates/comments/comments_block.html:15
@@ -1462,11 +1473,6 @@ msgstr ""
 #: templates/cyclope/themes/neutrona/__init__.py:40
 #: templates/cyclope/themes/neutronica/__init__.py:51
 msgid "Empty"
-msgstr ""
-
-#: templates/cyclope/themes/neutrona/__init__.py:45
-#: templates/cyclope/themes/neutronica/__init__.py:57
-msgid "Newsletter"
 msgstr ""
 
 #: templates/cyclope/themes/neutrona/base.html:40
