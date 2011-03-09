@@ -109,6 +109,7 @@ CYCLOPE: All chainSelect configuration for every particular model that needs it 
 
 {% comment %} CYCLOPE:  chainedSelect for Collectible derived clases {% endcomment %}
 <script type="text/javascript">
+//<![CDATA[
 function setup_chainedSelect_for_categorization(i) {
     $("#id_collections-categorization-content_type-object_id-"+ i +"-category").chainedSelect({
         parent: '#id_collections-categorization-content_type-object_id-'+ i +'-collection',
@@ -129,11 +130,13 @@ jQuery(document).ready(function($){
       setup_chainedSelect_for_categorization(i);
     });
 });
+//]]>
 </script>
 
 {% comment %} CYCLOPE: chainedSelect for Layout {% endcomment %}
 
 <script type="text/javascript">
+//<![CDATA[
 
   function setup_chainedSelect_for_layout(i) {
       $("#id_regionview_set-" + i + "-region").chainedSelect({
@@ -167,12 +170,13 @@ jQuery(document).ready(function($){
         setup_chainedSelect_for_layout($("select[id^='id_regionview_set-'][id$='-region']").length - 2);
     });
   });
-
+//]]>
 </script>
 
 {% comment %} CYCLOPE: chainedSelect for MenuItem {% endcomment %}
 
 <script type="text/javascript">
+//<![CDATA[
 $(function() {
   $("#id_content_view").chainedSelect({
         parent: '#id_content_type',
@@ -193,6 +197,11 @@ $(function() {
         access_number : 0,
     };
 
+    var div_container = $("#view_options_multiple").parent().parent();
+    if ($("#view_options_multiple").html() === ""){
+        div_container.hide();
+    }
+
     $("#id_content_view").change(function() {
         $.cyclope.access_number += 1;
         if ($.cyclope.access_number >= 3){
@@ -203,15 +212,18 @@ $(function() {
             */
             var view_name = $("#id_content_view option:selected").val();
             var content_type_id = $("#id_content_type option:selected").val();
+            // $("#view_options_multiple").parent().parent().hide();
             if (view_name && content_type_id){
                 $.get("/{{CYCLOPE_PREFIX}}options_view_widget_html",
                    { content_type_id: content_type_id, view_name: view_name },
                    function(data){
                        if (data){
-                        $("#view_options_multiple").replaceWith(data);
+                            $("#view_options_multiple").replaceWith(data);
+                            div_container.show();
                         }
                         else{
                             $("#view_options_multiple").html("");
+                            div_container.hide();
                         }
                    });
             }
@@ -221,11 +233,13 @@ $(function() {
     });
 
 });
+//]]>
 </script>
 
 {% comment %} CYCLOPE: Change parent for MenuItem when menu is changed {% endcomment %}
 
 <script type="text/javascript">
+//<![CDATA[
 $(function() {
   $("#id_parent").chainedSelect({
         parent: '#id_menu',
@@ -235,11 +249,13 @@ $(function() {
     });
 
 });
+//]]>
 </script>
 
 {% comment %} CYCLOPE: Change parent for Category when collection is changed {% endcomment %}
 
 <script type="text/javascript">
+//<![CDATA[
 $(function() {
   $("#id_parent").chainedSelect({
         parent: '#id_collection',
@@ -249,11 +265,13 @@ $(function() {
     });
 
 });
+//]]>
 </script>
 
 {% comment %} CYCLOPE: chainedSelect for RelatedContent {% endcomment %}
 
 <script type="text/javascript">
+//<![CDATA[
 function setup_chainedSelect_for_relatedcontent(i) {
     $('#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_id').chainedSelect({
         parent: '#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_type',
@@ -274,7 +292,7 @@ jQuery(document).ready(function($){
       setup_chainedSelect_for_relatedcontent(i);
     });
 });
-
+//]]>
 </script>
 
 {% if original.related_contents.count >= 0 %}
@@ -294,6 +312,8 @@ jQuery(document).ready(function($){
 
 {# TODO(nicoechaniz): the collection tabs code is messy. needs lots of love but it works... #}
 <script type="text/javascript">
+<<<<<<< local
+//<![CDATA[
 
 jQuery(document).ready(function($){
 
@@ -350,7 +370,7 @@ jQuery(document).ready(function($){
     $(".dynamic-collections-categorization-content_type-object_id .collection").hide();
 
 })
-
+//]]>
 </script>
 
 </div>

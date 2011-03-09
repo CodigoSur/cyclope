@@ -125,9 +125,8 @@ class FrontendView(object):
         options = {}
         if self.options_form:
             form = self.options_form()
-            options = form.fields.copy()
-            for field in form.fields:
-                options[field] = options[field].initial
+            for field_name, field in form.fields.iteritems():
+                options[field_name] = field.initial
         return options
 
 ##########

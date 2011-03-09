@@ -18,30 +18,26 @@ def create_site(app, created_models, verbosity, db, **kwargs):
             msg = "\nSite name (leave empty for default: %s): " % site_name
             input_name = raw_input(msg)
             site_name = input_name or site_name
-        site, created = Site.objects.get_or_create(id=0)
+        if Site.objects.all():
+            site = Site.objects.all()[0]
+        else:
+            site = Site()
         site.domain = domain
         site.name = site_name
         site.save(using=db)
 
-        menu, created = Menu.objects.get_or_create(name="Main menu", main_menu=True)
-        if created:
-            menu.save(using=db)
+        menu = Menu(name="Main menu", main_menu=True)
+        menu.save(using=db)
 
-        layout, created = Layout.objects.get_or_create(name="default", template='one_sidebar.html')
-        if created:
-            layout.save(using=db)
+        layout = Layout(name="default", template='one_sidebar.html')
+        layout.save(using=db)
 
-        menu_item, created = MenuItem.objects.get_or_create(menu=menu, name="home",
-                                        site_home=True, active=True, layout=layout)
-        if created:
-            menu_item.save(using=db)
+        menu_item = MenuItem(menu=menu, name="home", site_home=True, active=True, layout=layout)
+        menu_item.save(using=db)
 
-        site_settings, created = SiteSettings.objects.get_or_create(site=site,
-                                                                theme="neutronica",
-                                                                default_layout=layout,
-                                                                allow_comments='YES')
-        if created:
-            site_settings.save(using=db)
+        site_settings = SiteSettings(site=site, theme="neutronica",
+                                     default_layout=layout, allow_comments='YES')
+        site_settings.save(using=db)
 
 def create_user_groups(app, created_models, verbosity, db, **kwargs):
     from django.contrib.auth.models import User, Group

@@ -45,10 +45,9 @@ class MultipleField(forms.Field):
 
         self.widget = MultipleWidget(self.fields)
         kwargs.setdefault('help_text', "")
-        initial_data = self.fields.copy()
-        for field in self.fields:
-            initial_data[field] = initial_data[field].initial
-        self.initial = initial_data
+        self.initial = {}
+        for field_name, field in self.fields.iteritems():
+            self.initial[field_name] = field.initial
 
 
     def to_python(self, value):

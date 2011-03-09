@@ -9,7 +9,7 @@ EMAIL_PORT='587'
 EMAIL_USE_TLS = True  # we set this to True for the sample email config
 
 CYCLOPE_PAGINATION = { 'TEASER' : 3, 'LABELED_ICON' : 5,
-                       'FORUM' : 2}
+                      'FORUM' : 2, 'DETAIL': 5}
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''
