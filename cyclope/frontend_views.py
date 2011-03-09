@@ -43,7 +43,7 @@ class MenuRootItemsList(frontend.FrontendView):
     is_default = True
     is_region_view = True
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         menu_items = MenuItem.tree.filter(menu=content_object,
                                           level=0, active=True)
         current_url = request.path_info[1:].split('/')[0]
@@ -62,7 +62,7 @@ class MenuFlatItemsList(frontend.FrontendView):
     verbose_name=_('flat list of all items for the selected Menu')
     is_region_view = True
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         menu_items = MenuItem.tree.filter(menu=content_object, active=True)
         current_url = request.path_info[1:].split('/')[0]
         req_context.update({'menu_items': menu_items,
@@ -81,7 +81,7 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
     verbose_name=_('hierarchical list of the items in the selected menu')
     is_region_view = True
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         menu = content_object
         menu_items = MenuItem.tree.filter(menu=menu, level=0)
         menu_items_list = []
@@ -136,7 +136,7 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
     is_instance_view = False
     is_region_view = True
 
-    def get_response(self, request, req_context):
+    def get_response(self, request, req_context, options):
         base_url = request.path_info[1:].split('/')[0]
         if base_url == '':
             current_item = MenuItem.tree.filter(site_home=True)
@@ -163,7 +163,7 @@ class SiteMap(frontend.FrontendView):
     is_instance_view = False
     is_content_view = True
 
-    def get_response(self, request, req_context):
+    def get_response(self, request, req_context, options):
 
         collections_list = []
         for collection in Collection.objects.filter(visible=True):

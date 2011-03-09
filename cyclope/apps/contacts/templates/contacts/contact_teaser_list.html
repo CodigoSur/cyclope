@@ -5,7 +5,9 @@
 
 {% block content %}
 
-  {% for contact in object_list %}
+  {% include 'cyclope/alphabetical_pagination_block.html' %}
+
+  {% for contact in contacts %}
 
     {% include "contacts/contact_teaser.html" %}
   {% endfor %}

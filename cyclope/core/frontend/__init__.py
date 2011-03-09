@@ -81,7 +81,7 @@ class FrontendView(object):
             a string if the view is called from within a region templatetag
             an HttpResponse otherwise
         """
-        self.options = view_options or self.get_default_options()
+        options = view_options or self.get_default_options()
         if inline:
             host_template = 'cyclope/inline_view.html'
         else:
@@ -93,9 +93,9 @@ class FrontendView(object):
         if self.is_instance_view:
             if not content_object:
                 content_object = self.model.objects.get(slug=slug)
-            response = self.get_response(request, req_context, content_object)
+            response = self.get_response(request, req_context, options, content_object)
         else:
-            response = self.get_response(request, req_context)
+            response = self.get_response(request, req_context, options)
 
         # inline will be True if the view was called from a region templatetag
         if not inline:
@@ -104,7 +104,7 @@ class FrontendView(object):
 
         return response
 
-    def get_response(self, request, host_template, content_object=None):
+    def get_response(self, request, req_context, options, content_object=None):
         """Must be overriden by inheriting class and return a the view content
         """
         raise NotImplementedError()

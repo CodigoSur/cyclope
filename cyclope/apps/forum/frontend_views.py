@@ -45,7 +45,7 @@ class TopicDetail(frontend.FrontendView):
     is_instance_view = True
     is_content_view = True
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
 
         try:
             profile = content_object.author.get_profile()
@@ -64,7 +64,7 @@ class CreateTopic(frontend.FrontendView):
     is_instance_view = True
     is_content_view = True
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         if not request.user.is_authenticated():
             from django.conf import settings
             tup = (settings.LOGIN_URL, REDIRECT_FIELD_NAME,

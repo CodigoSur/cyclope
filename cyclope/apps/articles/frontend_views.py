@@ -36,7 +36,7 @@ class ArticleDetail(frontend.FrontendView):
     is_instance_view = True
     is_content_view = True
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         context = {'content_relations': content_object.related_contents.all()}
         return views.object_detail(request, req_context, content_object,
                                    extra_context=context)
@@ -52,8 +52,8 @@ class ArticleTeaserList(frontend.FrontendView):
     is_instance_view = False
     is_content_view = True
     is_region_view = True
-    
-    def get_response(self, request, req_context):
+
+    def get_response(self, request, req_context, options):
         return views.object_list(request, req_context,
                                  Article.objects.all(), view_name=self.name)
 
