@@ -98,11 +98,8 @@ class CustomIndexDashboard(Dashboard):
 
                 modules.ModelList(
                     title=_('Comments'),
-                    css_classes = ('dbmodule-comments', 'main-area-modules',),
-                    pre_content = _('Review and moderate user comments'),
-                    draggable = False,
-                    deletable = False,
-                    collapsible= False,
+                    css_classes = ('dbmodule-comments'),
+#                    pre_content = _('Review and moderate user comments'),
                     include_list=[
                         'django.contrib.comments.models.Comment',
                     ]),
@@ -241,7 +238,7 @@ class CustomIndexDashboard(Dashboard):
             draggable = False,
             deletable = False,
             collapsible= False,
-            limit=5
+            limit=5,
         ))
 
         self.children.append(modules.LinkList(

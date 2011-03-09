@@ -662,7 +662,8 @@ background: url("../images/admin-contact_form-contactformsettings.png") no-repea
 }
 
 /* ####### !! ####### */
-html[lang="es-ar"] .dashboard-module-content > ul > li > a[href="/admin/contact_form/contactformsettings/"] {
+/*html[lang="es-ar"]*/
+ .dashboard-module-content > ul > li > a[href="/admin/contact_form/contactformsettings/"] {
 background: url("../images/admin-contact_form-contactformsettings.png") no-repeat scroll 0 2px transparent;
 /* texto demasiado largo de contact:_form !! */
 margin:9px 0 11px 11px;
