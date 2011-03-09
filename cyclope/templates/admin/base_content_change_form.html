@@ -121,12 +121,17 @@ jQuery(document).ready(function($){
 
     $('#collections-categorization-content_type-object_id-group > .add-row a')
         .click(function(){
-            i = $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-collection']").length - 2
-            sel = '#id_collections-categorization-content_type-object_id-'+i+'-collection'
-            $(sel).val(current_collection);
-            select_collection(current_collection);
-            $(sel).change();
-            $(sel).parents(".collection").hide();
+            if (!current_collection){
+                alert("{% trans 'You must choose a collection first.' %}")
+            }
+            else{
+                i = $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-collection']").length - 2
+                sel = '#id_collections-categorization-content_type-object_id-'+i+'-collection'
+                $(sel).val(current_collection);
+                select_collection(current_collection);
+                $(sel).change();
+                $(sel).parents(".collection").hide();
+            }
         });
 
     select_collection(initial);

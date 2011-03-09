@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-09 10:55-0300\n"
+"POT-Creation-Date: 2011-03-09 17:05-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,96 +64,92 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: dashboard.py:102
-msgid "Review and moderate user comments"
-msgstr ""
-
-#: dashboard.py:112
+#: dashboard.py:109
 msgid "Site structure"
 msgstr ""
 
-#: dashboard.py:114
+#: dashboard.py:111
 msgid "Modify your site layout and collections"
 msgstr ""
 
-#: dashboard.py:122
+#: dashboard.py:119
 msgid "Collections"
 msgstr ""
 
-#: dashboard.py:129
+#: dashboard.py:126
 msgid "Menus"
 msgstr ""
 
-#: dashboard.py:136
+#: dashboard.py:133
 msgid "Layouts"
 msgstr ""
 
-#: dashboard.py:144
+#: dashboard.py:141
 msgid "Global settings"
 msgstr ""
 
-#: dashboard.py:155
+#: dashboard.py:152
 msgid "Plugins"
 msgstr ""
 
-#: dashboard.py:164
+#: dashboard.py:161
 msgid "Polls"
 msgstr ""
 
-#: dashboard.py:171 templates/cyclope/themes/neutrona/__init__.py:45
+#: dashboard.py:168 templates/cyclope/themes/neutrona/__init__.py:45
 #: templates/cyclope/themes/neutronica/__init__.py:57
 msgid "Newsletter"
 msgstr ""
 
-#: dashboard.py:177
+#: dashboard.py:174
 msgid "Contacts"
 msgstr ""
 
-#: dashboard.py:188
+#: dashboard.py:185
 msgid "Advanced"
 msgstr ""
 
-#: dashboard.py:194
+#: dashboard.py:191
 msgid "Advanced configuration"
 msgstr ""
 
-#: dashboard.py:197
+#: dashboard.py:194
 msgid "Auth"
 msgstr ""
 
-#: dashboard.py:203
+#: dashboard.py:200
 msgid "Registration"
 msgstr ""
 
-#: dashboard.py:209
+#: dashboard.py:206
 msgid "Sites"
 msgstr ""
 
-#: dashboard.py:220
+#: dashboard.py:217
 msgid "Quick links"
 msgstr ""
 
-#: dashboard.py:227
+#: dashboard.py:224
 msgid "Browse media files"
 msgstr ""
 
-#: dashboard.py:230
+#: dashboard.py:227
 msgid "Return to site"
 msgstr ""
 
-#: dashboard.py:239
+#: dashboard.py:236
 msgid "Recent Actions"
 msgstr ""
 
-#: dashboard.py:248
+#: dashboard.py:245
 msgid "Community and support"
 msgstr ""
 
-#: dashboard.py:256
+#: dashboard.py:253
 msgid "Official website"
 msgstr ""
 
-#: dashboard.py:261
+#: dashboard.py:258
 msgid "Tutorials"
 msgstr ""
 
@@ -508,11 +504,10 @@ msgid "Lookup"
 msgstr ""
 
 #: apps/articles/admin.py:39 apps/articles/admin.py:41
-#: apps/staticpages/admin.py:42 apps/staticpages/admin.py:44
 msgid "Text"
 msgstr ""
 
-#: apps/articles/admin.py:65
+#: apps/articles/admin.py:65 apps/staticpages/admin.py:72
 msgid "Publication data"
 msgstr ""
 
@@ -628,16 +623,28 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-#: apps/contacts/frontend_views.py:35
+#: apps/contacts/frontend_views.py:38
 msgid "detailed view of the selected Contact"
 msgstr ""
 
-#: apps/contacts/frontend_views.py:52
-msgid "list of Contact teasers"
+#: apps/contacts/frontend_views.py:51 core/collections/frontend_views.py:58
+msgid "Items per page"
 msgstr ""
 
-#: apps/contacts/frontend_views.py:68
-msgid "alphabetical teaser list of Contact members"
+#: apps/contacts/frontend_views.py:52
+msgid "Order by"
+msgstr ""
+
+#: apps/contacts/frontend_views.py:53 apps/contacts/models.py:50
+msgid "given name"
+msgstr ""
+
+#: apps/contacts/frontend_views.py:54 apps/contacts/models.py:51
+msgid "surname"
+msgstr ""
+
+#: apps/contacts/frontend_views.py:61
+msgid "list of Contact teasers"
 msgstr ""
 
 #: apps/contacts/models.py:41
@@ -646,14 +653,6 @@ msgstr ""
 
 #: apps/contacts/models.py:42
 msgid "home"
-msgstr ""
-
-#: apps/contacts/models.py:50
-msgid "given name"
-msgstr ""
-
-#: apps/contacts/models.py:51
-msgid "surname"
 msgstr ""
 
 #: apps/contacts/models.py:52
@@ -1110,56 +1109,48 @@ msgstr ""
 msgid "list of root items for the selected Category"
 msgstr ""
 
-#: core/collections/frontend_views.py:60
+#: core/collections/frontend_views.py:62
 msgid "default view for the Collection"
 msgstr ""
 
-#: core/collections/frontend_views.py:76
-msgid "Items per page"
-msgstr ""
-
-#: core/collections/frontend_views.py:77
-msgid "Labeled"
-msgstr ""
-
-#: core/collections/frontend_views.py:83
+#: core/collections/frontend_views.py:84
 msgid "teaser list of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:130
+#: core/collections/frontend_views.py:131
 msgid "Labeled icon list of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:144
+#: core/collections/frontend_views.py:145
 msgid "simplified teaser list of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:167
+#: core/collections/frontend_views.py:168
 msgid "full content of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:182
+#: core/collections/frontend_views.py:183
 msgid "teaser list of the root Categories of a Collection"
 msgstr ""
 
-#: core/collections/frontend_views.py:202
+#: core/collections/frontend_views.py:203
 msgid "hierarchical list of Categories in a Collection"
 msgstr ""
 
-#: core/collections/frontend_views.py:267
+#: core/collections/frontend_views.py:268
 msgid "hierarchical list of Categories that will show an icon list on click"
 msgstr ""
 
-#: core/collections/frontend_views.py:276
+#: core/collections/frontend_views.py:277
 msgid ""
 "alphabetical teaser list of all the members of the Collection's Categories"
 msgstr ""
 
-#: core/collections/frontend_views.py:317
+#: core/collections/frontend_views.py:318
 msgid "list of Category members as forum view"
 msgstr ""
 
-#: core/collections/frontend_views.py:373
+#: core/collections/frontend_views.py:374
 msgid "alphabetical teaser list of Category members"
 msgstr ""
 
@@ -1228,12 +1219,12 @@ msgstr ""
 msgid "by"
 msgstr ""
 
-#: core/frontend/__init__.py:174
+#: core/frontend/__init__.py:173
 #, python-format
 msgid "No default view has been set for %s"
 msgstr ""
 
-#: core/frontend/__init__.py:177
+#: core/frontend/__init__.py:176
 #, python-format
 msgid "You can set only one default view for %s"
 msgstr ""
@@ -1254,28 +1245,32 @@ msgstr ""
 msgid "No content object selected"
 msgstr ""
 
+#: templates/admin/base_content_change_form.html:125
+msgid "You must choose a collection first."
+msgstr ""
+
 #: templates/admin/base_site.html:4 templates/rosetta/base.html:5
 msgid "Cyclope site admin"
 msgstr ""
 
-#: templates/admin/change_form.html:66 templates/admin/change_list.html:62
+#: templates/admin/change_form.html:23 templates/admin/change_list.html:62
 #: templates/rosetta/pofile.html:46
 msgid "Home"
 msgstr ""
 
-#: templates/admin/change_form.html:68
+#: templates/admin/change_form.html:25
 msgid "Add"
 msgstr ""
 
-#: templates/admin/change_form.html:75
+#: templates/admin/change_form.html:32
 msgid "History"
 msgstr ""
 
-#: templates/admin/change_form.html:76
+#: templates/admin/change_form.html:33
 msgid "View on site"
 msgstr ""
 
-#: templates/admin/change_form.html:86 templates/admin/change_list.html:96
+#: templates/admin/change_form.html:43 templates/admin/change_list.html:96
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] ""
