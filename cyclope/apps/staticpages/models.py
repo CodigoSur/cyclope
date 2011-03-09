@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -35,3 +35,15 @@ class StaticPage(BaseContent, Collectible):
     class Meta:
         verbose_name = _('static page')
         verbose_name_plural = _('static pages')
+
+
+## class HTMLBlock(BaseContent, Collectible):
+##     text = models.TextField(_('text'))
+
+##     def __unicode__(self):
+##         return self.name
+
+##     class Meta:
+##         verbose_name = _('html block')
+##         verbose_name_plural = _('html block')
+

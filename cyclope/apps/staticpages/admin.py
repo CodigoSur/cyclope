@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -38,14 +38,17 @@ class StaticPageAdminForm(forms.ModelForm):
     menu_items = forms.ModelMultipleChoiceField(label=_('Menu items'),
                     queryset = MenuItem.tree.all(), required=False,
                     )
-    if cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE ==  'textile':
-        text = forms.CharField(label=_('Text'), widget=AdminMarkItUpWidget())
-    elif cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE == 'wysiwyg':
-        text = forms.CharField(label=_('Text'), widget=CKEditor())
+
+    ## TODO(nicoechaniz): Markitup is throwing an error in JS, fix and uncomment this region.
+    ## if cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE ==  'textile':
+    ##     text = forms.CharField(label=_('Text'), widget=AdminMarkItUpWidget())
+    ## elif cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE == 'wysiwyg':
+    ##     text = forms.CharField(label=_('Text'), widget=CKEditor())
 
     def __init__(self, *args, **kwargs):
     # this was initially written to be used for any BaseContent, that's
     # why we don't assume the content_type to be pre-determined
+    # TODO(nicoechaniz): update code
         super(forms.ModelForm, self).__init__(*args, **kwargs)
         if self.instance.id is not None:
             instance_type = ContentType.objects.get_for_model(self.instance)
@@ -64,7 +67,13 @@ class StaticPageAdmin(CollectibleAdmin):
     # updates related menu_items information when a StaticPaget is saved
     form = StaticPageAdminForm
     search_fields = ('name', 'text', )
-    fields = ('name', 'tags', 'published', 'text', 'menu_items')
+    fieldsets = ((None,
+                  {'fields': ('name', 'text',)}),
+                 (_('Publication data'),
+                  {
+                    'classes': ('collapse',),
+                    'fields': ('published', 'summary', 'menu_items')}),
+                 )
 
     def save_model(self, request, obj, form, change):
         super(CollectibleAdmin, self).save_model(request, obj, form, change)
