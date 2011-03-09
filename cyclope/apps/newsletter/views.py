@@ -27,15 +27,16 @@ def _newsletter_html(request, newsletter):
     categorizations_list = sorted(categorizations_list,
                                   key=lambda c: c.object_modification_date,
                                   reverse=True)
-    
+
     context = RequestContext(request, {'host_template': nl_template,
                                        'layout': newsletter.layout,
                                        'newsletter': newsletter,
                                        'categorizations': categorizations_list,
                                        })
     content_view = frontend.site.get_view(Newsletter, newsletter.view)
-    
-    html = content_view.get_response(request, context, newsletter)
+
+    html = content_view.get_response(request, context, options={},
+                                     content_object=newsletter)
     return html
 
 
@@ -75,7 +76,7 @@ def send(request, id, test=False):
         msg.send()
     except:
         return HttpResponseRedirect(reverse('newsletter_failed', args=[id]))
-    else:    
+    else:
         return HttpResponseRedirect(reverse('newsletter_sent', args=[id]))
 
 @permission_required('newsletter.can_modify')
@@ -92,4 +93,4 @@ def failed(request, id, test=False):
     c = RequestContext(request, {'newsletter': newsletter,})
     return HttpResponse(t.render(c))
 
-    
+

@@ -17,7 +17,7 @@ class NewsletterContentTeasers(frontend.FrontendView):
 
     template = "newsletter/content_teasers.html"
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         newsletter = content_object
         category = newsletter.content_category
         categorizations_list = category.categorizations.all()
@@ -52,8 +52,8 @@ frontend.site.register_view(Newsletter, NewsletterContent)
 ##     verbose_name=_('Header')
 ##     is_instance_view = True
 ##     is_region_view = True
-    
-##     def get_response(self, request, req_context, content_object):
+
+##     def get_response(self, request, req_context, options, content_object):
 ##         newsletter = content_object
 ##         return newsletter.header
 

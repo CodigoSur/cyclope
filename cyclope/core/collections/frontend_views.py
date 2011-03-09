@@ -44,7 +44,7 @@ class CategoryRootItemsList(frontend.FrontendView):
     is_content_view = True
     is_region_view = True
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
         template = "collections/category_root_items_list.html"
@@ -54,27 +54,28 @@ class CategoryRootItemsList(frontend.FrontendView):
 
 frontend.site.register_view(Category, CategoryRootItemsList)
 
+class ListOptions(forms.Form):
+    items_per_page = forms.IntegerField(label=_('Items per page'), initial=3, min_value=1)
 
 class CategoryDefaultList(frontend.FrontendView):
     name = 'default'
     verbose_name = _('default view for the Collection')
     is_default = True
     is_content_view = True
+    options_form = ListOptions
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         category = content_object
         if category.collection.default_list_view not in ["", self.name]:
             view_name = category.collection.default_list_view
             view = frontend.site.get_view(content_object.__class__, view_name)
         else:
             view = frontend.site.get_view(content_object.__class__, 'teaser_list')
-        return view.get_response(request, req_context, content_object)
+        return view.get_response(request, req_context, options, content_object)
 
 frontend.site.register_view(Category, CategoryDefaultList)
 
-class CategoryTeaserListOptions(forms.Form):
-    items_per_page = forms.IntegerField(label=_('Items per page'), initial=3, min_value=1)
-    labeled = forms.BooleanField(label=_('Labeled'), initial=False, required=False)
+
 
 class CategoryTeaserList(frontend.FrontendView):
     """A teaser list view of Category members.
@@ -82,14 +83,14 @@ class CategoryTeaserList(frontend.FrontendView):
     name = 'teaser_list'
     verbose_name = _('teaser list of Category members')
 
-    options_form = CategoryTeaserListOptions
     is_content_view = True
     is_region_view = True
+    options_form = ListOptions
 
     template = "collections/category_teaser_list.html"
     inline_view_name = 'teaser'
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
 
@@ -98,7 +99,7 @@ class CategoryTeaserList(frontend.FrontendView):
                                       key=lambda c: c.object_modification_date,
                                       reverse=True)
 
-        paginator = Paginator(categorizations_list, self.options["items_per_page"])
+        paginator = Paginator(categorizations_list, options["items_per_page"])
 
         # Make sure page request is an int. If not, deliver first page.
         try:
@@ -144,7 +145,7 @@ class CategorySimplifiedTeaserList(frontend.FrontendView):
     verbose_name=_('simplified teaser list of Category members')
     is_region_view = True
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
 
@@ -184,7 +185,7 @@ class CollectionRootCategoriesTeaserList(frontend.FrontendView):
     is_content_view = True
     template = "collections/collection_root_categories_teaser_list.html"
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         collection = content_object
         req_context.update(
             {'categories': Category.tree.filter(collection=collection, level=0),
@@ -204,7 +205,7 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
     is_content_view = True
     is_region_view = True
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         collection = content_object
         categories = Category.tree.filter(collection=collection, level=0)
         category_list = []
@@ -280,7 +281,7 @@ class CollectionCategoriesMembersAlphabeticTeaserList(frontend.FrontendView):
 
     template = "collections/collection_all_items_alphabetical_teaser_list.html"
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         collection = content_object
         categorizations_list = Categorization.objects.filter(category__in=collection.categories.all())
         object_list = list(set([cat.content_object for cat in categorizations_list]))
@@ -322,7 +323,7 @@ class CategoryListAsForum(frontend.FrontendView):
 
     template = "collections/category_list_as_forum.html"
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
 
@@ -377,7 +378,7 @@ class CategoryAlphabeticTeaserList(frontend.FrontendView):
 
     template = "collections/category_alphabetical_teaser_list.html"
 
-    def get_response(self, request, req_context, content_object):
+    def get_response(self, request, req_context, options, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
         paginator = NamePaginator(categorizations_list, on="content_object.name", per_page=self.items_per_page)
