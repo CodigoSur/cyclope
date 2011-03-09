@@ -1,0 +1,144 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_modify adminmedia %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{ CYCLOPE_MEDIA_URL }}css/tabbed_collections.css" />
+{% endblock %}
+
+
+{% block content %}
+
+{{ block.super }}
+
+{% block after_related_objects %}
+
+{# chainedSelect for Collectibles derived classes  #}
+
+<script type="text/javascript">
+//<![CDATA[
+function setup_chainedSelect_for_categorization(i) {
+    $("#id_collections-categorization-content_type-object_id-"+ i +"-category").chainedSelect({
+        parent: '#id_collections-categorization-content_type-object_id-'+ i +'-collection',
+        url: "/{{CYCLOPE_PREFIX}}collection_categories_json",
+        value: 'category_id',
+        label: 'category_name'
+    });
+};
+
+jQuery(document).ready(function($){
+  $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-category']").each(function(i, sel){
+        setup_chainedSelect_for_categorization(i);
+  });
+
+  $("#collections-categorization-content_type-object_id-group .add-row a").click(
+    function(){
+      i = $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-category']").length - 2
+      setup_chainedSelect_for_categorization(i);
+    });
+});
+//]]>
+</script>
+
+{# chainedSelect for RelatedContents #}
+
+<script type="text/javascript">
+//<![CDATA[
+function setup_chainedSelect_for_relatedcontent(i) {
+    $('#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_id').chainedSelect({
+        parent: '#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_type',
+        url: "/{{CYCLOPE_PREFIX}}objects_for_ctype_json",
+        value: 'object_id',
+        label: 'verbose_name'
+    });
+};
+
+jQuery(document).ready(function($){
+  $("select[id^='id_cyclope-relatedcontent-self_type-self_id-'][id$='-other_id']").each(function(i, sel){
+        setup_chainedSelect_for_relatedcontent(i);
+  });
+
+  $("#cyclope-relatedcontent-self_type-self_id-group .add-row a").click(
+    function(){
+      i = $("select[id^='id_cyclope-relatedcontent-self_type-self_id-'][id$='-other_id']").length - 2
+      setup_chainedSelect_for_relatedcontent(i);
+    });
+});
+//]]>
+
+</script>
+
+
+{% endblock %}
+
+
+{# TODO(nicoechaniz): the collection tabs code is messy. needs lots of love but it works... #}
+
+<script type="text/javascript">
+//<![CDATA[
+
+jQuery(document).ready(function($){
+    var current_collection = null;
+
+    var select_collection = function (collection){
+        $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-collection']")
+            .each(function(){
+                if (!collection){
+                    $(this).closest('.inline-related').hide();
+                }
+                else if (this.value != collection){
+                    $(this).closest('.inline-related').hide();
+                }
+                else{
+                    $(this).closest('.inline-related').show()
+                }
+            });
+        current_collection = collection;
+
+        $('li[id^=id_collections-tab-]').each(function(i){
+            $(this).removeClass('current-tab')
+        });
+
+        $('#id_collections-tab-'+ collection).addClass('current-tab');
+    }
+
+    var initial = $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-collection']").val();
+    $('#collections-categorization-content_type-object_id-group h2').after('<div id="collection-tabs-container"><ul id="collection-tabs-list"></ul></div>');
+
+    $('#id_collections-categorization-content_type-object_id-__prefix__-collection option')
+        .each(function(i){
+            if (this.text.match(/-+/g) != this.text){
+                var collection = this.value
+                var link_id = "id_collections-tab-"+ collection //$(this).parent().attr('id')
+                $('#collection-tabs-list').append('<li class="tab" id="'+link_id+'"><a href="javascript:void(0)" >'+this.text+'</a></li>');
+//                $('#collections-categorization-content_type-object_id-group h2').after('<span class="collection-tab" ><a href="javascript:void(0)" id="'+link_id+'" >'+this.text+'</a></span>');
+
+                $("#"+link_id).click(function(){
+                    select_collection(collection);
+                });
+            }
+        });
+
+    $('#collections-categorization-content_type-object_id-group > .add-row a')
+        .click(function(){
+            i = $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-collection']").length - 2
+            sel = '#id_collections-categorization-content_type-object_id-'+i+'-collection'
+            $(sel).val(current_collection);
+            select_collection(current_collection);
+            $(sel).change();
+            $(sel).parents(".collection").hide();
+        });
+
+    select_collection(initial);
+
+    $(".dynamic-collections-categorization-content_type-object_id .collection").hide();
+
+})
+//]]>
+</script>
+
+{% if original.related_contents.count >= 0 %}
+    <script type="text/javascript" src="/media/cyclope/js/drag_drop.js"></script>
+{% endif %}
+
+{% endblock %}

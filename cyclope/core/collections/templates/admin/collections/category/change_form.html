@@ -1,0 +1,23 @@
+{% extends "admin/change_form.html" %}
+
+
+{% block after_related_objects %}
+{{ block.super }}
+
+{# Change parent for Category when collection is changed #}
+
+<script type="text/javascript">
+//<![CDATA[
+$(function() {
+  $("#id_parent").chainedSelect({
+        parent: '#id_collection',
+        url: '/{{CYCLOPE_PREFIX}}collection_categories_json',
+        value: 'category_id',
+        label: 'category_name'
+    });
+
+});
+//]]>
+</script>
+
+{% endblock %}

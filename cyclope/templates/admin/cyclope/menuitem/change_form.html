@@ -1,0 +1,84 @@
+{% extends "admin/base_content_change_form.html" %}
+
+
+{% block after_related_objects %}
+{{ block.super }}
+
+{# chainedSelect for MenuItem #}
+
+<script type="text/javascript">
+//<![CDATA[
+$(function() {
+  $("#id_content_view").chainedSelect({
+        parent: '#id_content_type',
+        url: '/{{CYCLOPE_PREFIX}}registered_standard_views_json',
+        value: 'view_name',
+        label: 'verbose_name'
+    });
+
+  $("#id_object_id").chainedSelect({
+        parent: '#id_content_type',
+        // this /cyclope/ url should not be hard_coded here
+        url: '/{{CYCLOPE_PREFIX}}objects_for_ctype_json',
+        value: 'object_id',
+        label: 'verbose_name'
+      });
+
+    $.cyclope = {
+        access_number : 0,
+    };
+
+    var div_container = $("#view_options_multiple").parent().parent();
+    if ($("#view_options_multiple").html() === ""){
+        div_container.hide();
+    }
+
+    $("#id_content_view").change(function() {
+        $.cyclope.access_number += 1;
+        if ($.cyclope.access_number >= 3){
+            /*
+            $.cyclope.access_number >= 3 because 2 changes are made by the
+            cainedSelect in page load. So the third is the first change made by
+            the user.
+            */
+            var view_name = $("#id_content_view option:selected").val();
+            var content_type_id = $("#id_content_type option:selected").val();
+            // $("#view_options_multiple").parent().parent().hide();
+            if (view_name && content_type_id){
+                $.get("/{{CYCLOPE_PREFIX}}options_view_widget_html",
+                   { content_type_id: content_type_id, view_name: view_name },
+                   function(data){
+                       if (data){
+                            $("#view_options_multiple").replaceWith(data);
+                            div_container.show();
+                        }
+                        else{
+                            $("#view_options_multiple").html("");
+                            div_container.hide();
+                        }
+                   });
+            }
+        }
+
+
+    });
+
+});
+
+
+{# Change parent for MenuItem when menu is changed #}
+
+$(function() {
+  $("#id_parent").chainedSelect({
+        parent: '#id_menu',
+        url: '/{{CYCLOPE_PREFIX}}menu_items_for_menu_json',
+        value: 'object_id',
+        label: 'verbose_name'
+    });
+
+});
+//]]>
+</script>
+
+
+{% endblock %}
