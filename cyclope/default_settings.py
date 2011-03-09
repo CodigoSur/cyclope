@@ -136,7 +136,7 @@ CAPTCHA_FONT_SIZE=30
 CAPTCHA_LETTER_ROTATION=(-15,15)
 
 # feincms settings
-FEINCMS_ADMIN_MEDIA = '/feincms_media/'
+FEINCMS_ADMIN_MEDIA = '/media/feincms/'
 # TreeEditor throws an exception in the admin for Category (as of 2010-02-19)
 # if this is set to True
 FEINCMS_TREE_EDITOR_INCLUDE_ANCESTORS = False

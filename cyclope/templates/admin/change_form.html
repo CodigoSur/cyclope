@@ -312,10 +312,13 @@ jQuery(document).ready(function($){
 
 {# TODO(nicoechaniz): the collection tabs code is messy. needs lots of love but it works... #}
 <script type="text/javascript">
+<<<<<<< local
 //<![CDATA[
-var current_collection = null;
 
 jQuery(document).ready(function($){
+
+    var current_collection = null;
+
     var select_collection = function (collection){
         $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-collection']")
             .each(function(){
@@ -352,7 +355,6 @@ jQuery(document).ready(function($){
             }
         });
 
-
     $('#collections-categorization-content_type-object_id-group > .add-row a')
         .click(function(){
             i = $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-collection']").length - 2
@@ -360,9 +362,12 @@ jQuery(document).ready(function($){
             $(sel).val(current_collection);
             select_collection(current_collection);
             $(sel).change();
+            $(sel).parents(".collection").hide();
         });
 
     select_collection(initial);
+
+    $(".dynamic-collections-categorization-content_type-object_id .collection").hide();
 
 })
 //]]>

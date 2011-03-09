@@ -19,15 +19,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+"""
+To activate your index dashboard add the following to your settings.py::
+    ADMIN_TOOLS_INDEX_DASHBOARD = 'cyclope_project.dashboard.CustomIndexDashboard'
+
+And to activate the app index dashboard::
+    ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'cyclope_project.dashboard.CustomAppIndexDashboard'
+"""
+
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 
 from cyclope.apps.articles.models import Article
 
-# to activate your index dashboard add the following to your settings.py:
-#
-# ADMIN_TOOLS_INDEX_DASHBOARD = 'cyclope_project.dashboard.CustomIndexDashboard'
 
 class ModuleNotFound(Exception):
     """Dashboard module not found in dashboard children"""
@@ -90,125 +95,123 @@ class CustomIndexDashboard(Dashboard):
                         'cyclope.models.Author',
                         'cyclope.models.Source',
                         ]),
+
+                modules.ModelList(
+                    title=_('Comments'),
+                    css_classes = ('dbmodule-comments', 'main-area-modules',),
+                    pre_content = _('Review and moderate user comments'),
+                    draggable = False,
+                    deletable = False,
+                    collapsible= False,
+                    include_list=[
+                        'django.contrib.comments.models.Comment',
+                    ]),
+                )))
+
+        self.children.append(modules.Group(
+            title=_('Site structure'),
+            css_classes = ('dbmodule-site_structure', 'main-area-modules',),
+            pre_content = _('Modify your site layout and collections'),
+            display="tabs",
+            draggable = False,
+            deletable = False,
+            collapsible= False,
+            children = (
+                
+                modules.ModelList(
+                    title=_('Collections'),
+                    css_classes = ('dbmodule-content_collection',),
+                    include_list=[
+                       'cyclope.core.collections.models.Collection',
+                       'cyclope.core.collections.models.Category',
+                        ]),
+                modules.ModelList(
+                    title=_('Menus'),
+                    css_classes = ('dbmodule-menues',),
+                    include_list=[
+                        'cyclope.models.Menu',
+                        'cyclope.models.MenuItem',
+                        ]),
+                modules.ModelList(
+                    title=_('Layouts'),
+                    css_classes = ('dbmodule-layout',),
+                    include_list=[
+                        'cyclope.models.Layout',
+                        ]),
+               )))
+
+        self.children.append(modules.ModelList(
+            title=_('Global settings'),
+            css_classes = ('dbmodule-global_settings', 'main-area-modules',),
+            draggable = False,
+            deletable = False,
+            collapsible= False,
+            include_list=[
+                'cyclope.models.SiteSettings',
+                'contact_form.models.ContactFormSettings',
+                ]))
+
+        self.children.append(modules.Group(
+            title=_('Plugins'),
+            css_classes = ('dbmodule-plugins', 'main-area-modules',),
+            display="tabs",
+            draggable = False,
+            deletable = False,
+            collapsible= False,
+            pre_content = (''),
+            children = (
                 modules.ModelList(
                     title=_('Polls'),
-                    css_classes = ('dbmodule-content_authors_and_sources',),
+                    css_classes = ('dbmodule-polls', 'main-area-modules',),
                     include_list=[
                         'cyclope.apps.polls.models.Poll',
                         'cyclope.apps.polls.models.Question',
                         ]),
-
+                modules.ModelList(
+                    title=_('Newsletter'),
+                    css_classes = ('dbmodule-newsletter',),
+                    include_list=[
+                        'cyclope.apps.newsletter.models.Newsletter',
+                        ]),
+                modules.ModelList(
+                    title=_('Contacts'),
+                    css_classes = ('dbmodule-contacts', 'main-area-modules',),
+                    draggable = False,
+                    deletable = False,
+                    collapsible= False,
+                    include_list=[
+                        'cyclope.apps.contacts.models.Contact',
+                        ]),
                 )))
 
-        if user in managers or user in admins:
-            self.children.append(modules.ModelList(
-                title=_('Comments'),
-                css_classes = ('dbmodule-comments', 'main-area-modules',),
-                pre_content = _('Review and moderate user comments'),
-                draggable = False,
-                deletable = False,
-                collapsible= False,
-                include_list=[
-                    'django.contrib.comments.models.Comment',
-                    ]))
-
-            self.children.append(modules.Group(
-                title=_('Categorization'),
-                css_classes = ('dbmodule-categorization', 'main-area-modules',),
-                display="tabs",
-                draggable = False,
-                deletable = False,
-                collapsible= False,
-                pre_content = _('Classify the content in your website'),
-                children = (
-                    modules.ModelList(
-                        title=_('Collections'),
-                        css_classes = ('dbmodule-content_collection',),
-                        include_list=[
-                           'cyclope.core.collections.models.Collection',
-                           'cyclope.core.collections.models.Category',
-                            ]),
-                    modules.ModelList(
-                        title=_('Tagging'),
-                        css_classes = ('dbmodule-content_tagging',),
-                        include_list=[
-                            'tagging',
-                            ]),
-                    )))
-
-            self.children.append(modules.ModelList(
-                title=_('Site structure'),
-                css_classes = ('dbmodule-site_structure', 'main-area-modules',),
-                pre_content = _('Modify the menus and site layouts'),
-                draggable = False,
-                deletable = False,
-                collapsible= False,
-                include_list=[
-                    'cyclope.models.Layout',
-                    'cyclope.models.Menu',
-                    'cyclope.models.MenuItem',
-                    ]))
-
-            self.children.append(modules.ModelList(
-                title=_('Global settings'),
-                css_classes = ('dbmodule-global_settings', 'main-area-modules',),
-                draggable = False,
-                deletable = False,
-                collapsible= False,
-                include_list=[
-                    'cyclope.models.SiteSettings',
-                    'contact_form.models.ContactFormSettings',
-                    ]))
-
-            self.children.append(modules.ModelList(
-                title=_('Plugins'),
-                css_classes = ('dbmodule-global_settings', 'main-area-modules',),
-                draggable = False,
-                deletable = False,
-                collapsible= False,
-                include_list=[
-                    'cyclope.apps.newsletter.models.Newsletter',
-                    ]))
-
-            self.children.append(modules.ModelList(
-                title=_('Contacts'),
-                css_classes = ('dbmodule-contacts', 'main-area-modules',),
-                draggable = False,
-                deletable = False,
-                collapsible= False,
-                include_list=[
-                    'cyclope.apps.contacts.models.Contact',
-                    ]))
-
-        if user in admins:
-            self.children.append(modules.Group(
-                title=_('Advanced'),
-                css_classes = ('dbmodule-advanced', 'main-area-modules',),
-                display="tabs",
-                draggable = False,
-                deletable = False,
-                collapsible= False,
-                pre_content = _('Advanced configuration'),
-                children = (
-                    modules.ModelList(
-                        title=_('Auth'),
-                        css_classes = ('dbmodule-content_auth',),
-                        include_list=[
-                            'django.contrib.auth',
-                            ]),
-                    modules.ModelList(
-                        title=_('Registration'),
-                        css_classes = ('dbmodule-content_registration',),
-                        include_list=[
-                            'registration',
-                            ]),
-                    modules.ModelList(
-                        title=_('Sites'),
-                        css_classes = ('dbmodule-content_sites',),
-                        include_list=[
-                            'django.contrib.sites',
-                            ]),
-                    )))
+        self.children.append(modules.Group(
+            title=_('Advanced'),
+            css_classes = ('dbmodule-advanced', 'main-area-modules',),
+            display="tabs",
+            draggable = False,
+            deletable = False,
+            collapsible= False,
+            pre_content = _('Advanced configuration'),
+            children = (
+                modules.ModelList(
+                    title=_('Auth'),
+                    css_classes = ('dbmodule-content_auth',),
+                    include_list=[
+                        'django.contrib.auth',
+                        ]),
+                modules.ModelList(
+                    title=_('Registration'),
+                    css_classes = ('dbmodule-content_registration',),
+                    include_list=[
+                        'registration',
+                        ]),
+                modules.ModelList(
+                    title=_('Sites'),
+                    css_classes = ('dbmodule-content_sites',),
+                    include_list=[
+                        'django.contrib.sites',
+                        ]),
+                )))
 
 	## RIGHT PANEL MODULES ##
 
@@ -287,26 +290,24 @@ class CustomAppIndexDashboard(AppIndexDashboard):
     """
     Custom app index dashboard for cyclope_project.
     """
+    # we disable title because its redundant with the model list module
+    title = ''
+
     def __init__(self, *args, **kwargs):
         AppIndexDashboard.__init__(self, *args, **kwargs)
 
-        # we disable title because its redundant with the model list module
-        self.title = ''
-
-        # append a model list module
-        self.children.append(modules.ModelList(
-            title=self.app_title,
-            include_list=self.models,
-        ))
-
-        ## append a recent actions module
-        #self.children.append(modules.RecentActions(
-        #    title=_('Recent Actions'),
-        #    include_list=self.get_app_content_types(),
-        #))
+        # append a model list module and a recent actions module
+        self.children += [
+            modules.ModelList(self.app_title, self.models),
+            ## modules.RecentActions(
+            ##     _('Recent Actions'),
+            ##     include_list=self.get_app_content_types(),
+            ##     limit=5
+            ## )
+        ]
 
     def init_with_context(self, context):
         """
         Use this method if you need to access the request context.
         """
-        pass
+        return super(CustomAppIndexDashboard, self).init_with_context(context)
