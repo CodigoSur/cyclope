@@ -53,6 +53,7 @@ setup(
         'git+http://github.com/nicoechaniz/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-3.0-nograpup',
         'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-0.4a1',
         'hg+http://bitbucket.org/nicoechaniz/django-rosetta_temp#egg=django-rosetta-0.5.6-temp',
+        'hg+http://bitbucket.org/san/django-jsonfield#egg=django-jsonfield-0.6.0-cyclope',
     ],
 
     install_requires=[
@@ -76,6 +77,7 @@ setup(
         'django-dbgettext>=0.1', # fixed revision in dep links
         'django-rosetta==0.5.6-temp', # installed from our clone
         'django-markitup==0.6.1',
+        'django-jsonfield==0.6.0-cyclope', # installed from our clone
     ],
 
     scripts=['cyclope/management/commands/startcyclopeproject.py'],
