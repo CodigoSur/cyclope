@@ -34,7 +34,7 @@ from forms import ContactForm
 
 class ContactAddressInline(admin.TabularInline):
     model = ContactAddress
-    extra = 2
+    extra = 1
     fields = ('type', 'country', 'region', 'city', 'street_address', 'phone_number',
               'post_office_box')
 

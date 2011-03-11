@@ -34,15 +34,23 @@ from cyclope.core.collections.models import Collectible
 
 class Country(models.Model):
     name = models.CharField(_('name'), max_length=255)
-    # iso ?
+
+    def __unicode__(self):
+        return self.name
 
 class Region(models.Model):
     country = models.ForeignKey(Country)
     name = models.CharField(_('name'), max_length=255)
 
+    def __unicode__(self):
+        return self.name
+
 class City(models.Model):
     region = models.ForeignKey(Region)
     name = models.CharField(_('name'), max_length=255)
+
+    def __unicode__(self):
+        return self.name
 
 class Location(models.Model):
     country = models.ForeignKey(Country, verbose_name=_('country'),blank=True, null=True)

@@ -38,12 +38,12 @@ from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 
 ADDRESS_TYPE_CHOICES = (
-    ('work', _('work')),
-    ('home', _('home')),
+    ('WORK', _('work')),
+    ('HOME', _('home')),
 )
 
 class ContactAddress(Location):
-    type = models.CharField(max_length=1, choices=ADDRESS_TYPE_CHOICES)
+    type = models.CharField(max_length=20, choices=ADDRESS_TYPE_CHOICES)
     contact = models.ForeignKey("Contact")
 
 class Contact(BaseContent, Collectible):
