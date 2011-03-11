@@ -49,6 +49,7 @@ class ContactAddress(Location):
 class Contact(BaseContent, Collectible):
     given_name = models.CharField(_('given name'), max_length=255)
     surname = models.CharField(_('surname'), blank=True, max_length=255)
+    birth_date = models.DateField(blank=True, null=True)
     gender = models.CharField(max_length=1, choices=(('M', _('Male')),
                                                      ('F', _('Female'))))
     photo = FileBrowseField(_('photo'), max_length=100, format='Image',

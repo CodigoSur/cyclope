@@ -29,7 +29,8 @@ import cyclope.settings as cyc_settings
 from cyclope.admin import BaseContentAdmin
 from cyclope.core.collections.admin import CollectibleAdmin
 
-from models import *
+from models import Contact, ContactAddress
+from forms import ContactForm
 
 class ContactAddressInline(admin.TabularInline):
     model = ContactAddress
@@ -38,6 +39,7 @@ class ContactAddressInline(admin.TabularInline):
               'post_office_box')
 
 class ContactAdmin(CollectibleAdmin, BaseContentAdmin):
+    form = ContactForm
     inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines + [ContactAddressInline]
 
     list_filter = ('gender', )
@@ -45,7 +47,8 @@ class ContactAdmin(CollectibleAdmin, BaseContentAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('given_name', 'surname', 'photo', 'gender', 'email', 'web', 'mobile_phone_number')
+            'fields': ('given_name', 'surname', 'birth_date', 'photo', 'gender',
+                       'email', 'web', 'mobile_phone_number')
         }),
     )
 
