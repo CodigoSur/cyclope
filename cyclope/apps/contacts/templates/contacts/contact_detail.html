@@ -37,6 +37,7 @@
   <ul>
     <li>{% trans "Given name" %}: {{contact.given_name}}</li>
     <li>{% trans "Surname" %}: {{contact.surname}}</li>
+    <li>{% trans "Birth date" %}: {{contact.birth_date|default:""}}</li>
     <li>{% trans "Gender" %}: {{contact.get_gender_display}}</li>
     <li>{% trans "Email" %}: {{contact.email}}</li>
     <li>{% trans "Web" %}: {{contact.web}}</li>

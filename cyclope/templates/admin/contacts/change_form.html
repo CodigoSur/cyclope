@@ -1,0 +1,37 @@
+{% extends "admin/change_form.html" %}
+
+
+{% block after_related_objects %}
+{{ block.super }}
+
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function() {
+  function setup_chainedSelect_for_location(index) {
+      $("#id_contactaddress_set-"+index+"-region").chainedSelect({
+            parent: '#id_contactaddress_set-'+index+'-country',
+            url: '/{{CYCLOPE_PREFIX}}locations/region/list',
+            value: 'object_id',
+            label: 'verbose_name'
+        });
+
+      $("#id_contactaddress_set-"+index+"-city").chainedSelect({
+            parent: '#id_contactaddress_set-'+index+'-region',
+            url: '/{{CYCLOPE_PREFIX}}locations/city/list',
+            value: 'object_id',
+            label: 'verbose_name'
+        });
+  }
+
+  $("select[id^='id_contactaddress_set-'][id$='-region']").each(function(i, sel){
+      setup_chainedSelect_for_location(i);
+  });
+
+  $("#contactaddress_set-group .add-row a").click(function() {
+    setup_chainedSelect_for_location($("select[id^='id_contactaddress_set-'][id$='-region']").length - 2);
+  });
+
+});
+//]]>
+</script>
+{% endblock %}

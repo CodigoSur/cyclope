@@ -75,6 +75,7 @@ urlpatterns = patterns('',
         name='content_type_feed'),
     (r'^newsletter/', include('cyclope.apps.newsletter.urls')),
     url(r'^markitup/', include('markitup.urls')),
+    (r'^locations/', include('cyclope.apps.locations.urls')),
 )
 
 if django_settings.DEBUG:

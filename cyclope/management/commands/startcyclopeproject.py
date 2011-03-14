@@ -46,6 +46,7 @@ class Command(LabelCommand):
         import markitup
         import admin_tools
         import filebrowser
+        import feincms
         media = (
             ("admin", os.path.join(django.__path__[0], "contrib", "admin", "media")),
             ("markitup", os.path.join(markitup.__path__[0], "media", "markitup")),
@@ -53,6 +54,7 @@ class Command(LabelCommand):
             ("filebrowser", os.path.join(filebrowser.__path__[0], "media", "filebrowser")),
             ("cyclope", os.path.join(cyclope.__path__[0], "media")),
             ("jquery-autocomplete", os.path.join(cyclope.__path__[0], "media", "jquery-autocomplete")),
+            ("feincms", os.path.join(cyclope.__path__[0], "media", "feincms")),
         )
 
         top_dir = os.path.join(directory, project_name)
