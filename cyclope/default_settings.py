@@ -124,6 +124,16 @@ INSTALLED_APPS = [
 #    'django_extensions',
 ]
 
+try:
+    import live
+except:
+    live = None
+
+if live:
+    INSTALLED_APPS += ['live']
+    STOMP_RESTQ_URL = '/live/restq/'
+
+
 # debug_toolbar settings
 #DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
 

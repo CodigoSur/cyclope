@@ -29,6 +29,8 @@ And to activate the app index dashboard::
 
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
+from django.conf import settings
+
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 
 from cyclope.apps.articles.models import Article
@@ -148,6 +150,45 @@ class CustomIndexDashboard(Dashboard):
                 'contact_form.models.ContactFormSettings',
                 ]))
 
+
+        plugins_children = [
+            modules.ModelList(
+                title=_('Polls'),
+                css_classes = ('dbmodule-polls', 'main-area-modules',),
+                include_list=[
+                    'cyclope.apps.polls.models.Poll',
+                    'cyclope.apps.polls.models.Question',
+                    ]),
+            modules.ModelList(
+                title=_('Newsletter'),
+                css_classes = ('dbmodule-newsletter',),
+                include_list=[
+                    'cyclope.apps.newsletter.models.Newsletter',
+                    ]),
+            modules.ModelList(
+                title=_('Contacts'),
+                css_classes = ('dbmodule-contacts', 'main-area-modules',),
+                draggable = False,
+                deletable = False,
+                collapsible= False,
+                include_list=[
+                    'cyclope.apps.contacts.models.Contact',
+                    ]),
+            ]
+        
+        if 'live' in settings.INSTALLED_APPS:
+            plugins_children.append(
+                modules.ModelList(
+                    title=_('Chat'),
+                    css_classes = ('dbmodule-chat', 'main-area-modules',),
+                    draggable = False,
+                    deletable = False,
+                    collapsible= False,
+                    include_list=[
+                        'live.models.Channel',
+                        ]),
+                )
+        
         self.children.append(modules.Group(
             title=_('Plugins'),
             css_classes = ('dbmodule-plugins', 'main-area-modules',),
@@ -156,30 +197,9 @@ class CustomIndexDashboard(Dashboard):
             deletable = False,
             collapsible= False,
             pre_content = (''),
-            children = (
-                modules.ModelList(
-                    title=_('Polls'),
-                    css_classes = ('dbmodule-polls', 'main-area-modules',),
-                    include_list=[
-                        'cyclope.apps.polls.models.Poll',
-                        'cyclope.apps.polls.models.Question',
-                        ]),
-                modules.ModelList(
-                    title=_('Newsletter'),
-                    css_classes = ('dbmodule-newsletter',),
-                    include_list=[
-                        'cyclope.apps.newsletter.models.Newsletter',
-                        ]),
-                modules.ModelList(
-                    title=_('Contacts'),
-                    css_classes = ('dbmodule-contacts', 'main-area-modules',),
-                    draggable = False,
-                    deletable = False,
-                    collapsible= False,
-                    include_list=[
-                        'cyclope.apps.contacts.models.Contact',
-                        ]),
-                )))
+            children = plugins_children
+            ))
+            
 
         self.children.append(modules.Group(
             title=_('Advanced'),

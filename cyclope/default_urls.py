@@ -90,6 +90,11 @@ if django_settings.DEBUG:
             {'document_root': feincms_root, 'show_indexes': True})
     )
 
+if 'live' in django_settings.INSTALLED_APPS:
+    urlpatterns += patterns('',
+                            (r'live/', include('live.urls')),
+                            )
+
 if 'rosetta' in django_settings.INSTALLED_APPS:
     urlpatterns += patterns('',
         ## url(r'^rosetta/translate/(?P<langid>[\w\-]+)/(?P<idx>\d+)/',

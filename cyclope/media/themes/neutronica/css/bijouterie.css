@@ -546,3 +546,118 @@ padding:4px;
  display: none !important;
 }
 
+
+/* estilos para django-live */
+
+.sender{
+    color: #2c6250;
+}
+
+.message{
+    color: #444;
+}
+
+.channel_message{
+    color: #a44;
+}
+
+.user_message {
+    color: #448;
+}
+
+#chat_container{
+    font-family: Verdana, Arial;
+    background-color: #9ddcab;
+    padding: 10px 0px;
+    background-color: #efd;
+    margin-top: auto;
+    overflow: hidden;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    font-size: 14px;
+}
+
+#chat_container #wrapper {
+    padding: 0px;
+    margin: 0px;
+}
+
+#chat_container #output{
+    background-color: #ddf5e2;
+    overflow-y: auto;
+//    overflow-y: scroll;
+    overflow-x: wrap;
+    height: 300px;
+    padding: 10px;
+    color: #444;
+    width: 65%;
+    float: left;
+    /*    display: inline-block; */
+    padding: 10px;
+    margin: 10px;
+}
+
+#chat_container #participants_box{
+    display: inline-block;
+    /* float: left; */
+    padding: 0px;
+    margin: 0px;
+}
+
+#chat_container .guest, .guest a {
+    color: grey;
+}
+
+#chat_container .registered, .registered a {
+    color: green;
+}
+
+#chat_container .staff, .staff a {
+    color: orange;
+}
+
+#chat_container .superuser, .superuser a{
+    color: red;
+}
+
+#chat_container .staff, .staff a {
+    color: orange;
+}
+
+#chat_container .myself{
+    font-weight: bold;
+}
+
+#chat_container #input{
+    background-color: #62886a;
+    border: 1px #777 solid;
+    width: 70%;
+    color: #eeffd0;
+    padding: 3px;
+}
+
+#chat_container #channel_name{
+    font-size: 16px;
+    float: left;
+    margin-left: 10px;
+    width: 200px;
+}
+
+#chat_container #change_name{
+    margin-left: auto;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+#chat_container #nickname{
+    color: #1b1a1a;
+    background: transparent;
+    border: 0px;
+    border-bottom: 1px #555 dashed;
+}
+
+#chat_container a{
+    text-decoration: underline;
+}

@@ -8,6 +8,7 @@ syntax: glob
 *.orig
 *.dbbk
 *.bak
+*.log
 pip-log.txt 
 dbutils.py
 mine_initial_data.py
