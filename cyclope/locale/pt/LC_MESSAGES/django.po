@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-09 17:04-0300\n"
+"POT-Creation-Date: 2011-03-14 14:48-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,150 +33,154 @@ msgstr ""
 msgid "Set the layout that will be used when this menuitem is selected."
 msgstr ""
 
-#: dashboard.py:51
+#: dashboard.py:53
 msgid "Site Administration"
 msgstr ""
 
-#: dashboard.py:64
+#: dashboard.py:66
 msgid "Content"
 msgstr ""
 
-#: dashboard.py:70
+#: dashboard.py:72
 msgid "Create, delete or modify content for your website"
 msgstr ""
 
-#: dashboard.py:73
+#: dashboard.py:75
 msgid "Main"
 msgstr ""
 
-#: dashboard.py:80
+#: dashboard.py:82
 msgid "Multimedia Library"
 msgstr ""
 
-#: dashboard.py:92
+#: dashboard.py:94
 msgid "Authors and Sources"
 msgstr ""
 
-#: dashboard.py:100 apps/articles/templates/articles/article_detail.html:31
+#: dashboard.py:102 apps/articles/templates/articles/article_detail.html:31
 #: apps/polls/templates/polls/poll_detail.html:34
 #: core/collections/templates/collections/category_list_as_forum.html:15
 msgid "Comments"
 msgstr ""
 
-#: dashboard.py:109
+#: dashboard.py:111
 msgid "Site structure"
 msgstr ""
 
-#: dashboard.py:111
+#: dashboard.py:113
 msgid "Modify your site layout and collections"
 msgstr ""
 
-#: dashboard.py:119
+#: dashboard.py:121
 msgid "Collections"
 msgstr ""
 
-#: dashboard.py:126
+#: dashboard.py:128
 msgid "Menus"
 msgstr ""
 
-#: dashboard.py:133
+#: dashboard.py:135
 msgid "Layouts"
 msgstr ""
 
-#: dashboard.py:141
+#: dashboard.py:143
 msgid "Global settings"
 msgstr ""
 
-#: dashboard.py:152
-msgid "Plugins"
-msgstr ""
-
-#: dashboard.py:161
+#: dashboard.py:156
 msgid "Polls"
 msgstr ""
 
-#: dashboard.py:168 templates/cyclope/themes/neutrona/__init__.py:45
+#: dashboard.py:163 templates/cyclope/themes/neutrona/__init__.py:45
 #: templates/cyclope/themes/neutronica/__init__.py:57
 msgid "Newsletter"
 msgstr ""
 
-#: dashboard.py:174
+#: dashboard.py:169
 msgid "Contacts"
 msgstr ""
 
-#: dashboard.py:185
+#: dashboard.py:182
+msgid "Chat"
+msgstr ""
+
+#: dashboard.py:193
+msgid "Plugins"
+msgstr ""
+
+#: dashboard.py:205
 msgid "Advanced"
 msgstr ""
 
-#: dashboard.py:191
+#: dashboard.py:211
 msgid "Advanced configuration"
 msgstr ""
 
-#: dashboard.py:194
+#: dashboard.py:214
 msgid "Auth"
 msgstr ""
 
-#: dashboard.py:200
+#: dashboard.py:220
 msgid "Registration"
 msgstr ""
 
-#: dashboard.py:206
+#: dashboard.py:226
 msgid "Sites"
 msgstr ""
 
-#: dashboard.py:217
+#: dashboard.py:237
 msgid "Quick links"
 msgstr ""
 
-#: dashboard.py:224
+#: dashboard.py:244
 msgid "Browse media files"
 msgstr ""
 
-#: dashboard.py:227
+#: dashboard.py:247
 msgid "Return to site"
 msgstr ""
 
-#: dashboard.py:236
+#: dashboard.py:256
 msgid "Recent Actions"
 msgstr ""
 
-#: dashboard.py:245
+#: dashboard.py:265
 msgid "Community and support"
 msgstr ""
 
-#: dashboard.py:253
+#: dashboard.py:273
 msgid "Official website"
 msgstr ""
 
-#: dashboard.py:258
+#: dashboard.py:278
 msgid "Tutorials"
 msgstr ""
 
-#: default_settings.py:173
+#: default_settings.py:183
 msgid "Admin Thumbnail"
 msgstr ""
 
-#: default_settings.py:175
+#: default_settings.py:185
 msgid "Thumbnail (140px)"
 msgstr ""
 
-#: default_settings.py:177
+#: default_settings.py:187
 msgid "Small (300px)"
 msgstr ""
 
-#: default_settings.py:179
+#: default_settings.py:189
 msgid "Medium (460px)"
 msgstr ""
 
-#: default_settings.py:181
+#: default_settings.py:191
 msgid "Big (620px)"
 msgstr ""
 
-#: default_settings.py:183
+#: default_settings.py:193
 msgid "Cropped (60x60px)"
 msgstr ""
 
-#: default_settings.py:185
+#: default_settings.py:195
 msgid "Cropped Thumbnail (140x140px)"
 msgstr ""
 
@@ -306,8 +310,8 @@ msgid "site settings"
 msgstr ""
 
 #: models.py:93 models.py:123 models.py:239 models.py:285 models.py:360
-#: models.py:383 apps/locations/models.py:36 apps/locations/models.py:41
-#: apps/locations/models.py:45 apps/newsletter/models.py:34
+#: models.py:383 apps/locations/models.py:36 apps/locations/models.py:43
+#: apps/locations/models.py:50 apps/newsletter/models.py:34
 #: core/collections/models.py:42 core/collections/models.py:77
 msgid "name"
 msgstr ""
@@ -370,7 +374,7 @@ msgstr ""
 msgid "menu items"
 msgstr ""
 
-#: models.py:216 apps/locations/models.py:49
+#: models.py:216 apps/locations/models.py:57
 msgid "region"
 msgstr ""
 
@@ -478,7 +482,7 @@ msgstr ""
 msgid "avatar"
 msgstr ""
 
-#: models.py:418 apps/locations/models.py:50
+#: models.py:418 apps/locations/models.py:58
 msgid "city"
 msgstr ""
 
@@ -591,7 +595,7 @@ msgstr ""
 
 #: apps/articles/templates/articles/article_detail.html:114
 #: apps/articles/templates/articles/article_teaser.html:56
-#: apps/contacts/templates/contacts/contact_detail.html:58
+#: apps/contacts/templates/contacts/contact_detail.html:59
 #: apps/forum/templates/forum/topic_teaser.html:22
 #: apps/medialibrary/templates/medialibrary/document_teaser.html:25
 #: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:21
@@ -654,23 +658,23 @@ msgstr ""
 msgid "home"
 msgstr ""
 
-#: apps/contacts/models.py:52
+#: apps/contacts/models.py:53
 msgid "Male"
 msgstr ""
 
-#: apps/contacts/models.py:53
+#: apps/contacts/models.py:54
 msgid "Female"
 msgstr ""
 
-#: apps/contacts/models.py:54
+#: apps/contacts/models.py:55
 msgid "photo"
 msgstr ""
 
-#: apps/contacts/models.py:61
+#: apps/contacts/models.py:62
 msgid "contact"
 msgstr ""
 
-#: apps/contacts/models.py:62
+#: apps/contacts/models.py:63
 msgid "contacts"
 msgstr ""
 
@@ -691,21 +695,25 @@ msgid "Surname"
 msgstr ""
 
 #: apps/contacts/templates/contacts/contact_detail.html:40
+msgid "Birth date"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:41
 #: apps/contacts/templates/contacts/contact_teaser.html:17
 msgid "Gender"
 msgstr ""
 
-#: apps/contacts/templates/contacts/contact_detail.html:41
+#: apps/contacts/templates/contacts/contact_detail.html:42
 #: apps/contacts/templates/contacts/contact_teaser.html:18
 msgid "Email"
 msgstr ""
 
-#: apps/contacts/templates/contacts/contact_detail.html:42
+#: apps/contacts/templates/contacts/contact_detail.html:43
 #: apps/contacts/templates/contacts/contact_teaser.html:19
 msgid "Web"
 msgstr ""
 
-#: apps/contacts/templates/contacts/contact_detail.html:43
+#: apps/contacts/templates/contacts/contact_detail.html:44
 #: apps/contacts/templates/contacts/contact_teaser.html:20
 msgid "Mobile"
 msgstr ""
@@ -748,19 +756,19 @@ msgstr ""
 msgid "Replies"
 msgstr ""
 
-#: apps/locations/models.py:48
+#: apps/locations/models.py:56
 msgid "country"
 msgstr ""
 
-#: apps/locations/models.py:51
+#: apps/locations/models.py:59
 msgid "street address"
 msgstr ""
 
-#: apps/locations/models.py:52
+#: apps/locations/models.py:60
 msgid "phone number"
 msgstr ""
 
-#: apps/locations/models.py:53
+#: apps/locations/models.py:61
 msgid "postal box"
 msgstr ""
 
@@ -1042,6 +1050,12 @@ msgstr ""
 msgid "submissions"
 msgstr ""
 
+#: apps/polls/templates/admin/polls/change_list.html:7
+#: templates/admin/change_list.html:107
+#: templates/admin/feincms/tree_editor.html:43
+msgid "Filter"
+msgstr ""
+
 #: apps/polls/templates/polls/poll_detail.html:27
 msgid "Share"
 msgstr ""
@@ -1285,12 +1299,6 @@ msgstr ""
 #: templates/admin/change_list.html:88
 #, python-format
 msgid "Add %(name)s"
-msgstr ""
-
-#: templates/admin/change_list.html:107
-#: templates/admin/feincms/tree_editor.html:43
-#: templates/admin/polls/change_list.html:7
-msgid "Filter"
 msgstr ""
 
 #: templates/admin/filter.html:2
