@@ -19,7 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import simplejson
+from django.utils import simplejson as json
 
 from django.http import HttpResponse
 
@@ -34,11 +34,11 @@ def _make_choices(query_set):
 def regions_list(request):
     country_id = int(request.GET['q'])
     query_set = Region.objects.filter(country__id = country_id)
-    json_data = simplejson.dumps(_make_choices(query_set))
+    json_data = json.dumps(_make_choices(query_set))
     return HttpResponse(json_data, mimetype = 'application/javascript')
 
 def cities_list(request):
     region_id = int(request.GET['q'])
     query_set = City.objects.filter(region__id = region_id)
-    json_data = simplejson.dumps(_make_choices(query_set))
+    json_data = json.dumps(_make_choices(query_set))
     return HttpResponse(json_data, mimetype = 'application/javascript')
