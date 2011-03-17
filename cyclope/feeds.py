@@ -45,12 +45,15 @@ class WholeSiteFeed(Feed):
     def link(self):
         return reverse('whole_site_feed')
 
+    def item_title(self, item):
+        #FIXME(diegoM): How to get the right translation of the object_name ?
+        return "%s  (%s)" % (item.name, item.get_object_name().capitalize())
+
     def items(self):
         N = cyc_settings.CYCLOPE_RSS_LIMIT
         objs = []
-        #FIXME(diegoM): Manager isn't accessible via ContentType instances
         for ctype in SiteSettings.objects.get().rss_content_types.all():
-            objs.extend(list(ctype.objects.all()[:N]))
+            objs.extend(list(ctype.model_class().objects.all()[:N]))
         return sorted(objs, key=lambda x: x.creation_date, reverse = True)[:N]
 
 class ContentTypeFeed(WholeSiteFeed):
