@@ -75,6 +75,9 @@ class SiteSettings(models.Model):
     newsletter_collection = models.ForeignKey(Collection, blank=True, null=True,
                                               verbose_name =_('newsletter collection'),
                                               help_text=_('This is the collection that will group the contents for your newsletters.'))
+    rss_content_types = models.ManyToManyField(ContentType,
+                                               verbose_name=_('whole feed contents'),
+                                               help_text=_('contents to show in the whole feed'))
 
     def __unicode__(self):
         return self.site.name

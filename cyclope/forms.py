@@ -164,6 +164,14 @@ class SiteSettingsAdminForm(forms.ModelForm):
             for theme_name in cyc_settings.themes.available ],
         required=True)
 
+    def __init__(self, *args, **kwargs):
+        super(SiteSettingsAdminForm, self).__init__(*args, **kwargs)
+        self.fields['rss_content_types'].choices = site.get_base_ctype_choices()
+
+        #TODO(diegoM): I don't like this...
+        if ('', '------') in self.fields['rss_content_types'].choices:
+            self.fields['rss_content_types'].choices.remove(('', '------'))
+
     class Meta:
         model = SiteSettings
 
