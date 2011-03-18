@@ -23,7 +23,7 @@
 core.collections.admin
 ----------------------
 """
-
+import django
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from django import forms
@@ -86,7 +86,7 @@ class CategoryFilterSpec(ChoicesFilterSpec):
                 self.lookup_choices.append((category.slug, u'%s%s' % \
                                             ('--'* category.level, category.name)))
             self.lookup_choices.append((None, "</a></ul></div>"))
-            
+
         self.model = model
 
     def choices(self, cl):
@@ -202,11 +202,14 @@ class CollectibleAdmin (admin.ModelAdmin):
     inlines = [ CategorizationInline, ]
     valid_lookups = ('categories',)
 
-    def lookup_allowed(self, lookup):
+    def lookup_allowed(self, lookup, value=None):
         if lookup.startswith(self.valid_lookups):
             return True
         else:
-            return super(CollectibleAdmin, self).lookup_allowed(lookup)
+            args = [lookup]
+            if not django.VERSION[:3] == (1, 2, 4):
+                args.append(value)
+            return super(CollectibleAdmin, self).lookup_allowed(*args)
 
 
 class CollectionAdminForm(forms.ModelForm):

@@ -2,6 +2,28 @@
 
 {% load comments i18n fb_versions cyclope_utils markup dbgettext_tags%}
 
+{% block extra_head %}
+<style media="screen, print" type="text/css">
+    div.field  {
+        font-family: "Nimbus Sans L",Helvetica,Arial,sans-serif;
+        font-size: 12px;
+        width:100%;
+        float: left;
+    }
+    div.field-name  {
+        float: left;
+        font-weight: 600;
+    }
+    div.field-value  {
+        float: left;
+        font-weight: 400;
+        padding-left: 10px;
+
+    }
+
+</style>
+{% endblock extra_head %}
+
 {% block content %}
 
 {% alias contact as 'current_object' %}
@@ -17,12 +39,8 @@
     <ul>
       <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a></li>
       {% if contact.email %}
-      <li>
-        <a href="mailto:{{contact.email}}">
-          {% trans "Send mail" %}
-        </a>
-      </li>
-     {% endif %}
+      <li><a href="mailto:{{contact.email}}">{% trans "Send mail" %}</a></li>
+      {% endif %}
     </ul>
   </div>
   <!-- /herramientas -->
@@ -31,20 +49,28 @@
   <p><img src="{% version contact.photo 'cropped' %}" /></p>
   {% endif %}
 
+    <div>
+        <div class="field"><div class="field-name">{% trans "Given name" %}:</div> <div class="field-value">{{contact.given_name}}</div></div>
+        <div class="field"><div class="field-name">{% trans "Surname" %}:</div> <div class="field-value">{{contact.surname}}</div></div>
+        <div class="field"><div class="field-name">{% trans "Birth date" %}:</div> <div class="field-value">{{contact.birth_date|default:""}}</div></div>
+        <div class="field"><div class="field-name">{% trans "Gender" %}:</div> <div class="field-value">{{contact.get_gender_display}}</div></div>
+        <div class="field"><div class="field-name">{% trans "Email" %}:</div> <div class="field-value">{{contact.email}}</div></div>
+        <div class="field"><div class="field-name">{% trans "Web" %}:</div> <div class="field-value">{{contact.web}}</div></div>
+        <div class="field"><div class="field-name">{% trans "Mobile" %}:</div> <div class="field-value">{{contact.mobile_phone_number}}</div></div>
+    </div>
+  {% if contact.contactaddress_set.all %}
 
-  {% trans "Last update" %}: {{contact.modification_date}}
-
-  <ul>
-    <li>{% trans "Given name" %}: {{contact.given_name}}</li>
-    <li>{% trans "Surname" %}: {{contact.surname}}</li>
-    <li>{% trans "Birth date" %}: {{contact.birth_date|default:""}}</li>
-    <li>{% trans "Gender" %}: {{contact.get_gender_display}}</li>
-    <li>{% trans "Email" %}: {{contact.email}}</li>
-    <li>{% trans "Web" %}: {{contact.web}}</li>
-    <li>{% trans "Mobile" %}: {{contact.mobile_phone_number}}</li>
-  </ul>
-
-  (XXX) ADDRESSES (XXX)
+  <div id="address-list">
+    {% for address in contact.contactaddress_set.all %}
+    <div class="address {{address.type}}">
+        <div id="address-type">{{address.get_type_display}}</div>
+        <div class="field"><div class="field-name">{% trans "Address" %}:</div> <div class="field-value">{{address}}</div></div>
+        <div class="field"><div class="field-name">{% trans "Post Office Box" %}:</div> <div class="field-value">{{address.post_office_box}}</div></div>
+        <div class="field"><div class="field-name">{% trans "Phone Number" %}:</div> <div class="field-value">{{address.phone_number}}</div></div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
 
   <div class="profile">
   {% if contact.has_profile %}
@@ -56,9 +82,10 @@
   </div>
 
   {% if contact.tags %}
-    <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ contact.tags }}</span></div>
+    <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}</span> {{ contact.tags }}</span></div>
   {% endif %}
 
+  <div style="font-size:10px;">{% trans "Last update" %}: {{contact.modification_date}}</div>
 </div>
 
 {% endblock content%}
