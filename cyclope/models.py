@@ -246,6 +246,10 @@ class Layout(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_template_path(self):
+        theme = cyclope.settings.CYCLOPE_CURRENT_THEME
+        return 'cyclope/themes/%s/%s' % (theme, self.template)
+    
     class Meta:
         verbose_name = _('layout')
         verbose_name_plural = _('layouts')
@@ -433,3 +437,4 @@ def _create_profile_upon_activation(*args, **kwargs):
     UserProfile.objects.create(user=kwargs['user'])
 
 signals.user_activated.connect(_create_profile_upon_activation)
+

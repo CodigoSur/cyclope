@@ -96,6 +96,11 @@ if 'live' in django_settings.INSTALLED_APPS:
                             (r'live/', include('live.urls')),
                             )
 
+if 'schedule' in django_settings.INSTALLED_APPS:
+    urlpatterns += patterns('',
+                            (r'^schedule/', include('schedule.urls')),
+                            )
+
 if 'rosetta' in django_settings.INSTALLED_APPS:
     urlpatterns += patterns('',
         ## url(r'^rosetta/translate/(?P<langid>[\w\-]+)/(?P<idx>\d+)/',

@@ -24,6 +24,7 @@ a new app is installed.
 """
 
 import os
+import imp
 ugettext = lambda s: s
 
 #workaround for PIL when importing Image using different methods.
@@ -124,15 +125,16 @@ INSTALLED_APPS = [
 #    'django_extensions',
 ]
 
-try:
-    import live
-except:
-    live = None
-
-if live:
-    INSTALLED_APPS += ['live']
-    STOMP_RESTQ_URL = '/live/restq/'
-
+#optional_apps = ['live', 'schedule']
+optional_apps = ['live']
+for app_name in optional_apps:
+    try:
+        imp.find_module(app_name)
+    except ImportError:
+        pass
+    else:
+        INSTALLED_APPS += [app_name]
+    
 
 # debug_toolbar settings
 #DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
