@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-18 19:09-0300\n"
+"POT-Creation-Date: 2011-03-19 19:09-0300\n"
 "PO-Revision-Date: 2010-10-29 22:16\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -365,7 +365,7 @@ msgstr ""
 "Si el esquema es marcado como persistente se seguirá usando hasta que el "
 "usuario seleccione otro item de menú que especifique un esquema diferente"
 
-#: models.py:144 models.py:223
+#: models.py:144 models.py:223 apps/contacts/models.py:46
 msgid "type"
 msgstr "tipo"
 
@@ -571,7 +571,7 @@ msgid "articles"
 msgstr "artículos"
 
 #: apps/articles/templates/articles/article_detail.html:27
-#: apps/contacts/templates/contacts/contact_detail.html:18
+#: apps/contacts/templates/contacts/contact_detail.html:40
 #: apps/polls/templates/polls/poll_detail.html:24
 msgid "Print"
 msgstr "Imprimir"
@@ -606,7 +606,7 @@ msgstr "Fuente"
 
 #: apps/articles/templates/articles/article_detail.html:114
 #: apps/articles/templates/articles/article_teaser.html:56
-#: apps/contacts/templates/contacts/contact_detail.html:59
+#: apps/contacts/templates/contacts/contact_detail.html:85
 #: apps/forum/templates/forum/topic_teaser.html:22
 #: apps/medialibrary/templates/medialibrary/document_teaser.html:25
 #: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:21
@@ -649,11 +649,11 @@ msgstr "Ítems por página"
 msgid "Order by"
 msgstr "Ordenar por"
 
-#: apps/contacts/frontend_views.py:53 apps/contacts/models.py:50
+#: apps/contacts/frontend_views.py:53 apps/contacts/models.py:52
 msgid "given name"
 msgstr "nombre"
 
-#: apps/contacts/frontend_views.py:54 apps/contacts/models.py:51
+#: apps/contacts/frontend_views.py:54 apps/contacts/models.py:53
 msgid "surname"
 msgstr "apellido"
 
@@ -669,65 +669,97 @@ msgstr "trabajo"
 msgid "home"
 msgstr "casa"
 
-#: apps/contacts/models.py:53
-msgid "Male"
-msgstr "Hombre"
-
-#: apps/contacts/models.py:54
-msgid "Female"
-msgstr "Mujer"
-
-#: apps/contacts/models.py:55
-msgid "photo"
-msgstr "foto"
-
-#: apps/contacts/models.py:62
+#: apps/contacts/models.py:47 apps/contacts/models.py:63
 msgid "contact"
 msgstr "contacto"
 
-#: apps/contacts/models.py:63
+#: apps/contacts/models.py:49
+msgid "Male"
+msgstr "Hombre"
+
+#: apps/contacts/models.py:49
+msgid "Female"
+msgstr "Mujer"
+
+#: apps/contacts/models.py:54
+msgid "birth date"
+msgstr "fecha de nacimiento"
+
+#: apps/contacts/models.py:55
+msgid "gender"
+msgstr "sexo"
+
+#: apps/contacts/models.py:56
+msgid "photo"
+msgstr "foto"
+
+#: apps/contacts/models.py:58
+msgid "e-mail"
+msgstr "correo electrónico"
+
+#: apps/contacts/models.py:59
+msgid "web site"
+msgstr "sitio web"
+
+#: apps/contacts/models.py:60
+msgid "mobile phone number"
+msgstr "número de celular"
+
+#: apps/contacts/models.py:64
 msgid "contacts"
 msgstr "contactos"
 
-#: apps/contacts/templates/contacts/contact_detail.html:22
+#: apps/contacts/templates/contacts/contact_detail.html:42
 msgid "Send mail"
 msgstr "Enviar correo"
 
-#: apps/contacts/templates/contacts/contact_detail.html:35
-msgid "Last update"
-msgstr "Última actualización"
-
-#: apps/contacts/templates/contacts/contact_detail.html:38
+#: apps/contacts/templates/contacts/contact_detail.html:53
 msgid "Given name"
 msgstr "Nombre"
 
-#: apps/contacts/templates/contacts/contact_detail.html:39
+#: apps/contacts/templates/contacts/contact_detail.html:54
 msgid "Surname"
 msgstr "Apellido"
 
-#: apps/contacts/templates/contacts/contact_detail.html:40
+#: apps/contacts/templates/contacts/contact_detail.html:55
 msgid "Birth date"
 msgstr "Fecha de nacimiento"
 
-#: apps/contacts/templates/contacts/contact_detail.html:41
+#: apps/contacts/templates/contacts/contact_detail.html:56
 #: apps/contacts/templates/contacts/contact_teaser.html:17
 msgid "Gender"
 msgstr "Sexo"
 
-#: apps/contacts/templates/contacts/contact_detail.html:42
+#: apps/contacts/templates/contacts/contact_detail.html:57
 #: apps/contacts/templates/contacts/contact_teaser.html:18
 msgid "Email"
 msgstr "E-mail"
 
-#: apps/contacts/templates/contacts/contact_detail.html:43
+#: apps/contacts/templates/contacts/contact_detail.html:58
 #: apps/contacts/templates/contacts/contact_teaser.html:19
 msgid "Web"
 msgstr "Web"
 
-#: apps/contacts/templates/contacts/contact_detail.html:44
+#: apps/contacts/templates/contacts/contact_detail.html:59
 #: apps/contacts/templates/contacts/contact_teaser.html:20
 msgid "Mobile"
 msgstr "Celular"
+
+#: apps/contacts/templates/contacts/contact_detail.html:67
+msgid "Address"
+msgstr "Dirección"
+
+#: apps/contacts/templates/contacts/contact_detail.html:68
+msgid "Post Office Box"
+msgstr "Casilla postal"
+
+#: apps/contacts/templates/contacts/contact_detail.html:69
+msgid "Phone Number"
+msgstr "Número de teléfono"
+
+#: apps/contacts/templates/contacts/contact_detail.html:88
+msgid "Last update"
+msgstr "Última actualización"
 
 #: apps/forum/forms.py:33
 msgid "subject"
@@ -1127,7 +1159,7 @@ msgstr "Colección"
 msgid "Category"
 msgstr "Categoría"
 
-#: core/collections/admin.py:214
+#: core/collections/admin.py:217
 msgid "Default category listing view"
 msgstr "Vista por defecto para listados"
 

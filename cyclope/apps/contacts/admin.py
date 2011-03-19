@@ -42,7 +42,7 @@ class ContactAdmin(CollectibleAdmin, BaseContentAdmin):
     form = ContactForm
     inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines + [ContactAddressInline]
 
-    list_filter = ('gender', )
+    list_filter = CollectibleAdmin.list_filter + ('gender', )
     list_display = ('given_name', 'surname', 'gender', 'email', 'web', 'mobile_phone_number')
 
     fieldsets = (

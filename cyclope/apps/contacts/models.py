@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -43,21 +43,21 @@ ADDRESS_TYPE_CHOICES = (
 )
 
 class ContactAddress(Location):
-    type = models.CharField(max_length=20, choices=ADDRESS_TYPE_CHOICES)
-    contact = models.ForeignKey("Contact")
+    type = models.CharField(_('type'), max_length=20, choices=ADDRESS_TYPE_CHOICES)
+    contact = models.ForeignKey("Contact", verbose_name=_('contact'))
 
 GENDER_CHOICES = (('M', _('Male')),('F', _('Female')))
 
 class Contact(BaseContent, Collectible):
     given_name = models.CharField(_('given name'), max_length=255)
     surname = models.CharField(_('surname'), blank=True, max_length=255)
-    birth_date = models.DateField(blank=True, null=True)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    birth_date = models.DateField(_('birth date'), blank=True, null=True)
+    gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES)
     photo = FileBrowseField(_('photo'), max_length=100, format='Image',
                             directory='contact_images/', blank=True)
-    email = models.EmailField(blank=True)
-    web = models.CharField(max_length=255, blank=True)
-    mobile_phone_number = models.CharField(max_length=40, blank=True)
+    email = models.EmailField(_('e-mail'), blank=True)
+    web = models.CharField(_('web site'), max_length=255, blank=True)
+    mobile_phone_number = models.CharField(_('mobile phone number'), max_length=40, blank=True)
 
     class Meta:
         verbose_name = _('contact')
