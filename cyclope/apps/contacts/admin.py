@@ -44,6 +44,7 @@ class ContactAdmin(CollectibleAdmin, BaseContentAdmin):
 
     list_filter = CollectibleAdmin.list_filter + ('gender', )
     list_display = ('given_name', 'surname', 'gender', 'email', 'web', 'mobile_phone_number')
+    search_fields = ('given_name', 'surname', 'email', 'web', 'mobile_phone_number')
 
     fieldsets = (
         (None, {

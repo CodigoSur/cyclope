@@ -22,6 +22,7 @@
 
 from django import forms
 from django.forms.extras.widgets import SelectDateWidget
+from django.utils.translation import ugettext_lazy as _
 
 from models import Contact
 import datetime
@@ -29,7 +30,7 @@ import datetime
 actual_year = datetime.date.today().year
 
 class ContactForm(forms.ModelForm):
-    birth_date = forms.DateField(widget=SelectDateWidget(years=range(1900, actual_year)), required=False)
+    birth_date = forms.DateField(label=_('Birth date'), widget=SelectDateWidget(years=range(1900, actual_year)), required=False)
 
     class Meta:
         model = Contact

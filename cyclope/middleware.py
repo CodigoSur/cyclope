@@ -29,15 +29,22 @@ class LayoutMiddleware(object):
     """
     def process_request(self, request):
         menu_item = cyclope.utils.menu_item_for_request(request)
+        default_template = cyclope.settings.CYCLOPE_DEFAULT_TEMPLATE
         if menu_item:
-            default_template = cyclope.settings.CYCLOPE_DEFAULT_TEMPLATE
             ## we force the layout for items with custom URL (external apps)
             ## so they can use the correct template to extend from
             if menu_item.persistent_layout or menu_item.custom_url:
                 layout = menu_item.get_layout()
                 request.session['layout'] = layout
+                request.session['layout_template'] = layout.get_template_path()
+                
             else:
                 if request.session.has_key('layout'):
                     del request.session['layout']
+        else:
+            ## if no layout_template has been set we set it to the default so external apps'
+            ## templates will work (sort of) even when accessed through a direct URL
+            if not 'layout_template' in request.session:
+                request.session['layout_template'] = default_template
 
                 

@@ -36,9 +36,9 @@ sys.modules['Image'] = PIL.Image
 
 SITE_ID = 1
 USE_I18N = True
-#USE_L10N = True
+USE_L10N = True
 
-LANGUAGE_CODE = 'es'
+## LANGUAGE_CODE = 'en'
 LANGUAGES = (
     ('es', u'Español'),
     ('en', u'English'),

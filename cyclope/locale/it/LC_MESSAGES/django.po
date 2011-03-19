@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-19 19:09-0300\n"
+"POT-Creation-Date: 2011-03-19 19:50-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -635,6 +635,11 @@ msgstr ""
 msgid "More"
 msgstr ""
 
+#: apps/contacts/forms.py:33
+#: apps/contacts/templates/contacts/contact_detail.html:55
+msgid "Birth date"
+msgstr ""
+
 #: apps/contacts/frontend_views.py:38
 msgid "detailed view of the selected Contact"
 msgstr ""
@@ -717,10 +722,6 @@ msgstr ""
 
 #: apps/contacts/templates/contacts/contact_detail.html:54
 msgid "Surname"
-msgstr ""
-
-#: apps/contacts/templates/contacts/contact_detail.html:55
-msgid "Birth date"
 msgstr ""
 
 #: apps/contacts/templates/contacts/contact_detail.html:56
