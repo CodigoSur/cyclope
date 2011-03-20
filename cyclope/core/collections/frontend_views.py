@@ -54,15 +54,16 @@ class CategoryRootItemsList(frontend.FrontendView):
 
 frontend.site.register_view(Category, CategoryRootItemsList)
 
-class ListOptions(forms.Form):
-    items_per_page = forms.IntegerField(label=_('Items per page'), initial=3, min_value=1)
+class TeaserListOptions(forms.Form):
+    items_per_page = forms.IntegerField(label=_('Items per page'), min_value=1,
+                                        initial=cyc_settings.CYCLOPE_PAGINATION['TEASER'],)
 
 class CategoryDefaultList(frontend.FrontendView):
     name = 'default'
     verbose_name = _('default view for the Collection')
     is_default = True
     is_content_view = True
-    options_form = ListOptions
+    options_form = TeaserListOptions
 
     def get_response(self, request, req_context, options, content_object):
         category = content_object
@@ -85,7 +86,7 @@ class CategoryTeaserList(frontend.FrontendView):
 
     is_content_view = True
     is_region_view = True
-    options_form = ListOptions
+    options_form = TeaserListOptions
 
     template = "collections/category_teaser_list.html"
     inline_view_name = 'teaser'
@@ -148,6 +149,9 @@ class CategorySimplifiedTeaserList(frontend.FrontendView):
     def get_response(self, request, req_context, options, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
+        categorizations_list = sorted(categorizations_list,
+                                      key=lambda c: c.object_modification_date,
+                                      reverse=True)
 
         template = "collections/category_teaser_list.html"
         req_context.update({'category': category,
