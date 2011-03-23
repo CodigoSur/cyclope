@@ -42,8 +42,10 @@ class LayoutMiddleware(object):
                     del request.session['layout']
         else:
             ## if no layout_template has been set we set it to the default so external apps'
-            ## templates will work (sort of) even when accessed through a direct URL
-            if not 'layout_template' in request.session:
+            ## templates that extend from request.session.layout_template won't break
+            ## even when accessed through a direct URL
+            if not 'layout_template' in request.session and \
+                   hasattr(cyclope.settings, 'CYCLOPE_DEFAULT_TEMPLATE'):
                 request.session['layout_template'] = cyclope.settings.CYCLOPE_DEFAULT_TEMPLATE
 
                 
