@@ -93,7 +93,7 @@ if django_settings.DEBUG:
 
 if 'live' in django_settings.INSTALLED_APPS:
     urlpatterns += patterns('',
-                            (r'live/', include('live.urls')),
+                            (r'^live/', include('live.urls')),
                             )
 
 if 'schedule' in django_settings.INSTALLED_APPS:
