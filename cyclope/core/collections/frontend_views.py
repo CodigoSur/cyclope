@@ -204,6 +204,7 @@ class CollectionRootCategoriesList(CollectionRootCategoriesTeaserList):
     """
     name = 'root_categories_list'
     verbose_name=_('list of the root Categories of a Collection')
+    is_default = False
     is_region_view = True
     template = "collections/collection_root_categories_list.html"
 
