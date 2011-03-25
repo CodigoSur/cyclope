@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -56,6 +56,7 @@ class Location(models.Model):
     country = models.ForeignKey(Country, verbose_name=_('country'),blank=True, null=True)
     region = models.ForeignKey(Region, verbose_name=_('region'), blank=True, null=True)
     city = models.ForeignKey(City, verbose_name=_('city'), blank=True, null=True)
+    zip_code = models.CharField(_('zip code'), blank=True, max_length=15)
     street_address = models.CharField(_('street address'), blank=True, max_length=255)
     phone_number = models.CharField(max_length=40, verbose_name=_('phone number'), blank=True)
     post_office_box = models.CharField(_('postal box'), blank=True, max_length=255)
@@ -64,6 +65,12 @@ class Location(models.Model):
         abstract = True
 
     def __unicode__(self):
-        return "%s %s, %s, %s" % (self.street_address, self.city, self.region, self.country)
+        return "%s %s%s, %s, %s" % (self.street_address if self.street_address else '', '',
+                                    '(%s)' % self.zip_code if self.zip_code else '',
+                                    self.city if self.city else '',
+                                    self.region if self.region else '',
+                                    self.country if self.country else '',)
+    
+
 
 
