@@ -32,10 +32,10 @@ from cyclope.core.collections.admin import CollectibleAdmin
 from models import Contact, ContactAddress
 from forms import ContactForm
 
-class ContactAddressInline(admin.TabularInline):
+class ContactAddressInline(admin.StackedInline):
     model = ContactAddress
     extra = 1
-    fields = ('type', 'country', 'region', 'city', 'street_address', 'phone_number',
+    fields = ('type', 'country', 'region', 'city', 'zip_code', 'street_address', 'phone_number',
               'post_office_box')
 
 class ContactAdmin(CollectibleAdmin, BaseContentAdmin):
