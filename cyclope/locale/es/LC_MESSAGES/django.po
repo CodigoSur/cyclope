@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-25 13:14-0400\n"
+"POT-Creation-Date: 2011-03-25 18:51-0400\n"
 "PO-Revision-Date: 2010-10-29 22:16\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -658,11 +658,11 @@ msgstr "Ítems por página"
 msgid "Order by"
 msgstr "Ordenar por"
 
-#: apps/contacts/frontend_views.py:53 apps/contacts/models.py:52
+#: apps/contacts/frontend_views.py:53 apps/contacts/models.py:56
 msgid "given name"
 msgstr "nombre"
 
-#: apps/contacts/frontend_views.py:54 apps/contacts/models.py:53
+#: apps/contacts/frontend_views.py:54 apps/contacts/models.py:57
 msgid "surname"
 msgstr "apellido"
 
@@ -678,43 +678,51 @@ msgstr "trabajo"
 msgid "home"
 msgstr "casa"
 
-#: apps/contacts/models.py:47 apps/contacts/models.py:63
+#: apps/contacts/models.py:47 apps/contacts/models.py:67
 msgid "contact"
 msgstr "contacto"
 
-#: apps/contacts/models.py:49
+#: apps/contacts/models.py:50
+msgid "contact address"
+msgstr "dirección"
+
+#: apps/contacts/models.py:51
+msgid "contact addresses"
+msgstr "direcciones"
+
+#: apps/contacts/models.py:53
 msgid "Male"
 msgstr "Hombre"
 
-#: apps/contacts/models.py:49
+#: apps/contacts/models.py:53
 msgid "Female"
 msgstr "Mujer"
 
-#: apps/contacts/models.py:54
+#: apps/contacts/models.py:58
 msgid "birth date"
 msgstr "fecha de nacimiento"
 
-#: apps/contacts/models.py:55
+#: apps/contacts/models.py:59
 msgid "gender"
 msgstr "sexo"
 
-#: apps/contacts/models.py:56
+#: apps/contacts/models.py:60
 msgid "photo"
 msgstr "foto"
 
-#: apps/contacts/models.py:58
+#: apps/contacts/models.py:62
 msgid "e-mail"
 msgstr "correo electrónico"
 
-#: apps/contacts/models.py:59
+#: apps/contacts/models.py:63
 msgid "web site"
 msgstr "sitio web"
 
-#: apps/contacts/models.py:60
+#: apps/contacts/models.py:64
 msgid "mobile phone number"
 msgstr "número de celular"
 
-#: apps/contacts/models.py:64
+#: apps/contacts/models.py:68
 msgid "contacts"
 msgstr "contactos"
 
@@ -809,14 +817,18 @@ msgid "country"
 msgstr "país"
 
 #: apps/locations/models.py:59
+msgid "zip code"
+msgstr "código postal"
+
+#: apps/locations/models.py:60
 msgid "street address"
 msgstr "dirección"
 
-#: apps/locations/models.py:60
+#: apps/locations/models.py:61
 msgid "phone number"
 msgstr "número de teléfono"
 
-#: apps/locations/models.py:61
+#: apps/locations/models.py:62
 msgid "postal box"
 msgstr "casilla postal"
 

@@ -34,7 +34,7 @@ from forms import ContactForm
 
 class ContactAddressInline(admin.StackedInline):
     model = ContactAddress
-    extra = 1
+    extra = 0
     fields = ('type', 'country', 'region', 'city', 'zip_code', 'street_address', 'phone_number',
               'post_office_box')
 

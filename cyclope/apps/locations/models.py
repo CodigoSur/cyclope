@@ -65,9 +65,9 @@ class Location(models.Model):
         abstract = True
 
     def __unicode__(self):
-        return "%s %s%s, %s, %s" % (self.street_address if self.street_address else '', '',
-                                    '(%s)' % self.zip_code if self.zip_code else '',
+        return "%s, %s %s, %s, %s" % (self.street_address if self.street_address else '',
                                     self.city if self.city else '',
+                                    '(%s)' % self.zip_code if self.zip_code else '',
                                     self.region if self.region else '',
                                     self.country if self.country else '',)
     

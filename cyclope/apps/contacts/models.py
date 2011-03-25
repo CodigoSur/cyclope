@@ -46,6 +46,10 @@ class ContactAddress(Location):
     type = models.CharField(_('type'), max_length=20, choices=ADDRESS_TYPE_CHOICES)
     contact = models.ForeignKey("Contact", verbose_name=_('contact'))
 
+    class Meta:
+        verbose_name = _('contact address')
+        verbose_name_plural = _('contact addresses')
+
 GENDER_CHOICES = (('M', _('Male')),('F', _('Female')))
 
 class Contact(BaseContent, Collectible):

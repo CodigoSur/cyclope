@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-25 13:14-0400\n"
+"POT-Creation-Date: 2011-03-25 18:51-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -655,11 +655,11 @@ msgstr ""
 msgid "Order by"
 msgstr ""
 
-#: apps/contacts/frontend_views.py:53 apps/contacts/models.py:52
+#: apps/contacts/frontend_views.py:53 apps/contacts/models.py:56
 msgid "given name"
 msgstr ""
 
-#: apps/contacts/frontend_views.py:54 apps/contacts/models.py:53
+#: apps/contacts/frontend_views.py:54 apps/contacts/models.py:57
 msgid "surname"
 msgstr ""
 
@@ -675,43 +675,51 @@ msgstr ""
 msgid "home"
 msgstr ""
 
-#: apps/contacts/models.py:47 apps/contacts/models.py:63
+#: apps/contacts/models.py:47 apps/contacts/models.py:67
 msgid "contact"
 msgstr ""
 
-#: apps/contacts/models.py:49
+#: apps/contacts/models.py:50
+msgid "contact address"
+msgstr ""
+
+#: apps/contacts/models.py:51
+msgid "contact addresses"
+msgstr ""
+
+#: apps/contacts/models.py:53
 msgid "Male"
 msgstr ""
 
-#: apps/contacts/models.py:49
+#: apps/contacts/models.py:53
 msgid "Female"
 msgstr ""
 
-#: apps/contacts/models.py:54
+#: apps/contacts/models.py:58
 msgid "birth date"
 msgstr ""
 
-#: apps/contacts/models.py:55
+#: apps/contacts/models.py:59
 msgid "gender"
 msgstr ""
 
-#: apps/contacts/models.py:56
+#: apps/contacts/models.py:60
 msgid "photo"
 msgstr ""
 
-#: apps/contacts/models.py:58
+#: apps/contacts/models.py:62
 msgid "e-mail"
 msgstr ""
 
-#: apps/contacts/models.py:59
+#: apps/contacts/models.py:63
 msgid "web site"
 msgstr ""
 
-#: apps/contacts/models.py:60
+#: apps/contacts/models.py:64
 msgid "mobile phone number"
 msgstr ""
 
-#: apps/contacts/models.py:64
+#: apps/contacts/models.py:68
 msgid "contacts"
 msgstr ""
 
@@ -806,14 +814,18 @@ msgid "country"
 msgstr ""
 
 #: apps/locations/models.py:59
-msgid "street address"
+msgid "zip code"
 msgstr ""
 
 #: apps/locations/models.py:60
-msgid "phone number"
+msgid "street address"
 msgstr ""
 
 #: apps/locations/models.py:61
+msgid "phone number"
+msgstr ""
+
+#: apps/locations/models.py:62
 msgid "postal box"
 msgstr ""
 
