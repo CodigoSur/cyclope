@@ -155,6 +155,23 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
 
 frontend.site.register_view(MenuItem, MenuItemChildrenOfCurrentItem)
 
+
+class SiteSearchBox(frontend.FrontendView):
+    """Show a small form with an input field to search content
+    """
+    name='search'
+    verbose_name=_('search box')
+    is_instance_view = False
+    is_region_view = True
+
+    def get_response(self, request, req_context, options):
+        t = loader.get_template("cyclope/site_search_box.html")
+        return t.render(req_context)
+
+frontend.site.register_view(Site, SiteSearchBox)
+
+
+
 class SiteMap(frontend.FrontendView):
     """Show an expanded hierarchical list of all collection and menus
     """
