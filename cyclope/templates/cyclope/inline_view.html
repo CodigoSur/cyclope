@@ -1,5 +1,3 @@
-{% comment %}
-This template wraps a view when inserted inline in a region
-{% endcomment%}
-
-{% block content %}{% endblock content %}
+{# This template wraps a view when inserted inline in a region #}
+{% block extra_head %}{{ block.super }}{% endblock %}
+{% block content %}{{ block.super }}{% endblock %}
