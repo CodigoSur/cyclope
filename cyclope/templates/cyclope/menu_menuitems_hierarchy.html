@@ -1,23 +1,28 @@
 {% extends host_template %}
 
 {% block content %}
-
 <script type="text/javascript">
- jQuery(document).ready(function(){
-  $('#{{ menu_slug }}_menu ul').css('display', 'none');
-  $("#{{ menu_slug }}_menu ul").first().css('display', 'block');
-  $('#{{ menu_slug }}_menu ul li').mouseenter(function() {
-    $(this).children('ul').css('display', 'block');
-  });
 
-  $('#{{ menu_slug }}_menu ul li').mouseleave(function() {
-    $(this).children('ul').css('display', 'none');
-  });
+var hide_children= function (el){
+    $(el).children('ul').css('display', 'none');
+}
+
+jQuery(document).ready(function(){
+    hide_children($('#{{ menu_slug }}_menu .has_children').parent())
+    $('#{{ menu_slug }}_menu ul li').mouseenter(function() {
+        $(this).children('ul').css('display', 'block');
+    });
+/*TODO(nicochaniz): there should be an option for this view to choose between collapsing when the mose leaves the whole menu structure (commented out lines) or not */
+    $('#{{ menu_slug }}_menu ul li').mouseleave(function() {
+        $(this).children('ul').css('display', 'none');
+//      $('#{{ menu_slug }}_menu').mouseleave(function(){
+//          hide_children($('#{{ menu_slug }}_menu .has_children').parent())
+    });
 });
+
 </script>
 
 <ul>
-  {{ menu_items|unordered_list }}
+    {{ menu_items|unordered_list }}
 </ul>
-{% endblock content%}
-
+{% endblock content %}

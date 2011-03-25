@@ -1,23 +1,24 @@
 {% extends host_template %}
 
 {% block content %}
-
 <script type="text/javascript">
-jQuery(document).ready(function(){
-  $('#{{ collection_slug }}_collection ul').css('display', 'none');
-  $("#{{ collection_slug }}_collection ul").first().css('display', 'block');
-  $('#{{ collection_slug }}_collection .expand_collapse').click(function() {
-    if ($(this).text() == '+') $(this).text('-');
-    else $(this).text('+');
-    $(this).parent().children('ul').toggle();
-    return false;
-  });
-});
+    var hide_children= function (el){
+        $(el).children('ul').css('display', 'none');
+    }
+
+    jQuery(document).ready(function(){
+        hide_children($('#{{ collection_slug }}_collection .has_children').parent())
+        $('#{{ collection_slug }}_collection ul li').mouseenter(function() {
+            $(this).children('ul').css('display', 'block');
+        });
+        $('#{{ collection_slug }}_collection').mouseleave(function(){
+            hide_children($('#{{ collection_slug }}_collection .has_children').parent())
+        });
+    });
 </script>
 
 <ul>
   {{ categories|unordered_list }}
 </ul>
-
-
 {% endblock content%}
+

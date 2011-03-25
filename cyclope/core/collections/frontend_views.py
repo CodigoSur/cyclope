@@ -199,6 +199,16 @@ class CollectionRootCategoriesTeaserList(frontend.FrontendView):
 
 frontend.site.register_view(Collection, CollectionRootCategoriesTeaserList)
 
+class CollectionRootCategoriesList(CollectionRootCategoriesTeaserList):
+    """ A list of the root Categories of a Collection
+    """
+    name = 'root_categories_list'
+    verbose_name=_('list of the root Categories of a Collection')
+    is_region_view = True
+    template = "collections/collection_root_categories_list.html"
+
+frontend.site.register_view(Collection, CollectionRootCategoriesList)
+
 
 class CollectionCategoriesHierarchy(frontend.FrontendView):
     """A hierarchical list view of the Categories in a Collection.
@@ -229,12 +239,11 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
         #TODO(nicoechaniz): only show categories which have children or content.
         from django.template import Template, Context
         link_template = Template(
-            '{% if has_children %}'
-              '<span class="expand_collapse">+</span>\n'
-            '{% endif %}'
-            '{% if has_content %}'
-              '<a href="{% url category-'+self.target_view+' slug %}">'
-                 '<span>{{ name }}</span></a>'
+            '{% if has_content or has_children %}'
+              '<span class="has_children">'
+                '<a href="{% url category-'+ self.target_view +' slug %}">'
+                 '{{ name }}</a>'
+              '</span>'
             '{% else %} {{ name }}'
             '{% endif %}'
             )
