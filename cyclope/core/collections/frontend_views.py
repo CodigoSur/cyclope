@@ -245,7 +245,7 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
                 '<a href="{% url category-'+ self.target_view +' slug %}">'
                  '{{ name }}</a>'
               '</span>'
-            '{% else %} {{ name }}'
+            '{% else %}<span class="no_children">{{ name }}</span>'
             '{% endif %}'
             )
         nested_list = []
