@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-19 19:50-0300\n"
+"POT-Creation-Date: 2011-03-25 13:14-0400\n"
 "PO-Revision-Date: 2010-10-29 22:16\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -255,11 +255,15 @@ msgstr "lista sin jerarquía de los items del Menú"
 msgid "hierarchical list of the items in the selected menu"
 msgstr "lista jerarquizada de los items del menú"
 
-#: frontend_views.py:134
+#: frontend_views.py:135
 msgid "list view of children of the current menu item"
 msgstr "lista de los hijos del item de menú que se encuentre seleccionado"
 
-#: frontend_views.py:161
+#: frontend_views.py:163
+msgid "search box"
+msgstr "búsqueda"
+
+#: frontend_views.py:179
 msgid "expanded hierarchical list of all collection and menus"
 msgstr "lista de todas las categorías y menús"
 
@@ -1168,49 +1172,53 @@ msgstr "Vista por defecto para listados"
 msgid "list of root items for the selected Category"
 msgstr "lista de items raíz para la Categoría seleccionada"
 
-#: core/collections/frontend_views.py:62
+#: core/collections/frontend_views.py:63
 msgid "default view for the Collection"
 msgstr "vista por defecto para la Colección"
 
-#: core/collections/frontend_views.py:84
+#: core/collections/frontend_views.py:85
 msgid "teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:131
+#: core/collections/frontend_views.py:132
 msgid "Labeled icon list of Category members"
 msgstr "lista de iconos con nombre de los miembros de una Categoría"
 
-#: core/collections/frontend_views.py:145
+#: core/collections/frontend_views.py:146
 msgid "simplified teaser list of Category members"
 msgstr "lista simplificada de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:168
+#: core/collections/frontend_views.py:172
 msgid "full content of Category members"
 msgstr "contenido completo de una Categoría"
 
-#: core/collections/frontend_views.py:183
+#: core/collections/frontend_views.py:187
 msgid "teaser list of the root Categories of a Collection"
 msgstr "lista de resúmenes de las Categorías raíz de una Colección"
 
-#: core/collections/frontend_views.py:203
+#: core/collections/frontend_views.py:206
+msgid "list of the root Categories of a Collection"
+msgstr "listado de las Categorías raíz de la Colección"
+
+#: core/collections/frontend_views.py:218
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
-#: core/collections/frontend_views.py:268
+#: core/collections/frontend_views.py:282
 msgid "hierarchical list of Categories that will show an icon list on click"
 msgstr "lista jerarquizada de las Categorias que llevará a una vista de íconos"
 
-#: core/collections/frontend_views.py:277
+#: core/collections/frontend_views.py:291
 msgid ""
 "alphabetical teaser list of all the members of the Collection's Categories"
 msgstr ""
 "lista alfabética de resúmenes de los contenidos completos de una Colección"
 
-#: core/collections/frontend_views.py:318
+#: core/collections/frontend_views.py:332
 msgid "list of Category members as forum view"
 msgstr "listar la Categoría como un foro"
 
-#: core/collections/frontend_views.py:374
+#: core/collections/frontend_views.py:388
 msgid "alphabetical teaser list of Category members"
 msgstr "lista alfabética de resúmenes de los miembros de una Categoría"
 
@@ -1468,6 +1476,11 @@ msgstr "siguiente"
 msgid "Site map"
 msgstr "Mapa del sitio"
 
+#: templates/cyclope/site_search_box.html:32
+#: templates/cyclope/themes/neutrona/base.html:85
+msgid "Site wide search"
+msgstr "Buscar en el sitio"
+
 #: templates/cyclope/themes/__init__.py:22
 msgid "You need to set CYCLOPE_LOCAL_THEMES_PREFIX in your settings file"
 msgstr ""
@@ -1540,10 +1553,6 @@ msgstr "Vacío"
 #: templates/cyclope/themes/neutronica/base.html:43
 msgid "Image"
 msgstr "Imagen"
-
-#: templates/cyclope/themes/neutrona/base.html:85
-msgid "Site wide search"
-msgstr "Buscar en el sitio"
 
 #: templates/cyclope/themes/neutrona/base.html:122
 #: templates/cyclope/themes/neutronica/left_sidebar_block.html:34
@@ -1955,9 +1964,6 @@ msgstr "No se encontró ningún resultado"
 
 #~ msgid "Account activation for"
 #~ msgstr "Actviación de cuenta para"
-
-#~ msgid "Search In"
-#~ msgstr "Buscar en"
 
 #~ msgid "%s categories"
 #~ msgstr "%s categorías"

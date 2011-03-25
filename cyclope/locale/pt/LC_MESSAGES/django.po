@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-19 19:50-0300\n"
+"POT-Creation-Date: 2011-03-25 13:14-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -255,11 +255,15 @@ msgstr ""
 msgid "hierarchical list of the items in the selected menu"
 msgstr ""
 
-#: frontend_views.py:134
+#: frontend_views.py:135
 msgid "list view of children of the current menu item"
 msgstr ""
 
-#: frontend_views.py:161
+#: frontend_views.py:163
+msgid "search box"
+msgstr ""
+
+#: frontend_views.py:179
 msgid "expanded hierarchical list of all collection and menus"
 msgstr ""
 
@@ -1163,48 +1167,52 @@ msgstr ""
 msgid "list of root items for the selected Category"
 msgstr ""
 
-#: core/collections/frontend_views.py:62
+#: core/collections/frontend_views.py:63
 msgid "default view for the Collection"
 msgstr ""
 
-#: core/collections/frontend_views.py:84
+#: core/collections/frontend_views.py:85
 msgid "teaser list of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:131
+#: core/collections/frontend_views.py:132
 msgid "Labeled icon list of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:145
+#: core/collections/frontend_views.py:146
 msgid "simplified teaser list of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:168
+#: core/collections/frontend_views.py:172
 msgid "full content of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:183
+#: core/collections/frontend_views.py:187
 msgid "teaser list of the root Categories of a Collection"
 msgstr ""
 
-#: core/collections/frontend_views.py:203
+#: core/collections/frontend_views.py:206
+msgid "list of the root Categories of a Collection"
+msgstr ""
+
+#: core/collections/frontend_views.py:218
 msgid "hierarchical list of Categories in a Collection"
 msgstr ""
 
-#: core/collections/frontend_views.py:268
+#: core/collections/frontend_views.py:282
 msgid "hierarchical list of Categories that will show an icon list on click"
 msgstr ""
 
-#: core/collections/frontend_views.py:277
+#: core/collections/frontend_views.py:291
 msgid ""
 "alphabetical teaser list of all the members of the Collection's Categories"
 msgstr ""
 
-#: core/collections/frontend_views.py:318
+#: core/collections/frontend_views.py:332
 msgid "list of Category members as forum view"
 msgstr ""
 
-#: core/collections/frontend_views.py:374
+#: core/collections/frontend_views.py:388
 msgid "alphabetical teaser list of Category members"
 msgstr ""
 
@@ -1451,6 +1459,11 @@ msgstr ""
 msgid "Site map"
 msgstr ""
 
+#: templates/cyclope/site_search_box.html:32
+#: templates/cyclope/themes/neutrona/base.html:85
+msgid "Site wide search"
+msgstr ""
+
 #: templates/cyclope/themes/__init__.py:22
 msgid "You need to set CYCLOPE_LOCAL_THEMES_PREFIX in your settings file"
 msgstr ""
@@ -1521,10 +1534,6 @@ msgstr ""
 #: templates/cyclope/themes/neutrona/base.html:40
 #: templates/cyclope/themes/neutronica/base.html:43
 msgid "Image"
-msgstr ""
-
-#: templates/cyclope/themes/neutrona/base.html:85
-msgid "Site wide search"
 msgstr ""
 
 #: templates/cyclope/themes/neutrona/base.html:122
