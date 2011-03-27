@@ -466,6 +466,10 @@ font-weight: bold;
 
 }
 
+.main-area-modules.local_app  h2 { /* for local/custom admin panels defined locally */
+background: url("../images/estrella.png") no-repeat scroll 8px 7px #698ec6; 
+}
+
 .main-area-modules .dashboard-module-content p {
 color: white;
 font-style: italic;
