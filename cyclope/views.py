@@ -58,10 +58,10 @@ def object_detail(request, req_context, content_object, extra_context=None, view
     return t.render(req_context)
 
 
-def object_list(request, req_context, queryset, view_name='detail', inline=False,
+def object_list(request, req_context, queryset, view_name='list', inline=False,
                 paginate_by=None, page=None, allow_empty=True,
                 template_name=None, template_loader=loader,
-                extra_context=None, template_object_name='object', mimetype=None):
+                extra_context=None, template_object_name=None, mimetype=None):
     """
     Generic list of objects.
 
@@ -158,5 +158,4 @@ def object_list(request, req_context, queryset, view_name='detail', inline=False
             model._meta.app_label, model._meta.object_name.lower(), view_name)
 
     t = template_loader.get_template(template_name)
-
     return t.render(req_context)

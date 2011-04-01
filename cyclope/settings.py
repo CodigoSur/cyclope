@@ -177,6 +177,7 @@ from cyclope.models import RelatedContent
 def _delete_related_contents(sender, instance, **kwargs):
     # cascade delete does not delete the RelatedContent elements
     # where this object is the related content, so we do it here.
+    # (this deletes the relation, not the object)
     ctype = ContentType.objects.get_for_model(sender)
     if hasattr(instance, 'id'):
         related_from = RelatedContent.objects.filter(other_type=ctype,
