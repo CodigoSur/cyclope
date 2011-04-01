@@ -70,6 +70,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'cyclope.middleware.LayoutMiddleware'
@@ -109,6 +110,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.comments',
     'django.contrib.markup',
+    'django.contrib.messages',
 
     'autoslug',
     'feincms',
@@ -124,6 +126,8 @@ INSTALLED_APPS = [
 #    'debug_toolbar',
 #    'django_extensions',
 ]
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 #optional_apps = ['live', 'schedule']
 optional_apps = ['live']
