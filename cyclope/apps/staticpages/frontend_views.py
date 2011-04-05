@@ -40,7 +40,8 @@ class StaticPageDetail(frontend.FrontendView):
     is_region_view = True
 
     def get_response(self, request, req_context, options, content_object):
-        return views.object_detail(request, req_context, content_object)
+        context = {'content_relations': content_object.related_contents.all()}
+        return views.object_detail(request, req_context, content_object, extra_context=context)
 
 frontend.site.register_view(StaticPage, StaticPageDetail)
 
@@ -55,7 +56,6 @@ class StaticPageList(frontend.FrontendView):
     is_region_view = True
 
     def get_response(self, request, req_context, options):
-        return views.object_list(request, req_context,
-                                 StaticPage.objects.all())
+        return views.object_list(request, req_context, StaticPage.objects.all())
 
 frontend.site.register_view(StaticPage, StaticPageList)

@@ -8,8 +8,9 @@
       <!-- <div><span class="author">{% trans "By" %} {{ staticpage.author }}</span></div> -->
     {% endif %}
 
-    {% if staticpage.description %}
-      <p class="description">{{ staticpage.description }}</p>
+    
+    {% if staticpage.summary %}
+      <p class="description">{{ staticpage.summary }}</p>
     {% endif %}
 
     {% if staticpage.tags %}
