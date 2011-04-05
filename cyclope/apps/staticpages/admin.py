@@ -27,6 +27,7 @@ from django.contrib.contenttypes.models import ContentType
 from markitup.widgets import AdminMarkItUpWidget
 
 from cyclope.core.collections.admin import CollectibleAdmin
+from cyclope.admin import BaseContentAdmin
 from cyclope.widgets import CKEditor
 from cyclope.models import MenuItem
 from cyclope import settings as cyc_settings
@@ -40,10 +41,10 @@ class StaticPageAdminForm(forms.ModelForm):
                     )
 
     ## TODO(nicoechaniz): Markitup is throwing an error in JS, fix and uncomment this region.
-    ## if cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE ==  'textile':
-    ##     text = forms.CharField(label=_('Text'), widget=AdminMarkItUpWidget())
-    ## elif cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE == 'wysiwyg':
-    ##     text = forms.CharField(label=_('Text'), widget=CKEditor())
+    if cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE ==  'textile':
+        text = forms.CharField(label=_('Text'), widget=AdminMarkItUpWidget())
+    elif cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE == 'wysiwyg':
+        text = forms.CharField(label=_('Text'), widget=CKEditor())
 
     def __init__(self, *args, **kwargs):
     # this was initially written to be used for any BaseContent, that's
@@ -63,7 +64,7 @@ class StaticPageAdminForm(forms.ModelForm):
         model = StaticPage
 
 
-class StaticPageAdmin(CollectibleAdmin):
+class StaticPageAdmin(CollectibleAdmin, BaseContentAdmin):
     # updates related menu_items information when a StaticPaget is saved
     form = StaticPageAdminForm
     search_fields = ('name', 'text', )
@@ -74,6 +75,7 @@ class StaticPageAdmin(CollectibleAdmin):
                     'classes': ('collapse',),
                     'fields': ('published', 'summary', 'menu_items')}),
                  )
+    inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines
 
     def save_model(self, request, obj, form, change):
         super(CollectibleAdmin, self).save_model(request, obj, form, change)
