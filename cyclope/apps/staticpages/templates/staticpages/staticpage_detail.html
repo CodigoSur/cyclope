@@ -8,7 +8,7 @@ When showing the StaticPage as the main content of the view, the host_template i
 
 {% block content %}
 
-<div class="content-view staticpage detail staticpage-detail">
+<div class="content-view staticpage detail staticpage-detail html-content">
     {% if CYCLOPE_STATICPAGE_TEXT_STYLE == 'raw' or CYCLOPE_STATICPAGE_TEXT_STYLE == 'wysiwyg'%}
       {{ staticpage.text|safe }}
     {% else %}
