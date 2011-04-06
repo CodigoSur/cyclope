@@ -39,7 +39,7 @@ class Collection(models.Model):
     """A facility for creating custom content collections.
     """
 
-    name = models.CharField(_('name'), max_length=50, unique=True)
+    name = models.CharField(_('name'), max_length=100, unique=True)
     slug = AutoSlugField(populate_from='name', always_update=True)
     # collections that aren't visible can be used to customize content behaviour
     visible = models.BooleanField(_('visible'),
@@ -74,7 +74,7 @@ class Category(models.Model):
 
     collection = models.ForeignKey(Collection,
         verbose_name=_('collection'), related_name='categories')
-    name = models.CharField(_('name'), max_length=50)
+    name = models.CharField(_('name'), max_length=100)
     slug = AutoSlugField(populate_from='name', unique=True,
                          db_index=True, always_update=True)
 #    slug = AutoSlugField(populate_from='name', always_update=True)
