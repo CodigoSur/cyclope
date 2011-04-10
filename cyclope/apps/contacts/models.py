@@ -56,7 +56,7 @@ class Contact(BaseContent, Collectible):
     given_name = models.CharField(_('given name'), max_length=255)
     surname = models.CharField(_('surname'), blank=True, max_length=255)
     birth_date = models.DateField(_('birth date'), blank=True, null=True)
-    gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES)
+    gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, null=True, blank=True)
     photo = FileBrowseField(_('photo'), max_length=100, format='Image',
                             directory='contact_images/', blank=True)
     email = models.EmailField(_('e-mail'), blank=True)
