@@ -59,7 +59,6 @@ class CustomIndexDashboard(Dashboard):
         """
         from django.contrib.auth.models import User, Group
         user = context.get('user')
-        managers = Group.objects.get(name='managers').user_set.all()
         admins = User.objects.filter(is_superuser=True)
 
         self.children.append(modules.Group(
