@@ -58,7 +58,7 @@ setup(
 
     install_requires=[
         'Django==1.2.4',
-        'FeinCms==1.2.1',
+        'FeinCms==1.3.0',
         'django-autoslug==1.4.1',
         'django-mptt==0.4.2', # 0.4 breaks compatibility
         'PIL>=1.1.7', # in PIL we trust
