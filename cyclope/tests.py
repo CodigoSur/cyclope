@@ -458,6 +458,16 @@ class MultipleFieldTestCase(TestCase):
     def test_initial_values(self):
         self.assertIn('value="3"', self.form.as_p())
 
+
+class DispatcherTestCase(TestCase):
+    def setUp(self):
+        pass
+
+    def test_unknown_url_returns_404(self):
+        # Ticket https://trac.usla.org.ar/cyclope/ticket/43
+        self.assertEqual(self.client.get("/category/foo/").status_code, 404)
+
+
 #TODO(nicoechaniz)
 #class DeleteRelatedContent(TestCase):
 #class DeleteFromLayoutsAndMenuItems(TestCase)

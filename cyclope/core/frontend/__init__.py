@@ -28,6 +28,7 @@ core.frontend
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
 from django.template import RequestContext
+from django.shortcuts import get_object_or_404
 
 from sites import site
 
@@ -92,7 +93,7 @@ class FrontendView(object):
 
         if self.is_instance_view:
             if not content_object:
-                content_object = self.model.objects.get(slug=slug)
+                content_object = get_object_or_404(self.model, slug=slug)
             response = self.get_response(request, req_context, options, content_object)
         else:
             response = self.get_response(request, req_context, options)
