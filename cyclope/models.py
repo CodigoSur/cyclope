@@ -29,6 +29,7 @@ import os
 from django.db import models
 from django.db.models import get_model
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.comments import Comment
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
@@ -252,7 +253,7 @@ class Layout(models.Model):
     def get_template_path(self):
         theme = cyclope.settings.CYCLOPE_CURRENT_THEME
         return 'cyclope/themes/%s/%s' % (theme, self.template)
-    
+
     class Meta:
         verbose_name = _('layout')
         verbose_name_plural = _('layouts')
@@ -286,6 +287,7 @@ class RelatedContent(models.Model):
         verbose_name_plural = _('related contents')
         ordering = ['order', ]
 
+
 class BaseContent(models.Model):
     """Parent class for every content model.
     """
@@ -308,6 +310,7 @@ class BaseContent(models.Model):
                                     ('YES',_('enabled')),
                                     ('NO',_('disabled'))
                                 ), default='SITE')
+    comments = generic.GenericRelation(Comment, object_id_field="object_pk")
 
     def get_absolute_url(self):
         return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
