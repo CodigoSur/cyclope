@@ -3,23 +3,34 @@
 {% block content %}
 <script type="text/javascript">
 
-var hide_children= function (el){
+var hide_children = function (el){
     $(el).children('ul').css('display', 'none');
 }
 
 jQuery(document).ready(function(){
-    hide_children($('#{{ menu_slug }}_menu .has_children').parent())
-    $('#{{ menu_slug }}_menu ul li').mouseenter(function() {
-        $(this).children('ul').css('display', 'block');
-    });
-/*TODO(nicochaniz): there should be an option for this view to choose between collapsing when the mose leaves the whole menu structure (commented out lines) or not */
-    $('#{{ menu_slug }}_menu ul li').mouseleave(function() {
-        $(this).children('ul').css('display', 'none');
-//      $('#{{ menu_slug }}_menu').mouseleave(function(){
-//          hide_children($('#{{ menu_slug }}_menu .has_children').parent())
-    });
-});
 
+    // Collapse childs of menus
+    $('div[id^={{ menu_slug }}_menu] .has_children').each(function(){
+        hide_children($(this).parent());
+    });
+
+    // Expand childs on mouse enter
+    $('div[id^={{ menu_slug }}_menu] ul li').each(function(){
+      $(this).mouseenter(function() {
+        $(this).children('ul').css('display', 'block');
+      });
+    });
+
+    // Collapse childs on mouse leave
+    /*TODO(nicochaniz): there should be an option for this view to choose between collapsing when the mose leaves the whole menu structure (commented out lines) or not */
+    $('div[id^={{ menu_slug }}_menu] ul li').each(function(){
+        $(this).mouseleave(function() {
+          hide_children($(this));
+      });
+    });
+    // $('#{{ menu_slug }}_menu').mouseleave(function(){
+    //  hide_children($('#{{ menu_slug }}_menu .has_children').parent())
+});
 </script>
 
 <ul>
