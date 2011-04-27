@@ -5,31 +5,6 @@
   <div class="top"></div>
   {% region 'left_sidebar' %}
 
-  <div id="searchbox">
-	  <form action="/search/" method="get">
-	 {% for model in CYCLOPE_BASE_CONTENT_TYPES %}
-	 <input type="hidden" name="models" value="{{model.get_app_label}}.{{model.get_object_name}}">
-	 {% endfor %} 
-	  <input type="text" name="q"/>
-	  <input type="submit" value="" class="submit"/>
-	</form>
-  </div>
-
-  <div id="tags">
-	<span class="title">Etiquetas</span>
-	<div class="box">
-	  {% tag_cloud_for_model articles.Article as article_tags with min_count=1 distribution=log %}
-	  {% for tag in article_tags %}
-		  <a class="tag{{tag.font_size}}">{{tag.name}}</a>
-		{% comment %}
-		<a href="/tag/{{ tag.name|slugify }}" class="tag{{tag.font_size}}">
-		  {{tag.name}}
-		</a>
-		{% endcomment %}
-	  {% endfor %}
-	  </a>&nbsp&nbsp
-	</div>
-  </div>
 
   <div id="rss"><a href="/rss">{% trans "Subscribe to RSS" %}</a></div>
   <!-- banners -->
