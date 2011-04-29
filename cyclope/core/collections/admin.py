@@ -117,6 +117,12 @@ class CategoryForm(forms.ModelForm):
     parent = TreeNodeChoiceField(label=_('Parent'),
                                  queryset=Category.tree.all(), required=False)
 
+    def __init__(self, *args, **kwargs):
+        super(CategoryForm, self).__init__(*args, **kwargs)
+        if self.instance.id is not None:
+            current_col = self.instance.collection
+            self.fields['collection'].choices = [(current_col.pk, current_col)]
+
     class Meta:
         model = Category
 
