@@ -1,5 +1,7 @@
 {% load comments i18n %}
-  {% if not current_object.allow_comments == 'NO' %}
+  {% get_comment_count for current_object as comment_count %}
+
+      {% if current_object.allow_comments == 'YES' or current_object.allow_comments == 'SITE' and CYCLOPE_SITE_SETTINGS.allow_comments == 'YES' %}
     {% get_comment_count for current_object as comment_count %}
    <div>
     <script type="text/javascript">
