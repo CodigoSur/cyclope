@@ -266,7 +266,7 @@ class RegionViewInlineForm(forms.ModelForm):
 class AuthorAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AuthorAdminForm, self).__init__(*args, **kwargs)
-        self.fields['content_types'].choices = site.get_registry_ctype_choices()
+        self.fields['content_types'].choices = site.get_base_ctype_choices()
 
 
 from registration.forms import RegistrationFormUniqueEmail
