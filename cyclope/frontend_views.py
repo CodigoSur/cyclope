@@ -189,7 +189,10 @@ class SiteMap(frontend.FrontendView):
             for category in Category.tree.filter(collection=collection, level=0):
                 # TODO(diegoM): Change this line when the refactorization is done
                 category_list.extend(self._get_categories_nested_list(category))
-            collections_list.extend([collection,category_list])
+            if category_list:
+                collections_list.extend([collection,category_list])
+            else:
+                collections_list.append(collection)
 
         menus_list = []
         for menu in Menu.objects.all():
@@ -197,7 +200,10 @@ class SiteMap(frontend.FrontendView):
             for item in MenuItem.tree.filter(menu=menu, level=0):
                 # TODO(diegoM): Change this line when the refactorization is done
                 menu_items_list.extend(MenuMenuItemsHierarchy()._get_menuitems_nested_list(item))
-            menus_list.extend([menu.name, menu_items_list])
+            if menu_items_list:
+                menus_list.extend([menu.name, menu_items_list])
+            else:
+                menu_list.append(menu.name)
 
         req_context.update({'collections':collections_list,
                                      'menus':menus_list})
