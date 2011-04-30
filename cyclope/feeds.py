@@ -37,7 +37,8 @@ class WholeSiteFeed(Feed):
     def item_description(self, content):
         if hasattr(content, 'text'):
             return content.text
-        return content.description
+        elif hasattr(content, 'description'):
+            return content.description
 
     def item_author(self, content):
         return content.author.name
