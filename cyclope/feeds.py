@@ -66,7 +66,7 @@ class ContentTypeFeed(WholeSiteFeed):
         for model in sites.site.base_content_types:
             if model.get_object_name() == object_name:
                 return model
-        return Http404
+        raise Http404
 
     def link(self, model):
         return reverse('content_type_feed', args=[model.get_object_name()])
