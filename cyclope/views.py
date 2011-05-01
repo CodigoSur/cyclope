@@ -32,6 +32,11 @@ from django.template import loader
 from django.http import Http404
 from django.core.xheaders import populate_xheaders
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+
+from cyclope import settings as cyc_settings
+
 
 def object_detail(request, req_context, content_object, extra_context=None, view_name='detail',
         template_name=None, template_object_name=None):
@@ -159,3 +164,18 @@ def object_list(request, req_context, queryset, view_name='list', inline=False,
 
     t = template_loader.get_template(template_name)
     return t.render(req_context)
+
+
+def error_404(request):
+    template_name = 'cyclope/themes/%s/404.html' % cyc_settings.CYCLOPE_CURRENT_THEME
+    print template_name
+    return render_to_response(template_name,
+        context_instance = RequestContext(request)
+    )
+
+def error_500(request):
+    template_name = 'cyclope/themes/%s/500.html' % cyc_settings.CYCLOPE_CURRENT_THEME
+    print template_name
+    return render_to_response(template_name,
+        context_instance = RequestContext(request)
+    )

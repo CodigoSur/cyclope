@@ -20,7 +20,7 @@ jQuery(document).ready(function(){
         $(this).children('ul').css('display', 'block');
       });
     });
-    // Collapse whe whole menu if the alignament is VERTICAL
+    // Collapse whe whole menu if the alignment is VERTICAL
     if ("{{align}}" === "HORIZONTAL"){
       $('div[id^={{ menu_slug }}_menu] ul li').each(function(){
         $(this).mouseleave(function() {

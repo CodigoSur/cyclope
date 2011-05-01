@@ -74,7 +74,7 @@ class MenuFlatItemsList(frontend.FrontendView):
 frontend.site.register_view(Menu, MenuFlatItemsList)
 
 class MenuHierarchyOptions(forms.Form):
-    align = forms.ChoiceField(label=_('Alignament'),
+    align = forms.ChoiceField(label=_('Alignment'),
                               choices=(("VERTICAL", _("vertical")),
                                        ("HORIZONTAL", _("horizontal"))),
                               initial="VERTICAL")
