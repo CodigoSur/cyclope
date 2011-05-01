@@ -29,11 +29,16 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+from django.db.models.signals import m2m_changed
+
 import mptt
 from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 
 import cyclope
+
+
+
 
 class Collection(models.Model):
     """A facility for creating custom content collections.
@@ -65,6 +70,16 @@ class Collection(models.Model):
     class Meta:
         verbose_name = _('collection')
         verbose_name_plural = _('collections')
+
+def changed_ctypes(sender, instance, action, reverse, model, pk_set, **kwargs):
+    ## we remove previous categorizations that were set for content types
+    ## that are no longer accepted by the collection
+    if action == 'post_add' and pk_set:
+        Categorization = models.get_model('collections', 'categorization')
+        cats = Categorization.objects.filter(
+            category__collection=instance).exclude(content_type__pk__in=pk_set).delete()
+
+m2m_changed.connect(changed_ctypes, sender=Collection.content_types.through)
 
 
 class Category(models.Model):
@@ -104,7 +119,6 @@ class Category(models.Model):
                 for child in self.get_descendants():
                     child.collection = self.collection
                     child.save()
-
         super(Category, self).save(*args, **kwargs)
 
     class Meta:
