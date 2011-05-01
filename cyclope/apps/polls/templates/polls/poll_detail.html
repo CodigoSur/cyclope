@@ -12,32 +12,12 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
 <div class="content-view poll detail poll-detail">
 
-  {% get_comment_count for poll as comment_count %}
-
   <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
   <h1 class="title">{{ poll.name }}</h1>
 
   <!-- herramientas -->
-  <div class="tools meta-content">
-    <ul>
-      <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a></li>
-      <li>
-        <a href="/share?slug={{ poll.slug }}" onclick="abrir_popup(this);return false" class="share">
-          {% trans "Share" %}
-        </a>
-      </li>
-
-      {% if not poll.allow_comments == 'NO' %}
-        {% if comment_count %}
-        <li>
-          <a href="#comments" class="comments_link">{% trans "Comments" %} ({{ comment_count }})</a>
-        </li>
-        {% endif %}
-      {% endif %}
-    </ul>
-  </div>
-  <!-- /herramientas -->
+  {% include 'cyclope/content_tools_block.html' %}
 
   {% if poll.tags %}
     <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ poll.tags }}</span></div>

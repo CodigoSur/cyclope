@@ -104,6 +104,7 @@ a {
   margin-right: 16px;
   margin-bottom: 16px;
  -moz-border-radius: 12px 12px 12px 12px;
+ -webkit-border-radius: 12px 12px 12px 12px;
 }
 
 
@@ -177,20 +178,21 @@ a {
 }
 
 
-#searchbox {
+.search-box {
  border: none;
  background-color: black;
  color: white;
  padding: 20px 25px; 
 }
 
-#searchbox input[type="text"] {
+.search-box input[type="text"] {
  border: 2px solid #de2121;
  width: 100px; height: 22px;
  margin-right: 0px;
+ font-size: 12px;
 }
 
-#searchbox input.submit {
+.search-box input.submit {
  background: url(../images/css/btn.png) no-repeat 0 0 transparent;
  border-width: 0px;
  width: 30px; height: 30px;
@@ -257,6 +259,7 @@ a {
  font-size: 14px;
  border: none;
  -moz-border-radius: 8px 8px 0px 0px;
+ -webkit-border-radius: 8px 8px 0px 0px;
 }
 
 #header .menu ul li a:hover{
@@ -274,6 +277,7 @@ a {
  background-color: #de2121;
  border: none;
  -moz-border-radius: 8px 8px 8px 8px;
+ -webkit-border-radius: 8px 8px 8px 8px;
  font-weight: bold;
  font-size: 20px;
 }
@@ -297,6 +301,7 @@ a {
  background-color: #839882;
  border: none;
  -moz-border-radius: 8px 8px 8px 8px;
+ -webkit-border-radius: 8px 8px 8px 8px;
  font-weight: bold;
  font-size: 14px;
  color: white;
@@ -660,4 +665,17 @@ padding:4px;
 
 #chat_container a{
     text-decoration: underline;
+}
+
+#header .menuitems_hierarchy ul ul{
+    text-align: left;
+    width: 100px;
+    position: absolute;
+    border: 0px;
+}
+
+#header .menuitems_hierarchy ul ul li{
+    -moz-border-radius: 0px 0px 0px 0px;
+    -webkit-border-radius: 0px 0px 0px 0px;
+    width: 100px;
 }

@@ -37,7 +37,8 @@ class WholeSiteFeed(Feed):
     def item_description(self, content):
         if hasattr(content, 'text'):
             return content.text
-        return content.description
+        elif hasattr(content, 'description'):
+            return content.description
 
     def item_author(self, content):
         return content.author.name
@@ -66,7 +67,7 @@ class ContentTypeFeed(WholeSiteFeed):
         for model in sites.site.base_content_types:
             if model.get_object_name() == object_name:
                 return model
-        return Http404
+        raise Http404
 
     def link(self, model):
         return reverse('content_type_feed', args=[model.get_object_name()])

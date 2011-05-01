@@ -12,8 +12,6 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
 <div class="content-view article detail article-detail">
 
-  {% get_comment_count for article as comment_count %}
-
   <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
   {% if article.pretitle %}
@@ -22,19 +20,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   <h1 class="title">{% trans article.name  %}</h1>
 
   <!-- herramientas -->
-  <div class="tools meta-content">
-    <ul>
-      <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a></li>
-      {% if not article.allow_comments == 'NO' %}
-        {% if comment_count %}
-        <li>
-          <a href="#comments" class="comments_link">{% trans "Comments" %} ({{ comment_count }})</a>
-        </li>
-        {% endif %}
-      {% endif %}
-    </ul>
-  </div>
-  <!-- /herramientas -->
+  {% include 'cyclope/content_tools_block.html' %}
 
   <!-- descripcion -->
   {% if article.summary %}

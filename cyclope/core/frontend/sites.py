@@ -269,7 +269,7 @@ class CyclopeSite(object):
         choices = [{'object_id': '', 'verbose_name': '------'}]
 
         if not id_menu == '':
-            menu_items =  MenuItem.objects.filter(menu = id_menu)
+            menu_items =  MenuItem.tree.filter(menu = id_menu)
 
             choices.extend([ {'object_id': item.id,
                             'verbose_name': u'%s %s' % ('---' * item.level, item.name)}
