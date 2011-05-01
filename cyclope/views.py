@@ -168,14 +168,14 @@ def object_list(request, req_context, queryset, view_name='list', inline=False,
 
 def error_404(request):
     template_name = 'cyclope/themes/%s/404.html' % cyc_settings.CYCLOPE_CURRENT_THEME
-    print template_name
-    return render_to_response(template_name,
-        context_instance = RequestContext(request)
-    )
+    response = render_to_response(template_name,
+                                  context_instance = RequestContext(request))
+    response.status_code = 404
+    return response
 
 def error_500(request):
     template_name = 'cyclope/themes/%s/500.html' % cyc_settings.CYCLOPE_CURRENT_THEME
-    print template_name
-    return render_to_response(template_name,
-        context_instance = RequestContext(request)
-    )
+    response = render_to_response(template_name,
+                               context_instance = RequestContext(request))
+    response.status_code = 500
+    return response
