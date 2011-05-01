@@ -206,6 +206,7 @@ class RegionViewInlineForm(forms.ModelForm):
     region = AjaxChoiceField(label=_('Region'), required=False)
     content_view = AjaxChoiceField(label=_('View'), required=False)
     object_id = AjaxChoiceField(label=_('Content object'), required=False)
+    view_options = MultipleField(label=_('View options'), form=None, required=False)
 
     def __init__(self, *args, **kwargs):
         super(RegionViewInlineForm, self).__init__(*args, **kwargs)
@@ -214,6 +215,7 @@ class RegionViewInlineForm(forms.ModelForm):
             # if it is present before filling the choices through AJAX
             # so we set all choices here at __init__ time
             region_view = RegionView.objects.get(id=self.instance.id)
+
             if region_view.region:
                 selected_region = region_view.region
                 self.fields['region'].choices = [(selected_region,
@@ -222,12 +224,45 @@ class RegionViewInlineForm(forms.ModelForm):
                 selected_view = region_view.content_view
                 self.fields['content_view'].choices = [(selected_view,
                                                         selected_view)]
+            if region_view.content_type:
+                view_name = region_view.content_view
+                model = region_view.content_type.model_class()
+                view = site.get_view(model, view_name)
+
+                self.fields["view_options"] = MultipleField(form=view.options_form, required=False)
+                initial_options = self.fields["view_options"].initial
+                self.initial["view_options"] = region_view.view_options or initial_options
+
             if region_view.content_object:
                 content_object = region_view.content_object
                 self.fields['object_id'].choices = [(content_object.id,
                                                         content_object.name)]
 
         self.fields['content_type'].choices = site.get_registry_ctype_choices()
+
+    def clean_view_options(self):
+        # Retrieve content_view and content_type of current data
+        values = {}
+        field_names = ['content_type', "content_view"]
+        for name in field_names:
+            field, widget = self.fields[name], self.fields[name].widget
+            values[name] = widget.value_from_datadict(self.data, None,
+                                                      self.add_prefix(name))
+            values[name] = field.clean(values[name])
+        cleaned_value = {}
+        if all(values.values()):
+            view = site.get_view(values['content_type'].model_class(),
+                                 values['content_view'])
+            # Now we need to instance view_options field with the viw of the current
+            # form, and clean it.
+            self.fields["view_options"] = MultipleField(form=view.options_form,
+                                                        required=False)
+            field = self.fields["view_options"]
+            value = field.widget.value_from_datadict(self.data, None,
+                                                     self.add_prefix("view_options"))
+
+            cleaned_value = field.clean(value, validate=True)
+        return cleaned_value
 
     def clean(self):
         #TODO(nicoechaniz): this whole form validation could be simplified if we were not using our custom AjaxChoiceField and fields were actually marked as not null in the model definition. The problem is that the standard form validation will check for valid choices, so we should set choices to valid ones for each choicefield at form init time.

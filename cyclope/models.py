@@ -232,6 +232,7 @@ class RegionView(models.Model):
         db_index=True, verbose_name=_('object'),
         blank=True, null=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
+    view_options = JSONField(default="{}") # default is taken from ViewOptionsForm
 
     def __unicode__(self):
         return '%s/%s' % (self.content_type.model, self.content_view)

@@ -208,7 +208,7 @@ class CyclopeSite(object):
             {'category_id': category.id,
              'category_name': u"%s %s" % ('--' * category.level, category.name)}
             for category in Category.tree.filter(collection=collection)])
-        
+
         json_data = simplejson.dumps(categories)
         return HttpResponse(json_data, mimetype='application/json')
 
@@ -296,16 +296,20 @@ class CyclopeSite(object):
 
     def options_view_widget_html(self, request):
         """Returns the html with the options of a frontend view"""
+        from cyclope.fields import MultipleField
+
         content_type_id = request.GET['content_type_id']
-        model = ContentType.objects.get(pk=content_type_id).model_class()
         view_name = request.GET['view_name']
+        prefix_name = request.GET.get('prefix_name', "")
+
+        model = ContentType.objects.get(pk=content_type_id).model_class()
         frontend_view = self.get_view(model, view_name)
         if frontend_view.options_form is None:
             return HttpResponse("")
         form = frontend_view.options_form()
-        from cyclope.fields import MultipleField
         view_options = MultipleField(label=_('View options'), form=form, required=False)
-        html = view_options.widget.render(name="view_options", value=frontend_view.get_default_options())
+        html = view_options.widget.render(name=prefix_name+"view_options",
+                                          value=frontend_view.get_default_options())
         return HttpResponse(html)
 
 
