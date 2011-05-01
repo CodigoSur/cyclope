@@ -24,6 +24,7 @@ cyclope.frontend_views
 ----------------------
 """
 
+from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.template import loader, Template, Context
 from django.contrib.sites.models import Site
@@ -72,6 +73,11 @@ class MenuFlatItemsList(frontend.FrontendView):
 
 frontend.site.register_view(Menu, MenuFlatItemsList)
 
+class MenuHierarchyOptions(forms.Form):
+    align = forms.ChoiceField(label=_('Alignament'),
+                              choices=(("VERTICAL", _("vertical")),
+                                       ("HORIZONTAL", _("horizontal"))),
+                              initial="VERTICAL")
 
 # TODO(nicoechaniz): refactor this view and CollectionCategoriesHierarchy which share most of their code.
 class MenuMenuItemsHierarchy(frontend.FrontendView):
@@ -80,6 +86,7 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
     name='menuitems_hierarchy'
     verbose_name=_('hierarchical list of the items in the selected menu')
     is_region_view = True
+    options_form = MenuHierarchyOptions
 
     def get_response(self, request, req_context, options, content_object):
         menu = content_object
@@ -88,7 +95,8 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
         for item in menu_items:
             menu_items_list.extend(self._get_menuitems_nested_list(item))
         req_context.update({'menu_items': menu_items_list,
-                                     'menu_slug': menu.slug})
+                            'menu_slug': menu.slug,
+                            'align': options["align"]})
         t = loader.get_template("cyclope/menu_menuitems_hierarchy.html")
         return t.render(req_context)
 

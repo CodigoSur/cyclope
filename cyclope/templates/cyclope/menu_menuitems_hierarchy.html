@@ -20,16 +20,21 @@ jQuery(document).ready(function(){
         $(this).children('ul').css('display', 'block');
       });
     });
-
-    // Collapse childs on mouse leave
-    /*TODO(nicochaniz): there should be an option for this view to choose between collapsing when the mose leaves the whole menu structure (commented out lines) or not */
-    $('div[id^={{ menu_slug }}_menu] ul li').each(function(){
+    // Collapse whe whole menu if the alignament is VERTICAL
+    if ("{{align}}" === "HORIZONTAL"){
+      $('div[id^={{ menu_slug }}_menu] ul li').each(function(){
         $(this).mouseleave(function() {
           hide_children($(this));
+        });
       });
-    });
-    // $('#{{ menu_slug }}_menu').mouseleave(function(){
-    //  hide_children($('#{{ menu_slug }}_menu .has_children').parent())
+    }else{
+      $('div[id^={{ menu_slug }}_menu] .has_children').each(function(){
+          $(this).mouseleave(function() {
+            hide_children($(this).parent());
+          });
+      });
+    }
+
 });
 </script>
 
