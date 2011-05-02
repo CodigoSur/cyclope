@@ -32,12 +32,10 @@ from cyclope.core.collections.models import Collectible
 class BaseMedia(BaseContent, Collectible):
     """Abstract class for media content.
     """
-    author = models.CharField(_('author'), max_length=100,
-                              db_index=True, blank=True)
-    ## author = models.ForeignKey(Author, verbose_name=_('author'),
-    ##                            null=True, blank=True)
-    ## source = models.ForeignKey(Source, verbose_name=_('source'),
-    ##                            blank=True, null=True)
+    author = models.ForeignKey(Author, verbose_name=_('author'),
+                               null=True, blank=True)
+    source = models.ForeignKey(Source, verbose_name=_('source'),
+                               blank=True, null=True)
     
     description = models.TextField(_('description'), blank=True)
 

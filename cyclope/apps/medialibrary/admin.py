@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -21,6 +21,7 @@
 
 
 from django.contrib import admin
+from django import forms
 
 from cyclope.core.collections.admin import CollectibleAdmin
 from cyclope.admin import BaseContentAdmin
@@ -30,11 +31,29 @@ from models import *
 class MediaAdmin(CollectibleAdmin, BaseContentAdmin):
     inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines
     search_fields = ('name', 'author', 'description', )
+    list_filter = CollectibleAdmin.list_filter + \
+                  ('creation_date',)
 
-admin.site.register(Picture, MediaAdmin)
-admin.site.register(SoundTrack, MediaAdmin)
-admin.site.register(MovieClip, MediaAdmin)
-admin.site.register(Document, MediaAdmin)
-admin.site.register(FlashMovie, MediaAdmin)
-admin.site.register(RegularFile, MediaAdmin)
-admin.site.register(ExternalContent, MediaAdmin)
+def media_admin_factory(media_model):
+    class MediaLibraryForm(forms.ModelForm):
+        def __init__(self, *args, **kwargs):
+            super(MediaLibraryForm, self).__init__(*args, **kwargs)
+            author_choices = [('', '------')]
+            for author in Author.objects.all():
+                if media_model in [ctype.model_class()
+                                   for ctype in author.content_types.all()]:
+                    author_choices.append((author.id, author.name))
+            self.fields['author'].choices = author_choices
+        class Meta:
+            model = media_model
+
+    return type('%sAdmin' % media_model.__name__,
+                (MediaAdmin,), {'form': MediaLibraryForm})
+
+admin.site.register(Picture, media_admin_factory(Picture))
+admin.site.register(SoundTrack, media_admin_factory(SoundTrack))
+admin.site.register(MovieClip, media_admin_factory(MovieClip))
+admin.site.register(Document, media_admin_factory(Document))
+admin.site.register(FlashMovie, media_admin_factory(FlashMovie))
+admin.site.register(RegularFile, media_admin_factory(RegularFile))
+admin.site.register(ExternalContent, media_admin_factory(ExternalContent))

@@ -8,24 +8,17 @@ class Migration(DataMigration):
 
     def forwards(self, orm):
         media_types = ['Document', 'ExternalContent', 'FlashMovie', 'MovieClip', 'Picture', 'RegularFile', 'Soundtrack']
-        ContentType = orm['contenttypes.ContentType']
+        ContentType = orm['contenttypes.ContentType']        
         for type_name in media_types:
             model = getattr(orm, type_name)
             ctype = ContentType.objects.get(app_label='medialibrary', model=model._meta.module_name)
             items = model.objects.all()
             for item in items:
-                author_name = item.author
-                if author_name == '':
-                    continue
-                elif orm['cyclope.Author'].objects.filter(name=author_name).exists():
+                author_name = item.txt_author
+                if orm['cyclope.Author'].objects.filter(name=author_name).exists():
                     author = orm['cyclope.Author'].objects.get(name=author_name)
-                else:
-                    author = orm['cyclope.Author'](name=author_name)
-                    author.save()
-                if ctype not in author.content_types.all():
-                    author.content_types.add(ctype)
-                    author.save()
-
+                    item.author = author
+                    item.save()
 
     models = {
         'auth.group': {
@@ -217,107 +210,114 @@ class Migration(DataMigration):
         'medialibrary.document': {
             'Meta': {'object_name': 'Document'},
             'allow_comments': ('django.db.models.fields.CharField', [], {'default': "'SITE'", 'max_length': '4'}),
-            'author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'}),
-            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119479)'}),
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Author']", 'null': 'True', 'blank': 'True'}),
+            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586723)'}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'document': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100', 'blank': 'True'}),
-            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119559)', 'auto_now': 'True', 'blank': 'True'}),
+            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586792)', 'auto_now': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {}),
+            'txt_author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'})
         },
         'medialibrary.externalcontent': {
             'Meta': {'object_name': 'ExternalContent'},
             'allow_comments': ('django.db.models.fields.CharField', [], {'default': "'SITE'", 'max_length': '4'}),
-            'author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'}),
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Author']", 'null': 'True', 'blank': 'True'}),
             'content_url': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119479)'}),
+            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586723)'}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100', 'blank': 'True'}),
-            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119559)', 'auto_now': 'True', 'blank': 'True'}),
+            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586792)', 'auto_now': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
             'new_window': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'skip_detail': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {}),
+            'txt_author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'})
         },
         'medialibrary.flashmovie': {
             'Meta': {'object_name': 'FlashMovie'},
             'allow_comments': ('django.db.models.fields.CharField', [], {'default': "'SITE'", 'max_length': '4'}),
-            'author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'}),
-            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119479)'}),
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Author']", 'null': 'True', 'blank': 'True'}),
+            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586723)'}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'flash': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100', 'blank': 'True'}),
-            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119559)', 'auto_now': 'True', 'blank': 'True'}),
+            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586792)', 'auto_now': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {}),
+            'txt_author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'})
         },
         'medialibrary.movieclip': {
             'Meta': {'object_name': 'MovieClip'},
             'allow_comments': ('django.db.models.fields.CharField', [], {'default': "'SITE'", 'max_length': '4'}),
-            'author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'}),
-            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119479)'}),
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Author']", 'null': 'True', 'blank': 'True'}),
+            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586723)'}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119559)', 'auto_now': 'True', 'blank': 'True'}),
+            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586792)', 'auto_now': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
             'still': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100', 'blank': 'True'}),
             'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {}),
+            'txt_author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'}),
             'video': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100'})
         },
         'medialibrary.picture': {
             'Meta': {'object_name': 'Picture'},
             'allow_comments': ('django.db.models.fields.CharField', [], {'default': "'SITE'", 'max_length': '4'}),
-            'author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'}),
-            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119479)'}),
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Author']", 'null': 'True', 'blank': 'True'}),
+            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586723)'}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100'}),
-            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119559)', 'auto_now': 'True', 'blank': 'True'}),
+            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586792)', 'auto_now': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {}),
+            'txt_author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'})
         },
         'medialibrary.regularfile': {
             'Meta': {'object_name': 'RegularFile'},
             'allow_comments': ('django.db.models.fields.CharField', [], {'default': "'SITE'", 'max_length': '4'}),
-            'author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'}),
-            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119479)'}),
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Author']", 'null': 'True', 'blank': 'True'}),
+            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586723)'}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'file': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100', 'blank': 'True'}),
-            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119559)', 'auto_now': 'True', 'blank': 'True'}),
+            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586792)', 'auto_now': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {}),
+            'txt_author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'})
         },
         'medialibrary.soundtrack': {
             'Meta': {'object_name': 'SoundTrack'},
             'allow_comments': ('django.db.models.fields.CharField', [], {'default': "'SITE'", 'max_length': '4'}),
             'audio': ('filebrowser.fields.FileBrowseField', [], {'max_length': '250'}),
-            'author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'}),
-            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119479)'}),
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Author']", 'null': 'True', 'blank': 'True'}),
+            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586723)'}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 4, 58, 53, 119559)', 'auto_now': 'True', 'blank': 'True'}),
+            'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2011, 5, 2, 6, 28, 32, 586792)', 'auto_now': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {}),
+            'txt_author': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '100', 'blank': 'True'})
         },
         'sites.site': {
             'Meta': {'ordering': "('domain',)", 'object_name': 'Site', 'db_table': "'django_site'"},
