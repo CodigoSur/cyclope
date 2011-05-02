@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
 # All rights reserved.
@@ -26,7 +26,7 @@ import cyclope.apps.articles.models
 
 class ArticleIndex(RealTimeSearchIndex):
     text = CharField(document=True, use_template=True) #template: pretitle, summary, text, author, source
-    author = CharField(model_attr='author')
+    author = CharField(model_attr='author', null=True)
     source = CharField(model_attr='source', null=True)
     pub_date = DateTimeField(model_attr='creation_date') #TODO: Maybe we have to add 'date'
 
