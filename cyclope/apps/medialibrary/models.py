@@ -26,14 +26,19 @@ from django.contrib.contenttypes.models import ContentType
 from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 
-from cyclope.models import BaseContent
+from cyclope.models import BaseContent, Author, Source
 from cyclope.core.collections.models import Collectible
 
 class BaseMedia(BaseContent, Collectible):
     """Abstract class for media content.
     """
     author = models.CharField(_('author'), max_length=100,
-                               db_index=True, blank=True)
+                              db_index=True, blank=True)
+    ## author = models.ForeignKey(Author, verbose_name=_('author'),
+    ##                            null=True, blank=True)
+    ## source = models.ForeignKey(Source, verbose_name=_('source'),
+    ##                            blank=True, null=True)
+    
     description = models.TextField(_('description'), blank=True)
 
     class Meta:
