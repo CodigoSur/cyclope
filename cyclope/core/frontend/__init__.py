@@ -82,7 +82,9 @@ class FrontendView(object):
             a string if the view is called from within a region templatetag
             an HttpResponse otherwise
         """
-        options = view_options or self.get_default_options()
+        options = self.get_default_options()
+        if view_options:
+            options.update(view_options)
         if inline:
             host_template = 'cyclope/inline_view.html'
         else:
