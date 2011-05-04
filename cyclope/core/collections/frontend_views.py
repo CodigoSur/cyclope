@@ -63,6 +63,7 @@ class TeaserListOptions(forms.Form):
                                        ("DATE+", _(u"Date ↑ (oldest first)")),
                                        ("ALPHABETIC", _(u"Alphabetic"))),
                               initial="DATE-")
+    simplified = forms.BooleanField(label=_("Simplified"), initial=False, required=False)
 
 class CategoryDefaultList(frontend.FrontendView):
     name = 'default'
@@ -119,7 +120,8 @@ class CategoryTeaserList(frontend.FrontendView):
         req_context.update({'categorizations': page.object_list,
                             'page': page,
                             'category': category,
-                            'inline_view_name': self.inline_view_name})
+                            'inline_view_name': self.inline_view_name,
+                            'simplified_view': options["simplified"]})
         t = loader.get_template(template)
         return t.render(req_context)
 
@@ -138,32 +140,6 @@ class CategoryLabeledIconList(CategoryTeaserList):
     inline_view_name = 'teaser'
 
 frontend.site.register_view(Category, CategoryLabeledIconList)
-
-
-class CategorySimplifiedTeaserList(frontend.FrontendView):
-    """A teaser list view of category members.
-    """
-    name='simplified_teaser_list'
-    verbose_name=_('simplified teaser list of Category members')
-    is_region_view = True
-
-    def get_response(self, request, req_context, options, content_object):
-        category = content_object
-        categorizations_list = category.categorizations.all()
-        categorizations_list = sorted(categorizations_list,
-                                      key=lambda c: c.object_modification_date,
-                                      reverse=True)
-
-        template = "collections/category_teaser_list.html"
-        req_context.update({'category': category,
-                            'categorizations': categorizations_list,
-                            'simplified_view': True,
-                            'inline_view_name': 'teaser',
-                            })
-        t = loader.get_template(template)
-        return t.render(req_context)
-
-frontend.site.register_view(Category, CategorySimplifiedTeaserList)
 
 
 class CategoryContents(CategoryTeaserList):
