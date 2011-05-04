@@ -48,7 +48,6 @@ setup(
     # that are downloaded from source to ensure a tested revision is used.
     dependency_links=[
         'hg+http://bitbucket.org/ubernostrum/django-registration@d36a38202ee3d09d342b000f4ff634296f90df49#egg=django-registration-0.8-alpha-1',
-        'git+http://github.com/toastdriven/django-haystack.git@9c4a69110f181b252690230d96713e8cbba36f8b#egg=django-haystack-1.1.0-alpha',
         'hg+http://bitbucket.org/drmeers/django-dbgettext@fab7c71cab0cbc8cf73669fca4d408c7d3b24a9a#egg=django-dbgettext-0.1',
         'git+http://github.com/nicoechaniz/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-3.0-nograpup',
         'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-0.4a1',
@@ -71,8 +70,8 @@ setup(
         'django-profiles==0.2',
         'django-admin-tools==0.4.0',
         'django-contact-form>=0.4a1', # installed from our clone
-        'Whoosh==1.1.1',
-        'django-haystack>=1.1.0-alpha', # fixed revision in dep links
+        'Whoosh>=1.8.1',
+        'django-haystack>=1.2.0', # fixed revision in dep links
         'textile==2.1.4',
         'django-dbgettext>=0.1', # fixed revision in dep links
         'django-rosetta==0.5.6-temp', # installed from our clone
