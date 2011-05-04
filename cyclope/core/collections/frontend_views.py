@@ -27,10 +27,11 @@ from django.core.urlresolvers import reverse
 from django.contrib.comments.models import Comment
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
-from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.core.paginator import Paginator
 
-from cyclope.core import frontend
+import cyclope.utils
 from cyclope.utils import NamePaginator
+from cyclope.core import frontend
 from cyclope import settings as cyc_settings
 from cyclope.core.collections.models import Collection, Category, Categorization
 
@@ -101,19 +102,7 @@ class CategoryTeaserList(frontend.FrontendView):
                                       reverse=True)
 
         paginator = Paginator(categorizations_list, options["items_per_page"])
-
-        # Make sure page request is an int. If not, deliver first page.
-        try:
-            page_number = int(request.GET.get('page', '1'))
-        except ValueError:
-            page_number = 1
-
-        # DjangoDocs uses page differently
-        # If page request (9999) is out of range, deliver last page of results.
-        try:
-            page = paginator.page(page_number)
-        except (EmptyPage, InvalidPage):
-            page = paginator.page(paginator.num_pages)
+        page = cyclope.utils.get_page(paginator, request)
 
         req_context.update({'categorizations': page.object_list,
                             'page': page,
@@ -301,19 +290,7 @@ class CollectionCategoriesMembersAlphabeticTeaserList(frontend.FrontendView):
         object_list = list(set([cat.content_object for cat in categorizations_list]))
 
         paginator = NamePaginator(object_list, on="name", per_page=self.items_per_page)
-
-        # Make sure page request is an int. If not, deliver first page.
-        try:
-            page_number = int(request.GET.get('page', '1'))
-        except ValueError:
-            page_number = 1
-
-        # DjangoDocs uses page differently
-        # If page request (9999) is out of range, deliver last page of results.
-        try:
-            page = paginator.page(page_number)
-        except (EmptyPage, InvalidPage):
-            page = paginator.page(paginator.num_pages)
+        page = cyclope.utils.get_page(paginator, request)
 
         req_context.update({'object_list': page.object_list,
                             'page': page,
@@ -347,19 +324,7 @@ class CategoryListAsForum(frontend.FrontendView):
                                       reverse=True)
 
         paginator = Paginator(categorizations_list, self.items_per_page)
-
-        # Make sure page request is an int. If not, deliver first page.
-        try:
-            page_number = int(request.GET.get('page', '1'))
-        except ValueError:
-            page_number = 1
-
-        # DjangoDocs uses page differently
-        # If page request (9999) is out of range, deliver last page of results.
-        try:
-            page = paginator.page(page_number)
-        except (EmptyPage, InvalidPage):
-            page = paginator.page(paginator.num_pages)
+        page = cyclope.utils.get_page(paginator, request)
 
         for categorization in page.object_list:
             obj = categorization.content_object
@@ -395,20 +360,9 @@ class CategoryAlphabeticTeaserList(frontend.FrontendView):
     def get_response(self, request, req_context, options, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
+
         paginator = NamePaginator(categorizations_list, on="content_object.name", per_page=self.items_per_page)
-
-        # Make sure page request is an int. If not, deliver first page.
-        try:
-            page_number = int(request.GET.get('page', '1'))
-        except ValueError:
-            page_number = 1
-
-        # DjangoDocs uses page differently
-        # If page request (9999) is out of range, deliver last page of results.
-        try:
-            page = paginator.page(page_number)
-        except (EmptyPage, InvalidPage):
-            page = paginator.page(paginator.num_pages)
+        page = cyclope.utils.get_page(paginator, request)
 
         req_context.update({'categorizations': page.object_list,
                             'page': page,

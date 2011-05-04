@@ -27,6 +27,7 @@ Helper methods and classes.
 """
 
 from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import InvalidPage, EmptyPage
 from django.db.models import Q
 
 import cyclope
@@ -220,3 +221,23 @@ class NamePage(object):
             return u"%c" % (self.start_letter, )
         else:
             return u'%c-%c' % (self.start_letter, self.end_letter)
+
+def get_page(paginator, request):
+    """
+    Returns the current paginator instance page. Page number of paginator
+    is determined by request.GET["page"].
+    """
+    # Make sure page request is an int. If not, deliver first page.
+    try:
+        page_number = int(request.GET.get('page', '1'))
+    except ValueError:
+        page_number = 1
+
+    # DjangoDocs uses page differently
+    # If page request (9999) is out of range, deliver last page of results.
+    try:
+        page = paginator.page(page_number)
+    except (EmptyPage, InvalidPage):
+        page = paginator.page(paginator.num_pages)
+
+    return page
