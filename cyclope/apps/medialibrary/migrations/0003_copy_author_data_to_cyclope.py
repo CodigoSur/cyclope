@@ -3,15 +3,23 @@ import datetime
 from south.db import db
 from south.v2 import DataMigration
 from django.db import models
+from django.contrib.contenttypes import models
 
 class Migration(DataMigration):
-
+    
     def forwards(self, orm):
         media_types = ['Document', 'ExternalContent', 'FlashMovie', 'MovieClip', 'Picture', 'RegularFile', 'Soundtrack']
+        
         ContentType = orm['contenttypes.ContentType']
+        DoesNotExist = orm['contenttypes.ContentType'].DoesNotExist        
         for type_name in media_types:
             model = getattr(orm, type_name)
-            ctype = ContentType.objects.get(app_label='medialibrary', model=model._meta.module_name)
+            try:
+                ctype = ContentType.objects.get(app_label='medialibrary', model=model._meta.module_name)
+            except DoesNotExist:
+              ## this is a clean database, no need to do the data migration
+                return
+
             items = model.objects.all()
             for item in items:
                 author_name = item.author
