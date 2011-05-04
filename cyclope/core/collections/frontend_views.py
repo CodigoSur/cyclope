@@ -58,6 +58,11 @@ frontend.site.register_view(Category, CategoryRootItemsList)
 class TeaserListOptions(forms.Form):
     items_per_page = forms.IntegerField(label=_('Items per page'), min_value=1,
                                         initial=cyc_settings.CYCLOPE_PAGINATION['TEASER'],)
+    sort_by = forms.ChoiceField(label=_('Sort by'),
+                              choices=(("DATE-", _(u"Date ↓ (newest first)")),
+                                       ("DATE+", _(u"Date ↑ (oldest first)")),
+                                       ("ALPHABETIC", _(u"Alphabetic"))),
+                              initial="DATE-")
 
 class CategoryDefaultList(frontend.FrontendView):
     name = 'default'
@@ -77,8 +82,6 @@ class CategoryDefaultList(frontend.FrontendView):
 
 frontend.site.register_view(Category, CategoryDefaultList)
 
-
-
 class CategoryTeaserList(frontend.FrontendView):
     """A teaser list view of Category members.
     """
@@ -88,27 +91,36 @@ class CategoryTeaserList(frontend.FrontendView):
     is_content_view = True
     is_region_view = True
     options_form = TeaserListOptions
-
-    template = "collections/category_teaser_list.html"
     inline_view_name = 'teaser'
 
     def get_response(self, request, req_context, options, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
 
-        # TODO(diegoM): ¡¡¡ No escala !!!
-        categorizations_list = sorted(categorizations_list,
-                                      key=lambda c: c.object_modification_date,
-                                      reverse=True)
+        sort_by = options["sort_by"]
+        if "DATE" in sort_by:
+            if sort_by == "DATE-":
+                reverse = True
+            elif sort_by == "DATE+":
+                reverse = False
+            categorizations_list = sorted(categorizations_list,
+                                          key=lambda c: c.object_modification_date,
+                                          reverse=reverse)
+            paginator = Paginator(categorizations_list, options["items_per_page"])
+            template = "collections/category_teaser_list.html"
 
-        paginator = Paginator(categorizations_list, options["items_per_page"])
+        elif sort_by == "ALPHABETIC":
+            paginator = NamePaginator(categorizations_list, on="content_object.name",
+                                      per_page=self.items_per_page)
+            template = "collections/category_alphabetical_teaser_list.html"
+
         page = cyclope.utils.get_page(paginator, request)
 
         req_context.update({'categorizations': page.object_list,
                             'page': page,
                             'category': category,
                             'inline_view_name': self.inline_view_name})
-        t = loader.get_template(self.template)
+        t = loader.get_template(template)
         return t.render(req_context)
 
 frontend.site.register_view(Category, CategoryTeaserList)
@@ -344,30 +356,3 @@ class CategoryListAsForum(frontend.FrontendView):
         return t.render(req_context)
 
 frontend.site.register_view(Category, CategoryListAsForum)
-
-
-class CategoryAlphabeticTeaserList(frontend.FrontendView):
-    """ An alphabeticaly sorted list view of Category Members.
-    """
-    name='alphabetical_teaser_list'
-    verbose_name=_('alphabetical teaser list of Category members')
-    items_per_page = cyc_settings.CYCLOPE_PAGINATION['TEASER']
-    is_content_view = True
-    is_region_view = True
-
-    template = "collections/category_alphabetical_teaser_list.html"
-
-    def get_response(self, request, req_context, options, content_object):
-        category = content_object
-        categorizations_list = category.categorizations.all()
-
-        paginator = NamePaginator(categorizations_list, on="content_object.name", per_page=self.items_per_page)
-        page = cyclope.utils.get_page(paginator, request)
-
-        req_context.update({'categorizations': page.object_list,
-                            'page': page,
-                            'category': category})
-        t = loader.get_template(self.template)
-        return t.render(req_context)
-
-frontend.site.register_view(Category, CategoryAlphabeticTeaserList)
