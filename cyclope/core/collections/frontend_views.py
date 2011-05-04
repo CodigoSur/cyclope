@@ -64,6 +64,8 @@ class TeaserListOptions(forms.Form):
                                        ("ALPHABETIC", _(u"Alphabetic"))),
                               initial="DATE-")
     simplified = forms.BooleanField(label=_("Simplified"), initial=False, required=False)
+    traverse_children = forms.BooleanField(label=_("Include descendant's elements"),
+                                                    initial=False, required=False)
 
 class CategoryDefaultList(frontend.FrontendView):
     name = 'default'
@@ -96,7 +98,13 @@ class CategoryTeaserList(frontend.FrontendView):
 
     def get_response(self, request, req_context, options, content_object):
         category = content_object
-        categorizations_list = category.categorizations.all()
+        if options["traverse_children"]:
+            own = category.categorizations.select_related().all()
+            children_categories = category.get_descendants()
+            children = Categorization.objects.select_related().filter(category__in=children_categories)
+            categorizations_list = list(set(own | children))
+        else:
+            categorizations_list = category.categorizations.select_related().all()
 
         sort_by = options["sort_by"]
         if "DATE" in sort_by:
