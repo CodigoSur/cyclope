@@ -74,10 +74,11 @@ class MenuFlatItemsList(frontend.FrontendView):
 frontend.site.register_view(Menu, MenuFlatItemsList)
 
 class MenuHierarchyOptions(forms.Form):
-    align = forms.ChoiceField(label=_('Alignment'),
+    align = forms.ChoiceField(label=_('Collapse style'),
                               choices=(("VERTICAL", _("vertical")),
-                                       ("HORIZONTAL", _("horizontal"))),
-                              initial="VERTICAL")
+                                       ("HORIZONTAL", _("horizontal")),
+                                       ("DISABLED", _("disabled"))),
+                              initial="HORIZONTAL")
 
 # TODO(nicoechaniz): refactor this view and CollectionCategoriesHierarchy which share most of their code.
 class MenuMenuItemsHierarchy(frontend.FrontendView):
