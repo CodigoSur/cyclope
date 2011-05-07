@@ -65,12 +65,12 @@ def region(context, region_name):
         # instance views need instance data -> slug
         if view.is_instance_view:
             slug = regionview.content_object.slug
-            view_vars['output'] = view(context['request'], inline=True,
+            view_vars['output'] = view(context['request'], region_name=region_name,
                                        content_object=regionview.content_object,
                                        view_options=regionview.view_options)
             view_vars['slug'] = slug
         else:
-            view_vars['output'] = view(context['request'], inline=True,
+            view_vars['output'] = view(context['request'], region_name=region_name,
                                        view_options=regionview.view_options)
 
         view_vars['name'] = regionview.content_view
