@@ -63,7 +63,7 @@ def object_detail(request, req_context, content_object, extra_context=None, view
     return t.render(req_context)
 
 
-def object_list(request, req_context, queryset, view_name='list', inline=False,
+def object_list(request, req_context, queryset, view_name='list',
                 paginate_by=None, page=None, allow_empty=True,
                 template_name=None, template_loader=loader,
                 extra_context=None, template_object_name=None, mimetype=None):
