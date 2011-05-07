@@ -1,6 +1,6 @@
 {% if category.collection.visible %}
 
-  {% if not region_view %}
+  {% if not region_name %}
   <div id="categories_navigation" class="{{ category.collection.slug }} {{ category.slug }}">
     {% if category.parent %}
       <a href="{% url category-default category.parent.slug %}" class="parent">{{ category.parent.name }}</a>
