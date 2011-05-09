@@ -64,7 +64,7 @@ class Command(LabelCommand):
             ("filebrowser", os.path.join(filebrowser.__path__[0], "media", "filebrowser")),
             ("cyclope", os.path.join(cyclope.__path__[0], "media")),
             ("jquery-autocomplete", os.path.join(cyclope.__path__[0], "media", "jquery-autocomplete")),
-            ("feincms", os.path.join(cyclope.__path__[0], "media", "feincms")),
+            ("feincms", os.path.join(feincms.__path__[0], "static", "feincms")),
         )
 
         top_dir = os.path.join(directory, project_name)
@@ -72,6 +72,9 @@ class Command(LabelCommand):
         os.mkdir(media_dir)
         for name, path in media:
             os.symlink(path, os.path.join(media_dir, name))
+
+        # Create upload directory
+        os.mkdir(os.path.join(media_dir, "uploads"))
 
         # FIXME: this should not be here
         # Create db

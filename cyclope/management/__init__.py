@@ -1,10 +1,10 @@
 from django.db.models import signals
-import cyclope
 
 def create_site(app, created_models, verbosity, db, **kwargs):
     from django.contrib.sites.models import Site
     from cyclope.models import Menu, MenuItem, Layout, SiteSettings
-    if all([model in created_models for model in (Menu, MenuItem, Layout, SiteSettings)]) and \
+    models = (Menu, MenuItem, Layout, SiteSettings)
+    if all([model in created_models for model in models]) and \
         not Menu.objects.all():
         # Domain name
         domain = "localhost:8000"
@@ -32,7 +32,9 @@ def create_site(app, created_models, verbosity, db, **kwargs):
         layout = Layout(name="default", template='one_sidebar.html')
         layout.save(using=db)
 
-        menu_item = MenuItem(menu=menu, name="home", site_home=True, active=True, layout=layout)
+        menu_item = MenuItem(menu=menu, name="home", site_home=True,
+                             active=True, layout=layout)
+
         menu_item.save(using=db)
 
         site_settings = SiteSettings(site=site, theme="neutronica",
