@@ -21,9 +21,6 @@
 
 
 from django.utils.translation import ugettext_lazy as _
-from django.template import loader, RequestContext
-from django.http import Http404, HttpResponse
-from django.forms.formsets import formset_factory
 from django.shortcuts import redirect
 
 from cyclope.core import frontend

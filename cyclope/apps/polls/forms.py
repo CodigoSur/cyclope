@@ -25,12 +25,10 @@ forms
 """
 
 from django import forms
-from django.conf import settings as django_settings
 from django.utils.translation import ugettext_lazy as _
-#from django.core.exceptions import ValidationError
 
 from captcha.fields import CaptchaField
-from cyclope.apps.polls.models import Submission, Poll, Answer
+from cyclope.apps.polls.models import Submission, Answer
 
 
 class CaptchaForm(forms.Form):
@@ -50,7 +48,7 @@ class QuestionForm(forms.Form):
         # TODO: review unlisted for choicefield
         #if question.allow_unlisted:
         #    self.fields['unlisted'] = forms.CharField(required=False)
- 
+
         self.fields['answers'].choices = choices
 
 # TODO: implement clean for unlisted answers
@@ -65,13 +63,13 @@ class QuestionForm(forms.Form):
         # TODO: this is hacky. look for a better solution
         if not type(answer_ids) == list:
             answer_ids = [answer_ids]
-            
+
         #if unlisted_text:
         #    unlisted_answer = Answer.objects.create(question=self.question, text=unlisted_text, unlisted=True)
         #    answer_ids.append(unlisted_answer.id)
         return answer_ids
-        
-        
+
+
     class Meta:
         model = Submission
 
