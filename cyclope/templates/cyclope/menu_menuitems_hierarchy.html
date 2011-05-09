@@ -7,34 +7,36 @@ var hide_children = function (el){
     $(el).children('ul').css('display', 'none');
 }
 
+var show_children = function (el){
+    $(el).children('ul').css('display', 'block');
+}
+
 jQuery(document).ready(function(){
+    var menu_align = '{{ align }}';
 
-    // Collapse childs of menus
-    $('div[id^={{ menu_slug }}_menu] .has_children').each(function(){
-        hide_children($(this).parent());
-    });
-
-    // Expand childs on mouse enter
-    $('div[id^={{ menu_slug }}_menu] ul li').each(function(){
-      $(this).mouseenter(function() {
-        $(this).children('ul').css('display', 'block');
-      });
-    });
-    // Collapse whe whole menu if the alignment is VERTICAL
-    if ("{{align}}" === "HORIZONTAL"){
-      $('div[id^={{ menu_slug }}_menu] ul li').each(function(){
-        $(this).mouseleave(function() {
-          hide_children($(this));
-        });
-      });
-    }else{
-      $('div[id^={{ menu_slug }}_menu] .has_children').each(function(){
-          $(this).mouseleave(function() {
+    if (menu_align != 'DISABLED'){
+        // Hide children of collapsible menus
+        $('#{{ menu_slug }}_menu_{{ region_name }} .has_children').each(function(){
             hide_children($(this).parent());
-          });
-      });
-    }
+        });
 
+        // Expand children on mouse enter
+        $('#{{ menu_slug }}_menu_{{ region_name }} ul li').mouseenter(function() {
+            show_children($(this));
+        });
+
+        if (menu_align == 'HORIZONTAL'){
+            $('#{{ menu_slug }}_menu_{{ region_name }} ul li').mouseleave(function() {
+                hide_children($(this));
+            });
+        }
+        // Collapse whe whole menu if the alignment is VERTICAL
+        else{
+            $('#{{ menu_slug }}_menu_{{ region_name }}').mouseleave(function(){
+                hide_children($('#{{ menu_slug }}_menu_{{ region_name }} .has_children').parent());
+            });
+        }
+    }
 });
 </script>
 

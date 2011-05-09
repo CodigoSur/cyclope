@@ -7,12 +7,12 @@
     }
 
     jQuery(document).ready(function(){
-        hide_children($('#{{ collection_slug }}_collection .has_children').parent())
-        $('#{{ collection_slug }}_collection ul li').mouseenter(function() {
+        hide_children($('#{{ collection_slug }}_collection_{{ region_name }} .has_children').parent())
+        $('#{{ collection_slug }}_collection_{{ region_name }} ul li').mouseenter(function() {
             $(this).children('ul').css('display', 'block');
         });
-        $('#{{ collection_slug }}_collection').mouseleave(function(){
-            hide_children($('#{{ collection_slug }}_collection .has_children').parent())
+        $('#{{ collection_slug }}_collection_{{ region_name }}').mouseleave(function(){
+            hide_children($('#{{ collection_slug }}_collection_{{ region_name }} .has_children').parent())
         });
     });
 </script>

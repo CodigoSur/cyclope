@@ -34,12 +34,6 @@ from sites import site
 
 from cyclope.utils import template_for_request
 
-def get_view_template(request, inline=False):
-    if inline:
-        host_template = 'cyclope/inline_view.html'
-    else:
-        host_template = template_for_request(request)
-
 
 class FrontendView(object):
     """Parent class for frontend views.
@@ -73,7 +67,7 @@ class FrontendView(object):
     params = {}
     options_form = None
 
-    def __call__(self, request, inline=False, slug=None, content_object=None, view_options=None):
+    def __call__(self, request, region_name=None, slug=None, content_object=None, view_options=None):
         """
         Arguments:
             Either content_object or slug must be set
@@ -85,13 +79,13 @@ class FrontendView(object):
         options = self.get_default_options()
         if view_options:
             options.update(view_options)
-        if inline:
+        if region_name:
             host_template = 'cyclope/inline_view.html'
         else:
             host_template = template_for_request(request)
 
         req_context = RequestContext(request, {'host_template': host_template,
-                                              'region_view': inline})
+                                              'region_name': region_name})
 
         if self.is_instance_view:
             if not content_object:
@@ -100,8 +94,8 @@ class FrontendView(object):
         else:
             response = self.get_response(request, req_context, options)
 
-        # inline will be True if the view was called from a region templatetag
-        if not inline:
+        # region_name will hold a valye if the view was called from a region templatetag
+        if not region_name:
             if not isinstance(response, HttpResponse):
                 response = HttpResponse(response)
 
