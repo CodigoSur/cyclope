@@ -29,6 +29,7 @@ from django.conf import settings as django_settings
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.db.models import get_model
+from django.contrib.admin.widgets import AdminTextareaWidget
 from django.contrib.contenttypes.models import ContentType
 
 from mptt.forms import TreeNodeChoiceField
@@ -166,6 +167,8 @@ class SiteSettingsAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(SiteSettingsAdminForm, self).__init__(*args, **kwargs)
+        self.fields["keywords"].widget = AdminTextareaWidget()
+        self.fields["description"].widget = AdminTextareaWidget()
         self.fields['rss_content_types'].choices = site.get_base_ctype_choices()
 
         #TODO(diegoM): I don't like this...
