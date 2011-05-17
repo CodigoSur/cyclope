@@ -7,13 +7,31 @@
     }
 
     jQuery(document).ready(function(){
-        hide_children($('#{{ collection_slug }}_collection_{{ region_name }} .has_children').parent())
-        $('#{{ collection_slug }}_collection_{{ region_name }} ul li').mouseenter(function() {
-            $(this).children('ul').css('display', 'block');
-        });
-        $('#{{ collection_slug }}_collection_{{ region_name }}').mouseleave(function(){
-            hide_children($('#{{ collection_slug }}_collection_{{ region_name }} .has_children').parent())
-        });
+        var menu_align = '{{ align }}';
+
+        if (menu_align != 'DISABLED'){
+            // Hide children of collapsible menus
+            $('#{{ collection_slug }}_collection_{{ region_name }} .has_children').each(function(){
+                hide_children($(this).parent());
+            });
+
+            // Expand children on mouse enter
+            $('#{{ collection_slug }}_collection_{{ region_name }} ul li').mouseenter(function() {
+                show_children($(this));
+            });
+
+            if (menu_align == 'HORIZONTAL'){
+                $('#{{ collection_slug }}_collection_{{ region_name }} ul li').mouseleave(function() {
+                    hide_children($(this));
+                });
+            }
+            // Collapse whe whole menu if the alignment is VERTICAL
+            else{
+                $('#{{ collection_slug }}_collection_{{ region_name }}').mouseleave(function(){
+                    hide_children($('#{{ collection_slug }}_collection_{{ region_name }} .has_children').parent());
+                });
+            }
+        }
     });
 </script>
 

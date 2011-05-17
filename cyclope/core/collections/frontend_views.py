@@ -30,6 +30,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
 
 import cyclope.utils
+from cyclope.frontend_views import MenuHierarchyOptions
 from cyclope.utils import NamePaginator
 from cyclope.core import frontend
 from cyclope import settings as cyc_settings
@@ -204,6 +205,8 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
     target_view = 'default'
     is_content_view = True
     is_region_view = True
+    options_form = MenuHierarchyOptions
+    template = "collections/collection_categories_hierarchy.html"
 
     def get_response(self, request, req_context, options, content_object):
         collection = content_object
@@ -212,9 +215,9 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
         for category in categories:
             category_list.extend(self._get_categories_nested_list(category))
         req_context.update({'categories': category_list,
-                            'collection_slug': collection.slug})
-        template = "collections/collection_categories_hierarchy.html"
-        t = loader.get_template(template)
+                            'collection_slug': collection.slug,
+                            'align': options["align"]})
+        t = loader.get_template(self.template)
         return t.render(req_context)
 
     def _get_categories_nested_list(self, base_category, name_field='name'):
@@ -261,7 +264,9 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
 frontend.site.register_view(Collection, CollectionCategoriesHierarchy)
 
 class CollectionCategoriesHierarchyToIconlist(CollectionCategoriesHierarchy):
-    """A hierarchical list view of the Categories in a Collection that will show a labeled_icon list view of the category that the user makes a selection.
+    """A hierarchical list view of the Categories in a Collection that will
+    show a labeled_icon list view of the category that the user makes a
+    selection.
     """
     name='categories_hierarchy_to_iconlist'
     verbose_name=_('hierarchical list of Categories that will show an icon list on click')
