@@ -1,6 +1,6 @@
 {% extends host_template %}
 
-{% load i18n cyclope_utils markup fb_versions dbgettext_tags %}
+{% load i18n cyclope_utils fb_versions dbgettext_tags %}
 
 {% block content %}
 
@@ -11,7 +11,7 @@
   <tr>
     <td>
       <br/>
-      <span class="pretitle"><a name="editorial">{{ article.pretitle }}</a></span>
+      <span class="pretitle"><a name="editorial">{% trans article.pretitle %}</a></span>
       {% if newsletter.show_ToC %}
       <span class="show-ToC"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></span>
       {% endif %}
@@ -27,7 +27,7 @@
       {% endif %}
 
       <a href="{% url article-detail article.slug %}">
-        <h4>{{ article.summary|safe }}</h4>
+        <h4>{{ article|parsed_gettext:"summary"|smart_style }}</h4>
       </a>
       {% if article.author %}
       <h5>{% trans "By"%} {{ article.author }}</h5>
