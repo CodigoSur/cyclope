@@ -23,9 +23,7 @@
 from django.contrib import admin
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from markitup.widgets import AdminMarkItUpWidget
 
-from cyclope.widgets import ForeignKeyImageRawIdWidget, CKEditor
 from cyclope.core.collections.admin import CollectibleAdmin
 from cyclope.models import Author
 from cyclope.admin import BaseContentAdmin
@@ -35,11 +33,6 @@ from models import *
 
 
 class ArticleForm(forms.ModelForm):
-    if cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE ==  'textile':
-        text = forms.CharField(label=_('Text'), widget=AdminMarkItUpWidget())
-    elif cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE == 'wysiwyg':
-        text = forms.CharField(label=_('Text'), widget=CKEditor())
-
     def __init__(self, *args, **kwargs):
         super(ArticleForm, self).__init__(*args, **kwargs)
         author_choices = [('', '------')]

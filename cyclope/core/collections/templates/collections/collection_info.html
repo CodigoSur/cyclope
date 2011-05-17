@@ -11,7 +11,7 @@
 
         {% if collection.description %}
         <div class="text">
-          {{ collection.description|safe }}
+          {{ collection.description|smart_style }}
         </div>
         {% endif %}
       {% endif %}

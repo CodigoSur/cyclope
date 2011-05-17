@@ -1,11 +1,11 @@
-{% load comments i18n fb_versions cyclope_utils markup dbgettext_tags %}
+{% load comments i18n fb_versions cyclope_utils dbgettext_tags %}
 
 {% block content %}
 
 <div class="content-view article inline_detail article-inline_detail">
 
   {% if article.pretitle %}
-  <span class="pretitle">{{ article.pretitle }}</span>
+  <span class="pretitle">{% trans article.pretitle %}</span>
   {% endif %}
 
   {% if show_ToC %}
@@ -17,7 +17,7 @@
   </a>
 
   {% if article.summary %}
-  <h4 class="summary">{{ article.summary|safe }}</h4>
+  <h4 class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</h4>
   {% endif%}
 
   {% if article.author %}
@@ -32,17 +32,7 @@
     {% endif %}
 
     <span class="html-text html-content">
-      {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'raw' or CYCLOPE_ARTICLE_TEXT_STYLE == 'wysiwyg'%}
-        {{ article|parsed_gettext:"text"|safe }}
-      {% else %}
-        {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'textile' %}
-          {{ article.text|textile }}
-        {% else %}
-          {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'markdown'%}
-            {{ article.text|markdown }}
-          {% endif %}
-        {% endif %}
-      {% endif %}
+      {{ article|parsed_gettext:"text"|smart_style}}
     </span>
   </p>
 

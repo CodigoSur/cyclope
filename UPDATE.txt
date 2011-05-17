@@ -1,0 +1,34 @@
+
+
+Backwards-incompatible changes in 0.2.0
+=======================================
+
+* CYCLOPE_ARTICLE_TEXT_STYLE and CYCLOPE_STATIC_PAGE_TEXT_STYLE were removed and
+  unified to CYCLOPE_TEXT_STYLE. If you modified cyclope templates like
+  article_detail.html you must change them to use the new cyclope filter
+  `smart_style`.
+  A list of affected templates:
+    * cyclope/apps/articles/templates/articles/article_detail.html
+    * cyclope/apps/articles/templates/articles/article_inline_detail.html
+    * cyclope/apps/articles/templates/articles/article_teaser.html
+    * cyclope/apps/medialibrary/templates/medialibrary/document_detail.html
+    * cyclope/apps/medialibrary/templates/medialibrary/document_teaser.html
+    * cyclope/apps/medialibrary/templates/medialibrary/externalcontent_detail.html
+    * cyclope/apps/medialibrary/templates/medialibrary/externalcontent_teaser.html
+    * cyclope/apps/medialibrary/templates/medialibrary/flashmovie_detail.html
+    * cyclope/apps/medialibrary/templates/medialibrary/flashmovie_teaser.html
+    * cyclope/apps/medialibrary/templates/medialibrary/movieclip_detail.html
+    * cyclope/apps/medialibrary/templates/medialibrary/movieclip_teaser.html
+    * cyclope/apps/medialibrary/templates/medialibrary/picture_detail.html
+    * cyclope/apps/medialibrary/templates/medialibrary/picture_teaser.html
+    * cyclope/apps/medialibrary/templates/medialibrary/regularfile_detail.html
+    * cyclope/apps/medialibrary/templates/medialibrary/regularfile_teaser.html
+    * cyclope/apps/medialibrary/templates/medialibrary/soundtrack_detail.html
+    * cyclope/apps/medialibrary/templates/medialibrary/soundtrack_teaser.html
+    * cyclope/apps/staticpages/templates/staticpages/staticpage_detail.html
+    * cyclope/apps/staticpages/templates/staticpages/staticpage_teaser.html
+    * cyclope/core/collections/templates/collections/category_teaser_list.html
+    * cyclope/core/collections/templates/collections/collection_info.html
+    * cyclope/core/collections/templates/collections/collection_root_categories_teaser_list.html
+    * cyclope/templates/contact_form/contact_form.html
+    * cyclope/templates/filebrowser/index.html

@@ -22,6 +22,7 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import redirect
+from django.template import loader
 
 from cyclope.core import frontend
 from cyclope import views

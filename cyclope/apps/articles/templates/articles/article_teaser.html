@@ -1,4 +1,4 @@
-{% load i18n tagging_tags fb_versions markup %}
+{% load i18n tagging_tags fb_versions dbgettext_tags cyclope_utils %}
 
   <div class="content-view article teaser article-teaser">
 
@@ -21,21 +21,9 @@
 
     <div class="summary html-content">
       {% if article.summary %}
-        {{ article.summary }}
+        {{ article|parsed_gettext:"summary"|smart_style }}
       {% else %}
-
-        {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'raw' or CYCLOPE_ARTICLE_TEXT_STYLE == 'wysiwyg'%}
-          {{ article.text|truncatewords:40|safe }}
-        {% else %}
-            {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'textile' %}
-            {{ article.text|textile|truncatewords:40 }}
-            {% else %}
-              {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'markdown'%}
-              {{ article.text|markdown|truncatewords:40 }}
-              {% endif %}
-            {% endif %}
-        {% endif %}
-
+        {{ article|parsed_gettext:"text"|smart_style|truncatewords:40 }}
       {% endif %}
       <span class="more"><a href="{% url article-detail article.slug %}"> {% trans "More" %}</a></span>
     </div>

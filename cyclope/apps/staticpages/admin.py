@@ -39,13 +39,6 @@ class StaticPageAdminForm(forms.ModelForm):
     menu_items = forms.ModelMultipleChoiceField(label=_('Menu items'),
                     queryset = MenuItem.tree.all(), required=False,
                     )
-
-    ## TODO(nicoechaniz): Markitup is throwing an error in JS, fix and uncomment this region.
-    if cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE ==  'textile':
-        text = forms.CharField(label=_('Text'), widget=AdminMarkItUpWidget())
-    elif cyc_settings.CYCLOPE_STATICPAGE_TEXT_STYLE == 'wysiwyg':
-        text = forms.CharField(label=_('Text'), widget=CKEditor())
-
     def __init__(self, *args, **kwargs):
     # this was initially written to be used for any BaseContent, that's
     # why we don't assume the content_type to be pre-determined

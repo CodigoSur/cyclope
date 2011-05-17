@@ -24,7 +24,7 @@
     {% trans "Open external content"%} {% if media.new_window %}{% trans " (in new window)"%}{% endif%}
     </a>
   </div>
-  <div class="html-content">{{ media.description|safe }}</div>
+  <div class="html-content">{{ media.description|smart_style }}</div>
 
   {% include 'medialibrary/media_detail_footer.html' %}
 

@@ -4,7 +4,7 @@
 TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
 {% endcomment%}
 
-{% load comments i18n fb_versions cyclope_utils markup dbgettext_tags%}
+{% load comments i18n fb_versions cyclope_utils dbgettext_tags%}
 
 {% block content %}
 
@@ -15,7 +15,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
   {% if article.pretitle %}
-  <div class="pretitle-container meta-content"><span class="pretitle">{{ article.pretitle }}</span></div>
+  <div class="pretitle-container meta-content"><span class="pretitle">{% trans article.pretitle %}</span></div>
   {% endif %}
   <h1 class="title">{% trans article.name  %}</h1>
 
@@ -24,7 +24,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
   <!-- descripcion -->
   {% if article.summary %}
-  <p class="summary">{{ article.summary|safe }}</p>
+  <p class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</p>
   {% endif%}
   <!-- /descripcion -->
 
@@ -75,17 +75,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
           <!-- /descargas -->
 
   <div><span class="html-text html-content">
-    {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'raw' or CYCLOPE_ARTICLE_TEXT_STYLE == 'wysiwyg'%}
-      {{ article|parsed_gettext:"text"|safe }}
-    {% else %}
-        {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'textile' %}
-        {{ article.text|textile }}
-        {% else %}
-          {% if CYCLOPE_ARTICLE_TEXT_STYLE == 'markdown'%}
-          {{ article.text|markdown }}
-          {% endif %}
-        {% endif %}
-    {% endif %}
+    {{ article|parsed_gettext:"text"|smart_style}}
   </span></div>
 
   {% if article.date %}

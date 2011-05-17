@@ -1,4 +1,4 @@
-{% load i18n tagging_tags fb_versions %}
+{% load i18n tagging_tags fb_versions cyclope_utils %}
 
   <div class="content-view staticpage teaser staticpage-teaser">
 
@@ -8,9 +8,9 @@
       <!-- <div><span class="author">{% trans "By" %} {{ staticpage.author }}</span></div> -->
     {% endif %}
 
-    
+
     {% if staticpage.summary %}
-      <p class="description">{{ staticpage.summary }}</p>
+      <p class="description">{{ staticpage.summary|smart_style }}</p>
     {% endif %}
 
     {% if staticpage.tags %}

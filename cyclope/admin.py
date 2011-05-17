@@ -26,7 +26,9 @@ admin
 configuration for the Django admin
 """
 
+from django.db import models
 from django.contrib import admin
+from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 
@@ -40,9 +42,14 @@ from cyclope.forms import MenuItemAdminForm,\
                           RelatedContentForm,\
                           AuthorAdminForm
 
+from cyclope.widgets import get_default_text_widget
 from cyclope.core.collections.admin import CollectibleAdmin
 import cyclope.settings as cyc_settings
 
+
+# Set default widget for all admin textareas
+default_admin_textfield = FORMFIELD_FOR_DBFIELD_DEFAULTS[models.TextField]
+default_admin_textfield['widget'] = get_default_text_widget()
 
 class RelatedContentInline(generic.GenericStackedInline):
     form = RelatedContentForm

@@ -1,4 +1,4 @@
-{% load i18n tagging_tags fb_versions %}
+{% load i18n tagging_tags fb_versions cyclope_utils %}
 
   <div class="content-view movieclip teaser movieclip-teaser">
 
@@ -9,7 +9,7 @@
      {% endif %}
 
      {% if movieclip.description %}
-       <div class="html-content description">{{ movieclip.description }}</div>
+       <div class="html-content description">{{ movieclip.description|smart_style }}</div>
      {% endif %}
 
      {% if movieclip.author %}

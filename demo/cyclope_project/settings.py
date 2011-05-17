@@ -79,8 +79,7 @@ CYCLOPE_PREFIX = ''
 # wysiwyg (rich text editor, saves HTML, renders with safe filter)
 # raw (simple text area saves the raw input, renders with safe filter)
 
-CYCLOPE_STATICPAGE_TEXT_STYLE = 'textile'
-CYCLOPE_ARTICLE_TEXT_STYLE = 'textile'
+CYCLOPE_TEXT_STYLE = 'textile'
 
 HAYSTACK_WHOOSH_PATH = os.path.join(CYCLOPE_PROJECT_PATH, 'cyclope_project_index')
 

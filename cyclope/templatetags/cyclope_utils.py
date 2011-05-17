@@ -26,6 +26,10 @@ templatetags.cyclope_utils
 General utility helper tags.
 """
 from django import template
+from django.utils.safestring import mark_safe
+from django.contrib.markup.templatetags import markup
+
+import cyclope.settings as cyc_settings
 
 register = template.Library()
 
@@ -130,3 +134,18 @@ def admin_list_filter_without_all(cl, spec):
     return {'title': spec.title(), 'choices' : choices}
 admin_list_filter_without_all = register.inclusion_tag('admin/filter.html')(admin_list_filter_without_all)
 
+
+@register.filter
+def smart_style(value):
+    style = cyc_settings.CYCLOPE_TEXT_STYLE
+    styles = {"wysiwyg": mark_safe,
+              "markdown": markup.markdown,
+              "textile": markup.textile,
+              "raw": mark_safe}
+    renderer = styles.get(style, None)
+    if renderer is None:
+        raise ValueError("Bad TEXT_STYLE option: %s" % style)
+    else:
+        return renderer(value)
+
+smart_style.is_safe = True

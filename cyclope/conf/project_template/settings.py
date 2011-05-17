@@ -87,8 +87,7 @@ CYCLOPE_PREFIX = ''
 # wysiwyg (rich text editor, saves HTML, renders with safe filter)
 # raw (simple text area saves the raw input, renders with safe filter)
 
-CYCLOPE_STATICPAGE_TEXT_STYLE = 'wysiwyg'
-CYCLOPE_ARTICLE_TEXT_STYLE = 'wysiwyg'
+CYCLOPE_TEXT_STYLE = 'textile'
 
 HAYSTACK_SITECONF = '{{ project_name }}.search_sites'
 HAYSTACK_WHOOSH_PATH = os.path.join(CYCLOPE_PROJECT_PATH, 'cyclope_project_index')

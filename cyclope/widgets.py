@@ -36,9 +36,21 @@ from django.utils.text import truncate_words
 from django.utils.html import conditional_escape
 from django.utils.encoding import force_unicode
 from django.core.urlresolvers import reverse
-from django.contrib.admin.widgets import ForeignKeyRawIdWidget
+from django.contrib.admin.widgets import ForeignKeyRawIdWidget, AdminTextareaWidget
+
+from markitup.widgets import AdminMarkItUpWidget
 
 from cyclope import settings as cyc_settings
+
+
+def get_default_text_widget():
+    if cyc_settings.CYCLOPE_TEXT_STYLE == 'textile':
+        widget = AdminMarkItUpWidget
+    elif cyc_settings.CYCLOPE_TEXT_STYLE == 'wysiwyg':
+        widget = CKEditor
+    else:
+        widget = AdminTextareaWidget
+    return widget
 
 
 class ForeignKeyImageRawIdWidget(ForeignKeyRawIdWidget):

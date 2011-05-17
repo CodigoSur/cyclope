@@ -1,5 +1,5 @@
 {% extends host_template %}
-{% load markup%}
+{% load cyclope_utils %}
 
 {% comment %}
 When inserted in a layout region the host template used is just a wrapper (see inline_view.html).
@@ -9,17 +9,8 @@ When showing the StaticPage as the main content of the view, the host_template i
 {% block content %}
 
 <div class="content-view staticpage detail staticpage-detail html-content">
-    {% if CYCLOPE_STATICPAGE_TEXT_STYLE == 'raw' or CYCLOPE_STATICPAGE_TEXT_STYLE == 'wysiwyg'%}
-      {{ staticpage.text|safe }}
-    {% else %}
-        {% if CYCLOPE_STATICPAGE_TEXT_STYLE == 'textile' %}
-        {{ staticpage.text|textile }}
-        {% else %}
-          {% if CYCLOPE_STATICPAGE_TEXT_STYLE == 'markdown'%}
-          {{ staticpage.text|markdown }}
-          {% endif %}
-        {% endif %}
-    {% endif %}
+
+    {{ staticpage.text|smart_style }}
 
   {% include 'cyclope/related_contents_block.html' %}
 

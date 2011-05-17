@@ -23,7 +23,7 @@
 
   <div class="action-content"><span class="download_link"><a target="_blank" href="{{ media.flash }}">{% trans "full screen view (new window)"%}</a></span></div>
 
-  <div class="html-content description">{{ media.description|safe }}</div>
+  <div class="html-content description">{{ media.description|smart_style }}</div>
 
   {% include 'medialibrary/media_detail_footer.html' %}
 

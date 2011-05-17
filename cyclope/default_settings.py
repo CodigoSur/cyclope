@@ -138,7 +138,7 @@ for app_name in optional_apps:
         pass
     else:
         INSTALLED_APPS += [app_name]
-    
+
 
 # debug_toolbar settings
 #DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
@@ -251,7 +251,7 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
     )
 
 # martkitup settings
-JQUERY_URL = "" # We dont want jquery to be included twice in the admin.
+JQUERY_URL = "cyclope/js/reuse_django_jquery.js" # We dont want jquery to be included twice in the admin.
 MARKITUP_SET = 'markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
 

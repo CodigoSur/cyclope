@@ -1,11 +1,11 @@
-{% load i18n tagging_tags fb_versions %}
+{% load i18n tagging_tags fb_versions cyclope_utils %}
 
   <div class="content-view soundtrack teaser soundtrack-teaser">
 
     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/audio.png" /><a href="{% url soundtrack-detail soundtrack.slug %}">{{ soundtrack.name }}</a></h2>
 
     {% if soundtrack.description %}
-      <div class="description html-content">{{ soundtrack.description }}</div>
+      <div class="description html-content">{{ soundtrack.description|smart_style }}</div>
     {% endif %}
 
     {% if soundtrack.author %}
