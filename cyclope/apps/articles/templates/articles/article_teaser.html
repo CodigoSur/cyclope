@@ -23,7 +23,7 @@
       {% if article.summary %}
         {{ article|parsed_gettext:"summary"|smart_style }}
       {% else %}
-        {{ article|parsed_gettext:"text"|smart_style|truncatewords:40 }}
+        {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
       {% endif %}
       <span class="more"><a href="{% url article-detail article.slug %}"> {% trans "More" %}</a></span>
     </div>
@@ -39,6 +39,8 @@
     {% endif %}
 
     {% if not simplified_view %}
+
+{% comment %} TAGS ARE NOT IMPLEMENTED
         {% if article.tags %}
         <div class="meta-content"><span class="tags">
           <span class="tags-label">{% trans "Tags" %}:</span>
@@ -50,6 +52,7 @@
           {% endfor %}
         </span></div>
         {% endif %}
+{% endcomment %}
     <div class="clear"></div>
     {% endif %}
 
