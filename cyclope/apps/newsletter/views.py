@@ -40,7 +40,7 @@ def _newsletter_html(request, newsletter):
     return html
 
 
-@permission_required('newsletter.can_modify')
+@permission_required('newsletter.change_newsletter')
 def preview(request, id):
     newsletter = Newsletter.objects.get(id=id)
 
@@ -55,7 +55,7 @@ def preview(request, id):
     return HttpResponse(result)
 
 
-@permission_required('newsletter.can_modify')
+@permission_required('newsletter.change_newsletter')
 def send(request, id, test=False):
     newsletter = Newsletter.objects.get(id=id)
     subject = newsletter.name
@@ -79,14 +79,14 @@ def send(request, id, test=False):
     else:
         return HttpResponseRedirect(reverse('newsletter_sent', args=[id]))
 
-@permission_required('newsletter.can_modify')
+@permission_required('newsletter.change_newsletter')
 def sent(request, id, test=False):
     t = loader.get_template("newsletter/mail_sent.html")
     newsletter = Newsletter.objects.get(id=id)
     c = RequestContext(request, {'newsletter': newsletter,})
     return HttpResponse(t.render(c))
 
-@permission_required('newsletter.can_modify')
+@permission_required('newsletter.change_newsletter')
 def failed(request, id, test=False):
     t = loader.get_template("newsletter/send_failed.html")
     newsletter = Newsletter.objects.get(id=id)
