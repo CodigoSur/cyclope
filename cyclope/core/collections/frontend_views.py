@@ -91,7 +91,6 @@ class CategoryTeaserList(frontend.FrontendView):
     """
     name = 'teaser_list'
     verbose_name = _('teaser list of Category members')
-
     is_content_view = True
     is_region_view = True
     options_form = TeaserListOptions
@@ -225,37 +224,35 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
         """Creates a nested list to be used with unordered_list template tag
         """
         #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
-        #TODO(nicoechaniz): only show categories which have children or content.
         from django.template import Template, Context
         link_template = Template(
-            '{% if has_content or has_children %}'
-              '<span class="has_children">'
+              '<span class="{{ has_children }} {{ has_content}}">'
                 '<a href="{% url category-'+ self.target_view +' slug %}">'
                  '{{ name }}</a>'
               '</span>'
-            '{% else %}<span class="no_children">{{ name }}</span>'
-            '{% endif %}'
             )
+
+        def item_context(item):
+            name = getattr(item, name_field)
+            has_content = 'has_content' if item.categorizations.exists()\
+                          else 'no_content'
+            has_children = 'has_children' if item.get_descendant_count()\
+                           else 'no_children'
+            context = Context({'name': name,
+                               'slug': item.slug,
+                               'has_content': has_content,
+                               'has_children': has_children,})
+            return context
+            
         nested_list = []
         for child in base_category.get_children():
             if child.get_descendant_count()>0:
                 nested_list.extend(self._get_categories_nested_list(
                     child, name_field=name_field))
             else:
-                name = getattr(child, name_field)
-                has_content = child.categorizations.exists()
-                nested_list.append(link_template.render(
-                    Context({'name': name,
-                             'slug': child.slug,
-                             'has_content': has_content,})))
+                nested_list.append(link_template.render(item_context(child)))
 
-        name = getattr(base_category, name_field)
-        has_content = base_category.categorizations.exists()
-        include = link_template.render(
-            Context({'name': name,
-                     'slug': base_category.slug,
-                     'has_content': has_content,
-                     'has_children': base_category.get_descendant_count()}))
+        include = link_template.render(item_context(base_category))
         if nested_list:
             return [include, nested_list]
         else:
