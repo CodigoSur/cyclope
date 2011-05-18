@@ -50,6 +50,11 @@ class Picture(BaseMedia):
     image =  FileBrowseField(_('image'), max_length=100, format='Image',
                              directory='pictures/')
 
+    def admin_thumbnail(self):
+        return u'<img src="%s"/>' % self.image.url_thumbnail
+    admin_thumbnail.allow_tags = True
+    admin_thumbnail.short_description = _('Image')
+    
     class Meta:
         verbose_name = _('picture')
         verbose_name_plural = _('pictures')
@@ -73,6 +78,14 @@ class MovieClip(BaseMedia):
                             directory='movie_stills/', blank = True)
     video =  FileBrowseField(_('video'), max_length=100, format='Video',
                              directory='movie_clips/')
+
+    def admin_thumbnail(self):
+        if self.still:
+            return u'<img src="%s"/>' % self.still.url_thumbnail
+        else:
+            return ''
+    admin_thumbnail.allow_tags = True
+    admin_thumbnail.short_description = _('Still')
 
     class Meta:
         verbose_name = _('movie clip')
@@ -99,6 +112,14 @@ class FlashMovie(BaseMedia):
                             directory='flashmovie_images/', blank=True)
     flash =  FileBrowseField(_('flash'), max_length=100, format='Flash',
                                   directory='flashmovies/', blank=True)
+
+    def admin_thumbnail(self):
+        if self.image:
+            return u'<img src="%s"/>' % self.image.url_thumbnail
+        else:
+            return ''
+    admin_thumbnail.allow_tags = True
+    admin_thumbnail.short_description = _('Image')
 
     class Meta:
         verbose_name = _('flash movie')

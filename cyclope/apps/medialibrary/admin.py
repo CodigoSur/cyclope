@@ -34,6 +34,7 @@ class MediaAdmin(CollectibleAdmin, BaseContentAdmin):
     list_filter = CollectibleAdmin.list_filter + \
                   ('creation_date',)
 
+has_thumbnail = [Picture, MovieClip, FlashMovie]
 def media_admin_factory(media_model):
     class MediaLibraryForm(forms.ModelForm):
         def __init__(self, *args, **kwargs):
@@ -47,8 +48,14 @@ def media_admin_factory(media_model):
         class Meta:
             model = media_model
 
+    if media_model in has_thumbnail:
+        list_display = ['name', 'admin_thumbnail']
+    else:
+        list_display = ['name']
+        
     return type('%sAdmin' % media_model.__name__,
-                (MediaAdmin,), {'form': MediaLibraryForm})
+                (MediaAdmin,),
+                {'form': MediaLibraryForm, 'list_display': list_display})
 
 admin.site.register(Picture, media_admin_factory(Picture))
 admin.site.register(SoundTrack, media_admin_factory(SoundTrack))
