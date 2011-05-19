@@ -1889,6 +1889,10 @@ msgstr "Resultados"
 msgid "No results found."
 msgstr "No se encontró ningún resultado"
 
+#: contrib/admin/templates/admin/login.html:19
+msgid "Username:"
+msgstr "Nombre de ingreso:"
+
 #~ msgid "Alignment"
 #~ msgstr "Alineación"
 
