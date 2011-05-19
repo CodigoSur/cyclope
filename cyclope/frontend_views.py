@@ -77,6 +77,7 @@ class MenuHierarchyOptions(forms.Form):
     align = forms.ChoiceField(label=_('Collapse style'),
                               choices=(("VERTICAL", _("vertical")),
                                        ("HORIZONTAL", _("horizontal")),
+                                       ("ON_CLICK", _("on click")),
                                        ("DISABLED", _("disabled"))),
                               initial="HORIZONTAL")
 
@@ -99,7 +100,7 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
             menu_items_list.extend(self._get_menuitems_nested_list(item, current_url))
         req_context.update({'menu_items': menu_items_list,
                             'menu_slug': menu.slug,
-                            'align': options["align"]})
+                            'expand_style': options["align"]})
         t = loader.get_template("cyclope/menu_menuitems_hierarchy.html")
         return t.render(req_context)
 
