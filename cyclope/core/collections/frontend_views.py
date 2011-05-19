@@ -95,6 +95,7 @@ class CategoryTeaserList(frontend.FrontendView):
     is_region_view = True
     options_form = TeaserListOptions
     inline_view_name = 'teaser'
+    template = "collections/category_teaser_list.html"
 
     def get_response(self, request, req_context, options, content_object):
         category = content_object
@@ -116,7 +117,7 @@ class CategoryTeaserList(frontend.FrontendView):
                                           key=lambda c: c.object_modification_date,
                                           reverse=reverse)
             paginator = Paginator(categorizations_list, options["items_per_page"])
-            template = "collections/category_teaser_list.html"
+            template = self.template
 
         elif sort_by == "ALPHABETIC":
             paginator = NamePaginator(categorizations_list, on="content_object.name",
