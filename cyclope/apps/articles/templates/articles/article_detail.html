@@ -78,17 +78,27 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
     {{ article|parsed_gettext:"text"|smart_style}}
   </span></div>
 
-  {% if article.date %}
+{% if article.get_last_change_date or article.source %}
   <div class="meta-content">
-    <span class="source">--<br>
-      {% trans "Date" %}: {{ article.date|date:'SHORT_DATE_FORMAT' }}{% if article.source %} | {% trans "Source" %}: {article.source}{% endif %}
+    {% if article.get_last_change_date %}
+    <span class="date">
+      {% trans "Last modification date" %}: {{ article.get_last_change_date }}
     </span>
+    {% endif %}
+    {% if article.source %}
+    <span class="source">
+      {% if article.get_last_change_date %}|{% endif%}
+      {% trans "Source" %}: {{article.source}}
+    </span>
+    {% endif %}
   </div>
-  {% endif %}
+{% endif %}
 
+{% comment %} {# TAGS ARE NOT IMPLEMENTED YET #}
   {% if article.tags %}
     <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ article.tags }}</span></div>
   {% endif %}
+{% endcomment %}
 
 
   {% include 'cyclope/related_contents_block.html' %}

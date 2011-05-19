@@ -36,6 +36,7 @@ from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.conf import settings
+from django.contrib.admin.models import LogEntry
 
 from rosetta.poutil import find_pos
 from tagging_autocomplete.models import TagAutocompleteField
@@ -327,6 +328,16 @@ class BaseContent(models.Model):
     @classmethod
     def get_verbose_name(cls):
         return cls._meta.verbose_name
+
+    @property
+    def get_last_change_date(self):
+        entries = LogEntry.objects.filter(
+            content_type=ContentType.objects.get_for_model(self).id,
+            object_id=self.pk)
+
+        if entries:
+            last = entries.latest('action_time')
+            return last.action_time
 
 
     def translations(self):

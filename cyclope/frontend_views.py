@@ -95,7 +95,6 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
         menu_items = MenuItem.tree.filter(menu=menu, level=0)
         menu_items_list = []
         current_url = request.path_info[1:]
-        print current_url
         for item in menu_items:
             menu_items_list.extend(self._get_menuitems_nested_list(item, current_url))
         req_context.update({'menu_items': menu_items_list,
