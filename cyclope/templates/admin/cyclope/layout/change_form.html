@@ -41,7 +41,33 @@
         setup_chainedSelect_for_layout($("select[id^='id_regionview_set-'][id$='-region']").length - 2);
       });
 
-      $.cyclope = {access_number: []};
+      // View options
+
+      function update_to_default_view_options(view_options_combo, prefix, div_container, i){
+          var view_name = view_options_combo.val();
+          var content_type_id = $(prefix+"content_type  option:selected").val()
+
+          if (view_name && content_type_id){
+              $.get("/{{CYCLOPE_PREFIX}}options_view_widget_html",
+                 {
+                    content_type_id: content_type_id,
+                    view_name: view_name,
+                    prefix_name: "regionview_set-"+i+"-"
+                 },
+                 function(data){
+                     if (data){
+                          $("#regionview_set-" + i + "-view_options_multiple").replaceWith(data);
+                          div_container.show();
+                      }
+                      else{
+                          $("#regionview_set-" + i + "-view_options_multiple").html("");
+                          div_container.hide();
+                      }
+                 });
+          }
+      }
+
+      $.cyclope = {access_number: [], initial_content: []};
 
       $("select[id^='id_regionview_set-'][id$='-content_view']").each(function(i, sel){
           $.cyclope.access_number[i] = 0;
@@ -51,37 +77,22 @@
 
           if ($("#regionview_set-" + i + "-view_options_multiple").html() === ""){
               div_container.hide();
+              $.cyclope.initial_content[i] = false;
+          }
+          else{
+              $.cyclope.initial_content[i] = true;
           }
 
           $(this).change(function(){
               $.cyclope.access_number[i] += 1;
-              if ($.cyclope.access_number[i] >= 2){
-                  //
-                  //$.cyclope.access_number >= 2 because 1 changes are made by the
-                  //cainedSelect in page load. So the third is the first change made by
-                  //the user.
-                  //
-                  var view_name = $(this).val();
-                  var content_type_id = $(prefix+"content_type  option:selected").val()
 
-                  if (view_name && content_type_id){
-                      $.get("/{{CYCLOPE_PREFIX}}options_view_widget_html",
-                         {
-                            content_type_id: content_type_id,
-                            view_name: view_name,
-                            prefix_name: "regionview_set-"+i+"-"
-                         },
-                         function(data){
-                             if (data){
-                                  $("#regionview_set-" + i + "-view_options_multiple").replaceWith(data);
-                                  div_container.show();
-                              }
-                              else{
-                                  $("#regionview_set-" + i + "-view_options_multiple").html("");
-                                  div_container.hide();
-                              }
-                         });
-                  }
+              if ($.cyclope.access_number[i] == 2){
+                if ($.cyclope.initial_content[i] === false){
+                  update_to_default_view_options($(this), prefix, div_container, i);
+                }
+              }
+              else if ($.cyclope.access_number[i] >= 3){
+                update_to_default_view_options($(this), prefix, div_container, i);
               }
           });
       });
