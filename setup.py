@@ -48,7 +48,7 @@ setup(
     # that are downloaded from source to ensure a tested revision is used.
     dependency_links=[
         'hg+http://bitbucket.org/ubernostrum/django-registration@d36a38202ee3d09d342b000f4ff634296f90df49#egg=django-registration-0.8-alpha-1',
-        'hg+http://bitbucket.org/drmeers/django-dbgettext@fab7c71cab0cbc8cf73669fca4d408c7d3b24a9a#egg=django-dbgettext-0.1',
+        'hg+http://bitbucket.org/drmeers/django-dbgettext#egg=django-dbgettext-0.1',
         'git+http://github.com/nicoechaniz/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-3.0-nograpup',
         'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-0.4a1',
         'hg+http://bitbucket.org/nicoechaniz/django-rosetta_temp#egg=django-rosetta-0.5.6-temp',
@@ -70,10 +70,10 @@ setup(
         'django-profiles==0.2',
         'django-admin-tools==0.4.0',
         'django-contact-form>=0.4a1', # installed from our clone
-        'Whoosh>=1.8.1',
-        'django-haystack>=1.2.0', # fixed revision in dep links
+        'Whoosh>=1.8.3',
+        'django-haystack>=1.2.3',
         'textile==2.1.4',
-        'django-dbgettext>=0.1', # fixed revision in dep links
+        'django-dbgettext>=0.1',
         'django-rosetta==0.5.6-temp', # installed from our clone
         'django-markitup==0.6.1',
         'django-jsonfield==0.6.0-cyclope', # installed from our clone

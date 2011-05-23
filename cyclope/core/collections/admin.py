@@ -65,9 +65,9 @@ class CategoryFilterSpec(ChoicesFilterSpec):
     for this filter to be active.
     """
 
-    def __init__(self, f, request, params, model, model_admin):
+    def __init__(self, f, request, params, model, model_admin, field_path=None):
         super(CategoryFilterSpec, self).__init__(f, request, params, model,
-                                                   model_admin)
+                                                   model_admin, field_path)
 
         self.lookup_kwarg = 'categories__category__slug'
         self.lookup_val = request.GET.get(self.lookup_kwarg, None)
