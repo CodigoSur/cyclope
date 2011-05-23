@@ -24,7 +24,8 @@ from django.utils.translation import ugettext_lazy as _
 from cyclope.core import frontend
 from cyclope import views
 
-from models import StaticPage
+from models import StaticPage, HTMLBlock
+
 
 class StaticPageDetail(frontend.FrontendView):
     """Detail view of a StaticPage.
@@ -59,3 +60,21 @@ class StaticPageList(frontend.FrontendView):
         return views.object_list(request, req_context, StaticPage.objects.all())
 
 frontend.site.register_view(StaticPage, StaticPageList)
+
+
+class HTMLBlockDetail(frontend.FrontendView):
+    """Detail view of a HTMLBlock.
+
+    Returns:
+        a string if the view is called from within a region templatetag
+        an HttpResponse otherwise
+    """
+    name = 'detail'
+    verbose_name = _('display the selected HTML Block')
+    is_default = True
+    is_region_view = True
+
+    def get_response(self, request, req_context, options, content_object):
+        return views.object_detail(request, req_context, content_object)
+
+frontend.site.register_view(HTMLBlock, HTMLBlockDetail)

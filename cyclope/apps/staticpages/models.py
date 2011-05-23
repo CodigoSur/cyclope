@@ -22,6 +22,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from autoslug.fields import AutoSlugField
+
 from cyclope.models import BaseContent
 from cyclope.core.collections.models import Collectible
 
@@ -37,13 +39,20 @@ class StaticPage(BaseContent, Collectible):
         verbose_name_plural = _('static pages')
 
 
-## class HTMLBlock(BaseContent, Collectible):
-##     text = models.TextField(_('text'))
+class HTMLBlock(models.Model):
+    name = models.CharField(_('name'), max_length=250,
+                             db_index=True, blank=False)
+    slug = AutoSlugField(populate_from='name', unique=True,
+                         db_index=True, always_update=True)    
+    text = models.TextField(_('text'))
+    
+    def get_absolute_url(self):
+        return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
+    
+    def __unicode__(self):
+        return self.name
 
-##     def __unicode__(self):
-##         return self.name
-
-##     class Meta:
-##         verbose_name = _('html block')
-##         verbose_name_plural = _('html block')
+    class Meta:
+        verbose_name = _('html block')
+        verbose_name_plural = _('html blocks')
 

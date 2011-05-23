@@ -24,6 +24,7 @@ from django import forms
 
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.admin.widgets import AdminTextareaWidget
 from markitup.widgets import AdminMarkItUpWidget
 
 from cyclope.core.collections.admin import CollectibleAdmin
@@ -32,7 +33,7 @@ from cyclope.widgets import CKEditor
 from cyclope.models import MenuItem
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
-from models import StaticPage
+from models import StaticPage, HTMLBlock
 
 
 class StaticPageAdminForm(forms.ModelForm):
@@ -91,3 +92,17 @@ class StaticPageAdmin(CollectibleAdmin, BaseContentAdmin):
             menu_item.save()
 
 admin.site.register(StaticPage, StaticPageAdmin)
+
+
+class HTMLBlockAdminForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(HTMLBlockAdminForm, self).__init__(*args, **kwargs)
+        self.fields['text'].widget = AdminTextareaWidget()
+
+
+class HTMLBlockAdmin(admin.ModelAdmin):
+    form = HTMLBlockAdminForm
+    search_fields = ('name', 'text', )
+    
+admin.site.register(HTMLBlock, HTMLBlockAdmin)
+

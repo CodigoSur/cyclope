@@ -76,6 +76,7 @@ class CustomIndexDashboard(Dashboard):
                     include_list=[
                         'cyclope.apps.articles.models.Article',
                         'cyclope.apps.staticpages.models.StaticPage',
+                        'cyclope.apps.staticpages.models.HTMLBlock',
                         ]),
                 modules.ModelList(
                     title=_('Multimedia Library'),
