@@ -1,0 +1,8 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}{% if not is_popup %}
+<div class="breadcrumbs">
+     <a href="../../../">{% trans "Home" %}</a> &rsaquo; {{ opts.verbose_name }}
+</div>
+{% endif %}{% endblock %}

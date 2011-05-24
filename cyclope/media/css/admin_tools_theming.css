@@ -626,10 +626,6 @@ background: url("../images/admin-auth-user.png") no-repeat scroll 0 2px transpar
 background: url("../images/admin-auth-group.png") no-repeat scroll 0 0px transparent;
 }
 
-.dashboard-module-content > ul > li > a[href="/admin/cyclope/sitesetting/"] {
-background: url("../images/admin-cyclope-sitesettings.png") no-repeat scroll 0 2px transparent;
-}
-
 .dashboard-module-content > ul > li > a[href="/admin/cyclope/image/"] {
 background: url("../images/admin-cyclope-image.png") no-repeat scroll 0 2px transparent;
 }
@@ -646,7 +642,7 @@ background: url("../images/admin-collections-collection.png") no-repeat scroll 0
 background: url("../images/admin-collections-category.png") no-repeat scroll -2px 2px transparent;
 }
 
-.dashboard-module-content > ul > li > a[href="/admin/cyclope/sitesettings/"] {
+.dashboard-module-content > ul > li > a[href="/admin/cyclope/sitesettings/1/"] {
 background: url("../images/admin-cyclope-sitesettings.png") no-repeat scroll 0 2px transparent;
 }
 
@@ -658,10 +654,7 @@ background: url("../images/admin-tagging-taggeditem.png") no-repeat scroll 0 2px
 background: url("../images/admin-tagging-tag.png") no-repeat scroll 0 2px transparent;
 }
 
-
-
-
-.dashboard-module-content > ul > li > a[href="/admin/contact_form/contactformsettings/"] {
+.dashboard-module-content > ul > li > a[href="/admin/contact_form/contactformsettings/1/"] {
 background: url("../images/admin-contact_form-contactformsettings.png") no-repeat scroll 0 2px transparent;
 }
 

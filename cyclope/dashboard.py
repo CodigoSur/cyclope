@@ -32,9 +32,9 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
+from contact_form.models import ContactFormSettings
 
-from cyclope.apps.articles.models import Article
-
+from cyclope.models import SiteSettings
 
 class ModuleNotFound(Exception):
     """Dashboard module not found in dashboard children"""
@@ -139,17 +139,25 @@ class CustomIndexDashboard(Dashboard):
                         ]),
                )))
 
-        self.children.append(modules.ModelList(
-            title=_('Global settings'),
-            css_classes = ('dbmodule-global_settings', 'main-area-modules',),
-            draggable = False,
-            deletable = False,
-            collapsible= False,
-            include_list=[
-                'cyclope.models.SiteSettings',
-                'contact_form.models.ContactFormSettings',
-                ]))
+        ss_id = SiteSettings.objects.all()[0].id
+        cf_id = ContactFormSettings.objects.all()[0].id
 
+        if user.has_perm('cyclope.change_sitesettings'):
+            self.children.append(modules.LinkList(
+                    title=_('Global Settings'),
+                    css_classes = ('dbmodules-global_settings', 'main-area-modules',),
+                    draggable = False,
+                    deletable = False,
+                    collapsible= False,
+                    children=[
+                        {'title': _('Site Settings'),
+                         'url': '/admin/cyclope/sitesettings/%s/' % ss_id,
+                         },
+                        {'title': _('Contact Form'),
+                         'url': '/admin/contact_form/contactformsettings/%s/' % cf_id,
+                         },
+                        ]
+                    ),)
 
         plugins_children = [
             modules.ModelList(
