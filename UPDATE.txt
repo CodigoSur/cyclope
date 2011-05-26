@@ -3,6 +3,8 @@
 Backwards-incompatible changes in 0.2.0
 =======================================
 
+* STATIC_URL = "/media/" must be added to settings.py
+
 * Changed default sizes for Filebrowser. Every project needs to run ./manage.py version_generator to reflect the changes.
 
 * CYCLOPE_ARTICLE_TEXT_STYLE and CYCLOPE_STATIC_PAGE_TEXT_STYLE were removed and

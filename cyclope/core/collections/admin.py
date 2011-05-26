@@ -64,7 +64,6 @@ class CategoryFilterSpec(ChoicesFilterSpec):
     categories.category_filter must be set to True in the model
     for this filter to be active.
     """
-
     def __init__(self, f, request, params, model, model_admin, field_path=None):
         super(CategoryFilterSpec, self).__init__(f, request, params, model,
                                                    model_admin, field_path)

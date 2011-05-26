@@ -50,6 +50,8 @@ MEDIA_ROOT = os.path.join(CYCLOPE_PROJECT_PATH, 'media/')
 MEDIA_URL = '/media/'
 STATIC_URL = '/media/'
 
+STATIC_URL = '/media/'
+
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
