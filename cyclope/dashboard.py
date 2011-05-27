@@ -139,10 +139,20 @@ class CustomIndexDashboard(Dashboard):
                         ]),
                )))
 
-        ss_id = SiteSettings.objects.all()[0].id
-        cf_id = ContactFormSettings.objects.all()[0].id
+        ## this values should be initialized by the cyclopeproject command but we check
+        ## so the dashboard works even if they have not been set
+        site_settings = SiteSettings.objects.all()
+        if site_settings:
+            ss_id = site_settings[0].id
+        else:
+            cf_id = None
+        cf_settings = ContactFormSettings.objects.all()
+        if cf_settings:
+            cf_id = cf_settings[0].id
+        else:
+            cf_id = None
 
-        if user.has_perm('cyclope.change_sitesettings'):
+        if cf_id and ss_id and user.has_perm('cyclope.change_sitesettings'):
             self.children.append(modules.LinkList(
                     title=_('Global Settings'),
                     css_classes = ('dbmodules-global_settings', 'main-area-modules',),
