@@ -88,10 +88,14 @@ class Command(LabelCommand):
         settings_contents = re.sub(r"(?<=SECRET_KEY = ')'", secret_key + "'", settings_contents)
         fp.write(settings_contents)
         fp.close()
-        print u"\nProject created successfully\n"
-        sync_msg = u"Now you must cd to %s and run './manage.py syncdb' " \
-                   u"and then './manage.py migrate' to create an empty "  \
-                   u"database" % top_dir
+        print u"\nProject %s created successfully!\n" % project_name
+        sync_msg = u"" \
+            u"Now you must:\n\n" \
+            u"    1) cd to %s\n" \
+            u"    2) run './manage.py syncdb' to create database\n" \
+            u"    3) run './manage.py migrate' to load cyclope db migrations\n" \
+            u"    4] run './manage.py loaddata default_groups.json' to load\n" \
+            u"       cyclope default group permissions (Optional)\n"  % top_dir
         print sync_msg
 
 if __name__ == "__main__":
