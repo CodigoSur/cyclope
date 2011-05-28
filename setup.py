@@ -79,7 +79,7 @@ setup(
         'django-jsonfield==0.6.0-cyclope', # installed from our clone
     ],
 
-    scripts=['cyclope/management/commands/startcyclopeproject.py'],
+    scripts=['cyclope/bin/cyclopeproject'],
 
     packages=find_packages(),
 
