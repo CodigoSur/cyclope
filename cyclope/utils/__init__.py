@@ -241,3 +241,14 @@ def get_page(paginator, request):
         page = paginator.page(paginator.num_pages)
 
     return page
+
+def get_singleton(model_class):
+    """
+    Returns the instance with id=1 of the Model Class
+    """
+    try:
+        return model_class.objects.get(id=1)
+    except model_class.DoesNotExist, e:
+        e.args = (e.args[0] +" At least one instance of this class must exists.", )
+        raise e
+

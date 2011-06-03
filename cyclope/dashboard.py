@@ -35,6 +35,7 @@ from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 from contact_form.models import ContactFormSettings
 
 from cyclope.models import SiteSettings
+from cyclope.utils import get_singleton
 
 class ModuleNotFound(Exception):
     """Dashboard module not found in dashboard children"""
@@ -116,7 +117,7 @@ class CustomIndexDashboard(Dashboard):
             deletable = False,
             collapsible= False,
             children = (
-                
+
                 modules.ModelList(
                     title=_('Collections'),
                     css_classes = ('dbmodule-content_collection',),
@@ -139,20 +140,11 @@ class CustomIndexDashboard(Dashboard):
                         ]),
                )))
 
-        ## this values should be initialized by the cyclopeproject command but we check
-        ## so the dashboard works even if they have not been set
-        site_settings = SiteSettings.objects.all()
-        if site_settings:
-            ss_id = site_settings[0].id
-        else:
-            cf_id = None
-        cf_settings = ContactFormSettings.objects.all()
-        if cf_settings:
-            cf_id = cf_settings[0].id
-        else:
-            cf_id = None
 
-        if cf_id and ss_id and user.has_perm('cyclope.change_sitesettings'):
+        site_settings = get_singleton(SiteSettings)
+        contact_form = get_singleton(ContactFormSettings)
+
+        if user.has_perm('cyclope.change_sitesettings'):
             self.children.append(modules.LinkList(
                     title=_('Global Settings'),
                     css_classes = ('dbmodules-global_settings', 'main-area-modules',),
@@ -161,10 +153,10 @@ class CustomIndexDashboard(Dashboard):
                     collapsible= False,
                     children=[
                         {'title': _('Site Settings'),
-                         'url': '/admin/cyclope/sitesettings/%s/' % ss_id,
+                         'url': '/admin/cyclope/sitesettings/%s/' % site_settings.id,
                          },
                         {'title': _('Contact Form'),
-                         'url': '/admin/contact_form/contactformsettings/%s/' % cf_id,
+                         'url': '/admin/contact_form/contactformsettings/%s/' % contact_form.id,
                          },
                         ]
                     ),)
@@ -193,7 +185,7 @@ class CustomIndexDashboard(Dashboard):
                     'cyclope.apps.contacts.models.Contact',
                     ]),
             ]
-        
+
         if 'live' in settings.INSTALLED_APPS:
             plugins_children.append(
                 modules.ModelList(
@@ -206,7 +198,7 @@ class CustomIndexDashboard(Dashboard):
                         'live.models.Channel',
                         ]),
                 )
-        
+
         self.children.append(modules.Group(
             title=_('Plugins'),
             css_classes = ('dbmodule-plugins', 'main-area-modules',),
@@ -217,7 +209,7 @@ class CustomIndexDashboard(Dashboard):
             pre_content = (''),
             children = plugins_children
             ))
-            
+
 
         self.children.append(modules.Group(
             title=_('Advanced'),

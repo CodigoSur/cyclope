@@ -29,16 +29,17 @@ from cyclope.apps.newsletter.models import Newsletter
 from cyclope.core.collections.models import Category
 from cyclope.models import SiteSettings
 from cyclope.core.frontend.sites import site
+from cyclope.utils import get_singleton
 
 class NewsletterAdminForm(forms.ModelForm):
     content_category = TreeNodeChoiceField(
         queryset=Category.tree.all(), label=_('Current content category'),
         help_text=_('This is the category which groups the content that will be sent with the newsletter.'))
     view = forms.ChoiceField(label=_('View'))
-    
+
     def __init__(self, *args, **kwargs):
         super(NewsletterAdminForm, self).__init__(*args, **kwargs)
-        nl_collection = SiteSettings.objects.all()[0].newsletter_collection
+        nl_collection = get_singleton(SiteSettings).newsletter_collection
         self.fields['content_category'].queryset = Category.tree.filter(collection=nl_collection)
         self.fields['content_category'].initial = Category.objects.latest()
 
@@ -46,8 +47,8 @@ class NewsletterAdminForm(forms.ModelForm):
         views.extend([(view.name, view.verbose_name)
                        for view in site._registry[Newsletter]
                        if view.is_content_view])
-        self.fields['view'].choices = views        
-    
+        self.fields['view'].choices = views
+
     class Meta:
         model = Newsletter
 

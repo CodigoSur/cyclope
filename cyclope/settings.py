@@ -112,7 +112,7 @@ def get_site_settings():
     from django.db.utils import DatabaseError
     try:
         # a Cyclope project is supposed to have only one SiteSettings object
-        site_settings = SiteSettings.objects.all()[0]
+        site_settings = SiteSettings.objects.get()
     # catch exceptions if the database is not available or no settings created
     except (DatabaseError, IndexError):
         site_settings = None

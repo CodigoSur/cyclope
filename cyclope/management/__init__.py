@@ -41,6 +41,13 @@ def create_site(app, created_models, verbosity, db, **kwargs):
                                      default_layout=layout, allow_comments='YES')
         site_settings.save(using=db)
 
+def create_contact_form_settings(app, created_models, verbosity, db, **kwargs):
+    from contact_form.models import ContactFormSettings
+
+    if ContactFormSettings in created_models and not ContactFormSettings.objects.all():
+        cfs = ContactFormSettings(subject="Contact mail")
+        cfs.save(using=db)
+
 def create_user_groups(app, created_models, verbosity, db, **kwargs):
     from django.contrib.auth.models import User, Group
     if User in created_models and Group in created_models:
@@ -51,5 +58,7 @@ def create_user_groups(app, created_models, verbosity, db, **kwargs):
 
 
 signals.post_syncdb.connect(create_site)
+
+signals.post_syncdb.connect(create_contact_form_settings)
 
 signals.post_syncdb.connect(create_user_groups, dispatch_uid="create_cyclope_user_groups")
