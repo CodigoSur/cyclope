@@ -81,6 +81,13 @@ class SiteSettings(models.Model):
                                                verbose_name=_('whole feed contents'),
                                                help_text=_('contents to show in the whole feed'))
 
+    def save(self, *args, **kwargs):
+        self.id = 1
+        super(SiteSettings, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        pass
+
     def __unicode__(self):
         return self.site.name
 
