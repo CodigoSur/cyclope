@@ -73,8 +73,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
-    'cyclope.middleware.LayoutMiddleware'
+    'cyclope.middleware.LayoutMiddleware',
 #    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
 )
 
 # the order of the INSTALLED_APPS is relevant to get the template load order right
@@ -252,7 +253,7 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
 
 # martkitup settings
 JQUERY_URL = "cyclope/js/reuse_django_jquery.js" # We dont want jquery to be included twice in the admin.
-MARKITUP_SET = 'markitup/sets/textile'
+MARKITUP_SET = 'cyclope/markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
 
 

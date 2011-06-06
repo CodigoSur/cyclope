@@ -38,14 +38,14 @@ from django.utils.encoding import force_unicode
 from django.core.urlresolvers import reverse
 from django.contrib.admin.widgets import ForeignKeyRawIdWidget, AdminTextareaWidget
 
-from markitup.widgets import AdminMarkItUpWidget
+from markitup.widgets import AdminMarkItUpWidget, MarkItUpWidget
 
 from cyclope import settings as cyc_settings
 
 
 def get_default_text_widget():
     if cyc_settings.CYCLOPE_TEXT_STYLE == 'textile':
-        widget = AdminMarkItUpWidget
+        widget = FBAdminMarkItUpWidget
     elif cyc_settings.CYCLOPE_TEXT_STYLE == 'wysiwyg':
         widget = CKEditor
     else:
@@ -186,3 +186,24 @@ class MultipleWidget(forms.Widget):
             field_name = self._field_regexp.search(out_name).groups()[0]
             values[field_name] = data.get(out_name)
         return values
+
+class FBAdminMarkItUpWidget(AdminMarkItUpWidget):
+    def render(self, name, value, attrs=None):
+        html = super(MarkItUpWidget, self).render(name, value, attrs)
+
+        if self.auto_preview:
+            auto_preview = "$('a[title=\"Preview\"]').trigger('mouseup');"
+        else: auto_preview = ''
+
+        html += ('<script type="text/javascript">'
+                '(function($) { '
+                 '$(document).ready(function() {'
+                 '  $("#%(id)s").markItUp(mySettings);'
+                 '  %(auto_preview)s '
+                 'FileBrowserHelper.insertPicture("%(id)s");'
+                 '});'
+                 '})(jQuery);'
+
+                 '</script>' % {'id': attrs['id'],
+                                'auto_preview': auto_preview })
+        return mark_safe(html)
