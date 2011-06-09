@@ -79,6 +79,7 @@ class FrontendView(object):
         options = self.get_default_options()
         if view_options:
             options.update(view_options)
+
         if region_name:
             host_template = 'cyclope/inline_view.html'
         else:
@@ -90,11 +91,19 @@ class FrontendView(object):
         if self.is_instance_view:
             if not content_object:
                 content_object = get_object_or_404(self.model, slug=slug)
+
+            if self.is_content_view and not region_name:
+                if hasattr(content_object, "name"):
+                    title = _(content_object.name)
+                else:
+                    title = unicode(content_object)
+                req_context["title"] = title.capitalize()
+
             response = self.get_response(request, req_context, options, content_object)
         else:
             response = self.get_response(request, req_context, options)
 
-        # region_name will hold a valye if the view was called from a region templatetag
+        # region_name will hold a value if the view was called from a region templatetag
         if not region_name:
             if not isinstance(response, HttpResponse):
                 response = HttpResponse(response)
