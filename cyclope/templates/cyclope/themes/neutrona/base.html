@@ -8,27 +8,25 @@ Ver licencia en: http://creativecommons.org/licenses/GPL/2.0/deed.es_AR
 Ten en cuenta que las imagenes, los nombres y los logos de este sitio no pueden usarse. Solo el codigo HTML y CSS es GPL. Gracias :)
 Si modificas no borres estas lineas :)
  -->
-<!--
-Modificacion fede: inclusion de archivo javascript para menues
--->
+
 {% load layout i18n tagging_tags %}
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title><title>{% block title %}{%if title %}{{title}} | {%endif%}{{ CYCLOPE_SITE_SETTINGS.global_title }}{%endblock%}</title></title>
+    <title>{{ CYCLOPE_SITE_SETTINGS.global_title }}</title>
     <meta name="Keywords" content="{{ CYCLOPE_SITE_SETTINGS.keywords }}" />
     <meta name="Description" content="{{ CYCLOPE_SITE_SETTINGS.description }}" />
-    <link href="/rss" title="RSS" type="application/rss+xml" rel="alternate">
+    <!--
+        TODO(nicoechaniz): implement RSS
+        <link href="/rss.php" title="RSS" type="application/rss+xml" rel="alternate" /> -->
+
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/neutrona.css" rel="stylesheet" type="text/css" media="screen"/>
     <link href="{{ CYCLOPE_MEDIA_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
     <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
-    <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/menuitems.js"></script>
     <script type="text/javascript">
     $(function() {
-
-// setup galleries
         $('#gallery a').lightBox({
             overlayBgColor:         '#000',
             overlayOpacity:         0.8,
@@ -43,27 +41,9 @@ Modificacion fede: inclusion de archivo javascript para menues
             txtImage:               '{% trans "Image"%}',
             txtOf:                  '{% trans "of"%}',
         });
-
-// search box events
-
-        // clear input on focus
-	$('.cleardefault').focus(function() {
-            if( this.value == this.title ) {
-               this.value = '';
-            }
-	});
-
-	// if field is empty afterward, add text again
-	$('.cleardefault').blur(function() {
-            if(!this.value.length) {
-              this.value = this.title;
-            }
-	});
     });
     </script>
-
     {% block extra_head %}{% endblock %}
-
   </head>
 
   <body class="{% block body_class %}{%endblock%}">
@@ -80,17 +60,8 @@ AIRE
           <h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
           <h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
         </div>
-        <div class="searchbox">
-              <form action="/search/" method="get">
-             {% for model in CYCLOPE_BASE_CONTENT_TYPES %}
-             <input type="hidden" name="models" value="{{model.get_app_label}}.{{model.get_object_name}}">
-             {% endfor %}
-              <input type="text" value="{% trans "Site wide search" %}" title="{% trans "Site wide search" %}" name="q" class="cleardefault"/>
-              <input type="submit" value="" class="submit"/>
-            </form>
-          </div>
       </div>
-
+      
 
       <div class="clear"></div>
 
@@ -102,13 +73,10 @@ MEDIANERA
 <!-------------------------------------------------------------------------------------------------
 TIERRA
 ------------------------------------------------------------------------------------------------->
-        <div id="tierra" class="grid_5">
-          <div class="top"></div>
+        <div id="agua" class="grid_5">
+
           {% region 'left_sidebar' %}
-
-
-
-{% comment %}
+          {% comment %}
           <div id="tags">
             <span class="title">Etiquetas</span>
             <div class="box">
@@ -121,8 +89,9 @@ TIERRA
               </a>&nbsp&nbsp
             </div>
           </div>
-{% endcomment %}
+
           <div id="rss"><a href="/rss">{% trans "Subscribe to RSS" %}</a></div>
+{% endcomment %}
           <!-- banners -->
           <div class="banners">
             <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO" target="_blank">
@@ -136,7 +105,7 @@ TIERRA
             </a><br />
           </div>
           <!-- /banners -->
-          <div class="bottom"></div>
+
 
         </div>
         <!-- /tierra -->
@@ -147,20 +116,15 @@ TIERRA
 
       <div id="footer_separator"></div>
 
-      <div id="footer">
+      <div class="footer_global">
         {% region 'footer' %}
         <span id="creativecommons">Los contenidos de este sitio web están bajo una
         <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO">
           Licencia Creative Commons Reconocimiento-NoComercial-SinObraDerivada 3.0
         </a></span>.<br/>
-        <span id="codigo sur">Este sitio ha sido diseñado por
-        <a href="http://www.codigosur.org">Código Sur</a></span>,
-        <span id="cyclope">administrado con el editor dinámico de contenidos
-        <a href="http://cyclope.codigosur.org">Cyclope GPL</a>
-        desarrollado por
-        <a href="http://www.codigosur.org">Código Sur</a></span>.<br/>
-        Este sitio ha sido desarrollado sobre estándares de diseño web,
-        cualquier navegador de calidad lo visualizará correctamente: <br/>
+        <span id="codigo sur">Tecnología: <a href="http://cyclope.codigosur.org">Cyclope 3 GPL</a>. Diseño: <a href="http://neutrona.plantillas.codigosur.net">Neutrona Theme</a>. Hecho por <a href="http://www.codigosur.org">Código Sur</a>.
+        </span><br/>
+        Este sitio ha sido desarrollado sobre estándares de diseño web que cualquier navegador de calidad visualizará correctamente. <br/>
 
         <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/navegadores.png" width="246" height="36" border="0" usemap="#map-nav" alt=""/>
         <map name="map-nav" id="map-nav">
@@ -178,7 +142,7 @@ TIERRA
         </map>
       </div>
       <!-- /pie -->
-
+     
     </div>
     <!-- /mascara -->
 
