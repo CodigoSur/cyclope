@@ -8,7 +8,9 @@ Ver licencia en: http://creativecommons.org/licenses/GPL/2.0/deed.es_AR
 Ten en cuenta que las imagenes, los nombres y los logos de este sitio no pueden usarse. Solo el codigo HTML y CSS es GPL. Gracias :)
 Si modificas no borres estas lineas :)
  -->
-
+<!--
+Modificacion fede: inclusion de archivo javascript para menues
+-->
 {% load layout i18n tagging_tags %}
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
@@ -22,6 +24,7 @@ Si modificas no borres estas lineas :)
     <link href="{{ CYCLOPE_MEDIA_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
     <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/menuitems.js"></script>
     <script type="text/javascript">
     $(function() {
 

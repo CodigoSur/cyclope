@@ -42,13 +42,15 @@ ESQUELETO GENERAL
 .pagination {padding:0 10px 0 5px;margin:0 10px;} 
 
 /*-----------------------------------------------------------------------------------------------
-MENU HORIZONTAL
+MENU HORIZONTAL (fede)
 -----------------------------------------------------------------------------------------------*/
-#menu-horizontal_menu {height:33px;padding:10px 0 0;font-size:0.9em;}
+/*#menu-horizontal_menu {height:33px;padding:10px 0 0;font-size:0.9em;}
 #menu-horizontal_menu ul {float:right; padding:0; list-style:none;}
 #menu-horizontal_menu li {float:left;margin:0 0 5px 7px;}
 #menu-horizontal_menu li a {float:left; text-decoration:none;color:#fff;font-weight:700;background:#000;margin:0 0 0 0;padding:6px 12px;}
 #menu-horizontal_menu li a:hover {background:#666;color:#eee;} 
+
+/* */
 
 /*-----------------------------------------------------------------------------------------------
 AIRE
@@ -67,6 +69,7 @@ TIERRA
 #tierra .block-title {background-color:#90816f;font-size:0.8em;color:#fff;text-align:right;padding:5px;margin:10px 0 5px;}
 #tierra .top {height:12px;background: url(../images/css/tierra-top.png) 0 0 no-repeat;} 
 #tierra .bottom {height:12px;background: url(../images/css/tierra-bottom.png) 0 0 no-repeat;}
+/* FIXED MENU STYLES FOR JAVASCRIPT (fede)
 #tierra span {display:block;}
 #tierra ul{margin:0 5px; padding:0; list-style:none;}
 #tierra ul li {height:30px;margin:4px 0; padding:0;border:1px solid #ccc;background-color:#eee;display:block;text-decoration:none; color:#036; font-weight:700;font-size:0.8em;}
@@ -75,6 +78,19 @@ TIERRA
 #tierra ul ul {padding:0 0 0 0; margin:0;}
 #tierra ul ul li {height:25px;padding:0 0 0 8px;border:1px dotted #ccc;margin:4px 0;background-color:#fff;}
 #tierra ul ul a {padding: 6px 0 3px 15px; font-size:0.75em; color:#000;}
+*/
+
+
+#tierra ul { margin: 0 5px; padding: 0; list-style: none; }
+#tierra ul li {  }
+#tierra span { background: #eee; border: 1px solid #ccc; display: block; font-size:.8em; font-weight: 700; margin-bottom: 3px; }
+#tierra ul li a, #tierra ul ul a { display: block; color: #036; padding: 6px 15px; }
+#tierra ul ul { margin: 0; }
+#tierra ul ul span { background: #fff; color: #000; font-weight: 400; }
+
+
+/* */
+
 #tierra .searchbox {margin:15px auto;}
 #tierra .banners {display:block;padding:0;margin:15px auto;width:94px}
 #tierra .banners img {margin:0 auto 4px auto;text-align:center;} 
