@@ -15,7 +15,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
   {% if article.pretitle %}
-  <div class="pretitle-container meta-content"><span class="pretitle">{% trans article.pretitle %}</span></div>
+  <h6 class="pretitle">{% trans article.pretitle %}</h6>
   {% endif %}
   <h1 class="title">{% trans article.name  %}</h1>
 
@@ -24,7 +24,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
   <!-- descripcion -->
   {% if article.summary %}
-  <p class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</p>
+  <h3 class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</h3>
   {% endif%}
   <!-- /descripcion -->
 
@@ -46,12 +46,12 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
   <!-- author -->
   {% if article.author %}
-  <div id="author" class="meta-content">
+  <h4 id="author" class="meta-content">
     {% if article.author.image %}
     <img src="" width="60"  />
     {% endif %}
     <span class="author">{% trans "By"%} {{ article.author }}</span>
-  </div>
+  </h4>
   {% endif %}
   <!-- /autor -->
 
@@ -79,24 +79,23 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   </span></div>
 
 {% if article.get_last_change_date or article.source %}
-  <div class="meta-content">
-    {% if article.get_last_change_date %}
+   {% if article.get_last_change_date %}
     <span class="date">
       {% trans "Last modification date" %}: {{ article.get_last_change_date }}
     </span>
     {% endif %}
     {% if article.source %}
-    <span class="source">
-      {% if article.get_last_change_date %}|{% endif%}
+    <h6 class="source">
+       <!-- {% if article.get_last_change_date %}|{% endif%} -->
       {% trans "Source" %}: {{article.source}}
-    </span>
+    </h6>
     {% endif %}
-  </div>
+ 
 {% endif %}
 
 {% comment %} {# TAGS ARE NOT IMPLEMENTED YET #}
   {% if article.tags %}
-    <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ article.tags }}</span></div>
+    <div class="meta-content"><span class="tags"><span class="tags-label"> que es esto={% trans "Tags" %}:</span> ssss{{ article.tags }}</span></div>
   {% endif %}
 {% endcomment %}
 
