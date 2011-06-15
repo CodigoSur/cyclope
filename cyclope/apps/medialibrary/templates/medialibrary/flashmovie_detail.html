@@ -23,13 +23,12 @@
 
   <div class="action-content"><span class="download_link"><a target="_blank" href="{{ media.flash }}">{% trans "full screen view (new window)"%}</a></span></div>
 
-  <div class="html-content description">{{ media.description|smart_style }}</div>
+  <h3 class="html-content summary">{{ media.description|smart_style }}</h3>
 
   {% include 'medialibrary/media_detail_footer.html' %}
 
   {% include 'cyclope/related_contents_block.html' %}
 
-  <hr>
 
   <!--COMENTARIOS -->
   {% include 'comments/comments_block.html' %}

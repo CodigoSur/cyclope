@@ -162,8 +162,8 @@ FUEGO
 #fuego h2 {color:#333;padding:0;margin-top:4px; margin:0; border:none;font-size:1.6em;} 
 #fuego h2 a {color:#000; text-decoration:none;}
 #fuego h2 a:hover {color:#666;text-decoration:underline;}
-#fuego p {font-size:0.9em;font-weight:400;padding:10px 0;color:#333;display:inline;display:block;}
-#fuego p a {color:#666;text-decorat6ion:underline;}
+#fuego p {}
+#fuego p a {}
 #fuego .summary {font-weight:400;padding:10px 0;font-size: 0.9em;color: #333333;}
 #fuego .summary a {text-decoration:underline;} 
 #fuego .author {font-size: 0.8em;margin:0 0 12px;font-weight: 700;color: #000000;}
@@ -198,24 +198,26 @@ TITULOS GLOBALES (indice, mapa, contacto, busqueda)
 
  
 /*-----------------------------------------------------------------------------------------------
-VISTA ARTICULO 
+VISTA ARTICULO + TEXTILE
 -----------------------------------------------------------------------------------------------*/
 
 #container .content-view h1 {color:#000;padding:10px 0;margin:30px 0 30px;border-bottom:1px solid #000;display:block;}
 .article-detail a, .staticpage-detail a {color:#000;font-size:1em;}
 .article-detail {}
 
+.article-detail h1.title, .staticpage-detail h1.title {padding:10px 0;display:block;border-bottom:1px solid #666;}
+.article-detail h3.summary {color:#333;font-weight:700;padding:10px 0;text-align:justify;line-height:1.5em;}
+.article-detail h4.author {color:#666;border-left:4px solid #ccc;padding:0 0 0 10px;margin:10px 0 20px;font-size:.9em;}
+.article-detail h6.pretitle {color:#666;text-transform:uppercase;}
+.article-detail h6.date {color:#666;text-transform:uppercase;}
+.article-detail h6.source {color:#666;}
+.article-detail .caps,.staticpage-detail .caps {display:inline;margin:0;padding:0;background:none;width:auto;}
 .article-detail h1, .staticpage-detail h1 {color:#000;}
-.article-detail h1.title {padding:10px 0;display:block;border-bottom:1px solid #666;}
 .article-detail h2, .staticpage-detail h2 {color:#000;}
 .article-detail h3, .staticpage-detail h3 {color:#333;font-weight:700;}
-.article-detail h3.summary {color:#333;font-weight:700;padding:10px 0;text-align:justify;line-height:1.5em;}
 .article-detail h4, .staticpage-detail h4 {color:#666;}
-.article-detail h4.author {color:#666;border-left:4px solid #ccc;padding:0 0 0 10px;margin:10px 0 20px;font-size:.9em;}
 .article-detail h5, .staticpage-detail h5 {color:#666;}
 .article-detail h6, .staticpage-detail h6 {color:#666;}
-.article-detail h6.pretitle {color:#666;text-transform:uppercase;}
-.article-detail h6.source {color:#666;}
 .article-detail pre,.staticpage-detail pre {margin:15px 0;padding:10px;border:1px solid #ccc;background:#eee;font-size:.75em;font-weight:700;color:#666;}
 .article-detail code,.staticpage-detail code {display:block;padding:10px 10px;color:#000;font-size: 1.2em;overflow-x:scroll;overflow-y:auto;font-weight:400;}
 .article-detail .html-text p, .staticpage-detail p {color:#333;line-height:1.8em;padding:0;text-align:justify;}
@@ -253,6 +255,12 @@ VISTA ARTICULO
 .article-detail .related_contents li {color: #999;padding:0 10px 5px 0;margin:0 0 0 20px;}	
 .article-detail .related_contents li a {font-size:0.8em;color:#666;font-weight:400;}
 .article-detail .related_contents li a:hover {color:#000;font-weight:700;}
+
+
+/*-----------------------------------------------------------------------------------------------
+VISTA COMENTARIOS
+-----------------------------------------------------------------------------------------------*/
+
 #user_comments form input {width:40%;border:1px solid #999;margin:5px 0 15px;}
 #user_comments form input.submit {width:auto;background:#ccc;color:#000;margin:0 0 0 3px;border:1px solid #999;box-shadow:2px 2px 5px #666;-webkit-box-shadow:2px 2px 5px #666;-moz-box-shadow: 2px 2px 5px #666;}
 #user_comments textarea {width:550px;background-color:#fff;padding:4px;margin:5px 0 15px;border:1px solid #999;font-size: 1em;color:#333;display:block;}
@@ -299,19 +307,44 @@ VISTA ARTICULO
 #fuego-content .categories {}
 
 #fuego-content .article-teaser {margin: 4px 0 20px 0;clear:both;padding:3px 0;}
-#fuego-content h2 {margin:0;padding:0}
-#fuego-content h2 a {margin:0;padding:0;color:#000;}
-#fuego-content h2 img {}
-#fuego-content .pretitle, {font-size: 0.65em;text-transform: uppercase;margin:0 0 5px;color: #666666;display: inline;}
 
-#fuego-content .article-teaser img {float:right;margin: 4px 0 9px 15px;height:135px;clear:both;border:1px solid #ccc;padding:3px;background:#eee;}
+/*-----------------------------------------------------------------------------------------------
+VISTA LISTA DETALLADA ARTICULOS 
+-----------------------------------------------------------------------------------------------*/
+
+.article-teaser h2.tile {margin:0;padding:0}
+.article-teaser h2.tile a {margin:0;padding:0;color:#000;}
+.article-teaser h2.tile img {}
+.article-teaser h3.summary p {color:#333;font-weight:700;padding:10px 0;text-align:justify;line-height:1.5em;display:inline;}
+.article-teaser h6.pretitle {display:inline;text-transform:uppercase;}
+.article-teaser h6.date {display:inline;text-transform:uppercase;}
+.article-teaser img.teaser_icon {float:right;margin: 4px 0 9px 15px;height:135px;clear:both;border:1px solid #ccc;padding:3px;background:#eee;}
+
+.staticpage-teaser ul {color:#000;font-size:1em;padding:15px 0;margin:0 0 0 30px;list-style:square;}
+.staticpage-teaser li {margin:0 0 0 5px;padding:0 0 3px;}
+
+.labeled_icon h2.title {}
+.labeled_icon img.icon {float:left;}
+
+
+
+.detail h1.title, .staticpage-detail h1.title {padding:10px 0;display:block;border-bottom:1px solid #666;}
+.detail h3.summary {color:#333;font-weight:400;padding:10px 0;text-align:justify;line-height:1.4em;font-size:1.2em;}
+.detail h4.author {color:#666;border-left:4px solid #ccc;padding:0 0 0 10px;margin:20px 0 20px;font-size:.9em;}
+.detail h6.pretitle {color:#666;text-transform:uppercase;}
+.detail h6.date {color:#666;text-transform:uppercase;}
+.detail h6.source {color:#666;}
+.detail .categories ul {list-style:none;margin:10px 0;}
+.detail .categories li {display:inline;border:1px solid #ccc;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;padding:5px;background:#eee;color:#000;margin:10px 10px 0 0;font-size:.75em;}
+span.download_link  {display:block;padding:6px;margin:20px 0;font-weight:700;background:#000;width:300px;text-align:center;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;}
+span.download_link a {color:#fff;}
 
 #socialnetworks {font-size:0.75em;display:block;padding:0 0 10px;border-top:2px solid #eee;text-align:right;clear:both;}
 #socialnetworks img {width:24px;height:24px;margin:5px 3px -8px 0;padding:6px 0 0;border:none;clear:none;}
 #socialnetworks small {margin:0;padding:5px 5px 0 0;color:#666;text-align:right;}  
 #fuego-content hr {}
 
-#author img {border:none:border-left:1px solid #ccc;padding:0;margin:0 5px 0 0;}
+.author img {border:none:border-left:1px solid #ccc;padding:0;margin:0 5px 0 0;}
 .tools {margin:10px 0;padding:0 0;}
 .tools ul {text-align:left;margin:0;padding:0;list-style:none;font-weight:bold;font-size:0.8em;}
 .tools ul a:hover {text-decoration:underline;} 

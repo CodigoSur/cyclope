@@ -1,13 +1,15 @@
 {% extends host_template %}
 
 {% block content %}
+<div class="staticpage-teaser">
 <ul>
 {% for staticpage in staticpage_list %}
-  <li>
+  <li><h2>
     <a href="{% url staticpage-detail staticpage.slug %}">
     {{  staticpage.name}}
-    </a>
+    </a></h2>
   </li>
 {% endfor %}
 </ul>
+</div>
 {% endblock content%}
