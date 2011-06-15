@@ -202,36 +202,35 @@ VISTA ARTICULO + TEXTILE
 -----------------------------------------------------------------------------------------------*/
 
 #container .content-view h1 {color:#000;padding:10px 0;margin:30px 0 30px;border-bottom:1px solid #000;display:block;}
-.article-detail a, .staticpage-detail a {color:#000;font-size:1em;}
+.article-detail a, .staticpage-detail a {color:#000;}
 .article-detail {}
 
 .article-detail h1.title, .staticpage-detail h1.title {padding:10px 0;display:block;border-bottom:1px solid #666;}
 .article-detail h3.summary {color:#333;font-weight:700;padding:10px 0;text-align:justify;line-height:1.5em;}
-.article-detail h4.author {color:#666;border-left:4px solid #ccc;padding:0 0 0 10px;margin:10px 0 20px;font-size:.9em;}
+.article-detail h4.author {color:#666;border-left:4px solid #ccc;padding:0 0 0 10px;margin:10px 0 0;font-size:.9em;}
 .article-detail h6.pretitle {color:#666;text-transform:uppercase;}
 .article-detail h6.date {color:#666;text-transform:uppercase;}
 .article-detail h6.source {color:#666;}
-.article-detail .caps,.staticpage-detail .caps {display:inline;margin:0;padding:0;background:none;width:auto;}
+
 .article-detail h1, .staticpage-detail h1 {color:#000;}
 .article-detail h2, .staticpage-detail h2 {color:#000;}
 .article-detail h3, .staticpage-detail h3 {color:#333;font-weight:700;}
 .article-detail h4, .staticpage-detail h4 {color:#666;}
 .article-detail h5, .staticpage-detail h5 {color:#666;}
 .article-detail h6, .staticpage-detail h6 {color:#666;}
-.article-detail pre,.staticpage-detail pre {margin:15px 0;padding:10px;border:1px solid #ccc;background:#eee;font-size:.75em;font-weight:700;color:#666;}
-.article-detail code,.staticpage-detail code {display:block;padding:10px 10px;color:#000;font-size: 1.2em;overflow-x:scroll;overflow-y:auto;font-weight:400;}
-.article-detail .html-text p, .staticpage-detail p {color:#333;line-height:1.8em;padding:0;text-align:justify;}
-.article-detail span,.staticpage-detail span {margin:0;padding:0;}
-.article-detail p span,.staticpage-detail p span {margin:20px 0;display:block;padding:0;text-align:left;width:60%;background:#eee;padding:5px;}
-.article-detail blockquote, .staticpage-detail blockquote {margin:20px 0;padding:10px;;font-size:0.9em;width:60%;line-height:1em;border-left:5px solid #ccc;}
-.article-detail .html-text blockquote p, .staticpage-detail blockquote p {text-align:left;}
+.article-detail pre, .staticpage-detail pre {overflow-x:auto;overflow-y:auto;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;margin:10px 0;padding:20px;border:1px solid #ccc;background:#eee;font-size:0.9em;font-weight:400;color:#000;}
+.article-detail code, .staticpage-detail code {padding:0;color:#999;font-weight:400;}
+.article-detail p.text, .article-detail .text p /*se debe cambiar la salida en cyclope, este no iria*/, .staticpage-detail p.text {font-size:1.1em;color:#333;line-height:1.5em;text-align:justify;padding:20px 0 0;}
+.article-detail span, .staticpage-detail span {margin:0;padding:0;}
+.article-detail span.break, .staticpage-detail span.break {margin:-20px 0 0;padding:20px;display:block;text-align:left;width:60%;color:#fff;background:#999;border-left:5px solid #000;font-size:0.9em;}
+.article-detail blockquote, .staticpage-detail blockquote {background:#eee;padding:0 20px 20px;margin:10px 0;font-size:0.9em;width:60%;line-height:1em;border-left:5px solid #ccc;text-align:left;}
 .article-detail sup, .staticpage-detail sup {}
 .article-detail sub, .staticpage-detail sub {}
 .article-detail cite, .staticpage-detail cite {}
-.article-detail ul, .staticpage-detail ul {color:#000;font-size:1em;padding:15px 0;margin:0 0 0 30px;list-style:square;}
-.article-detail ol, .staticpage-detail ol {color:#000;font-size:1em;padding:15px 0;margin:0 0 0 30px;}  
+.article-detail ul, .staticpage-detail ul {color:#000;font-size:1.1em;line-height:1.5em;;padding:15px 0;margin:0 0 0 30px;list-style:square;}
+.article-detail ol, .staticpage-detail ol {color:#000;font-size:1.1em;line-height:1.5em;padding:15px 0;margin:0 0 0 30px;}  
 .article-detail li, .staticpage-detail li {margin:0 0 0 5px;padding:0 0 3px;}
-.article-detail acronym, .staticpage-detail acronym {}
+.article-detail acronym, .staticpage-detail acronym /*esta roto el uso de acronym via textile*/{}
 .article-detail del, .staticpage-detail del {}
 .article-detail ins, .staticpage-detail ins {}
 .article-detail table, .staticpage-detail table {margin:20px auto;color:#333;padding:0;border:none;}
@@ -241,7 +240,7 @@ VISTA ARTICULO + TEXTILE
 .article-detail img, .staticpage-detail img {}
 .article-detail img, .staticpage-detail img {}
 #container .content-view img {margin:20px 0 20px 20px;padding:0;float:none;box-shadow:2px 2px 20px #666;-webkit-box-shadow:2px 2px 20px #666;-moz-box-shadow: 2px 2px 20px #666;}
-.footnote {border-top:1px solid #ccc;color:#666;font-size:.8em;margin:10px 0;}
+.footnote {color:#666;font-size:.8em;margin:4px 0;}
 .article-detail .date {color:#333;font-size:.9em;margin:5px 0 0;display:block;}
 .article-detail .source {color:#333;font-size:.9em;margin:20px 0 0;display:block;}
 .article-detail .categories ul {list-style:none;margin:10px 0;}
@@ -328,14 +327,14 @@ VISTA LISTA DETALLADA ARTICULOS
 
 
 
-.detail h1.title, .staticpage-detail h1.title {padding:10px 0;display:block;border-bottom:1px solid #666;}
-.detail h3.summary {color:#333;font-weight:400;padding:10px 0;text-align:justify;line-height:1.4em;font-size:1.2em;}
-.detail h4.author {color:#666;border-left:4px solid #ccc;padding:0 0 0 10px;margin:20px 0 20px;font-size:.9em;}
-.detail h6.pretitle {color:#666;text-transform:uppercase;}
-.detail h6.date {color:#666;text-transform:uppercase;}
-.detail h6.source {color:#666;}
-.detail .categories ul {list-style:none;margin:10px 0;}
-.detail .categories li {display:inline;border:1px solid #ccc;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;padding:5px;background:#eee;color:#000;margin:10px 10px 0 0;font-size:.75em;}
+.media h1.title, .staticpage-detail h1.title {padding:10px 0;display:block;border-bottom:1px solid #666;}
+.media h3.summary {color:#333;font-weight:400;padding:10px 0;text-align:justify;line-height:1.4em;font-size:1.2em;}
+.media h4.author {color:#666;border-left:4px solid #ccc;padding:0 0 0 10px;margin:20px 0 20px;font-size:.9em;}
+.media h6.pretitle {color:#666;text-transform:uppercase;}
+.media h6.date {color:#666;text-transform:uppercase;}
+.media h6.source {color:#666;}
+.media .categories ul {list-style:none;margin:10px 0;}
+.media .categories li {display:inline;border:1px solid #ccc;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;padding:5px;background:#eee;color:#000;margin:10px 10px 0 0;font-size:.75em;}
 span.download_link  {display:block;padding:6px;margin:20px 0;font-weight:700;background:#000;width:300px;text-align:center;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;}
 span.download_link a {color:#fff;}
 
@@ -563,3 +562,4 @@ jQuery lightBox plugin - Gallery style
 .pull_21{left:-840px}
 .pull_22{left:-880px}
 .pull_23{left:-920px} 
+p span.caps {display:inline;margin:0;padding:0;background:none;width:auto;} /*mantener p span.caps siempre en la última línea*/
