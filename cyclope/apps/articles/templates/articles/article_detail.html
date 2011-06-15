@@ -12,8 +12,6 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
 <div class="content-view article detail article-detail">
 
-  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
-
   {% if article.pretitle %}
   <h6 class="pretitle">{% trans article.pretitle %}</h6>
   {% endif %}
@@ -98,6 +96,8 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
     <div class="meta-content"><span class="tags"><span class="tags-label"> que es esto={% trans "Tags" %}:</span> ssss{{ article.tags }}</span></div>
   {% endif %}
 {% endcomment %}
+
+<div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
 
   {% include 'cyclope/related_contents_block.html' %}
