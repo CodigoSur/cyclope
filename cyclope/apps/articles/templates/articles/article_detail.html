@@ -44,7 +44,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
   <!-- author -->
   {% if article.author %}
-  <h4 id="author" class="meta-content">
+  <h4 class="author" class="meta-content">
     {% if article.author.image %}
     <img src="" width="60"  />
     {% endif %}
@@ -77,23 +77,25 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   </span></div>
 
 {% if article.get_last_change_date or article.source %}
-   {% if article.get_last_change_date %}
-    <span class="date">
-      {% trans "Last modification date" %}: {{ article.get_last_change_date }}
-    </span>
-    {% endif %}
-    {% if article.source %}
+       {% if article.source %}
     <h6 class="source">
        <!-- {% if article.get_last_change_date %}|{% endif%} -->
       {% trans "Source" %}: {{article.source}}
     </h6>
     {% endif %}
+    
+    {% if article.get_last_change_date %}
+    <span class="date">
+      {% trans "Last modification date" %}: {{ article.get_last_change_date }}
+    </span>
+    {% endif %}
+
  
 {% endif %}
 
 {% comment %} {# TAGS ARE NOT IMPLEMENTED YET #}
   {% if article.tags %}
-    <div class="meta-content"><span class="tags"><span class="tags-label"> que es esto={% trans "Tags" %}:</span> ssss{{ article.tags }}</span></div>
+    <div class="meta-content"><span class="tags"><span class="tags-label"> {% trans "Tags" %}:</span>{{ article.tags }}</span></div>
   {% endif %}
 {% endcomment %}
 
@@ -115,7 +117,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
             <div class="clear"></div>
           /redsocial -->
 
-  <hr>
+
 
 <!--COMENTARIOS -->
   {% include 'comments/comments_block.html' %}
