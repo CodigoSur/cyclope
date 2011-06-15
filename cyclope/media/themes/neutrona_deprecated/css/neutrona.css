@@ -1,5 +1,5 @@
 /*
-Theme Neutrona 5 Elementos para Cyclope 3
+Theme Neutrona para Cyclope 3
 Este Theme fue desarrollado por Codigo Sur: www.codigosur.org
 Diseno conceptual + HTML + CSS: Santiago Hoerth Moura
 Basada en 960 Grid System
@@ -12,7 +12,7 @@ Si modificas no borres estas lineas :)
 /*-----------------------------------------------------------------------------------------------
 PARAMETROS GENERALES X DEFAULT
 -----------------------------------------------------------------------------------------------*/
-body{font-family: Arial, Verdana, Helvetica, Sans-serif; margin: 0; font-size:12pt; background-color:#fff;}
+body{font-family: Arial, Verdana, Helvetica, Sans-serif; margin: 0; font-size:12pt; background-color:#ccc;}
 * {margin:0; padding:0;}
 a {color:#666; text-decoration:none;outline:none;}
 a:hover {text-decoration:underline; color: #000;} 
@@ -20,13 +20,9 @@ img {border:none;}
 .clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0;padding:0;margin:0;}
 .clearfix:after{clear:both;content:' ';display:block;font-size:0;line-height:0;visibility:hidden;width:0;height:0}
 * html .clearfix,*:first-child+html .clearfix{zoom:1}
-#categories_navigation {} /*borra la categoria del bloque*/
+#categories_navigation {display:none;} /*borra la categoria del bloque*/
 h6.hiper-titles {border-left:6px solid #ddd;background-color:#eee;font-weight:700;color:#666;font-size:1.5em;padding:10px 25px;margin:0 0 25px;display:block;} /*define el estilo de titulares teaser_list, site_map y contact*/
-.container {margin:0;} /*define el margen de contenidos fuego*/
-
-form small {font-size:0.7em;padding:5px 0;display:block;} 
-form input {padding:2px;width:130px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;background:#fff;color:#000;border:1px solid #000;}
-form input.submit {width:30px;background:#666;color:#fff;border:1px solid #000;}
+.container {margin:15px 10px 15px 15px;} /*define el margen de contenidos fuego/*
 
 /*-----------------------------------------------------------------------------------------------
 ESQUELETO GENERAL
@@ -48,16 +44,16 @@ ESQUELETO GENERAL
 /*-----------------------------------------------------------------------------------------------
 MENU HORIZONTAL
 -----------------------------------------------------------------------------------------------*/
-#header .menuitems_hierarchy {height:33px;padding:10px 0 0;font-size:0.9em;}
-#header .menuitems_hierarchy ul {float:right; padding:0; list-style:none;}
-#header .menuitems_hierarchy li {float:left;margin:0 0 5px 7px;}
-#header .menuitems_hierarchy li a {float:left; text-decoration:none;color:#fff;font-weight:700;background:#000;margin:0 0 0 0;padding:6px 12px;}
-#header .menuitems_hierarchy li a:hover {background:#666;color:#eee;} 
+#menu-horizontal_menu {height:33px;padding:10px 0 0;font-size:0.9em;}
+#menu-horizontal_menu ul {float:right; padding:0; list-style:none;}
+#menu-horizontal_menu li {float:left;margin:0 0 5px 7px;}
+#menu-horizontal_menu li a {float:left; text-decoration:none;color:#fff;font-weight:700;background:#000;margin:0 0 0 0;padding:6px 12px;}
+#menu-horizontal_menu li a:hover {background:#666;color:#eee;} 
 
 /*-----------------------------------------------------------------------------------------------
 AIRE
 -----------------------------------------------------------------------------------------------*/
-#aire {height:170px; background: url(../images/css/cabezal.png) 0 0 no-repeat;padding:0;margin:0 0 20px;}
+#aire {height:170px; background: url(../images/css/cabezal.png) 0 0 no-repeat;padding:0;}
 #aire h1 {padding:15px 70px 0 0;text-align:left;font-size:2.3em;}
 #aire h1 a {color:#fff; text-decoration:none;}
 #aire h2 {font-size:1.1em;font-weight:400;}
@@ -65,36 +61,24 @@ AIRE
 #aire div {padding:5px 0 0 15px;text-align:left;color:#fff;font-size:0.85em;} 
 
 /*-----------------------------------------------------------------------------------------------
-AGUA
+TIERRA
 -----------------------------------------------------------------------------------------------*/
-#agua {background-color:#e6e6e6;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;padding:0;}
-#agua #left_sidebar {padding:5px;}
-#agua .block-title {background-color:#90816f;font-size:0.8em;color:#fff;text-align:right;padding:5px;margin:10px 0 5px;}
-#agua span {display:block;}
-#agua .searchbox {margin:15px auto;}
-#agua .banners {display:block;padding:0;margin:15px auto;width:94px}
-#agua .banners img {margin:0 auto 4px auto;text-align:center;} 
-#agua form {margin:15px auto;}
-#agua ul ul a {}
-#agua li li {display:block;}
+#tierra {background-color:#e6e6e6;margin:15px 0 0 8px;}
+#tierra .block-title {background-color:#90816f;font-size:0.8em;color:#fff;text-align:right;padding:5px;margin:10px 0 5px;}
+#tierra .top {height:12px;background: url(../images/css/tierra-top.png) 0 0 no-repeat;} 
+#tierra .bottom {height:12px;background: url(../images/css/tierra-bottom.png) 0 0 no-repeat;}
+#tierra span {display:block;}
+#tierra ul{margin:0 5px; padding:0; list-style:none;}
+#tierra ul li {height:30px;margin:4px 0; padding:0;border:1px solid #ccc;background-color:#eee;display:block;text-decoration:none; color:#036; font-weight:700;font-size:0.8em;}
+#tierra ul li a, #tierra ul ul a {display:block;text-decoration:none; color:#036; padding: 6px 0 3px 15px; }
+#tierra ul li a:hover{text-decoration:underline;}
+#tierra ul ul {padding:0 0 0 0; margin:0;}
+#tierra ul ul li {height:25px;padding:0 0 0 8px;border:1px dotted #ccc;margin:4px 0;background-color:#fff;}
+#tierra ul ul a {padding: 6px 0 3px 15px; font-size:0.75em; color:#000;}
+#tierra .searchbox {margin:15px auto;}
+#tierra .banners {display:block;padding:0;margin:15px auto;width:94px}
+#tierra .banners img {margin:0 auto 4px auto;text-align:center;} 
 
-#agua .menuitems_hierarchy, #agua .categories_hierarchy, #agua .categories_hierarchy_to_iconlist {font-size:0.80em;}
-#agua .menuitems_hierarchy, #agua .categories_hierarchy  span, #agua .categories_hierarchy_to_iconlist span {}
-#agua .menuitems_hierarchy ul, #agua .categories_hierarchy ul, #agua .categories_hierarchy_to_iconlist ul {margin:0 ; padding:0; list-style:none;display:block;}
-#agua .menuitems_hierarchy li, #agua .categories_hierarchy li, #agua .categories_hierarchy_to_iconlist li {margin:4px 0;text-decoration:none;font-weight:700;border:1px solid #ccc;background-color:#eee;padding:6px 0 6px 10px;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
-#agua .menuitems_hierarchy li a, #agua .categories_hierarchy li a, #agua .categories_hierarchy_to_iconlist li a{text-decoration:none; color:#000; display:block;}
-#agua .menuitems_hierarchy li a:hover, #agua .categories_hierarchy li a:hover, #agua .categories_hierarchy_to_iconlist li a:hover{text-decoration:underline;color:#036;}
-#agua .menuitems_hierarchy ul ul, , #agua .categories_hierarchy ul ul, #agua .categories_hierarchy_to_iconlist ul ul {margin:0;padding:0;display:block;border:none;}
-#agua .menuitems_hierarchy li li, #agua .categories_hierarchy li li, #agua .categories_hierarchy_to_iconlist li li {display:block;padding:3px 0;margin:4px 0;border:none;border-bottom:1px solid #ccc;}
-#agua .menuitems_hierarchy li li a, #agua .categories_hierarchy li li a, #agua .categories_hierarchy_to_iconlist li li a {color:#666;display:block;border:none;background:none;}
-#agua .menuitems_hierarchy li li a:hover, #agua .categories_hierarchy li li a:hover, #agua .categories_hierarchy_to_iconlist li li a:hover{display:block;background:#fff;color:#000;text-decoration:none; }
-#agua .menuitems_hierarchy ul ul ul, #agua .categories_hierarchy ul ul ul, #agua .categories_hierarchy_to_iconlist ul ul ul {position:relative;left:170px;top:-21px;background:#e0ecff;}
-#agua .menuitems_hierarchy li li li, #agua .categories_hierarchy li li li, #agua .categories_hierarchy_to_iconlist li li li {background:#2d5ba0;}
-#agua .menuitems_hierarchy li li li a, #agua .categories_hierarchy li li li a, #agua .categories_hierarchy_to_iconlist li li li a {color:#fff;}
-#agua .menuitems_hierarchy p, #agua .categories_hierarchy p, #agua .categories_hierarchy_to_iconlist p{clear:left;}	
-#agua .menuitems_hierarchy #current, #agua .categories_hierarchy #current, #agua .categories_hierarchy_to_iconlist #current {background:url(images/current-bg.gif) top left repeat-x;color:#ffffff;}
-
-		
 #rss {width:140px;margin:20px auto;display:block;padding:0 0 8px 20px;background: url("../images/css/rss_logo.png") 0 3px no-repeat;}
 #rss a {color:#999;text-decoration:none;font-weight:bold;}
 #rss a:hover {color:#000;text-decoration:underline;}
@@ -109,48 +93,6 @@ AGUA
 .tag3 {font-size: 1.2em}
 .tag4 {font-size: 1.3em}
 .tag5 {font-size: 1.4em} 
-
-
-/*-----------------------------------------------------------------------------------------------
-AMOR
------------------------------------------------------------------------------------------------*/
-#amor {border:0px solid #999;background:#ececec;padding:10px 0;margin-top:0px;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
-#amor .content-view {padding:0 10px 10px;margin:0 0 15px;border-bottom:3px solid #e1e1e1;}
-#amor h2 {font-size:1em;margin:5px 0 0;padding:3px 0 3px 20px;color:#000;position:relative;background:;line-height:1em;}
-#amor h2 a {color:#000;}
-#amor h2 a:hover {color:#999;text-decoration:none;}
-#amor h2 img {width:16px;padding:0;position:absolute;left:0;top:0px;clear:both;}
-#amor .pretitle,#amor .date {font-size:0.6em;display:inline;color:#fff;text-transform:uppercase;background:#999;margin:0;padding:3px;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;}
-#amor .more {font-size:0.8em;font-weight:400;margin:0; padding: 0 0;}
-#amor .pagination  {font-size:0.65em;text-align:center;padding:3px;background:#333;color:#eee;}
-#amor .pagination a {color:#fff;text-decoration:underline;}
-#amor p {font-size:0.85em;font-weight:400;margin:5px 0; padding: 0;}
-#amor .author {font-size:0.8em;font-weight:700;margin:0 0 10px; padding: 0;color:#666;}
-#amor img.teaser_icon {width:150px;padding:9px;border:1px solid #ccc;background:#fff;margin:5px 0 0;}
-#amor form .title {color:#000;font-weight:700;}
-#amor form small {font-size:0.7em;padding:5px 0;display:block;}
-#amor form input {padding:2px;width:130px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;background:#fff;color:#000;border:1px solid #000;}
-#amor form input.submit {width:30px;background:#666;color:#fff;border:1px solid #000;}
-#amor .tags {margin:0;padding:5px 0 0;font-size:0.7em;display:block;} 
-#amor .tags a {color: #666}
-#amor .tags a:hover {color:#000; text-decoration:underline;}
-.text {font-size:0.9em;padding:0;}
-.text ul {padding:0;margin:0 0 0 30px;list-style:square;}
-.text li {padding:15px 0 0;}
-.source  {font-size:0.75em;margin:0 0 5px;font-weight:400;color:#666;padding:30px 0 20px;display:block;} 
-/*#right_sidebar .article.teaser img {}
-#right_sidebar .article.teaser {float: none; }
-#right_sidebar .article.teaser {padding: 7px 0 0 0;; border-bottom: black dotted 1px;}
-#right_sidebar .article.teaser {margin: 0;}
-#right_sidebar .category_title {padding:0 0 7px 0;display:block; text-align:center; margin:0; color:#666; background-color: transparent; text-align: center; font-size: 0.85em; font-weight: bold; border: 0;}*/
- 
-/*-----------------------------------------------------------------------------------------------
-PROFUNDIDAD DE NAVEGACION
------------------------------------------------------------------------------------------------*/
-span.breadcrumb {font-size:0.8em;background:#fff;border-bottom:1px solid #ccc;display:block;font-weight:normal; padding:5px 0; margin:0 0 20px;}
-span.breadcrumb a {font-weight:bold; color:#999;}
-span.breadcrumb a:hover {color:#333;} 
-
 
 /*-----------------------------------------------------------------------------------------------
 FUEGO
@@ -171,14 +113,44 @@ FUEGO
 #fuego li {display:inline;margin:0 5px 10px 0;padding:0}
 #fuego li a {list-style:square;margin:0;padding:0;text-decoration:none;}
 #fuego li a:hover {text-decoration:underline;} 
-#fuego img.teaser_icon {float:right;margin: 4px 0 9px 15px;height:135px;clear:both;border:1px solid #ccc;padding:3px;background:#eee;}
-#fuego img.type_icon {width:24px;padding:9px;border:none;background:#fff;margin:5px 0 0;}
+#fuego .article.teaser img {float:right;margin: 4px 0 9px 15px;height:135px;clear:both;border:1px solid #ccc;padding:3px;background:#eee;}
+#fuego h2 img {display:none;}
 #fuego .article.teaser {}
 #fuego .article.teaser h4 {font-size:0.8em; padding:5px 0 0;font-weight:700;color:#666; margin-right:15px; display:inline;}
 #fuego .article.teaser h6 {font-size:0.65em;color:#666;font-weight:normal;text-transform:uppercase;margin-bottom:px;}
 /*.article.teaser img{padding:3px; background-color:#eee; border:1px solid #ccc;margin:3px 0 6px 15px; float:right;}*/
 
 
+/*-----------------------------------------------------------------------------------------------
+AGUA
+-----------------------------------------------------------------------------------------------*/
+#agua {width:190px;margin-top:12px;}
+#agua .top {height:12px;background: url(../images/css/agua-top.png) 0 0 no-repeat;}
+#agua .content {background:url(../images/css/agua-content.png) repeat-y;padding:0 9px;} 
+#agua .bottom {height:12px;background: url(../images/css/agua-bottom.png) 0 0 no-repeat;}
+#agua .pretitle, #agua .date {font-size:0.6em;}
+#agua h2 {font-size:1em;}
+#agua .summary {font-size:0.8em;font-weight:400;margin:0 0 10px; padding: 0;}
+#agua .author {font-size:0.8em;font-weight:400;margin:0 0 10px; padding: 0;}
+.tags {margin-bottom:20px; padding-6top:5px; font-size:0.7em;display:block;} 
+.tags a {color: #666}
+.tags a:hover {color:#000; text-decoration:underline;}
+.text {font-size:0.9em;padding:0;}
+.text ul {padding:0;margin:0 0 0 30px;list-style:square;}
+.text li {padding:15px 0 0;}
+.source  {font-size:0.75em;margin:0 0 5px;font-weight:400;color:#666;padding:30px 0 20px;display:block;} 
+#right_sidebar .article.teaser img {display:none;}
+#right_sidebar .article.teaser { float: none; }
+#right_sidebar .article.teaser { padding: 7px 0 0 0;; border-bottom: black dotted 1px;}
+#right_sidebar .article.teaser { margin: 0;}
+#right_sidebar .category_title {padding:0 0 7px 0;display:block; text-align:center; margin:0; color:#666; background-color: transparent; text-align: center; font-size: 0.85em; font-weight: bold; border: 0;}
+ 
+/*-----------------------------------------------------------------------------------------------
+PROFUNDIDAD DE NAVEGACION
+-----------------------------------------------------------------------------------------------*/
+span.breadcrumb {font-size:0.8em;background:#fff;border-bottom:1px solid #ccc;display:block;font-weight:normal; padding:5px 0; margin:0 0 20px;}
+span.breadcrumb a {font-weight:bold; color:#999;}
+span.breadcrumb a:hover {color:#333;} 
 
 /*-----------------------------------------------------------------------------------------------
 TITULOS GLOBALES (indice, mapa, contacto, busqueda)
@@ -197,57 +169,13 @@ TITULOS GLOBALES (indice, mapa, contacto, busqueda)
 VISTA ARTICULO 
 -----------------------------------------------------------------------------------------------*/
 
-#container .content-view h1 {color:#000;padding:10px 0;margin:30px 0 30px;border-bottom:1px solid #000;display:block;}
-.article-detail a, .staticpage-detail a {color:#ff0000;font-size:1em;}
-.article-detail {font-size:1em;}
-
-.article-detail h1, .staticpage-detail h1 {color:#000;}
-.article-detail h1.title {padding:10px 0;display:block;}
-.article-detail h2, .staticpage-detail h2 {color:#000;}
-.article-detail h3, .staticpage-detail h3,  #container p.summary {color:#333;font-weight:700;}
-.article-detail h3.summary {color:#ff0000;font-weight:700;font-size:1.4em;padding:10px 0;}
-.article-detail h4, .staticpage-detail h4 {color:#666;}
-.article-detail h5, .staticpage-detail h5 {color:#666;}
-.article-detail h6, .staticpage-detail h6 {color:#666;}
-.article-detail pre,.staticpage-detail pre {margin:15px 0;padding:10px;border:1px solid #ccc;background:#eee;font-size:.75em;font-weight:700;color:#666;}
-.article-detail code,.staticpage-detail code {display:block;padding:10px 10px;color:#000;font-size: 1.2em;overflow-x:scroll;overflow-y:auto;font-weight:400;}
-.article-detail p, .staticpage-detail p {color:#333;line-height:1.8em;padding:0;text-align:justify;}
-.article-detail span,.staticpage-detail span /*solucion temporaria a bug html span caps*/ {margin:0;padding:0;}
-.article-detail blockquote, .staticpage-detail blockquote {margin:20px 0;padding:5px 0 0 20px;;font-size:0.9em;width:60%;line-height:1em;border-left:5px solid #ccc;}
-.article-detail sup, .staticpage-detail sup {}
-.article-detail sub, .staticpage-detail sub {}
-.article-detail ul, .staticpage-detail ul {color:#000;font-size:1em;padding:15px 0;margin:0 0 0 30px;list-style:square;}
-.article-detail ol, .staticpage-detail ol {color:#000;font-size:1em;padding:15px 0;margin:0 0 0 30px;}  
-.article-detail li, .staticpage-detail li {margin:0 0 0 5px;padding:0 0 3px;}
-.article-detail acronym, .staticpage-detail acronym {}
-.article-detail table, .staticpage-detail table {margin:20px auto;color:#333;padding:0;border:none;}
-.article-detail th, .staticpage-detail th {background:#666;color:#fff;border:1px solid #000;margin:0;padding:3px;}
-.article-detail tr, .staticpage-detail tr {margin:0;padding:0;}
-.article-detail td, .staticpage-detail td {margin:0;padding:3px;border:1px solid #ccc;}
-.article-detail img, .staticpage-detail img {}
-.article-detail img, .staticpage-detail img {}
-#container .content-view img {margin:20px 0 20px 20px;padding:0;float:none;box-shadow:2px 2px 20px #666;-webkit-box-shadow:2px 2px 20px #666;-moz-box-shadow: 2px 2px 20px #666;}
-.footnote {border-top:1px solid #ccc;color:#666;font-size:.8em;margin:10px 0;}
-
-
-
-
-#fuego-content .category h2,#fuego-content .collection  big {margin:0 0 10px;font-weight:700;display:block;}
-#fuego-content .category h2 a, #fuego-content .collection big a {color:#333;}
-#fuego-content .category .text, #fuego-content .collection .text {margin:0 0 20px 0;padding:0 0 10px;border-bottom:6px solid #eee;}
-#fuego-content .category .selected, #fuego-content .collection .selected {margin:0 0 20px 0;padding:0 0 10px;border-bottom:6px solid #eee;}
-
-#fuego-content table {} 
-#fuego-content th {background:#666;color:#fff;}
-#fuego-content td {border:1px solid #999;}
-
 #fuego-content .content-view {border-bottom:6px solid #eee;overflow:auto;}
- 
+#fuego-content .html-text {font-size: 0.9em;margin:0 0 20px 0;} 
 #fuego-content .author {display:block;margin:0 0 25px 0;padding:0;color: #666666;font-size:0.8em;}
 #fuego-content .texto {font-size: 0.9em;padding:0;} 
 #fuego-content .texto ul {padding:0;margin:0 0 0 30px;list-style:square;} 
 #fuego-content .texto li {padding:15px 0 0;}
-#fuego-content .categories {}
+#fuego-content .categories {display:none;}
 #fuego-content .related_contents {font-weight:bold;color:#003300;background:#eee;padding:10px;margin:0;width:50%;}
 #fuego-content .related_contents span {font-size:1em;padding:0;margin:0;color:#666;} 
 #fuego-content .related_contents ul {padding:10px 0 0;margin:0;list-style:none;}
@@ -258,15 +186,15 @@ VISTA ARTICULO
 #fuego-content .article-teaser {margin: 4px 0 20px 0;clear:both;padding:3px 0;}
 #fuego-content h2 {margin:0;padding:0}
 #fuego-content h2 a {margin:0;padding:0;color:#000;}
-#fuego-content h2 img {}
+#fuego-content h2 img {display:none;}
 #fuego-content .pretitle, #fuego-content .date {font-size: 0.65em;text-transform: uppercase;margin:0 0 5px;color: #666666;display: inline;}
-
+#fuego-content .summary {padding:10px 0;font-size: 1em;color: #333333;}
 #fuego-content .article-teaser img {float:right;margin: 4px 0 9px 15px;height:135px;clear:both;border:1px solid #ccc;padding:3px;background:#eee;}
 #fuego-content .author {display: block;font-size: 0.8em;margin:0 0 12px;font-weight:700;color: #000;}
 #socialnetworks {font-size:0.75em;display:block;padding:0 0 10px;border-top:2px solid #eee;text-align:right;clear:both;}
 #socialnetworks img {width:24px;height:24px;margin:5px 3px -8px 0;padding:6px 0 0;border:none;clear:none;}
 #socialnetworks small {margin:0;padding:5px 5px 0 0;color:#666;text-align:right;}  
-#fuego-content hr {}
+#fuego-content hr {display:none;}
 #user_comments {width:550px;text-align:left;margin:25px 0 0;background-color:#fff;}
 #user_comments .data {color:#000;background-color:#eee;border:2px dotted #ddd;padding:10px;margin:0 0 20px;}
 #user_comments .data p {font-size:1em;color:#666;}
@@ -364,11 +292,13 @@ FOOTER
 -----------------------------------------------------------------------------------------------*/
 
 #footer_separator { clear:both; height:0;}
-.footer_global {border-bottom:6px solid #000;background-color:#333;border-top-right-radius:10px;-webkit-border-top-right-radius:10px;-moz-border-radius-topright:10px;  border-top-left-radius:10px;-webkit-border-top-left-radius:10px;-moz-border-radius-topleft:10px;}
-.footer_global {color:#eee;font-size:0.75em; text-align:center; padding:10px 0;margin:20px 0 0;}
-.footer_global a {color:#eee; text-decoration:underline;}
-.footer_global a:hover {color:#c5935b; text-decoration:none;}
-.footer_global img {padding:10px 0 0;}
+#footer {color:#eee;background:url(../images/css/footer.image.png) right top no-repeat; font-size:0.75em; text-align:center; background-color:#333;padding:10px 0;}
+#footer a {color:#eee; text-decoration:underline;}
+#footer a:hover {color:#c5935b; text-decoration:none;}
+#footer img {padding:10px 0 0;}
+#footer .text {width:720px;padding:0 10px;} 
+
+
 
 #logos {text-align:center;font-size: 0.7em;padding:1px 0 20px 0;margin:10px auto;}
 #logos img {padding:7px 0 0;}
