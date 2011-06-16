@@ -9,8 +9,8 @@ When showing the StaticPage as the main content of the view, the host_template i
 {% block content %}
 
 <div class="content-view staticpage detail staticpage-detail html-content">
-
-    {{ staticpage.text|smart_style }}
+  
+  <div class="text">{{ staticpage.text|smart_style }}</div>
 
   {% include 'cyclope/related_contents_block.html' %}
 
