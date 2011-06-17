@@ -245,7 +245,28 @@ div.labeled_icon img.type_icon {position:absolute;top:10px;left:10px;}
 .labeled_icon h2.title {font-size:.8em;text-align:center;}
 .labeled_icon img.icon {height:130px;width:130px;}
 .icon_list_container {margin:20px 0;overflow:auto;}
+display:block;
 
+/*-----------------------------------------------------------------------------------------------
+FOROS
+-----------------------------------------------------------------------------------------------*/
+.forum {margin:20px 0 0;}
+.forum table {margin:20px auto;color:#333;padding:0;border:none;}
+.forum th {background:#666;color:#fff;border:1px solid #000;margin:0;padding:3px;font-size:.8em;}
+.forum th.name {width:40%;}
+.forum th.comments {width:10%;}
+.forum th.created {width:25%;}
+.forum th.last_comment {width:25%;}        
+.forum h2.title {font-size:1.3em;}
+.forum tr {margin:0;padding:0;}
+.forum td {margin:0;padding:3px;border:1px solid #ccc;font-size:.75em;}
+.forum td.comment {text-align:center;}
+.link-create-topic {font-size:.8em;font-weight:700;text-align:center;background:#333;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;width:130px;padding:5px;float:right;clear:both;}
+.link-create-topic a {color:#fff}
+.create_forum label {display:block;padding:10px 0;}
+.create_forum input {display:block;}
+.create_forum input {display:block;}
+.create_forum textarea {display:block;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;margin:0 0 10px;}
 /*-----------------------------------------------------------------------------------------------
 VISTA ARTICULO + TEXTILE
 -----------------------------------------------------------------------------------------------*/

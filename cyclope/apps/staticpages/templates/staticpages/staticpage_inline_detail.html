@@ -1,0 +1,41 @@
+{% load comments i18n fb_versions cyclope_utils dbgettext_tags %}
+
+{% block content %}
+
+<div class="content-view article inline_detail article-inline_detail">
+
+  {% if article.pretitle %}
+  <span class="pretitle">{% trans article.pretitle %}</span>
+  {% endif %}
+
+  {% if show_ToC %}
+    <span class="ToC_link"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></span>
+  {% endif %}
+
+  <a name="article__{{ article.slug }}" href="{% url article-detail article.slug %}">
+    <h3 class="title">{% trans article.name  %}</h3>
+  </a>
+
+  {% if article.summary %}
+  <h4 class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</h4>
+  {% endif%}
+
+  {% if article.author %}
+  <div id="author" class="meta-content">
+    <span class="author">{% trans "By"%} {{ article.author }}</span>
+  </div>
+  {% endif %}
+
+  <p class="article_content">
+    {% if article.pictures %}
+      <img src="{% version article.pictures.0.image.path 'small' %}" alt="{{ article.pictures.0.name }}" hspace="0" vspace="0" align="right" />
+    {% endif %}
+
+    <span class="html-text html-content">
+      {{ article|parsed_gettext:"text"|smart_style}}
+    </span>
+  </p>
+
+</div> <!--termina article_detail -->
+
+{% endblock content%}

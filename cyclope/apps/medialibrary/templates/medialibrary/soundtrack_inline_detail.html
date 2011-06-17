@@ -1,0 +1,28 @@
+{% extends host_template %}
+
+{% load i18n cyclope_utils %}
+
+{% block content %}
+
+{% alias media as 'current_object' %}
+{% alias media.audio as 'media_file' %}
+
+<div class="content-view soundtrack media detail soundtrack-detail">
+
+  {% include 'medialibrary/media_detail_header.html' %}
+
+  {% assign player_height '24' %}
+  {% include 'medialibrary/media_player.html' %}
+
+  <h3 class="html-content summary">{{ media.description|smart_style }}</h3>
+
+  {% include 'medialibrary/media_detail_footer.html' %}
+
+  {% include 'cyclope/related_contents_block.html' %}
+
+  <!--COMENTARIOS -->
+  {% include 'comments/comments_block.html' %}
+
+</div> <!--termina media_detail -->
+
+{% endblock content%}
