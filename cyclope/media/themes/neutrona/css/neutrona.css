@@ -56,6 +56,8 @@ h6.pretitle {color:#666;text-transform:uppercase;}
 h6.date {color:#666;text-transform:uppercase;}
 h6.source {color:#666;}
 img.teaser_icon {float:right;margin: 20px 0 9px 15px;width:135px;clear:both;border:1px solid #ccc;padding:3px;background:#eee;}
+img.image {float:left;overflow:auto;margin:0 10px 0 0;clear:both;width:130px;}
+span.collection_teaser {overflow:auto;background:#eee;display:block;margin:0 0 20px;padding:10px;border-bottom:1px solid #000;}
 /*-----------------------------------------------------------------------------------------------
 MENU HORIZONTAL (San)
 -----------------------------------------------------------------------------------------------*//*
@@ -189,28 +191,6 @@ span.breadcrumb a:hover {color:#333;}
 /*-----------------------------------------------------------------------------------------------
 FUEGO
 -----------------------------------------------------------------------------------------------*/
-#fuego h2 {color:#333;padding:0;margin-top:4px; margin:0; border:none;font-size:1.6em;} 
-#fuego h2 a {color:#000; text-decoration:none;}
-#fuego h2 a:hover {color:#666;text-decoration:underline;}
-#fuego p {}
-#fuego p a {}
-#fuego .summary {font-weight:400;padding:10px 0;font-size: 0.9em;color: #333333;}
-#fuego .summary a {text-decoration:underline;} 
-#fuego .author {font-size: 0.8em;margin:0 0 12px;font-weight: 700;color: #000000;}
-#fuego .author a {margin:0 0 12px;font-weight:700;color:#000;} 
-#fuego .content-view {border-bottom:6px solid #eee;margin:0 0 15px 0;padding:0;overflow: auto;}
-#fuego .pretitle, #fuego .date {font-size: 0.65em;text-transform: uppercase;margin:0 0 5px;color: #666666;display: inline;}
-#fuego .links {margin:0 0 15px;}
-#fuego ul {font-size:0.9em;padding:0;margin:0; }
-#fuego li {display:inline;margin:0 5px 10px 0;padding:0}
-#fuego li a {list-style:square;margin:0;padding:0;text-decoration:none;}
-#fuego li a:hover {text-decoration:underline;} 
-#fuego img.teaser_icon {float:right;margin: 4px 0 9px 15px;height:135px;clear:both;border:1px solid #ccc;padding:3px;background:#eee;}
-#fuego img.type_icon {width:24px;padding:9px;border:none;background:#fff;margin:5px 0 0;}
-#fuego .article.teaser {}
-#fuego .article.teaser h4 {font-size:0.8em; padding:5px 0 0;font-weight:700;color:#666; margin-right:15px; display:inline;}
-#fuego .article.teaser h6 {font-size:0.65em;color:#666;font-weight:normal;text-transform:uppercase;margin-bottom:px;}
-/*.article.teaser img{padding:3px; background-color:#eee; border:1px solid #ccc;margin:3px 0 6px 15px; float:right;}*/
 
 
 
@@ -229,14 +209,14 @@ TITULOS GLOBALES (indice, mapa, contacto, busqueda)
 /*-----------------------------------------------------------------------------------------------
 VISTAS COLECCIONES	
 -----------------------------------------------------------------------------------------------*/
-.collection {margin:0 0 20px;}
+.collection {margin:0 0;}
 .collection h3 {}
 .collection p {padding:0;display:block;}
-.collection img.image {float:left;overflow:auto;margin:0 10px 0 0;}
+
 .teaser {margin:10px 0;padding:0 0 20px;overflow:auto;border-bottom:5px solid #eee;}
 .teaser img.icon {float:right;width:150px;clear:both;padding:3px;border:3px solid #ccc;margin:0 0 20px 20px;}
 .teaser img.type_icon {padding:0 10px 0 0;margin:0 0;float:left;}
-.collection span.collection_teaser {overflow:auto;background:#eee;display:block;margin:0 0;padding:10px;border-bottom:1px solid #000;}
+
 .collection h3.summary {color:#333;font-weight:700;padding:0;text-align:justify;line-height:1.5em;}
 .teaser h2.title {padding:10px 0 0;display:block;border-bottom:none;}
 .teaser h2.title a {text-decoration:underline;} 
@@ -245,7 +225,7 @@ VISTAS COLECCIONES
 .root {margin:10px 0;overflow:auto;}
 .root ul {list-style:square;margin:20px 30px;}
 .root li {list-style:square;}  
-div.paginator {padding:5px;background:#999;color:#fff;display:block;font-weight:700;text-align:center;margin:0 0 20px;}
+div.paginator {padding:5px;background:#999;color:#fff;display:block;font-weight:700;text-align:center;margin:0 0 20px;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;}
 div.paginator a {color:#fff;font-weight:400;text-decoration:underline;}
 div.paginator a:hover {color:#000;}
 .article-teaser h2.tile {margin:0;padding:0}
@@ -253,17 +233,18 @@ div.paginator a:hover {color:#000;}
 .article-teaser h2.tile img {}
 .article-teaser h3.summary p {display:inline;}
 .article-teaser h6 {background:#eee;text-transform:uppercase;display:inline;}
-.article-teaser h6.pretitle {}
+.article-teaser h6.pretitle {margin:10px 0 0;display:inline-block;}
 .article-teaser h6.date {}
 
 
 .staticpage-teaser ul {color:#000;font-size:1em;padding:15px 0;margin:0 0 0 30px;list-style:square;}
 .staticpage-teaser li {margin:0 0 0 5px;padding:0 0 3px;}
 
-.labeled_icon h2.title {}
-.labeled_icon img.icon {float:left;}
-
-
+div.labeled_icon {height:180px;border:2px solid #999;background:#eee;display:block;width:130px;margin:	0 5px;float:left;padding:5px;position:relative;border-radius:8px;-webkit-border-radius:8px;-moz-border-radius:8px;}
+div.labeled_icon img.type_icon {position:absolute;top:10px;left:10px;}
+.labeled_icon h2.title {font-size:.8em;text-align:center;}
+.labeled_icon img.icon {height:130px;width:130px;}
+.icon_list_container {margin:20px 0;overflow:auto;}
 
 /*-----------------------------------------------------------------------------------------------
 VISTA ARTICULO + TEXTILE

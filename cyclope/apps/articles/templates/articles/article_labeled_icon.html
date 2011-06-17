@@ -2,8 +2,13 @@
 
   <div class="content-view article labeled_icon">
     <a href="{% url article-detail article.slug %}">
-        <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article-medium.png" border="0"/>
-
-    </a>
+      {% if article.pictures %}
+        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
+        <img class="icon" src="{% version article.pictures.0.image.path 'thumbnail' %}" border="0"/>
+      {% else %}
+        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
+        <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
+      {% endif %}
+ </a>
     <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:40 }}</a></h2>
   </div>
