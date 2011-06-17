@@ -1,14 +1,14 @@
 {% extends host_template %}
 
 {% block content %}
-<ul>
-  {% if collection.visible %}<span>{{ collection.name }}</span>{% endif %}
-{% for category in categories %}
+<div class="root">
+{% if collection.visible %}<h1 class="title">{{ collection.name }}</h1>{% endif %}
+  <ul>
+  {% for category in categories %}
   <li>
-    <a href="{% url category-teaser_list category.slug %}">
-      <span>{{ category.name }}</span>
-    </a>
+    <a href="{% url category-teaser_list category.slug %}">{{ category.name }}</a>
   </li>
 {% endfor %}
 </ul>
+</div>
 {% endblock content%}

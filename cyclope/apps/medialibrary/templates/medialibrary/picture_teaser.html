@@ -3,15 +3,17 @@
   <div class="content-view picture teaser picture-teaser">
 
      <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/image.png"/><a href="{% url picture-detail picture.slug %}">{{ picture.name }}</a></h2>
-
-     <div class="media-content teaser_icon_container"><a href="{% url picture-detail picture.slug %}"><img class="teaser_icon" src="{% version picture.image.path 'small' %}" border="0" /></a></div>
-
-     {% if picture.description %}
-       <div class="html-content description">{{ picture.description|smart_style }}</div>
+ {% comment %}
+ TODO: sanhoerth - hay que unificar criterios para mostrar estas listas, si no ponemos visualizacion de audio o de video, creo que la logica de esta lista es
+  icono, titulo, descripcion. si les parece mal, descomentamos-
+ {% endcomment %}
+  <div class="media-content teaser_icon_container"><a href="{% url picture-detail picture.slug %}"><img class="teaser_icon" src="{% version picture.image.path 'small' %}" border="0" /></a></div>
+       {% if picture.description %}
+       <h3 class="html-content summary">{{ picture.description|smart_style }}</h3>
      {% endif %}
 
      {% if picture.author %}
-       <div class="meta-content author_container"><span class="author">{% trans "By" %} {{ picture.author }}</span></div>
+       <div class="meta-content author_container"><h4 class="author">{% trans "By" %} {{ picture.author }}</h4></div>
      {% endif %}
 
      {% if picture.tags %}

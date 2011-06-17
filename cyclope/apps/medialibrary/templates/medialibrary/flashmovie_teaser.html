@@ -9,11 +9,11 @@
      {% endif %}
 
      {% if flashmovie.description %}
-       <div class="html-content description">{{ flashmovie.description|smart_style }}</div>
+       <h3 class="html-content summary">{{ flashmovie.description|smart_style }}</h3>
      {% endif %}
 
      {% if flashmovie.author %}
-       <div class="meta-content author_container"><span class="author">{% trans "By" %} {{ flashmovie.author }}</span></div>
+       <div class="meta-content author_container"><h4 class="author">{% trans "By" %} {{ flashmovie.author }}</h4></div>
      {% endif %}
 
     {% if flashmovie.tags %}

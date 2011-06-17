@@ -55,7 +55,7 @@ h4.author {color:#666;border-left:4px solid #ccc;padding:0 0 0 10px;margin:10px 
 h6.pretitle {color:#666;text-transform:uppercase;}
 h6.date {color:#666;text-transform:uppercase;}
 h6.source {color:#666;}
-
+img.teaser_icon {float:right;margin: 20px 0 9px 15px;width:135px;clear:both;border:1px solid #ccc;padding:3px;background:#eee;}
 /*-----------------------------------------------------------------------------------------------
 MENU HORIZONTAL (San)
 -----------------------------------------------------------------------------------------------*//*
@@ -233,13 +233,38 @@ VISTAS COLECCIONES
 .collection h3 {}
 .collection p {padding:0;display:block;}
 .collection img.image {float:left;overflow:auto;margin:0 10px 0 0;}
-.teaser {margin:10px 0;overflow:auto;border-bottom:5px solid #eee;}
+.teaser {margin:10px 0;padding:0 0 20px;overflow:auto;border-bottom:5px solid #eee;}
 .teaser img.icon {float:right;width:150px;clear:both;padding:3px;border:3px solid #ccc;margin:0 0 20px 20px;}
+.teaser img.type_icon {padding:0 10px 0 0;margin:0 0;float:left;}
 .collection span.collection_teaser {overflow:auto;background:#eee;display:block;margin:0 0;padding:10px;border-bottom:1px solid #000;}
 .collection h3.summary {color:#333;font-weight:700;padding:0;text-align:justify;line-height:1.5em;}
 .teaser h2.title {padding:10px 0 0;display:block;border-bottom:none;}
 .teaser h2.title a {text-decoration:underline;} 
 .teaser h3.summary {color:#333;font-weight:400;padding:15px 0;text-align:justify;line-height:1.5em;}
+.teaser .tags {margin:20px 0 0 ;display:block;}
+.root {margin:10px 0;overflow:auto;}
+.root ul {list-style:square;margin:20px 30px;}
+.root li {list-style:square;}  
+div.paginator {padding:5px;background:#999;color:#fff;display:block;font-weight:700;text-align:center;margin:0 0 20px;}
+div.paginator a {color:#fff;font-weight:400;text-decoration:underline;}
+div.paginator a:hover {color:#000;}
+.article-teaser h2.tile {margin:0;padding:0}
+.article-teaser h2.tile a {margin:0;padding:0;color:#000;}
+.article-teaser h2.tile img {}
+.article-teaser h3.summary p {display:inline;}
+.article-teaser h6 {background:#eee;text-transform:uppercase;display:inline;}
+.article-teaser h6.pretitle {}
+.article-teaser h6.date {}
+
+
+.staticpage-teaser ul {color:#000;font-size:1em;padding:15px 0;margin:0 0 0 30px;list-style:square;}
+.staticpage-teaser li {margin:0 0 0 5px;padding:0 0 3px;}
+
+.labeled_icon h2.title {}
+.labeled_icon img.icon {float:left;}
+
+
+
 /*-----------------------------------------------------------------------------------------------
 VISTA ARTICULO + TEXTILE
 -----------------------------------------------------------------------------------------------*/
@@ -335,21 +360,6 @@ VISTA COMENTARIOS
 /*-----------------------------------------------------------------------------------------------
 VISTA LISTA DETALLADA ARTICULOS 
 -----------------------------------------------------------------------------------------------*/
-
-.article-teaser h2.tile {margin:0;padding:0}
-.article-teaser h2.tile a {margin:0;padding:0;color:#000;}
-.article-teaser h2.tile img {}
-.article-teaser h3.summary p {color:#333;font-weight:700;padding:10px 0;text-align:justify;line-height:1.5em;display:inline;}
-.article-teaser h6.pretitle {display:inline;text-transform:uppercase;}
-.article-teaser h6.date {display:inline;text-transform:uppercase;}
-.article-teaser img.teaser_icon {float:right;margin: 4px 0 9px 15px;height:135px;clear:both;border:1px solid #ccc;padding:3px;background:#eee;}
-
-.staticpage-teaser ul {color:#000;font-size:1em;padding:15px 0;margin:0 0 0 30px;list-style:square;}
-.staticpage-teaser li {margin:0 0 0 5px;padding:0 0 3px;}
-
-.labeled_icon h2.title {}
-.labeled_icon img.icon {float:left;}
-
 
 
 .media h1.title, .staticpage-detail h1.title {padding:10px 0;display:block;border-bottom:1px solid #666;}
