@@ -1,7 +1,7 @@
 {% extends host_template %}
 
 {% block content %}
-<script type="text/javascript">
+<!--<script type="text/javascript">
 
 var hide_children = function (el){
     $(el).children('ul').css('display', 'none');
@@ -49,9 +49,9 @@ jQuery(document).ready(function(){
         }
     }
 });
-</script>
+</script>-->
 
-<ul>
+<ul id="menu-{{ expand_style|lower }}-{{ menu_slug }}" class="cyclope_menu {{ expand_style|lower }}">
     {{ menu_items|unordered_list }}
 </ul>
 {% endblock content %}
