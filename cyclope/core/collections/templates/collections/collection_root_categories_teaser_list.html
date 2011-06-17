@@ -4,6 +4,7 @@
 
 {% block content %}
   <div>
+  
     {% include 'collections/collection_info.html' %}
 
     {% for category in categories %}
@@ -17,12 +18,12 @@
       {% endif %}
 
       {% if category.description %}
-      <div class="text">
+      <h3 class="summary">
         {{ category.description|smart_style }}
-      </div>
+      </h3>
       {% endif %}
 
-      <div class="bottom"></div>
+
     </div>
     {% endfor %}
 

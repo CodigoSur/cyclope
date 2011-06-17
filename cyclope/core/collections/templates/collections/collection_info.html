@@ -4,17 +4,33 @@
     <div class="collection_header">
       {% if collection.visible %}
         <h1 class="title">{{ collection.name }}</h1>
-
-        {% if collection.image %}
-        <img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
-        {% endif %}
+        
 
         {% if collection.description %}
+<span class="collection_teaser">
+
+{% if collection.image %}
+        <img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
+        {% endif %}
         <h3 class="summary">
+
           {{ collection.description|smart_style }}
         </h3>
+        </span>
+        {% else %}
+{% if collection.image %}
+<span class="collection_teaser">
+        <img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
+                </span>
         {% endif %}
+        
+        {% endif %}
+
+        
+        
+
       {% endif %}
+      
       <br class="clear"/>
     </div>
 </div>

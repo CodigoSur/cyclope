@@ -17,6 +17,20 @@ $(document).ready(function(){
                 }
             );
         }else if($(this).hasClass('horizontal')){
+            //Todo FEDE: Agregar una clase a los items que tienen submenues
+            //para poder agregar flechas en el css :)
+            //Acomodamos los sub-sub-menues en el dom, antes del span
+            $(this).find('ul').find('ul').each(function(){
+                //Lo alineamos a la izquierda
+                var left = $(this).parent().width();
+                $(this).css('left', left+'px');
+                //Clonamos, lo insertamos al principio del li
+                //y lo eliminamos
+                var menu = $(this).clone();
+                menu.prependTo($(this).parent());
+                $(this).remove();
+            });
+
             $(this).parent().find('ul').first()
             .children('li').each(function(){
                 //Primero nos fijamos si tiene submenues
@@ -35,11 +49,7 @@ $(document).ready(function(){
                         function(){
                             //Escondemos solo su primer submenues
                             parent_element.
-                            hide(
-                                'slide',
-                                {direction: 'up'},
-                                500
-                            );
+                            hide();
                         }
                     );
                     //Ahora nos fijamos si este submenu, tiene
@@ -57,76 +67,16 @@ $(document).ready(function(){
                                         child_element.show('slide');
                                     },
                                     function(){
-                                        child_element.hide('slide',
-                                            {direction: 'left'}, 500
-                                        );
+                                        child_element.hide();
                                     }
                                 );
-                            }                        
-                        });
-                    }
-                }
-            });
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        // todo Fede: Here we can refactor code so we can implement
-        //              infinite sub-sub-menues            
-        /*    $(this).children('li').each(function(){
-                if($(this).children('ul').length > 0){
-                    $(this).hover(
-                        function(){
-                            $(this).find('ul').first().stop(true, true).show('slide', {direction: 'up'});
-                        },
-                        function(){
-                            $(this).find('ul').first()
-                            .stop(true,true).hide('slide', {direction: 'up'});
-                        }
-                    );
-                    if($(this).find('ul').find('ul').length > 0){
-                        var element = $(this).find('ul').find('ul');
-                        element.css('left', $(this).parent().width());
-                        $(this).children('ul').children('li').each(function(){
-                            if($(this).children('ul').length > 0){
-                                var element = $(this).find('ul').first();
-                                $(this).hover(
-                                    function(){
-                                        $(this).find('ul').first().stop(true, true).show('slide', {direction: 'up'});
-                                    },
-                                    function(){
-                                    }
-                                );                            
-                        
-        
-
                             }
                         });
                     }
                 }
-            });*/
-            
-
+            });
         }
-        //Acomodamos los sub-sub-menues
-        $(this).find('ul').find('ul').each(function(){
-            var left = $(this).parent().width();
-            var top = $(this).parent().offset().top;
-            //alert(top);
-            $(this).css('left', left+'px');
-            $(this).css('top', '0');
-        });
+        //Por último, escondemos los menues
         $(this).find('ul').hide();
-        
     });
 });
