@@ -17,24 +17,24 @@
   </a>
 
   {% if article.summary %}
-  <h4 class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</h4>
+  <div class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</div>
   {% endif%}
 
   {% if article.author %}
-  <div id="author" class="meta-content">
+  <h4 id="author" class="meta-content">
     <span class="author">{% trans "By"%} {{ article.author }}</span>
-  </div>
+  </h4>
   {% endif %}
 
-  <p class="article_content">
+  <div class="article_content">
     {% if article.pictures %}
       <img src="{% version article.pictures.0.image.path 'small' %}" alt="{{ article.pictures.0.name }}" hspace="0" vspace="0" align="right" />
     {% endif %}
 
-    <span class="html-text html-content">
+    <div class="html-text html-content text">
       {{ article|parsed_gettext:"text"|smart_style}}
-    </span>
-  </p>
+    </div>
+  </div>
 
 </div> <!--termina article_detail -->
 

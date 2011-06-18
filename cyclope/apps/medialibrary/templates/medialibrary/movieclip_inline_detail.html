@@ -3,18 +3,19 @@
 {% block content %}
 
 {% alias media as 'current_object' %}
-{% alias media.audio as 'media_file' %}
+{% alias media.video as 'media_file' %}
 
-<div class="content-view soundtrack media detail soundtrack-detail">
+<div class="content-view movieclip media detail movieclip-detail">
 
   {% include 'medialibrary/media_detail_header.html' %}
 
-  {% assign player_height '24' %}
+  {% assign player_height '320' %}
   {% include 'medialibrary/media_player.html' %}
 
-  <div class="html-content summary">{{ media.description|smart_style }}</div>
+  <h3 class="html-content summary">{{ media.description|smart_style }}</h3>
 
   {% include 'medialibrary/media_detail_footer.html' %}
+
 
 </div> <!--termina media_detail -->
 

@@ -57,7 +57,7 @@ h6.date {color:#666;text-transform:uppercase;}
 h6.source {color:#666;}
 img.teaser_icon {float:right;margin: 20px 0 9px 15px;width:135px;clear:both;border:1px solid #ccc;padding:3px;background:#eee;}
 img.image {float:left;overflow:auto;margin:0 10px 0 0;clear:both;width:130px;}
-span.collection_teaser {overflow:auto;background:#eee;display:block;margin:0 0 20px;padding:10px;border-bottom:1px solid #000;}
+
 /*-----------------------------------------------------------------------------------------------
 MENU HORIZONTAL (San)
 -----------------------------------------------------------------------------------------------*//*
@@ -191,8 +191,52 @@ span.breadcrumb a:hover {color:#333;}
 /*-----------------------------------------------------------------------------------------------
 FUEGO
 -----------------------------------------------------------------------------------------------*/
+#fuego .title {padding:10px 0;display:block;border-bottom:1px solid #666;}
+#fuego .teaser .title {border:none;}
+#fuego .summary {color:#333;font-weight:700;padding:10px 0;text-align:justify;line-height:1.5em;}
+#fuego .author {color:#666;border-left:4px solid #ccc;padding:0 0 0 10px;margin:10px 0 0;font-size:.9em;}
+#fuego .pretitle {color:#666;text-transform:uppercase;}
+#fuego .tags {margin:20px 0 0 ;display:block;}
+#fuego .date {color:#666;text-transform:uppercase;}
+#fuego .source {color:#666;}
+#fuego div.collection_teaser {overflow:auto;background:#eee;display:block;margin:0 0 20px;padding:10px;border-bottom:1px solid #666;}
 
 
+#fuego h1 {color:#000;}
+#fuego h2 {color:#000;}
+#fuego h3 {color:#333;font-weight:700;}
+#fuego h4 {color:#666;}
+#fuego h5 {color:#666;}
+#fuego h6 {color:#666;}
+#fuego pre {overflow-x:auto;overflow-y:auto;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;margin:10px 0;padding:20px;border:1px solid #ccc;background:#eee;font-size:0.9em;font-weight:400;color:#000;}
+#fuego code {padding:0;color:#999;font-weight:400;}
+#fuego div.text p {font-size:1.1em;color:#333;line-height:1.5em;text-align:justify;padding:20px 0 0;}
+#fuego span {margin:inherit;padding:inherit;}
+#fuego span.tip {margin:-20px 0 0;padding:20px;display:block;text-align:left;width:60%;color:#fff;background:#999;border-left:5px solid #000;font-size:0.9em;}
+#fuego blockquote {background:#eee;padding:0 20px 20px;margin:10px 0;font-size:0.9em;width:60%;line-height:1em;border-left:5px solid #ccc;text-align:left;}
+#fuego sup {}
+#fuego sub {}
+#fuego cite {}
+#fuego ul {color:#000;font-size:1.1em;line-height:1.5em;;padding:15px 0;margin:0 0 0 30px;list-style:square;}
+#fuego ol {color:#000;font-size:1.1em;line-height:1.5em;padding:15px 0;margin:0 0 0 30px;}  
+#fuego li {margin:0 0 0 5px;padding:0 0 3px;}
+#fuego acronym /*esta roto el uso de acronym via textile*/{}
+#fuego del {}
+#fuego ins {}
+#fuego table {margin:20px auto;color:#333;padding:0;border:none;}
+#fuego th {background:#666;color:#fff;border:1px solid #000;margin:0;padding:3px;}
+#fuego tr {margin:0;padding:0;}
+#fuego td {margin:0;padding:3px;border:1px solid #ccc;}
+#fuego img {}
+#fuego img {}
+#container .content-view img {margin:20px 0 20px 20px;padding:0;float:none;box-shadow:2px 2px 20px #666;-webkit-box-shadow:2px 2px 20px #666;-moz-box-shadow: 2px 2px 20px #666;}
+#fuego div.text p.footnote, .staticpage-detail div.text p.footnote {color:#666;font-size:.8em;margin:4px 0;padding:0;}
+#fuego .date {color:#333;font-size:.9em;margin:5px 0 0;display:block;}
+#fuego .source {color:#333;font-size:.9em;margin:20px 0 0;display:block;}
+#fuego .categories ul {list-style:none;margin:10px 0;}
+#fuego .categories li {display:inline;border:1px solid #ccc;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;padding:5px;background:#eee;color:#000;margin:10px 10px 0 0;font-size:.75em;}
+#fuego .labeled_icon .title {font-size:.8em;text-align:center;padding:3px;border:none;}
+#fuego .labeled_icon img.icon {height:130px;width:130px;}
 
 /*-----------------------------------------------------------------------------------------------
 TITULOS GLOBALES (indice, mapa, contacto, busqueda)
@@ -216,12 +260,11 @@ VISTAS COLECCIONES
 .teaser {margin:10px 0;padding:0 0 20px;overflow:auto;border-bottom:5px solid #eee;}
 .teaser img.icon {float:right;width:150px;clear:both;padding:3px;border:3px solid #ccc;margin:0 0 20px 20px;}
 .teaser img.type_icon {padding:0 10px 0 0;margin:0 0;float:left;}
-
 .collection h3.summary {color:#333;font-weight:700;padding:0;text-align:justify;line-height:1.5em;}
 .teaser h2.title {padding:10px 0 0;display:block;border-bottom:none;}
 .teaser h2.title a {text-decoration:underline;} 
 .teaser h3.summary {color:#333;font-weight:400;padding:15px 0;text-align:justify;line-height:1.5em;}
-.teaser .tags {margin:20px 0 0 ;display:block;}
+
 .root {margin:10px 0;overflow:auto;}
 .root ul {list-style:square;margin:20px 30px;}
 .root li {list-style:square;}  
@@ -242,10 +285,9 @@ div.paginator a:hover {color:#000;}
 
 div.labeled_icon {height:180px;border:2px solid #999;background:#eee;display:block;width:130px;margin:	0 5px;float:left;padding:5px;position:relative;border-radius:8px;-webkit-border-radius:8px;-moz-border-radius:8px;}
 div.labeled_icon img.type_icon {position:absolute;top:10px;left:10px;}
-.labeled_icon h2.title {font-size:.8em;text-align:center;}
-.labeled_icon img.icon {height:130px;width:130px;}
+
 .icon_list_container {margin:20px 0;overflow:auto;}
-display:block;
+
 
 /*-----------------------------------------------------------------------------------------------
 FOROS
@@ -275,46 +317,7 @@ VISTA ARTICULO + TEXTILE
 .article-detail a, .staticpage-detail a {color:#000;}
 .article-detail {}
 
-.article-detail h1.title {padding:10px 0;display:block;border-bottom:1px solid #666;}
-.article-detail h3.summary {color:#333;font-weight:700;padding:10px 0;text-align:justify;line-height:1.5em;}
-.article-detail h4.author {color:#666;border-left:4px solid #ccc;padding:0 0 0 10px;margin:10px 0 0;font-size:.9em;}
-.article-detail h6.pretitle {color:#666;text-transform:uppercase;}
-.article-detail h6.date {color:#666;text-transform:uppercase;}
-.article-detail h6.source {color:#666;}
 
-.article-detail h1, .staticpage-detail h1 {color:#000;}
-.article-detail h2, .staticpage-detail h2 {color:#000;}
-.article-detail h3, .staticpage-detail h3 {color:#333;font-weight:700;}
-.article-detail h4, .staticpage-detail h4 {color:#666;}
-.article-detail h5, .staticpage-detail h5 {color:#666;}
-.article-detail h6, .staticpage-detail h6 {color:#666;}
-.article-detail pre, .staticpage-detail pre {overflow-x:auto;overflow-y:auto;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;margin:10px 0;padding:20px;border:1px solid #ccc;background:#eee;font-size:0.9em;font-weight:400;color:#000;}
-.article-detail code, .staticpage-detail code {padding:0;color:#999;font-weight:400;}
-.article-detail div.text p, .staticpage-detail div.text p {font-size:1.1em;color:#333;line-height:1.5em;text-align:justify;padding:20px 0 0;}
-.article-detail span, .staticpage-detail span {margin:0;padding:0;}
-.article-detail span.tip, .staticpage-detail span.tip {margin:-20px 0 0;padding:20px;display:block;text-align:left;width:60%;color:#fff;background:#999;border-left:5px solid #000;font-size:0.9em;}
-.article-detail blockquote, .staticpage-detail blockquote {background:#eee;padding:0 20px 20px;margin:10px 0;font-size:0.9em;width:60%;line-height:1em;border-left:5px solid #ccc;text-align:left;}
-.article-detail sup, .staticpage-detail sup {}
-.article-detail sub, .staticpage-detail sub {}
-.article-detail cite, .staticpage-detail cite {}
-.article-detail ul, .staticpage-detail ul {color:#000;font-size:1.1em;line-height:1.5em;;padding:15px 0;margin:0 0 0 30px;list-style:square;}
-.article-detail ol, .staticpage-detail ol {color:#000;font-size:1.1em;line-height:1.5em;padding:15px 0;margin:0 0 0 30px;}  
-.article-detail li, .staticpage-detail li {margin:0 0 0 5px;padding:0 0 3px;}
-.article-detail acronym, .staticpage-detail acronym /*esta roto el uso de acronym via textile*/{}
-.article-detail del, .staticpage-detail del {}
-.article-detail ins, .staticpage-detail ins {}
-.article-detail table, .staticpage-detail table {margin:20px auto;color:#333;padding:0;border:none;}
-.article-detail th, .staticpage-detail th {background:#666;color:#fff;border:1px solid #000;margin:0;padding:3px;}
-.article-detail tr, .staticpage-detail tr {margin:0;padding:0;}
-.article-detail td, .staticpage-detail td {margin:0;padding:3px;border:1px solid #ccc;}
-.article-detail img, .staticpage-detail img {}
-.article-detail img, .staticpage-detail img {}
-#container .content-view img {margin:20px 0 20px 20px;padding:0;float:none;box-shadow:2px 2px 20px #666;-webkit-box-shadow:2px 2px 20px #666;-moz-box-shadow: 2px 2px 20px #666;}
-.article-detail div.text p.footnote, .staticpage-detail div.text p.footnote {color:#666;font-size:.8em;margin:4px 0;padding:0;}
-.article-detail .date {color:#333;font-size:.9em;margin:5px 0 0;display:block;}
-.article-detail .source {color:#333;font-size:.9em;margin:20px 0 0;display:block;}
-.article-detail .categories ul {list-style:none;margin:10px 0;}
-.article-detail .categories li {display:inline;border:1px solid #ccc;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;padding:5px;background:#eee;color:#000;margin:10px 10px 0 0;font-size:.75em;}
 
 
 .article-detail .related_contents {font-weight:700;color:#003300;background:#eee;padding:10px;margin:0;width:60%;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;;}

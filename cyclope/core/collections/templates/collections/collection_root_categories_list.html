@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="root">
-{% if collection.visible %}<h1 class="title">{{ collection.name }}</h1>{% endif %}
+{% if collection.visible %}<div class="title">{{ collection.name }}</div>{% endif %}
   <ul>
   {% for category in categories %}
   <li>

@@ -7,21 +7,21 @@
         
 
         {% if collection.description %}
-<span class="collection_teaser">
+<div class="collection_teaser">
 
 {% if collection.image %}
         <img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
         {% endif %}
-        <h3 class="summary">
+        <div class="summary">
 
           {{ collection.description|smart_style }}
-        </h3>
-        </span>
+        </div>
+        </div>
         {% else %}
 {% if collection.image %}
-<span class="collection_teaser">
+<div class="collection_teaser">
         <img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
-                </span>
+                </div>
         {% endif %}
         
         {% endif %}

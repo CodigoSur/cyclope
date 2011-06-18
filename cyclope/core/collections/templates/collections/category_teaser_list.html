@@ -7,19 +7,19 @@
 {% include 'collections/hierarchycal_navigation_block.html' %}
 
 {% if category.description %}
-<span class="collection_teaser">{% if category.image %}
+<div class="collection_teaser">{% if category.image %}
 <img class="image" src="{% version category.image.path 'small' %}" border="0"/>
 {% endif %}
-<h3 class="summary">
+<div class="summary">
   {{ category.description|smart_style }}
-</h3>
-</span>
+</div>
+</div>
 {% else %}
 
 {% if category.image %}
-<span class="collection_teaser">
+<div class="collection_teaser">
 <img class="image" src="{% version category.image.path 'small' %}" border="0"/>
-</span>
+</div>
 {% endif %}
 
 {% endif %}
