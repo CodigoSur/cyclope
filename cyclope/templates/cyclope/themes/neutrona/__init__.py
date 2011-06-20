@@ -12,28 +12,28 @@ verbose_name = _('Neutrona')
 
 layout_templates = {
 
-    'one_sidebar.html':
+    '4_elements.html':
         {
-        'verbose_name': _('One sidebar'),
+        'verbose_name': _('4 Elements'),
         'regions' : {
-            'header': _('header'),
-            'left_sidebar': _('left sidebar'),
-            'before_content': _('before content'),
-            'after_content': _('after content'),
-            'footer': _('footer'),
+            'air': _('air'),
+            'water': _('water'),
+            'before_fire': _('before fire'),
+            'after_fire': _('after fire'),
+            'earth': _('earth'),
             }
         },
 
-    'two_sidebars.html':
+    '5_elements.html':
         {
-        'verbose_name': _('Two sidebars'),
+        'verbose_name': _('5 Elements'),
         'regions' : {
-            'header': _('header'),
-            'left_sidebar': _('left sidebar'),
-            'right_sidebar': _('right sidebar'),
-            'before_content': _('before content'),
-            'after_content': _('after content'),
-            'footer': _('footer'),
+            'air': _('air'),
+            'water': _('water'),
+            'love': _('love'),
+            'before_fire': _('before fire'),
+            'after_fire': _('after fire'),
+            'earth': _('earth'),
             }
         },
     'empty.html':

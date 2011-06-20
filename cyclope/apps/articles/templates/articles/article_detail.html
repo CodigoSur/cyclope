@@ -22,7 +22,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
   <!-- descripcion -->
   {% if article.summary %}
-  <h3 class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</h3>
+  <div class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</div>
   {% endif%}
   <!-- /descripcion -->
 
@@ -44,11 +44,13 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
   <!-- author -->
   {% if article.author %}
-  <h4 class="author" class="meta-content">
+  <h4 class="author meta-content">
+   {% comment %}the path author image not work. uncomment when fixed.
     {% if article.author.image %}
-    <img src="" width="60"  />
+    <img src="{% version author.image.path 'small' %}" width="60" alt="{{ article.author }}" />
     {% endif %}
-    <span class="author">{% trans "By"%} {{ article.author }}</span>
+    {% endcomment %}
+    <span>{% trans "By"%} {{ article.author }}</span>
   </h4>
   {% endif %}
   <!-- /autor -->

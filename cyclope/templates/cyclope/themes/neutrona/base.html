@@ -10,11 +10,12 @@ Si modificas no borres estas lineas :)
  -->
 
 {% load layout i18n tagging_tags %}
-
+  
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
-  <head>
+ 
+ <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>{{ CYCLOPE_SITE_SETTINGS.global_title }}</title>
+    <title>{% block title %}{%if title %}{{title}} | {%endif%}{{ CYCLOPE_SITE_SETTINGS.global_title }}{%endblock%}</title>
     <meta name="Keywords" content="{{ CYCLOPE_SITE_SETTINGS.keywords }}" />
     <meta name="Description" content="{{ CYCLOPE_SITE_SETTINGS.description }}" />
     <!--
@@ -51,21 +52,15 @@ Si modificas no borres estas lineas :)
   <body class="{% block body_class %}{%endblock%}">
 
     <div id="mascara" class="container_24">
-
-      {% region 'header' %}
-
 <!-------------------------------------------------------------------------------------------------
-AIRE
+AIR
 ------------------------------------------------------------------------------------------------->
-      <div id="aire">
-        <div class="logo">
-          <h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
-          <h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
-        </div>
-      </div>
-      
-
-      <div class="clear"></div>
+{% region 'air' %}
+	<div class="brand">
+		<h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
+		<h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
+	</div>
+		<hr class="clear">
 
 <!-------------------------------------------------------------------------------------------------
 MEDIANERA
@@ -73,12 +68,14 @@ MEDIANERA
       <div id="medianera">
 
 <!-------------------------------------------------------------------------------------------------
-TIERRA
+WATER
 ------------------------------------------------------------------------------------------------->
-        <div id="agua" class="grid_5">
+        <div class="grid_5">
 
-          {% region 'left_sidebar' %}
+          {% region 'water' %}
+         
           {% comment %}
+          tags no esta implementado, y cuando se haga, deberia tener su propia vista
           <div id="tags">
             <span class="title">Etiquetas</span>
             <div class="box">
@@ -88,61 +85,24 @@ TIERRA
                   {{tag.name}}
                 </a>
               {% endfor %}
-              </a>&nbsp&nbsp
+              </a>
             </div>
           </div>
 
           <div id="rss"><a href="/rss">{% trans "Subscribe to RSS" %}</a></div>
-{% endcomment %}
-          <!-- banners -->
-          <div class="banners">
-            <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO" target="_blank">
-              <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_cc.png" alt="Licencia Creative Commons" width="94" height="15" border="0" />
-            </a><br/>
-            <a href="http://cyclope.codigosur.org">
-              <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_cyclope.png" alt="Administrado con Cyclope" width="94" height="15" border="0" />
-            </a><br/>
-            <a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank">
-              <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/banners/banners_css.png" alt="CSS Válido" width="94" height="15" border="0" />
-            </a><br />
-          </div>
-          <!-- /banners -->
+			{% endcomment %}
+
 
 
         </div>
-        <!-- /tierra -->
+        <!-- /water -->
 
         {% block page_content %} {% endblock %}
       </div>
       <!-- /medianera -->
 
       <div id="footer_separator"></div>
-
-      <div class="footer_global">
-        {% region 'footer' %}
-        <span id="creativecommons">Los contenidos de este sitio web están bajo una
-        <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO">
-          Licencia Creative Commons Reconocimiento-NoComercial-SinObraDerivada 3.0
-        </a></span>.<br/>
-        <span id="codigo sur">Tecnología: <a href="http://cyclope.codigosur.org">Cyclope 3 GPL</a>. Diseño: <a href="http://neutrona.plantillas.codigosur.net">Neutrona Theme</a>. Hecho por <a href="http://www.codigosur.org">Código Sur</a>.
-        </span><br/>
-        Este sitio ha sido desarrollado sobre estándares de diseño web que cualquier navegador de calidad visualizará correctamente. <br/>
-
-        <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/navegadores.png" width="246" height="36" border="0" usemap="#map-nav" alt=""/>
-        <map name="map-nav" id="map-nav">
-          <!-- #$-:Image map file created by GIMP Image Map plug-in -->
-          <!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
-          <!-- #$-:Please do not edit lines starting with "#$" -->
-          <!-- #$VERSION:2.3 -->
-          <!-- #$AUTHOR:sh -->
-          <area shape="rect" coords="48,1,85,35" alt="Konkeror" title="Konkeror" href="http://www.konqueror.org/" />
-          <area shape="rect" coords="6,1,41,35" alt="Mozilla Firefox" title="Mozilla Firefox" href="http://www.mozilla-europe.org/es/firefox/" />
-          <area shape="rect" coords="88,0,120,36" alt="Epiphany" title="Epiphany" href="http://projects.gnome.org/epiphany/" />
-          <area shape="rect" coords="126,1,158,35" alt="Opera" title="Opera" href="http://www.opera.com/download/" />
-          <area shape="rect" coords="162,3,199,34" alt="Safari" title="Safari" href="http://www.apple.com/es/safari/download/" />
-          <area shape="rect" coords="206,4,242,34" alt="Google Chrome" title="Google Chrome" href="http://www.google.com/chrome/index.html?hl=es" />
-        </map>
-      </div>
+      <div class="footer_global">{% region 'earth' %}</div>
       <!-- /pie -->
      
     </div>

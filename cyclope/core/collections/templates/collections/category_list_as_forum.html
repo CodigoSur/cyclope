@@ -21,7 +21,7 @@
       {% for categorization in categorizations %}
        {% alias categorization.content_object as 'obj' %}
      <tr>
-       <td><h2 class="title"><a href="{{ obj.url }}">{{ obj.name }}</a></h2></td>
+       <td><h2 class="topic"><a href="{{ obj.url }}">{{ obj.name }}</a></h2></td>
        <td class="comment">{{ obj.comments_count }}</td>
        <td>{{ obj.creation_date|date:'DATETIME_FORMAT' }}
            {% if obj.author %} {% trans 'by' %} {{ obj.author }} {% endif %}
