@@ -141,9 +141,10 @@ WATER (sanhoerth: 18 Jun 2011)
 #water .menuitems_hierarchy li a {text-decoration:none; color:#fff; display:block;}
 #water .menuitems_hierarchy li a:hover {text-decoration:underline;color:#ccc;}
 #water .menuitems_hierarchy ul ul {margin:0;padding:0;display:block;border:none;}
-#water .menuitems_hierarchy li li {display:block;padding:3px 0;margin:4px 0;border:none;border-bottom:1px solid #ccc;}
-#water .menuitems_hierarchy li li a {color:#666;display:block;border:none;background:none;}
-#water .menuitems_hierarchy li li a:hover {display:block;background:#fff;color:#000;text-decoration:none; }
+#water .menuitems_hierarchy li li {display:block;padding:3px 3px;margin:4px 0;border:none;border-bottom:1px solid #ccc;}
+#water .menuitems_hierarchy li li a {color:#fff;display:block;border:none;background:none;}
+#water .menuitems_hierarchy li li:hover {background:#fff; }
+#water .menuitems_hierarchy li li:hover a {color:#000;}
 #water .menuitems_hierarchy ul ul ul {position:relative;left:170px;top:-21px;background:#eee;}
 #water .menuitems_hierarchy li li li {background:#ccc;}
 #water .menuitems_hierarchy li li li a {color:#fff;}
