@@ -13,9 +13,9 @@
   {% if media.image %}
     <div class="media-content"><img src="{% version media.image.path 'big' %}"/></div>
   {% endif %}
-  <div class="action-content download_link"><span class="download_link"><a href="{{ media.document }}">{% trans "download file" %}</a></span></div>
+  <div class="action-content download_link"><a href="{{ media.document }}">{% trans "download file" %}</a></div>
 
-  <h3 class="html-content summary">{{ media.description|smart_style }}</h3>
+  <div class="html-content summary">{{ media.description|smart_style }}</div>
 
   {% include 'medialibrary/media_detail_footer.html' %}
 

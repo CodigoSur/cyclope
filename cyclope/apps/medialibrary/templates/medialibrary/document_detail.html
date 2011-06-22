@@ -16,12 +16,12 @@
   </div>
   {% endif %}
 
-    <div class="action-content"><span class="download_link">
+    <div class="action-content download_link">
       <a href="{{ media.document }}">{% trans "download file" %}
-      </a></span>
+      </a>
     </div>
 
-  <h3 class="html-content summary">{{ media.description|smart_style }}</h3>
+  <div class="html-content summary">{{ media.description|smart_style }}<div>
 
   {% include 'medialibrary/media_detail_footer.html' %}
 

@@ -40,8 +40,6 @@ GENERAL SKEL
 .grid_1,.grid_2,.grid_3,.grid_4,.grid_5,.grid_6,.grid_7,.grid_8,.grid_9,.grid_10,.grid_11,.grid_12,.grid_13,.grid_14,.grid_15,.grid_16,.grid_17,.grid_18,.grid_19,.grid_20,.grid_21,.grid_22,.grid_23,.grid_24{display:inline;float:left;margin-left:5px;margin-right:5px}
 .push_1,.pull_1,.push_2,.pull_2,.push_3,.pull_3,.push_4,.pull_4,.push_5,.pull_5,.push_6,.pull_6,.push_7,.pull_7,.push_8,.pull_8,.push_9,.pull_9,.push_10,.pull_10,.push_11,.pull_11,.push_12,.pull_12,.push_13,.pull_13,.push_14,.pull_14,.push_15,.pull_15,.push_16,.pull_16,.push_17,.pull_17,.push_18,.pull_18,.push_19,.pull_19,.push_20,.pull_20,.push_21,.pull_21,.push_22,.pull_22,.push_23,.pull_23{position:relative}
 .alpha{margin-left:0}
-.beta{margin-left:5px}
-.gamma{margin-right:5px}
 .omega{margin-right:0}
 #mascara {background:#fff;}
 #medianera {overflow:auto;background:#fff;padding:10px 0;margin:0;}  
@@ -107,7 +105,7 @@ BRAND
 /*-----------------------------------------------------------------------------------------------
 WATER (sanhoerth: 18 Jun 2011)
 -----------------------------------------------------------------------------------------------*/
-#water {position:relative;border:1px solid #ccc;background:#999;padding:10px;margin-top:0px;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
+#water {position:relative;border:1px solid #ccc;background:#eee;padding:10px;margin-top:0px;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
 #water .content-view {}
 #water .more {font-size:inherit;font-weight:400;margin:0; padding: 0 0;display:inline;}
 #water .pagination  {font-size:0.65em;text-align:center;padding:3px;background:#333;color:#eee;}
@@ -136,10 +134,9 @@ WATER (sanhoerth: 18 Jun 2011)
 #water .menuitems_hierarchy{}
 #water .menuitems_hierarchy span {}
 #water .menuitems_hierarchy ul {margin:0 ; padding:0; list-style:none;display:block;}
-#water .menuitems_hierarchy li {font-size:.8em;margin:4px 0;text-decoration:none;font-weight:700;border:none;background:#666;padding:8px 10px;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
-#water .menuitems_hierarchy li:hover {background:#000;}
-#water .menuitems_hierarchy li a {text-decoration:none; color:#fff; display:block;}
-#water .menuitems_hierarchy li a:hover {text-decoration:underline;color:#ccc;}
+#water .menuitems_hierarchy li {font-size:.8em;margin:4px 0;text-decoration:none;font-weight:700;border:1px solid #ccc;background-color:#eee;padding:8px 10px;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
+#water .menuitems_hierarchy li a {text-decoration:none; color:#000; display:block;}
+#water .menuitems_hierarchy li a:hover {text-decoration:underline;color:#999;}
 #water .menuitems_hierarchy ul ul {margin:0;padding:0;display:block;border:none;}
 #water .menuitems_hierarchy li li {display:block;padding:3px 0;margin:4px 0;border:none;border-bottom:1px solid #ccc;}
 #water .menuitems_hierarchy li li a {color:#666;display:block;border:none;background:none;}
@@ -149,15 +146,14 @@ WATER (sanhoerth: 18 Jun 2011)
 #water .menuitems_hierarchy li li li a {color:#fff;}
 #water .menuitems_hierarchy p {clear:left;}	
 #water .menuitems_hierarchy #current {background:url(images/current-bg.gif) top left repeat-x;color:#ffffff;}
-#water .categories_hierarchy,               #water .categories_hierarchy_to_iconlist,               #water .flat_items_list,               #water .root_items_list,               #water .menuitem,               #water .menuitems_hierarchy                   {margin:0 0 10px;padding:0 0 10px;border-bottom:none}
-#water .categories_hierarchy .title,        #water .categories_hierarchy_to_iconlist .title,        #water .flat_items_list .title,        #water .root_items_list .title         #water .menuitem .title,        #water .menuitems_hierarchy .title            {font-weight:700;padding:10px 0;margin:0 0 5px;display:block;border-bottom:none;font-size:.85em;text-align:center;background:#333;color:#fff;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
-#water .categories_hierarchy .title a,      #water .categories_hierarchy_to_iconlist .title a,      #water .flat_items_list .title a,      #water .root_items_list .title a       #water .menuitem .title a,      #water .menuitems_hierarchy .title a          {color:#fff;}
+#water .categories_hierarchy .title {font-weight:700;padding:10px 0;margin:0 0 5px;display:block;border-bottom:none;font-size:1em;text-align:center;background:#333;color:#fff;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
+#water .categories_hierarchy .title a {color:#fff;}
+#water .categories_hierarchy,               #water .categories_hierarchy_to_iconlist,               #water .flat_items_list,               #water .root_items_list,               #water .menuitem,               #water .menuitems_hierarchy                   {margin:0 0 10px;padding:0 0 10px;border-bottom:3px solid #ccc;}
 #water .categories_hierarchy  span,         #water .categories_hierarchy_to_iconlist span,          #water .flat_items_list span,          #water .root_items_list span  {}
 #water .categories_hierarchy ul,            #water .categories_hierarchy_to_iconlist ul,            #water .flat_items_list ul,            #water .root_items_list ul,            #water .menuitem ul,            #water .category_root_item_list ul            {margin:0 ; padding:0; list-style:none;display:block;}
-#water .categories_hierarchy li,            #water .categories_hierarchy_to_iconlist li,            #water .flat_items_list li,            #water .root_items_list li,            #water .menuitem li,            #water .category_root_item_list li            {font-size:.8em;margin:4px 0;text-decoration:none;font-weight:700;background:#ccc;border:1px solid #ccc;padding:8px 10px;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
-#water .categories_hierarchy li:hover,      #water .categories_hierarchy_to_iconlist li:hover,      #water .flat_items_list li:hover,      #water .root_items_list li:hover,      #water .menuitem li:hover,      #water .category_root_item_list li:hover      {background:#666;}
-#water .categories_hierarchy li a,          #water .categories_hierarchy_to_iconlist li a,          #water .flat_items_list li a,          #water .root_items_list li a,          #water .menuitem li a,          #water .category_root_item_list li a          {text-decoration:none; color:#000; display:block;}
-#water .categories_hierarchy li a:hover,    #water .categories_hierarchy_to_iconlist li a:hover,    #water .flat_items_list li a:hover,    #water .root_items_list li a:hover,    #water .menuitem li a:hover,    #water .category_root_item_list a:hover       {text-decoration:underline;color:#eee;}
+#water .categories_hierarchy li,            #water .categories_hierarchy_to_iconlist li,            #water .flat_items_list li,            #water .root_items_list li,            #water .menuitem li,            #water .category_root_item_list li            {font-size:.8em;margin:4px 0;text-decoration:none;font-weight:700;border:1px solid #ccc;background-color:#666;padding:8px 10px;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
+#water .categories_hierarchy li a,          #water .categories_hierarchy_to_iconlist li a,          #water .flat_items_list li a,          #water .root_items_list li a,          #water .menuitem li a,          #water .category_root_item_list li a          {text-decoration:none; color:#fff; display:block;}
+#water .categories_hierarchy li a:hover,    #water .categories_hierarchy_to_iconlist li a:hover,    #water .flat_items_list li a:hover,    #water .root_items_list li a:hover,    #water .menuitem li a:hover,    #water .category_root_item_list a:hover       {text-decoration:underline;color:#333;}
 #water .categories_hierarchy ul ul,         #water .categories_hierarchy_to_iconlist ul ul,         #water .flat_items_list ul ul,         #water .root_items_list ul ul,         #water .menuitem ul ul,         #water .category_root_item_list ul ul         {margin:0;padding:0;display:block;border:none;}
 #water .categories_hierarchy li li,         #water .categories_hierarchy_to_iconlist li li,         #water .flat_items_list li li,         #water .root_items_list li li,         #water .menuitem li li,         #water .category_root_item_list li li         {display:block;padding:3px 0;margin:4px 0;border:none;border-bottom:1px solid #ccc;}
 #water .categories_hierarchy li li a,       #water .categories_hierarchy_to_iconlist li li a,       #water .flat_items_list li li a,       #water .root_items_list li li a,       #water .menuitem li li a,       #water .category_root_item_list li li a       {color:#666;display:block;border:none;background:none;}
@@ -306,14 +302,13 @@ LOVE
 /*-----------------------------------------------------------------------------------------------
 PROFUNDIDAD DE NAVEGACION
 -----------------------------------------------------------------------------------------------*/
-span.breadcrumb {font-size:0.8em;background:#fff;border-bottom:1px solid #ccc;display:block;font-weight:normal; padding:5px 0 15px; margin:0 0 20px;}
+span.breadcrumb {font-size:0.8em;background:#fff;border-bottom:1px solid #ccc;display:block;font-weight:normal; padding:5px 0; margin:0 0 20px;}
 span.breadcrumb a {font-weight:bold; color:#000;}
 span.breadcrumb a:hover {color:#fff;} 
 /*-----------------------------------------------------------------------------------------------
 FIRE
 -----------------------------------------------------------------------------------------------*/
-#fire {position:relative;border:none;background:none;padding:0;margin:0;}
-#fire div.content_fire {margin:0 20px 0 10px;display:block;background:none;}
+#fire {position:relative;border:0px solid #999;padding:0 5px;margin-top:0px;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
 #neutrona-theme_staticpage_before_fire {padding:20px;background:#666;margin:0 0 20px;color:#fff;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
 #neutrona-theme_staticpage_before_fire a {color:#000;}
 #neutrona-theme_staticpage_before_fire a:hover {color:#fff;} 
@@ -323,17 +318,17 @@ TITLES
 /*general titles*/
 #fire .title {display:block;margin:0 0 20px 0;font-size:2em;font-weight:700;}
 /*teasers titles*/
-#fire .teaser .title {border:none;margin:0;font-size:1.3em;}
+#fire .teaser .title {border:none;margin:0;}
 #fire .teaser .title a {text-decoration:none;} 
-#fire .teaser .title a:hover {text-decoration:underline;}
+#fire .teaser .title a:hover {text-decoration:underline;}  
 #fire .labeled_icon .title {font-size:.8em;text-align:center;padding:3px;border:none;font-weight:400;}
 /*forms titles*/
 #fire form .title {color:#000;font-weight:700;}
 /*-----------------
 DETAILS CONTENTS
 -------------------*/
-#fire .pretitle, #fire .date {color:#666;text-transform:uppercase;display:inline;font-size:.7em;margin:5px 0 0;}
-#fire .summary {color:#333;font-weight:700;padding:10px 0;text-align:left;line-height:1.5em;font-size:1.2em;}
+#fire .pretitle, #fire .date {color:#666;text-transform:uppercase;display:inline;font-size:.85em;margin:5px 0 0;}
+#fire .summary {color:#333;font-weight:700;padding:10px 0;text-align:justify;line-height:1.5em;}
 #fire .author {font-weight:700;color:#666;border-left:4px solid #ccc;padding:0 0 0 10px;margin:10px 0 0;font-size:.9em;}
 #fire .tags {margin:20px 0 0 ;display:block;}
 #fire .source {color:#333;font-size:.9em;margin:20px 0 0;display:block;}
@@ -346,13 +341,13 @@ DETAILS CONTENTS
 #fire .staticpage-detail {border-bottom:3px solid #ccc;padding:0 0 10px;margin:0 0 10px;font-size:.8em;}
 #fire .article-detail {}
 #fire .article-detail a,#fire .staticpage-detail a {color:#000;}
-#fire .related_contents            {font-weight:700;color:#333;background:#eee;padding:10px;margin:0;width:60%;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;;}
-#fire .related_contents span       {font-size:1em;padding:0;margin:0;color:#666;} 
-#fire .related_contents ul         {padding:10px 0 0;margin:0;list-style:none;}
-#fire .related_contents ul ul      {list-style:square;}
-#fire .related_contents li         {color: #999;padding:0 10px 5px 0;margin:0 0 0 20px;}	
-#fire .related_contents li a       {font-size:0.8em;color:#666;font-weight:400;}
-#fire .related_contents li a:hover {color:#000;font-weight:700;}
+#fire .article-detail .related_contents            {font-weight:700;color:#333;background:#eee;padding:10px;margin:0;width:60%;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;;}
+#fire .article-detail .related_contents span       {font-size:1em;padding:0;margin:0;color:#666;} 
+#fire .article-detail .related_contents ul         {padding:10px 0 0;margin:0;list-style:none;}
+#fire .article-detail .related_contents ul ul      {list-style:square;}
+#fire .article-detail .related_contents li         {color: #999;padding:0 10px 5px 0;margin:0 0 0 20px;}	
+#fire .article-detail .related_contents li a       {font-size:0.8em;color:#666;font-weight:400;}
+#fire .article-detail .related_contents li a:hover {color:#000;font-weight:700;}
 /*-----------------
 LABELED ICONS
 -------------------*/ 
@@ -364,7 +359,7 @@ LABELED ICONS
 /*-----------------
 TEASERS
 -------------------*/ 
-#fire .teaser {margin:40px 0;padding:0 0 20px;overflow:auto;border-bottom:5px solid #eee;}
+#fire .teaser {margin:10px 0;padding:0 0 20px;overflow:auto;border-bottom:5px solid #eee;}
 #fire .teaser .summary {color:#333;font-weight:400;padding:15px 0;text-align:justify;line-height:1.3em;font-size:1em;}
 #fire .teaser .summary p {display:inline;}
 #fire .teaser .pretitle {margin:10px 0 0;display:inline-block;} 
@@ -401,7 +396,7 @@ HIERARCHY
 #fire .menuitems_hierarchy p {clear:left;}	
 #fire .menuitems_hierarchy #current {background:url(images/current-bg.gif) top left repeat-x;color:#ffffff;}
 /*categories*/
-#fire .categories_hierarchy,               #fire .categories_hierarchy_to_iconlist,               #fire .flat_items_list,               #fire .root_items_list,               #fire .menuitem,               #fire .menuitems_hierarchy                   {margin:0 0 10px;padding:0 0 10px;border-bottom:5px solid #eee;}
+#fire .categories_hierarchy,               #fire .categories_hierarchy_to_iconlist,               #fire .flat_items_list,               #fire .root_items_list,               #fire .menuitem,               #fire .menuitems_hierarchy                   {margin:0 0 10px;padding:0 0 10px;border-bottom:3px solid #ccc;}
 #fire .categories_hierarchy span,          #fire .categories_hierarchy_to_iconlist span,          #fire .flat_items_list span,          #fire .root_items_list span                                                                                       {display:block;padding:0;margin:0;}
 #fire .categories_hierarchy ul,            #fire .categories_hierarchy_to_iconlist ul,            #fire .flat_items_list ul,            #fire .root_items_list ul,            #fire .menuitem ul,            #fire .category_root_item_list ul            {margin:0 0 0 40px ; padding:0; list-style:square;display:block;}
 #fire .categories_hierarchy li,            #fire .categories_hierarchy_to_iconlist li,            #fire .flat_items_list li,            #fire .root_items_list li,            #fire .menuitem li,            #fire .category_root_item_list li            {font-size:.8em;margin:4px 0;text-decoration:none;font-weight:700;border:none;padding:0 10px 8px;}
@@ -455,7 +450,7 @@ TEXTILE FORMAT
 -------------------*/
 #fire pre {max-width:700px;overflow-x:auto;overflow-y:auto;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;margin:10px 0;padding:20px;border:1px solid #ccc;background:#eee;font-size:0.9em;font-weight:400;color:#000;}
 #fire code {padding:0;color:#999;font-weight:400;overflow:scroll;}
-#fire div.text p {font-size:1em;line-height:1.5em;text-align:left;padding:20px 0 0;}
+#fire div.text p {font-size:1.1em;line-height:1.5em;text-align:justify;padding:20px 0 0;}
 #fire span {margin:inherit;padding:inherit;}
 #fire span.tip {margin:-20px 0 0;padding:20px;display:block;text-align:left;width:60%;color:#fff;background:#999;border-left:5px solid #000;font-size:0.9em;}
 #fire blockquote {background:#eee;padding:0 20px 20px;margin:10px 0;font-size:0.9em;width:60%;line-height:1em;border-left:5px solid #ccc;text-align:left;}
@@ -475,7 +470,7 @@ TEXTILE FORMAT
 #fire img {}
 #fire img {}
 #fire div.text p.footnote, .staticpage-detail div.text p.footnote {color:#666;font-size:.8em;margin:4px 0;padding:0;}
-#fire .text {padding:0 0 20px;}
+#fire .text {padding:0;}
 #fire .text ul {padding:0;margin:0 0 0 30px;list-style:square;}
 #fire .text li {padding:15px 0 0;}
 #fire #container .content-view img {margin:20px 0 20px 20px;padding:0;float:none;box-shadow:2px 2px 20px #666;-webkit-box-shadow:2px 2px 20px #666;-moz-box-shadow: 2px 2px 20px #666;}
@@ -541,7 +536,7 @@ COMMENTS
 #user_comments .show_comment_form {width:250px;;margin:0 0 20px;padding:3px;color:#fff;background:#666;border:1px solid #000;text-align:center;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;}
 #user_comments .show_comment_form a {color:#fff;} 
 #user_comments {width:550px;text-align:left;margin:25px 0 0;background-color:#fff;}
-#user_comments .data {color:#000;background-color:#eee;border:0px solid #ccc;padding:10px;margin:0 0 20px;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;box-shadow:2px 2px 2px #ccc;-webkit-box-shadow:2px 2px 2px #ccc;-moz-box-shadow: 2px 2px 2px #ccc;}
+#user_comments .data {color:#000;background-color:#eee;border:2px dotted #ccc;padding:10px;margin:0 0 20px;}
 #user_comments .data p {font-size:1em;color:#666;}
 #user_comments .when_who {color:#999;font-size:0.7em;}
 #user_comments .when_who a {color:#999;}
@@ -565,8 +560,8 @@ VISTA LISTA DETALLADA ARTICULOS
 .media h6.source {color:#666;}
 .media .categories ul {list-style:none;margin:10px 0;}
 .media .categories li {display:inline;border:1px solid #ccc;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;padding:5px;background:#eee;color:#000;margin:10px 10px 0 0;font-size:.75em;}
-div.download_link  {display:block;padding:6px;margin:20px 0;font-weight:700;background:#000;width:300px;text-align:center;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;}
-div.download_link a {color:#fff;}
+span.download_link  {display:block;padding:6px;margin:20px 0;font-weight:700;background:#000;width:300px;text-align:center;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;}
+span.download_link a {color:#fff;}
 #socialnetworks {font-size:0.75em;display:block;padding:0 0 10px;border-top:2px solid #eee;text-align:right;clear:both;}
 #socialnetworks img {width:24px;height:24px;margin:5px 3px -8px 0;padding:6px 0 0;border:none;clear:none;}
 #socialnetworks small {margin:0;padding:5px 5px 0 0;color:#666;text-align:right;}  

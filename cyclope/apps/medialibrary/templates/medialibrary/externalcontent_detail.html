@@ -19,14 +19,14 @@
   </div>
   {% endif %}
 
-  <div class="action-content download_link"><span class="download_link">
+  <div class="action-content download_link">
     <a href="{{ media.content_url }}" {% if media.new_window %}target="_blank"{% endif%}>
     {% trans "Open external content"%} {% if media.new_window %}{% trans " (in new window)"%}{% endif%}
-    </a></span>
+    </a>
   </div>
   
   
-  <h3 class="html-content summary">{{ media.description|smart_style }}</h3>
+  <div class="html-content summary">{{ media.description|smart_style }}</div>
 
 
   {% include 'medialibrary/media_detail_footer.html' %}
