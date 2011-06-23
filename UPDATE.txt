@@ -3,6 +3,14 @@
 Backwards-incompatible changes in 0.2.0
 =======================================
 
+* CYCLOPE_MEDIA_URL and CYCLOPE_MEDIA_ROOT were renamed to CYCLOPE_STATIC_URL and CYCLOPE_STATIC_ROOT. 
+  If you use that settings in your templates you must update accordingly.
+  A list of affected templates:
+    * cyclope/templates/admin/base_content_change_form.html
+    * cyclope/templates/admin/change_form.html
+    * cyclope/templates/cyclope/themes/neutrona/base.html
+    * cyclope/templates/cyclope/themes/neutronica/base.html
+
 * STATIC_URL = "/media/" must be added to settings.py
 
 * Changed default sizes for Filebrowser. Every project needs to run ./manage.py version_generator to reflect the changes.
@@ -36,3 +44,4 @@ Backwards-incompatible changes in 0.2.0
     * cyclope/core/collections/templates/collections/collection_root_categories_teaser_list.html
     * cyclope/templates/contact_form/contact_form.html
     * cyclope/templates/filebrowser/index.html
+

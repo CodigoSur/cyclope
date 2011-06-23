@@ -93,7 +93,7 @@ class CKEditor(forms.Textarea):
     """
     class Media:
         js = (
-            cyc_settings.CYCLOPE_MEDIA_URL + 'ckeditor/ckeditor.js',
+            cyc_settings.CYCLOPE_STATIC_URL + 'ckeditor/ckeditor.js',
         )
 
     def render(self, name, value, attrs={}):

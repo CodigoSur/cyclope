@@ -40,15 +40,19 @@ DATABASE_NAME = os.path.join(CYCLOPE_PROJECT_PATH, 'db/site.db')
 
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
-# Absolute path to the directory that holds media.
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = os.path.join(CYCLOPE_PROJECT_PATH, 'media/')
-#MEDIA_ROOT = '/var/www/pyclope.nicoechaniz.com.ar/htdocs/media/'
+
+STATIC_ROOT = os.path.join(CYCLOPE_PROJECT_PATH, 'media/')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = '/media/'
 
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a

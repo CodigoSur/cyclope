@@ -149,8 +149,8 @@ class CategoryAdmin(editor.TreeEditor):
 
     class Media:
         js = (
-            cyc_settings.CYCLOPE_MEDIA_URL + 'js/reuse_django_jquery.js',
-#            cyc_settings.CYCLOPE_MEDIA_URL + 'js/jquery-ui-1.8.4.custom.min.js',
+            cyc_settings.CYCLOPE_STATIC_URL + 'js/reuse_django_jquery.js',
+#            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-ui-1.8.4.custom.min.js',
         )
 
 admin.site.register(Category, CategoryAdmin)

@@ -30,8 +30,8 @@ Attributes:
 
     CYCLOPE_PROJECT_PATH: path to the django project that will be serving Cyclope
     CYCLOPE_PREFIX: prefix for Cyclope URLs, defaults to 'cyclope/'
-    CYCLOPE_MEDIA_URL: URL to Cyclope media files
-    CYCLOPE_MEDIA_ROOT: defaults to cyclope/ folder of the project's MEDIA_ROOT
+    CYCLOPE_STATIC_URL: URL to Cyclope static files
+    CYCLOPE_STATIC_ROOT: defaults to cyclope/ folder of the project's STATIC_ROOT
     CYCLOPE_THEMES_ROOT: path to the themes package
 
   Automatic (based on database values):
@@ -63,10 +63,12 @@ from cyclope.core.frontend.sites import site
 
 CYCLOPE_PREFIX = getattr(settings, 'CYCLOPE_PREFIX',
                            'cyclope/')
-CYCLOPE_MEDIA_URL = getattr(settings, 'CYCLOPE_MEDIA_URL',
-                           '%scyclope/' % settings.MEDIA_URL)
-CYCLOPE_MEDIA_ROOT = getattr(settings, 'CYCLOPE_MEDIA_ROOT',
+CYCLOPE_STATIC_URL = getattr(settings, 'CYCLOPE_STATIC_URL',
+                             '%scyclope/' % settings.STATIC_URL)
+CYCLOPE_STATIC_ROOT = getattr(settings, 'CYCLOPE_STATIC_ROOT',
                             '%scyclope/' % settings.MEDIA_ROOT)
+# FIXME #120: STATIC_ROOT is pointing to MEDIA_ROOT because some
+# apps doesn't upgraded to static django 1.3 convention.
 CYCLOPE_THEMES_ROOT = getattr(settings, 'CYCLOPE_THEMES_ROOT',
                               os.path.join(os.path.dirname(__file__),
                                            "templates/cyclope/themes/"))
@@ -132,7 +134,7 @@ if CYCLOPE_SITE_SETTINGS is not None:
         CYCLOPE_THEME_MEDIA_URL = '%s%s/' % (
             settings.CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX, CYCLOPE_CURRENT_THEME)
     else:
-        CYCLOPE_THEME_MEDIA_URL = '%sthemes/%s/' % (CYCLOPE_MEDIA_URL,
+        CYCLOPE_THEME_MEDIA_URL = '%sthemes/%s/' % (CYCLOPE_STATIC_URL,
                                                     CYCLOPE_CURRENT_THEME)
 
     CYCLOPE_THEME_PREFIX = 'cyclope/themes/%s/' % CYCLOPE_CURRENT_THEME

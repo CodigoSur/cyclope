@@ -19,9 +19,9 @@ Si modificas no borres estas lineas :)
     <meta name="Description" content="{{ CYCLOPE_SITE_SETTINGS.description }}" />
     <link href="/rss" title="RSS" type="application/rss+xml" rel="alternate">
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/neutrona.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="{{ CYCLOPE_MEDIA_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
-    <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="{{ CYCLOPE_MEDIA_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
+    <link href="{{ CYCLOPE_STATIC_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
     <script type="text/javascript">
     $(function() {
 
@@ -30,11 +30,11 @@ Si modificas no borres estas lineas :)
             overlayBgColor:         '#000',
             overlayOpacity:         0.8,
             fixedNavigation:        false,
-            imageLoading:           '{{ CYCLOPE_MEDIA_URL }}js/lightbox/images/lightbox-ico-loading.gif',
-            imageBtnPrev:           '{{ CYCLOPE_MEDIA_URL }}js/lightbox/images/lightbox-btn-prev.gif',
-            imageBtnNext:           '{{ CYCLOPE_MEDIA_URL }}js/lightbox/images/lightbox-btn-next.gif',
-            imageBtnClose:          '{{ CYCLOPE_MEDIA_URL }}js/lightbox/images/lightbox-btn-close.gif',
-            imageBlank:             '{{ CYCLOPE_MEDIA_URL }}js/lightbox/images/lightbox-blank.gif',
+            imageLoading:           '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-ico-loading.gif',
+            imageBtnPrev:           '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-btn-prev.gif',
+            imageBtnNext:           '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-btn-next.gif',
+            imageBtnClose:          '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-btn-close.gif',
+            imageBlank:             '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-blank.gif',
             containerBorderSize:    10,
             containerResizeSpeed:   400,
             txtImage:               '{% trans "Image"%}',
