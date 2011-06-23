@@ -72,12 +72,64 @@ INSTALLED_APPS += (
     '{{ project_name }}',
 )
 
-#FILEBROWSER_MAX_UPLOAD_SIZE = 1048576 # 10 MB
-
 LOGIN_REDIRECT_URL = '/inicio'
 
 
-# cyclope settings
+# Add real email account setup here for registration to work properly.
+
+# The host to use for sending e-mail. Default: 'localhost'
+EMAIL_HOST='smtp.gmail.com'
+
+# Username to use for the SMTP server defined in EMAIL_HOST. If empty,
+# Django won't attempt authentication. Default: '' (Empty string)
+EMAIL_HOST_USER='anon.email.noreply'
+
+# Password to use for the SMTP server defined in EMAIL_HOST. This setting
+# is used in conjunction with EMAIL_HOST_USER when authenticating to the
+# SMTP server. If either of these settings is empty, Django won't attempt
+# authentication. Default: '' (Empty string)
+EMAIL_HOST_PASSWORD='anon.email'
+
+# Port to use for the SMTP server defined in EMAIL_HOST. Default: 25
+EMAIL_PORT='587'
+
+# Default e-mail address to use for various automated correspondence from
+# the site manager(s). Default: 'webmaster@localhost'
+#DEFAULT_FROM_EMAIL = ""
+
+# The e-mail address that error messages come from, such as those sent to
+# ADMINS and MANAGERS. Default: 'root@localhost'
+#SERVER_EMAIL = ""
+
+# Whether to use a TLS (secure) connection when talking to the SMTP server.
+# Default: False
+EMAIL_USE_TLS = True  # we set this to True for the sample email config
+
+# A sample logging configuration. The only tangible logging
+# performed by this configuration is to send an email to
+# the site admins on every HTTP 500 error.
+# See http://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+                    'mail_admins': {
+                                    'level': 'ERROR',
+                                    'class': 'django.utils.log.AdminEmailHandler'
+                                }
+                },
+        'loggers': {
+                    'django.request': {
+                                    'handlers': ['mail_admins'],
+                                    'level': 'ERROR',
+                                    'propagate': True,
+                                },
+                }
+}
+
+
+# Cyclope settings
 
 #CYCLOPE_LOCAL_THEMES_DIR = os.path.join(CYCLOPE_PROJECT_PATH, 'templates/cyclope/themes/')
 #CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/media/local_themes/'
@@ -95,11 +147,15 @@ CYCLOPE_PREFIX = ''
 
 CYCLOPE_TEXT_STYLE = 'textile'
 
+
+CYCLOPE_PAGINATION = {'TEASER' : 3, 'LABELED_ICON' : 5,
+                      'FORUM' : 2, 'DETAIL': 5}
+
+
 HAYSTACK_SITECONF = '{{ project_name }}.search_sites'
 HAYSTACK_WHOOSH_PATH = os.path.join(CYCLOPE_PROJECT_PATH, 'cyclope_project_index')
 
-# import local settings if they are present
-try:
-    from local_settings import *
-except:
-    pass
+#FILEBROWSER_MAX_UPLOAD_SIZE = 1048576 # 10 MB
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = ''
