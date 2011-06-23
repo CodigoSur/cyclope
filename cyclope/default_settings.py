@@ -166,7 +166,7 @@ FILEBROWSER_EXTENSIONS = {
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
     'Video': ['.ogv', '.ogg', '.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.flv',],
     'Document': ['.odt', 'docx', '.pdf','.doc','.rtf','.txt',
-                 '.ods', '.xls', '.xlsx', '.csv', 'ppt', 'pptx'],
+                 '.ods', '.xls', '.xlsx', '.csv', '.ppt', '.pptx'],
     'Audio': ['.ogg', '.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
     'Code': ['.html','.py','.js','.css'],
     'Flash_App': ['.swf',],
