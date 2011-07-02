@@ -1,0 +1,18 @@
+{% load cyclope_utils %}
+
+{% comment %}
+When inserted in a layout region the host template used is just a wrapper (see inline_view.html).
+When showing the StaticPage as the main content of the view, the host_template is the layout template.
+{% endcomment %}
+
+{% block content %}
+
+<div class="content-view staticpage detail staticpage-detail html-content">
+  
+  <div class="text">{{ staticpage.text|smart_style }}</div>
+
+  {% include 'cyclope/related_contents_block.html' %}
+
+</div>
+
+{% endblock content%}

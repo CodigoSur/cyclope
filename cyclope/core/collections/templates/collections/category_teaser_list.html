@@ -6,14 +6,22 @@
 
 {% include 'collections/hierarchycal_navigation_block.html' %}
 
-{% if category.image %}
-<img class="category_image" src="{% version category.image.path 'small' %}" border="0"/>
-{% endif %}
-
 {% if category.description %}
-<div class="category_description text">
+<div class="collection_teaser">{% if category.image %}
+<img class="image" src="{% version category.image.path 'small' %}" border="0"/>
+{% endif %}
+<div class="summary">
   {{ category.description|smart_style }}
 </div>
+</div>
+{% else %}
+
+{% if category.image %}
+<div class="collection_teaser">
+<img class="image" src="{% version category.image.path 'small' %}" border="0"/>
+</div>
+{% endif %}
+
 {% endif %}
 
   {% comment %}

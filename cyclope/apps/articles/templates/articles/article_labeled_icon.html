@@ -4,11 +4,11 @@
     <a href="{% url article-detail article.slug %}">
       {% if article.pictures %}
         <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
-        <img src="{% version article.pictures.0.image.path 'thumbnail' %}" width="124" border="0"/>
+        <img class="icon" src="{% version article.pictures.0.image.path 'thumbnail' %}" border="0"/>
       {% else %}
-        <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article-medium.png" border="0"/>
+        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
+        <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
       {% endif %}
-
-    </a>
-    <span class="label"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:40 }}</a></span>
+ </a>
+    <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:40 }}</a></h2>
   </div>

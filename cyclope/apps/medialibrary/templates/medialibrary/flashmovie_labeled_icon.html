@@ -4,11 +4,12 @@
     <a href="{% url flashmovie-detail flashmovie.slug %}">
       {% if flashmovie.image %}
       <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/flash.png"/>
-      <img src="{% version flashmovie.image.path 'thumbnail' %}" width="124" />
+      <img class="icon" src="{% version flashmovie.image.path 'thumbnail' %}"/>
       {% else %}
-      <div class="crop_container"><img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/flash-medium.png" /></div>
+        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/flash.png" border="0"/>
+        <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
       {% endif %}
 
     </a>
-    <span class="label"><a href="{% url flashmovie-detail flashmovie.slug %}">{{ flashmovie.name|truncatechars:40 }}</a></span>
+    <h2 class="title"><a href="{% url flashmovie-detail flashmovie.slug %}">{{ flashmovie.name|truncatechars:40 }}</a></h2>
   </div>

@@ -4,23 +4,6 @@
 
 {% block extra_head %}
 <style media="screen, print" type="text/css">
-    div.field  {
-        font-family: "Nimbus Sans L",Helvetica,Arial,sans-serif;
-        font-size: 12px;
-        width:100%;
-        float: left;
-    }
-    div.field-name  {
-        float: left;
-        font-weight: 600;
-    }
-    div.field-value  {
-        float: left;
-        font-weight: 400;
-        padding-left: 10px;
-
-    }
-
 </style>
 {% endblock extra_head %}
 
@@ -29,9 +12,6 @@
 {% alias contact as 'current_object' %}
 
 <div class="content-view contact detail contact-detail">
-
-  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
-
   <h1 class="title">{{contact}}</h1>
 
   <!-- herramientas -->
@@ -44,23 +24,25 @@
     </ul>
   </div>
   <!-- /herramientas -->
-
+  
+  
   {% if contact.photo %}
-  <p><img src="{% version contact.photo 'cropped' %}" /></p>
+  <img class="contact_photo" src="{% version contact.photo 'cropped' %}" />
   {% endif %}
 
-    <div>
-        <div class="field"><div class="field-name">{% trans "Given name" %}:</div> <div class="field-value">{{contact.given_name}}</div></div>
-        <div class="field"><div class="field-name">{% trans "Surname" %}:</div> <div class="field-value">{{contact.surname}}</div></div>
-        <div class="field"><div class="field-name">{% trans "Birth date" %}:</div> <div class="field-value">{{contact.birth_date|default:""}}</div></div>
-        <div class="field"><div class="field-name">{% trans "Gender" %}:</div> <div class="field-value">{{contact.get_gender_display}}</div></div>
-        <div class="field"><div class="field-name">{% trans "Email" %}:</div> <div class="field-value">{{contact.email}}</div></div>
-        <div class="field"><div class="field-name">{% trans "Web" %}:</div> <div class="field-value">{{contact.web}}</div></div>
-        <div class="field"><div class="field-name">{% trans "Mobile" %}:</div> <div class="field-value">{{contact.mobile_phone_number}}</div></div>
+<div class="contact_teaser_detail">
+    <div class="details-list">
+        <div>{% trans "Given name" %}: <span>{{contact.given_name}}</span></div>
+        <div>{% trans "Surname" %}: <span>{{contact.surname}}</span></div>
+        <div>{% trans "Birth date" %}: <span>{{contact.birth_date|default:""}}</span></div>
+        <div>{% trans "Gender" %}: <span>{{contact.get_gender_display}}</span></div>
+        <div>{% trans "Email" %}: <span>{{contact.email}}</span></div>
+        <div>{% trans "Web" %}: <span>{{contact.web}}</span></div>
+        <div>{% trans "Mobile" %}: <span>{{contact.mobile_phone_number}}</span></div>
     </div>
   {% if contact.contactaddress_set.all %}
 
-  <div id="address-list">
+  <div class="address-list">
     {% for address in contact.contactaddress_set.all %}
     <div class="address {{address.type}}">
         <div id="address-type">{{address.get_type_display}}</div>
@@ -85,7 +67,8 @@
     <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}</span> {{ contact.tags }}</span></div>
   {% endif %}
 
-  <div style="font-size:10px;">{% trans "Last update" %}: {{contact.modification_date}}</div>
-</div>
-
+  <div>{% trans "Last update" %}: {{contact.modification_date}}</div>
+  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+  </div>
+  </div>
 {% endblock content%}

@@ -1,5 +1,6 @@
 
   {% if page %}
+  <div class="paginator">
     {% for p in page.paginator.pages %}
       {% if p == page %}
           <span class="selected">{{page}}</span>
@@ -8,5 +9,6 @@
       {% endif %}
       {% if not forloop.last %}|{% endif %}
     {% endfor %}
+</div>
   {% endif %}
 

@@ -1,24 +1,28 @@
 {% load i18n comments %}
 
+
+  
 {% if media.get_last_change_date or media.source %}
   <div class="meta-content">
     {% if media.get_last_change_date %}
-    <span class="date">
+    <h6 class="date">
       {% trans "Last modification date" %}: {{ media.get_last_change_date }}
-    </span>
+    </h6>
     {% endif %}
     {% if media.source %}
-    <span class="source">
+    <h6 class="source">
       {% if media.get_last_change_date %}|{% endif%}
       {% trans "Source" %}: {{media.source}}
-    </span>
+    </h6>
     {% endif %}
   </div>
 {% endif %}
 
+  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+  
 {% comment %} {# TAGS ARE NOT IMPLEMENTED YET #}
   {% if media.tags %}
-    <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ media.tags }}</span></div>
+    <div class="meta-content"><h2 class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ media.tags }}</h2></div>
   {% endif %}
 {% endcomment %}
 

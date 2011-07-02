@@ -5,16 +5,16 @@
 {% block content %}
 
 {% if not_allowed %}
-  <h2>
+  <h2 class="title">
       {% blocktrans %} {{ forum }} is not a forum {% endblocktrans %}
   </h2>
 
 {% else %}
 
-<div class="user_input">
-  <h2>
+  <h1 class="title">
       {% blocktrans %} New topic in  {{ forum }} forum {% endblocktrans %}
-  </h2>
+  </h1>
+<div class="create_forum">
   <form action="{{ action_url }}" method="post">
     {{ form.as_p }}
     <input type="submit" class="submit" value="{% trans "Create" %}" />

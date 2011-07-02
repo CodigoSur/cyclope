@@ -4,11 +4,14 @@
     <a href="{% url document-detail document.slug %}">
       {% if document.image %}
       <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/document.png"/>
-      <img src="{% version document.image.path 'thumbnail' %}" width="124" />
+      <img class="icon" src="{% version document.image.path 'thumbnail' %}" />
       {% else %}
-      <div class="crop_container"><img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/document-medium.png"/></div>
+        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/document.png" border="0"/>
+        <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
       {% endif %}
 
     </a>
-    <span class="label"><a href="{% url document-detail document.slug %}">{{ document.name|truncatechars:40 }}</a></span>
+    <h2 class="title"><a href="{% url document-detail document.slug %}">{{ document.name|truncatechars:40 }}</a></title>
   </div>
+
+

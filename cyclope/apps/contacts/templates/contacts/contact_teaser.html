@@ -2,17 +2,21 @@
 
   <div class="content-view contact teaser contact-teaser">
 
-    <div class="pretitle-container first meta-content">
-      <span class="pretitle">{{contact}}<span class="pretitle-separator"> | </span></span>
-      <span class="date">{{contact.email}}</span>
-    </div>
-
-    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png" /><a href="{% url contact-detail contact.slug %}">{{ contact }}</a></h2>
-
-    {% if contact.photo %}
-    <p><img src="{% version contact.photo 'cropped' %}" /></p>
-    {% endif %}
-    <div>
+ {% if contact.photo %}
+	<div class="title">
+  
+    <img class="photo" src="{% version contact.photo 'cropped' %}" />
+    <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png" alt="contact" />
+    <a  href="{% url contact-detail contact.slug %}">{{ contact }}</a>
+     </div>
+	 {% else %}
+  		<div class="title">
+    <img class="photo" src="/media/uploads/images/contacts/no-photo.png" alt="no photo" />
+    <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png" alt="contact" />
+    <a  href="{% url contact-detail contact.slug %}">{{ contact }}</a>
+     </div>
+    	 {% endif %}  
+    <div class="contact-details">
       <ul>
         <li>{% trans "Gender" %}: {{contact.gender}}</li>
         <li>{% trans "Email" %}: {{contact.email}}</li>
@@ -21,8 +25,9 @@
       </ul>
 
       <span class="more"><a href="{% url contact-detail contact.slug %}"> {% trans "More" %}</a></span>
+      <span class="last_change">{% trans "Last change" %}: {{ contact.get_last_change_date }}</span>
     </div>
 
     <div class="clear"></div>
-last change: {{ contact.get_last_change_date }}
+
   </div>

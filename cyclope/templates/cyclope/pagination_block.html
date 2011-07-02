@@ -1,7 +1,7 @@
 {% load comments i18n %}
 
    {% if page.paginator.num_pages != 1 %}
-    <div class="pagination">
+    <div class="paginator">
         <span class="step-links">
             {% if page.has_previous %}
                 {# query is present when this block is included in the search view #}

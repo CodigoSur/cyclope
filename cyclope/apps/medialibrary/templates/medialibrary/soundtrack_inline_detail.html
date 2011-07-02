@@ -1,0 +1,21 @@
+{% load i18n cyclope_utils %}
+
+{% block content %}
+
+{% alias media as 'current_object' %}
+{% alias media.audio as 'media_file' %}
+
+<div class="content-view soundtrack media detail soundtrack-detail">
+
+  {% include 'medialibrary/media_detail_header.html' %}
+
+  {% assign player_height '24' %}
+  {% include 'medialibrary/media_player.html' %}
+
+  <div class="html-content summary">{{ media.description|smart_style }}</div>
+
+  {% include 'medialibrary/media_detail_footer.html' %}
+
+</div> <!--termina media_detail -->
+
+{% endblock content%}

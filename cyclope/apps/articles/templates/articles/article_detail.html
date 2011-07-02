@@ -12,10 +12,8 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
 <div class="content-view article detail article-detail">
 
-  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
-
   {% if article.pretitle %}
-  <div class="pretitle-container meta-content"><span class="pretitle">{% trans article.pretitle %}</span></div>
+  <h6 class="pretitle">{% trans article.pretitle %}</h6>
   {% endif %}
   <h1 class="title">{% trans article.name  %}</h1>
 
@@ -24,7 +22,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
   <!-- descripcion -->
   {% if article.summary %}
-  <p class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</p>
+  <div class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</div>
   {% endif%}
   <!-- /descripcion -->
 
@@ -46,12 +44,14 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
   <!-- author -->
   {% if article.author %}
-  <div id="author" class="meta-content">
+  <h4 class="author meta-content">
+   {% comment %}the path author image not work. uncomment when fixed.
     {% if article.author.image %}
-    <img src="" width="60"  />
+    <img src="{% version author.image.path 'small' %}" width="60" alt="{{ article.author }}" />
     {% endif %}
-    <span class="author">{% trans "By"%} {{ article.author }}</span>
-  </div>
+    {% endcomment %}
+    <span>{% trans "By"%} {{ article.author }}</span>
+  </h4>
   {% endif %}
   <!-- /autor -->
 
@@ -74,31 +74,34 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 -->
           <!-- /descargas -->
 
-  <div><span class="html-text html-content">
+  <div class="text"><span class="html-text html-content">
     {{ article|parsed_gettext:"text"|smart_style}}
   </span></div>
 
 {% if article.get_last_change_date or article.source %}
-  <div class="meta-content">
+       {% if article.source %}
+    <h6 class="source">
+       <!-- {% if article.get_last_change_date %}|{% endif%} -->
+      {% trans "Source" %}: {{article.source}}
+    </h6>
+    {% endif %}
+    
     {% if article.get_last_change_date %}
     <span class="date">
       {% trans "Last modification date" %}: {{ article.get_last_change_date }}
     </span>
     {% endif %}
-    {% if article.source %}
-    <span class="source">
-      {% if article.get_last_change_date %}|{% endif%}
-      {% trans "Source" %}: {{article.source}}
-    </span>
-    {% endif %}
-  </div>
+
+ 
 {% endif %}
 
 {% comment %} {# TAGS ARE NOT IMPLEMENTED YET #}
   {% if article.tags %}
-    <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ article.tags }}</span></div>
+    <div class="meta-content"><span class="tags"><span class="tags-label"> {% trans "Tags" %}:</span>{{ article.tags }}</span></div>
   {% endif %}
 {% endcomment %}
+
+<div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
 
   {% include 'cyclope/related_contents_block.html' %}
@@ -116,7 +119,7 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
             <div class="clear"></div>
           /redsocial -->
 
-  <hr>
+
 
 <!--COMENTARIOS -->
   {% include 'comments/comments_block.html' %}
