@@ -86,7 +86,8 @@ class FrontendView(object):
             host_template = template_for_request(request)
 
         req_context = RequestContext(request, {'host_template': host_template,
-                                              'region_name': region_name})
+                                              'region_name': region_name,
+                                              'view_options': options})
 
         if self.is_instance_view:
             if not content_object:
