@@ -1,10 +1,8 @@
-{% extends host_template %}
+{% extends 'collections/category_contents_base.html' %}
 
 {% load i18n cyclope_utils %}
 
-{% block content %}
-
-{% include 'collections/hierarchycal_navigation_block.html' %}
+{% block category_content %}
 
   {% comment %}
   We show a teaser view of every object belonging to this category.
@@ -27,10 +25,5 @@
 
   </div>
   <br class="clear" />
-
-<!--  <div class="pagEspacio"></div> -->
-  {% if page %}
-    {% include 'cyclope/pagination_block.html' %}
-  {% endif %}
 
 {% endblock %}

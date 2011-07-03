@@ -1,28 +1,8 @@
-{% extends host_template %}
+{% extends 'collections/category_contents_base.html' %}
 
 {% load i18n cyclope_utils fb_versions %}
 
-{% block content %}
-
-{% include 'collections/hierarchycal_navigation_block.html' %}
-
-{% if category.description %}
-<div class="collection_teaser">{% if category.image %}
-<img class="image" src="{% version category.image.path 'small' %}" border="0"/>
-{% endif %}
-<div class="summary">
-  {{ category.description|smart_style }}
-</div>
-</div>
-{% else %}
-
-{% if category.image %}
-<div class="collection_teaser">
-<img class="image" src="{% version category.image.path 'small' %}" border="0"/>
-</div>
-{% endif %}
-
-{% endif %}
+{% block category_content %}
 
   {% comment %}
   The content of this view is composed by including a template for each content in the category
@@ -46,9 +26,5 @@
 
     {% include template_path %}
   {% endfor %}
-
-  {% if page %}
-    {% include 'cyclope/pagination_block.html' %}
-  {% endif %}
 
 {% endblock %}

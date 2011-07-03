@@ -1,0 +1,46 @@
+{% extends host_template %}
+
+{% load i18n cyclope_utils fb_versions %}
+
+{% block content %}
+
+  {% if view_options.navigation == "TOP" %}
+    {% include 'collections/hierarchycal_navigation_block.html' %}
+  {% endif %}
+
+  {% if view_options.show_title %}
+  <div class="category_title">
+    <h1 class="title">
+      <a href="{% url category-default category.slug %}">{{ category.name }}</a>
+    </h1>
+  </div>
+  {% endif %}
+
+  {% if category.description and view_options.show_description or category.image and view_options.show_image %}
+  <div class="collection_teaser">
+    {% if category.image and view_options.show_image %}
+    <img class="image" src="{% version category.image.path 'small' %}" border="0"/>
+    {% endif %}
+    {% if category.description and view_options.show_description %}
+    <div class="summary">{{ category.description|smart_style }}</div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+
+  {% block category_content %}
+  {% endblock %}
+
+  {% if view_options.navigation == "BOTTOM" %}
+    {% include 'collections/hierarchycal_navigation_block.html' %}
+  {% endif %}
+
+  {% if page %}
+    {% if view_options.sort_by == "ALPHABETIC" %}
+      {% include 'cyclope/alphabetical_pagination_block.html' %}
+    {% else %}
+      {% include 'cyclope/pagination_block.html' %}
+    {% endif %}
+  {% endif %}
+
+{% endblock %}
