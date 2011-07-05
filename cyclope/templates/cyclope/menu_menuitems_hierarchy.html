@@ -1,6 +1,8 @@
 {% extends host_template %}
 
 {% block content %}
+
+{% if expand_style != "DISABLED" %}
 <script type="text/javascript">
 
 var hide_children = function (el){
@@ -14,44 +16,43 @@ var show_children = function (el){
 jQuery(document).ready(function(){
     var expand_style = '{{ expand_style }}';
 
-    if (expand_style != 'DISABLED'){
-        // Hide children of collapsible menus
-        $('#{{ menu_slug }}_menu_{{ region_name }} .has_children').each(function(){
-            hide_children($(this).parent());
+    // Hide children of collapsible menus
+    $('#{{ menu_slug }}_menu_{{ region_name }} .has_children').each(function(){
+        hide_children($(this).parent());
+    });
+
+    // Only expand when clicking on a top level and never collapse
+    if (expand_style == 'ON_CLICK'){
+        $('#{{ menu_slug }}_menu_{{ region_name }} .has_children').parent().one('click', function() {
+            show_children($(this));
+            return false;
+        });
+    }
+
+    else{
+        // Expand children on mouse enter
+        $('#{{ menu_slug }}_menu_{{ region_name }} ul li').mouseenter(function() {
+            show_children($(this));
         });
 
-        // Only expand when clicking on a top level and never collapse
-        if (expand_style == 'ON_CLICK'){
-            $('#{{ menu_slug }}_menu_{{ region_name }} .has_children').parent().one('click', function() {
-                show_children($(this));
-                return false;
+        // Collapse when leaving a menu item if the alignment is HORIZONTAL
+        if (expand_style == 'HORIZONTAL'){
+            $('#{{ menu_slug }}_menu_{{ region_name }} ul li').mouseleave(function() {
+                hide_children($(this));
             });
         }
-
+        // Collapse when leaving the whole menu if the alignment is VERTICAL
         else{
-            // Expand children on mouse enter
-            $('#{{ menu_slug }}_menu_{{ region_name }} ul li').mouseenter(function() {
-                show_children($(this));
+            $('#{{ menu_slug }}_menu_{{ region_name }}').mouseleave(function(){
+                hide_children($('#{{ menu_slug }}_menu_{{ region_name }} .has_children').parent());
             });
-
-            // Collapse when leaving a menu item if the alignment is HORIZONTAL
-            if (expand_style == 'HORIZONTAL'){
-                $('#{{ menu_slug }}_menu_{{ region_name }} ul li').mouseleave(function() {
-                    hide_children($(this));
-                });
-            }
-            // Collapse when leaving the whole menu if the alignment is VERTICAL
-            else{
-                $('#{{ menu_slug }}_menu_{{ region_name }}').mouseleave(function(){
-                    hide_children($('#{{ menu_slug }}_menu_{{ region_name }} .has_children').parent());
-                });
-            }
         }
     }
 });
 </script>
+{% endif %}
 
-<ul>
+<ul id="menu-{{ expand_style|lower }}-{{ menu_slug }}" class="cyclope_menu {{ expand_style|lower }}">
     {{ menu_items|unordered_list }}
 </ul>
 {% endblock content %}

@@ -1,0 +1,23 @@
+{% load comments i18n fb_versions cyclope_utils dbgettext_tags %}
+
+{% block content %}
+
+{% alias media as 'current_object' %}
+
+<div class="content-view picture media detail">
+
+  {% include 'medialibrary/media_detail_header.html' %}
+
+  <div class="media-content detail_picture"><img src="{% version media.image.path 'big' %}"/></div>
+
+  <div class="html-content summary">{{ media.description|smart_style }}</div>
+
+  {% include 'medialibrary/media_detail_footer.html' %}
+
+  {% include 'cyclope/related_contents_block.html' %}
+
+
+
+</div> <!--termina media_detail -->
+
+{% endblock content%}

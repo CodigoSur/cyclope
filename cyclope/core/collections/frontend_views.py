@@ -36,7 +36,6 @@ from cyclope.core import frontend
 from cyclope import settings as cyc_settings
 from cyclope.core.collections.models import Collection, Category, Categorization
 
-
 class CategoryRootItemsList(frontend.FrontendView):
     """A flat list view of the root members for a Category.
     """
@@ -50,13 +49,17 @@ class CategoryRootItemsList(frontend.FrontendView):
         category = content_object
         categorizations_list = category.categorizations.all()
         template = "collections/category_root_items_list.html"
-        req_context['categorizations'] = categorizations_list
+        req_context.update({"categorizations": categorizations_list,
+                            "category": category})
         t = loader.get_template(template)
         return t.render(req_context)
 
 frontend.site.register_view(Category, CategoryRootItemsList)
 
 class TeaserListOptions(forms.Form):
+    show_title = forms.BooleanField(label=_("Show title"), initial=True, required=False)
+    show_description = forms.BooleanField(label=_("Show description"), initial=True, required=False)
+    show_image = forms.BooleanField(label=_("Show image"), initial=True, required=False)
     items_per_page = forms.IntegerField(label=_('Items per page'), min_value=1,
                                         initial=cyc_settings.CYCLOPE_PAGINATION['TEASER'],)
     sort_by = forms.ChoiceField(label=_('Sort by'),
@@ -67,6 +70,13 @@ class TeaserListOptions(forms.Form):
     simplified = forms.BooleanField(label=_("Simplified"), initial=False, required=False)
     traverse_children = forms.BooleanField(label=_("Include descendant's elements"),
                                                     initial=False, required=False)
+    navigation = forms.ChoiceField(label=_('Show navigation'),
+                              choices=(("TOP", _(u"Top")),
+                                       ("BOTTOM", _(u"Bottom")),
+                                       ("DISABLED", _(u"Disabled"))),
+                              initial="TOP")
+
+
 
 class CategoryDefaultList(frontend.FrontendView):
     name = 'default'
@@ -117,12 +127,10 @@ class CategoryTeaserList(frontend.FrontendView):
                                           key=lambda c: c.object_modification_date,
                                           reverse=reverse)
             paginator = Paginator(categorizations_list, options["items_per_page"])
-            template = self.template
 
         elif sort_by == "ALPHABETIC":
             paginator = NamePaginator(categorizations_list, on="content_object.name",
-                                      per_page=self.items_per_page)
-            template = "collections/category_alphabetical_teaser_list.html"
+                                      per_page=options["items_per_page"])
 
         page = cyclope.utils.get_page(paginator, request)
 
@@ -131,7 +139,7 @@ class CategoryTeaserList(frontend.FrontendView):
                             'category': category,
                             'inline_view_name': self.inline_view_name,
                             'simplified_view': options["simplified"]})
-        t = loader.get_template(template)
+        t = loader.get_template(self.template)
         return t.render(req_context)
 
 frontend.site.register_view(Category, CategoryTeaserList)
@@ -244,7 +252,7 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
                                'has_content': has_content,
                                'has_children': has_children,})
             return context
-            
+
         nested_list = []
         for child in base_category.get_children():
             if child.get_descendant_count()>0:

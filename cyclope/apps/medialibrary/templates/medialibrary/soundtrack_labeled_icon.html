@@ -4,11 +4,12 @@
     <a href="{% url soundtrack-detail soundtrack.slug %}">
       {% if soundtrack.image %}
       <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/audio.png"/>
-      <img src="{% version soundtrack.image.path 'thumbnail' %}" width="124" />
+      <img class="icon" src="{% version soundtrack.image.path 'thumbnail' %}"/>
       {% else %}
-      <div class="crop_container"><img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/audio-medium.png"/></div>
+      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/audio.png" border="0"/>
+        <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
       {% endif %}
 
     </a>
-    <span class="label"><a href="{% url soundtrack-detail soundtrack.slug %}">{{ soundtrack.name|truncatechars:40 }}</a></span>
+    <h2 class="title"><a href="{% url soundtrack-detail soundtrack.slug %}">{{ soundtrack.name|truncatechars:40 }}</a></h2>
   </div>

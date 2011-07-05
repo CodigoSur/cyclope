@@ -1,0 +1,36 @@
+{% load i18n cyclope_utils fb_versions %}
+
+{% block content %}
+
+{% alias media as 'current_object' %}
+
+<div class="content-view externalcontent media detail">
+
+  {% include 'medialibrary/media_detail_header.html' %}
+
+  {% if media.image %}
+  <div class="media-content">
+    <a href="{{ media.content_url }}"
+       {% if media.new_window %}target="_blank"{% endif%}>
+      <img src="{% version media.image.path 'thumbnail' %}"/>
+    </a>
+  </div>
+  {% endif %}
+
+  <div class="action-content download_link"><span class="download_link">
+    <a href="{{ media.content_url }}" {% if media.new_window %}target="_blank"{% endif%}>
+    {% trans "Open external content"%} {% if media.new_window %}{% trans " (in new window)"%}{% endif%}
+    </a></span>
+  </div>
+  
+  
+  <h3 class="html-content summary">{{ media.description|smart_style }}</h3>
+
+
+  {% include 'medialibrary/media_detail_footer.html' %}
+
+
+</div> <!--termina media_detail -->
+
+
+{% endblock content%}

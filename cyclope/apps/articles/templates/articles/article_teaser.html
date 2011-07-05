@@ -4,10 +4,11 @@
 
     <div class="pretitle-container first meta-content">
       {% if  article.pretitle and not simplified_view %}
-      <span class="pretitle">{% trans article.pretitle %}{% if article.date %}<span class="pretitle-separator"> | </span>{% endif %}</span>
+      <div class="pretitle">{% trans article.pretitle %}{% if article.date %}<span class="pretitle-separator"> | </span>{% endif %}</div>
       {% endif%}
+      
       {% if article.date %}
-      <span class="date">{{ article.date|date:'SHORT_DATE_FORMAT' }}</span>
+      <div class="date">{{ article.date|date:'SHORT_DATE_FORMAT' }}</div>
       {% endif %}
     </div>
 
@@ -19,18 +20,18 @@
       </a></div>
     {% endif %}
 
-    <div class="summary html-content">
+    <div class="html-content summary">
       {% if article.summary %}
         {{ article|parsed_gettext:"summary"|smart_style }}
       {% else %}
         {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
       {% endif %}
-      <span class="more"><a href="{% url article-detail article.slug %}"> {% trans "More" %}</a></span>
+      <span class="more"><a href="{% url article-detail article.slug %}"> {% trans "More" %}</a></span> 
     </div>
 
     {% if not simplified_view %}
         {% if article.author %}
-        <div class="meta-content" ><span class="author">{% trans "By" %} {{ article.author }}</span></div>
+        <div class="meta-content" ><h4 class="author">{% trans "By" %} {{ article.author }}</h4></div>
         {% endif %}
     {% endif %}
 
@@ -42,7 +43,7 @@
 
 {% comment %} TAGS ARE NOT IMPLEMENTED
         {% if article.tags %}
-        <div class="meta-content"><span class="tags">
+        <div class="meta-content"><h2 class="tags">
           <span class="tags-label">{% trans "Tags" %}:</span>
           {% tags_for_object article as article_tags %}
           {% for tag in article_tags %}
@@ -50,7 +51,7 @@
             {{tag.name}}{% if not forloop.last%},{% endif%}
 
           {% endfor %}
-        </span></div>
+        </h2></div>
         {% endif %}
 {% endcomment %}
     <div class="clear"></div>

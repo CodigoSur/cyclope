@@ -5,11 +5,11 @@
     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/audio.png" /><a href="{% url soundtrack-detail soundtrack.slug %}">{{ soundtrack.name }}</a></h2>
 
     {% if soundtrack.description %}
-      <div class="description html-content">{{ soundtrack.description|smart_style }}</div>
+      <h3 class="html-content summary">{{ soundtrack.description|smart_style }}</h3>
     {% endif %}
 
     {% if soundtrack.author %}
-      <div class="author_container meta-content"><span class="author">{% trans "By" %} {{ soundtrack.author }}</span></div>
+      <div class="author_container meta-content"><h4 class="author">{% trans "By" %} {{ soundtrack.author }}</h4></div>
     {% endif %}
 
     {% if soundtrack.tags %}

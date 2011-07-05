@@ -1,0 +1,114 @@
+
+
+
+
+
+
+#water {background-color:#e6e6e6;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;padding:5px;}
+#water #left_sidebar {padding:5px;}
+#water .block-title {background-color:#90816f;font-size:0.8em;color:#fff;text-align:right;padding:5px;margin:10px 0 5px;}
+
+#water .searchbox {margin:15px auto;}
+#water .banners {display:block;padding:0;margin:15px auto;width:94px}
+#water .banners img {margin:0 auto 4px auto;text-align:center;} 
+#water form {margin:15px auto;}
+#water ul ul a {}
+#water li li {display:block;}
+#water .menuitems_hierarchy{}
+#water .menuitems_hierarchy span {}
+#water .menuitems_hierarchy ul, #water .flat_items_list ul {margin:0 ; padding:0; list-style:none;display:block;}
+#water .menuitems_hierarchy li, #water .flat_items_list li {font-size:.8em;margin:4px 0;text-decoration:none;font-weight:700;border:1px solid #ccc;background-color:#eee;padding:8px 10px;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
+#water .menuitems_hierarchy li a, #water .flat_items_list li a {text-decoration:none; color:#000; display:block;}
+#water .menuitems_hierarchy li a:hover, #water .flat_items_list a:hover {text-decoration:underline;color:#036;}
+#water .menuitems_hierarchy ul ul#water .flat_items_list ul ul {margin:0;padding:0;display:block;border:none;}
+#water .menuitems_hierarchy li li, #water .flat_items_list li li {display:block;padding:3px 0;margin:4px 0;border:none;border-bottom:1px solid #ccc;}
+#water .menuitems_hierarchy li li a, #water .flat_items_list li li a {color:#666;display:block;border:none;background:none;} 
+#water .menuitems_hierarchy li li a:hover, #water .flat_items_list li li a:hover {display:block;background:#fff;color:#000;text-decoration:none; }
+#water .menuitems_hierarchy ul ul ul, #water .flat_items_list ul ul ul {position:relative;left:170px;top:-21px;background:#e0ecff;}
+#water .menuitems_hierarchy li li li, #water .flat_items_list li li li {background:#2d5ba0;}
+#water .menuitems_hierarchy li li li a, #water .flat_items_list li li li a {color:#fff;}
+#water .menuitems_hierarchy p, #water .flat_items_list p {clear:left;}	
+#water .menuitems_hierarchy #current, #water .flat_items_list #current {background:url(images/current-bg.gif) top left repeat-x;color:#ffffff;}
+#water .categories_hierarchy .title {font-weight:700;padding:10px 0;margin:0 0 5px;display:block;border-bottom:none;font-size:1em;text-align:center;background:#333;color:#fff;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
+#water .categories_hierarchy .title a {color:#fff;}
+#water .categories_hierarchy, #water .categories_hierarchy_to_iconlist {}
+#water .categories_hierarchy  span, #water .categories_hierarchy_to_iconlist span {}
+#water .categories_hierarchy ul, #water .categories_hierarchy_to_iconlist ul, #water .root_items_list ul, #water .menuitem ul {margin:0 ; padding:0; list-style:none;display:block;}
+#water .categories_hierarchy li, #water .categories_hierarchy_to_iconlist li, #water .root_items_list li, #water .menuitem li {font-size:.8em;margin:4px 0;text-decoration:none;font-weight:700;border:1px solid #ccc;background-color:#666;padding:8px 10px;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
+#water .categories_hierarchy li a, #water .categories_hierarchy_to_iconlist li a, #water .root_items_list li a, #water .menuitem li a {text-decoration:none; color:#fff; display:block;}
+#water .categories_hierarchy li a:hover, #water .categories_hierarchy_to_iconlist li a:hover, #water .root_items_list li a:hover, #water .menuitem li a:hover {text-decoration:underline;color:#036;}
+#water .categories_hierarchy ul ul, #water .categories_hierarchy_to_iconlist ul ul, #water .root_items_list ul ul, #water .menuitem ul ul {margin:0;padding:0;display:block;border:none;}
+#water .categories_hierarchy li li, #water .categories_hierarchy_to_iconlist li li, #water .root_items_list li li, #water .menuitem li li {display:block;padding:3px 0;margin:4px 0;border:none;border-bottom:1px solid #ccc;}
+#water .categories_hierarchy li li a, #water .categories_hierarchy_to_iconlist li li a, #water .root_items_list li li a, #water .menuitem li li a {color:#666;display:block;border:none;background:none;}
+#water .categories_hierarchy li li a:hover, #water .categories_hierarchy_to_iconlist li li a:hover, #water .root_items_list li li a:hover, li li a:hover {display:block;background:#fff;color:#000;text-decoration:none; }
+#water .categories_hierarchy ul ul ul, #water .categories_hierarchy_to_iconlist ul ul ul, #water .root_items_list ul ul ul, #water .menuitem ul ul ul {position:relative;left:170px;top:-21px;background:#e0ecff;}
+#water .categories_hierarchy li li li, #water .categories_hierarchy_to_iconlist li li li, #water .root_items_list li li li, #water .menuitem li li li {background:#2d5ba0;}
+#water .categories_hierarchy li li li a, #water .categories_hierarchy_to_iconlist li li li a, #water .root_items_list li li li a, #water .menuitem li li li a {color:#fff;}
+#water form small {font-size:0.7em;padding:5px 0;display:block;} 
+#water form input {padding:2px;width:130px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;background:#fff;color:#000;border:1px solid #000;}
+#water form input.submit {width:30px;background:#666;color:#fff;border:1px solid #000;}
+
+#water .teaser {margin:0 0 10px;padding:0 0 10px;overflow:auto;}
+#water .teaser .title {margin:0 0 10px 0;color:#fff;background:#999;position:relative;overflow:auto;font-size:.8em;padding:7px 3px 7px 26px;border-bottom:none;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
+
+#water .teaser .title a {text-decoration:none;color:inherit;}
+#water .teaser .title a:hover {text-decoration:underline;color:#000;}  
+#water .teaser .tile img {}
+#water .teaser img.teaser_icon {float:left;width:60px;padding:0;border:1px solid #000;background:#fff;margin:3px 5px 0 0;}
+#water .teaser .pretitle, #water .teaser .date {margin:0 0 5px;font-size:0.6em;display:inline;text-align:right;text-transform:none;color:#000;padding:0 0 5px 5px;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;}
+#water .teaser .date {padding:0;} 
+#water .teaser img.icon {float:right;width:150px;clear:both;padding:3px;border:3px solid #ccc;margin:0 0 20px 20px;}
+#water .teaser img.type_icon {width:20px;padding:0;margin:0 0;position:absolute;left:3px;top:5px;}
+#water .teaser .summary {color:#333;font-weight:400;padding:0;text-align:left;line-height:1.2em;font-size:.8em;margin:-3px 0 5px;}
+#water .teaser .summary p {display:inline;}
+#water .teaser ul {color:#000;font-size:1em;padding:15px 0;margin:0 0 0 30px;list-style:square;}
+#water .teaser li {margin:0 0 0 5px;padding:0 0 3px;}
+#water .category_title .title {padding:10px 0;margin:0 0 10px;display:block;border-bottom:none;font-size:1em;text-align:center;background:#333;color:#fff;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
+#water .category_title .title a {color:#fff;}
+
+#water .labeled_icon .title {font-size:.55em;text-align:center;padding:1px;border:none;font-weight:400;}
+#water .labeled_icon img.icon {height:60px;width:60px;}
+#water div.labeled_icon {width:60px;height:110px;border:2px solid #999;background:#eee;display:block;margin:0 5px 5px ;float:left;padding:5px 5px ;position:relative;border-radius:8px;-webkit-border-radius:8px;-moz-border-radius:8px;}
+#water div.labeled_icon img.type_icon {width:12px;position:absolute;top:10px;left:10px;}
+#water .labeled_icon_list {display:block;float:none;overflow:auto;margin:0 0 10px;padding:0 0 5px;border-bottom:3px solid #ccc;}
+#water .icon_list_container {margin:0 0 5px;overflow:auto;}
+
+
+
+#water .collection_header .title {padding:10px 0;margin:0 0 5px;display:block;border-bottom:none;font-size:1em;text-align:center;background:#333;color:#fff;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
+#water .collection_teaser {margin:0 0 10px;border-bottom:1px solid #000;padding:0 0 10px;}
+#water .collection_teaser .summary {color:#333;font-weight:700;padding:0;text-align:left;line-height:1.5em;font-size:.8em;}
+#water .collection_teaser .summary p {display:block;}
+#water .collection_teaser img.image {float:none;width:170px;margin:0;padding:0;}
+#water .labeled_icon .title {font-size:.55em;text-align:center;padding:1px;border:none;font-weight:400;}
+#water .labeled_icon img.icon {height:60px;width:60px;}
+#water div.labeled_icon {width:60px;height:110px;border:2px solid #999;background:#eee;display:block;margin:0 5px 5px ;float:left;padding:5px 5px ;position:relative;border-radius:8px;-webkit-border-radius:8px;-moz-border-radius:8px;}
+#water div.labeled_icon img.type_icon {width:12px;position:absolute;top:10px;left:10px;}
+#water .labeled_icon_list {display:block;float:none;overflow:auto;margin:0 0 10px;padding:0 0 5px;border-bottom:3px solid #ccc;}
+#water .icon_list_container {margin:0 0 5px;overflow:auto;}
+#water div.paginator {font-size:.7em;padding:5px;background:#999;color:#fff;display:block;font-weight:700;text-align:center;margin:0 auto 10px;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;}
+#water div.paginator a {color:#fff;font-weight:400;text-decoration:underline;}
+#water div.paginator a:hover {color:#000;}
+#water .teaser_list, #love .collection_all_items_teaser_list {margin:0 0 10px;border-bottom:3px solid #ccc;padding:0 0 10px;}
+#water .contact-teaser {border-bottom:1px solid #999;padding:5px 0;margin:0;}
+#water .contact-teaser img.type_icon {display:none;}
+#water .contact-teaser .title {display:inline;margin:0 0 10px 0;color:#000;font-weight:700;font-size:.9em;padding:0;background:none;border:none;}
+#water .contact-teaser .title a {text-decoration:none;color:#000;display:inline;}
+#water .contact-teaser .title a:hover {text-decoration:underline;color:#999;}
+#water .contact-teaser .title img.photo {width:30px;float:left;padding:0 5px 0 0;}
+#water .contact-teaser .contact-details {display:none;}
+#water form .title {color:#000;font-weight:700;}
+#water form small {font-size:0.7em;padding:5px 0;display:block;}
+#water form input {padding:2px;width:130px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;background:#fff;color:#000;border:1px solid #000;}
+#water form input.submit {width:30px;background:#666;color:#fff;border:1px solid #000;}
+#water .tags {margin:0;padding:10px 0 0;font-size:0.7em;display:block;} 
+#water .tags a {color: #666}
+#water .tags a:hover {color:#000; text-decoration:underline;}
+
+#water .search-box {overflow:auto;}
+#water .search-box form {margin:0 0;padding:5px;float:right;}
+#water .search-box input {padding:5px 3px;margin:0 0 1px 0;border:1px solid #000;color:#000;width:115px;background:#fff;font-size:0.75em}
+#water .search-box input.submit {border:none;padding:3px 0;margin:0 0 0 0;width:25px;height:25px;background:url(../images/css/btn.png) no-repeat;}
+
+ 
+ 

@@ -5,22 +5,24 @@
 {% block content %}
 
 {% include 'collections/hierarchycal_navigation_block.html' %}
-
-  <div id='link-create-topic'>
+  <div class='forum'>
+  <div class='link-create-topic'>
     <a href="{% url category-create_topic category.slug %}">{% trans 'Create a new topic' %}</a>
   </div>
+<div class="clear"></div>
   <table >
       <tr>
-        <th>{% trans 'Name' %}</th>
-        <th>{% trans 'Comments' %}</th>
-        <th>{% trans 'Created' %}</th>
-        <th>{% trans 'Last comment' %}</th>
+        <th class="name">{% comment %}{% trans 'Name' %}{% endcomment %}Temas</th>
+        <th class="comments">{% comment %}El nombre deberías ser Temas. Asi se pude achicas la columna. no como como cambiarlo en el languaje
+        {% trans 'Comments' %}{% endcomment %}Mensajes</th>
+        <th class="created">{% trans 'Created' %}</th>
+        <th class="last_comment">{% comment %}{% trans 'Last comment' %}{% endcomment %}Últimos mensajes</th>
       </tr>
       {% for categorization in categorizations %}
        {% alias categorization.content_object as 'obj' %}
      <tr>
-       <td><a href="{{ obj.url }}">{{ obj.name }}</a></td>
-       <td>{{ obj.comments_count }}</td>
+       <td><h2 class="topic"><a href="{{ obj.url }}">{{ obj.name }}</a></h2></td>
+       <td class="comment">{{ obj.comments_count }}</td>
        <td>{{ obj.creation_date|date:'DATETIME_FORMAT' }}
            {% if obj.author %} {% trans 'by' %} {{ obj.author }} {% endif %}
        </td>
@@ -29,7 +31,7 @@
       </tr>  
       {% endfor %}
   </table>
-
+  </div>
   {% if page %}
     {% include 'cyclope/pagination_block.html' %}
   {% endif %}

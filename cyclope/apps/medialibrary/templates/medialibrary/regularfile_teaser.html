@@ -9,11 +9,11 @@
     {% endif %}
 
     {% if regularfile.description %}
-      <div class="description html-content">{{ regularfile.description|smart_style }}</div>
+      <h3 class="html-content summary">{{ regularfile.description|smart_style }}</h3>
     {% endif %}
 
     {% if regularfile.author %}
-      <div class="meta-content author_container"><span class="author">{% trans "By" %} {{ regularfile.author }}</span></div>
+      <div class="meta-content author_container"><h4 class="author">{% trans "By" %} {{ regularfile.author }}</h4></div>
     {% endif %}
 
     {% if regularfile.image %}

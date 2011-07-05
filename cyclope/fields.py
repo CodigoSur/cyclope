@@ -42,13 +42,16 @@ class MultipleField(forms.Field):
             if not hasattr(form, "fields"):
                 form = form()
             self.fields = form.fields
-
         self.widget = MultipleWidget(self.fields)
         kwargs.setdefault('help_text', "")
         self.initial = {}
         for field_name, field in self.fields.iteritems():
             self.initial[field_name] = field.initial
 
+    def prepare_value(self, value):
+        initial = self.initial.copy()
+        initial.update(value)
+        return initial
 
     def to_python(self, value):
         if value is None:
