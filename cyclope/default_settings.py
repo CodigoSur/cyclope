@@ -203,7 +203,7 @@ FILEBROWSER_VERSIONS = {
                          'width': 140, 'height': 140, 'opts': 'crop'},
 }
 
-FILEBROWSER_MAX_UPLOAD_SIZE = 1048576 #1Mb
+FILEBROWSER_MAX_UPLOAD_SIZE = 20971520 # 20MB
 
 # django-registration settings
 ACCOUNT_ACTIVATION_DAYS = 7
