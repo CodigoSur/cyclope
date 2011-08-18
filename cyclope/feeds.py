@@ -30,6 +30,8 @@ import cyclope.core.frontend.sites as sites
 
 class WholeSiteFeed(Feed):
 
+    description_template = 'feeds/description.html'
+
     def title(self, obj):
         return cyc_settings.CYCLOPE_SITE_SETTINGS.global_title
 
@@ -48,13 +50,13 @@ class WholeSiteFeed(Feed):
 
     def item_title(self, item):
         #FIXME(diegoM): How to get the right translation of the object_name ?
-        return "%s  (%s)" % (item.name, item.get_object_name().capitalize())
+        return "%s  (%s)" % (item.name, item.get_verbose_name().capitalize())
 
     def items(self):
         N = cyc_settings.CYCLOPE_RSS_LIMIT
         objs = []
         for ctype in SiteSettings.objects.get().rss_content_types.all():
-            objs.extend(list(ctype.model_class().objects.all()[:N]))
+            objs.extend(list(ctype.model_class().objects.filter(published=True)[:N]))
         return sorted(objs, key=lambda x: x.creation_date, reverse = True)[:N]
 
 class ContentTypeFeed(WholeSiteFeed):
@@ -74,7 +76,7 @@ class ContentTypeFeed(WholeSiteFeed):
 
     def items(self, model):
         N = cyc_settings.CYCLOPE_RSS_LIMIT
-        return model.objects.all().order_by('-creation_date')[:N]
+        return model.objects.filter(published=True).order_by('-creation_date')[:N]
 
 class CategoryFeed(WholeSiteFeed):
 
@@ -90,5 +92,8 @@ class CategoryFeed(WholeSiteFeed):
 
     def items(self, category):
         N = cyc_settings.CYCLOPE_RSS_LIMIT
-        return [c.content_object for c in
-                category.categorizations.all()[:N]]
+        objs = []
+        for c in category.categorizations.all():
+            if c.content_object.published:
+              objs.append(c.content_object)
+        return sorted(objs, key=lambda x: x.creation_date, reverse = True)[:N]
