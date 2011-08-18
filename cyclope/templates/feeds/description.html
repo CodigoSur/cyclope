@@ -1,0 +1,6 @@
+{% load cyclope_utils %}
+{% if obj.text %}
+  {{ obj.text|smart_style }}
+{% else %}
+  {{ obj.description|smart_style }}
+{% endif %}
