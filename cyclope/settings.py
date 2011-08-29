@@ -74,6 +74,10 @@ CYCLOPE_THEMES_ROOT = getattr(settings, 'CYCLOPE_THEMES_ROOT',
                                            "templates/cyclope/themes/"))
 CYCLOPE_TEXT_STYLE = getattr(settings, 'CYCLOPE_TEXT_STYLE', 'textile')
 
+# For backwards compatibility only!
+CYCLOPE_ARTICLE_TEXT_STYLE = getattr(settings, 'CYCLOPE_TEXT_STYLE', 'textile')
+CYCLOPE_STATICPAGE_TEXT_STYLE = getattr(settings, 'CYCLOPE_TEXT_STYLE', 'textile')
+
 # Contacts Profile
 CYCLOPE_CONTACTS_PROFILE_MODULE = getattr(settings, 'CYCLOPE_CONTACTS_PROFILE_MODULE', None)
 CYCLOPE_CONTACTS_PROFILE_ADMIN_INLINE_MODULE = getattr(settings, 'CYCLOPE_CONTACTS_PROFILE_ADMIN_INLINE_MODULE', None)
