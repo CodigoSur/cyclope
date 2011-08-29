@@ -69,10 +69,9 @@ CYCLOPE_STATIC_ROOT = getattr(settings, 'CYCLOPE_STATIC_ROOT',
                             '%scyclope/' % settings.MEDIA_ROOT)
 
 # For backwards compatibility only!
-CYCLOPE_MEDIA_URL =  getattr(settings, 'CYCLOPE_STATIC_URL',
-                             '%scyclope/' % settings.CYCLOPE_STATIC_URL)
-CYCLOPE_MEDIA_ROOT = getattr(settings, 'CYCLOPE_STATIC_ROOT',
-                            '%scyclope/' % settings.CYCLOPE_STATIC_ROOT)
+CYCLOPE_MEDIA_URL =  CYCLOPE_STATIC_URL
+CYCLOPE_MEDIA_ROOT = CYCLOPE_STATIC_ROOT 
+
 
 # FIXME #120: STATIC_ROOT is pointing to MEDIA_ROOT because some
 # apps doesn't upgraded to static django 1.3 convention.
