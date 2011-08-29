@@ -3,7 +3,9 @@
 Backwards-incompatible changes in 0.2.0
 =======================================
 
-* CYCLOPE_MEDIA_URL and CYCLOPE_MEDIA_ROOT were renamed to CYCLOPE_STATIC_URL and CYCLOPE_STATIC_ROOT. 
+* Update Whoosh to 1.8.3. You should rebuild it's index.
+
+* CYCLOPE_MEDIA_URL and CYCLOPE_MEDIA_ROOT were renamed to CYCLOPE_STATIC_URL and CYCLOPE_STATIC_ROOT.
   If you use that settings in your templates you must update accordingly.
   A list of affected templates:
     * cyclope/templates/admin/base_content_change_form.html
