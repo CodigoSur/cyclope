@@ -51,7 +51,7 @@ setup(
         'hg+http://bitbucket.org/drmeers/django-dbgettext#egg=django-dbgettext-0.1',
         'git+http://github.com/nicoechaniz/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-3.0-nograpup',
         'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-0.4a1',
-        'hg+http://bitbucket.org/nicoechaniz/django-rosetta_temp#egg=django-rosetta-0.5.6-temp',
+        'hg+http://bitbucket.org/nicoechaniz/django-rosetta_temp#egg=django-rosetta-0.6.2-temp',
         'hg+http://bitbucket.org/san/django-jsonfield#egg=django-jsonfield-0.6.0-cyclope',
     ],
 
@@ -74,7 +74,7 @@ setup(
         'django-haystack>=1.2.3',
         'textile==2.1.4',
         'django-dbgettext>=0.1',
-        'django-rosetta==0.5.6-temp', # installed from our clone
+        'django-rosetta==0.6.2-temp', # installed from our clone
         'django-markitup==0.6.1',
         'django-jsonfield==0.6.0-cyclope', # installed from our clone
     ],

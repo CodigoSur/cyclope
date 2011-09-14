@@ -1,0 +1,2 @@
+# -*- coding: utf-8 -*-
+gettext("""Cyclope como todo CMS cuenta con una parte de atrás (donde entra quién edita y actualiza el sitio) y la parte de adelante, que es lo que ve todo el mundo, el sitio público. La parte de atrás se conoce como Backend (área administrativa), y la parte delantera como Frontend (área pública). Para ingresar al Backend de Cyclope 3 sigue los pasos que se detallan a continuación.""")

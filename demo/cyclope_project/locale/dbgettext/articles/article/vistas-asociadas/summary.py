@@ -1,0 +1,2 @@
+# -*- coding: utf-8 -*-
+gettext("""Cada tipo de contenido en Cyclope tiene vistas asociadas que le permiten mostrarse de diferentes maneras. Cuando hablábamos de las características que todos los tipos de contenido deben implementar, una parte importante de esto es el grupo mínimo de vistas, que consiste en: Detalle y Resúmen. Todos los tipos de contenido deben saber cómo mostrarse en detalle y como mostrar un resúmen, que será utilizado en listados.""")
