@@ -30,9 +30,8 @@ from models import *
 
 class MediaAdmin(CollectibleAdmin, BaseContentAdmin):
     inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines
-    search_fields = ('name', 'author', 'description', )
-    list_filter = CollectibleAdmin.list_filter + \
-                  ('creation_date',)
+    search_fields = ('name', 'description', )
+    list_filter = CollectibleAdmin.list_filter + ('creation_date',)
 
 has_thumbnail = [Picture, MovieClip, FlashMovie]
 def media_admin_factory(media_model):
