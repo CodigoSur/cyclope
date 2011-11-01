@@ -150,6 +150,25 @@ class CategorizationManager(models.Manager):
         """
         return self.filter(content_type__pk=ctype.pk)
 
+    def get_sorted_by_content_property(self, category, content_model, sort_property):
+
+        sql_params = {
+                'content_model_tbl': content_model._meta.db_table,
+                'content_type': ContentType.objects.get_for_model(content_model).id,
+                'categorization_tbl': Categorization._meta.db_table,
+                'category_tbl': Category._meta.db_table,
+                'category_id': category.id,
+                'sort_property': sort_property
+            }
+
+        #TODO(nicoechaniz): replace string formating with params list. reference http://docs.djangoproject.com/en/dev/topics/db/sql/
+        return Categorization.objects.raw(
+            'SELECT collections_categorization.*, %(content_model_tbl)s.%(sort_property)s AS sort_property FROM  collections_categorization '\
+            'JOIN %(content_model_tbl)s ON %(content_model_tbl)s.id = collections_categorization.object_id '\
+            'AND %(content_type)s = collections_categorization.content_type_id '\
+            'WHERE collections_categorization.category_id = %(category_id)s '\
+            'ORDER BY %(content_model_tbl)s.%(sort_property)s' % sql_params)
+
 
 class Categorization(models.Model):
     """Represents the association of a catergory and a content object."""

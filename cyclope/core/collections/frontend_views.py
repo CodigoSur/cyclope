@@ -21,6 +21,8 @@
 
 """cyclope.frontend_views"""
 
+from operator import attrgetter
+
 from django import forms
 from django.template import loader
 from django.core.urlresolvers import reverse
@@ -107,28 +109,54 @@ class CategoryTeaserList(frontend.FrontendView):
     inline_view_name = 'teaser'
     template = "collections/category_teaser_list.html"
 
+    #TODO(nicoechaniz): find a more elegant way to build this view. current version is a temporary fix to a performance problem of the previous implementation when sorting big amounts of data.
     def get_response(self, request, req_context, options, content_object):
         category = content_object
         if options["traverse_children"]:
-            own = category.categorizations.select_related().all()
             children_categories = category.get_descendants()
-            children = Categorization.objects.select_related().filter(category__in=children_categories)
-            categorizations_list = list(set(own | children))
         else:
-            categorizations_list = category.categorizations.select_related().all()
+            children_categories = None
 
         sort_by = options["sort_by"]
+        
         if "DATE" in sort_by:
             if sort_by == "DATE-":
                 reverse = True
             elif sort_by == "DATE+":
                 reverse = False
-            categorizations_list = sorted(categorizations_list,
-                                          key=lambda c: c.object_modification_date,
-                                          reverse=reverse)
+
+            ct_models = [ct.model_class() for ct in category.collection.content_types.all()]
+            categorizations_list = []
+            for ct_model in ct_models:
+                categorizations_list += \
+                    Categorization.objects.get_sorted_by_content_property(
+                        category, ct_model, sort_property='creation_date')
+
+                if children_categories:
+                    seen = [ (cat.object_id, cat.content_type_id) for cat in categorizations_list ]
+                    children_list = []
+                    for children_category in children_categories:
+                        additional_categorizations = \
+                                Categorization.objects.get_sorted_by_content_property(
+                                    children_category, ct_model, sort_property='creation_date')
+
+                        for cat in additional_categorizations:
+                            if (cat.object_id, cat.content_type_id) not in seen:
+                                categorizations_list.append(cat)
+                                seen.append((cat.object_id, cat.content_type_id))
+
+            categorizations_list.sort(key=attrgetter('sort_property'), reverse=reverse)
+            
             paginator = Paginator(categorizations_list, options["items_per_page"])
 
+
         elif sort_by == "ALPHABETIC":
+            if children_categories:
+                own = category.categorizations.select_related().all()
+                children = Categorization.objects.select_related().filter(category__in=children_categories)            
+                categorizations_list = list(set(own | children))
+            else:
+                categorizations_list = category.categorizations.select_related().all()
             paginator = NamePaginator(categorizations_list, on="content_object.name",
                                       per_page=options["items_per_page"])
 
@@ -325,7 +353,7 @@ class CategoryListAsForum(frontend.FrontendView):
         category = content_object
         categorizations_list = category.categorizations.all()
 
-        # TODO(diegoM): ¡¡¡ No escala !!!
+        #TODO(diegoM): ¡¡¡ No escala !!!
         categorizations_list = sorted(categorizations_list,
                                       key=lambda c: c.object_modification_date,
                                       reverse=True)
