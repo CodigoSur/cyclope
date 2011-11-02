@@ -21,8 +21,6 @@
 
 """cyclope.frontend_views"""
 
-from operator import attrgetter
-
 from django import forms
 from django.template import loader
 from django.core.urlresolvers import reverse
@@ -112,11 +110,7 @@ class CategoryTeaserList(frontend.FrontendView):
     #TODO(nicoechaniz): find a more elegant way to build this view. current version is a temporary fix to a performance problem of the previous implementation when sorting big amounts of data.
     def get_response(self, request, req_context, options, content_object):
         category = content_object
-        if options["traverse_children"]:
-            children_categories = category.get_descendants()
-        else:
-            children_categories = None
-
+        traverse_children = options["traverse_children"]
         sort_by = options["sort_by"]
         
         if "DATE" in sort_by:
@@ -124,39 +118,16 @@ class CategoryTeaserList(frontend.FrontendView):
                 reverse = True
             elif sort_by == "DATE+":
                 reverse = False
-
-            ct_models = [ct.model_class() for ct in category.collection.content_types.all()]
-            categorizations_list = []
-            for ct_model in ct_models:
-                categorizations_list += \
-                    Categorization.objects.get_sorted_by_content_property(
-                        category, ct_model, sort_property='creation_date')
-
-                if children_categories:
-                    seen = [ (cat.object_id, cat.content_type_id) for cat in categorizations_list ]
-                    children_list = []
-                    for children_category in children_categories:
-                        additional_categorizations = \
-                                Categorization.objects.get_sorted_by_content_property(
-                                    children_category, ct_model, sort_property='creation_date')
-
-                        for cat in additional_categorizations:
-                            if (cat.object_id, cat.content_type_id) not in seen:
-                                categorizations_list.append(cat)
-                                seen.append((cat.object_id, cat.content_type_id))
-
-            categorizations_list.sort(key=attrgetter('sort_property'), reverse=reverse)
-            
+            sort_property = 'modification_date'
+            categorizations_list = Categorization.objects.get_for_category(
+                category, sort_property, traverse_children, reverse)
             paginator = Paginator(categorizations_list, options["items_per_page"])
 
-
         elif sort_by == "ALPHABETIC":
-            if children_categories:
-                own = category.categorizations.select_related().all()
-                children = Categorization.objects.select_related().filter(category__in=children_categories)            
-                categorizations_list = list(set(own | children))
-            else:
-                categorizations_list = category.categorizations.select_related().all()
+            sort_property = 'name'
+            categorizations_list = Categorization.objects.get_for_category(
+                category, sort_property, traverse_children)
+                
             paginator = NamePaginator(categorizations_list, on="content_object.name",
                                       per_page=options["items_per_page"])
 
@@ -351,12 +322,8 @@ class CategoryListAsForum(frontend.FrontendView):
 
     def get_response(self, request, req_context, options, content_object):
         category = content_object
-        categorizations_list = category.categorizations.all()
-
-        #TODO(diegoM): ¡¡¡ No escala !!!
-        categorizations_list = sorted(categorizations_list,
-                                      key=lambda c: c.object_modification_date,
-                                      reverse=True)
+        categorizations_list = Categorization.objects.get_for_category(
+                                  category, 'modification_date', reverse=True)
 
         paginator = Paginator(categorizations_list, self.items_per_page)
         page = cyclope.utils.get_page(paginator, request)

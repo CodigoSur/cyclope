@@ -25,6 +25,8 @@ core.collections.models
 Django models for generic categorization of content objects
 """
 
+from operator import attrgetter
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
@@ -150,24 +152,37 @@ class CategorizationManager(models.Manager):
         """
         return self.filter(content_type__pk=ctype.pk)
 
-    def get_sorted_by_content_property(self, category, content_model, sort_property):
+    def get_for_category(self, category, sort_property='name', traverse_children=False, reverse=False):
+        if traverse_children:
+            categories = [category]+list(category.get_descendants())
+        else:
+            categories = [category]
+            
+        collection_models = [ct.model_class() for ct in categories[0].collection.content_types.all()]
+        categorizations_list = []
+        for content_model in collection_models:
+            sql_params = {
+                    'content_model_tbl': content_model._meta.db_table,
+                    'content_type': ContentType.objects.get_for_model(content_model).id,
+                    'categorization_tbl': Categorization._meta.db_table,
+                    'category_tbl': Category._meta.db_table,
+                    'category_ids': ', '.join([ str(category.id) for category in categories ]),
+                    'sort_property': sort_property
+                }
 
-        sql_params = {
-                'content_model_tbl': content_model._meta.db_table,
-                'content_type': ContentType.objects.get_for_model(content_model).id,
-                'categorization_tbl': Categorization._meta.db_table,
-                'category_tbl': Category._meta.db_table,
-                'category_id': category.id,
-                'sort_property': sort_property
-            }
+            categorization_query = \
+                'SELECT collections_categorization.*, %(content_model_tbl)s.%(sort_property)s AS sort_property FROM  collections_categorization '\
+                'JOIN %(content_model_tbl)s ON %(content_model_tbl)s.id = collections_categorization.object_id '\
+                'AND %(content_type)s = collections_categorization.content_type_id '\
+                'JOIN %(category_tbl)s ON %(category_tbl)s.id = collections_categorization.category_id '\
+                'WHERE  %(category_tbl)s.id IN (%(category_ids)s) '\
+                'GROUP BY collections_categorization.object_id' % sql_params
 
-        #TODO(nicoechaniz): replace string formating with params list. reference http://docs.djangoproject.com/en/dev/topics/db/sql/
-        return Categorization.objects.raw(
-            'SELECT collections_categorization.*, %(content_model_tbl)s.%(sort_property)s AS sort_property FROM  collections_categorization '\
-            'JOIN %(content_model_tbl)s ON %(content_model_tbl)s.id = collections_categorization.object_id '\
-            'AND %(content_type)s = collections_categorization.content_type_id '\
-            'WHERE collections_categorization.category_id = %(category_id)s '\
-            'ORDER BY %(content_model_tbl)s.%(sort_property)s' % sql_params)
+            ##TODO(nicoechaniz): replace string formating with params list. reference http://docs.djangoproject.com/en/dev/topics/db/sql/
+            categorizations_list += Categorization.objects.raw(categorization_query)
+
+        ##TODO(nicoechaniz): we should get all data in one query and properly sorted
+        return sorted(categorizations_list, key=attrgetter('sort_property'), reverse=reverse)
 
 
 class Categorization(models.Model):
