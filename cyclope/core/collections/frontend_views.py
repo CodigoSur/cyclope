@@ -79,7 +79,6 @@ class TeaserListOptions(forms.Form):
                               initial="TOP")
 
 
-
 class CategoryDefaultList(frontend.FrontendView):
     name = 'default'
     verbose_name = _('default view for the Collection')
@@ -156,7 +155,7 @@ class CategoryLabeledIconList(CategoryTeaserList):
     items_per_page = cyc_settings.CYCLOPE_PAGINATION['LABELED_ICON']
 
     template = "collections/category_labeled_icon_list.html"
-    inline_view_name = 'teaser'
+    inline_view_name = 'labeled_icon'
 
 frontend.site.register_view(Category, CategoryLabeledIconList)
 
