@@ -62,6 +62,8 @@ class TeaserListOptions(forms.Form):
     show_image = forms.BooleanField(label=_("Show image"), initial=True, required=False)
     items_per_page = forms.IntegerField(label=_('Items per page'), min_value=1,
                                         initial=cyc_settings.CYCLOPE_PAGINATION['TEASER'],)
+    limit_to_n_items = forms.IntegerField(label=_('Limit to N items (0 = no limit)'),
+                                          min_value=0, initial=0)
     sort_by = forms.ChoiceField(label=_('Sort by'),
                               choices=(("DATE-", _(u"Date ↓ (newest first)")),
                                        ("DATE+", _(u"Date ↑ (oldest first)")),
@@ -112,7 +114,8 @@ class CategoryTeaserList(frontend.FrontendView):
         category = content_object
         traverse_children = options["traverse_children"]
         sort_by = options["sort_by"]
-        
+        limit = options["limit_to_n_items"] or None
+
         if "DATE" in sort_by:
             if sort_by == "DATE-":
                 reverse = True
@@ -120,14 +123,14 @@ class CategoryTeaserList(frontend.FrontendView):
                 reverse = False
             sort_property = 'modification_date'
             categorizations_list = Categorization.objects.get_for_category(
-                category, sort_property, traverse_children, reverse)
+                category, sort_property, limit, traverse_children, reverse)
             paginator = Paginator(categorizations_list, options["items_per_page"])
 
         elif sort_by == "ALPHABETIC":
             sort_property = 'name'
             categorizations_list = Categorization.objects.get_for_category(
-                category, sort_property, traverse_children)
-                
+                category, sort_property, limit, traverse_children)
+
             paginator = NamePaginator(categorizations_list, on="content_object.name",
                                       per_page=options["items_per_page"])
 
@@ -148,7 +151,7 @@ class CategoryLabeledIconList(CategoryTeaserList):
     """A labeled icon list view of Category members.
     """
     name='labeled_icon_list'
-    verbose_name=_('Labeled icon list of Category members')
+    verbose_name=_('labeled icon list of Category members')
     is_default = False
     items_per_page = cyc_settings.CYCLOPE_PAGINATION['LABELED_ICON']
 

@@ -152,12 +152,13 @@ class CategorizationManager(models.Manager):
         """
         return self.filter(content_type__pk=ctype.pk)
 
-    def get_for_category(self, category, sort_property='name', traverse_children=False, reverse=False):
+    def get_for_category(self, category, sort_property='name', limit=None,
+                         traverse_children=False, reverse=False):
         if traverse_children:
             categories = [category]+list(category.get_descendants())
         else:
             categories = [category]
-            
+
         collection_models = [ct.model_class() for ct in categories[0].collection.content_types.all()]
         categorizations_list = []
         for content_model in collection_models:
@@ -182,7 +183,7 @@ class CategorizationManager(models.Manager):
             categorizations_list += Categorization.objects.raw(categorization_query)
 
         ##TODO(nicoechaniz): we should get all data in one query and properly sorted
-        return sorted(categorizations_list, key=attrgetter('sort_property'), reverse=reverse)
+        return sorted(categorizations_list, key=attrgetter('sort_property'), reverse=reverse)[slice(limit)]
 
 
 class Categorization(models.Model):
