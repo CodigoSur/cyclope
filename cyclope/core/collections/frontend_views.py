@@ -160,6 +160,76 @@ class CategoryLabeledIconList(CategoryTeaserList):
 frontend.site.register_view(Category, CategoryLabeledIconList)
 
 
+class SlideshowOptions(forms.Form):
+    show_title = forms.BooleanField(label=_("Show title"), initial=True, required=False)
+    show_description = forms.BooleanField(label=_("Show description"), initial=True, required=False)
+    show_image = forms.BooleanField(label=_("Show image"), initial=True, required=False)
+    limit_to_n_items = forms.IntegerField(label=_('Limit to N items (0 = no limit)'),
+                                          min_value=0, initial=10)
+    sort_by = forms.ChoiceField(label=_('Sort by'),
+                              choices=(("DATE-", _(u"Date ↓ (newest first)")),
+                                       ("DATE+", _(u"Date ↑ (oldest first)")),
+                                       ("ALPHABETIC", _(u"Alphabetic"))),
+                              initial="DATE-")
+    traverse_children = forms.BooleanField(label=_("Include descendant's elements"),
+                                                    initial=False, required=False)
+    visible_items = forms.IntegerField(label=_('Visible items'),
+                               min_value=1, initial=3)
+    scroll_by = forms.IntegerField(label=_('Scroll by N items'),
+                               min_value=1, initial=3)
+    delay = forms.IntegerField(label=_('Delay between transitions (in milliseconds)'),
+                               min_value=100, initial=3000)
+    speed = forms.IntegerField(label=_('Speed of transition (in milliseconds)'),
+                               min_value=0, initial=1000)
+    auto_play = forms.BooleanField(label=_("Automatic playback"),
+                                   initial=True, required=False)
+    #initial_delay = forms.IntegerField(label=_('Delay to the first transition (in milliseconds)'),
+    #                                   min_value=1, initial=5000)
+    circular = forms.BooleanField(label=_("Circular navigation"), initial=False,
+                                  required=False)
+
+class CategorySlideshow(frontend.FrontendView):
+    """A slideshow view of Category members.
+    """
+    name='slodeshow'
+    verbose_name=_('slideshow of Category members')
+    is_content_view = True
+    is_region_view = True
+    is_default = False
+    options_form = SlideshowOptions
+    inline_view_name = 'slideshow_item'
+    template = "collections/category_slideshow.html"
+
+    def get_response(self, request, req_context, options, content_object):
+        category = content_object
+        traverse_children = options["traverse_children"]
+        sort_by = options["sort_by"]
+        limit = options["limit_to_n_items"] or None
+
+        if "DATE" in sort_by:
+            if sort_by == "DATE-":
+                reverse = True
+            elif sort_by == "DATE+":
+                reverse = False
+            sort_property = 'modification_date'
+            categorizations_list = Categorization.objects.get_for_category(
+                category, sort_property, limit, traverse_children, reverse)
+
+        elif sort_by == "ALPHABETIC":
+            sort_property = 'name'
+            categorizations_list = Categorization.objects.get_for_category(
+                category, sort_property, limit, traverse_children)
+
+
+        req_context.update({'categorizations': categorizations_list,
+                            'category': category,
+                            'inline_view_name': self.inline_view_name})
+        t = loader.get_template(self.template)
+        return t.render(req_context)
+
+frontend.site.register_view(Category, CategorySlideshow)
+
+
 class CategoryContents(CategoryTeaserList):
     """Full content of Category members.
     """

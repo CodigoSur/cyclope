@@ -201,6 +201,8 @@ FILEBROWSER_VERSIONS = {
                 'width': 60, 'height': 60, 'opts': 'crop'},
     'croppedthumbnail': {'verbose_name': ugettext('Cropped Thumbnail (140x140px)'),
                          'width': 140, 'height': 140, 'opts': 'crop'},
+    'slideshow': {'verbose_name': ugettext('Slideshow'),
+                  'width': 300, 'height': 300, 'opts': ''},
 }
 
 FILEBROWSER_MAX_UPLOAD_SIZE = 20971520 # 20MB

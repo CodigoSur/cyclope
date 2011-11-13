@@ -1,0 +1,25 @@
+{% load i18n fb_versions cyclope_utils dbgettext_tags %}
+  <div class="slideshow">
+    <a href="{% url article-detail article.slug %}">
+      {% if view_options.show_image %}
+        {% if article.pictures %}
+          <img class="icon" src="{% version article.pictures.0.image.path 'slideshow' %}" border="0"/>
+        {% else %}
+          <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
+          <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
+        {% endif %}
+      {% endif %}
+    </a>
+    {% if view_options.show_title %}
+    <h2 class="title"><a href="{% url article-detail article.slug %}">{{article.name|truncatechars:40}}</a></h2>
+    {% endif %}
+
+    {% if view_options.show_description %}
+      <div class="html-content summary">
+      {% if article.summary %}
+        {{ article|parsed_gettext:"summary"|smart_style }}
+      {% else %}
+        {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
+      {% endif %}
+    {% endif %}
+  </div>
