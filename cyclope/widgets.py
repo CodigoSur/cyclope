@@ -173,10 +173,15 @@ class MultipleWidget(forms.Widget):
             value = {}
         out_names = ['%s_multiple_%s' % (name, field_name) for field_name in self.fields.keys()]
         out = []
+        out.append("<fieldset class='module'>")
+        #out.append('<a class="collapse-toggle" href="#"> Show </a>')
         field_names, fields = self.fields.iterkeys(), self.fields.itervalues()
         for field_name, field, out_name in zip(field_names, fields, out_names):
+            out.append("<div class='form-row'>")
             out.append(unicode(field.label)+u": " )
             out.append(field.widget.render(out_name, value.get(field_name)))
+            out.append("</div>")
+        out.append("</fieldset>")
         return mark_safe(u"<div id='%s_multiple'>" % name + u'\n'.join(out) +u"</div>")
 
     def value_from_datadict(self, data, files, name):
