@@ -177,16 +177,23 @@ class SlideshowOptions(forms.Form):
                                min_value=1, initial=3)
     scroll_by = forms.IntegerField(label=_('Scroll by N items'),
                                min_value=1, initial=3)
-    delay = forms.IntegerField(label=_('Delay between transitions (in milliseconds)'),
-                               min_value=100, initial=3000)
     speed = forms.IntegerField(label=_('Speed of transition (in milliseconds)'),
                                min_value=0, initial=1000)
     auto_play = forms.BooleanField(label=_("Automatic playback"),
                                    initial=True, required=False)
+    delay = forms.IntegerField(label=_('Delay between transitions (seconds)'),
+                               min_value=1, initial=3)
     #initial_delay = forms.IntegerField(label=_('Delay to the first transition (in milliseconds)'),
     #                                   min_value=1, initial=5000)
     circular = forms.BooleanField(label=_("Circular navigation"), initial=False,
                                   required=False)
+    navigation = forms.ChoiceField(label=_('Navigation wrap'),
+                              choices=(("'circular'", _(u"Circular")),
+                                       ("'first'", _(u"First")),
+                                       ("'last'", _(u"Last")),
+                                       ("'both'", _(u"Both")),
+                                       ("null", _(u"None"))),
+                              initial="circular")
 
 class CategorySlideshow(frontend.FrontendView):
     """A slideshow view of Category members.
@@ -223,7 +230,9 @@ class CategorySlideshow(frontend.FrontendView):
 
         req_context.update({'categorizations': categorizations_list,
                             'category': category,
-                            'inline_view_name': self.inline_view_name})
+                            'inline_view_name': self.inline_view_name,
+                            'category_slug': category.slug
+                            })
         t = loader.get_template(self.template)
         return t.render(req_context)
 
