@@ -5,16 +5,50 @@
 {% block extra_head %}
 <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery.jcarousel.min.js"></script>
 <script type="text/javascript">
+    // jCarousel documentation http://sorgalla.com/projects/jcarousel/
+
+    // TODO: add this option, 'autopause': the carousel stop when user hover or next/prev clic
+{% if view_options.autopause %}
+    function CarouselAutopause(carousel)
+    {
+        // Disable autoscrolling if the user clicks the prev or next button.
+
+        carousel.buttonNext.bind('click', function() {
+            carousel.startAuto(0);
+        });
+        carousel.buttonPrev.bind('click', function() {
+            carousel.startAuto(0);
+        });
+
+        // Pause autoscrolling if the user moves with the cursor over the clip.
+
+        carousel.clip.hover(function() {
+            carousel.stopAuto();
+        }, function() {
+            carousel.startAuto();
+        });
+    };
+{% endif %}
+
 jQuery(document).ready(function() {
     jQuery("#slideshow{% if region_name %}-{{region_name}}{% endif %}-{{category_slug}}").jcarousel({
-        visible: {{view_options.visible_items}},
-        scroll: {{view_options.scroll_by}},
-        wrap: {{view_options.navigation|safe}},
-        auto: {% if view_options.auto_play %}{{view_options.delay}}{% else %}0{% endif %},
-        animation: {{view_options.speed}}
+{% comment %}
+       // 'visible' is not 'visible' number of items! -> http://sorgalla.com/projects/jcarousel/#Configuration
+       // TODO: this option will be deleted??
+       visible: {{view_options.visible_items}},
+{% endcomment %}
+       scroll: {{view_options.scroll_by}},
+       wrap: {{view_options.navigation|safe}},
+       auto: {% if view_options.auto_play %}{{view_options.delay}}{% else %}0{% endif %},
+       animation: {{view_options.speed}}
+       // TODO: 'autopause' option
+    {% if view_options.autopause %}
+       , initCallback: CarouselAutopause
+    {% endif %}
     });
 });
 </script>
+<link rel="stylesheet" type="text/css" href="{{ CYCLOPE_THEME_MEDIA_URL }}css/jcarousel.css" />
 {% endblock %}
 
 {% block content %}
@@ -22,7 +56,7 @@ jQuery(document).ready(function() {
   The content of this view is composed by including a template for each content in the category
   The included template may be something different from a teaser
   {% endcomment %}
-    <ul id="slideshow{% if region_name %}-{{region_name}}{% endif %}-{{category_slug}}" class="slideshow">
+    <ul id="slideshow{% if region_name %}-{{region_name}}{% endif %}-{{category_slug}}" class="jcarousel-skin-cyclope">
     {% for categorization in categorizations %}
       {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name ".html" as template_path %}
 
