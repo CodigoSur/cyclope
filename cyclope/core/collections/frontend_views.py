@@ -173,18 +173,16 @@ class SlideshowOptions(forms.Form):
                               initial="DATE-")
     traverse_children = forms.BooleanField(label=_("Include descendant's elements"),
                                                     initial=False, required=False)
-    visible_items = forms.IntegerField(label=_('Visible items'),
-                               min_value=1, initial=3)
     scroll_by = forms.IntegerField(label=_('Scroll by N items'),
                                min_value=1, initial=3)
     speed = forms.IntegerField(label=_('Speed of transition (in milliseconds)'),
                                min_value=0, initial=1000)
     auto_play = forms.BooleanField(label=_("Automatic playback"),
                                    initial=True, required=False)
+    auto_pause = forms.BooleanField(label=_("Stop automatic playback after click"),
+                                    initial=True, required=False)
     delay = forms.IntegerField(label=_('Delay between transitions (seconds)'),
                                min_value=1, initial=3)
-    #initial_delay = forms.IntegerField(label=_('Delay to the first transition (in milliseconds)'),
-    #                                   min_value=1, initial=5000)
     circular = forms.BooleanField(label=_("Circular navigation"), initial=False,
                                   required=False)
     navigation = forms.ChoiceField(label=_('Navigation wrap'),
