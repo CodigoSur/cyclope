@@ -28,9 +28,11 @@ configuration for the Django admin
 
 from django.db import models
 from django.contrib import admin
+from django.core import urlresolvers
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.comments.admin import CommentsAdmin
 
 from feincms.admin import editor
 
@@ -141,3 +143,35 @@ class AuthorAdmin(admin.ModelAdmin):
 admin.site.register(Author, AuthorAdmin)
 
 admin.site.register(Source)
+
+class CyclopeCommentsAdmin(CommentsAdmin):
+    fieldsets = (
+        (None,
+           {'fields': ('content_type', 'object_pk')}
+        ),
+        (_('Content'),
+           {'fields': ('user', 'user_name', 'user_email', 'user_url', 'comment')}
+        ),
+        (_('Metadata'),
+           {'fields': ('submit_date', 'ip_address', 'is_public', 'is_removed')}
+        ),
+     )
+    list_display = ('name', "content", "content_url", 'content_type', 'ip_address',
+                    'submit_date', 'is_public', 'is_removed')
+    list_filter = ('submit_date', 'is_public', 'is_removed')
+
+    def content(self, obj):
+        admin_url_name = "%s_%s_change" % (obj.content_type.app_label, obj.content_type.name)
+        admin_url_name = admin_url_name.replace(" ", "")
+        change_url = urlresolvers.reverse('admin:%s' % admin_url_name, args=(obj.content_object.id,))
+        return "<a href='%s'>%s</a>" % (change_url, obj.content_object)
+    content.allow_tags = True
+
+    def content_url(self, obj):
+        url = obj.content_object.get_absolute_url()
+        return  "<a href='%s'>%s</a>" % (url, url)
+    content_url.allow_tags = True
+
+
+admin.site.unregister(Comment)
+admin.site.register(Comment, CyclopeCommentsAdmin)
