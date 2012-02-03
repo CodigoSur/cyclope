@@ -120,7 +120,7 @@ class CategoryTeaserList(frontend.FrontendView):
                 reverse = True
             elif sort_by == "DATE+":
                 reverse = False
-            sort_property = 'modification_date'
+            sort_property = 'creation_date'
             categorizations_list = Categorization.objects.get_for_category(
                 category, sort_property, limit, traverse_children, reverse)
             paginator = Paginator(categorizations_list, options["items_per_page"])
@@ -216,7 +216,7 @@ class CategorySlideshow(frontend.FrontendView):
                 reverse = True
             elif sort_by == "DATE+":
                 reverse = False
-            sort_property = 'modification_date'
+            sort_property = 'creation_date'
             categorizations_list = Categorization.objects.get_for_category(
                 category, sort_property, limit, traverse_children, reverse)
 
