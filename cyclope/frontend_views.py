@@ -281,7 +281,7 @@ class CommentsList(frontend.FrontendView):
     options_form = CommentsListOptions
 
     def get_response(self, request, req_context, options):
-        limit = options["items_to_show"]
+        limit = options["limit_to_n_items"]
         comment_list = Comment.objects.filter(is_public=True, is_removed=False).order_by('-submit_date')[:limit]
         req_context.update({'comment_list': comment_list})
         t = loader.get_template("comments/comments_list.html")
