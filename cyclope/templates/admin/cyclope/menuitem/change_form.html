@@ -50,7 +50,7 @@ $(function() {
     };
 
     var div_container = $("#view_options_multiple").parent().parent();
-    if ($("#view_options_multiple").html() === ""){
+    if ($("#view_options_multiple").html().indexOf("form-row") == -1){
         div_container.hide();
         $.cyclope.initial_content = false;
     }
