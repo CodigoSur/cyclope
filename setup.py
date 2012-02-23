@@ -77,6 +77,7 @@ setup(
         'django-rosetta==0.6.2-temp', # installed from our clone
         'django-markitup==0.6.1',
         'django-jsonfield==0.6.0-cyclope', # installed from our clone
+        'feedparser==5.1',
     ],
 
     scripts=['cyclope/bin/cyclopeproject'],

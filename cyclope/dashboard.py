@@ -176,6 +176,12 @@ class CustomIndexDashboard(Dashboard):
                     'cyclope.apps.newsletter.models.Newsletter',
                     ]),
             modules.ModelList(
+                title=_('Feeds'),
+                css_classes = ('dbmodule-feeds',),
+                include_list=[
+                    'cyclope.apps.feeds.models.Feed',
+                    ]),
+            modules.ModelList(
                 title=_('Contacts'),
                 css_classes = ('dbmodule-contacts', 'main-area-modules',),
                 draggable = False,

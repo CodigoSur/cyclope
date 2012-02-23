@@ -1,0 +1,52 @@
+{% extends host_template %}
+
+{% comment%}
+TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
+{% endcomment%}
+
+{% load comments i18n cyclope_utils %}
+
+{% block content %}
+
+{% alias feed as 'current_object' %}
+
+<div class="content-view feed detail feed-detail">
+
+  <h1 class="title">{% trans feed.name %}</h1>
+
+  <!-- herramientas -->
+  {% include 'cyclope/content_tools_block.html' %}
+
+  <!-- descripcion -->
+  {% if feed.summary %}
+  <div class="summary">{{ feed.summary|smart_style }}</div>
+  {% endif%}
+  <!-- /descripcion -->
+
+  {% for entry in entries %}
+  <div class="text html-text html-content">
+      <h2><a href="{{ entry.link }}">{{ entry.title }}</a></h2>
+      {% if not view_options.titles_only %}
+        {% if entry.summary_detail.type == 'text/html' %}
+          {{ entry.summary_detail.value|safe }}
+        {% else %}
+          {{ entry.summary_detail.value }}
+        {% endif %}
+      {% endif %}
+  </div>
+  {% endfor %}
+
+
+  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+
+  {% include 'cyclope/related_contents_block.html' %}
+
+  <div class="clear"></div>
+
+
+<!--COMENTARIOS -->
+  {% include 'comments/comments_block.html' %}
+
+</div> <!--termina feed_detail -->
+
+{% endblock content%}

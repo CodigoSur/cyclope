@@ -97,6 +97,7 @@ INSTALLED_APPS = [
     'cyclope.apps.newsletter',
     'cyclope.apps.contacts',
     'cyclope.apps.locations',
+    'cyclope.apps.feeds',
 
     'admin_tools',
     'admin_tools.theming',
