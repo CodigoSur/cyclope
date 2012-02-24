@@ -131,17 +131,6 @@ INSTALLED_APPS = [
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
-#optional_apps = ['live', 'schedule']
-optional_apps = ['live']
-for app_name in optional_apps:
-    try:
-        imp.find_module(app_name)
-    except ImportError:
-        pass
-    else:
-        INSTALLED_APPS += [app_name]
-
-
 # debug_toolbar settings
 #DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
 
