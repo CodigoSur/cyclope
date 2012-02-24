@@ -75,7 +75,7 @@
           var prefix = "#id_regionview_set-" + i + "-"
           var div_container = $("#regionview_set-"+i+"-view_options_multiple").parent().parent();
 
-          if ($("#regionview_set-" + i + "-view_options_multiple").html() === ""){
+          if ($("#regionview_set-" + i + "-view_options_multiple").html().indexOf("form-row") == -1){
               div_container.hide();
               $.cyclope.initial_content[i] = false;
           }
