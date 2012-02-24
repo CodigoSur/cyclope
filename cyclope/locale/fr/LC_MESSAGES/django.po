@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-29 01:48-0300\n"
+"POT-Creation-Date: 2012-02-23 20:26-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,28 +18,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: admin.py:80
+#: admin.py:82
 msgid "content details"
 msgstr ""
 
-#: admin.py:83
+#: admin.py:85
 msgid "Either set an URL here or select a contenttype and view."
 msgstr ""
 
-#: admin.py:86 models.py:146 models.py:267 apps/newsletter/models.py:44
+#: admin.py:88 models.py:146 models.py:267 apps/newsletter/models.py:44
 msgid "layout"
 msgstr ""
 
-#: admin.py:89
+#: admin.py:91
 msgid "Set the layout that will be used when this menuitem is selected."
+msgstr ""
+
+#: admin.py:152 dashboard.py:66
+msgid "Content"
+msgstr ""
+
+#: admin.py:155
+msgid "Metadata"
 msgstr ""
 
 #: dashboard.py:54
 msgid "Site Administration"
-msgstr ""
-
-#: dashboard.py:66
-msgid "Content"
 msgstr ""
 
 #: dashboard.py:72
@@ -104,91 +108,99 @@ msgid "Newsletter"
 msgstr ""
 
 #: dashboard.py:179
+msgid "Feeds"
+msgstr ""
+
+#: dashboard.py:185
 msgid "Contacts"
 msgstr ""
 
-#: dashboard.py:192
+#: dashboard.py:198
 msgid "Chat"
 msgstr ""
 
-#: dashboard.py:203
+#: dashboard.py:209
 msgid "Plugins"
 msgstr ""
 
-#: dashboard.py:215
+#: dashboard.py:221
 msgid "Advanced"
 msgstr ""
 
-#: dashboard.py:221
+#: dashboard.py:227
 msgid "Advanced configuration"
 msgstr ""
 
-#: dashboard.py:224
+#: dashboard.py:230
 msgid "Auth"
 msgstr ""
 
-#: dashboard.py:230
+#: dashboard.py:236
 msgid "Registration"
 msgstr ""
 
-#: dashboard.py:236
+#: dashboard.py:242
 msgid "Sites"
 msgstr ""
 
-#: dashboard.py:247
+#: dashboard.py:253
 msgid "Quick links"
 msgstr ""
 
-#: dashboard.py:254
+#: dashboard.py:260
 msgid "Browse media files"
 msgstr ""
 
-#: dashboard.py:257
+#: dashboard.py:263
 msgid "Return to site"
 msgstr ""
 
-#: dashboard.py:266
+#: dashboard.py:272
 msgid "Recent Actions"
 msgstr ""
 
-#: dashboard.py:275
+#: dashboard.py:281
 msgid "Community and support"
 msgstr ""
 
-#: dashboard.py:283
+#: dashboard.py:289
 msgid "Official website"
 msgstr ""
 
-#: dashboard.py:288
+#: dashboard.py:294
 msgid "Tutorials"
 msgstr ""
 
-#: default_settings.py:190
+#: default_settings.py:191
 msgid "Admin Thumbnail"
 msgstr ""
 
-#: default_settings.py:192
+#: default_settings.py:193
 msgid "Thumbnail (100px height)"
 msgstr ""
 
-#: default_settings.py:194
+#: default_settings.py:195
 msgid "Small (300x300px)"
 msgstr ""
 
-#: default_settings.py:196
+#: default_settings.py:197
 msgid "Medium (460px width)"
 msgstr ""
 
-#: default_settings.py:198
+#: default_settings.py:199
 msgid "Big (620px width)"
 msgstr ""
 
-#: default_settings.py:200
+#: default_settings.py:201
 msgid "Cropped (60x60px)"
 msgstr ""
 
-#: default_settings.py:202
+#: default_settings.py:203
 msgid "Cropped Thumbnail (140x140px)"
+msgstr ""
+
+#: default_settings.py:205
+msgid "Slideshow"
 msgstr ""
 
 #: forms.py:57 forms.py:74 forms.py:211
@@ -250,48 +262,56 @@ msgstr ""
 msgid "Your avatar image is too big"
 msgstr ""
 
-#: frontend_views.py:43
+#: frontend_views.py:44
 msgid "list of root items for the selected Menu"
 msgstr ""
 
-#: frontend_views.py:63
+#: frontend_views.py:64
 msgid "flat list of all items for the selected Menu"
 msgstr ""
 
-#: frontend_views.py:77
+#: frontend_views.py:78
 msgid "Collapse style"
 msgstr ""
 
-#: frontend_views.py:78
+#: frontend_views.py:79
 msgid "vertical"
 msgstr ""
 
-#: frontend_views.py:79
+#: frontend_views.py:80
 msgid "horizontal"
 msgstr ""
 
-#: frontend_views.py:80
+#: frontend_views.py:81
 msgid "on click"
 msgstr ""
 
-#: frontend_views.py:81 models.py:70 models.py:320
+#: frontend_views.py:82 models.py:70 models.py:320
 msgid "disabled"
 msgstr ""
 
-#: frontend_views.py:89
+#: frontend_views.py:90
 msgid "hierarchical list of the items in the selected menu"
 msgstr ""
 
-#: frontend_views.py:146
+#: frontend_views.py:147
 msgid "list view of children of the current menu item"
 msgstr ""
 
-#: frontend_views.py:174
+#: frontend_views.py:175
 msgid "search box"
 msgstr ""
 
-#: frontend_views.py:190
+#: frontend_views.py:191
 msgid "expanded hierarchical list of all collection and menus"
+msgstr ""
+
+#: frontend_views.py:270
+msgid "Items to show"
+msgstr ""
+
+#: frontend_views.py:277
+msgid "list of the last site content comments"
 msgstr ""
 
 #: models.py:63
@@ -319,7 +339,7 @@ msgid "keywords"
 msgstr ""
 
 #: models.py:76 apps/medialibrary/models.py:40 apps/polls/models.py:36
-#: core/collections/models.py:58 core/collections/models.py:100
+#: core/collections/models.py:60 core/collections/models.py:102
 msgid "description"
 msgstr ""
 
@@ -347,8 +367,8 @@ msgstr ""
 #: models.py:105 models.py:135 models.py:252 models.py:303 models.py:389
 #: models.py:412 apps/locations/models.py:36 apps/locations/models.py:43
 #: apps/locations/models.py:50 apps/newsletter/models.py:34
-#: apps/staticpages/models.py:43 core/collections/models.py:47
-#: core/collections/models.py:92
+#: apps/staticpages/models.py:43 core/collections/models.py:49
+#: core/collections/models.py:94
 msgid "name"
 msgstr ""
 
@@ -364,7 +384,7 @@ msgstr ""
 msgid "menus"
 msgstr ""
 
-#: models.py:136 core/collections/models.py:97
+#: models.py:136 core/collections/models.py:99
 msgid "parent"
 msgstr ""
 
@@ -426,7 +446,7 @@ msgstr ""
 msgid "layouts"
 msgstr ""
 
-#: models.py:275 models.py:280 core/collections/models.py:160
+#: models.py:275 models.py:280 core/collections/models.py:195
 msgid "content type"
 msgstr ""
 
@@ -465,7 +485,7 @@ msgstr ""
 #: models.py:393 models.py:428 models.py:438 apps/medialibrary/models.py:50
 #: apps/medialibrary/models.py:98 apps/medialibrary/models.py:111
 #: apps/medialibrary/models.py:132 apps/medialibrary/models.py:145
-#: core/collections/models.py:59 core/collections/models.py:101
+#: core/collections/models.py:61 core/collections/models.py:103
 msgid "image"
 msgstr ""
 
@@ -477,7 +497,7 @@ msgstr ""
 msgid "notes"
 msgstr ""
 
-#: models.py:400 core/collections/models.py:57
+#: models.py:400 core/collections/models.py:59
 msgid "content types"
 msgstr ""
 
@@ -534,7 +554,7 @@ msgstr ""
 msgid "Choose whether your profile info should be publicly visible or not"
 msgstr ""
 
-#: settings.py:95
+#: settings.py:105
 msgid "You need to set the CYCLOPE_PROJECT_PATH in your settings file."
 msgstr ""
 
@@ -542,7 +562,8 @@ msgstr ""
 msgid "Lookup"
 msgstr ""
 
-#: apps/articles/admin.py:58 apps/staticpages/admin.py:67
+#: apps/articles/admin.py:58 apps/feeds/admin.py:40
+#: apps/staticpages/admin.py:67
 msgid "Publication data"
 msgstr ""
 
@@ -570,7 +591,8 @@ msgstr ""
 msgid "pre-title"
 msgstr ""
 
-#: apps/articles/models.py:44 apps/staticpages/models.py:31
+#: apps/articles/models.py:44 apps/feeds/models.py:41
+#: apps/staticpages/models.py:31
 msgid "summary"
 msgstr ""
 
@@ -634,6 +656,7 @@ msgstr ""
 
 #: apps/articles/templates/articles/article_teaser.html:29
 #: apps/contacts/templates/contacts/contact_teaser.html:27
+#: apps/feeds/templates/feeds/feed_teaser.html:12
 #: apps/forum/templates/forum/topic_teaser.html:9
 #: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:18
 msgid "More"
@@ -792,6 +815,39 @@ msgstr ""
 
 #: apps/contacts/templates/contacts/contact_teaser.html:28
 msgid "Last change"
+msgstr ""
+
+#: apps/feeds/frontend_views.py:34
+msgid "entries to show"
+msgstr ""
+
+#: apps/feeds/frontend_views.py:35
+msgid "show titles only"
+msgstr ""
+
+#: apps/feeds/frontend_views.py:40
+msgid "detailed view of the selected Feed"
+msgstr ""
+
+#: apps/feeds/models.py:40
+#: apps/newsletter/templates/newsletter/content.html:36
+msgid "URL"
+msgstr ""
+
+#: apps/feeds/models.py:42
+msgid "default number of entries"
+msgstr ""
+
+#: apps/feeds/models.py:43
+msgid "by default, only show entry titles"
+msgstr ""
+
+#: apps/feeds/models.py:46
+msgid "feed"
+msgstr ""
+
+#: apps/feeds/models.py:47
+msgid "feeds"
 msgstr ""
 
 #: apps/forum/forms.py:33
@@ -1066,10 +1122,6 @@ msgstr ""
 msgid "Send e-mail"
 msgstr ""
 
-#: apps/newsletter/templates/newsletter/content.html:36
-msgid "URL"
-msgstr ""
-
 #: apps/newsletter/templates/newsletter/mail_sent.html:5
 msgid "The e-mail has been sent for newsletter "
 msgstr ""
@@ -1194,8 +1246,8 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: core/collections/admin.py:105 core/collections/models.py:127
-#: core/collections/models.py:190
+#: core/collections/admin.py:105 core/collections/models.py:129
+#: core/collections/models.py:225
 msgid "categories"
 msgstr ""
 
@@ -1224,135 +1276,200 @@ msgid "list of root items for the selected Category"
 msgstr ""
 
 #: core/collections/frontend_views.py:60
+#: core/collections/frontend_views.py:164
 msgid "Show title"
 msgstr ""
 
 #: core/collections/frontend_views.py:61
+#: core/collections/frontend_views.py:165
 msgid "Show description"
 msgstr ""
 
 #: core/collections/frontend_views.py:62
+#: core/collections/frontend_views.py:166
 msgid "Show image"
 msgstr ""
 
 #: core/collections/frontend_views.py:65
-msgid "Sort by"
-msgstr ""
-
-#: core/collections/frontend_views.py:66
-msgid "Date ↓ (newest first)"
+#: core/collections/frontend_views.py:167
+msgid "Limit to N items (0 = no limit)"
 msgstr ""
 
 #: core/collections/frontend_views.py:67
-msgid "Date ↑ (oldest first)"
+#: core/collections/frontend_views.py:169
+msgid "Sort by"
 msgstr ""
 
 #: core/collections/frontend_views.py:68
-msgid "Alphabetic"
+#: core/collections/frontend_views.py:170
+msgid "Date ↓ (newest first)"
+msgstr ""
+
+#: core/collections/frontend_views.py:69
+#: core/collections/frontend_views.py:171
+msgid "Date ↑ (oldest first)"
 msgstr ""
 
 #: core/collections/frontend_views.py:70
+#: core/collections/frontend_views.py:172
+msgid "Alphabetic"
+msgstr ""
+
+#: core/collections/frontend_views.py:72
 msgid "Simplified"
 msgstr ""
 
-#: core/collections/frontend_views.py:71
+#: core/collections/frontend_views.py:73
+#: core/collections/frontend_views.py:174
 msgid "Include descendant's elements"
 msgstr ""
 
-#: core/collections/frontend_views.py:73
+#: core/collections/frontend_views.py:75
 msgid "Show navigation"
 msgstr ""
 
-#: core/collections/frontend_views.py:74
+#: core/collections/frontend_views.py:76
 msgid "Top"
 msgstr ""
 
-#: core/collections/frontend_views.py:75
+#: core/collections/frontend_views.py:77
 msgid "Bottom"
 msgstr ""
 
-#: core/collections/frontend_views.py:76
+#: core/collections/frontend_views.py:78
 msgid "Disabled"
 msgstr ""
 
-#: core/collections/frontend_views.py:83
+#: core/collections/frontend_views.py:84
 msgid "default view for the Collection"
 msgstr ""
 
-#: core/collections/frontend_views.py:103
+#: core/collections/frontend_views.py:104
 msgid "teaser list of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:152
-msgid "Labeled icon list of Category members"
+#: core/collections/frontend_views.py:153
+msgid "labeled icon list of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:166
-msgid "full content of Category members"
+#: core/collections/frontend_views.py:176
+msgid "Scroll by N items"
 msgstr ""
 
-#: core/collections/frontend_views.py:181
-msgid "teaser list of the root Categories of a Collection"
+#: core/collections/frontend_views.py:178
+msgid "Speed of transition (in milliseconds)"
+msgstr ""
+
+#: core/collections/frontend_views.py:180
+msgid "Automatic playback"
+msgstr ""
+
+#: core/collections/frontend_views.py:182
+msgid "Stop automatic playback after click"
+msgstr ""
+
+#: core/collections/frontend_views.py:184
+msgid "Delay between transitions (seconds)"
+msgstr ""
+
+#: core/collections/frontend_views.py:186
+msgid "Circular navigation"
+msgstr ""
+
+#: core/collections/frontend_views.py:188
+msgid "Navigation wrap"
+msgstr ""
+
+#: core/collections/frontend_views.py:189
+msgid "Circular"
+msgstr ""
+
+#: core/collections/frontend_views.py:190
+msgid "First"
+msgstr ""
+
+#: core/collections/frontend_views.py:191
+msgid "Last"
+msgstr ""
+
+#: core/collections/frontend_views.py:192
+msgid "Both"
+msgstr ""
+
+#: core/collections/frontend_views.py:193
+msgid "None"
 msgstr ""
 
 #: core/collections/frontend_views.py:200
-msgid "list of the root Categories of a Collection"
+msgid "slideshow of Category members"
 msgstr ""
 
-#: core/collections/frontend_views.py:212
-msgid "hierarchical list of Categories in a Collection"
+#: core/collections/frontend_views.py:244
+msgid "full content of Category members"
+msgstr ""
+
+#: core/collections/frontend_views.py:259
+msgid "teaser list of the root Categories of a Collection"
 msgstr ""
 
 #: core/collections/frontend_views.py:278
+msgid "list of the root Categories of a Collection"
+msgstr ""
+
+#: core/collections/frontend_views.py:290
+msgid "hierarchical list of Categories in a Collection"
+msgstr ""
+
+#: core/collections/frontend_views.py:356
 msgid "hierarchical list of Categories that will show an icon list on click"
 msgstr ""
 
-#: core/collections/frontend_views.py:287
+#: core/collections/frontend_views.py:365
 msgid ""
 "alphabetical teaser list of all the members of the Collection's Categories"
 msgstr ""
 
-#: core/collections/frontend_views.py:316
+#: core/collections/frontend_views.py:394
 msgid "list of Category members as forum view"
 msgstr ""
 
-#: core/collections/models.py:50
+#: core/collections/models.py:52
 msgid "visible"
 msgstr ""
 
-#: core/collections/models.py:54
+#: core/collections/models.py:56
 msgid "navigation root"
 msgstr ""
 
-#: core/collections/models.py:61
+#: core/collections/models.py:63
 msgid "default list view"
 msgstr ""
 
-#: core/collections/models.py:71 core/collections/models.py:91
+#: core/collections/models.py:73 core/collections/models.py:93
 msgid "collection"
 msgstr ""
 
-#: core/collections/models.py:72
+#: core/collections/models.py:74
 msgid "collections"
 msgstr ""
 
-#: core/collections/models.py:99
+#: core/collections/models.py:101
 msgid "active"
 msgstr ""
 
-#: core/collections/models.py:126 core/collections/models.py:157
+#: core/collections/models.py:128 core/collections/models.py:192
 msgid "category"
 msgstr ""
 
-#: core/collections/models.py:180
+#: core/collections/models.py:215
 msgid "categorization"
 msgstr ""
 
-#: core/collections/models.py:181
+#: core/collections/models.py:216
 msgid "categorizations"
 msgstr ""
 
-#: core/collections/models.py:197
+#: core/collections/models.py:232
 msgid "is orphan"
 msgstr ""
 
