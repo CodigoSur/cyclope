@@ -19,12 +19,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
+from datetime import datetime
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 from cyclope.core import frontend
 from cyclope import views
+from cyclope import settings as cyc_settings
 import feedparser
 
 from models import Feed
@@ -33,7 +34,7 @@ from models import Feed
 class FeedDetailOptions(forms.Form):
     limit_to_n_items = forms.IntegerField(label=_('entries to show'), required=False)
     titles_only = forms.BooleanField(label=_('show titles only'), initial=False, required=False)
-    
+
 class FeedDetail(frontend.FrontendView):
     """Detail view for Feeds"""
     name='detail'
@@ -43,13 +44,20 @@ class FeedDetail(frontend.FrontendView):
     is_content_view = True
     is_region_view = True
     options_form = FeedDetailOptions
-    
+
+    _feed_cache = {}
+
     def get_response(self, request, req_context, options, content_object):
         if not options['limit_to_n_items']:
             options['limit_to_n_items'] = content_object.number_of_entries
         if not options['titles_only']:
             options['titles_only'] = content_object.titles_only
-        d = feedparser.parse(content_object.url)
+
+        now = datetime.now()
+        d, last_access = self._feed_cache.get(content_object.url, (None, None))
+        if d is None or (now - last_access).total_seconds() > cyc_settings.CYCLOPE_FEED_CACHE_TIME:
+            d = feedparser.parse(content_object.url)
+            self._feed_cache[content_object.url] = (d, now)
         context = {'entries': d.entries[:options['limit_to_n_items']]}
         return views.object_detail(request, req_context, content_object,
                                    extra_context=context)

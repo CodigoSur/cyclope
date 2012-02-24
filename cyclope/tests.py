@@ -39,7 +39,9 @@ from cyclope.apps.articles.models import Article
 from cyclope.apps.medialibrary.models import *
 from cyclope.apps.polls.models import *
 from cyclope.apps.forum.models import *
+from cyclope.apps.feeds.models import Feed
 from cyclope.fields import MultipleField
+
 
 def create_static_page(name=None):
     if name is None:
@@ -443,6 +445,16 @@ class TopicTestCase(ViewableTestCase):
         self.test_object = Topic(name='An instance', author=self.user)
         self.test_object.save()
         frontend.autodiscover()
+
+
+class FeedTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = Feed
+
+    def setUp(self):
+        self.test_object = Feed.objects.create(name="An instance", url="http://localhost:8000/rss")
+        frontend.autodiscover()
+
 
 class MultipleFieldTestCase(TestCase):
     def setUp(self):

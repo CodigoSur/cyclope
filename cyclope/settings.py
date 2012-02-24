@@ -70,7 +70,7 @@ CYCLOPE_STATIC_ROOT = getattr(settings, 'CYCLOPE_STATIC_ROOT',
 
 # For backwards compatibility only!
 CYCLOPE_MEDIA_URL =  CYCLOPE_STATIC_URL
-CYCLOPE_MEDIA_ROOT = CYCLOPE_STATIC_ROOT 
+CYCLOPE_MEDIA_ROOT = CYCLOPE_STATIC_ROOT
 
 
 # FIXME #120: STATIC_ROOT is pointing to MEDIA_ROOT because some
@@ -97,6 +97,10 @@ CYCLOPE_PAGINATION = getattr(settings, 'CYCLOPE_PAGINATION',
                                'DETAIL' : 9999,
                                })
 CYCLOPE_RSS_LIMIT = 50
+
+# Feed
+
+CYCLOPE_FEED_CACHE_TIME = getattr(settings, 'CYCLOPE_FEED_CACHE_TIME', 600)
 
 CYCLOPE_PROJECT_PATH = getattr(settings, 'CYCLOPE_PROJECT_PATH', None)
 
