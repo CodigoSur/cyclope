@@ -42,10 +42,11 @@ class Newsletter(models.Model):
     show_ToC = models.BooleanField(verbose_name=_("show table of contents"), default=False)
     header = models.TextField(verbose_name=_('header'), help_text="Text that will always be added on top of the content.", blank=True)
     layout = models.ForeignKey(Layout, verbose_name=_('layout'), help_text="Layout to use to build the resulting HTML.")
-    sender = models.EmailField(verbose_name=_('sender'), help_text="e-mail address that will be used to send the newsletter.")
+    sender_name = models.CharField(verbose_name=_('sender name'), help_text="name that will displayed as the sender of the newsletter.",  max_length=40, default="", blank=True)
+    sender = models.EmailField(verbose_name=_('sender e-mail'), help_text="e-mail address that will be used to send the newsletter.")
     test_recipients = models.CharField(verbose_name=_('test recipients'), help_text="comma separated list of test e-mail addresses", max_length=255)
     recipients = models.TextField(verbose_name=_('recipients'), help_text="comma separated list of recipient e-mail addresses")
-    
+
     def __unicode__(self):
         return self.name
 

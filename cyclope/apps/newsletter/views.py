@@ -64,13 +64,18 @@ def send(request, id, test=False):
                    preserve_internal_links=True,
                    )
     html_message = pm.transform()
-    sender = newsletter.sender
+
     if test:
         recipients = map(strip, newsletter.test_recipients.split(','))
     else:
         recipients = map(strip, newsletter.recipients.split(','))
 
-    msg = EmailMessage(subject, html_message, sender, recipients)
+    if newsletter.sender_name:
+        from_address = "%s <%s>" % (newsletter.sender_name, newsletter.sender)
+    else:
+        from_address = newsletter.sender
+
+    msg = EmailMessage(subject, html_message, from_address, recipients)
     msg.content_subtype = "html"
     try:
         msg.send()
