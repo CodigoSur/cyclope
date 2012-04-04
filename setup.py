@@ -47,7 +47,6 @@ setup(
     # revision number is indicated in the dependency_links for packages
     # that are downloaded from source to ensure a tested revision is used.
     dependency_links=[
-        'hg+http://bitbucket.org/ubernostrum/django-registration@d36a38202ee3d09d342b000f4ff634296f90df49#egg=django-registration-0.8-alpha-1',
         'hg+http://bitbucket.org/drmeers/django-dbgettext#egg=django-dbgettext-0.1',
         'git+http://github.com/nicoechaniz/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-3.0-nograpup',
         'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-0.4a1',
@@ -56,7 +55,7 @@ setup(
     ],
 
     install_requires=[
-        'Django==1.3.1',
+        'Django>=1.3.1,<1.4',
         'FeinCms==1.3.0',
         'django-autoslug==1.4.1',
         'django-mptt==0.4.2', # 0.4 breaks compatibility
@@ -65,8 +64,8 @@ setup(
         'django-tagging==0.3.1',
         'django-tagging-autocomplete==0.3.1',
         'django-filebrowser==3.0-nograpup', # installed from our clone
-        'South==0.7.2',
-        'django-registration>=0.8-alpha-1', # fixed revision in dep links
+        'South>=0.7,<0.8',
+        'django-registration==0.8',
         'django-profiles==0.2',
         'django-admin-tools==0.4.0',
         'django-contact-form>=0.4a1', # installed from our clone
