@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-23 20:26-0300\n"
+"POT-Creation-Date: 2012-04-04 17:37-0300\n"
 "PO-Revision-Date: 2010-10-29 22:16\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -170,35 +170,35 @@ msgstr "Sitio web oficial"
 msgid "Tutorials"
 msgstr "Tutoriales"
 
-#: default_settings.py:191
+#: default_settings.py:180
 msgid "Admin Thumbnail"
 msgstr "Miniatura para sitio de administración"
 
-#: default_settings.py:193
+#: default_settings.py:182
 msgid "Thumbnail (100px height)"
 msgstr "Imagen miniatura (100px alto)"
 
-#: default_settings.py:195
+#: default_settings.py:184
 msgid "Small (300x300px)"
 msgstr "Pequeña (300x300px)"
 
-#: default_settings.py:197
+#: default_settings.py:186
 msgid "Medium (460px width)"
 msgstr "Mediana (460px ancho)"
 
-#: default_settings.py:199
+#: default_settings.py:188
 msgid "Big (620px width)"
 msgstr "Grande (620px ancho)"
 
-#: default_settings.py:201
+#: default_settings.py:190
 msgid "Cropped (60x60px)"
 msgstr "Cortada (60x60px)"
 
-#: default_settings.py:203
+#: default_settings.py:192
 msgid "Cropped Thumbnail (140x140px)"
 msgstr "Miniatura cortada (140x140px)"
 
-#: default_settings.py:205
+#: default_settings.py:194
 msgid "Slideshow"
 msgstr "Rotador"
 
@@ -556,7 +556,7 @@ msgstr "público"
 msgid "Choose whether your profile info should be publicly visible or not"
 msgstr "Elije si deseas que tu información de perfil sea pública"
 
-#: settings.py:105
+#: settings.py:109
 msgid "You need to set the CYCLOPE_PROJECT_PATH in your settings file."
 msgstr "Debe establecer un valor para CYCLOPE_PROJECT_PATH en settings.py"
 
@@ -819,15 +819,15 @@ msgstr "Última actualización"
 msgid "Last change"
 msgstr "Última modificación"
 
-#: apps/feeds/frontend_views.py:34
+#: apps/feeds/frontend_views.py:35
 msgid "entries to show"
 msgstr "entradas a mostrar"
 
-#: apps/feeds/frontend_views.py:35
+#: apps/feeds/frontend_views.py:36
 msgid "show titles only"
 msgstr "sólo mostrar títulos"
 
-#: apps/feeds/frontend_views.py:40
+#: apps/feeds/frontend_views.py:41
 msgid "detailed view of the selected Feed"
 msgstr "vista detallada de la sindicación seleccionada"
 
@@ -1095,22 +1095,26 @@ msgid "header"
 msgstr "encabezado"
 
 #: apps/newsletter/models.py:45
-msgid "sender"
-msgstr "remitente"
+msgid "sender name"
+msgstr "nombre del remitente"
 
 #: apps/newsletter/models.py:46
+msgid "sender e-mail"
+msgstr "e-mail del remitente"
+
+#: apps/newsletter/models.py:47
 msgid "test recipients"
 msgstr "destinatarios de prueba"
 
-#: apps/newsletter/models.py:47
+#: apps/newsletter/models.py:48
 msgid "recipients"
 msgstr "destinatarios"
 
-#: apps/newsletter/models.py:53
+#: apps/newsletter/models.py:54
 msgid "newsletter"
 msgstr "boletín"
 
-#: apps/newsletter/models.py:54
+#: apps/newsletter/models.py:55
 msgid "newsletters"
 msgstr "boletines"
 
@@ -1382,7 +1386,7 @@ msgstr "Navegación circular"
 
 #: core/collections/frontend_views.py:188
 msgid "Navigation wrap"
-msgstr ""
+msgstr "Navegación"
 
 #: core/collections/frontend_views.py:189
 msgid "Circular"
@@ -1800,7 +1804,7 @@ msgstr "Ver archivo"
 #: templates/cyclope/themes/neutrona/newsletter.html:73
 #: templates/cyclope/themes/neutronica/newsletter.html:73
 msgid "Subscription options"
-msgstr "Opciones de subscripción"
+msgstr "Opciones de suscripción"
 
 #: templates/cyclope/themes/neutrona/newsletter.html:128
 #: templates/cyclope/themes/neutronica/newsletter.html:128
@@ -1840,7 +1844,7 @@ msgstr "Sin barras laterales"
 
 #: templates/cyclope/themes/neutronica/left_sidebar_block.html:9
 msgid "Subscribe to RSS"
-msgstr "Subscripción RSS"
+msgstr "Suscripción RSS"
 
 #: templates/filebrowser/index.html:48
 msgid "New Folder"
@@ -2075,7 +2079,6 @@ msgstr "Resultados"
 msgid "No results found."
 msgstr "No se encontró ningún resultado"
 
-
 #: contrib/admin/templates/admin/login.html:19
 msgid "Username:"
 msgstr "Nombre de ingreso:"
@@ -2099,6 +2102,9 @@ msgstr "nombre de ingreso"
 #: contrib/auth/models.py:223
 msgid "users"
 msgstr "personas"
+
+#~ msgid "sender"
+#~ msgstr "remitente"
 
 #~ msgid "Visit website"
 #~ msgstr "Ver en el sitio web"

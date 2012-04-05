@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-23 20:26-0300\n"
+"POT-Creation-Date: 2012-04-04 17:37-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -170,35 +170,35 @@ msgstr ""
 msgid "Tutorials"
 msgstr ""
 
-#: default_settings.py:191
+#: default_settings.py:180
 msgid "Admin Thumbnail"
 msgstr ""
 
-#: default_settings.py:193
+#: default_settings.py:182
 msgid "Thumbnail (100px height)"
 msgstr ""
 
-#: default_settings.py:195
+#: default_settings.py:184
 msgid "Small (300x300px)"
 msgstr ""
 
-#: default_settings.py:197
+#: default_settings.py:186
 msgid "Medium (460px width)"
 msgstr ""
 
-#: default_settings.py:199
+#: default_settings.py:188
 msgid "Big (620px width)"
 msgstr ""
 
-#: default_settings.py:201
+#: default_settings.py:190
 msgid "Cropped (60x60px)"
 msgstr ""
 
-#: default_settings.py:203
+#: default_settings.py:192
 msgid "Cropped Thumbnail (140x140px)"
 msgstr ""
 
-#: default_settings.py:205
+#: default_settings.py:194
 msgid "Slideshow"
 msgstr ""
 
@@ -553,7 +553,7 @@ msgstr ""
 msgid "Choose whether your profile info should be publicly visible or not"
 msgstr ""
 
-#: settings.py:105
+#: settings.py:109
 msgid "You need to set the CYCLOPE_PROJECT_PATH in your settings file."
 msgstr ""
 
@@ -816,15 +816,15 @@ msgstr ""
 msgid "Last change"
 msgstr ""
 
-#: apps/feeds/frontend_views.py:34
+#: apps/feeds/frontend_views.py:35
 msgid "entries to show"
 msgstr ""
 
-#: apps/feeds/frontend_views.py:35
+#: apps/feeds/frontend_views.py:36
 msgid "show titles only"
 msgstr ""
 
-#: apps/feeds/frontend_views.py:40
+#: apps/feeds/frontend_views.py:41
 msgid "detailed view of the selected Feed"
 msgstr ""
 
@@ -1090,22 +1090,26 @@ msgid "header"
 msgstr ""
 
 #: apps/newsletter/models.py:45
-msgid "sender"
+msgid "sender name"
 msgstr ""
 
 #: apps/newsletter/models.py:46
-msgid "test recipients"
+msgid "sender e-mail"
 msgstr ""
 
 #: apps/newsletter/models.py:47
+msgid "test recipients"
+msgstr ""
+
+#: apps/newsletter/models.py:48
 msgid "recipients"
 msgstr ""
 
-#: apps/newsletter/models.py:53
+#: apps/newsletter/models.py:54
 msgid "newsletter"
 msgstr ""
 
-#: apps/newsletter/models.py:54
+#: apps/newsletter/models.py:55
 msgid "newsletters"
 msgstr ""
 
