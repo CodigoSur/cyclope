@@ -15,9 +15,10 @@
     <span class="author">{{ topic.author }}</span>
     <div class="avatar">{% if avatar %}<img src="{{MEDIA_URL}}/{{ avatar }}" alt=""></img>{% endif %}</div>
   </div>
-  {{ topic.text }}
+  <div class="text"><span class="html-text html-content">
+    {{ topic.text|smart_style}}
+  </span></div>
 
-<!--COMENTARIOS -->
   {% include 'comments/comments_block.html' %}
 </div>
 

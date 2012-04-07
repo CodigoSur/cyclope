@@ -5,6 +5,7 @@
 {% block content %}
 
 {% include 'collections/hierarchycal_navigation_block.html' %}
+  <h1 class="title">{{ category }}</h1>
   <div class='forum'>
   <div class='link-create-topic'>
     <a href="{% url category-create_topic category.slug %}">{% trans 'Create a new topic' %}</a>
@@ -12,11 +13,10 @@
 <div class="clear"></div>
   <table >
       <tr>
-        <th class="name">{% comment %}{% trans 'Name' %}{% endcomment %}Temas</th>
-        <th class="comments">{% comment %}El nombre deberaas ser Temas. Asi se pude achicas la columna. no como como cambiarlo en el languaje
-        {% trans 'Comments' %}{% endcomment %}Mensajes</th>
+        <th class="name">{% trans 'Subject' %}</th>
+        <th class="comments">{% trans 'Replies'%}</th>
         <th class="created">{% trans 'Created' %}</th>
-        <th class="last_comment">{% comment %}{% trans 'Last comment' %}{% endcomment %}Últimos mensajes</th>
+        <th class="last_comment">{% trans 'Last comment' %}</th>
       </tr>
       {% for categorization in categorizations %}
        {% alias categorization.content_object as 'obj' %}
