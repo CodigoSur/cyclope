@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-04 17:37-0300\n"
+"POT-Creation-Date: 2012-04-07 12:26-0300\n"
 "PO-Revision-Date: 2010-10-29 22:16\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -887,6 +887,7 @@ msgid "Create"
 msgstr "Crear"
 
 #: apps/forum/templates/forum/topic_teaser.html:16
+#: core/collections/templates/collections/category_list_as_forum.html:17
 msgid "Replies"
 msgstr "Respuestas"
 
@@ -1482,16 +1483,24 @@ msgstr "Categorizaciones"
 msgid "is orphan"
 msgstr "sin categorizar"
 
-#: core/collections/templates/collections/category_list_as_forum.html:10
+#: core/collections/templates/collections/category_list_as_forum.html:11
 msgid "Create a new topic"
 msgstr "Crear nuevo tema"
 
-#: core/collections/templates/collections/category_list_as_forum.html:20
+#: core/collections/templates/collections/category_list_as_forum.html:16
+msgid "Subject"
+msgstr "Asunto"
+
+#: core/collections/templates/collections/category_list_as_forum.html:18
 msgid "Created"
 msgstr "Creado"
 
-#: core/collections/templates/collections/category_list_as_forum.html:30
-#: core/collections/templates/collections/category_list_as_forum.html:32
+#: core/collections/templates/collections/category_list_as_forum.html:19
+msgid "Last comment"
+msgstr "Último comentario"
+
+#: core/collections/templates/collections/category_list_as_forum.html:27
+#: core/collections/templates/collections/category_list_as_forum.html:29
 msgid "by"
 msgstr "por"
 
@@ -2114,9 +2123,6 @@ msgstr "personas"
 
 #~ msgid "Name"
 #~ msgstr "Nombre"
-
-#~ msgid "Last comment"
-#~ msgstr "Último comentario"
 
 #~ msgid "%(more_count)s more"
 #~ msgid_plural "%(more_count)s more"
