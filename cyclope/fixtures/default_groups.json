@@ -16,6 +16,21 @@
           "article"
         ], 
         [
+          "add_categorymap", 
+          "collections", 
+          "categorymap"
+        ], 
+        [
+          "change_categorymap", 
+          "collections", 
+          "categorymap"
+        ], 
+        [
+          "delete_categorymap", 
+          "collections", 
+          "categorymap"
+        ], 
+        [
           "add_author", 
           "cyclope", 
           "author"
@@ -104,6 +119,21 @@
           "change_soundtrack", 
           "medialibrary", 
           "soundtrack"
+        ], 
+        [
+          "add_newsletter", 
+          "newsletter", 
+          "newsletter"
+        ], 
+        [
+          "change_newsletter", 
+          "newsletter", 
+          "newsletter"
+        ], 
+        [
+          "delete_newsletter", 
+          "newsletter", 
+          "newsletter"
         ], 
         [
           "add_staticpage", 
@@ -358,6 +388,21 @@
           "delete_soundtrack", 
           "medialibrary", 
           "soundtrack"
+        ], 
+        [
+          "add_newsletter", 
+          "newsletter", 
+          "newsletter"
+        ], 
+        [
+          "change_newsletter", 
+          "newsletter", 
+          "newsletter"
+        ], 
+        [
+          "delete_newsletter", 
+          "newsletter", 
+          "newsletter"
         ], 
         [
           "add_poll", 
