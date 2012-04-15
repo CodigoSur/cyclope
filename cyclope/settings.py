@@ -128,7 +128,9 @@ def get_site_settings():
     from django.db.utils import DatabaseError
     try:
         # a Cyclope project is supposed to have only one SiteSettings object
-        site_settings = SiteSettings.objects.get()
+        #TODO(nicoechaniz): Fix for multi-site
+        site_settings = SiteSettings.objects.all()[0]
+
     # catch exceptions if the database is not available or no settings created
     except (DatabaseError, IndexError):
         site_settings = None
@@ -208,6 +210,14 @@ def _delete_from_layouts_and_menuitems(sender, instance, **kwargs):
         for item in items:
             item.content_type = item.object_id = item.content_object = None
             item.save()
+
+def reload_settings(**kwargs):
+    """Reload this module to refresh settings.
+
+    This is used in multi-site configurations."""
+
+    reload(themes)
+    reload(sys.modules[__name__])
 
 pre_delete.connect(_delete_related_contents)
 pre_delete.connect(_delete_from_layouts_and_menuitems)
