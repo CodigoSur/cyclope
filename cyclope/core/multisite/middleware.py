@@ -49,6 +49,10 @@ class DynamicSettingsMiddleware(object):
         settings.MEDIA_ROOT.set('%s/media/' % SITE_BASE_PATH)
 
         site_settings = imp.load_source("site_settings", '%s/settings.py' % SITE_BASE_PATH)
+
+        CYCLOPE_SITE_SETTINGS = cyc_settings.get_site_settings()
+        cyc_settings.populate_from_site_settings(CYCLOPE_SITE_SETTINGS)
+
         admin.autodiscover()
         for setting_name in dir(site_settings):
             if setting_name == setting_name.upper():

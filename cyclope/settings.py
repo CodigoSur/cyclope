@@ -117,6 +117,8 @@ CYCLOPE_PROJECT_NAME = os.path.basename(CYCLOPE_PROJECT_PATH)
 sys.path.append(os.path.join(CYCLOPE_THEMES_ROOT, '../'))
 import themes
 
+CYCLOPE_BASE_CONTENT_TYPES = site.base_content_types
+
 def get_site_settings():
     """Get the SiteSettings object.
 
@@ -129,7 +131,7 @@ def get_site_settings():
     try:
         # a Cyclope project is supposed to have only one SiteSettings object
         #TODO(nicoechaniz): Fix for multi-site
-        site_settings = SiteSettings.objects.all()[0]
+        site_settings = SiteSettings.objects.get()
 
     # catch exceptions if the database is not available or no settings created
     except (DatabaseError, IndexError):
@@ -137,14 +139,10 @@ def get_site_settings():
 
     return site_settings
 
-CYCLOPE_BASE_CONTENT_TYPES = site.base_content_types
-
-CYCLOPE_SITE_SETTINGS = get_site_settings()
-
-# If the site has already been set up we read some settings
-# and make them available at module level
-if CYCLOPE_SITE_SETTINGS is not None:
-    CYCLOPE_BASE_URL = "http://"+ CYCLOPE_SITE_SETTINGS.site.domain
+def populate_from_site_settings(site_settings):
+    # Read some settings and make them available at module level
+    CYCLOPE_SITE_SETTINGS = site_settings
+    CYCLOPE_BASE_URL = "http://" + CYCLOPE_SITE_SETTINGS.site.domain # FIXME: could be https
     CYCLOPE_CURRENT_THEME = CYCLOPE_SITE_SETTINGS.theme
     if CYCLOPE_CURRENT_THEME in themes.local_themes:
         CYCLOPE_THEME_MEDIA_URL = '%s%s/' % (
@@ -168,6 +166,14 @@ if CYCLOPE_SITE_SETTINGS is not None:
         #TODO(nicoechaniz): fix this workaround. It's here for migrations on the Layout model, which fail to complete with a DatabaseError when this module is imported. Eg: cyclope/migrations/0011...
         except DatabaseError:
             pass
+
+    # Update the settings module with the settings
+    for name, value in locals().copy().iteritems():
+        if name.startswith("CYCLOPE"):
+            globals()[name] = value
+
+#CYCLOPE_SITE_SETTINGS = get_site_settings() # FIXME: This should be executed on
+                                             # non multisite deploys
 
 def _refresh_site_settings(sender, instance, created, **kwargs):
     "Callback to refresh site settings when they are modified in the database"
