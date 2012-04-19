@@ -1,0 +1,21 @@
+{% extends CYCLOPE_THEME_BASE_TEMPLATE %}
+
+{% load layout %}
+
+{% block body_class %}two_sidebars{% endblock %}
+
+{% block page_content %}
+
+<div id="fuego" class="grid_14">
+    {% region 'before_content' %}
+    {% block content %}{% endblock %}
+    {% region 'after_content' %}
+</div>
+
+<div id="amor" class="grid_5">
+  <div class="content">
+    {% region 'right_sidebar'%}
+  </div>
+</div>
+
+{% endblock %}
