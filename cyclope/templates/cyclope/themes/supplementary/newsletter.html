@@ -1,0 +1,197 @@
+{% load layout i18n fb_versions cyclope_utils %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+    Plantilla Boletín Neutron para Cyclope 3 GPL
+    Esta plantilla fue desarrollada por Codigo Sur: www.codigosur.org
+    Diseno conceptual + HTML + CSS: Santiago Hoerth
+    Codigo HTML realizado bajo licencia GPL (copialo, mejoralo, pasalo)
+    Ver licencia en: http://creativecommons.org/licenses/GPL/2.0/deed.es_AR
+    Ten en cuenta que las imagenes, los nombres y los logos de este sitio no pueden usarse. Solo el codigo HTML y CSS es GPL. Gracias :)
+    Si modificas no borres estas lineas :)
+  -->
+
+{% join CYCLOPE_BASE_URL CYCLOPE_THEME_MEDIA_URL as base_theme_media_url %}
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+  <head>
+    <title>{{ newsletter.name }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+      body {color:#000;margin:0;padding:0;}
+      .mascara {color:#000;padding:0 50px;background-color:#ccc;}
+      #menucito td {background-color: #fff;}
+      #cabezal {background-color: #fff;}
+      #cabezal td {background: #ccc url({{ base_theme_media_url }}images/boletin/cabezal.png) no-repeat 0 0;}
+      #contenedora {background-color: #fff;}
+      .encabezado {padding:0 0 0 10px;color:#666;font-size:13px;display:block;margin:5px 0 0;top:0;float:left;font-family: Arial,Helvetica,sans-serif;font-weight:700;}
+      .menuh {display:block;padding:0;color:#000;margin:5px 0;font-family: Arial,Helvetica,sans-serif;text-align:right;width:720px;}
+      .menuh a {padding:5px;color:#333;font-size:12px;text-decoration:none;}
+      .titulo {color:#fff;text-align:center;font-family: Arial,Helvetica,sans-serif;font-size:30px;padding:5px 10px;}
+      .medianera {padding:15px 0 0;}
+      .editorial {margin:0 5px;}
+      #contenedor_portada {padding:0 10px; width:470px;}
+      #contenedor_portada img {padding:10px 0;}
+      .editorial-titulo {font-family: Arial,Helvetica,sans-serif;font-size:30px;font-weight:700;color:#000;padding:0;display:block;}
+      .editorial-resumen {font-family: Arial,Helvetica,sans-serif;text-align:justify;font-size:16px;display:block;}
+      .sumario-mascara {border: 0px solid #000000;background-color:#ffffff;margin:0 5px;width:190px;}
+      .sumario {margin:0 auto;}
+      #cs-contenido-middle {background:#e6e6e6;font-family: Arial,Helvetica,sans-serif; font-size: 11px; color:#000;}
+      .sumario-titulo {padding:4px 0;margin:0 0 15px;background:#999;color:#fff;font-weight:700;text-align:center;font-size:16px;}
+      .sumario-titulo a {color:fff;}
+      .sumario-sumario {text-align:left;padding:0 8px 11px;display:block;font-size:14px;font-weight:700;color:#333;}
+      .contenidos-mascara {display:block;width:720px;padding:0 15px;background:#eee;border-top:2px solid #999;margin-top:15px;}
+      .contenidos-mascara h3 {font-family:Arial,Helvetica,sans-serif;font-size:28px;padding:15px 0 0;margin:0;color:#000;}
+      .contenidos-mascara h4 {font-family:Arial,Helvetica,sans-serif;font-size:16px;padding:10px 0 0;margin:0;color:#666;text-align:justify;}
+      .contenidos-mascara p {font-family:Arial,Helvetica,sans-serif;font-size:14px;padding:2px;text-align:justify;}
+      .contenidos-mascara img {padding:5px 0 10px 15px;}
+      .contenidos-mascara hr {border:none;border-top:2px solid #ccc;margin:15px 0;}
+      .pie {text-align:center;padding:10px 0;color:#fff;font-size:13px;display:block;margin:0;font-family: Arial,Helvetica,sans-serif; background-color: #666;}
+      .pie a {color:#fff;text-decoration:none;}
+      .clear {clear:both;}
+
+      .newsletter-header{color: white; margin-left:10px;}
+      .pretitle {color:#000;font-family:Arial,Helvetica,sans-serif;font-size:12px;padding:5px;background:#ccc;}
+      .pretitle a {color:#000;text-decoration:none;}
+      .show-ToC {font-family:Arial,Helvetica,sans-serif;font-size:11px;padding:5px;margin: 0 10px;float:right;}
+      .show-ToC {color:#999;text-decoration:none;}
+
+    </style>
+  </head>
+  <body leftmargin="0" topmargin="0">
+    {% region 'header' %}
+    <a name="arriba"></a>
+
+    <table class="mascara" align="center">
+      <tr>
+        <td>
+
+          <!-- inicia menucito -->
+          <table id="menucito" align="center" border="0" cellpadding="0" cellspacing="0" width="720">
+            <tr>
+              <td valign="middle">
+                <span class="encabezado">{{ newsletter.content_category.name }}</span>
+                <span class="menuh"><a href="{% url index %}">{% trans "Visit our website" %}</a> <a href="{% url collection newsletter.content_category.collection.slug %}">{% trans "View archives" %}</a> <a href="http://listas.codigosur.org/mailman/listinfo">{% trans "Subscription options" %}</a>
+                </span>
+              </td>
+            </tr>
+          </table>
+          <!-- fin menucito -->
+
+          <!-- inicia cabezal -->
+          <table id="cabezal" align="center" border="0" cellpadding="0" cellspacing="0" width="720">
+            <tr>
+              <td height="124" valign="middle">
+                <h1 class="titulo">{{ newsletter.name }}</h1>
+                <span class="newsletter-header">{{ newsletter.header }}</span>
+              </td>
+            </tr>
+          </table>
+          <!-- fin cabezal -->
+
+          {% region 'before_content' %}
+
+          <!-- tabla contenedora de columnas -->
+          <table id="contenedora" align="center"  border="0" cellpadding="0" cellspacing="0" width="720" class="medianera">
+            <tr>
+              <td>
+
+                <!-- inicia portada -->
+                <table width="470" border="0" align="left" cellpadding="0" cellspacing="0" class="editorial">
+                  <tr>
+                    <td id="titular-ruta">
+                      <div id="contenedor_portada">
+                        <img src="{{ base_theme_media_url }}images/boletin/ilustracion.jpg" hspace="0" vspace="0" align="center"/>
+                        <span class="editorial-resumen">
+                          {{ newsletter.content_category.description|smart_style }}
+                        </span>
+                      </div>
+
+                    </td>
+                  </tr>
+                </table>
+                <!-- fin portada -->
+
+                <!-- inicia contenedora sumario -->
+                <table class="sumario-mascara" width="190" align="right" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td valign="top">
+                      <!-- inicia sumario-->
+                      {% if newsletter.show_ToC %}
+                      <table align="center" border="0" cellpadding="0" cellspacing="0" width="190" class="sumario">
+                        <tr>
+                          <td height="10" valign="top">
+                            <img src="{{ base_theme_media_url }}images/boletin/sumario-top.png" align="center" hspace="0" vspace="0" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td id="cs-contenido-middle">
+                            <div class="sumario-titulo"><a name="ToC">{% trans "Table of Contents" %}</a></div>
+                            {% for categorization in categorizations %}
+                            {% alias categorization.content_object as 'article' %}
+
+                            {% if article.pretitle %}
+                            <span class="pretitulo-sumario">{% trans article.pretitle %}</span>
+                            {% endif %}
+                            <a href='#{{ categorization.content_type.model }}__{{ article.slug }}' class="sumario-sumario">
+                              {{ article.name }}
+                            </a>
+                            {% if article.author %}
+                            {% trans "By"%} {{ article.author }}
+                            {% endif %}
+
+                            {% endfor %}
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td height="10" valign="top">
+                            <img src="{{ base_theme_media_url }}images/boletin/sumario-bottom.png" align="center" hspace="0" vspace="0" />
+                          </td>
+                        </tr>
+                      </table>
+                      {% endif %}
+                      <!-- termina sumario-->
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- fin contenedora sumario -->
+                <div class="clear"></div>
+                <!-- contenidos -->
+                <table align="center" class="contenidos-mascara">
+                  <tr>
+                    <td>
+                      {% block content%}{% endblock %}
+                    </td>
+                  </tr>
+                </table>
+                <!-- fin contenidos -->
+
+
+                <!-- fin tabla contenedora de columnas -->
+              </td>
+            </tr>
+          </table>
+
+          {% region 'after_content' %}
+
+          <!-- inicia pie -->
+          <table align="center" border="0" cellpadding="0" cellspacing="0" width="720">
+            <tr>
+              <td height="80" valign="middle">
+                <span class="pie">
+                  Una Publicación de Boletín Neutrón Cyclope 3.<br/>
+                  Los contenidos de este sitio web están bajo una <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO" >Licencia Creative Commons</a>.<br/>
+                  Para desuscribirse <a href="http://listas.dominio.org/mailman/listinfo/" >ingresar aquí</a>.
+                </span>
+              </td>
+            </tr>
+          </table>
+          <!-- fin pie -->
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>
+

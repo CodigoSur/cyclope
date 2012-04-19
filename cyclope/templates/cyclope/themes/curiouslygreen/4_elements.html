@@ -1,0 +1,18 @@
+{% extends CYCLOPE_THEME_BASE_TEMPLATE %}
+
+{% load layout%}
+
+{% block body_class %}4_elements{% endblock %}
+
+{% block page_content %}
+<div class="grid_19">
+<div id="fire">
+  {% region 'before_fire' %}
+  <div class="content_fire">
+  {% block content %} {% endblock %}
+  </div>
+  {% region 'after_fire' %}
+</div>
+</div>
+
+{% endblock %}
