@@ -389,7 +389,7 @@ LABELED ICONS
 TEASERS
 -------------------*/ 
 #fire .teaser {margin:0 0 20px;padding:0 0 20px;overflow:auto;border-bottom:2px dotted #c5638f;}
-#fire .teaser .summary {color:#6f0662;font-weight:400;padding:5px 0;text-align:justify;line-height:1.3em;font-size:1em;}
+#fire .teaser .summary {color:#666;font-weight:400;padding:5px 0;text-align:justify;line-height:1.3em;font-size:1em;}
 #fire .teaser .summary p {display:inline;}
 #fire .teaser .pretitle {margin:10px 0 0;display:inline-block;} 
 #fire .teaser .date {}
