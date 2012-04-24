@@ -48,16 +48,21 @@ Si modificas no borres estas lineas :)
 
   <body class="{% block body_class %}{%endblock%}">
 
+	<div class="brand">
+		<h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
+		<h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
+	</div>
+	
     <div id="mascara" class="container_24">
 <!-------------------------------------------------------------------------------------------------
 AIR
 ------------------------------------------------------------------------------------------------->
 {% region 'air' %}
-	<div class="brand">
-		<h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
-		<h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
-	</div>
+
+	
 		<div class="clear"></div>
+		
+
 
 <!-------------------------------------------------------------------------------------------------
 MEDIANERA
@@ -96,14 +101,16 @@ WATER
 
         {% block page_content %} {% endblock %}
       </div>
+  
+      <!-- /pie -->
       <!-- /medianera -->
 
-      <div id="footer_separator"></div>
-      <div class="footer_global">{% region 'earth' %}</div>
-      <!-- /pie -->
+      
      
     </div>
     <!-- /mascara -->
-
+    <div class="clear"></div>
+      <div id="footer_separator"></div>
+      <div class="footer_global">{% region 'earth' %}</div>   
   </body>
 </html>
