@@ -172,8 +172,12 @@ def populate_from_site_settings(site_settings):
         if name.startswith("CYCLOPE"):
             globals()[name] = value
 
-#CYCLOPE_SITE_SETTINGS = get_site_settings() # FIXME: This should be executed on
-                                             # non multisite deploys
+if hasattr(settings, "CYCLOPE_MULTISITE") and settings.CYCLOPE_MULTISITE:
+    pass
+else:
+    CYCLOPE_SITE_SETTINGS = get_site_settings() # FIXME: This should be executed on
+                                            # non multisite deploys
+    populate_from_site_settings(CYCLOPE_SITE_SETTINGS)
 
 def _refresh_site_settings(sender, instance, created, **kwargs):
     "Callback to refresh site settings when they are modified in the database"
