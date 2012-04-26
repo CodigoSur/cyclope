@@ -36,16 +36,16 @@ class DynamicSetting(object):
         setattr(_thread_locals, self.setting_name, value)
 
     def __getitem__(self, attr):
-        print "getitem"
         current = getattr(_thread_locals, self.setting_name, None)
         return current.__getitem__(attr)
 
     def __setitem__(self, attr, value):
-        print "setitem"
+        raise NotImplemented
         #current = getattr(_thread_locals, self.setting_name, None)
         #current.__setitem__(attr, value)
 
     def __getattribute__(self, attr):
+
         if attr == 'setting_name':
             return super(DynamicSetting, self).__getattribute__(attr)
         elif attr == '__setitem__':
