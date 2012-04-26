@@ -16,21 +16,6 @@
           "article"
         ], 
         [
-          "add_categorymap", 
-          "collections", 
-          "categorymap"
-        ], 
-        [
-          "change_categorymap", 
-          "collections", 
-          "categorymap"
-        ], 
-        [
-          "delete_categorymap", 
-          "collections", 
-          "categorymap"
-        ], 
-        [
           "add_author", 
           "cyclope", 
           "author"
