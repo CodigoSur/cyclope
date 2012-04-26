@@ -1,3 +1,4 @@
+import logging
 from string import strip
 
 try:
@@ -80,6 +81,8 @@ def send(request, id, test=False):
     try:
         msg.send()
     except:
+        logger = logging.getLogger("django.request")
+        logger.exception("Newsletter send failed")
         return HttpResponseRedirect(reverse('newsletter_failed', args=[id]))
     else:
         return HttpResponseRedirect(reverse('newsletter_sent', args=[id]))
