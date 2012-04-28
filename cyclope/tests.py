@@ -480,6 +480,12 @@ class DispatcherTestCase(TestCase):
         # Ticket https://trac.usla.org.ar/cyclope/ticket/43
         self.assertEqual(self.client.get("/category/foo/").status_code, 404)
 
+class TestDemoFixture(TestCase):
+    fixtures = ['cyclope_demo.json']
+
+    def test_demo_fixture(self):
+        pass
+
 
 #TODO(nicoechaniz)
 #class DeleteRelatedContent(TestCase):
