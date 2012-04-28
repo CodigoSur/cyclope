@@ -41,6 +41,7 @@ from cyclope.apps.polls.models import *
 from cyclope.apps.forum.models import *
 from cyclope.apps.feeds.models import Feed
 from cyclope.fields import MultipleField
+from cyclope.sitemaps import CollectionSitemap, CategorySitemap, MenuSitemap
 
 
 def create_static_page(name=None):
@@ -480,12 +481,26 @@ class DispatcherTestCase(TestCase):
         # Ticket https://trac.usla.org.ar/cyclope/ticket/43
         self.assertEqual(self.client.get("/category/foo/").status_code, 404)
 
+
 class TestDemoFixture(TestCase):
     fixtures = ['cyclope_demo.json']
 
     def test_demo_fixture(self):
         pass
 
+
+class TestSitemaps(TestCase):
+
+    fixtures = ['cyclope_demo.json']
+    sitemaps = [CollectionSitemap, CategorySitemap, MenuSitemap]
+
+    def test_sitemap(self):
+        for sitemap in self.sitemaps:
+            sitemap = sitemap()
+            urls = [obj.get("location") for obj in sitemap.get_urls()]
+            for url in urls:
+                response = self.client.get(url)
+                self.assertEqual(response.status_code, 200)
 
 #TODO(nicoechaniz)
 #class DeleteRelatedContent(TestCase):
