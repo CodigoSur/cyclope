@@ -47,9 +47,13 @@ class DynamicSettingsMiddleware(object):
         SITE_BASE_PATH = os.path.realpath(os.path.join(settings.CYCLOPE_MULTISITE_BASE_PATH,
                                                        shost, "cyclope_project"))
         settings.MEDIA_ROOT.set('%s/media/' % SITE_BASE_PATH)
-
-        site_settings = imp.load_source("site_settings", '%s/settings.py' % SITE_BASE_PATH)
-
+        try:
+            settings_filename = '%s/settings.py' % SITE_BASE_PATH
+            site_settings = imp.load_source("site_settings", settings_filename)
+        except IOError:
+            raise ValueError("Settings for host %s not found at %s " %
+                                                            (shost,
+                                                             settings_filename))
         CYCLOPE_SITE_SETTINGS = cyc_settings.get_site_settings()
         cyc_settings.populate_from_site_settings(CYCLOPE_SITE_SETTINGS)
 
