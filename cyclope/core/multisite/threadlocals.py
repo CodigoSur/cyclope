@@ -48,12 +48,6 @@ class DynamicSetting(object):
     def __getattribute__(self, attr):
         if attr == 'setting_name':
             return super(DynamicSetting, self).__getattribute__(attr)
-        elif attr == '__setitem__':
-            print "set item"
-            return super(DynamicSetting, self).__getattribute__(attr)
-        elif attr == '__getitem__':
-            print "get item"
-            return super(DynamicSetting, self).__getattribute__(attr)
 
         current = getattr(_thread_locals, self.setting_name, None)
         if hasattr(current, attr):
