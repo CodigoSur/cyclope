@@ -35,17 +35,17 @@ class DynamicSetting(object):
         "Sets the value for this setting in _thread_locals"
         setattr(_thread_locals, self.setting_name, value)
 
+    def get_value(self):
+        "Gets the settings actual value"
+        return getattr(_thread_locals, self.setting_name, None)
+
     def __getitem__(self, attr):
-        current = getattr(_thread_locals, self.setting_name, None)
-        return current.__getitem__(attr)
+        return self.get_value().__getitem__(attr)
 
     def __setitem__(self, attr, value):
         raise NotImplemented
-        #current = getattr(_thread_locals, self.setting_name, None)
-        #current.__setitem__(attr, value)
 
     def __getattribute__(self, attr):
-
         if attr == 'setting_name':
             return super(DynamicSetting, self).__getattribute__(attr)
         elif attr == '__setitem__':
@@ -60,6 +60,19 @@ class DynamicSetting(object):
             return getattr(current, attr)
         else:
             return super(DynamicSetting, self).__getattribute__(attr)
+
+    def __unicode__(self):
+        return unicode(self.get_value())
+
+    def __str__(self):
+        return str(self.get_value())
+
+    def __repr__(self):
+        return "<DynamicSetting: %s>" % repr(self.get_value())
+
+    def __float__(self):
+        return float(self.get_value())
+
 
 
 class RequestHostHook(object):

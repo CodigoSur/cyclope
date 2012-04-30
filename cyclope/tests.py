@@ -42,6 +42,7 @@ from cyclope.apps.forum.models import *
 from cyclope.apps.feeds.models import Feed
 from cyclope.fields import MultipleField
 from cyclope.sitemaps import CollectionSitemap, CategorySitemap, MenuSitemap
+from cyclope.core.multisite.threadlocals import DynamicSetting
 
 
 def create_static_page(name=None):
@@ -499,6 +500,38 @@ class TestSitemaps(TestCase):
             for url in urls:
                 response = self.client.get(url)
                 self.assertEqual(response.status_code, 200)
+                self.assertEqual("Broken url:", url)
+
+
+class DynamicSettingTestCase(TestCase):
+    def setUp(self):
+        self.ds = DynamicSetting("SETTING")
+
+    def test_int(self):
+        integer = 3
+        self.ds.set(integer)
+        self.assertEqual(int(self.ds), integer)
+
+        self.assertEqual(str(self.ds), str(integer))
+
+    def test_str(self):
+        self.ds.set("foo")
+        self.assertEqual(str(self.ds), "foo")
+
+    def test_dict(self):
+        d = {"foo": "bar"}
+        self.ds.set(d)
+        self.assertEqual(self.ds["foo"], "bar")
+
+    def test_repr(self):
+        d = {"foo": "bar"}
+        self.ds.set(d)
+        self.assertEqual(repr(self.ds), "<DynamicSetting: %s>" % repr(d))
+
+    def test_float(self):
+        self.ds.set(1.0)
+        self.assertEqual(float(self.ds), 1.0)
+
 
 
 #TODO(nicoechaniz)
