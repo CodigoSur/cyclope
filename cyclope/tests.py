@@ -474,8 +474,6 @@ class MultipleFieldTestCase(TestCase):
 
 
 class DispatcherTestCase(TestCase):
-    def setUp(self):
-        pass
 
     def test_unknown_url_returns_404(self):
         # Ticket https://trac.usla.org.ar/cyclope/ticket/43
@@ -501,6 +499,7 @@ class TestSitemaps(TestCase):
             for url in urls:
                 response = self.client.get(url)
                 self.assertEqual(response.status_code, 200)
+
 
 #TODO(nicoechaniz)
 #class DeleteRelatedContent(TestCase):
