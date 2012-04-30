@@ -484,8 +484,9 @@ class TestDemoFixture(TestCase):
     fixtures = ['cyclope_demo.json']
 
     def test_demo_fixture(self):
-        pass
-
+        self.assertGreater(Category.objects.count(), 5)
+        self.assertGreater(Collection.objects.count(), 3)
+        self.assertGreater(MenuItem.objects.count(), 7)
 
 class TestSitemaps(TestCase):
 
