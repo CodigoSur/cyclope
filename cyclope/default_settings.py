@@ -113,6 +113,7 @@ INSTALLED_APPS = [
     'django.contrib.comments',
     'django.contrib.markup',
     'django.contrib.messages',
+    'django.contrib.sitemaps',
 
     'autoslug',
     'feincms',

@@ -41,6 +41,7 @@ from cyclope.apps.polls.models import *
 from cyclope.apps.forum.models import *
 from cyclope.apps.feeds.models import Feed
 from cyclope.fields import MultipleField
+from cyclope.sitemaps import CollectionSitemap, CategorySitemap, MenuSitemap
 
 
 def create_static_page(name=None):
@@ -96,7 +97,7 @@ def add_region_view(model, view_name, content_object=None):
     layout = get_default_layout()
     content_type = ContentType.objects.get(model=model._meta.module_name)
     content_view = view_name
-    region = 'header'
+    region = 'after_fire'
     region_view = RegionView(layout=layout, content_type=content_type,
                              content_view=content_view, region=region,
                              content_object=content_object)
@@ -164,7 +165,7 @@ class SiteSettingsTestCase(TestCase):
 
     def test_creation(self):
         site_settings = SiteSettings(site=self.site,
-                                theme="neutronica",
+                                theme="neutrona",
                                 allow_comments='YES')
         site_settings.save()
         self.assertEqual(site_settings.site, self.site)
@@ -178,7 +179,7 @@ class SiteTestCase(TestCase):
         # Simplest site should be created by syncdb
         response = self.client.get("/")
         self.assertTemplateUsed(response,
-                                u'cyclope/themes/neutronica/one_sidebar.html')
+                                u'cyclope/themes/neutrona/5_elements.html')
 
     def testBugMenuItemWithoutLayout(self):
         # saving a MenuItem without setting a default site Layout failed
@@ -229,10 +230,10 @@ class RegressionTests(TestCase):
         menu_item = MenuItem(menu=menu, name="home",
                                             site_home=True, active=True)
         menu_item.save()
-        layout = Layout(name="default", template='one_sidebar.html')
+        layout = Layout(name="default", template='5_elements.html')
         layout.save()
         site_settings = SiteSettings.objects.create(site=site,
-                                theme="neutronica",
+                                theme="neutrona",
                                 allow_comments='YES')
         site_settings.default_layout = layout
         site_settings.save()
@@ -248,7 +249,7 @@ class RegionViewTestCase(TestCase):
         layout = get_default_layout()
         content_type = ContentType.objects.get(model='staticpage')
         content_view = 'list'
-        region = 'header'
+        region = 'after_fire'
         region_view = RegionView(layout=layout, content_type=content_type,
                                  content_view=content_view, region=region)
         region_view.save()
@@ -262,7 +263,7 @@ class RegionViewTestCase(TestCase):
         layout = get_default_layout()
         content_type = ContentType.objects.get(model='staticpage')
         content_view = 'detail'
-        region = 'header'
+        region = 'after_fire'
         region_view = RegionView(layout=layout, content_type=content_type,
                                  content_view=content_view, region=region)
         region_view.save()
@@ -278,7 +279,7 @@ class RegionViewTestCase(TestCase):
         static_page = create_static_page(
             name='test add layout region view instance view')
         object_id = static_page.id
-        region = 'header'
+        region = 'after_fire'
         region_view = RegionView(
             layout=layout, content_type=content_type, content_view=content_view,
             object_id=object_id, region=region)
@@ -452,7 +453,8 @@ class FeedTestCase(ViewableTestCase):
     test_model = Feed
 
     def setUp(self):
-        self.test_object = Feed.objects.create(name="An instance", url="http://localhost:8000/rss")
+        self.test_object = Feed.objects.create(name="An instance",
+                                               url="http://not.existant/rss")
         frontend.autodiscover()
 
 
@@ -472,12 +474,31 @@ class MultipleFieldTestCase(TestCase):
 
 
 class DispatcherTestCase(TestCase):
-    def setUp(self):
-        pass
 
     def test_unknown_url_returns_404(self):
         # Ticket https://trac.usla.org.ar/cyclope/ticket/43
         self.assertEqual(self.client.get("/category/foo/").status_code, 404)
+
+
+class TestDemoFixture(TestCase):
+    fixtures = ['cyclope_demo.json']
+
+    def test_demo_fixture(self):
+        pass
+
+
+class TestSitemaps(TestCase):
+
+    fixtures = ['cyclope_demo.json']
+    sitemaps = [CollectionSitemap, CategorySitemap, MenuSitemap]
+
+    def test_sitemap(self):
+        for sitemap in self.sitemaps:
+            sitemap = sitemap()
+            urls = [obj.get("location") for obj in sitemap.get_urls()]
+            for url in urls:
+                response = self.client.get(url)
+                self.assertEqual(response.status_code, 200)
 
 
 #TODO(nicoechaniz)

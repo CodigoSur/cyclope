@@ -37,6 +37,7 @@ from cyclope.core.captcha_contact_form.forms import  \
                                        AdminSettingsContactFormWithCaptcha
 import cyclope.settings as cyc_settings
 from cyclope.feeds import CategoryFeed, WholeSiteFeed, ContentTypeFeed
+from cyclope.sitemaps import CategorySitemap, CollectionSitemap, MenuSitemap
 
 urlpatterns = patterns('',
     (r'^admin/filebrowser/', include('filebrowser.urls')),
@@ -76,6 +77,9 @@ urlpatterns = patterns('',
     (r'^newsletter/', include('cyclope.apps.newsletter.urls')),
     url(r'^markitup/', include('markitup.urls')),
     (r'^locations/', include('cyclope.apps.locations.urls')),
+    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
+     {'sitemaps': {"menus": MenuSitemap, "categories": CategorySitemap,
+                   "collections": CollectionSitemap }}),
 )
 
 if django_settings.DEBUG:
