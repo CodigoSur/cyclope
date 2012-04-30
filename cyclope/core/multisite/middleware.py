@@ -58,21 +58,8 @@ class DynamicSettingsMiddleware(object):
         cyc_settings.populate_from_site_settings(CYCLOPE_SITE_SETTINGS)
 
         admin.autodiscover()
-        for setting_name in dir(site_settings):
-            if setting_name == setting_name.upper():
-                old_value = getattr(settings, setting_name, None)
-                new_value = getattr(site_settings, setting_name)
 
-                # this is a dynamic setting
-                if issubclass(type(old_value), DynamicSetting):
-                    # the current site did not override the default
-                    if issubclass(type(new_value), DynamicSetting):
-                        old_value.set(getattr(default_settings, setting_name))
-                    else:
-                        old_value.set(new_value)
-                else:
-                    setattr(settings, setting_name, new_value)
-
+        replace_settings(settings, site_settings)
         cyc_settings.reload_settings()
 
         # Hack sys path for urls import
@@ -85,3 +72,23 @@ class DynamicSettingsMiddleware(object):
         if getattr(request, "urlconf", None):
             patch_vary_headers(response, ('Host',))
         return response
+
+def replace_settings(old_settings, new_settings):
+    """
+    Updates old_settings values with new_settings's using DynamicSettings.
+    """
+    for setting_name in dir(new_settings):
+        if setting_name == setting_name.upper():
+            old_value = getattr(old_settings, setting_name, None)
+            new_value = getattr(new_settings, setting_name)
+
+            # this is a dynamic setting
+            if issubclass(type(old_value), DynamicSetting):
+                # the current site did not override the default
+                if issubclass(type(new_value), DynamicSetting):
+                    old_value.set(getattr(default_settings, setting_name))
+                else:
+                    old_value.set(new_value)
+            else:
+                setattr(old_settings, setting_name, new_value)
+

@@ -43,6 +43,7 @@ from cyclope.apps.feeds.models import Feed
 from cyclope.fields import MultipleField
 from cyclope.sitemaps import CollectionSitemap, CategorySitemap, MenuSitemap
 from cyclope.core.multisite.threadlocals import DynamicSetting
+from cyclope.core.multisite.middleware import replace_settings
 
 
 def create_static_page(name=None):
@@ -531,6 +532,31 @@ class DynamicSettingTestCase(TestCase):
     def test_float(self):
         self.ds.set(1.0)
         self.assertEqual(float(self.ds), 1.0)
+
+class DynamicSettingsMiddlewareTestCase(TestCase):
+
+    def test_replace_settings(self):
+
+        class Setting(object): pass
+        settings_a = Setting()
+        settings_a.FOO = 3
+
+        settings_new = Setting()
+        settings_new.FOO = 5
+
+        replace_settings(settings_a, settings_new)
+        self.assertTrue(isinstance(settings_a.FOO, int))
+        self.assertEqual(int(settings_a.FOO), 5)
+
+        settings_a.FOO = DynamicSetting("FOO")
+        settings_a.FOO.set(3)
+        settings_new.FOO = 5
+        replace_settings(settings_a, settings_new)
+        self.assertTrue(isinstance(settings_a.FOO, DynamicSetting))
+        self.assertEqual(int(settings_a.FOO), 5)
+
+
+
 
 
 
