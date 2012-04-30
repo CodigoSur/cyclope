@@ -492,6 +492,7 @@ class TestSitemaps(TestCase):
 
     fixtures = ['cyclope_demo.json']
     sitemaps = [CollectionSitemap, CategorySitemap, MenuSitemap]
+    longMessage = False
 
     def test_sitemap(self):
         for sitemap in self.sitemaps:
@@ -499,7 +500,7 @@ class TestSitemaps(TestCase):
             urls = [obj.get("location") for obj in sitemap.get_urls()]
             for url in urls:
                 response = self.client.get(url)
-                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.status_code, 200, "Broken url: %s" % url)
 
 
 #TODO(nicoechaniz)
