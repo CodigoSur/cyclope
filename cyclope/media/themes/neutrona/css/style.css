@@ -79,6 +79,7 @@ AIR MENU
 #air .menuitems_hierarchy li  {float:left; margin: 0 0 0 7px;}
 #air .menuitems_hierarchy li a {display: block; text-decoration: none; color: #fff; font-weight: 700;background: #000; margin: 0; padding: 6px 12px; }
 #air .menuitems_hierarchy li a:hover {background: #666; color: #eee; }
+#air .menuitems_hierarchy span.current a {}
 /* Sub Menues */
 #air .menuitems_hierarchy ul ul{font-size:.85em;width:180px;position:absolute;margin:0;padding:0 0 5px;border:none;background:#666;border-bottom-right-radius:5px;-webkit-border-bottom-right-radius:5px;-moz-border-radius-bottomright:5px;  border-top-bottom-radius:5px;-webkit-border-bottom-left-radius:5px;-moz-border-radius-bottomleft:5px;}
 #air .menuitems_hierarchy li li {float:none; margin: 0;}
@@ -139,6 +140,7 @@ WATER (sanhoerth: 18 Jun 2011)
 #water .menuitems_hierarchy li:hover {background:#000;}
 #water .menuitems_hierarchy li a {text-decoration:none; color:#fff; display:block;}
 #water .menuitems_hierarchy li a:hover {text-decoration:underline;color:#ccc;}
+#water .menuitems_hierarchy span.current a {}
 #water .menuitems_hierarchy ul ul {margin:0;padding:0;display:block;border:none;}
 #water .menuitems_hierarchy li li {display:block;padding:3px 3px;margin:4px 0;border:none;border-bottom:1px solid #ccc;}
 #water .menuitems_hierarchy li li a {color:#fff;display:block;border:none;background:none;}
