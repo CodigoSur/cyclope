@@ -179,7 +179,7 @@ class SiteTestCase(TestCase):
         # Simplest site should be created by syncdb
         response = self.client.get("/")
         self.assertTemplateUsed(response,
-                                u'cyclope/themes/neutrona/5_elements.html')
+                                u'cyclope/themes/neutrona/main.html')
 
     def testBugMenuItemWithoutLayout(self):
         # saving a MenuItem without setting a default site Layout failed
@@ -230,7 +230,7 @@ class RegressionTests(TestCase):
         menu_item = MenuItem(menu=menu, name="home",
                                             site_home=True, active=True)
         menu_item.save()
-        layout = Layout(name="default", template='5_elements.html')
+        layout = Layout(name="default", template='main.html')
         layout.save()
         site_settings = SiteSettings.objects.create(site=site,
                                 theme="neutrona",

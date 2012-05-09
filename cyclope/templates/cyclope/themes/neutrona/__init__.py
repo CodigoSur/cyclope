@@ -12,9 +12,9 @@ verbose_name = _('Neutrona')
 
 layout_templates = {
 
-    '4_elements.html':
+    'inner.html':
         {
-        'verbose_name': _('4 Elements'),
+        'verbose_name': _('Inner'),
         'regions' : {
             'air': _('air'),
             'water': _('water'),
@@ -24,9 +24,9 @@ layout_templates = {
             }
         },
 
-    '5_elements.html':
+    'main.html':
         {
-        'verbose_name': _('5 Elements'),
+        'verbose_name': _('Main'),
         'regions' : {
             'air': _('air'),
             'water': _('water'),
