@@ -55,6 +55,7 @@ from django.db.models.signals import post_save, pre_delete
 from django.core.exceptions import ImproperlyConfigured
 from django.db.utils import DatabaseError
 from django.db.models import get_model
+from django.contrib.contenttypes.models import ContentType
 
 from cyclope.models import SiteSettings
 
@@ -174,20 +175,6 @@ def _refresh_site_settings(sender, instance, created, **kwargs):
 
 post_save.connect(_refresh_site_settings, sender=SiteSettings)
 
-from django.contrib.contenttypes.models import ContentType
-from cyclope.models import RelatedContent
-
-def _delete_related_contents(sender, instance, **kwargs):
-    # cascade delete does not delete the RelatedContent elements
-    # where this object is the related content, so we do it here.
-    # (this deletes the relation, not the object)
-    ctype = ContentType.objects.get_for_model(sender)
-    if hasattr(instance, 'id'):
-        related_from = RelatedContent.objects.filter(other_type=ctype,
-                                                    other_id=instance.id)
-        for obj in related_from:
-            obj.delete()
-
 def _delete_from_layouts_and_menuitems(sender, instance, **kwargs):
     # when a content is part of a layout or a menu_item we need to
     # clear this relation
@@ -203,5 +190,5 @@ def _delete_from_layouts_and_menuitems(sender, instance, **kwargs):
             item.content_type = item.object_id = item.content_object = None
             item.save()
 
-pre_delete.connect(_delete_related_contents)
+
 pre_delete.connect(_delete_from_layouts_and_menuitems)
