@@ -29,7 +29,7 @@ from django.template import TemplateSyntaxError, Template, Context
 from django import template
 from django.db.models import get_model
 
-from cyclope.models import SiteSettings, Menu, MenuItem
+from cyclope.models import SiteSettings, Menu, MenuItem, RelatedContent
 from cyclope.models import Layout, RegionView, Author
 from cyclope.core import frontend
 from cyclope.core.collections.models import *
@@ -556,10 +556,43 @@ class DynamicSettingsMiddlewareTestCase(TestCase):
         self.assertEqual(int(settings_a.FOO), 5)
 
 
+class RelatedContentTestCase(TestCase):
 
+    def setUp(self):
+        self.article = Article.objects.create(name="Article")
+        self.related_article = Article.objects.create(name="Article Related")
 
+    def test_create_related(self):
+        rc = RelatedContent.objects.create(self_object=self.article,
+                                           other_object=self.related_article)
+        self.assertEqual(self.article.related_contents.get().other_object,
+                         self.related_article)
+
+    def test_delete_relatedcontent_forward(self):
+        """
+        Tests deletion of RelatedContent objects when the self's related content
+        is deleted.
+        """
+        rc = RelatedContent.objects.create(self_object=self.article,
+                                           other_object=self.related_article)
+
+        self.assertEqual(RelatedContent.objects.count(), 1)
+        self.article.delete()
+        self.assertEqual(RelatedContent.objects.count(), 0)
+
+    def test_delete_relatedcontent_backward(self):
+        """
+        Tests deletion of RelatedContent objects when the other related content
+        is deleted.
+        """
+        rc = RelatedContent.objects.create(self_object=self.article,
+                                           other_object=self.related_article)
+
+        self.assertEqual(RelatedContent.objects.count(), 1)
+        self.related_article.delete()
+        self.assertEqual(RelatedContent.objects.count(), 0)
 
 
 #TODO(nicoechaniz)
-#class DeleteRelatedContent(TestCase):
+#
 #class DeleteFromLayoutsAndMenuItems(TestCase)

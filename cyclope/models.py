@@ -37,6 +37,7 @@ from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.conf import settings
 from django.contrib.admin.models import LogEntry
+from django.db.models.signals import post_save, pre_delete
 
 from rosetta.poutil import find_pos
 from tagging_autocomplete.models import TagAutocompleteField
@@ -44,6 +45,8 @@ import mptt
 from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 from jsonfield import JSONField
+
+from registration import signals as registration_signals
 
 import cyclope
 from cyclope.core.collections.models import Collection
@@ -455,11 +458,24 @@ class UserProfile(models.Model):
         return ('profiles_profile_detail', (), { 'username': self.user.username })
     get_absolute_url = models.permalink(get_absolute_url)
 
-from registration_backends import CaptchaBackend
-from registration import signals
+
+# Signal callbacks
 
 def _create_profile_upon_activation(*args, **kwargs):
     UserProfile.objects.create(user=kwargs['user'])
 
-signals.user_activated.connect(_create_profile_upon_activation)
+registration_signals.user_activated.connect(_create_profile_upon_activation)
+
+def _delete_related_contents(sender, instance, **kwargs):
+    # cascade delete does not delete the RelatedContent elements
+    # where this object is the related content, so we do it here.
+    # (this deletes the relation, not the object)
+    ctype = ContentType.objects.get_for_model(sender)
+    if hasattr(instance, 'id'):
+        related_from = RelatedContent.objects.filter(other_type=ctype,
+                                                    other_id=instance.id)
+        for obj in related_from:
+            obj.delete()
+
+pre_delete.connect(_delete_related_contents)
 
