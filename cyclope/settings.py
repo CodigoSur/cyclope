@@ -113,11 +113,6 @@ CYCLOPE_PROJECT_PATH = os.path.normpath(CYCLOPE_PROJECT_PATH)
 
 CYCLOPE_PROJECT_NAME = os.path.basename(CYCLOPE_PROJECT_PATH)
 
-#TODO(nicoechaniz): re-evaluate the way we are handling these dynamic settings, it is practical but seems hacky and error-prone.
-
-sys.path.append(os.path.join(CYCLOPE_THEMES_ROOT, '../'))
-import themes
-
 CYCLOPE_BASE_CONTENT_TYPES = site.base_content_types
 
 def get_site_settings():
@@ -130,10 +125,7 @@ def get_site_settings():
     from django.core.exceptions import ObjectDoesNotExist
     from django.db.utils import DatabaseError
     try:
-        # a Cyclope project is supposed to have only one SiteSettings object
-        #TODO(nicoechaniz): Fix for multi-site
         site_settings = SiteSettings.objects.get()
-
     # catch exceptions if the database is not available or no settings created
     except (DatabaseError, IndexError):
         site_settings = None
@@ -164,7 +156,9 @@ def populate_from_site_settings(site_settings):
                 CYCLOPE_CURRENT_THEME,
                 CYCLOPE_DEFAULT_LAYOUT.template)
 
-        #TODO(nicoechaniz): fix this workaround. It's here for migrations on the Layout model, which fail to complete with a DatabaseError when this module is imported. Eg: cyclope/migrations/0011...
+        # TODO(nicoechaniz): fix this workaround. It's here for migrations on the
+        # Layout model, which fail to complete with a DatabaseError when this
+        # module is imported. Eg: cyclope/migrations/0011...
         except DatabaseError:
             pass
 
@@ -176,8 +170,14 @@ def populate_from_site_settings(site_settings):
 if hasattr(settings, "CYCLOPE_MULTISITE") and settings.CYCLOPE_MULTISITE:
     pass
 else:
-    CYCLOPE_SITE_SETTINGS = get_site_settings() # FIXME: This should be executed on
-                                            # non multisite deploys
+
+    # TODO(nicoechaniz): re-evaluate the way we are handling themes dynamic
+    # settings, it is practical but seems hacky and error-prone.
+    sys.path.append(os.path.join(CYCLOPE_THEMES_ROOT, '../'))
+    import themes
+
+
+    CYCLOPE_SITE_SETTINGS = get_site_settings()
     populate_from_site_settings(CYCLOPE_SITE_SETTINGS)
 
 def _refresh_site_settings(sender, instance, created, **kwargs):
@@ -188,7 +188,6 @@ def _refresh_site_settings(sender, instance, created, **kwargs):
         cyc_keys = [ key for key in globals() if key.startswith('CYCLOPE')]
         for key in cyc_keys:
             globals().pop(key)
-        import sys
         reload(sys.modules[__name__])
 
 post_save.connect(_refresh_site_settings, sender=SiteSettings)
