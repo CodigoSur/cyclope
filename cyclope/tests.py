@@ -172,6 +172,31 @@ class SiteSettingsTestCase(TestCase):
         site_settings.save()
         self.assertEqual(site_settings.site, self.site)
 
+    def test_force_not_deletion(self):
+        col = Collection.objects.create(name='A collection')
+        layout = Layout.objects.create(name="Test Layout", template='main.html')
+
+        site_settings = SiteSettings(site=self.site, theme="neutrona",
+                                     allow_comments='YES',
+                                     default_layout=layout,
+                                     newsletter_collection=col)
+        site_settings.save()
+
+        # On self delete
+        site_settings.delete()
+        qs = SiteSettings.objects.filter(id=site_settings.id)
+        self.assertTrue(len(qs) > 0)
+
+        # On newsletter collection delete
+        col.delete()
+        qs = SiteSettings.objects.filter(id=site_settings.id)
+        self.assertTrue(len(qs) > 0)
+
+        # On layout collection delete
+        layout.delete()
+        qs = SiteSettings.objects.filter(id=site_settings.id)
+        self.assertTrue(len(qs) > 0)
+
 
 class SiteTestCase(TestCase):
     def testSimplestSite(self):

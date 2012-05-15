@@ -63,7 +63,8 @@ class SiteSettings(models.Model):
     theme = models.CharField(_('templating theme'), max_length=250)
     default_layout = models.ForeignKey('Layout',
                                        verbose_name=_('default layout'),
-                                       null=True, blank=True)
+                                       null=True, blank=True,
+                                       on_delete=models.SET_NULL)
     allow_comments = models.CharField(_('allow comments'), max_length=4,
                                       choices = (
                                                  ('YES',_('enabled')),
@@ -75,6 +76,7 @@ class SiteSettings(models.Model):
     keywords = models.TextField(_('keywords'), blank=True, default='')
     description = models.TextField(_('description'), blank=True, default='')
     newsletter_collection = models.ForeignKey(Collection, blank=True, null=True,
+                                              on_delete=models.SET_NULL,
                                               verbose_name =_('newsletter collection'),
                                               help_text=_('This is the collection that will group the contents for your newsletters.'))
     rss_content_types = models.ManyToManyField(ContentType,
