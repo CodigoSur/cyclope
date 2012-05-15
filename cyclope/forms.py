@@ -39,6 +39,7 @@ from cyclope.models import MenuItem, BaseContent,\
 from cyclope.fields import MultipleField
 from cyclope import settings as cyc_settings
 from cyclope.core.frontend import site
+from cyclope.themes import get_all_themes, get_theme
 
 class AjaxChoiceField(forms.ChoiceField):
     """ChoiceField that always returns true for validate().
@@ -159,10 +160,8 @@ class MenuItemAdminForm(forms.ModelForm):
 
 class SiteSettingsAdminForm(forms.ModelForm):
     theme = forms.ChoiceField(label=_('Theme'),
-        choices=[
-            (theme_name,  getattr(cyc_settings.themes,
-            theme_name).verbose_name)
-            for theme_name in cyc_settings.themes.available ],
+        choices=[(theme_name,  theme.verbose_name)
+                 for theme_name, theme in get_all_themes().iteritems()],
         required=True)
 
     def __init__(self, *args, **kwargs):
@@ -185,17 +184,15 @@ class LayoutAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(LayoutAdminForm, self).__init__(*args, **kwargs)
 
-        # We are asuming there's only one site but this should be modified
-        # if we start using the sites framework and make cyclope multi-site.
-        #TODO(nicoechaniz): adapt for multi-site
         try:
             theme_name = SiteSettings.objects.get().theme
         except:
             return
-        theme_settings = getattr(cyc_settings.themes, theme_name)
+
+        theme = get_theme(theme_name)
         tpl_choices = [(tpl, tpl_settings['verbose_name'])
                        for tpl, tpl_settings
-                       in theme_settings.layout_templates.items()]
+                       in theme.layout_templates.items()]
 
         self.fields['template'].choices = tpl_choices
 

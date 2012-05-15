@@ -42,6 +42,8 @@ from cyclope.apps.forum.models import *
 from cyclope.apps.feeds.models import Feed
 from cyclope.fields import MultipleField
 from cyclope.sitemaps import CollectionSitemap, CategorySitemap, MenuSitemap
+from cyclope.forms import SiteSettingsAdminForm, LayoutAdminForm
+from cyclope import themes
 
 
 def create_static_page(name=None):
@@ -555,6 +557,7 @@ class TestDemoFixture(TestCase):
         self.assertGreater(Collection.objects.count(), 3)
         self.assertGreater(MenuItem.objects.count(), 7)
 
+
 class TestSitemaps(TestCase):
 
     fixtures = ['cyclope_demo.json']
@@ -567,7 +570,34 @@ class TestSitemaps(TestCase):
             urls = [obj.get("location") for obj in sitemap.get_urls()]
             for url in urls:
                 response = self.client.get(url)
-                self.assertEqual(response.status_code, 200, "Broken url: %s" % url)
+                status = response.status_code
+                self.assertEqual(status, 200, "Broken url: %s, %d" % (url, status))
+
+
+class ThemesTestCase(TestCase):
+
+    def test_layout_form(self):
+        form = LayoutAdminForm()
+        choices = [choice[0] for choice in form.fields["template"].choices]
+        self.assertTrue("main.html" in choices)
+        self.assertTrue("inner.html" in choices)
+
+    def test_default_themes_integration(self):
+        form = SiteSettingsAdminForm()
+        choices = [choice[0] for choice in form.fields["theme"].choices]
+        self.assertTrue("neutrona" in choices)
+        self.assertTrue("frecuency" in choices)
+
+    def test_custom_theme_integration(self):
+        form = SiteSettingsAdminForm()
+        choices = [choice[0] for choice in form.fields["theme"].choices]
+        self.assertTrue("custom_theme" in choices)
+
+    def test_api(self):
+        all_themes = themes.get_all_themes()
+        theme = all_themes["neutrona"]
+        self.assertTrue("main.html" in theme.layout_templates)
+        self.assertTrue(theme is themes.get_theme("neutrona"))
 
 
 #TODO(nicoechaniz)

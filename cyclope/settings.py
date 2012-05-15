@@ -32,7 +32,6 @@ Attributes:
     CYCLOPE_PREFIX: prefix for Cyclope URLs, defaults to 'cyclope/'
     CYCLOPE_STATIC_URL: URL to Cyclope static files
     CYCLOPE_STATIC_ROOT: defaults to cyclope/ folder of the project's STATIC_ROOT
-    CYCLOPE_THEMES_ROOT: path to the themes package
 
   Automatic (based on database values):
 
@@ -75,9 +74,7 @@ CYCLOPE_MEDIA_ROOT = CYCLOPE_STATIC_ROOT
 
 # FIXME #120: STATIC_ROOT is pointing to MEDIA_ROOT because some
 # apps doesn't upgraded to static django 1.3 convention.
-CYCLOPE_THEMES_ROOT = getattr(settings, 'CYCLOPE_THEMES_ROOT',
-                              os.path.join(os.path.dirname(__file__),
-                                           "templates/cyclope/themes/"))
+
 CYCLOPE_TEXT_STYLE = getattr(settings, 'CYCLOPE_TEXT_STYLE', 'textile')
 
 # For backwards compatibility only!
@@ -112,9 +109,6 @@ CYCLOPE_PROJECT_PATH = os.path.normpath(CYCLOPE_PROJECT_PATH)
 
 CYCLOPE_PROJECT_NAME = os.path.basename(CYCLOPE_PROJECT_PATH)
 
-#TODO(nicoechaniz): re-evaluate the way we are handling these dynamic settings, it is practical but seems hacky and error-prone.
-
-sys.path.append(os.path.join(CYCLOPE_THEMES_ROOT, '../'))
 import themes
 
 def get_site_settings():
@@ -144,7 +138,7 @@ CYCLOPE_SITE_SETTINGS = get_site_settings()
 if CYCLOPE_SITE_SETTINGS is not None:
     CYCLOPE_BASE_URL = "http://"+ CYCLOPE_SITE_SETTINGS.site.domain
     CYCLOPE_CURRENT_THEME = CYCLOPE_SITE_SETTINGS.theme
-    if CYCLOPE_CURRENT_THEME in themes.local_themes:
+    if CYCLOPE_CURRENT_THEME in themes.get_local_themes():
         CYCLOPE_THEME_MEDIA_URL = '%s%s/' % (
             settings.CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX, CYCLOPE_CURRENT_THEME)
     else:
