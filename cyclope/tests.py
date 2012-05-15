@@ -405,6 +405,73 @@ class CategoryTestCase(ViewableTestCase):
             self.assertEqual(self.client.get(url).status_code, 200)
 
 
+class MoveCategoryTestCase(TestCase):
+    def setUp(self):
+        staticpage_ct = ContentType.objects.get(model="staticpage")
+        collection_A = Collection.objects.create(name='collection A')
+        collection_A.content_types.add(ContentType.objects.get(model="article"))
+        collection_A.content_types.add(staticpage_ct)
+        collection_A.save()
+
+        collection_B = Collection.objects.create(name='collection B')
+        collection_B.content_types.add(ContentType.objects.get(name="article"))
+        collection_B.save()
+
+        category = Category(name='Parent', collection=collection_A)
+        category.save()
+
+        child_category = Category(name='child', parent=category, collection=collection_A)
+        child_category.save()
+
+        children_of_child_category = Category(name='child child',
+                                              parent=child_category,
+                                              collection=collection_A)
+        children_of_child_category.save()
+
+        static_page = StaticPage.objects.create(name="static", text="prueba")
+        static_page.categories.create(category=child_category)
+
+        self.collection_A, self.collection_B = collection_A, collection_B
+        self.category, self.child_category  = category, child_category
+        self.child_of_child = children_of_child_category
+        self.referesh_categories()
+
+    def referesh_categories(self):
+        self.category = Category.objects.get(id=self.category.id)
+        self.child_category = Category.objects.get(id=self.child_category.id)
+        self.child_of_child = Category.objects.get(id=self.child_of_child.id)
+
+    def test_move_root_category_with_children(self):
+        staticpage_ct = ContentType.objects.get(model="staticpage")
+
+        self.category.collection = self.collection_B
+        self.category.save()
+
+        self.referesh_categories()
+
+        # test change of collection in self and childs
+        self.assertEqual(self.category.collection, self.collection_B)
+        self.assertEqual(self.child_category.collection, self.collection_B)
+
+        # test added proper content_types to the new collection
+        self.assertTrue(staticpage_ct in self.category.collection.content_types.all())
+
+    def test_move_child_category_with_children(self):
+        self.assertEqual(self.child_category.get_root(), self.category)
+        self.assertTrue(self.child_of_child in self.child_category.get_descendants())
+
+        self.child_category.collection = self.collection_B
+        self.child_category.save()
+
+        self.referesh_categories()
+
+
+        self.assertEqual(self.category.collection, self.collection_A)
+        self.assertEqual(self.child_category.collection, self.collection_B)
+        self.assertTrue(self.child_category.is_root_node())
+        self.assertTrue(self.child_of_child in self.child_category.get_descendants())
+
+
 class CollectionTestCase(ViewableTestCase):
     fixtures = ['simplest_site.json']
     test_model = Collection
