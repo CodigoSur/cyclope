@@ -29,7 +29,7 @@ def create_site(app, created_models, verbosity, db, **kwargs):
         menu = Menu(name="Main menu", main_menu=True)
         menu.save(using=db)
 
-        layout = Layout(name="default", template='5_elements.html')
+        layout = Layout(name="default", template='main.html')
         layout.save(using=db)
 
         menu_item = MenuItem(menu=menu, name="home", site_home=True,

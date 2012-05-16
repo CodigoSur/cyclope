@@ -1,12 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
-Plantilla Neutrona para Cyclope 3
-Esta plantilla fue desarrollada por Codigo Sur: www.codigosur.org
-Diseno conceptual + HTML + CSS: Santiago Hoerth Moura
-Codigo HTML realizado bajo licencia GPL (copialo, mejoralo, pasalo)
-Ver licencia en: http://creativecommons.org/licenses/GPL/2.0/deed.es_AR
-Ten en cuenta que las imagenes, los nombres y los logos de este sitio no pueden usarse. Solo el codigo HTML y CSS es GPL. Gracias :)
-Si modificas no borres estas lineas :)
+# Cyclope 3 Workflow Design
+# Theme: Neutrona
+# Layout: 5 Elements
+# 960 Grid System Based www.960.gs
+# Official Trac Cyclope 3 GPL: http://codigo.cyclope.ws
+# Copyright 2010-2012 Codigo Sur - Sociedad Civil
+# All rights reserved.
+# This file is part of Cyclope 3.
+# Cyclope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# Development: Codigo Sur www.codigosur.org
+# Adaptation HTML + CSS: Santiago Hoerth Moura
+# Experience is an original design Free CSS Templates 
+# Not delete this comment :)
  -->
 
 {% load layout i18n tagging_tags %}
@@ -21,6 +30,7 @@ Si modificas no borres estas lineas :)
     <link href="/rss" title="RSS" type="application/rss+xml" rel="alternate" />
 
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/print.css" rel="stylesheet" type="text/css" media="print"/>
     <link href="{{ CYCLOPE_STATIC_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-1.5.1.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-ui-1.8.13.custom.min.js"></script>
@@ -49,58 +59,61 @@ Si modificas no borres estas lineas :)
 
   <body class="{% block body_class %}{%endblock%}">
 
-    <div id="mascara" class="container_24">
+    <div id="mask" class="container_24">
 <!-------------------------------------------------------------------------------------------------
 AIR
 ------------------------------------------------------------------------------------------------->
 {% region 'air' %}
+<!-------------------------------------------------------------------------------------------------
+BRAND
+------------------------------------------------------------------------------------------------->
 	<div class="brand">
 		<h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
 		<h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
 	</div>
 		<div class="clear"></div>
-
 <!-------------------------------------------------------------------------------------------------
 MEDIANERA
 ------------------------------------------------------------------------------------------------->
-      <div id="medianera">
+      <div id="middling">
 
 <!-------------------------------------------------------------------------------------------------
 WATER
 ------------------------------------------------------------------------------------------------->
-        <div class="grid_5" >
-
-          {% region 'water' %}
-         
-          {% comment %}
-          tags no esta implementado, y cuando se haga, deberia tener su propia vista
-          <div id="tags">
-            <span class="title">Etiquetas</span>
-            <div class="box">
-              {% tag_cloud_for_model articles.Article as article_tags with min_count=1 distribution=log %}
-              {% for tag in article_tags %}
-                <a href="/tag/{{ tag.name|slugify }}" class="tag{{tag.font_size}}">
-                  {{tag.name}}
-                </a>
-              {% endfor %}
-              </a>
-            </div>
-          </div>
-
-          <div id="rss"><a href="/rss">{% trans "Subscribe to RSS" %}</a></div>
-			{% endcomment %}
-
-
-
-        </div>
-        <!-- /water -->
+        <div class="grid_5" >{% region 'water' %}</div><!-- /water -->
 
         {% block page_content %} {% endblock %}
-      </div>
-      <!-- /medianera -->
+      </div><!-- /medianera -->
 
+<!-------------------------------------------------------------------------------------------------
+EARTH
+------------------------------------------------------------------------------------------------->
       <div id="footer_separator"></div>
-      <div class="footer_global">{% region 'earth' %}</div>
+      <div class="footer_global">
+      {% region 'earth' %}
+      <span id="creativecommons">Los contenidos de este sitio web están bajo una
+        <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO">
+          Licencia Creative Commons Reconocimiento-NoComercial-SinObraDerivada 3.0
+        </a></span>.<br/>
+        <span id="codigo sur">Tecnología: <a href="http://cyclope.codigosur.org">Cyclope 3 GPL</a>. Diseño: <a href="http://neutrona.plantillas.codigosur.net">Neutrona Theme</a>. Hecho por <a href="http://www.codigosur.org">Código Sur</a>.
+        </span><br/>
+        <span>Este sitio ha sido desarrollado sobre estándares de diseño web que cualquier navegador de calidad visualizará correctamente. </span><br/>
+
+        <img src="/media/uploads/images/banners/navegadores.png" width="246" height="36" border="0" usemap="#map-nav" alt="navegadores"/>
+        <map name="map-nav" id="map-nav">
+          <!-- #$-:Image map file created by GIMP Image Map plug-in -->
+          <!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+          <!-- #$-:Please do not edit lines starting with "#$" -->
+          <!-- #$VERSION:2.3 -->
+          <!-- #$AUTHOR:sh -->
+          <area shape="rect" coords="48,1,85,35" alt="Konkeror" title="Konkeror" href="http://www.konqueror.org/" />
+          <area shape="rect" coords="6,1,41,35" alt="Mozilla Firefox" title="Mozilla Firefox" href="http://www.mozilla-europe.org/es/firefox/" />
+          <area shape="rect" coords="88,0,120,36" alt="Epiphany" title="Epiphany" href="http://projects.gnome.org/epiphany/" />
+          <area shape="rect" coords="126,1,158,35" alt="Opera" title="Opera" href="http://www.opera.com/download/" />
+          <area shape="rect" coords="162,3,199,34" alt="Safari" title="Safari" href="http://www.apple.com/es/safari/download/" />
+          <area shape="rect" coords="206,4,242,34" alt="Google Chrome" title="Google Chrome" href="http://www.google.com/chrome/index.html?hl=es" />
+        </map>
+        </div>
       <!-- /pie -->
      
     </div>

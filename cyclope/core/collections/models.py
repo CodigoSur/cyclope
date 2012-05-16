@@ -112,15 +112,27 @@ class Category(models.Model):
     def valid_parents(self):
         return Category.tree.filter(pk__isnot=self.pk)
 
-    def save(self, *args, **kwargs):
+    def save(self, moving_childs=False, *args, **kwargs):
         # If is not a new Category and the Collection is changed, we move all
-        # childrens to the new Collection.
+        # childrens to the new Collection adding the necesary content_types to
+        # the new collection.
         if self.pk is not None:
             old_category = Category.objects.get(pk=self.pk)
             if old_category.collection != self.collection:
-                for child in self.get_descendants():
+                # If we are moving a non root category it must be root in
+                # the new collection
+                if self.is_child_node() and not moving_childs:
+                    self.parent = None
+                # Add the content_types of the categorizations to new collection
+                descendants = old_category.get_descendants()
+                all_categories = [self] + list(descendants)
+                categorizations_list = Categorization.objects.filter(category__in=all_categories)
+                content_types = list(set([cat.content_type for cat in categorizations_list]))
+                self.collection.content_types.add(*content_types)
+
+                for child in descendants:
                     child.collection = self.collection
-                    child.save()
+                    child.save(moving_childs=True)
         super(Category, self).save(*args, **kwargs)
 
     class Meta:

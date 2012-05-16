@@ -40,6 +40,7 @@ from django.db.models import get_model
 from cyclope.models import MenuItem, SiteSettings, BaseContent
 import cyclope
 from cyclope.utils import layout_for_request, LazyJSONEncoder
+from cyclope.themes import get_theme
 
 class CyclopeSite(object):
     """Handles frontend display of models.
@@ -217,7 +218,7 @@ class CyclopeSite(object):
         """View to dynamically update template regions select in the admin."""
         template_filename = request.GET['q']
         theme_name = SiteSettings.objects.get().theme
-        theme_settings = getattr(cyclope.settings.themes, theme_name)
+        theme_settings = get_theme(theme_name)
         regions = theme_settings.layout_templates[template_filename]['regions']
         regions_data = [{'region_name': '', 'verbose_name': '------'}]
         regions_data.extend([ {'region_name': region_name,

@@ -70,8 +70,8 @@ LOGIN_REDIRECT_URL = '/inicio'
 
 # cyclope settings
 
-#CYCLOPE_LOCAL_THEMES_DIR = os.path.join(CYCLOPE_PROJECT_PATH, 'templates/cyclope/themes/')
-#CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/media/local_themes/'
+CYCLOPE_LOCAL_THEMES_DIR = os.path.join(CYCLOPE_PROJECT_PATH, 'templates/cyclope/themes/')
+CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/media/local_themes/'
 
 CYCLOPE_PREFIX = ''
 
