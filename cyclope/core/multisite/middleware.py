@@ -26,7 +26,7 @@ import os
 import sys
 import imp
 
-from django.conf import settings
+from django.conf import settings as django_settings
 import cyclope.settings as cyc_settings
 
 from django.utils.importlib import import_module
@@ -36,6 +36,7 @@ from django.contrib import admin
 
 from cyclope.core.multisite.threadlocals import DynamicSetting
 from cyclope import default_settings
+from cyclope import themes
 
 class DynamicSettingsMiddleware(object):
     _path = sys.path[:]
@@ -43,10 +44,10 @@ class DynamicSettingsMiddleware(object):
     def process_request(self, request):
         host = request.get_host()
         shost = host.rsplit(':', 1)[0] # only host, without port
-        settings.REQUEST_HOST.set(shost)
-        SITE_BASE_PATH = os.path.realpath(os.path.join(settings.CYCLOPE_MULTISITE_BASE_PATH,
+        django_settings.REQUEST_HOST.set(shost)
+        SITE_BASE_PATH = os.path.realpath(os.path.join(django_settings.CYCLOPE_MULTISITE_BASE_PATH,
                                                        shost, "cyclope_project"))
-        settings.MEDIA_ROOT.set('%s/media/' % SITE_BASE_PATH)
+        django_settings.MEDIA_ROOT.set('%s/media/' % SITE_BASE_PATH)
         try:
             settings_filename = '%s/settings.py' % SITE_BASE_PATH
             site_settings = imp.load_source("site_settings", settings_filename)
@@ -54,13 +55,14 @@ class DynamicSettingsMiddleware(object):
             raise ValueError("Settings for host %s not found at %s " %
                                                             (shost,
                                                              settings_filename))
+
+
         CYCLOPE_SITE_SETTINGS = cyc_settings.get_site_settings()
-        cyc_settings.populate_from_site_settings(CYCLOPE_SITE_SETTINGS)
 
         admin.autodiscover()
-
-        replace_settings(settings, site_settings)
+        replace_settings(django_settings, site_settings)
         cyc_settings.reload_settings()
+        cyc_settings.populate_from_site_settings(CYCLOPE_SITE_SETTINGS)
 
         # Hack sys path for urls import
         sys.path = self._path[:]

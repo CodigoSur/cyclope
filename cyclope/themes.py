@@ -29,6 +29,8 @@ from django.utils.translation import ugettext_lazy as _
 _default_cache = None
 _local_cache = None
 
+_GLOBAL_CACHE = [True]
+
 _DEFAULT_THEMES_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                     "templates", "cyclope", "themes")
 
@@ -47,7 +49,7 @@ def get_default_themes():
         _default_cache = _get_themes(path)
     return _default_cache
 
-def get_local_themes(cache=True):
+def get_local_themes(cache=_GLOBAL_CACHE):
     global _local_cache
     if not hasattr(settings, 'CYCLOPE_LOCAL_THEMES_DIR'):
         return {}
@@ -56,7 +58,7 @@ def get_local_themes(cache=True):
         _local_cache = _get_themes(path)
     return _local_cache
 
-def get_all_themes(cache_local=True):
+def get_all_themes(cache_local=_GLOBAL_CACHE):
     """
     Returns a dictionary with all themes. Key are the theme name (directory name)
     and value the module object.
@@ -71,6 +73,13 @@ def get_theme(name):
     """
     return get_all_themes().get(name, None)
 
+def set_global_cache():
+    global _GLOBAL_CACHE
+    _GLOBAL_CACHE = [True]
+
+def deactivate_global_cache():
+    global _GLOBAL_CACHE
+    _GLOBAL_CACHE = []
 
 if hasattr(settings, 'CYCLOPE_LOCAL_THEMES_DIR'):
     if not hasattr(settings, 'CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX'):

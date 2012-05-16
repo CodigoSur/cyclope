@@ -47,7 +47,9 @@ Attributes:
 
 """
 
-import sys, os
+import os
+import sys
+import functools
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _, ugettext
@@ -112,6 +114,8 @@ CYCLOPE_PROJECT_NAME = os.path.basename(CYCLOPE_PROJECT_PATH)
 
 CYCLOPE_BASE_CONTENT_TYPES = site.base_content_types
 
+import themes
+
 def get_site_settings():
     """Get the SiteSettings object.
 
@@ -165,15 +169,8 @@ def populate_from_site_settings(site_settings):
             globals()[name] = value
 
 if hasattr(settings, "CYCLOPE_MULTISITE") and settings.CYCLOPE_MULTISITE:
-    pass
+    themes.deactivate_global_cache()
 else:
-
-    # TODO(nicoechaniz): re-evaluate the way we are handling themes dynamic
-    # settings, it is practical but seems hacky and error-prone.
-    sys.path.append(os.path.join(CYCLOPE_THEMES_ROOT, '../'))
-    import themes
-
-
     CYCLOPE_SITE_SETTINGS = get_site_settings()
     populate_from_site_settings(CYCLOPE_SITE_SETTINGS)
 
@@ -195,5 +192,4 @@ def reload_settings(**kwargs):
 
     This is used in multi-site configurations."""
 
-    reload(themes)
     reload(sys.modules[__name__])
