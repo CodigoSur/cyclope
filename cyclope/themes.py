@@ -49,6 +49,8 @@ def get_default_themes():
 
 def get_local_themes(cache=True):
     global _local_cache
+    if not hasattr(settings, 'CYCLOPE_LOCAL_THEMES_DIR'):
+        return {}
     path = settings.CYCLOPE_LOCAL_THEMES_DIR
     if _local_cache is None or not cache:
         _local_cache = _get_themes(path)
