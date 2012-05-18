@@ -25,11 +25,18 @@ templatetags.cyclope_utils
 
 General utility helper tags.
 """
+
 from django import template
 from django.utils.safestring import mark_safe
 from django.contrib.markup.templatetags import markup
 
 import cyclope.settings as cyc_settings
+from cyclope.utils import nohang
+from cyclope.utils.lru_cache import LRULimitedSizeDict
+
+
+MARKUP_RENDERER_WAIT = 0.5
+MARKUP_CACHE_SIZE = 250
 
 register = template.Library()
 
@@ -135,8 +142,15 @@ def admin_list_filter_without_all(cl, spec):
 admin_list_filter_without_all = register.inclusion_tag('admin/filter.html')(admin_list_filter_without_all)
 
 
+lru_cache = LRULimitedSizeDict(size_limit=MARKUP_CACHE_SIZE)
+
 @register.filter
 def smart_style(value):
+    value_hash = hash(value)
+    result = lru_cache.get(value_hash, None)
+    if result is not None:
+        return result
+
     style = cyc_settings.CYCLOPE_TEXT_STYLE
     styles = {"wysiwyg": mark_safe,
               "markdown": markup.markdown,
@@ -146,6 +160,10 @@ def smart_style(value):
     if renderer is None:
         raise ValueError("Bad TEXT_STYLE option: %s" % style)
     else:
-        return renderer(value)
+        result, success = nohang.run(renderer, args=(value,), wait=MARKUP_RENDERER_WAIT)
+        if not success:
+            result = value
+        lru_cache[value_hash] = result
+        return result
 
 smart_style.is_safe = True

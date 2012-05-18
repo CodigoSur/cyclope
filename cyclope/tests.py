@@ -19,6 +19,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import time
+
 from django import forms
 from django.test import TestCase
 from django.test.utils import setup_test_environment
@@ -44,6 +46,8 @@ from cyclope.fields import MultipleField
 from cyclope.sitemaps import CollectionSitemap, CategorySitemap, MenuSitemap
 from cyclope.forms import SiteSettingsAdminForm, LayoutAdminForm
 from cyclope import themes
+from cyclope import templatetags as cyclope_templatetags
+from cyclope.templatetags.cyclope_utils import smart_style
 
 
 def create_static_page(name=None):
@@ -623,6 +627,43 @@ class ThemesTestCase(TestCase):
         theme = all_themes["neutrona"]
         self.assertTrue("main.html" in theme.layout_templates)
         self.assertTrue(theme is themes.get_theme("neutrona"))
+
+
+class MarkupTestCase(TestCase):
+
+
+    def timeit(self, test_string):
+        start = time.time()
+        smart_style(test_string)
+        interval = time.time() - start
+        return interval
+
+    def test_textile_hang(self):
+        WAIT = 0.5
+        cyclope_templatetags.cyclope_utils.MARKUP_RENDERER_WAIT = WAIT
+        cyclope_templatetags.cyclope_utils.lru_cache.size_limit = 2
+
+        foo_string = "foo" * 10000
+        bar_string = "bar" * 10000
+
+        self.assertTrue(self.timeit(foo_string) > WAIT) # non cached version
+        self.assertTrue(self.timeit(foo_string) < WAIT) # cached version
+
+        self.assertTrue(self.timeit(bar_string) > WAIT) # non cached version
+        self.assertTrue(self.timeit(bar_string) < WAIT) # cached version
+
+        self.assertTrue(self.timeit(foo_string) < WAIT) # cached version
+        """
+        for i in range(1, 5):
+            print self.timeit("baz"*i*10000)
+        for i in range(1, 5)[::-1]:
+            print self.timeit("baz"*i*10000)
+        """
+        self.timeit("baz") # bar_string should fallen from the cache
+        self.assertTrue(self.timeit(foo_string) > WAIT) # non cached version
+
+
+
 
 
 #TODO(nicoechaniz)
