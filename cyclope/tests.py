@@ -628,80 +628,83 @@ class ThemesTestCase(TestCase):
 
 
 class DynamicSettingTestCase(TestCase):
-    def setUp(self):
-        self.ds = DynamicSetting("SETTING")
 
     def test_api(self):
-        ds = DynamicSetting("SETTING_A")
         ds = DynamicSetting("SETTING_A", 1)
         self.assertEqual(int(ds), 1)
 
     def test_int(self):
         integer = 3
-        self.ds.set(integer)
-        self.assertEqual(int(self.ds), integer)
-        self.assertEqual(str(self.ds), str(integer))
+        ds = DynamicSetting("SETTING", integer)
+        self.assertEqual(int(ds), integer)
+        self.assertEqual(str(ds), str(integer))
+        self.assertEqual(ds * 5, integer * 5)
+        self.assertEqual(5 * ds, integer * 5)
+        self.assertEqual(float(ds), float(integer))
+        self.assertEqual(ds/2, integer/2)
 
     def test_str(self):
-        self.ds.set("foo")
-        self.assertEqual(str(self.ds), "foo")
+        ds = DynamicSetting("SETTING", "foo")
+        self.assertEqual(str(ds), "foo")
+        self.assertEqual(ds + "bar", "foobar")
 
     def test_dict(self):
         d = {"foo": "bar"}
-        self.ds.set(d)
-        self.assertEqual(str(self.ds["foo"]), "bar")
+        ds = DynamicSetting("SETTING", d)
+
+        self.assertEqual(str(ds["foo"]), "bar")
 
         # Test override the entire dict
-        local_cache =  self.ds["foo"]
+        local_cache =  ds["foo"]
         self.assertEqual(str(local_cache), "bar")
 
-        self.ds.set({"foo": "baz"})
+        ds.set({"foo": "baz"})
         self.assertEqual(str(local_cache), "baz")
 
     def test_tuple(self):
-        self.ds.set(("a", "b"))
-        self.assertEqual(str(self.ds[0]), "a")
-        self.assertEqual(str(self.ds[1]), "b")
+        ds = DynamicSetting("SETTING", ("a", "b"))
+        self.assertEqual(str(ds[0]), "a")
+        self.assertEqual(str(ds[1]), "b")
 
-        self.ds.set(("c", "d"))
-        self.assertEqual(str(self.ds[0]), "c")
-        self.assertEqual(str(self.ds[1]), "d")
+        ds.set(("c", "d"))
+        self.assertEqual(str(ds[0]), "c")
+        self.assertEqual(str(ds[1]), "d")
 
-        self.ds.set(("a", "b"))
-        local_cache = self.ds[0]
-        self.ds.set(("c", "d"))
+        ds.set(("a", "b"))
+        local_cache = ds[0]
+        ds.set(("c", "d"))
         self.assertEqual(str(local_cache), "c")
 
         # slice
-        self.ds.set(("a", "b", "c"))
-        self.assertEqual(str(self.ds[:2][0]), "a")
+        ds.set(("a", "b", "c"))
+        self.assertEqual(str(ds[:2][0]), "a")
 
     def test_recursive_tuple(self):
-        self.ds.set((("foo",), ("bar", )))
-        first_elem = self.ds[0]
+        ds = DynamicSetting("SETTING", (("foo",), ("bar", )))
+        first_elem = ds[0]
         self.assertEqual(str(first_elem[0]), "foo")
 
         first_elem.set(("baz", ))
         self.assertEqual(str(first_elem[0]), "baz")
 
     def test_bool(self):
-        self.ds.set(True)
-        self.assertTrue(bool(self.ds) is True)
+        ds = DynamicSetting("SETTING", True)
+        self.assertTrue(bool(ds) is True)
 
-        self.ds.set(False)
-        self.assertTrue(bool(self.ds) is False)
+        ds.set(False)
+        self.assertTrue(bool(ds) is False)
 
     def test_repr(self):
         d = 5
-        self.ds.set(d)
-        self.assertEqual(repr(self.ds), "<DynamicSetting: %s>" % repr(d))
+        ds = DynamicSetting("SETTING", d)
+        self.assertEqual(repr(ds), "<DynamicSetting: %s>" % repr(d))
 
     def test_float(self):
-        self.ds.set(1.0)
-        self.assertEqual(float(self.ds), 1.0)
+        ds = DynamicSetting("SETTING", 1.0)
+        self.assertEqual(float(ds), 1.0)
 
     def test_none(self):
-        self.ds.set(None)
+        ds = DynamicSetting("SETTING", None)
         self.assertTrue()
 
 class DynamicSettingsMiddlewareTestCase(TestCase):

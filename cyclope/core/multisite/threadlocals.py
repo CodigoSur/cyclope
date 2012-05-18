@@ -22,18 +22,51 @@
 # based on  shestera's django-multisite
 # http://github.com/shestera/django-multisite
 
+import inspect
 from threading import local
 
 _thread_locals = local()
 
+_dont_override = set(['__repr__', '__getattribute__', '__new__',
+                      '__init__', '__setitem__'])
+
+class _None(object):
+    pass
+
 class DynamicSetting(object):
-    def __init__(self, setting_name, *args):
-        # the name of the setting whose value we will hold in _thread_locals
+    def __init__(self, setting_name, value_or_type):
+        value, type_ = _None, None
+        if isinstance(value_or_type, type):
+            type_ = value_or_type
+        else:
+            type_ = type(value_or_type)
+            value = value_or_type
+
+        self.__class__ = type('DS%s' % repr(type_), (self.__class__, object), {})
+
         self.setting_name = setting_name
-        if len(args) > 1:
-            raise TypeError("DynamicSetting only supports one value")
-        elif len(args) == 1:
-            self.set(args[0])
+        if value is not _None:
+            self.set(value)
+
+        methods = set()
+        for name, attr in type_.__dict__.iteritems():
+            if inspect.ismethod(attr) or inspect.ismethoddescriptor(attr):
+                methods.add(name)
+        methods_to_override = methods - _dont_override
+
+        def method(self, *args, **kwargs):
+            return getattr(self.get_value(), name)
+
+        for name in methods_to_override:
+            def method(self, *args, **kwargs):
+                print name, args, kwargs
+                return type_.__dict__[name](*args, **kwargs)
+
+            def outer(name, *args, **kwargs):
+                def inner(self, *args, **kwargs):
+                    return getattr(self.get_value(), name)(*args, **kwargs)
+                return inner
+            setattr(self.__class__, name, outer(name))
 
     def set(self, value):
         "Sets the value for this setting in _thread_locals"
@@ -53,38 +86,15 @@ class DynamicSetting(object):
         "Gets the settings actual value"
         return getattr(_thread_locals, self.setting_name, None)
 
-    def __getitem__(self, attr):
-        return self.get_value().__getitem__(attr)
-
-    def __setitem__(self, attr, value):
-        raise NotImplemented
-
-    def __getattribute__(self, attr):
-        if attr == 'setting_name':
-            return super(DynamicSetting, self).__getattribute__(attr)
-
-        current = getattr(_thread_locals, self.setting_name, None)
-        if hasattr(current, attr):
-            return getattr(current, attr)
-        else:
-            return super(DynamicSetting, self).__getattribute__(attr)
-
-    def __unicode__(self):
-        return unicode(self.get_value())
-
-    def __str__(self):
-        return str(self.get_value())
-
-    def __repr__(self):
-        return "<DynamicSetting: %s>" % repr(self.get_value())
-
-    def __float__(self):
-        return float(self.get_value())
-
     def __nonzero__(self):
         return bool(self.get_value())
 
+    def __setitem__(self, attr, value):
+        raise NotImplementedError
 
+    def __repr__(self):
+        val = self.get_value()
+        return "<DynamicSetting: %s>" % repr(val)
 
 class RequestHostHook(object):
     def __repr__(self):

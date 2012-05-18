@@ -41,4 +41,4 @@ else:
     HAYSTACK_SITECONF = 'cyclope_project.search_sites'
 
 
-CYCLOPE_PAGINATION = DynamicSetting('CYCLOPE_PAGINATION')
+CYCLOPE_PAGINATION = DynamicSetting('CYCLOPE_PAGINATION', dict)
