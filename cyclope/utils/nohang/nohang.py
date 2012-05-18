@@ -5,11 +5,15 @@ nohang does *not* support threading.
 """
 import signal
 import threading
+import warnings
 
 class TimeExpired(Exception):
     pass
 
 _in_main_thread = isinstance(threading.current_thread(), threading._MainThread)
+if not _in_main_thread:
+   warnings.warn("nohang is running in a thread so it will not work", RuntimeWarning)
+
 
 def run(function, args=None, kwargs=None, wait=None):
     """
