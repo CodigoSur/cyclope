@@ -27,12 +27,26 @@ from threading import local
 _thread_locals = local()
 
 class DynamicSetting(object):
-    def __init__(self, setting_name):
+    def __init__(self, setting_name, *args):
         # the name of the setting whose value we will hold in _thread_locals
         self.setting_name = setting_name
+        if len(args) > 1:
+            raise TypeError("DynamicSetting only supports one value")
+        elif len(args) == 1:
+            self.set(args[0])
 
     def set(self, value):
         "Sets the value for this setting in _thread_locals"
+        if isinstance(value, tuple):
+            tuple_format = "%s__tuple-%s"
+            value = tuple([DynamicSetting(tuple_format % (self.setting_name, n), element)
+                           for n, element in enumerate(value)])
+        if isinstance(value, dict):
+            dic = {}
+            for key, val in value.iteritems():
+                dict_format = "%s__dict-%s"
+                dic[key] = DynamicSetting(dict_format % (self.setting_name, key), val)
+            value = dic
         setattr(_thread_locals, self.setting_name, value)
 
     def get_value(self):
@@ -66,6 +80,9 @@ class DynamicSetting(object):
 
     def __float__(self):
         return float(self.get_value())
+
+    def __nonzero__(self):
+        return bool(self.get_value())
 
 
 
