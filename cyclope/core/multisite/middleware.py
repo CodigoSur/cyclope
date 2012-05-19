@@ -68,8 +68,9 @@ class DynamicSettingsMiddleware(object):
         sys.path = self._path[:]
         sys.path.insert(0, SITE_BASE_PATH)
         urlconf = 'urls'
-        request.urlconf = urlconf
-        django_settings.ROOT_URLCONF = "urls"
+        request.urlconf = django_settings.ROOT_URLCONF = urlconf
+        # Reload the urls module updating all
+        urls = imp.load_source("urls", "%s/%s.py" % (SITE_BASE_PATH, urlconf))
 
 
     def process_response(self, request, response):
