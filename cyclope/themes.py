@@ -44,7 +44,7 @@ def _get_themes(path):
 
 def get_default_themes():
     global _default_cache
-    path = _DEFAULT_THEMES_ROOT
+    path = unicode(_DEFAULT_THEMES_ROOT)
     if _default_cache is None:
         _default_cache = _get_themes(path)
     return _default_cache
@@ -53,7 +53,7 @@ def get_local_themes(cache=_GLOBAL_CACHE):
     global _local_cache
     if not hasattr(settings, 'CYCLOPE_LOCAL_THEMES_DIR'):
         return {}
-    path = settings.CYCLOPE_LOCAL_THEMES_DIR
+    path = unicode(settings.CYCLOPE_LOCAL_THEMES_DIR)
     if _local_cache is None or not cache:
         _local_cache = _get_themes(path)
     return _local_cache
@@ -75,11 +75,13 @@ def get_theme(name):
 
 def set_global_cache():
     global _GLOBAL_CACHE
-    _GLOBAL_CACHE = [True]
+    if not _GLOBAL_CACHE:
+        _GLOBAL_CACHE.append(True)
 
 def deactivate_global_cache():
     global _GLOBAL_CACHE
-    _GLOBAL_CACHE = []
+    if _GLOBAL_CACHE:
+        _GLOBAL_CACHE.pop()
 
 if hasattr(settings, 'CYCLOPE_LOCAL_THEMES_DIR'):
     if not hasattr(settings, 'CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX'):
