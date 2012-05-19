@@ -58,17 +58,19 @@ class DynamicSettingsMiddleware(object):
 
 
         CYCLOPE_SITE_SETTINGS = cyc_settings.get_site_settings()
-
-        admin.autodiscover()
         replace_settings(django_settings, site_settings)
         cyc_settings.reload_settings()
         cyc_settings.populate_from_site_settings(CYCLOPE_SITE_SETTINGS)
+
+        admin.autodiscover()
 
         # Hack sys path for urls import
         sys.path = self._path[:]
         sys.path.insert(0, SITE_BASE_PATH)
         urlconf = 'urls'
         request.urlconf = urlconf
+        django_settings.ROOT_URLCONF = "urls"
+
 
     def process_response(self, request, response):
         if getattr(request, "urlconf", None):

@@ -83,12 +83,12 @@ def deactivate_global_cache():
     if _GLOBAL_CACHE:
         _GLOBAL_CACHE.pop()
 
-if hasattr(settings, 'CYCLOPE_LOCAL_THEMES_DIR'):
-    if not hasattr(settings, 'CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX'):
-        raise ImproperlyConfigured(_('You need to set CYCLOPE_LOCAL_THEMES_PREFIX'\
-                                      ' in your settings file'))
+if not hasattr(settings, "CYCLOPE_MULTISITE"):
+    if hasattr(settings, 'CYCLOPE_LOCAL_THEMES_DIR'):
+        if not hasattr(settings, 'CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX'):
+            raise ImproperlyConfigured(_('You need to set CYCLOPE_LOCAL_THEMES_PREFIX'\
+                                          ' in your settings file'))
 
-
-    if not os.path.exists(settings.CYCLOPE_LOCAL_THEMES_DIR):
-        raise ImproperlyConfigured(_('Your CYCLOPE_LOCAL_THEMES_DIR' \
-                                      'setting is invalid'))
+        if not os.path.exists(str(settings.CYCLOPE_LOCAL_THEMES_DIR)):
+            raise ImproperlyConfigured(_('Your CYCLOPE_LOCAL_THEMES_DIR' \
+                                          'setting is invalid'))

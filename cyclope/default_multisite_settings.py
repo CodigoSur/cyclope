@@ -42,3 +42,8 @@ else:
 
 
 CYCLOPE_PAGINATION = DynamicSetting('CYCLOPE_PAGINATION', dict)
+CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = DynamicSetting('CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX', "/")
+CYCLOPE_LOCAL_THEMES_DIR = DynamicSetting('CYCLOPE_LOCAL_THEMES_DIR', "/")
+
+# DynamicSettings that must not go here
+# ROOT_URLCONF
