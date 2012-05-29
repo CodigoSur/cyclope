@@ -25,9 +25,10 @@
     {% if view_options.show_description %}
       <div class="html-content summary">
       {% if article.summary %}
-        {{ article|parsed_gettext:"summary"|smart_style }}
+      {{ article|parsed_gettext:"summary"|smart_style }}
       {% else %}
-        {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
+      {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
       {% endif %}
+      </div>
     {% endif %}
-  </div>
+ 

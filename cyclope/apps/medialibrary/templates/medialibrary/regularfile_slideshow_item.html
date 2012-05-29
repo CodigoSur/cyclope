@@ -1,0 +1,13 @@
+{% load i18n fb_versions cyclope_utils dbgettext_tags %}
+<div class="content-view regularfile media slideshow">
+  {% if view_options.show_title %}
+    <h2 class="title"><a href="{% url regularfile-detail regularfile.slug %}">{{ regularfile.name }}</a></h2>
+  {% endif %}
+  <div class="media-content slideshow_regularfile"><img src="{% version media.image.path 'slideshow' %}"/></div>
+  <div class="action-content download_link"><a href="{{ media.file }}">{% trans "download file" %}</a></div>
+  {% if view_options.show_description %}
+    {% if regularfile.description %}
+      <h3 class="summary">{{ regularfile.description|smart_style }}</h3>
+    {% endif %}
+  {% endif %}
+</div> 

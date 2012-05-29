@@ -1,0 +1,28 @@
+{% load i18n fb_versions cyclope_utils dbgettext_tags %}
+<div class="content-view externalcontent media slideshow">
+  {% if view_options.show_title %}
+    <h2 class="title"><a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>{{ externalcontent.name}}</a></h2>
+  {% endif %}
+  {% if view_options.show_image %}
+    {% if externalcontent.image %}
+      <div class="teaser_icon_container media-content"><a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
+        <img class="teaser_icon" src="{% version externalcontent.image.path 'thumbnail' %}" width="90" border="0"/></a>
+      </div>
+    {% endif %}
+  {% endif %}
+  {% if view_options.show_description %}
+    {% if externalcontent.description %}
+      <h3 class="html-content summary">
+        {{ externalcontent.description|smart_style }}
+          {% if not externalcontent.skip_detail %}
+            <span class="more"><a href="{% url externalcontent-detail externalcontent.slug %}">{% trans "More"%}</a></span>
+          {% endif %}
+      </h3>
+    {% endif %}
+    {% if externalcontent.skip_detail %}
+      <span class="meta-content">
+        <a href="{{ externalcontent.content_url }}" {% if externalcontent.new_window %}target="_blank"{% endif%}>{% trans "Open external content"%} {% if externalcontent.new_window %}{% trans " (in new window)"%}{% endif%}</a>
+      </span>
+    {% endif %}
+  {% endif %}
+</div>

@@ -17,11 +17,10 @@
   {% endif %}
 
     <div class="action-content download_link">
-      <a href="{{ media.document }}">{% trans "download file" %}
-      </a>
+      <a href="{{ media.document }}">{% trans "download file" %}</a>
     </div>
 
-  <div class="html-content summary">{{ media.description|smart_style }}<div>
+  <div class="html-content summary">{{ media.description|smart_style }}</div>
 
   {% include 'medialibrary/media_detail_footer.html' %}
 
