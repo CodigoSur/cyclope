@@ -286,5 +286,5 @@ class CommentsList(frontend.FrontendView):
         req_context.update({'comment_list': comment_list})
         t = loader.get_template("comments/comments_list.html")
         return t.render(req_context)
-    
+
 frontend.site.register_view(Comment, CommentsList)
