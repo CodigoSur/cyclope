@@ -35,7 +35,7 @@ from cyclope.utils import nohang
 from cyclope.utils.lru_cache import LRULimitedSizeDict
 
 
-MARKUP_RENDERER_WAIT = 0.5
+MARKUP_RENDERER_WAIT = 5
 MARKUP_CACHE_SIZE = 250
 
 register = template.Library()
