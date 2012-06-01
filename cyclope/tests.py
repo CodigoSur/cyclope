@@ -372,7 +372,6 @@ class SiteSearchViewTestCase(TestCase):
             model_query = "&models=%s.%s" % (model.get_app_label(), model.get_object_name())
             search_url.append(model_query)
         search_url = "".join(search_url)
-        print search_url
         response = self.client.get(search_url)
         self.assertContains(response, 'id="search_results"', count=1)
 
