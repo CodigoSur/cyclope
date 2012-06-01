@@ -30,6 +30,11 @@ import feedparser
 
 from models import Feed
 
+# timedelta.total_seconds is new in python 2.7 http://docs.python.org/library/datetime.html
+# so we define an equivalent here for compatibility's sake
+def total_seconds(td):
+    return (td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / 10**6
+
 
 class FeedDetailOptions(forms.Form):
     limit_to_n_items = forms.IntegerField(label=_('entries to show'), required=False)
@@ -55,7 +60,7 @@ class FeedDetail(frontend.FrontendView):
 
         now = datetime.now()
         d, last_access = self._feed_cache.get(content_object.url, (None, None))
-        if d is None or (now - last_access).total_seconds() > cyc_settings.CYCLOPE_FEED_CACHE_TIME:
+        if d is None or total_seconds(now - last_access) > cyc_settings.CYCLOPE_FEED_CACHE_TIME:
             d = feedparser.parse(content_object.url)
             self._feed_cache[content_object.url] = (d, now)
         context = {'entries': d.entries[:options['limit_to_n_items']]}

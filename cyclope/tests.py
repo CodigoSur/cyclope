@@ -359,6 +359,24 @@ class SiteMapViewTestCase(TestCase):
         self.assertEqual(res.status_code, 200)
 
 
+class SiteSearchViewTestCase(TestCase):
+    fixtures = ['cyclope_demo.json']
+
+    def setUp(self):
+        frontend.autodiscover()
+    
+    def test_site_search_view(self):
+        site = Site.objects.all()[0]
+        search_url = ['/search/?q=cyclope']
+        for model in frontend.site.base_content_types:
+            model_query = "&models=%s.%s" % (model.get_app_label(), model.get_object_name())
+            search_url.append(model_query)
+        search_url = "".join(search_url)
+        print search_url
+        response = self.client.get(search_url)
+        self.assertContains(response, 'id="search_results"', count=1)
+
+
 class StaticPageTestCase(ViewableTestCase):
     fixtures = ['simplest_site.json']
     test_model = StaticPage
