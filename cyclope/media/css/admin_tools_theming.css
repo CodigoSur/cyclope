@@ -294,9 +294,22 @@ padding:2px 4px;
 margin-left:0;
 }
 
+.login .button, .login input[type="submit"], .login input[type="button"], .login .submit-row input {
+background: none no-repeat 0 0 white;
+border: 2px solid #C3D5F0;
+color:black;
+-moz-border-radius: 5px 5px 5px 5px;
+padding:2px 4px;
+margin-left:0;
+}
+
 .button:hover, input[type="submit"]:hover, input[type="button"]:hover, .submit-row input:hover {
+background: none no-repeat 0 0 #fff;color:#000;
+}
+.login .button:hover, .login input[type="submit"]:hover, .login input[type="button"]:hover, .login .submit-row input:hover {
 background: none no-repeat 0 0 #000;
 }
+
 
 .button, input[type="text"] {
 background: none no-repeat 0 0 white;
@@ -483,14 +496,15 @@ width: 960px; padding: 0px;margin:0 auto;
 .main-area-modules { 
 width: 645px;
 float: left;
-margin-top: 20px;
+margin-top: 0;
 }
 
 .main-area-modules  h2 {
-background: url("../images/estrella.png") no-repeat scroll 8px 7px #aaa; /* #2b5ea9; (azul-celeste)*/
-padding-left: 30px;
+background: url("../images/engranaje.png") no-repeat scroll 8px 7px #6e6e6e; /* #2b5ea9; (azul-celeste)*/
+padding-left: 35px;
 width: 584px;
 font-weight: bold;
+font-size:1.6em;
 
 }
 
@@ -499,7 +513,7 @@ background: url("../images/estrella.png") no-repeat scroll 8px 7px #698ec6;
 }
 
 .main-area-modules .dashboard-module-content p {
-color: white;
+color: #ffcc00;
 font-style: italic;
 text-align: right;
 margin: -38px 38px 21px 0px;
@@ -570,12 +584,12 @@ height: auto;
 }
 
 .right-area-modules {
-border: 2px solid #800000;
+border: 2px solid #a00a0a;
 -moz-border-radius: 6px 6px 6px 6px;
 }
 
 .right-area-modules h2 {
-background: url("../images/right-area-default-icon.png") no-repeat scroll 8px 7px #800000;
+background: url("../images/right-area-default-icon.png") no-repeat scroll 8px 7px #a00a0a;
 -moz-border-radius: 3px 3px 0px 0px;
 }
 
@@ -740,10 +754,12 @@ line-height: 16px;
 /* ####### !! ####### */
 
 .dashboard-column {float:none !important;margin:0 auto !important;}
-h1.dashboard-title {float:none !important;width:960px;margin:0 auto;}
+h1.dashboard-title {float:none !important;width:960px;margin:30px auto 0;float:none;color:#ccc;display:none;}
 #header {position:relative;}
 #branding {width:960px;margin:0 auto;}
 #user-tools {width:960px;position:relative;margin:-40px auto 0;}
 .group ul {background:transparent;}
 #footer {width:960px;margin:10px auto;border-top:1px dotted #ccc;text-align:center;}
 .login #footer {display:none;}
+ul.messagelist li {width:880px !important;margin:0 auto !important;padding:20px 40px;background-position:20px center;font-size:1.2em;}
+.changelink {background: url("../images/admin-cyclope-sitesettings-small.png") no-repeat !important;}
