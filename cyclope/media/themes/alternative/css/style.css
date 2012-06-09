@@ -1,6 +1,6 @@
 /*
 # Alternative Theme 5 Elements to Cyclope 3
-# Copyright 2010-2012 Código Sur - Sociedad Civil
+# Copyright 2010-2012 CodigoSur - Sociedad Civil
 # All rights reserved.
 # This file is part of Cyclope.
 # Cyclope is free software: you can redistribute it and/or modify
@@ -56,7 +56,7 @@ DEFAULT'S
 .title a {color:#000;} 
 .title a:hover {color:#6f0662;}
 .summary {color:#6f0662;font-weight:700;padding:10px 0;text-align:justify;line-height:1.5em;}
-.summary a {color:#000;}
+.summary a {color:#000000;}
 .summary a:hover {color:#d261c2;text-decoration:underline;}
 /*.author {color:#af1099;border-left:4px solid #f7b0ed;padding:0 0 0 10px;margin:10px 0 0;font-size:.9em;}*/
 .pretitle {color:#af1099;text-transform:uppercase;}
