@@ -41,7 +41,6 @@ from cyclope.sitemaps import CategorySitemap, CollectionSitemap, MenuSitemap
 
 urlpatterns = patterns('',
     (r'^admin/filebrowser/', include('filebrowser.urls')),
-    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
     url(r'^admin_tools/', include('admin_tools.urls')),
     (r'^i18n/', include('django.conf.urls.i18n')),

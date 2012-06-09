@@ -1,6 +1,6 @@
 {% extends "admin/base.html" %}
 {% load i18n %}
-
+{% block extrastyle %}{% load adminmedia %}<link rel="icon" href="{{ CYCLOPE_STATIC_URL }}images/cyclope-icon.png" type="image/png">{% endblock %}
 {% block title %}{{ title }} | {% trans 'Cyclope site admin' %}{% endblock %}
 
 {% block branding %}
@@ -8,3 +8,5 @@
 {% endblock %}
 
 {% block nav-global %}{% endblock %}
+
+{% block footer %} <div id="footer">Desarrollado por <a href="http://www.codigosur.org" target="_blank">Código Sur</a></div> {% endblock %}

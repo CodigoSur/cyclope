@@ -434,10 +434,14 @@ font-weight: bold;
 }
 
 .dashboard-module-content {
-border: none;
+border-top: none;
 padding-top: 12px;
+width:614px;
 }
 
+#module_6 .dashboard-module-content, #module_7 .dashboard-module-content, #module_8 .dashboard-module-content {width:300px;text-align:left !important;padding:0;}
+#module_6 .dashboard-module ul.inline, #module_7 .dashboard-module ul.inline, #module_8 .dashboard-module ul.inline {text-align:left !important;}
+.dashboard-module ul.inline {text-align:left !important;}
 .dashboard-module-content > ul > li { 
 display: block;
 height: 67px; 
@@ -503,10 +507,21 @@ margin: -38px 38px 21px 0px;
 
 .main-area-modules .dashboard-module-content > ul > li { 
 display: inline-block;
-width: 280px;
-margin: 0 19px 13px 0;
+width: 270px;
+margin: 0 17px 13px 0;
+border:1px solid #ccc;
+ /* Safari 4+, Chrome 1-9 */
+   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#eeeeee), to(#fdfdfd));
+   /* Safari 5.1+, Mobile Safari, Chrome 10+ */
+   background-image: -webkit-linear-gradient(top, #eeeeee, #fdfdfd); 
+   /* Firefox 3.6+ */
+   background-image: -moz-linear-gradient(top, #eeeeee, #fdfdfd);
+   /* IE 10+ */
+   background-image: -ms-linear-gradient(top, #eeeeee, #fdfdfd);
+   /* Opera 11.10+ */
+   background-image: -o-linear-gradient(top, #eeeeee, #fdfdfd);
 }
-
+.main-area-modules .dashboard-module-content > ul > li:hover {background:#fff; }
 
 /* ========== right-area ========= */
 
@@ -591,12 +606,39 @@ background: url("../images/admin-articles-article.png") no-repeat scroll 0 1px t
 background: url("../images/admin-staticpages-staticpage.png") no-repeat scroll 0 1px transparent;
 }
 
+.dashboard-module-content > ul > li > a[href="/admin/staticpages/htmlblock/"] {
+background: url("../images/admin-staticpages-blockhtml.png") no-repeat scroll 0 1px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/newsletter/newsletter/"] {
+background: url("../images/admin-newsletter-newsletter.png") no-repeat scroll 0 1px transparent;
+}
+
 .dashboard-module-content > ul > li > a[href="/admin/cyclope/layout/"] {
 background: url("../images/admin-cyclope-layout.png") no-repeat scroll 0 2px transparent;
 }
 
+.dashboard-module-content > ul > li > a[href="/admin/feeds/feed/"] {
+background: url("../images/admin-feeds-feed.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/polls/poll/"] {
+background: url("../images/admin-polls-poll.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/polls/question/"] {
+background: url("../images/admin-polls-question.png") no-repeat scroll 0 2px transparent;
+}
+.dashboard-module-content > ul > li > a[href="/admin/contacts/contact/"] {
+background: url("../images/admin-contacts-contact.png") no-repeat scroll 0 2px transparent;
+}
+
 .dashboard-module-content > ul > li > a[href="/admin/cyclope/menuitem/"] {
 background: url("../images/admin-cyclope-menuitem.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/sites/site/"] {
+background: url("../images/admin-sites-site.png") no-repeat scroll 0 2px transparent;
 }
 
 .dashboard-module-content > ul > li > a[href="/admin/cyclope/menu/"] {
@@ -609,6 +651,10 @@ background: url("../images/admin-registration-registrationprofile.png") no-repea
 
 .dashboard-module-content > ul > li > a[href="/admin/medialibrary/soundtrack/"] {
 background: url("../images/admin-medialibrary-soundtrack.png") no-repeat scroll 0 2px transparent;
+}
+
+.dashboard-module-content > ul > li > a[href="/admin/medialibrary/flashmovie/"] {
+background: url("../images/admin-medialibrary-flashmovie.png") no-repeat scroll 0 2px transparent;
 }
 
 .dashboard-module-content > ul > li > a[href="/admin/medialibrary/movieclip/"] {
@@ -699,3 +745,5 @@ h1.dashboard-title {float:none !important;width:960px;margin:0 auto;}
 #branding {width:960px;margin:0 auto;}
 #user-tools {width:960px;position:relative;margin:-40px auto 0;}
 .group ul {background:transparent;}
+#footer {width:960px;margin:10px auto;border-top:1px dotted #ccc;text-align:center;}
+.login #footer {display:none;}
