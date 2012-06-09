@@ -2,28 +2,52 @@
  * theming styles
  * 
  */
-
+body {}
+#content {margin:10px auto;width:960px;}
 #header {
     /* background: url(/media/admin_tools/images/admin-tools.png) 0 0 repeat-x; */
-  background-color: #800000;
+  background-color: #a00a0a;
 }
-
+.login #header {
+    border-radius:12px;-webkit-border-radius:12px;-moz-border-radius:12px;}
+body.login {background-color: #a00a0a}
+.login #content {margin:10px auto;width:400px;}
+.login #container {border:none;width:400px;background-color: #a00a0a;
+border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
+.login #header #branding h1 {
+    margin: 0;
+    padding: 0;
+    text-indent: -9999px;
+    background: transparent url(../images/cyclope-logo-login.png) no-repeat center center;
+    height: 166px;
+    width: 400px;
+}
+.login #content-main {margin:0 0 0 30px;width:400px;}
+.login .form-row  {margin:0;}
+.login .form-row label {display:block;float:none;margin:0;text-align:left;padding:0;color:#fff;}
+.login .form-row input {display:block;float:none;margin:0 0 15px;width:300px !important;text-align:left;padding:6px 3px;font-size:1.1em;
+ border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;}
+.login .submit-row {display:block;float:none;margin:0 auto;padding:0;width:300px !important;}
+.login .submit-row input{display:block;float:right;margin:0 40px 0 0 !important;text-align:center;text-transform:uppercase;font-weight:700;padding:4px !important;color:#fff;background:#1a1a1a;border:2px solid #000;
+border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;}
 #header #branding h1 {
     margin: 0;
     padding: 5px 10px;
     text-indent: -9999px;
-    background: transparent url(../images/cyclope-admin-top.png) no-repeat 0px 0px;
-    height: 31px;
-    width: 155px;
+    background: transparent url(../images/cyclope-logo.png) no-repeat left center;
+    height: 84px;
+    width: 960px;
 }
 
 div.breadcrumbs {
     display: block;
     /* display: none; */
-    padding: 10px 15px;
+    padding: 10px 0;
     border: 0;
-    background-position: 0 -8px;
+    background:none;
     border-bottom: 1px solid #ededed;
+    width:960px;
+    margin:0 auto 10px;
 }
 
 div.breadcrumbs a {
@@ -48,7 +72,7 @@ body, .ui-widget {
 /* ========= change list ======== */
 
 .change-list #content, .change-form #content, .rosetta #content{ 
-width: 960px;
+width: 960px;margin:0 auto;
 }
 
 .popup #content{
@@ -267,11 +291,11 @@ border: 2px solid #C3D5F0;
 color:black;
 -moz-border-radius: 5px 5px 5px 5px;
 padding:2px 4px;
-margin-left: 3px;
+margin-left:0;
 }
 
 .button:hover, input[type="submit"]:hover, input[type="button"]:hover, .submit-row input:hover {
-background: none no-repeat 0 0 #C3D5F0;
+background: none no-repeat 0 0 #000;
 }
 
 .button, input[type="text"] {
@@ -449,7 +473,7 @@ color: #2B5EA9;
 /* =========== main area dashboard ========= */
 
 .dashboard-container { 
-width: 960px; padding: 0px;
+width: 960px; padding: 0px;margin:0 auto;
 }
 
 .main-area-modules { 
@@ -668,3 +692,10 @@ font-size: 14px;
 line-height: 16px;
 }
 /* ####### !! ####### */
+
+.dashboard-column {float:none !important;margin:0 auto !important;}
+h1.dashboard-title {float:none !important;width:960px;margin:0 auto;}
+#header {position:relative;}
+#branding {width:960px;margin:0 auto;}
+#user-tools {width:960px;position:relative;margin:-40px auto 0;}
+.group ul {background:transparent;}
