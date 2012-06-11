@@ -19,16 +19,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# based on  shestera's django-multisite
-# http://github.com/shestera/django-multisite
-
-import cyclope
-import cyclope.settings # Leave this here
-
 class LayoutMiddleware(object):
     """Sets session['layout'] if the current menu item has a persistent layout and clears it when another menu_item changes the layout.
     """
     def process_request(self, request):
+        import cyclope # Leave this here, it prevents circular imports
+        import cyclope.settings # Leave this here
+
         menu_item = cyclope.utils.menu_item_for_request(request)
         if menu_item:
             ## we force the layout for items with custom URL (external apps)
