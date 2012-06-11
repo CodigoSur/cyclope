@@ -505,7 +505,9 @@ padding-left: 35px;
 width: 584px;
 font-weight: bold;
 font-size:1.6em;
-
+ -webkit-border-radius:6px; 
+  -moz-border-radius:6px; 
+  border-radius:6px; 
 }
 
 .main-area-modules.local_app  h2 { /* for local/custom admin panels defined locally */
@@ -534,6 +536,9 @@ border:1px solid #ccc;
    background-image: -ms-linear-gradient(top, #eeeeee, #fdfdfd);
    /* Opera 11.10+ */
    background-image: -o-linear-gradient(top, #eeeeee, #fdfdfd);
+     -webkit-border-radius:8px; 
+  -moz-border-radius:8px; 
+  border-radius:8px; 
 }
 .main-area-modules .dashboard-module-content > ul > li:hover {background:#fff; }
 
@@ -585,7 +590,9 @@ height: auto;
 
 .right-area-modules {
 border: 2px solid #a00a0a;
--moz-border-radius: 6px 6px 6px 6px;
+ -webkit-border-radius:6px; 
+  -moz-border-radius:6px; 
+  border-radius:6px; 
 }
 
 .right-area-modules h2 {
