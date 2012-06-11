@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <!--
 # Cyclope 3 Workflow Design
 # Theme: Neutrona
 # Layout: 5 Elements
 # 960 Grid System Based www.960.gs
 # Official Trac Cyclope 3 GPL: http://codigo.cyclope.ws
-# Copyright 2010-2012 Codigo Sur - Sociedad Civil
+# Copyright 2010-2012 CodigoSur - SociedadCivil
 # All rights reserved.
 # This file is part of Cyclope 3.
 # Cyclope is free software: you can redistribute it and/or modify
@@ -13,14 +13,12 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 # Development: Codigo Sur www.codigosur.org
-# Adaptation HTML + CSS: Santiago Hoerth Moura
-# Experience is an original design Free CSS Templates 
-# Not delete this comment :)
+# Neutrona is original design Santiago Hoerth Moura
  -->
 
 {% load layout i18n tagging_tags %}
   
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+<html>
  
  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -29,9 +27,10 @@
     <meta name="Description" content="{{ CYCLOPE_SITE_SETTINGS.description }}" />
     <link href="/rss" title="RSS" type="application/rss+xml" rel="alternate" />
 
-    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/style.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/print.css" rel="stylesheet" type="text/css" media="print"/>
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet/less" type="text/css"/>
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/print.css" rel="stylesheet" type="text/css" media="print"/>    
     <link href="{{ CYCLOPE_STATIC_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less-1.3.0.min.js"></script>    
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-1.5.1.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-ui-1.8.13.custom.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/menuitems.js"></script>

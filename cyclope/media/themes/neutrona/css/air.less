@@ -1,0 +1,152 @@
+/*
+# Cyclope 3 Workflow Design
+# Theme: Neutrona 
+# Layout: 5 Elements
+# 960 Grid System Based www.960.gs
+# Official Trac Cyclope 3 GPL: http://codigo.cyclope.ws
+# Copyright 2010-2012 Codigo Sur - Sociedad Civil
+# All rights reserved.
+# This file is part of Cyclope 3.
+# Cyclope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# Development: Codigo Sur www.codigosur.org
+# Adaptation HTML + CSS: Santiago Hoerth Moura
+# Not delete this comment :)
+*/
+
+/*-----------------------------------------------------------------------------------------------
+AIR MENU
+-----------------------------------------------------------------------------------------------*/
+#air {
+  position:relative;
+  background:@colorc;}
+
+#air .menuitems_hierarchy {
+  position:relative;
+  height: 35px;
+  padding: 5px 0 0;
+  z-index:30;}
+
+#air .menuitems_hierarchy ul {
+float:right;
+list-style: none;}
+ 
+#air .menuitems_hierarchy li  {
+  float:left;
+  margin: 0 0 0 7px;}
+
+#air .menuitems_hierarchy li a {
+  display: block; 
+  text-decoration: none; 
+  color: @color-alpha; 
+  font-weight: 700;
+  background: @color-omega; 
+  margin: 0; padding: 6px 12px; }
+
+#air .menuitems_hierarchy li a:hover {
+  background: @colord; 
+  color: @colora; }
+
+#air .menuitems_hierarchy span.current a {
+  }
+/* Sub Menues */
+#air .menuitems_hierarchy ul ul{
+  font-size:.85em;
+  width:180px;
+  position:absolute;
+  margin:0;
+  padding:0 0 5px;
+  border:none;
+  background:@colord;
+  .rounded-corners-bottom(5px);}
+
+#air .menuitems_hierarchy li li {
+  float:none;
+  margin: 0;}
+
+#air .menuitems_hierarchy li li a {
+  padding: 8px 10px;
+  background:@colord;}
+
+#air .menuitems_hierarchy li li a:hover {
+  background:@color-omega;
+} 
+/* SUB-SUB MENUES */
+#air .menuitems_hierarchy ul ul ul {
+  background:@colore;}
+
+#air .menuitems_hierarchy li li li {
+  }
+
+#air .menuitems_hierarchy li li li a {
+  padding: 8px 10px;
+  background:@colore;}
+
+#air .menuitems_hierarchy li li li a:hover {
+  background: @color-omega; }
+
+/*SEARCH BOX*/
+#air .search-box {
+  position:absolute;
+  top:110px;
+  right:0;}
+
+#air .search-box form {
+  margin:0 15px 0 0;
+  padding:5px;
+  float:right;
+  z-index:50;}
+
+#air .search-box input {
+  padding:5px 3px;
+  margin:0 0 1px 0;
+  border:1px solid @color-omega;
+  color:@color-omega;
+  width:128px;
+  background:@color-alpha;
+  font-size:0.75em}
+
+#air .search-box input.submit {
+  border:none;
+  padding:3px 0;
+  margin:0 0 0 0;
+  width:25px;
+  height:25px;
+  background:url(../images/css/btn.png) no-repeat;}
+
+/*-----------------------------------------------------------------------------------------------
+BRAND
+-----------------------------------------------------------------------------------------------*/
+.brand {
+  height:170px;
+  background: url(../images/css/cabezal.png) 0 0 no-repeat;
+  padding:0;
+  margin:0;}
+
+.brand h1 {
+  padding:15px 70px 0 15px;
+  text-align:left;
+  font-size:2.3em;}
+
+.brand h1 a {
+  color:@color-alpha; 
+  text-decoration:none;}
+
+.brand h2 {
+  font-size:1.1em;
+  font-weight:400;
+  padding:0 70px 0 15px;}
+
+.brand h2 a {
+  color:@colorb; 
+  text-decoration:none;}
+
+.brand div {
+  padding:5px 0 0 15px;
+  margin:0;
+  text-align:left;
+  color:@color-alpha;
+  font-size:0.85em;
+  background:@color-alpha;} 
