@@ -20,7 +20,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class LayoutMiddleware(object):
-    """Sets session['layout'] if the current menu item has a persistent layout and clears it when another menu_item changes the layout.
+    """
+    Sets session['layout'] if the current menu item has a persistent layout
+    and clears it when another menu_item changes the layout.
     """
     def process_request(self, request):
         import cyclope # Leave this here, it prevents circular imports
