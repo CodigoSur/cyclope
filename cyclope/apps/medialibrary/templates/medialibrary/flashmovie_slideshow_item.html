@@ -1,9 +1,7 @@
+{% extends 'medialibrary/medialibrary_slideshow_base_item.html' %}
 {% load i18n fb_versions cyclope_utils dbgettext_tags %}
-<div class="content-view flashmovie media slideshow">
-  {% if view_options.show_title %}
-    <h2 class="title"><a href="{% url flashmovie-detail flashmovie.slug %}">{{ flashmovie.name }}</a></h2>
-  {% endif %}
-<div class="media-content slideshow_flashmovie"><img src="{% version media.image.path 'slideshow' %}"/></div>
+
+{% block content %}
 <div style="width: 100%; height: 150px;">
   <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="100%" height="100%" id="curso-el-video" align="middle">
     <param name="allowScriptAccess" value="sameDomain" />
@@ -15,9 +13,4 @@
   </object>
 </div>
 <div class="action-content download_link"><a target="_blank" href="{{ media.flash }}">{% trans "full screen view (new window)"%}</a></div>
-{% if view_options.show_description %}
-  {% if flashmovie.description %}
-    <h3 class="summary">{{ flashmovie.description|smart_style }}</h3>
-  {% endif %}
-{% endif %}
-</div> 
+{% endblock content %}

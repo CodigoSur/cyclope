@@ -1,19 +1,10 @@
+{% extends 'medialibrary/medialibrary_slideshow_base_item.html' %}
 {% load i18n fb_versions cyclope_utils dbgettext_tags %}
+
 {% alias media as 'current_object' %}
 {% alias media.video as 'media_file' %}
-<div class="content-view movieclip media slideshow">
-  {% if view_options.show_title %}
-    <h2 class="title"><a href="{% url movieclip-detail movieclip.slug %}">{{ movieclip.name }}</a></h2>
-  {% endif %}
+
+{% block content %}
   {% assign player_height '320' %}
   {% include 'medialibrary/media_player.html' %}
-  <div class="media-content slideshow_movieclip"><img src="{% version media.image.path 'slideshow' %}"/></div>
-  {% if view_options.show_description %}
-    {% if movieclip.description %}
-      <div class="summary">{{ movieclip.description|smart_style }}</div>
-    {% endif %}
-  {% endif %}
-</div> 
-
-
-
+{% endblock content %}

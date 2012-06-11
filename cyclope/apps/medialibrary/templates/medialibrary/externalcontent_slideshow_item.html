@@ -1,4 +1,6 @@
+{% extends 'medialibrary/medialibrary_slideshow_base_item.html' %}
 {% load i18n fb_versions cyclope_utils dbgettext_tags %}
+{% block wholecontent %}
 <div class="content-view externalcontent media slideshow">
   {% if view_options.show_title %}
     <h2 class="title"><a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>{{ externalcontent.name}}</a></h2>
@@ -26,3 +28,4 @@
     {% endif %}
   {% endif %}
 </div>
+{% endblock wholecontent %}

@@ -1,12 +1,1 @@
-{% load i18n fb_versions cyclope_utils dbgettext_tags %}
-<div class="content-view picture media slideshow">
-  {% if view_options.show_title %}
-    <h2 class="title"><a href="{% url picture-detail picture.slug %}">{{ picture.name }}</a></h2>
-  {% endif %}
-<div class="media-content slideshow_picture"><img src="{% version media.image.path 'slideshow' %}"/></div>
-  {% if view_options.show_description %}
-    {% if picture.description %}
-      <div class="summary">{{ picture.description|smart_style }}</div>
-    {% endif %}
-  {% endif %}
-</div> 
+{% extends 'medialibrary/medialibrary_slideshow_base_item.html' %}
