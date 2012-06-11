@@ -47,7 +47,8 @@ Attributes:
 
 """
 
-import sys, os
+import os
+import sys
 
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _, ugettext
@@ -110,6 +111,8 @@ CYCLOPE_PROJECT_PATH = os.path.normpath(CYCLOPE_PROJECT_PATH)
 
 CYCLOPE_PROJECT_NAME = os.path.basename(CYCLOPE_PROJECT_PATH)
 
+CYCLOPE_BASE_CONTENT_TYPES = site.base_content_types
+
 import themes
 
 def get_site_settings():
@@ -130,14 +133,10 @@ def get_site_settings():
 
     return site_settings
 
-CYCLOPE_BASE_CONTENT_TYPES = site.base_content_types
-
-CYCLOPE_SITE_SETTINGS = get_site_settings()
-
-# If the site has already been set up we read some settings
-# and make them available at module level
-if CYCLOPE_SITE_SETTINGS is not None:
-    CYCLOPE_BASE_URL = "http://"+ CYCLOPE_SITE_SETTINGS.site.domain
+def populate_from_site_settings(site_settings):
+    # Read some settings and make them available at module level
+    CYCLOPE_SITE_SETTINGS = site_settings
+    CYCLOPE_BASE_URL = "http://" + CYCLOPE_SITE_SETTINGS.site.domain # FIXME: could be https
     CYCLOPE_CURRENT_THEME = CYCLOPE_SITE_SETTINGS.theme
     if CYCLOPE_CURRENT_THEME in themes.get_local_themes():
         CYCLOPE_THEME_MEDIA_URL = '%s%s/' % (
@@ -158,9 +157,19 @@ if CYCLOPE_SITE_SETTINGS is not None:
                 CYCLOPE_CURRENT_THEME,
                 CYCLOPE_DEFAULT_LAYOUT.template)
 
-        #TODO(nicoechaniz): fix this workaround. It's here for migrations on the Layout model, which fail to complete with a DatabaseError when this module is imported. Eg: cyclope/migrations/0011...
+        # TODO(nicoechaniz): fix this workaround. It's here for migrations on the
+        # Layout model, which fail to complete with a DatabaseError when this
+        # module is imported. Eg: cyclope/migrations/0011...
         except DatabaseError:
             pass
+
+    # Update the settings module with the settings
+    for name, value in locals().copy().iteritems():
+        if name.startswith("CYCLOPE"):
+            globals()[name] = value
+
+CYCLOPE_SITE_SETTINGS = get_site_settings()
+populate_from_site_settings(CYCLOPE_SITE_SETTINGS)
 
 def _refresh_site_settings(sender, instance, created, **kwargs):
     "Callback to refresh site settings when they are modified in the database"
