@@ -174,21 +174,3 @@ def _refresh_site_settings(sender, instance, created, **kwargs):
         reload(sys.modules[__name__])
 
 post_save.connect(_refresh_site_settings, sender=SiteSettings)
-
-def _delete_from_layouts_and_menuitems(sender, instance, **kwargs):
-    # when a content is part of a layout or a menu_item we need to
-    # clear this relation
-    if instance.__class__ in site._registry:
-        ctype = ContentType.objects.get_for_model(sender)
-
-        RegionView = get_model('cyclope', 'regionview')
-        RegionView.objects.filter(content_type=ctype, object_id=instance.id).delete()
-
-        MenuItem = get_model('cyclope', 'menuitem')
-        items = MenuItem.objects.filter(content_type=ctype, object_id=instance.id)
-        for item in items:
-            item.content_type = item.object_id = item.content_object = None
-            item.save()
-
-
-pre_delete.connect(_delete_from_layouts_and_menuitems)

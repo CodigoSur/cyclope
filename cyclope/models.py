@@ -466,8 +466,6 @@ class UserProfile(models.Model):
 def _create_profile_upon_activation(*args, **kwargs):
     UserProfile.objects.create(user=kwargs['user'])
 
-registration_signals.user_activated.connect(_create_profile_upon_activation)
-
 def _delete_related_contents(sender, instance, **kwargs):
     # cascade delete does not delete the RelatedContent elements
     # where this object is the related content, so we do it here.
@@ -479,5 +477,22 @@ def _delete_related_contents(sender, instance, **kwargs):
         for obj in related_from:
             obj.delete()
 
-pre_delete.connect(_delete_related_contents)
+def _delete_from_layouts_and_menuitems(sender, instance, **kwargs):
+    # when a content is part of a layout or a menu_item we need to
+    # clear this relation
+    from cyclope.core.frontend.sites import site
+    if instance.__class__ in site._registry:
+        ctype = ContentType.objects.get_for_model(sender)
 
+        RegionView = get_model('cyclope', 'regionview')
+        RegionView.objects.filter(content_type=ctype, object_id=instance.id).delete()
+
+        MenuItem = get_model('cyclope', 'menuitem')
+        items = MenuItem.objects.filter(content_type=ctype, object_id=instance.id)
+        for item in items:
+            item.content_type = item.object_id = item.content_object = None
+            item.save()
+
+registration_signals.user_activated.connect(_create_profile_upon_activation)
+pre_delete.connect(_delete_related_contents)
+pre_delete.connect(_delete_from_layouts_and_menuitems)

@@ -716,6 +716,28 @@ class RelatedContentTestCase(TestCase):
         self.assertEqual(RelatedContent.objects.count(), 0)
 
 
-#TODO(nicoechaniz)
-#
-#class DeleteFromLayoutsAndMenuItems(TestCase)
+class DeleteFromLayoutsAndMenuItems(TestCase):
+    def setUp(self):
+        MenuItem.objects.all().delete()
+
+    def test_deletion(self):
+        frontend.autodiscover()
+        article = Article.objects.create(name="Article")
+
+        layout = get_default_layout()
+        region_view = RegionView(layout=layout)
+        article_ct = ContentType.objects.get_for_model(article)
+        region_view = RegionView.objects.create(content_object=article,
+                                                layout=layout,
+                                                content_view="detail")
+
+        menu = Menu.objects.create(name='menu')
+        mi = MenuItem(name='article item', menu=menu, content_object=article,
+                      content_view="detail")
+        mi.save()
+
+        self.assertEqual(RegionView.objects.count(), 1)
+        self.assertEqual(MenuItem.objects.get().content_object, article)
+        article.delete()
+        self.assertEqual(RegionView.objects.count(), 0)
+        self.assertEqual(MenuItem.objects.get().content_object, None)
