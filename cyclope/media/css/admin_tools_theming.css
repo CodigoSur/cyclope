@@ -295,9 +295,9 @@ margin-left:0;
 }
 
 .login .button, .login input[type="submit"], .login input[type="button"], .login .submit-row input {
-background: none no-repeat 0 0 white;
-border: 2px solid #C3D5F0;
-color:black;
+background: none no-repeat 0 0 #1a1a1a;
+border: 2px solid #000;
+color:#eee;
 -moz-border-radius: 5px 5px 5px 5px;
 padding:2px 4px;
 margin-left:0;
@@ -307,7 +307,8 @@ margin-left:0;
 background: none no-repeat 0 0 #fff;color:#000;
 }
 .login .button:hover, .login input[type="submit"]:hover, .login input[type="button"]:hover, .login .submit-row input:hover {
-background: none no-repeat 0 0 #000;
+background: none no-repeat 0 0 #1a1a1a;
+color:#eee;
 }
 
 
