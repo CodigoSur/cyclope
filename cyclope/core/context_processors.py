@@ -19,6 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from django.conf import settings
 from cyclope import settings as cyc_settings
 
 def site_settings(request):
@@ -28,4 +29,13 @@ def site_settings(request):
     for setting in dir(cyc_settings):
         if setting == setting.upper() and setting.startswith('CYCLOPE'):
             settings_dict[setting] = getattr(cyc_settings, setting)
+    return settings_dict
+
+
+def third_party_settings(request):
+    """Exposes some necesary settings of third party apps to the template.
+    """
+    settings_dict = {}
+
+    settings_dict["COMPRESS_ENABLED"] = getattr(settings, "COMPRESS_ENABLED", False)
     return settings_dict

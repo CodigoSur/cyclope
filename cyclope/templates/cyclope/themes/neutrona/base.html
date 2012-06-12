@@ -16,10 +16,10 @@
 # Neutrona is original design Santiago Hoerth Moura
  -->
 
-{% load layout i18n tagging_tags %}
-  
+{% load layout i18n tagging_tags compress %}
+
 <html>
- 
+
  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{% block title %}{%if title %}{{title}} | {%endif%}{{ CYCLOPE_SITE_SETTINGS.global_title }}{%endblock%}</title>
@@ -27,10 +27,19 @@
     <meta name="Description" content="{{ CYCLOPE_SITE_SETTINGS.description }}" />
     <link href="/rss" title="RSS" type="application/rss+xml" rel="alternate" />
 
+    {% if not COMPRESS_ENABLED %}
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet/less" type="text/css"/>
-    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/print.css" rel="stylesheet" type="text/css" media="print"/>    
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less-1.3.0.min.js"></script>
+    {% else %}
+    {% compress css %}
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet" type="text/less"/>
+    {% endcompress %}
+    {% endif %}
+    {% compress css %}
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/print.css" rel="stylesheet" type="text/css" media="print"/>
     <link href="{{ CYCLOPE_STATIC_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less-1.3.0.min.js"></script>    
+    {% endcompress %}
+    {% compress js %}
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-1.5.1.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-ui-1.8.13.custom.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/menuitems.js"></script>
@@ -49,10 +58,11 @@
             containerBorderSize:    10,
             containerResizeSpeed:   400,
             txtImage:               '{% trans "Image"%}',
-            txtOf:                  '{% trans "of"%}',
+            txtOf:                  '{% trans "of"%}'
         });
     });
     </script>
+    {% endcompress %}
     {% block extra_head %}{% endblock %}
   </head>
 
@@ -114,7 +124,7 @@ EARTH
         </map>
         </div>
       <!-- /pie -->
-     
+
     </div>
     <!-- /mascara -->
 

@@ -2,11 +2,6 @@
 
 {% load comments i18n fb_versions cyclope_utils markup dbgettext_tags%}
 
-{% block extra_head %}
-<style media="screen, print" type="text/css">
-</style>
-{% endblock extra_head %}
-
 {% block content %}
 
 {% alias contact as 'current_object' %}
@@ -24,8 +19,8 @@
     </ul>
   </div>
   <!-- /herramientas -->
-  
-  
+
+
   {% if contact.photo %}
   <img class="contact_photo" src="{% version contact.photo 'cropped' %}" />
   {% endif %}

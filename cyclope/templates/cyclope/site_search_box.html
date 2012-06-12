@@ -1,7 +1,8 @@
 {% extends host_template %}
-{% load i18n %}
+{% load i18n compress %}
 
 {% block extra_head %}
+{% compress js %}
 {{ block.super }}
     <script type="text/javascript">
     $(function() {
@@ -21,6 +22,7 @@
     });
 
     </script>
+{% endcompress %}
 {% endblock %}
 
 {% block content %}

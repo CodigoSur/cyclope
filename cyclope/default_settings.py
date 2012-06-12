@@ -61,6 +61,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
     "cyclope.core.context_processors.site_settings",
+    "cyclope.core.context_processors.third_party_settings",
 )
 
 
@@ -125,6 +126,7 @@ INSTALLED_APPS = [
     'profiles',
     'contact_form',
     'markitup',
+    'compressor',
 
 #    'debug_toolbar',
 #    'django_extensions',
@@ -249,4 +251,9 @@ JQUERY_URL = "cyclope/js/reuse_django_jquery.js" # We dont want jquery to be inc
 MARKITUP_SET = 'cyclope/markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
 
+# compressor settings
+COMPRESS_PARSER = "compressor.parser.HtmlParser"
 
+COMPRESS_PRECOMPILERS = (
+    ('text/less', '/usr/bin/lessc {infile} {outfile}'),
+)
