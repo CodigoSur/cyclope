@@ -1,8 +1,8 @@
 {% extends host_template %}
 
-{% block content %}
-
 {% if expand_style != "DISABLED" %}
+{% block extra_head_js %}
+{{ block.super }}
 <script type="text/javascript">
 
 var hide_children = function (el){
@@ -50,8 +50,10 @@ jQuery(document).ready(function(){
     }
 });
 </script>
+{% endblock extra_head_js %}
 {% endif %}
 
+{% block content %}
 <ul id="menu-{{ expand_style|lower }}-{{ menu_slug }}" class="cyclope_menu {{ expand_style|lower }}">
     {{ menu_items|unordered_list }}
 </ul>

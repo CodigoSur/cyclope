@@ -1,28 +1,25 @@
 {% extends host_template %}
-{% load i18n compress %}
+{% load i18n %}
 
-{% block extra_head %}
-{% compress js %}
+{% block extra_head_js %}
 {{ block.super }}
-    <script type="text/javascript">
-    $(function() {
-        // clear input on focus
-        $('.cleardefault').focus(function() {
-            if( this.value == this.title ) {
-               this.value = '';
-            }
-        });
-
-        // if field is empty afterward, add text again
-        $('.cleardefault').blur(function() {
-            if(!this.value.length) {
-              this.value = this.title;
-            }
-        });
+<script type="text/javascript">
+$(function() {
+    // clear input on focus
+    $('.cleardefault').focus(function() {
+        if( this.value == this.title ) {
+           this.value = '';
+        }
     });
 
-    </script>
-{% endcompress %}
+    // if field is empty afterward, add text again
+    $('.cleardefault').blur(function() {
+        if(!this.value.length) {
+          this.value = this.title;
+        }
+    });
+});
+</script>
 {% endblock %}
 
 {% block content %}

@@ -1,9 +1,8 @@
-{% load i18n compress %}
+{% load i18n %}
 
-{% block extra_head %}
-{% compress js %}
+{% block extra_head_js %}
+{{ block.super }}
 <script type='text/javascript' src='/media/cyclope/jwplayer/swfobject.js'></script>
-{% endcompress %}
 {% endblock %}
 
 

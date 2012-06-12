@@ -2,8 +2,7 @@
 
 {% load i18n cyclope_utils fb_versions compress %}
 
-{% block extra_head %}
-{% compress js %}
+{% block extra_head_js %}
 <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery.jcarousel.min.js"></script>
 <script type="text/javascript">
     // jCarousel documentation http://sorgalla.com/projects/jcarousel/
@@ -38,8 +37,10 @@
       });
   });
 </script>
-{% endcompress %}
-{% compress css %}
+{% endblock %}
+
+{% block extra_head %}
+{% compress css inline %}
 <link rel="stylesheet" type="text/css" href="{{ CYCLOPE_THEME_MEDIA_URL }}css/jcarousel.css" />
 {% endcompress %}
 {% endblock %}
