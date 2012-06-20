@@ -3,7 +3,6 @@
 {% load i18n cyclope_utils fb_versions %}
 
 {% block content %}
-
   {% if view_options.navigation == "TOP" %}
     {% include 'collections/hierarchycal_navigation_block.html' %}
   {% endif %}
@@ -27,10 +26,8 @@
   </div>
   {% endif %}
 
-
-  {% block category_content %}
-  {% endblock %}
-
+  {% block category_content %}{% endblock %}
+  {% spaceless %}
   {% if view_options.navigation == "BOTTOM" %}
     {% include 'collections/hierarchycal_navigation_block.html' %}
   {% endif %}
@@ -42,5 +39,5 @@
       {% include 'cyclope/pagination_block.html' %}
     {% endif %}
   {% endif %}
-
+  {% endspaceless %}
 {% endblock %}

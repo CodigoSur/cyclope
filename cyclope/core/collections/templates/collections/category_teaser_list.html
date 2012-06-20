@@ -2,29 +2,23 @@
 
 {% load i18n cyclope_utils fb_versions %}
 
+{% comment %}
+The content of this view is composed by including a template for each content in the category
+The included template may be something different from a teaser
+{% endcomment %}
+
 {% block category_content %}
-
-  {% comment %}
-  The content of this view is composed by including a template for each content in the category
-  The included template may be something different from a teaser
-  {% endcomment %}
-
   {% for categorization in categorizations %}
+    {% spaceless %}
     {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name ".html" as template_path %}
-
     {% comment %}
-      we alias the actual object with the model name
-      so the included template is reusable
-      and can access the content object using an explicit name
-    {% endcomment %}
-    {% alias categorization.content_object as categorization.content_type.model %}
-
-    {% comment %}
+      we alias the actual object with the model name so the included template
+      is reusable and can access the content object using an explicit name
       we also alias as 'media' because some medialibrary templates expect this name
     {% endcomment %}
+    {% alias categorization.content_object as categorization.content_type.model %}
     {% alias categorization.content_object as 'media' %}
-
+    {% endspaceless %}
     {% include template_path %}
   {% endfor %}
-
 {% endblock %}

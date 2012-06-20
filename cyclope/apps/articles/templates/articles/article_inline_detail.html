@@ -1,9 +1,7 @@
 {% load comments i18n fb_versions cyclope_utils dbgettext_tags %}
 
 {% block content %}
-
 <div class="content-view article inline_detail article-inline_detail">
-
   {% if article.pretitle %}
   <span class="pretitle">{% trans article.pretitle %}</span>
   {% endif %}
@@ -35,7 +33,5 @@
       {{ article|parsed_gettext:"text"|smart_style}}
     </div>
   </div>
-
 </div> <!--termina article_detail -->
-
 {% endblock content%}

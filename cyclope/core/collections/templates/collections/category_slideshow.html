@@ -41,28 +41,21 @@
 {% endblock %}
 
 {% block content %}
-  {% comment %}
-  The content of this view is composed by including a template for each content in the category
-  The included template may be something different from a teaser
-  {% endcomment %}
     {% comment %}TODO: review the ID definition{% endcomment %}
     <ul id="slideshow{% if region_name %}-{{region_name}}{% endif %}-{{category_slug}}" class="jcarousel-skin-cyclope">
     {% for categorization in categorizations %}
+      {% spaceless %}
       {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name ".html" as template_path %}
 
       {% comment %}
-        we alias the actual object with the model name
-        so the included template is reusable
-        and can access the content object using an explicit name
-      {% endcomment %}
-
-      {% alias categorization.content_object as categorization.content_type.model %}
-
-      {% comment %}
+        we alias the actual object with the model name so the included template
+        is reusable and can access the content object using an explicit name
         we also alias as 'media' because some medialibrary templates expect this name
       {% endcomment %}
 
+      {% alias categorization.content_object as categorization.content_type.model %}
       {% alias categorization.content_object as 'media' %}
+      {% endspaceless %}
       <li>{% include template_path %}</li>
     {% endfor %}
     </ul>
