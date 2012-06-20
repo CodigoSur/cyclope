@@ -14,19 +14,17 @@
       {% if newsletter.show_ToC %}
       <div class="show-ToC"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></div>
       {% endif %}
-     
+
       {% if article.pictures %}
       <a href="{% url article-detail article.slug %}">
         <img class="newsletter_image" src="{% version article.pictures.0.image.path 'thumbnail' %}" alt="{{ article.pictures.0.name }}"/>
       </a>
       {% endif %}
-      
-       <span class="pretitle"><a name="editorial">{% trans article.pretitle %}</a></span>
+      {% if article.pretitle %} <span class="pretitle"><a name="editorial">{% trans article.pretitle %}</a></span>{% endif %}
       <a name="article__{{ article.slug }}" href="{% url article-detail article.slug %}">
         <h2 class="title">{% trans article.name  %}</h2>
       </a>
 
-     
 
       <a href="{% url article-detail article.slug %}">
         <div class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</div>
