@@ -1,20 +1,15 @@
 {% extends host_template %}
 
-{% comment%}
-TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
-{% endcomment%}
-
-{% load comments i18n fb_versions cyclope_utils dbgettext_tags%}
+{% load comments i18n fb_versions cyclope_utils dbgettext_tags %}
 
 {% block content %}
-
 {% alias article as 'current_object' %}
-
 <div class="content-view article detail article-detail">
 
   {% if article.pretitle %}
   <h6 class="pretitle">{% trans article.pretitle %}</h6>
   {% endif %}
+
   <h1 class="title">{% trans article.name  %}</h1>
 
   <!-- herramientas -->
@@ -41,89 +36,37 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   </div>
   {% endif %}
 
-
   <!-- author -->
   {% if article.author %}
   <h4 class="author meta-content">
-   {% comment %}the path author image not work. uncomment when fixed.
-    {% if article.author.image %}
-    <img src="{% version author.image.path 'small' %}" width="60" alt="{{ article.author }}" />
-    {% endif %}
-    {% endcomment %}
     <span>{% trans "By"%} {{ article.author }}</span>
   </h4>
   {% endif %}
   <!-- /autor -->
-
-    <!-- descargas -->
-
-<!-- TODO(nicoechaniz): uncomment and fix when attachments are implemented
-
-            {if $articulo.downloads eq 'si'}
-
-          <div id="attachments">
-          <div class="attachments_box">
-            <h6><img src="{$templatedir}{{ CYCLOPE_THEME_MEDIA_URL }}images/css/leer_adjuntos.png" alt="Adjuntos"  width="16" height="16" border="0" align="absmiddle" /> Archivos para descargar </h6>
-             {section name=bucle loop=$downloads}
-            <p><img src="http://codigosur.org/imagenes/icons/{$downloads[bucle].ext}.gif" width="20" height="22" border="0" align="middle"> <a href="{$downloads[bucle].link}" title="{$downloads[bucle].desc}" >{$downloads[bucle].nombre}</a></p>
-            {/section}
-           </div>
-          </div>
-
-          {/if}
--->
-          <!-- /descargas -->
 
   <div class="text"><span class="html-text html-content">
     {{ article|parsed_gettext:"text"|smart_style}}
   </span></div>
 
 {% if article.get_last_change_date or article.source %}
-       {% if article.source %}
-    <h6 class="source">
-       <!-- {% if article.get_last_change_date %}|{% endif%} -->
-      {% trans "Source" %}: {{article.source}}
-    </h6>
+    {% if article.source %}
+    <h6 class="source">{% trans "Source" %}: {{article.source}}</h6>
     {% endif %}
-    
+
     {% if article.get_last_change_date %}
     <span class="date">
       {% trans "Last modification date" %}: {{ article.get_last_change_date }}
     </span>
     {% endif %}
-
- 
 {% endif %}
-
-{% comment %} {# TAGS ARE NOT IMPLEMENTED YET #}
-  {% if article.tags %}
-    <div class="meta-content"><span class="tags"><span class="tags-label"> {% trans "Tags" %}:</span>{{ article.tags }}</span></div>
-  {% endif %}
-{% endcomment %}
 
 <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
+{% include 'cyclope/related_contents_block.html' %}
 
-  {% include 'cyclope/related_contents_block.html' %}
-
-
-	      <div class="clear"></div>
-     <!-- redsocial #TODO: commented until fixed
-           <div id="socialnetworks" class="socialnetworks">{% trans "Share in your social networks"%}:
-<a href="http://www.facebook.com" rel="nofollow" onclick="sbs_facebook(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/facebook.png" border="0" alt="Compartir en Facebook" title="Compartir en Facebook" height="24" width="24" /></a>
-<a href="http://www.del.icio.us" rel="nofollow" onclick="sbs_delicious(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/delicious.png" border="0" alt="Compartir en Delicious" title="Compartir en Delicious" height="24" width="24" /></a>
-<a href="http://www.yahoo.com" rel="nofollow" onclick="sbs_yahoobm(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/yahoo.png" border="0" alt="Compartir en Yahoo" title="Compartir en Yahoo" height="24" width="24" /></a>
-<a href="http://www.google.com" rel="nofollow" onclick="sbs_googlebm(); return false;"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/redsocial/google.png" border="0" alt="Compartir en Google" title="Compartir en Google" height="24" width="24" /></a>
-  	</div>
-
-            <div class="clear"></div>
-          /redsocial -->
-
-
+<div class="clear"></div>
 
 <!--COMENTARIOS -->
   {% include 'comments/comments_block.html' %}
-
 </div> <!--termina article_detail -->
-
 {% endblock content%}
