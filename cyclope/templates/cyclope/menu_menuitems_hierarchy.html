@@ -1,7 +1,7 @@
 {% extends host_template %}
 
 {% if expand_style != "DISABLED" %}
-{% block extra_head_js %}
+{% block extra_head %}
 {{ block.super }}
 <script type="text/javascript">
 
@@ -50,7 +50,7 @@ jQuery(document).ready(function(){
     }
 });
 </script>
-{% endblock extra_head_js %}
+{% endblock extra_head %}
 {% endif %}
 
 {% block content %}

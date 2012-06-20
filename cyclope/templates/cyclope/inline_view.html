@@ -1,5 +1,3 @@
 {# This template wraps a view when inserted inline in a region #}
-{% load compress %}
 {% block extra_head %}{{ block.super }}{% endblock %}
-{% compress js inline %}{% block extra_head_js %}{{ block.super }}{% endblock %}{% endcompress %}
 {% block content %}{{ block.super }}{% endblock %}
