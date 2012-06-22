@@ -1,9 +1,0 @@
-# add real email account setup here for registration to work properly
-
-EMAIL_HOST='smtp.gmail.com'
-EMAIL_HOST_USER='anon.email.noreply'
-EMAIL_HOST_PASSWORD='anon.email'
-EMAIL_PORT='587'
-#DEFAULT_FROM_EMAIL = ""
-#SERVER_EMAIL = ""
-EMAIL_USE_TLS = True  # we set this to True for the sample email config

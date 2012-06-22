@@ -40,9 +40,11 @@ DATABASE_NAME = os.path.join(CYCLOPE_PROJECT_PATH, 'db/site.db')
 
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
-# Absolute path to the directory that holds media.
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = os.path.join(CYCLOPE_PROJECT_PATH, 'media/')
-#MEDIA_ROOT = '/var/www/pyclope.nicoechaniz.com.ar/htdocs/media/'
+
+STATIC_ROOT = os.path.join(CYCLOPE_PROJECT_PATH, 'media/')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -63,17 +65,77 @@ TEMPLATE_DIRS = (
     os.path.join(CYCLOPE_PROJECT_PATH, 'templates'),
 )
 
-#FILEBROWSER_MAX_UPLOAD_SIZE = 20971520 # 20 MB
+INSTALLED_APPS += (
+    'cyclope_project',
+)
 
 LOGIN_REDIRECT_URL = '/inicio'
 
 
-# cyclope settings
+# Add real email account setup here for registration to work properly.
+
+# The host to use for sending e-mail. Default: 'localhost'
+EMAIL_HOST='smtp.gmail.com'
+
+# Username to use for the SMTP server defined in EMAIL_HOST. If empty,
+# Django won't attempt authentication. Default: '' (Empty string)
+EMAIL_HOST_USER='anon.email.noreply'
+
+# Password to use for the SMTP server defined in EMAIL_HOST. This setting
+# is used in conjunction with EMAIL_HOST_USER when authenticating to the
+# SMTP server. If either of these settings is empty, Django won't attempt
+# authentication. Default: '' (Empty string)
+EMAIL_HOST_PASSWORD='anon.password'
+
+# Port to use for the SMTP server defined in EMAIL_HOST. Default: 25
+EMAIL_PORT='587'
+
+# Default e-mail address to use for various automated correspondence from
+# the site manager(s). Default: 'webmaster@localhost'
+#DEFAULT_FROM_EMAIL = ""
+
+# The e-mail address that error messages come from, such as those sent to
+# ADMINS and MANAGERS. Default: 'root@localhost'
+#SERVER_EMAIL = ""
+
+# Whether to use a TLS (secure) connection when talking to the SMTP server.
+# Default: False
+EMAIL_USE_TLS = True  # we set this to True for the sample email config
+
+# A sample logging configuration. The only tangible logging
+# performed by this configuration is to send an email to
+# the site admins on every HTTP 500 error.
+# See http://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+                    'mail_admins': {
+                                    'level': 'ERROR',
+                                    'class': 'django.utils.log.AdminEmailHandler'
+                                }
+                },
+        'loggers': {
+                    'django.request': {
+                                    'handlers': ['mail_admins'],
+                                    'level': 'ERROR',
+                                    'propagate': True,
+                                },
+                }
+}
+
+
+# Cyclope settings
 
 CYCLOPE_LOCAL_THEMES_DIR = os.path.join(CYCLOPE_PROJECT_PATH, 'templates/cyclope/themes/')
 CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/media/local_themes/'
 
 CYCLOPE_PREFIX = ''
+
+#CYCLOPE_CONTACTS_PROFILE_MODULE = "app.model"
+#CYCLOPE_CONTACTS_PROFILE_ADMIN_INLINE_MODULE = "project.app.admin.ProfileModuleInline"
+#CYCLOPE_CONTACTS_PROFILE_TEMPLATE = "app/profile_template.html"
 
 # possible values for TEXT_STYLE are:
 # textile (saves markup, renders with corresponding filter)
@@ -82,10 +144,11 @@ CYCLOPE_PREFIX = ''
 
 CYCLOPE_TEXT_STYLE = 'textile'
 
+
+HAYSTACK_SITECONF = 'cyclope_project.search_sites'
 HAYSTACK_WHOOSH_PATH = os.path.join(CYCLOPE_PROJECT_PATH, 'cyclope_project_index')
 
-# import local settings if they are present
-try:
-    from local_settings import *
-except:
-    pass
+#FILEBROWSER_MAX_UPLOAD_SIZE = 20971520 # 20MB
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'xm6qs4_f173(jp_tpl-kj!cp=h0%vyx-n6cbeqt-ujaszhobs^'
