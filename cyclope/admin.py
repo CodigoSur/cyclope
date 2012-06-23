@@ -33,6 +33,7 @@ from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments.admin import CommentsAdmin
+from django.http import HttpResponseRedirect
 
 from feincms.admin import editor
 
@@ -72,7 +73,18 @@ class BaseContentAdmin(admin.ModelAdmin):
             cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-ui-1.8.4.custom.min.js',
         )
 
+    def response_change(self, request, obj):
+        if '_frontend' in request.REQUEST:
+            return HttpResponseRedirect(obj.get_absolute_url())
+        return super(BaseContentAdmin, self).response_change(request, obj)
 
+    def response_add(self, request, obj, post_url_continue='../%s/'):
+        if '_frontend' in request.REQUEST:
+            return HttpResponseRedirect(obj.get_absolute_url())
+        return super(UserAdmin, self).response_add(request, obj, post_url_continue)
+
+
+        
 from django.utils.functional import update_wrapper
 
 class MenuItemAdmin(editor.TreeEditor):

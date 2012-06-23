@@ -4,6 +4,9 @@
 
 {% block content %}
 {% alias article as 'current_object' %}
+
+{% alias perms.articles.change_article as 'user_has_edit_perm' %}
+
 <div class="content-view article detail article-detail">
 
   {% if article.pretitle %}

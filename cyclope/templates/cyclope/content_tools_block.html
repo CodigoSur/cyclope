@@ -3,13 +3,21 @@
 
   <div class="tools meta-content">
     <ul>
-      <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a></li>
+      <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a>
+      </li>
       {% if current_object.allow_comments == 'YES' or current_object.allow_comments == 'SITE' and CYCLOPE_SITE_SETTINGS.allow_comments == 'YES' %}
-        {% if comment_count %}
-        <li>
-          <a href="#comments" class="comments_link">{% trans "Comments" %} ({{ comment_count }})</a>
-        </li>
-        {% endif %}
+      {% if comment_count %}
+      <li>
+        <a href="#comments" class="comments_link">{% trans "Comments" %} ({{ comment_count }})</a>
+      </li>
+      {% endif %}
+      {% endif %}
+      {% if user_has_edit_perm %}
+      <li>
+        <a href="/admin/{{ current_object.get_app_label }}/{{ current_object.get_object_name }}/{{current_object.pk }}?_frontend=1" class="edit_link">
+          {% trans "Edit" %}
+        </a>
+      </li>
       {% endif %}
     </ul>
   </div>
