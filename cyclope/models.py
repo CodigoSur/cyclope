@@ -481,7 +481,7 @@ def _delete_from_layouts_and_menuitems(sender, instance, **kwargs):
     # when a content is part of a layout or a menu_item we need to
     # clear this relation
     from cyclope.core.frontend.sites import site
-    if instance.__class__ in site._registry:
+    if site.get_views(instance):
         ctype = ContentType.objects.get_for_model(sender)
 
         RegionView = get_model('cyclope', 'regionview')

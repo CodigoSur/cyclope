@@ -221,7 +221,7 @@ class CollectionAdminForm(forms.ModelForm):
         self.fields['content_types'].choices = frontend.site.get_base_ctype_choices()
         model = get_model('collections', 'category')
         views = [('', '------')] + [ (view.name, view.verbose_name)
-                                     for view in frontend.site._registry[model]
+                                     for view in frontend.site.get_views(model)
                                      if view.name != 'default']
         self.fields['default_list_view'].choices = views
 

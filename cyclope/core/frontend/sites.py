@@ -51,17 +51,16 @@ class CyclopeSite(object):
         self._base_ctype_choices = [('', '------')]
         self._registry_ctype_choices = [('', '------')]
 
-    def register_view(self, model, view):
+    def register_view(self, model, view_class):
         """Register a view for a model.
 
         Registered views will be available for use in the admin interface.
 
         Arguments:
-            model: a model derived from BaseContent, Menu, MenuItem,
-                   core.collections.Collection or core.collections.Category
-            view: a view derived from core.frontend.FrontendView
+            model: a model.Model that has at least a name attribute
+            view_class: a view derived from core.frontend.FrontendView
         """
-        view = view()
+        view = view_class()
         view.model = model
         if not model in self._registry:
             self._registry[model] = [view]
@@ -74,6 +73,14 @@ class CyclopeSite(object):
                                                 model._meta.verbose_name))
         else:
             self._registry[model].append(view)
+
+    def unregister_view(self, model, view_class):
+        views = self.get_views(model)
+        new_views = [v for v in views if not isinstance(v, view_class)]
+        if not new_views:
+            self._registry.pop(model, None)
+        else:
+            self._registry[model] = new_views
 
     def get_base_ctype_choices(self):
         return sorted(self._base_ctype_choices, key=lambda choice: choice[1])
@@ -116,7 +123,7 @@ class CyclopeSite(object):
                 continue
             if item.content_object is not None: # if True: content_type should not be None
                 obj = item.content_object
-                view = self.get_view(obj.__class__, item.content_view)
+                view = self.get_view(obj, item.content_view)
                 view_options = item.view_options
                 urlpatterns += patterns('', url('^%s$' % item.url, view,
                                                    {'slug': obj.slug,
@@ -140,16 +147,29 @@ class CyclopeSite(object):
         return [ view.name for view in self._registry[model]
                 if view.is_default == True ][0]
 
-    def get_view(self, model, view_name):
-        view_ocurrences = [ view for view in self._registry[model]
+    def get_view(self, obj, view_name):
+        """
+        Returns the view instance asociated with a model by its name.
+        obj could be a model instance or it's class.
+        """
+        view_ocurrences = [ view for view in self.get_views(obj)
                             if view.name == view_name ]
         # if a view's name has changed this will be False
         # we return the default view to avoid the site from breaking
         if view_ocurrences:
             return view_ocurrences[0]
         else:
-            return [ view for view in self._registry[model]
+            return [ view for view in self.get_views(obj)
                      if view.is_default == True ][0]
+
+    def get_views(self, obj):
+        """
+        Return a list with the views instances asociated to a model. obj could
+        be a model instance or it's class.
+        """
+        if not isinstance(obj, type):
+            obj = obj.__class__
+        return self._registry.get(obj, [])
 
 #### Site Views ####
 

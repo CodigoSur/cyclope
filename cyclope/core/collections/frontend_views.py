@@ -90,9 +90,9 @@ class CategoryDefaultList(frontend.FrontendView):
         category = content_object
         if category.collection.default_list_view not in ["", self.name]:
             view_name = category.collection.default_list_view
-            view = frontend.site.get_view(content_object.__class__, view_name)
+            view = frontend.site.get_view(content_object, view_name)
         else:
-            view = frontend.site.get_view(content_object.__class__, 'teaser_list')
+            view = frontend.site.get_view(content_object, 'teaser_list')
         return view.get_response(request, req_context, options, content_object)
 
 frontend.site.register_view(Category, CategoryDefaultList)

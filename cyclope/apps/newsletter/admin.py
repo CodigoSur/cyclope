@@ -45,7 +45,7 @@ class NewsletterAdminForm(forms.ModelForm):
 
         views = [('', '------')]
         views.extend([(view.name, view.verbose_name)
-                       for view in site._registry[Newsletter]
+                       for view in site.get_views(Newsletter)
                        if view.is_content_view])
         self.fields['view'].choices = views
 

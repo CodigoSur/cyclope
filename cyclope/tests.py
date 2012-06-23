@@ -29,6 +29,7 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.template import TemplateSyntaxError, Template, Context
 from django import template
+from django.db import models
 from django.db.models import get_model
 
 from cyclope.models import SiteSettings, Menu, MenuItem, RelatedContent
@@ -71,7 +72,7 @@ def export_fixture(apps, filename=None):
 
 def get_instance_url(model_instance, view_name):
     #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well. Also this code is repeated in many model files.
-    view = cyclope.core.frontend.site.get_view(model_instance.__class__, view_name)
+    view = cyclope.core.frontend.site.get_view(model_instance, view_name)
 
     if view.is_default:
         return '%s/%s/'\
@@ -89,14 +90,14 @@ def get_instance_url(model_instance, view_name):
 
 def get_content_urls(test_object):
     content_urls = []
-    for view in frontend.site._registry[test_object.__class__]:
+    for view in frontend.site.get_views(test_object):
         if view.is_content_view:
             content_urls.append('/'+ get_instance_url(test_object, view.name))
     return content_urls
 
 
 def get_region_views(test_model):
-    return [ view for view in frontend.site._registry[test_model]
+    return [ view for view in frontend.site.get_views(test_model)
              if view.is_region_view ]
 
 def add_region_view(model, view_name, content_object=None):
@@ -162,6 +163,48 @@ class ViewableTestCase(TestCase):
                                     'class="regionview %s %s"' %
                                     (self.test_model._meta.module_name, view.name),
                                     count=1)
+
+class FrontendTestCase(TestCase):
+
+    class Model(models.Model):
+        name = "Test"
+
+    class ModelDetail(frontend.FrontendView):
+        name = 'model-detail'
+        verbose_name = 'show a model'
+        is_default = True
+        is_instance_view = True
+        is_region_view = False
+        is_content_view = True
+
+    def setUp(self):
+        cyclope.core.frontend.site.register_view(self.Model, self.ModelDetail)
+
+    def tearDown(self):
+        cyclope.core.frontend.site.unregister_view(self.Model, self.ModelDetail)
+
+    def test_register_view(self):
+        view = cyclope.core.frontend.site.get_view(self.Model, 'model-detail')
+        self.assertTrue(isinstance(view, self.ModelDetail))
+
+    def test_get_view(self):
+        view = cyclope.core.frontend.site.get_view(self.Model, 'model-detail')
+        self.assertTrue(isinstance(view, self.ModelDetail))
+
+        # Test with instance
+        view = cyclope.core.frontend.site.get_view(self.Model(), 'model-detail')
+        self.assertTrue(isinstance(view, self.ModelDetail))
+
+    def test_get_views(self):
+        views = cyclope.core.frontend.site.get_views(self.Model())
+        self.assertEqual(len(views), 1)
+        self.assertTrue(all([isinstance(v, self.ModelDetail) for v in views]))
+
+    def test_unregister(self):
+        cyclope.core.frontend.site.register_view(self.Model, self.ModelDetail)
+        cyclope.core.frontend.site.unregister_view(self.Model, self.ModelDetail)
+        views = cyclope.core.frontend.site.get_views(self.Model())
+        self.assertEqual(len(views), 0)
 
 
 class SiteSettingsTestCase(TestCase):
@@ -364,7 +407,7 @@ class SiteSearchViewTestCase(TestCase):
 
     def setUp(self):
         frontend.autodiscover()
-    
+
     def test_site_search_view(self):
         site = Site.objects.all()[0]
         search_url = ['/search/?q=cyclope']
