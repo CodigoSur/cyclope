@@ -32,6 +32,7 @@ from django.utils.translation import ugettext as _
 from django.contrib import admin
 from registration.views import register
 from haystack.views import SearchView, search_view_factory
+import forms_builder.forms.urls
 from cyclope.forms import UserProfileForm
 from cyclope.core.captcha_contact_form.forms import  \
                                        AdminSettingsContactFormWithCaptcha
@@ -79,6 +80,7 @@ urlpatterns = patterns('',
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
      {'sitemaps': {"menus": MenuSitemap, "categories": CategorySitemap,
                    "collections": CollectionSitemap }}),
+    url(r'^forms/', include(forms_builder.forms.urls)),
 )
 
 if django_settings.DEBUG:

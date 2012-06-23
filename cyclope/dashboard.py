@@ -163,17 +163,23 @@ class CustomIndexDashboard(Dashboard):
 
         plugins_children = [
             modules.ModelList(
+                title=_('Newsletter'),
+                css_classes = ('dbmodule-newsletter',),
+                include_list=[
+                    'cyclope.apps.newsletter.models.Newsletter',
+                    ]),
+            modules.ModelList(
+                title=_('Forms'),
+                css_classes = ('dbmodule-forms',),
+                include_list=[
+                    'forms_builder.forms.models.Form',
+                    ]),
+            modules.ModelList(
                 title=_('Polls'),
                 css_classes = ('dbmodule-polls', 'main-area-modules',),
                 include_list=[
                     'cyclope.apps.polls.models.Poll',
                     'cyclope.apps.polls.models.Question',
-                    ]),
-            modules.ModelList(
-                title=_('Newsletter'),
-                css_classes = ('dbmodule-newsletter',),
-                include_list=[
-                    'cyclope.apps.newsletter.models.Newsletter',
                     ]),
             modules.ModelList(
                 title=_('Feeds'),

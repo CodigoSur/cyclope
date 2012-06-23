@@ -1,0 +1,9 @@
+{% extends CYCLOPE_DEFAULT_TEMPLATE %}
+{% load i18n cyclope_utils %}
+
+{% block content%}
+    <h1>{{ form.title }}</h1>
+    {% if form.response %}
+    <p>{{ form.response|smart_style }}</p>
+    {% endif %}
+{% endblock %}

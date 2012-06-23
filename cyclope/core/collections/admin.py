@@ -195,7 +195,7 @@ class CategorizationInline(generic.GenericStackedInline):
         return super(CategorizationInline, self).queryset(request)
 
 
-class CollectibleAdmin (admin.ModelAdmin):
+class CollectibleAdmin(admin.ModelAdmin):
     """Base admin class for models that inherit from Collectible.
     """
     list_filter = ('categories',)

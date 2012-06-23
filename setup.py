@@ -77,6 +77,7 @@ setup(
         'django-markitup==0.6.1',
         'django-jsonfield==0.6.0-cyclope', # installed from our clone
         'feedparser==5.1',
+        'django-forms-builder>=0.7.5,<0.8',
     ],
 
     scripts=['cyclope/bin/cyclopeproject'],

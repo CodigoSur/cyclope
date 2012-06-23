@@ -1,0 +1,10 @@
+{% extends CYCLOPE_DEFAULT_TEMPLATE %}
+{% load i18n cyclope_utils forms_builder_tags %}
+
+{% block title %} {{ form.title }} {% endblock %}
+
+{% block content%}
+<div class="form">
+    {% render_built_form form %}
+</div>
+{% endblock %}

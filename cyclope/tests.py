@@ -43,6 +43,7 @@ from cyclope.apps.medialibrary.models import *
 from cyclope.apps.polls.models import *
 from cyclope.apps.forum.models import *
 from cyclope.apps.feeds.models import Feed
+from cyclope.apps.dynamicforms.models import DynamicForm
 from cyclope.fields import MultipleField
 from cyclope.sitemaps import CollectionSitemap, CategorySitemap, MenuSitemap
 from cyclope.forms import SiteSettingsAdminForm, LayoutAdminForm
@@ -616,6 +617,26 @@ class FeedTestCase(ViewableTestCase):
         frontend.autodiscover()
 
 
+class DynamicFormTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = DynamicForm
+
+    def setUp(self):
+        form = DynamicForm.objects.create(title="An instance")
+        form.sites.add(Site.objects.get_current())
+        form.save()
+        form.fields.create(label="field", field_type=1, required=True, visible=True)
+        self.test_object = form
+        frontend.autodiscover()
+
+    def test_empty_form(self):
+        view = frontend.site.get_views(self.test_object)[0]
+        url = '/'+ get_instance_url(self.test_object, view.name)
+        response = self.client.post(url, data={})
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue("This field is required" in response.content)
+
+
 class MultipleFieldTestCase(TestCase):
     def setUp(self):
         class CategoryTeaserListOptions(forms.Form):
@@ -691,7 +712,6 @@ class ThemesTestCase(TestCase):
 
 class MarkupTestCase(TestCase):
 
-
     def timeit(self, test_string):
         start = time.time()
         smart_style(test_string)
@@ -721,6 +741,7 @@ class MarkupTestCase(TestCase):
         """
         self.timeit("baz") # bar_string should fallen from the cache
         self.assertTrue(self.timeit(foo_string) > WAIT) # non cached version
+
 
 class RelatedContentTestCase(TestCase):
 

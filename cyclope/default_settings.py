@@ -86,6 +86,7 @@ INSTALLED_APPS = [
     'tagging',
     'tagging_autocomplete',
 
+
     'cyclope',
     'cyclope.core.collections',
     'cyclope.core.captcha_comments',
@@ -98,6 +99,7 @@ INSTALLED_APPS = [
     'cyclope.apps.contacts',
     'cyclope.apps.locations',
     'cyclope.apps.feeds',
+    'cyclope.apps.dynamicforms',
 
     'admin_tools',
     'admin_tools.theming',
@@ -125,6 +127,7 @@ INSTALLED_APPS = [
     'profiles',
     'contact_form',
     'markitup',
+    'forms_builder.forms',
 
 #    'debug_toolbar',
 #    'django_extensions',
@@ -248,5 +251,4 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
 JQUERY_URL = "cyclope/js/reuse_django_jquery.js" # We dont want jquery to be included twice in the admin.
 MARKITUP_SET = 'cyclope/markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
-
 
