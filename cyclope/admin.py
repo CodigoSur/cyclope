@@ -67,6 +67,7 @@ class BaseContentAdmin(admin.ModelAdmin):
     """Base class for content models to use instead of admin.ModelAdmin
     """
     inlines = [RelatedContentInline]
+    date_hierarchy = 'creation_date'
 
     class Media:
         js = (
