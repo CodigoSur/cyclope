@@ -25,6 +25,7 @@ from django import forms
 from django.test import TestCase
 from django.test.utils import setup_test_environment
 from django.contrib.sites.models import Site
+from django.contrib.auth.models import AnonymousUser
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.template import TemplateSyntaxError, Template, Context
@@ -813,11 +814,13 @@ class FrontendEditTestCase(TestCase):
 
     def setUp(self):
         self.article = Article.objects.create(name='Article')
-        User = get_model('auth', 'user')
-        self.user = User(username='admin')
-        self.user.set_password('password')
-        self.user.is_staff = True
-        self.user.save()        
+        self.perm_user = User(username='perm_user', is_staff=True)
+        self.perm_user.set_password('password')
+        self.perm_user.save()
+        self.non_perm_user = User(username='non_perm_user', is_staff=True)
+        self.non_perm_user.set_password('password')
+        self.non_perm_user.save()
+        self.anonymous_user = AnonymousUser()
         col = Collection.objects.create(name='Collection')
         col.content_types.add(ContentType.objects.get(model="article"))
         col.save()
@@ -825,28 +828,43 @@ class FrontendEditTestCase(TestCase):
         self.category.save()
         categorization = Categorization(category=self.category, content_object=self.article)
         self.article.categories.add(categorization)
-        perm = CategoryPermission(user=self.user, category=self.category,
+        perm = CategoryPermission(user=self.perm_user, category=self.category,
                                   can_edit_content=True, can_add_content=True)
         perm.save()
-        
+
         frontend.autodiscover()
 
     def test_add_content_perm(self):
-        self.assertTrue(self.user.has_perm('add_content', self.category))
-        
+        self.assertTrue(self.perm_user.has_perm('add_content', self.category))
+        self.assertFalse(self.non_perm_user.has_perm('add_content', self.category))
+        self.assertFalse(self.anonymous_user.has_perm('add_content', self.category))
+
     def test_edit_content_perm(self):
-        self.assertTrue(self.user.has_perm('edit_content', self.article))
+        self.assertTrue(self.perm_user.has_perm('edit_content', self.article))
+        self.assertFalse(self.non_perm_user.has_perm('add_content', self.article))
+        self.assertFalse(self.anonymous_user.has_perm('add_content', self.article))
 
     def test_edit_link(self):
-        self.client.login(username='admin', password='password')
+        response = self.client.get('/article/article/')
+        self.assertNotContains(response, 'class="edit_link"')
+
+        self.client.login(username='perm_user', password='password')
         response = self.client.get('/article/article/')
         self.assertContains(response, 'class="edit_link"', count=1)
 
+        self.client.login(username='non_perm_user', password='password')
+        response = self.client.get('/article/article/')
+        self.assertNotContains(response, 'class="edit_link"')
+
     def test_add_content_link(self):
-        self.client.login(username='admin', password='password')
+        response = self.client.get('/category/category/')
+        self.assertNotContains(response, 'class="category_add_content"')
+
+        self.client.login(username=self.perm_user.username, password='password')
         response = self.client.get('/category/category/')
         self.assertContains(response, 'class="category_add_content"', count=1)
 
+        self.client.login(username=self.non_perm_user.username, password='password')
+        response = self.client.get('/category/category/')
+        self.assertNotContains(response, 'class="category_add_content"')
         
-        
-    

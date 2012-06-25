@@ -85,9 +85,10 @@ class BaseContentAdmin(admin.ModelAdmin):
         return super(BaseContentAdmin, self).response_add(request, obj, post_url_continue)
 
     def has_delete_permission(self, request, obj=None):
+        # this is redundant with _popup, which already sets delete_permission to False
         if '_frontend' in request.REQUEST:
             return False
-        return super(BaseContentAdmin, self).has_perm(request, obj)
+        return super(BaseContentAdmin, self).has_delete_permission(request, obj)
     
     def change_view(self, request, object_id, extra_context=None):
         if '_frontend' in request.REQUEST:

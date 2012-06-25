@@ -86,7 +86,6 @@ INSTALLED_APPS = [
     'tagging',
     'tagging_autocomplete',
 
-
     'cyclope',
     'cyclope.core.collections',
     'cyclope.core.captcha_comments',
