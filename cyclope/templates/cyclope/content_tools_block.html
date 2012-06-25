@@ -1,4 +1,4 @@
-{% load i18n comments %}
+{% load i18n comments obj_perms %}
   {% get_comment_count for current_object as comment_count %}
 
   <div class="tools meta-content">
@@ -12,9 +12,11 @@
       </li>
       {% endif %}
       {% endif %}
-      {% if user_has_edit_perm %}
+
+      {% per_category_perms current_object as cat_perms %}
+      {% if cat_perms.edit_content %}
       <li>
-        <a href="/admin/{{ current_object.get_app_label }}/{{ current_object.get_object_name }}/{{current_object.pk }}?_frontend=1" class="edit_link">
+        <a href="/admin/{{ current_object.get_app_label }}/{{ current_object.get_object_name }}/{{current_object.pk }}?_frontend=1&_popup=1" class="edit_link">
           {% trans "Edit" %}
         </a>
       </li>

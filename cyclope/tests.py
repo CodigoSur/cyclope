@@ -36,6 +36,7 @@ from cyclope.models import SiteSettings, Menu, MenuItem, RelatedContent
 from cyclope.models import Layout, RegionView, Author
 from cyclope.core import frontend
 from cyclope.core.collections.models import *
+from cyclope.core.perms.models import CategoryPermission
 from cyclope.templatetags.cyclope_utils import do_join
 from cyclope.apps.staticpages.models import StaticPage
 from cyclope.apps.articles.models import Article
@@ -634,6 +635,7 @@ class DynamicFormTestCase(ViewableTestCase):
         url = '/'+ get_instance_url(self.test_object, view.name)
         response = self.client.post(url, data={})
         self.assertEqual(response.status_code, 200)
+        print response
         self.assertTrue("This field is required" in response.content)
 
 
@@ -805,3 +807,47 @@ class DeleteFromLayoutsAndMenuItems(TestCase):
         article.delete()
         self.assertEqual(RegionView.objects.count(), 0)
         self.assertEqual(MenuItem.objects.get().content_object, None)
+
+        
+class FrontendEditTestCase(TestCase):
+    fixtures = ['simplest_site.json']
+
+    def setUp(self):
+        self.article = Article.objects.create(name='Article')
+        User = get_model('auth', 'user')
+        self.user = User(username='admin')
+        self.user.set_password('password')
+        self.user.is_staff = True
+        self.user.save()        
+        col = Collection.objects.create(name='Collection')
+        col.content_types.add(ContentType.objects.get(model="article"))
+        col.save()
+        self.category = Category(name='Category', collection=col)
+        self.category.save()
+        categorization = Categorization(category=self.category, content_object=self.article)
+        self.article.categories.add(categorization)
+        perm = CategoryPermission(user=self.user, category=self.category,
+                                  can_edit_content=True, can_add_content=True)
+        perm.save()
+        
+        frontend.autodiscover()
+
+    def test_add_content_perm(self):
+        self.assertTrue(self.user.has_perm('add_content', self.category))
+        
+    def test_edit_content_perm(self):
+        self.assertTrue(self.user.has_perm('edit_content', self.article))
+
+    def test_edit_link(self):
+        self.client.login(username='admin', password='password')
+        response = self.client.get('/article/article/')
+        self.assertContains(response, 'class="edit_link"', count=1)
+
+    def test_add_content_link(self):
+        self.client.login(username='admin', password='password')
+        response = self.client.get('/category/category/')
+        self.assertContains(response, 'class="category_add_content"', count=1)
+
+        
+        
+    

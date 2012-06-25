@@ -42,6 +42,7 @@ from cyclope.core import frontend
 from models import *
 from cyclope.models import Menu
 from cyclope import settings as cyc_settings
+from cyclope.core.perms.admin import CategoryPermissionInline
 
 ####
 # custom FilterSpec
@@ -132,6 +133,8 @@ class CategoryAdmin(editor.TreeEditor):
             'fields': ('active', 'description', 'image',),
         }),
     )
+    inlines = (CategoryPermissionInline,)
+    
     def changelist_view(self, request, extra_context=None):
         # category changelist should only show items from one collection.
         # so we activate the filter to display categories from one collection

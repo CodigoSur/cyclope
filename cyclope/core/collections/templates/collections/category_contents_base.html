@@ -1,16 +1,18 @@
 {% extends host_template %}
 
-{% load i18n cyclope_utils fb_versions %}
+{% load i18n cyclope_utils fb_versions obj_perms %}
 
 {% block content %}
 
-  {% if perms.collections.add_categorization %}
+  {% per_category_perms category as cat_perms %}
+  {% if cat_perms.add_content %}
+
   <div class="category_add_content">
     <a href="{% url category-default category.slug %}">Add content</a>
     <ul class="content_types">
       {% for c_type in category.collection.content_types.all %}
       <li>
-        <a href="/admin/{{ c_type.app_label }}/{{ c_type.model }}/add?_frontend=1" class="add_content add_{{ c_type.model }}">
+        <a href="/admin/{{ c_type.app_label }}/{{ c_type.model }}/add?_frontend=1&_popup=1&_from_category={{category.slug}}" class="add_content add_{{ c_type.model }}">
           {{ c_type.name.capitalize }}
         </a>
       </li>

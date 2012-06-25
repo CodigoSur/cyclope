@@ -90,6 +90,7 @@ INSTALLED_APPS = [
     'cyclope',
     'cyclope.core.collections',
     'cyclope.core.captcha_comments',
+    'cyclope.core.perms',
     'cyclope.apps.articles',
     'cyclope.apps.staticpages',
     'cyclope.apps.medialibrary',
@@ -132,6 +133,12 @@ INSTALLED_APPS = [
 #    'debug_toolbar',
 #    'django_extensions',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'cyclope.core.perms.backends.CategoryPermBackend',
+)
+
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 

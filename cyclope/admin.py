@@ -47,6 +47,7 @@ from cyclope.forms import MenuItemAdminForm,\
 
 from cyclope.widgets import get_default_text_widget
 from cyclope.core.collections.admin import CollectibleAdmin
+from cyclope.core.collections.models import Category
 import cyclope.settings as cyc_settings
 
 
@@ -81,9 +82,34 @@ class BaseContentAdmin(admin.ModelAdmin):
     def response_add(self, request, obj, post_url_continue='../%s/'):
         if '_frontend' in request.REQUEST:
             return HttpResponseRedirect(obj.get_absolute_url())
-        return super(UserAdmin, self).response_add(request, obj, post_url_continue)
+        return super(BaseContentAdmin, self).response_add(request, obj, post_url_continue)
 
+    def has_delete_permission(self, request, obj=None):
+        if '_frontend' in request.REQUEST:
+            return False
+        return super(BaseContentAdmin, self).has_perm(request, obj)
+    
+    def change_view(self, request, object_id, extra_context=None):
+        if '_frontend' in request.REQUEST:
+            if extra_context is None:
+                extra_context = {}
+            extra_context['frontend_admin'] = 'frontend_admin'
+            
+        return super(BaseContentAdmin, self).change_view(request, object_id, extra_context)
 
+    def add_view(self, request, form_url='', extra_context=None):
+        if '_frontend' in request.REQUEST:
+            if extra_context is None:
+                extra_context = {}
+            extra_context['frontend_admin'] = 'frontend_admin'
+        if '_from_category' in request.REQUEST:
+            ## TODO(nicoechaniz): this could be used to set the categorization, but is not implemented yet
+            category_slug = request.REQUEST['_from_category']
+            category = Category.objects.get(slug=category_slug)
+            #            extra_context['initial_category'] = category.id
+            #            extra_context['initial_collection'] = category.collection.id
+        return super(BaseContentAdmin, self).add_view(request, form_url, extra_context)
+    
         
 from django.utils.functional import update_wrapper
 

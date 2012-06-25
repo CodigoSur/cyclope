@@ -94,6 +94,7 @@ class FrontendView(object):
                 content_object = get_object_or_404(self.model, slug=slug)
 
             if self.is_content_view and not region_name:
+                req_context["current_object"] = content_object
                 if hasattr(content_object, "name"):
                     title = _(content_object.name)
                 else:

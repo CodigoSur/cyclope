@@ -17,7 +17,7 @@
 
 {% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
 
-{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} {{ frontend_admin }} change-form{% endblock %}
 
 {% block breadcrumbs %}{% if not is_popup %}
 <div class="breadcrumbs">
