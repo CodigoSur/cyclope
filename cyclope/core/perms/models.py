@@ -26,20 +26,18 @@ core.perms.models
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
+
 from cyclope.core.collections.models import Category
 
 
 class CategoryPermission(models.Model):
-    user = models.ForeignKey(User)
-    can_edit_content = models.BooleanField()
-    can_add_content = models.BooleanField()    
-    category = models.ForeignKey(Category)
-
-    def _available_perms(self):
-        return [ f.name for f in self.fields if f.name.startswith('can_') ]
-
-    available_perms = property(_available_perms)
+    user = models.ForeignKey(User, verbose_name=_('user'))
+    can_edit_content = models.BooleanField(_('can edit content'))
+    can_add_content = models.BooleanField(_('can add content'))
+    category = models.ForeignKey(Category, verbose_name=_('category'))
 
     class Meta:
         unique_together = ('category', 'user')
-
+        verbose_name = _('category permission')
+        verbose_name_plural = _('category permissions')

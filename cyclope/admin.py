@@ -106,8 +106,8 @@ class BaseContentAdmin(admin.ModelAdmin):
             ## TODO(nicoechaniz): this could be used to set the categorization, but is not implemented yet
             category_slug = request.REQUEST['_from_category']
             category = Category.objects.get(slug=category_slug)
-            #            extra_context['initial_category'] = category.id
-            #            extra_context['initial_collection'] = category.collection.id
+            extra_context['initial_category'] = category.id
+            extra_context['initial_collection'] = category.collection.id
         return super(BaseContentAdmin, self).add_view(request, form_url, extra_context)
     
         

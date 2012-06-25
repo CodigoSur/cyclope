@@ -635,7 +635,6 @@ class DynamicFormTestCase(ViewableTestCase):
         url = '/'+ get_instance_url(self.test_object, view.name)
         response = self.client.post(url, data={})
         self.assertEqual(response.status_code, 200)
-        print response
         self.assertTrue("This field is required" in response.content)
 
 
