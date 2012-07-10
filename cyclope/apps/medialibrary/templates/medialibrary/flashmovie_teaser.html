@@ -12,9 +12,7 @@
        <h3 class="html-content summary">{{ flashmovie.description|smart_style }}</h3>
      {% endif %}
 
-     {% if flashmovie.author %}
-       <div class="meta-content author_container"><h4 class="author">{% trans "By" %} {{ flashmovie.author }}</h4></div>
-     {% endif %}
+    {% include "cyclope/author_block.html" with author=flashmovie.author %}
 
     {% if flashmovie.tags %}
         <div class="meta-content"><span class="tags">

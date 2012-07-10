@@ -8,9 +8,7 @@
       <h3 class="html-content summary">{{ soundtrack.description|smart_style }}</h3>
     {% endif %}
 
-    {% if soundtrack.author %}
-      <div class="author_container meta-content"><h4 class="author">{% trans "By" %} {{ soundtrack.author }}</h4></div>
-    {% endif %}
+    {% include "cyclope/author_block.html" with author=soundtrack.author %}
 
     {% if soundtrack.tags %}
         <div class="meta-content"><span class="tags">

@@ -6,11 +6,7 @@
   {% include 'cyclope/content_tools_block.html' %}
 
   <!-- author -->
-  {% if current_object.author %}
-  <div class="meta-content">
-    <h4 id="author" class="author">{% trans "By"%} {{ current_object.author }}</h4>
-  </div>
-  {% endif %}
+  {% include "cyclope/author_block.html" with author=current_object.author %}
   <!-- /autor -->
-  
+
 

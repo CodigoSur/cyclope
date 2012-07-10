@@ -23,6 +23,7 @@
 cyclope.frontend_views
 ----------------------
 """
+from operator import attrgetter
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
@@ -30,10 +31,11 @@ from django.template import loader, Template, Context
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
 
+import cyclope.utils
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 from cyclope.core.collections.models import Collection, Category
-from cyclope.models import Menu, MenuItem
+from cyclope.models import Menu, MenuItem, Author
 import cyclope.settings as cyc_settings
 
 
@@ -288,3 +290,72 @@ class CommentsList(frontend.FrontendView):
         return t.render(req_context)
 
 frontend.site.register_view(Comment, CommentsList)
+
+
+INLINE_CHOICES = (
+    ("teaser", _(u"Teaser")),
+    ("inline_detail", _(u"Detail")),
+    ("labeled_icon", _(u"Labeled icons")),
+)
+
+class AuthorDetailOptions(forms.Form):
+    show_authored_content = forms.BooleanField(label=_('Show authored content'),
+                                               initial=True, required=False)
+    inline_view_name = forms.ChoiceField(label=_('Inline type'),
+                                         choices=INLINE_CHOICES,
+                                         initial="teaser")
+    items_per_page = forms.IntegerField(label=_('Items per page'), min_value=1,
+                                        initial=cyc_settings.CYCLOPE_PAGINATION['TEASER'],)
+    limit_to_n_items = forms.IntegerField(label=_('Limit to N items (0 = no limit)'),
+                                          min_value=0, initial=0)
+    sort_by = forms.ChoiceField(label=_('Sort by'),
+                              choices=(("DATE-", _(u"Date ↓ (newest first)")),
+                                       ("DATE+", _(u"Date ↑ (oldest first)")),
+                                       ("ALPHABETIC", _(u"Alphabetic"))),
+                              initial="DATE-")
+
+
+class AuthorDetail(frontend.FrontendView):
+    """Display an author's detail
+    """
+    name='detail'
+    verbose_name=_('detailed view of the selected Author')
+    is_default = True
+    is_instance_view = True
+    is_region_view = False
+    is_content_view = True
+    options_form = AuthorDetailOptions
+    template = "cyclope/author_detail.html"
+
+    def get_response(self, request, req_context, options, content_object):
+        from cyclope.core.collections.frontend_views import SORT_BY
+
+        authored_content = []
+        if options["show_authored_content"]:
+            # get related methods like picture_set, article_set, etc.
+            related = [attribute for attribute in dir(content_object) \
+                       if attribute.endswith('_set')]
+            for n in related:
+                authored_content.extend(getattr(content_object, n).all())
+
+        sort_by = options["sort_by"]
+        limit = options["limit_to_n_items"] or None
+        sort_property, reverse, paginator_class = SORT_BY[sort_by]
+        paginator_kwargs = {"per_page": options["items_per_page"]}
+        if 'DATE' in sort_by:
+            authored_content.sort(key=attrgetter(sort_property),reverse=reverse)
+            if limit:
+                authored_content = authored_content[:limit]
+        elif 'ALPHABETIC' in sort_by:
+            paginator_kwargs['on'] = "name"
+        paginator = paginator_class(authored_content, **paginator_kwargs)
+        page = cyclope.utils.get_page(paginator, request)
+        req_context.update({'author': content_object,
+                            'authored_content': page.object_list,
+                            'inline_view_name': options["inline_view_name"],
+                            'page': page})
+        t = loader.get_template(self.template)
+        return t.render(req_context)
+
+
+frontend.site.register_view(Author, AuthorDetail)

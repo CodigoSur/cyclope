@@ -97,6 +97,30 @@ class CategoryDefaultList(frontend.FrontendView):
 
 frontend.site.register_view(Category, CategoryDefaultList)
 
+SORT_BY = {
+    "DATE-": ('creation_date', True, Paginator),
+    "DATE+": ('creation_date', False, Paginator),
+    "ALPHABETIC": ('name', None, NamePaginator)
+}
+
+def _get_paginator_page(category, options, request):
+    traverse_children = options["traverse_children"]
+    sort_by = options["sort_by"]
+    limit = options["limit_to_n_items"] or None
+    sort_property, reverse, paginator_class = SORT_BY[sort_by]
+    search_args = [category, sort_property, limit, traverse_children]
+    paginator, page = None, None
+    if 'DATE' in sort_by:
+        search_args.append(reverse)
+    categorizations_list = Categorization.objects.get_for_category(*search_args)
+    if options.get("items_per_page"):
+        paginator_kwargs = {"per_page": options["items_per_page"]}
+        if 'ALPHABETIC' in sort_by:
+            paginator_kwargs['on'] = "content_object.name"
+        paginator = paginator_class(categorizations_list, **paginator_kwargs)
+        page = cyclope.utils.get_page(paginator, request)
+    return categorizations_list, paginator, page
+
 class CategoryTeaserList(frontend.FrontendView):
     """A teaser list view of Category members.
     """
@@ -111,30 +135,7 @@ class CategoryTeaserList(frontend.FrontendView):
     #TODO(nicoechaniz): find a more elegant way to build this view. current version is a temporary fix to a performance problem of the previous implementation when sorting big amounts of data.
     def get_response(self, request, req_context, options, content_object):
         category = content_object
-        traverse_children = options["traverse_children"]
-        sort_by = options["sort_by"]
-        limit = options["limit_to_n_items"] or None
-
-        if "DATE" in sort_by:
-            if sort_by == "DATE-":
-                reverse = True
-            elif sort_by == "DATE+":
-                reverse = False
-            sort_property = 'creation_date'
-            categorizations_list = Categorization.objects.get_for_category(
-                category, sort_property, limit, traverse_children, reverse)
-            paginator = Paginator(categorizations_list, options["items_per_page"])
-
-        elif sort_by == "ALPHABETIC":
-            sort_property = 'name'
-            categorizations_list = Categorization.objects.get_for_category(
-                category, sort_property, limit, traverse_children)
-
-            paginator = NamePaginator(categorizations_list, on="content_object.name",
-                                      per_page=options["items_per_page"])
-
-        page = cyclope.utils.get_page(paginator, request)
-
+        _, _, page = _get_paginator_page(category, options, request)
         req_context.update({'categorizations': page.object_list,
                             'page': page,
                             'category': category,
@@ -207,25 +208,9 @@ class CategorySlideshow(frontend.FrontendView):
 
     def get_response(self, request, req_context, options, content_object):
         category = content_object
-        traverse_children = options["traverse_children"]
-        sort_by = options["sort_by"]
-        limit = options["limit_to_n_items"] or None
-
-        if "DATE" in sort_by:
-            if sort_by == "DATE-":
-                reverse = True
-            elif sort_by == "DATE+":
-                reverse = False
-            sort_property = 'creation_date'
-            categorizations_list = Categorization.objects.get_for_category(
-                category, sort_property, limit, traverse_children, reverse)
-
-        elif sort_by == "ALPHABETIC":
-            sort_property = 'name'
-            categorizations_list = Categorization.objects.get_for_category(
-                category, sort_property, limit, traverse_children)
-
-
+        categorizations_list, _, _ = _get_paginator_page(category,
+                                                         options,
+                                                         request)
         req_context.update({'categorizations': categorizations_list,
                             'category': category,
                             'inline_view_name': self.inline_view_name,

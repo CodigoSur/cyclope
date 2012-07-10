@@ -12,9 +12,7 @@
       <h3 class="html-content summary">{{ document.description|smart_style }}</h3>
     {% endif %}
 
-    {% if document.author %}
-      <div class="author_container meta-content"><h4 class="author">{% trans "By" %} {{ document.author }}</h4></div>
-    {% endif %}
+    {% include "cyclope/author_block.html" with author=document.author %}
 
     {% if document.image %}
     <br class="floating-img-clear" />

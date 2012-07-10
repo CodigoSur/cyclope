@@ -10,7 +10,7 @@
     </div>
 
     {% if not simplified_view %}
-        <div class="meta-content" ><span class="author">{% trans "By" %} {{ topic.author }}</span></div>
+        {% include "cyclope/author_block.html" with author=topic.author %}
         <div class="meta-content" ><span class="creation-date">{{ topic.creation_date|date:'DATETIME_FORMAT' }}</span></div>
         {% get_comment_count for topic as comment_count %}
         <div class="meta-content" ><span class="replies-count">{% trans "Replies" %}: {{ comment_count }}</span></div>

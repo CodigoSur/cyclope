@@ -37,11 +37,7 @@
   {% endif %}
 
   <!-- author -->
-  {% if article.author %}
-  <h4 class="author meta-content">
-    <span>{% trans "By"%} {{ article.author }}</span>
-  </h4>
-  {% endif %}
+  {% include "cyclope/author_block.html" with author=article.author %}
   <!-- /autor -->
 
   <div class="text"><span class="html-text html-content">

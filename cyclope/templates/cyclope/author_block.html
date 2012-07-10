@@ -1,0 +1,6 @@
+{% load i18n %}
+{% if author %}
+<div class="author-container meta-content">
+  <h4  class="author"><a href='{% url author-detail author.slug %}'>{% trans "By" %} {{ author }}</a></h4>
+</div>
+{% endif %}

@@ -18,11 +18,7 @@
   <div class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</div>
   {% endif%}
 
-  {% if article.author %}
-  <h4 id="author" class="meta-content">
-    <span class="author">{% trans "By"%} {{ article.author }}</span>
-  </h4>
-  {% endif %}
+  {% include "cyclope/author_block.html" with author=article.author %}
 
   <div class="article_content">
     {% if article.pictures %}

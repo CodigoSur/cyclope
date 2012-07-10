@@ -427,13 +427,32 @@ class StaticPageTestCase(ViewableTestCase):
     test_model = StaticPage
 
 
+class AuthorTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = Author
+
+    def setUp(self):
+        self.test_object = Author.objects.create(name="An instance")
+        article = Article.objects.create(name='Article authored',
+                                         author=self.test_object)
+        frontend.autodiscover()
+
+    def test_authored_content(self):
+        content_urls = get_content_urls(self.test_object)
+        for url in content_urls:
+            response = self.client.get(url)
+            self.assertContains(response, 'An instance')
+            self.assertContains(response, 'Article authored')
+
+
 class ArticleTestCase(ViewableTestCase):
     fixtures = ['simplest_site.json']
     test_model = Article
 
     def setUp(self):
         author = Author.objects.create(name="the author")
-        self.test_object = Article.objects.create(name='An instance', author=author)
+        self.test_object = Article.objects.create(name='An instance',
+                                                  author=author)
         frontend.autodiscover()
 
 
@@ -808,7 +827,7 @@ class DeleteFromLayoutsAndMenuItems(TestCase):
         self.assertEqual(RegionView.objects.count(), 0)
         self.assertEqual(MenuItem.objects.get().content_object, None)
 
-        
+
 class FrontendEditTestCase(TestCase):
     fixtures = ['simplest_site.json']
 
@@ -867,4 +886,4 @@ class FrontendEditTestCase(TestCase):
         self.client.login(username=self.non_perm_user.username, password='password')
         response = self.client.get('/category/category/')
         self.assertNotContains(response, 'class="category_add_content"')
-        
+

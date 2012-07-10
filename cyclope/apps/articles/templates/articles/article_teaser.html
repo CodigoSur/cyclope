@@ -33,9 +33,7 @@
     </div>
 
     {% if not simplified_view %}
-        {% if article.author %}
-        <div class="meta-content" ><h4 class="author">{% trans "By" %} {{ article.author }}</h4></div>
-        {% endif %}
+        {% include "cyclope/author_block.html" with author=article.author %}
     {% endif %}
 
     {% if article.pictures and not simplified_view %}

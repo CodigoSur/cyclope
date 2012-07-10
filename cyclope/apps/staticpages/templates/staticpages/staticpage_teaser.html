@@ -4,11 +4,6 @@
 
     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png" /><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a></h2>
 
-    {% if staticpage.author %}
-      <!-- <div><span class="author">{% trans "By" %} {{ staticpage.author }}</span></div> -->
-    {% endif %}
-
-
     {% if staticpage.summary %}
       <h3 class="html-content summary">{{ staticpage.summary|smart_style }}</h3>
     {% endif %}
