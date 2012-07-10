@@ -1,0 +1,13 @@
+{% load i18n %} 
+ 
+{% if source %}
+    <h6 class="source"> 
+    {% if source.link %}
+      <a href="{{source.link}}"  title="{{source.link}}">
+      {% trans "Source" %}: {{source}} 
+      </a>    
+    {% else %}
+      {% trans "Source" %}: {{source}}
+    {% endif %}
+    </h6>
+{% endif %}

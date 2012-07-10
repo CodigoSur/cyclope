@@ -49,11 +49,12 @@
   </span></div>
 
 {% if article.get_last_change_date or article.source %}
-    {% if article.source %}
-    <h6 class="source">{% trans "Source" %}: {{article.source}}</h6>
-    {% endif %}
 
-    {% if article.get_last_change_date %}
+  
+{% include "cyclope/source_block.html" with source=article.source %} 
+ 
+{% if article.get_last_change_date %}
+ 
     <span class="date">
       {% trans "Last modification date" %}: {{ article.get_last_change_date }}
     </span>

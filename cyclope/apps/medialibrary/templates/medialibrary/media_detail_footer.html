@@ -9,12 +9,10 @@
       {% trans "Last modification date" %}: {{ media.get_last_change_date }}
     </h6>
     {% endif %}
-    {% if media.source %}
-    <h6 class="source">
-      {% if media.get_last_change_date %}|{% endif%}
-      {% trans "Source" %}: {{media.source}}
-    </h6>
-    {% endif %}
+  
+     
+      {% include "cyclope/source_block.html" with source=media.source %} 
+          
   </div>
 {% endif %}
 
