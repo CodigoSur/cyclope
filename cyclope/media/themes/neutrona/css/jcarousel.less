@@ -1,28 +1,37 @@
-/* TODO: 
- * carousel css for other regions?? #love, #water 
- * test carousel on #after_fire and #before_fire
-
+/*
+# Cyclope3 Neutrona Workflow Design
+# Theme: Neutrona 
+# Layout: 5 Elements
+# Development: CodigoSur www.codigosur.org
+# Official web site Cyclope3 GPL: http://cyclope.codigosur.org
+# Official Trac Cyclope3 GPL: http://codigo.cyclope.ws
+# jCarousel based http://sorgalla.com/jcarousel
+# Less CSS based www.lesscss.org
+# 960 Grid System Based www.960.gs
+# Copyright 2010-2012 Codigo Sur Sociedad Civil
+# All rights reserved.
+# This file is part of Cyclope3.
+# Cyclope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 */
+
 
 /* jcarousel for #fire region */
 
 .jcarousel-skin-cyclope .jcarousel-container {
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-   border-radius: 6px;
-    background: #eeeeee;
-    border: 2px solid #999999;
-    margin-bottom: 20px;
-}
+  .rounded-corners(6px);
+  background: @colora;
+  border: 2px solid @colorc;
+  margin-bottom: 20px;}
 
 .jcarousel-skin-cyclope .jcarousel-direction-rtl {
-	direction: rtl;
-}
+	direction: rtl;}
 
 .jcarousel-skin-cyclope .jcarousel-container-horizontal {
-    width: 510px;
-    padding: 13px 18px 60px 18px;
-}
+  width: 510px;
+  padding: 13px 18px 60px 18px;}
 
 /*
 .jcarousel-skin-cyclope .jcarousel-container-vertical {
@@ -30,13 +39,12 @@
 */
 
 .jcarousel-skin-cyclope .jcarousel-clip {
-    overflow: hidden;
-    width: 510px;
-    height: 330px;
-}
+  overflow: hidden;
+  width: 510px;
+  height: 330px;}
 
 .jcarousel-skin-cyclope .jcarousel-clip-horizontal {
-}
+  }
 
 /*
 .jcarousel-skin-cyclope .jcarousel-clip-vertical {
@@ -44,16 +52,15 @@
 */
 
 .jcarousel-skin-cyclope .jcarousel-item {
-    width: 510px;
-    height: 330px;
-    padding:0;margin:0;
-}
+  width: 510px;
+  height: 330px;
+  padding:0;margin:0;}
 
 #fire .jcarousel-skin-cyclope .jcarousel-item-horizontal {
-	margin-left: 0;
-    margin: 0;
-    margin-right: 20px;
-}
+  margin-left: 0;
+  margin: 0;
+  margin-right: 20px;}
+
 /*
 #fire .jcarousel-skin-cyclope .jcarousel-direction-rtl .jcarousel-item-horizontal {
     margin: 0;
@@ -69,61 +76,53 @@
 */
 
 .jcarousel-skin-cyclope .jcarousel-item-placeholder {
-    background: #fff;
-    color: #000;
-}
+  background: @color-alpha;
+  color: @color-omega;}
 
 /**
  *  Horizontal Buttons
  */
 .jcarousel-skin-cyclope .jcarousel-next-horizontal {
-    position: absolute;
-    top: 360px;
-    right: 16px;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    background: transparent url(../images/jcarousel/next-horizontal.png) no-repeat 0 0;
-}
+  position: absolute;
+  top: 360px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: transparent url(../images/jcarousel/next-horizontal.png) no-repeat 0 0;}
 
 .jcarousel-skin-cyclope .jcarousel-direction-rtl .jcarousel-next-horizontal {
-    left: 5px;
-    right: auto;
-    background-image: url(../images/jcarousel/prev-horizontal.png);
-}
+  left: 5px;
+  right: auto;
+  background-image: url(../images/jcarousel/prev-horizontal.png);}
 
 .jcarousel-skin-cyclope .jcarousel-next-horizontal:hover,
 .jcarousel-skin-cyclope .jcarousel-next-horizontal:focus {
-    background-position: -32px 0;
-}
+  background-position: -32px 0;}
 
 .jcarousel-skin-cyclope .jcarousel-next-horizontal:active {
-    background-position: -64px 0;
-}
+  background-position: -64px 0;}
 
 .jcarousel-skin-cyclope .jcarousel-next-disabled-horizontal,
 .jcarousel-skin-cyclope .jcarousel-next-disabled-horizontal:hover,
 .jcarousel-skin-cyclope .jcarousel-next-disabled-horizontal:focus,
 .jcarousel-skin-cyclope .jcarousel-next-disabled-horizontal:active {
-    cursor: default;
-    background-position: -96px 0;
-}
+  cursor: default;
+  background-position: -96px 0;}
 
 .jcarousel-skin-cyclope .jcarousel-prev-horizontal {
-    position: absolute;
-    top: 360px;
-    left: 16px;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    background: transparent url(../images/jcarousel/prev-horizontal.png) no-repeat 0 0;
-}
+  position: absolute;
+  top: 360px;
+  left: 16px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: transparent url(../images/jcarousel/prev-horizontal.png) no-repeat 0 0;}
 
 .jcarousel-skin-cyclope .jcarousel-direction-rtl .jcarousel-prev-horizontal {
-    left: auto;
-    right: 5px;
-    background-image: url(../images/jcarousel/next-horizontal.png);
-}
+  left: auto;
+  right: 5px;
+  background-image: url(../images/jcarousel/next-horizontal.png);}
 
 .jcarousel-skin-cyclope .jcarousel-prev-horizontal:hover, 
 .jcarousel-skin-cyclope .jcarousel-prev-horizontal:focus {
@@ -131,16 +130,14 @@
 }
 
 .jcarousel-skin-cyclope .jcarousel-prev-horizontal:active {
-    background-position: -64px 0;
-}
+  background-position: -64px 0;}
 
 .jcarousel-skin-cyclope .jcarousel-prev-disabled-horizontal,
 .jcarousel-skin-cyclope .jcarousel-prev-disabled-horizontal:hover,
 .jcarousel-skin-cyclope .jcarousel-prev-disabled-horizontal:focus,
 .jcarousel-skin-cyclope .jcarousel-prev-disabled-horizontal:active {
-    cursor: default;
-    background-position: -96px 0;
-}
+  cursor: default;
+  background-position: -96px 0;}
 
 /**
  *  Vertical Buttons
@@ -205,59 +202,50 @@
 */
 
 
-/* internal .slideshow.teaser item styles */
+/* internal .slideshow item styles */
 
-#fire .slideshow.teaser {
+#fire .slideshow {
   margin: 10px 0;
   border-bottom: none;
-    padding: 0;
-}
+  padding: 0;}
 
-#fire .slideshow.teaser img.icon {
-    border: 3px solid #CCCCCC;
-    clear: both;
-    float: left;
-    margin: 0 20px 0 0;
-    padding: 3px;
-    width: 300px;
-}
+#fire .slideshow img.icon {
+  border: 3px solid @colorb;
+  clear: both;
+  float: left;
+  margin: 0 20px 0 0;
+  padding: 3px;
+  width: 300px;}
 
-#fire .slideshow.teaser img.icon.big {
-    border: none;
-    clear: both;
-    float: left;
-    margin: 0;
-    padding: 0;
-    width: 510px;
-}
+#fire .slideshow img.icon.big {
+  border: none;
+  clear: both;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 510px;}
 
-#fire .slideshow.teaser img.type_icon {
-    float: left;
-    left: 10px;
-    margin: 0;
-    padding: 0 10px 0 0;
-    position: absolute;
-    top: 10px;
-}
+#fire .slideshow img.type_icon {
+  float: left;
+  left: 10px;
+  margin: 0;
+  padding: 0 10px 0 0;
+  position: absolute;
+  top: 10px;}
 
-#fire .slideshow.teaser .teaser_icon_container {
- position: relative;
-}
+#fire .slideshow .teaser_icon_container {
+  position: relative;}
 
-#fire .teaser .title {
-    border: medium none;
-    font-size: 1.2em;
-    line-height: 1.1em;
-    margin: 0;
-}
+#fire .slideshow .title {
+  border: medium none;
+  font-size: 1.2em;
+  line-height: 1.1em;
+  margin: 0;}
 
-#fire .slideshow.teaser .summary {
-    color: #333333;
-    font-size: 0.8em;
-    font-weight: 400;
-    line-height: 1.3em;
-    padding: 0 0 15px 0;
-    text-align: left;
-}
-
-
+#fire .slideshow .summary {
+  color: @colore;
+  font-size: 0.8em;
+  font-weight: 400;
+  line-height: 1.3em;
+  padding: 0 0 15px 0;
+  text-align: left;}
