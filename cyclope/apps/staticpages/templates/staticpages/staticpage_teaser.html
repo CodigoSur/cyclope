@@ -8,15 +8,14 @@
       <h3 class="html-content summary">{{ staticpage.summary|smart_style }}</h3>
     {% endif %}
 
-    {% if staticpage.tags %}
-        <div class="meta-content"><span class="tags">
-          <span class="tags-label">{% trans "Tags" %}:</span>
-          {% tags_for_object staticpage as staticpage_tags %}
-          {% for tag in staticpage_tags %}
-            <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
-            {{tag.name}}{% if not forloop.last%},{% endif%}
-          {% endfor %}
-        </span></div>
+    {% if staticpage.pictures %}
+     <div class="teaser_icon_container"><a href="{% url staticpage-detail staticpage.slug %}">
+        <img class="teaser_icon" src="{% version staticpage.pictures.0.image.path 'small' %}" width="135" border="0"/>
+      </a></div>
+    {% endif %}
+
+    {% if staticpage.text %}
+      <h3 class="html-content summary">{{ staticpage.text|smart_style|striptags|truncatewords:40 }}</h3>
     {% endif %}
 
     <div class="clear"></div>
