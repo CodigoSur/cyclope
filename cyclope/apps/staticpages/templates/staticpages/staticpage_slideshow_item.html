@@ -6,15 +6,27 @@
     <h2 class="title"><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a></h2>
     {% endif %}
 
-  {% if view_options.show_image %}
-       
+    {% if view_options.show_image %}
+    <div class="teaser_icon_container">
+    <a href="{% url staticpage-detail staticpage.slug %}">
+        {% if staticpage.pictures %}
+            {% if not view_options.show_title and not view_options.show_description %}
+          <img class="icon big" src="{% version staticpage.pictures.0.image.path 'big' %}" border="0"/>
+            {% else %}
+          <img class="slideshow_picture" src="{% version staticpage.pictures.0.image.path 'slideshow-background' %}" border="0"/>
+            {% endif %}
+        {% else %}
+          <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
+        {% endif %}
+    </a>
+    </div>
     {% endif %}
     
   {% if view_options.show_description %}
      
     
        {% if staticpage.text %}
-      <h3 class="html-content summary">{{ staticpage.text|smart_style }}</h3>
+      <h3 class="html-content summary"><p>{{ staticpage.text|smart_style|striptags|truncatewords:40 }}</p></h3>
     {% endif %}
     {% endif %}
 

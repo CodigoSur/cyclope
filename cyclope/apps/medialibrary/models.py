@@ -86,6 +86,9 @@ class MovieClip(BaseMedia):
             return ''
     admin_thumbnail.allow_tags = True
     admin_thumbnail.short_description = _('Still')
+    
+    def image(self):
+        return self.still
 
     class Meta:
         verbose_name = _('movie clip')

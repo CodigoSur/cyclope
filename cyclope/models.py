@@ -376,6 +376,15 @@ class BaseContent(models.Model):
         trans_links = ''.join(trans_links)
         return trans_links
 
+    def pictures(self):
+        if self.related_contents:
+            pic_model = models.get_model('medialibrary', 'picture')
+            ctype = ContentType.objects.get_for_model(pic_model)
+            rel_contents = self.related_contents.filter(other_type__pk=ctype.pk)
+            return [ r.other_object for r in rel_contents ]
+        else:
+            return None
+
     translations.allow_tags = True
     translations.short_description = _('translations')
 

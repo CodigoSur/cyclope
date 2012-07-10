@@ -203,6 +203,8 @@ FILEBROWSER_VERSIONS = {
                          'width': 140, 'height': 140, 'opts': 'crop'},
     'slideshow': {'verbose_name': ugettext('Slideshow'),
                   'width': 300, 'height': 300, 'opts': 'crop'},
+    'slideshow-background': {'verbose_name': ugettext('Slideshow'),
+                  'width': 550, 'height': '', 'opts': 'crop'},                  
 }
 
 FILEBROWSER_MAX_UPLOAD_SIZE = 20971520 # 20MB

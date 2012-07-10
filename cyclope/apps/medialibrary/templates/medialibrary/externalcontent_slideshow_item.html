@@ -8,7 +8,7 @@
   {% if view_options.show_image %}
     {% if externalcontent.image %}
       <div class="teaser_icon_container media-content"><a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
-        <img class="teaser_icon" src="{% version externalcontent.image.path 'thumbnail' %}" width="90" border="0"/></a>
+        <img class="slideshow_picture" src="{% version externalcontent.image.path 'slideshow-background' %}" border="0"/></a>
       </div>
     {% endif %}
   {% endif %}
@@ -21,11 +21,7 @@
           {% endif %}
       </h3>
     {% endif %}
-    {% if externalcontent.skip_detail %}
-      <span class="meta-content">
-        <a href="{{ externalcontent.content_url }}" {% if externalcontent.new_window %}target="_blank"{% endif%}>{% trans "Open external content"%} {% if externalcontent.new_window %}{% trans " (in new window)"%}{% endif%}</a>
-      </span>
-    {% endif %}
+
   {% endif %}
 </div>
 {% endblock wholecontent %}

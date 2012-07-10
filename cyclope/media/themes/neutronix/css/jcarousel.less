@@ -18,20 +18,20 @@
 */
 
 
-/* jcarousel for #fire region */
+/*-----------------------------------------------------------------------------------------------
+DEFAULTS
+-----------------------------------------------------------------------------------------------*/
 
 .jcarousel-skin-cyclope .jcarousel-container {
-  .rounded-corners(6px);
-  background: @colora;
-  border: 2px solid @colorc;
-  margin-bottom: 20px;}
+    background: @colora;
+    margin-bottom: 20px;}
 
 .jcarousel-skin-cyclope .jcarousel-direction-rtl {
-	direction: rtl;}
+    direction: rtl;}
 
 .jcarousel-skin-cyclope .jcarousel-container-horizontal {
-  width: 510px;
-  padding: 13px 18px 60px 18px;}
+    width: 550px;
+    padding: 0;}
 
 /*
 .jcarousel-skin-cyclope .jcarousel-container-vertical {
@@ -39,9 +39,9 @@
 */
 
 .jcarousel-skin-cyclope .jcarousel-clip {
-  overflow: hidden;
-  width: 510px;
-  height: 330px;}
+    overflow: hidden;
+    width: 550px;
+    height: 330px;}
 
 .jcarousel-skin-cyclope .jcarousel-clip-horizontal {
   }
@@ -52,14 +52,13 @@
 */
 
 .jcarousel-skin-cyclope .jcarousel-item {
-  width: 510px;
-  height: 330px;
-  padding:0;margin:0;}
+    width: 550px;
+    height: 330px;
+    padding:0;margin:0;}
 
-#fire .jcarousel-skin-cyclope .jcarousel-item-horizontal {
-  margin-left: 0;
-  margin: 0;
-  margin-right: 20px;}
+.jcarousel-skin-cyclope .jcarousel-item-horizontal {
+    margin-left: 0;
+    margin: 0;}
 
 /*
 #fire .jcarousel-skin-cyclope .jcarousel-direction-rtl .jcarousel-item-horizontal {
@@ -79,29 +78,26 @@
   background: @color-alpha;
   color: @color-omega;}
 
-/**
- *  Horizontal Buttons
- */
+
+/*-----------------------------------------------------------------------------------------------
+HORIZONTAL BUTTONS
+-----------------------------------------------------------------------------------------------*/
+
 .jcarousel-skin-cyclope .jcarousel-next-horizontal {
   position: absolute;
-  top: 360px;
-  right: 16px;
+  top: 140px;
+  right: 0px;
   width: 32px;
   height: 32px;
   cursor: pointer;
-  background: transparent url(../images/jcarousel/next-horizontal.png) no-repeat 0 0;}
-
-.jcarousel-skin-cyclope .jcarousel-direction-rtl .jcarousel-next-horizontal {
-  left: 5px;
-  right: auto;
-  background-image: url(../images/jcarousel/prev-horizontal.png);}
+  background: transparent url(../images/jcarousel/next-horizontal-right.png) no-repeat 0 0;}
 
 .jcarousel-skin-cyclope .jcarousel-next-horizontal:hover,
 .jcarousel-skin-cyclope .jcarousel-next-horizontal:focus {
   background-position: -32px 0;}
 
 .jcarousel-skin-cyclope .jcarousel-next-horizontal:active {
-  background-position: -64px 0;}
+  background-position: -65px 0;}
 
 .jcarousel-skin-cyclope .jcarousel-next-disabled-horizontal,
 .jcarousel-skin-cyclope .jcarousel-next-disabled-horizontal:hover,
@@ -112,17 +108,12 @@
 
 .jcarousel-skin-cyclope .jcarousel-prev-horizontal {
   position: absolute;
-  top: 360px;
-  left: 16px;
+  top: 140px;
+  left: 0px;
   width: 32px;
   height: 32px;
   cursor: pointer;
-  background: transparent url(../images/jcarousel/prev-horizontal.png) no-repeat 0 0;}
-
-.jcarousel-skin-cyclope .jcarousel-direction-rtl .jcarousel-prev-horizontal {
-  left: auto;
-  right: 5px;
-  background-image: url(../images/jcarousel/next-horizontal.png);}
+  background: transparent url(../images/jcarousel/prev-horizontal-left.png) no-repeat 0 0;}
 
 .jcarousel-skin-cyclope .jcarousel-prev-horizontal:hover, 
 .jcarousel-skin-cyclope .jcarousel-prev-horizontal:focus {
@@ -204,20 +195,23 @@
 
 /* internal .slideshow item styles */
 
-#fire .slideshow {
-  margin: 10px 0;
+#spark .slideshow {
+  
+  margin: 0;
   border-bottom: none;
-  padding: 0;}
+  padding: 0;
+  z-index:0;}
 
-#fire .slideshow img.icon {
-  border: 3px solid @colorb;
+#spark .slideshow img.icon {
+  border: none;
   clear: both;
   float: left;
-  margin: 0 20px 0 0;
-  padding: 3px;
-  width: 300px;}
+  margin: 0 0 0;
+  padding: 0;
+  position:absolute;
+  z-index:1;}
 
-#fire .slideshow img.icon.big {
+#spark .slideshow img.icon.big {
   border: none;
   clear: both;
   float: left;
@@ -225,7 +219,7 @@
   padding: 0;
   width: 510px;}
 
-#fire .slideshow img.type_icon {
+#spark .slideshow img.type_icon {
   float: left;
   left: 10px;
   margin: 0;
@@ -233,19 +227,55 @@
   position: absolute;
   top: 10px;}
 
-#fire .slideshow .teaser_icon_container {
+#spark .slideshow .teaser_icon_container {
   position: relative;}
 
-#fire .slideshow .title {
-  border: medium none;
+#spark .slideshow h2.title {
+  margin:0;
+  padding:15px;}
+  
+#spark .slideshow .title {
+  border: none;
   font-size: 1.2em;
-  line-height: 1.1em;
-  margin: 0;}
+  line-height: 100%;
+  padding:15px;
+  margin: 0;
+  z-index:3;
+  position:absolute; 
+  width:520px;
+  color:@color-alpha;
+  background:url(../images/jcarousel/opacity.png);
+  display:block;
+  float:left;}
+  
+#spark .slideshow .title a {
+  color:@color-alpha;}
+  
+#spark .slideshow .download_link {
+    display:block;
+    clear:both;
+    padding:0;
+    margin:0;
+    float:left;}
 
-#fire .slideshow .summary {
-  color: @colore;
-  font-size: 0.8em;
+#spark .slideshow .summary {
+  color: @color-alpha !important;
+  font-size: 0.8em !important;
   font-weight: 400;
   line-height: 1.3em;
-  padding: 0 0 15px 0;
-  text-align: left;}
+  padding: 15px !important;
+  margin:0;
+  text-align: left;
+  background:url(../images/jcarousel/opacity.png);
+  position:absolute;
+  bottom:0;
+  z-index:4;}
+
+#spark .slideshow .summary p { 
+  overflow:auto;
+  width:520px;
+  display:block !important;}
+  
+#spark li { 
+  padding:0 !important;
+  margin:0 !important;}  

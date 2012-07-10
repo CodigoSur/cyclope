@@ -49,15 +49,6 @@ class Article(BaseContent, Collectible):
                                blank=True, null=True)
     date = models.DateTimeField(_('date'), blank=True, null=True)
 
-    def pictures(self):
-        if self.related_contents:
-            pic_model = models.get_model('medialibrary', 'picture')
-            ctype = ContentType.objects.get_for_model(pic_model)
-            rel_contents = self.related_contents.filter(other_type__pk=ctype.pk)
-            return [ r.other_object for r in rel_contents ]
-        else:
-            return None
-
     class Meta:
         verbose_name = _('article')
         verbose_name_plural = _('articles')

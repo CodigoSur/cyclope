@@ -7,13 +7,11 @@
     <h2 class="title"><a href="{{media.get_absolute_url}}">{{ media.name }}</a></h2>
   {% endif %}
   {% if media.image %}
-    <div class="media-content slideshow_{{media.get_object_name}}"><img src="{% version media.image.path 'slideshow' %}"/></div>
+    <div class="media-content slideshow_{{media.get_object_name}}"><img src="{% version media.image.path 'slideshow-background' %}"/></div>
   {% endif %}
 {% endblock head %}
 
-  {% block content %}
-  <div class="action-content download_link"><a href="{{ media.file }}">{% trans "download file" %}</a></div>
-  {% endblock content %}
+
 
   {% block description %}
   {% if view_options.show_description %}

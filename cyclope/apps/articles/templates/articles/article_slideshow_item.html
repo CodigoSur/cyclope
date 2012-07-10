@@ -1,5 +1,10 @@
 {% load i18n fb_versions cyclope_utils dbgettext_tags %}
   <div class="slideshow article teaser">
+
+    {% if view_options.show_title %}
+    <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:70 }}</a></h2>
+    {% endif %}
+
     {% if view_options.show_image %}
     <div class="teaser_icon_container">
           <img title="article" class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
@@ -8,7 +13,7 @@
             {% if not view_options.show_title and not view_options.show_description %}
           <img class="icon big" src="{% version article.pictures.0.image.path 'big' %}" border="0"/>
             {% else %}
-          <img class="icon" src="{% version article.pictures.0.image.path 'slideshow' %}" border="0"/>
+          <img class="slideshow_picture" src="{% version article.pictures.0.image.path 'slideshow-background' %}" border="0"/>
             {% endif %}
         {% else %}
           <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
@@ -17,16 +22,12 @@
     </div>
     {% endif %}
 
-    {% if view_options.show_title %}
-    <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:70 }}</a></h2>
-    {% endif %}
-
     {% if view_options.show_description %}
-      <div class="html-content summary">
+      <h3 class="html-content summary">
       {% if article.summary %}
-      {{ article|parsed_gettext:"summary"|smart_style }}
+      <p>{{ article|parsed_gettext:"summary"|smart_style }}</p>
       {% else %}
-      {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
+      <p>{{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}</p>
       {% endif %}
-      </div>
+      </h3>
     {% endif %}
