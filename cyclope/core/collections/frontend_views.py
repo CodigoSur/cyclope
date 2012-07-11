@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010 - 2012 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -162,6 +162,11 @@ frontend.site.register_view(Category, CategoryLabeledIconList)
 
 
 class SlideshowOptions(forms.Form):
+    visualization_mode = forms.ChoiceField(label=_('Visual Mode'),
+                              choices=(("slideshow", _(u"Standar view")),
+                                       ("slideshow-background", _(u"With background image view"))),
+                              initial="slideshow-background")
+                              
     show_title = forms.BooleanField(label=_("Show title"), initial=True, required=False)
     show_description = forms.BooleanField(label=_("Show description"), initial=True, required=False)
     show_image = forms.BooleanField(label=_("Show image"), initial=True, required=False)

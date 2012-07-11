@@ -42,6 +42,7 @@
 
 {% block content %}
     {% comment %}TODO: review the ID definition{% endcomment %}
+    <div class="{{view_options.visualization_mode}}">
     <ul id="slideshow{% if region_name %}-{{region_name}}{% endif %}-{{category_slug}}" class="jcarousel-skin-cyclope">
     {% for categorization in categorizations %}
       {% spaceless %}
@@ -59,4 +60,5 @@
       <li>{% include template_path %}</li>
     {% endfor %}
     </ul>
+    </div>
 {% endblock %}

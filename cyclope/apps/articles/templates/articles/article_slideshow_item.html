@@ -1,5 +1,6 @@
 {% load i18n fb_versions cyclope_utils dbgettext_tags %}
-  <div class="slideshow article teaser">
+
+  <div class="article">
 
     {% if view_options.show_title %}
     <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:70 }}</a></h2>
@@ -13,7 +14,7 @@
             {% if not view_options.show_title and not view_options.show_description %}
           <img class="icon big" src="{% version article.pictures.0.image.path 'big' %}" border="0"/>
             {% else %}
-          <img class="slideshow_picture" src="{% version article.pictures.0.image.path 'slideshow-background' %}" border="0"/>
+          <img class="slideshow_picture" src="{% version article.pictures.0.image.path view_options.visualization_mode %}" border="0"/>
             {% endif %}
         {% else %}
           <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
