@@ -22,14 +22,19 @@
   <!-- /descripcion -->
 
   {% if article.pictures %}
-  <div id="gallery" class="media-content">
+  <div id="gallery" class="media-content"> 
     <ul>
       {% for picture in article.pictures %}
       <li {% if not forloop.first %} style="display:none;" {% endif %} >
         <a href="{% version picture.image.path 'medium' %}"  title="{{ picture.name }}">
           <img src="{% version picture.image.path 'small' %}" alt="{{ picture.name }}" />
+        
+        <p>{{ picture.name }}
+        {% if article.pictures|length >= 2 %}
+        ({{ article.pictures|length }} {% trans "pictures" %})
+        {% endif %}
+        </p>
         </a>
-        <p>{{ picture.name }}</p>
       </li>
       {% endfor %}
     </ul>
