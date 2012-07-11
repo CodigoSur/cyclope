@@ -5,7 +5,7 @@
     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/regularfile.png" /><a href="{% url regularfile-detail regularfile.slug %}">{{ regularfile.name }}</a></h2>
 
     {% if regularfile.image %}
-      <div class="media-content teaser_icon_container"><img class="teaser_icon" src="{% version regularfile.image.path 'thumbnail' %}" width="90" border="0" /></div>
+      <div class="media-content teaser_icon_container"><img class="teaser_icon" src="{% version regularfile.image.path 'small' %}" border="0" /></div>
     {% endif %}
 
     {% if regularfile.description %}
