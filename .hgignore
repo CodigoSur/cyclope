@@ -22,3 +22,13 @@ django_cyclope.egg-info
 fulldb.json
 demo/cyclope_project/cyclope_project_index/*
 .emacs*
+*_fb_thumb*
+*_thumbnail*
+*_small*
+*_medium* 
+*_big* 
+*_cropped* 
+*_croppedthumbnail* 
+*_slideshow-news* 
+*_slideshow-background* 
+*_crop*
