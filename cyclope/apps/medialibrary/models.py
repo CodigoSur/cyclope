@@ -36,25 +36,24 @@ class BaseMedia(BaseContent, Collectible):
                                null=True, blank=True)
     source = models.ForeignKey(Source, verbose_name=_('source'),
                                blank=True, null=True)
-    
     description = models.TextField(_('description'), blank=True)
 
     class Meta:
         abstract = True
         ordering = ('-creation_date', 'name')
 
-
 class Picture(BaseMedia):
     """Picture model.
     """
+
     image =  FileBrowseField(_('image'), max_length=100, format='Image',
-                             directory='pictures/')
+                             directory='images/pictures/')
 
     def admin_thumbnail(self):
         return u'<img src="%s"/>' % self.image.url_thumbnail
     admin_thumbnail.allow_tags = True
     admin_thumbnail.short_description = _('Image')
-    
+
     class Meta:
         verbose_name = _('picture')
         verbose_name_plural = _('pictures')
@@ -65,6 +64,9 @@ class SoundTrack(BaseMedia):
     """
     audio =  FileBrowseField(_('audio'), max_length=250, format='Audio',
                              directory='sound_tracks/')
+    image =  FileBrowseField(_('image'), max_length=100, format='Image',
+                             directory='images/medialibrary/', blank=True,
+                             null=True)
 
     class Meta:
         verbose_name = _('sound track')
@@ -75,7 +77,7 @@ class MovieClip(BaseMedia):
     """MovieClip model.
     """
     still = FileBrowseField(_('still'), max_length=100, format='Image',
-                            directory='movie_stills/', blank = True)
+                            directory='images/medialibrary/', blank=True)
     video =  FileBrowseField(_('video'), max_length=100, format='Video',
                              directory='movie_clips/')
 
@@ -99,7 +101,7 @@ class Document(BaseMedia):
     """Document model.
     """
     image = FileBrowseField(_('image'), max_length=100, format='Image',
-                            directory='document_images/', blank=True)
+                            directory='images/medialibrary/', blank=True)
     document =  FileBrowseField(_('document'), max_length=100, format='Document',
                             directory='documents/')
 
@@ -112,7 +114,7 @@ class FlashMovie(BaseMedia):
     """FlashMovie model.
     """
     image = FileBrowseField(_('image'), max_length=100, format='Image',
-                            directory='flashmovie_images/', blank=True)
+                            directory='images/medialibrary/', blank=True)
     flash =  FileBrowseField(_('flash'), max_length=100, format='Flash',
                                   directory='flashmovies/', blank=True)
 
@@ -133,7 +135,7 @@ class RegularFile(BaseMedia):
     """RegularFile model. Accepts any type of file.
     """
     image = FileBrowseField(_('image'), max_length=100, format='Image',
-                            directory='regular_file_images/', blank=True)
+                            directory='images/medialibrary/', blank=True)
     file =  FileBrowseField(_('file'), max_length=100,
                             directory='regular_files/')
 
@@ -146,7 +148,7 @@ class ExternalContent(BaseMedia):
     """ExternalContent. For media that's displayed with custom html.
     """
     image = FileBrowseField(_('image'), max_length=100, format='Image',
-                            directory='external_content/', blank=True)
+                            directory='images/medialibrary/', blank=True)
     content_url = models.CharField(_('content url'), max_length=100)
     new_window = models.BooleanField(_('open in new window'), default=False)
     skip_detail = models.BooleanField(_('skip detailed view'), default=False)
