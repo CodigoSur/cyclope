@@ -5,6 +5,7 @@
         <span class="step-links">
             {% if page.has_previous %}
                 {# query is present when this block is included in the search view #}
+                <a href="?{% if query %}q={{ query }}&amp;{% endif %}page=1">{% trans 'first' %}</a>&nbsp
                 <a href="?{% if query %}q={{ query }}&amp;{% endif %}page={{ page.previous_page_number }}">{% trans 'previous' %}</a>
             {% endif %}
 
@@ -13,7 +14,8 @@
             </span>
 
             {% if page.has_next %}
-                <a href="?{% if query %}q={{ query }}&amp;{% endif %}page={{ page.next_page_number }}">{% trans 'next' %}</a>
+                <a href="?{% if query %}q={{ query }}&amp;{% endif %}page={{ page.next_page_number }}">{% trans 'next' %}</a>&nbsp
+                <a href="?{% if query %}q={{ query }}&amp;{% endif %}page={{ page.paginator.num_pages }}">{% trans 'last' %}</a>
             {% endif %}
         </span>
     </div>
