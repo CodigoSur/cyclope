@@ -29,7 +29,7 @@ def create_site(app, created_models, verbosity, db, **kwargs):
         menu = Menu(name="Main menu", main_menu=True)
         menu.save(using=db)
 
-        layout = Layout(name="default", template='main.html')
+        layout = Layout(name="default", template='five_elements.html')
         layout.save(using=db)
 
         menu_item = MenuItem(menu=menu, name="home", site_home=True,
@@ -37,7 +37,7 @@ def create_site(app, created_models, verbosity, db, **kwargs):
 
         menu_item.save(using=db)
 
-        site_settings = SiteSettings(site=site, theme="neutrona",
+        site_settings = SiteSettings(site=site, theme="neutronix",
                                      default_layout=layout, allow_comments='YES')
         site_settings.save(using=db)
 
