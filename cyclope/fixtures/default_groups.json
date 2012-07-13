@@ -16,6 +16,11 @@
           "article"
         ], 
         [
+          "delete_article", 
+          "articles", 
+          "article"
+        ], 
+        [
           "add_author", 
           "cyclope", 
           "author"
@@ -26,12 +31,37 @@
           "author"
         ], 
         [
+          "delete_author", 
+          "cyclope", 
+          "author"
+        ], 
+        [
+          "add_relatedcontent", 
+          "cyclope", 
+          "relatedcontent"
+        ], 
+        [
+          "change_relatedcontent", 
+          "cyclope", 
+          "relatedcontent"
+        ], 
+        [
+          "delete_relatedcontent", 
+          "cyclope", 
+          "relatedcontent"
+        ], 
+        [
           "add_source", 
           "cyclope", 
           "source"
         ], 
         [
           "change_source", 
+          "cyclope", 
+          "source"
+        ], 
+        [
+          "delete_source", 
           "cyclope", 
           "source"
         ], 
@@ -46,12 +76,22 @@
           "document"
         ], 
         [
+          "delete_document", 
+          "medialibrary", 
+          "document"
+        ], 
+        [
           "add_externalcontent", 
           "medialibrary", 
           "externalcontent"
         ], 
         [
           "change_externalcontent", 
+          "medialibrary", 
+          "externalcontent"
+        ], 
+        [
+          "delete_externalcontent", 
           "medialibrary", 
           "externalcontent"
         ], 
@@ -66,12 +106,22 @@
           "flashmovie"
         ], 
         [
+          "delete_flashmovie", 
+          "medialibrary", 
+          "flashmovie"
+        ], 
+        [
           "add_movieclip", 
           "medialibrary", 
           "movieclip"
         ], 
         [
           "change_movieclip", 
+          "medialibrary", 
+          "movieclip"
+        ], 
+        [
+          "delete_movieclip", 
           "medialibrary", 
           "movieclip"
         ], 
@@ -86,6 +136,11 @@
           "picture"
         ], 
         [
+          "delete_picture", 
+          "medialibrary", 
+          "picture"
+        ], 
+        [
           "add_regularfile", 
           "medialibrary", 
           "regularfile"
@@ -96,12 +151,22 @@
           "regularfile"
         ], 
         [
+          "delete_regularfile", 
+          "medialibrary", 
+          "regularfile"
+        ], 
+        [
           "add_soundtrack", 
           "medialibrary", 
           "soundtrack"
         ], 
         [
           "change_soundtrack", 
+          "medialibrary", 
+          "soundtrack"
+        ], 
+        [
+          "delete_soundtrack", 
           "medialibrary", 
           "soundtrack"
         ], 
@@ -121,12 +186,32 @@
           "newsletter"
         ], 
         [
+          "add_htmlblock", 
+          "staticpages", 
+          "htmlblock"
+        ], 
+        [
+          "change_htmlblock", 
+          "staticpages", 
+          "htmlblock"
+        ], 
+        [
+          "delete_htmlblock", 
+          "staticpages", 
+          "htmlblock"
+        ], 
+        [
           "add_staticpage", 
           "staticpages", 
           "staticpage"
         ], 
         [
           "change_staticpage", 
+          "staticpages", 
+          "staticpage"
+        ], 
+        [
+          "delete_staticpage", 
           "staticpages", 
           "staticpage"
         ]
@@ -375,17 +460,7 @@
           "soundtrack"
         ], 
         [
-          "add_newsletter", 
-          "newsletter", 
-          "newsletter"
-        ], 
-        [
           "change_newsletter", 
-          "newsletter", 
-          "newsletter"
-        ], 
-        [
-          "delete_newsletter", 
           "newsletter", 
           "newsletter"
         ], 
@@ -400,6 +475,11 @@
           "poll"
         ], 
         [
+          "delete_poll", 
+          "polls", 
+          "poll"
+        ], 
+        [
           "change_question", 
           "polls", 
           "question"
@@ -408,6 +488,21 @@
           "delete_question", 
           "polls", 
           "question"
+        ], 
+        [
+          "add_htmlblock", 
+          "staticpages", 
+          "htmlblock"
+        ], 
+        [
+          "change_htmlblock", 
+          "staticpages", 
+          "htmlblock"
+        ], 
+        [
+          "delete_htmlblock", 
+          "staticpages", 
+          "htmlblock"
         ], 
         [
           "add_staticpage", 
