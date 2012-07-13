@@ -190,11 +190,15 @@ class CustomIndexDashboard(Dashboard):
             modules.ModelList(
                 title=_('Contacts'),
                 css_classes = ('dbmodule-contacts', 'main-area-modules',),
-                draggable = False,
-                deletable = False,
-                collapsible= False,
                 include_list=[
                     'cyclope.apps.contacts.models.Contact',
+                    ]),
+            modules.ModelList(
+                title=_('Abuse'),
+                css_classes = ('dbmodule-abuse', 'main-area-modules',),
+                include_list=[
+                    'cyclope.apps.abuse.models.AbuseType',
+                    'cyclope.apps.abuse.models.AbuseReport',
                     ]),
             ]
 

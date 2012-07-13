@@ -35,6 +35,7 @@ from autoslug.fields import AutoSlugField
 from cyclope.core.collections.models import Collectible
 from cyclope.models import BaseContent, Author, Source, Image
 from cyclope.apps.medialibrary.models import Picture
+import cyclope.apps.abuse
 
 YES_NO = (('YES', _('yes')), ('NO', _('no')),)
 
@@ -54,3 +55,5 @@ class Article(BaseContent, Collectible):
         verbose_name_plural = _('articles')
         ordering = ('-creation_date', 'name')
 
+
+cyclope.apps.abuse.register(Article)

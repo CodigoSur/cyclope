@@ -85,6 +85,7 @@ class SiteSettings(models.Model):
     rss_content_types = models.ManyToManyField(ContentType,
                                                verbose_name=_('whole feed contents'),
                                                help_text=_('contents to show in the whole feed'))
+    enable_abuse_reports = models.BooleanField(_('enable abuse reports'), default=False)
 
     def save(self, *args, **kwargs):
         self.id = 1

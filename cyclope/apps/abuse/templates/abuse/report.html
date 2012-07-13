@@ -1,0 +1,16 @@
+
+{% extends CYCLOPE_DEFAULT_TEMPLATE %}
+{% load i18n cyclope_utils %}
+
+{% block content%}
+<div class="abuse-report">
+{% if form %}
+<form action="." method="post">
+  {{ form.as_p }}
+  <input type="submit" class="submit" value="{% trans "Report" %}" />
+</form>
+{% else %}
+Thanks reporting!
+{% endif %}
+</div>
+{% endblock %}

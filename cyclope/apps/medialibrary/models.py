@@ -28,6 +28,7 @@ from filebrowser.fields import FileBrowseField
 
 from cyclope.models import BaseContent, Author, Source
 from cyclope.core.collections.models import Collectible
+import cyclope.apps.abuse
 
 class BaseMedia(BaseContent, Collectible):
     """Abstract class for media content.
@@ -88,7 +89,7 @@ class MovieClip(BaseMedia):
             return ''
     admin_thumbnail.allow_tags = True
     admin_thumbnail.short_description = _('Still')
-    
+
     def image(self):
         return self.still
 
@@ -156,3 +157,9 @@ class ExternalContent(BaseMedia):
     class Meta:
         verbose_name = _('external content')
         verbose_name_plural = _('external contents')
+
+
+# register models on abuse registry
+for key, val in locals().copy().iteritems():
+    if isinstance(val, type) and issubclass(val, BaseMedia):
+        cyclope.apps.abuse.register(val)

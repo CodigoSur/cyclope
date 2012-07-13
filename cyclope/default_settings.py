@@ -100,6 +100,7 @@ INSTALLED_APPS = [
     'cyclope.apps.locations',
     'cyclope.apps.feeds',
     'cyclope.apps.dynamicforms',
+    'cyclope.apps.abuse',
 
     'admin_tools',
     'admin_tools.theming',
@@ -204,7 +205,7 @@ FILEBROWSER_VERSIONS = {
     'slideshow': {'verbose_name': ugettext('Slideshow'),
                   'width': 300, 'height': 300, 'opts': 'crop'},
     'slideshow-background': {'verbose_name': ugettext('Slideshow'),
-                  'width': 550, 'height': '', 'opts': 'crop'},                  
+                  'width': 550, 'height': '', 'opts': 'crop'},
 }
 
 FILEBROWSER_MAX_UPLOAD_SIZE = 20971520 # 20MB

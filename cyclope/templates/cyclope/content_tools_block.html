@@ -1,10 +1,13 @@
-{% load i18n comments obj_perms %}
+{% load i18n comments obj_perms cyclope_utils abuse %}
   {% get_comment_count for current_object as comment_count %}
 
   <div class="tools meta-content">
     <ul>
       <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a>
       </li>
+      {% if user.is_authenticated and CYCLOPE_SITE_SETTINGS.enable_abuse_reports %}
+      <li class='abuse-report'><a href="{{current_object|abuse_report_link}}">{% trans "Report abuse" %}</a></li>
+      {% endif %}
       {% if current_object.allow_comments == 'YES' or current_object.allow_comments == 'SITE' and CYCLOPE_SITE_SETTINGS.allow_comments == 'YES' %}
       {% if comment_count %}
       <li>

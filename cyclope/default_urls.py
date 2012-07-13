@@ -57,9 +57,10 @@ urlpatterns = patterns('',
      {'form_class': UserProfileForm}),
     (r'^profiles/edit/$', 'profiles.views.edit_profile',
      {'form_class': UserProfileForm}),
-
+    url(r'^abuse/report/(?P<ct_id>\d+)/(?P<obj_id>\d+)/',
+        'cyclope.apps.abuse.views.abuse_report',
+        name="abuse-report"),
     (r'^profiles/', include('profiles.urls')),
-
     url(r'^contact/$', 'contact_form.views.contact_form',
         {'form_class': AdminSettingsContactFormWithCaptcha},
         name='contact_form'),

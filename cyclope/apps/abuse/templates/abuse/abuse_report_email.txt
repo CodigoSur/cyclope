@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% blocktrans with username=element.user content=element.content_object abuse_type=element.abuse_type %}
+The user {{username}} has reported that the content {{content}} is an abuse
+of {{abuse_type}}.
+{% endblocktrans %}
+
+http://{{domain}}{{element.content_object.get_absolute_url}}
+
+{% if element.text %}
+{% blocktrans with text=element.text%}
+Also the user says that: {{text}}
+{% endblocktrans %}
+{% endif %}
+
