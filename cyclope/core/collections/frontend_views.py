@@ -91,6 +91,9 @@ class CategoryDefaultList(frontend.FrontendView):
         if category.collection.default_list_view not in ["", self.name]:
             view_name = category.collection.default_list_view
             view = frontend.site.get_view(content_object, view_name)
+            if category.collection.view_options:
+                options.update(category.collection.view_options)
+            req_context['view_options'] = options
         else:
             view = frontend.site.get_view(content_object, 'teaser_list')
         return view.get_response(request, req_context, options, content_object)
@@ -163,10 +166,10 @@ frontend.site.register_view(Category, CategoryLabeledIconList)
 
 class SlideshowOptions(forms.Form):
     visualization_mode = forms.ChoiceField(label=_('Visual Mode'),
-                              choices=(("slideshow", _(u"Standar view")),
-                                       ("slideshow-background", _(u"With background image view"))),
+                              choices=(("slideshow", _(u"Standard view")),
+                                       ("slideshow-background",
+                                       _(u"With background image view"))),
                               initial="slideshow-background")
-                              
     show_title = forms.BooleanField(label=_("Show title"), initial=True, required=False)
     show_description = forms.BooleanField(label=_("Show description"), initial=True, required=False)
     show_image = forms.BooleanField(label=_("Show image"), initial=True, required=False)

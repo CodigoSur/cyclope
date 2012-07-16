@@ -41,8 +41,11 @@ from cyclope.core import frontend
 
 from models import *
 from cyclope.models import Menu
+from cyclope.core.frontend import site
+from cyclope.fields import MultipleField
 from cyclope import settings as cyc_settings
 from cyclope.core.perms.admin import CategoryPermissionInline
+from cyclope.forms import ViewOptionsFormMixin
 
 ####
 # custom FilterSpec
@@ -134,7 +137,7 @@ class CategoryAdmin(editor.TreeEditor):
         }),
     )
     inlines = (CategoryPermissionInline,)
-    
+
     def changelist_view(self, request, extra_context=None):
         # category changelist should only show items from one collection.
         # so we activate the filter to display categories from one collection
@@ -215,9 +218,15 @@ class CollectibleAdmin(admin.ModelAdmin):
             return super(CollectibleAdmin, self).lookup_allowed(*args)
 
 
-class CollectionAdminForm(forms.ModelForm):
+class CollectionAdminForm(forms.ModelForm, ViewOptionsFormMixin):
     raw_id_fields = ['picture',]
     default_list_view = forms.ChoiceField(label=_('Default category listing view'), required=False)
+    view_options = MultipleField(label=_('View options'), form=None, required=False)
+
+    options_field_name = 'view_options'
+    view_field_name = 'default_list_view'
+    field_names = ["default_list_view"]
+    model = Category
 
     def __init__(self, *args, **kwargs):
         super(CollectionAdminForm, self).__init__(*args, **kwargs)
@@ -227,9 +236,19 @@ class CollectionAdminForm(forms.ModelForm):
                                      for view in frontend.site.get_views(model)
                                      if view.name != 'default']
         self.fields['default_list_view'].choices = views
+        self.model = model
+
+        if self.instance.id is not None:
+            collection = self.instance
+            view_name = collection.default_list_view
+            view = site.get_view(Category, view_name)
+            self.fields["view_options"] = MultipleField(form=view.options_form, required=False)
+            initial_options = self.fields["view_options"].initial
+            self.initial["view_options"] = collection.view_options or initial_options
 
     class Meta:
         model = Collection
+
 
 class CollectionAdmin (admin.ModelAdmin):
     """Base admin class for models that inherit from Collectible.

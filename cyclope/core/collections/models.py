@@ -34,12 +34,11 @@ from django.contrib.contenttypes import generic
 from django.db.models.signals import m2m_changed
 
 import mptt
+from jsonfield import JSONField
 from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 
 import cyclope
-
-
 
 
 class Collection(models.Model):
@@ -62,6 +61,7 @@ class Collection(models.Model):
                              blank=True)
     default_list_view = models.CharField(_('default list view'), max_length=255,
                                     blank=True, default='')
+    view_options = JSONField(default='{}') # default is taken from ViewOptionsForm
 
     def get_absolute_url(self):
         return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)

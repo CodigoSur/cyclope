@@ -317,12 +317,16 @@ class CyclopeSite(object):
     def options_view_widget_html(self, request):
         """Returns the html with the options of a frontend view"""
         from cyclope.fields import MultipleField
+        content_type_name = request.GET.get("content_type_name")
+        if content_type_name:
+            ct = ContentType.objects.get(name=content_type_name)
+        else:
+            ct = ContentType.objects.get(pk=request.GET['content_type_id'])
+        model = ct.model_class()
 
-        content_type_id = request.GET['content_type_id']
         view_name = request.GET['view_name']
         prefix_name = request.GET.get('prefix_name', "")
 
-        model = ContentType.objects.get(pk=content_type_id).model_class()
         frontend_view = self.get_view(model, view_name)
         if frontend_view.options_form is None:
             return HttpResponse("")

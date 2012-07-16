@@ -68,13 +68,53 @@ class RelatedContentForm(forms.ModelForm):
                                                         content_object.name)]
 
 
-class MenuItemAdminForm(forms.ModelForm):
+class ViewOptionsFormMixin(object):
+    options_field_name = 'view_options'
+    view_field_name = 'content_view'
+    field_names = []
+    model = None
+
+    def get_initial(self, view, fields):
+        fields[self.options_field_name] = MultipleField(form=view.options_form,
+                                                        required=False)
+        initial_options = self.fields[self.options_field_name].initial
+
+    def get_view(self, values):
+        return site.get_view(self.model, values[self.view_field_name])
+
+    def clean_view_options(self):
+        # Retrieve content_view and content_type of current data
+        values = {}
+        field_names = self.field_names
+        for name in field_names:
+            field, widget = self.fields[name], self.fields[name].widget
+            values[name] = widget.value_from_datadict(self.data, None,
+                                                      self.add_prefix(name))
+            values[name] = field.clean(values[name])
+        cleaned_value = {}
+        if all(values.values()):
+            view = self.get_view(values)
+            # Now we need to instance view_options field with the viw of the current
+            # form, and clean it.
+            self.fields[self.options_field_name] = MultipleField(form=view.options_form,
+                                                        required=False)
+            field = self.fields[self.options_field_name]
+            value = field.widget.value_from_datadict(self.data, None,
+                                                     self.add_prefix(self.options_field_name))
+
+            cleaned_value = field.clean(value, validate=True)
+        return cleaned_value
+
+class MenuItemAdminForm(forms.ModelForm, ViewOptionsFormMixin):
     # content_view choices get populated through javascript
     # when a template is selected
     content_view = AjaxChoiceField(label=_('View'), required=False)
     object_id = AjaxChoiceField(label=_('Content object'), required=False)
     parent = TreeNodeChoiceField(label=_('Parent'), queryset=MenuItem.tree.all(), required=False)
     view_options = MultipleField(label=_('View options'), form=None, required=False)
+
+
+    field_names = ['content_type', "content_view"]
 
     def __init__(self, *args, **kwargs):
         super(MenuItemAdminForm, self).__init__(*args, **kwargs)
@@ -91,9 +131,9 @@ class MenuItemAdminForm(forms.ModelForm):
                 model = menu_item.content_type.model_class()
                 view = site.get_view(model, view_name)
 
-                self.fields["view_options"] = MultipleField(form=view.options_form, required=False)
-                initial_options = self.fields["view_options"].initial
-                self.initial["view_options"] = menu_item.view_options or initial_options
+                initial_options = self.get_initial(view, self.fields)
+                self.initial[self.options_field_name] = menu_item.view_options or \
+                                                        initial_options
 
             if menu_item.content_object:
                 content_object = menu_item.content_object
@@ -101,28 +141,9 @@ class MenuItemAdminForm(forms.ModelForm):
                                                         content_object.name)]
         self.fields['content_type'].choices = site.get_registry_ctype_choices()
 
-    def clean_view_options(self):
-        # Retrieve content_view and content_type of current data
-        values = {}
-        field_names = ['content_type', "content_view"]
-        for name in field_names:
-            field, widget = self.fields[name], self.fields[name].widget
-            values[name] = widget.value_from_datadict(self.data, None,
-                                                      self.add_prefix(name))
-            values[name] = field.clean(values[name])
-        cleaned_value = {}
-        if all(values.values()):
-            view = site.get_view(values['content_type'].model_class(),
-                                 values['content_view'])
-            # Now we need to instance view_options field with the viw of the current
-            # form, and clean it.
-            self.fields["view_options"] = MultipleField(form=view.options_form,
-                                                        required=False)
-            field = self.fields["view_options"]
-            value = field.widget.value_from_datadict(self.data, None,
-                                                     self.add_prefix("view_options"))
-            cleaned_value = field.clean(value, validate=True)
-        return cleaned_value
+    def get_view(self, values):
+        return site.get_view(values['content_type'].model_class(),
+                              values[self.view_field_name])
 
     def clean(self):
         data = self.cleaned_data
@@ -200,13 +221,15 @@ class LayoutAdminForm(forms.ModelForm):
         model = Layout
 
 
-class RegionViewInlineForm(forms.ModelForm):
+class RegionViewInlineForm(forms.ModelForm, ViewOptionsFormMixin):
 
     # Choices for these fields get populated through javascript/JSON.
     region = AjaxChoiceField(label=_('Region'), required=False)
     content_view = AjaxChoiceField(label=_('View'), required=False)
     object_id = AjaxChoiceField(label=_('Content object'), required=False)
     view_options = MultipleField(label=_('View options'), form=None, required=False)
+
+    field_names = ['content_type', "content_view"]
 
     def __init__(self, *args, **kwargs):
         super(RegionViewInlineForm, self).__init__(*args, **kwargs)
@@ -240,29 +263,9 @@ class RegionViewInlineForm(forms.ModelForm):
 
         self.fields['content_type'].choices = site.get_registry_ctype_choices()
 
-    def clean_view_options(self):
-        # Retrieve content_view and content_type of current data
-        values = {}
-        field_names = ['content_type', "content_view"]
-        for name in field_names:
-            field, widget = self.fields[name], self.fields[name].widget
-            values[name] = widget.value_from_datadict(self.data, None,
-                                                      self.add_prefix(name))
-            values[name] = field.clean(values[name])
-        cleaned_value = {}
-        if all(values.values()):
-            view = site.get_view(values['content_type'].model_class(),
-                                 values['content_view'])
-            # Now we need to instance view_options field with the viw of the current
-            # form, and clean it.
-            self.fields["view_options"] = MultipleField(form=view.options_form,
-                                                        required=False)
-            field = self.fields["view_options"]
-            value = field.widget.value_from_datadict(self.data, None,
-                                                     self.add_prefix("view_options"))
-
-            cleaned_value = field.clean(value, validate=True)
-        return cleaned_value
+    def get_view(self, values):
+        return site.get_view(values['content_type'].model_class(),
+                              values[self.view_field_name])
 
     def clean(self):
         #TODO(nicoechaniz): this whole form validation could be simplified if we were not using our custom AjaxChoiceField and fields were actually marked as not null in the model definition. The problem is that the standard form validation will check for valid choices, so we should set choices to valid ones for each choicefield at form init time.
@@ -312,10 +315,6 @@ class RegistrationFormWithCaptcha(RegistrationFormUniqueEmail):
 
 
 class UserProfileForm(forms.ModelForm):
-
-    #def __init__(self, *args, **kwargs):
-    #    super(UserProfileForm, self).__init__(*args, **kwargs)
-    #    self.fields['avatar'].initial = ""
 
     def clean_avatar(self):
         from django.core.files.images import get_image_dimensions

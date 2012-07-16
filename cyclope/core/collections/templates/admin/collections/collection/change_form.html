@@ -1,0 +1,51 @@
+{% extends "admin/change_form.html" %}
+
+
+{% block after_related_objects %}
+{{ block.super }}
+
+<script type="text/javascript">
+//<![CDATA[
+$(function() {
+    function update_to_default_view_options(){
+        console.log("chang3e")
+        var view_name = $("#id_default_list_view option:selected").val();
+        if (view_name){
+            $.get("/{{CYCLOPE_PREFIX}}options_view_widget_html",
+               { content_type_name: 'category', view_name: view_name },
+               function(data){
+                   if (data){
+                        $("#view_options_multiple").replaceWith(data);
+                        div_container.show();
+                    }
+                    else{
+                        $("#view_options_multiple").html("");
+                        div_container.hide();
+                    }
+               });
+        }
+    }
+
+    $.cyclope = {
+    };
+
+    var div_container = $("#view_options_multiple").parent().parent();
+    if ($("#view_options_multiple").html().indexOf("form-row") == -1){
+        div_container.hide();
+        $.cyclope.initial_content = false;
+        update_to_default_view_options();
+    }
+    else{
+        $.cyclope.initial_content = true;
+    }
+
+    $("#id_default_list_view").change(function() {
+        update_to_default_view_options();
+    });
+
+});
+//]]>
+</script>
+
+
+{% endblock %}
