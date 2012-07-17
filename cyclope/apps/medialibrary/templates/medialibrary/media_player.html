@@ -1,17 +1,37 @@
 {% load i18n %}
 
 {% block extra_head %}
-<script type='text/javascript' src='/media/cyclope/jwplayer/swfobject.js'></script>
+<script type='text/javascript' src='{{ CYCLOPE_STATIC_URL }}jwplayer/swfobject.js'></script>
+<script type='text/javascript'>
+var uniqueId = uniqueId || function(){
+    var _unique_id = 0;
+    return function(){
+        var ret = _unique_id;
+        _unique_id += 1;
+        return ret;
+    };
+}();
+// Here we are loading the media player for all media in the page.
+// We are using an indirect method to prevent multiple loading
+var loadMedia = function(){
+    $(function() {
+      $(".video_player").each(function (){
+        var height = $(this).attr("vheight");
+        var media = $(this).attr("vmedia");
+        this.id = "media_player_" + uniqueId();
+        var so = new SWFObject('{{ CYCLOPE_STATIC_URL }}jwplayer/player.swf','ply','95%', height,'9','#ffffff');
+        so.addParam('allowfullscreen','true');
+        so.addParam('allowscriptaccess','always');
+        so.addParam('wmode','opaque');
+        so.addVariable('file', media);
+        so.write(this.id);
+     });
+ });
+ return true;
+};
+var media_loaded = media_loaded || loadMedia();
+</script>
 {% endblock %}
 
-
-  <div class='video_player' id="{{ current_object.slug }}_player">This text will be replaced</div>
-  <script type='text/javascript'>
-    var so = new SWFObject('/media/cyclope/jwplayer/player.swf','ply','470','{{ player_height }}','9','#ffffff');
-    so.addParam('allowfullscreen','true');
-    so.addParam('allowscriptaccess','always');
-    so.addParam('wmode','opaque');
-    so.addVariable('file','{{ media_file }}');
-    so.write('{{ current_object.slug }}_player');
-  </script>
+  <div class='video_player' vheight="{{ player_height }}" vmedia="{{ media_file }}">Player</div>
   <div class="download_link"><a href="{{ media_file }}">{% trans "download file" %}</a></div>
