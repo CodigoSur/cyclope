@@ -39,7 +39,8 @@ def _get_themes(path):
     themes_ = {}
     for name in names:
         filename = os.path.join(path, name, "__init__.py")
-        themes_[name] = imp.load_source(name, filename)
+        if os.path.exists(filename):
+            themes_[name] = imp.load_source(name, filename)
     return themes_
 
 def get_default_themes():
