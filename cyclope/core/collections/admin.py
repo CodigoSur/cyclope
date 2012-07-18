@@ -239,12 +239,7 @@ class CollectionAdminForm(forms.ModelForm, ViewOptionsFormMixin):
         self.model = model
 
         if self.instance.id is not None:
-            collection = self.instance
-            view_name = collection.default_list_view
-            view = site.get_view(Category, view_name)
-            self.fields["view_options"] = MultipleField(form=view.options_form, required=False)
-            initial_options = self.fields["view_options"].initial
-            self.initial["view_options"] = collection.view_options or initial_options
+            self.set_initial_view_options(self.instance)
 
     class Meta:
         model = Collection
