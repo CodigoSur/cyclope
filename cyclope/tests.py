@@ -53,6 +53,9 @@ from cyclope import themes
 from cyclope import templatetags as cyclope_templatetags
 from cyclope.templatetags.cyclope_utils import smart_style
 
+DEFAULT_THEME = "neutronix"
+DEFAULT_THEME_REGION = "ash"
+
 
 def create_static_page(name=None):
     if name is None:
@@ -107,7 +110,7 @@ def add_region_view(model, view_name, content_object=None):
     layout = get_default_layout()
     content_type = ContentType.objects.get(model=model._meta.module_name)
     content_view = view_name
-    region = 'after_fire'
+    region = DEFAULT_THEME_REGION
     region_view = RegionView(layout=layout, content_type=content_type,
                              content_view=content_view, region=region,
                              content_object=content_object)
@@ -217,16 +220,16 @@ class SiteSettingsTestCase(TestCase):
 
     def test_creation(self):
         site_settings = SiteSettings(site=self.site,
-                                theme="neutrona",
+                                theme=DEFAULT_THEME,
                                 allow_comments='YES')
         site_settings.save()
         self.assertEqual(site_settings.site, self.site)
 
     def test_force_not_deletion(self):
         col = Collection.objects.create(name='A collection')
-        layout = Layout.objects.create(name="Test Layout", template='main.html')
+        layout = Layout.objects.create(name="Test Layout", template='five_elements.html')
 
-        site_settings = SiteSettings(site=self.site, theme="neutrona",
+        site_settings = SiteSettings(site=self.site, theme=DEFAULT_THEME,
                                      allow_comments='YES',
                                      default_layout=layout,
                                      newsletter_collection=col)
@@ -256,7 +259,7 @@ class SiteTestCase(TestCase):
         # Simplest site should be created by syncdb
         response = self.client.get("/")
         self.assertTemplateUsed(response,
-                                u'cyclope/themes/neutrona/main.html')
+                                u'cyclope/themes/neutronix/five_elements.html')
 
     def testBugMenuItemWithoutLayout(self):
         # saving a MenuItem without setting a default site Layout failed
@@ -307,10 +310,10 @@ class RegressionTests(TestCase):
         menu_item = MenuItem(menu=menu, name="home",
                                             site_home=True, active=True)
         menu_item.save()
-        layout = Layout(name="default", template='main.html')
+        layout = Layout(name="default", template='five_elements.html')
         layout.save()
         site_settings = SiteSettings.objects.create(site=site,
-                                theme="neutrona",
+                                theme=DEFAULT_THEME,
                                 allow_comments='YES')
         site_settings.default_layout = layout
         site_settings.save()
@@ -326,7 +329,7 @@ class RegionViewTestCase(TestCase):
         layout = get_default_layout()
         content_type = ContentType.objects.get(model='staticpage')
         content_view = 'list'
-        region = 'after_fire'
+        region = DEFAULT_THEME_REGION
         region_view = RegionView(layout=layout, content_type=content_type,
                                  content_view=content_view, region=region)
         region_view.save()
@@ -340,7 +343,7 @@ class RegionViewTestCase(TestCase):
         layout = get_default_layout()
         content_type = ContentType.objects.get(model='staticpage')
         content_view = 'detail'
-        region = 'after_fire'
+        region = DEFAULT_THEME_REGION
         region_view = RegionView(layout=layout, content_type=content_type,
                                  content_view=content_view, region=region)
         region_view.save()
@@ -356,7 +359,7 @@ class RegionViewTestCase(TestCase):
         static_page = create_static_page(
             name='test add layout region view instance view')
         object_id = static_page.id
-        region = 'after_fire'
+        region = DEFAULT_THEME_REGION
         region_view = RegionView(
             layout=layout, content_type=content_type, content_view=content_view,
             object_id=object_id, region=region)
@@ -710,13 +713,13 @@ class ThemesTestCase(TestCase):
     def test_layout_form(self):
         form = LayoutAdminForm()
         choices = [choice[0] for choice in form.fields["template"].choices]
-        self.assertTrue("main.html" in choices)
-        self.assertTrue("inner.html" in choices)
+        self.assertTrue("five_elements.html" in choices)
+        self.assertTrue("four_elements.html" in choices)
 
     def test_default_themes_integration(self):
         form = SiteSettingsAdminForm()
         choices = [choice[0] for choice in form.fields["theme"].choices]
-        self.assertTrue("neutrona" in choices)
+        self.assertTrue(DEFAULT_THEME in choices)
         self.assertTrue("frecuency" in choices)
 
     def test_custom_theme_integration(self):
@@ -726,9 +729,9 @@ class ThemesTestCase(TestCase):
 
     def test_api(self):
         all_themes = themes.get_all_themes()
-        theme = all_themes["neutrona"]
-        self.assertTrue("main.html" in theme.layout_templates)
-        self.assertTrue(theme is themes.get_theme("neutrona"))
+        theme = all_themes[DEFAULT_THEME]
+        self.assertTrue("five_elements.html" in theme.layout_templates)
+        self.assertTrue(theme is themes.get_theme(DEFAULT_THEME))
 
 
 class MarkupTestCase(TestCase):
