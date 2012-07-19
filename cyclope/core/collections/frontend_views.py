@@ -409,7 +409,7 @@ class CategoryListAsForum(frontend.FrontendView):
             if obj.comments_count:
                 last_comment = qs.latest('submit_date')
                 obj.last_comment_date = last_comment.submit_date
-                obj.last_comment_author = obj.author
+                obj.last_comment_author = last_comment.user_name
 
         req_context.update({'categorizations': page.object_list,
                             'page': page,
