@@ -133,23 +133,27 @@
      * In addition, its constructor should take a single argument; it'll be passed a hash
      * of options used to initialize the plugin.
      */
+    var cache = {}, keys = [];
     $.fn.chainedSelect.Cache = function(opts) {
-        var cache = {},
-            keys = [];
-
         return {
             getItem: function(key) {
+                key = this.replace(key);
                 if (key in cache) return cache[key];
                 else return null;
             },
             setItem: function(key, value) {
                 if (value) {
+                    key = this.replace(key);
                     cache[key] = value;
                     var length = keys.push(key);
                     if (length > opts.cacheLength) {
                         delete cache[keys.shift()];
                     }
                 }
+            },
+            replace: function(key){
+                // This way region view ajax calls are cached
+                return key.replace(/id_regionview_set-\d-/, "");
             },
             clear: function() {
                 cache = {};
