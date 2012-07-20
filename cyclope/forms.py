@@ -74,15 +74,15 @@ class ViewOptionsFormMixin(object):
     field_names = []
     model = None
 
-    def set_initial_view_options(self, content_object):
-        view_name = getattr(content_object, self.view_field_name)
-        view = site.get_view(content_object, view_name)
+    def set_initial_view_options(self, obj, model):
+        view_name = getattr(obj, self.view_field_name)
+        view = site.get_view(model, view_name)
 
         self.fields[self.options_field_name] = MultipleField(form=view.options_form,
                                                              required=False)
 
         initial_options = self.fields[self.options_field_name].initial
-        actual_options = getattr(content_object, self.options_field_name)
+        actual_options = getattr(obj, self.options_field_name)
         self.initial[self.options_field_name] = actual_options or initial_options
 
     def get_view(self, values):
@@ -134,7 +134,8 @@ class MenuItemAdminForm(forms.ModelForm, ViewOptionsFormMixin):
             self.fields['content_view'].choices = [(selected_view,
                                                     selected_view)]
             if menu_item.content_type:
-                self.set_initial_view_options(menu_item)
+                model = menu_item.content_type.model_class()
+                self.set_initial_view_options(menu_item, model)
 
             if menu_item.content_object:
                 content_object = menu_item.content_object
@@ -249,7 +250,8 @@ class RegionViewInlineForm(forms.ModelForm, ViewOptionsFormMixin):
                 self.fields['content_view'].choices = [(selected_view,
                                                         selected_view)]
             if region_view.content_type:
-                self.set_initial_view_options(region_view)
+		model = region_view.content_type.model_class()
+                self.set_initial_view_options(region_view, model)
 
             if region_view.content_object:
                 content_object = region_view.content_object

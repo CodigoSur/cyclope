@@ -239,7 +239,7 @@ class CollectionAdminForm(forms.ModelForm, ViewOptionsFormMixin):
         self.model = model
 
         if self.instance.id is not None:
-            self.set_initial_view_options(self.instance)
+            self.set_initial_view_options(self.instance, self.instance)
 
     class Meta:
         model = Collection
