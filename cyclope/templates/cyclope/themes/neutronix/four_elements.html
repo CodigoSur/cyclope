@@ -1,8 +1,8 @@
 {% extends CYCLOPE_THEME_BASE_TEMPLATE %}
 
 {% load layout%}
-
-{% block body_class %}inner{% endblock %}
+{% block title %}{%if title %}{{title}} | {%endif%}{{ CYCLOPE_SITE_SETTINGS.global_title }}{%endblock%}
+{% block body_class %}four_elements{% endblock %}
 
 {% block page_content %}
 <div class="grid_19">
