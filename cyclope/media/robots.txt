@@ -1,0 +1,9 @@
+User-Agent: *
+Disallow:
+Disallow: /admin/
+Disallow: /captcha/
+#
+# this technically isn't valid, since for some f*** reason
+# sitemap paths must be ABSOLUTE and not relative.
+#
+Sitemap: /sitemap.xml

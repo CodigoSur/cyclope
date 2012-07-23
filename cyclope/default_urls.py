@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Asoc. Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -22,9 +22,7 @@
 # urls should be set at project level using cyclope.site.autodiscover()
 # to populate cyclope.site.urls
 
-# see cyclope_demo for an example
-
-#!/usr/bin/env python
+# see cyclope/demo for an example
 
 from django.conf.urls.defaults import *
 from django.conf import settings as django_settings
@@ -32,7 +30,6 @@ from django.utils.translation import ugettext as _
 from django.contrib import admin
 from registration.views import register
 from haystack.views import SearchView, search_view_factory
-import forms_builder.forms.urls
 from cyclope.forms import UserProfileForm
 from cyclope.core.captcha_contact_form.forms import  \
                                        AdminSettingsContactFormWithCaptcha
@@ -41,47 +38,58 @@ from cyclope.feeds import CategoryFeed, WholeSiteFeed, ContentTypeFeed
 from cyclope.sitemaps import CategorySitemap, CollectionSitemap, MenuSitemap
 
 urlpatterns = patterns('',
-    (r'^admin/filebrowser/', include('filebrowser.urls')),
-    (r'^admin/', include(admin.site.urls)),
-    url(r'^admin_tools/', include('admin_tools.urls')),
-    (r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
+        {'sitemaps': {"menus": MenuSitemap, "categories": CategorySitemap,
+                      "collections": CollectionSitemap}}),
+    url(r'^robots\.txt$', 'django.views.generic.simple.direct_to_template',
+        {'template': 'cyclope/robots.txt', 'mimetype': 'text/plain'}),
 
-    (r'^comments/', include('django.contrib.comments.urls')),
-    (r'^captcha/', include('captcha.urls')),
-    (r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
-    url(r'^accounts/register/$', 'registration.views.register',
-        {'backend': 'cyclope.registration_backends.CaptchaBackend'},
-        name='registration_register'),
-    (r'^accounts/', include('registration.backends.default.urls')),
-    (r'^profiles/create/$', 'profiles.views.create_profile',
-     {'form_class': UserProfileForm}),
-    (r'^profiles/edit/$', 'profiles.views.edit_profile',
-     {'form_class': UserProfileForm}),
+    ## cyclope apps
+    url(r'^locations/', include('cyclope.apps.locations.urls')),
+    url(r'^newsletter/', include('cyclope.apps.newsletter.urls')),
     url(r'^abuse/report/(?P<ct_id>\d+)/(?P<obj_id>\d+)/',
         'cyclope.apps.abuse.views.abuse_report',
         name="abuse-report"),
-    (r'^profiles/', include('profiles.urls')),
-    url(r'^contact/$', 'contact_form.views.contact_form',
-        {'form_class': AdminSettingsContactFormWithCaptcha},
-        name='contact_form'),
-    (r'^contact/', include('contact_form.urls')),
+    url(r'^rss/category/(?P<slug>[\w-]+)/$', CategoryFeed(), name='category_feed'),
+    url(r'^rss/$', WholeSiteFeed(), name='whole_site_feed'),
+    url(r'^rss/(?P<object_name>[\w-]+)/$', ContentTypeFeed(), name='content_type_feed'),
     url(r'^search/', search_view_factory(
         view_class=SearchView,
         results_per_page=cyc_settings.CYCLOPE_PAGINATION['TEASER']),
         name='haystack_search'),
-    url(r'^rss/category/(?P<slug>[\w-]+)/$', CategoryFeed(),
-        name='category_feed'),
-    url(r'^rss/$', WholeSiteFeed(),
-        name='whole_site_feed'),
-    url(r'^rss/(?P<object_name>[\w-]+)/$', ContentTypeFeed(),
-        name='content_type_feed'),
-    (r'^newsletter/', include('cyclope.apps.newsletter.urls')),
+
+    ## admin & django contrib
+    url(r'^admin/filebrowser/', include('filebrowser.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin_tools/', include('admin_tools.urls')),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^comments/', include('django.contrib.comments.urls')),
+
+    ## 3rd party
+    # captcha (django-simple-captcha)
+    url(r'^captcha/', include('captcha.urls')),
+    # django-tagging-autocomplete
+    url(r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
+    # accounts (django-registration)
+    url(r'^accounts/register/$', 'registration.views.register',
+        {'backend': 'cyclope.registration_backends.CaptchaBackend'},
+        name='registration_register'),
+    url(r'^accounts/', include('registration.backends.default.urls')),
+    # profiles (django-profiles)
+    url(r'^profiles/create/$', 'profiles.views.create_profile',
+        {'form_class': UserProfileForm}),
+    url(r'^profiles/edit/$', 'profiles.views.edit_profile',
+        {'form_class': UserProfileForm}),
+    (r'^profiles/', include('profiles.urls')),
+    # contact (django-contact-form)
+    url(r'^contact/$', 'contact_form.views.contact_form',
+        {'form_class': AdminSettingsContactFormWithCaptcha},
+        name='contact_form'),
+    url(r'^contact/', include('contact_form.urls')),
+    # markitup
     url(r'^markitup/', include('markitup.urls')),
-    (r'^locations/', include('cyclope.apps.locations.urls')),
-    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
-     {'sitemaps': {"menus": MenuSitemap, "categories": CategorySitemap,
-                   "collections": CollectionSitemap }}),
-    url(r'^forms/', include(forms_builder.forms.urls)),
+    # custom-forms (django-forms-builder)
+    url(r'^forms/', include("forms_builder.forms.urls")),
 )
 
 if django_settings.DEBUG:
