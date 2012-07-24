@@ -1,82 +1,63 @@
-$(document).ready(function(){
+(function() {
+    var hide_children = function (el){
+        $(el).children('ul').stop(true, true).slideUp();
+    }
 
-    $(".cyclope_menu").each(function(){
-        var clickeable_items_collection = $(this).find('li').find('span.has_children a')
-        if($(this).hasClass('on_click')){
-        // todo Fede: Here we can add a script for sub-sub menus
-            var item = null;
-            clickeable_items_collection.toggle(
-                function(ev){
-                    ev.preventDefault();
-                    item = $(this).parent().parent().children('ul');
-                    item.slideDown();
-                },
-                function(ev){
-                    ev.preventDefault();
-                    item.slideUp();
-                }
-            );
-        }else if($(this).hasClass('horizontal')){
-            //Todo FEDE: Agregar una clase a los items que tienen submenues
-            //para poder agregar flechas en el css :)
-            //Acomodamos los sub-sub-menues en el dom, antes del span
-            $(this).find('ul').find('ul').each(function(){
-                //Lo alineamos a la izquierda
-                var left = $(this).parent().width();
-                $(this).css('left', left+'px');
-                //Clonamos, lo insertamos al principio del li
-                //y lo eliminamos
-                var menu = $(this).clone();
-                menu.prependTo($(this).parent());
-                $(this).remove();
-            });
+    var show_children = function (el){
+        $(el).children('ul').stop(true, true).slideDown();
+    }
 
-            $(this).parent().find('ul').first()
-            .children('li').each(function(){
-                //Primero nos fijamos si tiene submenues
-                if($(this).find('ul').length>0){
-                    var parent_element = $(this).find('ul').first();
-                    $(this).hover(
-                        function(){
-                            //Mostramos solo su primer submenues
-                            parent_element.
-                            stop(true,true).show(
-                                'slide',
-                                {direction: 'up'},
-                                500
-                            );
-                        },
-                        function(){
-                            //Escondemos solo su primer submenues
-                            parent_element.
-                            hide();
-                        }
-                    );
-                    //Ahora nos fijamos si este submenu, tiene
-                    //submenues
-                    if(parent_element.find('ul').length>0){
-                        //Tiene submenues, iteramos
-                        //sobre sus hijos y confirmamos
-                        //Cuales son aquellos que si tienen sub-sub-menues
-                        parent_element.children('li').each(function(){
-                            if($(this).find('ul').length>0){
-                                //Tiene sub-sub-menues
-                                var child_element = $(this).find('ul').first();
-                                $(this).hover(
-                                    function(){
-                                        child_element.show('slide');
-                                    },
-                                    function(){
-                                        child_element.hide();
-                                    }
-                                );
-                            }
-                        });
+    var hide_all_expanded = function(){
+        $(".cyclope_menu .expanded").each( function(){
+            hide_children($(this));
+            $(this).removeClass("expanded");
+        })
+    }
+
+    $(document).ready(function(){
+        // Hide children of collapsible menus not DISABLED
+        $('.cyclope_menu:not(.disabled) .has_children').each(
+            function(){$(this).next('ul').css('display', 'none');
+        });
+
+
+        $('html').click(function() {
+            hide_all_expanded();
+        });
+
+        // select all menues that are not DISABLED
+        $(".cyclope_menu:not(.disabled)").each(function(){
+            if($(this).hasClass('on_click')){ // ON_CLICK
+                $(this).find(".has_children").parent().click(function(event) {
+                    event.stopPropagation();
+                    if (!$(this).hasClass("expanded")){
+                        hide_all_expanded();
+                        show_children($(this));
+                        $(this).addClass("expanded");
+                        return false; // stop propagation to children
                     }
+                });
+            }else{
+                // Expand children on mouse enter
+                $(this).find("li").mouseenter(function() {
+                    $(this).addClass("expanded");
+                    show_children($(this));
+                });
+
+                // Collapse when leaving a menu item if the alignment is HORIZONTAL
+                if ($(this).hasClass('horizontal')){
+                    $(this).find("li").mouseleave(function() {
+                        $(this).removeClass("expanded");
+                        hide_children($(this));
+                    });
                 }
-            });
-        }
-        //Por último, escondemos los menues
-        $(this).find('ul').hide();
+                // Collapse when leaving the whole menu if the alignment is VERTICAL
+                else{
+                    $(this).mouseleave(function(){
+                        hide_children($(this).find('.has_children').parent());
+                    });
+                }
+            }
+        });
     });
-});
+})();
