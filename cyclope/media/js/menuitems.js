@@ -54,6 +54,7 @@
                 // Collapse when leaving the whole menu if the alignment is VERTICAL
                 else{
                     $(this).mouseleave(function(){
+                        $(this).find("li").removeClass("expanded");
                         hide_children($(this).find('.has_children').parent());
                     });
                 }
