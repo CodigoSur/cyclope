@@ -35,8 +35,12 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'sqlite3'
-DATABASE_NAME = os.path.join(CYCLOPE_PROJECT_PATH, 'db/site.db')
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(CYCLOPE_PROJECT_PATH, 'db/site.db'),
+    }
+}
 
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
 

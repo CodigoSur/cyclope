@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -48,15 +48,15 @@ setup(
     # that are downloaded from source to ensure a tested revision is used.
     dependency_links=[
         'hg+http://bitbucket.org/drmeers/django-dbgettext#egg=django-dbgettext-0.1',
-        'git+http://github.com/nicoechaniz/django-filebrowser-no-grappelli-and-uploadify.git#egg=django-filebrowser-3.0-nograpup',
+        'git+http://github.com/nicoechaniz/django-filebrowser-no-grappelli-and-uploadify.git@d5098f607b75146e1d3c31ceff96f094e61cd27b#egg=django-filebrowser-3.0-nograpup',
         'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-0.4a1',
         'hg+http://bitbucket.org/nicoechaniz/django-rosetta_temp#egg=django-rosetta-0.6.2-temp',
         'hg+http://bitbucket.org/san/django-jsonfield#egg=django-jsonfield-0.6.0-cyclope',
     ],
 
     install_requires=[
-        'Django>=1.3.1,<1.4',
-        'FeinCms==1.3.0',
+        'Django>=1.4,<1.5',
+        'FeinCms==1.3.1',
         'django-autoslug==1.4.1',
         'django-mptt==0.4.2', # 0.4 breaks compatibility
         'PIL>=1.1.7', # in PIL we trust
@@ -70,7 +70,7 @@ setup(
         'django-admin-tools==0.4.0',
         'django-contact-form>=0.4a1', # installed from our clone
         'Whoosh>=1.8.3',
-        'django-haystack>=1.2.3',
+        'django-haystack>=1.2.7',
         'textile==2.1.4',
         'django-dbgettext>=0.1',
         'django-rosetta==0.6.2-temp', # installed from our clone

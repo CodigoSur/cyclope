@@ -1,9 +1,5 @@
 {% extends host_template %}
 
-{% comment%}
-TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
-{% endcomment%}
-
 {% load comments i18n fb_versions cyclope_utils markup %}
 
 {% block content %}
@@ -20,16 +16,17 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
 
   <form action="" method="POST"> <!-- class="user_input"> -->
     {% for form in forms %}
+    {% csrf_token %}
       <p>{{ form.question }}</p>
         {% for field in form.form %}
-	  {{ field.errors }}
+        {{ field.errors }}
           {{ field }}
-	{% endfor %}
+        {% endfor %}
     {% endfor %}
     {{ captcha_form.as_p }}
       <input type="submit" class="submit" value="{% trans "Send" %}" />
   </form>
 
-</div> <!--termina poll_detail -->
+</div>
 
 {% endblock content%}

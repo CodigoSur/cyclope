@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Asociación Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -250,7 +250,7 @@ class RegionViewInlineForm(forms.ModelForm, ViewOptionsFormMixin):
                 self.fields['content_view'].choices = [(selected_view,
                                                         selected_view)]
             if region_view.content_type:
-		model = region_view.content_type.model_class()
+                model = region_view.content_type.model_class()
                 self.set_initial_view_options(region_view, model)
 
             if region_view.content_object:

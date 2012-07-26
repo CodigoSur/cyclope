@@ -1,9 +1,5 @@
 {% extends host_template %}
 
-{% comment%}
-TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
-{% endcomment%}
-
 {% load comments i18n cyclope_utils %}
 
 {% block content %}
@@ -36,13 +32,11 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   </div>
   {% endfor %}
 
-
   <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
   {% include 'cyclope/related_contents_block.html' %}
 
   <div class="clear"></div>
-
 
 <!--COMENTARIOS -->
   {% include 'comments/comments_block.html' %}

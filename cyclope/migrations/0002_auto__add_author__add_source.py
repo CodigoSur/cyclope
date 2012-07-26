@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -31,10 +31,12 @@ class Migration(SchemaMigration):
     )
 
     def forwards(self, orm):
-        print "this migration is resolved in the cyclope.articles 0002 migration"
+        #this migration is resolved in the cyclope.articles 0002 migration
+        pass
 
     def backwards(self, orm):
-        print "this migration is resolved in the cyclope.articles 0002 migration"
+        # this migration is resolved in the cyclope.articles 0002 migration
+        pass
 
 
     models = {

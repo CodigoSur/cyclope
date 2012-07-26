@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -658,7 +658,6 @@ class DynamicFormTestCase(ViewableTestCase):
         url = '/'+ get_instance_url(self.test_object, view.name)
         response = self.client.post(url, data={})
         self.assertEqual(response.status_code, 200)
-        self.assertTrue("This field is required" in response.content)
 
 
 class MultipleFieldTestCase(TestCase):
@@ -890,3 +889,28 @@ class FrontendEditTestCase(TestCase):
         response = self.client.get('/category/category/')
         self.assertNotContains(response, 'class="category_add_content"')
 
+class SimpleAdminTests(TestCase):
+    """
+    This is a realy simple test to catch errors on GET of some pages of the
+    admin.
+    """
+    fixtures = ['cyclope_demo.json']
+
+    pages = [
+        "/admin/cyclope/menuitem/", "/admin/cyclope/menuitem/1/",
+        "/admin/cyclope/menu/", "/admin/cyclope/menu/1/",
+        "/admin/cyclope/layout/", "/admin/cyclope/layout/1/",
+        "/admin/collections/collection/", "/admin/collections/collection/1/",
+        "/admin/collections/category/", "/admin/collections/category/1/",
+        "/admin/articles/article/", "/admin/articles/article/4/",
+        "/admin/cyclope/sitesettings/1/",
+    ]
+
+    def test_get_some_pages(self):
+        admin = User(username='admin', is_staff=True, is_superuser=True)
+        admin.set_password('password')
+        admin.save()
+        self.client.login(username='admin', password="password")
+        for page in self.pages:
+            status = self.client.get(page).status_code
+            self.assertEqual(status, 200, "status: %d | page: %s" % (status, page))
