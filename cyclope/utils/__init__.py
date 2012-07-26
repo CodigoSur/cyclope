@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -252,3 +252,30 @@ def get_singleton(model_class):
         e.args = (e.args[0] +" At least one instance of this class must exists.", )
         raise e
 
+
+class PermanentFilterMixin(object):
+    """
+    Mixin class that adds a default filter to a changelist that also is permanent
+    (saved in the session).
+
+    You must define permanent_filters in the subclass, something like this:
+
+    permanent_filters = (
+        (u"model__id__exact", # this is the key of the filter
+         lambda request: unicode(Model.objects.all()[0].id)), # default param as lambda
+    )
+
+    And then use the method do_permanent_filters in the change_list
+    """
+    permanent_filters = None
+
+    def do_permanent_filters(self, request):
+        for filter_key, default_filter_param in self.permanent_filters:
+            session_key = "%s|%s" % (request.path, filter_key)
+            if not request.GET.get(filter_key):
+                param = request.session.get(session_key) or default_filter_param(request)
+                if param:
+                    GET = request.GET.copy()
+                    GET[filter_key] = param
+                    request.GET = GET
+            request.session[session_key] = request.GET.get(filter_key)

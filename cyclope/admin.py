@@ -49,7 +49,7 @@ from cyclope.widgets import get_default_text_widget
 from cyclope.core.collections.admin import CollectibleAdmin
 from cyclope.core.collections.models import Category
 import cyclope.settings as cyc_settings
-
+from cyclope.utils import PermanentFilterMixin
 
 # Set default widget for all admin textareas
 default_admin_textfield = FORMFIELD_FOR_DBFIELD_DEFAULTS[models.TextField]
@@ -115,7 +115,7 @@ class BaseContentAdmin(admin.ModelAdmin):
         
 from django.utils.functional import update_wrapper
 
-class MenuItemAdmin(editor.TreeEditor):
+class MenuItemAdmin(editor.TreeEditor, PermanentFilterMixin):
     form = MenuItemAdminForm
     fieldsets = ((None,
                   {'fields': ('menu', 'parent', 'name', 'site_home', 'active')}),
@@ -134,19 +134,13 @@ class MenuItemAdmin(editor.TreeEditor):
                 )
     list_filter = ('menu',)
 
+    permanent_filters = (
+        (u"menu__id__exact",
+         lambda request: unicode(Menu.objects.all()[0].id)),
+    )
 
     def changelist_view(self, request, extra_context=None):
-        # menuitems changelist should only show items from one menu.
-        # so we activate the filter to display main menu items when no filters
-        # have been selected by the user
-        if Menu.objects.count():
-            main_menu =  Menu.objects.get(main_menu=True)
-            if main_menu:
-                menu_id = main_menu.id
-            else:
-                menu_id = Menu.objects.all()[0].id
-            if not request.GET:
-                request.GET = {u'menu__id__exact': unicode(menu_id)}
+        self.do_permanent_filters(request)
         return super(MenuItemAdmin, self).changelist_view(request, extra_context)
 
 admin.site.register(MenuItem, MenuItemAdmin)

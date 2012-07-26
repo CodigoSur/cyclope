@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -24,12 +24,12 @@ core.collections.admin
 ----------------------
 """
 import django
-from django.contrib import admin
-from django.utils.translation import ugettext_lazy as _
 from django import forms
+from django.db import models
+from django.contrib import admin
 from django.db.models import get_model
 from django.contrib.contenttypes import generic
-from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from markitup.widgets import AdminMarkItUpWidget
 from mptt.forms import TreeNodeChoiceField
@@ -46,6 +46,7 @@ from cyclope.fields import MultipleField
 from cyclope import settings as cyc_settings
 from cyclope.core.perms.admin import CategoryPermissionInline
 from cyclope.forms import ViewOptionsFormMixin
+from cyclope.utils import PermanentFilterMixin
 
 ####
 # custom FilterSpec
@@ -124,7 +125,7 @@ class CategoryForm(forms.ModelForm):
         model = Category
 
 
-class CategoryAdmin(editor.TreeEditor):
+class CategoryAdmin(editor.TreeEditor, PermanentFilterMixin):
     form = CategoryForm
     list_filter = ['collection']
     fieldsets = (
@@ -137,16 +138,14 @@ class CategoryAdmin(editor.TreeEditor):
         }),
     )
     inlines = (CategoryPermissionInline,)
+    permanent_filters = (
+        (u"collection__id__exact",
+         lambda request: unicode(Collection.objects.all()[0].id)),
+    )
 
     def changelist_view(self, request, extra_context=None):
-        # category changelist should only show items from one collection.
-        # so we activate the filter to display categories from one collection
-        # when no filters have been selected by the user
-        a_collection = Collection.objects.all()[0].id
-        if not request.GET:
-            request.GET = {u'collection__id__exact': unicode(a_collection)}
+        self.do_permanent_filters(request)
         return super(CategoryAdmin, self).changelist_view(request, extra_context)
-
 
     class Media:
         js = (
