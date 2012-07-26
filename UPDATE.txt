@@ -3,6 +3,9 @@
 Backwards-incompatible changes in 0.2.0
 =======================================
 
+* Updated to Django 1.4 and some dependencies
+  * settings.DATABASE must be updated to settings.DATABASES
+
 * Update Whoosh to 1.8.3. You should rebuild it's index.
 
 * CYCLOPE_MEDIA_URL and CYCLOPE_MEDIA_ROOT were renamed to CYCLOPE_STATIC_URL and CYCLOPE_STATIC_ROOT.
