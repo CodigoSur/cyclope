@@ -49,7 +49,8 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
     form = ArticleForm
     list_filter = CollectibleAdmin.list_filter + \
                   ('creation_date', 'author', 'source')
-    list_display = ('name', 'is_orphan', 'translations')
+    list_display = ('name', 'translations', 'creation_date') + \
+                   CollectibleAdmin.list_display
     search_fields = ('name', 'pretitle', 'summary', 'text', )
     inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines
 

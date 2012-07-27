@@ -166,12 +166,13 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 admin.site.register(SiteSettings, SiteSettingsAdmin)
 
 class ImageAdmin(admin.ModelAdmin):
-	list_display = ['thumbnail']
+    list_display = ['thumbnail']
 
 admin.site.register(Image, ImageAdmin)
 
 class AuthorAdmin(admin.ModelAdmin):
     form = AuthorAdminForm
+    list_display = ('name', 'thumbnail')
     search_fields = ('name', 'origin', 'notes')
 
 admin.site.register(Author, AuthorAdmin)

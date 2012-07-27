@@ -415,6 +415,12 @@ class Author(models.Model):
         ContentType, db_index=True, verbose_name=_('content types'),
         help_text=_('Select the content types this author is related to.'),)
 
+    def thumbnail(self):
+        return '<img src="%s"/>' % self.image.url_thumbnail
+
+    thumbnail.short_description = _('Thumbnail Image')
+    thumbnail.allow_tags = True
+
     def __unicode__(self):
         return self.name
 

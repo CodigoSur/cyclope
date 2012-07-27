@@ -67,6 +67,12 @@ class Collection(models.Model):
     def get_absolute_url(self):
         return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
 
+    def thumbnail(self):
+        return '<img src="%s"/>' % self.image.url_thumbnail
+
+    thumbnail.short_description = _('Thumbnail Image')
+    thumbnail.allow_tags = True
+
     def __unicode__(self):
         return self.name
 
@@ -109,6 +115,12 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
+
+    def thumbnail(self):
+        return '<img src="%s"/>' % self.image.url_thumbnail
+
+    thumbnail.short_description = _('Thumbnail Image')
+    thumbnail.allow_tags = True
 
     def valid_parents(self):
         return Category.tree.filter(pk__isnot=self.pk)

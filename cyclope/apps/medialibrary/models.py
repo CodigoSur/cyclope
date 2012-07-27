@@ -52,6 +52,7 @@ class Picture(BaseMedia):
 
     def admin_thumbnail(self):
         return u'<img src="%s"/>' % self.image.url_thumbnail
+
     admin_thumbnail.allow_tags = True
     admin_thumbnail.short_description = _('Image')
 

@@ -28,6 +28,7 @@ from django import forms
 from django.db import models
 from django.contrib import admin
 from django.db.models import get_model
+from django.core.urlresolvers import reverse
 from django.contrib.contenttypes import generic
 from django.utils.translation import ugettext_lazy as _
 
@@ -127,6 +128,7 @@ class CategoryForm(forms.ModelForm):
 
 class CategoryAdmin(editor.TreeEditor, PermanentFilterMixin):
     form = CategoryForm
+    list_display = ("name", "thumbnail")
     list_filter = ['collection']
     fieldsets = (
         (None, {
@@ -203,9 +205,23 @@ class CategorizationInline(generic.GenericStackedInline):
 class CollectibleAdmin(admin.ModelAdmin):
     """Base admin class for models that inherit from Collectible.
     """
+    list_display = ("categories_on", )
     list_filter = ('categories',)
     inlines = [ CategorizationInline, ]
     valid_lookups = ('categories',)
+
+    def categories_on(self, obj):
+        category_list = [categzt.category for categzt in obj.categories.all()]
+        template = ""
+        for category in category_list:
+            if template:
+                template += ", "
+            url = reverse("admin:collections_category_change", args=(category.pk,))
+            template += '<a href="%s">%s</a>' % (url, category)
+        return template
+
+    categories_on.allow_tags = True
+    categories_on.short_description = "Categories"
 
     def lookup_allowed(self, lookup, value=None):
         if lookup.startswith(self.valid_lookups):
@@ -248,5 +264,7 @@ class CollectionAdmin (admin.ModelAdmin):
     """Base admin class for models that inherit from Collectible.
     """
     form = CollectionAdminForm
+    list_display = ["name", "thumbnail", "visible", "default_list_view"]
+    list_editable = ("visible", )
 
 admin.site.register(Collection, CollectionAdmin)
