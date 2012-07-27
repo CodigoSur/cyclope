@@ -61,6 +61,7 @@ class StaticPageAdminForm(forms.ModelForm):
 class StaticPageAdmin(CollectibleAdmin, BaseContentAdmin):
     # updates related menu_items information when a StaticPaget is saved
     form = StaticPageAdminForm
+    list_display = ('__unicode__', ) + CollectibleAdmin.list_display
     search_fields = ('name', 'text', )
     fieldsets = ((None,
                   {'fields': ('name', 'text',)}),
@@ -103,6 +104,6 @@ class HTMLBlockAdminForm(forms.ModelForm):
 class HTMLBlockAdmin(admin.ModelAdmin):
     form = HTMLBlockAdminForm
     search_fields = ('name', 'text', )
-    
+
 admin.site.register(HTMLBlock, HTMLBlockAdmin)
 
