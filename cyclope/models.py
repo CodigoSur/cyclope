@@ -143,7 +143,7 @@ class MenuItem(models.Model):
                               related_name=_('children'),
                               null=True, blank=True)
     slug = AutoSlugField(populate_from='name', unique_with=('parent'),
-                         always_update=True)
+                         always_update=False, editable=True, blank=True)
     site_home = models.BooleanField(_('site home'), default=False)
     custom_url = models.CharField(_('custom URL'), max_length=200,
                                   blank=True, default='')
@@ -308,8 +308,8 @@ class BaseContent(models.Model):
     """
     name = models.CharField(_('name'), max_length=250,
                              db_index=True, blank=False)
-    slug = AutoSlugField(populate_from='name', unique=True,
-                         db_index=True, always_update=True)
+    slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
+                         always_update=False, editable=True, blank=True)
     tags = TagAutocompleteField(_('tags'))
     published =  models.BooleanField(_('published'), default=True)
     related_contents = generic.GenericRelation(RelatedContent,
@@ -403,8 +403,8 @@ class Author(models.Model):
     """
     name = models.CharField(_('name'), max_length=250,
                              db_index=True, blank=False)
-    slug = AutoSlugField(populate_from='name', unique=True,
-                         db_index=True, always_update=True)
+    slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
+                         always_update=False, editable=True, blank=True)
     image = FileBrowseField(_('image'), max_length=100, format='Image',
                             directory='author_images/',
                             blank=True, default='')

@@ -134,7 +134,7 @@ class CategoryAdmin(editor.TreeEditor, PermanentFilterMixin):
         }),
         (_('Extra info'),{
             'classes': ('collapse',),
-            'fields': ('active', 'description', 'image',),
+            'fields': ('slug', 'active', 'description', 'image',),
         }),
     )
     inlines = (CategoryPermissionInline,)

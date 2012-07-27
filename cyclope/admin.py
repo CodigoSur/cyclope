@@ -118,7 +118,7 @@ from django.utils.functional import update_wrapper
 class MenuItemAdmin(editor.TreeEditor, PermanentFilterMixin):
     form = MenuItemAdminForm
     fieldsets = ((None,
-                  {'fields': ('menu', 'parent', 'name', 'site_home', 'active')}),
+                  {'fields': ('menu', 'parent', 'name', 'slug', 'site_home', 'active')}),
                  (_('content details'),
                   {'fields':('custom_url', 'content_type', 'content_view',
                              'view_options', 'object_id'),

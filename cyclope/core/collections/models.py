@@ -46,7 +46,8 @@ class Collection(models.Model):
     """
 
     name = models.CharField(_('name'), max_length=100, unique=True)
-    slug = AutoSlugField(populate_from='name', always_update=True)
+    slug = AutoSlugField(populate_from='name', always_update=False,
+                         editable=True, blank=True)
     # collections that aren't visible can be used to customize content behaviour
     visible = models.BooleanField(_('visible'),
                                              default=True)
@@ -92,8 +93,8 @@ class Category(models.Model):
     collection = models.ForeignKey(Collection,
         verbose_name=_('collection'), related_name='categories')
     name = models.CharField(_('name'), max_length=100)
-    slug = AutoSlugField(populate_from='name', unique=True,
-                         db_index=True, always_update=True)
+    slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
+                         always_update=False, editable=True, blank=True)
 #    slug = AutoSlugField(populate_from='name', always_update=True)
 #                         unique_with=('parent', 'collection'))
     parent = models.ForeignKey('self', verbose_name=_('parent'),

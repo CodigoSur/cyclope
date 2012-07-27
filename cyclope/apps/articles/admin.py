@@ -58,7 +58,7 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
                  (_('Publication data'),
                   {
                     'classes': ('collapse',),
-                    'fields':( 'published', 'source', 'pretitle',
+                    'fields':('slug', 'published', 'source', 'pretitle',
                               'summary', 'date', 'allow_comments', 'creation_date')}),
                 )
 
