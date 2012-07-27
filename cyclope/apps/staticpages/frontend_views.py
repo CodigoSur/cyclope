@@ -73,6 +73,7 @@ class HTMLBlockDetail(frontend.FrontendView):
     verbose_name = _('display the selected HTML Block')
     is_default = True
     is_region_view = True
+    is_content_view = True
 
     def get_response(self, request, req_context, options, content_object):
         return views.object_detail(request, req_context, content_object)

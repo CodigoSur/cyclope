@@ -252,6 +252,7 @@ class CollectionRootCategoriesTeaserList(frontend.FrontendView):
     verbose_name=_('teaser list of the root Categories of a Collection')
     is_default = True
     is_content_view = True
+    is_region_view = True
     template = "collections/collection_root_categories_teaser_list.html"
 
     def get_response(self, request, req_context, options, content_object):
