@@ -2,23 +2,21 @@
 
   <div class="content-view externalcontent teaser externalcontent-teaser">
 
-    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/external.png" /><a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>{{ externalcontent.name|truncatechars:40 }}</a></h2>
+    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/external.png" alt="{% trans "External Content" %}" /><a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>{{ externalcontent.name|truncatechars:40 }}</a></h2>
 
     {% if externalcontent.image %}
       <div class="teaser_icon_container media-content"><a href="{% if externalcontent.skip_detail %}{{ externalcontent.content_url }}{% else %} {% url externalcontent-detail externalcontent.slug %}{% endif%}" {% if externalcontent.new_window %}target="_blank"{% endif%}>
-        <img class="teaser_icon" src="{% version externalcontent.image.path 'small' %}" border="0"/>
+        <img class="teaser_icon" src="{% version externalcontent.image.path 'small' %}" alt="{% trans "External Content" %}" border="0"/>
       </a></div>
     {% endif %}
 
     {% if externalcontent.description %}
-    <h3 class="html-content summary">
+    <div class="html-content summary">
       {{ externalcontent.description|smart_style }}
     {% if not externalcontent.skip_detail %}
-      <span class="more"><a href="{% url externalcontent-detail externalcontent.slug %}"></span>
-      {% trans "More"%}
-      </a>
+      <span class="more"><a href="{% url externalcontent-detail externalcontent.slug %}">{% trans "More"%}</a></span>
     {% endif %}
-    </h3>
+    </div>
     {% endif %}
 
     {% if externalcontent.image %}

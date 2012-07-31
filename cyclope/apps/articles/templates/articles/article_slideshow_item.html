@@ -1,6 +1,6 @@
 {% load i18n fb_versions cyclope_utils dbgettext_tags %}
 
-  <div class="article">
+  <div class="article content-view">
 
     {% if view_options.show_title %}
     <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:70 }}</a></h2>
@@ -24,11 +24,11 @@
     {% endif %}
 
     {% if view_options.show_description %}
-      <h3 class="html-content summary">
+      <div class="html-content summary">
       {% if article.summary %}
-      <p>{{ article|parsed_gettext:"summary"|smart_style }}</p>
+      {{ article|parsed_gettext:"summary"|smart_style }}
       {% else %}
-      <p>{{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}</p>
+      {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
       {% endif %}
-      </h3>
+      </div>
     {% endif %}
