@@ -1,10 +1,8 @@
 /*
-# Cyclope 3 Workflow Design
-# Theme: Neutrona 
-# Layout: 5 Elements
-# 960 Grid System Based www.960.gs
-# Official Trac Cyclope 3 GPL: http://codigo.cyclope.ws
-# Copyright 2010-2012 Codigo Sur - Sociedad Civil
+# Cyclope 3 GPL
+# Neutronix Workflow Design
+# Layouts: 4 & 5 Elements
+# Copyright 2010-2012 CodigoSur - SociedadCivil
 # All rights reserved.
 # This file is part of Cyclope 3.
 # Cyclope is free software: you can redistribute it and/or modify
@@ -12,8 +10,9 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 # Development: Codigo Sur www.codigosur.org
-# Adaptation HTML + CSS: Santiago Hoerth Moura
-# Not delete this comment :)
+# Less CSS based www.lesscss.org
+# 960 Grid System Based www.960.gs
+# Neutronix is developed by Santiago Hoerth Moura
 */
 
 /*-----------------------------------------------------------------------------------------------
@@ -240,7 +239,7 @@ WATER
   text-decoration:none;
   font-weight:700;
   border:none;
-  background:@colorc;
+  background:@colord;
   padding:8px 10px;
   .rounded-corners(6px);}
   
@@ -251,7 +250,7 @@ WATER
 #water .root_items_list li:hover,
 #water .menuitem li:hover,
 #water .category_root_item_list li:hover {
-  background:@colord;}
+  background:@colore;}
 
 #water .menuitems_hierarchy li a,
 #water .categories_hierarchy li a,
@@ -293,14 +292,17 @@ WATER
 #water .root_items_list li li,
 #water .menuitem li li,
 #water .category_root_item_list li li {
+  font-size:1em;
   display:block;
   padding:3px 3px;
   margin:4px 0;
   border:none;
-  border-bottom:1px solid @colorb;}
+  border-bottom:1px dotted @colorb;
+  background:transparent;
+  .rounded-corners(0);}
 
 #water .menuitems_hierarchy li li:hover {
-  background:@color-alpha;}
+  background:transparent;}
 
 li li:hover a {
   color:@color-omega;}
@@ -336,9 +338,9 @@ li li:hover a {
 #water .menuitem ul ul ul,
 #water .category_root_item_list ul ul ul {
   position:relative;
-  left:170px;
-  top:-21px;
-  background:@colora;}
+  left:0;
+  top:0;
+  background:transparent;}
   
 #water .menuitems_hierarchy li li li , 
 #water .categories_hierarchy li li li,
@@ -347,7 +349,8 @@ li li:hover a {
 #water .root_items_list li li li,
 #water .menuitem li li li,
 #water .category_root_item_list li li li {
-  background:@colorb;}
+  background:transparent;
+  border:none;}
 
 #water .menuitems_hierarchy li li li a,
 #water .categories_hierarchy li li li a,

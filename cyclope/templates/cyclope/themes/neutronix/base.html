@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <!--
-# Cyclope 3 Workflow Design
-# Theme: Neutronix
-# Layout: 5 Elements
-# 960 Grid System Based www.960.gs
-# Official Trac Cyclope 3 GPL: http://codigo.cyclope.ws
+# Cyclope 3 GPL
+# Neutronix Workflow Design
+# Layouts: 4 & 5 Elements
 # Copyright 2010-2012 CodigoSur - SociedadCivil
 # All rights reserved.
 # This file is part of Cyclope 3.
@@ -13,7 +11,9 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 # Development: Codigo Sur www.codigosur.org
-# Neutrona is original design Santiago Hoerth Moura
+# Less CSS based www.lesscss.org
+# 960 Grid System Based www.960.gs
+# Neutronix is developed by Santiago Hoerth Moura
  -->
 
 {% load layout i18n tagging_tags %}
@@ -22,11 +22,11 @@
  
  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>{% block title %}{%endblock%}</title>
+    <title>{% block title %}{{ CYCLOPE_SITE_SETTINGS.global_title }}{%endblock%}</title>
     <meta name="Keywords" content="{{ CYCLOPE_SITE_SETTINGS.keywords }}" />
     <meta name="Description" content="{{ CYCLOPE_SITE_SETTINGS.description }}" />
     <link href="/rss" title="RSS" type="application/rss+xml" rel="alternate" />
-
+    <link href="/media/cyclope/themes/neutronix/css/neutronix.less" rel="stylesheet/less" type="text/css"/>
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet/less" type="text/css"/>
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/print.css" rel="stylesheet" type="text/css" media="print"/>    
     <link href="{{ CYCLOPE_STATIC_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -58,35 +58,19 @@
 
   <body class="{% block body_class %}{%endblock%}">
 
-    <div id="mask" class="container_24">
-<!-------------------------------------------------------------------------------------------------
-AIR
-------------------------------------------------------------------------------------------------->
+{% block page_header %}
+<div id="mask" class="container_24">
 {% region 'air' %}
-<!-------------------------------------------------------------------------------------------------
-BRAND
-------------------------------------------------------------------------------------------------->
-	<div class="brand">
-		<h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
-		<h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
-	</div>
-		<div class="clear"></div>
-<!-------------------------------------------------------------------------------------------------
-MEDIANERA
-------------------------------------------------------------------------------------------------->
-      <div id="middling">
+    <div class="brand">
+        <h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
+        <h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
+    </div>
+        <div class="clear"></div>
+{% endblock %}
 
-<!-------------------------------------------------------------------------------------------------
-WATER
-------------------------------------------------------------------------------------------------->
-        <div class="grid_5" >{% region 'water' %}</div><!-- /water -->
+<div id="middling">{% block page_content %} {% endblock %}</div>
 
-        {% block page_content %} {% endblock %}
-      </div><!-- /medianera -->
-
-<!-------------------------------------------------------------------------------------------------
-EARTH
-------------------------------------------------------------------------------------------------->
+{% block page_footer %}
       <div id="footer_separator"></div>
       <div class="footer_global">
       {% region 'earth' %}
@@ -94,7 +78,7 @@ EARTH
         <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO">
           Licencia Creative Commons BY-NC-ND
         </a></span>.<br/>
-        <span id="codigo sur">Tecnología: <a href="http://cyclope.codigosur.org">Cyclope 3 GPL</a>. Hecho por <a href="http://www.codigosur.org">Código Sur</a>.
+        <span id="codigo_sur">Tecnología: <a href="http://cyclope.codigosur.org">Cyclope 3 GPL</a>. Hecho por <a href="http://www.codigosur.org">Código Sur</a>.
         </span><br/>
         <span>Este sitio ha sido desarrollado sobre estándares de diseño web que cualquier navegador de calidad visualizará correctamente. </span><br/>
 
@@ -113,10 +97,7 @@ EARTH
           <area shape="rect" coords="206,4,242,34" alt="Google Chrome" title="Google Chrome" href="http://www.google.com/chrome/index.html?hl=es" />
         </map>
         </div>
-      <!-- /pie -->
-
-    </div>
-    <!-- /mascara -->
-
+    </div><!-- /end mask -->
+{% endblock %}
   </body>
 </html>

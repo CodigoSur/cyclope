@@ -1,10 +1,8 @@
 /*
-# Cyclope 3 Workflow Design
-# Theme: Neutrona 
-# Layout: 5 Elements
-# 960 Grid System Based www.960.gs
-# Official Trac Cyclope 3 GPL: http://codigo.cyclope.ws
-# Copyright 2010-2012 Codigo Sur - Sociedad Civil
+# Cyclope 3 GPL
+# Neutronix Workflow Design
+# Layouts: 4 & 5 Elements
+# Copyright 2010-2012 CodigoSur - SociedadCivil
 # All rights reserved.
 # This file is part of Cyclope 3.
 # Cyclope is free software: you can redistribute it and/or modify
@@ -12,13 +10,20 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 # Development: Codigo Sur www.codigosur.org
-# Adaptation HTML + CSS: Santiago Hoerth Moura
-# Not delete this comment :)
+# Less CSS based www.lesscss.org
+# 960 Grid System Based www.960.gs
+# Neutronix is developed by Santiago Hoerth Moura
 */
 
-/*-----------------------------------------------------------------------------------------------
+/*------------------
+FONTS
+-------------------*/
+
+@font-face {font-family: Convergence;src: url('../fonts/Convergence-Regular.ttf');}
+
+/*------------------
 GENERALS PARAMETERS
------------------------------------------------------------------------------------------------*/
+-------------------*/
 
 body{
   font-family: Arial, Verdana, Helvetica, Sans-serif; 
@@ -62,14 +67,15 @@ img {
   width:0;
   height:0}
 
-* html .clearfix,*:first-child+html .clearfix{
+* html .clearfix,
+*:first-child+html .clearfix {
   zoom:1}
 
 #categories_navigation {
-  } /*borra la categoria del bloque*/
+  } 
 
 .container {
-  margin:0;} /*define el margen de contenidos fuego*/ 
+  margin:0;} /*margin fire region*/ 
 
 .floating-img-clear {
   clear:both;
@@ -97,6 +103,10 @@ form input.submit {
 textarea {
   .rounded-corners(6px);}
 
+/*------------------
+
+-------------------*/
+
 /*-----------------------------------------------------------------------------------------------
 GENERAL SKEL
 -----------------------------------------------------------------------------------------------*/
@@ -114,6 +124,9 @@ GENERAL SKEL
   padding:0 10px 0 5px;
   margin:0 10px;} 
 
+/*------------------
+
+-------------------*/
 /*-----------------------------------------------------------------------------------------------
 DEFAULT'S
 -----------------------------------------------------------------------------------------------*/
@@ -211,7 +224,11 @@ div.paginator a {
   
 div.paginator a:hover {
   color:@color-omega;}
-  
+
+/*------------------
+
+-------------------*/
+
 /*-----------------------------------------------------------------------------------------------
 PROFUNDIDAD DE NAVEGACION
 -----------------------------------------------------------------------------------------------*/
@@ -230,7 +247,11 @@ span.breadcrumb a {
   
 span.breadcrumb a:hover {
   color:@color-alpha;}
-   
+
+/*------------------
+
+-------------------*/
+
 /*-----------------------------------------------------------------------------------------------
 TEASER VIEWS
 -----------------------------------------------------------------------------------------------*/
@@ -250,7 +271,11 @@ TEASER VIEWS
   padding:0;
   text-align:justify;
   line-height:1.5em;}
-  
+
+/*------------------
+
+-------------------*/
+
 /*-----------------------------------------------------------------------------------------------
 NEWSLETTER 
 -----------------------------------------------------------------------------------------------*/
@@ -302,7 +327,11 @@ img.newsletter_image {
   padding:0;
   border:none;
   background:none;}
-  
+
+/*------------------
+
+-------------------*/
+
 /*-----------------------------------------------------------------------------------------------
 FORUMS 
 -----------------------------------------------------------------------------------------------*/
@@ -381,186 +410,11 @@ FORUMS
   display:block;
   .rounded-corners(6px);
   margin:0 0 10px;}
-  
-/*-----------------------------------------------------------------------------------------------
-COMMENTS
------------------------------------------------------------------------------------------------*/
-#user_comments form input {
-  width:40%;
-  border:1px solid @colorc;
-  margin:5px 0 15px;}
-  
-#user_comments form input.submit {
-  width:auto;
-  background:@colorb;
-  color:@color-omega;
-  margin:0 0 0 3px;
-  border:1px solid @colorc;
-  .shadows}
-  
-#user_comments textarea {
-  width:550px;
-  background-color:@color-alpha;
-  padding:4px;
-  margin:5px 0 15px;
-  border:1px solid @colorc;
-  font-size: 1em;
-  color:@colore;
-  display:block;}
-  
-#user_comments label {
-  display: block;
-  margin:0 0;
-  font-weight:700;
-  font-size:0.9em;}
-  
-#user_comments .show_comment_form {
-  width:250px;
-  margin:0 0 20px;
-  padding:3px;
-  color:@color-alpha;
-  background:@colord;
-  border:1px solid @color-omega;
-  text-align:center;
- .rounded-corners(4px);}
-  
-#user_comments .show_comment_form a {
-  color:@color-alpha;} 
 
-#user_comments {
-  width:550px;
-  text-align:left;
-  margin:25px 0 0;
-  background-color:@color-alpha;}
-  
-#user_comments .data {
-  color:@color-omega;
-  background-color:@colora;
-  border:0px solid @colorb;
-  padding:10px;
-  margin:0 0 20px;
-  .rounded-corners(6px);
-  .shadows(2px 2px 2px @colorb)}
-  
-#user_comments .data p {
-  font-size:1em;
-  color:@colord;}
-  
-#user_comments .when_who {
-  color:@colorc;
-  font-size:0.7em;}
-  
-#user_comments .when_who a {
-  color:@colorc;}
-  
-#user_comments .bottom-post {
-  margin:20px 0;
-  border:none;
-  border-top:6px dashed @colora;}
-  
-#user_comments .box {
-  color:@colore;
-  margin:0;
-  width:644px;}
-  
-#user_comments h6 {
-  background-color:@color-alpha;
-  color:@colord;
-  margin:0 0 10px 0;
-  padding:5px 0;
-  font-weight:700;
-  font-size:0.9em;}
-  
-#user_comments img {
-  margin:10px 0;display:block;}
-  
-#user_comments form {
-  padding:0 0 30px 0;
-  margin:0 0 0 0;}
-  				
-#user_comments fieldset {
-  display: block;
-  margin: 0 0 0 0;
-  padding:5px 0;
-  border:none;}
-   
-#user_comments select {
-  display: block;}
-  
-#user_comments small {
-  margin:0;
-  color:@colord;
-  font-weight:400;
-  display:block;
-  padding:3px 0;
-  width:350px;
-  clear:both;
-  font-size:0.8em;}
-  
-#user_comments .hidden {
-  border:none;
-  display:none;}
-  
-/*-----------------------------------------------------------------------------------------------
-VISTA LISTA DETALLADA ARTICULOS 
------------------------------------------------------------------------------------------------*/
-.media h1.title, .staticpage-detail h1.title {
-  padding:10px 0;
-  display:block;
-  border-bottom:1px solid @colord;}
-  
-.media h3.summary {
-  color:@colore;
-  font-weight:400;
-  padding:10px 0;
-  text-align:justify;
-  line-height:1.4em;
-  font-size:1.2em;}
-  
-.media h4.author {
-  color:@colord;
-  border-left:4px solid @colorb;
-  padding:0 0 0 10px;
-  margin:20px 0 20px;
-  font-size:.9em;}
-  
-.media h6.pretitle {
-  color:@colord;
-  text-transform:uppercase;}
-  
-.media h6.date {
-  color:@colord;
-  text-transform:uppercase;}
-  
-.media h6.source {
-  color:@colord;}
-  
-.media .categories ul {
-  list-style:none;
-  margin:10px 0;}
-  
-.media .categories li {
-  display:inline;
-  border:1px solid @colorb;
-  .rounded-corners(4px);
-  padding:5px;
-  background:@colora;
-  color:@color-omega;
-  margin:10px 10px 0 0;
-  font-size:.75em;}
-  
-div.download_link  {
-  display:block;
-  padding:6px;
-  margin:20px 0;
-  font-weight:700;
-  background:@color-omega;
-  width:300px;
-  text-align:center;
-  .rounded-corners(4px);}
-  
-div.download_link a {
-  color:@color-alpha;}
+/*------------------
+
+-------------------*/
+
   
 #socialnetworks {
   font-size:0.75em;
@@ -587,11 +441,7 @@ div.download_link a {
 #fuego-content hr {
   }
 
-.author img {
-  border:none;
-  border-left:1px solid @colorb;
-  padding:0;
-  margin:0 5px 0 0;}
+
 
 #attachments {
   width:50%;
@@ -664,6 +514,10 @@ div.download_link a {
   padding:0 0 5px;
   margin:0;}
 
+/*------------------
+
+-------------------*/
+
 /*-----------------------------------------------------------------------------------------------
 CONTACT
 -----------------------------------------------------------------------------------------------*/
@@ -722,42 +576,71 @@ CONTACT
   padding:3px 0;
   width:30%;
   color:@colorc;}
-  
-/*-----------------------------------------------------------------------------------------------
-MAP
------------------------------------------------------------------------------------------------*/
-#map span {
-margin:0;
-padding:0;}
+
+/*------------------
+SITE MAP
+-------------------*/
+#map {
+  margin:0;
+  padding:0;
+  font-size:1em;}
+
+#map a {
+  margin:0;
+  padding:0;}
 
 #map ul {
-list-style:none;
-margin:0 0 0 30px;
-padding:0;
-font-size:1em;}
+  list-style:none;
+  margin:0 0 0 30px !important;
+  padding:0 !important;}
 
-#map ul li {
-  background: transparent url(../images/css/carpeta-abierta.png) 0% 3px no-repeat;
-  padding:0 0 0 15px;
-  margin:0 0 15px 0;
-  font-weight:700;}
+#map li {
+  background: transparent url(../images/css/carpeta-abierta.png) 0 8px no-repeat;
+  padding:0 0 0 15px !important;
+  margin:0 0 15px 0 !important;
+  font-weight:700;
+  list-style:none;
+  font-size:1.2em;
+  color:@color-omega;}
 
-#map ul li ul {
-  margin:0 0 0;}
-  
+#map li a {
+  color:inherit;}
+
+#map ul ul {
+  list-style:none;
+  margin:0 0 0 10px !important;
+  padding:0 !important;}
+
 #map li li {
-  background: transparent url(../images/css/carpeta.png) 0% 3px no-repeat;
-  padding:0 0 0 15px;
-  margin:0 0 0 0;}
-  
-#map ul li ul li {
-  margin:0;
-  padding:0 0 0 15px;
-  font-weight:400;}
-  
-/*-----------------------------------------------------------------------------------------------
+  background: transparent url(../images/css/carpeta-abierta.png) 0 14px no-repeat;
+  padding:0 0 0 8px !important;
+  margin:0 0 0 0 !important;
+  font-weight:700;
+  list-style:none;
+  font-size:.7em;
+  border:none;
+  color:@colore;}
+
+#map ul ul ul {
+  list-style:none;
+  margin:0 0 0 10px !important;
+  padding:0 !important;}
+
+#map li li li {
+  background: transparent url(../images/css/carpeta-abierta.png) 0 8px no-repeat;
+  padding:0 0 0 8px !important;
+  margin:0 0 0 0 !important;
+  font-size:.8em;
+  color:@colord;}
+
+#map li li li li {
+  color:@colorc;}
+
+
+/*------------------
 SEARCH
------------------------------------------------------------------------------------------------*/
+-------------------*/
+
 #advanced_search {
 margin:0 0 20px;}
 
@@ -807,48 +690,63 @@ margin:0 0 20px;}
   padding:4px;
   text-align:center;
   margin:0 0 20px;}
-  
+
+#search_results h3.summary {
+  background:none;
+  border:none;}
+
 #id_q {
   margin:0 0 10px;
   border:1px solid @colorc;
   padding:4px;
   width:350px;}
-  
-/*-----------------------------------------------------------------------------------------------
-jQuery lightBox plugin - Gallery style
------------------------------------------------------------------------------------------------*/
-#gallery {
-  float: right;
-  background-color: @color-alpha;
-  padding: 10px;}
-  
-#gallery ul {
-  list-style: none; }
-  
-#gallery ul li {
-  display: inline; }
-  
-#gallery ul img {
-  border: 1px solid @colorc;
-  padding: 5px;
-  width: 250px;
-  height: 250px;}
-  
-#gallery ul a:hover img {
-  border: 1px solid @colore;
-  color: @color-alpha;}
-  
-#gallery ul a:hover {
-  color: @color-alpha;}
-  
-#gallery p {
-  color:@colore;
-  font-size: 0.7em;
-  text-align: center;}
-  
-#lightbox-container-image{
-  background-color: @color-alpha;}
-  
+
+.frontend_login p {
+  padding:5px 0;
+  display:block;}
+
+.frontend_login label {
+  width:200px;
+  display:block;
+  float:left;
+  margin:0 0 10px;}
+
+.frontend_login input {
+  display:block;
+  margin:0 0 10px;}
+
+.frontend_login input.submit {
+  width:170px !important;
+  margin:30px 0;}
+
+.frontend_login span.register {
+  display:block;
+  background:@colora;
+  padding:10px 15px !important;
+  margin:20px 0 !important;
+  .rounded-corners(12px);}
+
+.frontend_login span.register a {
+  text-decoration:underline;}
+
+.frontend_login ul.errorlist {
+  list-style:none;
+  background:@colorc;
+  color:@color-alpha;
+  margin:20px 0 !important;
+  padding:10px !important;
+  font-size:.8em !important;
+  font-weight:700;
+  display:block;
+  clear:both;
+  .rounded-corners(10px);}
+
+.frontend_login ul.errorlist li {
+  list-style:none;
+  color:@color-alpha;}
+
+
+
 p span.caps {
   display:inline;
   margin:0;

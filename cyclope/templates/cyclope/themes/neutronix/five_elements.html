@@ -1,22 +1,13 @@
 {% extends CYCLOPE_THEME_BASE_TEMPLATE %}
-
 {% load layout %}
-{% block title %}{{ CYCLOPE_SITE_SETTINGS.global_title }}{%endblock%}
 {% block body_class %}five_elements{% endblock %}
 
 {% block page_content %}
+<div class="grid_5" >{% region 'water' %}</div>
 <div class="grid_14">
-<div id="fire">
     {% region 'spark' %}
-    {% block content %}{% endblock %}
+    <div id="fire">{% block content %}{% endblock %}</div>
     {% region 'ash' %}
 </div>
-</div>
-
-<div class="grid_5">
-  <div class="content">
-    {% region 'love'%}
-  </div>
-</div>
-
+<div class="grid_5">{% region 'love'%}</div>
 {% endblock %}
