@@ -1,0 +1,90 @@
+
+#love .teaser {
+  margin:0 0 10px;
+  padding:0 0 5px 0;
+  overflow:auto;
+  border-bottom:1px dotted @colorc;}
+
+#love .teaser .title {
+  margin:0 0 10px 0;
+  color:@color-omega;
+  position:relative;
+  overflow:auto;
+  font-size:.95em;
+  padding:7px 0 0;
+  border-bottom:none;
+  .rounded-corners(6px);}
+
+#love .teaser .title a {
+  text-decoration:none;
+  color:inherit;}
+
+#love .teaser .title a:hover {
+  text-decoration:underline;
+  color:@color-omega;}  
+
+#love .teaser .author {
+  font-size:0.8em;
+  font-weight:700;
+  margin:10px 0 0;
+  color:@colord;padding:0;}
+
+#love .teaser .tile img {
+  }
+
+#love .teaser img.teaser_icon {
+  float:left;
+  width:60px;
+  padding:0;
+  border:1px solid @color-omega;
+  background:@color-alpha;
+  margin:3px 5px 0 0;}
+
+#love .teaser .pretitle, #love .teaser .date {
+  margin:0 0 5px;
+  font-size:0.6em;
+  display:inline;
+  text-align:right;
+  text-transform:none;
+  color:@color-omega;padding:0 0 5px 5px;
+  .rounded-corners(4px);}
+
+#love .teaser .date {
+  padding:0;}
+ 
+#love .teaser img.icon {
+  float:right;
+  width:150px;
+  clear:both;
+  padding:3px;
+  border:3px solid @colorb;
+  margin:0 0 20px 20px;}
+
+#love .teaser img.type_icon {
+  width:20px;
+  padding:0;
+  margin:0 0;
+  float:right;}
+
+#love .teaser .summary {
+  color:@colore;
+  font-weight:400;
+  padding:0;
+  text-align:left;
+  line-height:1.2em;
+  font-size:.8em;
+  margin:-3px 0 5px;}
+
+#love .teaser .summary p {
+  display:inline;}
+
+#love .teaser ul {
+  color:@color-omega;
+  font-size:1em;
+  padding:15px 0;
+  margin:0 0 0 30px;
+  list-style:square;}
+
+#love .teaser li {
+  margin:0 0 0 5px;
+  padding:0 0 3px;}

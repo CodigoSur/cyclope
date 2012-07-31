@@ -1,0 +1,33 @@
+/*
+# Cyclope 3 Workflow Design
+# Theme: Neutrona 
+# Print CSS
+# 960 Grid System Based www.960.gs
+# Official Trac Cyclope 3 GPL: http://codigo.cyclope.ws
+# Copyright 2010-2012 Codigo Sur - Sociedad Civil
+# All rights reserved.
+# This file is part of Cyclope 3.
+# Cyclope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# Development: Codigo Sur www.codigosur.org
+# Adaptation HTML + CSS: Santiago Hoerth Moura
+# Not delete this comment :)
+*/
+
+* {font-family: Arial, Verdana, Helvetica, Sans-serif;}
+a {color:#000;text-decoration:none;}
+#water {display:none;}
+#love {display:none;}
+#air {display:none;}
+.footer_global {display:none;}
+.tools {display:none;}
+#user_comments {display:none;}
+.related_contents {display:none;}
+#gallery ul {list-style:none;margin:0;padding:0;}
+#gallery ul li p {display:none;}
+#gallery ul img {float:left;margin:0 20px 10px 0;padding:0;}
+.categories {display:none;}
+.brand h1 {margin:0;padding:0;}
+.brand h2 {font-size:1em;margin:0;padding:0;}

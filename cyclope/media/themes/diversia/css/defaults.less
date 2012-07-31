@@ -1,0 +1,84 @@
+/*
+# Cyclope 3 Workflow Design
+# Theme: Neutrona 
+# Layout: 5 Elements
+# 960 Grid System Based www.960.gs
+# Official Trac Cyclope 3 GPL: http://codigo.cyclope.ws
+# Copyright 2010-2012 Codigo Sur - Sociedad Civil
+# All rights reserved.
+# This file is part of Cyclope 3.
+# Cyclope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# Development: Codigo Sur www.codigosur.org
+# Adaptation HTML + CSS: Santiago Hoerth Moura
+# Not delete this comment :)
+*/
+
+/*-----------------------------
+ROUNDED CORNERS
+------------------------------*/
+.rounded-corners(@value) {
+  -webkit-border-radius:@value; 
+  -moz-border-radius:@value; 
+  border-radius:@value; 
+  }
+.rounded-corners-top(@value) {
+  border-top-right-radius:@value;
+  border-top-left-radius: @value;
+  -moz-border-radius-topright:@value;
+  -moz-border-radius-topleft:@value;
+  -webkit-border-top-right-radius:@value;
+  -webkit-border-top-left-radius:@value;
+  }
+
+.rounded-corners-bottom(@value) {
+  border-bottom-right-radius:@value;
+  border-bottom-left-radius: @value;
+  -moz-border-radius-bottomright:@value;
+  -moz-border-radius-bottomleft:@value;
+  -webkit-border-bottom-right-radius:@value;
+  -webkit-border-bottom-left-radius:@value;
+  }
+
+.rounded-corners-left(@value) {
+  border-top-left-radius: @value;
+  -moz-border-radius-topleft:@value;
+  -webkit-border-top-left-radius:@value;
+  border-bottom-left-radius: @value;
+  -moz-border-radius-bottomleft:@value;
+  -webkit-border-bottom-left-radius:@value;
+  }
+
+.rounded-corners-right(@value) {
+  border-top-right-radius: @value;
+  -moz-border-radius-topright:@value;
+  -webkit-border-top-right-radius:@value;
+  border-bottom-right-radius: @value;
+  -moz-border-radius-bottomright:@value;
+  -webkit-border-bottom-right-radius:@value;
+  }
+
+/*-----------------------------
+GRADIENTS
+------------------------------*/
+.gradient(@gradient-position, @top-color, @bottom-color) {
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(@top-color), to(@bottom-color)); /* Safari 4+, Chrome 1-9 */
+  background-image: -webkit-linear-gradient(@gradient-position, @top-color, @bottom-color); /* Safari 5.1+, Mobile Safari, Chrome 10+ */
+  background-image: -moz-linear-gradient(@gradient-position, @top-color, @bottom-color); /* Firefox 3.6+ */
+  background-image: -ms-linear-gradient(@gradient-position, @top-color, @bottom-color); /* IE 10+ */
+  background-image: -o-linear-gradient(@gradient-position, @top-color, @bottom-color); /* Opera 11.10+ */
+  }
+/*-----------------------------
+SHADOWS
+------------------------------*/
+.shadows(@horizontal-shadow:2px, @vertical-shadow:2px, @blur-shadow:5px, @color-shadow:#333){
+  box-shadow:@horizontal-shadow @vertical-shadow @blur-shadow @color-shadow;
+  -webkit-box-shadow:@horizontal-shadow @vertical-shadow @blur-shadow @color-shadow;
+  -moz-box-shadow:@horizontal-shadow @vertical-shadow @blur-shadow @color-shadow
+  }
+  
+.text-shadows(@horizontal-shadow:2px, @vertical-shadow:2px, @blur-shadow:5px, @color-shadow:#333){
+  text-shadow:@horizontal-shadow @vertical-shadow @blur-shadow @color-shadow;
+  }

@@ -1,0 +1,253 @@
+/*
+# Cyclope 3 GPL
+# Neutronix Workflow Design
+# Layouts: 4 & 5 Elements
+# Official Repository Cyclope 3 GPL: http://codigo.cyclope.ws
+# Copyright 2010-2012 CodigoSur - SociedadCivil
+# All rights reserved.
+# This file is part of Cyclope 3.
+# Cyclope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# Development: Codigo Sur www.codigosur.org
+# jCarousel based http://sorgalla.com/jcarousel
+# Less CSS based www.lesscss.org
+# 960 Grid System Based www.960.gs
+# Neutronix is developed by Santiago Hoerth Moura
+*/
+
+/*-----------------------------------------
+DEFAULTS
+------------------------------------------*/
+
+.jcarousel-skin-cyclope .jcarousel-container {
+    background: @colora;
+    margin:20px auto;}
+
+
+/*------------------
+HORIZONTAL BUTTONS
+-------------------*/
+
+/* ******** NEXT BUTTON ******** */
+
+.slideshow .jcarousel-skin-cyclope .jcarousel-next-horizontal {
+    top: 90px;}
+
+.slideshow-background .jcarousel-skin-cyclope .jcarousel-next-horizontal {
+    top: 140px;}
+
+.jcarousel-skin-cyclope .jcarousel-next-horizontal {
+  position: absolute;
+  right: -40px;
+  width: 32px;
+  height: 61px;
+  cursor: pointer;
+  background: transparent url(../images/jcarousel/next-horizontal.png) no-repeat 0 0;}
+
+.jcarousel-skin-cyclope .jcarousel-next-horizontal:hover,
+.jcarousel-skin-cyclope .jcarousel-next-horizontal:focus {
+  background-position:0 0;}
+
+.jcarousel-skin-cyclope .jcarousel-next-horizontal:active {
+  background-position:0 0;}
+
+.jcarousel-skin-cyclope .jcarousel-next-disabled-horizontal,
+.jcarousel-skin-cyclope .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin-cyclope .jcarousel-next-disabled-horizontal:focus,
+.jcarousel-skin-cyclope .jcarousel-next-disabled-horizontal:active {
+  background-position:0 0;}
+
+/* ******** PREV BUTTON ******** */
+
+.slideshow .jcarousel-skin-cyclope .jcarousel-prev-horizontal {
+    top: 90px;}
+
+.slideshow-background .jcarousel-skin-cyclope .jcarousel-prev-horizontal {
+    top: 140px;}
+
+.jcarousel-skin-cyclope .jcarousel-prev-horizontal {
+  position: absolute;
+  left: -40px;
+  width: 32px;
+  height: 61px;
+  cursor: pointer;
+  background: transparent url(../images/jcarousel/prev-horizontal.png) no-repeat 0 0;}
+    
+.jcarousel-skin-cyclope .jcarousel-prev-horizontal:hover, 
+.jcarousel-skin-cyclope .jcarousel-prev-horizontal:focus {
+  background-position:0 0;}
+
+.jcarousel-skin-cyclope .jcarousel-prev-horizontal:active {
+  background-position:0 0;}
+
+.jcarousel-skin-cyclope .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin-cyclope .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin-cyclope .jcarousel-prev-disabled-horizontal:focus,
+.jcarousel-skin-cyclope .jcarousel-prev-disabled-horizontal:active {
+  cursor: default;}
+
+/*------------------
+MODE STANDAR VIEW
+-------------------*/
+
+.slideshow .jcarousel-skin-cyclope .jcarousel-container-horizontal {
+    width: 530px;
+    padding: 10px;
+    .rounded-corners(10px);}
+    
+.slideshow .jcarousel-skin-cyclope .jcarousel-clip {
+    overflow: hidden;
+    width: 530px;
+    height: 210px;}
+
+.slideshow .jcarousel-skin-cyclope .jcarousel-item {
+    height: 210px;}
+
+#spark .slideshow {
+  margin: 0;
+  border-bottom: none;
+  padding: 0;}
+
+#spark .slideshow img.slideshow_picture {
+  border: 3px solid @colorb;
+  float: left;
+  margin: 0 10px 0 0;
+  padding:0;
+  width: 140px;
+  .rounded-corners(6px);
+  background:@colora;}
+
+#spark .slideshow img.type_icon {
+  display:none;
+  float: right;
+  right: 10px; 
+  margin: 0;
+  padding: 0 10px 0 0;
+  position: absolute;
+  top: 10px;
+  width:20px;}
+  
+#spark .slideshow .teaser_icon_container {
+  position: relative;}
+
+#spark .slideshow .title {
+  border: medium none;
+  font-size: 1.7em !important;
+  line-height: 1.1em;
+  margin: 0;}
+
+#spark .slideshow .summary {
+  color: @color-omega !important;
+  font-size: .95em !important;
+  font-weight: 400;
+  line-height: 1.2em;
+  padding: 0 20px 0 0 !important;
+  margin:0 !important;
+  text-align: left !important;
+  z-index:4;}
+
+#spark .slideshow .summary p { 
+  padding: 0 !important;
+  margin:0 !important;
+  display:block !important;}
+
+/*------------------
+MODE IMAGE BACKGROUND VIEW
+-------------------*/
+
+.slideshow-background .jcarousel-skin-cyclope .jcarousel-container-horizontal {
+    width: 730px;
+    padding: 0;}
+
+
+.slideshow-background .jcarousel-skin-cyclope .jcarousel-clip {
+    overflow: hidden;
+    width: 730px;
+    height: 330px;}
+
+.slideshow-background .jcarousel-skin-cyclope .jcarousel-item {
+    width: 730px;
+    padding:0;
+    margin:0;
+    height: 330px;}
+
+#spark .slideshow-background {
+  
+  margin: 0;
+  border-bottom: none;
+  padding: 0;
+  z-index:0;}
+
+#spark .slideshow-background img.slideshow_picture {
+  border: none;
+  width: 730px;
+  clear: both;
+  float: left;
+  margin: 0 0 0;
+  padding: 0;
+  position:absolute;
+  z-index:1;}
+
+#spark .slideshow-background img.type_icon {
+  float: left;
+  left: 10px;
+  margin: 0;
+  padding: 0 10px 0 0;
+  position: absolute;
+  top: 10px;}
+
+#spark .slideshow-background .teaser_icon_container {
+  position: relative;}
+
+#spark .slideshow-background h2.title {
+  margin:0;
+  padding:15px;}
+  
+#spark .slideshow-background .title {
+  border: none;
+  font-size: 2.4em;
+  line-height: 100%;
+  padding:15px;
+  margin: 0;
+  z-index:3;
+  position:absolute; 
+  width:700px;
+  color:@color-alpha;
+  background:url(../images/jcarousel/opacity.png);
+  display:block;
+  float:left;}
+  
+#spark .slideshow-background .title a {
+  color:@color-alpha;}
+  
+#spark .slideshow-background .download_link {
+    display:block;
+    clear:both;
+    padding:0;
+    margin:0;
+    float:left;}
+
+#spark .slideshow-background .summary {
+  color: @color-alpha !important;
+  font-size: 0.8em !important;
+  font-weight: 400;
+  line-height: 1.3em;
+  padding: 15px !important;
+  margin:0;
+  text-align: left;
+  background:url(../images/jcarousel/opacity.png);
+  position:absolute;
+  bottom:0;
+  z-index:4;}
+
+#spark .slideshow-background .summary p { 
+  overflow:auto;
+  width:700px;
+  display:block !important;}
+  
+#spark .slideshow-background li { 
+  padding:0 !important;
+  margin:0 !important;}  
+
