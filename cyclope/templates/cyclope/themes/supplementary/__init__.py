@@ -12,9 +12,9 @@ verbose_name = _('Supplementary')
 
 layout_templates = {
 
-    '4_elements.html':
+    'four_elements.html':
         {
-        'verbose_name': _('4 Elements'),
+        'verbose_name': _('Four Elements'),
         'regions' : {
             'air': _('air'),
             'water': _('water'),
@@ -24,9 +24,9 @@ layout_templates = {
             }
         },
 
-    '5_elements.html':
+    'five_elements.html':
         {
-        'verbose_name': _('5 Elements'),
+        'verbose_name': _('Five Elements'),
         'regions' : {
             'air': _('air'),
             'water': _('water'),
