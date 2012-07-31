@@ -1,0 +1,15 @@
+{% extends CYCLOPE_THEME_BASE_TEMPLATE %}
+{% load layout %}
+{% block body_class %}five_elements{% endblock %}
+
+{% block page_content %}
+<div class="grid_19">
+<div class="grid_19 alpha omega">{% region 'spark' %}</div>
+<div class="grid_11 alpha">
+    <div id="fire">{% block content %}{% endblock %}</div>
+    {% region 'ash' %}
+</div>
+<div class="grid_8 omega">{% region 'love'%}</div>
+</div>
+<div class="grid_5 omega" >{% region 'water' %}</div>
+{% endblock %}
