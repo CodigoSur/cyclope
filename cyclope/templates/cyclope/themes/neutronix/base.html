@@ -73,8 +73,7 @@
   <div id="middling">{% block page_content %} {% endblock %}</div>
 
 {% block page_footer %}
-  {% join CYCLOPE_THEME_PREFIX "footer.html" as footer %}
-  {% include footer %}
+  {% include "cyclope/themes/neutronix/footer.html" %}
 </div><!-- /end mask -->
 {% endblock %}
 </body>
