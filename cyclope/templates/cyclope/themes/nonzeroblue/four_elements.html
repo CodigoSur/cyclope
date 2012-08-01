@@ -1,18 +1,53 @@
 {% extends CYCLOPE_THEME_BASE_TEMPLATE %}
-
 {% load layout%}
+{% block title %}{%if title %}{{title}} | {%endif%}{{ CYCLOPE_SITE_SETTINGS.global_title }}{%endblock%}
+{% block body_class %}four_elements{% endblock %}
 
-{% block body_class %}4_elements{% endblock %}
+{% block page_header %}
+{% region 'air' %}
+    <div class="brand">
+        <h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
+        <h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
+    </div>
+        <div class="clear"></div>
+<div id="mask" class="container_24">
+{% endblock %}
 
 {% block page_content %}
 <div class="grid_19">
-<div id="fire" class="inner">
-  {% region 'before_fire' %}
-  <div class="content_fire">
-  {% block content %} {% endblock %}
-  </div>
-  {% region 'after_fire' %}
+  {% region 'spark' %}
+  <div id="fire">{% block content %} {% endblock %}</div>
+  {% region 'ash' %}
 </div>
-</div>
+<div class="grid_5" >{% region 'water' %}</div>
+{% endblock %}
 
+{% block page_footer %}
+      </div><!-- /end mask -->
+      <div id="footer_separator"></div>
+      <div class="footer_global">
+      {% region 'earth' %}
+      <span id="creativecommons">Los contenidos de este sitio web están bajo una
+        <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO">
+          Licencia Creative Commons BY-NC-ND
+        </a></span>.<br/>
+        <span id="codigo_sur">Tecnología: <a href="http://cyclope.codigosur.org">Cyclope 3 GPL</a>. Hecho por <a href="http://www.codigosur.org">Código Sur</a>.
+        </span><br/>
+        <span>Este sitio ha sido desarrollado sobre estándares de diseño web que cualquier navegador de calidad visualizará correctamente. </span><br/>
+
+        <img src="/media/uploads/images/banners/navegadores.png" width="246" height="36" border="0" usemap="#map-nav" alt="navegadores"/>
+        <map name="map-nav" id="map-nav">
+          <!-- #$-:Image map file created by GIMP Image Map plug-in -->
+          <!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+          <!-- #$-:Please do not edit lines starting with "#$" -->
+          <!-- #$VERSION:2.3 -->
+          <!-- #$AUTHOR:sh -->
+          <area shape="rect" coords="48,1,85,35" alt="Konkeror" title="Konkeror" href="http://www.konqueror.org/" />
+          <area shape="rect" coords="6,1,41,35" alt="Mozilla Firefox" title="Mozilla Firefox" href="http://www.mozilla-europe.org/es/firefox/" />
+          <area shape="rect" coords="88,0,120,36" alt="Epiphany" title="Epiphany" href="http://projects.gnome.org/epiphany/" />
+          <area shape="rect" coords="126,1,158,35" alt="Opera" title="Opera" href="http://www.opera.com/download/" />
+          <area shape="rect" coords="162,3,199,34" alt="Safari" title="Safari" href="http://www.apple.com/es/safari/download/" />
+          <area shape="rect" coords="206,4,242,34" alt="Google Chrome" title="Google Chrome" href="http://www.google.com/chrome/index.html?hl=es" />
+        </map>
+        </div>
 {% endblock %}
