@@ -39,9 +39,10 @@ from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 
 import cyclope
+from cyclope.utils import ThumbnailMixin
 
 
-class Collection(models.Model):
+class Collection(models.Model, ThumbnailMixin):
     """A facility for creating custom content collections.
     """
 
@@ -67,12 +68,6 @@ class Collection(models.Model):
     def get_absolute_url(self):
         return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
 
-    def thumbnail(self):
-        return '<img src="%s"/>' % self.image.url_thumbnail
-
-    thumbnail.short_description = _('Thumbnail Image')
-    thumbnail.allow_tags = True
-
     def __unicode__(self):
         return self.name
 
@@ -91,7 +86,7 @@ def changed_ctypes(sender, instance, action, reverse, model, pk_set, **kwargs):
 m2m_changed.connect(changed_ctypes, sender=Collection.content_types.through)
 
 
-class Category(models.Model):
+class Category(models.Model, ThumbnailMixin):
     """Categories are associated with a specific Collection,
     and can be generically usable with any content type.
     """
@@ -115,12 +110,6 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
-
-    def thumbnail(self):
-        return '<img src="%s"/>' % self.image.url_thumbnail
-
-    thumbnail.short_description = _('Thumbnail Image')
-    thumbnail.allow_tags = True
 
     def valid_parents(self):
         return Category.tree.filter(pk__isnot=self.pk)

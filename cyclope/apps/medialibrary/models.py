@@ -28,9 +28,10 @@ from filebrowser.fields import FileBrowseField
 
 from cyclope.models import BaseContent, Author, Source
 from cyclope.core.collections.models import Collectible
+from cyclope.utils import ThumbnailMixin
 import cyclope.apps.abuse
 
-class BaseMedia(BaseContent, Collectible):
+class BaseMedia(BaseContent, Collectible, ThumbnailMixin):
     """Abstract class for media content.
     """
     author = models.ForeignKey(Author, verbose_name=_('author'),
@@ -43,18 +44,13 @@ class BaseMedia(BaseContent, Collectible):
         abstract = True
         ordering = ('-creation_date', 'name')
 
+
 class Picture(BaseMedia):
     """Picture model.
     """
 
     image =  FileBrowseField(_('image'), max_length=100, format='Image',
                              directory='images/pictures/')
-
-    def admin_thumbnail(self):
-        return u'<img src="%s"/>' % self.image.url_thumbnail
-
-    admin_thumbnail.allow_tags = True
-    admin_thumbnail.short_description = _('Image')
 
     class Meta:
         verbose_name = _('picture')
@@ -83,16 +79,11 @@ class MovieClip(BaseMedia):
     video =  FileBrowseField(_('video'), max_length=100, format='Video',
                              directory='movie_clips/')
 
-    def admin_thumbnail(self):
-        if self.still:
-            return u'<img src="%s"/>' % self.still.url_thumbnail
-        else:
-            return ''
-    admin_thumbnail.allow_tags = True
-    admin_thumbnail.short_description = _('Still')
-
     def image(self):
         return self.still
+
+    def get_thumbnail_src(self):
+        return self.still.url_thumbnail
 
     class Meta:
         verbose_name = _('movie clip')
@@ -119,14 +110,6 @@ class FlashMovie(BaseMedia):
                             directory='images/medialibrary/', blank=True)
     flash =  FileBrowseField(_('flash'), max_length=100, format='Flash',
                                   directory='flashmovies/', blank=True)
-
-    def admin_thumbnail(self):
-        if self.image:
-            return u'<img src="%s"/>' % self.image.url_thumbnail
-        else:
-            return ''
-    admin_thumbnail.allow_tags = True
-    admin_thumbnail.short_description = _('Image')
 
     class Meta:
         verbose_name = _('flash movie')

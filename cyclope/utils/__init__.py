@@ -29,11 +29,13 @@ Helper methods and classes.
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import InvalidPage, EmptyPage
 from django.db.models import Q
+from django.utils.translation import ugettext as _
 
 import cyclope
-from cyclope.models import MenuItem
 
 def menu_item_for_request(request):
+    # Avoids a circular import
+    from cyclope.models import MenuItem
     req_url = request.path
     url = req_url[len(cyclope.settings.CYCLOPE_PREFIX)+1:]
     if url == '':
@@ -279,3 +281,20 @@ class PermanentFilterMixin(object):
                     GET[filter_key] = param
                     request.GET = GET
             request.session[session_key] = request.GET.get(filter_key)
+
+
+class ThumbnailMixin(object):
+
+    def get_thumbnail_src(self):
+        try:
+            image = getattr(self, "image")
+        except AttributeError:
+            raise NotImplemented
+        return getattr(image, "url_thumbnail")
+
+    def thumbnail(self):
+        return '<img class="thumbnail" src="%s"/>' %  self.get_thumbnail_src()
+
+    thumbnail.short_description = _('Thumbnail Image')
+    thumbnail.allow_tags = True
+

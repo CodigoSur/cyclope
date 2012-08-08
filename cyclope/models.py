@@ -50,6 +50,7 @@ from registration import signals as registration_signals
 
 import cyclope
 from cyclope.core.collections.models import Collection
+from cyclope.utils import ThumbnailMixin
 
 # we add South introspection rules for custom field TagAutocompleteField
 # this shouldn't be necessary once South incorporates this rule
@@ -396,7 +397,7 @@ class BaseContent(models.Model):
         abstract = True
 
 
-class Author(models.Model):
+class Author(models.Model, ThumbnailMixin):
     """Model to be used for every content that needs an author.
 
     This referes to the author of the content, not to the user uploading it.
@@ -414,12 +415,6 @@ class Author(models.Model):
     content_types = models.ManyToManyField(
         ContentType, db_index=True, verbose_name=_('content types'),
         help_text=_('Select the content types this author is related to.'),)
-
-    def thumbnail(self):
-        return '<img src="%s"/>' % self.image.url_thumbnail
-
-    thumbnail.short_description = _('Thumbnail Image')
-    thumbnail.allow_tags = True
 
     def __unicode__(self):
         return self.name
@@ -443,17 +438,11 @@ class Source(models.Model):
         verbose_name = _('source')
         verbose_name_plural = _('sources')
 
-class Image(models.Model):
+class Image(models.Model, ThumbnailMixin):
     """A simple image model.
     """
     image =  FileBrowseField(_('image'), max_length=100, format='Image',
                              directory='pictures/')
-
-    def thumbnail(self):
-        return '<img src="%s"/>' % self.image.url_thumbnail
-
-    thumbnail.short_description = _('Thumbnail Image')
-    thumbnail.allow_tags = True
 
     class Meta:
         verbose_name = _('image')
