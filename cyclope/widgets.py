@@ -53,40 +53,6 @@ def get_default_text_widget():
     return widget
 
 
-class ForeignKeyImageRawIdWidget(ForeignKeyRawIdWidget):
-    """
-    A Widget for displaying ForeignKeys in the "raw_id" interface rather than
-    in a <select> box.
-    """
-    input_type = 'hidden'
-
-    def render(self, name, value, attrs=None):
-        if attrs is None:
-            attrs = {}
-        related_url = '../../../%s/%s/' % (self.rel.to._meta.app_label, self.rel.to._meta.object_name.lower())
-        params = self.url_parameters()
-        if params:
-            url = '?' + '&amp;'.join(['%s=%s' % (k, v) for k, v in params.items()])
-        else:
-            url = ''
-        if not attrs.has_key('class'):
-            attrs['class'] = 'vForeignKeyRawIdAdminField' # The JavaScript looks for this hook.
-        output = [super(ForeignKeyRawIdWidget, self).render(name, value, attrs)]
-        if value:
-            output.append(self.thumbnail_for_value(value))
-        output.append('<a href="%s%s" class="related-lookup" id="lookup_id_%s" onclick="return showRelatedObjectLookupPopup(this);"> ' % \
-            (related_url, url, name))
-        output.append('<img src="%simg/admin/selector-search.gif" width="16" height="16" alt="%s" /></a>' % (settings.ADMIN_MEDIA_PREFIX, _('Lookup')))
-        return mark_safe(u''.join(output))
-
-    def thumbnail_for_value(self, value):
-        key = self.rel.get_related_field().name
-        try:
-            obj = self.rel.to._default_manager.using(self.db).get(**{key: value})
-        except self.rel.to.DoesNotExist:
-            return ''
-        return obj.thumbnail()
-
 class CKEditor(forms.Textarea):
     """
     Widget providing CKEditor for Rich Text Editing.
@@ -191,6 +157,7 @@ class MultipleWidget(forms.Widget):
             field_name = self._field_regexp.search(out_name).groups()[0]
             values[field_name] = data.get(out_name)
         return values
+
 
 class FBAdminMarkItUpWidget(AdminMarkItUpWidget):
     def render(self, name, value, attrs=None):

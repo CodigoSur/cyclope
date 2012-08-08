@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -25,21 +25,21 @@ forms
 """
 
 from django import forms
-from django.conf import settings as django_settings
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
-from django.db.models import get_model
 from django.contrib.admin.widgets import AdminTextareaWidget
-from django.contrib.contenttypes.models import ContentType
 
 from mptt.forms import TreeNodeChoiceField
 
-from cyclope.models import MenuItem, BaseContent,\
-                           SiteSettings, Layout, RegionView, UserProfile
-from cyclope.fields import MultipleField
-from cyclope import settings as cyc_settings
 from cyclope.core.frontend import site
+from cyclope.models import MenuItem, RelatedContent, SiteSettings, Layout, \
+                            RegionView, UserProfile
+from cyclope.fields import MultipleField
 from cyclope.themes import get_all_themes, get_theme
+from cyclope.apps.related_admin import GenericFKWidget, GenericModelForm
+from cyclope.apps.related_admin import GenericModelChoiceField as GMCField
+
+
 
 class AjaxChoiceField(forms.ChoiceField):
     """ChoiceField that always returns true for validate().
@@ -52,20 +52,19 @@ class AjaxChoiceField(forms.ChoiceField):
     def validate(self, value):
         return True
 
-from django.utils.safestring import mark_safe
 
-class RelatedContentForm(forms.ModelForm):
-    other_id= AjaxChoiceField(label=_('Content object'),)
+class RelatedContentForm(GenericModelForm):
+
+    other_object = GMCField(label='object', widget=GenericFKWidget('other_type',
+                                                   cts=site.base_content_types))
 
     def __init__(self, *args, **kwargs):
         super(RelatedContentForm, self).__init__(*args, **kwargs)
-
         self.fields['other_type'].choices = site.get_base_ctype_choices()
 
-        if self.instance.id is not None:
-            content_object = self.instance.other_object
-            self.fields['other_id'].choices = [(content_object.id,
-                                                        content_object.name)]
+    class Meta:
+        model = RelatedContent
+        fields = ('order', 'other_type', 'other_object')
 
 
 class ViewOptionsFormMixin(object):
@@ -112,12 +111,15 @@ class ViewOptionsFormMixin(object):
         return cleaned_value
 
 
-class MenuItemAdminForm(forms.ModelForm, ViewOptionsFormMixin):
+class MenuItemAdminForm(GenericModelForm, ViewOptionsFormMixin):
     # content_view choices get populated through javascript
     # when a template is selected
     content_view = AjaxChoiceField(label=_('View'), required=False)
-    object_id = AjaxChoiceField(label=_('Content object'), required=False)
-    parent = TreeNodeChoiceField(label=_('Parent'), queryset=MenuItem.tree.all(), required=False)
+    content_object = GMCField(label=_('Content object'), required=False,
+                              widget=GenericFKWidget("content_type",
+                                                     cts=site._registry.keys()))
+    parent = TreeNodeChoiceField(label=_('Parent'), queryset=MenuItem.tree.all(),
+                                 required=False)
     view_options = MultipleField(label=_('View options'), form=None, required=False)
 
 
@@ -125,7 +127,6 @@ class MenuItemAdminForm(forms.ModelForm, ViewOptionsFormMixin):
 
     def __init__(self, *args, **kwargs):
         super(MenuItemAdminForm, self).__init__(*args, **kwargs)
-
         if self.instance.id is not None:
             # chainedSelect will show the selected choice
             # if it is present before filling the choices through AJAX
@@ -137,10 +138,6 @@ class MenuItemAdminForm(forms.ModelForm, ViewOptionsFormMixin):
                 model = menu_item.content_type.model_class()
                 self.set_initial_view_options(menu_item, model)
 
-            if menu_item.content_object:
-                content_object = menu_item.content_object
-                self.fields['object_id'].choices = [(content_object.id,
-                                                        content_object.name)]
         self.fields['content_type'].choices = site.get_registry_ctype_choices()
 
     def get_view(self, values):
@@ -149,8 +146,8 @@ class MenuItemAdminForm(forms.ModelForm, ViewOptionsFormMixin):
 
     def clean(self):
         data = self.cleaned_data
-        if data['object_id'] == '':
-            data['object_id'] = None
+
+        data['content_object'] == data['content_object'] or None
 
         if data['custom_url'] and (data['content_type']
                                    or data['object_id']
@@ -167,13 +164,13 @@ class MenuItemAdminForm(forms.ModelForm, ViewOptionsFormMixin):
                 else:
                     view = site.get_view(data['content_type'].model_class(),
                                          data['content_view'])
-                    if view.is_instance_view and data['object_id'] is None:
+                    if view.is_instance_view and data['content_object'] is None:
                         raise(ValidationError(
                             _(u'The selected view requires a content object')))
                     elif not view.is_instance_view:
                         # if not an instance it does not need a content object
-                        if data['object_id'] is not None:
-                            data['object_id'] = None
+                        if data['content_object'] is not None:
+                            data['content_object'] = None
 
         return super(MenuItemAdminForm, self).clean()
 
@@ -250,7 +247,7 @@ class RegionViewInlineForm(forms.ModelForm, ViewOptionsFormMixin):
                 self.fields['content_view'].choices = [(selected_view,
                                                         selected_view)]
             if region_view.content_type:
-		model = region_view.content_type.model_class()
+                model = region_view.content_type.model_class()
                 self.set_initial_view_options(region_view, model)
 
             if region_view.content_object:

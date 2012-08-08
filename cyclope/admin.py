@@ -90,13 +90,13 @@ class BaseContentAdmin(admin.ModelAdmin):
         if '_frontend' in request.REQUEST:
             return False
         return super(BaseContentAdmin, self).has_delete_permission(request, obj)
-    
+
     def change_view(self, request, object_id, extra_context=None):
         if '_frontend' in request.REQUEST:
             if extra_context is None:
                 extra_context = {}
             extra_context['frontend_admin'] = 'frontend_admin'
-            
+
         return super(BaseContentAdmin, self).change_view(request, object_id, extra_context)
 
     def add_view(self, request, form_url='', extra_context=None):
@@ -111,8 +111,8 @@ class BaseContentAdmin(admin.ModelAdmin):
             extra_context['initial_category'] = category.id
             extra_context['initial_collection'] = category.collection.id
         return super(BaseContentAdmin, self).add_view(request, form_url, extra_context)
-    
-        
+
+
 from django.utils.functional import update_wrapper
 
 class MenuItemAdmin(editor.TreeEditor, PermanentFilterMixin):
@@ -121,7 +121,7 @@ class MenuItemAdmin(editor.TreeEditor, PermanentFilterMixin):
                   {'fields': ('menu', 'parent', 'name', 'slug', 'site_home', 'active')}),
                  (_('content details'),
                   {'fields':('custom_url', 'content_type', 'content_view',
-                             'view_options', 'object_id'),
+                             'view_options', 'content_object',),
                   'description': _(u"Either set an URL here or select a content"
                                     "type and view.")
                   }),
