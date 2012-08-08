@@ -101,6 +101,7 @@ INSTALLED_APPS = [
     'cyclope.apps.feeds',
     'cyclope.apps.dynamicforms',
     'cyclope.apps.abuse',
+    'cyclope.apps.related_admin',
 
     'admin_tools',
     'admin_tools.theming',
