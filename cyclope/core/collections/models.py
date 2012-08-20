@@ -39,14 +39,16 @@ from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 
 import cyclope
+from cyclope.utils import ThumbnailMixin
 
 
-class Collection(models.Model):
+class Collection(models.Model, ThumbnailMixin):
     """A facility for creating custom content collections.
     """
 
     name = models.CharField(_('name'), max_length=100, unique=True)
-    slug = AutoSlugField(populate_from='name', always_update=True)
+    slug = AutoSlugField(populate_from='name', always_update=False,
+                         editable=True, blank=True)
     # collections that aren't visible can be used to customize content behaviour
     visible = models.BooleanField(_('visible'),
                                              default=True)
@@ -84,7 +86,7 @@ def changed_ctypes(sender, instance, action, reverse, model, pk_set, **kwargs):
 m2m_changed.connect(changed_ctypes, sender=Collection.content_types.through)
 
 
-class Category(models.Model):
+class Category(models.Model, ThumbnailMixin):
     """Categories are associated with a specific Collection,
     and can be generically usable with any content type.
     """
@@ -92,8 +94,8 @@ class Category(models.Model):
     collection = models.ForeignKey(Collection,
         verbose_name=_('collection'), related_name='categories')
     name = models.CharField(_('name'), max_length=100)
-    slug = AutoSlugField(populate_from='name', unique=True,
-                         db_index=True, always_update=True)
+    slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
+                         always_update=False, editable=True, blank=True)
 #    slug = AutoSlugField(populate_from='name', always_update=True)
 #                         unique_with=('parent', 'collection'))
     parent = models.ForeignKey('self', verbose_name=_('parent'),

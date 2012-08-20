@@ -50,6 +50,7 @@ from registration import signals as registration_signals
 
 import cyclope
 from cyclope.core.collections.models import Collection
+from cyclope.utils import ThumbnailMixin
 
 # we add South introspection rules for custom field TagAutocompleteField
 # this shouldn't be necessary once South incorporates this rule
@@ -143,7 +144,7 @@ class MenuItem(models.Model):
                               related_name=_('children'),
                               null=True, blank=True)
     slug = AutoSlugField(populate_from='name', unique_with=('parent'),
-                         always_update=True)
+                         always_update=False, editable=True, blank=True)
     site_home = models.BooleanField(_('site home'), default=False)
     custom_url = models.CharField(_('custom URL'), max_length=200,
                                   blank=True, default='')
@@ -308,8 +309,8 @@ class BaseContent(models.Model):
     """
     name = models.CharField(_('name'), max_length=250,
                              db_index=True, blank=False)
-    slug = AutoSlugField(populate_from='name', unique=True,
-                         db_index=True, always_update=True)
+    slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
+                         always_update=False, editable=True, blank=True)
     tags = TagAutocompleteField(_('tags'))
     published =  models.BooleanField(_('published'), default=True)
     related_contents = generic.GenericRelation(RelatedContent,
@@ -396,15 +397,15 @@ class BaseContent(models.Model):
         abstract = True
 
 
-class Author(models.Model):
+class Author(models.Model, ThumbnailMixin):
     """Model to be used for every content that needs an author.
 
     This referes to the author of the content, not to the user uploading it.
     """
     name = models.CharField(_('name'), max_length=250,
                              db_index=True, blank=False)
-    slug = AutoSlugField(populate_from='name', unique=True,
-                         db_index=True, always_update=True)
+    slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
+                         always_update=False, editable=True, blank=True)
     image = FileBrowseField(_('image'), max_length=100, format='Image',
                             directory='author_images/',
                             blank=True, default='')
@@ -437,17 +438,11 @@ class Source(models.Model):
         verbose_name = _('source')
         verbose_name_plural = _('sources')
 
-class Image(models.Model):
+class Image(models.Model, ThumbnailMixin):
     """A simple image model.
     """
     image =  FileBrowseField(_('image'), max_length=100, format='Image',
                              directory='pictures/')
-
-    def thumbnail(self):
-        return '<img src="%s"/>' % self.image.url_thumbnail
-
-    thumbnail.short_description = _('Thumbnail Image')
-    thumbnail.allow_tags = True
 
     class Meta:
         verbose_name = _('image')

@@ -7,7 +7,7 @@
     <h2 class="title"><a href="{{media.get_absolute_url}}">{{ media.name }}</a></h2>
   {% endif %}
   {% if media.image %}
-    <div class="media-content slideshow_{{media.get_object_name}}"><img class="slideshow_picture" src="{% version media.image.path view_options.visualization_mode %}"/></div>
+    <div class="media-content slideshow_{{media.get_object_name}}"><img class="slideshow_picture" src="{% version media.image.path view_options.visualization_mode %}" alt="{{ media.name }}" /></div>
   {% endif %}
 {% endblock head %}
 
@@ -16,7 +16,7 @@
   {% block description %}
   {% if view_options.show_description %}
     {% if media.description %}
-      <h3 class="summary">{{ media.description|smart_style }}</h3>
+      <div class="summary">{{ media.description|smart_style }}</div>
     {% endif %}
   {% endif %}
   {% endblock description %}

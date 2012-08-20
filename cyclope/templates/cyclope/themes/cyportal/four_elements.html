@@ -1,0 +1,13 @@
+{% extends CYCLOPE_THEME_BASE_TEMPLATE %}
+{% load layout%}
+{% block body_class %}four_elements{% endblock %}
+
+{% block page_content %}
+<div class="grid_19">
+    {% region 'spark' %}
+    <div id="fire">{% block content %}{% endblock %}</div>
+    {% region 'ash' %}
+</div>
+<div class="grid_5" >{% region 'water' %}</div>
+{% endblock %}
+

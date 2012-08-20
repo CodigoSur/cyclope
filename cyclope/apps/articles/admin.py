@@ -49,7 +49,8 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
     form = ArticleForm
     list_filter = CollectibleAdmin.list_filter + \
                   ('creation_date', 'author', 'source')
-    list_display = ('name', 'is_orphan', 'translations')
+    list_display = ('name', 'translations', 'creation_date') + \
+                   CollectibleAdmin.list_display
     search_fields = ('name', 'pretitle', 'summary', 'text', )
     inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines
 
@@ -58,7 +59,7 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
                  (_('Publication data'),
                   {
                     'classes': ('collapse',),
-                    'fields':( 'published', 'source', 'pretitle',
+                    'fields':('slug', 'published', 'source', 'pretitle',
                               'summary', 'date', 'allow_comments', 'creation_date')}),
                 )
 

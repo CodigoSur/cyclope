@@ -1,10 +1,8 @@
 /*
-# Cyclope 3 Workflow Design
-# Theme: Neutrona 
-# Layout: 5 Elements
-# 960 Grid System Based www.960.gs
-# Official Trac Cyclope 3 GPL: http://codigo.cyclope.ws
-# Copyright 2010-2012 Codigo Sur - Sociedad Civil
+# Cyclope 3 GPL
+# Neutronix Workflow Design
+# Layouts: 4 & 5 Elements
+# Copyright 2010-2012 CodigoSur - SociedadCivil
 # All rights reserved.
 # This file is part of Cyclope 3.
 # Cyclope is free software: you can redistribute it and/or modify
@@ -12,8 +10,9 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 # Development: Codigo Sur www.codigosur.org
-# Adaptation HTML + CSS: Santiago Hoerth Moura
-# Not delete this comment :)
+# Less CSS based www.lesscss.org
+# 960 Grid System Based www.960.gs
+# Neutronix is developed by Santiago Hoerth Moura
 */
 
 
@@ -116,13 +115,9 @@ DETAILS CONTENTS
   line-height:1.5em;
   font-size:1.2em;}
 
-#fire .author {
-  font-weight:700;
-  color:@colord;
-  border-left:4px solid @colorb;
-  padding:0 0 0 10px;
-  margin:10px 0 0;
-  font-size:.9em;}
+#fire .media .summary {
+  font-weight:400;
+  font-size:1em;}
 
 #fire .tags {
   margin:20px 0 0 ;
@@ -172,7 +167,6 @@ DETAILS CONTENTS
   color:@color-omega;}
 
 #fire .staticpage-detail {
-  border-bottom:3px solid @colorb;
   padding:0 0 10px;
   margin:0 0 10px;
   font-size:.8em;}
@@ -183,13 +177,85 @@ DETAILS CONTENTS
 #fire .article-detail a,#fire .staticpage-detail a {
   color:@color-omega;}
 
+
+/*-----------------------------------------------------------------------------------------------
+VISTA LISTA DETALLADA ARTICULOS 
+-----------------------------------------------------------------------------------------------*/
+.media h1.title, .staticpage-detail h1.title {
+  padding:10px 0;
+  display:block;
+  border-bottom:1px solid @colord;}
+  
+.media h3.summary {
+  color:@colore;
+  font-weight:400;
+  padding:10px 0;
+  text-align:justify;
+  line-height:1.4em;
+  font-size:1.2em;}
+  
+.media h4.author {
+  color:@colord;
+  border-left:4px solid @colorb;
+  padding:0 0 0 10px;
+  margin:20px 0 20px;
+  font-size:.9em;}
+  
+.media h6.pretitle {
+  color:@colord;
+  text-transform:uppercase;}
+  
+.media h6.date {
+  color:@colord;
+  text-transform:uppercase;}
+  
+.media h6.source {
+  color:@colord;}
+  
+.media .categories ul {
+  list-style:none;
+  margin:10px 0;}
+  
+.media .categories li {
+  display:inline;
+  border:1px solid @colorb;
+  .rounded-corners(4px);
+  padding:5px;
+  background:@colora;
+  color:@color-omega;
+  margin:10px 10px 0 0;
+  font-size:.75em;}
+  
+div.download_link  {
+  display:block;
+  padding:14px 8px;
+  margin:20px 0;
+  font-weight:700;
+  background:@color-omega;
+  color:@color-alpha;
+  width:300px;
+  text-align:center;
+  border:1px solid @color-omega;
+  .rounded-corners(18px);
+  .gradient(top, @colore, @colorc);}
+
+div.download_link:hover  {
+  .gradient(top, @color-omega, @colord);}
+
+div.download_link a {
+  color:@color-alpha;}
+
+/*-----------------
+RELATED CONTENTS
+-------------------*/ 
+
 #fire .related_contents {
   font-weight:700;
   color:@colore;
   background:@colora;
   padding:10px;
   margin:0;
-  width:60%;
+  width:50%;
  .rounded-corners(4px);}
 
 #fire .related_contents span {
@@ -209,7 +275,7 @@ DETAILS CONTENTS
 #fire .related_contents li {
   color: @colorc;
   padding:0 10px 5px 0;
-  margin:0 0 0 20px;}	
+  margin:0 0 0 20px;}
 
 #fire .related_contents li a {
   font-size:0.8em;
@@ -865,3 +931,163 @@ TEXTILE FORMAT
   background: transparent url(../images/css/comentarios.png) no-repeat;
   padding:0 0 10px 20px;
   margin:0 0 0 15px;}
+
+
+/*------------------
+RELATED IMAGES GALLERY
+jQuery lightBox plugin
+-------------------*/
+
+#fire #gallery {
+  float:right;
+  background: transparent;
+  padding:10px;}
+  
+#fire #gallery ul {
+  list-style: none; }
+  
+#fire #gallery ul li {
+  display: inline; }
+  
+#fire #gallery ul img {
+  border: 1px solid @colorc;
+  padding: 5px;
+  width: 250px;
+  height: 250px;}
+  
+#fire #gallery ul a:hover img {
+  border: 1px solid @colore;
+  color: @color-alpha;}
+  
+#fire #gallery ul a:hover {
+  color: @color-alpha;}
+  
+#fire #gallery p {
+  color:@colore;
+  font-size: 0.7em;
+  text-align: center;}
+  
+#fire #lightbox-container-image{
+  background-color: @color-alpha;}
+
+/*------------------
+COMMENTS
+-------------------*/
+
+#user_comments form input {
+  width:40%;
+  border:1px solid @colorc;
+  margin:5px 0 15px;}
+  
+#user_comments form input.submit {
+  width:auto;
+  background:@colord;
+  color:@color-alpha;
+  margin:0 0 0 3px;
+  border:1px solid @colorc;
+  width:120px;}
+
+#user_comments form input.submit:hover {
+  background:@color-omega;}
+  
+#user_comments textarea {
+  width:550px;
+  background-color:@color-alpha;
+  padding:4px;
+  margin:5px 0 15px;
+  border:1px solid @colorc;
+  font-size: 1em;
+  color:@colore;
+  display:block;}
+  
+#user_comments label {
+  display: block;
+  margin:0 0;
+  font-weight:700;
+  font-size:0.9em;}
+  
+#user_comments .show_comment_form {
+  width:250px;
+  margin:0 0 20px;
+  padding:3px;
+  color:@color-alpha;
+  background:@colord;
+  border:1px solid @color-omega;
+  text-align:center;
+ .rounded-corners(4px);}
+  
+#user_comments .show_comment_form a {
+  color:@color-alpha !important;} 
+
+#user_comments {
+  width:550px;
+  text-align:left;
+  margin:25px 0 0;}
+  
+#user_comments .data {
+  color:@color-omega;
+  background-color:@colora;
+  border:0px solid @colorb;
+  padding:10px;
+  margin:0 0 20px;
+  .rounded-corners(6px);
+  .shadows(2px 2px 2px @colorb)}
+  
+#user_comments .data p {
+  font-size:1em;
+  color:@colord;}
+  
+#user_comments .when_who {
+  color:@colorc;
+  font-size:0.7em;}
+  
+#user_comments .when_who a {
+  color:@colorc;}
+  
+#user_comments .bottom-post {
+  margin:20px 0;
+  border:none;
+  border-top:6px dashed @colora;}
+  
+#user_comments .box {
+  color:@colore;
+  margin:0;
+  width:644px;}
+  
+#user_comments h6 {
+  color:@colord;
+  margin:0 0 10px 0;
+  padding:5px 0;
+  font-weight:700;
+  font-size:0.9em;}
+  
+#user_comments img {
+  margin:10px 0;display:block;}
+  
+#user_comments form {
+  padding:0 0 30px 0;
+  margin:0 0 0 0;}
+  				
+#user_comments fieldset {
+  display: block;
+  margin: 0 0 0 0;
+  padding:5px 0;
+  border:none;}
+   
+#user_comments select {
+  display: block;}
+  
+#user_comments small {
+  margin:0;
+  color:@colord;
+  font-weight:400;
+  display:block;
+  padding:3px 0;
+  width:350px;
+  clear:both;
+  font-size:0.8em;}
+  
+#user_comments .hidden {
+  border:none;
+  display:none;}
+

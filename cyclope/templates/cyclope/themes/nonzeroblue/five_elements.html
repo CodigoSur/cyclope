@@ -1,0 +1,30 @@
+{% extends CYCLOPE_THEME_BASE_TEMPLATE %}
+{% load layout %}
+{% block body_class %}five_elements{% endblock %}
+
+
+{% block page_header %}
+{% region 'air' %}
+    <div class="brand">
+        <h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
+        <h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
+    </div>
+        <div class="clear"></div>
+<div id="mask" class="container_24">
+{% endblock %}
+
+
+{% block page_content %}
+  <div class="grid_12">
+    {% region 'spark' %}
+    <div id="fire">{% block content %}{% endblock %}</div>
+    {% region 'ash' %}
+  </div>
+  <div class="grid_7">{% region 'love'%}</div>
+  <div class="grid_5" >{% region 'water' %}</div>
+{% endblock %}
+
+{% block page_footer %}
+</div><!-- /end mask -->
+  {% include "cyclope/themes/neutronix/footer.html" %}
+{% endblock %}

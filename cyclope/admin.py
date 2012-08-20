@@ -91,14 +91,13 @@ class BaseContentAdmin(admin.ModelAdmin):
             return False
         return super(BaseContentAdmin, self).has_delete_permission(request, obj)
 
-    def change_view(self, request, object_id, form_url="", extra_context=None):
+    def change_view(self, request, object_id, extra_context=None):
         if '_frontend' in request.REQUEST:
             if extra_context is None:
                 extra_context = {}
             extra_context['frontend_admin'] = 'frontend_admin'
 
-        return super(BaseContentAdmin, self).change_view(request, object_id,
-                                                          form_url, extra_context)
+        return super(BaseContentAdmin, self).change_view(request, object_id, extra_context)
 
     def add_view(self, request, form_url='', extra_context=None):
         if '_frontend' in request.REQUEST:
@@ -119,10 +118,10 @@ from django.utils.functional import update_wrapper
 class MenuItemAdmin(editor.TreeEditor, PermanentFilterMixin):
     form = MenuItemAdminForm
     fieldsets = ((None,
-                  {'fields': ('menu', 'parent', 'name', 'site_home', 'active')}),
+                  {'fields': ('menu', 'parent', 'name', 'slug', 'site_home', 'active')}),
                  (_('content details'),
                   {'fields':('custom_url', 'content_type', 'content_view',
-                             'view_options', 'object_id'),
+                             'view_options', 'content_object',),
                   'description': _(u"Either set an URL here or select a content"
                                     "type and view.")
                   }),
@@ -167,12 +166,13 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 admin.site.register(SiteSettings, SiteSettingsAdmin)
 
 class ImageAdmin(admin.ModelAdmin):
-	list_display = ['thumbnail']
+    list_display = ['thumbnail']
 
 admin.site.register(Image, ImageAdmin)
 
 class AuthorAdmin(admin.ModelAdmin):
     form = AuthorAdminForm
+    list_display = ('name', 'thumbnail')
     search_fields = ('name', 'origin', 'notes')
 
 admin.site.register(Author, AuthorAdmin)

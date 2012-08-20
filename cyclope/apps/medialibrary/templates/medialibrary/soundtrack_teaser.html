@@ -9,7 +9,7 @@
      {% endif %}
 
     {% if soundtrack.description %}
-      <h3 class="html-content summary">{{ soundtrack.description|smart_style }}</h3>
+      <div class="html-content summary">{{ soundtrack.description|smart_style }}</div>
     {% endif %}
 
     {% include "cyclope/author_block.html" with author=soundtrack.author %}

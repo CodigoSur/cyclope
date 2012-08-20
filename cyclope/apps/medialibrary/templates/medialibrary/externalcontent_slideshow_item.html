@@ -14,12 +14,12 @@
   {% endif %}
   {% if view_options.show_description %}
     {% if externalcontent.description %}
-      <h3 class="html-content summary">
+      <div class="html-content summary">
         {{ externalcontent.description|smart_style }}
           {% if not externalcontent.skip_detail %}
             <span class="more"><a href="{% url externalcontent-detail externalcontent.slug %}">{% trans "More"%}</a></span>
           {% endif %}
-      </h3>
+      </div>
     {% endif %}
 
   {% endif %}

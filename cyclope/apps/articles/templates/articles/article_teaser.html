@@ -19,7 +19,7 @@
 
     {% if article.pictures and not simplified_view %}
       <div class="teaser_icon_container"><a href="{% url article-detail article.slug %}">
-        <img class="teaser_icon" src="{% version article.pictures.0.image.path 'small' %}" width="135" border="0"/>
+        <img class="teaser_icon" src="{% version article.pictures.0.image.path 'small' %}" alt="{{ article.pictures.0.name }}" width="135" border="0"/>
       </a></div>
     {% endif %}
 

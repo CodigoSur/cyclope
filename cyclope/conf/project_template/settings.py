@@ -139,7 +139,7 @@ CYCLOPE_TEXT_STYLE = 'textile'
 HAYSTACK_SITECONF = '{{ project_name }}.search_sites'
 HAYSTACK_WHOOSH_PATH = os.path.join(CYCLOPE_PROJECT_PATH, 'cyclope_project_index')
 
-#FILEBROWSER_MAX_UPLOAD_SIZE = 20971520 # 20MB
+#FILEBROWSER_MAX_UPLOAD_SIZE = 1024*1024*20 # 20MB
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''

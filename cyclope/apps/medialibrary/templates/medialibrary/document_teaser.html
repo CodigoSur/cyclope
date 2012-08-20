@@ -2,14 +2,14 @@
 
   <div class="content-view document teaser">
 
-    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/document.png" /><a href="{% url document-detail document.slug %}">{{ document.name }}</a></h2>
+    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/document.png" alt="{% trans "Document" %}"/><a href="{% url document-detail document.slug %}">{{ document.name }}</a></h2>
 
     {% if document.image %}
-      <div class="teaser_icon_container"><img class="teaser_icon" src="{% version document.image.path 'small' %}" /></div>
+      <div class="teaser_icon_container"><img class="teaser_icon" src="{% version document.image.path 'small' %}" alt="{% trans "Document" %}" /></div>
     {% endif %}
 
     {% if document.description %}
-      <h3 class="html-content summary">{{ document.description|smart_style }}</h3>
+      <div class="html-content summary">{{ document.description|smart_style }}</div>
     {% endif %}
 
     {% include "cyclope/author_block.html" with author=document.author %}

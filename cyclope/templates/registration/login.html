@@ -3,24 +3,25 @@
 {% load i18n %}
 
 {% block content %}
-
+<div class="frontend_login">
   <div class="user_input">
-    <h6>{% trans "Please enter your credentials"%}</h6>
+    <h4 class="title">{% trans "Please enter your credentials"%}</h4>
     <form action="" method="post">
     {{form.as_p}}
-    <input type="submit">
+    <input type="submit" class="submit">
     </form>
   </div>
 
-  <h4>{% blocktrans %}
+  <span class="register">{% blocktrans %}
      If you have not yet created an account you need to
      <a href="/accounts/register?next={{next}}">register</a>
      before you may login.
      {% endblocktrans %}
-  </h4>
+  </span>
 
 <script type="text/javascript">
     document.getElementById('id_username').focus()
 </script>
+</div>
 
 {% endblock %}

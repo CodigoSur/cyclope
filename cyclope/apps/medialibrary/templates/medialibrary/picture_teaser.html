@@ -4,9 +4,9 @@
 
      <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/image.png"/><a href="{% url picture-detail picture.slug %}">{{ picture.name }}</a></h2>
 
-  <div class="media-content teaser_icon_container"><a href="{% url picture-detail picture.slug %}"><img class="teaser_icon" src="{% version picture.image.path 'small' %}" border="0" /></a></div>
+  <div class="media-content teaser_icon_container"><a href="{% url picture-detail picture.slug %}"><img class="teaser_icon" src="{% version picture.image.path 'small' %}" alt="{{ picture.name }}" border="0" /></a></div>
        {% if picture.description %}
-       <h3 class="html-content summary">{{ picture.description|smart_style }}</h3>
+       <div class="html-content summary">{{ picture.description|smart_style }}</div>
      {% endif %}
 
      {% include "cyclope/author_block.html" with author=picture.author %}

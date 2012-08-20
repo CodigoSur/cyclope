@@ -48,10 +48,11 @@ def media_admin_factory(media_model):
             model = media_model
 
     if media_model in has_thumbnail:
-        list_display = ['name', 'admin_thumbnail']
+        list_display = ['name', 'thumbnail']
     else:
         list_display = ['name']
-        
+    list_display += CollectibleAdmin.list_display
+
     return type('%sAdmin' % media_model.__name__,
                 (MediaAdmin,),
                 {'form': MediaLibraryForm, 'list_display': list_display})

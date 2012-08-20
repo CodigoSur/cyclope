@@ -9,7 +9,7 @@
      {% endif %}
 
      {% if flashmovie.description %}
-       <h3 class="html-content summary">{{ flashmovie.description|smart_style }}</h3>
+       <div class="html-content summary">{{ flashmovie.description|smart_style }}</div>
      {% endif %}
 
     {% include "cyclope/author_block.html" with author=flashmovie.author %}

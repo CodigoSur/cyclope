@@ -1,0 +1,173 @@
+/*
+# Cyclope 3 GPL
+# Neutronix Workflow Design
+# Layouts: 4 & 5 Elements
+# Official Repository Cyclope 3 GPL: http://codigo.cyclope.ws
+# Copyright 2010-2012 CodigoSur - SociedadCivil
+# All rights reserved.
+# This file is part of Cyclope 3.
+# Cyclope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# Development: Codigo Sur www.codigosur.org
+# Less CSS based www.lesscss.org
+# 960 Grid System Based www.960.gs
+# Neutronix is developed by Santiago Hoerth Moura
+*/
+
+/*-----------------------------------------------------------------------------------------------
+AIR MENU
+-----------------------------------------------------------------------------------------------*/
+#air {
+  margin:10px 0 0;
+  padding:0 0 5px;
+  position:relative;
+  background:@colora;}
+
+#air .redes {
+  float:right;}
+
+#air .menuitems_hierarchy {
+  position:relative;
+  height: 30px;
+  padding: 0 0 0;
+  z-index:10;}
+
+#air .menuitems_hierarchy ul {
+  float:right;
+  list-style: none;
+  border-left:2px solid #999;
+  margin:0 5px 0 0;
+  background:transparent;}
+ 
+#air .menuitems_hierarchy li  {
+  float:left;
+  margin: 0 0 0;
+  border-right:2px solid #999;
+  background:transparent;}
+
+#air .menuitems_hierarchy li a {
+  display: block; 
+  text-decoration: none; 
+  color: @color-omega; 
+  font-weight: 700;
+  margin: 0;
+  padding: 1px 7px;
+  background:transparent;}
+
+#air .menuitems_hierarchy li a:hover { 
+  background:transparent;
+  color:@colore; }
+
+#air .menuitems_hierarchy span.current a {
+  }
+/* Sub Menues */
+#air .menuitems_hierarchy ul ul{
+  font-size:.85em;
+  width:180px;
+  position:absolute;
+  margin:0;
+  padding:0 0 5px;
+  border:none;
+  background:@colora;
+  .rounded-corners-bottom(5px);}
+
+#air .menuitems_hierarchy li li {
+  float:none;
+  margin: 0;
+  border:none;}
+
+#air .menuitems_hierarchy li li a {
+  padding: 8px 10px;
+  background:@colora;}
+
+#air .menuitems_hierarchy li li a:hover,
+#air .menuitems_hierarchy li li.expanded {
+  background:#b6af9c;} 
+
+#air .menuitems_hierarchy li li.expanded span.has_children,
+#air .menuitems_hierarchy li li.expanded span.has_children a {
+  background:#b6af9c;} 
+
+/* SUB-SUB MENUES */
+#air .menuitems_hierarchy ul ul ul {
+  background:@colore;
+  margin:-32px 0 0 0;}
+
+#air .menuitems_hierarchy li li li {
+  }
+
+#air .menuitems_hierarchy li li li a {
+  padding: 8px 10px;
+  background:#b6af9c;}
+
+#air .menuitems_hierarchy li li li a:hover {
+  background:#b6af9c; }
+
+/*SEARCH BOX*/
+#air .search-box {
+  position:absolute;
+  top:-5px;
+  left:0;
+  z-index:20;
+  width:350px;}
+
+#air .search-box form {
+  margin:0 15px 0 0;
+  padding:5px;
+  float:left;
+  z-index:50;}
+
+#air .search-box input {
+  padding:6px 3px;
+  margin:0;
+  border:1px solid #a30047;
+  color:@color-omega;
+  width:330px;
+  font-size:0.75em;
+  background:url(../images/css/search.png) no-repeat center right @color-alpha;
+  }
+
+#air .search-box input.submit {
+  display:none;
+  border:none;
+  padding:3px 0;
+  border:1px solid #a30047;
+  margin:0 0 0 0;
+  width:35px;
+  height:25px;
+  }
+
+/*-----------------------------------------------------------------------------------------------
+BRAND
+-----------------------------------------------------------------------------------------------*/
+.brand {
+  height:130px;
+  background-image:none; /* url(../images/css/cabezal.png) 0 0 no-repeat;*/
+  padding:0;
+  margin:0 0;}
+
+.brand h1 {
+  padding:0;
+  text-align:center;
+  font-size:3.5em;
+  margin:0;
+  font-family:Arial, Sans, Verdana;}
+
+.brand h1 a {
+  color:#e62b20; 
+  text-decoration:none;}
+
+.brand h2 {
+  font-size:1.3em;
+  font-weight:400;
+  padding:0;
+  margin:0;
+  text-align:center;}
+
+.brand h2 a {
+  color:#0d75ba; 
+  text-decoration:none;}
+
+ 

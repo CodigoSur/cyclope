@@ -100,6 +100,7 @@ INSTALLED_APPS = [
     'cyclope.apps.feeds',
     'cyclope.apps.dynamicforms',
     'cyclope.apps.abuse',
+    'cyclope.apps.related_admin',
 
     'admin_tools',
     'admin_tools.theming',
@@ -207,7 +208,7 @@ FILEBROWSER_VERSIONS = {
                   'width': 550, 'height': '', 'opts': 'crop'},
 }
 
-FILEBROWSER_MAX_UPLOAD_SIZE = 20971520 # 20MB
+FILEBROWSER_MAX_UPLOAD_SIZE = 1024*1024*20 # 20MB
 
 # django-registration settings
 ACCOUNT_ACTIVATION_DAYS = 7

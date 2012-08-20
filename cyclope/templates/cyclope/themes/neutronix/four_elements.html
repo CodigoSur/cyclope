@@ -6,13 +6,9 @@
 
 {% block page_content %}
 <div class="grid_19">
-<div id="fire">
   {% region 'spark' %}
-  <div class="content_fire">
-  {% block content %} {% endblock %}
-  </div>
+  <div id="fire">{% block content %} {% endblock %}</div>
   {% region 'ash' %}
 </div>
-</div>
-
+<div class="grid_5" >{% region 'water' %}</div>
 {% endblock %}

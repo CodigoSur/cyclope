@@ -26,7 +26,7 @@
      
     
        {% if staticpage.text %}
-      <h3 class="html-content summary"><p>{{ staticpage.text|smart_style|striptags|truncatewords:40 }}</p></h3>
+      <div class="html-content summary"><p>{{ staticpage.text|smart_style|striptags|truncatewords:40 }}</p></div>
     {% endif %}
     {% endif %}
 
