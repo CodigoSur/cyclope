@@ -3,13 +3,13 @@
 {% block body_class %}five_elements{% endblock %}
 
 {% block page_content %}
-{% region 'spark' %}
-<div class="container">
-    <div class="clear"></div>
-    <div class="grid_15">
-        <div id="fire"> {% block content %}{% endblock %}</div>
-        {% region 'ash' %}
-    </div>
-    <div class="grid_9">{% region 'love'%}</div>
+<div>{% region 'water' %}</div>
+  <div class="clear"></div>
+ {% region 'spark' %} 
+      <div class="clear"></div>
+<div class="grid_15">
+    <div id="fire">{% block content %}{% endblock %}</div>
+    {% region 'ash' %}
 </div>
+<div class="grid_9">{% region 'love'%}</div>
 {% endblock %}
