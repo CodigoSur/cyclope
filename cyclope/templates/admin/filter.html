@@ -1,8 +1,14 @@
 {% load i18n %}
-<h3>{% blocktrans with title as filter_title %} By {{ filter_title }} {% endblocktrans %}</h3>
+<h3>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h3>
 <ul>
 {% for choice in choices %}
+    {% if choice.query_string == "?categories__category__slug=COLLECTION" %}
+    <div><span class='expand_collapse'>{{ choice.display|safe }}</span><ul class='categories-filter'>
+    {% elif choice.query_string == "?categories__category__slug=EOCOLLECTION" %}
+    </ul></div>
+    {% else %}
     <li{% if choice.selected %} class="selected"{% endif %}>
     <a href="{{ choice.query_string|iriencode }}">{{ choice.display|safe }}</a></li>
+    {% endif %}
 {% endfor %}
 </ul>

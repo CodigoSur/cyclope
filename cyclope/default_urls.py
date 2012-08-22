@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2012 Código Sur Asoc. Civil
+# Copyright 2010-2012 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -24,7 +24,7 @@
 
 # see cyclope/demo for an example
 
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, include, url
 from django.conf import settings as django_settings
 from django.utils.translation import ugettext as _
 from django.contrib import admin
@@ -67,8 +67,6 @@ urlpatterns = patterns('',
     ## 3rd party
     # captcha (django-simple-captcha)
     url(r'^captcha/', include('captcha.urls')),
-    # django-tagging-autocomplete
-    url(r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
     # accounts (django-registration)
     url(r'^accounts/register/$', 'registration.views.register',
         {'backend': 'cyclope.registration_backends.CaptchaBackend'},

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -20,6 +20,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import time
+import json
 
 from django import forms
 from django.test import TestCase
@@ -601,9 +602,19 @@ class CollectionTestCase(ViewableTestCase):
         self.test_object = Collection.objects.create(name='An instance')
         self.test_object.save()
         # most views list categories in the collection, so we create one
-        cat = Category(name='An instance', collection=self.test_object)
+        cat = Category(name='A Category', collection=self.test_object)
         cat.save()
         frontend.autodiscover()
+
+    def test_get_widget_ajax(self):
+        collection = Collection.objects.get(pk=1)
+        response = self.client.get("/collection_categories_json",
+                                  {"q": "1"})
+        categories = json.loads(response.content)
+        self.assertEqual(len(categories), 2)
+        self.assertEqual(categories[0]["category_id"], "")
+        self.assertEqual(categories[1]["category_id"], 1)
+        self.assertContains(response, "A Category")
 
 
 class MenuItemTestCase(ViewableTestCase):
@@ -615,6 +626,16 @@ class MenuItemTestCase(ViewableTestCase):
         self.test_object = MenuItem(name='An instance', menu=menu)
         self.test_object.save()
         frontend.autodiscover()
+
+    def test_menu_item_without_view(self):
+        menu = Menu.objects.create(name='Menu')
+        menu_item = MenuItem(name='MI', menu=menu)
+        menu_item.save()
+        article = Article.objects.create(name='An article',)
+        menu_item.content_object = article
+        menu_item.save()
+        self.assertEqual(menu_item.content_view,
+                         frontend.site.get_default_view_name(Article))
 
 
 class MenuTestCase(ViewableTestCase):
@@ -663,7 +684,6 @@ class DynamicFormTestCase(ViewableTestCase):
         url = '/'+ get_instance_url(self.test_object, view.name)
         response = self.client.post(url, data={})
         self.assertEqual(response.status_code, 200)
-        self.assertTrue("This field is required" in response.content)
 
 
 class MultipleFieldTestCase(TestCase):
@@ -679,6 +699,13 @@ class MultipleFieldTestCase(TestCase):
 
     def test_initial_values(self):
         self.assertIn('value="3"', self.form.as_p())
+
+    def test_get_widget_ajax(self):
+        response = self.client.get("/options_view_widget_html",
+                                   {"content_type_name": "category",
+                                    "view_name": "default"})
+        self.assertContains(response, "view_options")
+
 
 
 class DispatcherTestCase(TestCase):
@@ -895,3 +922,29 @@ class FrontendEditTestCase(TestCase):
         response = self.client.get('/category/category/')
         self.assertNotContains(response, 'class="category_add_content"')
 
+class SimpleAdminTests(TestCase):
+    """
+    This is a realy simple test to catch errors on GET of some pages of the
+    admin.
+    """
+    fixtures = ['cyclope_demo.json']
+
+    pages = [
+        "/admin/",
+        "/admin/cyclope/menuitem/", "/admin/cyclope/menuitem/1/",
+        "/admin/cyclope/menu/", "/admin/cyclope/menu/1/",
+        "/admin/cyclope/layout/", "/admin/cyclope/layout/1/",
+        "/admin/collections/collection/", "/admin/collections/collection/1/",
+        "/admin/collections/category/", "/admin/collections/category/1/",
+        "/admin/articles/article/", "/admin/articles/article/4/",
+        "/admin/cyclope/sitesettings/1/",
+    ]
+
+    def test_get_some_pages(self):
+        admin = User(username='admin', is_staff=True, is_superuser=True)
+        admin.set_password('password')
+        admin.save()
+        self.client.login(username='admin', password="password")
+        for page in self.pages:
+            status = self.client.get(page).status_code
+            self.assertEqual(status, 200, "status: %d | page: %s" % (status, page))

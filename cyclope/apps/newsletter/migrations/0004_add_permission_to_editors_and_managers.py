@@ -13,7 +13,7 @@ class Migration(DataMigration):
             perms = Permission.objects.filter(codename__contains="newsletter")
             for group in groups:
                 group.permissions.add(*perms)
-        except Group.DoesNotExists:
+        except Group.DoesNotExist:
             pass
 
 

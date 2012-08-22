@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<div class="content-view poll teaser poll-teaser">
+
+  <h2 class="title"><a href="{% url poll-submission poll.slug %}">{{ poll.name }}</a></h2>
+
+  <div class="summary">
+    {{ poll.description}}
+  </div>
+
+</div>

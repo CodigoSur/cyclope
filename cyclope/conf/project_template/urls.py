@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, include, url
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 frontend.autodiscover()

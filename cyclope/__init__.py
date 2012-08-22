@@ -79,5 +79,5 @@ If you need to contact the development team you can reach us by e-mail: nicoecha
 
 """
 
-VERSION = (0, 1, 0)
+VERSION = (0, 2, 0, 'beta')
 __version__ = '.'.join(map(str, VERSION))

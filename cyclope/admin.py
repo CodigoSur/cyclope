@@ -91,13 +91,14 @@ class BaseContentAdmin(admin.ModelAdmin):
             return False
         return super(BaseContentAdmin, self).has_delete_permission(request, obj)
 
-    def change_view(self, request, object_id, extra_context=None):
+    def change_view(self, request, object_id, form_url="", extra_context=None):
         if '_frontend' in request.REQUEST:
             if extra_context is None:
                 extra_context = {}
             extra_context['frontend_admin'] = 'frontend_admin'
 
-        return super(BaseContentAdmin, self).change_view(request, object_id, extra_context)
+        return super(BaseContentAdmin, self).change_view(request, object_id,
+                                                          form_url, extra_context)
 
     def add_view(self, request, form_url='', extra_context=None):
         if '_frontend' in request.REQUEST:

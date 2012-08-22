@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2012 Código Sur Asoc. Civil
+# Copyright 2012 Código Sur Asociación Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -50,7 +50,7 @@ class CategoryPermBackend(object):
         elif issubclass(obj.__class__, Category):
             categories = [obj]
         return CategoryPermission.objects.filter(category__in=categories, user=user_obj)
-    
+
     def get_all_permissions(self, user_obj, obj=None):
         """Returns a dictionary of permissions a user has over a Category or Collectible"""
         permissions = self._get_all_permissions(user_obj, obj)

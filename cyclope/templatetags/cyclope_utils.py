@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -126,19 +126,10 @@ def do_assign(parser, token):
     value = parser.compile_filter(bits[2])
     return AssignNode(bits[1], value)
 
-@register.filter
-# truncate after a certain number of characters
-def truncatechars(value, arg):
-    if len(value) < arg:
-        return value
-    else:
-        return value[:arg] + '...'
-
-
 def admin_list_filter_without_all(cl, spec):
     choices = list(spec.choices(cl))
     choices.pop(0) # Remove "all" option
-    return {'title': spec.title(), 'choices' : choices}
+    return {'title': spec.title, 'choices' : choices}
 admin_list_filter_without_all = register.inclusion_tag('admin/filter.html')(admin_list_filter_without_all)
 
 

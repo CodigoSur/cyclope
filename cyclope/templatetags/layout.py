@@ -64,6 +64,8 @@ def region(context, region_name):
             )
         # instance views need instance data -> slug
         if view.is_instance_view:
+            if regionview.content_object is None:
+                raise template.TemplateSyntaxError
             slug = regionview.content_object.slug
             view_vars['output'] = view(context['request'], region_name=region_name,
                                        content_object=regionview.content_object,

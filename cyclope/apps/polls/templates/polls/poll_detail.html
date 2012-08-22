@@ -1,9 +1,5 @@
 {% extends host_template %}
 
-{% comment%}
-TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text that should be translated
-{% endcomment%}
-
 {% load comments i18n fb_versions cyclope_utils markup %}
 
 {% block content %}
@@ -19,10 +15,6 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
   <!-- herramientas -->
   {% include 'cyclope/content_tools_block.html' %}
 
-  {% if poll.tags %}
-    <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ poll.tags }}</span></div>
-  {% endif %}
-
     <div class="poll_results">
       {% for question in poll.question_set.all %}
         <p>{{ question.text }}</p>
@@ -31,15 +23,13 @@ TODO(nicoechaniz): finish adaptation from smarty to django. add trans to text th
           <li> {{answer.text}} ({{answer.get_votes}}) </li>
           {% endfor %}
         </ul>
-      
+
       {% endfor %}
     </div>
   {% include 'cyclope/related_contents_block.html' %}
 
 
-            <div class="clear"></div>
-
-  <hr>
+  <div class="clear"></div>
 
 <!--COMENTARIOS -->
   {% include 'comments/comments_block.html' %}

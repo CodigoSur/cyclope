@@ -25,95 +25,47 @@ core.collections.admin
 """
 import django
 from django import forms
-from django.db import models
 from django.contrib import admin
 from django.db.models import get_model
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes import generic
+from django.contrib.admin import SimpleListFilter
 from django.utils.translation import ugettext_lazy as _
 
 from markitup.widgets import AdminMarkItUpWidget
 from mptt.forms import TreeNodeChoiceField
 from feincms.admin import editor
 
-#from cyclope.widgets import CKEditor
-
 from cyclope.core import frontend
 
 from models import *
-from cyclope.models import Menu
-from cyclope.core.frontend import site
 from cyclope.fields import MultipleField
 from cyclope import settings as cyc_settings
 from cyclope.core.perms.admin import CategoryPermissionInline
 from cyclope.forms import ViewOptionsFormMixin
 from cyclope.utils import PermanentFilterMixin
 
-####
-# custom FilterSpec
-# based on snippet found at:
-# http://www.djangosnippets.org/snippets/1051/
-# This is a workaround to add a custom filter to the admin changelist
-# until a generic way of adding custom filter specs make it into django.
-# See ticket: http://code.djangoproject.com/ticket/5833
-####
+class CategoryListFilter(SimpleListFilter):
+    title = _('category')
+    parameter_name = 'categories__category__slug'
 
-from django.db import models
-from django.contrib.admin.filterspecs import FilterSpec, ChoicesFilterSpec
-from django.utils.encoding import smart_unicode
-
-class CategoryFilterSpec(ChoicesFilterSpec):
-    """Adds filtering by categories.
-
-    To be used by Collectible based objects.
-
-    categories.category_filter must be set to True in the model
-    for this filter to be active.
-    """
-    def __init__(self, f, request, params, model, model_admin, field_path=None):
-        super(CategoryFilterSpec, self).__init__(f, request, params, model,
-                                                   model_admin, field_path)
-
-        self.lookup_kwarg = 'categories__category__slug'
-        self.lookup_val = request.GET.get(self.lookup_kwarg, None)
-
-        object_ctype = ContentType.objects.get_for_model(model)
+    def lookups(self, request, model_admin):
+        # Lookups are arranged by collections in a collapsable way
+        # so we add marks for the template (COLLECTION & EOCOLLECTION)
+        object_ctype = ContentType.objects.get_for_model(model_admin.model)
         collections = Collection.objects.filter(content_types=object_ctype)
-
-        self.lookup_choices = []
+        lookup_choices = []
         for collection in collections:
-            # we hack a bit on the standard django way of displaying filters
-            # to allow for a collapsible sub-level
-            self.lookup_choices.append(
-                (None, "</a><div><span class='expand_collapse'>"+collection.name+"</span><ul class='categories-filter'>"))
             categories = Category.tree.filter(collection=collection)
+            lookup_choices.append(("COLLECTION", collection.name))
             for category in categories:
-                self.lookup_choices.append((category.slug, u'%s%s' % \
-                                            ('--'* category.level, category.name)))
-            self.lookup_choices.append((None, "</a></ul></div>"))
+                lookup_choices.append((category.slug, u'%s%s' % ('--'* category.level, category.name)))
+            lookup_choices.append(("EOCOLLECTION", ""))
+        return lookup_choices
 
-        self.model = model
-
-    def choices(self, cl):
-        # show All items when no choice is selected
-        yield {'selected': self.lookup_val is None,
-                'query_string': cl.get_query_string({}, [self.lookup_kwarg]),
-                'display': _('All')}
-        for [val, display] in self.lookup_choices:
-            selected = smart_unicode(val) == self.lookup_val
-            if selected:
-                display = display.lstrip('-')
-            yield {'selected': selected,
-                  'query_string': cl.get_query_string({self.lookup_kwarg: val}),
-                  'display': display}
-
-    def title(self):
-        return _('categories')
-
-FilterSpec.filter_specs.insert(0, (lambda f: \
-                                   getattr(f, 'category_filter', False),
-                                   CategoryFilterSpec))
-####
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(categories__category__slug=self.value())
 
 
 class CategoryForm(forms.ModelForm):
@@ -206,8 +158,8 @@ class CollectibleAdmin(admin.ModelAdmin):
     """Base admin class for models that inherit from Collectible.
     """
     list_display = ("categories_on", )
-    list_filter = ('categories',)
-    inlines = [ CategorizationInline, ]
+    list_filter = (CategoryListFilter,)
+    inlines = [CategorizationInline, ]
     valid_lookups = ('categories',)
 
     def categories_on(self, obj):
