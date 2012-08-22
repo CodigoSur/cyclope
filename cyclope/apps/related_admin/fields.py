@@ -37,6 +37,7 @@ class GenericModelChoiceField(fields.Field):
     Simple form field that converts strings to models.
     """
     def validate(self, value):
+        super(GenericModelChoiceField, self).validate(value)
         if not value and not self.required:
             return True
 
@@ -67,13 +68,12 @@ class GenericModelChoiceField(fields.Field):
         5.
         """
         if not value:
-            return value
-
+            raise forms.ValidationError(_(u"Wrong value: can't be empty"))
         try:
             content_type_id, object_id = value.split('-')
             content_type = ContentType.objects.get_for_id(content_type_id)
         except (ContentType.DoesNotExist, ValueError):
-            raise forms.ValidationError(_(u'Wrong content type'))
+            raise forms.ValidationError(_(u'Wrong content type or object'))
         else:
             model = content_type.model_class()
 
