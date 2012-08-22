@@ -212,6 +212,11 @@ class FrontendTestCase(TestCase):
         views = cyclope.core.frontend.site.get_views(self.Model())
         self.assertEqual(len(views), 0)
 
+    def test__name__expected(self):
+        view = cyclope.core.frontend.site.get_view(self.Model, 'model-detail')
+        self.assertEqual(view.__name__, view.name)
+
+
 
 class SiteSettingsTestCase(TestCase):
     def setUp(self):

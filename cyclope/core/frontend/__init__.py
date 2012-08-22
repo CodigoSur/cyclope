@@ -58,6 +58,7 @@ class FrontendView(object):
     """
 
     name = ''
+    __name__ = property(lambda self: self.name) # Needed for compatibility
     verbose_name = ''
     is_default = False
     is_instance_view = True
