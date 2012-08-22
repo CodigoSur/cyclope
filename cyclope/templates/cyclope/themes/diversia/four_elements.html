@@ -4,7 +4,10 @@
 {% block body_class %}four_elements{% endblock %}
 
 {% block page_content %}
+<div>{% region 'water' %}</div>
+  <div class="clear"></div>
 {% region 'spark' %}
+  <div class="clear"></div>
 <div class="container">
     <div class="clear"></div>
     <div id="fire"> {% block content %}{% endblock %}</div>
