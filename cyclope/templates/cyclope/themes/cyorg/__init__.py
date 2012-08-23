@@ -8,7 +8,7 @@ Attributes:
 
 from django.utils.translation import ugettext_lazy as _
 
-verbose_name = _('Neutronix')
+verbose_name = _('Cyorg')
 
 layout_templates = {
 
