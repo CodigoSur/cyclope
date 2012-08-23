@@ -52,6 +52,7 @@ setup(
         'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-0.4a1',
         'hg+http://bitbucket.org/nicoechaniz/django-rosetta_temp#egg=django-rosetta-0.6.2-temp',
         'hg+http://bitbucket.org/san/django-jsonfield#egg=django-jsonfield-0.6.0-cyclope',
+        'git+http://github.com/HonzaKral/django-threadedcomments.git@issue/39#egg=django-threadedcomments-0.9'
     ],
 
     install_requires=[
@@ -78,6 +79,7 @@ setup(
         'django-jsonfield==0.6.0-cyclope', # installed from our clone
         'feedparser==5.1',
         'django-forms-builder>=0.7.5,<0.8',
+        'django-threadedcomments==0.9',
     ],
 
     scripts=['cyclope/bin/cyclopeproject'],

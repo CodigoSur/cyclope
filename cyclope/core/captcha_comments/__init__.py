@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -20,6 +20,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from cyclope.core.captcha_comments.forms import CommentFormWithCaptcha
+
+from threadedcomments import get_model # Dont delete this import if you don't
+                                        # know what are you doing
 
 def get_form():
     return CommentFormWithCaptcha

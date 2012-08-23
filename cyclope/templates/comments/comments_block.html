@@ -1,37 +1,56 @@
-{% load comments i18n %}
-  {% get_comment_count for current_object as comment_count %}
+{% load threadedcomments_tags i18n %}
+{% if current_object.allow_comments == 'YES' or current_object.allow_comments == 'SITE' and CYCLOPE_SITE_SETTINGS.allow_comments == 'YES' %}
 
-      {% if current_object.allow_comments == 'YES' or current_object.allow_comments == 'SITE' and CYCLOPE_SITE_SETTINGS.allow_comments == 'YES' %}
-    {% get_comment_count for current_object as comment_count %}
+  {% get_comment_count for current_object as comment_count %}
    <div>
     <script type="text/javascript">
-    jQuery(document).ready(function(){
-      $('#comment_form').hide();
-      $('#show_comment_form').click(function() {
-        $('#comment_form').toggle();
-      });
-    });
+
+        function show_reply_form(event) {
+            var $this = $(this);
+            var comment_id = $this.data('comment-id');
+
+            $('#id_parent').val(comment_id);
+            $('#form-comment').insertAfter($this.closest('.comment'));
+            $('#form-comment').show();
+        };
+
+        function cancel_reply_form(event) {
+            $('#id_comment').val('');
+            $('#id_parent').val('');
+            $('#form-comment').appendTo($('#wrap_write_comment'));
+            $('#form-comment').hide();
+        }
+
+        jQuery(document).ready(function(){
+            $('.comment_reply_link').click(show_reply_form);
+            $('#cancel_reply').click(cancel_reply_form);
+            $('#form-comment').hide();
+
+            $('#show_comment_form').click(function() {
+                cancel_reply_form();
+                $('#form-comment').toggle();
+            });
+        });
     </script>
+
+
     <div id="user_comments">
-      <div class="top">
+      <div class="top comments_length">
         <h6>{% blocktrans %} There are {{ comment_count }} comments {% endblocktrans %}</h6>
       </div>
-      <div class="bottom"></div>
+
       {% render_comment_list for current_object %}
-      <!--enviar comentario -->
 
-      <div class="action-content show_comment_form"><a name="comments" href="#comments" id="show_comment_form">
-        {% trans "comment on this content" %}
-      </a></div>
+      <div class="action-content show_comment_form">
+        <a name="comments" href="#comments" id="show_comment_form">{% trans "comment on this content" %}</a>
+      </div>
 
-      <div class="box-top"></div>
       <div class="box">
-        <div class="user_input" id="comment_form">
+        <div class="user_input" id="wrap_write_comment">
         <!--form comentario -->
-        {% render_comment_form for current_object %}
+         <div id="form-comment">{% render_comment_form for current_object %}</div>
         </div>
-      </div> <!-- termina box -->
-      <div class="bottom"></div>
-    </div><!--termina comments -->
+      </div>
+    </div>
    </div>
-  {% endif %}
+{% endif %}

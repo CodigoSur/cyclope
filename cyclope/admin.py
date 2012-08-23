@@ -208,6 +208,8 @@ class CyclopeCommentsAdmin(CommentsAdmin):
         return  "<a href='%s'>%s</a>" % (url, url)
     content_url.allow_tags = True
 
-
-admin.site.unregister(Comment)
+try:
+    admin.site.unregister(Comment)
+except admin.sites.NotRegistered:
+    pass
 admin.site.register(Comment, CyclopeCommentsAdmin)

@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     'tagging',
     'tagging_autocomplete',
 
+
     'cyclope',
     'cyclope.core.collections',
     'cyclope.core.captcha_comments',
@@ -105,6 +106,8 @@ INSTALLED_APPS = [
     'admin_tools.theming',
     'admin_tools.menu',
     'admin_tools.dashboard',
+
+    'threadedcomments',
 
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -21,10 +21,10 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django import forms
-from django.contrib.comments.forms import CommentForm
+from threadedcomments.forms import ThreadedCommentForm
 from captcha.fields import CaptchaField
 
-class CommentFormWithCaptcha(CommentForm):
+class CommentFormWithCaptcha(ThreadedCommentForm):
     url = forms.URLField(label=_("Website or Blog"), required=False)
     captcha = CaptchaField(label=_("Security code"))
 
