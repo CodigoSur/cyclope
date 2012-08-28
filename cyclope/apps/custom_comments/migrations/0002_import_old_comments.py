@@ -14,8 +14,9 @@ class Migration(DataMigration):
                      "is_public", "is_removed", "user_url"]
             for attr in attrs:
                 setattr(cc, attr, getattr(com, attr))
+
             com.delete()
-            cc.save(send_notifications=False)
+            cc.save()
 
     def backwards(self, orm):
         raise RuntimeError("Cannot reverse this migration.")
