@@ -240,6 +240,21 @@
           "article"
         ], 
         [
+          "add_categorization", 
+          "collections", 
+          "categorization"
+        ], 
+        [
+          "change_categorization", 
+          "collections", 
+          "categorization"
+        ], 
+        [
+          "delete_categorization", 
+          "collections", 
+          "categorization"
+        ], 
+        [
           "add_category", 
           "collections", 
           "category"
@@ -305,6 +320,16 @@
           "contactformsettings"
         ], 
         [
+          "change_customcomment", 
+          "custom_comments", 
+          "customcomment"
+        ], 
+        [
+          "delete_customcomment", 
+          "custom_comments", 
+          "customcomment"
+        ], 
+        [
           "add_author", 
           "cyclope", 
           "author"
@@ -333,6 +358,21 @@
           "delete_menuitem", 
           "cyclope", 
           "menuitem"
+        ], 
+        [
+          "add_relatedcontent", 
+          "cyclope", 
+          "relatedcontent"
+        ], 
+        [
+          "change_relatedcontent", 
+          "cyclope", 
+          "relatedcontent"
+        ], 
+        [
+          "delete_relatedcontent", 
+          "cyclope", 
+          "relatedcontent"
         ], 
         [
           "change_sitesettings", 
