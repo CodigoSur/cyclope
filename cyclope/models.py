@@ -87,6 +87,8 @@ class SiteSettings(models.Model):
                                                verbose_name=_('whole feed contents'),
                                                help_text=_('contents to show in the whole feed'))
     enable_abuse_reports = models.BooleanField(_('enable abuse reports'), default=False)
+    enable_comments_notifications = models.BooleanField(_('enable comments email notifications'),
+                                                        default=True)
 
     def save(self, *args, **kwargs):
         self.id = 1

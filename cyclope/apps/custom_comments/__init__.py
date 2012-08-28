@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -19,19 +19,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from django.utils.translation import ugettext_lazy as _
-from django import forms
-from threadedcomments.forms import ThreadedCommentForm
-from captcha.fields import CaptchaField
+from forms import CustomCommentForm
+from models import CustomComment
 
-class CommentFormWithCaptcha(ThreadedCommentForm):
-    url = forms.URLField(label=_("Website or Blog"), required=False)
-    captcha = CaptchaField(label=_("Security code"))
 
-    def clean(self):
+def get_model():
+    return CustomComment
 
-        # captcha_ input only exists when the user is authenticated
-        if 'captcha_' in self.data:
-            if 'captcha' in self._errors:
-                self._errors.pop('captcha')
-        return super(CommentFormWithCaptcha, self).clean()
+def get_form():
+    return CustomCommentForm

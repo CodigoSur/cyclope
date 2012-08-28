@@ -24,6 +24,7 @@
       {% else %}
           {{ field.label_tag }}
           {{ field }}
+          <span class="helptext">{{ field.help_text }}</span>
        {% endif %}
     {% endif %}
   {% endfor %}

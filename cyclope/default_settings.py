@@ -87,7 +87,6 @@ INSTALLED_APPS = [
 
     'cyclope',
     'cyclope.core.collections',
-    'cyclope.core.captcha_comments',
     'cyclope.core.perms',
     'cyclope.apps.articles',
     'cyclope.apps.staticpages',
@@ -101,6 +100,7 @@ INSTALLED_APPS = [
     'cyclope.apps.dynamicforms',
     'cyclope.apps.abuse',
     'cyclope.apps.related_admin',
+    'cyclope.apps.custom_comments',
 
     'admin_tools',
     'admin_tools.theming',
@@ -148,7 +148,7 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 #DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
 
 # comments settings
-COMMENTS_APP = 'cyclope.core.captcha_comments'
+COMMENTS_APP = 'cyclope.apps.custom_comments'
 
 # captcha settings
 CAPTCHA_NOISE_FUNCTIONS=('captcha.helpers.noise_arcs',)
