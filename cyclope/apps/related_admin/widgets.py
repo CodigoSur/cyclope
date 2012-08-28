@@ -136,7 +136,7 @@ class GenericFKWidget(ForeignKeyRawIdWidget):
         output.append("""%(generic_script)s
             <a href="%(related)s%(url)s" class="related-lookup" id="lookup_id_%(name)s" onclick="return showGenericRelatedObjectLookupPopup('%(ct_field)s', this, '%(related)s%(url)s');"> """
              % {'generic_script': generic_script, 'related': related_url, 'url': url, 'name': name, 'ct_field': ct_field})
-        output.append('<img src="%simg/admin/selector-search.gif" width="16" height="16" alt="%s" /></a>' % (settings.ADMIN_MEDIA_PREFIX, 'Lookup'))
+        output.append('<img src="%simg/selector-search.gif" width="16" height="16" alt="%s" /></a>' % (settings.ADMIN_MEDIA_PREFIX, 'Lookup'))
         return mark_safe(u''.join(output) + self.content_types)
 
     def url_parameters(self):
