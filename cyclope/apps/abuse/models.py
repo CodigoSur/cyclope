@@ -1,12 +1,12 @@
 from django.db import models, IntegrityError
-from django.template import loader
-from django.template import Context
+from django.template.loader import render_to_string
 from django.core.mail import mail_managers
 from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+
 
 from . import registry
 
@@ -41,9 +41,9 @@ class AbuseReportElement(models.Model):
         if self.report.status in ("REP", "HOLD"):
             # send mail to managers
             subject = _("Abuse report for object %s") % self.content_object
-            t = loader.get_template("abuse/abuse_report_email.txt")
-            message = t.render(Context({"element": self,
-                                        "domain": Site.objects.get_current().domain}))
+            message = render_to_string("abuse/abuse_report_email.txt",
+                                      {"element": self,
+                                       "domain": Site.objects.get_current().domain})
             mail_managers(subject, message, fail_silently=True)
 
     class Meta:
