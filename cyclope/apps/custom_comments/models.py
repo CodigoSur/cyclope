@@ -35,7 +35,7 @@ class CustomComment(ThreadedComment):
 
     #objects = CommentManager()
 
-    def save(self, *args, **kwargs):
+    def save(self, send_notifications=True, *args, **kwargs):
         from cyclope.utils import get_singleton # Fixme: move out of SiteSettings
         from cyclope.models import SiteSettings
 
@@ -43,7 +43,8 @@ class CustomComment(ThreadedComment):
 
         super(CustomComment, self).save(*args, **kwargs)
 
-        if created and get_singleton(SiteSettings).enable_comments_notifications:
+        if created and get_singleton(SiteSettings).enable_comments_notifications \
+            and send_notifications:
             self.send_email_notifications()
 
     def send_email_notifications(self):
