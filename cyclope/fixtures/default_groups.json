@@ -345,6 +345,21 @@
           "author"
         ], 
         [
+          "add_image", 
+          "cyclope", 
+          "image"
+        ], 
+        [
+          "change_image", 
+          "cyclope", 
+          "image"
+        ], 
+        [
+          "delete_image", 
+          "cyclope", 
+          "image"
+        ], 
+        [
           "add_menuitem", 
           "cyclope", 
           "menuitem"
