@@ -68,6 +68,7 @@ class BaseContentAdmin(admin.ModelAdmin):
     """
     inlines = [RelatedContentInline]
     date_hierarchy = 'creation_date'
+    exclude = ("tags", )
 
     class Media:
         js = (
