@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -40,7 +40,6 @@ from django.contrib.admin.models import LogEntry
 from django.db.models.signals import post_save, pre_delete
 
 from rosetta.poutil import find_pos
-from tagging_autocomplete.models import TagAutocompleteField
 import mptt
 from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
@@ -51,11 +50,6 @@ from registration import signals as registration_signals
 import cyclope
 from cyclope.core.collections.models import Collection
 from cyclope.utils import ThumbnailMixin
-
-# we add South introspection rules for custom field TagAutocompleteField
-# this shouldn't be necessary once South incorporates this rule
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["^tagging_autocomplete\.models\.TagAutocompleteField"])
 
 
 class SiteSettings(models.Model):
@@ -313,7 +307,6 @@ class BaseContent(models.Model):
                              db_index=True, blank=False)
     slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
                          always_update=False, editable=True, blank=True)
-    tags = TagAutocompleteField(_('tags'))
     published =  models.BooleanField(_('published'), default=True)
     related_contents = generic.GenericRelation(RelatedContent,
                                                object_id_field='self_id',

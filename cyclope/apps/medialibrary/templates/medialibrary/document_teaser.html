@@ -1,4 +1,4 @@
-{% load i18n tagging_tags fb_versions cyclope_utils %}
+{% load i18n fb_versions cyclope_utils %}
 
   <div class="content-view document teaser">
 
@@ -16,17 +16,6 @@
 
     {% if document.image %}
     <br class="floating-img-clear" />
-    {% endif %}
-
-    {% if document.tags %}
-        <div class="meta-content" ><span class="tags">
-          <span class="tags-label">{% trans "Tags" %}:</span>
-          {% tags_for_object document as document_tags %}
-          {% for tag in document_tags %}
-            <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
-            {{tag.name}}{% if not forloop.last%},{% endif%}
-          {% endfor %}
-        </span></div>
     {% endif %}
 
     <div class="clear"></div>

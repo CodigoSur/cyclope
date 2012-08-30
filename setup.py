@@ -62,8 +62,6 @@ setup(
         'django-mptt==0.4.2', # 0.4 breaks compatibility
         'PIL>=1.1.7', # in PIL we trust
         'django-simple-captcha==0.2.0',
-        'django-tagging==0.3.1',
-        'django-tagging-autocomplete==0.3.1',
         'django-filebrowser==3.0-nograpup', # installed from our clone
         'South>=0.7,<0.8',
         'django-registration==0.8',

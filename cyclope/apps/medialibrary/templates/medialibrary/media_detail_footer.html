@@ -1,7 +1,7 @@
 {% load i18n comments %}
 
 
-  
+
 {% if media.get_last_change_date or media.source %}
   <div class="meta-content">
     {% if media.get_last_change_date %}
@@ -9,18 +9,11 @@
       {% trans "Last modification date" %}: {{ media.get_last_change_date }}
     </h6>
     {% endif %}
-  
-     
-      {% include "cyclope/source_block.html" with source=media.source %} 
-          
+
+
+      {% include "cyclope/source_block.html" with source=media.source %}
+
   </div>
 {% endif %}
 
   <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
-  
-{% comment %} {# TAGS ARE NOT IMPLEMENTED YET #}
-  {% if media.tags %}
-    <div class="meta-content"><h2 class="tags"><span class="tags-label">{% trans "Tags" %}:</span> {{ media.tags }}</h2></div>
-  {% endif %}
-{% endcomment %}
-

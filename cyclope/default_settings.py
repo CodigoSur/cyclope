@@ -81,9 +81,6 @@ INSTALLED_APPS = [
     'dbgettext',
     'rosetta',
     'haystack',
-    'tagging',
-    'tagging_autocomplete',
-
 
     'cyclope',
     'cyclope.core.collections',
@@ -217,9 +214,6 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 # profile settings
 AUTH_PROFILE_MODULE = "cyclope.userprofile"
-
-# tagging settings
-FORCE_LOWERCASE_TAGS = True
 
 # admin-tools settings
 ADMIN_TOOLS_INDEX_DASHBOARD = 'cyclope.dashboard.CustomIndexDashboard'

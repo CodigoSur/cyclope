@@ -1,4 +1,4 @@
-{% load i18n tagging_tags fb_versions cyclope_utils %}
+{% load i18n fb_versions cyclope_utils %}
 
   <div class="content-view soundtrack teaser soundtrack-teaser">
 
@@ -13,17 +13,6 @@
     {% endif %}
 
     {% include "cyclope/author_block.html" with author=soundtrack.author %}
-
-    {% if soundtrack.tags %}
-        <div class="meta-content"><span class="tags">
-          <span class="tags-label">{% trans "Tags" %}:</span>
-          {% tags_for_object soundtrack as soundtrack_tags %}
-          {% for tag in soundtrack_tags %}
-            <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
-            {{tag.name}}{% if not forloop.last%},{% endif%}
-          {% endfor %}
-        </span></div>
-    {% endif %}
 
     <div class="clear"></div>
   </div>

@@ -1,4 +1,4 @@
-{% load i18n tagging_tags fb_versions cyclope_utils %}
+{% load i18n fb_versions cyclope_utils %}
 
   <div class="content-view flashmovie teaser">
 
@@ -13,17 +13,6 @@
      {% endif %}
 
     {% include "cyclope/author_block.html" with author=flashmovie.author %}
-
-    {% if flashmovie.tags %}
-        <div class="meta-content"><span class="tags">
-          <span class="tags-label">{% trans "Tags" %}:</span>
-          {% tags_for_object flashmovie as flashmovie_tags %}
-          {% for tag in flashmovie_tags %}
-            <!--<a href="/tag/{{ tag.name|slugify }}" class="tag">{{tag.name}}</a>-->
-            {{tag.name}}{% if not forloop.last%},{% endif%}
-          {% endfor %}
-        </span></div>
-    {% endif %}
 
     <div class="clear"></div>
   </div>
