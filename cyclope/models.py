@@ -63,12 +63,6 @@ class SiteSettings(models.Model):
                                        verbose_name=_('default layout'),
                                        null=True, blank=True,
                                        on_delete=models.SET_NULL)
-    allow_comments = models.CharField(_('allow comments'), max_length=4,
-                                      choices = (
-                                                 ('YES',_('enabled')),
-                                                 ('NO',_('disabled'))
-                                    ))
-
     global_title = models.CharField(_('global title'),
                                     max_length=250, blank=True, default='')
     keywords = models.TextField(_('keywords'), blank=True, default='')
@@ -80,9 +74,15 @@ class SiteSettings(models.Model):
     rss_content_types = models.ManyToManyField(ContentType,
                                                verbose_name=_('whole feed contents'),
                                                help_text=_('contents to show in the whole feed'))
-    enable_abuse_reports = models.BooleanField(_('enable abuse reports'), default=False)
+    allow_comments = models.CharField(_('allow comments'), max_length=4,
+                                      choices = (
+                                                 ('YES',_('enabled')),
+                                                 ('NO',_('disabled'))
+                                    ))
+    moderate_comments = models.BooleanField(default=False)
     enable_comments_notifications = models.BooleanField(_('enable comments email notifications'),
                                                         default=True)
+    enable_abuse_reports = models.BooleanField(_('enable abuse reports'), default=False)
 
     def save(self, *args, **kwargs):
         self.id = 1

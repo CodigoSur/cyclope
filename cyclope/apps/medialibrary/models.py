@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -142,8 +142,10 @@ class ExternalContent(BaseMedia):
         verbose_name = _('external content')
         verbose_name_plural = _('external contents')
 
+from cyclope.apps.custom_comments.moderator import CustomCommentModerator, moderator
 
 # register models on abuse registry
 for key, val in locals().copy().iteritems():
     if isinstance(val, type) and issubclass(val, BaseMedia):
         cyclope.apps.abuse.register(val)
+        moderator.register(val, CustomCommentModerator)

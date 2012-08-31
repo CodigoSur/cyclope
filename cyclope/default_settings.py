@@ -147,6 +147,8 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 # comments settings
 COMMENTS_APP = 'cyclope.apps.custom_comments'
 
+EMAIL_SUBJECT_PREFIX = '[Cyclope] '
+
 # captcha settings
 CAPTCHA_NOISE_FUNCTIONS=('captcha.helpers.noise_arcs',)
 CAPTCHA_FONT_SIZE=30

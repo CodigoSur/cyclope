@@ -35,10 +35,8 @@ from autoslug.fields import AutoSlugField
 from cyclope.core.collections.models import Collectible
 from cyclope.models import BaseContent, Author, Source, Image
 from cyclope.apps.medialibrary.models import Picture
-import cyclope.apps.abuse
 
 YES_NO = (('YES', _('yes')), ('NO', _('no')),)
-
 
 class Article(BaseContent, Collectible):
     pretitle = models.CharField(_('pre-title'), max_length=250, blank=True)
@@ -55,5 +53,9 @@ class Article(BaseContent, Collectible):
         verbose_name_plural = _('articles')
         ordering = ('-creation_date', 'name')
 
-
+# FIXME: this registrations should be done elsewhere
+import cyclope.apps.abuse
 cyclope.apps.abuse.register(Article)
+
+from cyclope.apps.custom_comments.moderator import CustomCommentModerator, moderator
+moderator.register(Article, CustomCommentModerator)

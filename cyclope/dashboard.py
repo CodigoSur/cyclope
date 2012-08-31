@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -102,7 +102,7 @@ class CustomIndexDashboard(Dashboard):
                 modules.ModelList(
                     title=_('Comments'),
                     css_classes = ('dbmodule-comments'),
-#                    pre_content = _('Review and moderate user comments'),
+                    #pre_content = _('Review and moderate user comments'),
                     include_list=[
                         'django.contrib.comments.models.Comment',
                     ]),
@@ -256,10 +256,10 @@ class CustomIndexDashboard(Dashboard):
                         ]),
                 )))
 
-	## RIGHT PANEL MODULES ##
+    ## RIGHT PANEL MODULES ##
 
         ## append a link list module for "quick links"
-        self.children.append(modules.LinkList(
+        quick_links = modules.LinkList(
             title=_('Quick links'),
             css_classes = ('right-area-modules',),
             layout = 'inline',
@@ -275,7 +275,23 @@ class CustomIndexDashboard(Dashboard):
                  'external': True,
                  },
                 ]
-        ))
+        )
+
+        # Comments moderation link
+        from cyclope.apps.custom_comments import models as custom_comments_models
+        if custom_comments_models.moderation_enabled():
+            in_moderation = custom_comments_models.CustomComment.objects.in_moderation()
+            if in_moderation:
+                url = reverse('admin:comments_comment_changelist')
+                url +="?is_removed__exact=0&is_public__exact=0"
+                moderate_link = {
+                    'title': _('%d comments need moderation') % len(in_moderation),
+                    'url': url,
+                    'external': False,
+                }
+                quick_links.children.insert(0, moderate_link)
+
+        self.children.append(quick_links)
 
         # append a recent actions module
         self.children.append(modules.RecentActions(

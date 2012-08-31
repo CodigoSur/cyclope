@@ -19,38 +19,41 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from django.conf import settings
 from django.db import models
-from django.core.mail import mail_managers, send_mass_mail
+from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
+from django.core.mail import mail_managers, send_mass_mail
 from django.contrib.comments.managers import CommentManager
 
 from threadedcomments import ThreadedComment
-
 
 class CustomComment(ThreadedComment):
 
     subscribe = models.BooleanField(default=False)
 
-    #objects = CommentManager()
+    objects = CommentManager()
 
     def save(self, send_notifications=True, *args, **kwargs):
-        from cyclope.utils import get_singleton # Fixme: move out of SiteSettings
-        from cyclope.models import SiteSettings
 
         created = not self.pk
-
         super(CustomComment, self).save(*args, **kwargs)
 
-        if created and get_singleton(SiteSettings).enable_comments_notifications \
-            and send_notifications:
+        if created and notification_enabled() and send_notifications:
             self.send_email_notifications()
 
     def send_email_notifications(self):
-        subject = _("New comment on %s") % self.content_object
+        subject = _("New comment posted on '%s'") % self.content_object
         message = self.get_as_text()
-        mail_managers(subject, message, fail_silently=True)
+        managers_message = message
+        if moderation_enabled():
+            url = "http://%s%s" % (self.site.domain, reverse('comments-approve',
+                                   args=(self.id,)))
+            managers_message = _("This comment is moderated!\nYou may approve it " \
+                                 "on the following url: %s\n\n") % url + message
+
+        mail_managers(subject, managers_message, fail_silently=True)
 
         # Send mail to suscribed users of the tree path
         comments = CustomComment.objects.filter(id=self.root_path, subscribe=True)
@@ -58,3 +61,21 @@ class CustomComment(ThreadedComment):
             messages = [(subject, message, settings.DEFAULT_FROM_EMAIL,
                          [comment.userinfo["email"]]) for comment in comments]
             send_mass_mail(messages, fail_silently=True)
+
+
+
+def moderation_enabled():
+    from cyclope.utils import get_singleton # Fixme: move out of SiteSettings
+    from cyclope.models import SiteSettings
+    return get_singleton(SiteSettings).moderate_comments
+
+
+def notification_enabled():
+    from cyclope.utils import get_singleton # Fixme: move out of SiteSettings
+    from cyclope.models import SiteSettings
+    return get_singleton(SiteSettings).enable_comments_notifications
+
+def comments_allowed():
+    from cyclope.utils import get_singleton # Fixme: move out of SiteSettings
+    from cyclope.models import SiteSettings
+    return get_singleton(SiteSettings).allow_comments
