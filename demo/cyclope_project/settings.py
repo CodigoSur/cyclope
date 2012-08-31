@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -29,11 +29,9 @@ CYCLOPE_PROJECT_PATH = os.path.dirname(__file__)
 
 INTERNAL_IPS = ('127.0.0.1',)
 
-ADMINS = (
-    ('Your Name', 'your_email@domain.com'),
-)
+#ADMINS = (('Your Name', 'your_email@domain.com'),)
 
-MANAGERS = ADMINS
+#MANAGERS = (('Your Name', 'your_email@domain.com'),)
 
 DATABASES = {
     'default': {
@@ -79,20 +77,20 @@ LOGIN_REDIRECT_URL = '/inicio'
 # Add real email account setup here for registration to work properly.
 
 # The host to use for sending e-mail. Default: 'localhost'
-EMAIL_HOST='smtp.gmail.com'
+#EMAIL_HOST='smtp.gmail.com'
 
 # Username to use for the SMTP server defined in EMAIL_HOST. If empty,
 # Django won't attempt authentication. Default: '' (Empty string)
-EMAIL_HOST_USER='anon.email.noreply'
+#EMAIL_HOST_USER='anon.email.noreply'
 
 # Password to use for the SMTP server defined in EMAIL_HOST. This setting
 # is used in conjunction with EMAIL_HOST_USER when authenticating to the
 # SMTP server. If either of these settings is empty, Django won't attempt
 # authentication. Default: '' (Empty string)
-EMAIL_HOST_PASSWORD='anon.password'
+#EMAIL_HOST_PASSWORD='anon.password'
 
 # Port to use for the SMTP server defined in EMAIL_HOST. Default: 25
-EMAIL_PORT='587'
+#EMAIL_PORT='587'
 
 # Default e-mail address to use for various automated correspondence from
 # the site manager(s). Default: 'webmaster@localhost'
@@ -100,11 +98,11 @@ EMAIL_PORT='587'
 
 # The e-mail address that error messages come from, such as those sent to
 # ADMINS and MANAGERS. Default: 'root@localhost'
-#SERVER_EMAIL = ""
+#SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 # Whether to use a TLS (secure) connection when talking to the SMTP server.
 # Default: False
-EMAIL_USE_TLS = True  # we set this to True for the sample email config
+#EMAIL_USE_TLS = True  # we set this to True for the sample email config
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
