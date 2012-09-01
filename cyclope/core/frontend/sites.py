@@ -28,7 +28,7 @@ Frontend views' URL handling.
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext, loader
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 from django.utils.translation import ugettext_lazy as _, ugettext
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.contrib.contenttypes.models import ContentType
@@ -89,7 +89,7 @@ class CyclopeSite(object):
         return sorted(self._registry_ctype_choices, key=lambda choice: choice[1])
 
     def get_urls(self):
-        from django.conf.urls.defaults import patterns, url
+        from django.conf.urls import patterns, url
         urlpatterns = patterns('',
             url(r'^$', self.index, name='index'),
             #JSON views for AJAX updating of admin fields

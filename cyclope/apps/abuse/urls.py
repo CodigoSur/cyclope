@@ -25,7 +25,7 @@
 # see cyclope/demo for an example
 
 """URLs module"""
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, url
 from views import abuse_report
 
 urlpatterns = patterns('',

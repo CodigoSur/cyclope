@@ -138,6 +138,9 @@ AUTHENTICATION_BACKENDS = (
     'cyclope.core.perms.backends.CategoryPermBackend',
 )
 
+# ADMIN_MEDIA_PREFIX is deprecated but it's here
+# only for compatibility with admin tools 0.4.1
+ADMIN_MEDIA_PREFIX = "/media/admin/"
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 

@@ -54,17 +54,16 @@ STATIC_ROOT = os.path.join(CYCLOPE_PROJECT_PATH, 'media/')
 MEDIA_URL = '/media/'
 STATIC_URL = '/media/'
 
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/admin/'
-
 ROOT_URLCONF = 'cyclope_project.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates".
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(CYCLOPE_PROJECT_PATH, 'templates'),
+)
+
+LOCALE_PATHS = (
+    os.path.join(CYCLOPE_PROJECT_PATH, 'locale'),
 )
 
 INSTALLED_APPS += (
@@ -106,25 +105,31 @@ LOGIN_REDIRECT_URL = '/inicio'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error.
+# the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'handlers': {
-                    'mail_admins': {
-                                    'level': 'ERROR',
-                                    'class': 'django.utils.log.AdminEmailHandler'
-                                }
-                },
-        'loggers': {
-                    'django.request': {
-                                    'handlers': ['mail_admins'],
-                                    'level': 'ERROR',
-                                    'propagate': True,
-                                },
-                }
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
 }
 
 
