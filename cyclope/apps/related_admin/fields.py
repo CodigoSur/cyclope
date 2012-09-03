@@ -68,7 +68,7 @@ class GenericModelChoiceField(fields.Field):
         5.
         """
         if not value:
-            raise forms.ValidationError(_(u"Wrong value: can't be empty"))
+            return None
         try:
             content_type_id, object_id = value.split('-')
             content_type = ContentType.objects.get_for_id(content_type_id)
