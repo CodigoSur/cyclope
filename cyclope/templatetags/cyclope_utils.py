@@ -126,6 +126,28 @@ def do_assign(parser, token):
     value = parser.compile_filter(bits[2])
     return AssignNode(bits[1], value)
 
+# based on http://djangosnippets.org/snippets/1627/
+class AppendGetNode(template.Node):
+    def __init__(self, extra_context=None):
+        self.extra_context = extra_context or {}
+
+    def render(self, context):
+        get = context['request'].GET.copy()
+        for key, val in self.extra_context.iteritems():
+            get[key] = val.resolve(context)
+
+        get_encoded = ""
+        if len(get):
+            get_encoded = "%s" % get.urlencode()
+        return get_encoded
+
+@register.tag('append_to_get')
+def do_append_to_get(parser, token):
+    from django.template.base import token_kwargs
+    kwargs = token_kwargs(token.split_contents()[1:], parser)
+    return AppendGetNode(kwargs)
+
+
 def admin_list_filter_without_all(cl, spec):
     choices = list(spec.choices(cl))
     choices.pop(0) # Remove "all" option
