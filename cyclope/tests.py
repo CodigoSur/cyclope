@@ -50,7 +50,7 @@ from cyclope.apps.feeds.models import Feed
 from cyclope.apps.dynamicforms.models import DynamicForm
 from cyclope.fields import MultipleField
 from cyclope.sitemaps import CollectionSitemap, CategorySitemap, MenuSitemap
-from cyclope.forms import SiteSettingsAdminForm, LayoutAdminForm
+from cyclope.forms import SiteSettingsAdminForm, LayoutAdminForm, MenuItemAdminForm
 from cyclope import themes
 from cyclope import templatetags as cyclope_templatetags
 from cyclope.templatetags.cyclope_utils import smart_style
@@ -623,20 +623,46 @@ class MenuItemTestCase(ViewableTestCase):
     test_model = MenuItem
 
     def setUp(self):
-        menu = Menu.objects.create(name='menu')
-        self.test_object = MenuItem(name='An instance', menu=menu)
+        self.menu = Menu.objects.create(name='menu')
+        self.test_object = MenuItem(name='An instance', menu=self.menu)
         self.test_object.save()
+        self.article = Article.objects.create(name='An article')
         frontend.autodiscover()
 
     def test_menu_item_without_view(self):
-        menu = Menu.objects.create(name='Menu')
-        menu_item = MenuItem(name='MI', menu=menu)
-        menu_item.save()
-        article = Article.objects.create(name='An article',)
-        menu_item.content_object = article
-        menu_item.save()
-        self.assertEqual(menu_item.content_view,
+        self.test_object.content_object = self.article
+        self.test_object.save()
+        self.assertEqual(self.test_object.content_view,
                          frontend.site.get_default_view_name(Article))
+
+    def test_menu_item_admin_form(self):
+
+        # test without custom_url nor view/content
+        self.assertTrue(self.build_admin_form().is_valid())
+
+        # test with custom_url
+        self.assertTrue(self.build_admin_form({'custom_url': "/foo/"}).is_valid())
+
+
+        article_view = frontend.site.get_default_view_name(Article)
+        article_ct_pk = ContentType.objects.get(model="article").pk
+        # test with content_view
+        data = {'content_view': article_view, 'content_type': article_ct_pk,
+               'content_object': "%s-%s" % (article_ct_pk, self.article.pk)}
+        self.assertTrue(self.build_admin_form(data).is_valid())
+
+        # test fail: requires content_object
+        data = {'content_view': article_view, 'content_type': article_ct_pk}
+        self.assertFalse(self.build_admin_form(data).is_valid())
+
+        # test fail: can't have custom_url and content
+        data = {'custom_url': "/foo/", 'content_type': article_ct_pk}
+        self.assertFalse(self.build_admin_form(data).is_valid())
+
+    def build_admin_form(self, new_data=None):
+        base_data = {'menu':self.menu.pk, 'name': 'test_mi'}
+        base_data.update(new_data or {})
+        return MenuItemAdminForm(base_data)
 
 
 class MenuTestCase(ViewableTestCase):

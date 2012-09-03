@@ -146,8 +146,7 @@ class MenuItemAdminForm(GenericModelForm, ViewOptionsFormMixin):
 
     def clean(self):
         data = self.cleaned_data
-
-        data['content_object'] == data['content_object'] or None
+        data['content_object'] = data.get('content_object', None)
 
         if data['custom_url'] and (data['content_type']
                                    or data['object_id']
