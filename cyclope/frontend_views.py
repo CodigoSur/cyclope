@@ -269,25 +269,6 @@ class CommentsListOptions(forms.Form):
     limit_to_n_items = forms.IntegerField(label=_('Items to show'), min_value=1,
                                         initial=5,)
 
-class CommentsList(frontend.FrontendView):
-    """Show a list of the last comments
-    """
-    name='list'
-    verbose_name=_('list of the last site content comments')
-    is_default = True
-    is_instance_view = False
-    is_region_view = True
-    options_form = CommentsListOptions
-
-    def get_response(self, request, req_context, options):
-        limit = options["limit_to_n_items"]
-        comment_list = Comment.objects.filter(is_public=True, is_removed=False).order_by('-submit_date')[:limit]
-        req_context.update({'comment_list': comment_list})
-        t = loader.get_template("comments/comments_list.html")
-        return t.render(req_context)
-
-frontend.site.register_view(Comment, CommentsList)
-
 
 INLINE_CHOICES = (
     ("teaser", _(u"Teaser")),

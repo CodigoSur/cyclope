@@ -62,6 +62,10 @@ class CustomComment(ThreadedComment):
                          [comment.userinfo["email"]]) for comment in comments]
             send_mass_mail(messages, fail_silently=True)
 
+    class Meta:
+        verbose_name = _("comment")
+        verbose_name_plural = _("comments")
+
 
 
 def moderation_enabled():

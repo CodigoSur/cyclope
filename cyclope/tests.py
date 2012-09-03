@@ -33,6 +33,7 @@ from django.template import TemplateSyntaxError, Template, Context
 from django import template
 from django.db import models
 from django.db.models import get_model
+import django.contrib.comments
 
 from cyclope.models import SiteSettings, Menu, MenuItem, RelatedContent
 from cyclope.models import Layout, RegionView, Author
@@ -707,6 +708,20 @@ class MultipleFieldTestCase(TestCase):
         self.assertContains(response, "view_options")
 
 
+class CommentsViewsTestCase(ViewableTestCase):
+    fixtures = ['simplest_site.json']
+    test_model = django.contrib.comments.get_model()
+
+    def setUp(self):
+        site = Site.objects.get_current()
+        comment = self.test_model(name="SAn", email="san@test.com", parent=None,
+                                  content_object=site, site=site, subscribe=True)
+        comment.save()
+        self.test_object = comment
+        frontend.autodiscover()
+
+    def test_creation(self):
+        pass
 
 class DispatcherTestCase(TestCase):
 
