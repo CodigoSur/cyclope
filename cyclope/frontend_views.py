@@ -36,7 +36,6 @@ from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 from cyclope.core.collections.models import Collection, Category
 from cyclope.models import Menu, MenuItem, Author
-import cyclope.settings as cyc_settings
 
 
 class MenuRootItemsList(frontend.FrontendView):
@@ -110,7 +109,6 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
         """Creates a nested list to be used with unordered_list template tag
         """
         #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
-        from django.template import Template, Context
         link_template = Template(
              '<span class="{% if has_children %}has_children{% else %}no_children{% endif %}{% if current_url == menu_item.url%} current{% endif%}{% if menu_item.site_home %} site_home{% endif %}">'
              '{% if menu_item.custom_url %}'
@@ -197,7 +195,6 @@ class SiteMap(frontend.FrontendView):
 
     def get_response(self, request, req_context, options):
         collections_list = []
-        current_url = request.path_info[1:].split('/')[0]
         for collection in Collection.objects.filter(visible=True):
             category_list = []
             for category in Category.tree.filter(collection=collection, level=0):
@@ -218,7 +215,7 @@ class SiteMap(frontend.FrontendView):
             if menu_items_list:
                 menus_list.extend([menu.name, menu_items_list])
             else:
-                menu_list.append(menu.name)
+                menus_list.append(menu.name)
 
         req_context.update({'collections':collections_list,
                                      'menus':menus_list})

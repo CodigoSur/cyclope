@@ -58,9 +58,7 @@ class CustomIndexDashboard(Dashboard):
         """
         Use this method if you need to access the request context.
         """
-        from django.contrib.auth.models import User, Group
         user = context.get('user')
-        admins = User.objects.filter(is_superuser=True)
 
         self.children.append(modules.Group(
             title=_('Content'),

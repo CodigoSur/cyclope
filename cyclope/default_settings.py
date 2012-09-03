@@ -24,7 +24,6 @@ a new app is installed.
 """
 
 import os
-import imp
 ugettext = lambda s: s
 
 #workaround for PIL when importing Image using different methods.

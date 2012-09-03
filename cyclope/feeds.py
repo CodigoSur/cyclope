@@ -19,12 +19,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from django.contrib.syndication.views import Feed, FeedDoesNotExist
+from django.contrib.syndication.views import Feed
 from django.shortcuts import get_object_or_404
 from django.http import Http404
 from django.core.urlresolvers import reverse
 from cyclope.core.collections.models import Category
-from cyclope.models import BaseContent, SiteSettings
+from cyclope.models import SiteSettings
 import cyclope.settings as cyc_settings
 import cyclope.core.frontend.sites as sites
 

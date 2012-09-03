@@ -34,10 +34,10 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
-from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
+from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from django.contrib.admin.models import LogEntry
-from django.db.models.signals import post_save, pre_delete
+from django.db.models.signals import pre_delete
 
 from rosetta.poutil import find_pos
 import mptt

@@ -26,9 +26,7 @@
 
 from django.conf.urls import patterns, include, url
 from django.conf import settings as django_settings
-from django.utils.translation import ugettext as _
 from django.contrib import admin
-from registration.views import register
 from haystack.views import SearchView, search_view_factory
 from cyclope.forms import UserProfileForm
 from cyclope.core.captcha_contact_form.forms import  \
