@@ -15,7 +15,7 @@
       {% blocktrans %} New topic in  {{ forum }} forum {% endblocktrans %}
   </h1>
 <div class="create_forum">
-  <form action="{{ action_url }}" method="post">
+  <form action="{{ action_url }}" method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" class="submit" value="{% trans "Create" %}" />
   </form>

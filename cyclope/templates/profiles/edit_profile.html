@@ -7,9 +7,7 @@
 <h6>
   {% trans "Please fill in your user profile data" %}
 </h6>
-<form enctype="multipart/form-data" method="post">
-{% csrf_token %}
-
+<form enctype="multipart/form-data" method="post">{% csrf_token %}
 {% for field in  form %}
   {{ field.label_tag }}
   {% if field.help_text %}<span class="help">{{ field.help_text }}</span> <br/> {% endif%}
