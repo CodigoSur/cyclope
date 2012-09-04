@@ -6,10 +6,10 @@
   <a href="/accounts/logout/?next={{ request.path}}">{% trans "Log out" %}</a>
 {% else %}
   <a href="/accounts/login/?next={{ request.path}}">{% trans "Log in" %}</a>
-  
-  {% if LANGUAGES|length > 1 %} / 
+
+  {% if LANGUAGES|length > 1 %} /
   <div id="language" class="user_input">
-    <form action="/i18n/setlang/" method="post" id="lang">
+    <form action="/i18n/setlang/" method="post" id="lang">{% csrf_token %}
       <select name="language" onChange="forms['lang'].submit();">
 	{% for lang_code, lang_name in LANGUAGES %}
         <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected="selected" {% endif %}>

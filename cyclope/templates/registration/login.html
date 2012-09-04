@@ -6,7 +6,7 @@
 <div class="frontend_login">
   <div class="user_input">
     <h4 class="title">{% trans "Please enter your credentials"%}</h4>
-    <form action="" method="post">
+    <form action="" method="post">{% csrf_token %}
     {{form.as_p}}
     <input type="submit" class="submit">
     </form>

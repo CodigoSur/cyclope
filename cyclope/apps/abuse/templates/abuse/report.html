@@ -5,7 +5,7 @@
 {% block content%}
 <div class="abuse-report">
 {% if form %}
-<form action="." method="post">
+<form action="." method="post">{% csrf_token %}
   {{ form.as_p }}
   <input type="submit" class="submit" value="{% trans "Report" %}" />
 </form>
