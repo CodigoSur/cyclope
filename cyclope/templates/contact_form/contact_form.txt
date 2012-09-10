@@ -2,3 +2,6 @@
 {{ name }} <{{ email }}> {% trans "wrote" %}:
 
 {{ body }}
+
+
+http://{{site.domain}}/
