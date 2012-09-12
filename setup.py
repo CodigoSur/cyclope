@@ -19,16 +19,30 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import codecs
 from setuptools import setup, find_packages
 
+version = '0.2.dev0'
+
+
+def read(filename):
+    return unicode(codecs.open(filename, encoding='utf-8').read())
+
+
+long_description = '\n\n'.join([read('README.rst'),
+                                read('CONTRIBUTORS.rst'),
+                                read('CHANGELOG.rst')])
+
 setup(
-    name='django-cyclope',
-    version=__import__('cyclope').__version__,
+    name='cyclope3',
+    version=version,
     description="CMS for pythonistas who like to code instead of using a web UI for every task.",
-    long_description=__import__('cyclope').__doc__,
+    long_description=long_description,
     author='Nicolás Echániz & Santiago Hoerth',
     author_email='nicoechaniz@codigosur.org',
-    url='http://bitbucket.org/nicoechaniz/django-cyclope/',
+    maintainer='Santiago Piccinini',
+    maintainer_email='spiccinini@codigosur.org',
+    url='http://forja.codigosur.org/projects/cyclope/',
     license='GPL v3',
     platforms=['OS Independent'],
     classifiers=[
@@ -39,6 +53,8 @@ setup(
         "License :: GPL v3",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
+        "Programming Language :: Python :: 2.6",
+        "Programming Language :: Python :: 2.7",
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
         "Topic :: Software Development",
         "Topic :: Software Development :: Libraries :: Application Frameworks",
