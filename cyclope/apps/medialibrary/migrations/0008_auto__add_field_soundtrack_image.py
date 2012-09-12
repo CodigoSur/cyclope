@@ -145,7 +145,7 @@ class Migration(SchemaMigration):
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Source']", 'null': 'True', 'blank': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+
         },
         'medialibrary.externalcontent': {
             'Meta': {'object_name': 'ExternalContent'},
@@ -163,7 +163,7 @@ class Migration(SchemaMigration):
             'skip_detail': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Source']", 'null': 'True', 'blank': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+
         },
         'medialibrary.flashmovie': {
             'Meta': {'object_name': 'FlashMovie'},
@@ -179,7 +179,7 @@ class Migration(SchemaMigration):
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Source']", 'null': 'True', 'blank': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+
         },
         'medialibrary.movieclip': {
             'Meta': {'object_name': 'MovieClip'},
@@ -194,7 +194,7 @@ class Migration(SchemaMigration):
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Source']", 'null': 'True', 'blank': 'True'}),
             'still': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100', 'blank': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {}),
+
             'video': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100'})
         },
         'medialibrary.picture': {
@@ -210,7 +210,7 @@ class Migration(SchemaMigration):
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Source']", 'null': 'True', 'blank': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+
         },
         'medialibrary.regularfile': {
             'Meta': {'object_name': 'RegularFile'},
@@ -226,7 +226,7 @@ class Migration(SchemaMigration):
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Source']", 'null': 'True', 'blank': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+
         },
         'medialibrary.soundtrack': {
             'Meta': {'object_name': 'SoundTrack'},
@@ -242,7 +242,7 @@ class Migration(SchemaMigration):
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Source']", 'null': 'True', 'blank': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+
         },
         'sites.site': {
             'Meta': {'ordering': "('domain',)", 'object_name': 'Site', 'db_table': "'django_site'"},

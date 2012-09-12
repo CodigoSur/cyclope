@@ -80,7 +80,7 @@ class Migration(SchemaMigration):
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
             'surname': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {}),
+
             'web': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'})
         },
         'contacts.contactaddress': {

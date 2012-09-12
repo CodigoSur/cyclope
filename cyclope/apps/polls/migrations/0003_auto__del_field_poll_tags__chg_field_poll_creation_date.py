@@ -11,17 +11,10 @@ class Migration(SchemaMigration):
         # Deleting field 'Poll.tags'
         db.delete_column('polls_poll', 'tags')
 
-
         # Changing field 'Poll.creation_date'
         db.alter_column('polls_poll', 'creation_date', self.gf('django.db.models.fields.DateTimeField')())
 
     def backwards(self, orm):
-        # Adding field 'Poll.tags'
-        db.add_column('polls_poll', 'tags',
-                      self.gf('tagging_autocomplete.models.TagAutocompleteField')(default=''),
-                      keep_default=False)
-
-
         # Changing field 'Poll.creation_date'
         db.alter_column('polls_poll', 'creation_date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True))
 

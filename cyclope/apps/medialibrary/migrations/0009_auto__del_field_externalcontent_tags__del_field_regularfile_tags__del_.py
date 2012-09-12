@@ -29,43 +29,8 @@ class Migration(SchemaMigration):
         # Deleting field 'Picture.tags'
         db.delete_column('medialibrary_picture', 'tags')
 
-
     def backwards(self, orm):
-        # Adding field 'ExternalContent.tags'
-        db.add_column('medialibrary_externalcontent', 'tags',
-                      self.gf('tagging_autocomplete.models.TagAutocompleteField')(default=''),
-                      keep_default=False)
-
-        # Adding field 'RegularFile.tags'
-        db.add_column('medialibrary_regularfile', 'tags',
-                      self.gf('tagging_autocomplete.models.TagAutocompleteField')(default=''),
-                      keep_default=False)
-
-        # Adding field 'FlashMovie.tags'
-        db.add_column('medialibrary_flashmovie', 'tags',
-                      self.gf('tagging_autocomplete.models.TagAutocompleteField')(default=''),
-                      keep_default=False)
-
-        # Adding field 'Document.tags'
-        db.add_column('medialibrary_document', 'tags',
-                      self.gf('tagging_autocomplete.models.TagAutocompleteField')(default=''),
-                      keep_default=False)
-
-        # Adding field 'MovieClip.tags'
-        db.add_column('medialibrary_movieclip', 'tags',
-                      self.gf('tagging_autocomplete.models.TagAutocompleteField')(default=''),
-                      keep_default=False)
-
-        # Adding field 'SoundTrack.tags'
-        db.add_column('medialibrary_soundtrack', 'tags',
-                      self.gf('tagging_autocomplete.models.TagAutocompleteField')(default=''),
-                      keep_default=False)
-
-        # Adding field 'Picture.tags'
-        db.add_column('medialibrary_picture', 'tags',
-                      self.gf('tagging_autocomplete.models.TagAutocompleteField')(default=''),
-                      keep_default=False)
-
+        pass
 
     models = {
         'auth.group': {

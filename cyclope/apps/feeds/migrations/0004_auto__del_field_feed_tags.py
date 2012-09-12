@@ -8,16 +8,12 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'Feed.tags'
+
         db.delete_column('feeds_feed', 'tags')
 
 
     def backwards(self, orm):
-        # Adding field 'Feed.tags'
-        db.add_column('feeds_feed', 'tags',
-                      self.gf('tagging_autocomplete.models.TagAutocompleteField')(default=''),
-                      keep_default=False)
-
+        pass
 
     models = {
         'auth.group': {

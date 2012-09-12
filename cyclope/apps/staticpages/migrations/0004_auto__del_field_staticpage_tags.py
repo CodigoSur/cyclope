@@ -8,15 +8,12 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'StaticPage.tags'
+
         db.delete_column('staticpages_staticpage', 'tags')
 
 
     def backwards(self, orm):
-        # Adding field 'StaticPage.tags'
-        db.add_column('staticpages_staticpage', 'tags',
-                      self.gf('tagging_autocomplete.models.TagAutocompleteField')(default=''),
-                      keep_default=False)
+        pass
 
 
     models = {

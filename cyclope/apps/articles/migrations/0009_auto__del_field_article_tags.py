@@ -13,10 +13,7 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
-        # Adding field 'Article.tags'
-        db.add_column('articles_article', 'tags',
-                      self.gf('tagging_autocomplete.models.TagAutocompleteField')(default=''),
-                      keep_default=False)
+        pass
 
 
     models = {

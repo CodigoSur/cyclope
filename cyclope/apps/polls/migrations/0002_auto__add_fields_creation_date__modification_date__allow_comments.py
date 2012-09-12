@@ -125,7 +125,7 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+
         },
         'polls.question': {
             'Meta': {'ordering': "('order',)", 'object_name': 'Question'},

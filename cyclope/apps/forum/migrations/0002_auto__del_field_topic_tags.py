@@ -8,15 +8,10 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'Topic.tags'
         db.delete_column('forum_topic', 'tags')
 
-
     def backwards(self, orm):
-        # Adding field 'Topic.tags'
-        db.add_column('forum_topic', 'tags',
-                      self.gf('tagging_autocomplete.models.TagAutocompleteField')(default=''),
-                      keep_default=False)
+        pass
 
 
     models = {

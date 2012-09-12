@@ -8,20 +8,11 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'Contact.tags'
         db.delete_column('contacts_contact', 'tags')
-
-
         # Changing field 'Contact.gender'
         db.alter_column('contacts_contact', 'gender', self.gf('django.db.models.fields.CharField')(max_length=1, null=True))
 
     def backwards(self, orm):
-        # Adding field 'Contact.tags'
-        db.add_column('contacts_contact', 'tags',
-                      self.gf('tagging_autocomplete.models.TagAutocompleteField')(default=''),
-                      keep_default=False)
-
-
         # User chose to not deal with backwards NULL issues for 'Contact.gender'
         raise RuntimeError("Cannot reverse this migration. 'Contact.gender' and its values cannot be restored.")
 
