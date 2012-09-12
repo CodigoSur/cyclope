@@ -73,12 +73,11 @@ class Command(TemplateCommand):
         import filebrowser
         import feincms
         media = (
-            ("admin", os.path.join(django.__path__[0], "contrib", "admin", "media")),
-            ("markitup", os.path.join(markitup.__path__[0], "media", "markitup")),
+            ("admin", os.path.join(django.__path__[0], "contrib", "admin", "static", "admin")),
+            ("markitup", os.path.join(markitup.__path__[0], "static", "markitup")),
             ("admin_tools", os.path.join(admin_tools.__path__[0], "media", "admin_tools")),
             ("filebrowser", os.path.join(filebrowser.__path__[0], "media", "filebrowser")),
             ("cyclope", os.path.join(cyclope.__path__[0], "media")),
-            ("jquery-autocomplete", os.path.join(cyclope.__path__[0], "media", "jquery-autocomplete")),
             ("feincms", os.path.join(feincms.__path__[0], "static", "feincms")),
         )
 
@@ -100,9 +99,9 @@ class Command(TemplateCommand):
         sync_msg = u"" \
             u"Now you must:\n\n" \
             u"    1) cd to %s\n" \
-            u"    2) run './manage.py syncdb' to create database\n" \
-            u"    3) run './manage.py migrate' to load cyclope db migrations\n" \
-            u"    4] run './manage.py loaddata default_groups.json' to load\n" \
+            u"    2) run 'python manage.py syncdb' to create database\n" \
+            u"    3) run 'python manage.py migrate' to load cyclope db migrations\n" \
+            u"    4] run 'python manage.py loaddata default_groups.json' to load\n" \
             u"       cyclope default group permissions (Optional)\n"  % top_dir
         print sync_msg
 
