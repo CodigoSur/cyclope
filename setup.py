@@ -64,7 +64,6 @@ setup(
     # that are downloaded from source to ensure a tested revision is used.
     dependency_links=[
         'hg+http://bitbucket.org/drmeers/django-dbgettext#egg=django-dbgettext-0.1',
-        'git+http://github.com/nicoechaniz/django-filebrowser-no-grappelli-and-uploadify.git@0e8f0d05cbf87b1736cbefab0d9421099468864e#egg=django-filebrowser-3.0-nograpup',
         'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-0.4a1',
         'hg+http://bitbucket.org/nicoechaniz/django-rosetta_temp#egg=django-rosetta-0.6.2-temp',
         'hg+http://bitbucket.org/san/django-jsonfield#egg=django-jsonfield-0.6.0-cyclope',
@@ -78,7 +77,7 @@ setup(
         'django-mptt-tree-editor>=0.1,<0.2',
         'PIL>=1.1.7', # in PIL we trust
         'django-simple-captcha==0.2.0',
-        'django-filebrowser==3.0-nograpup', # installed from our clone
+        'django-filebrowser-nograpup>=3.0.2,<3.1',
         'South>=0.7,<0.8',
         'django-registration==0.8',
         'django-profiles==0.2',
