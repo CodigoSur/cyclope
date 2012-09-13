@@ -416,7 +416,7 @@ class SiteMapViewTestCase(TestCase):
 
 
 class SiteSearchViewTestCase(TestCase):
-    fixtures = ['cyclope_demo.json']
+    fixtures = ['default_users.json', 'default_groups.json', 'cyclope_demo.json']
 
     def setUp(self):
         frontend.autodiscover()
@@ -757,17 +757,17 @@ class DispatcherTestCase(TestCase):
 
 
 class TestDemoFixture(TestCase):
-    fixtures = ['cyclope_demo.json']
+    fixtures = ['default_users.json', 'default_groups.json', 'cyclope_demo.json']
 
     def test_demo_fixture(self):
-        self.assertGreater(Category.objects.count(), 5)
-        self.assertGreater(Collection.objects.count(), 3)
-        self.assertGreater(MenuItem.objects.count(), 7)
+        self.assertGreater(Category.objects.count(), 1)
+        self.assertGreater(Collection.objects.count(), 2)
+        self.assertGreater(MenuItem.objects.count(), 6)
 
 
 class TestSitemaps(TestCase):
 
-    fixtures = ['cyclope_demo.json']
+    fixtures = ['default_users.json', 'default_groups.json', 'cyclope_demo.json']
     sitemaps = [CollectionSitemap, CategorySitemap, MenuSitemap]
     longMessage = False
 
@@ -968,7 +968,7 @@ class SimpleAdminTests(TestCase):
     This is a realy simple test to catch errors on GET of some pages of the
     admin.
     """
-    fixtures = ['cyclope_demo.json']
+    fixtures = ['default_users.json', 'default_groups.json', 'cyclope_demo.json']
 
     pages = [
         "/admin/",
@@ -977,14 +977,12 @@ class SimpleAdminTests(TestCase):
         "/admin/cyclope/layout/", "/admin/cyclope/layout/1/",
         "/admin/collections/collection/", "/admin/collections/collection/1/",
         "/admin/collections/category/", "/admin/collections/category/1/",
-        "/admin/articles/article/", "/admin/articles/article/4/",
+        "/admin/articles/article/", "/admin/articles/article/1/",
         "/admin/cyclope/sitesettings/1/",
     ]
 
     def test_get_some_pages(self):
-        admin = User(username='admin', is_staff=True, is_superuser=True)
-        admin.set_password('password')
-        admin.save()
+        admin = User.objects.get(username='admin')
         self.client.login(username='admin', password="password")
         for page in self.pages:
             status = self.client.get(page).status_code
