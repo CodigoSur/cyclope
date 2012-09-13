@@ -34,7 +34,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from markitup.widgets import AdminMarkItUpWidget
 from mptt.forms import TreeNodeChoiceField
-from feincms.admin import editor
+from mptt_tree_editor.admin import TreeEditor
 
 from cyclope.core import frontend
 
@@ -78,7 +78,7 @@ class CategoryForm(forms.ModelForm):
         model = Category
 
 
-class CategoryAdmin(editor.TreeEditor, PermanentFilterMixin):
+class CategoryAdmin(TreeEditor, PermanentFilterMixin):
     form = CategoryForm
     list_display = ("name", "thumbnail")
     list_filter = ['collection']

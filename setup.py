@@ -22,7 +22,7 @@
 import codecs
 from setuptools import setup, find_packages
 
-version = '0.1.dev0'
+version = '0.2.dev0'
 
 
 def read(filename):
@@ -73,9 +73,9 @@ setup(
 
     install_requires=[
         'Django>=1.4,<1.5',
-        'FeinCms==1.3.1',
         'django-autoslug==1.4.1',
         'django-mptt==0.4.2', # 0.4 breaks compatibility
+        'django-mptt-tree-editor>=0.1,<0.2',
         'PIL>=1.1.7', # in PIL we trust
         'django-simple-captcha==0.2.0',
         'django-filebrowser==3.0-nograpup', # installed from our clone

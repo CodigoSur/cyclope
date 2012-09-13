@@ -33,7 +33,7 @@ from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponseRedirect
 
-from feincms.admin import editor
+from mptt_tree_editor.admin import TreeEditor
 
 from cyclope.models import *
 from cyclope.forms import MenuItemAdminForm,\
@@ -112,7 +112,7 @@ class BaseContentAdmin(admin.ModelAdmin):
         return super(BaseContentAdmin, self).add_view(request, form_url, extra_context)
 
 
-class MenuItemAdmin(editor.TreeEditor, PermanentFilterMixin):
+class MenuItemAdmin(TreeEditor, PermanentFilterMixin):
     form = MenuItemAdminForm
     fieldsets = ((None,
                   {'fields': ('menu', 'parent', 'name', 'slug', 'site_home', 'active')}),

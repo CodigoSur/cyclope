@@ -5,6 +5,7 @@ Changelog for Cyclope 3
 0.2 (unreleased)
 ================
 
+- Replace dependency of FeinCMS by django-mptt-tree-editor.
 
 - Upgraded to django 1.4 (#160).
 

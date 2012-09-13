@@ -117,7 +117,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
 
     'autoslug',
-    'feincms',
+    'mptt_tree_editor',
     'mptt',
     'captcha',
     'filebrowser',
@@ -155,12 +155,6 @@ EMAIL_SUBJECT_PREFIX = '[Cyclope] '
 CAPTCHA_NOISE_FUNCTIONS=('captcha.helpers.noise_arcs',)
 CAPTCHA_FONT_SIZE=30
 CAPTCHA_LETTER_ROTATION=(-15,15)
-
-# feincms settings
-FEINCMS_ADMIN_MEDIA = '/media/feincms/'
-# TreeEditor throws an exception in the admin for Category (as of 2010-02-19)
-# if this is set to True
-FEINCMS_TREE_EDITOR_INCLUDE_ANCESTORS = False
 
 # filebrowser settings
 FILEBROWSER_DEBUG = False
@@ -244,7 +238,7 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
     'tagging',
     'tagging_autocomplete',
     'autoslug',
-    'feincms',
+    'mptt_tree_editor',
     'mptt',
     'captcha',
     'filebrowser',
