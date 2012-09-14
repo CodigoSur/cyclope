@@ -5,6 +5,9 @@ Changelog for Cyclope 3
 0.2 (unreleased)
 ================
 
+- Added cyclopedemo command that creates a new project and loads the demo
+  fixtures.
+
 - Replace dependency of FeinCMS by django-mptt-tree-editor.
 
 - Upgraded to django 1.4 (#160).

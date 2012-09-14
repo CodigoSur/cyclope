@@ -1,5 +1,4 @@
-include LICENSE.txt README.rst CONTRIBUTORS.rst
-recursive-include cyclope/templates *.html *.txt
+include LICENSE.txt README.rst CONTRIBUTORS.rst CHANGELOG.rst
 recursive-include cyclope/media *
-recursive-include cyclope/apps/*/templates *.html *.txt
+recursive-include cyclope *.html *.txt
 recursive-include cyclope/fixtures *.json
