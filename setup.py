@@ -95,7 +95,7 @@ setup(
         'django-threadedcomments==0.9',
     ],
 
-    scripts=['cyclope/bin/cyclopeproject'],
+    scripts=['cyclope/bin/cyclopeproject','cyclope/bin/cyclopedemo'],
 
     packages=find_packages(),
 

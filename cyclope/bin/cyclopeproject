@@ -94,16 +94,17 @@ class Command(TemplateCommand):
         # FIXME: this should not be here
         # Create db
         os.mkdir(os.path.join(top_dir, "db"))
-
-        print u"\nProject %s created successfully!\n" % project_name
-        sync_msg = u"" \
-            u"Now you must:\n\n" \
-            u"    1) cd to %s\n" \
-            u"    2) run 'python manage.py syncdb' to create database\n" \
-            u"    3) run 'python manage.py migrate' to load cyclope db migrations\n" \
-            u"    4] run 'python manage.py loaddata default_groups.json' to load\n" \
-            u"       cyclope default group permissions (Optional)\n"  % top_dir
-        print sync_msg
+        
+        if options['verbosity'] != "0":
+            print u"\nProject %s created successfully!\n" % project_name
+            sync_msg = u"" \
+                u"Now you must:\n\n" \
+                u"    1) cd to %s\n" \
+                u"    2) run 'python manage.py syncdb' to create database\n" \
+                u"    3) run 'python manage.py migrate' to load cyclope db migrations\n" \
+                u"    4] run 'python manage.py loaddata default_groups.json' to load\n" \
+                u"       cyclope default group permissions (Optional)\n"  % top_dir
+            print sync_msg
 
 if __name__ == "__main__":
     cmnd = Command()
