@@ -147,4 +147,4 @@ HAYSTACK_WHOOSH_PATH = os.path.join(CYCLOPE_PROJECT_PATH, 'cyclope_project_index
 #FILEBROWSER_MAX_UPLOAD_SIZE = 1024*1024*20 # 20MB
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = ''
+SECRET_KEY = '{{ secret_key }}'
