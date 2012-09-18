@@ -5,6 +5,7 @@ VIRTUALENV_DOWNLOAD_URL=https://raw.github.com/pypa/virtualenv/master/virtualenv
 VIRTUALENV_PATH=cyclope_workenv
 DEBIAN_OS_DEPENDENCIES="mercurial git-core python-imaging"
 PYTHON=
+CYCLOPE_PACKAGE=http://forja.codigosur.org/hg/cyclope/archive/tip.tar.bz2
 
 function get_python_version {
     if python2 --version >/dev/null 2>&1; then
@@ -18,11 +19,10 @@ function get_python_version {
 function install_dependencies {
     if apt-get >/dev/null 2>&1; then 
         sudo apt-get install -y $DEBIAN_OS_DEPENDENCIES || { echo -e >&2 "\n\nplease install $DEBIAN_OS_DEPENDENCIES and. Aborting."; exit 1; }
-    else { 
+    else
         git --version >/dev/null 2>&1 || { echo -e >&2 "\n\ngit not found. Please install git package and retry.  Aborting."; exit 1; }
         hg --version >/dev/null 2>&1 || { echo -e >&2 "\n\nmercurial not found. Please install mercurial package and retry.  Aborting."; exit 1; }
         $PYTHON -c "import PIL" 2>&1 || { echo -e >&2 "\n\nPIL not found. Please install python-imaging or PIL package and retry.  Aborting."; exit 1; }
-    }
     fi
 }
 
@@ -40,11 +40,11 @@ function activate_virtualenv {
 }
 
 function install_cyclope {
-    pip install --use-mirrors --timeout=50 http://forja.codigosur.org/hg/cyclope/archive/tip.tar.bz2;
+    pip install --use-mirrors --timeout=50 $CYCLOPE_PACKAGE;
 }
 
 function post_install_message {
-    echo "Cyclope3 installed."
+    echo -e "\n\nCyclope3 installed."
     echo "run 'source cyclope_workenv/bin/activate' to activate virtualenv and then"
     echo "run 'cyclopeproject project_name' to create an empty project OR"
     echo "run 'cyclopedemo demo' to create a demo project with some content"

@@ -50,19 +50,17 @@ class Collection(models.Model, ThumbnailMixin):
     slug = AutoSlugField(populate_from='name', always_update=False,
                          editable=True, blank=True)
     # collections that aren't visible can be used to customize content behaviour
-    visible = models.BooleanField(_('visible'),
-                                             default=True)
+    visible = models.BooleanField(_('visible'), default=True)
     # the idea with navigation_root collections is that
     # URLS for these collections should be simplified. not used at the moment.
-    navigation_root = models.BooleanField(_('navigation root'),
-                                             default=False)
+    navigation_root = models.BooleanField(_('navigation root'), default=False)
     content_types = models.ManyToManyField(ContentType, db_index=True,
                                            verbose_name=_('content types'))
     description = models.TextField(_('description'), blank=True, null=True)
     image =  FileBrowseField(_('image'), max_length=250, format='Image',
                              blank=True)
     default_list_view = models.CharField(_('default list view'), max_length=255,
-                                    blank=True, default='')
+                                         blank=True, default='')
     view_options = JSONField(default='{}') # default is taken from ViewOptionsForm
 
     def get_absolute_url(self):
@@ -96,8 +94,6 @@ class Category(models.Model, ThumbnailMixin):
     name = models.CharField(_('name'), max_length=100)
     slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
                          always_update=False, editable=True, blank=True)
-#    slug = AutoSlugField(populate_from='name', always_update=True)
-#                         unique_with=('parent', 'collection'))
     parent = models.ForeignKey('self', verbose_name=_('parent'),
                               related_name='children', null=True, blank=True)
     active = models.BooleanField(_('active'), default=True, db_index=True)
