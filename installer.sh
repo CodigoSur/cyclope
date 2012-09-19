@@ -36,7 +36,7 @@ bootstrap_virtualenv() {
 }
 
 activate_virtualenv() {
-    source $1/bin/activate;
+    . $1/bin/activate;
 }
 
 install_cyclope() {
