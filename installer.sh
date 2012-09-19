@@ -7,7 +7,7 @@ DEBIAN_OS_DEPENDENCIES="mercurial git-core python-imaging"
 PYTHON=
 CYCLOPE_PACKAGE=http://forja.codigosur.org/hg/cyclope/archive/tip.tar.bz2
 
-function get_python_version {
+get_python_version() {
     if python2 --version >/dev/null 2>&1; then
       PYTHON=python2;
     else PYTHON=python;
@@ -16,7 +16,7 @@ function get_python_version {
     which $PYTHON;
 }
 
-function install_dependencies {
+install_dependencies() {
     if apt-get >/dev/null 2>&1; then 
         sudo apt-get install -y $DEBIAN_OS_DEPENDENCIES || { echo -e >&2 "\n\nplease install $DEBIAN_OS_DEPENDENCIES and. Aborting."; exit 1; }
     else
@@ -26,7 +26,7 @@ function install_dependencies {
     fi
 }
 
-function bootstrap_virtualenv {
+bootstrap_virtualenv() {
     echo "Downloading virtualenv";
     
     #try to download with curl and wget
@@ -35,15 +35,15 @@ function bootstrap_virtualenv {
     $PYTHON $VIRTUALENV_SCRIPT --system-site-packages $VIRTUALENV_PATH;
 }
 
-function activate_virtualenv {
+activate_virtualenv() {
     source $1/bin/activate;
 }
 
-function install_cyclope {
+install_cyclope() {
     pip install --use-mirrors --timeout=50 $CYCLOPE_PACKAGE;
 }
 
-function post_install_message {
+post_install_message() {
     echo -e "\n\nCyclope3 installed."
     echo "run 'source cyclope_workenv/bin/activate' to activate virtualenv and then"
     echo "run 'cyclopeproject project_name' to create an empty project OR"
