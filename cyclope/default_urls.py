@@ -109,8 +109,3 @@ if 'rosetta' in django_settings.INSTALLED_APPS:
         ##     'cyclope.helper_views.rosetta_select_and_translate'),
         url(r'^rosetta/', include('rosetta.urls')),
     )
-
-    urlpatterns += patterns('',
-        url(r'^accounts/login/$', 'django.contrib.auth.views.login',
-            {'template_name': 'admin/login.html'}),
-    )
