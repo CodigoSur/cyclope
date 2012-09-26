@@ -33,8 +33,8 @@ class Command(TemplateCommand):
 
     option_list = TemplateCommand.option_list + (
         make_option('--db-in-memory', action='store_true', dest='db_in_memory',
-            default=False, help='Destination directory '
-                'where the project will be created.'),
+            default=False, help='Create the database in memory (/tmp) to speed'
+                'up creation. WARNING: database will be erased on PC restart.'),
     )
 
     def handle(self, project_name="demo", target=None, *args, **options):
