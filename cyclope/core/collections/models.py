@@ -26,6 +26,7 @@ Django models for generic categorization of content objects
 """
 
 from operator import attrgetter
+from collections import defaultdict
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -162,38 +163,39 @@ class CategorizationManager(models.Manager):
         """
         return self.filter(content_type__pk=ctype.pk)
 
-    def get_for_category(self, category, sort_property='name', limit=None,
+    def get_for_category(self, category, sort_property="name", limit=None,
                          traverse_children=False, reverse=False):
+        # Here are two ways of order categorizations by a content_object attribute:
+        #
+        # 1) using prefetch_related:
+        #      it's short but it prefetches ALL fields from all the instances.
+        #      also it makes 1 query for content_type (only content_types that are used in this category)
+        #      This implementation is commented below in case django add defer/only support to prefetch_related.
+        #
+        #      categorizations = Categorization.objects.filter(category__in=categories).prefetch_related("content_object")
+        #
+        # 2) doing what prefetch_related does but only using needed fields.
+        #
+        categories = [category]
         if traverse_children:
-            categories = [category]+list(category.get_descendants())
-        else:
-            categories = [category]
+            categories += list(category.get_descendants())
 
-        collection_models = [ct.model_class() for ct in categories[0].collection.content_types.all()]
-        categorizations_list = []
-        for content_model in collection_models:
-            sql_params = {
-                    'content_model_tbl': content_model._meta.db_table,
-                    'content_type': ContentType.objects.get_for_model(content_model).id,
-                    'categorization_tbl': Categorization._meta.db_table,
-                    'category_tbl': Category._meta.db_table,
-                    'category_ids': ', '.join([ str(category.id) for category in categories ]),
-                    'sort_property': sort_property
-                }
+        # First fetch object_id's and content_types and build a dict with key on content_type
+        categorizations = Categorization.objects.filter(category__in=categories)
+        ct_vals = defaultdict(list)
+        for cat_id, obj_id, ct_id in categorizations.values_list("pk", "object_id", "content_type_id"):
+            ct_vals[ct_id].append(obj_id)
 
-            categorization_query = \
-                'SELECT collections_categorization.*, %(content_model_tbl)s.%(sort_property)s AS sort_property FROM  collections_categorization '\
-                'JOIN %(content_model_tbl)s ON %(content_model_tbl)s.id = collections_categorization.object_id '\
-                'AND %(content_type)s = collections_categorization.content_type_id '\
-                'JOIN %(category_tbl)s ON %(category_tbl)s.id = collections_categorization.category_id '\
-                'WHERE  %(category_tbl)s.id IN (%(category_ids)s) '\
-                'GROUP BY collections_categorization.object_id' % sql_params
+        # Iterate over content_types fetching the sort_key of the content_object and saving in sort_attrs dict
+        sort_attrs = {}
+        for ct_id, object_ids in ct_vals.iteritems():
+            ct = ContentType.objects.get_for_id(ct_id)
+            for obj_id, val in ct.get_all_objects_for_this_type(pk__in=object_ids).values_list("pk", sort_property):
+                sort_attrs[(ct_id, obj_id)] = val
 
-            ##TODO(nicoechaniz): replace string formating with params list. reference http://docs.djangoproject.com/en/dev/topics/db/sql/
-            categorizations_list += Categorization.objects.raw(categorization_query)
+        return sorted(categorizations, key=lambda c: sort_attrs[(c.content_type_id, c.object_id)],
+                       reverse=reverse)[slice(limit)]
 
-        ##TODO(nicoechaniz): we should get all data in one query and properly sorted
-        return sorted(categorizations_list, key=attrgetter('sort_property'), reverse=reverse)[slice(limit)]
 
 
 class Categorization(models.Model):
