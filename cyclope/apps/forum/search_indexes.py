@@ -26,7 +26,6 @@ import cyclope.apps.forum.models
 
 class TopicIndex(RealTimeSearchIndex):
     text = CharField(document=True, use_template=True) #template: text, author
-    author = CharField(model_attr='author')
     pub_date = DateTimeField(model_attr='creation_date')
 
 site.register(cyclope.apps.forum.models.Topic, TopicIndex)

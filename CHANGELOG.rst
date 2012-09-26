@@ -5,6 +5,8 @@ Changelog for Cyclope 3
 0.2 (unreleased)
 ================
 
+- Added user field to BaseContent
+
 - Added cyclopedemo command that creates a new project and loads the demo
   fixtures.
 

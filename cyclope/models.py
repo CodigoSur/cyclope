@@ -308,6 +308,8 @@ class BaseContent(models.Model):
     slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
                          always_update=False, editable=True, blank=True)
     published =  models.BooleanField(_('published'), default=True)
+    # user that uploads the content
+    user = models.ForeignKey(User, editable=False, blank=True, null=True)
     related_contents = generic.GenericRelation(RelatedContent,
                                                object_id_field='self_id',
                                                content_type_field='self_type')

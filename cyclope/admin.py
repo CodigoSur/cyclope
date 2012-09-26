@@ -111,6 +111,12 @@ class BaseContentAdmin(admin.ModelAdmin):
             extra_context['initial_collection'] = category.collection.id
         return super(BaseContentAdmin, self).add_view(request, form_url, extra_context)
 
+    def save_model(self, request, obj, form, change):
+        # sets the user as the creator of the content
+        if getattr(obj, 'user', None) is None:
+            obj.user = request.user
+        obj.save()
+
 
 class MenuItemAdmin(TreeEditor, PermanentFilterMixin):
     form = MenuItemAdminForm
