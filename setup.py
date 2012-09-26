@@ -63,7 +63,6 @@ setup(
     # revision number is indicated in the dependency_links for packages
     # that are downloaded from source to ensure a tested revision is used.
     dependency_links=[
-        'hg+http://bitbucket.org/drmeers/django-dbgettext#egg=django-dbgettext-0.1',
         'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-0.4a1',
         'hg+http://bitbucket.org/nicoechaniz/django-rosetta_temp#egg=django-rosetta-0.6.2-temp',
         'hg+http://bitbucket.org/san/django-jsonfield#egg=django-jsonfield-0.6.0-cyclope',
