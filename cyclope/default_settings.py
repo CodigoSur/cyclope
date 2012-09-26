@@ -83,6 +83,7 @@ INSTALLED_APPS = [
 
     'cyclope',
     'cyclope.core.collections',
+    'cyclope.core.series',
     'cyclope.core.perms',
     'cyclope.apps.articles',
     'cyclope.apps.staticpages',

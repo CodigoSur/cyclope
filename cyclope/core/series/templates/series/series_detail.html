@@ -1,0 +1,25 @@
+{% extends "cyclope/base_content_detail.html" %}
+{% load i18n %}
+
+
+{% block basecontent_content %}
+
+{% with series_items=current_object.series_contents.all  %}
+
+  {% if series_items %}
+  <div class="series_contents">
+    <span>{% trans "Content:" %}</span>
+    <ul>
+    {% for item in series_items %}
+        {% with content=item.other_object %}
+        <li class='series_content {{ content.get_object_name }}'>
+          <a href="{{ content.get_absolute_url }}">{{ content.name }}</a>
+        </li>
+        {% endwith %}
+    {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+{% endwith %}
+{% endblock basecontent_content %}
+
