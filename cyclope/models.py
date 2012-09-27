@@ -399,8 +399,8 @@ class Author(models.Model, ThumbnailMixin):
 
     This referes to the author of the content, not to the user uploading it.
     """
-    name = models.CharField(_('name'), max_length=250,
-                             db_index=True, blank=False)
+    name = models.CharField(_('name'), max_length=250, db_index=True,
+                            unique=True)
     slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
                          always_update=False, editable=True, blank=True)
     image = FileBrowseField(_('image'), max_length=100, format='Image',
