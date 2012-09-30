@@ -36,6 +36,8 @@ import cyclope
 def menu_item_for_request(request):
     # Avoids a circular import
     from cyclope.models import MenuItem
+    if getattr(request, "_menu_item", False) is not False:
+        return request._menu_item
     req_url = request.path
     url = req_url[len(cyclope.settings.CYCLOPE_PREFIX)+1:]
     if url == '':
@@ -50,6 +52,7 @@ def menu_item_for_request(request):
             menu_item = MenuItem.objects.select_related().get(Q(url=url)|Q(url=req_url))
         except:
             menu_item = None
+    request._menu_item = menu_item
     return menu_item
 
 def layout_for_request(request):

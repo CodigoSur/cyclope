@@ -1014,6 +1014,6 @@ class CategorizationManagerTests(TestCase):
 
         self.assertNumQueries(4, Categorization.objects.get_for_category, category)
 
-        Categorization.objects.get_for_category(category, sort_property="creation_date", reverse=True)
+        cats = Categorization.objects.get_for_category(category, sort_property="creation_date", reverse=True)
         self.assertEqual(cats[0].content_object, Article.objects.latest("creation_date"))
 

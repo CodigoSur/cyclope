@@ -342,14 +342,7 @@ class BaseContent(models.Model):
 
     @property
     def get_last_change_date(self):
-        entries = LogEntry.objects.filter(
-            content_type=ContentType.objects.get_for_model(self).id,
-            object_id=self.pk)
-
-        if entries:
-            last = entries.latest('action_time')
-            return last.action_time
-
+        return self.modification_date
 
     def translations(self):
         trans_links = []
@@ -376,13 +369,16 @@ class BaseContent(models.Model):
         return trans_links
 
     def pictures(self):
+        if getattr(self, "_pictures", False) is not False:
+            return self._pictures
+        self._pictures = None
         if self.related_contents:
             pic_model = models.get_model('medialibrary', 'picture')
             ctype = ContentType.objects.get_for_model(pic_model)
             rel_contents = self.related_contents.filter(other_type__pk=ctype.pk)
-            return [ r.other_object for r in rel_contents ]
-        else:
-            return None
+            self._pictures = [ r.other_object for r in rel_contents ]
+        return self._pictures
+
 
     translations.allow_tags = True
     translations.short_description = _('translations')
