@@ -30,6 +30,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.template import loader, Template, Context
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
+from django.template.loader import render_to_string
+from cyclope.models import User
 
 import cyclope.utils
 from cyclope import settings as cyc_settings
@@ -45,15 +47,17 @@ class MenuRootItemsList(frontend.FrontendView):
     verbose_name=_('list of root items for the selected Menu')
     is_default = True
     is_region_view = True
+    template = "cyclope/menu_flat_items_list.html"
 
     def get_response(self, request, req_context, options, content_object):
         menu_items = MenuItem.tree.filter(menu=content_object,
                                           level=0, active=True)
         current_url = request.path_info[1:].split('/')[0]
-        req_context.update({'menu_items': menu_items,
-                            'current_url': current_url})
-        t = loader.get_template("cyclope/menu_flat_items_list.html")
-        return t.render(req_context)
+        return render_to_string(self.template, {
+            'menu_items': menu_items,
+            'current_url': current_url
+        }, req_context)
+
 
 frontend.site.register_view(Menu, MenuRootItemsList)
 
@@ -64,14 +68,16 @@ class MenuFlatItemsList(frontend.FrontendView):
     name='flat_items_list'
     verbose_name=_('flat list of all items for the selected Menu')
     is_region_view = True
+    template = "cyclope/menu_flat_items_list.html"
 
     def get_response(self, request, req_context, options, content_object):
         menu_items = MenuItem.tree.filter(menu=content_object, active=True)
         current_url = request.path_info[1:].split('/')[0]
-        req_context.update({'menu_items': menu_items,
-                                     'current_url': current_url})
-        t = loader.get_template("cyclope/menu_flat_items_list.html")
-        return t.render(req_context)
+        return render_to_string(self.template, {
+            'menu_items': menu_items,
+            'current_url': current_url
+        }, req_context)
+
 
 frontend.site.register_view(Menu, MenuFlatItemsList)
 
@@ -91,6 +97,7 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
     verbose_name=_('hierarchical list of the items in the selected menu')
     is_region_view = True
     options_form = MenuHierarchyOptions
+    template = "cyclope/menu_menuitems_hierarchy.html"
 
     def get_response(self, request, req_context, options, content_object):
         menu = content_object
@@ -99,11 +106,11 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
         current_url = request.path_info[1:]
         for item in menu_items:
             menu_items_list.extend(self._get_menuitems_nested_list(item, current_url))
-        req_context.update({'menu_items': menu_items_list,
-                            'menu_slug': menu.slug,
-                            'expand_style': options["align"]})
-        t = loader.get_template("cyclope/menu_menuitems_hierarchy.html")
-        return t.render(req_context)
+        return render_to_string(self.template, {
+            'menu_items': menu_items_list,
+            'menu_slug': menu.slug,
+            'expand_style': options["align"]
+        }, req_context)
 
     def _get_menuitems_nested_list(self, base_item, current_url=None, name_field='name'):
         """Creates a nested list to be used with unordered_list template tag
@@ -148,7 +155,7 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
     is_default = True
     is_instance_view = False
     is_region_view = True
-
+    template = "cyclope/menu_flat_items_list.html"
     def get_response(self, request, req_context, options):
         base_url = request.path_info[1:].split('/')[0]
         if base_url == '':
@@ -158,10 +165,8 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
 
         if current_item:
             children = current_item[0].get_children().filter(active=True)
-
-            req_context.update({'menu_items': children})
-            t = loader.get_template("cyclope/menu_flat_items_list.html")
-            return t.render(req_context)
+            return render_to_string(self.template, {'menu_items': children},
+                                    req_context)
         else:
             return ''
 
@@ -175,13 +180,12 @@ class SiteSearchBox(frontend.FrontendView):
     verbose_name=_('search box')
     is_instance_view = False
     is_region_view = True
+    template = "cyclope/site_search_box.html"
 
     def get_response(self, request, req_context, options):
-        t = loader.get_template("cyclope/site_search_box.html")
-        return t.render(req_context)
+        return render_to_string(self.template, {}, req_context)
 
 frontend.site.register_view(Site, SiteSearchBox)
-
 
 
 class SiteMap(frontend.FrontendView):
@@ -192,6 +196,7 @@ class SiteMap(frontend.FrontendView):
     is_default = True
     is_instance_view = False
     is_content_view = True
+    template = "cyclope/site_map.html"
 
     def get_response(self, request, req_context, options):
         collections_list = []
@@ -217,10 +222,10 @@ class SiteMap(frontend.FrontendView):
             else:
                 menus_list.append(menu.name)
 
-        req_context.update({'collections':collections_list,
-                                     'menus':menus_list})
-        t = loader.get_template("cyclope/site_map.html")
-        return t.render(req_context)
+        return render_to_string(self.template, {
+            'collections':collections_list,
+            'menus':menus_list,
+        }, req_context)
 
     def _get_categories_nested_list(self, base_category, name_field='name'):
 
