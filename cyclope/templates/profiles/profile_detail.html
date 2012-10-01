@@ -1,11 +1,18 @@
 {% extends CYCLOPE_DEFAULT_TEMPLATE %}
-{% load i18n %}
+{% load i18n fb_versions %}
 
 {% block content%}
 
+
+
 <h3>{{ profile.user.username }}</h3>
-{% if profile.avatar %}<img src="{{MEDIA_URL}}/{{ profile.avatar }}" alt=""></img>{% endif %}
-<br/>
+
+{% trans "City" %}: {{profile.city}}
+
+{{profile.about|linebreaks}}
+
+{% if profile.avatar %}<img src="{% version profile.avatar.path 'croppedthumbnail' %}" alt="profile avatar" />{% endif %}
+
 <a href="{{request.META.HTTP_REFERER}}">{% trans "Return" %}</a>
 
 {% endblock %}

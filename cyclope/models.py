@@ -313,8 +313,8 @@ class BaseContent(models.Model):
     related_contents = generic.GenericRelation(RelatedContent,
                                                object_id_field='self_id',
                                                content_type_field='self_type')
-    creation_date = models.DateTimeField(_('creation date'),
-                                         editable=True, default=datetime.now)
+    creation_date = models.DateTimeField(_('creation date'), editable=True,
+                                         default=datetime.now)
     modification_date = models.DateTimeField(_('modification date'), auto_now=True,
                                              editable=False, default=datetime.now)
     allow_comments = models.CharField(_('allow comments'), max_length=4,

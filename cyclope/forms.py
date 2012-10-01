@@ -305,18 +305,3 @@ from captcha.fields import CaptchaField
 
 class RegistrationFormWithCaptcha(RegistrationFormUniqueEmail):
     captcha = CaptchaField(label=_("Security code"))
-
-
-class UserProfileForm(forms.ModelForm):
-
-    def clean_avatar(self):
-        from django.core.files.images import get_image_dimensions
-        avatar = self.cleaned_data['avatar']
-        w, h = get_image_dimensions(avatar)
-        if w > 300 or h > 300:
-            raise forms.ValidationError(_('Your avatar image is too big'))
-        return avatar
-
-    class Meta:
-        model = UserProfile
-        exclude = ('user',)

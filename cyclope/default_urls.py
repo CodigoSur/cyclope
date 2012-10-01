@@ -28,7 +28,6 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings as django_settings
 from django.contrib import admin
 from haystack.views import SearchView, search_view_factory
-from cyclope.forms import UserProfileForm
 from cyclope.core.captcha_contact_form.forms import  \
                                        AdminSettingsContactFormWithCaptcha
 import cyclope.settings as cyc_settings
@@ -71,10 +70,6 @@ urlpatterns = patterns('',
         name='registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     # profiles (django-profiles)
-    url(r'^profiles/create/$', 'profiles.views.create_profile',
-        {'form_class': UserProfileForm}),
-    url(r'^profiles/edit/$', 'profiles.views.edit_profile',
-        {'form_class': UserProfileForm}),
     (r'^profiles/', include('profiles.urls')),
     # contact (django-contact-form)
     url(r'^contact/$', 'contact_form.views.contact_form',

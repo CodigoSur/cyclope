@@ -1,5 +1,5 @@
 {% extends CYCLOPE_DEFAULT_TEMPLATE %}
-{% load i18n %}
+{% load i18n fb_versions %}
 
 {% block content%}
 
@@ -9,14 +9,16 @@
 </h6>
 <form enctype="multipart/form-data" method="post">{% csrf_token %}
 {% for field in  form %}
+  <div>
   {{ field.label_tag }}
   {% if field.help_text %}<span class="help">{{ field.help_text }}</span> <br/> {% endif%}
   {{ field.errors }}
   {% if field.name ==  "avatar" and profile.avatar %}
-    <img src="{{MEDIA_URL}}/{{ profile.avatar }}" alt=""></img>
+    <img src="{% version profile.avatar.path 'croppedthumbnail' %}" alt="profile avatar" />
   {% endif %}
 
   {{ field }}
+  </div>
 {% endfor %}
 <p class="submit">
   <input type="submit" name="post" class="submit" value="{% trans "Send data" %}" />
