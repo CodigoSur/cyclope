@@ -658,10 +658,10 @@ class MenuItemTestCase(ViewableTestCase):
 
     def test_active_item(self):
         # home menu and An instance menu items
-        self.assertEqual(len(frontend.site.get_menuitem_urls([])), 2)
+        self.assertEqual(len(frontend.site.get_menuitem_urls()), 2)
         self.test_object.active = False
         self.test_object.save()
-        self.assertEqual(len(frontend.site.get_menuitem_urls([])), 1)
+        self.assertEqual(len(frontend.site.get_menuitem_urls()), 1)
 
     def build_admin_form(self, new_data=None):
         base_data = {'menu':self.menu.pk, 'name': 'test_mi'}
