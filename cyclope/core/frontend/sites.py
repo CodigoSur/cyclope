@@ -25,8 +25,7 @@ core.frontend.sites
 Frontend views' URL handling.
 """
 
-from django.http import Http404, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response, get_object_or_404
+from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.conf.urls import *
 from django.utils.translation import ugettext_lazy as _, ugettext
@@ -34,7 +33,6 @@ from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import post_save
 from django.utils import simplejson
-from django.contrib.sites.models import Site
 from django.db.models import get_model
 
 from cyclope.models import MenuItem, SiteSettings, BaseContent
@@ -113,11 +111,13 @@ class CyclopeSite(object):
                     urlpatterns += patterns('', url(url_pattern, view, name=model_name))
 
         # url patterns for menu items
-        return self.get_menuitem_urls(urlpatterns)
+        urlpatterns.extend(self.get_menuitem_urls())
+        return urlpatterns
 
 
-    def get_menuitem_urls(self, urlpatterns):
-        for item in MenuItem.tree.all():
+    def get_menuitem_urls(self):
+        urlpatterns = []
+        for item in MenuItem.tree.filter(active=True):
             # custom urls are not supposed to be handled by Cyclope
             if item.custom_url:
                 continue

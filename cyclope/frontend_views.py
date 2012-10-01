@@ -94,7 +94,7 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
 
     def get_response(self, request, req_context, options, content_object):
         menu = content_object
-        menu_items = MenuItem.tree.filter(menu=menu, level=0)
+        menu_items = MenuItem.tree.filter(menu=menu, level=0, active=True)
         menu_items_list = []
         current_url = request.path_info[1:]
         for item in menu_items:
@@ -119,8 +119,8 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
              '{{ menu_item.name }}</a></span>'
             )
         nested_list = []
-        for child in base_item.get_children():
-            if child.get_descendant_count()>0:
+        for child in base_item.get_children().filter(active=True):
+            if child.get_descendant_count() > 0:
                 nested_list.extend(self._get_menuitems_nested_list(
                     child, current_url, name_field=name_field))
             else:
@@ -157,7 +157,7 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
             current_item = MenuItem.tree.filter(url=base_url)
 
         if current_item:
-            children = current_item[0].get_children()
+            children = current_item[0].get_children().filter(active=True)
 
             req_context.update({'menu_items': children})
             t = loader.get_template("cyclope/menu_flat_items_list.html")

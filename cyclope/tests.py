@@ -332,9 +332,6 @@ class RegressionTests(TestCase):
 class RegionViewTestCase(TestCase):
     fixtures = ['simplest_site.json']
 
-    def setUp(self):
-        pass
-
     def testAddLayoutRegionView(self):
         layout = get_default_layout()
         content_type = ContentType.objects.get(model='staticpage')
@@ -377,9 +374,6 @@ class RegionViewTestCase(TestCase):
         response = self.client.get("/")
         self.assertContains(response, 'class="regionview staticpage detail',
                             count=1)
-
-    def tearDown(self):
-        pass
 
 
 class TemplateTagsTestCase(TestCase):
@@ -661,6 +655,13 @@ class MenuItemTestCase(ViewableTestCase):
         # test fail: can't have custom_url and content
         data = {'custom_url': "/foo/", 'content_type': article_ct_pk}
         self.assertFalse(self.build_admin_form(data).is_valid())
+
+    def test_active_item(self):
+        # home menu and An instance menu items
+        self.assertEqual(len(frontend.site.get_menuitem_urls([])), 2)
+        self.test_object.active = False
+        self.test_object.save()
+        self.assertEqual(len(frontend.site.get_menuitem_urls([])), 1)
 
     def build_admin_form(self, new_data=None):
         base_data = {'menu':self.menu.pk, 'name': 'test_mi'}
