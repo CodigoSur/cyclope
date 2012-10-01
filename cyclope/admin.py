@@ -32,6 +32,7 @@ from django.core import urlresolvers
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponseRedirect
+from django.contrib.sites.models import Site
 
 from mptt_tree_editor.admin import TreeEditor
 
@@ -166,6 +167,13 @@ admin.site.register(Layout, LayoutAdmin)
 class SiteSettingsAdmin(admin.ModelAdmin):
     form = SiteSettingsAdminForm
 
+    def has_add_permission(self, request):
+        """ Prevent addition of new objects """
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 admin.site.register(SiteSettings, SiteSettingsAdmin)
 
 class ImageAdmin(admin.ModelAdmin):
@@ -181,3 +189,20 @@ class AuthorAdmin(admin.ModelAdmin):
 admin.site.register(Author, AuthorAdmin)
 
 admin.site.register(Source)
+
+class SiteAdmin(admin.ModelAdmin):
+    list_display = ('domain', 'name')
+    search_fields = ('domain', 'name')
+
+    def has_add_permission(self, request):
+        """ Prevent addition of new objects """
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+
+import django.contrib.sites.admin # Force register of django's SiteAdmin
+admin.site.unregister(Site)
+admin.site.register(Site, SiteAdmin)

@@ -30,6 +30,7 @@ And to activate the app index dashboard::
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.contrib.sites.models import Site
 
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 from contact_form.models import ContactFormSettings
@@ -200,19 +201,6 @@ class CustomIndexDashboard(Dashboard):
                     ]),
             ]
 
-        if 'live' in settings.INSTALLED_APPS:
-            plugins_children.append(
-                modules.ModelList(
-                    title=_('Chat'),
-                    css_classes = ('dbmodule-chat', 'main-area-modules',),
-                    draggable = False,
-                    deletable = False,
-                    collapsible= False,
-                    include_list=[
-                        'live.models.Channel',
-                        ]),
-                )
-
         self.children.append(modules.Group(
             title=_('Plugins'),
             css_classes = ('dbmodule-plugins', 'main-area-modules',),
@@ -223,7 +211,6 @@ class CustomIndexDashboard(Dashboard):
             pre_content = (''),
             children = plugins_children
             ))
-
 
         self.children.append(modules.Group(
             title=_('Advanced'),
@@ -246,11 +233,13 @@ class CustomIndexDashboard(Dashboard):
                     include_list=[
                         'registration',
                         ]),
-                modules.ModelList(
-                    title=_('Sites'),
+                modules.LinkList(
+                    title=_('Site'),
                     css_classes = ('dbmodule-content_sites',),
-                    include_list=[
-                        'django.contrib.sites',
+                    children=[
+                        {'title': _('Site'),
+                         'url': '/admin/sites/site/%s/' % get_singleton(Site).id,
+                         }
                         ]),
                 )))
 
