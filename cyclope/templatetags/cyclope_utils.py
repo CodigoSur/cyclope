@@ -216,3 +216,14 @@ def pdbdebug_tag(parser, token):
     in the context.
     """
     return PdbNode()
+
+
+@register.filter
+def inline_template(obj, inline_view_name):
+    """
+    Returns the name of the requested inline template for the object obj.
+
+    Eg: {{ article|inline_template:"teaser" }} -> "articles/article_teaser.html"
+    """
+    return "%s/%s_%s.html" % (obj.get_app_label(), obj.get_object_name(),
+                              inline_view_name)
