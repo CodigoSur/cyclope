@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -27,7 +27,7 @@ Frontend views' URL handling.
 
 from django.http import HttpResponse
 from django.template import RequestContext, loader
-from django.conf.urls import *
+from django.conf.urls import patterns, url
 from django.utils.translation import ugettext_lazy as _, ugettext
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.contrib.contenttypes.models import ContentType
@@ -87,7 +87,6 @@ class CyclopeSite(object):
         return sorted(self._registry_ctype_choices, key=lambda choice: choice[1])
 
     def get_urls(self):
-        from django.conf.urls import patterns, url
         urlpatterns = patterns('',
             url(r'^$', self.index, name='index'),
             #JSON views for AJAX updating of admin fields
