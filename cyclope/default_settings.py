@@ -85,6 +85,7 @@ INSTALLED_APPS = [
     'cyclope.core.collections',
     'cyclope.core.series',
     'cyclope.core.perms',
+    'cyclope.core.user_profiles',
     'cyclope.apps.articles',
     'cyclope.apps.staticpages',
     'cyclope.apps.medialibrary',
@@ -212,7 +213,7 @@ FILEBROWSER_MAX_UPLOAD_SIZE = 1024*1024*20 # 20MB
 ACCOUNT_ACTIVATION_DAYS = 7
 
 # profile settings
-AUTH_PROFILE_MODULE = "cyclope.userprofile"
+AUTH_PROFILE_MODULE = "user_profiles.UserProfile"
 
 # admin-tools settings
 ADMIN_TOOLS_INDEX_DASHBOARD = 'cyclope.dashboard.CustomIndexDashboard'

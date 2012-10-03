@@ -5,7 +5,7 @@
 {% block content %}
 
   {% for article in article_list %}
-    {% include "articles/article_teaser.html" %}
+    {% include "articles/article_teaser.html" with current_object=article %}
   {% endfor %}
 
 <!-- {include file="paginador.html" } -->

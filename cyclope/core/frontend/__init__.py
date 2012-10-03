@@ -93,7 +93,7 @@ class FrontendView(object):
         if self.is_instance_view:
             if not content_object:
                 content_object = get_object_or_404(self.model, slug=slug)
-            
+
             req_context["current_object"] = content_object
             if self.is_content_view and not region_name:
                 if hasattr(content_object, "name"):

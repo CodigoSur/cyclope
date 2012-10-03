@@ -35,9 +35,9 @@ class BaseMedia(BaseContent, Collectible, ThumbnailMixin):
     """Abstract class for media content.
     """
     author = models.ForeignKey(Author, verbose_name=_('author'),
-                               null=True, blank=True)
+                               null=True, blank=True, on_delete=models.SET_NULL)
     source = models.ForeignKey(Source, verbose_name=_('source'),
-                               blank=True, null=True)
+                               blank=True, null=True, on_delete=models.SET_NULL)
     description = models.TextField(_('description'), blank=True)
 
     media_file_field = None # This must me set to the media_file on the model

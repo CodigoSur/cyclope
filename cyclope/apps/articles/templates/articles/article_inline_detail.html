@@ -18,7 +18,7 @@
   <div class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</div>
   {% endif%}
 
-  {% include "cyclope/author_block.html" with author=article.author %}
+  {% include "cyclope/author_block.html" %}
 
   <div class="article_content">
     {% if article.pictures %}

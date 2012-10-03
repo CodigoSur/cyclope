@@ -45,8 +45,6 @@ from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 from jsonfield import JSONField
 
-from registration import signals as registration_signals
-
 import cyclope
 from cyclope.core.collections.models import Collection
 from cyclope.utils import ThumbnailMixin
@@ -326,7 +324,7 @@ class BaseContent(models.Model):
     comments = generic.GenericRelation(Comment, object_id_field="object_pk")
 
     def get_absolute_url(self):
-        return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
+        return '/%s/%s/' % (self.get_object_name(), self.slug)
 
     @classmethod
     def get_app_label(cls):
@@ -416,6 +414,10 @@ class Author(models.Model, ThumbnailMixin):
         verbose_name = _('author')
         verbose_name_plural = _('authors')
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('author-detail', (), {'slug': self.slug})
+
 
 class Source(models.Model):
     name = models.CharField(_('name'),max_length=250,
@@ -441,28 +443,6 @@ class Image(models.Model, ThumbnailMixin):
         verbose_name = _('image')
         verbose_name_plural = _('images')
 
-
-class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True)
-
-    avatar = models.ImageField(_('avatar'), max_length=100,
-                               blank=True, upload_to="uploads/avatars/")
-    city = models.CharField(_('city'), max_length=100, blank=True)
-    about = models.TextField(_('about myself'), max_length=1000, blank=True)
-
-    public = models.BooleanField(
-        _('public'), default=True,
-        help_text=_('Choose whether your profile info should be publicly visible or not'))
-
-    def get_absolute_url(self):
-        return ('profiles_profile_detail', (), { 'username': self.user.username })
-    get_absolute_url = models.permalink(get_absolute_url)
-
-
-# Signal callbacks
-
-def _create_profile_upon_activation(*args, **kwargs):
-    UserProfile.objects.create(user=kwargs['user'])
 
 def _delete_related_contents(sender, instance, **kwargs):
     # cascade delete does not delete the RelatedContent elements
@@ -491,6 +471,6 @@ def _delete_from_layouts_and_menuitems(sender, instance, **kwargs):
             item.content_type = item.object_id = item.content_object = None
             item.save()
 
-registration_signals.user_activated.connect(_create_profile_upon_activation)
+
 pre_delete.connect(_delete_related_contents)
 pre_delete.connect(_delete_from_layouts_and_menuitems)

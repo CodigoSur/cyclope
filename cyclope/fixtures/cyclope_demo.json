@@ -608,19 +608,6 @@
   }, 
   {
     "pk": 1, 
-    "model": "cyclope.userprofile", 
-    "fields": {
-      "city": "", 
-      "about": "", 
-      "public": true, 
-      "user": [
-        "manager"
-      ], 
-      "avatar": ""
-    }
-  }, 
-  {
-    "pk": 1, 
     "model": "collections.collection", 
     "fields": {
       "content_types": [

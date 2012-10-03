@@ -43,6 +43,7 @@ from cyclope.models import Layout, RegionView, Author
 from cyclope.core import frontend
 from cyclope.core.collections.models import *
 from cyclope.core.perms.models import CategoryPermission
+from cyclope.core.user_profiles.models import UserProfile
 from cyclope.templatetags.cyclope_utils import do_join
 from cyclope.apps.staticpages.models import StaticPage
 from cyclope.apps.articles.models import Article
@@ -51,6 +52,7 @@ from cyclope.apps.polls.models import *
 from cyclope.apps.forum.models import *
 from cyclope.apps.feeds.models import Feed
 from cyclope.apps.dynamicforms.models import DynamicForm
+
 from cyclope.fields import MultipleField
 from cyclope.sitemaps import CollectionSitemap, CategorySitemap, MenuSitemap
 from cyclope.forms import SiteSettingsAdminForm, LayoutAdminForm, MenuItemAdminForm
@@ -748,6 +750,19 @@ class CommentsViewsTestCase(ViewableTestCase):
                                   content_object=site, site=site, subscribe=True)
         comment.save()
         self.test_object = comment
+        frontend.autodiscover()
+
+    def test_creation(self):
+        pass
+
+class UserProfileViewsTestCase(ViewableTestCase):
+    test_model = UserProfile
+
+    def setUp(self):
+        user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
+        from registration import signals as registration_signals
+        registration_signals.user_activated.send(sender=user, user=user)
+        self.test_object = user.get_profile()
         frontend.autodiscover()
 
     def test_creation(self):

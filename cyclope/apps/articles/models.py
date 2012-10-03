@@ -43,7 +43,7 @@ class Article(BaseContent, Collectible):
     summary = models.TextField(_('summary'), blank=True)
     text = models.TextField(_('text'))
     author = models.ForeignKey(Author, verbose_name=_('author'),
-                               null=True, blank=True)
+                               null=True, blank=True, on_delete=models.SET_NULL)
     source = models.ForeignKey(Source, verbose_name=_('source'),
                                blank=True, null=True)
     date = models.DateTimeField(_('date'), blank=True, null=True)

@@ -12,10 +12,8 @@
   {% include 'cyclope/content_tools_block.html' %}
 
 
-  {% if current_object.author %}
   <!-- author -->
-    {% include "cyclope/author_block.html" with author=current_object.author %}
-  {% endif %}
+  {% include "cyclope/author_block.html" %}
 
   <!-- categories navigation -->
   <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>

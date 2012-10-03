@@ -11,9 +11,7 @@ CYCLOPE_PROJECT_PATH = os.path.dirname(__file__)
 
 INTERNAL_IPS = ('127.0.0.1',)
 
-#ADMINS = (
-#    ('Your Name', 'your_email@domain.com'),
-#)
+#ADMINS = (('Your Name', 'your_email@domain.com'),)
 
 #MANAGERS = (('Your Name', 'your_email@domain.com'), )
 

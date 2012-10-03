@@ -1,6 +1,9 @@
-{% load i18n %}
+{% load i18n cyclope_utils %}
+
+{% assign author current_object.author|default:current_object.user %}
 {% if author %}
 <div class="author-container meta-content">
-  <h4  class="author"><a href='{% url author-detail author.slug %}'>{% trans "By" %} {{ author }}</a></h4>
+  <h4  class="author"><a href='{{ author.get_absolute_url }}'>{% trans "By" %} {{ author }}</a></h4>
 </div>
 {% endif %}
+

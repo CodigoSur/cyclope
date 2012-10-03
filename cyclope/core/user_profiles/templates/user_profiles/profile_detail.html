@@ -1,0 +1,15 @@
+{% extends host_template %}
+
+{% load i18n fb_versions cyclope_utils dbgettext_tags %}
+{% load url from future %}
+
+{% block content %}
+<div class="content-view user detail user-detail">
+  {% include "profiles/profile_content.html" %}
+
+  {% if request.user == current_object.user %}
+    <a href="{% url "profiles_edit_profile" %}">{% trans "Edit profile" %}</a>
+  {% endif %}
+  {% include "cyclope/authored_content_block.html" %}
+</div>
+{% endblock content%}

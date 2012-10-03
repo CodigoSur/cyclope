@@ -27,11 +27,10 @@ from operator import attrgetter
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from django.template import loader, Template, Context
+from django.template import Template, Context
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
 from django.template.loader import render_to_string
-from cyclope.models import User
 
 import cyclope.utils
 from cyclope import settings as cyc_settings
@@ -297,8 +296,34 @@ class AuthorDetailOptions(forms.Form):
                                        ("ALPHABETIC", _(u"Alphabetic"))),
                               initial="DATE-")
 
+class AuthoredMixin(object):
 
-class AuthorDetail(frontend.FrontendView):
+    options_form = AuthorDetailOptions
+
+    def get_queryset(self, content_object):
+        "Must return a queryset with all objects 'authored' by content_object"
+        return NotImplementedError
+
+    def get_page(self, request, req_context, options, content_object):
+        from cyclope.core.collections.frontend_views import SORT_BY
+        qs = self.get_queryset(content_object)
+
+        sort_by = options["sort_by"]
+        limit = options["limit_to_n_items"] or None
+        sort_property, reverse, paginator_class = SORT_BY[sort_by]
+        paginator_kwargs = {"per_page": options["items_per_page"]}
+        if 'DATE' in sort_by:
+            qs.sort(key=attrgetter(sort_property), reverse=reverse)
+            if limit:
+                qs = qs[:limit]
+        elif 'ALPHABETIC' in sort_by:
+            paginator_kwargs['on'] = "name"
+        paginator = paginator_class(qs, **paginator_kwargs)
+        page = cyclope.utils.get_page(paginator, request)
+        return page
+
+
+class AuthorDetail(AuthoredMixin, frontend.FrontendView):
     """Display an author's detail
     """
     name='detail'
@@ -307,38 +332,28 @@ class AuthorDetail(frontend.FrontendView):
     is_instance_view = True
     is_region_view = False
     is_content_view = True
-    options_form = AuthorDetailOptions
     template = "cyclope/author_detail.html"
 
-    def get_response(self, request, req_context, options, content_object):
-        from cyclope.core.collections.frontend_views import SORT_BY
-
+    def get_queryset(self, content_object):
         authored_content = []
-        if options["show_authored_content"]:
-            # get related methods like picture_set, article_set, etc.
-            related = [attribute for attribute in dir(content_object) \
-                       if attribute.endswith('_set')]
-            for n in related:
-                authored_content.extend(getattr(content_object, n).all())
+        # get related methods like picture_set, article_set, etc.
+        related = [attribute for attribute in dir(content_object) \
+                   if attribute.endswith('_set')]
+        for n in related:
+            authored_content.extend(getattr(content_object, n).all())
+        return authored_content
 
-        sort_by = options["sort_by"]
-        limit = options["limit_to_n_items"] or None
-        sort_property, reverse, paginator_class = SORT_BY[sort_by]
-        paginator_kwargs = {"per_page": options["items_per_page"]}
-        if 'DATE' in sort_by:
-            authored_content.sort(key=attrgetter(sort_property),reverse=reverse)
-            if limit:
-                authored_content = authored_content[:limit]
-        elif 'ALPHABETIC' in sort_by:
-            paginator_kwargs['on'] = "name"
-        paginator = paginator_class(authored_content, **paginator_kwargs)
-        page = cyclope.utils.get_page(paginator, request)
-        req_context.update({'author': content_object,
-                            'authored_content': page.object_list,
-                            'inline_view_name': options["inline_view_name"],
-                            'page': page})
-        t = loader.get_template(self.template)
-        return t.render(req_context)
+    def get_response(self, request, req_context, options, content_object):
+        if options['show_authored_content']:
+            authored_contents_page = self.get_page(request, req_context, options,
+                                                   content_object)
+        else:
+            authored_contents_page = None
+
+        return render_to_string(self.template, {
+            'inline_view_name': options["inline_view_name"],
+            'page': authored_contents_page
+        }, req_context)
 
 
 frontend.site.register_view(Author, AuthorDetail)

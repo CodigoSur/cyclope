@@ -33,7 +33,7 @@ from mptt.forms import TreeNodeChoiceField
 
 from cyclope.core.frontend import site
 from cyclope.models import MenuItem, RelatedContent, SiteSettings, Layout, \
-                            RegionView, UserProfile
+                            RegionView
 from cyclope.fields import MultipleField
 from cyclope.themes import get_all_themes, get_theme
 from cyclope.apps.related_admin import GenericFKWidget, GenericModelForm
