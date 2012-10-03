@@ -1,18 +1,1 @@
-{% load i18n fb_versions cyclope_utils %}
-
-  <div class="content-view flashmovie teaser">
-
-     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/flash.png" /><a href="{% url flashmovie-detail flashmovie.slug %}">{{ flashmovie.name }}</a></h2>
-
-     {% if flashmovie.image %}
-       <div class="media-content teaser_icon_container"><img class="teaser_icon" src="{% version flashmovie.image.path 'small' %}"/></div>
-     {% endif %}
-
-     {% if flashmovie.description %}
-       <div class="html-content summary">{{ flashmovie.description|smart_style }}</div>
-     {% endif %}
-
-    {% include "cyclope/author_block.html" with author=flashmovie.author %}
-
-    <div class="clear"></div>
-  </div>
+{% extends "medialibrary/medialibrary_base_teaser.html" %}

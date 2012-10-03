@@ -1,18 +1,1 @@
-{% load i18n fb_versions cyclope_utils %}
-
-  <div class="content-view movieclip teaser movieclip-teaser">
-
-     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/video.png" /><a href="{% url movieclip-detail movieclip.slug %}">{{ movieclip.name }}</a></h2>
-
-     {% if movieclip.image %}
-       <div class="media-content teaser_icon_container"><img class="teaser_icon" src="{% version movieclip.image.path 'small' %}" width="135" border="0" /></div>
-     {% endif %}
-
-     {% if movieclip.description %}
-       <div class="html-content summary">{{ movieclip.description|smart_style }}</div>
-     {% endif %}
-
-     {% include "cyclope/author_block.html" with author=movieclip.author %}
-
-    <div class="clear"></div>
-  </div>
+{% extends "medialibrary/medialibrary_base_teaser.html" %}

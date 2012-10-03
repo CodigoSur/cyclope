@@ -1,10 +1,8 @@
 {% extends 'medialibrary/medialibrary_slideshow_base_item.html' %}
 {% load i18n fb_versions cyclope_utils dbgettext_tags %}
 
-{% alias media as 'current_object' %}
-{% alias media.audio as 'media_file' %}
-
 {% block content %}
-  {% assign player_height '24' %}
-  {% include 'medialibrary/media_player.html' %}
+    {% with player_height='24' %}
+    {% include 'medialibrary/media_player.html' %}
+    {% endwith %}
 {% endblock content %}

@@ -1,22 +1,7 @@
-{% load i18n cyclope_utils %}
+{% extends "medialibrary/medialibrary_base_inline_detail.html" %}
 
-{% block content %}
-
-{% alias media as 'current_object' %}
-{% alias media.video as 'media_file' %}
-
-<div class="content-view movieclip media detail movieclip-detail">
-
-  {% include 'medialibrary/media_detail_header.html' %}
-
-  {% assign player_height '320' %}
-  {% include 'medialibrary/media_player.html' %}
-
-  <h3 class="html-content summary">{{ media.description|smart_style }}</h3>
-
-  {% include 'medialibrary/media_detail_footer.html' %}
-
-
-</div> <!--termina media_detail -->
-
-{% endblock content%}
+{% block media_content %}
+    {% with player_height='320' %}
+    {% include 'medialibrary/media_player.html' %}
+    {% endwith %}
+{% endblock %}

@@ -1,15 +1,1 @@
-{% load fb_versions cyclope_utils %}
-
-  <div class="content-view media labeled_icon movieclip">
-    <a href="{% url movieclip-detail movieclip.slug %}">
-      {% if movieclip.still %}
-      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/video.png"/>
-      <img class="icon" src="{% version movieclip.still.path 'thumbnail' %}"/>
-      {% else %}
-        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/video.png" border="0"/>
-        <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
-      {% endif %}
-
-    </a>
-    <h2 class="title"><a href="{% url movieclip-detail movieclip.slug %}">{{ movieclip.name|truncatechars:40 }}</a></h2>
-  </div>
+{% extends "medialibrary/medialibrary_base_labeled_icon.html" %}

@@ -1,0 +1,32 @@
+{% load i18n cyclope_utils fb_versions %}
+
+{% block content %}
+<div class="content-view {{ current_object.get_object_name }} teaser {{ current_object.get_object_name }}-teaser">
+
+  <h2 class="title">
+  <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/{{ current_object.get_object_name }}.png" />
+  <a href="{% if current_object.skip_detail %}{{ current_object.content_url }}{% else %} {{ current_object.get_absolute_url }} {% endif%}" {% if current_object.new_window %}target="_blank"{% endif%}>{{ current_object.name }}</a>
+  </h2>
+
+  {% if current_object.image %}
+      <div class="teaser_icon_container media-content">
+      <a href="{% if current_object.skip_detail %}{{ current_object.content_url }}{% else %} {{ current_object.get_absolute_url }} {% endif%}" {% if current_object.new_window %}target="_blank"{% endif%}>
+        <img class="teaser_icon" src="{% version current_object.image.path 'small' %}" border="0"/>
+      </a>
+    </div>
+  {% endif %}
+
+  {% if current_object.description %}
+      <div class="html-content summary">{{ current_object.description }}
+      {% if not current_object.skip_detail %}
+          <span class="more"><a href="{{ current_object.get_absolute_url }}">{% trans "More"%}</a></span>
+      {% endif %}
+      </div>
+  {% endif %}
+
+  {% include "cyclope/author_block.html" with author=current_object.author %}
+
+  <div class="clear"></div>
+
+</div>
+{% endblock content%}
