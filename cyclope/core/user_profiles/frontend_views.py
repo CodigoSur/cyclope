@@ -45,7 +45,11 @@ class UserDetail(AuthoredMixin, frontend.FrontendView):
             if related_name.endswith('_set'):
                 rel_set = getattr(content_object, related_name)
                 if rel_set.model in frontend.site.base_content_types:
-                    qs.extend(rel_set.all())
+                    sqs = rel_set.all()
+                    # We only want the items that doesn't have author set
+                    if hasattr(rel_set.model, "author"):
+                        sqs = sqs.filter(author=None)
+                    qs.extend(sqs)
         return qs
 
     def get_response(self, request, req_context, options, content_object):

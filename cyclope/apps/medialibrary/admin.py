@@ -44,8 +44,10 @@ def media_admin_factory(media_model):
                                    for ctype in author.content_types.all()]:
                     author_choices.append((author.id, author.name))
             self.fields['author'].choices = author_choices
+
         class Meta:
             model = media_model
+            
 
     if media_model in has_thumbnail:
         list_display = ['name', 'thumbnail']

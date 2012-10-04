@@ -47,7 +47,7 @@ from jsonfield import JSONField
 
 import cyclope
 from cyclope.core.collections.models import Collection
-from cyclope.utils import ThumbnailMixin
+from cyclope.utils import ThumbnailMixin, get_singleton
 
 
 class SiteSettings(models.Model):
@@ -74,13 +74,19 @@ class SiteSettings(models.Model):
                                                help_text=_('contents to show in the whole feed'))
     allow_comments = models.CharField(_('allow comments'), max_length=4,
                                       choices = (
-                                                 ('YES',_('enabled')),
-                                                 ('NO',_('disabled'))
-                                    ))
+                                          ('YES',_('enabled')),
+                                          ('NO',_('disabled'))
+                                      ), default='YES')
     moderate_comments = models.BooleanField(default=False)
     enable_comments_notifications = models.BooleanField(_('enable comments email notifications'),
                                                         default=True)
     enable_abuse_reports = models.BooleanField(_('enable abuse reports'), default=False)
+    show_author = models.CharField(_('show author'), max_length=6,
+                                   choices = (
+                                       ('AUTHOR', _('author')),
+                                       ('USER', _('user if author is empty'))
+                                   ), default='AUTHOR',
+                                   help_text=_('Select which field to use to show as author of the content.'))
 
     def save(self, *args, **kwargs):
         self.id = 1
@@ -322,6 +328,12 @@ class BaseContent(models.Model):
                                     ('NO',_('disabled'))
                                 ), default='SITE')
     comments = generic.GenericRelation(Comment, object_id_field="object_pk")
+    show_author = models.CharField(_('show author'), max_length=6, default='SITE',
+                                   choices = (
+                                        ('AUTHOR', _('author')),
+                                        ('USER', _('user if author is empty')),
+                                        ('SITE', _('default'))
+                                   ), help_text=_('Select which field to use to show as author of this content.'))
 
     def get_absolute_url(self):
         return '/%s/%s/' % (self.get_object_name(), self.slug)
@@ -377,6 +389,21 @@ class BaseContent(models.Model):
             self._pictures = [ r.other_object for r in rel_contents ]
         return self._pictures
 
+    def get_author_or_user(self):
+        """
+        Returns the author or the user that created the content as stated on
+        self.show_author and/or SiteSettings.show_author.
+        """
+        ret = None
+        author = getattr(self, "author", None)
+        site_settings = get_singleton(SiteSettings)
+        if self.show_author == "AUTHOR" or (self.show_author == "SITE" and
+                                            site_settings.show_author == "AUTHOR"):
+            ret = author
+        elif self.show_author == "USER" or (self.show_author == "SITE" and
+                                            site_settings.show_author == "USER"):
+            ret = author or self.user  # If the ir no author it defaults to user
+        return ret
 
     translations.allow_tags = True
     translations.short_description = _('translations')

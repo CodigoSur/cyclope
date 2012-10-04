@@ -33,6 +33,7 @@ from cyclope.core.captcha_contact_form.forms import  \
 import cyclope.settings as cyc_settings
 from cyclope.feeds import CategoryFeed, WholeSiteFeed, ContentTypeFeed
 from cyclope.sitemaps import CategorySitemap, CollectionSitemap, MenuSitemap
+from cyclope.core.user_profiles.forms import UserProfileForm
 
 urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
@@ -70,6 +71,7 @@ urlpatterns = patterns('',
         name='registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     # profiles (django-profiles)
+    ('^profiles/edit', 'profiles.views.edit_profile', {'form_class': UserProfileForm,}),
     (r'^profiles/', include('profiles.urls')),
     # contact (django-contact-form)
     url(r'^contact/$', 'contact_form.views.contact_form',

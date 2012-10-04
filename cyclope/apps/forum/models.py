@@ -36,10 +36,6 @@ from cyclope.models import BaseContent
 
 class Topic(BaseContent, Collectible):
     text = models.TextField(_('text'))
-    
-    @property
-    def author(self):
-        return self.user
 
     class Meta:
         verbose_name = _('topic')

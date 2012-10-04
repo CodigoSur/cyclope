@@ -14,7 +14,7 @@
        {% alias content as content.get_object_name %}
        {% alias content as 'media' %}
       {% assign template_path content|inline_template:inline_view_name %}
-      {% include template_path with current_object=content %}
+      {% include template_path with current_object=content host_template="cyclope/inline_view.html"%}
     {% endfor %}
     </div>
   {% endif %}
