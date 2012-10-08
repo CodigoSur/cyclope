@@ -12,28 +12,28 @@ verbose_name = _('Alternative')
 
 layout_templates = {
 
-    'inner.html':
+    'four_elements.html':
         {
-        'verbose_name': _('Inner'),
+        'verbose_name': _('Four Elements'),
         'regions' : {
-            'air': _('air'),
-            'water': _('water'),
-            'before_fire': _('before fire'),
-            'after_fire': _('after fire'),
-            'earth': _('earth'),
+            'air': _('Air'),
+            'water': _('Water'),
+            'spark': _('Spark'),
+            'ash': _('Ash'),
+            'earth': _('Earth'),
             }
         },
 
-    'main.html':
+    'five_elements.html':
         {
-        'verbose_name': _('Main'),
+        'verbose_name': _('Five Elements'),
         'regions' : {
-            'air': _('air'),
-            'water': _('water'),
-            'love': _('love'),
-            'before_fire': _('before fire'),
-            'after_fire': _('after fire'),
-            'earth': _('earth'),
+            'air': _('Air'),
+            'water': _('Water'),
+            'love': _('Love'),
+            'spark': _('Spark'),
+            'ash': _('Ash'),
+            'earth': _('Earth'),
             }
         },
     'empty.html':
