@@ -34,7 +34,7 @@ class UserProfileForm(forms.ModelForm):
             self.fields['first_name'].initial = self.instance.user.first_name
             self.fields['last_name'].initial = self.instance.user.last_name
         except User.DoesNotExist:
-            pass
+            del self.fields['email']
 
     first_name = forms.CharField(label=_('first name'), max_length=30, required=False)
     last_name = forms.CharField(label=_('last name'), max_length=30, required=False)
@@ -45,13 +45,27 @@ class UserProfileForm(forms.ModelForm):
         exclude = ('user',)
 
     def save(self, *args, **kwargs):
-        user = self.instance.user
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
-        # change the email only if nobody is using it
-        user_same_email = User.objects.filter(email=self.cleaned_data['email'])
-        if user == user_same_email:
-            user.email = self.cleaned_data['email']
-        user.save()
-        profile = super(UserProfileForm, self).save(*args,**kwargs)
+        user = self.instance.user if self.instance.user_id else None
+        if user:
+            user.first_name = self.cleaned_data['first_name']
+            user.last_name = self.cleaned_data['last_name']
+            # change the email only if nobody is using it
+            email = self.cleaned_data.get('email')
+            if email:
+                user_same_email = User.objects.filter(email=email)
+                if not user_same_email:
+                    email = self.cleaned_data['email']
+                elif user == user_same_email:
+                    email = self.cleaned_data['email']
+                else:
+                    email = user.email
+                user.email = email
+            user.save()
+            self.instance._form = None
+
+        profile = super(UserProfileForm, self).save(*args, **kwargs)
+        # This is a hack to deal with profiles that aren't created automatically by a signal
+        # so the user is not part of the profile instance in the save method
+        # Instead, the form save will be issued from the profile model
+        profile._form = getattr(self.instance, "_form", self)
         return profile

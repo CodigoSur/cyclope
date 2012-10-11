@@ -42,6 +42,16 @@ class UserProfile(models.Model):
     def get_absolute_url(self):
         return ('userprofile-detail', (), { 'slug': self.slug })
 
+    def save(self, *args, **kwargs):
+        super(UserProfile, self).save(*args, **kwargs)
+        # This is a hack to deal with profiles that aren't created automatically by a signal
+        # so the user is not part of the profile instance in the save method
+        # Instead, the form save is issued from the profile model
+        form = getattr(self, "_form", None)
+        if form:
+            form.instance = self
+            form.save()
+
 User.get_absolute_url = lambda self: self.get_profile().get_absolute_url()
 
 # Signal callbacks
