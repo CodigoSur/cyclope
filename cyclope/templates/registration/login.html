@@ -9,7 +9,7 @@
         <div class="summary">{% trans "Please enter your credentials"%}</div>
     </div>
 
-    <form action="" method="post" class="uniForm login">
+    <form action="" method="post" class="uniForm login">{% csrf_token %}
       {{form|crispy}}
       <div class="buttonHolder">
         <input type="submit" value="{% trans "login"|capfirst %}" >
