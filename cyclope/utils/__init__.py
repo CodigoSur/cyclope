@@ -30,6 +30,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import InvalidPage, EmptyPage
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 import cyclope
 
@@ -301,3 +303,7 @@ class ThumbnailMixin(object):
     thumbnail.short_description = _('Thumbnail Image')
     thumbnail.allow_tags = True
 
+
+class CrispyFormsSimpleMixin(object):
+    helper = FormHelper()
+    helper.add_input(Submit('submit', _('Submit')))

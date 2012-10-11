@@ -302,6 +302,8 @@ class AuthorAdminForm(forms.ModelForm):
 
 from registration.forms import RegistrationFormUniqueEmail
 from captcha.fields import CaptchaField
+from cyclope.utils import CrispyFormsSimpleMixin
 
-class RegistrationFormWithCaptcha(RegistrationFormUniqueEmail):
+class RegistrationFormWithCaptcha(RegistrationFormUniqueEmail,
+                                    CrispyFormsSimpleMixin):
     captcha = CaptchaField(label=_("Security code"))
