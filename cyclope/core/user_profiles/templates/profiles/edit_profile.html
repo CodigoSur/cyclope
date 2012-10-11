@@ -4,9 +4,14 @@
 {% block content%}
 
 <div class="user_input">
-<h6>
-  {% trans "Please fill in your user profile data" %}
-</h6>
+
+<h1 class="title">{% block title_content%}{% trans "Edit Profile" %}{% endblock %}</h1>
+
+<div class="form_summary">
+    <div class="summary">
+      <p>{% trans "Please fill in your user profile data" %}</p>
+    </div>
+</div>
 
 {% crispy form form.helper %}
 

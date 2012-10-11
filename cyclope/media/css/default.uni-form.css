@@ -34,7 +34,7 @@
     .uniForm legend{ font-weight: bold; font-size: 100%; margin: 0; padding: 1.5em 0; }
   
     .uniForm .ctrlHolder{ padding: 1em; border-bottom: 1px solid #efefef; }
-    .uniForm .ctrlHolder.focused{ background: #fffcdf; }
+    .uniForm .ctrlHolder.focused{ background: #eee; }
     
     .uniForm .inlineLabels .noLabel{}
     
