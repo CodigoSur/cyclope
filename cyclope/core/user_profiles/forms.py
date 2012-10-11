@@ -22,10 +22,16 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+
 from models import UserProfile
 
 class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.add_input(Submit('submit', _('Submit')))
         super(UserProfileForm, self).__init__(*args, **kwargs)
         # Add User's fields first in the form
         self.fields.keyOrder =  ['first_name', 'last_name', 'email'] + self.fields.keyOrder[:-3]

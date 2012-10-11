@@ -129,6 +129,7 @@ INSTALLED_APPS = [
     'contact_form',
     'markitup',
     'forms_builder.forms',
+    'crispy_forms',
 
 #    'debug_toolbar',
 #    'django_extensions',
@@ -257,3 +258,4 @@ JQUERY_URL = "cyclope/js/reuse_django_jquery.js" # We dont want jquery to be inc
 MARKITUP_SET = 'cyclope/markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
 
+CRISPY_TEMPLATE_PACK = 'uni_form'

@@ -92,6 +92,7 @@ setup(
         'feedparser==5.1',
         'django-forms-builder>=0.7.5,<0.8',
         'django-threadedcomments==0.9',
+        'django-crispy-forms>=1.2,<1.3',
     ],
 
     scripts=['cyclope/bin/cyclopeproject','cyclope/bin/cyclopedemo'],
