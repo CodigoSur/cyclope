@@ -6,27 +6,26 @@
 
   {% for categorization in categorizations %}
     {% alias categorization.content_object as 'article' %}
-<div class="newsletter newsletter_detail">
+<div class="detail">
 <table>
   <tr>
     <td>
-      <br/>
-      <span class="pretitle"><a name="editorial">{% trans article.pretitle %}</a></span>
       {% if newsletter.show_ToC %}
       <span class="show-ToC"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></span>
       {% endif %}
+      {% if article.pretitle %} <span class="pretitle"><a name="editorial">{% trans article.pretitle %}</a></span>{% endif %}
       <a name="article__{{ article.slug }}">
-        <h3 class="title">{% trans article.name  %}</h3>
+        <h2 class="title">{% trans article.name  %}</h2>
       </a>
-      <div class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</div>
+      <div class="summary content">{{ article|parsed_gettext:"summary"|smart_style }}</div>
       {% if article.author %}
-      <h5>{% trans "By"%} {{ article.author }}</h5>
+      <h5 class="author">{% trans "By"%} {{ article.author }}</h5>
       {% endif %}
 
 
       <div class="text">
         {% if article.pictures %}
-        <img class="newsletter_image" src="{% version article.pictures.0.image.path 'small' %}" alt="{{ article.pictures.0.name }}" hspace="0" vspace="0" align="right" />
+        <img class="newsletter_image image_content" src="{% version article.pictures.0.image.path 'small' %}" alt="{{ article.pictures.0.name }}" hspace="0" vspace="0" align="right" />
         {% endif %}
 
         <span class="html-text html-content">
