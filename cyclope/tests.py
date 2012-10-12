@@ -685,7 +685,7 @@ class TopicTestCase(ViewableTestCase):
         self.user = User(username='admin')
         self.user.set_password('password')
         self.user.save()
-        self.test_object = Topic(name='An instance', author=self.user)
+        self.test_object = Topic(name='An instance', user=self.user)
         self.test_object.save()
         frontend.autodiscover()
 
