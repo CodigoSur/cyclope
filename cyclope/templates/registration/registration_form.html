@@ -4,7 +4,11 @@
 {% block content%}
 <div class="frontend_login">
 <h1 class="title">{% trans "Registration" %}</h1>
-<h6>{% trans "Please fill in your user profile data" %}</h6>
+<div class="form_summary">
+    <div class="summary">
+      <p>{% trans "Please fill in your user profile data" %}</p>
+    </div>
+</div>
 {% crispy form %}
 </div>
 {% endblock %}
