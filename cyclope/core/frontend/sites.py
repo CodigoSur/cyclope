@@ -222,13 +222,17 @@ class CyclopeSite(object):
         """Returns the categories that belong to the sellected collection."""
         Collection = get_model('collections','collection')
         Category = get_model('collections','category')
-        collection = Collection.objects.get(pk=request.GET['q'])
-        col_categories = Category.tree.filter(collection=collection)
-        categories = [{'category_id': '', 'category_name': '------'}]
-        categories.extend([
-                {'category_id': category.id,
-                 'category_name': u"%s %s" % ('--' * category.level, category.name)}
-                for category in col_categories])
+        try:
+            pk = int(request.GET['q'])
+            collection = Collection.objects.get(pk=pk)
+            col_categories = Category.tree.filter(collection=collection)
+            categories = [{'category_id': '', 'category_name': '------'}]
+            categories.extend([
+                    {'category_id': category.id,
+                     'category_name': u"%s %s" % ('--' * category.level, category.name)}
+                    for category in col_categories])
+        except ValueError:
+            categories = []
         json_data = simplejson.dumps(categories)
         return HttpResponse(json_data, mimetype='application/json')
 
