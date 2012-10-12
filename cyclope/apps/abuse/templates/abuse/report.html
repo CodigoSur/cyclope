@@ -8,7 +8,10 @@
 
 {% if not form %}
   <div class="form_summary">
-      <div class="summary">{% trans "thanks for reporting!"|capfirst %}</div>
+      <div class="summary">
+      {% if already_reported %} {% trans "you have already reported this content."|capfirst %}
+      {% else %}{% trans "thanks for reporting!"|capfirst %}{% endif %}
+      </div>
       <span><a href="{{ content.get_absolute_url }}"> {% trans "return"|capfirst %}</a></span>
   </div>
 {% endif %}

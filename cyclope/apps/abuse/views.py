@@ -15,16 +15,21 @@ class ReportElementForm(forms.ModelForm, CrispyFormsSimpleMixin):
 
 @login_required
 def abuse_report(request, ct_id, obj_id):
-    #TODO: validate unique of user, ct_id, obj_id
+    ct = ContentType.objects.get_for_id(ct_id)
+    obj = ct.get_object_for_this_type(pk=obj_id)
+    # already reported by this user
+    if AbuseReportElement.objects.filter(user=request.user, object_id=obj_id,
+                                          content_type=ct):
+        return render(request, "abuse/report.html", {"already_reported": True, "content": obj})
+
     if request.method == "POST":
         form = ReportElementForm(request.POST)
         if form.is_valid():
             report_el = form.save(commit=False)
-            klass = ContentType.objects.get(pk=ct_id).model_class()
-            report_el.content_object = klass.objects.get(pk=obj_id)
+            report_el.content_object = obj
             report_el.user = request.user
             report_el.save()
-            return render(request, "abuse/report.html", {"content": report_el.content_object})
+            return render(request, "abuse/report.html", {"content": obj})
     else:
         form = ReportElementForm()
 
