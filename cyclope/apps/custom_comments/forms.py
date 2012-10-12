@@ -35,10 +35,18 @@ class CustomCommentForm(ThreadedCommentForm):
 
     def clean(self):
         # captcha_ input only exists when the user is authenticated
+        # this is not a real validation, submiting the form without the captcha_
+        # will pass. The problem is that there's no way to know if the user us logged in
+        # without rewriting a couple of views and template tags or use something like
+        # django-contrib-requestprovider
         if 'captcha_' in self.data:
             if 'captcha' in self._errors:
                 self._errors.pop('captcha')
         return super(CustomCommentForm, self).clean()
+
+    def user_is_authenticated(self):
+        del self.fields["captcha"]
+        del self.fields["honeypot"]
 
     def get_comment_model(self):
         return CustomComment
