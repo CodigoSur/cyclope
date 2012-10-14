@@ -56,40 +56,43 @@ class SeriesContent(models.Model):
 
 class Series(BaseContent, Collectible):
     """Base model for Series contents.
-    
+
     """
     description = models.TextField(_('description'), blank=True)
 
     image = models.ImageField(_('image'), max_length=100,
                                blank=True, upload_to="uploads/series/")
 
-    series_contents = generic.GenericRelation(SeriesContent, 
+    series_contents = generic.GenericRelation(SeriesContent,
                                               object_id_field='self_id',
                                               content_type_field='self_type')
-    
+
     # models allowed as series content
     content_models = []
     _cache_content_types = None
-    
+
     @classmethod
     def get_content_types(cls):
         if cls._cache_content_types is None:
             dic = ContentType.objects.get_for_models(*cls.content_models)
             cls._cache_content_types = dic.values()
         return cls._cache_content_types
-        
+
     @classmethod
     def get_content_models(cls):
         return cls.content_models
 
     @classmethod
     def get_content_types_choices(cls):
-        
+
         dic = ContentType.objects.get_for_models(*cls.content_models)
-        ctype_choices = map(lambda item: (item[1].id, item[0]._meta.verbose_name), 
+        ctype_choices = map(lambda item: (item[1].id, item[0]._meta.verbose_name),
                             dic.iteritems())
         ctype_choices.insert(0, ('', '------'))
         return sorted(ctype_choices, key=lambda choice: choice[1])
+
+    def get_content_objects(self):
+        return [sc.other_object for sc in self.series_contents.all()]
 
     class Meta:
         verbose_name = _('series')
