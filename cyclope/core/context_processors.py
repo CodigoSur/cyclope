@@ -19,6 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from django.conf import settings
 from cyclope import settings as cyc_settings
 
 def site_settings(request):
@@ -28,4 +29,19 @@ def site_settings(request):
     for setting in dir(cyc_settings):
         if setting == setting.upper() and setting.startswith('CYCLOPE'):
             settings_dict[setting] = getattr(cyc_settings, setting)
+    return settings_dict
+
+
+def compressor(request):
+    """Exposes COMPRESS_ENABLED setting.
+    """
+    settings_dict = {}
+
+    compress_enabled = settings.COMPRESS_ENABLED
+    if settings.COMPRESS_DEBUG_TOGGLE and settings.COMPRESS_DEBUG_TOGGLE in request.GET:
+        compress_enabled = False
+
+    if not compress_enabled:
+        settings.COMPRESS_PRECOMPILERS = tuple()
+    settings_dict["COMPRESS_ENABLED"] = compress_enabled
     return settings_dict

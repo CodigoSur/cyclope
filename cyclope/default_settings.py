@@ -60,6 +60,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
     "cyclope.core.context_processors.site_settings",
+    "cyclope.core.context_processors.compressor",
 )
 
 
@@ -130,6 +131,7 @@ INSTALLED_APPS = [
     'markitup',
     'forms_builder.forms',
     'crispy_forms',
+    'compressor',
 
 #    'debug_toolbar',
 #    'django_extensions',
@@ -258,4 +260,20 @@ JQUERY_URL = "cyclope/js/reuse_django_jquery.js" # We dont want jquery to be inc
 MARKITUP_SET = 'cyclope/markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
 
+# crispy forms settings
 CRISPY_TEMPLATE_PACK = 'uni_form'
+
+
+# compressor settings
+
+COMPRESS_ENABLED = True
+
+COMPRESS_PARSER = "compressor.parser.HtmlParser"
+
+# PRECOMPILERS are emptied on cyclope.core.compressor context processor if
+# COMPRESS_ENABLED is False or COMPRESS_DEBUG_TOGGLE is set
+COMPRESS_PRECOMPILERS = (
+    ('text/less', '/usr/bin/lesscpy  {infile}'),
+)
+
+COMPRESS_DEBUG_TOGGLE = 'nocompress'

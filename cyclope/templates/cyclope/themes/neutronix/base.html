@@ -16,7 +16,7 @@
 # Neutronix is developed by Santiago Hoerth Moura
  -->
 
-{% load layout i18n cyclope_utils %}
+{% load layout i18n cyclope_utils compress %}
 
 <html>
 
@@ -26,15 +26,20 @@
     <meta name="Keywords" content="{{ CYCLOPE_SITE_SETTINGS.keywords }}" />
     <meta name="Description" content="{{ CYCLOPE_SITE_SETTINGS.description }}" />
     <link href="/rss" title="RSS" type="application/rss+xml" rel="alternate" />
+    {% compress css %}
     {% block displaycss %}
-    <link href="/media/cyclope/themes/neutronix/css/neutronix.less" rel="stylesheet/less" type="text/css"/>
-    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet/less" type="text/css"/>
-    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/print.css" rel="stylesheet" type="text/css" media="print"/>
+    {% block neutronixcss %}
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
+    {% endblock neutronixcss %}
+    <link href="{{ CYCLOPE_STATIC_URL }}themes/neutronix/css/print.css" rel="stylesheet" type="text/css" media="print"/>
     <link href="{{ CYCLOPE_STATIC_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
     <link rel="stylesheet" href="{{ CYCLOPE_STATIC_URL }}css/uni-form.css" type="text/css" />
     <link rel="stylesheet" href="{{ CYCLOPE_STATIC_URL }}css/default.uni-form.css" type="text/css" />
-    {% endblock %}
+    {% endblock displaycss %}
+    {% endcompress %}
+    {% if not COMPRESS_ENABLED %}
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less.min.js"></script>
+    {% endif %}
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/menuitems.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
