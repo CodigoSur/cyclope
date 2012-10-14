@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from django.conf.urls import patterns, include, url
+import haystack # This is here preventing a circular import
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 frontend.autodiscover()
