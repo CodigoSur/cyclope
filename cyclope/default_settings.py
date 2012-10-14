@@ -266,7 +266,7 @@ CRISPY_TEMPLATE_PACK = 'uni_form'
 
 # compressor settings
 
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 
 COMPRESS_PARSER = "compressor.parser.HtmlParser"
 
