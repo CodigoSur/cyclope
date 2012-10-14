@@ -24,7 +24,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Layout, Fieldset, ButtonHolder
 
 from models import UserProfile
 
@@ -32,6 +32,16 @@ class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.add_input(Submit('submit', _('Submit')))
+        self.helper.layout = Layout(
+            Fieldset(
+                _('Personal information'),
+                'first_name',
+                'last_name',
+                'email',
+                'image',
+                'description',
+            )
+        )
         super(UserProfileForm, self).__init__(*args, **kwargs)
         # Add User's fields first in the form
         self.fields.keyOrder =  ['first_name', 'last_name', 'email'] + self.fields.keyOrder[:-3]
@@ -42,8 +52,8 @@ class UserProfileForm(forms.ModelForm):
         except User.DoesNotExist:
             del self.fields['email']
 
-    first_name = forms.CharField(label=_('first name'), max_length=30, required=False)
-    last_name = forms.CharField(label=_('last name'), max_length=30, required=False)
+    first_name = forms.CharField(label=_('First name'), max_length=30, required=False)
+    last_name = forms.CharField(label=_('Last name'), max_length=30, required=False)
     email = forms.EmailField()
 
     class Meta:

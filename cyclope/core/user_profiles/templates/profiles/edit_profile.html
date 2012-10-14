@@ -13,7 +13,7 @@
     </div>
 </div>
 
-{% crispy form form.helper %}
+{% crispy form %}
 
 {% if profile.avatar %}
   <img src="{% version profile.avatar.path 'croppedthumbnail' %}" alt="profile avatar" />
