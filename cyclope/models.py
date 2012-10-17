@@ -77,7 +77,8 @@ class SiteSettings(models.Model):
                                           ('YES',_('enabled')),
                                           ('NO',_('disabled'))
                                       ), default='YES')
-    moderate_comments = models.BooleanField(default=False)
+    moderate_comments = models.BooleanField(_('moderate comments'),
+                                            default=False)
     enable_comments_notifications = models.BooleanField(_('enable comments email notifications'),
                                                         default=True)
     enable_abuse_reports = models.BooleanField(_('enable abuse reports'), default=False)
