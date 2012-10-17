@@ -45,8 +45,8 @@ class GenericModelChoiceField(fields.Field):
         try:
             self.to_python(value)
         except:
-            raise forms.ValidationError(_(u'%s cannot validate %s') % (
-                self, value))
+            raise forms.ValidationError(_(u'field %(field)s cannot validate %(value)s') %
+                                        {"field":self, "value":value})
 
     def prepare_value(self, value):
         """
