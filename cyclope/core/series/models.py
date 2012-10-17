@@ -98,3 +98,4 @@ class Series(BaseContent, Collectible):
         verbose_name = _('series')
         verbose_name_plural = _('series')
         ordering = ['-creation_date', ]
+        abstract = True
