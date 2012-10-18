@@ -76,7 +76,7 @@ setup(
         'django-mptt-tree-editor>=0.1,<0.2',
         'PIL>=1.1.7', # in PIL we trust
         'django-simple-captcha==0.2.0',
-        'django-filebrowser-nograpup>=3.0.2,<3.1',
+        'django-filebrowser-nograpup>=3.0.3,<3.1',
         'South>=0.7,<0.8',
         'django-registration==0.8',
         'django-profiles==0.2',
