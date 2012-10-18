@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-17 19:20-0300\n"
-"PO-Revision-Date: 2010-10-29 22:16\n"
+"POT-Creation-Date: 2012-10-18 11:40-0300\n"
+"PO-Revision-Date: 2012-10-18 11:14\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -220,299 +220,6 @@ msgstr "Miniatura cortada (140x140px)"
 #: default_settings.py:207 default_settings.py:209
 msgid "Slideshow"
 msgstr "Rotador"
-
-#: external_translations.py:5 locale/external_translations.py:5
-msgid "Username"
-msgstr "Nombre de ingreso"
-
-#: external_translations.py:9 locale/external_translations.py:9
-msgid "Search In"
-msgstr "Buscar"
-
-#: external_translations.py:13
-msgid "Your avatar image is too big"
-msgstr "La imagen enviada es demasiado grande"
-
-#: external_translations.py:15
-msgid "Chat"
-msgstr "Chat"
-
-#: external_translations.py:17
-msgid "tags"
-msgstr "etiquetas"
-
-#: external_translations.py:19
-msgid "Lookup"
-msgstr "Buscar"
-
-#: external_translations.py:21
-msgid "Share in your social networks"
-msgstr "Compartir en redes sociales"
-
-#: external_translations.py:23
-msgid "Still"
-msgstr "Cuadro de muestra"
-
-#: external_translations.py:25
-msgid "Shortcuts"
-msgstr "Atajos"
-
-#: external_translations.py:27
-msgid "Collapse tree"
-msgstr "Colapsar el árbol"
-
-#: external_translations.py:29
-msgid "Expand tree"
-msgstr "Expandir el árbol"
-
-#: external_translations.py:31
-msgid "and"
-msgstr "y"
-
-#: external_translations.py:33
-msgid "or make changes"
-msgstr "o haga cambios"
-
-#: external_translations.py:35
-msgid "Post"
-msgstr "Enviar"
-
-#: external_translations.py:37
-msgid "Neutronica theme"
-msgstr "tema Neutronica"
-
-#: external_translations.py:39
-msgid "One sidebar"
-msgstr "Una barra lateral"
-
-#: external_translations.py:41
-msgid "left sidebar"
-msgstr "barra lateral izquierda"
-
-#: external_translations.py:43
-msgid "footer"
-msgstr "pie de página"
-
-#: external_translations.py:45
-msgid "Two sidebars"
-msgstr "Dos barras laterales"
-
-#: external_translations.py:47
-msgid "right sidebar"
-msgstr "barra lateral derecha"
-
-#: external_translations.py:49
-msgid "No sidebars"
-msgstr "Sin barras laterales"
-
-#: external_translations.py:51
-msgid "Subscribe to RSS"
-msgstr "Suscripción RSS"
-
-#: external_translations.py:53
-msgid "User"
-msgstr "Usuario"
-
-#: external_translations.py:55
-msgid "A user with that username already exists."
-msgstr "Ya existe una persona con este nombre."
-
-#: external_translations.py:57
-msgid "username"
-msgstr "nombre de ingreso"
-
-#: external_translations.py:59
-msgid "users"
-msgstr "personas"
-
-#: external_translations.py:61
-msgid "sender"
-msgstr "remitente"
-
-#: external_translations.py:63
-msgid "Visit website"
-msgstr "Ver en el sitio web"
-
-#: external_translations.py:65
-msgid "Categories"
-msgstr "Categorías"
-
-#: external_translations.py:67
-msgid "Name"
-msgstr "Nombre"
-
-#: external_translations.py:69
-msgid "Alignment"
-msgstr "Alineación"
-
-#: external_translations.py:71
-msgid "Text"
-msgstr "Texto"
-
-#: external_translations.py:73
-msgid "Date"
-msgstr "Fecha"
-
-#: external_translations.py:75
-msgid "simplified teaser list of Category members"
-msgstr "lista simplificada de resúmenes de miembros de una Categoría"
-
-#: external_translations.py:77
-msgid "alphabetical teaser list of Category members"
-msgstr "lista alfabética de resúmenes de los miembros de una Categoría"
-
-#: external_translations.py:79
-msgid "Share"
-msgstr "Compartir"
-
-#: external_translations.py:81
-msgid "Review and moderate user comments"
-msgstr "Revisa y modera los comentarios recibidos"
-
-#: external_translations.py:83
-msgid "alphabetical teaser list of Contact members"
-msgstr "lista alfabética de Contactos"
-
-#: external_translations.py:85
-msgid "Categorization"
-msgstr "Categorización"
-
-#: external_translations.py:87
-msgid "Classify the content in your website"
-msgstr "Clasifica el contenido de tu sitio"
-
-#: external_translations.py:89
-msgid "Tagging"
-msgstr "Etiquetado"
-
-#: external_translations.py:91
-msgid "Modify the menus and site layouts"
-msgstr "Administra los menús y la disposición del contenido"
-
-#: external_translations.py:93
-msgid "Header"
-msgstr "encabezado"
-
-#: external_translations.py:95
-msgid "show the current content for the selected Newsletter"
-msgstr "mostrar el contenido actual del Newsletter"
-
-#: external_translations.py:97
-msgid "show the header text of the selected Newsletter"
-msgstr "mostrar el encabezado del Boletín seleccionado"
-
-#: external_translations.py:99
-msgid "toggle editor"
-msgstr "encender o apagar editor"
-
-#: external_translations.py:101
-msgid "on"
-msgstr "encendido"
-
-#: external_translations.py:103
-msgid "off"
-msgstr "apagado"
-
-#: external_translations.py:105
-msgid "collection categories"
-msgstr "categorias de colecciones"
-
-#: external_translations.py:107
-msgid "Spanish"
-msgstr "Español"
-
-#: external_translations.py:109
-msgid "English"
-msgstr "Inglés"
-
-#: external_translations.py:111
-msgid "Portuguese"
-msgstr "Portugués"
-
-#: external_translations.py:113
-msgid "list of Products"
-msgstr "lista de Productos"
-
-#: external_translations.py:115
-msgid "price"
-msgstr "precio"
-
-#: external_translations.py:117
-msgid "product"
-msgstr "producto"
-
-#: external_translations.py:119
-msgid "products"
-msgstr "productos"
-
-#: external_translations.py:121
-msgid "Potente theme"
-msgstr "tema Potente"
-
-#: external_translations.py:123
-msgid "One sidebar and four panes"
-msgstr "Una barra y cuatro paneles"
-
-#: external_translations.py:125
-msgid "sidebar"
-msgstr "barra lateral"
-
-#: external_translations.py:127
-msgid "second pane"
-msgstr "segundo panel"
-
-#: external_translations.py:129
-msgid "third pane"
-msgstr "tercer panel"
-
-#: external_translations.py:131
-msgid "fourth pane"
-msgstr "cuarto panel"
-
-#: external_translations.py:133
-msgid "%(lang_name)s "
-msgstr "%(lang_name)s"
-
-#: external_translations.py:135
-msgid "Translated"
-msgstr "Traducciones"
-
-#: external_translations.py:137
-msgid "article image"
-msgstr "imagen de artículo"
-
-#: external_translations.py:139
-msgid "article images"
-msgstr "imágenes de artículo"
-
-#: external_translations.py:141
-msgid "attachments"
-msgstr "adjuntos"
-
-#: external_translations.py:143
-msgid "downloads"
-msgstr "bajadas"
-
-#: external_translations.py:145
-msgid "Codigo Sur, latest news"
-msgstr "Código Sur, últimas noticias"
-
-#: external_translations.py:147
-msgid "navigation breadcrumb"
-msgstr "profundidad de navegación"
-
-#: external_translations.py:149
-msgid "Categories for this"
-msgstr "categorías"
-
-#: external_translations.py:151
-msgid "category map"
-msgstr "mapeo de categoría"
-
-#: external_translations.py:153 external_translations.py:155
-#, fuzzy, python-format
-msgid "%(more_count)s more"
-msgstr "%(more_count)s más"
 
 #: forms.py:117 forms.py:226 apps/newsletter/admin.py:38
 msgid "View"
@@ -2119,6 +1826,267 @@ msgstr "Volver"
 msgid "Edit profile"
 msgstr "Editar perfil"
 
+#: locale_external/external_translations.py:5
+msgid "Username"
+msgstr "Nombre de ingreso"
+
+#: locale_external/external_translations.py:9
+msgid "Search In"
+msgstr "Buscar"
+
+#: locale_external/external_translations.py:13
+msgid "Lookup"
+msgstr "Buscar"
+
+#: locale_external/external_translations.py:15
+msgid "Share in your social networks"
+msgstr "Compartir en redes sociales"
+
+#: locale_external/external_translations.py:17
+msgid "Shortcuts"
+msgstr "Atajos"
+
+#: locale_external/external_translations.py:19
+msgid "Collapse tree"
+msgstr "Colapsar el árbol"
+
+#: locale_external/external_translations.py:21
+msgid "Expand tree"
+msgstr "Expandir el árbol"
+
+#: locale_external/external_translations.py:23
+msgid "and"
+msgstr "y"
+
+#: locale_external/external_translations.py:25
+msgid "or make changes"
+msgstr "o haga cambios"
+
+#: locale_external/external_translations.py:27
+msgid "Post"
+msgstr "Enviar"
+
+#: locale_external/external_translations.py:29
+msgid "Neutronica theme"
+msgstr "tema Neutronica"
+
+#: locale_external/external_translations.py:31
+msgid "One sidebar"
+msgstr "Una barra lateral"
+
+#: locale_external/external_translations.py:33
+msgid "left sidebar"
+msgstr "barra lateral izquierda"
+
+#: locale_external/external_translations.py:35
+msgid "footer"
+msgstr "pie de página"
+
+#: locale_external/external_translations.py:37
+msgid "Two sidebars"
+msgstr "Dos barras laterales"
+
+#: locale_external/external_translations.py:39
+msgid "right sidebar"
+msgstr "barra lateral derecha"
+
+#: locale_external/external_translations.py:41
+msgid "No sidebars"
+msgstr "Sin barras laterales"
+
+#: locale_external/external_translations.py:43
+msgid "Subscribe to RSS"
+msgstr "Suscripción RSS"
+
+#: locale_external/external_translations.py:45
+msgid "User"
+msgstr "Usuario"
+
+#: locale_external/external_translations.py:47
+msgid "A user with that username already exists."
+msgstr "Ya existe una persona con este nombre."
+
+#: locale_external/external_translations.py:49
+msgid "username"
+msgstr "nombre de ingreso"
+
+#: locale_external/external_translations.py:51
+msgid "users"
+msgstr "personas"
+
+#: locale_external/external_translations.py:53
+msgid "sender"
+msgstr "remitente"
+
+#: locale_external/external_translations.py:55
+msgid "Visit website"
+msgstr "Ver en el sitio web"
+
+#: locale_external/external_translations.py:57
+msgid "Categories"
+msgstr "Categorías"
+
+#: locale_external/external_translations.py:59
+msgid "Name"
+msgstr "Nombre"
+
+#: locale_external/external_translations.py:61
+msgid "Alignment"
+msgstr "Alineación"
+
+#: locale_external/external_translations.py:63
+msgid "Text"
+msgstr "Texto"
+
+#: locale_external/external_translations.py:65
+msgid "Date"
+msgstr "Fecha"
+
+#: locale_external/external_translations.py:67
+msgid "Share"
+msgstr "Compartir"
+
+#: locale_external/external_translations.py:69
+msgid "Review and moderate user comments"
+msgstr "Revisa y modera los comentarios recibidos"
+
+#: locale_external/external_translations.py:71
+msgid "alphabetical teaser list of Contact members"
+msgstr "lista alfabética de Contactos"
+
+#: locale_external/external_translations.py:73
+msgid "Categorization"
+msgstr "Categorización"
+
+#: locale_external/external_translations.py:75
+msgid "Classify the content in your website"
+msgstr "Clasifica el contenido de tu sitio"
+
+#: locale_external/external_translations.py:77
+msgid "Modify the menus and site layouts"
+msgstr "Administra los menús y la disposición del contenido"
+
+#: locale_external/external_translations.py:79
+msgid "Header"
+msgstr "encabezado"
+
+#: locale_external/external_translations.py:81
+msgid "show the current content for the selected Newsletter"
+msgstr "mostrar el contenido actual del Newsletter"
+
+#: locale_external/external_translations.py:83
+msgid "show the header text of the selected Newsletter"
+msgstr "mostrar el encabezado del Boletín seleccionado"
+
+#: locale_external/external_translations.py:85
+msgid "toggle editor"
+msgstr "encender o apagar editor"
+
+#: locale_external/external_translations.py:87
+msgid "on"
+msgstr "encendido"
+
+#: locale_external/external_translations.py:89
+msgid "off"
+msgstr "apagado"
+
+#: locale_external/external_translations.py:91
+msgid "collection categories"
+msgstr "categorias de colecciones"
+
+#: locale_external/external_translations.py:93
+msgid "Spanish"
+msgstr "Español"
+
+#: locale_external/external_translations.py:95
+msgid "English"
+msgstr "Inglés"
+
+#: locale_external/external_translations.py:97
+msgid "Portuguese"
+msgstr "Portugués"
+
+#: locale_external/external_translations.py:99
+msgid "list of Products"
+msgstr "lista de Productos"
+
+#: locale_external/external_translations.py:101
+msgid "price"
+msgstr "precio"
+
+#: locale_external/external_translations.py:103
+msgid "product"
+msgstr "producto"
+
+#: locale_external/external_translations.py:105
+msgid "products"
+msgstr "productos"
+
+#: locale_external/external_translations.py:107
+msgid "Potente theme"
+msgstr "tema Potente"
+
+#: locale_external/external_translations.py:109
+msgid "One sidebar and four panes"
+msgstr "Una barra y cuatro paneles"
+
+#: locale_external/external_translations.py:111
+msgid "sidebar"
+msgstr "barra lateral"
+
+#: locale_external/external_translations.py:113
+msgid "second pane"
+msgstr "segundo panel"
+
+#: locale_external/external_translations.py:115
+msgid "third pane"
+msgstr "tercer panel"
+
+#: locale_external/external_translations.py:117
+msgid "fourth pane"
+msgstr "cuarto panel"
+
+#: locale_external/external_translations.py:119
+msgid "Translated"
+msgstr "Traducciones"
+
+#: locale_external/external_translations.py:121
+msgid "article image"
+msgstr "imagen de artículo"
+
+#: locale_external/external_translations.py:123
+msgid "article images"
+msgstr "imágenes de artículo"
+
+#: locale_external/external_translations.py:125
+msgid "attachments"
+msgstr "adjuntos"
+
+#: locale_external/external_translations.py:127
+msgid "downloads"
+msgstr "bajadas"
+
+#: locale_external/external_translations.py:129
+msgid "Codigo Sur, latest news"
+msgstr "Código Sur, últimas noticias"
+
+#: locale_external/external_translations.py:131
+msgid "navigation breadcrumb"
+msgstr "profundidad de navegación"
+
+#: locale_external/external_translations.py:133
+msgid "Categories for this"
+msgstr "categorías"
+
+#: locale_external/external_translations.py:135
+msgid "category map"
+msgstr "mapeo de categoría"
+
+#: locale_external/external_translations.py:137
+#, fuzzy, python-format
+msgid "%(more_count)s more"
+msgstr "%(more_count)s más"
+
 #: templates/admin/base_content_change_form.html:131
 msgid "You must choose a collection first."
 msgstr "Primero debe serleccinar una colección."
@@ -3123,6 +3091,30 @@ msgstr "No se encontró ningún resultado"
 #: utils/__init__.py:303
 msgid "Thumbnail Image"
 msgstr "Imagen miniatura"
+
+#~ msgid "Your avatar image is too big"
+#~ msgstr "La imagen enviada es demasiado grande"
+
+#~ msgid "Chat"
+#~ msgstr "Chat"
+
+#~ msgid "tags"
+#~ msgstr "etiquetas"
+
+#~ msgid "Still"
+#~ msgstr "Cuadro de muestra"
+
+#~ msgid "simplified teaser list of Category members"
+#~ msgstr "lista simplificada de resúmenes de miembros de una Categoría"
+
+#~ msgid "alphabetical teaser list of Category members"
+#~ msgstr "lista alfabética de resúmenes de los miembros de una Categoría"
+
+#~ msgid "Tagging"
+#~ msgstr "Etiquetado"
+
+#~ msgid "%(lang_name)s "
+#~ msgstr "%(lang_name)s"
 
 #~ msgid ""
 #~ "For security reasons you need to type the text displayed in the following "
