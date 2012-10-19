@@ -1,0 +1,3042 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-10-19 10:31-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin.py:126
+msgid "content details"
+msgstr ""
+
+#: admin.py:129
+msgid "Either set an URL here or select a contenttype and view."
+msgstr ""
+
+#: admin.py:132 models.py:154 models.py:275 apps/newsletter/models.py:44
+msgid "layout"
+msgstr ""
+
+#: admin.py:135
+msgid "Set the layout that will be used when this menuitem is selected."
+msgstr ""
+
+#: dashboard.py:55
+msgid "Site Administration"
+msgstr ""
+
+#: dashboard.py:65 apps/custom_comments/admin.py:35
+msgid "Content"
+msgstr ""
+
+#: dashboard.py:71
+msgid "Create, delete or modify content for your website"
+msgstr ""
+
+#: dashboard.py:74
+msgid "Main"
+msgstr ""
+
+#: dashboard.py:82
+msgid "Multimedia Library"
+msgstr ""
+
+#: dashboard.py:94
+msgid "Authors and Sources"
+msgstr ""
+
+#: dashboard.py:102 templates/cyclope/content_tools_block.html:14
+msgid "Comments"
+msgstr ""
+
+#: dashboard.py:111
+msgid "Site structure"
+msgstr ""
+
+#: dashboard.py:113
+msgid "Modify your site layout and collections"
+msgstr ""
+
+#: dashboard.py:121
+msgid "Collections"
+msgstr ""
+
+#: dashboard.py:128
+msgid "Menus"
+msgstr ""
+
+#: dashboard.py:135
+msgid "Layouts"
+msgstr ""
+
+#: dashboard.py:148
+msgid "Global Settings"
+msgstr ""
+
+#: dashboard.py:154
+msgid "Site Settings"
+msgstr ""
+
+#: dashboard.py:157
+msgid "Contact Form"
+msgstr ""
+
+#: dashboard.py:165 templates/cyclope/themes/alternative/__init__.py:45
+#: templates/cyclope/themes/baseline/__init__.py:45
+#: templates/cyclope/themes/curiouslygreen/__init__.py:45
+#: templates/cyclope/themes/cyblog/__init__.py:45
+#: templates/cyclope/themes/cyorg/__init__.py:45
+#: templates/cyclope/themes/cyportal/__init__.py:45
+#: templates/cyclope/themes/diversia/__init__.py:45
+#: templates/cyclope/themes/experience/__init__.py:45
+#: templates/cyclope/themes/frecuency/__init__.py:45
+#: templates/cyclope/themes/neutronix/__init__.py:45
+#: templates/cyclope/themes/newfangled/__init__.py:45
+#: templates/cyclope/themes/newflash/__init__.py:45
+#: templates/cyclope/themes/nonzeroblue/__init__.py:45
+#: templates/cyclope/themes/plantation/__init__.py:45
+#: templates/cyclope/themes/potentix/__init__.py:45
+#: templates/cyclope/themes/supplementary/__init__.py:45
+msgid "Newsletter"
+msgstr ""
+
+#: dashboard.py:171
+msgid "Forms"
+msgstr ""
+
+#: dashboard.py:177
+msgid "Polls"
+msgstr ""
+
+#: dashboard.py:184
+msgid "Feeds"
+msgstr ""
+
+#: dashboard.py:190
+msgid "Contacts"
+msgstr ""
+
+#: dashboard.py:196
+msgid "Abuse"
+msgstr ""
+
+#: dashboard.py:205
+msgid "Plugins"
+msgstr ""
+
+#: dashboard.py:216
+msgid "Advanced"
+msgstr ""
+
+#: dashboard.py:222
+msgid "Advanced configuration"
+msgstr ""
+
+#: dashboard.py:225
+msgid "Auth"
+msgstr ""
+
+#: dashboard.py:231 templates/registration/registration_form.html:6
+msgid "Registration"
+msgstr ""
+
+#: dashboard.py:237 dashboard.py:240
+msgid "Site"
+msgstr ""
+
+#: dashboard.py:250
+msgid "Quick links"
+msgstr ""
+
+#: dashboard.py:257
+msgid "Browse media files"
+msgstr ""
+
+#: dashboard.py:260
+msgid "Return to site"
+msgstr ""
+
+#: dashboard.py:275
+#, python-format
+msgid "%d comments need moderation"
+msgstr ""
+
+#: dashboard.py:285
+msgid "Recent Actions"
+msgstr ""
+
+#: dashboard.py:294
+msgid "Community and support"
+msgstr ""
+
+#: dashboard.py:302
+msgid "Official website"
+msgstr ""
+
+#: dashboard.py:307
+msgid "Tutorials"
+msgstr ""
+
+#: default_settings.py:193
+msgid "Admin Thumbnail"
+msgstr ""
+
+#: default_settings.py:195
+msgid "Thumbnail (100px height)"
+msgstr ""
+
+#: default_settings.py:197
+msgid "Small (300x300px)"
+msgstr ""
+
+#: default_settings.py:199
+msgid "Medium (460px width)"
+msgstr ""
+
+#: default_settings.py:201
+msgid "Big (620px width)"
+msgstr ""
+
+#: default_settings.py:203
+msgid "Cropped (60x60px)"
+msgstr ""
+
+#: default_settings.py:205
+msgid "Cropped Thumbnail (140x140px)"
+msgstr ""
+
+#: default_settings.py:207 default_settings.py:209
+msgid "Slideshow"
+msgstr ""
+
+#: forms.py:117 forms.py:226 apps/newsletter/admin.py:38
+msgid "View"
+msgstr ""
+
+#: forms.py:118 forms.py:227
+msgid "Content object"
+msgstr ""
+
+#: forms.py:121 core/collections/admin.py:74
+msgid "Parent"
+msgstr ""
+
+#: forms.py:123 forms.py:228 core/collections/admin.py:191
+#: core/frontend/sites.py:337
+msgid "View options"
+msgstr ""
+
+#: forms.py:155
+msgid ""
+"You can not set a Custom URL for menu entries                     with "
+"associated content"
+msgstr ""
+
+#: forms.py:162 forms.py:279
+msgid "You need to select a content view"
+msgstr ""
+
+#: forms.py:168 forms.py:285
+msgid "The selected view requires a content object"
+msgstr ""
+
+#: forms.py:181
+msgid "Theme"
+msgstr ""
+
+#: forms.py:201
+msgid "Template"
+msgstr ""
+
+#: forms.py:225
+msgid "Region"
+msgstr ""
+
+#: forms.py:272
+msgid "Content type can not be empty"
+msgstr ""
+
+#: forms.py:276
+msgid "You need to select a region"
+msgstr ""
+
+#: forms.py:309 apps/custom_comments/forms.py:31
+#: apps/dynamicforms/models.py:37 apps/polls/forms.py:35
+#: core/captcha_contact_form/forms.py:31
+msgid "Security code"
+msgstr ""
+
+#: frontend_views.py:46
+msgid "list of root items for the selected Menu"
+msgstr ""
+
+#: frontend_views.py:68
+msgid "flat list of all items for the selected Menu"
+msgstr ""
+
+#: frontend_views.py:84
+msgid "Collapse style"
+msgstr ""
+
+#: frontend_views.py:85
+msgid "vertical"
+msgstr ""
+
+#: frontend_views.py:86
+msgid "horizontal"
+msgstr ""
+
+#: frontend_views.py:87
+msgid "on click"
+msgstr ""
+
+#: frontend_views.py:88 models.py:78 models.py:329
+msgid "disabled"
+msgstr ""
+
+#: frontend_views.py:96
+msgid "hierarchical list of the items in the selected menu"
+msgstr ""
+
+#: frontend_views.py:153
+msgid "list view of children of the current menu item"
+msgstr ""
+
+#: frontend_views.py:179
+msgid "search box"
+msgstr ""
+
+#: frontend_views.py:194
+msgid "expanded hierarchical list of all collection and menus"
+msgstr ""
+
+#: frontend_views.py:273 apps/custom_comments/frontend_views.py:30
+msgid "Items to show"
+msgstr ""
+
+#: frontend_views.py:278
+msgid "Teaser"
+msgstr ""
+
+#: frontend_views.py:279
+msgid "Detail"
+msgstr ""
+
+#: frontend_views.py:280
+msgid "Labeled icons"
+msgstr ""
+
+#: frontend_views.py:284
+msgid "Show authored content"
+msgstr ""
+
+#: frontend_views.py:286
+msgid "Inline type"
+msgstr ""
+
+#: frontend_views.py:289 apps/contacts/frontend_views.py:49
+#: core/collections/frontend_views.py:63
+msgid "Items per page"
+msgstr ""
+
+#: frontend_views.py:291 core/collections/frontend_views.py:65
+#: core/collections/frontend_views.py:176
+msgid "Limit to N items (0 = no limit)"
+msgstr ""
+
+#: frontend_views.py:293 core/collections/frontend_views.py:67
+#: core/collections/frontend_views.py:178
+msgid "Sort by"
+msgstr ""
+
+#: frontend_views.py:294 core/collections/frontend_views.py:68
+#: core/collections/frontend_views.py:179
+msgid "Date ↓ (newest first)"
+msgstr ""
+
+#: frontend_views.py:295 core/collections/frontend_views.py:69
+#: core/collections/frontend_views.py:180
+msgid "Date ↑ (oldest first)"
+msgstr ""
+
+#: frontend_views.py:296 core/collections/frontend_views.py:70
+#: core/collections/frontend_views.py:181
+msgid "Alphabetic"
+msgstr ""
+
+#: frontend_views.py:330
+msgid "detailed view of the selected Author"
+msgstr ""
+
+#: models.py:59
+msgid "templating theme"
+msgstr ""
+
+#: models.py:61
+msgid "default layout"
+msgstr ""
+
+#: models.py:64
+msgid "global title"
+msgstr ""
+
+#: models.py:66
+msgid "keywords"
+msgstr ""
+
+#: models.py:67 apps/medialibrary/models.py:41 apps/polls/models.py:36
+#: core/collections/models.py:60 core/collections/models.py:101
+#: core/series/models.py:61
+msgid "description"
+msgstr ""
+
+#: models.py:70
+msgid "newsletter collection"
+msgstr ""
+
+#: models.py:71
+msgid ""
+"This is the collection that will group the contents for your newsletters."
+msgstr ""
+
+#: models.py:73
+msgid "whole feed contents"
+msgstr ""
+
+#: models.py:74
+msgid "contents to show in the whole feed"
+msgstr ""
+
+#: models.py:75 models.py:325
+msgid "allow comments"
+msgstr ""
+
+#: models.py:77 models.py:328
+msgid "enabled"
+msgstr ""
+
+#: models.py:80
+msgid "moderate comments"
+msgstr ""
+
+#: models.py:82
+msgid "enable comments email notifications"
+msgstr ""
+
+#: models.py:84
+msgid "enable abuse reports"
+msgstr ""
+
+#: models.py:85 models.py:332
+msgid "show author"
+msgstr ""
+
+#: models.py:87 models.py:334 models.py:442 apps/articles/models.py:45
+#: apps/medialibrary/models.py:37
+msgid "author"
+msgstr ""
+
+#: models.py:88 models.py:335
+msgid "user if author is empty"
+msgstr ""
+
+#: models.py:90
+msgid "Select which field to use to show as author of the content."
+msgstr ""
+
+#: models.py:103 models.py:104
+msgid "site settings"
+msgstr ""
+
+#: models.py:113 models.py:143 models.py:260 models.py:311 models.py:424
+#: models.py:451 apps/abuse/models.py:15 apps/locations/models.py:36
+#: apps/locations/models.py:43 apps/locations/models.py:50
+#: apps/newsletter/models.py:34 apps/staticpages/models.py:43
+#: core/collections/models.py:50 core/collections/models.py:95
+msgid "name"
+msgstr ""
+
+#: models.py:115
+msgid "main menu"
+msgstr ""
+
+#: models.py:132 models.py:141
+msgid "menu"
+msgstr ""
+
+#: models.py:133
+msgid "menus"
+msgstr ""
+
+#: models.py:144 core/collections/models.py:98
+msgid "parent"
+msgstr ""
+
+#: models.py:145
+msgid "children"
+msgstr ""
+
+#: models.py:149
+msgid "site home"
+msgstr ""
+
+#: models.py:150
+msgid "custom URL"
+msgstr ""
+
+#: models.py:156
+msgid "Persistent layout"
+msgstr ""
+
+#: models.py:157
+msgid ""
+"If the layout is marked as persistent it will be in use until the user "
+"navigates to a menu item which explicitly specifies a different Layout"
+msgstr ""
+
+#: models.py:161 models.py:240 apps/contacts/models.py:46
+msgid "type"
+msgstr ""
+
+#: models.py:163 models.py:248 apps/abuse/models.py:26 apps/abuse/models.py:60
+msgid "object"
+msgstr ""
+
+#: models.py:169 models.py:242 apps/newsletter/models.py:41
+msgid "view"
+msgstr ""
+
+#: models.py:225
+msgid "menu item"
+msgstr ""
+
+#: models.py:226
+msgid "menu items"
+msgstr ""
+
+#: models.py:236 apps/locations/models.py:57
+msgid "region"
+msgstr ""
+
+#: models.py:245
+msgid "weight"
+msgstr ""
+
+#: models.py:265
+msgid "layout template"
+msgstr ""
+
+#: models.py:276
+msgid "layouts"
+msgstr ""
+
+#: models.py:283 models.py:288 apps/abuse/models.py:25 apps/abuse/models.py:59
+#: core/collections/models.py:207 core/series/models.py:33
+#: core/series/models.py:37
+msgid "content type"
+msgstr ""
+
+#: models.py:303
+msgid "related content"
+msgstr ""
+
+#: models.py:304
+msgid "related contents"
+msgstr ""
+
+#: models.py:315
+msgid "published"
+msgstr ""
+
+#: models.py:321
+msgid "creation date"
+msgstr ""
+
+#: models.py:323
+msgid "modification date"
+msgstr ""
+
+#: models.py:327 models.py:336
+msgid "default"
+msgstr ""
+
+#: models.py:337
+msgid "Select which field to use to show as author of this content."
+msgstr ""
+
+#: models.py:410
+msgid "translations"
+msgstr ""
+
+#: models.py:428 models.py:467 models.py:471 apps/medialibrary/models.py:58
+#: apps/medialibrary/models.py:72 apps/medialibrary/models.py:105
+#: apps/medialibrary/models.py:119 apps/medialibrary/models.py:133
+#: apps/medialibrary/models.py:147 core/collections/models.py:61
+#: core/collections/models.py:102 core/series/models.py:63
+msgid "image"
+msgstr ""
+
+#: models.py:431
+msgid "origin"
+msgstr ""
+
+#: models.py:433
+msgid "notes"
+msgstr ""
+
+#: models.py:435 core/collections/models.py:59
+msgid "content types"
+msgstr ""
+
+#: models.py:436
+msgid "Select the content types this author is related to."
+msgstr ""
+
+#: models.py:443
+msgid "authors"
+msgstr ""
+
+#: models.py:455
+msgid "link"
+msgstr ""
+
+#: models.py:461 apps/articles/models.py:47 apps/medialibrary/models.py:39
+msgid "source"
+msgstr ""
+
+#: models.py:462
+msgid "sources"
+msgstr ""
+
+#: models.py:472
+msgid "images"
+msgstr ""
+
+#: settings.py:105
+msgid "You need to set the CYCLOPE_PROJECT_PATH in your settings file."
+msgstr ""
+
+#: themes.py:89
+msgid "You need to set CYCLOPE_LOCAL_THEMES_PREFIX in your settings file"
+msgstr ""
+
+#: themes.py:94
+msgid "Your CYCLOPE_LOCAL_THEMES_DIRsetting is invalid"
+msgstr ""
+
+#: apps/abuse/models.py:21
+msgid "abuse types"
+msgstr ""
+
+#: apps/abuse/models.py:22
+msgid "abuses types"
+msgstr ""
+
+#: apps/abuse/models.py:28
+msgid "abuse type"
+msgstr ""
+
+#: apps/abuse/models.py:47
+#, python-format
+msgid "Abuse report for object %s"
+msgstr ""
+
+#: apps/abuse/models.py:54
+msgid "abuse report elements"
+msgstr ""
+
+#: apps/abuse/models.py:55
+msgid "abuses reports elements"
+msgstr ""
+
+#: apps/abuse/models.py:62
+msgid "status"
+msgstr ""
+
+#: apps/abuse/models.py:64
+msgid "reported"
+msgstr ""
+
+#: apps/abuse/models.py:65
+msgid "on hold"
+msgstr ""
+
+#: apps/abuse/models.py:66
+msgid "ignored"
+msgstr ""
+
+#: apps/abuse/models.py:67
+msgid "deleted"
+msgstr ""
+
+#: apps/abuse/models.py:93
+#, python-format
+msgid "Report: %d"
+msgstr ""
+
+#: apps/abuse/models.py:113
+msgid "abuse report"
+msgstr ""
+
+#: apps/abuse/models.py:114
+msgid "abuses reports"
+msgstr ""
+
+#: apps/abuse/templates/abuse/abuse_report_email.txt:3
+#, python-format
+msgid ""
+"\n"
+"The user %(username)s has reported that the content %(content)s is an abuse\n"
+"of %(abuse_type)s.\n"
+msgstr ""
+
+#: apps/abuse/templates/abuse/abuse_report_email.txt:11
+#, python-format
+msgid ""
+"\n"
+"Also the user says that: %(text)s\n"
+msgstr ""
+
+#: apps/abuse/templates/abuse/report.html:7
+msgid "report abuse"
+msgstr ""
+
+#: apps/abuse/templates/abuse/report.html:12
+msgid "you have already reported this content."
+msgstr ""
+
+#: apps/abuse/templates/abuse/report.html:13
+msgid "thanks for reporting!"
+msgstr ""
+
+#: apps/abuse/templates/abuse/report.html:15
+msgid "return"
+msgstr ""
+
+#: apps/articles/admin.py:59 apps/feeds/admin.py:40
+#: apps/staticpages/admin.py:68
+msgid "Publication data"
+msgstr ""
+
+#: apps/articles/frontend_views.py:34
+msgid "detailed view of the selected Article"
+msgstr ""
+
+#: apps/articles/frontend_views.py:49
+msgid "list of Article teasers"
+msgstr ""
+
+#: apps/articles/frontend_views.py:65
+msgid "list of Article labeled icons"
+msgstr ""
+
+#: apps/articles/models.py:39
+msgid "yes"
+msgstr ""
+
+#: apps/articles/models.py:39
+msgid "no"
+msgstr ""
+
+#: apps/articles/models.py:42
+msgid "pre-title"
+msgstr ""
+
+#: apps/articles/models.py:43 apps/feeds/models.py:41
+#: apps/staticpages/models.py:31
+msgid "summary"
+msgstr ""
+
+#: apps/articles/models.py:44 apps/forum/models.py:38 apps/polls/models.py:48
+#: apps/polls/models.py:67 apps/staticpages/models.py:32
+#: apps/staticpages/models.py:47
+msgid "text"
+msgstr ""
+
+#: apps/articles/models.py:49
+msgid "date"
+msgstr ""
+
+#: apps/articles/models.py:52
+msgid "article"
+msgstr ""
+
+#: apps/articles/models.py:53
+msgid "articles"
+msgstr ""
+
+#: apps/articles/templates/articles/article_detail.html:34
+#: apps/medialibrary/models.py:64
+msgid "pictures"
+msgstr ""
+
+#: apps/articles/templates/articles/article_detail.html:60
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_detail.html:37
+#: templates/cyclope/base_content_detail.html:26
+msgid "Last modification date"
+msgstr ""
+
+#: apps/articles/templates/articles/article_inline_detail.html:10
+#: apps/newsletter/templates/newsletter/content.html:14
+#: apps/newsletter/templates/newsletter/content_teasers.html:13
+msgid "Return to Table of Contents"
+msgstr ""
+
+#: apps/articles/templates/articles/article_teaser.html:32
+#: apps/contacts/templates/contacts/contact_teaser.html:27
+#: apps/feeds/templates/feeds/feed_teaser.html:12
+#: apps/forum/templates/forum/topic_teaser.html:9
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_teaser.html:22
+msgid "More"
+msgstr ""
+
+#: apps/contacts/forms.py:33
+#: apps/contacts/templates/contacts/contact_detail.html:32
+msgid "Birth date"
+msgstr ""
+
+#: apps/contacts/frontend_views.py:38
+msgid "detailed view of the selected Contact"
+msgstr ""
+
+#: apps/contacts/frontend_views.py:50
+msgid "Order by"
+msgstr ""
+
+#: apps/contacts/frontend_views.py:51 apps/contacts/models.py:56
+msgid "given name"
+msgstr ""
+
+#: apps/contacts/frontend_views.py:52 apps/contacts/models.py:57
+msgid "surname"
+msgstr ""
+
+#: apps/contacts/frontend_views.py:59
+msgid "list of Contact teasers"
+msgstr ""
+
+#: apps/contacts/models.py:41
+msgid "work"
+msgstr ""
+
+#: apps/contacts/models.py:42
+msgid "home"
+msgstr ""
+
+#: apps/contacts/models.py:47 apps/contacts/models.py:67
+msgid "contact"
+msgstr ""
+
+#: apps/contacts/models.py:50
+msgid "contact address"
+msgstr ""
+
+#: apps/contacts/models.py:51
+msgid "contact addresses"
+msgstr ""
+
+#: apps/contacts/models.py:53
+msgid "Male"
+msgstr ""
+
+#: apps/contacts/models.py:53
+msgid "Female"
+msgstr ""
+
+#: apps/contacts/models.py:58
+msgid "birth date"
+msgstr ""
+
+#: apps/contacts/models.py:59
+msgid "gender"
+msgstr ""
+
+#: apps/contacts/models.py:60
+msgid "photo"
+msgstr ""
+
+#: apps/contacts/models.py:62
+msgid "e-mail"
+msgstr ""
+
+#: apps/contacts/models.py:63
+msgid "web site"
+msgstr ""
+
+#: apps/contacts/models.py:64
+msgid "mobile phone number"
+msgstr ""
+
+#: apps/contacts/models.py:68
+msgid "contacts"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:15
+#: templates/cyclope/content_tools_block.html:6
+msgid "Print"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:17
+msgid "Send mail"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:30
+msgid "Given name"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:31
+msgid "Surname"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:33
+#: apps/contacts/templates/contacts/contact_teaser.html:21
+msgid "Gender"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:34
+#: apps/contacts/templates/contacts/contact_teaser.html:22
+msgid "Email"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:35
+#: apps/contacts/templates/contacts/contact_teaser.html:23
+msgid "Web"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:36
+#: apps/contacts/templates/contacts/contact_teaser.html:24
+msgid "Mobile"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:44
+msgid "Address"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:45
+msgid "Post Office Box"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:46
+msgid "Phone Number"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:62
+msgid "Tags"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_detail.html:65
+msgid "Last update"
+msgstr ""
+
+#: apps/contacts/templates/contacts/contact_teaser.html:28
+msgid "Last change"
+msgstr ""
+
+#: apps/custom_comments/admin.py:38
+msgid "Metadata"
+msgstr ""
+
+#: apps/custom_comments/forms.py:30
+msgid "Website or Blog"
+msgstr ""
+
+#: apps/custom_comments/forms.py:32
+msgid "I want to be notified by email when there is a new comment."
+msgstr ""
+
+#: apps/custom_comments/frontend_views.py:37
+msgid "list of the last site content comments"
+msgstr ""
+
+#: apps/custom_comments/models.py:47
+#, python-format
+msgid "New comment posted on '%s'"
+msgstr ""
+
+#: apps/custom_comments/models.py:53
+#, python-format
+msgid ""
+"This comment is moderated!\n"
+"You may approve it on the following url: %s\n"
+"\n"
+msgstr ""
+
+#: apps/custom_comments/models.py:66
+msgid "comment"
+msgstr ""
+
+#: apps/custom_comments/models.py:67
+msgid "comments"
+msgstr ""
+
+#: apps/dynamicforms/frontend_views.py:38
+msgid "show a form"
+msgstr ""
+
+#: apps/dynamicforms/models.py:47
+msgid "form"
+msgstr ""
+
+#: apps/dynamicforms/models.py:48
+msgid "forms"
+msgstr ""
+
+#: apps/feeds/frontend_views.py:40
+msgid "entries to show"
+msgstr ""
+
+#: apps/feeds/frontend_views.py:41
+msgid "show titles only"
+msgstr ""
+
+#: apps/feeds/frontend_views.py:46
+msgid "detailed view of the selected Feed"
+msgstr ""
+
+#: apps/feeds/models.py:40
+#: apps/newsletter/templates/newsletter/content.html:35
+msgid "URL"
+msgstr ""
+
+#: apps/feeds/models.py:42
+msgid "default number of entries"
+msgstr ""
+
+#: apps/feeds/models.py:43
+msgid "by default, only show entry titles"
+msgstr ""
+
+#: apps/feeds/models.py:46
+msgid "feed"
+msgstr ""
+
+#: apps/feeds/models.py:47
+msgid "feeds"
+msgstr ""
+
+#: apps/forum/forms.py:33
+msgid "subject"
+msgstr ""
+
+#: apps/forum/frontend_views.py:43
+msgid "detailed view of the selected Topic"
+msgstr ""
+
+#: apps/forum/frontend_views.py:64
+msgid "create a new topic in the Forum selected"
+msgstr ""
+
+#: apps/forum/models.py:41
+msgid "topic"
+msgstr ""
+
+#: apps/forum/models.py:42
+msgid "topics"
+msgstr ""
+
+#: apps/forum/templates/collections/category_create_topic.html:9
+#, python-format
+msgid " %(forum)s is not a forum "
+msgstr ""
+
+#: apps/forum/templates/collections/category_create_topic.html:15
+#, python-format
+msgid " New topic in  %(forum)s forum "
+msgstr ""
+
+#: apps/forum/templates/collections/category_create_topic.html:20
+msgid "Create"
+msgstr ""
+
+#: apps/forum/templates/forum/topic_teaser.html:15
+#: core/collections/templates/collections/category_list_as_forum.html:17
+msgid "Replies"
+msgstr ""
+
+#: apps/locations/models.py:56
+msgid "country"
+msgstr ""
+
+#: apps/locations/models.py:58 core/user_profiles/models.py:34
+msgid "city"
+msgstr ""
+
+#: apps/locations/models.py:59
+msgid "zip code"
+msgstr ""
+
+#: apps/locations/models.py:60
+msgid "street address"
+msgstr ""
+
+#: apps/locations/models.py:61
+msgid "phone number"
+msgstr ""
+
+#: apps/locations/models.py:62
+msgid "postal box"
+msgstr ""
+
+#: apps/medialibrary/frontend_views.py:42
+msgid "detailed view of the selected Picture"
+msgstr ""
+
+#: apps/medialibrary/frontend_views.py:50
+msgid "detailed view of the selected Audio Track"
+msgstr ""
+
+#: apps/medialibrary/frontend_views.py:58
+msgid "detailed view of the selected Movie Clip"
+msgstr ""
+
+#: apps/medialibrary/frontend_views.py:66
+msgid "detailed view of the selected Document"
+msgstr ""
+
+#: apps/medialibrary/frontend_views.py:74
+msgid "detailed view of the selected File"
+msgstr ""
+
+#: apps/medialibrary/frontend_views.py:82
+msgid "detailed view of the selected External Content"
+msgstr ""
+
+#: apps/medialibrary/frontend_views.py:90
+msgid "detailed view of the selected Flash Movie"
+msgstr ""
+
+#: apps/medialibrary/models.py:63
+msgid "picture"
+msgstr ""
+
+#: apps/medialibrary/models.py:70
+msgid "audio"
+msgstr ""
+
+#: apps/medialibrary/models.py:78
+msgid "sound track"
+msgstr ""
+
+#: apps/medialibrary/models.py:79
+msgid "sound tracks"
+msgstr ""
+
+#: apps/medialibrary/models.py:85
+msgid "still"
+msgstr ""
+
+#: apps/medialibrary/models.py:87
+msgid "video"
+msgstr ""
+
+#: apps/medialibrary/models.py:98
+msgid "movie clip"
+msgstr ""
+
+#: apps/medialibrary/models.py:99
+msgid "movie clips"
+msgstr ""
+
+#: apps/medialibrary/models.py:107 apps/medialibrary/models.py:112
+msgid "document"
+msgstr ""
+
+#: apps/medialibrary/models.py:113
+msgid "documents"
+msgstr ""
+
+#: apps/medialibrary/models.py:121
+msgid "flash"
+msgstr ""
+
+#: apps/medialibrary/models.py:126
+msgid "flash movie"
+msgstr ""
+
+#: apps/medialibrary/models.py:127
+msgid "flash movies"
+msgstr ""
+
+#: apps/medialibrary/models.py:135 apps/medialibrary/models.py:140
+msgid "file"
+msgstr ""
+
+#: apps/medialibrary/models.py:141
+msgid "files"
+msgstr ""
+
+#: apps/medialibrary/models.py:149
+msgid "content url"
+msgstr ""
+
+#: apps/medialibrary/models.py:150
+msgid "open in new window"
+msgstr ""
+
+#: apps/medialibrary/models.py:151
+msgid "skip detailed view"
+msgstr ""
+
+#: apps/medialibrary/models.py:155
+msgid "external content"
+msgstr ""
+
+#: apps/medialibrary/models.py:156
+msgid "external contents"
+msgstr ""
+
+#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:7
+#: apps/medialibrary/templates/medialibrary/externalcontent_inline_detail.html:7
+msgid "Open external content"
+msgstr ""
+
+#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:7
+#: apps/medialibrary/templates/medialibrary/externalcontent_inline_detail.html:7
+msgid " (in new window)"
+msgstr ""
+
+#: apps/medialibrary/templates/medialibrary/flashmovie_detail.html:20
+#: apps/medialibrary/templates/medialibrary/flashmovie_inline_detail.html:20
+#: apps/medialibrary/templates/medialibrary/flashmovie_slideshow_item.html:15
+msgid "full screen view (new window)"
+msgstr ""
+
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_detail.html:28
+msgid "download file"
+msgstr ""
+
+#: apps/newsletter/admin.py:36
+msgid "Current content category"
+msgstr ""
+
+#: apps/newsletter/admin.py:37
+msgid ""
+"This is the category which groups the content that will be sent with the "
+"newsletter."
+msgstr ""
+
+#: apps/newsletter/frontend_views.py:12
+msgid "show content teasers linked to the website"
+msgstr ""
+
+#: apps/newsletter/frontend_views.py:39
+msgid "show the full content (no external links)"
+msgstr ""
+
+#: apps/newsletter/models.py:38
+msgid "sent date"
+msgstr ""
+
+#: apps/newsletter/models.py:42
+msgid "show table of contents"
+msgstr ""
+
+#: apps/newsletter/models.py:43
+#: templates/cyclope/themes/alternative/__init__.py:47
+#: templates/cyclope/themes/baseline/__init__.py:47
+#: templates/cyclope/themes/curiouslygreen/__init__.py:47
+#: templates/cyclope/themes/cyblog/__init__.py:47
+#: templates/cyclope/themes/cyorg/__init__.py:47
+#: templates/cyclope/themes/cyportal/__init__.py:47
+#: templates/cyclope/themes/diversia/__init__.py:47
+#: templates/cyclope/themes/experience/__init__.py:47
+#: templates/cyclope/themes/frecuency/__init__.py:47
+#: templates/cyclope/themes/neutronix/__init__.py:47
+#: templates/cyclope/themes/newfangled/__init__.py:47
+#: templates/cyclope/themes/newflash/__init__.py:47
+#: templates/cyclope/themes/nonzeroblue/__init__.py:47
+#: templates/cyclope/themes/plantation/__init__.py:47
+#: templates/cyclope/themes/potentix/__init__.py:47
+#: templates/cyclope/themes/supplementary/__init__.py:47
+msgid "header"
+msgstr ""
+
+#: apps/newsletter/models.py:45
+msgid "sender name"
+msgstr ""
+
+#: apps/newsletter/models.py:46
+msgid "sender e-mail"
+msgstr ""
+
+#: apps/newsletter/models.py:47
+msgid "test recipients"
+msgstr ""
+
+#: apps/newsletter/models.py:48
+msgid "recipients"
+msgstr ""
+
+#: apps/newsletter/models.py:54
+msgid "newsletter"
+msgstr ""
+
+#: apps/newsletter/models.py:55
+msgid "newsletters"
+msgstr ""
+
+#: apps/newsletter/templates/admin/newsletter_change_form.html:7
+msgid "Preview"
+msgstr ""
+
+#: apps/newsletter/templates/admin/newsletter_change_form.html:8
+msgid "Send test"
+msgstr ""
+
+#: apps/newsletter/templates/admin/newsletter_change_form.html:9
+msgid "Send e-mail"
+msgstr ""
+
+#: apps/newsletter/templates/newsletter/content.html:22
+#: apps/newsletter/templates/newsletter/content_teasers.html:30
+#: templates/comments/list.html:11 templates/cyclope/author_block.html:7
+#: templates/cyclope/themes/alternative/newsletter.html:139
+#: templates/cyclope/themes/baseline/newsletter.html:139
+#: templates/cyclope/themes/curiouslygreen/newsletter.html:139
+#: templates/cyclope/themes/cyblog/newsletter.html:139
+#: templates/cyclope/themes/cyorg/newsletter.html:139
+#: templates/cyclope/themes/cyportal/newsletter.html:139
+#: templates/cyclope/themes/diversia/newsletter.html:139
+#: templates/cyclope/themes/experience/newsletter.html:139
+#: templates/cyclope/themes/frecuency/newsletter.html:139
+#: templates/cyclope/themes/neutronix/newsletter.html:155
+#: templates/cyclope/themes/newfangled/newsletter.html:139
+#: templates/cyclope/themes/newflash/newsletter.html:139
+#: templates/cyclope/themes/nonzeroblue/newsletter.html:139
+#: templates/cyclope/themes/plantation/newsletter.html:139
+#: templates/cyclope/themes/potentix/newsletter.html:139
+#: templates/cyclope/themes/supplementary/newsletter.html:139
+msgid "By"
+msgstr ""
+
+#: apps/newsletter/templates/newsletter/mail_sent.html:5
+msgid "The e-mail has been sent for newsletter "
+msgstr ""
+
+#: apps/newsletter/templates/newsletter/mail_sent.html:6
+#: apps/newsletter/templates/newsletter/send_failed.html:11
+msgid "Return to newsletter admin"
+msgstr ""
+
+#: apps/newsletter/templates/newsletter/send_failed.html:6
+msgid "The e-mail for newsletter"
+msgstr ""
+
+#: apps/newsletter/templates/newsletter/send_failed.html:7
+msgid "could not be sent."
+msgstr ""
+
+#: apps/newsletter/templates/newsletter/send_failed.html:9
+msgid "You should try again later or contact your administrator."
+msgstr ""
+
+#: apps/polls/frontend_views.py:37
+msgid "Poll submission form"
+msgstr ""
+
+#: apps/polls/frontend_views.py:73
+msgid "detailed view of the selected Poll"
+msgstr ""
+
+#: apps/polls/models.py:42
+msgid "poll"
+msgstr ""
+
+#: apps/polls/models.py:43
+msgid "polls"
+msgstr ""
+
+#: apps/polls/models.py:52
+msgid "allow multiple answers"
+msgstr ""
+
+#: apps/polls/models.py:60 apps/polls/models.py:66
+msgid "question"
+msgstr ""
+
+#: apps/polls/models.py:61
+msgid "questions"
+msgstr ""
+
+#: apps/polls/models.py:77
+msgid "answer"
+msgstr ""
+
+#: apps/polls/models.py:78 apps/polls/models.py:86
+msgid "answers"
+msgstr ""
+
+#: apps/polls/models.py:83 core/perms/models.py:35
+msgid "user"
+msgstr ""
+
+#: apps/polls/models.py:84
+msgid "foreign_user"
+msgstr ""
+
+#: apps/polls/models.py:89
+msgid "submission"
+msgstr ""
+
+#: apps/polls/models.py:90
+msgid "submissions"
+msgstr ""
+
+#: apps/polls/templates/admin/polls/change_list.html:7
+#: templates/admin/change_list.html:110
+msgid "Filter"
+msgstr ""
+
+#: apps/polls/templates/polls/poll_submission.html:22
+#: core/user_profiles/forms.py:34 utils/__init__.py:309
+msgid "Submit"
+msgstr ""
+
+#: apps/related_admin/fields.py:48
+#, python-format
+msgid "field %(field)s cannot validate %(value)s"
+msgstr ""
+
+#: apps/related_admin/fields.py:76
+msgid "Wrong content type or object"
+msgstr ""
+
+#: apps/staticpages/admin.py:40
+msgid "Menu items"
+msgstr ""
+
+#: apps/staticpages/frontend_views.py:38
+msgid "detailed view of the selected Static Page"
+msgstr ""
+
+#: apps/staticpages/frontend_views.py:53
+msgid "list of Static Pages"
+msgstr ""
+
+#: apps/staticpages/frontend_views.py:72
+msgid "display the selected HTML Block"
+msgstr ""
+
+#: apps/staticpages/models.py:38
+msgid "static page"
+msgstr ""
+
+#: apps/staticpages/models.py:39
+msgid "static pages"
+msgstr ""
+
+#: apps/staticpages/models.py:56
+msgid "html block"
+msgstr ""
+
+#: apps/staticpages/models.py:57
+msgid "html blocks"
+msgstr ""
+
+#: core/collections/admin.py:49 core/collections/models.py:139
+#: core/collections/models.py:204 core/perms/models.py:38
+msgid "category"
+msgstr ""
+
+#: core/collections/admin.py:72
+msgid "Description"
+msgstr ""
+
+#: core/collections/admin.py:89
+msgid "Extra info"
+msgstr ""
+
+#: core/collections/admin.py:116
+msgid "Collection"
+msgstr ""
+
+#: core/collections/admin.py:118
+msgid "Category"
+msgstr ""
+
+#: core/collections/admin.py:190
+msgid "Default category listing view"
+msgstr ""
+
+#: core/collections/frontend_views.py:43
+msgid "list of root items for the selected Category"
+msgstr ""
+
+#: core/collections/frontend_views.py:60
+#: core/collections/frontend_views.py:173
+msgid "Show title"
+msgstr ""
+
+#: core/collections/frontend_views.py:61
+#: core/collections/frontend_views.py:174
+msgid "Show description"
+msgstr ""
+
+#: core/collections/frontend_views.py:62
+#: core/collections/frontend_views.py:175
+msgid "Show image"
+msgstr ""
+
+#: core/collections/frontend_views.py:72
+msgid "Simplified"
+msgstr ""
+
+#: core/collections/frontend_views.py:73
+#: core/collections/frontend_views.py:183
+msgid "Include descendant's elements"
+msgstr ""
+
+#: core/collections/frontend_views.py:75
+msgid "Show navigation"
+msgstr ""
+
+#: core/collections/frontend_views.py:76
+msgid "Top"
+msgstr ""
+
+#: core/collections/frontend_views.py:77
+msgid "Bottom"
+msgstr ""
+
+#: core/collections/frontend_views.py:78
+msgid "Disabled"
+msgstr ""
+
+#: core/collections/frontend_views.py:84
+msgid "default view for the Collection"
+msgstr ""
+
+#: core/collections/frontend_views.py:131
+msgid "teaser list of Category members"
+msgstr ""
+
+#: core/collections/frontend_views.py:157
+msgid "labeled icon list of Category members"
+msgstr ""
+
+#: core/collections/frontend_views.py:168
+msgid "Visual Mode"
+msgstr ""
+
+#: core/collections/frontend_views.py:169
+msgid "Standard view"
+msgstr ""
+
+#: core/collections/frontend_views.py:171
+msgid "With background image view"
+msgstr ""
+
+#: core/collections/frontend_views.py:185
+msgid "Scroll by N items"
+msgstr ""
+
+#: core/collections/frontend_views.py:187
+msgid "Speed of transition (in milliseconds)"
+msgstr ""
+
+#: core/collections/frontend_views.py:189
+msgid "Automatic playback"
+msgstr ""
+
+#: core/collections/frontend_views.py:191
+msgid "Stop automatic playback after click"
+msgstr ""
+
+#: core/collections/frontend_views.py:193
+msgid "Delay between transitions (seconds)"
+msgstr ""
+
+#: core/collections/frontend_views.py:195
+msgid "Circular navigation"
+msgstr ""
+
+#: core/collections/frontend_views.py:197
+msgid "Navigation wrap"
+msgstr ""
+
+#: core/collections/frontend_views.py:198
+msgid "Circular"
+msgstr ""
+
+#: core/collections/frontend_views.py:199
+msgid "First"
+msgstr ""
+
+#: core/collections/frontend_views.py:200
+msgid "Last"
+msgstr ""
+
+#: core/collections/frontend_views.py:201
+msgid "Both"
+msgstr ""
+
+#: core/collections/frontend_views.py:202
+msgid "None"
+msgstr ""
+
+#: core/collections/frontend_views.py:209
+msgid "slideshow of Category members"
+msgstr ""
+
+#: core/collections/frontend_views.py:237
+msgid "full content of Category members"
+msgstr ""
+
+#: core/collections/frontend_views.py:252
+msgid "teaser list of the root Categories of a Collection"
+msgstr ""
+
+#: core/collections/frontend_views.py:272
+msgid "list of the root Categories of a Collection"
+msgstr ""
+
+#: core/collections/frontend_views.py:284
+msgid "hierarchical list of Categories in a Collection"
+msgstr ""
+
+#: core/collections/frontend_views.py:350
+msgid "hierarchical list of Categories that will show an icon list on click"
+msgstr ""
+
+#: core/collections/frontend_views.py:359
+msgid ""
+"alphabetical teaser list of all the members of the Collection's Categories"
+msgstr ""
+
+#: core/collections/frontend_views.py:388
+msgid "list of Category members as forum view"
+msgstr ""
+
+#: core/collections/models.py:54
+msgid "visible"
+msgstr ""
+
+#: core/collections/models.py:57
+msgid "navigation root"
+msgstr ""
+
+#: core/collections/models.py:63
+msgid "default list view"
+msgstr ""
+
+#: core/collections/models.py:74 core/collections/models.py:94
+msgid "collection"
+msgstr ""
+
+#: core/collections/models.py:75
+msgid "collections"
+msgstr ""
+
+#: core/collections/models.py:100
+msgid "active"
+msgstr ""
+
+#: core/collections/models.py:140 core/collections/models.py:237
+msgid "categories"
+msgstr ""
+
+#: core/collections/models.py:227
+msgid "categorization"
+msgstr ""
+
+#: core/collections/models.py:228
+msgid "categorizations"
+msgstr ""
+
+#: core/collections/models.py:244
+msgid "is orphan"
+msgstr ""
+
+#: core/collections/templates/collections/category_contents_base.html:39
+msgid "Add content"
+msgstr ""
+
+#: core/collections/templates/collections/category_list_as_forum.html:11
+msgid "Create a new topic"
+msgstr ""
+
+#: core/collections/templates/collections/category_list_as_forum.html:16
+msgid "Subject"
+msgstr ""
+
+#: core/collections/templates/collections/category_list_as_forum.html:18
+msgid "Created"
+msgstr ""
+
+#: core/collections/templates/collections/category_list_as_forum.html:19
+msgid "Last comment"
+msgstr ""
+
+#: core/collections/templates/collections/category_list_as_forum.html:27
+#: core/collections/templates/collections/category_list_as_forum.html:29
+msgid "by"
+msgstr ""
+
+#: core/frontend/__init__.py:182
+#, python-format
+msgid "No default view has been set for %s"
+msgstr ""
+
+#: core/frontend/__init__.py:185
+#, python-format
+msgid "You can set only one default view for %s"
+msgstr ""
+
+#: core/frontend/sites.py:181
+msgid "You need to create you site settings"
+msgstr ""
+
+#: core/frontend/sites.py:186
+msgid "You need to select a layout for the site"
+msgstr ""
+
+#: core/frontend/sites.py:192
+msgid "The site home page has not been set."
+msgstr ""
+
+#: core/frontend/sites.py:204
+msgid "No content object selected"
+msgstr ""
+
+#: core/perms/models.py:36
+msgid "can edit content"
+msgstr ""
+
+#: core/perms/models.py:37
+msgid "can add content"
+msgstr ""
+
+#: core/perms/models.py:42
+msgid "category permission"
+msgstr ""
+
+#: core/perms/models.py:43
+msgid "category permissions"
+msgstr ""
+
+#: core/series/frontend_views.py:35
+msgid "detailed view of the selected Series"
+msgstr ""
+
+#: core/series/models.py:52
+msgid "series content"
+msgstr ""
+
+#: core/series/models.py:53
+msgid "series contents"
+msgstr ""
+
+#: core/series/models.py:98 core/series/models.py:99
+msgid "series"
+msgstr ""
+
+#: core/series/templates/series/series_detail.html:11
+msgid "Content:"
+msgstr ""
+
+#: core/user_profiles/forms.py:37
+msgid "Personal information"
+msgstr ""
+
+#: core/user_profiles/forms.py:55
+msgid "First name"
+msgstr ""
+
+#: core/user_profiles/forms.py:56
+msgid "Last name"
+msgstr ""
+
+#: core/user_profiles/frontend_views.py:35
+msgid "detailed view of the selected User"
+msgstr ""
+
+#: core/user_profiles/models.py:32
+msgid "avatar"
+msgstr ""
+
+#: core/user_profiles/models.py:35
+msgid "about myself"
+msgstr ""
+
+#: core/user_profiles/models.py:38
+msgid "public"
+msgstr ""
+
+#: core/user_profiles/models.py:39
+msgid "Choose whether your profile info should be publicly visible or not"
+msgstr ""
+
+#: core/user_profiles/templates/profiles/create_profile.html:4
+msgid "Create Profile"
+msgstr ""
+
+#: core/user_profiles/templates/profiles/edit_profile.html:8
+msgid "Edit Profile"
+msgstr ""
+
+#: core/user_profiles/templates/profiles/edit_profile.html:12
+#: templates/registration/registration_form.html:9
+msgid "Please fill in your user profile data"
+msgstr ""
+
+#: core/user_profiles/templates/profiles/profile_content.html:5
+msgid "City"
+msgstr ""
+
+#: core/user_profiles/templates/profiles/profile_list.html:10
+msgid "Return"
+msgstr ""
+
+#: core/user_profiles/templates/user_profiles/profile_detail.html:11
+msgid "Edit profile"
+msgstr ""
+
+#: locale_external/external_translations.py:5
+msgid "Username"
+msgstr ""
+
+#: locale_external/external_translations.py:9
+msgid "Search In"
+msgstr ""
+
+#: locale_external/external_translations.py:13
+msgid "Lookup"
+msgstr ""
+
+#: locale_external/external_translations.py:15
+msgid "Share in your social networks"
+msgstr ""
+
+#: locale_external/external_translations.py:17
+msgid "Shortcuts"
+msgstr ""
+
+#: locale_external/external_translations.py:19
+msgid "Collapse tree"
+msgstr ""
+
+#: locale_external/external_translations.py:21
+msgid "Expand tree"
+msgstr ""
+
+#: locale_external/external_translations.py:23
+msgid "and"
+msgstr ""
+
+#: locale_external/external_translations.py:25
+msgid "or make changes"
+msgstr ""
+
+#: locale_external/external_translations.py:27
+msgid "Post"
+msgstr ""
+
+#: locale_external/external_translations.py:29
+msgid "Neutronica theme"
+msgstr ""
+
+#: locale_external/external_translations.py:31
+msgid "One sidebar"
+msgstr ""
+
+#: locale_external/external_translations.py:33
+msgid "left sidebar"
+msgstr ""
+
+#: locale_external/external_translations.py:35
+msgid "footer"
+msgstr ""
+
+#: locale_external/external_translations.py:37
+msgid "Two sidebars"
+msgstr ""
+
+#: locale_external/external_translations.py:39
+msgid "right sidebar"
+msgstr ""
+
+#: locale_external/external_translations.py:41
+msgid "No sidebars"
+msgstr ""
+
+#: locale_external/external_translations.py:43
+msgid "Subscribe to RSS"
+msgstr ""
+
+#: locale_external/external_translations.py:45
+msgid "User"
+msgstr ""
+
+#: locale_external/external_translations.py:47
+msgid "A user with that username already exists."
+msgstr ""
+
+#: locale_external/external_translations.py:49
+msgid "username"
+msgstr ""
+
+#: locale_external/external_translations.py:51
+msgid "users"
+msgstr ""
+
+#: locale_external/external_translations.py:53
+msgid "sender"
+msgstr ""
+
+#: locale_external/external_translations.py:55
+msgid "Visit website"
+msgstr ""
+
+#: locale_external/external_translations.py:57
+msgid "Categories"
+msgstr ""
+
+#: locale_external/external_translations.py:59
+msgid "Name"
+msgstr ""
+
+#: locale_external/external_translations.py:61
+msgid "Alignment"
+msgstr ""
+
+#: locale_external/external_translations.py:63
+msgid "Text"
+msgstr ""
+
+#: locale_external/external_translations.py:65
+msgid "Date"
+msgstr ""
+
+#: locale_external/external_translations.py:67
+msgid "Share"
+msgstr ""
+
+#: locale_external/external_translations.py:69
+msgid "Review and moderate user comments"
+msgstr ""
+
+#: locale_external/external_translations.py:71
+msgid "alphabetical teaser list of Contact members"
+msgstr ""
+
+#: locale_external/external_translations.py:73
+msgid "Categorization"
+msgstr ""
+
+#: locale_external/external_translations.py:75
+msgid "Classify the content in your website"
+msgstr ""
+
+#: locale_external/external_translations.py:77
+msgid "Modify the menus and site layouts"
+msgstr ""
+
+#: locale_external/external_translations.py:79
+msgid "Header"
+msgstr ""
+
+#: locale_external/external_translations.py:81
+msgid "show the current content for the selected Newsletter"
+msgstr ""
+
+#: locale_external/external_translations.py:83
+msgid "show the header text of the selected Newsletter"
+msgstr ""
+
+#: locale_external/external_translations.py:85
+msgid "toggle editor"
+msgstr ""
+
+#: locale_external/external_translations.py:87
+msgid "on"
+msgstr ""
+
+#: locale_external/external_translations.py:89
+msgid "off"
+msgstr ""
+
+#: locale_external/external_translations.py:91
+msgid "collection categories"
+msgstr ""
+
+#: locale_external/external_translations.py:93
+msgid "Spanish"
+msgstr ""
+
+#: locale_external/external_translations.py:95
+msgid "English"
+msgstr ""
+
+#: locale_external/external_translations.py:97
+msgid "Portuguese"
+msgstr ""
+
+#: locale_external/external_translations.py:99
+msgid "list of Products"
+msgstr ""
+
+#: locale_external/external_translations.py:101
+msgid "price"
+msgstr ""
+
+#: locale_external/external_translations.py:103
+msgid "product"
+msgstr ""
+
+#: locale_external/external_translations.py:105
+msgid "products"
+msgstr ""
+
+#: locale_external/external_translations.py:107
+msgid "Potente theme"
+msgstr ""
+
+#: locale_external/external_translations.py:109
+msgid "One sidebar and four panes"
+msgstr ""
+
+#: locale_external/external_translations.py:111
+msgid "sidebar"
+msgstr ""
+
+#: locale_external/external_translations.py:113
+msgid "second pane"
+msgstr ""
+
+#: locale_external/external_translations.py:115
+msgid "third pane"
+msgstr ""
+
+#: locale_external/external_translations.py:117
+msgid "fourth pane"
+msgstr ""
+
+#: locale_external/external_translations.py:119
+msgid "Translated"
+msgstr ""
+
+#: locale_external/external_translations.py:121
+msgid "article image"
+msgstr ""
+
+#: locale_external/external_translations.py:123
+msgid "article images"
+msgstr ""
+
+#: locale_external/external_translations.py:125
+msgid "attachments"
+msgstr ""
+
+#: locale_external/external_translations.py:127
+msgid "downloads"
+msgstr ""
+
+#: locale_external/external_translations.py:129
+msgid "Codigo Sur, latest news"
+msgstr ""
+
+#: locale_external/external_translations.py:131
+msgid "navigation breadcrumb"
+msgstr ""
+
+#: locale_external/external_translations.py:133
+msgid "Categories for this"
+msgstr ""
+
+#: locale_external/external_translations.py:135
+msgid "category map"
+msgstr ""
+
+#: locale_external/external_translations.py:137
+#, python-format
+msgid "%(more_count)s more"
+msgstr ""
+
+#: templates/admin/base_content_change_form.html:131
+msgid "You must choose a collection first."
+msgstr ""
+
+#: templates/admin/base_site.html:4 templates/rosetta/base.html:5
+msgid "Cyclope site admin"
+msgstr ""
+
+#: templates/admin/change_form.html:31 templates/admin/change_list.html:63
+#: templates/admin/contact_form/contactformsettings/change_form.html:6
+#: templates/admin/cyclope/sitesettings/change_form.html:6
+#: templates/rosetta/pofile.html:46
+msgid "Home"
+msgstr ""
+
+#: templates/admin/change_form.html:34
+msgid "Add"
+msgstr ""
+
+#: templates/admin/change_form.html:44
+msgid "History"
+msgstr ""
+
+#: templates/admin/change_form.html:45
+msgid "View on site"
+msgstr ""
+
+#: templates/admin/change_form.html:56 templates/admin/change_list.html:99
+#: templates/admin/login.html:17
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/change_list.html:79
+#, python-format
+msgid ""
+"You may use the filters and search form to narrow the list of "
+"%(plural_name)s displayed."
+msgstr ""
+
+#: templates/admin/change_list.html:90
+#, python-format
+msgid "Add %(name)s"
+msgstr ""
+
+#: templates/admin/filter.html:2
+#, python-format
+msgid " By %(filter_title)s "
+msgstr ""
+
+#: templates/admin/login.html:33
+msgid "Username:"
+msgstr ""
+
+#: templates/admin/login.html:37
+msgid "Password:"
+msgstr ""
+
+#: templates/admin/login.html:42 templates/registration/user_block.html:14
+msgid "Log in"
+msgstr ""
+
+#: templates/admin/articles/change_list.html:6
+msgid ""
+"\n"
+"<p>\n"
+"Articles are a rich content type that you may use to publish categorized "
+"information on your website.\n"
+"</p>\n"
+msgstr ""
+
+#: templates/comments/approved.html:4
+msgid "Thanks for approving"
+msgstr ""
+
+#: templates/comments/approved.html:11
+msgid ""
+"Thanks for taking the time to improve the quality of discussion on our site"
+msgstr ""
+
+#: templates/comments/approved.html:12 templates/comments/posted.html:12
+msgid "return."
+msgstr ""
+
+#: templates/comments/comments_block.html:39
+#, python-format
+msgid " There are %(comment_count)s comments "
+msgstr ""
+
+#: templates/comments/comments_block.html:45
+msgid "comment on this content"
+msgstr ""
+
+#: templates/comments/form.html:11
+msgid "Post your comment"
+msgstr ""
+
+#: templates/comments/form.html:12
+msgid "Cancel reply"
+msgstr ""
+
+#: templates/comments/posted.html:4
+msgid "Thanks for commenting"
+msgstr ""
+
+#: templates/comments/posted.html:11
+msgid "Thank you for your comment"
+msgstr ""
+
+#: templates/comments/preview.html:4
+msgid "Preview your comment"
+msgstr ""
+
+#: templates/contact_form/contact_form.txt:2
+msgid "wrote"
+msgstr ""
+
+#: templates/contact_form/contact_form_sent.html:6
+msgid "Thank you for contacting us!"
+msgstr ""
+
+#: templates/cyclope/breadcrumb.html:8
+msgid "Breadcrumb"
+msgstr ""
+
+#: templates/cyclope/content_tools_block.html:9
+msgid "Report abuse"
+msgstr ""
+
+#: templates/cyclope/content_tools_block.html:23
+msgid "Edit"
+msgstr ""
+
+#: templates/cyclope/pagination_block.html:8
+msgid "first"
+msgstr ""
+
+#: templates/cyclope/pagination_block.html:9
+msgid "previous"
+msgstr ""
+
+#: templates/cyclope/pagination_block.html:13
+msgid "Page"
+msgstr ""
+
+#: templates/cyclope/pagination_block.html:13
+#: templates/cyclope/themes/neutronix/base.html:61
+msgid "of"
+msgstr ""
+
+#: templates/cyclope/pagination_block.html:17
+msgid "next"
+msgstr ""
+
+#: templates/cyclope/pagination_block.html:18
+msgid "last"
+msgstr ""
+
+#: templates/cyclope/related_contents_block.html:7
+msgid "Related:"
+msgstr ""
+
+#: templates/cyclope/site_map.html:6
+msgid "Site map"
+msgstr ""
+
+#: templates/cyclope/site_search_box.html:31
+msgid "Site wide search"
+msgstr ""
+
+#: templates/cyclope/source_block.html:7
+#: templates/cyclope/source_block.html:10
+msgid "Source"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/404.html:6
+#: templates/cyclope/themes/baseline/404.html:6
+#: templates/cyclope/themes/curiouslygreen/404.html:6
+#: templates/cyclope/themes/cyblog/404.html:6
+#: templates/cyclope/themes/cyorg/404.html:6
+#: templates/cyclope/themes/diversia/404.html:6
+#: templates/cyclope/themes/experience/404.html:6
+#: templates/cyclope/themes/frecuency/404.html:6
+#: templates/cyclope/themes/neutronix/404.html:6
+#: templates/cyclope/themes/newfangled/404.html:6
+#: templates/cyclope/themes/newflash/404.html:6
+#: templates/cyclope/themes/plantation/404.html:6
+#: templates/cyclope/themes/potentix/404.html:6
+#: templates/cyclope/themes/supplementary/404.html:6
+msgid "Error 404 (Not Found)"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/404.html:10
+#: templates/cyclope/themes/baseline/404.html:10
+#: templates/cyclope/themes/curiouslygreen/404.html:10
+#: templates/cyclope/themes/cyblog/404.html:10
+#: templates/cyclope/themes/cyorg/404.html:10
+#: templates/cyclope/themes/diversia/404.html:12
+#: templates/cyclope/themes/experience/404.html:10
+#: templates/cyclope/themes/frecuency/404.html:10
+#: templates/cyclope/themes/neutronix/404.html:12
+#: templates/cyclope/themes/newfangled/404.html:10
+#: templates/cyclope/themes/newflash/404.html:10
+#: templates/cyclope/themes/plantation/404.html:10
+#: templates/cyclope/themes/potentix/404.html:10
+#: templates/cyclope/themes/supplementary/404.html:10
+msgid "Error 404"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/404.html:13
+#: templates/cyclope/themes/baseline/404.html:13
+#: templates/cyclope/themes/curiouslygreen/404.html:13
+#: templates/cyclope/themes/cyblog/404.html:13
+#: templates/cyclope/themes/cyorg/404.html:13
+#: templates/cyclope/themes/diversia/404.html:14
+#: templates/cyclope/themes/experience/404.html:13
+#: templates/cyclope/themes/frecuency/404.html:13
+#: templates/cyclope/themes/neutronix/404.html:14
+#: templates/cyclope/themes/newfangled/404.html:13
+#: templates/cyclope/themes/newflash/404.html:13
+#: templates/cyclope/themes/plantation/404.html:13
+#: templates/cyclope/themes/potentix/404.html:13
+#: templates/cyclope/themes/supplementary/404.html:13
+msgid "The requested URL was not found on this server."
+msgstr ""
+
+#: templates/cyclope/themes/alternative/500.html:6
+#: templates/cyclope/themes/baseline/500.html:6
+#: templates/cyclope/themes/curiouslygreen/500.html:6
+#: templates/cyclope/themes/cyblog/500.html:6
+#: templates/cyclope/themes/cyorg/500.html:6
+#: templates/cyclope/themes/diversia/500.html:6
+#: templates/cyclope/themes/experience/500.html:6
+#: templates/cyclope/themes/frecuency/500.html:6
+#: templates/cyclope/themes/neutronix/500.html:6
+#: templates/cyclope/themes/newfangled/500.html:6
+#: templates/cyclope/themes/newflash/500.html:6
+#: templates/cyclope/themes/plantation/500.html:6
+#: templates/cyclope/themes/potentix/500.html:6
+#: templates/cyclope/themes/supplementary/500.html:6
+msgid "Error 500 (Internal Server Error)"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/500.html:10
+#: templates/cyclope/themes/baseline/500.html:10
+#: templates/cyclope/themes/curiouslygreen/500.html:10
+#: templates/cyclope/themes/cyblog/500.html:10
+#: templates/cyclope/themes/cyorg/500.html:10
+#: templates/cyclope/themes/diversia/500.html:12
+#: templates/cyclope/themes/experience/500.html:10
+#: templates/cyclope/themes/frecuency/500.html:10
+#: templates/cyclope/themes/neutronix/500.html:12
+#: templates/cyclope/themes/newfangled/500.html:10
+#: templates/cyclope/themes/newflash/500.html:10
+#: templates/cyclope/themes/plantation/500.html:10
+#: templates/cyclope/themes/potentix/500.html:10
+#: templates/cyclope/themes/supplementary/500.html:10
+msgid "Error 500"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/500.html:13
+#: templates/cyclope/themes/baseline/500.html:13
+#: templates/cyclope/themes/curiouslygreen/500.html:13
+#: templates/cyclope/themes/cyblog/500.html:13
+#: templates/cyclope/themes/cyorg/500.html:13
+#: templates/cyclope/themes/diversia/500.html:14
+#: templates/cyclope/themes/experience/500.html:13
+#: templates/cyclope/themes/frecuency/500.html:13
+#: templates/cyclope/themes/neutronix/500.html:14
+#: templates/cyclope/themes/newfangled/500.html:13
+#: templates/cyclope/themes/newflash/500.html:13
+#: templates/cyclope/themes/plantation/500.html:13
+#: templates/cyclope/themes/potentix/500.html:13
+#: templates/cyclope/themes/supplementary/500.html:13
+msgid "Internal server error."
+msgstr ""
+
+#: templates/cyclope/themes/alternative/__init__.py:11
+msgid "Alternative"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/__init__.py:17
+#: templates/cyclope/themes/cyorg/__init__.py:17
+#: templates/cyclope/themes/neutronix/__init__.py:17
+#: templates/cyclope/themes/supplementary/__init__.py:17
+msgid "Four Elements"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/__init__.py:19
+#: templates/cyclope/themes/alternative/__init__.py:31
+#: templates/cyclope/themes/cyorg/__init__.py:19
+#: templates/cyclope/themes/cyorg/__init__.py:31
+#: templates/cyclope/themes/cyportal/__init__.py:19
+#: templates/cyclope/themes/cyportal/__init__.py:31
+#: templates/cyclope/themes/diversia/__init__.py:31
+#: templates/cyclope/themes/neutronix/__init__.py:19
+#: templates/cyclope/themes/neutronix/__init__.py:31
+#: templates/cyclope/themes/nonzeroblue/__init__.py:19
+#: templates/cyclope/themes/nonzeroblue/__init__.py:31
+msgid "Air"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/__init__.py:20
+#: templates/cyclope/themes/alternative/__init__.py:32
+#: templates/cyclope/themes/cyorg/__init__.py:20
+#: templates/cyclope/themes/cyorg/__init__.py:32
+#: templates/cyclope/themes/cyportal/__init__.py:20
+#: templates/cyclope/themes/cyportal/__init__.py:32
+#: templates/cyclope/themes/diversia/__init__.py:32
+#: templates/cyclope/themes/neutronix/__init__.py:20
+#: templates/cyclope/themes/neutronix/__init__.py:32
+#: templates/cyclope/themes/nonzeroblue/__init__.py:20
+#: templates/cyclope/themes/nonzeroblue/__init__.py:32
+msgid "Water"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/__init__.py:21
+#: templates/cyclope/themes/alternative/__init__.py:34
+#: templates/cyclope/themes/cyorg/__init__.py:21
+#: templates/cyclope/themes/cyorg/__init__.py:34
+#: templates/cyclope/themes/cyportal/__init__.py:21
+#: templates/cyclope/themes/cyportal/__init__.py:34
+#: templates/cyclope/themes/diversia/__init__.py:21
+#: templates/cyclope/themes/diversia/__init__.py:34
+#: templates/cyclope/themes/neutronix/__init__.py:21
+#: templates/cyclope/themes/neutronix/__init__.py:34
+#: templates/cyclope/themes/nonzeroblue/__init__.py:21
+#: templates/cyclope/themes/nonzeroblue/__init__.py:34
+msgid "Spark"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/__init__.py:22
+#: templates/cyclope/themes/alternative/__init__.py:35
+#: templates/cyclope/themes/cyorg/__init__.py:22
+#: templates/cyclope/themes/cyorg/__init__.py:35
+#: templates/cyclope/themes/cyportal/__init__.py:22
+#: templates/cyclope/themes/cyportal/__init__.py:35
+#: templates/cyclope/themes/diversia/__init__.py:22
+#: templates/cyclope/themes/diversia/__init__.py:35
+#: templates/cyclope/themes/neutronix/__init__.py:22
+#: templates/cyclope/themes/neutronix/__init__.py:35
+#: templates/cyclope/themes/nonzeroblue/__init__.py:22
+#: templates/cyclope/themes/nonzeroblue/__init__.py:35
+msgid "Ash"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/__init__.py:23
+#: templates/cyclope/themes/alternative/__init__.py:36
+#: templates/cyclope/themes/cyorg/__init__.py:23
+#: templates/cyclope/themes/cyorg/__init__.py:36
+#: templates/cyclope/themes/cyportal/__init__.py:23
+#: templates/cyclope/themes/cyportal/__init__.py:36
+#: templates/cyclope/themes/diversia/__init__.py:36
+#: templates/cyclope/themes/neutronix/__init__.py:23
+#: templates/cyclope/themes/neutronix/__init__.py:36
+#: templates/cyclope/themes/nonzeroblue/__init__.py:23
+#: templates/cyclope/themes/nonzeroblue/__init__.py:36
+msgid "Earth"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/__init__.py:29
+#: templates/cyclope/themes/cyorg/__init__.py:29
+#: templates/cyclope/themes/neutronix/__init__.py:29
+#: templates/cyclope/themes/supplementary/__init__.py:29
+msgid "Five Elements"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/__init__.py:33
+#: templates/cyclope/themes/cyorg/__init__.py:33
+#: templates/cyclope/themes/cyportal/__init__.py:33
+#: templates/cyclope/themes/diversia/__init__.py:33
+#: templates/cyclope/themes/neutronix/__init__.py:33
+#: templates/cyclope/themes/nonzeroblue/__init__.py:33
+msgid "Love"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/__init__.py:40
+#: templates/cyclope/themes/baseline/__init__.py:40
+#: templates/cyclope/themes/curiouslygreen/__init__.py:40
+#: templates/cyclope/themes/cyblog/__init__.py:40
+#: templates/cyclope/themes/cyorg/__init__.py:40
+#: templates/cyclope/themes/cyportal/__init__.py:40
+#: templates/cyclope/themes/diversia/__init__.py:40
+#: templates/cyclope/themes/experience/__init__.py:40
+#: templates/cyclope/themes/frecuency/__init__.py:40
+#: templates/cyclope/themes/neutronix/__init__.py:40
+#: templates/cyclope/themes/newfangled/__init__.py:40
+#: templates/cyclope/themes/newflash/__init__.py:40
+#: templates/cyclope/themes/nonzeroblue/__init__.py:40
+#: templates/cyclope/themes/plantation/__init__.py:40
+#: templates/cyclope/themes/potentix/__init__.py:40
+#: templates/cyclope/themes/supplementary/__init__.py:40
+msgid "Empty"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/__init__.py:48
+#: templates/cyclope/themes/baseline/__init__.py:48
+#: templates/cyclope/themes/curiouslygreen/__init__.py:48
+#: templates/cyclope/themes/cyblog/__init__.py:48
+#: templates/cyclope/themes/cyorg/__init__.py:48
+#: templates/cyclope/themes/cyportal/__init__.py:48
+#: templates/cyclope/themes/diversia/__init__.py:48
+#: templates/cyclope/themes/experience/__init__.py:48
+#: templates/cyclope/themes/frecuency/__init__.py:48
+#: templates/cyclope/themes/neutronix/__init__.py:48
+#: templates/cyclope/themes/newfangled/__init__.py:48
+#: templates/cyclope/themes/newflash/__init__.py:48
+#: templates/cyclope/themes/nonzeroblue/__init__.py:48
+#: templates/cyclope/themes/plantation/__init__.py:48
+#: templates/cyclope/themes/potentix/__init__.py:48
+#: templates/cyclope/themes/supplementary/__init__.py:48
+msgid "before content"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/__init__.py:49
+#: templates/cyclope/themes/baseline/__init__.py:49
+#: templates/cyclope/themes/curiouslygreen/__init__.py:49
+#: templates/cyclope/themes/cyblog/__init__.py:49
+#: templates/cyclope/themes/cyorg/__init__.py:49
+#: templates/cyclope/themes/cyportal/__init__.py:49
+#: templates/cyclope/themes/diversia/__init__.py:49
+#: templates/cyclope/themes/experience/__init__.py:49
+#: templates/cyclope/themes/frecuency/__init__.py:49
+#: templates/cyclope/themes/neutronix/__init__.py:49
+#: templates/cyclope/themes/newfangled/__init__.py:49
+#: templates/cyclope/themes/newflash/__init__.py:49
+#: templates/cyclope/themes/nonzeroblue/__init__.py:49
+#: templates/cyclope/themes/plantation/__init__.py:49
+#: templates/cyclope/themes/potentix/__init__.py:49
+#: templates/cyclope/themes/supplementary/__init__.py:49
+msgid "after content"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/newsletter.html:73
+#: templates/cyclope/themes/baseline/newsletter.html:73
+#: templates/cyclope/themes/curiouslygreen/newsletter.html:73
+#: templates/cyclope/themes/cyblog/newsletter.html:73
+#: templates/cyclope/themes/cyorg/newsletter.html:73
+#: templates/cyclope/themes/cyportal/newsletter.html:73
+#: templates/cyclope/themes/diversia/newsletter.html:73
+#: templates/cyclope/themes/experience/newsletter.html:73
+#: templates/cyclope/themes/frecuency/newsletter.html:73
+#: templates/cyclope/themes/neutronix/newsletter.html:99
+#: templates/cyclope/themes/newfangled/newsletter.html:73
+#: templates/cyclope/themes/newflash/newsletter.html:73
+#: templates/cyclope/themes/nonzeroblue/newsletter.html:73
+#: templates/cyclope/themes/plantation/newsletter.html:73
+#: templates/cyclope/themes/potentix/newsletter.html:73
+#: templates/cyclope/themes/supplementary/newsletter.html:73
+msgid "Visit our website"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/newsletter.html:73
+#: templates/cyclope/themes/baseline/newsletter.html:73
+#: templates/cyclope/themes/curiouslygreen/newsletter.html:73
+#: templates/cyclope/themes/cyblog/newsletter.html:73
+#: templates/cyclope/themes/cyorg/newsletter.html:73
+#: templates/cyclope/themes/cyportal/newsletter.html:73
+#: templates/cyclope/themes/diversia/newsletter.html:73
+#: templates/cyclope/themes/experience/newsletter.html:73
+#: templates/cyclope/themes/frecuency/newsletter.html:73
+#: templates/cyclope/themes/neutronix/newsletter.html:99
+#: templates/cyclope/themes/newfangled/newsletter.html:73
+#: templates/cyclope/themes/newflash/newsletter.html:73
+#: templates/cyclope/themes/nonzeroblue/newsletter.html:73
+#: templates/cyclope/themes/plantation/newsletter.html:73
+#: templates/cyclope/themes/potentix/newsletter.html:73
+#: templates/cyclope/themes/supplementary/newsletter.html:73
+msgid "View archives"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/newsletter.html:73
+#: templates/cyclope/themes/baseline/newsletter.html:73
+#: templates/cyclope/themes/curiouslygreen/newsletter.html:73
+#: templates/cyclope/themes/cyblog/newsletter.html:73
+#: templates/cyclope/themes/cyorg/newsletter.html:73
+#: templates/cyclope/themes/cyportal/newsletter.html:73
+#: templates/cyclope/themes/diversia/newsletter.html:73
+#: templates/cyclope/themes/experience/newsletter.html:73
+#: templates/cyclope/themes/frecuency/newsletter.html:73
+#: templates/cyclope/themes/neutronix/newsletter.html:99
+#: templates/cyclope/themes/newfangled/newsletter.html:73
+#: templates/cyclope/themes/newflash/newsletter.html:73
+#: templates/cyclope/themes/nonzeroblue/newsletter.html:73
+#: templates/cyclope/themes/plantation/newsletter.html:73
+#: templates/cyclope/themes/potentix/newsletter.html:73
+#: templates/cyclope/themes/supplementary/newsletter.html:73
+msgid "Subscription options"
+msgstr ""
+
+#: templates/cyclope/themes/alternative/newsletter.html:128
+#: templates/cyclope/themes/baseline/newsletter.html:128
+#: templates/cyclope/themes/curiouslygreen/newsletter.html:128
+#: templates/cyclope/themes/cyblog/newsletter.html:128
+#: templates/cyclope/themes/cyorg/newsletter.html:128
+#: templates/cyclope/themes/cyportal/newsletter.html:128
+#: templates/cyclope/themes/diversia/newsletter.html:128
+#: templates/cyclope/themes/experience/newsletter.html:128
+#: templates/cyclope/themes/frecuency/newsletter.html:128
+#: templates/cyclope/themes/neutronix/newsletter.html:151
+#: templates/cyclope/themes/newfangled/newsletter.html:128
+#: templates/cyclope/themes/newflash/newsletter.html:128
+#: templates/cyclope/themes/nonzeroblue/newsletter.html:128
+#: templates/cyclope/themes/plantation/newsletter.html:128
+#: templates/cyclope/themes/potentix/newsletter.html:128
+#: templates/cyclope/themes/supplementary/newsletter.html:128
+msgid "Table of Contents"
+msgstr ""
+
+#: templates/cyclope/themes/baseline/__init__.py:11
+msgid "Baseline"
+msgstr ""
+
+#: templates/cyclope/themes/baseline/__init__.py:17
+#: templates/cyclope/themes/curiouslygreen/__init__.py:17
+#: templates/cyclope/themes/cyblog/__init__.py:17
+#: templates/cyclope/themes/experience/__init__.py:17
+#: templates/cyclope/themes/frecuency/__init__.py:17
+#: templates/cyclope/themes/newfangled/__init__.py:17
+#: templates/cyclope/themes/newflash/__init__.py:17
+#: templates/cyclope/themes/plantation/__init__.py:17
+#: templates/cyclope/themes/potentix/__init__.py:17
+msgid "4 Elements"
+msgstr ""
+
+#: templates/cyclope/themes/baseline/__init__.py:19
+#: templates/cyclope/themes/baseline/__init__.py:31
+#: templates/cyclope/themes/curiouslygreen/__init__.py:19
+#: templates/cyclope/themes/curiouslygreen/__init__.py:31
+#: templates/cyclope/themes/cyblog/__init__.py:19
+#: templates/cyclope/themes/cyblog/__init__.py:31
+#: templates/cyclope/themes/diversia/__init__.py:19
+#: templates/cyclope/themes/experience/__init__.py:19
+#: templates/cyclope/themes/experience/__init__.py:31
+#: templates/cyclope/themes/frecuency/__init__.py:19
+#: templates/cyclope/themes/frecuency/__init__.py:31
+#: templates/cyclope/themes/newfangled/__init__.py:19
+#: templates/cyclope/themes/newfangled/__init__.py:31
+#: templates/cyclope/themes/newflash/__init__.py:19
+#: templates/cyclope/themes/newflash/__init__.py:31
+#: templates/cyclope/themes/plantation/__init__.py:19
+#: templates/cyclope/themes/plantation/__init__.py:31
+#: templates/cyclope/themes/potentix/__init__.py:19
+#: templates/cyclope/themes/potentix/__init__.py:31
+#: templates/cyclope/themes/supplementary/__init__.py:19
+#: templates/cyclope/themes/supplementary/__init__.py:31
+msgid "air"
+msgstr ""
+
+#: templates/cyclope/themes/baseline/__init__.py:20
+#: templates/cyclope/themes/baseline/__init__.py:32
+#: templates/cyclope/themes/curiouslygreen/__init__.py:20
+#: templates/cyclope/themes/curiouslygreen/__init__.py:32
+#: templates/cyclope/themes/cyblog/__init__.py:20
+#: templates/cyclope/themes/cyblog/__init__.py:32
+#: templates/cyclope/themes/diversia/__init__.py:20
+#: templates/cyclope/themes/experience/__init__.py:20
+#: templates/cyclope/themes/experience/__init__.py:32
+#: templates/cyclope/themes/frecuency/__init__.py:20
+#: templates/cyclope/themes/frecuency/__init__.py:32
+#: templates/cyclope/themes/newfangled/__init__.py:20
+#: templates/cyclope/themes/newfangled/__init__.py:32
+#: templates/cyclope/themes/newflash/__init__.py:20
+#: templates/cyclope/themes/newflash/__init__.py:32
+#: templates/cyclope/themes/plantation/__init__.py:20
+#: templates/cyclope/themes/plantation/__init__.py:32
+#: templates/cyclope/themes/potentix/__init__.py:20
+#: templates/cyclope/themes/potentix/__init__.py:32
+#: templates/cyclope/themes/supplementary/__init__.py:20
+#: templates/cyclope/themes/supplementary/__init__.py:32
+msgid "water"
+msgstr ""
+
+#: templates/cyclope/themes/baseline/__init__.py:21
+#: templates/cyclope/themes/baseline/__init__.py:34
+#: templates/cyclope/themes/curiouslygreen/__init__.py:21
+#: templates/cyclope/themes/curiouslygreen/__init__.py:34
+#: templates/cyclope/themes/cyblog/__init__.py:21
+#: templates/cyclope/themes/cyblog/__init__.py:34
+#: templates/cyclope/themes/experience/__init__.py:21
+#: templates/cyclope/themes/experience/__init__.py:34
+#: templates/cyclope/themes/frecuency/__init__.py:21
+#: templates/cyclope/themes/frecuency/__init__.py:34
+#: templates/cyclope/themes/newfangled/__init__.py:21
+#: templates/cyclope/themes/newfangled/__init__.py:34
+#: templates/cyclope/themes/newflash/__init__.py:21
+#: templates/cyclope/themes/newflash/__init__.py:34
+#: templates/cyclope/themes/plantation/__init__.py:21
+#: templates/cyclope/themes/plantation/__init__.py:34
+#: templates/cyclope/themes/potentix/__init__.py:21
+#: templates/cyclope/themes/potentix/__init__.py:34
+#: templates/cyclope/themes/supplementary/__init__.py:21
+#: templates/cyclope/themes/supplementary/__init__.py:34
+msgid "before fire"
+msgstr ""
+
+#: templates/cyclope/themes/baseline/__init__.py:22
+#: templates/cyclope/themes/baseline/__init__.py:35
+#: templates/cyclope/themes/curiouslygreen/__init__.py:22
+#: templates/cyclope/themes/curiouslygreen/__init__.py:35
+#: templates/cyclope/themes/cyblog/__init__.py:22
+#: templates/cyclope/themes/cyblog/__init__.py:35
+#: templates/cyclope/themes/experience/__init__.py:22
+#: templates/cyclope/themes/experience/__init__.py:35
+#: templates/cyclope/themes/frecuency/__init__.py:22
+#: templates/cyclope/themes/frecuency/__init__.py:35
+#: templates/cyclope/themes/newfangled/__init__.py:22
+#: templates/cyclope/themes/newfangled/__init__.py:35
+#: templates/cyclope/themes/newflash/__init__.py:22
+#: templates/cyclope/themes/newflash/__init__.py:35
+#: templates/cyclope/themes/plantation/__init__.py:22
+#: templates/cyclope/themes/plantation/__init__.py:35
+#: templates/cyclope/themes/potentix/__init__.py:22
+#: templates/cyclope/themes/potentix/__init__.py:35
+#: templates/cyclope/themes/supplementary/__init__.py:22
+#: templates/cyclope/themes/supplementary/__init__.py:35
+msgid "after fire"
+msgstr ""
+
+#: templates/cyclope/themes/baseline/__init__.py:23
+#: templates/cyclope/themes/baseline/__init__.py:36
+#: templates/cyclope/themes/curiouslygreen/__init__.py:23
+#: templates/cyclope/themes/curiouslygreen/__init__.py:36
+#: templates/cyclope/themes/cyblog/__init__.py:23
+#: templates/cyclope/themes/cyblog/__init__.py:36
+#: templates/cyclope/themes/diversia/__init__.py:23
+#: templates/cyclope/themes/experience/__init__.py:23
+#: templates/cyclope/themes/experience/__init__.py:36
+#: templates/cyclope/themes/frecuency/__init__.py:23
+#: templates/cyclope/themes/frecuency/__init__.py:36
+#: templates/cyclope/themes/newfangled/__init__.py:23
+#: templates/cyclope/themes/newfangled/__init__.py:36
+#: templates/cyclope/themes/newflash/__init__.py:23
+#: templates/cyclope/themes/newflash/__init__.py:36
+#: templates/cyclope/themes/plantation/__init__.py:23
+#: templates/cyclope/themes/plantation/__init__.py:36
+#: templates/cyclope/themes/potentix/__init__.py:23
+#: templates/cyclope/themes/potentix/__init__.py:36
+#: templates/cyclope/themes/supplementary/__init__.py:23
+#: templates/cyclope/themes/supplementary/__init__.py:36
+msgid "earth"
+msgstr ""
+
+#: templates/cyclope/themes/baseline/__init__.py:29
+#: templates/cyclope/themes/curiouslygreen/__init__.py:29
+#: templates/cyclope/themes/cyblog/__init__.py:29
+#: templates/cyclope/themes/experience/__init__.py:29
+#: templates/cyclope/themes/frecuency/__init__.py:29
+#: templates/cyclope/themes/newfangled/__init__.py:29
+#: templates/cyclope/themes/newflash/__init__.py:29
+#: templates/cyclope/themes/plantation/__init__.py:29
+#: templates/cyclope/themes/potentix/__init__.py:29
+msgid "5 Elements"
+msgstr ""
+
+#: templates/cyclope/themes/baseline/__init__.py:33
+#: templates/cyclope/themes/curiouslygreen/__init__.py:33
+#: templates/cyclope/themes/cyblog/__init__.py:33
+#: templates/cyclope/themes/experience/__init__.py:33
+#: templates/cyclope/themes/frecuency/__init__.py:33
+#: templates/cyclope/themes/newfangled/__init__.py:33
+#: templates/cyclope/themes/newflash/__init__.py:33
+#: templates/cyclope/themes/plantation/__init__.py:33
+#: templates/cyclope/themes/potentix/__init__.py:33
+#: templates/cyclope/themes/supplementary/__init__.py:33
+msgid "love"
+msgstr ""
+
+#: templates/cyclope/themes/curiouslygreen/__init__.py:11
+msgid "Curiouslygreen"
+msgstr ""
+
+#: templates/cyclope/themes/cyblog/__init__.py:11
+msgid "Cyblog"
+msgstr ""
+
+#: templates/cyclope/themes/cyorg/__init__.py:11
+msgid "Cyorg"
+msgstr ""
+
+#: templates/cyclope/themes/cyportal/__init__.py:11
+msgid "Cyportal"
+msgstr ""
+
+#: templates/cyclope/themes/cyportal/__init__.py:17
+#: templates/cyclope/themes/diversia/__init__.py:17
+#: templates/cyclope/themes/nonzeroblue/__init__.py:17
+msgid "FourElements"
+msgstr ""
+
+#: templates/cyclope/themes/cyportal/__init__.py:29
+#: templates/cyclope/themes/diversia/__init__.py:29
+#: templates/cyclope/themes/nonzeroblue/__init__.py:29
+msgid "FiveElements"
+msgstr ""
+
+#: templates/cyclope/themes/diversia/__init__.py:11
+msgid "Diversia"
+msgstr ""
+
+#: templates/cyclope/themes/experience/__init__.py:11
+msgid "Experience"
+msgstr ""
+
+#: templates/cyclope/themes/frecuency/__init__.py:11
+msgid "Frecuency"
+msgstr ""
+
+#: templates/cyclope/themes/neutronix/__init__.py:11
+msgid "Neutronix"
+msgstr ""
+
+#: templates/cyclope/themes/neutronix/base.html:60
+msgid "Image"
+msgstr ""
+
+#: templates/cyclope/themes/newfangled/__init__.py:11
+msgid "Newfangled"
+msgstr ""
+
+#: templates/cyclope/themes/newflash/__init__.py:11
+msgid "Newflash"
+msgstr ""
+
+#: templates/cyclope/themes/nonzeroblue/__init__.py:11
+msgid "Nonzeroblue"
+msgstr ""
+
+#: templates/cyclope/themes/plantation/__init__.py:11
+msgid "Plantation"
+msgstr ""
+
+#: templates/cyclope/themes/potentix/__init__.py:11
+msgid "Potentix"
+msgstr ""
+
+#: templates/cyclope/themes/supplementary/__init__.py:11
+msgid "Supplementary"
+msgstr ""
+
+#: templates/filebrowser/index.html:48
+msgid "New Folder"
+msgstr ""
+
+#: templates/filebrowser/index.html:49
+msgid "Upload"
+msgstr ""
+
+#: templates/registration/activate.html:8
+msgid "The activation key you posted is invalid."
+msgstr ""
+
+#: templates/registration/activate.html:9
+msgid "Please make sure that:"
+msgstr ""
+
+#: templates/registration/activate.html:11
+msgid "You haven't already activated your account"
+msgstr ""
+
+#: templates/registration/activate.html:12
+msgid "Your key hasn't expired"
+msgstr ""
+
+#: templates/registration/activate.html:13
+msgid "Your activation link wasn't split or malformed"
+msgstr ""
+
+#: templates/registration/activate.html:18
+msgid "Welcome! Your account has been successfully activated. "
+msgstr ""
+
+#: templates/registration/activation_complete.html:7
+msgid "Your account is now active"
+msgstr ""
+
+#: templates/registration/activation_complete.html:8
+msgid "You may now"
+msgstr ""
+
+#: templates/registration/activation_complete.html:8
+#: templates/registration/login.html:6 templates/registration/login.html:15
+msgid "login"
+msgstr ""
+
+#: templates/registration/activation_email.txt:2
+#, python-format
+msgid ""
+"\n"
+"Thank you for registering to %(site)s\n"
+"\n"
+"You can finish your registration by clicking on this link:\n"
+msgstr ""
+
+#: templates/registration/activation_email.txt:8
+#, python-format
+msgid ""
+"\n"
+"This activation key will expire in %(expiration_days)s days.\n"
+msgstr ""
+
+#: templates/registration/activation_email_subject.txt:2
+msgid "Account activation for"
+msgstr ""
+
+#: templates/registration/login.html:9
+msgid "Please enter your credentials"
+msgstr ""
+
+#: templates/registration/login.html:16
+#, python-format
+msgid ""
+"\n"
+"        If you have not yet created an account you need to\n"
+"        <a href=\"/accounts/register?next=%(next)s\">register</a>\n"
+"        before you may login.\n"
+"        "
+msgstr ""
+
+#: templates/registration/logout.html:6
+msgid "You have logged out"
+msgstr ""
+
+#: templates/registration/password_change_form.html:6
+#: templates/rosetta/pofile.html:28
+msgid "Change password"
+msgstr ""
+
+#: templates/registration/password_change_form.html:11
+msgid "Change"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:7
+msgid "Your password has been reset"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:5
+#: templates/registration/password_reset_form.html:17
+msgid "Reset Password"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:8
+msgid "Forgot your password?"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:11
+msgid ""
+"Enter your e-mail address in the form below and we will send you a link for "
+"resetting your password."
+msgstr ""
+
+#: templates/registration/registration_complete.html:4
+msgid "Registration complete"
+msgstr ""
+
+#: templates/registration/registration_complete.html:8
+msgid ""
+"Please check your e-mail and follow the provided link in order to complete "
+"your account activation."
+msgstr ""
+
+#: templates/registration/user_block.html:9
+msgid "Create profile"
+msgstr ""
+
+#: templates/registration/user_block.html:11 templates/rosetta/pofile.html:35
+msgid "Log out"
+msgstr ""
+
+#: templates/rosetta/base.html:5 templates/rosetta/pofile.html:47
+msgid "Translation"
+msgstr ""
+
+#: templates/rosetta/pofile.html:12
+msgid "Welcome,"
+msgstr ""
+
+#: templates/rosetta/pofile.html:20
+msgid "Documentation"
+msgstr ""
+
+#: templates/rosetta/pofile.html:49
+msgid "File is read-only: download the file when done editing!"
+msgstr ""
+
+#: templates/rosetta/pofile.html:50
+msgid ""
+"Some items in your last translation block couldn't be saved: this usually "
+"happens when the catalog file changes on disk after you last loaded it."
+msgstr ""
+
+#: templates/rosetta/pofile.html:54
+#, python-format
+msgid "Translate into %(rosetta_i18n_lang_name)s"
+msgstr ""
+
+#: templates/rosetta/pofile.html:55
+#, python-format
+msgid "total progress: %(percent_translated)s%%"
+msgstr ""
+
+#: templates/rosetta/pofile.html:58
+msgid "Display:"
+msgstr ""
+
+#: templates/rosetta/pofile.html:59
+msgid "All"
+msgstr ""
+
+#: templates/rosetta/pofile.html:60
+msgid "Untranslated only"
+msgstr ""
+
+#: templates/rosetta/pofile.html:61
+msgid "Fuzzy only"
+msgstr ""
+
+#: templates/rosetta/pofile.html:62
+msgid "Translated only"
+msgstr ""
+
+#: templates/rosetta/pofile.html:69 templates/search/search.html:11
+msgid "Search"
+msgstr ""
+
+#: templates/rosetta/pofile.html:71
+msgid "Go"
+msgstr ""
+
+#: templates/rosetta/pofile.html:81
+msgid "Original"
+msgstr ""
+
+#: templates/rosetta/pofile.html:84
+msgid "Fuzzy"
+msgstr ""
+
+#: templates/rosetta/pofile.html:109
+msgid "suggest"
+msgstr ""
+
+#: templates/rosetta/pofile.html:135
+msgid "Save"
+msgstr ""
+
+#: templates/rosetta/pofile.html:139
+msgid "Skip to page:"
+msgstr ""
+
+#: templates/rosetta/pofile.html:152
+msgid "Displaying:"
+msgstr ""
+
+#: templates/rosetta/pofile.html:154
+#, python-format
+msgid "%(hits)s/%(message_number)s message"
+msgid_plural "%(hits)s/%(message_number)s messages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/search/search.html:6
+msgid "Advanced search"
+msgstr ""
+
+#: templates/search/search.html:18
+msgid "Results"
+msgstr ""
+
+#: templates/search/search.html:27
+msgid "No results found."
+msgstr ""
+
+#: utils/__init__.py:303
+msgid "Thumbnail Image"
+msgstr ""
