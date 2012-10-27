@@ -45,6 +45,7 @@ class QuestionForm(forms.Form):
         else:
             self.fields['answers'] = forms.ChoiceField(widget=forms.RadioSelect())
 
+        self.fields['answers'].label = question.text.capitalize()
         # TODO: review unlisted for choicefield
         #if question.allow_unlisted:
         #    self.fields['unlisted'] = forms.CharField(required=False)

@@ -14,17 +14,13 @@
 
   <h1 class="title">{{ poll.name }}</h1>
 
-  <form action="" method="POST"> <!-- class="user_input"> -->
-    {% for form in forms %}
+  <form action="{% url poll-submission poll.slug %}" method="POST" class="uniForm">
     {% csrf_token %}
-      <p>{{ form.question }}</p>
-        {% for field in form.form %}
-        {{ field.errors }}
-          {{ field }}
-        {% endfor %}
+    {% for form in forms %}
+        {{ form.as_ul }}
     {% endfor %}
     {{ captcha_form.as_p }}
-      <input type="submit" class="submit" value="{% trans "Send" %}" />
+      <input type="submit" value="{% trans "Submit" %}" />
   </form>
 
 </div>

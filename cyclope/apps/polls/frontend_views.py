@@ -36,6 +36,7 @@ class PollSubmission(frontend.FrontendView):
     name = 'submission'
     verbose_name=_('Poll submission form')
     is_content_view = True
+    is_region_view = True
 
     def get_response(self, request, req_context, options, content_object):
         forms = []
@@ -43,13 +44,13 @@ class PollSubmission(frontend.FrontendView):
         questions = Question.objects.filter(poll=poll)
         for question in questions:
             form = QuestionForm(question, data=request.POST or None, prefix=question.pk)
-            forms.append({'question': question.text, 'form': form})
+            forms.append(form)
         captcha_form = CaptchaForm(data=request.POST or None)
 
-        if all( (d['form'].is_valid() for d in forms) ) and captcha_form.is_valid():
+        if all( (f.is_valid() for f in forms) ) and captcha_form.is_valid():
             posted_answers = []
-            for d in forms:
-                posted_answers.extend(d['form'].get_answers())
+            for f in forms:
+                posted_answers.extend(f.get_answers())
             submission = Submission(poll=poll)
             submission.save()
             submission.answers = posted_answers
