@@ -156,9 +156,12 @@ class ExternalContent(BaseMedia):
         verbose_name_plural = _('external contents')
 
 from cyclope.apps.custom_comments.moderator import CustomCommentModerator, moderator
+from ratings.handlers import ratings
+from cyclope.core.ratings.forms import LikeDislikeVoteForm
 
 # register models on abuse registry
 for key, val in locals().copy().iteritems():
     if isinstance(val, type) and issubclass(val, BaseMedia):
         cyclope.apps.abuse.register(val)
         moderator.register(val, CustomCommentModerator)
+        ratings.register(val, form_class=LikeDislikeVoteForm)

@@ -1,0 +1,54 @@
+{% load cyclope_utils i18n %}
+
+{% block parent %}{% if not read_only %}{{ parent }}{% endif %}{% endblock %}
+
+{% block widget %}
+    <div class="likedislike {% if value %}voted{% endif %}" id="{{ widget_id }}">
+        <div class="vote-results">
+          <div class="vote-results-pos">{{score.num_positives}}</div> /
+          <div class="vote-results-neg">{{score.num_negatives}}</div>
+        </div>
+        <div>
+          <div class="vote-btn vote-like">+1</div> <div class="vote-btn vote-dislike">-1</div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" charset="utf-8">
+        (function($) {
+            $(document).ready(function() {
+                var object = $('#{{ widget_id }}');
+                var vote_form = object.closest('form');
+
+                $("#{{ widget_id }} .vote-btn").click(function(){
+                    // not authenticated
+                    if($(".user-is-not-authenticated").length){
+                        $("#{{ widget_id }}").html($(".user-is-not-authenticated").html());
+                        return;
+                    }
+                    // already voted
+                    if ($("#{{ widget_id }}").hasClass("voted"))
+                        return;
+
+                    var val = 1;
+                    var results = "vote-results-pos";
+                    if ($(this).hasClass("vote-dislike")){
+                        val = -1;
+                        results = "vote-results-neg"
+                    }
+                    vote_form.find('#{{ parent_id }}').val(val);
+                    vote_form.trigger("star_change");
+
+                    $("#{{ widget_id }}").addClass("voted");
+                    $(this).addClass("voted");
+                    $("#{{ widget_id }} ." + results).html(parseInt($("#{{ widget_id }} ." + results).html()) + 1);
+                });
+
+                vote_form.bind('vote_submit', function(event, data) {
+                });
+            });
+        })(jQuery);
+    </script>
+
+{% endblock %}

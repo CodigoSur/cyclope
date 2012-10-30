@@ -88,6 +88,7 @@ class SiteSettings(models.Model):
                                        ('USER', _('user if author is empty'))
                                    ), default='AUTHOR',
                                    help_text=_('Select which field to use to show as author of the content.'))
+    enable_ratings = models.BooleanField(_('enable rating (like/dislike) content'), default=False)
 
     def save(self, *args, **kwargs):
         self.id = 1

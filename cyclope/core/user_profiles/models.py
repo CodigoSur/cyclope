@@ -42,6 +42,9 @@ class UserProfile(models.Model):
     def get_absolute_url(self):
         return ('userprofile-detail', (), { 'slug': self.slug })
 
+    def __unicode__(self):
+        return self.user.get_full_name() or self.user.username
+
     def save(self, *args, **kwargs):
         super(UserProfile, self).save(*args, **kwargs)
         # This is a hack to deal with profiles that aren't created automatically by a signal

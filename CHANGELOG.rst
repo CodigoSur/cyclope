@@ -5,6 +5,8 @@ Changelog for Cyclope 3
 0.2 (unreleased)
 ================
 
+- Added Rating application
+
 - Improved user profiles
 
 - Added user field to BaseContent
@@ -16,7 +18,7 @@ Changelog for Cyclope 3
 
 - Upgraded to django 1.4 (#160).
 
-- Improved comments (#62, #66, #77, #161). Addded threaded comments, comments 
+- Improved comments (#62, #66, #77, #161). Addded threaded comments, comments
   moderation and email notifications.
 
 - Added frontend content edition. Users with permissions on a category now can

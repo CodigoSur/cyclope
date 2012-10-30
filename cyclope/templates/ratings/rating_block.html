@@ -1,0 +1,17 @@
+{% load i18n cyclope_utils ratings_tags %}
+
+{% if CYCLOPE_SITE_SETTINGS.enable_ratings %}
+  {% get_rating_form for current_object as rating_form %}
+  {% if request.user.is_authenticated %}
+  <form class="ratings" action="{% url ratings_vote %}" method="post">
+    {% csrf_token %}
+    {{ rating_form }}
+  </form>
+  {% else %}
+    <div style="display:none;" class="user-is-not-authenticated">
+        {% trans "Please" %} <a href="{% url auth_login %}?next={% firstof request.path '/' %}">{% trans "login" %}</a> {% trans "to vote" %}.
+    </div>
+    {{ rating_form }}
+  {% endif %}
+{% endif %}
+

@@ -44,6 +44,9 @@
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/menuitems.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/uni-form.jquery.min.js" ></script>
+    {% if CYCLOPE_SITE_SETTINGS.enable_ratings %}
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/ratings.js" ></script>
+    {% endif %}
     <script type="text/javascript">
     $(function() {
         $('#gallery a').lightBox({

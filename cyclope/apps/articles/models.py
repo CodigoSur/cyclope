@@ -59,3 +59,7 @@ cyclope.apps.abuse.register(Article)
 
 from cyclope.apps.custom_comments.moderator import CustomCommentModerator, moderator
 moderator.register(Article, CustomCommentModerator)
+
+from ratings.handlers import ratings
+from cyclope.core.ratings.forms import LikeDislikeVoteForm
+ratings.register(Article, form_class=LikeDislikeVoteForm)

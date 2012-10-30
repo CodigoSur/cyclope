@@ -38,12 +38,14 @@
     {% endif %}
 
     {% include "cyclope/source_block.html" with source=current_object.source %}
-  </div> 
+  </div>
 {% endif %}
 
 <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
 {% include 'cyclope/related_contents_block.html' %}
+
+{% include 'ratings/rating_block.html' %}
 
 {% block media_comments %}
     {% include 'comments/comments_block.html' %}

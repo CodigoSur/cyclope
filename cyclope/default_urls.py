@@ -91,6 +91,8 @@ urlpatterns = patterns('',
     url(r'^markitup/', include('markitup.urls')),
     # custom-forms (django-forms-builder)
     url(r'^forms/', include("forms_builder.forms.urls")),
+    # django-generic-ratings
+    (r'^ratings/', include('ratings.urls')),
 )
 
 if django_settings.DEBUG:

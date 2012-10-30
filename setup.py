@@ -94,6 +94,7 @@ setup(
         'django-threadedcomments==0.9',
         'django-crispy-forms>=1.2,<1.3',
         'django-compressor>=1.2,<1.3',
+        'django-generic-ratings>=0.6,<0.7',
     ],
 
     scripts=['cyclope/bin/cyclopeproject','cyclope/bin/cyclopedemo'],
