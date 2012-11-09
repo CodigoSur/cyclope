@@ -9,10 +9,11 @@
         <div class="summary">{% trans "Please enter your credentials"%}</div>
     </div>
 
-    <form action="" method="post" class="uniForm login">{% csrf_token %}
+    <form action="." method="post" class="uniForm login">{% csrf_token %}
       {{form|crispy}}
       <div class="buttonHolder">
-        <input type="submit" value="{% trans "login"|capfirst %}" >
+        <input type="submit" value="{% trans "login"|capfirst %}" />
+
         <span class="register">{% blocktrans %}
         If you have not yet created an account you need to
         <a href="/accounts/register?next={{next}}">register</a>
