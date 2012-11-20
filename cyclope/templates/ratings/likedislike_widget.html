@@ -3,15 +3,20 @@
 {% block parent %}{% if not read_only %}{{ parent }}{% endif %}{% endblock %}
 
 {% block widget %}
+
     <div class="likedislike {% if value %}voted{% endif %}" id="{{ widget_id }}">
-        <div class="vote-results">
-          <div class="vote-results-pos">{{score.num_positives}}</div> /
-          <div class="vote-results-neg">{{score.num_negatives}}</div>
-        </div>
         <div>
-          <div class="vote-btn vote-like">+1</div> <div class="vote-btn vote-dislike">-1</div>
+          <div class="vote-btn vote-like">
+              <img class="teaser_audiodata_img" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/like.png" border="0"/>
+          </div>
+          <div class="vote-results-pos">{{score.num_positives}}</div>
+          <div class="vote-btn vote-dislike">
+            <img class="teaser_audiodata_img" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/dislike.png" border="0"/>
+          </div>
+            <div class="vote-results-neg">{{score.num_negatives}}</div>
         </div>
     </div>
+
 {% endblock %}
 
 {% block javascript %}
@@ -20,6 +25,23 @@
             $(document).ready(function() {
                 var object = $('#{{ widget_id }}');
                 var vote_form = object.closest('form');
+                $('#{{ widget_id }}.voted').each( function(index, el){
+                    var score = $(el).closest('form').children("input[name=score]").val();
+                    if (score == "1.0")
+                    {
+                        $(el).find(".vote-like").addClass("voted");
+                    }
+                    if (score == "-1.0")
+                    {
+                        $(el).find(".vote-dislike").addClass("voted");
+                    }
+
+                });
+
+                var mark_voted = function (){
+                    $('#{{ widget_id }}.voted .vote-btn').not(".voted").fadeTo(0, 0.3);
+                };
+                mark_voted();
 
                 $("#{{ widget_id }} .vote-btn").click(function(){
                     // not authenticated
@@ -43,6 +65,8 @@
                     $("#{{ widget_id }}").addClass("voted");
                     $(this).addClass("voted");
                     $("#{{ widget_id }} ." + results).html(parseInt($("#{{ widget_id }} ." + results).html()) + 1);
+
+                    mark_voted();
                 });
 
                 vote_form.bind('vote_submit', function(event, data) {
