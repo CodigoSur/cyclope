@@ -3,20 +3,18 @@
 {% block parent %}{% if not read_only %}{{ parent }}{% endif %}{% endblock %}
 
 {% block widget %}
-
     <div class="likedislike {% if value %}voted{% endif %}" id="{{ widget_id }}">
         <div>
           <div class="vote-btn vote-like">
-              <img class="teaser_audiodata_img" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/like.png" border="0"/>
+              <img class="teaser_audiodata_img" src="{{ cyc_settings.CYCLOPE_THEME_MEDIA_URL }}images/css/like.png" border="0"/>
           </div>
           <div class="vote-results-pos">{{score.num_positives}}</div>
           <div class="vote-btn vote-dislike">
-            <img class="teaser_audiodata_img" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/dislike.png" border="0"/>
+            <img class="teaser_audiodata_img" src="{{ cyc_settings.CYCLOPE_THEME_MEDIA_URL }}images/css/dislike.png" border="0"/>
           </div>
             <div class="vote-results-neg">{{score.num_negatives}}</div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block javascript %}

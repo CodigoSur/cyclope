@@ -5,6 +5,8 @@ from ratings.forms import VoteForm
 from ratings.forms.widgets import BaseWidget
 from ratings import handlers
 
+from cyclope import settings as cyc_settings
+
 class LikeDislikeWidget(BaseWidget):
 
     def __init__(self, min_value, max_value, step, instance=None,
@@ -40,6 +42,7 @@ class LikeDislikeWidget(BaseWidget):
             'value': value,
             'widget_id': self.get_widget_id('likedislike', name, self.key),
             'score': self._get_score_annotated(),
+            'cyc_settings': cyc_settings,
         }
 
     def render(self, name, value, attrs=None):
