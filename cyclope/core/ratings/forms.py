@@ -5,8 +5,6 @@ from ratings.forms import VoteForm
 from ratings.forms.widgets import BaseWidget
 from ratings import handlers
 
-from cyclope import settings as cyc_settings
-
 class LikeDislikeWidget(BaseWidget):
 
     def __init__(self, min_value, max_value, step, instance=None,
@@ -33,6 +31,7 @@ class LikeDislikeWidget(BaseWidget):
         return score
 
     def get_context(self, name, value, attrs=None):
+        from cyclope import settings as cyc_settings
         attrs['type'] = 'hidden'
         return {
             'can_delete_vote': self.can_delete_vote,
