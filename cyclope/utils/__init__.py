@@ -254,11 +254,20 @@ def get_singleton(model_class):
     Returns the instance with id=1 of the Model Class
     """
     try:
-        return model_class.objects.get(id=1)
+        if not hasattr(model_class, "_instance"):
+            model_class._instance = model_class.objects.get(id=1)
+        return model_class._instance
     except model_class.DoesNotExist, e:
         e.args = (e.args[0] +" At least one instance of this class must exists.", )
         raise e
 
+def get_or_set_cache(func, args, kwargs, key, timeout=None):
+    from django.core.cache import cache
+    out = cache.get(key)
+    if out is None:
+        out = func(*args, **kwargs)
+        cache.set(key, out, timeout)
+    return out
 
 class PermanentFilterMixin(object):
     """
