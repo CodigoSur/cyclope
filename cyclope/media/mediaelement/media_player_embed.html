@@ -1,28 +1,26 @@
 <!DOCTYPE html>
-<html lang="es" dir="ltr" >
-
-<script>
-function getUrlVars() {
+<html>
+<head>
+<script type="text/javascript">
+  function getUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
         vars[key] = value;
     });
     return vars;
-}
-var media_url = getUrlVars()["media_url"];
-var file_type = getUrlVars()["file_type"];
-
+  }
+  var media_url = getUrlVars()["media_url"];
+  var file_type = getUrlVars()["file_type"];
 </script> 
 
-<script src="http://localhost:8080/media/cyclope/js/jquery.min.js"></script> 
-<script src="http://localhost:8080/media/player/mediaelement-and-player.min.js"></script>
-<link rel="stylesheet" href="http://localhost:8080/media/player/mediaelementplayer.min.css" />
-<link  href="http://localhost:8080/media/player/mejs-skins.css" rel="Stylesheet" />
+<script src="/media/cyclope/js/jquery.min.js"></script> 
+<script src="/media/player/mediaelement-and-player.min.js"></script>
+<link  href="/media/player/mediaelementplayer.min.css" rel="stylesheet" />
+<link  href="/media/player/mejs-skins.css" rel="stylesheet" />
 
-<script>
-
-$(document).ready(function() {
-		$('audio').mediaelementplayer({
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('audio').mediaelementplayer({
     // if the <video width> is not specified, this is the default
     defaultVideoWidth: 480,
     // if the <video height> is not specified, this is the default
@@ -63,23 +61,16 @@ $(document).ready(function() {
     pauseOtherPlayers: true,
     // array of keyboard commands
     keyActions: []
- 
     });
-
-});
+  });
 </script>
 
 </head>
-
-
 <body>
-
 
 <script type="text/javascript">
 document.write('<audio controls="control" preload="none" src="'+ media_url + '" type="audio/'+ file_type + '"></audio>');
 </script>
-
-
 
 </body>
 </html>
