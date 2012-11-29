@@ -2,7 +2,6 @@
 <form action="{% comment_form_target %}" class="uniForm" method="post">{% csrf_token %}
   {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
   {% if user.is_authenticated %}
-    {{ form.user_is_authenticated }}
     <input id="id_captcha_" name="captcha_" type="hidden">
   {% endif %}
   {{ form|crispy }}
