@@ -32,7 +32,6 @@ from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-
 import cyclope
 
 def menu_item_for_request(request):
@@ -249,12 +248,21 @@ def get_page(paginator, request):
 
     return page
 
+
+
+
+def _invalidate_cache(sender, **kwargs):
+    sender._instance = None
+
 def get_singleton(model_class):
     """
     Returns the instance with id=1 of the Model Class
     """
+    from django.db.models.signals import post_save
     try:
         if not hasattr(model_class, "_instance"):
+            post_save.connect(_invalidate_cache, sender=model_class)
+        if not getattr(model_class, "_instance", None):
             model_class._instance = model_class.objects.get(id=1)
         return model_class._instance
     except model_class.DoesNotExist, e:

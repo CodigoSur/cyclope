@@ -1033,3 +1033,16 @@ class CategorizationManagerTests(TestCase):
         cats = Categorization.objects.get_for_category(category, sort_property="creation_date", reverse=True)
         self.assertEqual(cats[0].content_object, Article.objects.latest("creation_date"))
 
+class GetSingletonTests(TestCase):
+    def test_get_singleton(self):
+        from cyclope.utils import get_singleton
+        site_settings = get_singleton(SiteSettings)
+        site_settings.allow_comments = "YES"
+        site_settings.save()
+        site_settings = get_singleton(SiteSettings)
+        self.assertEqual(site_settings.allow_comments, "YES")
+
+        site_settings.allow_comments = "NO"
+        site_settings.save()
+        site_settings = get_singleton(SiteSettings)
+        self.assertEqual(site_settings.allow_comments, "NO")
