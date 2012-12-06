@@ -24,7 +24,7 @@ core.collections.models
 -----------------------
 Django models for generic categorization of content objects
 """
-
+import random
 from operator import attrgetter
 from collections import defaultdict
 
@@ -181,20 +181,24 @@ class CategorizationManager(models.Manager):
             categories += list(category.get_descendants())
 
         # First fetch object_id's and content_types and build a dict with key on content_type
-        categorizations = Categorization.objects.filter(category__in=categories)
+        cats = Categorization.objects.filter(category__in=categories)
         ct_vals = defaultdict(list)
-        for cat_id, obj_id, ct_id in categorizations.values_list("pk", "object_id", "content_type_id"):
+        for cat_id, obj_id, ct_id in cats.values_list("pk", "object_id", "content_type_id"):
             ct_vals[ct_id].append(obj_id)
 
-        # Iterate over content_types fetching the sort_key of the content_object and saving in sort_attrs dict
-        sort_attrs = {}
-        for ct_id, object_ids in ct_vals.iteritems():
-            ct = ContentType.objects.get_for_id(ct_id)
-            for obj_id, val in ct.get_all_objects_for_this_type(pk__in=object_ids).values_list("pk", sort_property):
-                sort_attrs[(ct_id, obj_id)] = val
+        if sort_property == "random":
+            random.shuffle(cats)
+        else:
 
-        return sorted(categorizations, key=lambda c: sort_attrs[(c.content_type_id, c.object_id)],
-                       reverse=reverse)[slice(limit)]
+            # Iterate over content_types fetching the sort_key of the content_object and saving in sort_attrs dict
+            sort_attrs = {}
+            for ct_id, object_ids in ct_vals.iteritems():
+                ct = ContentType.objects.get_for_id(ct_id)
+                for obj_id, val in ct.get_all_objects_for_this_type(pk__in=object_ids).values_list("pk", sort_property):
+                    sort_attrs[(ct_id, obj_id)] = val
+            cats = sorted(cats, key=lambda c: sort_attrs[(c.content_type_id, c.object_id)],
+                          reverse=reverse)[slice(limit)]
+        return cats
 
 
 
