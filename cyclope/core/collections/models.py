@@ -189,7 +189,6 @@ class CategorizationManager(models.Manager):
         if sort_property == "random":
             random.shuffle(cats)
         else:
-
             # Iterate over content_types fetching the sort_key of the content_object and saving in sort_attrs dict
             sort_attrs = {}
             for ct_id, object_ids in ct_vals.iteritems():
@@ -197,8 +196,8 @@ class CategorizationManager(models.Manager):
                 for obj_id, val in ct.get_all_objects_for_this_type(pk__in=object_ids).values_list("pk", sort_property):
                     sort_attrs[(ct_id, obj_id)] = val
             cats = sorted(cats, key=lambda c: sort_attrs[(c.content_type_id, c.object_id)],
-                          reverse=reverse)[slice(limit)]
-        return cats
+                          reverse=reverse)
+        return cats[slice(limit)]
 
 
 
