@@ -180,7 +180,8 @@ class SlideshowOptions(forms.Form):
     sort_by = forms.ChoiceField(label=_('Sort by'),
                               choices=(("DATE-", _(u"Date ↓ (newest first)")),
                                        ("DATE+", _(u"Date ↑ (oldest first)")),
-                                       ("ALPHABETIC", _(u"Alphabetic"))),
+                                       ("ALPHABETIC", _(u"Alphabetic")),
+                                       ("RANDOM", _(u"Random"))),
                               initial="DATE-")
     traverse_children = forms.BooleanField(label=_("Include descendant's elements"),
                                                     initial=False, required=False)
