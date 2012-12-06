@@ -1033,6 +1033,11 @@ class CategorizationManagerTests(TestCase):
         cats = Categorization.objects.get_for_category(category, sort_property="creation_date", reverse=True)
         self.assertEqual(cats[0].content_object, Article.objects.latest("creation_date"))
 
+        cats_random = Categorization.objects.get_for_category(category, sort_property="random")
+        self.assertEqual(len(cats), len(cats_random))
+
+
+
 class GetSingletonTests(TestCase):
     def test_get_singleton(self):
         from cyclope.utils import get_singleton
