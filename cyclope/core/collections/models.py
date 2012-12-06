@@ -187,7 +187,8 @@ class CategorizationManager(models.Manager):
             ct_vals[ct_id].append(obj_id)
 
         if sort_property == "random":
-            random.shuffle(list(cats))
+            cats = list(cats)
+            random.shuffle(cats)
         else:
             # Iterate over content_types fetching the sort_key of the content_object and saving in sort_attrs dict
             sort_attrs = {}
