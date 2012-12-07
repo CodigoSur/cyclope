@@ -5,15 +5,6 @@
    <div>
     <script type="text/javascript">
 
-        function show_reply_form(event) {
-            var $this = $(this);
-            var comment_id = $this.data('comment-id');
-
-            $('#id_parent').val(comment_id);
-            $('#form-comment').insertAfter($this.closest('.comment'));
-            $('#form-comment').show();
-        };
-
         function cancel_reply_form(event) {
             $('#id_comment').val('');
             $('#id_parent').val('');
@@ -22,12 +13,13 @@
         }
 
         jQuery(document).ready(function(){
-            $('.comment_reply_link').click(show_reply_form);
             $('#cancel_reply').click(cancel_reply_form);
             $('#form-comment').hide();
 
             $('#show_comment_form').click(function() {
                 cancel_reply_form();
+                var captcha_img = $('#form-comment img');
+                captcha_img.attr("src", captcha_img.attr("src_"))
                 $('#form-comment').toggle();
             });
         });
