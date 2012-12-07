@@ -28,6 +28,10 @@ from models import CustomComment
 
 
 class CustomCaptchaTextInput(CaptchaTextInput):
+    """
+    This is the same as CaptchaTextInput but with 'deferred' image loading via
+    javascript. The image html tag has a 'src_' attr instead of 'src'.
+    """
     def render(self, name, value, attrs=None):
         ret = super(CustomCaptchaTextInput, self).render(name, value, attrs=None)
         return ret.replace("src=", "src_=")
