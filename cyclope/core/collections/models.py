@@ -192,10 +192,16 @@ class CategorizationManager(models.Manager):
         else:
             # Iterate over content_types fetching the sort_key of the content_object and saving in sort_attrs dict
             sort_attrs = {}
+            def chunks(l, n):
+                """ Yield successive n-sized chunks from l.
+                """
+                for i in xrange(0, len(l), n):
+                    yield l[i:i+n]
             for ct_id, object_ids in ct_vals.iteritems():
                 ct = ContentType.objects.get_for_id(ct_id)
-                for obj_id, val in ct.get_all_objects_for_this_type(pk__in=object_ids).values_list("pk", sort_property):
-                    sort_attrs[(ct_id, obj_id)] = val
+                for object_ids in chunks(object_ids, 450):
+                    for obj_id, val in ct.get_all_objects_for_this_type(pk__in=object_ids).values_list("pk", sort_property):
+                        sort_attrs[(ct_id, obj_id)] = val
             cats = sorted(cats, key=lambda c: sort_attrs[(c.content_type_id, c.object_id)],
                           reverse=reverse)
         return cats[slice(limit)]
