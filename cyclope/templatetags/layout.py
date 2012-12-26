@@ -68,23 +68,13 @@ def region(context, region_name):
             if regionview.content_object is None:
                 raise template.TemplateSyntaxError
             slug = regionview.content_object.slug
-            cache_key = "%s:%s:%s" % (view.name, region_name, slug)
-            view_vars['output'] = get_or_set_cache(view,
-                                                   (context['request'],),
-                                                   {"region_name": region_name,
-                                                    "content_object":regionview.content_object,
-                                                    "view_options":regionview.view_options},
-                                                    cache_key)
-
+            view_vars['output'] = view(context['request'], region_name=region_name,
+                                       content_object=regionview.content_object,
+                                       view_options=regionview.view_options)
             view_vars['slug'] = slug
         else:
-            cache_key = "%s:%s" % (view.name, region_name)
-            view_vars['output'] = get_or_set_cache(view,
-                                                   (context['request'],),
-                                                   {"region_name": region_name,
-                                                    "view_options":regionview.view_options},
-                                                   cache_key)
-
+            view_vars['output'] = view(context['request'], region_name=region_name,
+                                       view_options=regionview.view_options)
         view_vars['name'] = regionview.content_view
         view_vars['model'] = regionview.content_type.model
         views.append(view_vars)
