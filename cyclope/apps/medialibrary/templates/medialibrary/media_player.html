@@ -1,5 +1,4 @@
 {% load i18n %}
-
 {% block extra_head %}
 <script type='text/javascript' src='{{ CYCLOPE_STATIC_URL }}jwplayer/swfobject.js'></script>
 <script type='text/javascript'>
@@ -32,6 +31,5 @@ var loadMedia = function(){
 var media_loaded = media_loaded || loadMedia();
 </script>
 {% endblock %}
-
-  <div class='video_player' vheight="{{ player_height }}" vmedia="{{ media_file }}">Player</div>
-  <div class="download_link"><a href="{{ media_file }}">{% trans "download file" %}</a></div>
+<br>
+  <div class='video_player' vheight="{{ player_height }}" vmedia="{{ current_object.media_file }}">Player</div>

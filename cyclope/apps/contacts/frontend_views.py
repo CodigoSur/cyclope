@@ -41,9 +41,7 @@ class ContactDetail(frontend.FrontendView):
     is_content_view = True
 
     def get_response(self, request, req_context, options, content_object):
-        context = {'content_relations': content_object.related_contents.all()}
-        return views.object_detail(request, req_context, content_object,
-                                   extra_context=context)
+        return views.object_detail(request, req_context, content_object)
 
 frontend.site.register_view(Contact, ContactDetail)
 

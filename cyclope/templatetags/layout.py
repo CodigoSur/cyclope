@@ -28,7 +28,7 @@ of different Layouts.
 """
 
 from django import template
-from cyclope.utils import layout_for_request
+from cyclope.utils import layout_for_request, get_or_set_cache
 from cyclope.core import frontend
 
 register = template.Library()
@@ -56,6 +56,7 @@ def region(context, region_name):
         region=region_name).order_by('weight')
     views = []
 
+
     for regionview in regionviews:
         view_vars={}
         view = frontend.site.get_view(
@@ -74,7 +75,6 @@ def region(context, region_name):
         else:
             view_vars['output'] = view(context['request'], region_name=region_name,
                                        view_options=regionview.view_options)
-
         view_vars['name'] = regionview.content_view
         view_vars['model'] = regionview.content_type.model
         views.append(view_vars)

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
+import haystack
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 frontend.autodiscover()

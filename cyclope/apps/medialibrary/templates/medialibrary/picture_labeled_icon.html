@@ -1,9 +1,1 @@
-{% load fb_versions cyclope_utils %}
-
-  <div class="content-view media labeled_icon picture">
-    <a href="{% url picture-detail picture.slug %}">
-      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/image.png"/>
-      <img class="icon" src="{% version picture.image.path 'thumbnail' %}" />
-    </a>
-    <h2 class="title"><a href="{% url picture-detail picture.slug %}">{{ picture.name|truncatechars:40 }}</a></h2>
-  </div>
+{% extends "medialibrary/medialibrary_base_labeled_icon.html" %}

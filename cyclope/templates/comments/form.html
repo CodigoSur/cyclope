@@ -1,36 +1,11 @@
-{% load comments i18n %}
-<form action="{% comment_form_target %}" method="post">{% csrf_token %}
+{% load comments i18n crispy_forms_tags %}
+<form action="{% comment_form_target %}" class="uniForm" method="post">{% csrf_token %}
   {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
-    {% if form.errors %}
-    <h6>{% blocktrans count form.errors|length as counter %}Please correct the error below{% plural %}Please correct the errors below{% endblocktrans %}</h6>
-    {% endif %}
-  {% for field in form %}
-    {% if field.is_hidden %}
-      {{ field }}
-    {% else %}
-      {% if field.errors %}<span>{{ field.errors }}</span>{% endif %}
-      {% if field.name == "honeypot" %}
-        <div  style="display:none;">
-          {{ field.label_tag }} {{ field }}
-        </div>
-      {% elif field.name == "captcha" %}
-        {% if not user.is_authenticated %}
-            {{ field.label_tag }}
-            <small>
-              {% trans "For security reasons you need to type the text displayed in the following image" %}
-            </small>
-            {{ field }}
-         {% endif %}
-      {% else %}
-          {{ field.label_tag }}
-          {{ field }}
-          <span class="helptext">{{ field.help_text }}</span>
-       {% endif %}
-    {% endif %}
-  {% endfor %}
   {% if user.is_authenticated %}
     <input id="id_captcha_" name="captcha_" type="hidden">
   {% endif %}
+  {{ form|crispy }}
+
   <div class="submit action-content submit-comment">
     <input type="submit" name="post" class="submit" value="{% trans "Post your comment" %}" />
     <a href="#c0" id="cancel_reply">{% trans "Cancel reply" %}</a>

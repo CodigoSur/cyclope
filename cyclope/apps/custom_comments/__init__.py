@@ -22,7 +22,6 @@
 from forms import CustomCommentForm
 from models import CustomComment
 
-
 def get_model():
     return CustomComment
 

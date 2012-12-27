@@ -1,0 +1,8 @@
+{% extends CYCLOPE_DEFAULT_TEMPLATE %}
+{% load %}
+
+{% block content%}
+
+{% include "profiles/profile_content.html" with current_object=profile %}
+
+{% endblock %}

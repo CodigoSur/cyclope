@@ -17,6 +17,10 @@ class AbuseType(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name = _('abuse types')
+        verbose_name_plural = _('abuses types')
+
 class AbuseReportElement(models.Model):
     content_type = models.ForeignKey(ContentType, verbose_name=_('content type'))
     object_id = models.PositiveIntegerField(_('object'))
@@ -47,9 +51,9 @@ class AbuseReportElement(models.Model):
             mail_managers(subject, message, fail_silently=True)
 
     class Meta:
+        verbose_name = _('abuse report elements')
+        verbose_name_plural = _('abuses reports elements')
         unique_together = ("user", "content_type", "object_id")
-
-
 
 class AbuseReport(models.Model):
     content_type = models.ForeignKey(ContentType, verbose_name=_('content type'))
@@ -104,4 +108,8 @@ class AbuseReport(models.Model):
         super(AbuseReport, self).save(*args, **kwargs)
 
     link.allow_tags = True
+
+    class Meta:
+        verbose_name = _('abuse report')
+        verbose_name_plural = _('abuses reports')
 

@@ -1,6 +1,6 @@
-/** 
+/**
  * theming styles
- * 
+ *
  */
 body {}
 body.frontend_admin {margin: 20px 65px;}
@@ -660,7 +660,7 @@ background: url("../images/admin-contacts-contact.png") no-repeat scroll 0 2px t
 background: url("../images/admin-cyclope-menuitem.png") no-repeat scroll 0 2px transparent;
 }
 
-.dashboard-module-content > ul > li > a[href="/admin/sites/site/"] {
+.dbmodule-content_sites a {
 background: url("../images/admin-sites-site.png") no-repeat scroll 0 2px transparent;
 }
 

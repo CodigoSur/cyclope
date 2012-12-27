@@ -24,7 +24,6 @@ a new app is installed.
 """
 
 import os
-import imp
 ugettext = lambda s: s
 
 #workaround for PIL when importing Image using different methods.
@@ -61,6 +60,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
     "cyclope.core.context_processors.site_settings",
+    "cyclope.core.context_processors.compressor",
 )
 
 
@@ -81,13 +81,12 @@ INSTALLED_APPS = [
     'dbgettext',
     'rosetta',
     'haystack',
-    'tagging',
-    'tagging_autocomplete',
-
 
     'cyclope',
     'cyclope.core.collections',
+    'cyclope.core.series',
     'cyclope.core.perms',
+    'cyclope.core.user_profiles',
     'cyclope.apps.articles',
     'cyclope.apps.staticpages',
     'cyclope.apps.medialibrary',
@@ -121,7 +120,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
 
     'autoslug',
-    'feincms',
+    'mptt_tree_editor',
     'mptt',
     'captcha',
     'filebrowser',
@@ -131,6 +130,9 @@ INSTALLED_APPS = [
     'contact_form',
     'markitup',
     'forms_builder.forms',
+    'crispy_forms',
+    'compressor',
+    'ratings',
 
 #    'debug_toolbar',
 #    'django_extensions',
@@ -141,6 +143,9 @@ AUTHENTICATION_BACKENDS = (
     'cyclope.core.perms.backends.CategoryPermBackend',
 )
 
+# ADMIN_MEDIA_PREFIX is deprecated but it's here
+# only for compatibility with admin tools 0.4.1
+ADMIN_MEDIA_PREFIX = "/media/admin/"
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
@@ -150,16 +155,12 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 # comments settings
 COMMENTS_APP = 'cyclope.apps.custom_comments'
 
+EMAIL_SUBJECT_PREFIX = '[Cyclope] '
+
 # captcha settings
 CAPTCHA_NOISE_FUNCTIONS=('captcha.helpers.noise_arcs',)
 CAPTCHA_FONT_SIZE=30
 CAPTCHA_LETTER_ROTATION=(-15,15)
-
-# feincms settings
-FEINCMS_ADMIN_MEDIA = '/media/feincms/'
-# TreeEditor throws an exception in the admin for Category (as of 2010-02-19)
-# if this is set to True
-FEINCMS_TREE_EDITOR_INCLUDE_ANCESTORS = False
 
 # filebrowser settings
 FILEBROWSER_DEBUG = False
@@ -167,10 +168,10 @@ FILEBROWSER_DIRECTORY = 'uploads/'
 FILEBROWSER_EXTENSIONS = {
     'Folder': [''],
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
-    'Video': ['.ogv', '.ogg', '.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.flv',],
+    'Video': ['.ogv', '.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.flv',],
     'Document': ['.odt', 'docx', '.pdf','.doc','.rtf','.txt',
                  '.ods', '.xls', '.xlsx', '.csv', '.ppt', '.pptx'],
-    'Audio': ['.ogg', '.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
+    'Audio': ['.ogg', '.oga', '.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
     'Code': ['.html','.py','.js','.css'],
     'Flash_App': ['.swf',],
     'Flash_Movie': ['.flv',],
@@ -216,10 +217,7 @@ FILEBROWSER_MAX_UPLOAD_SIZE = 1024*1024*20 # 20MB
 ACCOUNT_ACTIVATION_DAYS = 7
 
 # profile settings
-AUTH_PROFILE_MODULE = "cyclope.userprofile"
-
-# tagging settings
-FORCE_LOWERCASE_TAGS = True
+AUTH_PROFILE_MODULE = "user_profiles.UserProfile"
 
 # admin-tools settings
 ADMIN_TOOLS_INDEX_DASHBOARD = 'cyclope.dashboard.CustomIndexDashboard'
@@ -246,7 +244,7 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
     'tagging',
     'tagging_autocomplete',
     'autoslug',
-    'feincms',
+    'mptt_tree_editor',
     'mptt',
     'captcha',
     'filebrowser',
@@ -263,3 +261,20 @@ JQUERY_URL = "cyclope/js/reuse_django_jquery.js" # We dont want jquery to be inc
 MARKITUP_SET = 'cyclope/markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
 
+# crispy forms settings
+CRISPY_TEMPLATE_PACK = 'uni_form'
+
+
+# compressor settings
+
+COMPRESS_ENABLED = False
+
+COMPRESS_PARSER = "compressor.parser.HtmlParser"
+
+# PRECOMPILERS are emptied on cyclope.core.compressor context processor if
+# COMPRESS_ENABLED is False or COMPRESS_DEBUG_TOGGLE is set
+COMPRESS_PRECOMPILERS = (
+    ('text/less', '/usr/bin/lesscpy  {infile}'),
+)
+
+COMPRESS_DEBUG_TOGGLE = 'nocompress'

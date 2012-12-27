@@ -6,11 +6,11 @@
   <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="100%" height="100%" id="curso-el-video" align="middle">
     <param name="allowScriptAccess" value="sameDomain" />
     <param name="allowFullScreen" value="true" />
-    <param name="movie" value="{{ media.flash}}" />
+    <param name="movie" value="{{ current_object.flash}}" />
     <param name="quality" value="high" />
     <param name="base" value="{{ url_base }}" />
-    <embed src="{{ media.flash}}" quality="high" width="100%" height="100%" name="curso-el-video" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer_es" base="{{ url_base }}"/>
+    <embed src="{{ current_object.flash}}" quality="high" width="100%" height="100%" name="curso-el-video" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer_es" base="{{ url_base }}"/>
   </object>
 </div>
-<div class="action-content download_link"><a target="_blank" href="{{ media.flash }}">{% trans "full screen view (new window)"%}</a></div>
+<div class="action-content download_link"><a target="_blank" href="{{ current_object.flash }}">{% trans "full screen view (new window)" %}</a></div>
 {% endblock content %}

@@ -1,0 +1,20 @@
+{% load cyclope_utils  %}
+  {% if page %}
+    {% if view_options.sort_by == "ALPHABETIC" %}
+      {% include 'cyclope/alphabetical_pagination_block.html' %}
+    {% else %}
+      {% include 'cyclope/pagination_block.html' %}
+    {% endif %}
+
+    <div class='authored-content'>
+    {% for content in page.object_list %}
+       {% comment %}
+       The alias to the model name and 'media' are deprecated and remains only for backwards compatibility
+       {% endcomment %}
+       {% alias content as content.get_object_name %}
+       {% alias content as 'media' %}
+      {% assign template_path content|inline_template:inline_view_name %}
+      {% include template_path with current_object=content host_template="cyclope/inline_view.html"%}
+    {% endfor %}
+    </div>
+  {% endif %}

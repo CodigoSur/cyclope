@@ -1,0 +1,76 @@
+{% load cyclope_utils i18n %}
+
+{% block parent %}{% if not read_only %}{{ parent }}{% endif %}{% endblock %}
+
+{% block widget %}
+    <div class="likedislike {% if value %}voted{% endif %}" id="{{ widget_id }}">
+        <div>
+          <div class="vote-btn vote-like">
+              <img class="teaser_audiodata_img" src="{{ cyc_settings.CYCLOPE_THEME_MEDIA_URL }}images/css/like.png" border="0"/>
+          </div>
+          <div class="vote-results-pos">{{score.num_positives}}</div>
+          <div class="vote-btn vote-dislike">
+            <img class="teaser_audiodata_img" src="{{ cyc_settings.CYCLOPE_THEME_MEDIA_URL }}images/css/dislike.png" border="0"/>
+          </div>
+            <div class="vote-results-neg">{{score.num_negatives}}</div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" charset="utf-8">
+        (function($) {
+            $(document).ready(function() {
+                var object = $('#{{ widget_id }}');
+                var vote_form = object.closest('form');
+                $('#{{ widget_id }}.voted').each( function(index, el){
+                    var score = $(el).closest('form').children("input[name=score]").val();
+                    if (score == "1.0")
+                    {
+                        $(el).find(".vote-like").addClass("voted");
+                    }
+                    if (score == "-1.0")
+                    {
+                        $(el).find(".vote-dislike").addClass("voted");
+                    }
+
+                });
+
+                var mark_voted = function (){
+                    $('#{{ widget_id }}.voted .vote-btn').not(".voted").fadeTo(0, 0.3);
+                };
+                mark_voted();
+
+                $("#{{ widget_id }} .vote-btn").click(function(){
+                    // not authenticated
+                    if($(".user-is-not-authenticated").length){
+                        $("#{{ widget_id }}").html($(".user-is-not-authenticated").html());
+                        return;
+                    }
+                    // already voted
+                    if ($("#{{ widget_id }}").hasClass("voted"))
+                        return;
+
+                    var val = 1;
+                    var results = "vote-results-pos";
+                    if ($(this).hasClass("vote-dislike")){
+                        val = -1;
+                        results = "vote-results-neg"
+                    }
+                    vote_form.find('#{{ parent_id }}').val(val);
+                    vote_form.trigger("star_change");
+
+                    $("#{{ widget_id }}").addClass("voted");
+                    $(this).addClass("voted");
+                    $("#{{ widget_id }} ." + results).html(parseInt($("#{{ widget_id }} ." + results).html()) + 1);
+
+                    mark_voted();
+                });
+
+                vote_form.bind('vote_submit', function(event, data) {
+                });
+            });
+        })(jQuery);
+    </script>
+
+{% endblock %}

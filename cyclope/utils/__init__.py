@@ -29,13 +29,16 @@ Helper methods and classes.
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import InvalidPage, EmptyPage
 from django.db.models import Q
-from django.utils.translation import ugettext as _
-
+from django.utils.translation import ugettext_lazy as _
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 import cyclope
 
 def menu_item_for_request(request):
     # Avoids a circular import
     from cyclope.models import MenuItem
+    if getattr(request, "_menu_item", False) is not False:
+        return request._menu_item
     req_url = request.path
     url = req_url[len(cyclope.settings.CYCLOPE_PREFIX)+1:]
     if url == '':
@@ -50,6 +53,7 @@ def menu_item_for_request(request):
             menu_item = MenuItem.objects.select_related().get(Q(url=url)|Q(url=req_url))
         except:
             menu_item = None
+    request._menu_item = menu_item
     return menu_item
 
 def layout_for_request(request):
@@ -244,16 +248,34 @@ def get_page(paginator, request):
 
     return page
 
+
+
+
+def _invalidate_cache(sender, **kwargs):
+    sender._instance = None
+
 def get_singleton(model_class):
     """
     Returns the instance with id=1 of the Model Class
     """
+    from django.db.models.signals import post_save
     try:
-        return model_class.objects.get(id=1)
+        if not hasattr(model_class, "_instance"):
+            post_save.connect(_invalidate_cache, sender=model_class)
+        if not getattr(model_class, "_instance", None):
+            model_class._instance = model_class.objects.get(id=1)
+        return model_class._instance
     except model_class.DoesNotExist, e:
         e.args = (e.args[0] +" At least one instance of this class must exists.", )
         raise e
 
+def get_or_set_cache(func, args, kwargs, key, timeout=None):
+    from django.core.cache import cache
+    out = cache.get(key)
+    if out is None:
+        out = func(*args, **kwargs)
+        cache.set(key, out, timeout)
+    return out
 
 class PermanentFilterMixin(object):
     """
@@ -298,3 +320,7 @@ class ThumbnailMixin(object):
     thumbnail.short_description = _('Thumbnail Image')
     thumbnail.allow_tags = True
 
+
+class CrispyFormsSimpleMixin(object):
+    helper = FormHelper()
+    helper.add_input(Submit('submit', _('Submit')))

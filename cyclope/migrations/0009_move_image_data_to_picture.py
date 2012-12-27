@@ -65,7 +65,7 @@ class Migration(DataMigration):
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Source']", 'null': 'True', 'blank': 'True'}),
             'summary': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {}),
+
             'text': ('django.db.models.fields.TextField', [], {})
         },
         'articles.articleimagedata': {
@@ -258,7 +258,7 @@ class Migration(DataMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+
         },
         'medialibrary.externalcontent': {
             'Meta': {'object_name': 'ExternalContent'},
@@ -272,7 +272,7 @@ class Migration(DataMigration):
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
             'skip_detail': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+
         },
         'medialibrary.flashmovie': {
             'Meta': {'object_name': 'FlashMovie'},
@@ -284,7 +284,7 @@ class Migration(DataMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+
         },
         'medialibrary.movieclip': {
             'Meta': {'object_name': 'MovieClip'},
@@ -295,7 +295,7 @@ class Migration(DataMigration):
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
             'still': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100', 'blank': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {}),
+
             'video': ('filebrowser.fields.FileBrowseField', [], {'max_length': '100'})
         },
         'medialibrary.picture': {
@@ -307,7 +307,7 @@ class Migration(DataMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+
         },
         'medialibrary.regularfile': {
             'Meta': {'object_name': 'RegularFile'},
@@ -319,7 +319,7 @@ class Migration(DataMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+
         },
         'medialibrary.soundtrack': {
             'Meta': {'object_name': 'SoundTrack'},
@@ -330,7 +330,7 @@ class Migration(DataMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {})
+
         },
         'sites.site': {
             'Meta': {'object_name': 'Site', 'db_table': "'django_site'"},

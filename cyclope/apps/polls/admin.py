@@ -50,7 +50,6 @@ class QuestionInline(admin.StackedInline):
 
 class PollAdmin(admin.ModelAdmin):
     inlines = [QuestionInline]
-    exclude = ('tags',)
 
     class Media:
         # This js is needed because drag&drop will be used

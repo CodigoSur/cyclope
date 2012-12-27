@@ -1,0 +1,37 @@
+{% extends host_template %}
+
+{% load comments i18n cyclope_utils dbgettext_tags %}
+
+{% block content %}
+
+<div class="content-view {{ current_object.get_object_name }} detail {{ current_object.get_object_name }}-detail">
+
+  <h1 class="title">{{ current_object.name }}</h1>
+
+  <!-- tools -->
+  {% include 'cyclope/content_tools_block.html' %}
+
+
+  <!-- author -->
+  {% include "cyclope/author_block.html" %}
+
+  <!-- categories navigation -->
+  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+
+  {% block basecontent_content %}
+  {% endblock basecontent_content %}
+
+  {% if current_object.get_last_change_date %}
+    <h6 class="date">
+    {% trans "Last modification date" %}: {{ current_object.get_last_change_date }}
+    </h6>
+  {% endif %}
+
+  <!-- related contents -->
+  {% include 'cyclope/related_contents_block.html' %}
+
+  <!-- comments -->
+  {% include 'comments/comments_block.html' %}
+
+</div>
+{% endblock content%}

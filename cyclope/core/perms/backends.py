@@ -36,13 +36,14 @@ from models import CategoryPermission
 class CategoryPermBackend(object):
     supports_object_permissions = True
     supports_anonymous_user = False
+    supports_inactive_user = False
 
     def authenticate(self, username, password):
         return None
 
     def _get_all_permissions(self, user_obj, obj=None):
         """Returns a queryset of all CategoryPermissions a user has over a Category or Collectible"""
-        if obj is None or not user_obj.is_authenticated():
+        if obj is None or not user_obj.is_authenticated() or not user_obj.is_active:
             return CategoryPermission.objects.none()
         if issubclass(obj.__class__, Collectible):
             categorizations = Categorization.objects.get_for_object(obj)

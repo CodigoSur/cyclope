@@ -34,7 +34,6 @@ class MediaDetail(frontend.FrontendView):
     params = {'template_object_name': 'media'}
 
     def get_response(self, request, req_context, options, content_object):
-        req_context.update({'content_relations': content_object.related_contents.all()})
         return views.object_detail(request, req_context, content_object, **self.params)
 
 class PictureDetail(MediaDetail):
@@ -94,8 +93,7 @@ class FlashMovieDetail(MediaDetail):
         p = content_object.flash.url_full
         i = p.rfind("/")+1
         base = p[:i]
-        req_context.update({'url_base': base,
-                            'content_relations': content_object.related_contents.all()})
+        req_context.update({'url_base': base})
         return views.object_detail(request, req_context, content_object,
                                    **self.params)
 

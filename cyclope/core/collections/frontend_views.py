@@ -67,7 +67,8 @@ class TeaserListOptions(forms.Form):
     sort_by = forms.ChoiceField(label=_('Sort by'),
                               choices=(("DATE-", _(u"Date ↓ (newest first)")),
                                        ("DATE+", _(u"Date ↑ (oldest first)")),
-                                       ("ALPHABETIC", _(u"Alphabetic"))),
+                                       ("ALPHABETIC", _(u"Alphabetic")),
+                                       ("RANDOM", _(u"Random"))),
                               initial="DATE-")
     simplified = forms.BooleanField(label=_("Simplified"), initial=False, required=False)
     traverse_children = forms.BooleanField(label=_("Include descendant's elements"),
@@ -103,7 +104,8 @@ frontend.site.register_view(Category, CategoryDefaultList)
 SORT_BY = {
     "DATE-": ('creation_date', True, Paginator),
     "DATE+": ('creation_date', False, Paginator),
-    "ALPHABETIC": ('name', None, NamePaginator)
+    "ALPHABETIC": ('name', None, NamePaginator),
+    "RANDOM": ('random', False, Paginator),
 }
 
 def _get_paginator_page(category, options, request):
@@ -178,7 +180,8 @@ class SlideshowOptions(forms.Form):
     sort_by = forms.ChoiceField(label=_('Sort by'),
                               choices=(("DATE-", _(u"Date ↓ (newest first)")),
                                        ("DATE+", _(u"Date ↑ (oldest first)")),
-                                       ("ALPHABETIC", _(u"Alphabetic"))),
+                                       ("ALPHABETIC", _(u"Alphabetic")),
+                                       ("RANDOM", _(u"Random"))),
                               initial="DATE-")
     traverse_children = forms.BooleanField(label=_("Include descendant's elements"),
                                                     initial=False, required=False)

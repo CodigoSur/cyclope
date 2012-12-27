@@ -1,0 +1,64 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Copyright 2010-2012 Código Sur Sociedad Civil
+# All rights reserved.
+#
+# This file is part of Cyclope.
+#
+# Cyclope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Cyclope is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import os
+import sys
+import tempfile
+from optparse import make_option
+
+import django
+from django.core.management.templates import TemplateCommand
+from django.core.management import call_command
+
+class Command(TemplateCommand):
+    help = ("Creates a Cyclope Demo project.")
+
+    option_list = TemplateCommand.option_list + (
+        make_option('--db-in-memory', action='store_true', dest='db_in_memory',
+            default=False, help='Create the database in memory (/tmp) to speed'
+                'up creation. WARNING: database will be erased on PC restart.'),
+    )
+
+    def handle(self, project_name="demo", target=None, *args, **options):
+
+        val = os.system("cyclopeproject -v0 " + (project_name or ""))
+        if val:
+            return
+
+        #os.chdir(project_name)
+        sys.path.insert(0, ".")
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", project_name +".settings")
+        if options["db_in_memory"]:
+            dbdir = os.path.join(project_name, "db")
+            os.rmdir(dbdir)
+            tmp_dir = tempfile.mkdtemp(project_name, "cycdemo")
+            os.symlink(tmp_dir, dbdir)
+        call_command("syncdb", migrate=True, interactive=False)
+        call_command("loaddata", "default_groups.json", "default_users.json",
+                     "cyclope_demo.json")
+
+if __name__ == "__main__":
+    cmnd = Command()
+    if len(sys.argv) == 1:
+        cmnd.print_help("startcyclopeproject", "")
+    else:
+        sys.argv.insert(0, "") # Hack run_from_argv
+        cmnd.run_from_argv(sys.argv)

@@ -33,7 +33,7 @@ from mptt.forms import TreeNodeChoiceField
 
 from cyclope.core.frontend import site
 from cyclope.models import MenuItem, RelatedContent, SiteSettings, Layout, \
-                            RegionView, UserProfile
+                            RegionView
 from cyclope.fields import MultipleField
 from cyclope.themes import get_all_themes, get_theme
 from cyclope.apps.related_admin import GenericFKWidget, GenericModelForm
@@ -302,21 +302,8 @@ class AuthorAdminForm(forms.ModelForm):
 
 from registration.forms import RegistrationFormUniqueEmail
 from captcha.fields import CaptchaField
+from cyclope.utils import CrispyFormsSimpleMixin
 
-class RegistrationFormWithCaptcha(RegistrationFormUniqueEmail):
+class RegistrationFormWithCaptcha(RegistrationFormUniqueEmail,
+                                    CrispyFormsSimpleMixin):
     captcha = CaptchaField(label=_("Security code"))
-
-
-class UserProfileForm(forms.ModelForm):
-
-    def clean_avatar(self):
-        from django.core.files.images import get_image_dimensions
-        avatar = self.cleaned_data['avatar']
-        w, h = get_image_dimensions(avatar)
-        if w > 300 or h > 300:
-            raise forms.ValidationError(_('Your avatar image is too big'))
-        return avatar
-
-    class Meta:
-        model = UserProfile
-        exclude = ('user',)

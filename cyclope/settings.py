@@ -48,15 +48,12 @@ Attributes:
 """
 
 import os
-import sys
 
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _, ugettext
-from django.db.models.signals import post_save, pre_delete
+from django.utils.translation import ugettext_lazy as ugettext
+from django.db.models.signals import post_save
 from django.core.exceptions import ImproperlyConfigured
 from django.db.utils import DatabaseError
-from django.db.models import get_model
-from django.contrib.contenttypes.models import ContentType
 
 from cyclope.models import SiteSettings
 
@@ -122,8 +119,6 @@ def get_site_settings():
         SiteSettings instance or None if no SiteSettings have been created.
 
     """
-    from django.core.exceptions import ObjectDoesNotExist
-    from django.db.utils import DatabaseError
     try:
         # a Cyclope project is supposed to have only one SiteSettings object
         site_settings = SiteSettings.objects.get()

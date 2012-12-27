@@ -19,16 +19,30 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import codecs
 from setuptools import setup, find_packages
 
+version = '0.2'
+
+
+def read(filename):
+    return unicode(codecs.open(filename, encoding='utf-8').read())
+
+
+long_description = '\n\n'.join([read('README.rst'),
+                                read('CONTRIBUTORS.rst'),
+                                read('CHANGELOG.rst')])
+
 setup(
-    name='django-cyclope',
-    version=__import__('cyclope').__version__,
+    name='cyclope3',
+    version=version,
     description="CMS for pythonistas who like to code instead of using a web UI for every task.",
-    long_description=__import__('cyclope').__doc__,
+    long_description=long_description,
     author='Nicolás Echániz & Santiago Hoerth',
     author_email='nicoechaniz@codigosur.org',
-    url='http://bitbucket.org/nicoechaniz/django-cyclope/',
+    maintainer='Santiago Piccinini',
+    maintainer_email='spiccinini@codigosur.org',
+    url='http://forja.codigosur.org/projects/cyclope/',
     license='GPL v3',
     platforms=['OS Independent'],
     classifiers=[
@@ -36,9 +50,11 @@ setup(
         "Environment :: Web Environment",
         "Framework :: Django",
         "Intended Audience :: Developers",
-        "License :: GPL v3",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
+        "Programming Language :: Python :: 2.6",
+        "Programming Language :: Python :: 2.7",
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
         "Topic :: Software Development",
         "Topic :: Software Development :: Libraries :: Application Frameworks",
@@ -47,8 +63,6 @@ setup(
     # revision number is indicated in the dependency_links for packages
     # that are downloaded from source to ensure a tested revision is used.
     dependency_links=[
-        'hg+http://bitbucket.org/drmeers/django-dbgettext#egg=django-dbgettext-0.1',
-        'git+http://github.com/nicoechaniz/django-filebrowser-no-grappelli-and-uploadify.git@0e8f0d05cbf87b1736cbefab0d9421099468864e#egg=django-filebrowser-3.0-nograpup',
         'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-0.4a1',
         'hg+http://bitbucket.org/nicoechaniz/django-rosetta_temp#egg=django-rosetta-0.6.2-temp',
         'hg+http://bitbucket.org/san/django-jsonfield#egg=django-jsonfield-0.6.0-cyclope',
@@ -57,14 +71,12 @@ setup(
 
     install_requires=[
         'Django>=1.4,<1.5',
-        'FeinCms==1.3.1',
         'django-autoslug==1.4.1',
         'django-mptt==0.4.2', # 0.4 breaks compatibility
+        'django-mptt-tree-editor>=0.1,<0.2',
         'PIL>=1.1.7', # in PIL we trust
         'django-simple-captcha==0.2.0',
-        'django-tagging==0.3.1',
-        'django-tagging-autocomplete==0.3.1',
-        'django-filebrowser==3.0-nograpup', # installed from our clone
+        'django-filebrowser-nograpup>=3.0.3,<3.1',
         'South>=0.7,<0.8',
         'django-registration==0.8',
         'django-profiles==0.2',
@@ -80,9 +92,12 @@ setup(
         'feedparser==5.1',
         'django-forms-builder>=0.7.5,<0.8',
         'django-threadedcomments==0.9',
+        'django-crispy-forms>=1.2,<1.3',
+        'django-compressor>=1.2,<1.3',
+        'django-generic-ratings>=0.6,<0.7',
     ],
 
-    scripts=['cyclope/bin/cyclopeproject'],
+    scripts=['cyclope/bin/cyclopeproject','cyclope/bin/cyclopedemo'],
 
     packages=find_packages(),
 

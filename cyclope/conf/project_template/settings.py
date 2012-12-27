@@ -11,11 +11,9 @@ CYCLOPE_PROJECT_PATH = os.path.dirname(__file__)
 
 INTERNAL_IPS = ('127.0.0.1',)
 
-ADMINS = (
-    ('Your Name', 'your_email@domain.com'),
-)
+#ADMINS = (('Your Name', 'your_email@domain.com'),)
 
-MANAGERS = ADMINS
+#MANAGERS = (('Your Name', 'your_email@domain.com'), )
 
 DATABASES = {
     'default': {
@@ -41,17 +39,16 @@ MEDIA_URL = '/media/'
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/media/'
 
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/admin/'
-
 ROOT_URLCONF = '{{ project_name }}.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates".
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(CYCLOPE_PROJECT_PATH, 'templates'),
+)
+
+LOCALE_PATHS = (
+    os.path.join(CYCLOPE_PROJECT_PATH, 'locale'),
 )
 
 INSTALLED_APPS += (
@@ -64,20 +61,20 @@ LOGIN_REDIRECT_URL = '/inicio'
 # Add real email account setup here for registration to work properly.
 
 # The host to use for sending e-mail. Default: 'localhost'
-EMAIL_HOST='smtp.gmail.com'
+#EMAIL_HOST='smtp.gmail.com'
 
 # Username to use for the SMTP server defined in EMAIL_HOST. If empty,
 # Django won't attempt authentication. Default: '' (Empty string)
-EMAIL_HOST_USER='anon.email.noreply'
+#EMAIL_HOST_USER='anon.email.noreply'
 
 # Password to use for the SMTP server defined in EMAIL_HOST. This setting
 # is used in conjunction with EMAIL_HOST_USER when authenticating to the
 # SMTP server. If either of these settings is empty, Django won't attempt
 # authentication. Default: '' (Empty string)
-EMAIL_HOST_PASSWORD='anon.email'
+#EMAIL_HOST_PASSWORD='anon.email'
 
 # Port to use for the SMTP server defined in EMAIL_HOST. Default: 25
-EMAIL_PORT='587'
+#EMAIL_PORT='587'
 
 # Default e-mail address to use for various automated correspondence from
 # the site manager(s). Default: 'webmaster@localhost'
@@ -89,29 +86,35 @@ EMAIL_PORT='587'
 
 # Whether to use a TLS (secure) connection when talking to the SMTP server.
 # Default: False
-EMAIL_USE_TLS = True  # we set this to True for the sample email config
+#EMAIL_USE_TLS = True  # we set this to True for the sample email config
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error.
+# the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'handlers': {
-                    'mail_admins': {
-                                    'level': 'ERROR',
-                                    'class': 'django.utils.log.AdminEmailHandler'
-                                }
-                },
-        'loggers': {
-                    'django.request': {
-                                    'handlers': ['mail_admins'],
-                                    'level': 'ERROR',
-                                    'propagate': True,
-                                },
-                }
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
 }
 
 
@@ -142,4 +145,4 @@ HAYSTACK_WHOOSH_PATH = os.path.join(CYCLOPE_PROJECT_PATH, 'cyclope_project_index
 #FILEBROWSER_MAX_UPLOAD_SIZE = 1024*1024*20 # 20MB
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = ''
+SECRET_KEY = '{{ secret_key }}'

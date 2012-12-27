@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -34,28 +34,20 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
-from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
+from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from django.contrib.admin.models import LogEntry
-from django.db.models.signals import post_save, pre_delete
+from django.db.models.signals import pre_delete
 
 from rosetta.poutil import find_pos
-from tagging_autocomplete.models import TagAutocompleteField
 import mptt
 from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 from jsonfield import JSONField
 
-from registration import signals as registration_signals
-
 import cyclope
 from cyclope.core.collections.models import Collection
-from cyclope.utils import ThumbnailMixin
-
-# we add South introspection rules for custom field TagAutocompleteField
-# this shouldn't be necessary once South incorporates this rule
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["^tagging_autocomplete\.models\.TagAutocompleteField"])
+from cyclope.utils import ThumbnailMixin, get_singleton
 
 
 class SiteSettings(models.Model):
@@ -69,12 +61,6 @@ class SiteSettings(models.Model):
                                        verbose_name=_('default layout'),
                                        null=True, blank=True,
                                        on_delete=models.SET_NULL)
-    allow_comments = models.CharField(_('allow comments'), max_length=4,
-                                      choices = (
-                                                 ('YES',_('enabled')),
-                                                 ('NO',_('disabled'))
-                                    ))
-
     global_title = models.CharField(_('global title'),
                                     max_length=250, blank=True, default='')
     keywords = models.TextField(_('keywords'), blank=True, default='')
@@ -86,9 +72,23 @@ class SiteSettings(models.Model):
     rss_content_types = models.ManyToManyField(ContentType,
                                                verbose_name=_('whole feed contents'),
                                                help_text=_('contents to show in the whole feed'))
-    enable_abuse_reports = models.BooleanField(_('enable abuse reports'), default=False)
+    allow_comments = models.CharField(_('allow comments'), max_length=4,
+                                      choices = (
+                                          ('YES',_('enabled')),
+                                          ('NO',_('disabled'))
+                                      ), default='YES')
+    moderate_comments = models.BooleanField(_('moderate comments'),
+                                            default=False)
     enable_comments_notifications = models.BooleanField(_('enable comments email notifications'),
                                                         default=True)
+    enable_abuse_reports = models.BooleanField(_('enable abuse reports'), default=False)
+    show_author = models.CharField(_('show author'), max_length=6,
+                                   choices = (
+                                       ('AUTHOR', _('author')),
+                                       ('USER', _('user if author is empty'))
+                                   ), default='AUTHOR',
+                                   help_text=_('Select which field to use to show as author of the content.'))
+    enable_ratings = models.BooleanField(_('enable rating (like/dislike) content'), default=False)
 
     def save(self, *args, **kwargs):
         self.id = 1
@@ -313,15 +313,16 @@ class BaseContent(models.Model):
                              db_index=True, blank=False)
     slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
                          always_update=False, editable=True, blank=True)
-    tags = TagAutocompleteField(_('tags'))
     published =  models.BooleanField(_('published'), default=True)
+    # user that uploads the content
+    user = models.ForeignKey(User, editable=False, blank=True, null=True)
     related_contents = generic.GenericRelation(RelatedContent,
                                                object_id_field='self_id',
                                                content_type_field='self_type')
-    creation_date = models.DateTimeField(_('creation date'),
-                                         editable=True, default=datetime.now())
+    creation_date = models.DateTimeField(_('creation date'), editable=True,
+                                         default=datetime.now)
     modification_date = models.DateTimeField(_('modification date'), auto_now=True,
-                                             editable=False, default=datetime.now())
+                                             editable=False, default=datetime.now)
     allow_comments = models.CharField(_('allow comments'), max_length=4,
                                 choices = (
                                     ('SITE',_('default')),
@@ -329,9 +330,15 @@ class BaseContent(models.Model):
                                     ('NO',_('disabled'))
                                 ), default='SITE')
     comments = generic.GenericRelation(Comment, object_id_field="object_pk")
+    show_author = models.CharField(_('show author'), max_length=6, default='SITE',
+                                   choices = (
+                                        ('AUTHOR', _('author')),
+                                        ('USER', _('user if author is empty')),
+                                        ('SITE', _('default'))
+                                   ), help_text=_('Select which field to use to show as author of this content.'))
 
     def get_absolute_url(self):
-        return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
+        return '/%s/%s/' % (self.get_object_name(), self.slug)
 
     @classmethod
     def get_app_label(cls):
@@ -347,14 +354,7 @@ class BaseContent(models.Model):
 
     @property
     def get_last_change_date(self):
-        entries = LogEntry.objects.filter(
-            content_type=ContentType.objects.get_for_model(self).id,
-            object_id=self.pk)
-
-        if entries:
-            last = entries.latest('action_time')
-            return last.action_time
-
+        return self.modification_date
 
     def translations(self):
         trans_links = []
@@ -381,13 +381,31 @@ class BaseContent(models.Model):
         return trans_links
 
     def pictures(self):
+        if getattr(self, "_pictures", False) is not False:
+            return self._pictures
+        self._pictures = None
         if self.related_contents:
             pic_model = models.get_model('medialibrary', 'picture')
             ctype = ContentType.objects.get_for_model(pic_model)
             rel_contents = self.related_contents.filter(other_type__pk=ctype.pk)
-            return [ r.other_object for r in rel_contents ]
-        else:
-            return None
+            self._pictures = [ r.other_object for r in rel_contents ]
+        return self._pictures
+
+    def get_author_or_user(self):
+        """
+        Returns the author or the user that created the content as stated on
+        self.show_author and/or SiteSettings.show_author.
+        """
+        ret = None
+        author = getattr(self, "author", None)
+        site_settings = get_singleton(SiteSettings)
+        if self.show_author == "AUTHOR" or (self.show_author == "SITE" and
+                                            site_settings.show_author == "AUTHOR"):
+            ret = author
+        elif self.show_author == "USER" or (self.show_author == "SITE" and
+                                            site_settings.show_author == "USER"):
+            ret = author or self.user  # If the ir no author it defaults to user
+        return ret
 
     translations.allow_tags = True
     translations.short_description = _('translations')
@@ -404,8 +422,8 @@ class Author(models.Model, ThumbnailMixin):
 
     This referes to the author of the content, not to the user uploading it.
     """
-    name = models.CharField(_('name'), max_length=250,
-                             db_index=True, blank=False)
+    name = models.CharField(_('name'), max_length=250, db_index=True,
+                            unique=True)
     slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
                          always_update=False, editable=True, blank=True)
     image = FileBrowseField(_('image'), max_length=100, format='Image',
@@ -424,6 +442,10 @@ class Author(models.Model, ThumbnailMixin):
     class Meta:
         verbose_name = _('author')
         verbose_name_plural = _('authors')
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('author-detail', (), {'slug': self.slug})
 
 
 class Source(models.Model):
@@ -450,28 +472,6 @@ class Image(models.Model, ThumbnailMixin):
         verbose_name = _('image')
         verbose_name_plural = _('images')
 
-
-class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True)
-
-    avatar = models.ImageField(_('avatar'), max_length=100,
-                               blank=True, upload_to="uploads/avatars/")
-    city = models.CharField(_('city'), max_length=100, blank=True)
-    about = models.TextField(_('about myself'), max_length=1000, blank=True)
-
-    public = models.BooleanField(
-        _('public'), default=True,
-        help_text=_('Choose whether your profile info should be publicly visible or not'))
-
-    def get_absolute_url(self):
-        return ('profiles_profile_detail', (), { 'username': self.user.username })
-    get_absolute_url = models.permalink(get_absolute_url)
-
-
-# Signal callbacks
-
-def _create_profile_upon_activation(*args, **kwargs):
-    UserProfile.objects.create(user=kwargs['user'])
 
 def _delete_related_contents(sender, instance, **kwargs):
     # cascade delete does not delete the RelatedContent elements
@@ -500,6 +500,6 @@ def _delete_from_layouts_and_menuitems(sender, instance, **kwargs):
             item.content_type = item.object_id = item.content_object = None
             item.save()
 
-registration_signals.user_activated.connect(_create_profile_upon_activation)
+
 pre_delete.connect(_delete_related_contents)
 pre_delete.connect(_delete_from_layouts_and_menuitems)

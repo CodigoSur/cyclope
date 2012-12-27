@@ -1,0 +1,23 @@
+{% extends CYCLOPE_DEFAULT_TEMPLATE %}
+{% load i18n fb_versions crispy_forms_tags %}
+
+{% block content%}
+
+<div class="user_input">
+
+<h1 class="title">{% block title_content%}{% trans "Edit Profile" %}{% endblock %}</h1>
+
+<div class="form_summary">
+    <div class="summary">
+      <p>{% trans "Please fill in your user profile data" %}</p>
+    </div>
+</div>
+
+{% crispy form %}
+
+{% if profile.avatar %}
+  <img src="{% version profile.avatar.path 'croppedthumbnail' %}" alt="profile avatar" />
+{% endif %}
+</div>
+
+{% endblock %}

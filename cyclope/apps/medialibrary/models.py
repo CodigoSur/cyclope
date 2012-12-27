@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -35,10 +35,16 @@ class BaseMedia(BaseContent, Collectible, ThumbnailMixin):
     """Abstract class for media content.
     """
     author = models.ForeignKey(Author, verbose_name=_('author'),
-                               null=True, blank=True)
+                               null=True, blank=True, on_delete=models.SET_NULL)
     source = models.ForeignKey(Source, verbose_name=_('source'),
-                               blank=True, null=True)
+                               blank=True, null=True, on_delete=models.SET_NULL)
     description = models.TextField(_('description'), blank=True)
+
+    media_file_field = None # This must me set to the media_file on the model
+                            # (eg: audio for Soundtrack)
+    @property
+    def media_file(self):
+        return getattr(self, self.media_file_field)
 
     class Meta:
         abstract = True
@@ -51,6 +57,7 @@ class Picture(BaseMedia):
 
     image =  FileBrowseField(_('image'), max_length=100, format='Image',
                              directory='images/pictures/')
+    media_file_field = "image"
 
     class Meta:
         verbose_name = _('picture')
@@ -65,6 +72,7 @@ class SoundTrack(BaseMedia):
     image =  FileBrowseField(_('image'), max_length=100, format='Image',
                              directory='images/medialibrary/', blank=True,
                              null=True)
+    media_file_field = "audio"
 
     class Meta:
         verbose_name = _('sound track')
@@ -78,6 +86,7 @@ class MovieClip(BaseMedia):
                             directory='images/medialibrary/', blank=True)
     video =  FileBrowseField(_('video'), max_length=100, format='Video',
                              directory='movie_clips/')
+    media_file_field = "video"
 
     def image(self):
         return self.still
@@ -97,6 +106,7 @@ class Document(BaseMedia):
                             directory='images/medialibrary/', blank=True)
     document =  FileBrowseField(_('document'), max_length=100, format='Document',
                             directory='documents/')
+    media_file_field = "document"
 
     class Meta:
         verbose_name = _('document')
@@ -110,6 +120,7 @@ class FlashMovie(BaseMedia):
                             directory='images/medialibrary/', blank=True)
     flash =  FileBrowseField(_('flash'), max_length=100, format='Flash',
                                   directory='flashmovies/', blank=True)
+    media_file_field = "flash"
 
     class Meta:
         verbose_name = _('flash movie')
@@ -123,6 +134,7 @@ class RegularFile(BaseMedia):
                             directory='images/medialibrary/', blank=True)
     file =  FileBrowseField(_('file'), max_length=100,
                             directory='regular_files/')
+    media_file_field = "file"
 
     class Meta:
         verbose_name = _('file')
@@ -137,13 +149,19 @@ class ExternalContent(BaseMedia):
     content_url = models.CharField(_('content url'), max_length=100)
     new_window = models.BooleanField(_('open in new window'), default=False)
     skip_detail = models.BooleanField(_('skip detailed view'), default=False)
+    media_file_field = "content_url"
 
     class Meta:
         verbose_name = _('external content')
         verbose_name_plural = _('external contents')
 
+from cyclope.apps.custom_comments.moderator import CustomCommentModerator, moderator
+from ratings.handlers import ratings
+from cyclope.core.ratings.forms import LikeDislikeVoteForm
 
 # register models on abuse registry
 for key, val in locals().copy().iteritems():
     if isinstance(val, type) and issubclass(val, BaseMedia):
         cyclope.apps.abuse.register(val)
+        moderator.register(val, CustomCommentModerator)
+        ratings.register(val, form_class=LikeDislikeVoteForm)

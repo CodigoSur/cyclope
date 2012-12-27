@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -31,11 +31,10 @@ from django.contrib import admin
 from django.core import urlresolvers
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.comments.admin import CommentsAdmin
 from django.http import HttpResponseRedirect
+from django.contrib.sites.models import Site
 
-from feincms.admin import editor
+from mptt_tree_editor.admin import TreeEditor
 
 from cyclope.models import *
 from cyclope.forms import MenuItemAdminForm,\
@@ -68,7 +67,6 @@ class BaseContentAdmin(admin.ModelAdmin):
     """
     inlines = [RelatedContentInline]
     date_hierarchy = 'creation_date'
-    exclude = ("tags", )
 
     class Media:
         js = (
@@ -114,10 +112,14 @@ class BaseContentAdmin(admin.ModelAdmin):
             extra_context['initial_collection'] = category.collection.id
         return super(BaseContentAdmin, self).add_view(request, form_url, extra_context)
 
+    def save_model(self, request, obj, form, change):
+        # sets the user as the creator of the content
+        if getattr(obj, 'user', None) is None:
+            obj.user = request.user
+        obj.save()
 
-from django.utils.functional import update_wrapper
 
-class MenuItemAdmin(editor.TreeEditor, PermanentFilterMixin):
+class MenuItemAdmin(TreeEditor, PermanentFilterMixin):
     form = MenuItemAdminForm
     fieldsets = ((None,
                   {'fields': ('menu', 'parent', 'name', 'slug', 'site_home', 'active')}),
@@ -165,6 +167,13 @@ admin.site.register(Layout, LayoutAdmin)
 class SiteSettingsAdmin(admin.ModelAdmin):
     form = SiteSettingsAdminForm
 
+    def has_add_permission(self, request):
+        """ Prevent addition of new objects """
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 admin.site.register(SiteSettings, SiteSettingsAdmin)
 
 class ImageAdmin(admin.ModelAdmin):
@@ -181,36 +190,19 @@ admin.site.register(Author, AuthorAdmin)
 
 admin.site.register(Source)
 
-class CyclopeCommentsAdmin(CommentsAdmin):
-    fieldsets = (
-        (None,
-           {'fields': ('content_type', 'object_pk')}
-        ),
-        (_('Content'),
-           {'fields': ('user', 'user_name', 'user_email', 'user_url', 'comment')}
-        ),
-        (_('Metadata'),
-           {'fields': ('submit_date', 'ip_address', 'is_public', 'is_removed')}
-        ),
-     )
-    list_display = ('name', "content", "content_url", 'content_type', 'ip_address',
-                    'submit_date', 'is_public', 'is_removed')
-    list_filter = ('submit_date', 'is_public', 'is_removed')
+class SiteAdmin(admin.ModelAdmin):
+    list_display = ('domain', 'name')
+    search_fields = ('domain', 'name')
 
-    def content(self, obj):
-        admin_url_name = "%s_%s_change" % (obj.content_type.app_label, obj.content_type.name)
-        admin_url_name = admin_url_name.replace(" ", "")
-        change_url = urlresolvers.reverse('admin:%s' % admin_url_name, args=(obj.content_object.id,))
-        return "<a href='%s'>%s</a>" % (change_url, obj.content_object)
-    content.allow_tags = True
+    def has_add_permission(self, request):
+        """ Prevent addition of new objects """
+        return False
 
-    def content_url(self, obj):
-        url = obj.content_object.get_absolute_url()
-        return  "<a href='%s'>%s</a>" % (url, url)
-    content_url.allow_tags = True
+    def has_delete_permission(self, request, obj=None):
+        return False
 
-try:
-    admin.site.unregister(Comment)
-except admin.sites.NotRegistered:
-    pass
-admin.site.register(Comment, CyclopeCommentsAdmin)
+
+
+import django.contrib.sites.admin # Force register of django's SiteAdmin
+admin.site.unregister(Site)
+admin.site.register(Site, SiteAdmin)

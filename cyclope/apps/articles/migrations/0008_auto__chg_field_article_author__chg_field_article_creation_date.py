@@ -39,7 +39,7 @@ class Migration(SchemaMigration):
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cyclope.Source']", 'null': 'True', 'blank': 'True'}),
             'summary': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {}),
+
             'text': ('django.db.models.fields.TextField', [], {})
         },
         'collections.categorization': {

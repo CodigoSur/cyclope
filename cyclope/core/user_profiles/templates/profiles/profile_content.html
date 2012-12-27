@@ -1,0 +1,9 @@
+{% load i18n fb_versions %}
+
+<h1 class="title">{{ current_object.user.get_full_name|default:current_object.user.username }}</h1>
+
+{% if current_object.city %} {% trans "City" %}: {{current_object.city}} {% endif %}
+
+{{current_object.about|linebreaks}}
+
+{% if current_object.avatar %}<img src="{% version current_object.avatar.path 'croppedthumbnail' %}" alt="profile avatar" />{% endif %}

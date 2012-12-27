@@ -2,23 +2,29 @@
 
 <div id="user_status">
 {% if user.is_authenticated %}
-  <a href="/profiles/edit/"><strong>{{ user }}</strong></a> /
-  <a href="/accounts/logout/?next={{ request.path}}">{% trans "Log out" %}</a>
-{% else %}
-  <a href="/accounts/login/?next={{ request.path}}">{% trans "Log in" %}</a>
+  {% with profile=user.get_profile %}
+    {% if profile %}
+      <a href="{{ profile.get_absolute_url }}">{{ user.get_full_name|default:user.username }}</a>
+    {% else %}
+      <a href="{% url profiles_create_profile %}">{{ user.username }} ({% trans "Create profile" %})</a>
+    {% endif %} /
+    <a href="{% url auth_logout %}?next={{ request.path }}">{% trans "Log out" %}</a>
+  {% endwith %}
+  {% else %}
+  <a href="{% url auth_login %}?next={{ request.path }}">{% trans "Log in" %}</a>
+{% endif %}
 
-  {% if LANGUAGES|length > 1 %} /
+{% if LANGUAGES|length > 1 %}
   <div id="language" class="user_input">
     <form action="/i18n/setlang/" method="post" id="lang">{% csrf_token %}
       <select name="language" onChange="forms['lang'].submit();">
-	{% for lang_code, lang_name in LANGUAGES %}
+      {% for lang_code, lang_name in LANGUAGES %}
         <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected="selected" {% endif %}>
-	  {{ lang_name }}
-	</option>
-	{% endfor %}
+        {{ lang_name }}
+        </option>
+      {% endfor %}
       </select>
     </form>
   </div>
-  {% endif %}
 {% endif %}
 </div>

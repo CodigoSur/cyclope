@@ -1,14 +1,12 @@
 {% extends host_template %}
 
-{% load comments i18n fb_versions cyclope_utils markup %}
+{% load comments i18n fb_versions cyclope_utils markup crispy_forms_tags %}
 
 {% block content %}
 
 {% alias poll as 'current_object' %}
 
 <div class="content-view poll submission poll-submission">
-
-  {% get_comment_count for poll as comment_count %}
 
   <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
@@ -17,10 +15,12 @@
   <form action="{% url poll-submission poll.slug %}" method="POST" class="uniForm">
     {% csrf_token %}
     {% for form in forms %}
-        {{ form.as_ul }}
+        {{ form|crispy }}
     {% endfor %}
-    {{ captcha_form.as_p }}
+    {{ captcha_form|crispy }}
+    <div class="buttonHolder">
       <input type="submit" value="{% trans "Submit" %}" />
+    </div>
   </form>
 
 </div>

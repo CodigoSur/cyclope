@@ -20,7 +20,7 @@
     {% endcomment %}
 
     {% alias categorization.content_object as categorization.content_type.model %}
-    {% include template_path %}
+    {% include template_path with current_object=categorization.content_object %}
   {% endfor %}
 
   </div>

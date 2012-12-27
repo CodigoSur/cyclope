@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -30,6 +30,7 @@ And to activate the app index dashboard::
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.contrib.sites.models import Site
 
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 from contact_form.models import ContactFormSettings
@@ -58,9 +59,7 @@ class CustomIndexDashboard(Dashboard):
         """
         Use this method if you need to access the request context.
         """
-        from django.contrib.auth.models import User, Group
         user = context.get('user')
-        admins = User.objects.filter(is_superuser=True)
 
         self.children.append(modules.Group(
             title=_('Content'),
@@ -102,7 +101,7 @@ class CustomIndexDashboard(Dashboard):
                 modules.ModelList(
                     title=_('Comments'),
                     css_classes = ('dbmodule-comments'),
-#                    pre_content = _('Review and moderate user comments'),
+                    #pre_content = _('Review and moderate user comments'),
                     include_list=[
                         'django.contrib.comments.models.Comment',
                     ]),
@@ -202,19 +201,6 @@ class CustomIndexDashboard(Dashboard):
                     ]),
             ]
 
-        if 'live' in settings.INSTALLED_APPS:
-            plugins_children.append(
-                modules.ModelList(
-                    title=_('Chat'),
-                    css_classes = ('dbmodule-chat', 'main-area-modules',),
-                    draggable = False,
-                    deletable = False,
-                    collapsible= False,
-                    include_list=[
-                        'live.models.Channel',
-                        ]),
-                )
-
         self.children.append(modules.Group(
             title=_('Plugins'),
             css_classes = ('dbmodule-plugins', 'main-area-modules',),
@@ -225,7 +211,6 @@ class CustomIndexDashboard(Dashboard):
             pre_content = (''),
             children = plugins_children
             ))
-
 
         self.children.append(modules.Group(
             title=_('Advanced'),
@@ -248,18 +233,20 @@ class CustomIndexDashboard(Dashboard):
                     include_list=[
                         'registration',
                         ]),
-                modules.ModelList(
-                    title=_('Sites'),
+                modules.LinkList(
+                    title=_('Site'),
                     css_classes = ('dbmodule-content_sites',),
-                    include_list=[
-                        'django.contrib.sites',
+                    children=[
+                        {'title': _('Site'),
+                         'url': '/admin/sites/site/%s/' % get_singleton(Site).id,
+                         }
                         ]),
                 )))
 
-	## RIGHT PANEL MODULES ##
+    ## RIGHT PANEL MODULES ##
 
         ## append a link list module for "quick links"
-        self.children.append(modules.LinkList(
+        quick_links = modules.LinkList(
             title=_('Quick links'),
             css_classes = ('right-area-modules',),
             layout = 'inline',
@@ -275,7 +262,23 @@ class CustomIndexDashboard(Dashboard):
                  'external': True,
                  },
                 ]
-        ))
+        )
+
+        # Comments moderation link
+        from cyclope.apps.custom_comments import models as custom_comments_models
+        if custom_comments_models.moderation_enabled():
+            in_moderation = custom_comments_models.CustomComment.objects.in_moderation()
+            if in_moderation:
+                url = reverse('admin:comments_comment_changelist')
+                url +="?is_removed__exact=0&is_public__exact=0"
+                moderate_link = {
+                    'title': _('%d comments need moderation') % len(in_moderation),
+                    'url': url,
+                    'external': False,
+                }
+                quick_links.children.insert(0, moderate_link)
+
+        self.children.append(quick_links)
 
         # append a recent actions module
         self.children.append(modules.RecentActions(

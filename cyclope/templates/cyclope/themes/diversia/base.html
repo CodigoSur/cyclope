@@ -1,8 +1,6 @@
 {% extends "cyclope/themes/neutronix/base.html" %}
-{% block displaycss %}
-    <link href="/media/cyclope/themes/neutronix/css/neutronix.less" rel="stylesheet/less" type="text/css"/>
-    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet/less" type="text/css"/>
-    <link href="/media/local_themes/diversia/css/local.less" rel="stylesheet/less" type="text/css"/>
-    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/print.css" rel="stylesheet" type="text/css" media="print"/>
-    <link href="{{ CYCLOPE_STATIC_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
-{%endblock%}
+
+{% block neutronixcss %}
+    <link href="{{ CYCLOPE_STATIC_URL }}themes/neutronix/css/neutronix.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
+{% endblock %}

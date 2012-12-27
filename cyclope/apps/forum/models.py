@@ -35,7 +35,6 @@ from cyclope.models import BaseContent
 
 
 class Topic(BaseContent, Collectible):
-    author = models.ForeignKey(User, verbose_name=_('author'))
     text = models.TextField(_('text'))
 
     class Meta:

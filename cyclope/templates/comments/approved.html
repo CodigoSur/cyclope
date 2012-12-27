@@ -1,0 +1,13 @@
+{% extends "comments/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Thanks for approving" %}.{% endblock %}
+
+{% block content %}
+<script type="text/javascript">
+  setTimeout('window.location = "{{ comment.content_object.get_absolute_url }}"', 3000);
+</script>
+
+<h2>{% trans "Thanks for taking the time to improve the quality of discussion on our site" %}.</h2>
+<p><a href="{{ comment.content_object.get_absolute_url }}">{% trans "return." %}</a></p>
+{% endblock %}

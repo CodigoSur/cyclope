@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2012 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -44,8 +44,10 @@ def media_admin_factory(media_model):
                                    for ctype in author.content_types.all()]:
                     author_choices.append((author.id, author.name))
             self.fields['author'].choices = author_choices
+
         class Meta:
             model = media_model
+            
 
     if media_model in has_thumbnail:
         list_display = ['name', 'thumbnail']

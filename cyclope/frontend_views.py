@@ -27,16 +27,16 @@ from operator import attrgetter
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from django.template import loader, Template, Context
+from django.template import Template, Context
 from django.contrib.sites.models import Site
 from django.contrib.comments.models import Comment
+from django.template.loader import render_to_string
 
 import cyclope.utils
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 from cyclope.core.collections.models import Collection, Category
 from cyclope.models import Menu, MenuItem, Author
-import cyclope.settings as cyc_settings
 
 
 class MenuRootItemsList(frontend.FrontendView):
@@ -46,15 +46,17 @@ class MenuRootItemsList(frontend.FrontendView):
     verbose_name=_('list of root items for the selected Menu')
     is_default = True
     is_region_view = True
+    template = "cyclope/menu_flat_items_list.html"
 
     def get_response(self, request, req_context, options, content_object):
         menu_items = MenuItem.tree.filter(menu=content_object,
                                           level=0, active=True)
         current_url = request.path_info[1:].split('/')[0]
-        req_context.update({'menu_items': menu_items,
-                            'current_url': current_url})
-        t = loader.get_template("cyclope/menu_flat_items_list.html")
-        return t.render(req_context)
+        return render_to_string(self.template, {
+            'menu_items': menu_items,
+            'current_url': current_url
+        }, req_context)
+
 
 frontend.site.register_view(Menu, MenuRootItemsList)
 
@@ -65,14 +67,16 @@ class MenuFlatItemsList(frontend.FrontendView):
     name='flat_items_list'
     verbose_name=_('flat list of all items for the selected Menu')
     is_region_view = True
+    template = "cyclope/menu_flat_items_list.html"
 
     def get_response(self, request, req_context, options, content_object):
         menu_items = MenuItem.tree.filter(menu=content_object, active=True)
         current_url = request.path_info[1:].split('/')[0]
-        req_context.update({'menu_items': menu_items,
-                                     'current_url': current_url})
-        t = loader.get_template("cyclope/menu_flat_items_list.html")
-        return t.render(req_context)
+        return render_to_string(self.template, {
+            'menu_items': menu_items,
+            'current_url': current_url
+        }, req_context)
+
 
 frontend.site.register_view(Menu, MenuFlatItemsList)
 
@@ -92,25 +96,25 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
     verbose_name=_('hierarchical list of the items in the selected menu')
     is_region_view = True
     options_form = MenuHierarchyOptions
+    template = "cyclope/menu_menuitems_hierarchy.html"
 
     def get_response(self, request, req_context, options, content_object):
         menu = content_object
-        menu_items = MenuItem.tree.filter(menu=menu, level=0)
+        menu_items = MenuItem.tree.filter(menu=menu, level=0, active=True)
         menu_items_list = []
         current_url = request.path_info[1:]
         for item in menu_items:
             menu_items_list.extend(self._get_menuitems_nested_list(item, current_url))
-        req_context.update({'menu_items': menu_items_list,
-                            'menu_slug': menu.slug,
-                            'expand_style': options["align"]})
-        t = loader.get_template("cyclope/menu_menuitems_hierarchy.html")
-        return t.render(req_context)
+        return render_to_string(self.template, {
+            'menu_items': menu_items_list,
+            'menu_slug': menu.slug,
+            'expand_style': options["align"]
+        }, req_context)
 
     def _get_menuitems_nested_list(self, base_item, current_url=None, name_field='name'):
         """Creates a nested list to be used with unordered_list template tag
         """
         #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
-        from django.template import Template, Context
         link_template = Template(
              '<span class="{% if has_children %}has_children{% else %}no_children{% endif %}{% if current_url == menu_item.url%} current{% endif%}{% if menu_item.site_home %} site_home{% endif %}">'
              '{% if menu_item.custom_url %}'
@@ -121,8 +125,8 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
              '{{ menu_item.name }}</a></span>'
             )
         nested_list = []
-        for child in base_item.get_children():
-            if child.get_descendant_count()>0:
+        for child in base_item.get_children().filter(active=True):
+            if child.get_descendant_count() > 0:
                 nested_list.extend(self._get_menuitems_nested_list(
                     child, current_url, name_field=name_field))
             else:
@@ -150,7 +154,7 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
     is_default = True
     is_instance_view = False
     is_region_view = True
-
+    template = "cyclope/menu_flat_items_list.html"
     def get_response(self, request, req_context, options):
         base_url = request.path_info[1:].split('/')[0]
         if base_url == '':
@@ -159,11 +163,9 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
             current_item = MenuItem.tree.filter(url=base_url)
 
         if current_item:
-            children = current_item[0].get_children()
-
-            req_context.update({'menu_items': children})
-            t = loader.get_template("cyclope/menu_flat_items_list.html")
-            return t.render(req_context)
+            children = current_item[0].get_children().filter(active=True)
+            return render_to_string(self.template, {'menu_items': children},
+                                    req_context)
         else:
             return ''
 
@@ -177,13 +179,12 @@ class SiteSearchBox(frontend.FrontendView):
     verbose_name=_('search box')
     is_instance_view = False
     is_region_view = True
+    template = "cyclope/site_search_box.html"
 
     def get_response(self, request, req_context, options):
-        t = loader.get_template("cyclope/site_search_box.html")
-        return t.render(req_context)
+        return render_to_string(self.template, {}, req_context)
 
 frontend.site.register_view(Site, SiteSearchBox)
-
 
 
 class SiteMap(frontend.FrontendView):
@@ -194,10 +195,10 @@ class SiteMap(frontend.FrontendView):
     is_default = True
     is_instance_view = False
     is_content_view = True
+    template = "cyclope/site_map.html"
 
     def get_response(self, request, req_context, options):
         collections_list = []
-        current_url = request.path_info[1:].split('/')[0]
         for collection in Collection.objects.filter(visible=True):
             category_list = []
             for category in Category.tree.filter(collection=collection, level=0):
@@ -218,12 +219,12 @@ class SiteMap(frontend.FrontendView):
             if menu_items_list:
                 menus_list.extend([menu.name, menu_items_list])
             else:
-                menu_list.append(menu.name)
+                menus_list.append(menu.name)
 
-        req_context.update({'collections':collections_list,
-                                     'menus':menus_list})
-        t = loader.get_template("cyclope/site_map.html")
-        return t.render(req_context)
+        return render_to_string(self.template, {
+            'collections':collections_list,
+            'menus':menus_list,
+        }, req_context)
 
     def _get_categories_nested_list(self, base_category, name_field='name'):
 
@@ -272,25 +273,6 @@ class CommentsListOptions(forms.Form):
     limit_to_n_items = forms.IntegerField(label=_('Items to show'), min_value=1,
                                         initial=5,)
 
-class CommentsList(frontend.FrontendView):
-    """Show a list of the last comments
-    """
-    name='list'
-    verbose_name=_('list of the last site content comments')
-    is_default = True
-    is_instance_view = False
-    is_region_view = True
-    options_form = CommentsListOptions
-
-    def get_response(self, request, req_context, options):
-        limit = options["limit_to_n_items"]
-        comment_list = Comment.objects.filter(is_public=True, is_removed=False).order_by('-submit_date')[:limit]
-        req_context.update({'comment_list': comment_list})
-        t = loader.get_template("comments/comments_list.html")
-        return t.render(req_context)
-
-frontend.site.register_view(Comment, CommentsList)
-
 
 INLINE_CHOICES = (
     ("teaser", _(u"Teaser")),
@@ -314,8 +296,34 @@ class AuthorDetailOptions(forms.Form):
                                        ("ALPHABETIC", _(u"Alphabetic"))),
                               initial="DATE-")
 
+class AuthoredMixin(object):
 
-class AuthorDetail(frontend.FrontendView):
+    options_form = AuthorDetailOptions
+
+    def get_queryset(self, content_object):
+        "Must return a queryset with all objects 'authored' by content_object"
+        return NotImplementedError
+
+    def get_page(self, request, req_context, options, content_object):
+        from cyclope.core.collections.frontend_views import SORT_BY
+        qs = self.get_queryset(content_object)
+
+        sort_by = options["sort_by"]
+        limit = options["limit_to_n_items"] or None
+        sort_property, reverse, paginator_class = SORT_BY[sort_by]
+        paginator_kwargs = {"per_page": options["items_per_page"]}
+        if 'DATE' in sort_by:
+            qs.sort(key=attrgetter(sort_property), reverse=reverse)
+            if limit:
+                qs = qs[:limit]
+        elif 'ALPHABETIC' in sort_by:
+            paginator_kwargs['on'] = "name"
+        paginator = paginator_class(qs, **paginator_kwargs)
+        page = cyclope.utils.get_page(paginator, request)
+        return page
+
+
+class AuthorDetail(AuthoredMixin, frontend.FrontendView):
     """Display an author's detail
     """
     name='detail'
@@ -324,38 +332,28 @@ class AuthorDetail(frontend.FrontendView):
     is_instance_view = True
     is_region_view = False
     is_content_view = True
-    options_form = AuthorDetailOptions
     template = "cyclope/author_detail.html"
 
-    def get_response(self, request, req_context, options, content_object):
-        from cyclope.core.collections.frontend_views import SORT_BY
-
+    def get_queryset(self, content_object):
         authored_content = []
-        if options["show_authored_content"]:
-            # get related methods like picture_set, article_set, etc.
-            related = [attribute for attribute in dir(content_object) \
-                       if attribute.endswith('_set')]
-            for n in related:
-                authored_content.extend(getattr(content_object, n).all())
+        # get related methods like picture_set, article_set, etc.
+        related = [attribute for attribute in dir(content_object) \
+                   if attribute.endswith('_set')]
+        for n in related:
+            authored_content.extend(getattr(content_object, n).all())
+        return authored_content
 
-        sort_by = options["sort_by"]
-        limit = options["limit_to_n_items"] or None
-        sort_property, reverse, paginator_class = SORT_BY[sort_by]
-        paginator_kwargs = {"per_page": options["items_per_page"]}
-        if 'DATE' in sort_by:
-            authored_content.sort(key=attrgetter(sort_property),reverse=reverse)
-            if limit:
-                authored_content = authored_content[:limit]
-        elif 'ALPHABETIC' in sort_by:
-            paginator_kwargs['on'] = "name"
-        paginator = paginator_class(authored_content, **paginator_kwargs)
-        page = cyclope.utils.get_page(paginator, request)
-        req_context.update({'author': content_object,
-                            'authored_content': page.object_list,
-                            'inline_view_name': options["inline_view_name"],
-                            'page': page})
-        t = loader.get_template(self.template)
-        return t.render(req_context)
+    def get_response(self, request, req_context, options, content_object):
+        if options['show_authored_content']:
+            authored_contents_page = self.get_page(request, req_context, options,
+                                                   content_object)
+        else:
+            authored_contents_page = None
+
+        return render_to_string(self.template, {
+            'inline_view_name': options["inline_view_name"],
+            'page': authored_contents_page
+        }, req_context)
 
 
 frontend.site.register_view(Author, AuthorDetail)

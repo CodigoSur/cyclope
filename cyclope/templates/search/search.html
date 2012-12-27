@@ -1,15 +1,18 @@
 {% extends CYCLOPE_DEFAULT_TEMPLATE %}
-{% load i18n cyclope_utils%}
+{% load i18n cyclope_utils crispy_forms_tags %}
 
 {% block content %}
-<div id='advanced_search' class='user_input'>
+<div id='advanced_search'>
     <h2 class="title">{% trans "Advanced search" %}</h2>
 
-    <form method="get" action=".">
-        {{ form }}
-        <input type="submit" class="submit" value={% trans "Search" %}>
+    <form method="get" action="." class="uniForm">
+        {{ form|crispy }}
+        <div class="buttonHolder">
+          <input type="submit" value={% trans "Search" %}>
+        </div>
     </form>
 </div>
+
 {% if query %}
     <div id="search_results" >
         <h3>{% trans "Results" %}</h3>
@@ -18,7 +21,7 @@
             {# show teaser_views for all results objects #}
             {% join result.object.get_app_label  "/" result.object.get_object_name "_teaser.html" as template_path %}
             {% alias result.object as result.object.get_object_name %}
-            {% include template_path %}
+            {% include template_path with current_object=result.object host_template="cyclope/inline_view.html" %}
 
         {% empty %}
             <p>{% trans "No results found." %}</p>

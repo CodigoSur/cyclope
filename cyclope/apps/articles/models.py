@@ -35,17 +35,15 @@ from autoslug.fields import AutoSlugField
 from cyclope.core.collections.models import Collectible
 from cyclope.models import BaseContent, Author, Source, Image
 from cyclope.apps.medialibrary.models import Picture
-import cyclope.apps.abuse
 
 YES_NO = (('YES', _('yes')), ('NO', _('no')),)
-
 
 class Article(BaseContent, Collectible):
     pretitle = models.CharField(_('pre-title'), max_length=250, blank=True)
     summary = models.TextField(_('summary'), blank=True)
     text = models.TextField(_('text'))
     author = models.ForeignKey(Author, verbose_name=_('author'),
-                               null=True, blank=True)
+                               null=True, blank=True, on_delete=models.SET_NULL)
     source = models.ForeignKey(Source, verbose_name=_('source'),
                                blank=True, null=True)
     date = models.DateTimeField(_('date'), blank=True, null=True)
@@ -55,5 +53,13 @@ class Article(BaseContent, Collectible):
         verbose_name_plural = _('articles')
         ordering = ('-creation_date', 'name')
 
-
+# FIXME: this registrations should be done elsewhere
+import cyclope.apps.abuse
 cyclope.apps.abuse.register(Article)
+
+from cyclope.apps.custom_comments.moderator import CustomCommentModerator, moderator
+moderator.register(Article, CustomCommentModerator)
+
+from ratings.handlers import ratings
+from cyclope.core.ratings.forms import LikeDislikeVoteForm
+ratings.register(Article, form_class=LikeDislikeVoteForm)

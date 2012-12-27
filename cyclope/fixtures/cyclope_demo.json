@@ -11,9 +11,12 @@
       ], 
       "allow_comments": "YES", 
       "description": "Neutrona es una plantilla \u201cneutra\u201d realizada para Cyclope 3 en colores grises, para servir de base de trabajo para dise\u00f1os m\u00e1s complejos. Ha sido realizada bajo el framework 960 Grid System (www.960.gs) y est\u00e1 totalmente desarrollada con la t\u00e9cnica tableless. Los navegadores basados en est\u00e1ndares web pueden visualizarla de forma correcta. ", 
-      "global_title": "Neutrona Theme", 
+      "global_title": "Demo Site", 
       "site": 1, 
-      "theme": "newfangled", 
+      "moderate_comments": false, 
+      "theme": "neutronix", 
+      "enable_abuse_reports": false, 
+      "enable_comments_notifications": true, 
       "keywords": "cyclope cms codigo sur ", 
       "newsletter_collection": null, 
       "default_layout": 1
@@ -23,18 +26,18 @@
     "pk": 1, 
     "model": "cyclope.menu", 
     "fields": {
-      "main_menu": true, 
-      "name": "Men\u00fa Horizontal", 
-      "slug": "menu-horizontal"
+      "main_menu": false, 
+      "name": "Accesos r\u00e1pidos", 
+      "slug": "accesos-rapidos"
     }
   }, 
   {
     "pk": 3, 
     "model": "cyclope.menu", 
     "fields": {
-      "main_menu": false, 
-      "name": "Menu Vertical", 
-      "slug": "menu-vertical"
+      "main_menu": true, 
+      "name": "Men\u00fa Principal", 
+      "slug": "menu-principal"
     }
   }, 
   {
@@ -44,15 +47,15 @@
       "site_home": true, 
       "rght": 2, 
       "layout": 10, 
-      "name": "inicio", 
+      "name": "Inicio", 
       "parent": null, 
       "content_view": "teaser_list", 
       "url": "inicio", 
       "menu": 1, 
-      "tree_id": 3, 
+      "tree_id": 1, 
       "custom_url": "", 
       "object_id": 20, 
-      "view_options": "{\"limit_to_n_items\": 0, \"show_description\": false, \"sort_by\": \"DATE-\", \"items_per_page\": 10, \"traverse_children\": false, \"show_title\": true, \"show_image\": false, \"simplified\": false, \"navigation\": \"TOP\"}", 
+      "view_options": "{\"limit_to_n_items\": 10, \"show_description\": false, \"sort_by\": \"DATE-\", \"items_per_page\": 10, \"traverse_children\": false, \"show_title\": true, \"show_image\": false, \"simplified\": false, \"navigation\": \"TOP\"}", 
       "lft": 1, 
       "content_type": [
         "collections", 
@@ -69,14 +72,14 @@
     "model": "cyclope.menuitem", 
     "fields": {
       "site_home": false, 
-      "rght": 20, 
+      "rght": 2, 
       "layout": 1, 
       "name": "Contacto", 
       "parent": null, 
       "content_view": "", 
       "url": "/contact/", 
       "menu": 1, 
-      "tree_id": 12, 
+      "tree_id": 2, 
       "custom_url": "/contact/", 
       "object_id": null, 
       "view_options": "{}", 
@@ -93,14 +96,14 @@
     "model": "cyclope.menuitem", 
     "fields": {
       "site_home": false, 
-      "rght": 4, 
+      "rght": 2, 
       "layout": null, 
       "name": "Sobre Cyclope 3", 
       "parent": null, 
       "content_view": "", 
       "url": "http://cyclope.codigosur.org", 
       "menu": 3, 
-      "tree_id": 21, 
+      "tree_id": 3, 
       "custom_url": "http://cyclope.codigosur.org", 
       "object_id": null, 
       "view_options": "{}", 
@@ -124,7 +127,7 @@
       "content_view": "map", 
       "url": "mapa-del-sitio-2", 
       "menu": 1, 
-      "tree_id": 46, 
+      "tree_id": 4, 
       "custom_url": "", 
       "object_id": null, 
       "view_options": "{}", 
@@ -151,7 +154,7 @@
       "content_view": "", 
       "url": "http://www.codigosur.net", 
       "menu": 3, 
-      "tree_id": 48, 
+      "tree_id": 6, 
       "custom_url": "http://www.codigosur.net", 
       "object_id": null, 
       "view_options": "{}", 
@@ -175,7 +178,7 @@
       "content_view": "", 
       "url": "http://www.pillku.com", 
       "menu": 3, 
-      "tree_id": 49, 
+      "tree_id": 7, 
       "custom_url": "http://www.pillku.com", 
       "object_id": null, 
       "view_options": "{}", 
@@ -199,7 +202,7 @@
       "content_view": "", 
       "url": "http://www.youtube.com/user/sanhoerth", 
       "menu": 3, 
-      "tree_id": 47, 
+      "tree_id": 5, 
       "custom_url": "http://www.youtube.com/user/sanhoerth", 
       "object_id": null, 
       "view_options": "{}", 
@@ -209,33 +212,6 @@
       "active": true, 
       "level": 0, 
       "slug": "video-tutoriales"
-    }
-  }, 
-  {
-    "pk": 123, 
-    "model": "cyclope.menuitem", 
-    "fields": {
-      "site_home": false, 
-      "rght": 2, 
-      "layout": null, 
-      "name": "Areas trabajo", 
-      "parent": null, 
-      "content_view": "root_categories_list", 
-      "url": "areas-trabajo", 
-      "menu": 3, 
-      "tree_id": 50, 
-      "custom_url": "", 
-      "object_id": 9, 
-      "view_options": "{}", 
-      "lft": 1, 
-      "content_type": [
-        "collections", 
-        "collection"
-      ], 
-      "persistent_layout": false, 
-      "active": true, 
-      "level": 0, 
-      "slug": "areas-trabajo"
     }
   }, 
   {
@@ -287,22 +263,6 @@
     }
   }, 
   {
-    "pk": 28, 
-    "model": "cyclope.regionview", 
-    "fields": {
-      "layout": 1, 
-      "weight": 1, 
-      "content_view": "detail", 
-      "region": "earth", 
-      "object_id": 3, 
-      "view_options": "{}", 
-      "content_type": [
-        "staticpages", 
-        "htmlblock"
-      ]
-    }
-  }, 
-  {
     "pk": 92, 
     "model": "cyclope.regionview", 
     "fields": {
@@ -315,22 +275,6 @@
       "content_type": [
         "staticpages", 
         "staticpage"
-      ]
-    }
-  }, 
-  {
-    "pk": 93, 
-    "model": "cyclope.regionview", 
-    "fields": {
-      "layout": 10, 
-      "weight": 0, 
-      "content_view": "detail", 
-      "region": "earth", 
-      "object_id": 3, 
-      "view_options": "{}", 
-      "content_type": [
-        "staticpages", 
-        "htmlblock"
       ]
     }
   }, 
@@ -359,7 +303,7 @@
       "content_view": "teaser_list", 
       "region": "love", 
       "object_id": 1, 
-      "view_options": "{\"limit_to_n_items\": 0, \"show_description\": false, \"sort_by\": \"DATE-\", \"items_per_page\": 3, \"traverse_children\": false, \"show_title\": true, \"show_image\": false, \"simplified\": false, \"navigation\": \"TOP\"}", 
+      "view_options": "{\"limit_to_n_items\": 8, \"show_description\": false, \"sort_by\": \"DATE-\", \"items_per_page\": 8, \"traverse_children\": false, \"show_title\": true, \"show_image\": false, \"simplified\": false, \"navigation\": \"TOP\"}", 
       "content_type": [
         "collections", 
         "category"
@@ -431,12 +375,44 @@
     }
   }, 
   {
+    "pk": 103, 
+    "model": "cyclope.regionview", 
+    "fields": {
+      "layout": 1, 
+      "weight": 1, 
+      "content_view": "detail", 
+      "region": "water", 
+      "object_id": 4, 
+      "view_options": "{}", 
+      "content_type": [
+        "staticpages", 
+        "htmlblock"
+      ]
+    }
+  }, 
+  {
+    "pk": 104, 
+    "model": "cyclope.regionview", 
+    "fields": {
+      "layout": 10, 
+      "weight": 0, 
+      "content_view": "slodeshow", 
+      "region": "spark", 
+      "object_id": 20, 
+      "view_options": "{\"auto_pause\": true, \"limit_to_n_items\": 0, \"visualization_mode\": \"slideshow-background\", \"navigation\": \"'circular'\", \"auto_play\": true, \"show_description\": true, \"sort_by\": \"DATE-\", \"delay\": 2, \"scroll_by\": 2, \"traverse_children\": false, \"show_title\": true, \"show_image\": true, \"speed\": 100, \"circular\": false}", 
+      "content_type": [
+        "collections", 
+        "category"
+      ]
+    }
+  }, 
+  {
     "pk": 1, 
     "model": "cyclope.layout", 
     "fields": {
-      "name": "4-Elements", 
-      "template": "inner.html", 
-      "slug": "4-elements"
+      "name": "Four Elements", 
+      "template": "four_elements.html", 
+      "slug": "four-elements"
     }
   }, 
   {
@@ -452,22 +428,39 @@
     "pk": 10, 
     "model": "cyclope.layout", 
     "fields": {
-      "name": "Main", 
-      "template": "main.html", 
-      "slug": "main"
+      "name": "Five Elements", 
+      "template": "five_elements.html", 
+      "slug": "five-elements"
     }
   }, 
   {
     "pk": 1, 
     "model": "cyclope.relatedcontent", 
     "fields": {
-      "self_id": 7, 
+      "self_id": 1, 
+      "self_type": [
+        "staticpages", 
+        "staticpage"
+      ], 
+      "order": 1, 
+      "other_id": 1, 
+      "other_type": [
+        "medialibrary", 
+        "picture"
+      ]
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "cyclope.relatedcontent", 
+    "fields": {
+      "self_id": 1, 
       "self_type": [
         "articles", 
         "article"
       ], 
       "order": 1, 
-      "other_id": 1, 
+      "other_id": 2, 
       "other_type": [
         "medialibrary", 
         "picture"
@@ -479,9 +472,9 @@
     "model": "cyclope.author", 
     "fields": {
       "origin": "Chino", 
-      "name": "el chino", 
+      "name": "admin", 
       "image": "/media/uploads/wp_logo.png", 
-      "slug": "chino", 
+      "slug": "admin", 
       "content_types": [
         [
           "articles", 
@@ -553,86 +546,6 @@
     }
   }, 
   {
-    "pk": 3, 
-    "model": "cyclope.author", 
-    "fields": {
-      "origin": "", 
-      "name": "", 
-      "image": "", 
-      "slug": "author-2", 
-      "content_types": [
-        [
-          "medialibrary", 
-          "externalcontent"
-        ], 
-        [
-          "medialibrary", 
-          "regularfile"
-        ], 
-        [
-          "medialibrary", 
-          "flashmovie"
-        ]
-      ], 
-      "notes": ""
-    }
-  }, 
-  {
-    "pk": 4, 
-    "model": "cyclope.author", 
-    "fields": {
-      "origin": "", 
-      "name": "Videoramia", 
-      "image": "", 
-      "slug": "author-3", 
-      "content_types": [
-        [
-          "medialibrary", 
-          "movieclip"
-        ]
-      ], 
-      "notes": ""
-    }
-  }, 
-  {
-    "pk": 5, 
-    "model": "cyclope.author", 
-    "fields": {
-      "origin": "", 
-      "name": "Fot\u00f3nico", 
-      "image": "", 
-      "slug": "author-4", 
-      "content_types": [
-        [
-          "medialibrary", 
-          "movieclip"
-        ], 
-        [
-          "medialibrary", 
-          "picture"
-        ]
-      ], 
-      "notes": ""
-    }
-  }, 
-  {
-    "pk": 6, 
-    "model": "cyclope.author", 
-    "fields": {
-      "origin": "", 
-      "name": "Le\u00edto", 
-      "image": "", 
-      "slug": "author-5", 
-      "content_types": [
-        [
-          "medialibrary", 
-          "soundtrack"
-        ]
-      ], 
-      "notes": ""
-    }
-  }, 
-  {
     "pk": 7, 
     "model": "cyclope.author", 
     "fields": {
@@ -695,31 +608,8 @@
   }, 
   {
     "pk": 1, 
-    "model": "cyclope.source", 
-    "fields": {
-      "link": "htpp://rebelion.org", 
-      "name": "Rebeli\u00f3n", 
-      "slug": "rebelion"
-    }
-  }, 
-  {
-    "pk": 1, 
-    "model": "cyclope.userprofile", 
-    "fields": {
-      "city": "", 
-      "about": "", 
-      "public": true, 
-      "user": 2, 
-      "avatar": ""
-    }
-  }, 
-  {
-    "pk": 1, 
     "model": "collections.collection", 
     "fields": {
-      "description": "La Colecci\u00f3n Zonas agrupa los diferentes lugares de publicaci\u00f3n de la portada del sitio. ", 
-      "default_list_view": "", 
-      "image": "/media/uploads/wp_logo.png", 
       "content_types": [
         [
           "articles", 
@@ -758,6 +648,10 @@
           "staticpage"
         ]
       ], 
+      "description": "La Colecci\u00f3n Zonas agrupa los diferentes lugares de publicaci\u00f3n de la portada del sitio. ", 
+      "default_list_view": "", 
+      "image": "/media/uploads/wp_logo.png", 
+      "view_options": "{}", 
       "visible": true, 
       "navigation_root": false, 
       "slug": "zonas", 
@@ -768,15 +662,16 @@
     "pk": 6, 
     "model": "collections.collection", 
     "fields": {
-      "description": "Hola esta es la descripci\u00f3n.", 
-      "default_list_view": "contents", 
-      "image": "/media/uploads/images/cyclope.png", 
       "content_types": [
         [
           "articles", 
           "article"
         ]
       ], 
+      "description": "Hola esta es la descripci\u00f3n.", 
+      "default_list_view": "contents", 
+      "image": "/media/uploads/images/cyclope.png", 
+      "view_options": "{}", 
       "visible": true, 
       "navigation_root": false, 
       "slug": "boletin", 
@@ -787,9 +682,6 @@
     "pk": 8, 
     "model": "collections.collection", 
     "fields": {
-      "description": "Aqu\u00ed ir\u00eda una descripci\u00f3n general de la colecci\u00f3n. ", 
-      "default_list_view": "", 
-      "image": "/media/uploads/images/cyclope.png", 
       "content_types": [
         [
           "articles", 
@@ -840,53 +732,14 @@
           "topic"
         ]
       ], 
+      "description": "Aqu\u00ed ir\u00eda una descripci\u00f3n general de la colecci\u00f3n. ", 
+      "default_list_view": "", 
+      "image": "/media/uploads/images/cyclope.png", 
+      "view_options": "{}", 
       "visible": true, 
       "navigation_root": false, 
       "slug": "general", 
       "name": "General"
-    }
-  }, 
-  {
-    "pk": 9, 
-    "model": "collections.collection", 
-    "fields": {
-      "description": "", 
-      "default_list_view": "", 
-      "image": "", 
-      "content_types": [
-        [
-          "articles", 
-          "article"
-        ], 
-        [
-          "medialibrary", 
-          "document"
-        ], 
-        [
-          "medialibrary", 
-          "regularfile"
-        ], 
-        [
-          "medialibrary", 
-          "movieclip"
-        ], 
-        [
-          "medialibrary", 
-          "picture"
-        ], 
-        [
-          "medialibrary", 
-          "soundtrack"
-        ], 
-        [
-          "staticpages", 
-          "staticpage"
-        ]
-      ], 
-      "visible": true, 
-      "navigation_root": false, 
-      "slug": "areas-de-trabajo", 
-      "name": "Areas de trabajo"
     }
   }, 
   {
@@ -907,23 +760,6 @@
     }
   }, 
   {
-    "pk": 18, 
-    "model": "collections.category", 
-    "fields": {
-      "rght": 2, 
-      "description": "h2. Terminamos el 2010 con muchos logros.\r\nEn 2011 sigamos caminando la utop\u00eda.\r\n\r\nLuego de mucho caminar, preguntar, caminar el 2010 ha sido un a\u00f1o de grandes logros para C\u00f3digo Sur. Logros que nos han hecho crecer a fuerza de sudor y l\u00e1grimas, por que as\u00ed lo sentimos en varias oportunidades. Pero mirando el a\u00f1o completo a la luz de los \u00faltimos d\u00edas de \u00e9l, nos da fuerza saber que las acciones no son pocas, y que modestamente estamos haciendo parte de la b\u00fasqueda de alternativas para otro mundo posible.\r\n\r\nLa cultura, el conocimiento, el software, todos los bienes comunes, son indispensables en en el proceso de transformaci\u00f3n de la sociedad. El planteo es c\u00f3mo y desde qu\u00e9 lugar ha de darse la lucha, y entendiendo la construcci\u00f3n de otro mundo posible como capaz de generar ideas y acciones emancipadoras y cultivar la semilla de la esperanza.\r\n\r\nHoy m\u00e1s que nunca, cuando las coorporaciones parecen querer apropiarse de nuevo conceptos (que en realidad no son nuevos) como conocimiento o bienes comunes, y cuando la tecnolog\u00eda se funde con el proyecto social, dando espacio para nuevos mecanimos de comunicaci\u00f3n entre las personas, es necesario contruir una fuerza motora de ideas, reflexiones, nuevos paradigmas, y pr\u00e1cticas coherentes y \u00e9ticas.\r\n\r\nA esa lucha nos entregamos, hoy como ayer, para construir de verdad en la tierra un mundo donde quepan muchos mundos. Para contruir una patria grande llamada Nuestra Am\u00e9rica, con hombres y mujeres nuevos, con hombres y mujeres libres.\r\n\r\n\u00a1Felices Fiestas para todos y todas!\r\n\r\nAgradecimientos:\r\n\r\nSon muchas las organizaciones para agradecer, pero un breve listado de las m\u00e1s significativas del a\u00f1o: Ayuda Popular Noruega, Fundaci\u00f3n Heinrich Boll, Fondo de Solidaridad X-Y, Centro Memorial Martin Luther King Jr., Radialistas Apasionadas y Apasionados, Movimiento Nacional Campesino Ind\u00edgena, Radio Santa Clara, Di\u00f3cesis de Ciudad Quesada, Movimiento Campesino de Santiago del Estero, Colectivo Redeco y Frente Popular Dar\u00edo Santill\u00e1n.\r\n\r\nEditora: Florencia Copley\r\nPara comunicarse con C\u00f3digo Sur por favor escriba a info@codigosur.org.\r\n\r\n\r\n", 
-      "parent": null, 
-      "level": 0, 
-      "image": "/media/uploads/ilustracion.png", 
-      "collection": 6, 
-      "lft": 1, 
-      "tree_id": 17, 
-      "active": true, 
-      "slug": "boletin-0-enero-2011", 
-      "name": "Bolet\u00edn # 0 | Enero 2011"
-    }
-  }, 
-  {
     "pk": 20, 
     "model": "collections.category", 
     "fields": {
@@ -938,132 +774,6 @@
       "active": true, 
       "slug": "noticias", 
       "name": "Noticias"
-    }
-  }, 
-  {
-    "pk": 30, 
-    "model": "collections.category", 
-    "fields": {
-      "rght": 8, 
-      "description": "Aqu\u00ed la descripci\u00f3n general de la categor\u00eda. ", 
-      "parent": null, 
-      "level": 0, 
-      "image": "/media/uploads/images/cyclope.png", 
-      "collection": 8, 
-      "lft": 1, 
-      "tree_id": 27, 
-      "active": true, 
-      "slug": "acerca-de", 
-      "name": "Acerca de"
-    }
-  }, 
-  {
-    "pk": 31, 
-    "model": "collections.category", 
-    "fields": {
-      "rght": 3, 
-      "description": "Descripci\u00f3n. ", 
-      "parent": 30, 
-      "level": 1, 
-      "image": "", 
-      "collection": 8, 
-      "lft": 2, 
-      "tree_id": 27, 
-      "active": true, 
-      "slug": "foros-sociales", 
-      "name": "Foros Sociales"
-    }
-  }, 
-  {
-    "pk": 32, 
-    "model": "collections.category", 
-    "fields": {
-      "rght": 7, 
-      "description": "", 
-      "parent": 30, 
-      "level": 1, 
-      "image": "", 
-      "collection": 8, 
-      "lft": 4, 
-      "tree_id": 27, 
-      "active": true, 
-      "slug": "actividades", 
-      "name": "Actividades"
-    }
-  }, 
-  {
-    "pk": 33, 
-    "model": "collections.category", 
-    "fields": {
-      "rght": 6, 
-      "description": "", 
-      "parent": 32, 
-      "level": 2, 
-      "image": "", 
-      "collection": 8, 
-      "lft": 5, 
-      "tree_id": 27, 
-      "active": true, 
-      "slug": "subsubcategoria", 
-      "name": "SubSubcategor\u00eda"
-    }
-  }, 
-  {
-    "pk": 35, 
-    "model": "collections.category", 
-    "fields": {
-      "rght": 2, 
-      "description": "Hola esta es la descripci\u00f3n. Ac\u00e1 podemos crear una nota o presentaci\u00f3n general para el n\u00famero del bolet\u00edn que estamos enviando. ", 
-      "parent": null, 
-      "level": 0, 
-      "image": "/media/uploads/images/cyclope.png", 
-      "collection": 6, 
-      "lft": 1, 
-      "tree_id": 29, 
-      "active": true, 
-      "slug": "mi-primer-boletin-0", 
-      "name": "Mi primer Bolet\u00edn # 0"
-    }
-  }, 
-  {
-    "pk": 36, 
-    "model": "collections.category", 
-    "fields": {
-      "rght": 2, 
-      "description": "", 
-      "parent": null, 
-      "level": 0, 
-      "image": "", 
-      "collection": 9, 
-      "lft": 1, 
-      "tree_id": 30, 
-      "active": true, 
-      "slug": "salarios", 
-      "name": "Salarios"
-    }
-  }, 
-  {
-    "pk": 8, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 1, 
-      "object_id": 1, 
-      "content_type": [
-        "medialibrary", 
-        "movieclip"
-      ]
-    }
-  }, 
-  {
-    "pk": 9, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 1, 
-      "object_id": 1, 
-      "content_type": [
-        "medialibrary", 
-        "soundtrack"
-      ]
     }
   }, 
   {
@@ -1091,10 +801,82 @@
     }
   }, 
   {
-    "pk": 13, 
+    "pk": 66, 
     "model": "collections.categorization", 
     "fields": {
       "category": 1, 
+      "object_id": 1, 
+      "content_type": [
+        "medialibrary", 
+        "picture"
+      ]
+    }
+  }, 
+  {
+    "pk": 69, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
+      "object_id": 1, 
+      "content_type": [
+        "medialibrary", 
+        "document"
+      ]
+    }
+  }, 
+  {
+    "pk": 70, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
+      "object_id": 1, 
+      "content_type": [
+        "medialibrary", 
+        "regularfile"
+      ]
+    }
+  }, 
+  {
+    "pk": 73, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
+      "object_id": 1, 
+      "content_type": [
+        "staticpages", 
+        "staticpage"
+      ]
+    }
+  }, 
+  {
+    "pk": 74, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
+      "object_id": 1, 
+      "content_type": [
+        "medialibrary", 
+        "picture"
+      ]
+    }
+  }, 
+  {
+    "pk": 75, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
+      "object_id": 1, 
+      "content_type": [
+        "medialibrary", 
+        "movieclip"
+      ]
+    }
+  }, 
+  {
+    "pk": 76, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
       "object_id": 1, 
       "content_type": [
         "medialibrary", 
@@ -1103,10 +885,22 @@
     }
   }, 
   {
-    "pk": 14, 
+    "pk": 77, 
     "model": "collections.categorization", 
     "fields": {
-      "category": 1, 
+      "category": 20, 
+      "object_id": 1, 
+      "content_type": [
+        "articles", 
+        "article"
+      ]
+    }
+  }, 
+  {
+    "pk": 78, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
       "object_id": 1, 
       "content_type": [
         "medialibrary", 
@@ -1115,413 +909,69 @@
     }
   }, 
   {
-    "pk": 21, 
+    "pk": 79, 
     "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
+      "object_id": 1, 
+      "content_type": [
+        "medialibrary", 
+        "soundtrack"
+      ]
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "perms.categorypermission", 
     "fields": {
       "category": 1, 
-      "object_id": 4, 
-      "content_type": [
-        "articles", 
-        "article"
-      ]
+      "can_edit_content": true, 
+      "user": [
+        "editor"
+      ], 
+      "can_add_content": false
     }
   }, 
   {
-    "pk": 33, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 18, 
-      "object_id": 4, 
-      "content_type": [
-        "articles", 
-        "article"
-      ]
-    }
-  }, 
-  {
-    "pk": 37, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 20, 
-      "object_id": 7, 
-      "content_type": [
-        "articles", 
-        "article"
-      ]
-    }
-  }, 
-  {
-    "pk": 39, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 20, 
-      "object_id": 8, 
-      "content_type": [
-        "articles", 
-        "article"
-      ]
-    }
-  }, 
-  {
-    "pk": 40, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 20, 
-      "object_id": 9, 
-      "content_type": [
-        "articles", 
-        "article"
-      ]
-    }
-  }, 
-  {
-    "pk": 42, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 20, 
-      "object_id": 10, 
-      "content_type": [
-        "articles", 
-        "article"
-      ]
-    }
-  }, 
-  {
-    "pk": 45, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 20, 
-      "object_id": 11, 
-      "content_type": [
-        "articles", 
-        "article"
-      ]
-    }
-  }, 
-  {
-    "pk": 47, 
-    "model": "collections.categorization", 
+    "pk": 2, 
+    "model": "perms.categorypermission", 
     "fields": {
       "category": 1, 
-      "object_id": 12, 
-      "content_type": [
-        "articles", 
-        "article"
-      ]
+      "can_edit_content": false, 
+      "user": [
+        "manager"
+      ], 
+      "can_add_content": true
     }
   }, 
   {
-    "pk": 49, 
-    "model": "collections.categorization", 
+    "pk": 3, 
+    "model": "perms.categorypermission", 
     "fields": {
       "category": 20, 
-      "object_id": 13, 
-      "content_type": [
-        "articles", 
-        "article"
-      ]
+      "can_edit_content": true, 
+      "user": [
+        "editor"
+      ], 
+      "can_add_content": true
     }
   }, 
   {
-    "pk": 63, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 35, 
-      "object_id": 8, 
-      "content_type": [
-        "articles", 
-        "article"
-      ]
-    }
-  }, 
-  {
-    "pk": 64, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 35, 
-      "object_id": 14, 
-      "content_type": [
-        "articles", 
-        "article"
-      ]
-    }
-  }, 
-  {
-    "pk": 65, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 35, 
-      "object_id": 18, 
-      "content_type": [
-        "articles", 
-        "article"
-      ]
-    }
-  }, 
-  {
-    "pk": 19, 
+    "pk": 1, 
     "model": "articles.article", 
     "fields": {
       "allow_comments": "SITE", 
-      "name": "Agregado de contenido en Biblioteca Multimedia", 
-      "modification_date": "2011-10-10 14:10:23", 
-      "tags": "", 
-      "text": "La administraci\u00f3n de la biblioteca multimedia es b\u00e1sicamente igual para todas sus opciones. Un formulario que pemite manejar diferentes campos para clasificar la informaci\u00f3n. Las opciones ser\u00e1n similares en todos los elementos de la biblioteca. \r\n\r\nLos tipos de contenido dentro de la Biblioteca multimedia son:\r\n\r\n- Im\u00e1genes  (ScreenCast)\r\n- Video  (ScreenCast)\r\nTodos los vide\r\n- Pistas de sonido  (ScreenCast)\r\n- Documentos  (ScreenCast)\r\n- Archivos  (ScreenCast)\r\n- Flash  (ScreenCast)\r\n- Contenidos externos \r\n\r\nIngrese a Biblioteca Multimedia y haga click en Video. Recuerde que el video debe estar previamente subido por medio del Explorador de Archivos. \r\n\r\nSiempre que cree un nuevo contenido en la biblioteca, debe como m\u00ednimo proporcionar un nombre, sea una im\u00e1gen, sea un video, un audio, etc. y seleccionar el archivo fuente, desde el Explorador de Archivos. \r\n\r\nLuego, la ventana del Visor de Archivos se cerrar\u00e1 llev\u00e1ndolo a la pantalla anterior, donde vera Ud. la ruta a la imagen y una miniatura de la misma. \r\n\r\nAqu\u00ed veremos las siguientes opciones (car\u00edan seg\u00fan el tipo de contenido):\r\n\r\nNombre\r\nEtiquetas\r\nPublicado\r\nFecha de creaci\u00f3n\r\nPermitir comentarios\r\nAutor\u00eda\r\nDescripci\u00f3n\r\nNo olvide llenar el campo descripci\u00f3n en que luego se mostrar\u00e1, por ejemplo, como ep\u00edgrafe para una imagen cuando \u00e9sta aparezca dentro de un art\u00edculo, o como texto descriptivo en la vista HTML del sitio. Es altamente recomendable completar el campo descripci\u00f3n. \r\nCuadro de muestra\r\nImagen / Video / Audio / Documentos / Etc.\r\nCategorizaciones\r\nEl contenido puede llevar tambien categor\u00edas. esto sirve por ejemplo si ademas de incluirse en un art\u00edculo se desea que forme parte de alguna galeria o categor\u00eda en especial, o simplemente sea listada junto con otro contenido del sitio. \r\nContenidos relacionados \r\n\r\n\r\nPara finalizar solo haga click en \u201cGuardar\u201d, o alguna de las otras opciones de guardar. \r\n", 
+      "name": "Un art\u00edculo Pi", 
+      "modification_date": "2012-07-10T16:15:14.298", 
       "author": null, 
-      "creation_date": "2011-06-21 05:56:24", 
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet risus in neque lobortis viverra et scelerisque dolor. Ut pellentesque pharetra odio, aliquam congue nisl tempus nec. Etiam ullamcorper nisi ut tellus blandit cursus. Suspendisse tristique ullamcorper metus sed luctus. ", 
+      "creation_date": "2012-07-10T16:04:17", 
       "source": null, 
       "published": true, 
       "date": null, 
       "summary": "", 
-      "slug": "agregado-de-contenido-en-biblioteca-multimedia", 
+      "slug": "un-articulo-pi", 
       "pretitle": ""
-    }
-  }, 
-  {
-    "pk": 13, 
-    "model": "articles.article", 
-    "fields": {
-      "allow_comments": "SITE", 
-      "name": "Art\u00edculos y p\u00e1ginas est\u00e1ticas: \u00bfcual es la diferencia?", 
-      "modification_date": "2011-06-21 07:28:40", 
-      "tags": "", 
-      "text": "Las p\u00e1ginas est\u00e1ticas no muestran autor\u00edas, fuentes, ni fecha. A veces definitivamente las necesitaremos, aunque la mayor\u00eda de nuestros contenidos sean Art\u00edculos. Depender\u00e1 de nuestro sitio el uso que le demos a cada una. \r\n\r\nTambi\u00e9n, mientras desarrollamos una opci\u00f3n que llamaremos \u201cHTML\u201d en Contenidos, todo lo que es c\u00f3digo HTML que queremos poner en una regi\u00f3n, lo utilizaremos como p\u00e1gina est\u00e1tica. Por ejemplo el recuadro de suscripci\u00f3n al bolet\u00edn, se guardar\u00eda como p\u00e1gina est\u00e1tica.", 
-      "author": null, 
-      "creation_date": "2011-06-21 05:56:24", 
-      "source": null, 
-      "published": true, 
-      "date": null, 
-      "summary": "Un art\u00edculo muestra m\u00e1s tipos de informaci\u00f3n que una p\u00e1gina est\u00e1tica. B\u00e1sicamente las dos pueden cumplir funciones similares, sin embargo, una p\u00e1gina est\u00e1tica servir\u00e1 para poner un texto de bienvenida en nuestra web, o poner informaci\u00f3n institucional que actualizaremos muy espor\u00e1dicamente.", 
-      "slug": "articulos-y-paginas-estaticas-cual-es-la-diferenci", 
-      "pretitle": ""
-    }
-  }, 
-  {
-    "pk": 7, 
-    "model": "articles.article", 
-    "fields": {
-      "allow_comments": "SITE", 
-      "name": "Colecciones y categor\u00edas ", 
-      "modification_date": "2012-04-21 17:17:18", 
-      "tags": "", 
-      "text": "Por ejemplo, podemos utilizar una colecci\u00f3n para agrupar contenidos seg\u00fan la regi\u00f3n (parte del sitio) donde queremos que sean exhibidos en el sitio web. \r\n\r\nPodemos tambi\u00e9n crear colecciones asociadas a componentes, como ocurre con el caso de los Boletines. La colecci\u00f3n que utilizamos para Boletines permitir\u00e1 que asignemos para cada env\u00edo del bolet\u00edn qu\u00e9 contenidos del sitio ser\u00e1n enviados. \r\n\r\nEl art\u00edculo Colecciones y Categor\u00edas: el coraz\u00f3n de Cyclope profundiza sobre este tema y su manejo desde la interfaz de administraci\u00f3n. ", 
-      "author": 7, 
-      "creation_date": "2011-06-21 05:56:24", 
-      "source": null, 
-      "published": true, 
-      "date": null, 
-      "summary": "Cyclope usa un sistema de colecciones y categor\u00edas que nos permite agrupar nuestros contenidos con diferentes prop\u00f3sitos. El uso m\u00e1s cl\u00e1sico es el de organizar la informaci\u00f3n sem\u00e1nticamente, pero tambi\u00e9n podemos utilizar las colecciones para asociar contenidos a comportamientos espec\u00edficos de m\u00faltiples formas. ", 
-      "slug": "colecciones-y-categorias", 
-      "pretitle": ""
-    }
-  }, 
-  {
-    "pk": 14, 
-    "model": "articles.article", 
-    "fields": {
-      "allow_comments": "SITE", 
-      "name": "C\u00f3mo crear un Art\u00edculo", 
-      "modification_date": "2011-10-10 14:51:14", 
-      "tags": "", 
-      "text": "Llene los campos con los contenidos del art\u00edculo. Si el men\u00fa de autores est\u00e1 vacio, puede crear el primero desde el signo \u201c+\u201c a la derecha del item \u201cAutor\u201d. \r\n\r\nVer el tema de datos de publicaci\u00f3n que est\u00e1 oculto. Desglosar este punto. \r\n\r\nPara asignarle categor\u00edas a su articulo haga click en \u201cAgregar otro/a Categorizaci\u00f3n\u201c en el subpanel \u201cCategorizaciones\u201c. \r\n\r\nPara relacionar otro contenido a su art\u00edculo (que puede ser una imagen, un PDF o cualquier otro archivo que haya subido a Cyclope) debe hacer click en \u201cAgregar otro/a Contenido Relacionado\u201c en el panel \u201cContenidos Relacionados\u201c .\r\n\r\nSi no desea publicar el art\u00edculo todav\u00eda, pero necesita guardarlo, puede dejar sin seleccionar el item \u201cPublicar\u201d, guardar\u00e1 el art\u00edculo pero no aparecer\u00e1 publicado en el sitio. \r\n\r\nEl subpanel \u201cCategorizaciones\u201d se explica en detalle en la secci\u00f3n \u00bfC\u00f3mo determinar en que lugar del sitio aparecer\u00e1 mi art\u00edculo? y el panel \u201cContenidos Relacionados\u201d en \u00bfC\u00f3mo agregar una imagen a mi articulo?. \r\n\r\nFinalmente, para guardar el art\u00edculo Ud. dispone de tres opciones. En la parte inferior de la pantalla encontrar\u00e1 tres botones con funciones semejantes: \r\n\r\n    * Guardar y a\u00f1adir otro Guarda el contenido y abre un nuevo formulario vacio. \r\n    * Guardar y continuar a editar Guarda el contenido sin cerrar el formulario. \r\n    * Guardar Guarda el contenido y vuelve a la secci\u00f3n articulos para modificar. \r\n\r\nDebe hacer click en alguno de los tres para guardar el contenido cargado en el formulario.", 
-      "author": null, 
-      "creation_date": "2011-06-21 05:56:24", 
-      "source": null, 
-      "published": true, 
-      "date": null, 
-      "summary": "Para agregar un art\u00edculo, acceda al panel de Control , seleccione la pesta\u00f1a Principal y haga clic en Agregar, debajo del Item Art\u00edculo.", 
-      "slug": "como-crear-un-articulo", 
-      "pretitle": ""
-    }
-  }, 
-  {
-    "pk": 15, 
-    "model": "articles.article", 
-    "fields": {
-      "allow_comments": "SITE", 
-      "name": "C\u00f3mo crear una p\u00e1gina est\u00e1tica", 
-      "modification_date": "2011-06-21 07:30:28", 
-      "tags": "", 
-      "text": "Un ejemplo t\u00edpico para este tipo de contenido es el texto introductorio usado en la secci\u00f3n \u201cQui\u00e9nes Somos\u201d de cualquier sitio web. Las p\u00e1ginas est\u00e1ticas son facilmente \u201cvinculables\u201d a un \u00edtem de men\u00fa, de manera que la p\u00e1gina se mostrar\u00e1 cuando se haga click en el men\u00fa. \r\nAgregar una P\u00e1gina Est\u00e1tica \r\n\r\nPara agregar una p\u00e1gina est\u00e1tica, acceda al panel de Control , seleccione la pesta\u00f1a Principal y haga clic en Agregar, debajo de P\u00e1ginas Est\u00e1ticas.\r\na continuaci\u00f3n se abrir\u00e1 el formulario Agregar p\u00e1gina est\u00e1tica:\r\n\r\nLlene los campos con los contenidos del formulario. \r\nModificar una \u201cP\u00e1gina Est\u00e1tica\u201d \r\n\r\nPara modificar una p\u00e1gina est\u00e1tica existente, acceda al panel de Control , seleccione la pesta\u00f1a Principal y haga clic Modificar debajo de P\u00e1gina Est\u00e1tica. \r\n\r\nCyclope mostrar\u00e1 entonces, una lista con todas las p\u00e1ginas est\u00e1ticas del sitio. Puede seleccionar una p\u00e1gina de la lista para modificar (o crear una nueva tambi\u00e9n desde \u201cAgregar P\u00e1gina Est\u00e1tica\u201d). De esta forma se llegar\u00e1 al formulario \u201cModificar p\u00e1gina est\u00e1tica\u201c \r\n\r\nLlene los campos con los contenidos del formulario. \r\nAsignar la P\u00e1gina Est\u00e1tica a un item de men\u00fa \r\n\r\nEn la parte se\u00f1alada del formulario (tanto para crear como para modificar p\u00e1ginas), se encuentra una lista de los items de men\u00fa existentes en el sitio. Si la p\u00e1gina est\u00e1tica ya ha sido asignada a un \u00edtem con anterioridad, ver\u00e1 que el mismo est\u00e1 marcado. Sino seleccione el \u00edtem de men\u00fa que se debe vincular a esa p\u00e1gina. \r\n\r\nSi el \u00edtem de men\u00fa deseado para vincular a la p\u00e1gina que estamos editando ya est\u00e1 asignado a otra p\u00e1gina o una categor\u00eda, este enlace se romper\u00e1 y se asignar\u00e1 uno nuevo al seleccionado en la lista \u201cItems de Menu\u201d. \r\n\r\nSi no desea publicar la p\u00e1gina todav\u00eda, pero necesita guardar el texto tipeado o copiado en el formulario, puede dejar sin seleccionar el item \u201cPublicar\u201d, guardar\u00e1 la p\u00e1gina pero no aparecer\u00e1 publicado hasta que edite el articulo y seleccione ese \u00edtem. \r\n\r\nTambi\u00e9n puede asignarle categor\u00edas a su P\u00e1gina desde \u201cAgregar otro/a Categorizaci\u00f3n\u201c en el subpanel \u201cCategorizaciones\u201c. \r\nOpciones para guardar una P\u00e1gina Est\u00e1tica \r\n\r\nUd. dispone de tres opciones para guardar la p\u00e1gina. En la parte inferior de la pantalla encontrar\u00e1 tres botones con funciones semejantes: \r\n\r\n    * Guardar y a\u00f1adir otro Guarda el contenido y abre un nuevo formulario vacio. \r\n    * Guardar y continuar a editar Guarda el contenido sin cerrar el formulario. \r\n    * Guardar Guarda el contenido y vuelve a la secci\u00f3n \u201cPaginas Est\u00e1tica\u201d para modificar. \r\n\r\nDebe hacer click en alguno de los tres para guardar el contenido cargado en el formulario.", 
-      "author": null, 
-      "creation_date": "2011-06-21 05:56:24", 
-      "source": null, 
-      "published": true, 
-      "date": null, 
-      "summary": "\r\n\r\n\r\nLas p\u00e1ginas est\u00e1ticas est\u00e1n destinadas a secciones \u201cfijas\u201d del sitio, y no, como los art\u00edculos y otros contenidos multimedia, a aparecer entre los listados de contenido din\u00e1mico. Tampoco cargan datos como \u201cautor\u201d o \u201cfecha\u201d. ", 
-      "slug": "como-crear-una-pagina-estatica", 
-      "pretitle": ""
-    }
-  }, 
-  {
-    "pk": 16, 
-    "model": "articles.article", 
-    "fields": {
-      "allow_comments": "SITE", 
-      "name": "C\u00f3mo determinar en qu\u00e9 lugar del sitio aparecer\u00e1n mis contenidos", 
-      "modification_date": "2011-06-21 07:32:05", 
-      "tags": "", 
-      "text": "A su vez, para mantener las categor\u00edas ordenadas, pueden agruparse en colecciones. En el tutorial Nivel Medio (para usuarios \u201cManager\u201d) se desarrolla este tema en detalle. Los usuarios \u201cEditor\u201d, no pueden acceder a estos paneles de configuraci\u00f3n sobre las categor\u00edas y men\u00faes, pero si pueden asignarle a cada art\u00edculo o contenido una o m\u00e1s categor\u00edas y definir en que lugar del sitio se mostrar\u00e1n, tal como describiremos en detalle en este apartado. \r\nEstructura del sitio \r\n\r\nLos sitios de Cyclope son entregados con una estructura de contenidos configurada seg\u00fan los requerimientos definidos previamente por el socio. Por lo tanto, al editar un art\u00edculo Ud. debe buscar en \u201cCategorizaciones\u201c, la colecci\u00f3n y la categoria relacionada con la estructura de contenidos pautada. Generalmente las categor\u00edas llevan el mismo nombre que el item de men\u00fa que permite acceder a ellas. \r\nAgregar una categoria a su Art\u00edculo \r\n\r\nDesde el formulario de \u201cAgregar Art\u00edculo\u201d o \u201cModificar Articulo\u201d (en \u00bfC\u00f3mo publicar un art\u00edculo? se explica paso a paso c\u00f3mo llegar a esta secci\u00f3n), busque el sub-panel \u201cCategorizaciones\u201c. \r\n\r\n\r\nHaga click en \u201cAgregar otro/a Categorizaci\u00f3n\u201c y se abrir\u00e1 una nueva selecci\u00f3n de categor\u00eda:\r\n\r\nSeleccione en el primer menu desplegable la colecci\u00f3n deseada, inmediatamente en el menu siguiente (Categor\u00eda) se cargar\u00e1n las categor\u00edas correpondientes a la selecci\u00f3n. Finalmente seleccione la categor\u00eda deseada de este \u00faltimo menu.\r\nPuede agregar cuantas categor\u00edas desee a cada art\u00edculo, simplemente volviendo a hacer click en \u201cAgregar otro/a Categorizaci\u00f3n\u201c.", 
-      "author": null, 
-      "creation_date": "2011-06-21 05:56:24", 
-      "source": null, 
-      "published": true, 
-      "date": null, 
-      "summary": "Una de las herramientas que Cyclope ofrece para ordenar el contenido son las Categor\u00edas. Cada \u00edtem de men\u00fa por ejemplo, puede apuntarse hacia una categor\u00eda determinada, de tal forma que al hacer click en ese \u00edtem de men\u00fa, se listan los art\u00edculos pertenecientes a dicha categor\u00eda. ", 
-      "slug": "como-determinar-en-que-lugar-del-sitio-apareceran-", 
-      "pretitle": ""
-    }
-  }, 
-  {
-    "pk": 17, 
-    "model": "articles.article", 
-    "fields": {
-      "allow_comments": "SITE", 
-      "name": "C\u00f3mo funciona el Explorador de archivos", 
-      "modification_date": "2011-06-21 07:32:51", 
-      "tags": "", 
-      "text": "Si no est\u00e1 subida a\u00fan siga el procedimiento detallado a continuaci\u00f3n: \r\nSubir un archivo de imagen al reposito de archivos del sitio \r\n\r\nPara subir un archivo de imagen, haga clic en el boton \u201cSubir\u201d, ubicado en la esquina superior derecha del Visor de Archivos. \r\n\r\nA continuacion se abrir\u00e1 una nueva ventana que le permitira seleccionar archivos ubicados en su computadora (hasta cinco archivos a la vez). Una vez seleccionado haga click en \u201cSubir\u201d \r\n\r\nDesde http://misitio.org/admin/filebrowser/browse/ puede acceder al Visor de Archivos. (copie la url a su navegador y reemplace \u201cmisitio.org\u201d por su dominio). Puede utilizar la combinaci\u00f3n de teclas Control + d para guardar el marcador en su navegador. \r\n\r\nTenga en cuenta que, segun el tama\u00f1o del archivo y la velocidad de conexion, el proceso de subida puede tomar algunos minutos. Una vez subidas las im\u00e1genes, podr\u00e1 encontrarlas en el \u201cVisor de archivos\u201d. \r\n\r\nSi la cantidad de im\u00e1genes es numerosa y se dificulta encontrarlas en el Visor de Archivos, use el panel de filtros a su derecha, donde podra seleccionar por fecha, tipo de archivos etc, y reducir el listado de items. \r\n\r\nUna vez subido el archivo de la imagen, Cyclope volver\u00e1 al Visor de Archivos donde la imagen aparecer\u00e1 listada.\r\nPara cargar el archivo de imagen (que puede ser .jpg, .png, .gif o .tif) desde el Visor de Archivos haga clic en el icono\u2026 \r\n\r\n...que abrir\u00e1 en una ventana nueva con el Visor. \r\n\r\nSi la imagen ya est\u00e1 inclu\u00edda en el mismo, aparecera listada entre los archivos. \r\n\r\n S\u00f3lo debe hacer click en el bot\u00f3n \u201cselecciona\u201c a la izquierda del item elegido. ", 
-      "author": null, 
-      "creation_date": "2011-06-21 05:56:24", 
-      "source": null, 
-      "published": true, 
-      "date": null, 
-      "summary": "", 
-      "slug": "como-funciona-el-explorador-de-archivos", 
-      "pretitle": ""
-    }
-  }, 
-  {
-    "pk": 18, 
-    "model": "articles.article", 
-    "fields": {
-      "allow_comments": "SITE", 
-      "name": "C\u00f3mo funciona la biblioteca Biblioteca Multimedia", 
-      "modification_date": "2011-10-10 14:51:27", 
-      "tags": "", 
-      "text": "Seguramente sea necesario hacer una aclaraci\u00f3n bastante importante. Imaginemos que en el centro de nuestro barrio se crea una biblioteca. Cuando nos acercamos a ella, \u00bfqu\u00e9 hacemos? Nos acercamos al mostrador y decimos: Buenos d\u00edas, me da por favor Las Venas Abiertas de Am\u00e9rica Latina. La persona que nos recibe piensa un segundo, e inmediatamente buscar\u00e1 ese libro, dentro de todos los cientos y cientos de estantes, pero a trav\u00e9s de una planilla sabr\u00e1 en qu\u00e9 parte se encuentra el libro. El concepto con la biblioteca multimedia es similar. La biblioteca clasifica el contenido multimedia, pero no se encarga de almacenar en el disco dicha informaci\u00f3n. \r\n\r\nExiste otra instancia independiente que es la de subir archivos por medio del \"visor de archivos\". Que sirve para hacer realmente el upload del contenido al servidor. Luego la biblioteca buscar\u00e1 en ese visor para seleccionar el contenido. La Biblioteca Multimedia depende del Explorador de Archivos para poder funcionar, ya que sin \u00e9l, no tendr\u00eda contenidos que clasificar y mostrar. \r\n\r\nSi desea saber c\u00f3mo subir archivos por favor vea: Explorar Archivos. \r\n\r\nUna vez que tenemos nuestro contenido subido por medio del Explorador de Archivos, entonces vamos a clasificar el contenido subido por medio de la Biblioteca Multimedia. ", 
-      "author": null, 
-      "creation_date": "2011-06-21 05:56:24", 
-      "source": null, 
-      "published": true, 
-      "date": null, 
-      "summary": "La \u201cBiblioteca Multimedia\u201d es el lugar desde donde se clasifican nuestros contenidos multimedia, es decir, todo lo que es im\u00e1genes, audios, videos, documentos, etc. que luego podremos relacionar entre s\u00ed y con art\u00edculos, y tendr\u00e1n vistas HTML en nuestro sitio web.", 
-      "slug": "como-funciona-la-biblioteca-biblioteca-multimedia", 
-      "pretitle": ""
-    }
-  }, 
-  {
-    "pk": 12, 
-    "model": "articles.article", 
-    "fields": {
-      "allow_comments": "SITE", 
-      "name": "C\u00f3mo ingresar a Cyclope 3", 
-      "modification_date": "2011-06-21 08:13:21", 
-      "tags": "", 
-      "text": "Para ingresar a Cyclope 3 ingresar la siguiente direcci\u00f3n en nuestro navegador:\r\nhttp://midominio.org/admin\r\n\r\nPor favor, reemplace midominio.org por su dominio real con Cyclope. \r\n\r\nAqu\u00ed nos pedir\u00e1 ingresar nuesto nombre de acceso, y nuestra contrase\u00f1a. Si no la tienes, p\u00eddesela a qui\u00e9n configur\u00f3 tu sitio. \r\n\r\n!(left)/media/uploads/manual_cyclope_3/introduccion/como-ingresar.png(alt_text)!\r\n\r\nUna vez dentro en el entorno administrativo de Cyclope las herramientas se encuentran agrupadas para facilitar el trabajo. Las opciones disponibles en Cyclope dependen de los permisos que la persona usuaria tenga. Esto lo definen aquellas personas que son administradoras, por lo general qui\u00e9nes instalan y configuran el software y el sitio. Si te instalaste Cyclope en tu sistema, entonces tienes permisos totales.\r\n\r\n!(left)/media/uploads/manual_cyclope_3/introduccion/panel.png(alt_text)!\r\n\r\nAqu\u00ed enumeramos los grupos que actualmente tiene Cyclope a nivel administrativo (algunas de estas opciones puede no estar disponible en tu nivel o variar en funci\u00f3n de qu\u00e9 n\u00famero de versi\u00f3n tengas):\r\n\r\n* Contenidos\r\n* Estructura del sitio\r\n* Configuraci\u00f3n global\r\n* Complementos\r\n* Avanzado\r\n", 
-      "author": null, 
-      "creation_date": "2011-06-21 05:56:24", 
-      "source": null, 
-      "published": true, 
-      "date": null, 
-      "summary": "Cyclope como todo CMS cuenta con una parte de atr\u00e1s (donde entra qui\u00e9n edita y actualiza el sitio) y la parte de adelante, que es lo que ve todo el mundo, el sitio p\u00fablico. La parte de atr\u00e1s se conoce como Backend (\u00e1rea administrativa), y la parte delantera como Frontend (\u00e1rea p\u00fablica). Para ingresar al Backend de Cyclope 3 sigue los pasos que se detallan a continuaci\u00f3n.", 
-      "slug": "como-ingresar-a-cyclope-3", 
-      "pretitle": ""
-    }
-  }, 
-  {
-    "pk": 10, 
-    "model": "articles.article", 
-    "fields": {
-      "allow_comments": "SITE", 
-      "name": "Men\u00fas e \u00edtems de men\u00fa ", 
-      "modification_date": "2011-06-21 07:18:31", 
-      "tags": "", 
-      "text": "Los \u00edtems de men\u00fa son los componentes internos de los men\u00faes; pueden organizarse jer\u00e1rquicamente en forma de \u00e1rbol. \r\n\r\nEl \u00edtem de men\u00fa determina qu\u00e9 contenido se mostrar\u00e1 cuando el usuario lo seleccione. \r\nAqu\u00ed, al igual que en las regiones de esquemas, se debe determinar para cada item de men\u00fa qu\u00e9 contenido se desplegar\u00e1 y por lo tanto es necesario especificar qu\u00e9 vista de dicho contenido habr\u00e1 de usarse. \r\n", 
-      "author": 7, 
-      "creation_date": "2011-06-21 05:56:24", 
-      "source": null, 
-      "published": true, 
-      "date": null, 
-      "summary": "Los men\u00fas son un tipo de objeto con vistas asociadas y por lo tanto podremos decidir mediante el uso de esquemas su ubicaci\u00f3n en las diferentes regiones de nuestro sitio web. Podemos crear tantos men\u00faes como necesitemos. \r\n", 
-      "slug": "menus-e-items-de-menu", 
-      "pretitle": ""
-    }
-  }, 
-  {
-    "pk": 11, 
-    "model": "articles.article", 
-    "fields": {
-      "allow_comments": "SITE", 
-      "name": "Regiones y esquemas ", 
-      "modification_date": "2011-10-10 14:09:56", 
-      "tags": "", 
-      "text": "Es aqu\u00ed donde utilizaremos las vistas asociadas que describimos en el punto anterior. Podemos decidir, por ejemplo, que en la regi\u00f3n lateral izquierda se muestre una lista jerarquizada de las categor\u00edas pertenecientes a una colecci\u00f3n, en la regi\u00f3n superior se muestre un men\u00fa de navegaci\u00f3n y en la barra lateral izquierda un listado de res\u00famenes de los contenidos de la categor\u00eda \u201cDestacados\u201d. \r\n\r\n!(left)/media/uploads/manual_cyclope_3/logica/5-elements.png(alt_text)!\r\n\r\n!(left)/media/uploads/manual_cyclope_3/logica/water-left.png(alt_text)!\r\n\r\nEn Cyclope podemos utilizar diferentes esquemas para las diferentes secciones de nuestro sitio web, aunque el caso m\u00e1s com\u00fan, que viene pre-configurado, es tener un esquema para la portada (o p\u00e1gina de inicio) y otro para el resto del sitio web. \r\n\r\n\r\nh3. Qu\u00e9 son las Regiones\r\n\r\nLas Regiones est\u00e1n configuradas en un archivo llamado __init__.py de la carpeta donde se guardan los HTML de nuestro sitio. Nos permiten definir la cantidad de regiones que podr\u00e1 tener nuestro sitio web. Cada Regi\u00f3n se invoca dentro de los archivos HTML de nuestro Tema. En el caso de Neutrona Theme, la configuraci\u00f3n de las regiones se ve as\u00ed:\r\n\r\nbc. # *-- coding:utf-8 --*@\r\n\"\"Configuration for the Neutrona theme templates and regions.\r\nAttributes:\r\n    verbose_name: name of theme to be displayed in the admin interface\r\n    layout_templates: dictionary defining regions for the available templates\r\n\"\"\"\r\nfrom django.utils.translation import ugettext_lazy as _\r\nverbose_name = _('Neutrona')\r\nlayout_templates = {\r\n    'inner.html':\r\n        {\r\n        'verbose_name': _('4 Elements'),\r\n        'regions' : {\r\n        'air': _('air'),\r\n        'water': _('water'),\r\n        'before_fire': _('before fire'),\r\n        'after_fire': _('after fire'),\r\n        'earth': _('earth'),\r\n            }\r\n        },\r\n    'main.html':\r\n       {\r\n        'verbose_name': _('5 Elements'),\r\n        'regions' : {\r\n            'air': _('air'),\r\n            'water': _('water'),\r\n            'love': _('love'),\r\n            'before_fire': _('before fire'),\r\n            'after_fire': _('after fire'),\r\n            'earth': _('earth'),\r\n            }\r\n        },\r\n    'empty.html':\r\n        {'verbose_name': _('Empty'),\r\n         'regions': {}\r\n         },\r\n    'newsletter.html':\r\n        {'verbose_name': _('Newsletter'),\r\n        'regions' : {\r\n            'header': _('header'),\r\n            'before_content': _('before content'),\r\n            'after_content': _('after content'),\r\n            }\r\n         },\r\n}\r\n\r\n\r\nDefinir las Regiones de nuestro sitio en el documento de configuraci\u00f3n __init_.py, nos permite poder definir por medio de la opci\u00f3n Esquemas, las vistas que queremos que se vean en cada regi\u00f3n del sitio. Neutrona Theme, viene con regiones creadas por defecto que cubrir\u00e1n la mayor cantidad de usos. Es por eso que te recomendamos no cambiar esta informaci\u00f3n salvo que realmente sepas lo que est\u00e1s haciendo. \r\n\r\nh3. Qu\u00e9 son los Esquemas\r\n\r\nLos esquemas nos permiten generar \u201cvistas\u201d dentro de las regiones de nuestro sitio web, para cada tipo contenido creado, sean art\u00edculos, p\u00e1ginas, Bloques HTML, Colecciones, Categor\u00edas, Men\u00fas, Contactos, audios, videos, etc., etc. \r\n\r\nPor ejemplo podemos crear un Esquema que en la regi\u00f3n \u201cAgua\u201d (Water) se muestre una lista jerarquizada de las categor\u00edas pertenecientes a una colecci\u00f3n, en la regi\u00f3n \u201cAire\u201d (Air) se muestre un men\u00fa de navegaci\u00f3n y en la regi\u00f3n \u201cAmor\u201d (Love) se visualice un listado de res\u00famenes de los contenidos de la categor\u00eda \u201cDestacados\u201d. \r\n\r\nPor defecto, Neutrona Theme usa dos Esquemas preconfigurados: 5-Elements y 4-Elements. 5-Elements es el esquema para la portada del sitio, mientras que 4-Elements, est\u00e1 utilizado como Esquema interior, o sea, Esquema por defecto en \"Configuraci\u00f3n Global(Cyclope 3: Configuraci\u00f3n Global)\":/configuracion-global. \r\n\r\n\r\nEn Neutrona Theme existen una base de datos en /demo/db/sandbox.db que podr\u00e1s renombrar a site.db para tener todas las vistas posibles las regiones de cada Esquema: 4-Elements-SandBox y 5-Elements-SandBox. \r\n\r\nDivi\u00e9rtete mirando todas las posibilidades actuales y aprender a configurar tus propios Esquemas. ", 
-      "author": 7, 
-      "creation_date": "2011-06-21 05:56:24", 
-      "source": null, 
-      "published": true, 
-      "date": null, 
-      "summary": "Las \u201cvistas asociadas\u201d pueden ser presentadas en las diferentes regiones de un sitio web mediante el  uso de Esquemas. Estos nos permiten decidir qu\u00e9 contenido mostrar en cada regi\u00f3n del sitio web. ", 
-      "slug": "regiones-y-esquemas", 
-      "pretitle": ""
-    }
-  }, 
-  {
-    "pk": 8, 
-    "model": "articles.article", 
-    "fields": {
-      "allow_comments": "SITE", 
-      "name": "Tipos de contenido heterog\u00e9neos ", 
-      "modification_date": "2011-10-10 14:50:50", 
-      "tags": "", 
-      "text": "Implementan todos ellos ciertas caracter\u00edsticas que les permiten organizarse y mostrarse los unos junto a los otros. As\u00ed es que podemos tener una misma colecci\u00f3n que agrupe tanto Art\u00edculos como Videos y cuando visitemos un listado de una categor\u00eda de dicha colecci\u00f3n, cada contenido sabr\u00e1 c\u00f3mo mostrarse en el listado. \r\n", 
-      "author": 7, 
-      "creation_date": "2011-06-21 05:56:24", 
-      "source": null, 
-      "published": true, 
-      "date": null, 
-      "summary": "En la secci\u00f3n de contenidos de la interfaz de usuario de Cyclope encontraremos que tenemos la posibilidad de agregar a nuestro sitio web Art\u00edculos, P\u00e1ginas Est\u00e1ticas, Im\u00e1genes, Videos, Audios,  Documentos, etc. Estos son los tipos de contenido provistos por Cyclope.", 
-      "slug": "tipos-de-contenido-heterogeneos", 
-      "pretitle": ""
-    }
-  }, 
-  {
-    "pk": 9, 
-    "model": "articles.article", 
-    "fields": {
-      "allow_comments": "SITE", 
-      "name": "Vistas asociadas", 
-      "modification_date": "2011-06-21 07:17:47", 
-      "tags": "", 
-      "text": "Los tipos de contenido pueden tener cualquier n\u00famero de vistas asociadas, que estar\u00e1n autom\u00e1ticamente disponibles para ser elejidas desde la interfaz de administraci\u00f3n, siempre que configuremos un item de men\u00fa o un esquema donde aparezca el tipo de contenido en cuesti\u00f3n. \r\n\r\nOtros componentes, como las Colecciones y las Categor\u00edas, tambi\u00e9n tienen sus propias vistas asociadas, lo que nos permitir\u00e1, por ejempo, mostrarlas como listados o como componentes de navegaci\u00f3n en el sitio web. ", 
-      "author": 7, 
-      "creation_date": "2011-06-21 05:56:24", 
-      "source": null, 
-      "published": true, 
-      "date": null, 
-      "summary": "Cada tipo de contenido en Cyclope tiene vistas asociadas que le permiten mostrarse de diferentes maneras. Cuando habl\u00e1bamos de las caracter\u00edsticas que todos los tipos de contenido deben implementar, una parte importante de esto es el grupo m\u00ednimo de vistas, que consiste en: Detalle y Res\u00famen. Todos los tipos de contenido deben saber c\u00f3mo mostrarse en detalle y como mostrar un res\u00famen, que ser\u00e1 utilizado en listados. \r\n", 
-      "slug": "vistas-asociadas", 
-      "pretitle": ""
-    }
-  }, 
-  {
-    "pk": 4, 
-    "model": "articles.article", 
-    "fields": {
-      "allow_comments": "SITE", 
-      "name": "Elementos de tagueado HTML disponibles en p\u00e1ginas y art\u00edculos", 
-      "modification_date": "2011-06-20 08:44:37", 
-      "tags": "actualidad, pueblos", 
-      "text": "Los siguientes p\u00e1rrafos pretenden hacer una demostraci\u00f3n del sistema de etiquetado HTML que tiene incorporado Cyclope3. Los textos son simulaciones, para mostrar el resultado visual de cada etiqueta. \r\n\r\nEl sistema de etiquetado se realiza con Textile, y puede ver la sint\u00e1xis editando esta p\u00e1gina desde el Backend de Cyclope3. \r\n\r\n*Lo b\u00e1sico*\r\n\r\nHay cosas b\u00e1sicas como son las *negritas*, _bastardillas_ y -tachado- en la barra de formato de Cyclope3. Pero existen etiquetas que podr\u00e1s usar manualmente logrando diversidad y personalizaci\u00f3n, que adem\u00e1s mejorar\u00e1n nuestro ranking en los buscadores. Podemos poner los siguientes tipos:\r\n\r\n* _\u00e9nfasis en el texto_\r\n* *letra fuerte, negrita* \r\n* ??realizar una cita??\r\n* -texto tachado- \r\n* +texto subrayado+ \r\n* ^superscript^ Relaci\u00f3n tama\u00f1o\r\n* ~subscript~ Relaci\u00f3n tama\u00f1o\r\n\r\nSi quisi\u00e9ramos poner el c\u00f3digo literal, por ejemplo para que se vea como est\u00e1 realizado el marcado del texto enumerado arriba, podr\u00edamos usar la etiqueta \"pre\" y ser ver\u00eda as\u00ed:\r\n\r\npre. _\u00e9nfasis en el texto_\r\n*letra fuerte, negrita* \r\n??realizar una cita??\r\n-texto tachado- \r\n+texto subrayado+ \r\n^superscript^ Relaci\u00f3n tama\u00f1o\r\n~subscript~ Relaci\u00f3n tama\u00f1o\r\n\r\n\r\n*Encabezados HTML*\r\n\r\nTambi\u00e9n es posible hacer uso de headings que vienen incorporados a la barra de formato de texto en Cyclope3. \u00c9ste es el resultado de su uso:\r\n\r\nh1. Este es un h1\r\n\r\nh2. Este es un h2\r\n\r\nh3. Este es un h3\r\n\r\nh4. Este es un h4\r\n\r\nh5. Este es un h5\r\n\r\nh6. Este es un h6\r\n\r\n\r\n*Cambiando el formato de p\u00e1rrafos determinados*\r\n\r\nHay varias opciones, como ya vimos la etiqueta \"pre\", para cambiar el formato de algunos p\u00e1rrafos. A continuaci\u00f3n una lista de las opciones que puedes utilizar. \r\n\r\nbq. Esta opci\u00f3n viene en la barra de formato de texto en Cyclope3 y crea una etiqueta HTML *blockquote*. \r\n\r\n%(break)Esta opci\u00f3n es un \"span\" con una clase que se llama .break y te dar\u00e1 una opci\u00f3n m\u00e1s de formato.%\r\n\r\nbc. Esto es un tag \"code\" que \r\npermitir\u00e1 poner por ejemplo instrucciones de una l\u00ednea de comando en Linux o cosas similares.\r\n\r\npre. Nuevamente la etiqueta \"pre\" que ya utilizamos m\u00e1s arriba. Nos permite mostrar el texto en varias l\u00edneas. Sirve para poner c\u00f3digo y m\u00e1s. \r\n\r\n\r\n*Listas*\r\n\r\nla barra de formato de texto de Cyclope3 tambi\u00e9n tiene incluye la generaci\u00f3n de listas de forma autom\u00e1tica.\r\n\r\nPodemos utilizar listas de vi\u00f1etas:\r\n\r\n* Lista de vi\u00f1etas\r\n* Lista de vi\u00f1etas\r\n* Lista de vi\u00f1etas\r\n* Lista de vi\u00f1etas\r\n* Lista de vi\u00f1etas\r\n\r\n\r\nY tambi\u00e9n listas num\u00e9ricas:\r\n\r\n# Lista n\u00famerica\r\n# Lista n\u00famerica\r\n# Lista n\u00famerica\r\n# Lista n\u00famerica\r\n\r\n\r\n\r\n*Tablas*\r\n\r\nS\u00ed, es posible poner prolijas tablas con Cyclope3. Aqu\u00ed puedes ver un ejemplo. \r\n\r\n|_. Ejemplo|_. Cabecera|_. Tabla|\r\n|Ejemplo|Comun|Celda|\r\n|Ejemplo|Comun|Celda|\r\n\r\n\r\n*Otras funcionalidades*\r\n\r\nTambi\u00e9n puedes utilizar la etiqueta \"acronym\" para poner la descripci\u00f3n de una sigla como GNU(GNU Not Unix). \r\n\r\nY en cualquier lugar puedes poner notas al pie[1] para referencias de cualquier cosa que necesites hacer. Puedes poner tantas notas como quieras[2]. \r\n\r\n<br/>\r\n\r\nfn1. Esta es la nota al pie\r\n\r\nfn2. Esto es el infinto", 
-      "author": 1, 
-      "creation_date": "2010-08-08 20:19:22", 
-      "source": 1, 
-      "published": true, 
-      "date": null, 
-      "summary": "Cyclope 3 cuenta con un sistema de tagueado para facilitar la edici\u00f3n tanto de p\u00e1ginas est\u00e1ticas como de art\u00edculos. Esta p\u00e1gina muestra todas las diferentes opciones que podr\u00e1 utilizar.", 
-      "slug": "elementos-de-tagueado-html-disponibles-en-paginas-", 
-      "pretitle": "Actualidad"
     }
   }, 
   {
@@ -1530,10 +980,9 @@
     "fields": {
       "allow_comments": "SITE", 
       "name": "Neutrona Theme", 
-      "modification_date": "2011-09-25 18:35:03", 
-      "tags": "", 
+      "modification_date": "2012-07-10T15:50:31.670", 
       "text": "h2. Te damos la bienvenida al sitio de demostraci\u00f3n de Neutrona Theme para Cyclope 3\r\n\r\np(text). Neutrona es una plantilla \u201cneutra\u201d realizada para \"Cyclope 3(Cyclope 3)\":http://cyclope.codigosur.org en colores grises, para servir de base de trabajo para dise\u00f1os m\u00e1s complejos. Ha sido realizada bajo el framework 960 Grid System (\"www.960.gs(www.960.gs)\":http://www.960.gs) y est\u00e1 totalmente desarrollada con la t\u00e9cnica tableless. Los navegadores basados en est\u00e1ndares web pueden visualizarla de forma correcta. \r\n\r\np(text). La estructura del *Neutrona* est\u00e1 basadas en 4 y 5 elementos para organizar nuestra portada y contenidos. Podemos encontrar 4 regiones generales: Aire, Fuego, Agua y Tierra. El quinto elemento es una regi\u00f3n adicional llamada Amor. \r\n\r\np(text). Neutrona se realiz\u00f3 primeramente para Cyclope 2, y luego se adapt\u00f3 y perfeccion\u00f3 para Cyclope 3, y est\u00e1 liberada bajo licencia GPL.\r\n\r\np(text). Su creador es _Santiago Hoerth Moura_ y han colaborado en su desarrollo _Juan Pablo Su\u00e1rez_, _Nicol\u00e1s Ech\u00e1niz_, _Federico Hoerth_ y _Alicia Viana_.", 
-      "creation_date": "2010-09-17 20:22:39", 
+      "creation_date": "2010-09-17T20:22:39", 
       "published": true, 
       "summary": "", 
       "slug": "neutrona-theme"
@@ -1545,10 +994,9 @@
     "fields": {
       "allow_comments": "SITE", 
       "name": "Pie de p\u00e1gina", 
-      "modification_date": "2011-06-18 22:25:24", 
-      "tags": "", 
+      "modification_date": "2011-06-18T22:25:24", 
       "text": "Puedes modificar este texto desde el Backend en P\u00e1ginas est\u00e1ticas > Modifica p\u00e1gina est\u00e1tica > Pie de p\u00e1gina. ", 
-      "creation_date": "2011-06-18 22:14:01", 
+      "creation_date": "2011-06-18T22:14:01", 
       "published": true, 
       "summary": "", 
       "slug": "pie-de-pagina"
@@ -1561,15 +1009,6 @@
       "text": "<form action=\"http://listas.dominio.org/cgi-bin/mailman/subscribe/nombrelista\" method=\"post\" target=\"blank\"><span class=\"title\">Bolet\u00edn Electr\u00f3nico</span>\r\n<p>Suscribite a nuestro bolet\u00edn electr\u00f3nico de forma gratuita y recib\u00ed en tu correo eletr\u00f3nico las novedades. Ingres\u00e1 tu correo a continuaci\u00f3n: </p>\r\n             <input type=\"Text\" name=\"email\" value=\"\">\r\n             <input type=\"submit\" value=\"ok\" class=\"submit\"/>\r\n<small>Texto m\u00e1s peque\u00f1o que puede editarse/borrarse.</small>\r\n                        </form>", 
       "name": "Suscripci\u00f3n Bolet\u00edn", 
       "slug": "suscripcion-boletin"
-    }
-  }, 
-  {
-    "pk": 3, 
-    "model": "staticpages.htmlblock", 
-    "fields": {
-      "text": "<span id=\"creativecommons\">Los contenidos de este sitio web est\u00e1n bajo una\r\n        <a href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO\">\r\n          Licencia Creative Commons Reconocimiento-NoComercial-SinObraDerivada 3.0\r\n        </a></span>.<br/>\r\n        <span id=\"codigo sur\">Tecnolog\u00eda: <a href=\"http://cyclope.codigosur.org\">Cyclope 3 GPL</a>. Dise\u00f1o: <a href=\"http://neutrona.plantillas.codigosur.net\">Neutrona Theme</a>. Hecho por <a href=\"http://www.codigosur.org\">C\u00f3digo Sur</a>.\r\n        </span><br/>\r\n        Este sitio ha sido desarrollado sobre est\u00e1ndares de dise\u00f1o web que cualquier navegador de calidad visualizar\u00e1 correctamente. <br/>\r\n\r\n        <img src=\"/media/uploads/images/banners/navegadores.png\" width=\"246\" height=\"36\" border=\"0\" usemap=\"#map-nav\" alt=\"navegadores\"/>\r\n        <map name=\"map-nav\" id=\"map-nav\">\r\n          <!-- #$-:Image map file created by GIMP Image Map plug-in -->\r\n          <!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->\r\n          <!-- #$-:Please do not edit lines starting with \"#$\" -->\r\n          <!-- #$VERSION:2.3 -->\r\n          <!-- #$AUTHOR:sh -->\r\n          <area shape=\"rect\" coords=\"48,1,85,35\" alt=\"Konkeror\" title=\"Konkeror\" href=\"http://www.konqueror.org/\" />\r\n          <area shape=\"rect\" coords=\"6,1,41,35\" alt=\"Mozilla Firefox\" title=\"Mozilla Firefox\" href=\"http://www.mozilla-europe.org/es/firefox/\" />\r\n          <area shape=\"rect\" coords=\"88,0,120,36\" alt=\"Epiphany\" title=\"Epiphany\" href=\"http://projects.gnome.org/epiphany/\" />\r\n          <area shape=\"rect\" coords=\"126,1,158,35\" alt=\"Opera\" title=\"Opera\" href=\"http://www.opera.com/download/\" />\r\n          <area shape=\"rect\" coords=\"162,3,199,34\" alt=\"Safari\" title=\"Safari\" href=\"http://www.apple.com/es/safari/download/\" />\r\n          <area shape=\"rect\" coords=\"206,4,242,34\" alt=\"Google Chrome\" title=\"Google Chrome\" href=\"http://www.google.com/chrome/index.html?hl=es\" />\r\n        </map>", 
-      "name": "Tierra - Cr\u00e9ditos Fijos", 
-      "slug": "tierra-creditos-fijos"
     }
   }, 
   {
@@ -1587,15 +1026,46 @@
     "fields": {
       "allow_comments": "SITE", 
       "name": "Planeta Neptuno", 
-      "modification_date": "2012-04-21 17:19:16", 
-      "tags": "", 
-      "image": "/media/uploads/images/neptuno.jpg", 
+      "modification_date": "2012-07-10T20:46:01.060", 
       "author": null, 
-      "creation_date": "2012-04-21 15:36:45", 
+      "image": "/media/uploads/images/pictures/neptuno.jpg", 
+      "creation_date": "2012-04-21T15:36:45", 
       "source": null, 
       "published": true, 
       "slug": "planeta-neptuno", 
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed diam non mi porta convallis at sit amet tellus. Nunc sed justo vel nulla elementum dictum. Vivamus sit amet tellus sed nunc consectetur viverra. Maecenas sem enim, euismod eget sollicitudin pharetra, rhoncus quis neque."
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "medialibrary.picture", 
+    "fields": {
+      "allow_comments": "SITE", 
+      "name": "Pi", 
+      "modification_date": "2012-07-10T20:45:24.259", 
+      "author": null, 
+      "image": "/media/uploads/images/pictures/pi-max.jpg", 
+      "creation_date": "2012-07-10T16:04:17", 
+      "source": null, 
+      "published": true, 
+      "slug": "pi", 
       "description": ""
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "medialibrary.picture", 
+    "fields": {
+      "allow_comments": "SITE", 
+      "name": "Nueva imagen", 
+      "modification_date": "2012-09-13T15:03:15.857", 
+      "author": null, 
+      "image": "/media/uploads/images/pictures/jupiter.jpg", 
+      "creation_date": "2012-09-13T15:02:19", 
+      "source": null, 
+      "published": true, 
+      "slug": "nueva-imagen", 
+      "description": "desc"
     }
   }, 
   {
@@ -1603,16 +1073,16 @@
     "model": "medialibrary.soundtrack", 
     "fields": {
       "allow_comments": "SITE", 
-      "name": "Musica Andina", 
-      "modification_date": "2011-05-02 06:52:55", 
-      "tags": "folklore, m\u00fasica", 
-      "author": 6, 
-      "creation_date": "2010-09-17 20:22:45", 
+      "name": "Un audio de Radialistas", 
+      "modification_date": "2012-07-11T00:05:54.274", 
+      "author": null, 
+      "image": "/media/uploads/images/medialibrary/shangrila.jpg", 
+      "creation_date": "2012-07-10T16:04:17", 
       "source": null, 
       "published": true, 
-      "audio": "/media/uploads/punch.mp3", 
-      "slug": "musica-andina", 
-      "description": "Una corta descripcion del conteindo"
+      "audio": "/media/uploads/soundtrack/footstepsinwater.mp3", 
+      "slug": "un-audio-de-radialistas", 
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet risus in neque lobortis viverra et scelerisque dolor. Ut pellentesque pharetra odio, aliquam congue nisl tempus nec. Etiam ullamcorper nisi ut tellus blandit cursus. Suspendisse tristique ullamcorper metus sed luctus. "
     }
   }, 
   {
@@ -1620,17 +1090,16 @@
     "model": "medialibrary.movieclip", 
     "fields": {
       "allow_comments": "SITE", 
-      "name": "Screencast Test", 
-      "modification_date": "2011-05-02 06:52:55", 
-      "tags": "construccion, metodolog\u00eda", 
-      "author": 4, 
-      "creation_date": "2010-09-17 20:22:41", 
+      "name": "Volver al Futuro", 
+      "modification_date": "2012-07-10T21:09:05.923", 
+      "author": null, 
+      "creation_date": "2012-07-10T13:43:17", 
       "source": null, 
-      "video": "/media/uploads/output.ogv", 
+      "video": "/media/uploads/videos/unvideo.flv", 
       "published": true, 
-      "still": "/media/uploads/cubil.jpg", 
-      "slug": "screencast-test", 
-      "description": "This is a bad screencast \r\n\r\nQuisque molestie ligula at erat sodales iaculis. Cras lacus mauris, euismod sed scelerisque in, vulputate ut erat. Curabitur rhoncus, nisl nec consequat convallis, nibh elit dignissim leo, a lobortis eros nulla in ipsum. Donec adipiscing arcu ut elit aliquet accumsan."
+      "still": "/media/uploads/images/medialibrary/back-to-future.jpg", 
+      "slug": "volver-al-futuro", 
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet risus in neque lobortis viverra et scelerisque dolor. Ut pellentesque pharetra odio, aliquam congue nisl tempus nec. Etiam ullamcorper nisi ut tellus blandit cursus. Suspendisse tristique ullamcorper metus sed luctus. "
     }
   }, 
   {
@@ -1639,16 +1108,15 @@
     "fields": {
       "allow_comments": "SITE", 
       "name": "Cultura Libre", 
-      "modification_date": "2011-05-02 06:52:55", 
-      "tags": "cultura libre, copyleft", 
-      "image": "", 
+      "modification_date": "2012-09-13T18:11:47.964", 
       "author": 2, 
-      "creation_date": "2010-09-17 20:22:43", 
+      "image": "/media/uploads/images/medialibrary/creativecommons-800x533.jpg", 
+      "creation_date": "2010-09-17T20:22:43", 
       "source": null, 
       "published": true, 
-      "document": "/media/uploads/undocumento.txt", 
+      "document": "/media/uploads/documents/documento.pdf", 
       "slug": "cultura-libre", 
-      "description": "<b>Cultura libre</b> c\u00f3mo los grandes medios usan la tecnolog\u00eda y las leyes para encerrar la cultura y controlar la creatividad (su t\u00edtulo original en ingl\u00e9s Free Culture), es un ensayo de Lawrence Lessig publicado el 25 de marzo de 2004 en Internet con licencia Creative Commons[1] publicado tambi\u00e9n en papel por la editorial Penguin Books.[2] Trata sobre los excesos de los actuales derechos de autor, la pirater\u00eda y el copyleft."
+      "description": "*Cultura libre* c\u00f3mo los grandes medios usan la tecnolog\u00eda y las leyes para encerrar la cultura y controlar la creatividad (su t\u00edtulo original en ingl\u00e9s Free Culture), es un ensayo de Lawrence Lessig publicado el 25 de marzo de 2004 en Internet con licencia Creative Commons publicado tambi\u00e9n en papel por la editorial Penguin Books. Trata sobre los excesos de los actuales derechos de autor, la pirater\u00eda y el copyleft."
     }
   }, 
   {
@@ -1656,17 +1124,16 @@
     "model": "medialibrary.flashmovie", 
     "fields": {
       "allow_comments": "SITE", 
-      "flash": "/media/uploads/edificios.swf", 
-      "name": "Animaci\u00f3n Flash", 
-      "modification_date": "2011-05-02 06:52:55", 
-      "tags": "", 
-      "image": "", 
-      "author": 3, 
-      "creation_date": "2010-09-17 20:22:42", 
+      "name": "Edificios Flash Movie", 
+      "modification_date": "2012-07-10T21:23:13.429", 
+      "author": null, 
+      "image": "/media/uploads/images/medialibrary/the-matrix.jpg", 
+      "flash": "/media/uploads/flash/edificios.swf", 
+      "creation_date": "2012-07-10T16:04:17", 
       "source": null, 
       "published": true, 
-      "slug": "animacion-flash", 
-      "description": "Phasellus posuere euismod nisl bibendum egestas. Praesent porttitor, purus sed blandit scelerisque, dolor odio interdum justo, vel blandit arcu lectus ut tortor. Etiam eget odio sit amet ipsum lacinia sodales"
+      "slug": "edificios-flash-movie", 
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet risus in neque lobortis viverra et scelerisque dolor. Ut pellentesque pharetra odio, aliquam congue nisl tempus nec. Etiam ullamcorper nisi ut tellus blandit cursus. Suspendisse tristique ullamcorper metus sed luctus. "
     }
   }, 
   {
@@ -1674,17 +1141,16 @@
     "model": "medialibrary.regularfile", 
     "fields": {
       "allow_comments": "SITE", 
-      "name": "Archivo ", 
-      "modification_date": "2011-10-21 04:22:14", 
-      "tags": "", 
-      "image": "", 
-      "author": 3, 
-      "creation_date": "2010-09-17 20:22:40", 
+      "name": "Archivo Stars Wars", 
+      "modification_date": "2012-07-10T21:30:46.020", 
+      "author": null, 
+      "image": "/media/uploads/images/medialibrary/star_wars_3.jpg", 
+      "creation_date": "2010-09-17T20:22:40", 
       "source": null, 
-      "file": "/media/uploads/archivito/", 
+      "file": "/media/uploads/regularfiles/archivito/", 
       "published": true, 
-      "slug": "archivo", 
-      "description": "Colecci\u00f3n de software con utilidades varias"
+      "slug": "archivo-stars-wars", 
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet risus in neque lobortis viverra et scelerisque dolor. Ut pellentesque pharetra odio, aliquam congue nisl tempus nec. Etiam ullamcorper nisi ut tellus blandit cursus. Suspendisse tristique ullamcorper metus sed luctus. "
     }
   }, 
   {
@@ -1692,19 +1158,18 @@
     "model": "medialibrary.externalcontent", 
     "fields": {
       "allow_comments": "SITE", 
-      "name": "Wikipedia", 
-      "modification_date": "2011-05-02 06:52:55", 
-      "tags": "conocimiento, acceso", 
-      "skip_detail": false, 
-      "image": "/media/uploads/wp_logo.png", 
-      "author": 3, 
-      "content_url": "http://www.desktopextreme.com/photos/Star_Wars_Empire_Darth_Vader_329200543049PM311.jpg", 
-      "creation_date": "2010-09-17 20:22:44", 
+      "name": "La famosa Wikipedia", 
+      "modification_date": "2012-07-10T21:14:54.942", 
+      "author": null, 
+      "skip_detail": true, 
+      "image": "/media/uploads/images/medialibrary/wikipedia_mini_globe_handheld-800x533.jpg", 
+      "content_url": "http://wikipedia.com", 
+      "creation_date": "2012-07-10T13:43:17", 
       "source": null, 
-      "new_window": false, 
+      "new_window": true, 
       "published": true, 
-      "slug": "wikipedia", 
-      "description": "Aliquam tincidunt ultrices massa ac luctus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed malesuada, metus vel vestibulum fringilla, purus felis condimentum dui, non semper dui nisl at nisi. \r\n\r\nVivamus sodales rutrum enim, porta pretium tortor ullamcorper tristique. Ut gravida nisi at lacus tristique eleifend. Praesent justo risus, faucibus eu auctor malesuada, rutrum condimentum tellus. Donec condimentum velit scelerisque tellus laoreet blandit."
+      "slug": "la-famosa-wikipedia", 
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet risus in neque lobortis viverra et scelerisque dolor. Ut pellentesque pharetra odio, aliquam congue nisl tempus nec. Etiam ullamcorper nisi ut tellus blandit cursus. Suspendisse tristique ullamcorper metus sed luctus. "
     }
   }, 
   {
@@ -1712,13 +1177,25 @@
     "model": "polls.poll", 
     "fields": {
       "allow_comments": "SITE", 
-      "name": "Opini\u00f3n sobre el sitio web de Demo", 
-      "modification_date": "2011-04-29 06:07:02", 
-      "tags": "", 
-      "creation_date": "2010-09-17 20:22:47", 
+      "name": "encuesta de prueba", 
+      "modification_date": "2012-06-25T12:44:38.366", 
+      "creation_date": "2012-06-25T12:37:28", 
       "published": true, 
-      "slug": "opinion-sobre-el-sitio-web-de-demo", 
-      "description": "te invitamos a que nos cuentes qu\u00e9 te parece el sitio de demo"
+      "slug": "encuesta-de-prueba", 
+      "description": "esta es una encuesta de prueba"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "polls.poll", 
+    "fields": {
+      "allow_comments": "SITE", 
+      "name": "otra encuesta de prueba", 
+      "modification_date": "2012-06-25T12:47:17.423", 
+      "creation_date": "2012-06-25T12:37:28", 
+      "published": true, 
+      "slug": "otra-encuesta-de-prueba", 
+      "description": "esta es otra encuesta de prueba"
     }
   }, 
   {
@@ -1726,9 +1203,19 @@
     "model": "polls.question", 
     "fields": {
       "allow_multiple_answers": false, 
-      "text": "qu\u00e9 te parece el dise\u00f1o gr\u00e1fico?", 
+      "text": "resulta simple?", 
       "poll": 1, 
-      "order": null
+      "order": 1
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "polls.question", 
+    "fields": {
+      "allow_multiple_answers": false, 
+      "text": "es verde?", 
+      "poll": 2, 
+      "order": 1
     }
   }, 
   {
@@ -1736,174 +1223,103 @@
     "model": "polls.question", 
     "fields": {
       "allow_multiple_answers": false, 
-      "text": "te resulta simple la administraci\u00f3n?", 
+      "text": "resulta entretenido?", 
       "poll": 1, 
-      "order": null
-    }
-  }, 
-  {
-    "pk": 3, 
-    "model": "polls.question", 
-    "fields": {
-      "allow_multiple_answers": true, 
-      "text": "qu\u00e9 cambiar\u00edas?", 
-      "poll": 1, 
-      "order": null
-    }
-  }, 
-  {
-    "pk": 1, 
-    "model": "polls.answer", 
-    "fields": {
-      "text": "bueno", 
-      "question": 1
-    }
-  }, 
-  {
-    "pk": 2, 
-    "model": "polls.answer", 
-    "fields": {
-      "text": "regular", 
-      "question": 1
-    }
-  }, 
-  {
-    "pk": 3, 
-    "model": "polls.answer", 
-    "fields": {
-      "text": "malo", 
-      "question": 1
+      "order": 2
     }
   }, 
   {
     "pk": 4, 
-    "model": "polls.answer", 
+    "model": "polls.question", 
     "fields": {
-      "text": "s\u00ed", 
-      "question": 2
-    }
-  }, 
-  {
-    "pk": 5, 
-    "model": "polls.answer", 
-    "fields": {
-      "text": "m\u00e1s o menos", 
-      "question": 2
-    }
-  }, 
-  {
-    "pk": 6, 
-    "model": "polls.answer", 
-    "fields": {
-      "text": "no", 
-      "question": 2
-    }
-  }, 
-  {
-    "pk": 7, 
-    "model": "polls.answer", 
-    "fields": {
-      "text": "pondr\u00eda contenido m\u00e1s divertido", 
-      "question": 3
-    }
-  }, 
-  {
-    "pk": 8, 
-    "model": "polls.answer", 
-    "fields": {
-      "text": "agregar\u00eda m\u00e1s men\u00faes", 
-      "question": 3
-    }
-  }, 
-  {
-    "pk": 9, 
-    "model": "polls.answer", 
-    "fields": {
-      "text": "agregar\u00eda m\u00e1s temas", 
-      "question": 3
-    }
-  }, 
-  {
-    "pk": 10, 
-    "model": "polls.answer", 
-    "fields": {
-      "text": "pondr\u00eda una versi\u00f3n online", 
-      "question": 3
+      "allow_multiple_answers": false, 
+      "text": "es rojo?", 
+      "poll": 2, 
+      "order": 2
     }
   }, 
   {
     "pk": 1, 
-    "model": "polls.submission", 
+    "model": "polls.answer", 
     "fields": {
-      "foreign_user": "", 
-      "poll": 1, 
-      "user": null, 
-      "answers": [
-        1, 
-        9, 
-        5, 
-        10
-      ]
-    }
-  }, 
-  {
-    "pk": 1, 
-    "model": "newsletter.newsletter", 
-    "fields": {
-      "test_recipients": "user@dominio.com", 
-      "sender": "boletin@midominio.org", 
-      "layout": 6, 
-      "name": "Bolet\u00edn", 
-      "recipients": "boletin@listas.codigosur.net", 
-      "sender_name": "", 
-      "last_sent_date": null, 
-      "show_ToC": false, 
-      "header": "", 
-      "content_category": 35, 
-      "slug": "boletin", 
-      "view": "content_teasers_as_table"
+      "text": "si", 
+      "question": 1
     }
   }, 
   {
     "pk": 2, 
-    "model": "contacts.contact", 
+    "model": "polls.answer", 
     "fields": {
-      "web": "", 
-      "allow_comments": "SITE", 
-      "surname": "Ech\u00e1niz", 
-      "name": "Nicol\u00e1s Ech\u00e1niz", 
-      "modification_date": "2011-06-19 09:19:17", 
-      "tags": "", 
-      "gender": "M", 
-      "mobile_phone_number": "", 
-      "creation_date": "2011-05-19 02:17:45", 
-      "email": "alguien@conuncorreo.com", 
-      "given_name": "Nicol\u00e1s", 
-      "published": true, 
-      "birth_date": null, 
-      "slug": "nicolas-echaniz", 
-      "photo": "/media/uploads/ilustracion.png"
+      "text": "no", 
+      "question": 1
     }
   }, 
   {
     "pk": 3, 
-    "model": "contacts.contact", 
+    "model": "polls.answer", 
     "fields": {
-      "web": "", 
+      "text": "m\u00e1s o menos", 
+      "question": 1
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "feeds.feed", 
+    "fields": {
       "allow_comments": "SITE", 
-      "surname": "Fern\u00e1ndez", 
-      "name": "Ariel Fern\u00e1ndez", 
-      "modification_date": "2011-05-19 03:47:43", 
-      "tags": "", 
-      "gender": "F", 
-      "mobile_phone_number": "", 
-      "creation_date": "2011-05-19 02:17:45", 
-      "email": "", 
-      "given_name": "Ariel", 
+      "name": "La Vecindaria", 
+      "modification_date": "2012-05-31T20:31:43.241", 
+      "url": "http://www.lavecindaria.org.ar/rss", 
+      "number_of_entries": 10, 
+      "creation_date": "2012-05-31T20:29:42", 
+      "titles_only": false, 
       "published": true, 
-      "birth_date": "1901-01-02", 
-      "slug": "ariel-fernandez", 
-      "photo": ""
+      "summary": "RSS feed de La Vecindaria, un sitio amigo.", 
+      "slug": "la-vecindaria"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "dashboard.dashboardpreferences", 
+    "fields": {
+      "dashboard_id": "dashboard", 
+      "data": "{}", 
+      "user": [
+        "admin"
+      ]
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "dashboard.dashboardpreferences", 
+    "fields": {
+      "dashboard_id": "forum-dashboard", 
+      "data": "{}", 
+      "user": [
+        "admin"
+      ]
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "dashboard.dashboardpreferences", 
+    "fields": {
+      "dashboard_id": "dashboard", 
+      "data": "{}", 
+      "user": [
+        "manager"
+      ]
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "dashboard.dashboardpreferences", 
+    "fields": {
+      "dashboard_id": "dashboard", 
+      "data": "{}", 
+      "user": [
+        "editor"
+      ]
     }
   }, 
   {
@@ -1911,17 +1327,19 @@
     "model": "sites.site", 
     "fields": {
       "domain": "localhost:8000", 
-      "name": "Neutrona Theme"
+      "name": "Cyclope Demo"
     }
   }, 
   {
     "pk": 1, 
     "model": "contact_form.contactformsettings", 
     "fields": {
-      "instructions": "h1. Contacto con nuestra organizaci\u00f3n", 
-      "email": "info@codigosur.org", 
+      "instructions": "h1(title). Contacto con nuestra organizaci\u00f3n", 
+      "email": "", 
       "recipients": [
-        1
+        [
+          "manager"
+        ]
       ], 
       "subject": "Recibido desde el sitio web"
     }

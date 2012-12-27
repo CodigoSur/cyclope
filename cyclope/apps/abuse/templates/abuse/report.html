@@ -1,16 +1,24 @@
 
 {% extends CYCLOPE_DEFAULT_TEMPLATE %}
-{% load i18n cyclope_utils %}
+{% load i18n cyclope_utils crispy_forms_tags %}
 
 {% block content%}
+
+<h1 class="title">{% trans "report abuse"|capfirst %}</h1>
+
+{% if not form %}
+  <div class="form_summary">
+      <div class="summary">
+      {% if already_reported %} {% trans "you have already reported this content."|capfirst %}
+      {% else %}{% trans "thanks for reporting!"|capfirst %}{% endif %}
+      </div>
+      <span><a href="{{ content.get_absolute_url }}"> {% trans "return"|capfirst %}</a></span>
+  </div>
+{% endif %}
+
 <div class="abuse-report">
 {% if form %}
-<form action="." method="post">{% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" class="submit" value="{% trans "Report" %}" />
-</form>
-{% else %}
-Thanks reporting!
+  {% crispy  form %}
 {% endif %}
 </div>
 {% endblock %}

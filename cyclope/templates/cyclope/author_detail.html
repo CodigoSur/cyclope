@@ -4,46 +4,22 @@
 
 {% block content %}
 <div class="content-view author detail author-detail">
-  <h1 class="title">{{ author.name }}</h1>
+  <h1 class="title">{{ current_object.name }}</h1>
 
-  {% if author.origin %}
-  <div class="origin">{{ author.origin }}</div>
+  {% if current_object.origin %}
+  <div class="origin">{{ current_object.origin }}</div>
   {% endif %}
 
-  {% if author.notes %}
-  <div class="notes">{{ author.notes|smart_style }}</div>
+  {% if current_object.notes %}
+  <div class="notes">{{ current_object.notes|smart_style }}</div>
   {% endif %}
 
-  {% if author.image %}
+  {% if current_object.image %}
   <div class="media-content">
     <img src="{% version media.image.path 'croppedthumbnail' %}" />
   </div>
   {% endif %}
 
-  {% if page %}
-    {% if view_options.sort_by == "ALPHABETIC" %}
-      {% include 'cyclope/alphabetical_pagination_block.html' %}
-    {% else %}
-      {% include 'cyclope/pagination_block.html' %}
-    {% endif %}
-  {% endif %}
-
-
-  <div class='authored-content'>
-  {% for content in authored_content %}
-    {% spaceless %}
-    {% join content.get_app_label  "/" content.get_object_name "_" inline_view_name ".html" as template_path %}
-    {% comment %}
-      we alias the actual object with the model name so the included template
-      is reusable and can access the content object using an explicit name
-      we also alias as 'media' because some medialibrary templates expect this name
-    {% endcomment %}
-    {% alias content as content.get_object_name %}
-    {% alias content as 'media' %}
-    {% endspaceless %}
-    {% include template_path %}
-  {% endfor %}
-  </div>
-
+  {% include "cyclope/authored_content_block.html" %}
 </div>
 {% endblock content%}

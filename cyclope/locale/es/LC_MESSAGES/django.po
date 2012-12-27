@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-07 12:26-0300\n"
-"PO-Revision-Date: 2010-10-29 22:16\n"
+"POT-Creation-Date: 2012-10-18 11:40-0300\n"
+"PO-Revision-Date: 2012-10-18 11:14\n"
 "Last-Translator: <a@a.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -15,396 +15,495 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.5.6\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
 
-#: admin.py:82
+#: admin.py:126
 msgid "content details"
 msgstr "detalles de contenido"
 
-#: admin.py:85
+#: admin.py:129
 msgid "Either set an URL here or select a contenttype and view."
 msgstr "Configura la URL aquí o selecciona un tipo de contenido y vista."
 
-#: admin.py:88 models.py:146 models.py:267 apps/newsletter/models.py:44
+#: admin.py:132 models.py:154 models.py:275 apps/newsletter/models.py:44
 msgid "layout"
 msgstr "esquema"
 
-#: admin.py:91
+#: admin.py:135
 msgid "Set the layout that will be used when this menuitem is selected."
 msgstr ""
 "Establezca el esquema que será utilizado cuando este ítem de menú sea "
 "seleccionado"
 
-#: admin.py:152 dashboard.py:66
-msgid "Content"
-msgstr "Contenidos"
-
-#: admin.py:155
-msgid "Metadata"
-msgstr ""
-
-#: dashboard.py:54
+#: dashboard.py:55
 msgid "Site Administration"
 msgstr "Administración del sitio"
 
-#: dashboard.py:72
+#: dashboard.py:65 apps/custom_comments/admin.py:35
+msgid "Content"
+msgstr "Contenidos"
+
+#: dashboard.py:71
 msgid "Create, delete or modify content for your website"
 msgstr "Crea, borra o modifica el contenido del sitio web"
 
-#: dashboard.py:75
+#: dashboard.py:74
 msgid "Main"
 msgstr "Principal"
 
-#: dashboard.py:83
+#: dashboard.py:82
 msgid "Multimedia Library"
 msgstr "Biblioteca Multimedia"
 
-#: dashboard.py:95
+#: dashboard.py:94
 msgid "Authors and Sources"
 msgstr "Autorías y Fuentes"
 
-#: dashboard.py:103 templates/cyclope/content_tools_block.html:10
+#: dashboard.py:102 templates/cyclope/content_tools_block.html:14
 msgid "Comments"
 msgstr "Comentarios"
 
-#: dashboard.py:112
+#: dashboard.py:111
 msgid "Site structure"
 msgstr "Estructura del sitio"
 
-#: dashboard.py:114
+#: dashboard.py:113
 msgid "Modify your site layout and collections"
 msgstr "Modifica la estructura y colecciones de tu sitio"
 
-#: dashboard.py:122
+#: dashboard.py:121
 msgid "Collections"
 msgstr "Colecciones"
 
-#: dashboard.py:129
+#: dashboard.py:128
 msgid "Menus"
 msgstr "Menús"
 
-#: dashboard.py:136
+#: dashboard.py:135
 msgid "Layouts"
 msgstr "Esquemas"
 
-#: dashboard.py:149
+#: dashboard.py:148
 msgid "Global Settings"
 msgstr "Configuración global"
 
-#: dashboard.py:155
+#: dashboard.py:154
 msgid "Site Settings"
 msgstr "Configuración del sitio"
 
-#: dashboard.py:158
+#: dashboard.py:157
 msgid "Contact Form"
 msgstr "Formulario de Contacto"
 
-#: dashboard.py:166
-msgid "Polls"
-msgstr "Encuestas"
-
-#: dashboard.py:173 templates/cyclope/themes/neutrona/__init__.py:45
-#: templates/cyclope/themes/neutronica/__init__.py:57
+#: dashboard.py:165 templates/cyclope/themes/alternative/__init__.py:45
+#: templates/cyclope/themes/baseline/__init__.py:45
+#: templates/cyclope/themes/curiouslygreen/__init__.py:45
+#: templates/cyclope/themes/cyblog/__init__.py:45
+#: templates/cyclope/themes/cyorg/__init__.py:45
+#: templates/cyclope/themes/cyportal/__init__.py:45
+#: templates/cyclope/themes/diversia/__init__.py:45
+#: templates/cyclope/themes/experience/__init__.py:45
+#: templates/cyclope/themes/frecuency/__init__.py:45
+#: templates/cyclope/themes/neutronix/__init__.py:45
+#: templates/cyclope/themes/newfangled/__init__.py:45
+#: templates/cyclope/themes/newflash/__init__.py:45
+#: templates/cyclope/themes/nonzeroblue/__init__.py:45
+#: templates/cyclope/themes/plantation/__init__.py:45
+#: templates/cyclope/themes/potentix/__init__.py:45
+#: templates/cyclope/themes/supplementary/__init__.py:45
 msgid "Newsletter"
 msgstr "Boletín"
 
-#: dashboard.py:179
+#: dashboard.py:171
+msgid "Forms"
+msgstr "Formularios"
+
+#: dashboard.py:177
+msgid "Polls"
+msgstr "Encuestas"
+
+#: dashboard.py:184
 msgid "Feeds"
 msgstr "Sindicación"
 
-#: dashboard.py:185
+#: dashboard.py:190
 msgid "Contacts"
 msgstr "Contactos"
 
-#: dashboard.py:198
-msgid "Chat"
-msgstr "Chat"
+#: dashboard.py:196
+msgid "Abuse"
+msgstr "Denuncias"
 
-#: dashboard.py:209
+#: dashboard.py:205
 msgid "Plugins"
 msgstr "Complementos"
 
-#: dashboard.py:221
+#: dashboard.py:216
 msgid "Advanced"
 msgstr "Avanzado"
 
-#: dashboard.py:227
+#: dashboard.py:222
 msgid "Advanced configuration"
 msgstr "Configuración avanzada"
 
-#: dashboard.py:230
+#: dashboard.py:225
 msgid "Auth"
 msgstr "Permisos"
 
-#: dashboard.py:236
+#: dashboard.py:231 templates/registration/registration_form.html:6
 msgid "Registration"
 msgstr "Registro"
 
-#: dashboard.py:242
-msgid "Sites"
-msgstr "Sitios"
+#: dashboard.py:237 dashboard.py:240
+msgid "Site"
+msgstr "Sitio"
 
-#: dashboard.py:253
+#: dashboard.py:250
 msgid "Quick links"
 msgstr "Enlaces rápidos"
 
-#: dashboard.py:260
+#: dashboard.py:257
 msgid "Browse media files"
 msgstr "Explorar archivos"
 
-#: dashboard.py:263
+#: dashboard.py:260
 msgid "Return to site"
 msgstr "Volver al sitio"
 
-#: dashboard.py:272
+#: dashboard.py:275
+#, python-format
+msgid "%d comments need moderation"
+msgstr "%d comentarios necesitan moderación"
+
+#: dashboard.py:285
 msgid "Recent Actions"
 msgstr "Acciones Recientes"
 
-#: dashboard.py:281
+#: dashboard.py:294
 msgid "Community and support"
 msgstr "Comunidad y soporte"
 
-#: dashboard.py:289
+#: dashboard.py:302
 msgid "Official website"
 msgstr "Sitio web oficial"
 
-#: dashboard.py:294
+#: dashboard.py:307
 msgid "Tutorials"
 msgstr "Tutoriales"
 
-#: default_settings.py:180
+#: default_settings.py:193
 msgid "Admin Thumbnail"
 msgstr "Miniatura para sitio de administración"
 
-#: default_settings.py:182
+#: default_settings.py:195
 msgid "Thumbnail (100px height)"
 msgstr "Imagen miniatura (100px alto)"
 
-#: default_settings.py:184
+#: default_settings.py:197
 msgid "Small (300x300px)"
 msgstr "Pequeña (300x300px)"
 
-#: default_settings.py:186
+#: default_settings.py:199
 msgid "Medium (460px width)"
 msgstr "Mediana (460px ancho)"
 
-#: default_settings.py:188
+#: default_settings.py:201
 msgid "Big (620px width)"
 msgstr "Grande (620px ancho)"
 
-#: default_settings.py:190
+#: default_settings.py:203
 msgid "Cropped (60x60px)"
 msgstr "Cortada (60x60px)"
 
-#: default_settings.py:192
+#: default_settings.py:205
 msgid "Cropped Thumbnail (140x140px)"
 msgstr "Miniatura cortada (140x140px)"
 
-#: default_settings.py:194
+#: default_settings.py:207 default_settings.py:209
 msgid "Slideshow"
 msgstr "Rotador"
 
-#: forms.py:57 forms.py:74 forms.py:211
-msgid "Content object"
-msgstr "Contenido"
-
-#: forms.py:73 forms.py:210 apps/newsletter/admin.py:38
+#: forms.py:117 forms.py:226 apps/newsletter/admin.py:38
 msgid "View"
 msgstr "Vista"
 
-#: forms.py:75 core/collections/admin.py:116
+#: forms.py:118 forms.py:227
+msgid "Content object"
+msgstr "Contenido"
+
+#: forms.py:121 core/collections/admin.py:74
 msgid "Parent"
 msgstr "Padre"
 
-#: forms.py:76 forms.py:212 core/frontend/sites.py:310
+#: forms.py:123 forms.py:228 core/collections/admin.py:191
+#: core/frontend/sites.py:337
 msgid "View options"
 msgstr "Opciones de la vista"
 
-#: forms.py:135
+#: forms.py:155
 msgid ""
 "You can not set a Custom URL for menu entries                     with "
 "associated content"
 msgstr "No puede setear una URL para Entradas de Menú con contenido asociado."
 
-#: forms.py:142 forms.py:286
+#: forms.py:162 forms.py:279
 msgid "You need to select a content view"
 msgstr "Debe seleccionar una Vista del contenido"
 
-#: forms.py:148 forms.py:292
+#: forms.py:168 forms.py:285
 msgid "The selected view requires a content object"
 msgstr "La vista seleccionada requiere que elija un objeto de contenido"
 
-#: forms.py:161
+#: forms.py:181
 msgid "Theme"
 msgstr "Tema"
 
-#: forms.py:183
+#: forms.py:201
 msgid "Template"
 msgstr "Plantilla"
 
-#: forms.py:209
+#: forms.py:225
 msgid "Region"
 msgstr "Región"
 
-#: forms.py:279
+#: forms.py:272
 msgid "Content type can not be empty"
 msgstr "El Tipo de contenido no debe estar vacío"
 
-#: forms.py:283
+#: forms.py:276
 msgid "You need to select a region"
 msgstr "Debe seleccionar una región"
 
-#: forms.py:314 apps/polls/forms.py:35 core/captcha_comments/forms.py:29
-#: core/captcha_contact_form/forms.py:28
+#: forms.py:309 apps/custom_comments/forms.py:31
+#: apps/dynamicforms/models.py:37 apps/polls/forms.py:35
+#: core/captcha_contact_form/forms.py:31
 msgid "Security code"
 msgstr "Código de seguridad"
 
-#: forms.py:328
-msgid "Your avatar image is too big"
-msgstr "La imagen enviada es demasiado grande"
-
-#: frontend_views.py:44
+#: frontend_views.py:46
 msgid "list of root items for the selected Menu"
 msgstr "lista de items raíz para el Menú seleccionado"
 
-#: frontend_views.py:64
+#: frontend_views.py:68
 msgid "flat list of all items for the selected Menu"
 msgstr "lista sin jerarquía de los items del Menú"
 
-#: frontend_views.py:78
+#: frontend_views.py:84
 msgid "Collapse style"
 msgstr "Estilo de despliegue"
 
-#: frontend_views.py:79
+#: frontend_views.py:85
 msgid "vertical"
 msgstr "vertical"
 
-#: frontend_views.py:80
+#: frontend_views.py:86
 msgid "horizontal"
 msgstr "horizontal"
 
-#: frontend_views.py:81
+#: frontend_views.py:87
 msgid "on click"
 msgstr "al clickear"
 
-#: frontend_views.py:82 models.py:70 models.py:320
+#: frontend_views.py:88 models.py:78 models.py:329
 msgid "disabled"
 msgstr "deshabilitado"
 
-#: frontend_views.py:90
+#: frontend_views.py:96
 msgid "hierarchical list of the items in the selected menu"
 msgstr "lista jerarquizada de los items del menú"
 
-#: frontend_views.py:147
+#: frontend_views.py:153
 msgid "list view of children of the current menu item"
 msgstr "lista de los hijos del item de menú que se encuentre seleccionado"
 
-#: frontend_views.py:175
+#: frontend_views.py:179
 msgid "search box"
 msgstr "búsqueda"
 
-#: frontend_views.py:191
+#: frontend_views.py:194
 msgid "expanded hierarchical list of all collection and menus"
 msgstr "lista de todas las categorías y menús"
 
-#: frontend_views.py:270
+#: frontend_views.py:273 apps/custom_comments/frontend_views.py:30
 msgid "Items to show"
 msgstr "Items a mostrar"
 
-#: frontend_views.py:277
-msgid "list of the last site content comments"
-msgstr "listado de los últimos comentarios"
+#: frontend_views.py:278
+msgid "Teaser"
+msgstr "Resumen"
 
-#: models.py:63
+#: frontend_views.py:279
+msgid "Detail"
+msgstr "Detalle"
+
+#: frontend_views.py:280
+msgid "Labeled icons"
+msgstr "Íconos etiquetados"
+
+#: frontend_views.py:284
+msgid "Show authored content"
+msgstr "Mostrar contenido del autor"
+
+#: frontend_views.py:286
+msgid "Inline type"
+msgstr "Tipo de embebido"
+
+#: frontend_views.py:289 apps/contacts/frontend_views.py:49
+#: core/collections/frontend_views.py:63
+msgid "Items per page"
+msgstr "Ítems por página"
+
+#: frontend_views.py:291 core/collections/frontend_views.py:65
+#: core/collections/frontend_views.py:176
+msgid "Limit to N items (0 = no limit)"
+msgstr "Limitar a N items (0 = sin límite)"
+
+#: frontend_views.py:293 core/collections/frontend_views.py:67
+#: core/collections/frontend_views.py:178
+msgid "Sort by"
+msgstr "Ordenar por"
+
+#: frontend_views.py:294 core/collections/frontend_views.py:68
+#: core/collections/frontend_views.py:179
+msgid "Date ↓ (newest first)"
+msgstr "Fecha ↓ (más nuevo primero)"
+
+#: frontend_views.py:295 core/collections/frontend_views.py:69
+#: core/collections/frontend_views.py:180
+msgid "Date ↑ (oldest first)"
+msgstr "Fecha ↓ (más antiguo primero)"
+
+#: frontend_views.py:296 core/collections/frontend_views.py:70
+#: core/collections/frontend_views.py:181
+msgid "Alphabetic"
+msgstr "Alfabéticamente"
+
+#: frontend_views.py:330
+msgid "detailed view of the selected Author"
+msgstr "vista detallada del Autor"
+
+#: models.py:59
 msgid "templating theme"
 msgstr "tema de la plantilla"
 
-#: models.py:65
+#: models.py:61
 msgid "default layout"
 msgstr "esquema por defecto"
 
-#: models.py:67 models.py:316
-msgid "allow comments"
-msgstr "permitir comentarios"
-
-#: models.py:69 models.py:319
-msgid "enabled"
-msgstr "habilitado"
-
-#: models.py:73
+#: models.py:64
 msgid "global title"
 msgstr "titulo global"
 
-#: models.py:75
+#: models.py:66
 msgid "keywords"
 msgstr "palabras clave"
 
-#: models.py:76 apps/medialibrary/models.py:40 apps/polls/models.py:36
-#: core/collections/models.py:60 core/collections/models.py:102
+#: models.py:67 apps/medialibrary/models.py:41 apps/polls/models.py:36
+#: core/collections/models.py:60 core/collections/models.py:101
+#: core/series/models.py:61
 msgid "description"
 msgstr "descripción"
 
-#: models.py:78
+#: models.py:70
 msgid "newsletter collection"
 msgstr "colección para boletines"
 
-#: models.py:79
+#: models.py:71
 msgid ""
 "This is the collection that will group the contents for your newsletters."
 msgstr ""
 "Esta es la colección que agrupará los contenidos a enviar en los boletines."
 
-#: models.py:81
+#: models.py:73
 msgid "whole feed contents"
 msgstr "contenidos del RSS"
 
-#: models.py:82
+#: models.py:74
 msgid "contents to show in the whole feed"
 msgstr "contenidos que se publicarán en el RSS general"
 
-#: models.py:95 models.py:96
+#: models.py:75 models.py:325
+msgid "allow comments"
+msgstr "permitir comentarios"
+
+#: models.py:77 models.py:328
+msgid "enabled"
+msgstr "habilitado"
+
+#: models.py:80
+msgid "moderate comments"
+msgstr "moderar comentarios"
+
+#: models.py:82
+msgid "enable comments email notifications"
+msgstr "habilitar notificaciones por email cuando lleguen comentarios"
+
+#: models.py:84
+msgid "enable abuse reports"
+msgstr "habilitar las denuncias por contenido indebido"
+
+#: models.py:85 models.py:332
+msgid "show author"
+msgstr "mostrar autoría"
+
+#: models.py:87 models.py:334 models.py:442 apps/articles/models.py:45
+#: apps/medialibrary/models.py:37
+msgid "author"
+msgstr "autoría"
+
+#: models.py:88 models.py:335
+msgid "user if author is empty"
+msgstr "mostrar user si el campo autoría está vacío"
+
+#: models.py:90
+msgid "Select which field to use to show as author of the content."
+msgstr ""
+"Seleccione el campo que desea usar para mostrar como autoría de los "
+"contenidos."
+
+#: models.py:103 models.py:104
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:105 models.py:135 models.py:252 models.py:303 models.py:389
-#: models.py:412 apps/locations/models.py:36 apps/locations/models.py:43
-#: apps/locations/models.py:50 apps/newsletter/models.py:34
-#: apps/staticpages/models.py:43 core/collections/models.py:49
-#: core/collections/models.py:94
+#: models.py:113 models.py:143 models.py:260 models.py:311 models.py:424
+#: models.py:451 apps/abuse/models.py:15 apps/locations/models.py:36
+#: apps/locations/models.py:43 apps/locations/models.py:50
+#: apps/newsletter/models.py:34 apps/staticpages/models.py:43
+#: core/collections/models.py:50 core/collections/models.py:95
 msgid "name"
 msgstr "nombre"
 
-#: models.py:107
+#: models.py:115
 msgid "main menu"
 msgstr "menu principal"
 
-#: models.py:124 models.py:133
+#: models.py:132 models.py:141
 msgid "menu"
 msgstr "menú"
 
-#: models.py:125
+#: models.py:133
 msgid "menus"
 msgstr "menús"
 
-#: models.py:136 core/collections/models.py:99
+#: models.py:144 core/collections/models.py:98
 msgid "parent"
 msgstr "relacionado"
 
-#: models.py:137
+#: models.py:145
 msgid "children"
 msgstr "hijo"
 
-#: models.py:141
+#: models.py:149
 msgid "site home"
 msgstr "página de inicio"
 
-#: models.py:142
+#: models.py:150
 msgid "custom URL"
 msgstr "URL personalizada"
 
-#: models.py:148
+#: models.py:156
 msgid "Persistent layout"
 msgstr "Esquema persistente"
 
-#: models.py:149
+#: models.py:157
 msgid ""
 "If the layout is marked as persistent it will be in use until the user "
 "navigates to a menu item which explicitly specifies a different Layout"
@@ -412,160 +511,236 @@ msgstr ""
 "Si el esquema es marcado como persistente se seguirá usando hasta que el "
 "visitante seleccione otro item de menú que especifique un esquema diferente"
 
-#: models.py:153 models.py:232 apps/contacts/models.py:46
+#: models.py:161 models.py:240 apps/contacts/models.py:46
 msgid "type"
 msgstr "tipo"
 
-#: models.py:155 models.py:240
+#: models.py:163 models.py:248 apps/abuse/models.py:26 apps/abuse/models.py:60
 msgid "object"
 msgstr "objeto"
 
-#: models.py:161 models.py:234 apps/newsletter/models.py:41
+#: models.py:169 models.py:242 apps/newsletter/models.py:41
 msgid "view"
 msgstr "vista"
 
-#: models.py:217
+#: models.py:225
 msgid "menu item"
 msgstr "item de menú"
 
-#: models.py:218
+#: models.py:226
 msgid "menu items"
 msgstr "items de menú"
 
-#: models.py:228 apps/locations/models.py:57
+#: models.py:236 apps/locations/models.py:57
 msgid "region"
 msgstr "región"
 
-#: models.py:237
+#: models.py:245
 msgid "weight"
 msgstr "peso"
 
-#: models.py:257
+#: models.py:265
 msgid "layout template"
 msgstr "plantilla para este esquema"
 
-#: models.py:268
+#: models.py:276
 msgid "layouts"
 msgstr "esquemas"
 
-#: models.py:275 models.py:280 core/collections/models.py:195
+#: models.py:283 models.py:288 apps/abuse/models.py:25 apps/abuse/models.py:59
+#: core/collections/models.py:207 core/series/models.py:33
+#: core/series/models.py:37
 msgid "content type"
 msgstr "tipo de contenido"
 
-#: models.py:295
+#: models.py:303
 msgid "related content"
 msgstr "contenido relacionado"
 
-#: models.py:296
+#: models.py:304
 msgid "related contents"
 msgstr "contenidos relacionados"
 
-#: models.py:307
-msgid "tags"
-msgstr "etiquetas"
-
-#: models.py:308
+#: models.py:315
 msgid "published"
 msgstr "publicar"
 
-#: models.py:312
+#: models.py:321
 msgid "creation date"
 msgstr "fecha de creación"
 
-#: models.py:314
+#: models.py:323
 msgid "modification date"
 msgstr "fecha de modificación"
 
-#: models.py:318
+#: models.py:327 models.py:336
 msgid "default"
 msgstr "por defecto"
 
-#: models.py:375
+#: models.py:337
+msgid "Select which field to use to show as author of this content."
+msgstr ""
+"Seleccione el campo que desea usar para mostrar como autoría de este "
+"contenido."
+
+#: models.py:410
 msgid "translations"
 msgstr "traducciones"
 
-#: models.py:393 models.py:428 models.py:438 apps/medialibrary/models.py:50
-#: apps/medialibrary/models.py:98 apps/medialibrary/models.py:111
-#: apps/medialibrary/models.py:132 apps/medialibrary/models.py:145
-#: core/collections/models.py:61 core/collections/models.py:103
+#: models.py:428 models.py:467 models.py:471 apps/medialibrary/models.py:58
+#: apps/medialibrary/models.py:72 apps/medialibrary/models.py:105
+#: apps/medialibrary/models.py:119 apps/medialibrary/models.py:133
+#: apps/medialibrary/models.py:147 core/collections/models.py:61
+#: core/collections/models.py:102 core/series/models.py:63
 msgid "image"
 msgstr "imagen"
 
-#: models.py:396
+#: models.py:431
 msgid "origin"
 msgstr "origen"
 
-#: models.py:398
+#: models.py:433
 msgid "notes"
 msgstr "notas"
 
-#: models.py:400 core/collections/models.py:59
+#: models.py:435 core/collections/models.py:59
 msgid "content types"
 msgstr "tipos de contenido"
 
-#: models.py:401
+#: models.py:436
 msgid "Select the content types this author is related to."
 msgstr "Seleccione los tipos de contenido que corresponden a esta autoría"
 
-#: models.py:407 apps/articles/models.py:46 apps/forum/models.py:38
-#: apps/medialibrary/models.py:35
-msgid "author"
-msgstr "autoría"
-
-#: models.py:408
+#: models.py:443
 msgid "authors"
 msgstr "autorías"
 
-#: models.py:416
+#: models.py:455
 msgid "link"
 msgstr "enlace"
 
-#: models.py:422 apps/articles/models.py:48 apps/medialibrary/models.py:37
+#: models.py:461 apps/articles/models.py:47 apps/medialibrary/models.py:39
 msgid "source"
 msgstr "fuente"
 
-#: models.py:423
+#: models.py:462
 msgid "sources"
 msgstr "fuentes"
 
-#: models.py:434
-msgid "Thumbnail Image"
-msgstr "Imagen miniatura"
-
-#: models.py:439
+#: models.py:472
 msgid "images"
 msgstr "imágenes"
 
-#: models.py:445
-msgid "avatar"
-msgstr "tu imagen"
-
-#: models.py:447 apps/locations/models.py:58
-msgid "city"
-msgstr "ciudad"
-
-#: models.py:448
-msgid "about myself"
-msgstr "sobre mí"
-
-#: models.py:451
-msgid "public"
-msgstr "público"
-
-#: models.py:452
-msgid "Choose whether your profile info should be publicly visible or not"
-msgstr "Elije si deseas que tu información de perfil sea pública"
-
-#: settings.py:109
+#: settings.py:105
 msgid "You need to set the CYCLOPE_PROJECT_PATH in your settings file."
 msgstr "Debe establecer un valor para CYCLOPE_PROJECT_PATH en settings.py"
 
-#: widgets.py:79
-msgid "Lookup"
-msgstr "Buscar"
+#: themes.py:89
+msgid "You need to set CYCLOPE_LOCAL_THEMES_PREFIX in your settings file"
+msgstr ""
+"Debe establecer un valor para CYCLOPE_LOCAL_THEMES_PREFIX en settings.py"
 
-#: apps/articles/admin.py:58 apps/feeds/admin.py:40
-#: apps/staticpages/admin.py:67
+#: themes.py:94
+msgid "Your CYCLOPE_LOCAL_THEMES_DIRsetting is invalid"
+msgstr "El valor de CYCLOPE_LOCAL_THEMES_DIR es inválido"
+
+#: apps/abuse/models.py:21
+msgid "abuse types"
+msgstr "tipos de denuncia"
+
+#: apps/abuse/models.py:22
+msgid "abuses types"
+msgstr "tipos de denuncia"
+
+#: apps/abuse/models.py:28
+msgid "abuse type"
+msgstr "tipo de denuncia"
+
+#: apps/abuse/models.py:47
+#, python-format
+msgid "Abuse report for object %s"
+msgstr "Denuncia por contenido indebido para %s"
+
+#: apps/abuse/models.py:54
+msgid "abuse report elements"
+msgstr "reporte de contenido denunciado"
+
+#: apps/abuse/models.py:55
+msgid "abuses reports elements"
+msgstr "reporte de contenidos denunciados"
+
+#: apps/abuse/models.py:62
+msgid "status"
+msgstr "estado"
+
+#: apps/abuse/models.py:64
+msgid "reported"
+msgstr "reportado"
+
+#: apps/abuse/models.py:65
+msgid "on hold"
+msgstr "en espera"
+
+#: apps/abuse/models.py:66
+msgid "ignored"
+msgstr "ignorado"
+
+#: apps/abuse/models.py:67
+msgid "deleted"
+msgstr "borrado"
+
+#: apps/abuse/models.py:93
+#, python-format
+msgid "Report: %d"
+msgstr "Reporte: %d "
+
+#: apps/abuse/models.py:113
+msgid "abuse report"
+msgstr "Denuncia"
+
+#: apps/abuse/models.py:114
+msgid "abuses reports"
+msgstr "Denuncias"
+
+#: apps/abuse/templates/abuse/abuse_report_email.txt:3
+#, python-format
+msgid ""
+"\n"
+"The user %(username)s has reported that the content %(content)s is an abuse\n"
+"of %(abuse_type)s.\n"
+msgstr ""
+"\n"
+"%(username)s ha reportado que: %(content)s tiene contenido indebido de este "
+"tipo:\n"
+"%(abuse_type)s.\n"
+
+#: apps/abuse/templates/abuse/abuse_report_email.txt:11
+#, python-format
+msgid ""
+"\n"
+"Also the user says that: %(text)s\n"
+msgstr ""
+"\n"
+"Otros comentarios sobre el contenido denunciado: %(text)s\n"
+
+#: apps/abuse/templates/abuse/report.html:7
+msgid "report abuse"
+msgstr "Denuncia este contenido"
+
+#: apps/abuse/templates/abuse/report.html:12
+msgid "you have already reported this content."
+msgstr "ya has denunciado este contenido."
+
+#: apps/abuse/templates/abuse/report.html:13
+msgid "thanks for reporting!"
+msgstr "Gracias por la denuncia. En breve el contenido será revisado"
+
+#: apps/abuse/templates/abuse/report.html:15
+msgid "return"
+msgstr "volver"
+
+#: apps/articles/admin.py:59 apps/feeds/admin.py:40
+#: apps/staticpages/admin.py:68
 msgid "Publication data"
 msgstr "Datos de la publicación"
 
@@ -573,11 +748,11 @@ msgstr "Datos de la publicación"
 msgid "detailed view of the selected Article"
 msgstr "vista detallada del Artículo seleccionado"
 
-#: apps/articles/frontend_views.py:51
+#: apps/articles/frontend_views.py:49
 msgid "list of Article teasers"
 msgstr "lista de resúmenes de Artículos"
 
-#: apps/articles/frontend_views.py:67
+#: apps/articles/frontend_views.py:65
 msgid "list of Article labeled icons"
 msgstr "lista de iconos con nombre"
 
@@ -589,83 +764,60 @@ msgstr "sí"
 msgid "no"
 msgstr "no"
 
-#: apps/articles/models.py:43
+#: apps/articles/models.py:42
 msgid "pre-title"
 msgstr "pre-título"
 
-#: apps/articles/models.py:44 apps/feeds/models.py:41
+#: apps/articles/models.py:43 apps/feeds/models.py:41
 #: apps/staticpages/models.py:31
 msgid "summary"
 msgstr "resumen"
 
-#: apps/articles/models.py:45 apps/forum/models.py:39 apps/polls/models.py:48
+#: apps/articles/models.py:44 apps/forum/models.py:38 apps/polls/models.py:48
 #: apps/polls/models.py:67 apps/staticpages/models.py:32
 #: apps/staticpages/models.py:47
 msgid "text"
 msgstr "texto"
 
-#: apps/articles/models.py:50
+#: apps/articles/models.py:49
 msgid "date"
 msgstr "fecha"
 
-#: apps/articles/models.py:62
+#: apps/articles/models.py:52
 msgid "article"
 msgstr "artículo"
 
-#: apps/articles/models.py:63
+#: apps/articles/models.py:53
 msgid "articles"
 msgstr "artículos"
 
-#: apps/articles/templates/articles/article_detail.html:54
-#: apps/articles/templates/articles/article_inline_detail.html:25
-#: apps/articles/templates/articles/article_teaser.html:34
-#: apps/forum/templates/forum/topic_teaser.html:13
-#: apps/medialibrary/templates/medialibrary/document_teaser.html:16
-#: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:16
-#: apps/medialibrary/templates/medialibrary/media_detail_header.html:11
-#: apps/medialibrary/templates/medialibrary/movieclip_teaser.html:16
-#: apps/medialibrary/templates/medialibrary/picture_teaser.html:17
-#: apps/medialibrary/templates/medialibrary/regularfile_teaser.html:16
-#: apps/medialibrary/templates/medialibrary/soundtrack_teaser.html:12
-#: apps/newsletter/templates/newsletter/content.html:23
-#: apps/newsletter/templates/newsletter/content_teasers.html:35
-#: apps/staticpages/templates/staticpages/staticpage_teaser.html:8
-#: templates/comments/list.html:9
-#: templates/cyclope/themes/neutrona/newsletter.html:139
-#: templates/cyclope/themes/neutronica/newsletter.html:139
-msgid "By"
-msgstr "Por"
+#: apps/articles/templates/articles/article_detail.html:34
+#: apps/medialibrary/models.py:64
+msgid "pictures"
+msgstr "imágenes"
 
-#: apps/articles/templates/articles/article_detail.html:86
-#: apps/medialibrary/templates/medialibrary/media_detail_footer.html:15
-msgid "Source"
-msgstr "Fuente"
-
-#: apps/articles/templates/articles/article_detail.html:92
-#: apps/medialibrary/templates/medialibrary/media_detail_footer.html:9
+#: apps/articles/templates/articles/article_detail.html:60
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_detail.html:37
+#: templates/cyclope/base_content_detail.html:26
 msgid "Last modification date"
 msgstr "Última modificación"
 
-#: apps/articles/templates/articles/article_detail.html:113
-msgid "Share in your social networks"
-msgstr "Compartir en redes sociales"
-
-#: apps/articles/templates/articles/article_inline_detail.html:12
-#: apps/newsletter/templates/newsletter/content.html:16
-#: apps/newsletter/templates/newsletter/content_teasers.html:15
+#: apps/articles/templates/articles/article_inline_detail.html:10
+#: apps/newsletter/templates/newsletter/content.html:14
+#: apps/newsletter/templates/newsletter/content_teasers.html:13
 msgid "Return to Table of Contents"
 msgstr "Volver al Sumario"
 
-#: apps/articles/templates/articles/article_teaser.html:29
+#: apps/articles/templates/articles/article_teaser.html:32
 #: apps/contacts/templates/contacts/contact_teaser.html:27
 #: apps/feeds/templates/feeds/feed_teaser.html:12
 #: apps/forum/templates/forum/topic_teaser.html:9
-#: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:18
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_teaser.html:22
 msgid "More"
 msgstr "Más"
 
 #: apps/contacts/forms.py:33
-#: apps/contacts/templates/contacts/contact_detail.html:37
+#: apps/contacts/templates/contacts/contact_detail.html:32
 msgid "Birth date"
 msgstr "Fecha de nacimiento"
 
@@ -673,23 +825,19 @@ msgstr "Fecha de nacimiento"
 msgid "detailed view of the selected Contact"
 msgstr "vista detallada del Contacto seleccionado"
 
-#: apps/contacts/frontend_views.py:51 core/collections/frontend_views.py:63
-msgid "Items per page"
-msgstr "Ítems por página"
-
-#: apps/contacts/frontend_views.py:52
+#: apps/contacts/frontend_views.py:50
 msgid "Order by"
 msgstr "Ordenar por"
 
-#: apps/contacts/frontend_views.py:53 apps/contacts/models.py:56
+#: apps/contacts/frontend_views.py:51 apps/contacts/models.py:56
 msgid "given name"
 msgstr "nombre"
 
-#: apps/contacts/frontend_views.py:54 apps/contacts/models.py:57
+#: apps/contacts/frontend_views.py:52 apps/contacts/models.py:57
 msgid "surname"
 msgstr "apellido"
 
-#: apps/contacts/frontend_views.py:61
+#: apps/contacts/frontend_views.py:59
 msgid "list of Contact teasers"
 msgstr "lista de resúmenes de Contactos"
 
@@ -749,69 +897,60 @@ msgstr "número de celular"
 msgid "contacts"
 msgstr "contactos"
 
-#: apps/contacts/templates/contacts/contact_detail.html:20
+#: apps/contacts/templates/contacts/contact_detail.html:15
 #: templates/cyclope/content_tools_block.html:6
 msgid "Print"
 msgstr "Imprimir"
 
-#: apps/contacts/templates/contacts/contact_detail.html:22
+#: apps/contacts/templates/contacts/contact_detail.html:17
 msgid "Send mail"
 msgstr "Enviar correo"
 
-#: apps/contacts/templates/contacts/contact_detail.html:35
+#: apps/contacts/templates/contacts/contact_detail.html:30
 msgid "Given name"
 msgstr "Nombre"
 
-#: apps/contacts/templates/contacts/contact_detail.html:36
+#: apps/contacts/templates/contacts/contact_detail.html:31
 msgid "Surname"
 msgstr "Apellido"
 
-#: apps/contacts/templates/contacts/contact_detail.html:38
+#: apps/contacts/templates/contacts/contact_detail.html:33
 #: apps/contacts/templates/contacts/contact_teaser.html:21
 msgid "Gender"
 msgstr "Sexo"
 
-#: apps/contacts/templates/contacts/contact_detail.html:39
+#: apps/contacts/templates/contacts/contact_detail.html:34
 #: apps/contacts/templates/contacts/contact_teaser.html:22
 msgid "Email"
 msgstr "E-mail"
 
-#: apps/contacts/templates/contacts/contact_detail.html:40
+#: apps/contacts/templates/contacts/contact_detail.html:35
 #: apps/contacts/templates/contacts/contact_teaser.html:23
 msgid "Web"
 msgstr "Web"
 
-#: apps/contacts/templates/contacts/contact_detail.html:41
+#: apps/contacts/templates/contacts/contact_detail.html:36
 #: apps/contacts/templates/contacts/contact_teaser.html:24
 msgid "Mobile"
 msgstr "Celular"
 
-#: apps/contacts/templates/contacts/contact_detail.html:49
+#: apps/contacts/templates/contacts/contact_detail.html:44
 msgid "Address"
 msgstr "Dirección"
 
-#: apps/contacts/templates/contacts/contact_detail.html:50
+#: apps/contacts/templates/contacts/contact_detail.html:45
 msgid "Post Office Box"
 msgstr "Casilla postal"
 
-#: apps/contacts/templates/contacts/contact_detail.html:51
+#: apps/contacts/templates/contacts/contact_detail.html:46
 msgid "Phone Number"
 msgstr "Número de teléfono"
 
-#: apps/contacts/templates/contacts/contact_detail.html:67
-#: apps/forum/templates/forum/topic_teaser.html:22
-#: apps/medialibrary/templates/medialibrary/document_teaser.html:25
-#: apps/medialibrary/templates/medialibrary/flashmovie_teaser.html:21
-#: apps/medialibrary/templates/medialibrary/movieclip_teaser.html:21
-#: apps/medialibrary/templates/medialibrary/picture_teaser.html:22
-#: apps/medialibrary/templates/medialibrary/regularfile_teaser.html:25
-#: apps/medialibrary/templates/medialibrary/soundtrack_teaser.html:17
-#: apps/polls/templates/polls/poll_detail.html:23
-#: apps/staticpages/templates/staticpages/staticpage_teaser.html:18
+#: apps/contacts/templates/contacts/contact_detail.html:62
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: apps/contacts/templates/contacts/contact_detail.html:70
+#: apps/contacts/templates/contacts/contact_detail.html:65
 msgid "Last update"
 msgstr "Última actualización"
 
@@ -819,22 +958,74 @@ msgstr "Última actualización"
 msgid "Last change"
 msgstr "Última modificación"
 
-#: apps/feeds/frontend_views.py:35
+#: apps/custom_comments/admin.py:38
+msgid "Metadata"
+msgstr "Metadato"
+
+#: apps/custom_comments/forms.py:30
+msgid "Website or Blog"
+msgstr "Sitio web o Blog"
+
+#: apps/custom_comments/forms.py:32
+msgid "I want to be notified by email when there is a new comment."
+msgstr "Quiero ser notificado por email cuando haya nuevos comentarios."
+
+#: apps/custom_comments/frontend_views.py:37
+msgid "list of the last site content comments"
+msgstr "listado de los últimos comentarios"
+
+#: apps/custom_comments/models.py:47
+#, python-format
+msgid "New comment posted on '%s'"
+msgstr "Nuevo comentario publicado en '%s'"
+
+#: apps/custom_comments/models.py:53
+#, python-format
+msgid ""
+"This comment is moderated!\n"
+"You may approve it on the following url: %s\n"
+"\n"
+msgstr ""
+"¡Este comentario está moderado!\n"
+"Puedes aprobarlo en el siguiente enlace: %s\n"
+"\n"
+
+#: apps/custom_comments/models.py:66
+msgid "comment"
+msgstr "comentario"
+
+#: apps/custom_comments/models.py:67
+msgid "comments"
+msgstr "comentarios"
+
+#: apps/dynamicforms/frontend_views.py:38
+msgid "show a form"
+msgstr "mostrar formulario"
+
+#: apps/dynamicforms/models.py:47
+msgid "form"
+msgstr "formulario"
+
+#: apps/dynamicforms/models.py:48
+msgid "forms"
+msgstr "formularios"
+
+#: apps/feeds/frontend_views.py:40
 msgid "entries to show"
 msgstr "entradas a mostrar"
 
-#: apps/feeds/frontend_views.py:36
+#: apps/feeds/frontend_views.py:41
 msgid "show titles only"
 msgstr "sólo mostrar títulos"
 
-#: apps/feeds/frontend_views.py:41
+#: apps/feeds/frontend_views.py:46
 msgid "detailed view of the selected Feed"
 msgstr "vista detallada de la sindicación seleccionada"
 
 #: apps/feeds/models.py:40
-#: apps/newsletter/templates/newsletter/content.html:36
+#: apps/newsletter/templates/newsletter/content.html:35
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: apps/feeds/models.py:42
 msgid "default number of entries"
@@ -860,15 +1051,15 @@ msgstr "asunto"
 msgid "detailed view of the selected Topic"
 msgstr "vista detallada del Tema seleccionado"
 
-#: apps/forum/frontend_views.py:63
+#: apps/forum/frontend_views.py:64
 msgid "create a new topic in the Forum selected"
 msgstr "crear un nuevo tema en el foro seleccionado"
 
-#: apps/forum/models.py:42
+#: apps/forum/models.py:41
 msgid "topic"
 msgstr "tema"
 
-#: apps/forum/models.py:43
+#: apps/forum/models.py:42
 msgid "topics"
 msgstr "temas"
 
@@ -886,7 +1077,7 @@ msgstr " Nuevo tema en el foro %(forum)s "
 msgid "Create"
 msgstr "Crear"
 
-#: apps/forum/templates/forum/topic_teaser.html:16
+#: apps/forum/templates/forum/topic_teaser.html:15
 #: core/collections/templates/collections/category_list_as_forum.html:17
 msgid "Replies"
 msgstr "Respuestas"
@@ -894,6 +1085,10 @@ msgstr "Respuestas"
 #: apps/locations/models.py:56
 msgid "country"
 msgstr "país"
+
+#: apps/locations/models.py:58 core/user_profiles/models.py:34
+msgid "city"
+msgstr "ciudad"
 
 #: apps/locations/models.py:59
 msgid "zip code"
@@ -911,152 +1106,133 @@ msgstr "número de teléfono"
 msgid "postal box"
 msgstr "casilla postal"
 
-#: apps/medialibrary/frontend_views.py:43
+#: apps/medialibrary/frontend_views.py:42
 msgid "detailed view of the selected Picture"
 msgstr "vista detallada de la Imagen seleccionada"
 
-#: apps/medialibrary/frontend_views.py:51
+#: apps/medialibrary/frontend_views.py:50
 msgid "detailed view of the selected Audio Track"
 msgstr "vista detallada de la Pista de Audio seleccionada"
 
-#: apps/medialibrary/frontend_views.py:59
+#: apps/medialibrary/frontend_views.py:58
 msgid "detailed view of the selected Movie Clip"
 msgstr "vista detallada del Video seleccionado"
 
-#: apps/medialibrary/frontend_views.py:67
+#: apps/medialibrary/frontend_views.py:66
 msgid "detailed view of the selected Document"
 msgstr "vista detallada del Documento seleccionado"
 
-#: apps/medialibrary/frontend_views.py:75
+#: apps/medialibrary/frontend_views.py:74
 msgid "detailed view of the selected File"
 msgstr "vista detallada del Archivo seleccionado"
 
-#: apps/medialibrary/frontend_views.py:83
+#: apps/medialibrary/frontend_views.py:82
 msgid "detailed view of the selected External Content"
 msgstr "vista detallada del Contenido Externo seleccionado"
 
-#: apps/medialibrary/frontend_views.py:91
+#: apps/medialibrary/frontend_views.py:90
 msgid "detailed view of the selected Flash Movie"
 msgstr "vista detallada del elemento Flash seleccionado"
 
-#: apps/medialibrary/models.py:56 apps/medialibrary/models.py:122
-#: templates/cyclope/themes/neutrona/base.html:44
-#: templates/cyclope/themes/neutronica/base.html:43
-msgid "Image"
-msgstr "Imagen"
-
-#: apps/medialibrary/models.py:59
+#: apps/medialibrary/models.py:63
 msgid "picture"
 msgstr "imagen"
 
-#: apps/medialibrary/models.py:60
-msgid "pictures"
-msgstr "imágenes"
-
-#: apps/medialibrary/models.py:66
+#: apps/medialibrary/models.py:70
 msgid "audio"
 msgstr "audio"
 
-#: apps/medialibrary/models.py:70
+#: apps/medialibrary/models.py:78
 msgid "sound track"
 msgstr "pista de sonido"
 
-#: apps/medialibrary/models.py:71
+#: apps/medialibrary/models.py:79
 msgid "sound tracks"
 msgstr "pistas de sonido"
 
-#: apps/medialibrary/models.py:77
+#: apps/medialibrary/models.py:85
 msgid "still"
 msgstr "cuadro de muestra"
 
-#: apps/medialibrary/models.py:79
+#: apps/medialibrary/models.py:87
 msgid "video"
 msgstr "video"
 
-#: apps/medialibrary/models.py:88
-msgid "Still"
-msgstr "Cuadro de muestra"
-
-#: apps/medialibrary/models.py:91
+#: apps/medialibrary/models.py:98
 msgid "movie clip"
 msgstr "video"
 
-#: apps/medialibrary/models.py:92
+#: apps/medialibrary/models.py:99
 msgid "movie clips"
 msgstr "video"
 
-#: apps/medialibrary/models.py:100 apps/medialibrary/models.py:104
+#: apps/medialibrary/models.py:107 apps/medialibrary/models.py:112
 msgid "document"
 msgstr "documento"
 
-#: apps/medialibrary/models.py:105
+#: apps/medialibrary/models.py:113
 msgid "documents"
 msgstr "documentos"
 
-#: apps/medialibrary/models.py:113
+#: apps/medialibrary/models.py:121
 msgid "flash"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:125
+#: apps/medialibrary/models.py:126
 msgid "flash movie"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:126
+#: apps/medialibrary/models.py:127
 msgid "flash movies"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:134 apps/medialibrary/models.py:138
+#: apps/medialibrary/models.py:135 apps/medialibrary/models.py:140
 msgid "file"
 msgstr "archivo"
 
-#: apps/medialibrary/models.py:139
+#: apps/medialibrary/models.py:141
 msgid "files"
 msgstr "archivos"
 
-#: apps/medialibrary/models.py:147
+#: apps/medialibrary/models.py:149
 msgid "content url"
 msgstr "URL del contenido"
 
-#: apps/medialibrary/models.py:148
+#: apps/medialibrary/models.py:150
 msgid "open in new window"
 msgstr "abrir en ventana nueva"
 
-#: apps/medialibrary/models.py:149
+#: apps/medialibrary/models.py:151
 msgid "skip detailed view"
 msgstr "saltear vista detallada"
 
-#: apps/medialibrary/models.py:152
+#: apps/medialibrary/models.py:155
 msgid "external content"
 msgstr "contenido externo"
 
-#: apps/medialibrary/models.py:153
+#: apps/medialibrary/models.py:156
 msgid "external contents"
 msgstr "contenidos externos"
 
-#: apps/medialibrary/templates/medialibrary/document_detail.html:20
-#: apps/medialibrary/templates/medialibrary/document_inline_detail.html:18
-#: apps/medialibrary/templates/medialibrary/media_player.html:17
-#: apps/medialibrary/templates/medialibrary/regularfile_detail.html:16
-#: apps/medialibrary/templates/medialibrary/regularfile_inline_detail.html:14
-msgid "download file"
-msgstr "descargar archivo"
-
-#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:24
-#: apps/medialibrary/templates/medialibrary/externalcontent_inline_detail.html:22
-#: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:31
+#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:7
+#: apps/medialibrary/templates/medialibrary/externalcontent_inline_detail.html:7
 msgid "Open external content"
 msgstr "Abrir contenido externo"
 
-#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:24
-#: apps/medialibrary/templates/medialibrary/externalcontent_inline_detail.html:22
-#: apps/medialibrary/templates/medialibrary/externalcontent_teaser.html:31
+#: apps/medialibrary/templates/medialibrary/externalcontent_detail.html:7
+#: apps/medialibrary/templates/medialibrary/externalcontent_inline_detail.html:7
 msgid " (in new window)"
 msgstr " (en ventana nueva)"
 
-#: apps/medialibrary/templates/medialibrary/flashmovie_detail.html:24
-#: apps/medialibrary/templates/medialibrary/flashmovie_inline_detail.html:22
+#: apps/medialibrary/templates/medialibrary/flashmovie_detail.html:20
+#: apps/medialibrary/templates/medialibrary/flashmovie_inline_detail.html:20
+#: apps/medialibrary/templates/medialibrary/flashmovie_slideshow_item.html:15
 msgid "full screen view (new window)"
 msgstr "pantalla completa (en ventana nueva)"
+
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_detail.html:28
+msgid "download file"
+msgstr "descargar archivo"
 
 #: apps/newsletter/admin.py:36
 msgid "Current content category"
@@ -1087,11 +1263,22 @@ msgid "show table of contents"
 msgstr "mostrar sumario"
 
 #: apps/newsletter/models.py:43
-#: templates/cyclope/themes/neutrona/__init__.py:47
-#: templates/cyclope/themes/neutronica/__init__.py:19
-#: templates/cyclope/themes/neutronica/__init__.py:31
-#: templates/cyclope/themes/neutronica/__init__.py:43
-#: templates/cyclope/themes/neutronica/__init__.py:59
+#: templates/cyclope/themes/alternative/__init__.py:47
+#: templates/cyclope/themes/baseline/__init__.py:47
+#: templates/cyclope/themes/curiouslygreen/__init__.py:47
+#: templates/cyclope/themes/cyblog/__init__.py:47
+#: templates/cyclope/themes/cyorg/__init__.py:47
+#: templates/cyclope/themes/cyportal/__init__.py:47
+#: templates/cyclope/themes/diversia/__init__.py:47
+#: templates/cyclope/themes/experience/__init__.py:47
+#: templates/cyclope/themes/frecuency/__init__.py:47
+#: templates/cyclope/themes/neutronix/__init__.py:47
+#: templates/cyclope/themes/newfangled/__init__.py:47
+#: templates/cyclope/themes/newflash/__init__.py:47
+#: templates/cyclope/themes/nonzeroblue/__init__.py:47
+#: templates/cyclope/themes/plantation/__init__.py:47
+#: templates/cyclope/themes/potentix/__init__.py:47
+#: templates/cyclope/themes/supplementary/__init__.py:47
 msgid "header"
 msgstr "encabezado"
 
@@ -1131,6 +1318,28 @@ msgstr "Enviar prueba"
 msgid "Send e-mail"
 msgstr "Enviar correo"
 
+#: apps/newsletter/templates/newsletter/content.html:22
+#: apps/newsletter/templates/newsletter/content_teasers.html:30
+#: templates/comments/list.html:11 templates/cyclope/author_block.html:7
+#: templates/cyclope/themes/alternative/newsletter.html:139
+#: templates/cyclope/themes/baseline/newsletter.html:139
+#: templates/cyclope/themes/curiouslygreen/newsletter.html:139
+#: templates/cyclope/themes/cyblog/newsletter.html:139
+#: templates/cyclope/themes/cyorg/newsletter.html:139
+#: templates/cyclope/themes/cyportal/newsletter.html:139
+#: templates/cyclope/themes/diversia/newsletter.html:139
+#: templates/cyclope/themes/experience/newsletter.html:139
+#: templates/cyclope/themes/frecuency/newsletter.html:139
+#: templates/cyclope/themes/neutronix/newsletter.html:155
+#: templates/cyclope/themes/newfangled/newsletter.html:139
+#: templates/cyclope/themes/newflash/newsletter.html:139
+#: templates/cyclope/themes/nonzeroblue/newsletter.html:139
+#: templates/cyclope/themes/plantation/newsletter.html:139
+#: templates/cyclope/themes/potentix/newsletter.html:139
+#: templates/cyclope/themes/supplementary/newsletter.html:139
+msgid "By"
+msgstr "Por"
+
 #: apps/newsletter/templates/newsletter/mail_sent.html:5
 msgid "The e-mail has been sent for newsletter "
 msgstr "El correo ha sido enviado para el boletín "
@@ -1156,7 +1365,7 @@ msgstr "Intente más tarde o comuníquese con su administrador."
 msgid "Poll submission form"
 msgstr "Formulario de envío de encuesta"
 
-#: apps/polls/frontend_views.py:72
+#: apps/polls/frontend_views.py:73
 msgid "detailed view of the selected Poll"
 msgstr "vista detallada de la Encuesta"
 
@@ -1188,7 +1397,7 @@ msgstr "respuesta"
 msgid "answers"
 msgstr "respuestas"
 
-#: apps/polls/models.py:83
+#: apps/polls/models.py:83 core/perms/models.py:35
 msgid "user"
 msgstr "persona"
 
@@ -1206,14 +1415,22 @@ msgstr "envíos"
 
 #: apps/polls/templates/admin/polls/change_list.html:7
 #: templates/admin/change_list.html:110
-#: templates/admin/feincms/tree_editor.html:43
 msgid "Filter"
 msgstr "Filtro"
 
-#: apps/polls/templates/polls/poll_submission.html:30
-#: templates/contact_form/contact_form.html:9
-msgid "Send"
+#: apps/polls/templates/polls/poll_submission.html:22
+#: core/user_profiles/forms.py:34 utils/__init__.py:309
+msgid "Submit"
 msgstr "Enviar"
+
+#: apps/related_admin/fields.py:48
+#, python-format
+msgid "field %(field)s cannot validate %(value)s"
+msgstr "%(field)s no pudo validarse %(value)s"
+
+#: apps/related_admin/fields.py:76
+msgid "Wrong content type or object"
+msgstr "Tipo de contenido u objecto inválido"
 
 #: apps/staticpages/admin.py:40
 msgid "Menu items"
@@ -1223,11 +1440,11 @@ msgstr "Items de menú"
 msgid "detailed view of the selected Static Page"
 msgstr "vista detallada de la página estatica"
 
-#: apps/staticpages/frontend_views.py:54
+#: apps/staticpages/frontend_views.py:53
 msgid "list of Static Pages"
 msgstr "lista de Páginas Estáticas"
 
-#: apps/staticpages/frontend_views.py:73
+#: apps/staticpages/frontend_views.py:72
 msgid "display the selected HTML Block"
 msgstr "vista detallada del Bloque HTML seleccionado"
 
@@ -1247,36 +1464,28 @@ msgstr "bloque html"
 msgid "html blocks"
 msgstr "bloques html"
 
-#: core/captcha_comments/forms.py:28
-msgid "Website or Blog"
-msgstr "Sitio web o Blog"
+#: core/collections/admin.py:49 core/collections/models.py:139
+#: core/collections/models.py:204 core/perms/models.py:38
+msgid "category"
+msgstr "categoría"
 
-#: core/collections/admin.py:95 templates/rosetta/pofile.html:59
-msgid "All"
-msgstr "Todos"
-
-#: core/collections/admin.py:105 core/collections/models.py:129
-#: core/collections/models.py:225
-msgid "categories"
-msgstr "categorías"
-
-#: core/collections/admin.py:114
+#: core/collections/admin.py:72
 msgid "Description"
 msgstr "Descrición"
 
-#: core/collections/admin.py:135
+#: core/collections/admin.py:89
 msgid "Extra info"
 msgstr "Información extra"
 
-#: core/collections/admin.py:162
+#: core/collections/admin.py:116
 msgid "Collection"
 msgstr "Colección"
 
-#: core/collections/admin.py:164
+#: core/collections/admin.py:118
 msgid "Category"
 msgstr "Categoría"
 
-#: core/collections/admin.py:222
+#: core/collections/admin.py:190
 msgid "Default category listing view"
 msgstr "Vista por defecto para listados"
 
@@ -1285,51 +1494,26 @@ msgid "list of root items for the selected Category"
 msgstr "lista de items raíz para la Categoría seleccionada"
 
 #: core/collections/frontend_views.py:60
-#: core/collections/frontend_views.py:164
+#: core/collections/frontend_views.py:173
 msgid "Show title"
 msgstr "Mostrar título"
 
 #: core/collections/frontend_views.py:61
-#: core/collections/frontend_views.py:165
+#: core/collections/frontend_views.py:174
 msgid "Show description"
 msgstr "Mostrar descripción"
 
 #: core/collections/frontend_views.py:62
-#: core/collections/frontend_views.py:166
+#: core/collections/frontend_views.py:175
 msgid "Show image"
 msgstr "Mostrar imagen"
-
-#: core/collections/frontend_views.py:65
-#: core/collections/frontend_views.py:167
-msgid "Limit to N items (0 = no limit)"
-msgstr "Limitar a N items (0 = sin límite)"
-
-#: core/collections/frontend_views.py:67
-#: core/collections/frontend_views.py:169
-msgid "Sort by"
-msgstr "Ordenar por"
-
-#: core/collections/frontend_views.py:68
-#: core/collections/frontend_views.py:170
-msgid "Date ↓ (newest first)"
-msgstr "Fecha ↓ (más nuevo primero)"
-
-#: core/collections/frontend_views.py:69
-#: core/collections/frontend_views.py:171
-msgid "Date ↑ (oldest first)"
-msgstr "Fecha ↓ (más antiguo primero)"
-
-#: core/collections/frontend_views.py:70
-#: core/collections/frontend_views.py:172
-msgid "Alphabetic"
-msgstr "Alfabéticamente"
 
 #: core/collections/frontend_views.py:72
 msgid "Simplified"
 msgstr "Simplificada"
 
 #: core/collections/frontend_views.py:73
-#: core/collections/frontend_views.py:174
+#: core/collections/frontend_views.py:183
 msgid "Include descendant's elements"
 msgstr "Incluir elementos de los decendientes"
 
@@ -1353,101 +1537,113 @@ msgstr "No visible"
 msgid "default view for the Collection"
 msgstr "vista por defecto para la Colección"
 
-#: core/collections/frontend_views.py:104
+#: core/collections/frontend_views.py:131
 msgid "teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:153
+#: core/collections/frontend_views.py:157
 msgid "labeled icon list of Category members"
 msgstr "lista de iconos con nombre de los miembros de una Categoría"
 
-#: core/collections/frontend_views.py:176
+#: core/collections/frontend_views.py:168
+msgid "Visual Mode"
+msgstr "Modo visual"
+
+#: core/collections/frontend_views.py:169
+msgid "Standard view"
+msgstr "Vista estándar"
+
+#: core/collections/frontend_views.py:171
+msgid "With background image view"
+msgstr "Con imagen de fondo"
+
+#: core/collections/frontend_views.py:185
 msgid "Scroll by N items"
 msgstr "Avanzar de a N items"
 
-#: core/collections/frontend_views.py:178
+#: core/collections/frontend_views.py:187
 msgid "Speed of transition (in milliseconds)"
 msgstr "Velocidad de la transición (en milisegundos)"
 
-#: core/collections/frontend_views.py:180
+#: core/collections/frontend_views.py:189
 msgid "Automatic playback"
 msgstr "Rotación automática"
 
-#: core/collections/frontend_views.py:182
+#: core/collections/frontend_views.py:191
 msgid "Stop automatic playback after click"
 msgstr "Detener la rotación al hacer click"
 
-#: core/collections/frontend_views.py:184
+#: core/collections/frontend_views.py:193
 msgid "Delay between transitions (seconds)"
 msgstr "Espera entre transiciones (segundos)"
 
-#: core/collections/frontend_views.py:186
+#: core/collections/frontend_views.py:195
 msgid "Circular navigation"
 msgstr "Navegación circular"
 
-#: core/collections/frontend_views.py:188
+#: core/collections/frontend_views.py:197
 msgid "Navigation wrap"
 msgstr "Navegación"
 
-#: core/collections/frontend_views.py:189
+#: core/collections/frontend_views.py:198
 msgid "Circular"
-msgstr ""
+msgstr "Circular"
 
-#: core/collections/frontend_views.py:190
+#: core/collections/frontend_views.py:199
 msgid "First"
 msgstr "Inicio"
 
-#: core/collections/frontend_views.py:191
+#: core/collections/frontend_views.py:200
 msgid "Last"
 msgstr "Fin"
 
-#: core/collections/frontend_views.py:192
+#: core/collections/frontend_views.py:201
 msgid "Both"
 msgstr "Ambos"
 
-#: core/collections/frontend_views.py:193
+#: core/collections/frontend_views.py:202
 msgid "None"
 msgstr "Ninguno"
 
-#: core/collections/frontend_views.py:200
+#: core/collections/frontend_views.py:209
 msgid "slideshow of Category members"
 msgstr "rotador de los miembros de la Categoría"
 
-#: core/collections/frontend_views.py:244
+#: core/collections/frontend_views.py:237
 msgid "full content of Category members"
 msgstr "contenido completo de una Categoría"
 
-#: core/collections/frontend_views.py:259
+#: core/collections/frontend_views.py:252
 msgid "teaser list of the root Categories of a Collection"
 msgstr "lista de resúmenes de las Categorías raíz de una Colección"
 
-#: core/collections/frontend_views.py:278
+#: core/collections/frontend_views.py:272
 msgid "list of the root Categories of a Collection"
 msgstr "listado de las Categorías raíz de la Colección"
 
-#: core/collections/frontend_views.py:290
+#: core/collections/frontend_views.py:284
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
-#: core/collections/frontend_views.py:356
+#: core/collections/frontend_views.py:350
 msgid "hierarchical list of Categories that will show an icon list on click"
 msgstr "lista jerarquizada de las Categorias que llevará a una vista de íconos"
 
-#: core/collections/frontend_views.py:365
+#: core/collections/frontend_views.py:359
 msgid ""
 "alphabetical teaser list of all the members of the Collection's Categories"
 msgstr ""
 "lista alfabética de resúmenes de los contenidos completos de una Colección"
 
-#: core/collections/frontend_views.py:394
+#: core/collections/frontend_views.py:388
 msgid "list of Category members as forum view"
 msgstr "listar la Categoría como un foro"
 
-#: core/collections/models.py:52
+#: core/collections/models.py:54
 msgid "visible"
 msgstr "visible"
 
-#: core/collections/models.py:56
+#: core/collections/models.py:57
 msgid "navigation root"
 msgstr "raíz de navegación"
 
@@ -1455,33 +1651,37 @@ msgstr "raíz de navegación"
 msgid "default list view"
 msgstr "vista de listado por defecto"
 
-#: core/collections/models.py:73 core/collections/models.py:93
+#: core/collections/models.py:74 core/collections/models.py:94
 msgid "collection"
 msgstr "colección"
 
-#: core/collections/models.py:74
+#: core/collections/models.py:75
 msgid "collections"
 msgstr "colecciones"
 
-#: core/collections/models.py:101
+#: core/collections/models.py:100
 msgid "active"
 msgstr "activo"
 
-#: core/collections/models.py:128 core/collections/models.py:192
-msgid "category"
-msgstr "categoría"
+#: core/collections/models.py:140 core/collections/models.py:237
+msgid "categories"
+msgstr "categorías"
 
-#: core/collections/models.py:215
+#: core/collections/models.py:227
 msgid "categorization"
 msgstr "Categorización"
 
-#: core/collections/models.py:216
+#: core/collections/models.py:228
 msgid "categorizations"
 msgstr "Categorizaciones"
 
-#: core/collections/models.py:232
+#: core/collections/models.py:244
 msgid "is orphan"
 msgstr "sin categorizar"
+
+#: core/collections/templates/collections/category_contents_base.html:39
+msgid "Add content"
+msgstr "Agregar contenido"
 
 #: core/collections/templates/collections/category_list_as_forum.html:11
 msgid "Create a new topic"
@@ -1504,63 +1704,418 @@ msgstr "Último comentario"
 msgid "by"
 msgstr "por"
 
-#: core/frontend/__init__.py:180
+#: core/frontend/__init__.py:182
 #, python-format
 msgid "No default view has been set for %s"
 msgstr "No hay una vista por defecto para %s"
 
-#: core/frontend/__init__.py:183
+#: core/frontend/__init__.py:185
 #, python-format
 msgid "You can set only one default view for %s"
 msgstr "Puedes definir solo una vista por defecto para %s"
 
-#: core/frontend/sites.py:161
+#: core/frontend/sites.py:181
 msgid "You need to create you site settings"
 msgstr "Tu sitio aún no ha sido configurado"
 
-#: core/frontend/sites.py:166
+#: core/frontend/sites.py:186
 msgid "You need to select a layout for the site"
 msgstr "Debe seleccionar un esquema para el sitio"
 
-#: core/frontend/sites.py:172
+#: core/frontend/sites.py:192
 msgid "The site home page has not been set."
 msgstr ""
 "La página de inicio no ha sido establecida. Debe ingresar al área de "
 "administración -> Ítems de menú, elejir el item que desee que aparezca al "
 "ingresar al sitio y tildar la opción 'Página de inicio'."
 
-#: core/frontend/sites.py:184
+#: core/frontend/sites.py:204
 msgid "No content object selected"
 msgstr "No ha seleccionado contenido"
 
-#: templates/admin/base_content_change_form.html:125
+#: core/perms/models.py:36
+msgid "can edit content"
+msgstr "puede editar contenido"
+
+#: core/perms/models.py:37
+msgid "can add content"
+msgstr "puede agregar contenido"
+
+#: core/perms/models.py:42
+msgid "category permission"
+msgstr "permiso de categoría"
+
+#: core/perms/models.py:43
+msgid "category permissions"
+msgstr "permisos de categoría"
+
+#: core/series/frontend_views.py:35
+msgid "detailed view of the selected Series"
+msgstr "vista detallada de la Serie"
+
+#: core/series/models.py:52
+msgid "series content"
+msgstr "contenido de la serie"
+
+#: core/series/models.py:53
+msgid "series contents"
+msgstr "contenidos de la serie"
+
+#: core/series/models.py:98 core/series/models.py:99
+msgid "series"
+msgstr "serie"
+
+#: core/series/templates/series/series_detail.html:11
+msgid "Content:"
+msgstr "Contenido:"
+
+#: core/user_profiles/forms.py:37
+msgid "Personal information"
+msgstr "Información personal"
+
+#: core/user_profiles/forms.py:55
+msgid "First name"
+msgstr "Nombre"
+
+#: core/user_profiles/forms.py:56
+msgid "Last name"
+msgstr "Apellido"
+
+#: core/user_profiles/frontend_views.py:35
+msgid "detailed view of the selected User"
+msgstr "vista detallada del Usuario"
+
+#: core/user_profiles/models.py:32
+msgid "avatar"
+msgstr "tu imagen"
+
+#: core/user_profiles/models.py:35
+msgid "about myself"
+msgstr "sobre mí"
+
+#: core/user_profiles/models.py:38
+msgid "public"
+msgstr "público"
+
+#: core/user_profiles/models.py:39
+msgid "Choose whether your profile info should be publicly visible or not"
+msgstr "Elije si deseas que tu información de perfil sea pública"
+
+#: core/user_profiles/templates/profiles/create_profile.html:4
+msgid "Create Profile"
+msgstr "Crear Perfil"
+
+#: core/user_profiles/templates/profiles/edit_profile.html:8
+msgid "Edit Profile"
+msgstr "Editar Perfil"
+
+#: core/user_profiles/templates/profiles/edit_profile.html:12
+#: templates/registration/registration_form.html:9
+msgid "Please fill in your user profile data"
+msgstr "Por favor complete sus datos"
+
+#: core/user_profiles/templates/profiles/profile_content.html:5
+msgid "City"
+msgstr "Ciudad"
+
+#: core/user_profiles/templates/profiles/profile_list.html:10
+msgid "Return"
+msgstr "Volver"
+
+#: core/user_profiles/templates/user_profiles/profile_detail.html:11
+msgid "Edit profile"
+msgstr "Editar perfil"
+
+#: locale_external/external_translations.py:5
+msgid "Username"
+msgstr "Nombre de ingreso"
+
+#: locale_external/external_translations.py:9
+msgid "Search In"
+msgstr "Buscar"
+
+#: locale_external/external_translations.py:13
+msgid "Lookup"
+msgstr "Buscar"
+
+#: locale_external/external_translations.py:15
+msgid "Share in your social networks"
+msgstr "Compartir en redes sociales"
+
+#: locale_external/external_translations.py:17
+msgid "Shortcuts"
+msgstr "Atajos"
+
+#: locale_external/external_translations.py:19
+msgid "Collapse tree"
+msgstr "Colapsar el árbol"
+
+#: locale_external/external_translations.py:21
+msgid "Expand tree"
+msgstr "Expandir el árbol"
+
+#: locale_external/external_translations.py:23
+msgid "and"
+msgstr "y"
+
+#: locale_external/external_translations.py:25
+msgid "or make changes"
+msgstr "o haga cambios"
+
+#: locale_external/external_translations.py:27
+msgid "Post"
+msgstr "Enviar"
+
+#: locale_external/external_translations.py:29
+msgid "Neutronica theme"
+msgstr "tema Neutronica"
+
+#: locale_external/external_translations.py:31
+msgid "One sidebar"
+msgstr "Una barra lateral"
+
+#: locale_external/external_translations.py:33
+msgid "left sidebar"
+msgstr "barra lateral izquierda"
+
+#: locale_external/external_translations.py:35
+msgid "footer"
+msgstr "pie de página"
+
+#: locale_external/external_translations.py:37
+msgid "Two sidebars"
+msgstr "Dos barras laterales"
+
+#: locale_external/external_translations.py:39
+msgid "right sidebar"
+msgstr "barra lateral derecha"
+
+#: locale_external/external_translations.py:41
+msgid "No sidebars"
+msgstr "Sin barras laterales"
+
+#: locale_external/external_translations.py:43
+msgid "Subscribe to RSS"
+msgstr "Suscripción RSS"
+
+#: locale_external/external_translations.py:45
+msgid "User"
+msgstr "Usuario"
+
+#: locale_external/external_translations.py:47
+msgid "A user with that username already exists."
+msgstr "Ya existe una persona con este nombre."
+
+#: locale_external/external_translations.py:49
+msgid "username"
+msgstr "nombre de ingreso"
+
+#: locale_external/external_translations.py:51
+msgid "users"
+msgstr "personas"
+
+#: locale_external/external_translations.py:53
+msgid "sender"
+msgstr "remitente"
+
+#: locale_external/external_translations.py:55
+msgid "Visit website"
+msgstr "Ver en el sitio web"
+
+#: locale_external/external_translations.py:57
+msgid "Categories"
+msgstr "Categorías"
+
+#: locale_external/external_translations.py:59
+msgid "Name"
+msgstr "Nombre"
+
+#: locale_external/external_translations.py:61
+msgid "Alignment"
+msgstr "Alineación"
+
+#: locale_external/external_translations.py:63
+msgid "Text"
+msgstr "Texto"
+
+#: locale_external/external_translations.py:65
+msgid "Date"
+msgstr "Fecha"
+
+#: locale_external/external_translations.py:67
+msgid "Share"
+msgstr "Compartir"
+
+#: locale_external/external_translations.py:69
+msgid "Review and moderate user comments"
+msgstr "Revisa y modera los comentarios recibidos"
+
+#: locale_external/external_translations.py:71
+msgid "alphabetical teaser list of Contact members"
+msgstr "lista alfabética de Contactos"
+
+#: locale_external/external_translations.py:73
+msgid "Categorization"
+msgstr "Categorización"
+
+#: locale_external/external_translations.py:75
+msgid "Classify the content in your website"
+msgstr "Clasifica el contenido de tu sitio"
+
+#: locale_external/external_translations.py:77
+msgid "Modify the menus and site layouts"
+msgstr "Administra los menús y la disposición del contenido"
+
+#: locale_external/external_translations.py:79
+msgid "Header"
+msgstr "encabezado"
+
+#: locale_external/external_translations.py:81
+msgid "show the current content for the selected Newsletter"
+msgstr "mostrar el contenido actual del Newsletter"
+
+#: locale_external/external_translations.py:83
+msgid "show the header text of the selected Newsletter"
+msgstr "mostrar el encabezado del Boletín seleccionado"
+
+#: locale_external/external_translations.py:85
+msgid "toggle editor"
+msgstr "encender o apagar editor"
+
+#: locale_external/external_translations.py:87
+msgid "on"
+msgstr "encendido"
+
+#: locale_external/external_translations.py:89
+msgid "off"
+msgstr "apagado"
+
+#: locale_external/external_translations.py:91
+msgid "collection categories"
+msgstr "categorias de colecciones"
+
+#: locale_external/external_translations.py:93
+msgid "Spanish"
+msgstr "Español"
+
+#: locale_external/external_translations.py:95
+msgid "English"
+msgstr "Inglés"
+
+#: locale_external/external_translations.py:97
+msgid "Portuguese"
+msgstr "Portugués"
+
+#: locale_external/external_translations.py:99
+msgid "list of Products"
+msgstr "lista de Productos"
+
+#: locale_external/external_translations.py:101
+msgid "price"
+msgstr "precio"
+
+#: locale_external/external_translations.py:103
+msgid "product"
+msgstr "producto"
+
+#: locale_external/external_translations.py:105
+msgid "products"
+msgstr "productos"
+
+#: locale_external/external_translations.py:107
+msgid "Potente theme"
+msgstr "tema Potente"
+
+#: locale_external/external_translations.py:109
+msgid "One sidebar and four panes"
+msgstr "Una barra y cuatro paneles"
+
+#: locale_external/external_translations.py:111
+msgid "sidebar"
+msgstr "barra lateral"
+
+#: locale_external/external_translations.py:113
+msgid "second pane"
+msgstr "segundo panel"
+
+#: locale_external/external_translations.py:115
+msgid "third pane"
+msgstr "tercer panel"
+
+#: locale_external/external_translations.py:117
+msgid "fourth pane"
+msgstr "cuarto panel"
+
+#: locale_external/external_translations.py:119
+msgid "Translated"
+msgstr "Traducciones"
+
+#: locale_external/external_translations.py:121
+msgid "article image"
+msgstr "imagen de artículo"
+
+#: locale_external/external_translations.py:123
+msgid "article images"
+msgstr "imágenes de artículo"
+
+#: locale_external/external_translations.py:125
+msgid "attachments"
+msgstr "adjuntos"
+
+#: locale_external/external_translations.py:127
+msgid "downloads"
+msgstr "bajadas"
+
+#: locale_external/external_translations.py:129
+msgid "Codigo Sur, latest news"
+msgstr "Código Sur, últimas noticias"
+
+#: locale_external/external_translations.py:131
+msgid "navigation breadcrumb"
+msgstr "profundidad de navegación"
+
+#: locale_external/external_translations.py:133
+msgid "Categories for this"
+msgstr "categorías"
+
+#: locale_external/external_translations.py:135
+msgid "category map"
+msgstr "mapeo de categoría"
+
+#: locale_external/external_translations.py:137
+#, fuzzy, python-format
+msgid "%(more_count)s more"
+msgstr "%(more_count)s más"
+
+#: templates/admin/base_content_change_form.html:131
 msgid "You must choose a collection first."
-msgstr "Seleccione antes una colección."
+msgstr "Primero debe serleccinar una colección."
 
 #: templates/admin/base_site.html:4 templates/rosetta/base.html:5
 msgid "Cyclope site admin"
 msgstr "Administración de Cyclope"
 
-#: templates/admin/change_form.html:24 templates/admin/change_list.html:63
+#: templates/admin/change_form.html:31 templates/admin/change_list.html:63
 #: templates/admin/contact_form/contactformsettings/change_form.html:6
 #: templates/admin/cyclope/sitesettings/change_form.html:6
 #: templates/rosetta/pofile.html:46
 msgid "Home"
 msgstr "Inicio"
 
-#: templates/admin/change_form.html:26
+#: templates/admin/change_form.html:34
 msgid "Add"
 msgstr "Agregar"
 
-#: templates/admin/change_form.html:35
+#: templates/admin/change_form.html:44
 msgid "History"
 msgstr "Historial"
 
-#: templates/admin/change_form.html:36
+#: templates/admin/change_form.html:45
 msgid "View on site"
 msgstr "Ver en el sitio"
 
-#: templates/admin/change_form.html:47 templates/admin/change_list.html:99
+#: templates/admin/change_form.html:56 templates/admin/change_list.html:99
+#: templates/admin/login.html:17
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] "Por favor corrija el error detallado"
@@ -1585,6 +2140,18 @@ msgstr "Agregar %(name)s"
 msgid " By %(filter_title)s "
 msgstr " Por %(filter_title)s "
 
+#: templates/admin/login.html:33
+msgid "Username:"
+msgstr "Nombre de ingreso:"
+
+#: templates/admin/login.html:37
+msgid "Password:"
+msgstr "Clave:"
+
+#: templates/admin/login.html:42 templates/registration/user_block.html:14
+msgid "Log in"
+msgstr "Ingresar"
+
 #: templates/admin/articles/change_list.html:6
 msgid ""
 "\n"
@@ -1599,37 +2166,37 @@ msgstr ""
 "publicar material categorizado en tu sitio.\n"
 "</p>\n"
 
-#: templates/admin/feincms/tree_editor.html:38
-msgid "Shortcuts"
-msgstr "Atajos"
+#: templates/comments/approved.html:4
+msgid "Thanks for approving"
+msgstr "Gracias por aprobar"
 
-#: templates/admin/feincms/tree_editor.html:40
-msgid "Collapse tree"
-msgstr "Colapsar el árbol"
+#: templates/comments/approved.html:11
+msgid ""
+"Thanks for taking the time to improve the quality of discussion on our site"
+msgstr ""
+"Gracias por tomarse el tiempo para comentar y aportar al debate en nuestro "
+"sitio"
 
-#: templates/admin/feincms/tree_editor.html:41
-msgid "Expand tree"
-msgstr "Expandir el árbol"
+#: templates/comments/approved.html:12 templates/comments/posted.html:12
+msgid "return."
+msgstr "volver."
 
-#: templates/comments/comments_block.html:17
+#: templates/comments/comments_block.html:39
 #, python-format
 msgid " There are %(comment_count)s comments "
 msgstr " Hay %(comment_count)s comentarios "
 
-#: templates/comments/comments_block.html:24
+#: templates/comments/comments_block.html:45
 msgid "comment on this content"
 msgstr "comentar este contenido"
 
-#: templates/comments/form.html:22
-msgid ""
-"For security reasons you need to type the text displayed in the following "
-"image"
-msgstr ""
-"Por razones de seguridad, debe ingresar el texto que se muestra en la imagen."
-
-#: templates/comments/form.html:34 templates/comments/preview.html:17
+#: templates/comments/form.html:11
 msgid "Post your comment"
 msgstr "Enviar comentario"
+
+#: templates/comments/form.html:12
+msgid "Cancel reply"
+msgstr "Cancelar respuesta"
 
 #: templates/comments/posted.html:4
 msgid "Thanks for commenting"
@@ -1639,31 +2206,13 @@ msgstr "Gracias por su comentario"
 msgid "Thank you for your comment"
 msgstr "Gracias por su comentario"
 
-#: templates/comments/posted.html:12
-msgid "return."
-msgstr "volver."
-
-#: templates/comments/preview.html:4 templates/comments/preview.html.py:14
+#: templates/comments/preview.html:4
 msgid "Preview your comment"
 msgstr "Vista previa de su comentario"
 
-#: templates/comments/preview.html:12
-msgid "Please correct the error below"
-msgid_plural "Please correct the errors below"
-msgstr[0] "Por favor corrija el error detallado"
-msgstr[1] "Por favor corrija los errores detallados"
-
-#: templates/comments/preview.html:17
-msgid "and"
-msgstr "y"
-
-#: templates/comments/preview.html:17
-msgid "or make changes"
-msgstr "o haga cambios"
-
-#: templates/comments/preview.html:33
-msgid "Post"
-msgstr "Enviar"
+#: templates/contact_form/contact_form.txt:2
+msgid "wrote"
+msgstr "escribió"
 
 #: templates/contact_form/contact_form_sent.html:6
 msgid "Thank you for contacting us!"
@@ -1673,187 +2222,620 @@ msgstr "¡Gracias por contactarnos!"
 msgid "Breadcrumb"
 msgstr "Profundidad de navegación"
 
+#: templates/cyclope/content_tools_block.html:9
+msgid "Report abuse"
+msgstr "Denuncia este contenido"
+
+#: templates/cyclope/content_tools_block.html:23
+msgid "Edit"
+msgstr "Editar"
+
 #: templates/cyclope/pagination_block.html:8
+msgid "first"
+msgstr "primera"
+
+#: templates/cyclope/pagination_block.html:9
 msgid "previous"
 msgstr "anterior"
 
-#: templates/cyclope/pagination_block.html:12
+#: templates/cyclope/pagination_block.html:13
 msgid "Page"
 msgstr "Página"
 
-#: templates/cyclope/pagination_block.html:12
-#: templates/cyclope/themes/neutrona/base.html:45
-#: templates/cyclope/themes/neutronica/base.html:44
+#: templates/cyclope/pagination_block.html:13
+#: templates/cyclope/themes/neutronix/base.html:61
 msgid "of"
 msgstr "de"
 
-#: templates/cyclope/pagination_block.html:16
+#: templates/cyclope/pagination_block.html:17
 msgid "next"
 msgstr "siguiente"
+
+#: templates/cyclope/pagination_block.html:18
+msgid "last"
+msgstr "última"
+
+#: templates/cyclope/related_contents_block.html:7
+msgid "Related:"
+msgstr "Relacionado:"
 
 #: templates/cyclope/site_map.html:6
 msgid "Site map"
 msgstr "Mapa del sitio"
 
-#: templates/cyclope/site_search_box.html:32
+#: templates/cyclope/site_search_box.html:31
 msgid "Site wide search"
 msgstr "Buscar en el sitio"
 
-#: templates/cyclope/themes/__init__.py:22
-msgid "You need to set CYCLOPE_LOCAL_THEMES_PREFIX in your settings file"
-msgstr ""
-"Debe establecer un valor para CYCLOPE_LOCAL_THEMES_PREFIX en settings.py"
+#: templates/cyclope/source_block.html:7
+#: templates/cyclope/source_block.html:10
+msgid "Source"
+msgstr "Fuente"
 
-#: templates/cyclope/themes/__init__.py:36
-msgid "Your CYCLOPE_LOCAL_THEMES_DIR setting is invalid"
-msgstr "El valor de CYCLOPE_LOCAL_THEMES_DIR es inválido"
-
-#: templates/cyclope/themes/neutrona/404.html:6
-#: templates/cyclope/themes/neutronica/404.html:6
+#: templates/cyclope/themes/alternative/404.html:6
+#: templates/cyclope/themes/baseline/404.html:6
+#: templates/cyclope/themes/curiouslygreen/404.html:6
+#: templates/cyclope/themes/cyblog/404.html:6
+#: templates/cyclope/themes/cyorg/404.html:6
+#: templates/cyclope/themes/diversia/404.html:6
+#: templates/cyclope/themes/experience/404.html:6
+#: templates/cyclope/themes/frecuency/404.html:6
+#: templates/cyclope/themes/neutronix/404.html:6
+#: templates/cyclope/themes/newfangled/404.html:6
+#: templates/cyclope/themes/newflash/404.html:6
+#: templates/cyclope/themes/plantation/404.html:6
+#: templates/cyclope/themes/potentix/404.html:6
+#: templates/cyclope/themes/supplementary/404.html:6
 msgid "Error 404 (Not Found)"
 msgstr "Error 404 (No encontrado)"
 
-#: templates/cyclope/themes/neutrona/404.html:10
-#: templates/cyclope/themes/neutronica/404.html:10
+#: templates/cyclope/themes/alternative/404.html:10
+#: templates/cyclope/themes/baseline/404.html:10
+#: templates/cyclope/themes/curiouslygreen/404.html:10
+#: templates/cyclope/themes/cyblog/404.html:10
+#: templates/cyclope/themes/cyorg/404.html:10
+#: templates/cyclope/themes/diversia/404.html:12
+#: templates/cyclope/themes/experience/404.html:10
+#: templates/cyclope/themes/frecuency/404.html:10
+#: templates/cyclope/themes/neutronix/404.html:12
+#: templates/cyclope/themes/newfangled/404.html:10
+#: templates/cyclope/themes/newflash/404.html:10
+#: templates/cyclope/themes/plantation/404.html:10
+#: templates/cyclope/themes/potentix/404.html:10
+#: templates/cyclope/themes/supplementary/404.html:10
 msgid "Error 404"
 msgstr "Error 404"
 
-#: templates/cyclope/themes/neutrona/404.html:13
-#: templates/cyclope/themes/neutronica/404.html:13
+#: templates/cyclope/themes/alternative/404.html:13
+#: templates/cyclope/themes/baseline/404.html:13
+#: templates/cyclope/themes/curiouslygreen/404.html:13
+#: templates/cyclope/themes/cyblog/404.html:13
+#: templates/cyclope/themes/cyorg/404.html:13
+#: templates/cyclope/themes/diversia/404.html:14
+#: templates/cyclope/themes/experience/404.html:13
+#: templates/cyclope/themes/frecuency/404.html:13
+#: templates/cyclope/themes/neutronix/404.html:14
+#: templates/cyclope/themes/newfangled/404.html:13
+#: templates/cyclope/themes/newflash/404.html:13
+#: templates/cyclope/themes/plantation/404.html:13
+#: templates/cyclope/themes/potentix/404.html:13
+#: templates/cyclope/themes/supplementary/404.html:13
 msgid "The requested URL was not found on this server."
 msgstr "La URL solicitada no se ha encontrado."
 
-#: templates/cyclope/themes/neutrona/500.html:6
-#: templates/cyclope/themes/neutronica/500.html:6
+#: templates/cyclope/themes/alternative/500.html:6
+#: templates/cyclope/themes/baseline/500.html:6
+#: templates/cyclope/themes/curiouslygreen/500.html:6
+#: templates/cyclope/themes/cyblog/500.html:6
+#: templates/cyclope/themes/cyorg/500.html:6
+#: templates/cyclope/themes/diversia/500.html:6
+#: templates/cyclope/themes/experience/500.html:6
+#: templates/cyclope/themes/frecuency/500.html:6
+#: templates/cyclope/themes/neutronix/500.html:6
+#: templates/cyclope/themes/newfangled/500.html:6
+#: templates/cyclope/themes/newflash/500.html:6
+#: templates/cyclope/themes/plantation/500.html:6
+#: templates/cyclope/themes/potentix/500.html:6
+#: templates/cyclope/themes/supplementary/500.html:6
 msgid "Error 500 (Internal Server Error)"
 msgstr "Error 500 (error interno del servidor)"
 
-#: templates/cyclope/themes/neutrona/500.html:10
-#: templates/cyclope/themes/neutronica/500.html:10
+#: templates/cyclope/themes/alternative/500.html:10
+#: templates/cyclope/themes/baseline/500.html:10
+#: templates/cyclope/themes/curiouslygreen/500.html:10
+#: templates/cyclope/themes/cyblog/500.html:10
+#: templates/cyclope/themes/cyorg/500.html:10
+#: templates/cyclope/themes/diversia/500.html:12
+#: templates/cyclope/themes/experience/500.html:10
+#: templates/cyclope/themes/frecuency/500.html:10
+#: templates/cyclope/themes/neutronix/500.html:12
+#: templates/cyclope/themes/newfangled/500.html:10
+#: templates/cyclope/themes/newflash/500.html:10
+#: templates/cyclope/themes/plantation/500.html:10
+#: templates/cyclope/themes/potentix/500.html:10
+#: templates/cyclope/themes/supplementary/500.html:10
 msgid "Error 500"
 msgstr "Error 500"
 
-#: templates/cyclope/themes/neutrona/500.html:13
-#: templates/cyclope/themes/neutronica/500.html:13
+#: templates/cyclope/themes/alternative/500.html:13
+#: templates/cyclope/themes/baseline/500.html:13
+#: templates/cyclope/themes/curiouslygreen/500.html:13
+#: templates/cyclope/themes/cyblog/500.html:13
+#: templates/cyclope/themes/cyorg/500.html:13
+#: templates/cyclope/themes/diversia/500.html:14
+#: templates/cyclope/themes/experience/500.html:13
+#: templates/cyclope/themes/frecuency/500.html:13
+#: templates/cyclope/themes/neutronix/500.html:14
+#: templates/cyclope/themes/newfangled/500.html:13
+#: templates/cyclope/themes/newflash/500.html:13
+#: templates/cyclope/themes/plantation/500.html:13
+#: templates/cyclope/themes/potentix/500.html:13
+#: templates/cyclope/themes/supplementary/500.html:13
 msgid "Internal server error."
 msgstr "Error interno del servidor."
 
-#: templates/cyclope/themes/neutrona/__init__.py:11
-msgid "Neutrona"
-msgstr "Neutrona"
+#: templates/cyclope/themes/alternative/__init__.py:11
+msgid "Alternative"
+msgstr "Alternative"
 
-#: templates/cyclope/themes/neutrona/__init__.py:17
-msgid "4 Elements"
+#: templates/cyclope/themes/alternative/__init__.py:17
+#: templates/cyclope/themes/cyorg/__init__.py:17
+#: templates/cyclope/themes/neutronix/__init__.py:17
+#: templates/cyclope/themes/supplementary/__init__.py:17
+msgid "Four Elements"
 msgstr "4 Elementos"
 
-#: templates/cyclope/themes/neutrona/__init__.py:19
-#: templates/cyclope/themes/neutrona/__init__.py:31
-msgid "air"
-msgstr "aire"
+#: templates/cyclope/themes/alternative/__init__.py:19
+#: templates/cyclope/themes/alternative/__init__.py:31
+#: templates/cyclope/themes/cyorg/__init__.py:19
+#: templates/cyclope/themes/cyorg/__init__.py:31
+#: templates/cyclope/themes/cyportal/__init__.py:19
+#: templates/cyclope/themes/cyportal/__init__.py:31
+#: templates/cyclope/themes/diversia/__init__.py:31
+#: templates/cyclope/themes/neutronix/__init__.py:19
+#: templates/cyclope/themes/neutronix/__init__.py:31
+#: templates/cyclope/themes/nonzeroblue/__init__.py:19
+#: templates/cyclope/themes/nonzeroblue/__init__.py:31
+msgid "Air"
+msgstr "Aire"
 
-#: templates/cyclope/themes/neutrona/__init__.py:20
-#: templates/cyclope/themes/neutrona/__init__.py:32
-msgid "water"
-msgstr "agua"
+#: templates/cyclope/themes/alternative/__init__.py:20
+#: templates/cyclope/themes/alternative/__init__.py:32
+#: templates/cyclope/themes/cyorg/__init__.py:20
+#: templates/cyclope/themes/cyorg/__init__.py:32
+#: templates/cyclope/themes/cyportal/__init__.py:20
+#: templates/cyclope/themes/cyportal/__init__.py:32
+#: templates/cyclope/themes/diversia/__init__.py:32
+#: templates/cyclope/themes/neutronix/__init__.py:20
+#: templates/cyclope/themes/neutronix/__init__.py:32
+#: templates/cyclope/themes/nonzeroblue/__init__.py:20
+#: templates/cyclope/themes/nonzeroblue/__init__.py:32
+msgid "Water"
+msgstr "Agua"
 
-#: templates/cyclope/themes/neutrona/__init__.py:21
-#: templates/cyclope/themes/neutrona/__init__.py:34
-msgid "before fire"
-msgstr "antes de fuego"
+#: templates/cyclope/themes/alternative/__init__.py:21
+#: templates/cyclope/themes/alternative/__init__.py:34
+#: templates/cyclope/themes/cyorg/__init__.py:21
+#: templates/cyclope/themes/cyorg/__init__.py:34
+#: templates/cyclope/themes/cyportal/__init__.py:21
+#: templates/cyclope/themes/cyportal/__init__.py:34
+#: templates/cyclope/themes/diversia/__init__.py:21
+#: templates/cyclope/themes/diversia/__init__.py:34
+#: templates/cyclope/themes/neutronix/__init__.py:21
+#: templates/cyclope/themes/neutronix/__init__.py:34
+#: templates/cyclope/themes/nonzeroblue/__init__.py:21
+#: templates/cyclope/themes/nonzeroblue/__init__.py:34
+msgid "Spark"
+msgstr "Chispa"
 
-#: templates/cyclope/themes/neutrona/__init__.py:22
-#: templates/cyclope/themes/neutrona/__init__.py:35
-msgid "after fire"
-msgstr "después de fuego"
+#: templates/cyclope/themes/alternative/__init__.py:22
+#: templates/cyclope/themes/alternative/__init__.py:35
+#: templates/cyclope/themes/cyorg/__init__.py:22
+#: templates/cyclope/themes/cyorg/__init__.py:35
+#: templates/cyclope/themes/cyportal/__init__.py:22
+#: templates/cyclope/themes/cyportal/__init__.py:35
+#: templates/cyclope/themes/diversia/__init__.py:22
+#: templates/cyclope/themes/diversia/__init__.py:35
+#: templates/cyclope/themes/neutronix/__init__.py:22
+#: templates/cyclope/themes/neutronix/__init__.py:35
+#: templates/cyclope/themes/nonzeroblue/__init__.py:22
+#: templates/cyclope/themes/nonzeroblue/__init__.py:35
+msgid "Ash"
+msgstr "Cenizas"
 
-#: templates/cyclope/themes/neutrona/__init__.py:23
-#: templates/cyclope/themes/neutrona/__init__.py:36
-msgid "earth"
-msgstr "tierra"
+#: templates/cyclope/themes/alternative/__init__.py:23
+#: templates/cyclope/themes/alternative/__init__.py:36
+#: templates/cyclope/themes/cyorg/__init__.py:23
+#: templates/cyclope/themes/cyorg/__init__.py:36
+#: templates/cyclope/themes/cyportal/__init__.py:23
+#: templates/cyclope/themes/cyportal/__init__.py:36
+#: templates/cyclope/themes/diversia/__init__.py:36
+#: templates/cyclope/themes/neutronix/__init__.py:23
+#: templates/cyclope/themes/neutronix/__init__.py:36
+#: templates/cyclope/themes/nonzeroblue/__init__.py:23
+#: templates/cyclope/themes/nonzeroblue/__init__.py:36
+msgid "Earth"
+msgstr "Tierra"
 
-#: templates/cyclope/themes/neutrona/__init__.py:29
-msgid "5 Elements"
+#: templates/cyclope/themes/alternative/__init__.py:29
+#: templates/cyclope/themes/cyorg/__init__.py:29
+#: templates/cyclope/themes/neutronix/__init__.py:29
+#: templates/cyclope/themes/supplementary/__init__.py:29
+msgid "Five Elements"
 msgstr "5 Elementos"
 
-#: templates/cyclope/themes/neutrona/__init__.py:33
-msgid "love"
-msgstr "amor"
+#: templates/cyclope/themes/alternative/__init__.py:33
+#: templates/cyclope/themes/cyorg/__init__.py:33
+#: templates/cyclope/themes/cyportal/__init__.py:33
+#: templates/cyclope/themes/diversia/__init__.py:33
+#: templates/cyclope/themes/neutronix/__init__.py:33
+#: templates/cyclope/themes/nonzeroblue/__init__.py:33
+msgid "Love"
+msgstr "Amor"
 
-#: templates/cyclope/themes/neutrona/__init__.py:40
-#: templates/cyclope/themes/neutronica/__init__.py:51
+#: templates/cyclope/themes/alternative/__init__.py:40
+#: templates/cyclope/themes/baseline/__init__.py:40
+#: templates/cyclope/themes/curiouslygreen/__init__.py:40
+#: templates/cyclope/themes/cyblog/__init__.py:40
+#: templates/cyclope/themes/cyorg/__init__.py:40
+#: templates/cyclope/themes/cyportal/__init__.py:40
+#: templates/cyclope/themes/diversia/__init__.py:40
+#: templates/cyclope/themes/experience/__init__.py:40
+#: templates/cyclope/themes/frecuency/__init__.py:40
+#: templates/cyclope/themes/neutronix/__init__.py:40
+#: templates/cyclope/themes/newfangled/__init__.py:40
+#: templates/cyclope/themes/newflash/__init__.py:40
+#: templates/cyclope/themes/nonzeroblue/__init__.py:40
+#: templates/cyclope/themes/plantation/__init__.py:40
+#: templates/cyclope/themes/potentix/__init__.py:40
+#: templates/cyclope/themes/supplementary/__init__.py:40
 msgid "Empty"
 msgstr "Vacío"
 
-#: templates/cyclope/themes/neutrona/__init__.py:48
-#: templates/cyclope/themes/neutronica/__init__.py:21
-#: templates/cyclope/themes/neutronica/__init__.py:34
-#: templates/cyclope/themes/neutronica/__init__.py:44
-#: templates/cyclope/themes/neutronica/__init__.py:60
+#: templates/cyclope/themes/alternative/__init__.py:48
+#: templates/cyclope/themes/baseline/__init__.py:48
+#: templates/cyclope/themes/curiouslygreen/__init__.py:48
+#: templates/cyclope/themes/cyblog/__init__.py:48
+#: templates/cyclope/themes/cyorg/__init__.py:48
+#: templates/cyclope/themes/cyportal/__init__.py:48
+#: templates/cyclope/themes/diversia/__init__.py:48
+#: templates/cyclope/themes/experience/__init__.py:48
+#: templates/cyclope/themes/frecuency/__init__.py:48
+#: templates/cyclope/themes/neutronix/__init__.py:48
+#: templates/cyclope/themes/newfangled/__init__.py:48
+#: templates/cyclope/themes/newflash/__init__.py:48
+#: templates/cyclope/themes/nonzeroblue/__init__.py:48
+#: templates/cyclope/themes/plantation/__init__.py:48
+#: templates/cyclope/themes/potentix/__init__.py:48
+#: templates/cyclope/themes/supplementary/__init__.py:48
 msgid "before content"
 msgstr "antes del contenido"
 
-#: templates/cyclope/themes/neutrona/__init__.py:49
-#: templates/cyclope/themes/neutronica/__init__.py:22
-#: templates/cyclope/themes/neutronica/__init__.py:35
-#: templates/cyclope/themes/neutronica/__init__.py:45
-#: templates/cyclope/themes/neutronica/__init__.py:61
+#: templates/cyclope/themes/alternative/__init__.py:49
+#: templates/cyclope/themes/baseline/__init__.py:49
+#: templates/cyclope/themes/curiouslygreen/__init__.py:49
+#: templates/cyclope/themes/cyblog/__init__.py:49
+#: templates/cyclope/themes/cyorg/__init__.py:49
+#: templates/cyclope/themes/cyportal/__init__.py:49
+#: templates/cyclope/themes/diversia/__init__.py:49
+#: templates/cyclope/themes/experience/__init__.py:49
+#: templates/cyclope/themes/frecuency/__init__.py:49
+#: templates/cyclope/themes/neutronix/__init__.py:49
+#: templates/cyclope/themes/newfangled/__init__.py:49
+#: templates/cyclope/themes/newflash/__init__.py:49
+#: templates/cyclope/themes/nonzeroblue/__init__.py:49
+#: templates/cyclope/themes/plantation/__init__.py:49
+#: templates/cyclope/themes/potentix/__init__.py:49
+#: templates/cyclope/themes/supplementary/__init__.py:49
 msgid "after content"
 msgstr "después del contenido"
 
-#: templates/cyclope/themes/neutrona/newsletter.html:73
-#: templates/cyclope/themes/neutronica/newsletter.html:73
+#: templates/cyclope/themes/alternative/newsletter.html:73
+#: templates/cyclope/themes/baseline/newsletter.html:73
+#: templates/cyclope/themes/curiouslygreen/newsletter.html:73
+#: templates/cyclope/themes/cyblog/newsletter.html:73
+#: templates/cyclope/themes/cyorg/newsletter.html:73
+#: templates/cyclope/themes/cyportal/newsletter.html:73
+#: templates/cyclope/themes/diversia/newsletter.html:73
+#: templates/cyclope/themes/experience/newsletter.html:73
+#: templates/cyclope/themes/frecuency/newsletter.html:73
+#: templates/cyclope/themes/neutronix/newsletter.html:99
+#: templates/cyclope/themes/newfangled/newsletter.html:73
+#: templates/cyclope/themes/newflash/newsletter.html:73
+#: templates/cyclope/themes/nonzeroblue/newsletter.html:73
+#: templates/cyclope/themes/plantation/newsletter.html:73
+#: templates/cyclope/themes/potentix/newsletter.html:73
+#: templates/cyclope/themes/supplementary/newsletter.html:73
 msgid "Visit our website"
 msgstr "Ir al sitio web"
 
-#: templates/cyclope/themes/neutrona/newsletter.html:73
-#: templates/cyclope/themes/neutronica/newsletter.html:73
+#: templates/cyclope/themes/alternative/newsletter.html:73
+#: templates/cyclope/themes/baseline/newsletter.html:73
+#: templates/cyclope/themes/curiouslygreen/newsletter.html:73
+#: templates/cyclope/themes/cyblog/newsletter.html:73
+#: templates/cyclope/themes/cyorg/newsletter.html:73
+#: templates/cyclope/themes/cyportal/newsletter.html:73
+#: templates/cyclope/themes/diversia/newsletter.html:73
+#: templates/cyclope/themes/experience/newsletter.html:73
+#: templates/cyclope/themes/frecuency/newsletter.html:73
+#: templates/cyclope/themes/neutronix/newsletter.html:99
+#: templates/cyclope/themes/newfangled/newsletter.html:73
+#: templates/cyclope/themes/newflash/newsletter.html:73
+#: templates/cyclope/themes/nonzeroblue/newsletter.html:73
+#: templates/cyclope/themes/plantation/newsletter.html:73
+#: templates/cyclope/themes/potentix/newsletter.html:73
+#: templates/cyclope/themes/supplementary/newsletter.html:73
 msgid "View archives"
 msgstr "Ver archivo"
 
-#: templates/cyclope/themes/neutrona/newsletter.html:73
-#: templates/cyclope/themes/neutronica/newsletter.html:73
+#: templates/cyclope/themes/alternative/newsletter.html:73
+#: templates/cyclope/themes/baseline/newsletter.html:73
+#: templates/cyclope/themes/curiouslygreen/newsletter.html:73
+#: templates/cyclope/themes/cyblog/newsletter.html:73
+#: templates/cyclope/themes/cyorg/newsletter.html:73
+#: templates/cyclope/themes/cyportal/newsletter.html:73
+#: templates/cyclope/themes/diversia/newsletter.html:73
+#: templates/cyclope/themes/experience/newsletter.html:73
+#: templates/cyclope/themes/frecuency/newsletter.html:73
+#: templates/cyclope/themes/neutronix/newsletter.html:99
+#: templates/cyclope/themes/newfangled/newsletter.html:73
+#: templates/cyclope/themes/newflash/newsletter.html:73
+#: templates/cyclope/themes/nonzeroblue/newsletter.html:73
+#: templates/cyclope/themes/plantation/newsletter.html:73
+#: templates/cyclope/themes/potentix/newsletter.html:73
+#: templates/cyclope/themes/supplementary/newsletter.html:73
 msgid "Subscription options"
 msgstr "Opciones de suscripción"
 
-#: templates/cyclope/themes/neutrona/newsletter.html:128
-#: templates/cyclope/themes/neutronica/newsletter.html:128
+#: templates/cyclope/themes/alternative/newsletter.html:128
+#: templates/cyclope/themes/baseline/newsletter.html:128
+#: templates/cyclope/themes/curiouslygreen/newsletter.html:128
+#: templates/cyclope/themes/cyblog/newsletter.html:128
+#: templates/cyclope/themes/cyorg/newsletter.html:128
+#: templates/cyclope/themes/cyportal/newsletter.html:128
+#: templates/cyclope/themes/diversia/newsletter.html:128
+#: templates/cyclope/themes/experience/newsletter.html:128
+#: templates/cyclope/themes/frecuency/newsletter.html:128
+#: templates/cyclope/themes/neutronix/newsletter.html:151
+#: templates/cyclope/themes/newfangled/newsletter.html:128
+#: templates/cyclope/themes/newflash/newsletter.html:128
+#: templates/cyclope/themes/nonzeroblue/newsletter.html:128
+#: templates/cyclope/themes/plantation/newsletter.html:128
+#: templates/cyclope/themes/potentix/newsletter.html:128
+#: templates/cyclope/themes/supplementary/newsletter.html:128
 msgid "Table of Contents"
 msgstr "Sumario"
 
-#: templates/cyclope/themes/neutronica/__init__.py:11
-msgid "Neutronica theme"
-msgstr "tema Neutronica"
+#: templates/cyclope/themes/baseline/__init__.py:11
+msgid "Baseline"
+msgstr "Baseline"
 
-#: templates/cyclope/themes/neutronica/__init__.py:17
-msgid "One sidebar"
-msgstr "Una barra lateral"
+#: templates/cyclope/themes/baseline/__init__.py:17
+#: templates/cyclope/themes/curiouslygreen/__init__.py:17
+#: templates/cyclope/themes/cyblog/__init__.py:17
+#: templates/cyclope/themes/experience/__init__.py:17
+#: templates/cyclope/themes/frecuency/__init__.py:17
+#: templates/cyclope/themes/newfangled/__init__.py:17
+#: templates/cyclope/themes/newflash/__init__.py:17
+#: templates/cyclope/themes/plantation/__init__.py:17
+#: templates/cyclope/themes/potentix/__init__.py:17
+msgid "4 Elements"
+msgstr "4 Elementos"
 
-#: templates/cyclope/themes/neutronica/__init__.py:20
-#: templates/cyclope/themes/neutronica/__init__.py:32
-msgid "left sidebar"
-msgstr "barra lateral izquierda"
+#: templates/cyclope/themes/baseline/__init__.py:19
+#: templates/cyclope/themes/baseline/__init__.py:31
+#: templates/cyclope/themes/curiouslygreen/__init__.py:19
+#: templates/cyclope/themes/curiouslygreen/__init__.py:31
+#: templates/cyclope/themes/cyblog/__init__.py:19
+#: templates/cyclope/themes/cyblog/__init__.py:31
+#: templates/cyclope/themes/diversia/__init__.py:19
+#: templates/cyclope/themes/experience/__init__.py:19
+#: templates/cyclope/themes/experience/__init__.py:31
+#: templates/cyclope/themes/frecuency/__init__.py:19
+#: templates/cyclope/themes/frecuency/__init__.py:31
+#: templates/cyclope/themes/newfangled/__init__.py:19
+#: templates/cyclope/themes/newfangled/__init__.py:31
+#: templates/cyclope/themes/newflash/__init__.py:19
+#: templates/cyclope/themes/newflash/__init__.py:31
+#: templates/cyclope/themes/plantation/__init__.py:19
+#: templates/cyclope/themes/plantation/__init__.py:31
+#: templates/cyclope/themes/potentix/__init__.py:19
+#: templates/cyclope/themes/potentix/__init__.py:31
+#: templates/cyclope/themes/supplementary/__init__.py:19
+#: templates/cyclope/themes/supplementary/__init__.py:31
+msgid "air"
+msgstr "aire"
 
-#: templates/cyclope/themes/neutronica/__init__.py:23
-#: templates/cyclope/themes/neutronica/__init__.py:36
-#: templates/cyclope/themes/neutronica/__init__.py:46
-msgid "footer"
-msgstr "pie de página"
+#: templates/cyclope/themes/baseline/__init__.py:20
+#: templates/cyclope/themes/baseline/__init__.py:32
+#: templates/cyclope/themes/curiouslygreen/__init__.py:20
+#: templates/cyclope/themes/curiouslygreen/__init__.py:32
+#: templates/cyclope/themes/cyblog/__init__.py:20
+#: templates/cyclope/themes/cyblog/__init__.py:32
+#: templates/cyclope/themes/diversia/__init__.py:20
+#: templates/cyclope/themes/experience/__init__.py:20
+#: templates/cyclope/themes/experience/__init__.py:32
+#: templates/cyclope/themes/frecuency/__init__.py:20
+#: templates/cyclope/themes/frecuency/__init__.py:32
+#: templates/cyclope/themes/newfangled/__init__.py:20
+#: templates/cyclope/themes/newfangled/__init__.py:32
+#: templates/cyclope/themes/newflash/__init__.py:20
+#: templates/cyclope/themes/newflash/__init__.py:32
+#: templates/cyclope/themes/plantation/__init__.py:20
+#: templates/cyclope/themes/plantation/__init__.py:32
+#: templates/cyclope/themes/potentix/__init__.py:20
+#: templates/cyclope/themes/potentix/__init__.py:32
+#: templates/cyclope/themes/supplementary/__init__.py:20
+#: templates/cyclope/themes/supplementary/__init__.py:32
+msgid "water"
+msgstr "agua"
 
-#: templates/cyclope/themes/neutronica/__init__.py:29
-msgid "Two sidebars"
-msgstr "Dos barras laterales"
+#: templates/cyclope/themes/baseline/__init__.py:21
+#: templates/cyclope/themes/baseline/__init__.py:34
+#: templates/cyclope/themes/curiouslygreen/__init__.py:21
+#: templates/cyclope/themes/curiouslygreen/__init__.py:34
+#: templates/cyclope/themes/cyblog/__init__.py:21
+#: templates/cyclope/themes/cyblog/__init__.py:34
+#: templates/cyclope/themes/experience/__init__.py:21
+#: templates/cyclope/themes/experience/__init__.py:34
+#: templates/cyclope/themes/frecuency/__init__.py:21
+#: templates/cyclope/themes/frecuency/__init__.py:34
+#: templates/cyclope/themes/newfangled/__init__.py:21
+#: templates/cyclope/themes/newfangled/__init__.py:34
+#: templates/cyclope/themes/newflash/__init__.py:21
+#: templates/cyclope/themes/newflash/__init__.py:34
+#: templates/cyclope/themes/plantation/__init__.py:21
+#: templates/cyclope/themes/plantation/__init__.py:34
+#: templates/cyclope/themes/potentix/__init__.py:21
+#: templates/cyclope/themes/potentix/__init__.py:34
+#: templates/cyclope/themes/supplementary/__init__.py:21
+#: templates/cyclope/themes/supplementary/__init__.py:34
+msgid "before fire"
+msgstr "antes de fuego"
 
-#: templates/cyclope/themes/neutronica/__init__.py:33
-msgid "right sidebar"
-msgstr "barra lateral derecha"
+#: templates/cyclope/themes/baseline/__init__.py:22
+#: templates/cyclope/themes/baseline/__init__.py:35
+#: templates/cyclope/themes/curiouslygreen/__init__.py:22
+#: templates/cyclope/themes/curiouslygreen/__init__.py:35
+#: templates/cyclope/themes/cyblog/__init__.py:22
+#: templates/cyclope/themes/cyblog/__init__.py:35
+#: templates/cyclope/themes/experience/__init__.py:22
+#: templates/cyclope/themes/experience/__init__.py:35
+#: templates/cyclope/themes/frecuency/__init__.py:22
+#: templates/cyclope/themes/frecuency/__init__.py:35
+#: templates/cyclope/themes/newfangled/__init__.py:22
+#: templates/cyclope/themes/newfangled/__init__.py:35
+#: templates/cyclope/themes/newflash/__init__.py:22
+#: templates/cyclope/themes/newflash/__init__.py:35
+#: templates/cyclope/themes/plantation/__init__.py:22
+#: templates/cyclope/themes/plantation/__init__.py:35
+#: templates/cyclope/themes/potentix/__init__.py:22
+#: templates/cyclope/themes/potentix/__init__.py:35
+#: templates/cyclope/themes/supplementary/__init__.py:22
+#: templates/cyclope/themes/supplementary/__init__.py:35
+msgid "after fire"
+msgstr "después de fuego"
 
-#: templates/cyclope/themes/neutronica/__init__.py:41
-msgid "No sidebars"
-msgstr "Sin barras laterales"
+#: templates/cyclope/themes/baseline/__init__.py:23
+#: templates/cyclope/themes/baseline/__init__.py:36
+#: templates/cyclope/themes/curiouslygreen/__init__.py:23
+#: templates/cyclope/themes/curiouslygreen/__init__.py:36
+#: templates/cyclope/themes/cyblog/__init__.py:23
+#: templates/cyclope/themes/cyblog/__init__.py:36
+#: templates/cyclope/themes/diversia/__init__.py:23
+#: templates/cyclope/themes/experience/__init__.py:23
+#: templates/cyclope/themes/experience/__init__.py:36
+#: templates/cyclope/themes/frecuency/__init__.py:23
+#: templates/cyclope/themes/frecuency/__init__.py:36
+#: templates/cyclope/themes/newfangled/__init__.py:23
+#: templates/cyclope/themes/newfangled/__init__.py:36
+#: templates/cyclope/themes/newflash/__init__.py:23
+#: templates/cyclope/themes/newflash/__init__.py:36
+#: templates/cyclope/themes/plantation/__init__.py:23
+#: templates/cyclope/themes/plantation/__init__.py:36
+#: templates/cyclope/themes/potentix/__init__.py:23
+#: templates/cyclope/themes/potentix/__init__.py:36
+#: templates/cyclope/themes/supplementary/__init__.py:23
+#: templates/cyclope/themes/supplementary/__init__.py:36
+msgid "earth"
+msgstr "tierra"
 
-#: templates/cyclope/themes/neutronica/left_sidebar_block.html:9
-msgid "Subscribe to RSS"
-msgstr "Suscripción RSS"
+#: templates/cyclope/themes/baseline/__init__.py:29
+#: templates/cyclope/themes/curiouslygreen/__init__.py:29
+#: templates/cyclope/themes/cyblog/__init__.py:29
+#: templates/cyclope/themes/experience/__init__.py:29
+#: templates/cyclope/themes/frecuency/__init__.py:29
+#: templates/cyclope/themes/newfangled/__init__.py:29
+#: templates/cyclope/themes/newflash/__init__.py:29
+#: templates/cyclope/themes/plantation/__init__.py:29
+#: templates/cyclope/themes/potentix/__init__.py:29
+msgid "5 Elements"
+msgstr "5 Elementos"
+
+#: templates/cyclope/themes/baseline/__init__.py:33
+#: templates/cyclope/themes/curiouslygreen/__init__.py:33
+#: templates/cyclope/themes/cyblog/__init__.py:33
+#: templates/cyclope/themes/experience/__init__.py:33
+#: templates/cyclope/themes/frecuency/__init__.py:33
+#: templates/cyclope/themes/newfangled/__init__.py:33
+#: templates/cyclope/themes/newflash/__init__.py:33
+#: templates/cyclope/themes/plantation/__init__.py:33
+#: templates/cyclope/themes/potentix/__init__.py:33
+#: templates/cyclope/themes/supplementary/__init__.py:33
+msgid "love"
+msgstr "amor"
+
+#: templates/cyclope/themes/curiouslygreen/__init__.py:11
+msgid "Curiouslygreen"
+msgstr "Curiouslygreen"
+
+#: templates/cyclope/themes/cyblog/__init__.py:11
+msgid "Cyblog"
+msgstr "Cyblog"
+
+#: templates/cyclope/themes/cyorg/__init__.py:11
+msgid "Cyorg"
+msgstr "Cyorg"
+
+#: templates/cyclope/themes/cyportal/__init__.py:11
+msgid "Cyportal"
+msgstr "Cyportal"
+
+#: templates/cyclope/themes/cyportal/__init__.py:17
+#: templates/cyclope/themes/diversia/__init__.py:17
+#: templates/cyclope/themes/nonzeroblue/__init__.py:17
+msgid "FourElements"
+msgstr "4 Elementos"
+
+#: templates/cyclope/themes/cyportal/__init__.py:29
+#: templates/cyclope/themes/diversia/__init__.py:29
+#: templates/cyclope/themes/nonzeroblue/__init__.py:29
+msgid "FiveElements"
+msgstr "5 Elementos"
+
+#: templates/cyclope/themes/diversia/__init__.py:11
+msgid "Diversia"
+msgstr "Diversia"
+
+#: templates/cyclope/themes/experience/__init__.py:11
+msgid "Experience"
+msgstr "Experience"
+
+#: templates/cyclope/themes/frecuency/__init__.py:11
+msgid "Frecuency"
+msgstr "Frecuency"
+
+#: templates/cyclope/themes/neutronix/__init__.py:11
+msgid "Neutronix"
+msgstr "Neutronix"
+
+#: templates/cyclope/themes/neutronix/base.html:60
+msgid "Image"
+msgstr "Imagen"
+
+#: templates/cyclope/themes/newfangled/__init__.py:11
+msgid "Newfangled"
+msgstr "Newfangled"
+
+#: templates/cyclope/themes/newflash/__init__.py:11
+msgid "Newflash"
+msgstr "Newflash"
+
+#: templates/cyclope/themes/nonzeroblue/__init__.py:11
+msgid "Nonzeroblue"
+msgstr "Nonzeroblue"
+
+#: templates/cyclope/themes/plantation/__init__.py:11
+msgid "Plantation"
+msgstr "Plantation"
+
+#: templates/cyclope/themes/potentix/__init__.py:11
+msgid "Potentix"
+msgstr "Potentix"
+
+#: templates/cyclope/themes/supplementary/__init__.py:11
+msgid "Supplementary"
+msgstr "Supplementary"
 
 #: templates/filebrowser/index.html:48
 msgid "New Folder"
@@ -1862,21 +2844,6 @@ msgstr "Nueva Carpeta"
 #: templates/filebrowser/index.html:49
 msgid "Upload"
 msgstr "Subir"
-
-#: templates/profiles/edit_profile.html:8
-#: templates/registration/registration_form.html:8
-msgid "Please fill in your user profile data"
-msgstr "Por favor complete sus datos"
-
-#: templates/profiles/edit_profile.html:24
-#: templates/registration/password_change_form.html:10
-msgid "Send data"
-msgstr "Enviar datos"
-
-#: templates/profiles/profile_detail.html:9
-#: templates/profiles/profile_list.html:10
-msgid "Return"
-msgstr "Volver"
 
 #: templates/registration/activate.html:8
 msgid "The activation key you posted is invalid."
@@ -1911,21 +2878,48 @@ msgid "You may now"
 msgstr "Ahora puedes"
 
 #: templates/registration/activation_complete.html:8
+#: templates/registration/login.html:6 templates/registration/login.html:15
 msgid "login"
 msgstr "ingresar"
 
-#: templates/registration/login.html:8
-msgid "Please enter your credentials"
-msgstr "Por favor introduzca sus datos de acceso"
-
-#: templates/registration/login.html:15
+#: templates/registration/activation_email.txt:2
 #, python-format
 msgid ""
 "\n"
-"     If you have not yet created an account you need to\n"
-"     <a href=\"/accounts/register?next=%(next)s\">register</a>\n"
-"     before you may login.\n"
-"     "
+"Thank you for registering to %(site)s\n"
+"\n"
+"You can finish your registration by clicking on this link:\n"
+msgstr ""
+"\n"
+"Gracias por registrarse a %(site)s\n"
+"\n"
+"Para completar su registración haga click aquí:\n"
+
+#: templates/registration/activation_email.txt:8
+#, python-format
+msgid ""
+"\n"
+"This activation key will expire in %(expiration_days)s days.\n"
+msgstr ""
+"\n"
+"Esta llave de activación caducará en %(expiration_days)s días.\n"
+
+#: templates/registration/activation_email_subject.txt:2
+msgid "Account activation for"
+msgstr "Actviación de cuenta para"
+
+#: templates/registration/login.html:9
+msgid "Please enter your credentials"
+msgstr "Por favor introduzca sus datos de acceso"
+
+#: templates/registration/login.html:16
+#, python-format
+msgid ""
+"\n"
+"        If you have not yet created an account you need to\n"
+"        <a href=\"/accounts/register?next=%(next)s\">register</a>\n"
+"        before you may login.\n"
+"        "
 msgstr ""
 "\n"
 "     Si aún no has creado una cuenta, deberás\n"
@@ -1937,25 +2931,35 @@ msgstr ""
 msgid "You have logged out"
 msgstr "Haz cerrado tu sesión"
 
+#: templates/registration/password_change_form.html:6
+#: templates/rosetta/pofile.html:28
+msgid "Change password"
+msgstr "Cambiar contraseña"
+
+#: templates/registration/password_change_form.html:11
+msgid "Change"
+msgstr "Cambiar"
+
 #: templates/registration/password_reset_done.html:7
 msgid "Your password has been reset"
 msgstr "Tu clave ha sido re-generada"
+
+#: templates/registration/password_reset_form.html:5
+#: templates/registration/password_reset_form.html:17
+msgid "Reset Password"
+msgstr "Re-configurar Clave"
 
 #: templates/registration/password_reset_form.html:8
 msgid "Forgot your password?"
 msgstr "¿Olvidaste tu clave?"
 
-#: templates/registration/password_reset_form.html:10
+#: templates/registration/password_reset_form.html:11
 msgid ""
 "Enter your e-mail address in the form below and we will send you a link for "
 "resetting your password."
 msgstr ""
 "Ingresa tu dirección de correo electrónico y te enviaremos un enlace parare-"
 "configurar tu clave."
-
-#: templates/registration/password_reset_form.html:13
-msgid "Reset Password"
-msgstr "Re-configurar Clave"
 
 #: templates/registration/registration_complete.html:4
 msgid "Registration complete"
@@ -1969,17 +2973,13 @@ msgstr ""
 "Por favor revisa tu correo electrónico y sigue el enlace provisto para "
 "completar la activación de tu cuenta."
 
-#: templates/registration/registration_form.html:14
-msgid "Register"
-msgstr "Registrarse"
+#: templates/registration/user_block.html:9
+msgid "Create profile"
+msgstr "Crear perfil"
 
-#: templates/registration/user_block.html:6 templates/rosetta/pofile.html:35
+#: templates/registration/user_block.html:11 templates/rosetta/pofile.html:35
 msgid "Log out"
 msgstr "Cerrar sesión"
-
-#: templates/registration/user_block.html:8
-msgid "Log in"
-msgstr "Ingresar"
 
 #: templates/rosetta/base.html:5 templates/rosetta/pofile.html:47
 msgid "Translation"
@@ -1993,14 +2993,10 @@ msgstr "Te damos la Bienvenida"
 msgid "Documentation"
 msgstr "Documentación"
 
-#: templates/rosetta/pofile.html:28
-msgid "Change password"
-msgstr "Cambiar contraseña"
-
 #: templates/rosetta/pofile.html:49
 msgid "File is read-only: download the file when done editing!"
 msgstr ""
-"El archivo es sólo-lectura: descargue el archivo cuando termine de editar!"
+"El archivo es de sólo-lectura: descargue el archivo cuando termine de editar!"
 
 #: templates/rosetta/pofile.html:50
 msgid ""
@@ -2014,7 +3010,7 @@ msgstr ""
 #: templates/rosetta/pofile.html:54
 #, python-format
 msgid "Translate into %(rosetta_i18n_lang_name)s"
-msgstr "Traducie a %(rosetta_i18n_lang_name)s"
+msgstr "Traducir a %(rosetta_i18n_lang_name)s"
 
 #: templates/rosetta/pofile.html:55
 #, python-format
@@ -2024,6 +3020,10 @@ msgstr "progreso total: %(percent_translated)s%%"
 #: templates/rosetta/pofile.html:58
 msgid "Display:"
 msgstr "Mostrar:"
+
+#: templates/rosetta/pofile.html:59
+msgid "All"
+msgstr "Todos"
 
 #: templates/rosetta/pofile.html:60
 msgid "Untranslated only"
@@ -2037,7 +3037,7 @@ msgstr "Sólo dudosos"
 msgid "Translated only"
 msgstr "Sólo traducidos"
 
-#: templates/rosetta/pofile.html:69 templates/search/search.html:10
+#: templates/rosetta/pofile.html:69 templates/search/search.html:11
 msgid "Search"
 msgstr "Buscar"
 
@@ -2080,63 +3080,29 @@ msgstr[1] "%(hits)s/%(message_number)s mensajes"
 msgid "Advanced search"
 msgstr "Búsqueda avanzada"
 
-#: templates/search/search.html:15
+#: templates/search/search.html:18
 msgid "Results"
 msgstr "Resultados"
 
-#: templates/search/search.html:24
+#: templates/search/search.html:27
 msgid "No results found."
 msgstr "No se encontró ningún resultado"
 
-#: contrib/admin/templates/admin/login.html:19
-msgid "Username:"
-msgstr "Nombre de ingreso:"
+#: utils/__init__.py:303
+msgid "Thumbnail Image"
+msgstr "Imagen miniatura"
 
-#: contrib/admin/templates/admin/object_history.html:23
-msgid "User"
-msgstr "Usuario"
+#~ msgid "Your avatar image is too big"
+#~ msgstr "La imagen enviada es demasiado grande"
 
-#: contrib/auth/forms.py:14 forms.py:48 forms.py:66
-msgid "Username"
-msgstr "Nombre de ingreso"
+#~ msgid "Chat"
+#~ msgstr "Chat"
 
-#: contrib/auth/forms.py:31
-msgid "A user with that username already exists."
-msgstr "Ya existe una persona con este nombre."
+#~ msgid "tags"
+#~ msgstr "etiquetas"
 
-#: contrib/auth/models.py:206
-msgid "username"
-msgstr "nombre de ingreso"
-
-#: contrib/auth/models.py:223
-msgid "users"
-msgstr "personas"
-
-#~ msgid "sender"
-#~ msgstr "remitente"
-
-#~ msgid "Visit website"
-#~ msgstr "Ver en el sitio web"
-
-#~ msgid "Categories"
-#~ msgstr "Categorías"
-
-#~ msgid "Name"
-#~ msgstr "Nombre"
-
-#~ msgid "%(more_count)s more"
-#~ msgid_plural "%(more_count)s more"
-#~ msgstr[0] "%(more_count)s más"
-#~ msgstr[1] "%(more_count)s más"
-
-#~ msgid "Alignment"
-#~ msgstr "Alineación"
-
-#~ msgid "Text"
-#~ msgstr "Texto"
-
-#~ msgid "Date"
-#~ msgstr "Fecha"
+#~ msgid "Still"
+#~ msgstr "Cuadro de muestra"
 
 #~ msgid "simplified teaser list of Category members"
 #~ msgstr "lista simplificada de resúmenes de miembros de una Categoría"
@@ -2144,151 +3110,18 @@ msgstr "personas"
 #~ msgid "alphabetical teaser list of Category members"
 #~ msgstr "lista alfabética de resúmenes de los miembros de una Categoría"
 
-#~ msgid "Share"
-#~ msgstr "Compartir"
-
-#~ msgid "Review and moderate user comments"
-#~ msgstr "Revisa y modera los comentarios recibidos"
-
-#~ msgid "alphabetical teaser list of Contact members"
-#~ msgstr "lista alfabética de Contactos"
-
-#~ msgid "Labeled"
-#~ msgstr "Etiquetado"
-
-#~ msgid "Categorization"
-#~ msgstr "Categorización"
-
-#~ msgid "Classify the content in your website"
-#~ msgstr "Clasifica el contenido de tu sitio"
-
 #~ msgid "Tagging"
 #~ msgstr "Etiquetado"
 
-#~ msgid "Modify the menus and site layouts"
-#~ msgstr "Administra los menús y la disposición del contenido"
-
-#~ msgid "Profile"
-#~ msgstr "Perfil"
-
-#, fuzzy
-#~ msgid "Header"
-#~ msgstr "encabezado"
-
-#~ msgid "show the current content for the selected Newsletter"
-#~ msgstr "mostrar el contenido actual del Newsletter"
-
-#~ msgid "show the header text of the selected Newsletter"
-#~ msgstr "mostrar el encabezado del Boletín seleccionado"
-
-#~ msgid "toggle editor"
-#~ msgstr "encender o apagar editor"
-
-#~ msgid "on"
-#~ msgstr "encendido"
-
-#~ msgid "off"
-#~ msgstr "apagado"
-
-#~ msgid "collection categories"
-#~ msgstr "categorias de colecciones"
-
-#~ msgid "Spanish"
-#~ msgstr "Español"
-
-#~ msgid "English"
-#~ msgstr "Inglés"
-
-#~ msgid "Portuguese"
-#~ msgstr "Portugués"
-
-#~ msgid "list of Products"
-#~ msgstr "lista de Productos"
-
-#~ msgid "price"
-#~ msgstr "precio"
-
-#~ msgid "product"
-#~ msgstr "producto"
-
-#~ msgid "products"
-#~ msgstr "productos"
-
-#~ msgid "Potente theme"
-#~ msgstr "tema Potente"
-
-#~ msgid "One sidebar and four panes"
-#~ msgstr "Una barra y cuatro paneles"
-
-#~ msgid "sidebar"
-#~ msgstr "barra lateral"
-
-#~ msgid "first pane"
-#~ msgstr "primer panel"
-
-#~ msgid "second pane"
-#~ msgstr "segundo panel"
-
-#~ msgid "third pane"
-#~ msgstr "tercer panel"
-
-#~ msgid "fourth pane"
-#~ msgstr "cuarto panel"
-
-#, fuzzy
 #~ msgid "%(lang_name)s "
-#~ msgstr "Agregar %(name)s"
-
-#~ msgid "Translated"
-#~ msgstr "Traducciones"
-
-#~ msgid "article image"
-#~ msgstr "imagen de artículo"
-
-#~ msgid "article images"
-#~ msgstr "imágenes de artículo"
-
-#~ msgid "attachments"
-#~ msgstr "adjuntos"
-
-#~ msgid "downloads"
-#~ msgstr "bajadas"
-
-#~ msgid "Codigo Sur, latest news"
-#~ msgstr "Código Sur, últimas noticias"
-
-#~ msgid "navigation breadcrumb"
-#~ msgstr "profundidad de navegación"
-
-#~ msgid "Categories for this"
-#~ msgstr "categorías"
-
-#~ msgid "category map"
-#~ msgstr "mapeo de categoría"
-
-#~ msgid "category maps"
-#~ msgstr "mapeos de categorías"
+#~ msgstr "%(lang_name)s"
 
 #~ msgid ""
-#~ "\n"
-#~ "Thank you for registering to %(site)s\n"
-#~ "\n"
-#~ "You can finish your registration by clicking on this link:\n"
+#~ "For security reasons you need to type the text displayed in the following "
+#~ "image"
 #~ msgstr ""
-#~ "\n"
-#~ "Gracias por registrarse a %(site)s\n"
-#~ "\n"
-#~ "Para completar su registración haga click aquí:\n"
+#~ "Por razones de seguridad, debe ingresar el texto que se muestra en la "
+#~ "imagen."
 
-#~ msgid ""
-#~ "\n"
-#~ "This activation key will expire in %(expiration_days)s days.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Esta llave de activación caducará en %(expiration_days)s días.\n"
-
-#~ msgid "Account activation for"
-#~ msgstr "Actviación de cuenta para"
-
-#~ msgid "%s categories"
-#~ msgstr "%s categorías"
+#~ msgid "Register"
+#~ msgstr "Registrarse"

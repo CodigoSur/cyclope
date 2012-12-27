@@ -33,7 +33,7 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=250, db_index=True)),
             ('slug', self.gf('autoslug.fields.AutoSlugField')(unique=True, max_length=50, populate_from=None, unique_with=(), db_index=True)),
-            ('tags', self.gf('tagging_autocomplete.models.TagAutocompleteField')()),
+
             ('published', self.gf('django.db.models.fields.BooleanField')(default=True, blank=True)),
             ('summary', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('text', self.gf('django.db.models.fields.TextField')()),
@@ -95,7 +95,7 @@ class Migration(SchemaMigration):
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': 'None', 'unique_with': '()', 'db_index': 'True'}),
             'summary': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'tags': ('tagging_autocomplete.models.TagAutocompleteField', [], {}),
+
             'text': ('django.db.models.fields.TextField', [], {})
         }
     }

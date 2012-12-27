@@ -46,12 +46,13 @@ class TopicDetail(frontend.FrontendView):
     is_content_view = True
 
     def get_response(self, request, req_context, options, content_object):
-
-        try:
-            profile = content_object.author.get_profile()
-            avatar = profile.avatar
-        except ObjectDoesNotExist:
-            avatar = None
+        avatar = None
+        if content_object.user:
+            try:
+                profile = content_object.user.get_profile()
+                avatar = profile.avatar
+            except ObjectDoesNotExist:
+                pass
 
         req_context.update({'avatar': avatar})
         return views.object_detail(request, req_context, content_object)
@@ -85,7 +86,7 @@ class CreateTopic(frontend.FrontendView):
                 if form.is_valid():
                     # partial save
                     topic = form.save(commit=False)
-                    topic.author = request.user
+                    topic.user = request.user
                     topic.allow_comments = 'YES'
                     topic.save()
                     # category added

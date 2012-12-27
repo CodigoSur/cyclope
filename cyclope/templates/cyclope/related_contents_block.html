@@ -1,8 +1,10 @@
 {% load i18n cyclope_utils %}
+
+{% with content_relations=current_object.related_contents.all  %}
   {% if content_relations %}
   {% regroup content_relations by other_type as relations %}
   <div class="related_contents">
-    <span>Relacionado: </span>
+    <span>{% trans "Related:" %} </span>
     <ul>
     {% for relation in relations %}
       <li class='related_type {{ relation.grouper }}'>
@@ -19,3 +21,4 @@
     </ul>
   </div>
   {% endif %}
+{% endwith %}

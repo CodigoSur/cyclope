@@ -20,9 +20,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.utils.translation import ugettext_lazy as _
+
+from cyclope.utils import CrispyFormsSimpleMixin
 from contact_form.forms import AdminSettingsContactForm
 from captcha.fields import CaptchaField
 
 
-class AdminSettingsContactFormWithCaptcha(AdminSettingsContactForm):
+class AdminSettingsContactFormWithCaptcha(AdminSettingsContactForm,
+                                             CrispyFormsSimpleMixin):
     captcha = CaptchaField(label=_("Security code"))

@@ -19,7 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 from cyclope import settings as cyc_settings
 
 # cyclope.autodiscover will search inside installed apps folders
