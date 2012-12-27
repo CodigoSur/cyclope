@@ -1,8 +1,7 @@
 Changelog for Cyclope 3
 =======================
 
-
-0.2 (unreleased)
+0.2 (27-12-2012)
 ================
 
 - Added Rating application
