@@ -5,7 +5,7 @@ VIRTUALENV_DOWNLOAD_URL=https://raw.github.com/pypa/virtualenv/master/virtualenv
 VIRTUALENV_PATH=cyclope_workenv
 DEBIAN_OS_DEPENDENCIES="mercurial git-core python-imaging"
 PYTHON=
-CYCLOPE_PACKAGE=http://forja.codigosur.org/hg/cyclope/archive/tip.tar.bz2
+CYCLOPE_PACKAGE="cyclope3"
 
 get_python_version() {
     if python2 --version >/dev/null 2>&1; then
