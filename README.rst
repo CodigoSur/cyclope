@@ -31,13 +31,18 @@ Target audience
 Installation
 ------------
 
-Please visit: http://forja.codigosur.org/projects/cyclope for installation instructions.
+To install in a virtualenv just ``pip install cyclope3``.
 
+For detailed instructions please visit http://forja.codigosur.org/projects/cyclope
 
 Demo project
 ------------
 
-You can test ``Cyclope`` by running: ``python manage.py runserver`` in the provided ``demo/cyclope_project/`` folder.
+You can test ``Cyclope`` by running::
+
+ cyclopedemo myproject
+ cd myproject
+ python manage.py runserver
 
 The admin interface will be accessible at http://localhost:8000/admin and the fronted at: http://localhost:8000
 
