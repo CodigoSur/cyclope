@@ -1,4 +1,17 @@
 {% load comments i18n crispy_forms_tags %}
+<script>
+    // if show_comment_captcha is undefined is beacause we are in /comments/post/
+    // so we must show the captcha right away.
+$(function(){
+    if (window.show_comment_captcha === undefined) {
+        function show_comment_captcha() {
+                var captcha_img = $('form img');
+                captcha_img.attr("src", captcha_img.attr("src_"));
+        };
+        show_comment_captcha();
+    };
+});
+</script>
 <form action="{% comment_form_target %}" class="uniForm" method="post">{% csrf_token %}
   {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
   {% if user.is_authenticated %}
