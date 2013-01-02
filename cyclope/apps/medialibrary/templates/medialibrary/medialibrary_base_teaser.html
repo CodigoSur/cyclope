@@ -17,7 +17,7 @@
   {% endif %}
 
   {% if current_object.description %}
-      <div class="html-content summary">{{ current_object.description }}
+  <div class="html-content summary">{{ current_object.description|smart_style }}
       {% if not current_object.skip_detail %}
           <span class="more"><a href="{{ current_object.get_absolute_url }}">{% trans "More"%}</a></span>
       {% endif %}
