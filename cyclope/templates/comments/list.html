@@ -17,7 +17,7 @@
             <dd>
                 {{ comment.comment|linebreaks }}
             </dd>
-            <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link">Reply</a>
+            <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link">{% trans 'Reply' %}</a>
         </dl>
         {% for close in comment.close %}</li></ul>{% endfor %}
 {% endfor %}
