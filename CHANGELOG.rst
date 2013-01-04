@@ -4,6 +4,17 @@ Changelog for Cyclope 3
 0.3 (unreleased)
 ================
 
+
+0.2.1 (04-01-2013)
+==================
+
+- Added missing locale files to the package
+
+- Fixed reply of threaded comments
+
+- Fixed description of medialibrary teasers not rendering markup
+
+
 0.2 (27-12-2012)
 ================
 
