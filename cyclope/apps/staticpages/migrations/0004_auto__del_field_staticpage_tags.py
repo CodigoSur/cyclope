@@ -8,8 +8,10 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-
-        db.delete_column('staticpages_staticpage', 'tags')
+        try:
+          db.delete_column('staticpages_staticpage', 'tags')
+        except:
+          pass
 
 
     def backwards(self, orm):

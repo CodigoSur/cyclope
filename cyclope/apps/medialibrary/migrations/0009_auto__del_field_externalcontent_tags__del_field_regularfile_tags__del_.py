@@ -9,25 +9,28 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Deleting field 'ExternalContent.tags'
-        db.delete_column('medialibrary_externalcontent', 'tags')
+        try:
+         db.delete_column('medialibrary_externalcontent', 'tags')
 
-        # Deleting field 'RegularFile.tags'
-        db.delete_column('medialibrary_regularfile', 'tags')
+         # Deleting field 'RegularFile.tags'
+         db.delete_column('medialibrary_regularfile', 'tags')
 
-        # Deleting field 'FlashMovie.tags'
-        db.delete_column('medialibrary_flashmovie', 'tags')
+         # Deleting field 'FlashMovie.tags'
+         db.delete_column('medialibrary_flashmovie', 'tags')
 
-        # Deleting field 'Document.tags'
-        db.delete_column('medialibrary_document', 'tags')
+         # Deleting field 'Document.tags'
+         db.delete_column('medialibrary_document', 'tags')
 
-        # Deleting field 'MovieClip.tags'
-        db.delete_column('medialibrary_movieclip', 'tags')
+         # Deleting field 'MovieClip.tags'
+         db.delete_column('medialibrary_movieclip', 'tags')
 
-        # Deleting field 'SoundTrack.tags'
-        db.delete_column('medialibrary_soundtrack', 'tags')
+         # Deleting field 'SoundTrack.tags'
+         db.delete_column('medialibrary_soundtrack', 'tags')
 
-        # Deleting field 'Picture.tags'
-        db.delete_column('medialibrary_picture', 'tags')
+         # Deleting field 'Picture.tags'
+         db.delete_column('medialibrary_picture', 'tags')
+        except:
+          pass
 
     def backwards(self, orm):
         pass
