@@ -51,7 +51,8 @@ class Command(TemplateCommand):
             os.rmdir(dbdir)
             tmp_dir = tempfile.mkdtemp(project_name, "cycdemo")
             os.symlink(tmp_dir, dbdir)
-        call_command("syncdb", migrate=True, interactive=False)
+        call_command("syncdb", migrate_all=True, interactive=False)
+        call_command("migrate", fake=True)
         call_command("loaddata", "default_groups.json", "default_users.json",
                      "cyclope_demo.json")
 
