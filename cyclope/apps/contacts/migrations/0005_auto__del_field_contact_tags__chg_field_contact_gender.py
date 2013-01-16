@@ -8,7 +8,11 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        db.delete_column('contacts_contact', 'tags')
+        try:
+          db.delete_column('contacts_contact', 'tags')
+        except:
+          pass
+ 
         # Changing field 'Contact.gender'
         db.alter_column('contacts_contact', 'gender', self.gf('django.db.models.fields.CharField')(max_length=1, null=True))
 

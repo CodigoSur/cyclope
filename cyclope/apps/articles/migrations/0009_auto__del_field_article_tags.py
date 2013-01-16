@@ -9,7 +9,10 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Deleting field 'Article.tags'
-        db.delete_column('articles_article', 'tags')
+        try:
+           db.delete_column('articles_article', 'tags')
+        except:
+           pass
 
 
     def backwards(self, orm):

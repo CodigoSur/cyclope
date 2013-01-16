@@ -8,8 +8,10 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-
-        db.delete_column('feeds_feed', 'tags')
+        try: 
+          db.delete_column('feeds_feed', 'tags')
+        except:
+          pass
 
 
     def backwards(self, orm):

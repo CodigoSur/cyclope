@@ -9,7 +9,11 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Deleting field 'Poll.tags'
-        db.delete_column('polls_poll', 'tags')
+        try:
+          db.delete_column('polls_poll', 'tags')
+        except:
+          pass
+
 
         # Changing field 'Poll.creation_date'
         db.alter_column('polls_poll', 'creation_date', self.gf('django.db.models.fields.DateTimeField')())
