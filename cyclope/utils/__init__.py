@@ -26,6 +26,7 @@ utils
 Helper methods and classes.
 """
 
+import os
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import InvalidPage, EmptyPage
 from django.db.models import Q
@@ -33,6 +34,12 @@ from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 import cyclope
+
+def get_extension(filename):
+    """
+    Returns lowercase extension of filename. Eg: get_extension(foo.Bar) -> "bar"
+    """
+    return os.path.splitext(filename)[1].lower().replace(".", "")
 
 def menu_item_for_request(request):
     # Avoids a circular import

@@ -21,14 +21,12 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.contenttypes.models import ContentType
 
-from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 
 from cyclope.models import BaseContent, Author, Source
 from cyclope.core.collections.models import Collectible
-from cyclope.utils import ThumbnailMixin
+from cyclope.utils import ThumbnailMixin, get_extension
 import cyclope.apps.abuse
 
 class BaseMedia(BaseContent, Collectible, ThumbnailMixin):
@@ -45,6 +43,11 @@ class BaseMedia(BaseContent, Collectible, ThumbnailMixin):
     @property
     def media_file(self):
         return getattr(self, self.media_file_field)
+
+    @property
+    def file_type(self):
+        return get_extension(self.media_file.path)
+
 
     class Meta:
         abstract = True
