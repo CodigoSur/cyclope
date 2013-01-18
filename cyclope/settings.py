@@ -122,8 +122,8 @@ def get_site_settings():
     try:
         # a Cyclope project is supposed to have only one SiteSettings object
         site_settings = SiteSettings.objects.get()
-    # catch exceptions if the database is not available or no settings created
-    except (DatabaseError, IndexError):
+    # catch exceptions if no settings are created
+    except IndexError:
         site_settings = None
     return site_settings
 
