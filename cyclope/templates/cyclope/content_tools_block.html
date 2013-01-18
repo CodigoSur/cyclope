@@ -2,6 +2,16 @@
   {% get_comment_count for current_object as comment_count %}
 
   <div class="tools meta-content">
+    {% if CYCLOPE_SITE_SETTINGS.enable_share_buttons %}
+      {% block social_share %}
+      <div class="addthis_toolbox addthis_default_style"  style="float:left;">
+        <a class="addthis_button_facebook"></a>
+        <a class="addthis_button_twitter"></a>
+        <a class="addthis_button_compact"></a>
+      </div>
+      {% endblock %}
+    {% endif %}
+
     <ul>
       <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a>
       </li>

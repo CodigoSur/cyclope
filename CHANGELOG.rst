@@ -4,6 +4,8 @@ Changelog for Cyclope 3
 0.2.2 (unreleased)
 ==================
 
+- Added Network Sharing (using AddThis) capabillities.
+
 - Speed up cyclopeproject and cyclopedemo faking migrations
 
 - Fixed migrations on MySQL

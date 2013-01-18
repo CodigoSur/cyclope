@@ -90,6 +90,18 @@ class SiteSettings(models.Model):
                                    help_text=_('Select which field to use to show as author of the content.'))
     enable_ratings = models.BooleanField(_('enable rating (like/dislike) content'), default=False)
 
+    enable_share_buttons = models.BooleanField(_('enable social sharing buttons (facebook, twitter, etc)'),
+                                               default=True)
+    enable_follow_buttons = models.BooleanField(_('enable social follow buttons (facebook, twitter, etc)'),
+                                                default=False)
+    social_follow_services = JSONField(default='[["twitter","USERNAME"],["facebook","USERNAME"],' \
+                                               '["google","USERNAME"],["flickr","USERNAME"],' \
+                                               '["linkedin","USERNAME"],["vimeo","USERNAME"],' \
+                                               '["youtube","USERNAME"]]',
+                                       help_text=_("Change USERNAME by your username in each service you want to enable." \
+                                                   " Eg for youtube: if your page is http://youtube.com/user/cyclope/" \
+                                                   " then replace the 'USERNAME' bellow youtube with 'cyclope'."))
+
     def save(self, *args, **kwargs):
         self.id = 1
         super(SiteSettings, self).save(*args, **kwargs)

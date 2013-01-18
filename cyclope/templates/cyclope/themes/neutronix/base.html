@@ -47,6 +47,9 @@
     {% if CYCLOPE_SITE_SETTINGS.enable_ratings %}
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/ratings.js" ></script>
     {% endif %}
+    {% if CYCLOPE_SITE_SETTINGS.enable_share_buttons or CYCLOPE_SITE_SETTINGS.enable_follow_buttons %}
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+    {% endif %}
     <script type="text/javascript">
     $(function() {
         $('#gallery a').lightBox({
