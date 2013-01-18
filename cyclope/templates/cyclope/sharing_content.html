@@ -1,0 +1,17 @@
+{% extends host_template %}
+{% load i18n %}
+
+{% block content %}
+<div class="addthis_toolbox {{ options.style }}">
+  {% if CYCLOPE_SITE_SETTINGS.enable_follow_buttons and options.show_social_buttons %}
+  {% for service, username in CYCLOPE_SITE_SETTINGS.social_follow_services %}
+    {% if username != "USERNAME" %}
+    <a class="addthis_button_{{service}}_follow" addthis:userid="{{username}}"></a>
+    {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% if options.show_rss %}
+    <a class="addthis_button_rss_follow" addthis:userid="rss"></a>
+  {% endif %}
+</div>
+{% endblock %}

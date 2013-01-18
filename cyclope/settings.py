@@ -125,7 +125,6 @@ def get_site_settings():
     # catch exceptions if the database is not available or no settings created
     except (DatabaseError, IndexError):
         site_settings = None
-
     return site_settings
 
 def populate_from_site_settings(site_settings):

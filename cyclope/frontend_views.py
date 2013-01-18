@@ -191,7 +191,7 @@ class SiteMap(frontend.FrontendView):
     """Show an expanded hierarchical list of all collection and menus
     """
     name='map'
-    verbose_name=_('expanded hierarchical list of all collection and menus')
+    verbose_name=_('sitemap view of the site')
     is_default = True
     is_instance_view = False
     is_content_view = True
@@ -357,3 +357,37 @@ class AuthorDetail(AuthoredMixin, frontend.FrontendView):
 
 
 frontend.site.register_view(Author, AuthorDetail)
+
+class SharingContentOptions(forms.Form):
+    show_rss = forms.BooleanField(label=_('Show rss button'),
+                                  initial=True, required=False)
+    show_social_buttons = forms.BooleanField(label=_('Show social buttons'),
+                                             initial=True, required=False,
+                                             help_text="Display social buttons that are configured in SiteSettings")
+    style = forms.ChoiceField(label=_('Style'),
+                              choices=(("addthis_default_style", _(u"Horizontal small")),
+                                       ("addthis_32x32_style addthis_default_style", _(u"Horizontal large")),
+                                       ("addthis_vertical_style", _(u"Vertical small")),
+                                       ("addthis_32x32_style addthis_vertical_style", _(u"Vertical large"))),
+                              initial="addthis_default_style")
+
+class SharingContent(frontend.FrontendView):
+
+    """Display RSS and/or social network's follow buttons
+    """
+    name='share-content'
+    verbose_name=_('sharing buttons')
+    is_instance_view = False
+    is_region_view = True
+    is_content_view = False
+    options_form = SharingContentOptions
+    template = "cyclope/sharing_content.html"
+
+    def get_response(self, request, req_context, options):
+
+        return render_to_string(self.template, {
+            'options': options,
+        }, req_context)
+
+
+frontend.site.register_view(Site, SharingContent)
