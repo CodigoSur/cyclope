@@ -4,6 +4,8 @@ Changelog for Cyclope 3
 0.2.2 (unreleased)
 ==================
 
+- Reworked Media Player based on MediaElements.js. It now use HTML5 with a Flash fallback. File support is  mp3 and ogg for audio, and ogv, mp4, webm and flv for video. Contribution of Santiago García.
+
 - Added Network Sharing (using AddThis) capabillities.
 
 - Speed up cyclopeproject and cyclopedemo faking migrations
