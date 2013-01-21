@@ -59,6 +59,10 @@ class CategoryPermBackend(object):
         if permissions:
             for perm in ['edit_content', 'add_content']:
                 perms_dict[perm] = permissions.filter(**{'can_%s' % perm: True}).exists()
+        if user_obj.is_authenticated() and (user_obj.is_superuser or
+           user_obj.is_staff and user_obj.has_perm('collections.change_category')):
+            perms_dict["edit_content"] = True
+            perms_dict["add_content"] = True
         return perms_dict
 
     def has_perm(self, user_obj, perm, obj=None):

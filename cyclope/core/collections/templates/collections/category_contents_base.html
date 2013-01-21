@@ -2,42 +2,13 @@
 
 {% load i18n cyclope_utils fb_versions obj_perms %}
 
-{% block extra_head %}
-{{ block.super }}
-<script type="text/javascript">
-var hide_children = function (el){
-    $(el).children('ul').css('display', 'none');
-}
-
-var show_children = function (el){
-    $(el).children('ul').css('display', 'block');
-}
-
-jQuery(document).ready(function(){
-    $('.category_add_content').each(function(){
-        hide_children($(this));
-    });
-    $('.category_add_content').each(function(){
-        $(this).mouseenter(function(){
-            show_children($(this));
-            return false;
-        })
-        $(this).mouseleave(function(){
-            hide_children($(this));
-            return false;
-        });
-    });
-});
-</script>
-{% endblock %}
-
 {% block content %}
 
   {% per_category_perms category as cat_perms %}
   {% if cat_perms.add_content %}
   <div class="category_add_content">
-    <a href="{% url category-default category.slug %}">{% trans "Add content" %}</a>
-    <ul class="content_types">
+    <span onClick="$(this).siblings('ul').toggle()">{% trans "Add content" %}</span>
+    <ul class="content_types" style="display:none;">
       {% for c_type in category.collection.content_types.all %}
       <li>
         <a href="/admin/{{ c_type.app_label }}/{{ c_type.model }}/add?_frontend=1&_popup=1&_from_category={{category.slug}}" class="add_content add_{{ c_type.model }}">
