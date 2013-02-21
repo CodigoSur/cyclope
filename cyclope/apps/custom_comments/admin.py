@@ -61,6 +61,8 @@ class CustomCommentsAdmin(CommentsAdmin):
     content.allow_tags = True
 
     def content_url(self, obj):
+        if not obj.object_pk:
+            return ""
         url = obj.content_object.get_absolute_url()
         return  "<a href='%s'>%s</a>" % (url, url)
     content_url.allow_tags = True
