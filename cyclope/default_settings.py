@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2012 Código Sur Sociedad Civil
+# Copyright 2010-2013 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -136,6 +136,7 @@ INSTALLED_APPS = [
 
 #    'debug_toolbar',
 #    'django_extensions',
+    'cyclope.apps.post_init',
 ]
 
 AUTHENTICATION_BACKENDS = (

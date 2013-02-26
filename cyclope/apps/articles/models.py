@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -52,14 +52,3 @@ class Article(BaseContent, Collectible):
         verbose_name = _('article')
         verbose_name_plural = _('articles')
         ordering = ('-creation_date', 'name')
-
-# FIXME: this registrations should be done elsewhere
-import cyclope.apps.abuse
-cyclope.apps.abuse.register(Article)
-
-from cyclope.apps.custom_comments.moderator import CustomCommentModerator, moderator
-moderator.register(Article, CustomCommentModerator)
-
-from ratings.handlers import ratings
-from cyclope.core.ratings.forms import LikeDislikeVoteForm
-ratings.register(Article, form_class=LikeDislikeVoteForm)
