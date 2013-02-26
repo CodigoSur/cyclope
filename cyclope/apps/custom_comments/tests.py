@@ -13,6 +13,7 @@ from django.test.client import RequestFactory
 from forms import CustomCommentForm
 from models import CustomComment
 import models as custom_comment_models
+from admin import CustomCommentsAdmin
 from moderator import CustomCommentModerator, moderator
 
 moderator.register(Site, CustomCommentModerator)
@@ -50,6 +51,14 @@ class CustomCommentTest(TestCase):
         custom_comment_models.moderation_enabled = lambda :True
         self.create_comment()
         self.assertEqual(len(CustomComment.objects.in_moderation()), 1)
+
+    def test_admin_content(self):
+        comment = self.create_comment()
+        admin = CustomCommentsAdmin(CustomComment, self.site)
+        self.assertEqual("<a href='/admin/sites/site/1/'>example.com</a>",
+                         admin.content(comment))
+        comment.object_pk = ""
+        self.assertEqual("", admin.content(comment))
 
     def create_comment(self):
         comment = CustomComment(name="SAn", email="san@test.com", parent=None,

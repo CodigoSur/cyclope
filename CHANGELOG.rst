@@ -1,9 +1,26 @@
 Changelog for Cyclope 3
 =======================
 
-0.3 (unreleased)
-================
+0.3.1 (unreleased)
+==================
 
+0.3 (24-01-2013)
+==================
+
+- Improved related contents display: added embedded audio and video player and download links.
+  Contribution of Santiago García.
+
+- Enabled "Frontend Edit" on superusers and "managers"
+
+- Reworked Media Player based on MediaElements.js. It now use HTML5 with a Flash fallback.
+  File support is  mp3 and ogg for audio, and ogv, mp4, webm and flv for video.
+  Contribution of Santiago García.
+
+- Added Network Sharing (using AddThis) capabillities.
+
+- Speed up cyclopeproject and cyclopedemo faking migrations
+
+- Fixed migrations on MySQL
 
 0.2.1 (04-01-2013)
 ==================

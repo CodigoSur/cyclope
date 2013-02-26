@@ -26,11 +26,6 @@ templatetags.cyclope_utils
 General utility helper tags.
 """
 
-try:
-    import ipdb as pdb
-except ImportError:
-    import pdb
-
 from django import template
 from django.utils.safestring import mark_safe
 from django.contrib.markup.templatetags import markup
@@ -192,6 +187,12 @@ smart_style.is_safe = True
 
 class PdbNode(template.Node):
     def render(self, context):
+        # These imports are here because ipython creates a temporary dir and files
+        # each time in /tmp if the user has no homedir.
+        try:
+            import ipdb as pdb
+        except ImportError:
+            import pdb
         # Access vars at the prompt for an easy reference to
         # variables in the context
         vars = []

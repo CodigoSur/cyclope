@@ -168,10 +168,10 @@ FILEBROWSER_DIRECTORY = 'uploads/'
 FILEBROWSER_EXTENSIONS = {
     'Folder': [''],
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
-    'Video': ['.ogv', '.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.flv',],
+    'Video': ['.ogv', '.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.flv', '.mp4'],
     'Document': ['.odt', 'docx', '.pdf','.doc','.rtf','.txt',
                  '.ods', '.xls', '.xlsx', '.csv', '.ppt', '.pptx'],
-    'Audio': ['.ogg', '.oga', '.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
+    'Audio': ['.ogg', '.oga', '.mp3','.wav','.aiff','.midi','.m4p'],
     'Code': ['.html','.py','.js','.css'],
     'Flash_App': ['.swf',],
     'Flash_Movie': ['.flv',],

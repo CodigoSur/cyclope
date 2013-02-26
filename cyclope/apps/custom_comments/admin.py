@@ -51,13 +51,18 @@ class CustomCommentsAdmin(CommentsAdmin):
         return actions
 
     def content(self, obj):
+        if not obj.object_pk:
+            return ""
         admin_url_name = "%s_%s_change" % (obj.content_type.app_label, obj.content_type.name)
         admin_url_name = admin_url_name.replace(" ", "")
         change_url = urlresolvers.reverse('admin:%s' % admin_url_name, args=(obj.content_object.id,))
         return "<a href='%s'>%s</a>" % (change_url, obj.content_object)
+
     content.allow_tags = True
 
     def content_url(self, obj):
+        if not obj.object_pk:
+            return ""
         url = obj.content_object.get_absolute_url()
         return  "<a href='%s'>%s</a>" % (url, url)
     content_url.allow_tags = True

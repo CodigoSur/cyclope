@@ -36,6 +36,7 @@ def _newsletter_html(request, newsletter):
                                        })
     content_view = frontend.site.get_view(Newsletter, newsletter.view)
 
+    request.hide_frontend_edit = True
     html = content_view.get_response(request, context, options={},
                                      content_object=newsletter)
     return html
