@@ -331,3 +331,33 @@ class ThumbnailMixin(object):
 class CrispyFormsSimpleMixin(object):
     helper = FormHelper()
     helper.add_input(Submit('submit', _('Submit')))
+
+
+from django.conf import settings
+from django.core.mail.message import EmailMultiAlternatives
+from django.contrib.auth.models import Group
+
+def _get_managers_mails():
+    emails = [a[1] for a in settings.MANAGERS]
+    try:
+        emails.extend(Group.objects.get(name="managers").user_set.values_list("email",
+                                                                             flat=True))
+    except Group.DoesNotExist:
+        pass
+
+    return filter(None, emails)
+
+def mail_managers(subject, message, fail_silently=False, connection=None,
+                  html_message=None):
+    """
+    Sends a message to the managers, as defined by the MANAGERS setting and
+    to the users in managers group."""
+
+    emails = _get_managers_mails()
+    if not emails:
+        return
+    mail = EmailMultiAlternatives(u'%s%s' % (settings.EMAIL_SUBJECT_PREFIX, subject),
+                message, settings.SERVER_EMAIL, emails, connection=connection)
+    if html_message:
+        mail.attach_alternative(html_message, 'text/html')
+    mail.send(fail_silently=fail_silently)

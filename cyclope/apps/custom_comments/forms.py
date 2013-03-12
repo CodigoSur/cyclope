@@ -68,3 +68,8 @@ class CustomCommentForm(ThreadedCommentForm):
 
     def get_comment_model(self):
         return CustomComment
+
+    def get_comment_create_data(self):
+        d = super(CustomCommentForm, self).get_comment_create_data()
+        d['subscribe'] = self.cleaned_data['subscribe']
+        return d

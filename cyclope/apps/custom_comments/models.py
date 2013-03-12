@@ -24,10 +24,12 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
-from django.core.mail import mail_managers, send_mass_mail
+from django.core.mail import send_mass_mail
 from django.contrib.comments.managers import CommentManager
 
 from threadedcomments import ThreadedComment
+from cyclope.utils import mail_managers
+
 
 class CustomComment(ThreadedComment):
 
@@ -36,7 +38,6 @@ class CustomComment(ThreadedComment):
     objects = CommentManager()
 
     def save(self, send_notifications=True, *args, **kwargs):
-
         created = not self.pk
         super(CustomComment, self).save(*args, **kwargs)
 
