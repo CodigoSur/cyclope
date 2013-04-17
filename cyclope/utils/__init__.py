@@ -361,3 +361,26 @@ def mail_managers(subject, message, fail_silently=False, connection=None,
     if html_message:
         mail.attach_alternative(html_message, 'text/html')
     mail.send(fail_silently=fail_silently)
+
+
+class HyerarchyBuilderMixin(object):
+
+    template_item = ""
+
+    def render_item(self, item, *args):
+        #return render_to_string(self.template_item, context)
+        raise NotImplementedError
+
+    def make_nested_list(self, base, *render_args):
+        nested_list = []
+        for child in base.get_children().filter(active=True):
+            if child.get_descendant_count() > 0:
+                nested_list.extend(self.make_nested_list(child))
+            else:
+                nested_list.append((self.render_item(child, *render_args), child.slug))
+
+        include = (self.render_item(base, *render_args), base.slug)
+        if nested_list:
+            return [include, nested_list]
+        else:
+            return [include]

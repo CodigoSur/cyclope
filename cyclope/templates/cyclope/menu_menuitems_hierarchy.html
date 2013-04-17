@@ -1,7 +1,8 @@
 {% extends host_template %}
+{% load cyclope_utils %}
 
 {% block content %}
 <ul id="menu-{{ expand_style|lower }}-{{ menu_slug }}" class="cyclope_menu {{ expand_style|lower }}">
-    {{ menu_items|unordered_list }}
+    {{ menu_items|unordered_list_css }}
 </ul>
 {% endblock content %}
