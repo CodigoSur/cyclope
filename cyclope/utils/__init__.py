@@ -368,14 +368,16 @@ class HyerarchyBuilderMixin(object):
     template_item = ""
 
     def render_item(self, item, *args):
-        #return render_to_string(self.template_item, context)
+        """
+        Render one item of the hierarchy. This must me implemented by the subclass.
+        """
         raise NotImplementedError
 
     def make_nested_list(self, base, *render_args):
         nested_list = []
         for child in base.get_children().filter(active=True):
             if child.get_descendant_count() > 0:
-                nested_list.extend(self.make_nested_list(child))
+                nested_list.extend(self.make_nested_list(child, *render_args))
             else:
                 nested_list.append((self.render_item(child, *render_args), child.slug))
 
