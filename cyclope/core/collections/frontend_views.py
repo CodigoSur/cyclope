@@ -28,10 +28,12 @@ from django.contrib.comments.models import Comment
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
+from django.template.loader import render_to_string
+from django.template import Context
 
 import cyclope.utils
 from cyclope.frontend_views import MenuHierarchyOptions
-from cyclope.utils import NamePaginator
+from cyclope.utils import NamePaginator, HyerarchyBuilderMixin
 from cyclope.core import frontend
 from cyclope import settings as cyc_settings
 from cyclope.core.collections.models import Collection, Category, Categorization
@@ -280,7 +282,7 @@ class CollectionRootCategoriesList(CollectionRootCategoriesTeaserList):
 frontend.site.register_view(Collection, CollectionRootCategoriesList)
 
 
-class CollectionCategoriesHierarchy(frontend.FrontendView):
+class CollectionCategoriesHierarchy(frontend.FrontendView, HyerarchyBuilderMixin):
     """A hierarchical list view of the Categories in a Collection.
     """
     name='categories_hierarchy'
@@ -290,57 +292,31 @@ class CollectionCategoriesHierarchy(frontend.FrontendView):
     is_region_view = True
     options_form = MenuHierarchyOptions
     template = "collections/collection_categories_hierarchy.html"
+    template_item = "collections/collection_categories_hierarchy_item.html"
 
     def get_response(self, request, req_context, options, content_object):
         collection = content_object
         categories = Category.tree.filter(collection=collection, level=0)
         category_list = []
         for category in categories:
-            category_list.extend(self._get_categories_nested_list(category))
+            category_list.extend(self.make_nested_list(category))
         req_context.update({'categories': category_list,
                             'collection_slug': collection.slug,
                             'align': options["align"]})
         t = loader.get_template(self.template)
         return t.render(req_context)
 
-    def _get_categories_nested_list(self, base_category, name_field='name'):
-
-        """Creates a nested list to be used with unordered_list template tag
-        """
-        #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
-        from django.template import Template, Context
-        link_template = Template(
-              '<span class="{{ has_children }} {{ has_content}}">'
-                '<a href="{% url category-'+ self.target_view +' slug %}">'
-                 '{{ name }}</a>'
-              '</span>'
-            )
-
-        def item_context(item):
-            name = getattr(item, name_field)
-            has_content = 'has_content' if item.categorizations.exists()\
-                          else 'no_content'
-            has_children = 'has_children' if item.get_descendant_count()\
-                           else 'no_children'
-            context = Context({'name': name,
-                               'slug': item.slug,
-                               'has_content': has_content,
-                               'has_children': has_children,})
-            return context
-
-        nested_list = []
-        for child in base_category.get_children():
-            if child.get_descendant_count()>0:
-                nested_list.extend(self._get_categories_nested_list(
-                    child, name_field=name_field))
-            else:
-                nested_list.append(link_template.render(item_context(child)))
-
-        include = link_template.render(item_context(base_category))
-        if nested_list:
-            return [include, nested_list]
-        else:
-            return [include]
+    def render_item(self, item, *args):
+        has_content = 'has_content' if item.categorizations.exists()\
+                      else 'no_content'
+        has_children = 'has_children' if item.get_descendant_count()\
+                       else 'no_children'
+        context = Context({'name': item.name,
+                           'slug': item.slug,
+                           'has_content': has_content,
+                           'has_children': has_children,
+                           'target_view': "category-" + self.target_view})
+        return render_to_string(self.template_item, context)
 
 frontend.site.register_view(Collection, CollectionCategoriesHierarchy)
 

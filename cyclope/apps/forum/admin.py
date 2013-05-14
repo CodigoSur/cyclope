@@ -35,5 +35,7 @@ class TopicForm(forms.ModelForm):
 
 class TopicAdmin(CollectibleAdmin, BaseContentAdmin):
     form = TopicForm
+    list_display = ('name', 'creation_date') + CollectibleAdmin.list_display
+    list_filter = ('creation_date',) + CollectibleAdmin.list_filter
 
 admin.site.register(Topic, TopicAdmin)

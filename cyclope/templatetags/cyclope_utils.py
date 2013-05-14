@@ -26,11 +26,6 @@ templatetags.cyclope_utils
 General utility helper tags.
 """
 
-try:
-    import ipdb as pdb
-except ImportError:
-    import pdb
-
 from django import template
 from django.utils.safestring import mark_safe
 from django.contrib.markup.templatetags import markup
@@ -192,6 +187,12 @@ smart_style.is_safe = True
 
 class PdbNode(template.Node):
     def render(self, context):
+        # These imports are here because ipython creates a temporary dir and files
+        # each time in /tmp if the user has no homedir.
+        try:
+            import ipdb as pdb
+        except ImportError:
+            import pdb
         # Access vars at the prompt for an easy reference to
         # variables in the context
         vars = []
@@ -227,3 +228,62 @@ def inline_template(obj, inline_view_name):
     """
     return "%s/%s_%s.html" % (obj.get_app_label(), obj.get_object_name(),
                               inline_view_name)
+
+from django.utils.encoding import force_unicode
+from django.utils.html import (conditional_escape, escapejs, fix_ampersands,
+    escape, urlize as urlize_impl, linebreaks, strip_tags)
+
+@register.filter(is_safe=True, needs_autoescape=True)
+def unordered_list_css(value, autoescape=None):
+    """
+    Recursively takes a self-nested list and returns an HTML unordered list --
+    WITHOUT opening and closing <ul> tags.
+
+    The list is assumed to be in the proper format. For example, if ``var``
+    contains: ``[('States', 'states'), [('Kansas', 'knss'), [('Lawrence', 'lw'), ('Topeka', 'tk')]]]``,
+    then ``{{ var|unordered_list }}`` would return::
+
+        <li class="states">States
+        <ul>
+                <li class="knss">Kansas
+                <ul>
+                        <li class="lw">Lawrence</li>
+                        <li class="tk">Topeka</li>
+                </ul>
+                </li>
+        </ul>
+        </li>
+    """
+    if autoescape:
+        escaper = conditional_escape
+    else:
+        escaper = lambda x: x
+    def _helper(list_, tabs=1):
+        indent = u'\t' * tabs
+        output = []
+
+        list_length = len(list_)
+        i = 0
+        while i < list_length:
+            title, css_class = list_[i]
+            sublist = ''
+            sublist_item = None
+            if isinstance(title, (list, tuple)):
+                sublist_item = title
+                title = ''
+            elif i < list_length - 1:
+                next_item = list_[i+1]
+                if next_item and isinstance(next_item[0], (list, tuple)):
+                    # The next item is a sub-list.
+                    sublist_item = next_item
+                    # We've processed the next item now too.
+                    i += 1
+            if sublist_item:
+                sublist = _helper(sublist_item, tabs+1)
+                sublist = '\n%s<ul>\n%s\n%s</ul>\n%s' % (indent, sublist,
+                                                         indent, indent)
+            output.append('%s<li class="%s">%s%s</li>' % (indent, css_class,
+                    escaper(force_unicode(title)), sublist))
+            i += 1
+        return '\n'.join(output)
+    return mark_safe(_helper(value))

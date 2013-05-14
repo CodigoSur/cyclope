@@ -331,3 +331,58 @@ class ThumbnailMixin(object):
 class CrispyFormsSimpleMixin(object):
     helper = FormHelper()
     helper.add_input(Submit('submit', _('Submit')))
+
+
+from django.conf import settings
+from django.core.mail.message import EmailMultiAlternatives
+from django.contrib.auth.models import Group
+
+def _get_managers_mails():
+    emails = [a[1] for a in settings.MANAGERS]
+    try:
+        emails.extend(Group.objects.get(name="managers").user_set.values_list("email",
+                                                                             flat=True))
+    except Group.DoesNotExist:
+        pass
+
+    return filter(None, emails)
+
+def mail_managers(subject, message, fail_silently=False, connection=None,
+                  html_message=None):
+    """
+    Sends a message to the managers, as defined by the MANAGERS setting and
+    to the users in managers group."""
+
+    emails = _get_managers_mails()
+    if not emails:
+        return
+    mail = EmailMultiAlternatives(u'%s%s' % (settings.EMAIL_SUBJECT_PREFIX, subject),
+                message, settings.SERVER_EMAIL, emails, connection=connection)
+    if html_message:
+        mail.attach_alternative(html_message, 'text/html')
+    mail.send(fail_silently=fail_silently)
+
+
+class HyerarchyBuilderMixin(object):
+
+    template_item = ""
+
+    def render_item(self, item, *args):
+        """
+        Render one item of the hierarchy. This must me implemented by the subclass.
+        """
+        raise NotImplementedError
+
+    def make_nested_list(self, base, *render_args):
+        nested_list = []
+        for child in base.get_children().filter(active=True):
+            if child.get_descendant_count() > 0:
+                nested_list.extend(self.make_nested_list(child, *render_args))
+            else:
+                nested_list.append((self.render_item(child, *render_args), child.slug))
+
+        include = (self.render_item(base, *render_args), base.slug)
+        if nested_list:
+            return [include, nested_list]
+        else:
+            return [include]

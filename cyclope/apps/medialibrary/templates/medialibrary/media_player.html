@@ -1,35 +1,66 @@
 {% load i18n %}
+
 {% block extra_head %}
-<script type='text/javascript' src='{{ CYCLOPE_STATIC_URL }}jwplayer/swfobject.js'></script>
+<script src="{{ CYCLOPE_STATIC_URL }}mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="{{ CYCLOPE_STATIC_URL }}mediaelement/mediaelementplayer.min.css" type="text/css" />
+<link rel="stylesheet" href="{{ CYCLOPE_STATIC_URL }}mediaelement/mejs-skins.css" type="text/css" />
 <script type='text/javascript'>
-var uniqueId = uniqueId || function(){
-    var _unique_id = 0;
-    return function(){
-        var ret = _unique_id;
-        _unique_id += 1;
-        return ret;
-    };
-}();
 // Here we are loading the media player for all media in the page.
 // We are using an indirect method to prevent multiple loading
 var loadMedia = function(){
-    $(function() {
-      $(".video_player").each(function (){
-        var height = $(this).attr("vheight");
-        var media = $(this).attr("vmedia");
-        this.id = "media_player_" + uniqueId();
-        var so = new SWFObject('{{ CYCLOPE_STATIC_URL }}jwplayer/player.swf','ply','95%', height,'9','#ffffff');
-        so.addParam('allowfullscreen','true');
-        so.addParam('allowscriptaccess','always');
-        so.addParam('wmode','opaque');
-        so.addVariable('file', media);
-        so.write(this.id);
-     });
- });
+  $(function() {
+    $('video,audio').mediaelementplayer({
+        // initial volume when the player starts
+        startVolume: 0.8,
+        // useful for <audio> player loops
+        loop: false,
+        // enables Flash and Silverlight to resize to content size
+        enableAutosize: true,
+        // the order of controls you want on the control bar (and other plugins below)
+        features: ['playpause','current','progress','duration','tracks','volume','fullscreen'],
+        // Hide controls when playing and mouse is not over the video
+        alwaysShowControls: false,
+        // force iPad's native controls
+        iPadUseNativeControls: false,
+        // force iPhone's native controls
+        iPhoneUseNativeControls: false,
+        // force Android's native controls
+        AndroidUseNativeControls: false,
+        // forces the hour marker (##:00:00)
+        alwaysShowHours: false,
+        // show framecount in timecode (##:00:00:00)
+        showTimecodeFrameCount: false,
+        // used when showTimecodeFrameCount is set to true
+        framesPerSecond: 25,
+        // turns keyboard support on and off for this instance
+        enableKeyboard: true,
+        // when this player starts, it will pause other players
+        pauseOtherPlayers: true,
+        // array of keyboard commands
+        keyActions: []
+        });
+  });
  return true;
 };
 var media_loaded = media_loaded || loadMedia();
 </script>
 {% endblock %}
-<br>
-  <div class='video_player' vheight="{{ player_height }}" vmedia="{{ current_object.media_file }}">Player</div>
+
+<div class='player'>
+{% with type=current_object.get_object_name file_type=current_object.file_type %}
+  {% if file_type == 'mp3' or file_type == 'ogg' %}
+    <audio controls="control" preload="none" src="{{ current_object.media_file }}" type="audio/{{ file_type }}" height="{{ player_audio_height|default:30 }}" width="{{ player_audio_width|default:240 }}" /></audio>
+  {% elif file_type == 'ogv' or file_type == 'flv' or file_type == 'mp4' or file_type == 'webm' %}
+    <video width="{{ player_video_width|default:480 }}" height="{{ player_video_height|default:360 }}"  controls="controls" preload="none">
+      <source src="{{ current_object.media_file }}" {% if file_type == 'ogv' %}type="video/ogg"{% else %}type="video/{{ file_type }}"{% endif %} />
+      <object width="{{ player_video_width|default:480 }}" height="{{ player_video_height|default:360 }}"  type="application/x-shockwave-flash" data="{{ CYCLOPE_STATIC_URL }}player/flashmediaelement.swf">
+        <param name="movie" value="{{ CYCLOPE_STATIC_URL }}player/flashmediaelement.swf" />
+        <param name="flashvars" value="controls=true&file={{ current_object.media_file }}" />
+      </object>
+    </video>
+  {% else %}
+    {% trans "This format: (."  %}{{ file_type }}{% trans ") is unsupported. Use the link to download." %}
+  {% endif %}
+{% endwith %}
+
+</div>

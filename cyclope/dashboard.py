@@ -181,6 +181,12 @@ class CustomIndexDashboard(Dashboard):
                     'cyclope.apps.polls.models.Question',
                     ]),
             modules.ModelList(
+                title=_('Forum'),
+                css_classes = ('dbmodule-forum', 'main-area-modules',),
+                include_list=[
+                    'cyclope.apps.forum.models.Topic',
+                    ]),
+            modules.ModelList(
                 title=_('Feeds'),
                 css_classes = ('dbmodule-feeds',),
                 include_list=[

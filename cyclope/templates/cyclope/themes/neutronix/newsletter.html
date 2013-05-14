@@ -36,7 +36,7 @@
       .category_description .mask {padding:0; }
       .category_description img {padding:0 0 0 10px;}
       .category_description .summary {margin:0;padding:0 10px 0;font-family: Arial,Helvetica,sans-serif;text-align:left;font-size:18px;display:block;}
-       
+
       .table_of_contents {border:1px solid #999;background-color:#333;margin:0 10px 0 0;padding:0;}
       .table_of_contents .mask {margin:0 auto;}
       .table_of_contents .content {background:#e6e6e6;font-family: Arial,Helvetica,sans-serif; font-size: 11px; color:#000;padding: 0 0 10px 0;}
@@ -64,20 +64,14 @@
       .block_content .teaser {border-bottom:1px dotted #ccc;margin:0 0 15px;}
       .block_content .detail {border-bottom:1px dotted #ccc;margin:0 0 15px;}
 
-      
       .editorial-titulo {font-family: Arial,Helvetica,sans-serif;font-size:30px;font-weight:700;color:#000;padding:0;display:block;}
       .editorial-titulo h2 {font-family: Arial,Helvetica,sans-serif;font-size:30px;font-weight:700;color:#000;padding:0;display:block;}
-      
 
-      
-      .
       .newsletter_detail {border-bottom:1px dotted #ccc;margin:0 0 15px;}
       .pie {text-align:center;padding:10px 0;color:#fff;font-size:13px;display:block;margin:0;font-family: Arial,Helvetica,sans-serif; background-color: #666;}
       .pie a {color:#fff;text-decoration:none;}
       .clear {clear:both;}
       .image_content {width:240px;}
- 
-
 
       .permalink {font-family:Arial,Helvetica,sans-serif;font-size:16px;padding:0 0 0;margin:10px 0 0;font-weight:700;}
 
@@ -108,7 +102,7 @@
             <tr>
               <td height="124" valign="middle">
                 <h1 class="title">{{ newsletter.name }}</h1>
-                <span class="summary">{{ newsletter.header }}</span>
+                <span class="summary">{{ newsletter.header|smart_style }}</span>
               </td>
             </tr>
           </table>
@@ -122,7 +116,7 @@
               <td valign="top">
 
                 {% if newsletter.show_ToC %}
-                
+
                 <!-- category_description -->
                 <table width="530" border="0" align="left" cellpadding="0" cellspacing="0" class="category_description">
                   <tr>
@@ -144,7 +138,7 @@
                   <tr>
                     <td valign="top">
                       <!-- ToC-->
-                      
+
                       <table align="center" border="0" cellpadding="0" cellspacing="0" width="180" class="mask">
                         <tr>
                           <td class="content">
@@ -152,7 +146,7 @@
                             {% for categorization in categorizations %}
                             {% alias categorization.content_object as 'article' %}
                             <a href='#{{ categorization.content_type.model }}__{{ article.slug }}' class="title">{{ article.name }}</a>
-                            {% if article.author %}<span class="author">{% trans "By"%} {{ article.author }}</span>{% endif %}                            
+                            {% if article.author %}<span class="author">{% trans "By"%} {{ article.author }}</span>{% endif %}
                             {% endfor %}
                           </td>
                         </tr>
@@ -163,7 +157,7 @@
                 </table>
                 <!-- /table_of_contents -->
              {% else %}
-             
+
 <!-- category_description -->
                 <table width="720" border="0" align="left" cellpadding="0" cellspacing="0" class="category_description">
                   <tr>
@@ -180,7 +174,7 @@
                 </table>
                 <!-- /category_description -->
              {% endif %}
-                
+
                 <div class="clear"></div>
 
                 <!-- block_content -->
