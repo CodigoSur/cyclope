@@ -23,6 +23,7 @@
 models
 ------
 """
+
 from datetime import datetime
 import os
 
@@ -155,7 +156,7 @@ class MenuItem(models.Model):
                              db_index=True, related_name='menu_items')
     name = models.CharField(_('name'), max_length=50, db_index=True)
     parent = models.ForeignKey('self', verbose_name=_('parent'),
-                              related_name=_('children'),
+                              related_name='children',
                               null=True, blank=True)
     slug = AutoSlugField(populate_from='name', unique_with=('parent'),
                          always_update=False, editable=True, blank=True)
