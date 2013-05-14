@@ -49,6 +49,8 @@ comment_was_posted.connect(comment_activity,
                            sender=CustomComment,
                            dispatch_uid="custom_comment_creation_activity")
 
-settings.ACTSTREAM_SETTINGS["MODELS"] = ['auth.user', 'auth.group', 'sites.site', 'custom_comments.customcomment'] + \
-            ['%s.%s' % (model._meta.app_label,model._meta.object_name.lower()) for
-             model in models]
+activities = set(settings.ACTSTREAM_SETTINGS["MODELS"])
+activities.add('custom_comments.customcomment')
+[activities.add('%s.%s' % (model._meta.app_label,model._meta.object_name.lower())) for model in models]
+settings.ACTSTREAM_SETTINGS["MODELS"] = list(activities)
+

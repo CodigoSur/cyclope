@@ -283,7 +283,7 @@ COMPRESS_PRECOMPILERS = (
 COMPRESS_DEBUG_TOGGLE = 'nocompress'
 
 ACTSTREAM_SETTINGS = {
-    'MODELS': ('auth.user', 'auth.group', 'sites.site', 'custom_comments.customcomment'),
+    'MODELS': ['auth.user', 'auth.group', 'custom_comments.customcomment'],
     'FETCH_RELATIONS': True,
     'USE_PREFETCH': True,
     'USE_JSONFIELD': True,
