@@ -78,6 +78,7 @@ MIDDLEWARE_CLASSES = (
 
 # the order of the INSTALLED_APPS is relevant to get the template load order right
 INSTALLED_APPS = [
+
     'dbgettext',
     'rosetta',
     'haystack',
@@ -133,6 +134,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'compressor',
     'ratings',
+    'actstream',
 
 #    'debug_toolbar',
 #    'django_extensions',
@@ -279,3 +281,11 @@ COMPRESS_PRECOMPILERS = (
 )
 
 COMPRESS_DEBUG_TOGGLE = 'nocompress'
+
+ACTSTREAM_SETTINGS = {
+    'MODELS': ('auth.user', 'auth.group', 'sites.site', 'custom_comments.customcomment'),
+    'FETCH_RELATIONS': True,
+    'USE_PREFETCH': True,
+    'USE_JSONFIELD': True,
+    'GFK_FETCH_DEPTH': 1,
+}

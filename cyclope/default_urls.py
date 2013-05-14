@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2012 Código Sur Sociedad Civil
+# Copyright 2010-2013 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -34,6 +34,7 @@ import cyclope.settings as cyc_settings
 from cyclope.feeds import CategoryFeed, WholeSiteFeed, ContentTypeFeed
 from cyclope.sitemaps import CategorySitemap, CollectionSitemap, MenuSitemap
 from cyclope.core.user_profiles.forms import UserProfileForm
+
 
 urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
@@ -93,6 +94,8 @@ urlpatterns = patterns('',
     url(r'^forms/', include("forms_builder.forms.urls")),
     # django-generic-ratings
     (r'^ratings/', include('ratings.urls')),
+    # django-activity-stream
+    ('^activity/', include('actstream.urls')),
 )
 
 if django_settings.DEBUG:

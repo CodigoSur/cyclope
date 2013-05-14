@@ -1,9 +1,58 @@
-{% load i18n fb_versions %}
+{% load i18n fb_versions activity_tags %}
 
 <h1 class="title">{{ current_object.user.get_full_name|default:current_object.user.username }}</h1>
 
+<script>
+$(function() {
+    function follow_unfollow_urls(url){
+        if (url.indexOf("unfollow") === -1){
+            following = true;
+        } else {
+            following = false;
+        }
+
+        follow_url = url.replace("un", "");
+        unfollow_url = follow_url.replace("follow", "unfollow");
+            return {"follow_url": follow_url, "unfollow_url": unfollow_url,
+                    "following": following};
+    }
+
+    function follow_unfollow_button(el){
+        console.log($(el).attr("url"));
+        ffobject = follow_unfollow_urls($(el).attr("url"));
+
+        render = function (){
+            console.log("render");
+            text = this.ffobject.following ? '{% trans "Unfollow" %}' : '{% trans "Follow" %}';
+            return this.el.innerHTML = text;
+
+        }
+        toggle = function (){
+            this.ffobject.following = !this.ffobject.following;
+        }
+        click = function (){
+            $.post(this.ffobject.following ? this.ffobject.follow_url : this.ffobject.unfollow_url)
+            this.toggle();
+            this.render();
+        }
+
+
+        obj = {"render": render, "toggle": toggle, "ffobject": ffobject, "el": el, "click": click}
+        $(el).click(function(){obj.click()});
+        obj.render();
+        return  obj;
+    }
+    $(".follow-unfollow").each(function(){follow_unfollow_button(this)});
+});
+</script>
+
+<div class="follow-unfollow" url="{% follow_url current_object.user %}">
+</div>
+
+<div class="activity"><a href="{% actor_url current_object.user %}">{% trans "Activity" %}</a></div>
+
 {% if current_object.city %} {% trans "City" %}: {{current_object.city}} {% endif %}
 
-{{current_object.about|linebreaks}}
+{{ current_object.about|linebreaks }}
 
 {% if current_object.avatar %}<img src="{% version current_object.avatar.path 'croppedthumbnail' %}" alt="profile avatar" />{% endif %}

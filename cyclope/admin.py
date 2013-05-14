@@ -29,6 +29,7 @@ configuration for the Django admin
 from django.db import models
 from django.contrib import admin
 from django.core import urlresolvers
+
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponseRedirect
@@ -49,6 +50,8 @@ from cyclope.core.collections.admin import CollectibleAdmin
 from cyclope.core.collections.models import Category
 import cyclope.settings as cyc_settings
 from cyclope.utils import PermanentFilterMixin
+from cyclope.signals import admin_post_create
+
 
 # Set default widget for all admin textareas
 default_admin_textfield = FORMFIELD_FOR_DBFIELD_DEFAULTS[models.TextField]
@@ -80,6 +83,7 @@ class BaseContentAdmin(admin.ModelAdmin):
         return super(BaseContentAdmin, self).response_change(request, obj)
 
     def response_add(self, request, obj, post_url_continue='../%s/'):
+        admin_post_create.send(sender=obj.__class__, request=request, instance=obj)
         if '_frontend' in request.REQUEST:
             return HttpResponseRedirect(obj.get_absolute_url())
         return super(BaseContentAdmin, self).response_add(request, obj, post_url_continue)
