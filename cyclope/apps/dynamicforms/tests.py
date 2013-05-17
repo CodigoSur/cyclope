@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2012-2013 Código Sur Sociedad Civil
+# Copyright 2010-2013 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -19,29 +19,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""
-This app implements DynamicForms using django-forms-builder
-"""
+from django.contrib.sites.models import Site
 
-from django.utils.translation import ugettext_lazy as _
+from cyclope.tests import ViewableTestCase
 
 from models import DynamicForm
-from forms_builder.forms.views import form_detail
 
-from cyclope.core import frontend
-from cyclope import views
+class DynamicFormTestCase(ViewableTestCase):
+    test_model = DynamicForm
 
-class FormDetail(frontend.FrontendView):
-    """Display a DynamicForm
-    """
-    name='form-detail'
-    verbose_name=_('show a form')
-    is_default = True
-    is_instance_view = True
-    is_region_view = False
-    is_content_view = True
+    def setUp(self):
+        super(DynamicFormTestCase, self).setUp()
+        form = DynamicForm.objects.create(title="An instance")
+        form.sites.add(Site.objects.get_current())
+        form.save()
+        form.fields.create(label="field", field_type=1, required=True, visible=True)
+        self.test_object = form
 
-    def get_response(self, request, req_context, options, content_object):
-        return form_detail(request, content_object.slug)
-
-frontend.site.register_view(DynamicForm, FormDetail)
+    def test_empty_form(self):
+        url = u'/form/%s/' % self.test_object.slug
+        response = self.client.post(url, data={})
+        self.assertEqual(response.status_code, 200)

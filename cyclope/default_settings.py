@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     'haystack',
 
     'cyclope',
+    'cyclope.core.frontend',
     'cyclope.core.collections',
     'cyclope.core.series',
     'cyclope.core.perms',
