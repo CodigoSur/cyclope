@@ -118,18 +118,6 @@ class FrontendView(object):
         """
         raise NotImplementedError()
 
-    def get_url_pattern(self, model):
-        if self.is_default:
-            return '%s/(?P<slug>[\w-]+)/$'\
-                    % (model._meta.object_name.lower())
-
-        if self.is_instance_view:
-            return '%s/(?P<slug>[\w-]+)/View/%s'\
-                    % (model._meta.object_name.lower(), self.name)
-        else:
-            return '%s/View/%s'\
-                    % (model._meta.object_name.lower(), self.name)
-
     def get_default_options(self):
         options = {}
         if self.options_form:
