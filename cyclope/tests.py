@@ -27,6 +27,7 @@ from collections import defaultdict
 
 from django import forms
 from django.test import TestCase
+from django.test.simple import DjangoTestSuiteRunner
 from django.test.utils import setup_test_environment
 from django.test.client import RequestFactory
 from django.contrib.sites.models import Site
@@ -109,6 +110,19 @@ def get_default_layout():
     return get_default_layout.cache
 
 get_default_layout.cache = None
+
+
+class CyclopeTestSuiteRunner(DjangoTestSuiteRunner):
+    """
+    This TestSuiteRunner if fed without app labels runs all the cyclope's apps
+    tests. Eg cyclope.core.collection, cyclope.apps.articles, etc.
+    """
+    def run_tests(self, test_labels, extra_tests=None, **kwargs):
+        if not test_labels:
+            test_labels = ["cyclope"] + [c.split(".")[-1] for c in \
+                                         settings.INSTALLED_APPS if "cyclope." in c]
+        super(CyclopeTestSuiteRunner, self).run_tests(test_labels, extra_tests,
+                                                       **kwargs)
 
 
 class ViewableTestCase(TestCase):

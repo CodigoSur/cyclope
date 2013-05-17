@@ -153,6 +153,8 @@ ADMIN_MEDIA_PREFIX = "/media/admin/"
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
+TEST_RUNNER = 'cyclope.tests.CyclopeTestSuiteRunner'
+
 # debug_toolbar settings
 #DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
 
