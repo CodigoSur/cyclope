@@ -101,6 +101,7 @@ INSTALLED_APPS = [
     'cyclope.apps.abuse',
     'cyclope.apps.related_admin',
     'cyclope.apps.custom_comments',
+    'cyclope.apps.social',
 
     'admin_tools',
     'admin_tools.theming',

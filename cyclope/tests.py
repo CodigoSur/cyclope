@@ -28,6 +28,7 @@ from collections import defaultdict
 from django import forms
 from django.test import TestCase
 from django.test.utils import setup_test_environment
+from django.test.client import RequestFactory
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import AnonymousUser
 from django.conf import settings
@@ -83,36 +84,6 @@ def export_fixture(apps, filename=None):
     else:
         return dump
 
-def get_instance_url(model_instance, view_name):
-    #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well. Also this code is repeated in many model files.
-    view = cyclope.core.frontend.site.get_view(model_instance, view_name)
-
-    if view.is_default:
-        return '%s/%s/'\
-                % (model_instance._meta.object_name.lower(),
-                   model_instance.slug)
-
-    if view.is_instance_view:
-        return '%s/%s/View/%s'\
-                % (model_instance._meta.object_name.lower(),
-                   model_instance.slug, view_name)
-    else:
-        return '%s/View/%s'\
-                % (model_instance._meta.object_name.lower(), view_name)
-
-
-def get_content_urls(test_object):
-    content_urls = []
-    for view in frontend.site.get_views(test_object):
-        if view.is_content_view:
-            content_urls.append('/'+ get_instance_url(test_object, view.name))
-    return content_urls
-
-
-def get_region_views(test_model):
-    return [ view for view in frontend.site.get_views(test_model)
-             if view.is_region_view ]
-
 def add_region_view(model, view_name, content_object=None):
     layout = get_default_layout()
     content_type = ContentType.objects.get(model=model._meta.module_name)
@@ -141,41 +112,45 @@ get_default_layout.cache = None
 
 
 class ViewableTestCase(TestCase):
-    # this is an "abstract" test case which should be inherited but not run
-
-#TODO (nicoechaniz): check how this base test class should be created to keep it out uf the test run
-
+    """
+    Inherit this class to test FrontendViews for a given model.
+    """
     fixtures = ['simplest_site.json']
+    test_model = None # must be redefined with a model.Model class
+    test_object = None
 
     def setUp(self):
-        if hasattr(self, 'test_model') and not hasattr(self, 'test_object'):
-            self.test_object = self.test_model.objects.create(name='An instance')
         frontend.autodiscover()
 
-    def test_creation(self):
-        if hasattr(self, 'test_model'):
-            an_instance = self.test_model.objects.get(slug='an-instance')
-            self.assertEqual(an_instance.name, 'An instance')
+    def test_views(self):
+        if self.test_model:
+            model_name = self.test_model._meta.module_name
+            for view in frontend.site.get_views(self.test_model):
+                if view.is_instance_view and self.test_object is None:
+                    self.test_object = self.test_model.objects.create(name='An instance')
 
-    def test_content_views(self):
-        if hasattr(self, 'test_object'):
-            content_urls = get_content_urls(self.test_object)
-            for url in content_urls:
-                self.assertEqual(self.client.get(url).status_code, 200)
-
-    def test_region_views(self):
-        if hasattr(self, 'test_model'):
-            model_region_views = get_region_views(self.test_model)
-            for view in model_region_views:
-                content_object = None
                 if view.is_region_view:
-                    content_object = self.test_object
-                add_region_view(self.test_model, view.name, content_object)
-                response = self.client.get("/")
-                self.assertContains(response,
-                                    'class="regionview %s %s"' %
-                                    (self.test_model._meta.module_name, view.name),
-                                    count=1)
+                    add_region_view(self.test_model, view.name, content_object=self.test_object)
+
+                request = self.get_request()
+
+                if view.is_instance_view:
+                    response = view(request=request, content_object=self.test_object)
+                else:
+                    response = view(request=request)
+
+                self.assertEqual(response.status_code, 200)
+
+                if view.is_region_view:
+                    self.assertContains(response, 'class="regionview %s %s"' %
+                                        (model_name, view.name), count=1)
+
+    def get_request(self):
+        request = RequestFactory().get('/foo/')
+        request.session = {}
+        request.user = AnonymousUser()
+        return request
+
 
 class FrontendTestCase(TestCase):
 
@@ -447,11 +422,9 @@ class AuthorTestCase(ViewableTestCase):
         frontend.autodiscover()
 
     def test_authored_content(self):
-        content_urls = get_content_urls(self.test_object)
-        for url in content_urls:
-            response = self.client.get(url)
-            self.assertContains(response, 'An instance')
-            self.assertContains(response, 'Article authored')
+        response = self.client.get(u'/author/an-instance/')
+        self.assertContains(response, 'An instance')
+        self.assertContains(response, 'Article authored')
 
 
 class ArticleTestCase(ViewableTestCase):
@@ -509,23 +482,16 @@ class CategoryTestCase(ViewableTestCase):
     test_model = Category
 
     def setUp(self):
-        # we need an authenticated user for some category views
-        User = get_model('auth', 'user')
-        self.user = User(username='admin')
-        self.user.set_password('password')
-        self.user.save()
         col = Collection.objects.create(name='A collection')
         self.test_object = Category(name='An instance', collection=col)
         self.test_object.save()
         frontend.autodiscover()
 
-
-    def test_content_views(self):
-        content_urls = get_content_urls(self.test_object)
-        self.client.login(username='admin', password='password')
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
+    def get_request(self):
+        request = RequestFactory().get('/foo/')
+        request.session = {}
+        request.user, created = User.objects.get_or_create(username='johny')
+        return request
 
 class MoveCategoryTestCase(TestCase):
     def setUp(self):
@@ -682,9 +648,7 @@ class TopicTestCase(ViewableTestCase):
 
     def setUp(self):
         User = get_model('auth', 'user')
-        self.user = User(username='admin')
-        self.user.set_password('password')
-        self.user.save()
+        self.user = User.objects.create_user('john', 'le@non.com', 'lennon')
         self.test_object = Topic(name='An instance', user=self.user)
         self.test_object.save()
         frontend.autodiscover()
@@ -713,8 +677,7 @@ class DynamicFormTestCase(ViewableTestCase):
         frontend.autodiscover()
 
     def test_empty_form(self):
-        view = frontend.site.get_views(self.test_object)[0]
-        url = '/'+ get_instance_url(self.test_object, view.name)
+        url = u'/form/%s/' % self.test_object.slug
         response = self.client.post(url, data={})
         self.assertEqual(response.status_code, 200)
 
@@ -752,8 +715,6 @@ class CommentsViewsTestCase(ViewableTestCase):
         self.test_object = comment
         frontend.autodiscover()
 
-    def test_creation(self):
-        pass
 
 class UserProfileViewsTestCase(ViewableTestCase):
     test_model = UserProfile
@@ -765,8 +726,6 @@ class UserProfileViewsTestCase(ViewableTestCase):
         self.test_object = user.get_profile()
         frontend.autodiscover()
 
-    def test_creation(self):
-        pass
 
 class DispatcherTestCase(TestCase):
 
