@@ -40,7 +40,7 @@ for model in models:
                               dispatch_uid="%s_creation_activity" % model._meta.object_name.lower())
 
 def comment_activity(sender, comment, request, **k):
-    if not request.user.is_authenticated():
+    if not hasattr(request, "user") or not request.user.is_authenticated():
         return
     action.send(request.user, verb=_('commented'), action_object=comment,
                 target=comment.content_object)
