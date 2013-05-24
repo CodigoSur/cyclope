@@ -267,6 +267,10 @@ class RegionView(models.Model):
     def __unicode__(self):
         return '%s/%s' % (self.content_type.model, self.content_view)
 
+    def get_view(self):
+        return cyclope.core.frontend.site.get_view(self.content_type.model_class(),
+                                                    self.content_view)
+
 
 class Layout(models.Model):
     """Given a theme template, a Layout configures which frontend views will be displayed in each region.

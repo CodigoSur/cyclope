@@ -1,14 +1,34 @@
 {% extends "admin/change_form.html" %}
-{% load layout %}
+{% load i18n layout cyclope_utils %}
 
 
 
 {% block after_related_objects %}
 {{ block.super }}
 
-{# CYCLOPE: chainedSelect for Layout #}
+{# CYCLOPE: Tree structure of regions #}
+{% regroup original.regionview_set.all|dictsort:"region" by region as region_list %}
+<ul id="regions_tree" style="display:none;">
+{% for region in region_list %}
+    <li>{% trans region.grouper|capfirst %}
+    <ul>
+        {% for item in region.list %}
+          <li>{{ item.content_type|capfirst }} ->  {{ item.get_view.verbose_name|capfirst }} {% if item.content_object %} -> {{ item.content_object }}{% endif %}</li>
+        {% endfor %}
+    </ul>
+    </li>
+{% endfor %}
+</ul>
+
+
 <script type="text/javascript">
 //<![CDATA[
+
+  $("#regionview_set-group h2").after($("#regions_tree"))
+  $("#regions_tree").show();
+
+  {# CYCLOPE: chainedSelect for Layout #}
+
   var layout_data = {% layout_regions_data %};
 
   function setup_chainedSelect_for_layout(i) {
