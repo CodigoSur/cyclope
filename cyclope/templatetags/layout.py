@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2013 Código Sur Asoc Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -26,10 +26,16 @@ templatetags.layout
 Template tags to mark regions in a template, which enable the configuration
 of different Layouts.
 """
+import json
 
 from django import template
+from django.contrib.contenttypes.models import ContentType
+
 from cyclope.utils import layout_for_request, get_or_set_cache
 from cyclope.core import frontend
+from cyclope.models import SiteSettings
+from cyclope.utils import layout_for_request, LazyJSONEncoder
+from cyclope.themes import get_theme
 
 register = template.Library()
 
@@ -82,3 +88,39 @@ def region(context, region_name):
     region_vars['views'] = views
 
     return region_vars
+
+@register.simple_tag
+def layout_regions_data():
+    """
+    Builds a json object to embed on the admin's change_form of Layout. This
+    object contains all the available views and regions for all templates.
+    """
+    theme_name = SiteSettings.objects.get().theme
+    theme_settings = get_theme(theme_name)
+    out_dict = {}
+    layout_templates = {}
+    for name, dic_ in theme_settings.layout_templates.iteritems():
+        regions = dic_['regions']
+        regions_data = [{'region_name': '', 'verbose_name': '------'}]
+        regions_data.extend([ {'region_name': region_name,
+                               'verbose_name': verbose_name}
+                            for region_name, verbose_name
+                            in sorted(regions.items(), key=lambda r: r[1])
+                            if region_name != 'content' ])
+        layout_templates[name] = regions_data
+
+    out_dict["layout_templates"] = layout_templates
+
+    views_for_models = {}
+    models = frontend.site.get_all_registry_models()
+    for model in models:
+        views = [{'view_name': '', 'verbose_name': '------'}]
+        views.extend([{'view_name': view.name,
+                       'verbose_name': view.verbose_name}
+                       for view in frontend.site.get_views(model)
+                       if view.is_region_view])
+        ctype = ContentType.objects.get_for_model(model)
+        views_for_models[ctype.pk] = views
+    out_dict["views_for_models"] = views_for_models
+    json_data = json.dumps(out_dict, cls=LazyJSONEncoder)
+    return json_data

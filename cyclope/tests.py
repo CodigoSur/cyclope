@@ -1051,3 +1051,17 @@ class GetSingletonTests(TestCase):
         site_settings.save()
         site_settings = get_singleton(SiteSettings)
         self.assertEqual(site_settings.allow_comments, "NO")
+
+class LayoutAndRegionsJsonTemplateTagTests(TestCase):
+    fixtures = ['simplest_site.json']
+    def test_generate_data(self):
+        frontend.autodiscover()
+        out = Template(
+                "{% load layout %}"
+                "{% layout_regions_data %}"
+            ).render(Context())
+        data = json.loads(out)
+        self.assertTrue("five_elements.html" in data["layout_templates"])
+        self.assertTrue("views_for_models" in data)
+
+

@@ -86,6 +86,9 @@ class CyclopeSite(object):
     def get_registry_ctype_choices(self):
         return sorted(self._registry_ctype_choices, key=lambda choice: choice[1])
 
+    def get_all_registry_models(self):
+        return self._registry.keys()
+
     def get_urls(self):
         urlpatterns = patterns('',
             url(r'^$', self.index, name='index'),
@@ -241,6 +244,7 @@ class CyclopeSite(object):
         template_filename = request.GET['q']
         theme_name = SiteSettings.objects.get().theme
         theme_settings = get_theme(theme_name)
+
         regions = theme_settings.layout_templates[template_filename]['regions']
         regions_data = [{'region_name': '', 'verbose_name': '------'}]
         regions_data.extend([ {'region_name': region_name,

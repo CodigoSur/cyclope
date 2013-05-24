@@ -1,35 +1,46 @@
 {% extends "admin/change_form.html" %}
+{% load layout %}
+
 
 
 {% block after_related_objects %}
 {{ block.super }}
 
 {# CYCLOPE: chainedSelect for Layout #}
-
 <script type="text/javascript">
 //<![CDATA[
+  var layout_data = {% layout_regions_data %};
 
   function setup_chainedSelect_for_layout(i) {
       $("#id_regionview_set-" + i + "-region").chainedSelect({
           parent: '#id_template',
-          url: '/{{CYCLOPE_PREFIX}}layout_regions_json',
+          accesor_function: function (param){return layout_data["layout_templates"][param];},
           value: 'region_name',
-          label: 'verbose_name'
+          label: 'verbose_name',
+          notTriggetParentChange: true,
       });
 
       $("#id_regionview_set-" + i + "-content_view").chainedSelect({
           parent: '#id_regionview_set-' + i + '-content_type',
-          url: '/{{CYCLOPE_PREFIX}}registered_region_views_json',
+          accesor_function: function (param){
+              return layout_data["views_for_models"][param];},
           value: 'view_name',
-          label: 'verbose_name'
+          label: 'verbose_name',
+          notTriggetParentChange: true,
       });
 
-      $("#id_regionview_set-" + i + "-object_id").chainedSelect({
+     $("#id_regionview_set-" + i + "-object_id").chainedSelect({
           parent: '#id_regionview_set-' + i + '-content_type',
           url: '/{{CYCLOPE_PREFIX}}objects_for_ctype_json',
           value: 'object_id',
-          label: 'verbose_name'
+          label: 'verbose_name',
+          notTriggetParentChange: true,
       });
+
+    if ($('#id_regionview_set-' + i + '-content_type').val()){
+        $('#id_regionview_set-' + i + '-content_type').trigger('change');
+    }
+
   }
 
   jQuery(document).ready(function($){
@@ -40,6 +51,8 @@
       $("#regionview_set-group .add-row a").click(function() {
         setup_chainedSelect_for_layout($("select[id^='id_regionview_set-'][id$='-region']").length - 2);
       });
+      $('#id_template').trigger('change');
+
 
       // View options
 
@@ -65,35 +78,31 @@
                       }
                  });
           }
+          else {
+              $("#regionview_set-" + i + "-view_options_multiple").html("");
+              div_container.hide();
+          }
       }
 
       $.cyclope = {access_number: [], initial_content: []};
 
       $("select[id^='id_regionview_set-'][id$='-content_view']").each(function(i, sel){
-          $.cyclope.access_number[i] = 0;
+          $.cyclope.access_number[i] = 2;
 
           var prefix = "#id_regionview_set-" + i + "-"
           var div_container = $("#regionview_set-"+i+"-view_options_multiple").parent().parent();
-
-          if ($("#regionview_set-" + i + "-view_options_multiple").html().indexOf("form-row") == -1){
+          var html = $("#regionview_set-" + i + "-view_options_multiple").html() || "";
+          if (html && (html.indexOf("form-row") !== -1)){
+              $.cyclope.initial_content[i] = true;
+          }
+          else {
               div_container.hide();
               $.cyclope.initial_content[i] = false;
-          }
-          else{
-              $.cyclope.initial_content[i] = true;
+
           }
 
           $(this).change(function(){
-              $.cyclope.access_number[i] += 1;
-
-              if ($.cyclope.access_number[i] == 2){
-                if ($.cyclope.initial_content[i] === false){
-                  update_to_default_view_options($(this), prefix, div_container, i);
-                }
-              }
-              else if ($.cyclope.access_number[i] >= 3){
-                update_to_default_view_options($(this), prefix, div_container, i);
-              }
+              update_to_default_view_options($(this), prefix, div_container, i);
           });
       });
   });
