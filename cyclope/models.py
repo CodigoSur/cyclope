@@ -459,6 +459,7 @@ class Author(models.Model, ThumbnailMixin):
     class Meta:
         verbose_name = _('author')
         verbose_name_plural = _('authors')
+        ordering = ['name']
 
     @models.permalink
     def get_absolute_url(self):
