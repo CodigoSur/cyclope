@@ -31,13 +31,13 @@
 
   var layout_data = {% layout_regions_data %};
 
-  function setup_chainedSelect_for_layout(i) {
+  function setup_chainedSelect_for_layout(i, notTriggetParentChange) {
       $("#id_regionview_set-" + i + "-region").chainedSelect({
           parent: '#id_template',
           accesor_function: function (param){return layout_data["layout_templates"][param];},
           value: 'region_name',
           label: 'verbose_name',
-          notTriggetParentChange: true,
+          notTriggetParentChange: notTriggetParentChange,
       });
 
       $("#id_regionview_set-" + i + "-content_view").chainedSelect({
@@ -46,7 +46,7 @@
               return layout_data["views_for_models"][param];},
           value: 'view_name',
           label: 'verbose_name',
-          notTriggetParentChange: true,
+          notTriggetParentChange: notTriggetParentChange,
       });
 
      $("#id_regionview_set-" + i + "-object_id").chainedSelect({
@@ -54,7 +54,7 @@
           url: '/{{CYCLOPE_PREFIX}}objects_for_ctype_json',
           value: 'object_id',
           label: 'verbose_name',
-          notTriggetParentChange: true,
+          notTriggetParentChange: notTriggetParentChange,
       });
 
     if ($('#id_regionview_set-' + i + '-content_type').val()){
@@ -65,11 +65,11 @@
 
   jQuery(document).ready(function($){
       $("select[id^='id_regionview_set-'][id$='-region']").each(function(i, sel){
-          setup_chainedSelect_for_layout(i);
+          setup_chainedSelect_for_layout(i, true);
       });
 
       $("#regionview_set-group .add-row a").click(function() {
-        setup_chainedSelect_for_layout($("select[id^='id_regionview_set-'][id$='-region']").length - 2);
+        setup_chainedSelect_for_layout($("select[id^='id_regionview_set-'][id$='-region']").length - 2, false);
       });
       $('#id_template').trigger('change');
 
