@@ -1,0 +1,11 @@
+{% extends CYCLOPE_DEFAULT_TEMPLATE %}
+{% load i18n cyclope_utils %}
+
+{% block content %}
+<h2>{% blocktrans %}Actors that {{ user }} follows{% endblocktrans %}</h2>
+<ul>
+    {% for actor in following %}
+    <li>{{ actor }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
