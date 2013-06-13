@@ -35,6 +35,12 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 import cyclope
 
+def get_object_name(model):
+    return model._meta.object_name.lower()
+
+def get_app_label(model):
+    return model._meta.app_label
+
 def get_extension(filename):
     """
     Returns lowercase extension of filename. Eg: get_extension(foo.Bar) -> "bar"

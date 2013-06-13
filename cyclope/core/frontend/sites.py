@@ -37,7 +37,7 @@ from django.db.models import get_model
 
 from cyclope.models import MenuItem, SiteSettings, BaseContent
 import cyclope
-from cyclope.utils import layout_for_request, LazyJSONEncoder
+from cyclope.utils import layout_for_request, LazyJSONEncoder, get_object_name
 from cyclope.themes import get_theme
 
 class CyclopeSite(object):
@@ -101,7 +101,7 @@ class CyclopeSite(object):
 
         # url patterns for registered views
         for model, model_views in self._registry.items():
-            model_name = model._meta.object_name.lower()
+            model_name = get_object_name(model)
             for view in model_views:
                 url_pattern = self.get_url_pattern_for_view(view, model_name)
                 url_name = self.get_url_name_for_view(view, model_name)

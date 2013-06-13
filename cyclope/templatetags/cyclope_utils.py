@@ -31,7 +31,7 @@ from django.utils.safestring import mark_safe
 from django.contrib.markup.templatetags import markup
 
 import cyclope.settings as cyc_settings
-from cyclope.utils import nohang
+from cyclope.utils import nohang, get_object_name, get_app_label
 from cyclope.utils.lru_cache import LRULimitedSizeDict
 
 
@@ -226,7 +226,7 @@ def inline_template(obj, inline_view_name):
 
     Eg: {{ article|inline_template:"teaser" }} -> "articles/article_teaser.html"
     """
-    return "%s/%s_%s.html" % (obj.get_app_label(), obj.get_object_name(),
+    return "%s/%s_%s.html" % (get_app_label(obj), get_object_name(obj),
                               inline_view_name)
 
 from django.utils.encoding import force_unicode

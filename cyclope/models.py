@@ -48,7 +48,7 @@ from jsonfield import JSONField
 
 import cyclope
 from cyclope.core.collections.models import Collection
-from cyclope.utils import ThumbnailMixin, get_singleton
+from cyclope.utils import ThumbnailMixin, get_singleton, get_object_name, get_app_label
 
 
 class SiteSettings(models.Model):
@@ -355,11 +355,11 @@ class BaseContent(models.Model):
 
     @classmethod
     def get_app_label(cls):
-        return cls._meta.app_label
+        return get_app_label(cls)
 
     @classmethod
     def get_object_name(cls):
-        return cls._meta.object_name.lower()
+        return get_object_name(cls)
 
     @classmethod
     def get_verbose_name(cls):
