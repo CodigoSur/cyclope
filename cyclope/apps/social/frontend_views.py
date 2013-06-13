@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.template.loader import select_template
-from actstream.models import Action
+from actstream.models import Action, target_stream, user_stream
 
 from cyclope.core import frontend
 from cyclope.templatetags.cyclope_utils import inline_template
@@ -25,7 +25,10 @@ class GlobalActivity(frontend.FrontendView):
     template = "social/actions_list.html"
 
     def get_response(self, request, req_context, options):
-        actions = Action.objects.public()
+        if request.user.is_authenticated():
+            actions = target_stream(request.user) | user_stream(request.user)
+        else:
+            actions = Action.objects.public()
         # add template variable to action in the form app/model_action_teaser
         # defaulting to 'social/action_teaser.html' if does not exist
         for action in actions:

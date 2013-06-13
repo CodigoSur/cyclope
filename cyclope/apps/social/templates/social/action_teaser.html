@@ -1,4 +1,5 @@
 {% load i18n %}
+<div class="action">
 {% if action.actor.get_absolute_url %}
  <a href="{{ action.actor.get_absolute_url }}">{{ action.actor }}</a>
 {% else %}
@@ -14,3 +15,4 @@
     {% else %}<a href="{{ action.target_url }}">{{ action.target }}</a>{% endif %}
 {% endif %}
 {{ action.timestamp|timesince }} {% trans "ago" %}
+</div>

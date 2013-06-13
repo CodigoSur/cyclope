@@ -12,3 +12,15 @@ def followers_url(obj):
 @register.simple_tag
 def following_url(user):
     return reverse('social-following', None, (user.pk,))
+
+@register.simple_tag
+def unfollow_url(actor):
+    content_type = ContentType.objects.get_for_model(actor)
+    return reverse('actstream_unfollow', kwargs={'content_type_id': content_type.pk,
+                                                 'object_id': actor.pk})
+
+@register.simple_tag
+def actual_follow_all_url(actor):
+    content_type = ContentType.objects.get_for_model(actor)
+    return reverse('actstream_follow_all', kwargs={'content_type_id': content_type.pk,
+                                                    'object_id': actor.pk})

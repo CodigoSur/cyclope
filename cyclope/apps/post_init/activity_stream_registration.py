@@ -29,6 +29,8 @@ from cyclope.apps import medialibrary
 from cyclope.apps.articles.models import Article
 from cyclope.apps.custom_comments.models import CustomComment
 from django.contrib.comments.signals import comment_was_posted
+from ratings.signals import vote_was_saved
+from ratings.models import Vote
 
 def creation_activity(sender, request, instance, **kwargs):
     action.send(request.user, verb=_('created'), action_object=instance)
@@ -39,18 +41,34 @@ for model in models:
     admin_post_create.connect(creation_activity, sender=model,
                               dispatch_uid="%s_creation_activity" % model._meta.object_name.lower())
 
-def comment_activity(sender, comment, request, **k):
-    if not hasattr(request, "user") or not request.user.is_authenticated():
+def comment_activity(sender, **kwargs):
+    instance = kwargs.pop("instance")
+    user = instance.user
+    target_user = getattr(instance.content_object, "user", None)
+    if not kwargs.get("created") or not user:
         return
-    action.send(request.user, verb=_('commented'), action_object=comment,
-                target=comment.content_object)
+    action.send(user, verb=_('commented'), action_object=instance,
+                target=target_user)
 
-comment_was_posted.connect(comment_activity,
-                           sender=CustomComment,
-                           dispatch_uid="custom_comment_creation_activity")
+post_save.connect(comment_activity, sender=CustomComment,
+                  dispatch_uid="custom_comment_creation_activity")
+
+
+def rating_activity(sender, **kwargs):
+    instance = kwargs.pop("instance")
+    user = instance.user
+    target_user = getattr(instance.content_object, "user", None)
+    if not kwargs.get("created") or not user:
+        return
+    action.send(user, verb=_('voted'), action_object=instance,
+                target=target_user)
+
+post_save.connect(rating_activity, sender=Vote, dispatch_uid="vote_activity")
+
 
 activities = set(settings.ACTSTREAM_SETTINGS["MODELS"])
 activities.add('custom_comments.customcomment')
+activities.add('ratings.vote')
 [activities.add('%s.%s' % (model._meta.app_label,model._meta.object_name.lower())) for model in models]
 settings.ACTSTREAM_SETTINGS["MODELS"] = list(activities)
 
