@@ -1,18 +1,35 @@
 {% load i18n %}
 <div class="action">
-{% if action.actor.get_absolute_url %}
- <a href="{{ action.actor.get_absolute_url }}">{{ action.actor }}</a>
-{% else %}
- <a href="{{ action.actor_url }}">{{ action.actor }}</a>
-{% endif %}
-{{ action.verb }}
-{% if action.action_object %}
-  <a href="{{ action.action_object.get_absolute_url }}">{{ action.action_object }}</a>
-{% endif %}
-{% if action.target %}
+
+<div>
+    {% if action.actor.username %}
+      {{ action.actor }}
+    {% elif action.actor.get_absolute_url %}
+     <a href="{{ action.actor.get_absolute_url }}">{{ action.actor }}</a>
+    {% else %}
+     <a href="{{ action.actor_url }}">{{ action.actor }}</a>
+    {% endif %}
+    <div>
+
+    {{ action.verb }}
+
+    {% if action.action_object %}
+        <a href="{{ action.action_object.get_absolute_url }}">{{ action.action_object }}</a>
+    {% endif %}
+    </div>
+</div>
+
+<div>
+
+
+{% if action.real_target %}
+  {% include action.target_template with current_object=action.real_target %}
+
+{% elif action.target %}
+
 {% trans "to" %}
     {% if action.target.get_absolute_url %}<a href="{{ action.target.get_absolute_url }}">{{ action.target }}</a>
     {% else %}<a href="{{ action.target_url }}">{{ action.target }}</a>{% endif %}
 {% endif %}
-{{ action.timestamp|timesince }} {% trans "ago" %}
+</div>
 </div>

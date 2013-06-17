@@ -3,7 +3,7 @@
 
 {% block content %}
     {% for action in object_list %}
-        {% include action.template %} {% comment %}template is in the form "app/model_action_teaser.html" {% endcomment %}
+        {% include "social/action_teaser.html" %}
     {% empty %}
     {% trans "No actions yet" %}
     {% endfor %}
