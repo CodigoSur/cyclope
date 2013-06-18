@@ -14,7 +14,13 @@
     {{ action.verb }}
 
     {% if action.action_object %}
-        <a href="{{ action.action_object.get_absolute_url }}">{{ action.action_object }}</a>
+
+        {% if action.action_object_template %}
+          {# template is like "app/model_action_teaser.html" #}
+          {% include action.action_object_template with current_object=action.real_target host_template="cyclope/inline_view.html" %}
+        {% else %}
+          <a href="{{ action.action_object.get_absolute_url }}">{{ action.action_object }}</a>
+        {% endif %}
     {% endif %}
     </div>
 </div>
@@ -22,9 +28,9 @@
 <div>
 
 
-{% if action.real_target %}
-  {% include action.target_template with current_object=action.real_target %}
-
+{% if action.target_template %}
+  {# template is like "app/model_teaser.html" #}
+  {% include action.target_template with current_object=action.real_target host_template="cyclope/inline_view.html" %}
 {% elif action.target %}
 
 {% trans "to" %}
