@@ -64,6 +64,12 @@ class Collection(models.Model, ThumbnailMixin):
                                          blank=True, default='')
     view_options = JSONField(default='{}') # default is taken from ViewOptionsForm
 
+    def get_absolute_url(self):
+        return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
+
+    def __unicode__(self):
+        return self.name
+
     class Meta:
         verbose_name = _('collection')
         verbose_name_plural = _('collections')
@@ -95,6 +101,12 @@ class Category(models.Model, ThumbnailMixin):
     description = models.TextField(_('description'), blank=True, null=True)
     image =  FileBrowseField(_('image'), max_length=250, format='Image',
                              blank=True)
+
+    def __unicode__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
 
     def valid_parents(self):
         return Category.tree.filter(pk__isnot=self.pk)
