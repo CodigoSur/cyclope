@@ -31,11 +31,7 @@ $(function () {
 {% if request.user.is_authenticated %}
 <p><b><a href="{% actor_url request.user %}">{% trans "View my actions" %}</a></b></p>
 {% endif %}
-<ul>
-{% for action in action_list %}
-    <li>{% include 'activity/action.html' %}</li>
-{% empty %}
-{% trans "No actions yet" %}
-{% endfor %}
-</ul>
+
+{% include "social/actions_list.html" with object_list=action_list host_template="cyclope/inline_view.html" %}
+
 {% endblock %}

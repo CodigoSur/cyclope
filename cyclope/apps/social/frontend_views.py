@@ -30,22 +30,6 @@ class GlobalActivity(frontend.FrontendView):
             actions = target_stream(request.user) | user_stream(request.user)
         else:
             actions = Action.objects.public()
-        # add template variable to action in the form app/model_teaser.html
-        for action in actions:
-            if action.action_object:
-                # the real target object is eg: the object that is comented
-                action.real_target = getattr(action.action_object, "content_object", action.action_object)
-                action_object_template = inline_template(action.action_object, "action_teaser")
-                action.action_object_template = select_template
-            else:
-                action.real_target = action.target
-
-            target_template = inline_template(action.real_target, "teaser")
-            try:
-                action.target_template = get_template(target_template).name
-            except TemplateDoesNotExist:
-                action.target_template = None
-
 
         return render_to_string(self.template, {
             'object_list': actions,
