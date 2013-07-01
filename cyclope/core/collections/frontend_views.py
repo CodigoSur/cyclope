@@ -307,13 +307,10 @@ class CollectionCategoriesHierarchy(frontend.FrontendView, HyerarchyBuilderMixin
         return t.render(req_context)
 
     def render_item(self, item, *args):
-        has_content = 'has_content' if item.categorizations.exists()\
-                      else 'no_content'
         has_children = 'has_children' if item.get_descendant_count()\
                        else 'no_children'
         context = Context({'name': item.name,
                            'slug': item.slug,
-                           'has_content': has_content,
                            'has_children': has_children,
                            'target_view': "category-" + self.target_view})
         return render_to_string(self.template_item, context)
