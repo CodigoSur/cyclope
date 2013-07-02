@@ -7,9 +7,11 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.template.loader import select_template, get_template
 from django.template import TemplateDoesNotExist
+from django.core.paginator import Paginator
 from actstream.models import Action, target_stream, user_stream
 
 from cyclope.core import frontend
+import cyclope.utils
 from cyclope.templatetags.cyclope_utils import inline_template
 
 class Social(models.Model):
@@ -31,8 +33,10 @@ class GlobalActivity(frontend.FrontendView):
         else:
             actions = Action.objects.public()
 
+        paginator = Paginator(actions, per_page=10)
+        page = cyclope.utils.get_page(paginator, request)
         return render_to_string(self.template, {
-            'object_list': actions,
+            'page': page,
         }, req_context)
 
 frontend.site.register_view(Social, GlobalActivity)

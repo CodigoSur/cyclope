@@ -1,9 +1,11 @@
 {% extends host_template %}
-{% load i18n cyclope_utils %}
+{% load i18n cyclope_utils social %}
 
 {% block content %}
-    {% for action in object_list %}
-        {% include "social/action_teaser.html" %}
+    {% include 'cyclope/pagination_block.html' %}
+
+    {% for action in page.object_list %}
+        {% include "social/action_teaser.html" with action=action|steroid_action %}
     {% empty %}
     {% trans "No actions yet" %}
     {% endfor %}
