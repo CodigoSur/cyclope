@@ -1,7 +1,9 @@
 from django import template
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import Paginator
 
+import cyclope.utils
 from ..utils import steroid_action as _steroid_action
 
 from actstream.models import actor_stream
@@ -34,5 +36,8 @@ def steroid_action(action):
     return _steroid_action(action)
 
 @register.filter
-def actor_actions(actor):
-    return [_steroid_action(action) for action in actor_stream(actor)]
+def actor_actions(actor, request):
+    object_list = [_steroid_action(action) for action in actor_stream(actor)]
+    paginator = Paginator(object_list, per_page=10)
+    page = cyclope.utils.get_page(paginator, request)
+    return page

@@ -2,11 +2,29 @@
 {% load i18n cyclope_utils social %}
 
 {% block content %}
-    {% include 'cyclope/pagination_block.html' %}
 
-    {% for action in page.object_list %}
-        {% include "social/action_teaser.html" with action=action|steroid_action %}
-    {% empty %}
-    {% trans "No actions yet" %}
-    {% endfor %}
 {% endblock %}
+
+
+
+{% extends host_template %}
+{% load i18n cyclope_utils social %}
+
+{% block content %}
+    {% if page %}
+        {% include 'cyclope/pagination_block.html' %}
+
+        {% for action in page.object_list %}
+            {% include "social/action_teaser.html" with action=action|steroid_action %}
+        {% empty %}
+        {% trans "No actions yet" %}
+        {% endfor %}
+    {% else %}
+        {% for action in object_list %}
+            {% include "social/action_teaser.html" with action=action|steroid_action %}
+        {% empty %}
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
+
