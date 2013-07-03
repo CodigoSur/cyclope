@@ -72,7 +72,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'cyclope.middleware.LayoutMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+#    'debug_toolbar.middleware.DebugToolbarMiddleware',
 
 )
 
@@ -138,7 +138,7 @@ INSTALLED_APPS = [
     'ratings',
     'actstream',
 
-    'debug_toolbar',
+#    'debug_toolbar',
 #    'django_extensions',
     'cyclope.apps.post_init',
 ]
