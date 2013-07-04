@@ -8,10 +8,7 @@ from actstream.models import Action, target_stream, user_stream
 
 from cyclope.core import frontend
 import cyclope.utils
-
-class Social(models.Model):
-    """Fake model for cyclope frontend view registration"""
-
+from models import Social
 
 class GlobalActivity(frontend.FrontendView):
     name = 'global_activity'

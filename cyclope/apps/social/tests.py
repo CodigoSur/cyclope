@@ -25,7 +25,7 @@ from actstream.models import Action
 
 from cyclope.tests import ViewableTestCase
 
-from frontend_views import Social
+from models import Social
 
 
 class SocialTestCase(ViewableTestCase):
