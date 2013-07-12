@@ -10,7 +10,10 @@ def steroid_action(action):
         # the real target object is eg: the object that is comented
         action.real_target = getattr(action.action_object, "content_object", action.action_object)
         action_object_template = inline_template(action.action_object, "action_teaser")
-        action.action_object_template = select_template
+        try:
+            action.action_object_template = get_template(action_object_template).name
+        except TemplateDoesNotExist:
+            action.action_object_template = None
     else:
         action.real_target = action.target
 
