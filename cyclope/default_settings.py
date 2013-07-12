@@ -176,12 +176,12 @@ FILEBROWSER_EXTENSIONS = {
     'Folder': [''],
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
     'Video': ['.ogv', '.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.flv', '.mp4'],
-    'Document': ['.odt', 'docx', '.pdf','.doc','.rtf','.txt',
+    'Document': ['.odt', '.docx', '.pdf','.doc','.rtf','.txt',
                  '.ods', '.xls', '.xlsx', '.csv', '.ppt', '.pptx'],
     'Audio': ['.ogg', '.oga', '.mp3','.wav','.aiff','.midi','.m4p'],
-    'Code': ['.html','.py','.js','.css'],
+    'Code': ['.html', '.js','.css'],
+    'Archives': ['.zip', '.rar', '.7z', '.xs', '.gz', '.tar'],
     'Flash_App': ['.swf',],
-    'Flash_Movie': ['.flv',],
 }
 
 FILEBROWSER_SELECT_FORMATS = {
