@@ -179,8 +179,9 @@ class MenuItemAdminForm(GenericModelForm, ViewOptionsFormMixin):
 
 class SiteSettingsAdminForm(forms.ModelForm):
     theme = forms.ChoiceField(label=_('Theme'),
-        choices=[(theme_name,  theme.verbose_name)
-                 for theme_name, theme in get_all_themes().iteritems()],
+        choices=sorted([(theme_name,  theme.verbose_name)
+                         for theme_name, theme in get_all_themes().iteritems()],
+                         key=lambda t: t[1]),
         required=True)
 
     def __init__(self, *args, **kwargs):
@@ -189,7 +190,6 @@ class SiteSettingsAdminForm(forms.ModelForm):
         self.fields["description"].widget = AdminTextareaWidget()
         self.fields['rss_content_types'].choices = site.get_base_ctype_choices()
 
-        #TODO(diegoM): I don't like this...
         if ('', '------') in self.fields['rss_content_types'].choices:
             self.fields['rss_content_types'].choices.remove(('', '------'))
 
