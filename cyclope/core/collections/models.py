@@ -217,6 +217,7 @@ class Categorization(models.Model):
                                      verbose_name=_('content type'))
     object_id = models.PositiveIntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
+    order = models.IntegerField(blank=True, null=True, db_index=True)
 
     objects = CategorizationManager()
 
@@ -236,7 +237,7 @@ class Categorization(models.Model):
     class Meta:
         verbose_name = _('categorization')
         verbose_name_plural = _('categorizations')
-#        ordering = ('object_modification_date',)
+        ordering = ('order',)
 
 
 class Collectible(models.Model):

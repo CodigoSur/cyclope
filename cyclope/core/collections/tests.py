@@ -46,6 +46,53 @@ class CategoryTestCase(ViewableTestCase):
         request.user, created = User.objects.get_or_create(username='johny')
         return request
 
+class CategorizationOrderTestCase(TestCase):
+
+    def setUp(self):
+        self.collection = Collection.objects.create(name='A collection')
+        self.collection.content_types.add(ContentType.objects.get(model="staticpage"))
+        self.collection.save()
+        self.category = Category(name='category foo', collection=self.collection)
+        self.category.save()
+        self.stpage1 = StaticPage.objects.create(name="static", text="prueba")
+        self.stpage2 = StaticPage.objects.create(name="static2", text="prueba")
+        self.stpage3 = StaticPage.objects.create(name="static3", text="prueba")
+
+    def test_create_with_order_empty(self):
+        ctgz = Categorization(content_object=self.stpage1, category=self.category)
+        ctgz.save()
+        ctgz2 = Categorization(content_object=self.stpage2, category=self.category)
+        ctgz2.save()
+        first = self.category.categorizations.all().order_by('order')[0].content_object
+        self.assertEqual(first, self.stpage1)
+
+    def test_create_with_order_defined(self):
+        ctgz = Categorization(content_object=self.stpage1, category=self.category,
+                              order=2)
+        ctgz.save()
+        ctgz2 = Categorization(content_object=self.stpage2, category=self.category,
+                               order=1)
+        ctgz2.save()
+        first = self.category.categorizations.all().order_by('order')[0].content_object
+        self.assertEqual(first, self.stpage2)
+
+    def test_create_with_mixed_order(self):
+        "first items are unordered categorizations sorted in creation order"
+        ctgz = Categorization(content_object=self.stpage1, category=self.category,
+                              order=2)
+        ctgz.save()
+        ctgz3 = Categorization(content_object=self.stpage3, category=self.category)
+        ctgz3.save()
+        ctgz2 = Categorization(content_object=self.stpage2, category=self.category)
+        ctgz2.save()
+        #from django.db.models import Count
+        #first = self.category.categorizations.all().annotate(null_order=Count('order')).order_by('-null_order', 'order')[0].content_object
+        self.category.categorizations.all()[0]
+        first = self.category.categorizations.all()[0].content_object
+        import ipdb;ipdb.set_trace()
+        self.assertEqual(first, self.stpage2)
+
+
 class MoveCategoryTestCase(TestCase):
     def setUp(self):
         staticpage_ct = ContentType.objects.get(model="staticpage")
