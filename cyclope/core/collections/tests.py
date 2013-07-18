@@ -89,7 +89,6 @@ class CategorizationOrderTestCase(TestCase):
         #first = self.category.categorizations.all().annotate(null_order=Count('order')).order_by('-null_order', 'order')[0].content_object
         self.category.categorizations.all()[0]
         first = self.category.categorizations.all()[0].content_object
-        import ipdb;ipdb.set_trace()
         self.assertEqual(first, self.stpage2)
 
 

@@ -220,3 +220,21 @@ class CollectionAdmin (admin.ModelAdmin):
     list_editable = ("visible", )
 
 admin.site.register(Collection, CollectionAdmin)
+
+class CategorizationAdmin(admin.ModelAdmin):
+    list_display = ["content_object", "content_type",
+                    "object_creation_date", "order"]
+    list_per_page = 500
+    list_editable = ("order", )
+    list_display_links = ('object_creation_date', )
+    # TODO: add link to the content_objet
+
+    def changelist_view(self, request, *args, **kwargs):
+
+        # Force one category selected
+        if request.GET.get("category__id__exact") is None:
+            request.GET = request.GET.copy()
+            request.GET['category__id__exact'] = str(Category.objects.all()[0].pk)
+        return super(CategorizationAdmin, self).changelist_view(request, *args, **kwargs)
+
+admin.site.register(Categorization, CategorizationAdmin)

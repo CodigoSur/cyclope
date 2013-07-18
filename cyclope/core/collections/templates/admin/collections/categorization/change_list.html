@@ -1,0 +1,14 @@
+{% extends "admin/change_list.html" %}
+{% load adminmedia admin_list i18n cyclope_utils static %}
+{% load url from future %}
+
+{% block pretitle %}{% endblock %}
+{% block content_title %}<h1>{% trans "categorizations"|capfirst %}</h1>{% endblock %}
+
+{% block object-tools %}{% endblock %}
+
+{% block help %}
+<p>
+ {% blocktrans %}You may order the contents of this Category{% endblocktrans %}
+</p>
+{% endblock %}
