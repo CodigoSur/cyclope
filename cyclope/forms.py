@@ -32,8 +32,8 @@ from django.contrib.admin.widgets import AdminTextareaWidget
 from mptt.forms import TreeNodeChoiceField
 
 from cyclope.core.frontend import site
-from cyclope.models import MenuItem, RelatedContent, SiteSettings, Layout, \
-                            RegionView
+from cyclope.models import (MenuItem, RelatedContent, SiteSettings, Layout,
+                             RegionView, DesignSettings)
 from cyclope.fields import MultipleField
 from cyclope.themes import get_all_themes, get_theme
 from cyclope.apps.related_admin import GenericFKWidget, GenericModelForm
@@ -178,17 +178,12 @@ class MenuItemAdminForm(GenericModelForm, ViewOptionsFormMixin):
 
 
 class SiteSettingsAdminForm(forms.ModelForm):
-    theme = forms.ChoiceField(label=_('Theme'),
-        choices=sorted([(theme_name,  theme.verbose_name)
-                         for theme_name, theme in get_all_themes().iteritems()],
-                         key=lambda t: t[1]),
-        required=True)
-
     def __init__(self, *args, **kwargs):
         super(SiteSettingsAdminForm, self).__init__(*args, **kwargs)
-        self.fields["keywords"].widget = AdminTextareaWidget()
-        self.fields["description"].widget = AdminTextareaWidget()
+        self.fields["keywords"].widget = AdminTextareaWidget(attrs={'rows': 3})
+        self.fields["description"].widget = AdminTextareaWidget(attrs={'rows': 5})
         self.fields['rss_content_types'].choices = site.get_base_ctype_choices()
+
 
         if ('', '------') in self.fields['rss_content_types'].choices:
             self.fields['rss_content_types'].choices.remove(('', '------'))
@@ -196,6 +191,27 @@ class SiteSettingsAdminForm(forms.ModelForm):
     class Meta:
         model = SiteSettings
 
+def get_home_menu_item():
+    return MenuItem.objects.get(site_home=True)
+
+class DesignSettingsAdminForm(forms.ModelForm):
+
+    theme = forms.ChoiceField(label=_('Theme'),
+        choices=sorted([(theme_name,  theme.verbose_name)
+                         for theme_name, theme in get_all_themes().iteritems()],
+                         key=lambda t: t[1]),
+        required=True)
+    home_layout = forms.ModelChoiceField(queryset=Layout.objects.all(),
+                                         initial=lambda : get_home_menu_item().layout)
+    class Meta:
+        model = DesignSettings
+
+    def save(self, *args, **kwargs):
+        m = super(DesignSettingsAdminForm, self).save(*args, **kwargs)
+        home = get_home_menu_item()
+        home.layout = self.cleaned_data['home_layout']
+        home.save()
+        return m
 
 class LayoutAdminForm(forms.ModelForm):
     template = forms.ChoiceField(label=_('Template'), required=True)

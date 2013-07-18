@@ -48,7 +48,8 @@ from jsonfield import JSONField
 
 import cyclope
 from cyclope.core.collections.models import Collection
-from cyclope.utils import ThumbnailMixin, get_singleton, get_object_name, get_app_label
+from cyclope.utils import (ThumbnailMixin, get_singleton,
+                            get_object_name, get_app_label)
 
 
 class SiteSettings(models.Model):
@@ -116,6 +117,12 @@ class SiteSettings(models.Model):
     class Meta:
         verbose_name = _('site settings')
         verbose_name_plural = _('site settings')
+
+
+class DesignSettings(SiteSettings):
+    'Proxy model to use in the admin'
+    class Meta:
+        proxy = True
 
 
 class Menu(models.Model):

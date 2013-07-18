@@ -523,14 +523,14 @@ class ThemesTestCase(TestCase):
         self.assertTrue("four_elements.html" in choices)
 
     def test_default_themes_integration(self):
-        form = SiteSettingsAdminForm()
+        form = DesignSettingsAdminForm()
         choices = [choice[0] for choice in form.fields["theme"].choices]
         self.assertTrue(DEFAULT_THEME in choices)
         self.assertTrue("frecuency" in choices)
 
     @unittest.skip("this test fails when there is now custom_theme directory")
     def test_custom_theme_integration(self):
-        form = SiteSettingsAdminForm()
+        form = DesignSettingsAdminForm()
         choices = [choice[0] for choice in form.fields["theme"].choices]
         self.assertTrue("custom_theme" in choices)
 
