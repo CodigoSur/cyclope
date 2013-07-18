@@ -11,14 +11,16 @@ def steroid_action(action):
         action.real_target = getattr(action.action_object, "content_object", action.action_object)
         action_object_template = inline_template(action.action_object, "action_teaser")
         action.action_object_template = select_template
-    else:
+    elif action.target:
         action.real_target = action.target
-
-    target_template = inline_template(action.real_target, "teaser")
-    try:
-        action.target_template = get_template(target_template).name
-    except TemplateDoesNotExist:
-        action.target_template = None
+    else:
+        action.real_target = None
+    if action.real_target:
+        target_template = inline_template(action.real_target, "teaser")
+        try:
+            action.target_template = get_template(target_template).name
+        except TemplateDoesNotExist:
+            action.target_template = None
 
     action.verb_template = "social/action_teaser_%s.html" % action.verb
     return action

@@ -33,7 +33,7 @@ class SocialTestCase(ViewableTestCase):
 
     def setUp(self):
         user, created = User.objects.get_or_create(username="Foo")
-        action.send(user,  verb='reached level 10')
-        action.send(user,  verb='reached level 11')
+        action.send(user,  verb='reached level 10', target=user)
+        action.send(user,  verb='reached level 11', target=user)
         action.send(user,  verb='reached level 12')
 

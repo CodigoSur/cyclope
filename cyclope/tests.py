@@ -55,7 +55,8 @@ from cyclope.apps.feeds.models import Feed
 
 from cyclope.fields import MultipleField
 from cyclope.sitemaps import CollectionSitemap, CategorySitemap, MenuSitemap
-from cyclope.forms import SiteSettingsAdminForm, LayoutAdminForm, MenuItemAdminForm
+from cyclope.forms import (SiteSettingsAdminForm, LayoutAdminForm, MenuItemAdminForm,
+                            DesignSettingsAdminForm)
 from cyclope import themes
 from cyclope import templatetags as cyclope_templatetags
 from cyclope.templatetags.cyclope_utils import smart_style
