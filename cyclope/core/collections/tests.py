@@ -63,7 +63,7 @@ class CategorizationOrderTestCase(TestCase):
         ctgz.save()
         ctgz2 = Categorization(content_object=self.stpage2, category=self.category)
         ctgz2.save()
-        first = self.category.categorizations.all().order_by('order')[0].content_object
+        first = self.category.categorizations.all()[0].content_object
         self.assertEqual(first, self.stpage1)
 
     def test_create_with_order_defined(self):
@@ -73,7 +73,7 @@ class CategorizationOrderTestCase(TestCase):
         ctgz2 = Categorization(content_object=self.stpage2, category=self.category,
                                order=1)
         ctgz2.save()
-        first = self.category.categorizations.all().order_by('order')[0].content_object
+        first = self.category.categorizations.all()[0].content_object
         self.assertEqual(first, self.stpage2)
 
     def test_create_with_mixed_order(self):
@@ -85,11 +85,10 @@ class CategorizationOrderTestCase(TestCase):
         ctgz3.save()
         ctgz2 = Categorization(content_object=self.stpage2, category=self.category)
         ctgz2.save()
-        #from django.db.models import Count
-        #first = self.category.categorizations.all().annotate(null_order=Count('order')).order_by('-null_order', 'order')[0].content_object
+
         self.category.categorizations.all()[0]
         first = self.category.categorizations.all()[0].content_object
-        self.assertEqual(first, self.stpage2)
+        self.assertEqual(first, self.stpage3)
 
 
 class MoveCategoryTestCase(TestCase):
