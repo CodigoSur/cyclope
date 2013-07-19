@@ -3,12 +3,22 @@
 {% load url from future %}
 
 {% block pretitle %}{% endblock %}
-{% block content_title %}<h1>{% trans "categorizations"|capfirst %}</h1>{% endblock %}
+{% block content_title %}<h1>{% trans "category"|capfirst %} {{ category }} ({{ category.collection }})</h1>{% endblock %}
 
-{% block object-tools %}{% endblock %}
+
+
+{% block bodyclass %}change-list {{ app_label }} categorizations-changelist{% endblock %}
+
+{% block object-tools %}
+<ul class="object-tools">
+  <li><a href="../category/{{ category.pk }}" class="edit-object">{% trans "Edit" %} {% trans "Category" %}</a></li>
+  <li><a href="{{ category.get_absolute_url }}" class="viewsitelink">{% trans "View on site" %}</a></li>
+</ul>
+{% endblock %}
 
 {% block help %}
+
 <p>
- {% blocktrans %}You may order the contents of this Category{% endblocktrans %}
+ {% blocktrans %}You may order the contents of this Category. Dont forget to save!{% endblocktrans %}
 </p>
 {% endblock %}

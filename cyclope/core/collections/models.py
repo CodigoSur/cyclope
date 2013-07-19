@@ -189,6 +189,8 @@ class CategorizationManager(models.Manager):
         if sort_property == "random":
             cats = list(cats)
             random.shuffle(cats)
+        elif sort_property == "creation_date":
+            pass # this is the default ordering
         else:
             # Iterate over content_types fetching the sort_key of the content_object and saving in sort_attrs dict
             sort_attrs = {}

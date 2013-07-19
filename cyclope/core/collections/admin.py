@@ -104,7 +104,6 @@ class CategoryAdmin(TreeEditor, PermanentFilterMixin):
     class Media:
         js = (
             cyc_settings.CYCLOPE_STATIC_URL + 'js/reuse_django_jquery.js',
-#            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-ui-1.8.4.custom.min.js',
         )
 
 admin.site.register(Category, CategoryAdmin)
@@ -222,19 +221,44 @@ class CollectionAdmin (admin.ModelAdmin):
 admin.site.register(Collection, CollectionAdmin)
 
 class CategorizationAdmin(admin.ModelAdmin):
-    list_display = ["content_object", "content_type",
+    list_display = ["edit_object", "view_on_site", "content_type",
                     "object_creation_date", "order"]
     list_per_page = 500
     list_editable = ("order", )
     list_display_links = ('object_creation_date', )
-    # TODO: add link to the content_objet
 
-    def changelist_view(self, request, *args, **kwargs):
+    def edit_object(self, item):
+        item = item.content_object
+        url = reverse('admin:%s_%s_change' % (item._meta.app_label,  item._meta.module_name),
+                      args=(item.pk,) )
+        return u'<a href="%s">%s</a>' % (url,  item.__unicode__())
 
+    edit_object.allow_tags = True
+
+    def view_on_site(self, item):
+        return u'<a href="%s">Link</a>' % item.content_object.get_absolute_url()
+
+    view_on_site.allow_tags = True
+
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
         # Force one category selected
         if request.GET.get("category__id__exact") is None:
             request.GET = request.GET.copy()
             request.GET['category__id__exact'] = str(Category.objects.all()[0].pk)
-        return super(CategorizationAdmin, self).changelist_view(request, *args, **kwargs)
+
+        try:
+            extra_context["category"] = Category.objects.get(pk=int(request.GET['category__id__exact']))
+        except Category.DoesNotExist:
+            extra_context["category"] = None
+        return super(CategorizationAdmin, self).changelist_view(request,
+                                                                 extra_context=extra_context)
+
+    class Media:
+        js = (
+            cyc_settings.CYCLOPE_STATIC_URL + 'js/reuse_django_jquery.js',
+            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-ui-1.8.4.custom.min.js',
+            cyc_settings.CYCLOPE_STATIC_URL + 'js/drag_drop.js',
+        )
 
 admin.site.register(Categorization, CategorizationAdmin)
