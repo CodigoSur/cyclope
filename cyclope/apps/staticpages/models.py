@@ -26,13 +26,11 @@ from autoslug.fields import AutoSlugField
 
 from cyclope.models import BaseContent
 from cyclope.core.collections.models import Collectible
+from cyclope.utils import get_object_name
 
 class StaticPage(BaseContent, Collectible):
     summary = models.TextField(_('summary'), blank=True)
     text = models.TextField(_('text'))
-
-    def __unicode__(self):
-        return self.name
 
     class Meta:
         verbose_name = _('static page')
@@ -43,12 +41,12 @@ class HTMLBlock(models.Model):
     name = models.CharField(_('name'), max_length=250,
                              db_index=True, blank=False)
     slug = AutoSlugField(populate_from='name', unique=True,
-                         db_index=True, always_update=True)    
+                         db_index=True, always_update=True)
     text = models.TextField(_('text'))
-    
+
     def get_absolute_url(self):
-        return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
-    
+        return '/%s/%s/' % (get_object_name(self), self.slug)
+
     def __unicode__(self):
         return self.name
 

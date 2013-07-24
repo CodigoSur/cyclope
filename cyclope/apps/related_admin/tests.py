@@ -20,4 +20,3 @@ class GenericModelChoiceFieldTest(TestCase):
     def test_empty_value(self):
         field = GenericModelChoiceField()
         self.assertRaises(forms.ValidationError, field.validate, u"")
-        self.assertRaises(forms.ValidationError, field.to_python, u"")

@@ -1,0 +1,41 @@
+{% load i18n %}
+<div class="action">
+
+<div>
+    {% if action.actor.username %}
+      {{ action.actor }}
+    {% elif action.actor.get_absolute_url %}
+     <a href="{{ action.actor.get_absolute_url }}">{{ action.actor }}</a>
+    {% else %}
+     <a href="{{ action.actor_url }}">{{ action.actor }}</a>
+    {% endif %}
+    <div>
+
+    {{ action.verb }}
+
+    {% if action.action_object %}
+
+        {% if action.action_object_template %}
+          {# template is like "app/model_action_teaser.html" #}
+          {% include action.action_object_template with current_object=action.real_target host_template="cyclope/inline_view.html" %}
+        {% else %}
+          <a href="{{ action.action_object.get_absolute_url }}">{{ action.action_object }}</a>
+        {% endif %}
+    {% endif %}
+    </div>
+</div>
+
+<div>
+
+
+{% if action.target_template %}
+  {# template is like "app/model_teaser.html" #}
+  {% include action.target_template with current_object=action.real_target host_template="cyclope/inline_view.html" %}
+{% elif action.target %}
+
+{% trans "to" %}
+    {% if action.target.get_absolute_url %}<a href="{{ action.target.get_absolute_url }}">{{ action.target }}</a>
+    {% else %}<a href="{{ action.target_url }}">{{ action.target }}</a>{% endif %}
+{% endif %}
+</div>
+</div>

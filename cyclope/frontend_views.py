@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2013 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -145,10 +145,10 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
 
         if current_item:
             children = current_item[0].get_children().filter(active=True)
-            return render_to_string(self.template, {'menu_items': children},
-                                    req_context)
         else:
-            return ''
+            children = []
+        return render_to_string(self.template, {'menu_items': children},
+                                 req_context)
 
 frontend.site.register_view(MenuItem, MenuItemChildrenOfCurrentItem)
 

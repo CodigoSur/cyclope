@@ -189,6 +189,8 @@ class CategorizationManager(models.Manager):
         if sort_property == "random":
             cats = list(cats)
             random.shuffle(cats)
+        elif sort_property == "creation_date":
+            pass # this is the default ordering
         else:
             # Iterate over content_types fetching the sort_key of the content_object and saving in sort_attrs dict
             sort_attrs = {}
@@ -217,6 +219,8 @@ class Categorization(models.Model):
                                      verbose_name=_('content type'))
     object_id = models.PositiveIntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
+    order = models.IntegerField(blank=True, null=True, db_index=True,
+                                verbose_name=_('order'))
 
     objects = CategorizationManager()
 
@@ -236,7 +240,7 @@ class Categorization(models.Model):
     class Meta:
         verbose_name = _('categorization')
         verbose_name_plural = _('categorizations')
-#        ordering = ('object_modification_date',)
+        ordering = ('order', 'id')
 
 
 class Collectible(models.Model):

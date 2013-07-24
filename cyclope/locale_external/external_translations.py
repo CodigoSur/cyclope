@@ -135,3 +135,5 @@ _("Categories for this")
 _("category map")
 
 _("%(more_count)s more")
+
+_("started following")

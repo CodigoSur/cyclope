@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2013 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -117,18 +117,6 @@ class FrontendView(object):
         """Must be overriden by inheriting class and return a the view content
         """
         raise NotImplementedError()
-
-    def get_url_pattern(self, model):
-        if self.is_default:
-            return '%s/(?P<slug>[\w-]+)/$'\
-                    % (model._meta.object_name.lower())
-
-        if self.is_instance_view:
-            return '%s/(?P<slug>[\w-]+)/View/%s'\
-                    % (model._meta.object_name.lower(), self.name)
-        else:
-            return '%s/View/%s'\
-                    % (model._meta.object_name.lower(), self.name)
 
     def get_default_options(self):
         options = {}

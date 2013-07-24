@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2012 Código Sur Sociedad Civil
+# Copyright 2010-2013 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -27,7 +27,9 @@ from collections import defaultdict
 
 from django import forms
 from django.test import TestCase
+from django.test.simple import DjangoTestSuiteRunner
 from django.test.utils import setup_test_environment
+from django.test.client import RequestFactory
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import AnonymousUser
 from django.conf import settings
@@ -47,15 +49,14 @@ from cyclope.core.user_profiles.models import UserProfile
 from cyclope.templatetags.cyclope_utils import do_join
 from cyclope.apps.staticpages.models import StaticPage
 from cyclope.apps.articles.models import Article
-from cyclope.apps.medialibrary.models import *
 from cyclope.apps.polls.models import *
 from cyclope.apps.forum.models import *
 from cyclope.apps.feeds.models import Feed
-from cyclope.apps.dynamicforms.models import DynamicForm
 
 from cyclope.fields import MultipleField
 from cyclope.sitemaps import CollectionSitemap, CategorySitemap, MenuSitemap
-from cyclope.forms import SiteSettingsAdminForm, LayoutAdminForm, MenuItemAdminForm
+from cyclope.forms import (SiteSettingsAdminForm, LayoutAdminForm, MenuItemAdminForm,
+                            DesignSettingsAdminForm)
 from cyclope import themes
 from cyclope import templatetags as cyclope_templatetags
 from cyclope.templatetags.cyclope_utils import smart_style
@@ -63,55 +64,6 @@ from cyclope.templatetags.cyclope_utils import smart_style
 DEFAULT_THEME = "neutronix"
 DEFAULT_THEME_REGION = "ash"
 
-
-def create_static_page(name=None):
-    if name is None:
-        name = 'A page'
-    return StaticPage.objects.create(name=name)
-
-def export_fixture(apps, filename=None):
-    """
-    Return dumpdata from apps. If filename write dumpdata to file.
-    """
-    from django.core.management.commands.dumpdata import Command as Dumpdata
-    cmd = Dumpdata()
-    dump = cmd.handle(*apps)
-    if filename:
-        f = open(filename, "w")
-        f.write(dump)
-        f.close()
-    else:
-        return dump
-
-def get_instance_url(model_instance, view_name):
-    #TODO(nicoechaniz): this seems like a bad name. it returns the URL for an instance and for a non-instance as well. Also this code is repeated in many model files.
-    view = cyclope.core.frontend.site.get_view(model_instance, view_name)
-
-    if view.is_default:
-        return '%s/%s/'\
-                % (model_instance._meta.object_name.lower(),
-                   model_instance.slug)
-
-    if view.is_instance_view:
-        return '%s/%s/View/%s'\
-                % (model_instance._meta.object_name.lower(),
-                   model_instance.slug, view_name)
-    else:
-        return '%s/View/%s'\
-                % (model_instance._meta.object_name.lower(), view_name)
-
-
-def get_content_urls(test_object):
-    content_urls = []
-    for view in frontend.site.get_views(test_object):
-        if view.is_content_view:
-            content_urls.append('/'+ get_instance_url(test_object, view.name))
-    return content_urls
-
-
-def get_region_views(test_model):
-    return [ view for view in frontend.site.get_views(test_model)
-             if view.is_region_view ]
 
 def add_region_view(model, view_name, content_object=None):
     layout = get_default_layout()
@@ -125,13 +77,6 @@ def add_region_view(model, view_name, content_object=None):
     return region_view
 
 
-def get_default_site():
-    if get_default_site.cache is None:
-       get_default_site.cache = Site.objects.get_current()
-    return get_default_site.cache
-
-get_default_site.cache = None
-
 def get_default_layout():
     if get_default_layout.cache is None:
        get_default_layout.cache = Layout.objects.all()[0]
@@ -140,92 +85,64 @@ def get_default_layout():
 get_default_layout.cache = None
 
 
+class CyclopeTestSuiteRunner(DjangoTestSuiteRunner):
+    """
+    This TestSuiteRunner if fed without app labels runs all the cyclope's apps
+    tests. Eg cyclope.core.collection, cyclope.apps.articles, etc.
+    """
+    def run_tests(self, test_labels, extra_tests=None, **kwargs):
+        if not test_labels:
+            test_labels = ["cyclope"] + [c.split(".")[-1] for c in \
+                                         settings.INSTALLED_APPS if "cyclope." in c]
+        super(CyclopeTestSuiteRunner, self).run_tests(test_labels, extra_tests,
+                                                       **kwargs)
+
+
 class ViewableTestCase(TestCase):
-    # this is an "abstract" test case which should be inherited but not run
-
-#TODO (nicoechaniz): check how this base test class should be created to keep it out uf the test run
-
+    """
+    Inherit this class to test FrontendViews for a given model.
+    """
     fixtures = ['simplest_site.json']
+    test_model = None # must be redefined with a model.Model class
+    test_object = None
 
     def setUp(self):
-        if hasattr(self, 'test_model') and not hasattr(self, 'test_object'):
-            self.test_object = self.test_model.objects.create(name='An instance')
         frontend.autodiscover()
 
-    def test_creation(self):
-        if hasattr(self, 'test_model'):
-            an_instance = self.test_model.objects.get(slug='an-instance')
-            self.assertEqual(an_instance.name, 'An instance')
+    def test_views(self):
+        if self.test_model:
+            model_name = self.test_model._meta.module_name
+            for view in frontend.site.get_views(self.test_model):
 
-    def test_content_views(self):
-        if hasattr(self, 'test_object'):
-            content_urls = get_content_urls(self.test_object)
-            for url in content_urls:
-                self.assertEqual(self.client.get(url).status_code, 200)
+                if view.is_instance_view and self.test_object is None:
+                    self.test_object = self.test_model.objects.create(name='An instance')
 
-    def test_region_views(self):
-        if hasattr(self, 'test_model'):
-            model_region_views = get_region_views(self.test_model)
-            for view in model_region_views:
-                content_object = None
                 if view.is_region_view:
-                    content_object = self.test_object
-                add_region_view(self.test_model, view.name, content_object)
-                response = self.client.get("/")
-                self.assertContains(response,
-                                    'class="regionview %s %s"' %
-                                    (self.test_model._meta.module_name, view.name),
-                                    count=1)
+                    add_region_view(self.test_model, view.name, content_object=self.test_object)
 
-class FrontendTestCase(TestCase):
+                request = self.get_request()
 
-    class Model(models.Model):
-        name = "Test"
+                if view.is_instance_view:
+                    response = view(request=request, content_object=self.test_object)
+                else:
+                    response = view(request=request)
 
-    class ModelDetail(frontend.FrontendView):
-        name = 'model-detail'
-        verbose_name = 'show a model'
-        is_default = True
-        is_instance_view = True
-        is_region_view = False
-        is_content_view = True
+                self.assertEqual(response.status_code, 200)
 
-    def setUp(self):
-        cyclope.core.frontend.site.register_view(self.Model, self.ModelDetail)
+                if view.is_region_view:
+                    self.assertContains(response, 'class="regionview %s %s"' %
+                                        (model_name, view.name), count=1)
 
-    def tearDown(self):
-        cyclope.core.frontend.site.unregister_view(self.Model, self.ModelDetail)
-
-    def test_register_view(self):
-        view = cyclope.core.frontend.site.get_view(self.Model, 'model-detail')
-        self.assertTrue(isinstance(view, self.ModelDetail))
-
-    def test_get_view(self):
-        view = cyclope.core.frontend.site.get_view(self.Model, 'model-detail')
-        self.assertTrue(isinstance(view, self.ModelDetail))
-
-        # Test with instance
-        view = cyclope.core.frontend.site.get_view(self.Model(), 'model-detail')
-        self.assertTrue(isinstance(view, self.ModelDetail))
-
-    def test_get_views(self):
-        views = cyclope.core.frontend.site.get_views(self.Model())
-        self.assertEqual(len(views), 1)
-        self.assertTrue(all([isinstance(v, self.ModelDetail) for v in views]))
-
-    def test_unregister(self):
-        cyclope.core.frontend.site.register_view(self.Model, self.ModelDetail)
-        cyclope.core.frontend.site.unregister_view(self.Model, self.ModelDetail)
-        views = cyclope.core.frontend.site.get_views(self.Model())
-        self.assertEqual(len(views), 0)
-
-    def test__name__expected(self):
-        view = cyclope.core.frontend.site.get_view(self.Model, 'model-detail')
-        self.assertEqual(view.__name__, view.name)
+    def get_request(self):
+        request = RequestFactory().get('/foo/')
+        request.session = {}
+        request.user = AnonymousUser()
+        return request
 
 
 
 class SiteSettingsTestCase(TestCase):
+
     def setUp(self):
         self.site = Site(domain="mydomain.com", name="mydomain")
         self.site.save()
@@ -264,6 +181,7 @@ class SiteSettingsTestCase(TestCase):
 
 
 class SiteTestCase(TestCase):
+
     def testSimplestSite(self):
         """
         Test the simplest creation of a Cyclope-site.
@@ -275,7 +193,7 @@ class SiteTestCase(TestCase):
 
     def testBugMenuItemWithoutLayout(self):
         # saving a MenuItem without setting a default site Layout failed
-        site = get_default_site()
+        site = Site.objects.get_current()
         menu = Menu.objects.get(main_menu=True)
         menu_item = MenuItem(menu=menu, name="without_layout", active=True)
         menu_item.save()
@@ -286,7 +204,7 @@ class SiteTestCase(TestCase):
 
 
     def testSiteWithoutDefaultLayout(self):
-        site = get_default_site()
+        site = Site.objects.get_current()
         site_settings = SiteSettings.objects.get(site=site)
         site_settings.default_layout = None
         site_settings.save()
@@ -332,7 +250,6 @@ class RegressionTests(TestCase):
 
 
 class RegionViewTestCase(TestCase):
-    fixtures = ['simplest_site.json']
 
     def testAddLayoutRegionView(self):
         layout = get_default_layout()
@@ -365,7 +282,7 @@ class RegionViewTestCase(TestCase):
         content_type = ContentType.objects.get(model='staticpage')
 
         content_view = 'detail'
-        static_page = create_static_page(
+        static_page = StaticPage.objects.create(
             name='test add layout region view instance view')
         object_id = static_page.id
         region = DEFAULT_THEME_REGION
@@ -379,6 +296,7 @@ class RegionViewTestCase(TestCase):
 
 
 class TemplateTagsTestCase(TestCase):
+
     def setUp(self):
         register = template.Library()
         register.tag(name='join', compile_function=do_join)
@@ -393,7 +311,7 @@ class TemplateTagsTestCase(TestCase):
 
 
 class SiteMapViewTestCase(TestCase):
-    fixtures = ['simplest_site.json']
+
     test_model = Site
 
     def test_creation(self):
@@ -431,13 +349,7 @@ class SiteSearchViewTestCase(TestCase):
         self.assertContains(response, 'id="search_results"', count=1)
 
 
-class StaticPageTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
-    test_model = StaticPage
-
-
 class AuthorTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
     test_model = Author
 
     def setUp(self):
@@ -447,178 +359,12 @@ class AuthorTestCase(ViewableTestCase):
         frontend.autodiscover()
 
     def test_authored_content(self):
-        content_urls = get_content_urls(self.test_object)
-        for url in content_urls:
-            response = self.client.get(url)
-            self.assertContains(response, 'An instance')
-            self.assertContains(response, 'Article authored')
-
-
-class ArticleTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
-    test_model = Article
-
-    def setUp(self):
-        author = Author.objects.create(name="the author")
-        self.test_object = Article.objects.create(name='An instance',
-                                                  author=author)
-        frontend.autodiscover()
-
-
-class DocumentTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
-    test_model = Document
-
-
-class ExternalContentTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
-    test_model = ExternalContent
-
-
-class FlashMovieTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
-    test_model = FlashMovie
-
-    def setUp(self):
-        self.test_object = FlashMovie.objects.create(name='An instance', flash="/")
-        frontend.autodiscover()
-
-
-class MovieClipTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
-    test_model = MovieClip
-
-
-class PictureTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
-    test_model = Picture
-
-
-class SoundTrackTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
-    test_model = SoundTrack
-
-
-class PollTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
-    test_model = Poll
-
-
-class CategoryTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
-    test_model = Category
-
-    def setUp(self):
-        # we need an authenticated user for some category views
-        User = get_model('auth', 'user')
-        self.user = User(username='admin')
-        self.user.set_password('password')
-        self.user.save()
-        col = Collection.objects.create(name='A collection')
-        self.test_object = Category(name='An instance', collection=col)
-        self.test_object.save()
-        frontend.autodiscover()
-
-
-    def test_content_views(self):
-        content_urls = get_content_urls(self.test_object)
-        self.client.login(username='admin', password='password')
-        for url in content_urls:
-            self.assertEqual(self.client.get(url).status_code, 200)
-
-
-class MoveCategoryTestCase(TestCase):
-    def setUp(self):
-        staticpage_ct = ContentType.objects.get(model="staticpage")
-        collection_A = Collection.objects.create(name='collection A')
-        collection_A.content_types.add(ContentType.objects.get(model="article"))
-        collection_A.content_types.add(staticpage_ct)
-        collection_A.save()
-
-        collection_B = Collection.objects.create(name='collection B')
-        collection_B.content_types.add(ContentType.objects.get(name="article"))
-        collection_B.save()
-
-        category = Category(name='Parent', collection=collection_A)
-        category.save()
-
-        child_category = Category(name='child', parent=category, collection=collection_A)
-        child_category.save()
-
-        children_of_child_category = Category(name='child child',
-                                              parent=child_category,
-                                              collection=collection_A)
-        children_of_child_category.save()
-
-        static_page = StaticPage.objects.create(name="static", text="prueba")
-        static_page.categories.create(category=child_category)
-
-        self.collection_A, self.collection_B = collection_A, collection_B
-        self.category, self.child_category  = category, child_category
-        self.child_of_child = children_of_child_category
-        self.referesh_categories()
-
-    def referesh_categories(self):
-        self.category = Category.objects.get(id=self.category.id)
-        self.child_category = Category.objects.get(id=self.child_category.id)
-        self.child_of_child = Category.objects.get(id=self.child_of_child.id)
-
-    def test_move_root_category_with_children(self):
-        staticpage_ct = ContentType.objects.get(model="staticpage")
-
-        self.category.collection = self.collection_B
-        self.category.save()
-
-        self.referesh_categories()
-
-        # test change of collection in self and childs
-        self.assertEqual(self.category.collection, self.collection_B)
-        self.assertEqual(self.child_category.collection, self.collection_B)
-
-        # test added proper content_types to the new collection
-        self.assertTrue(staticpage_ct in self.category.collection.content_types.all())
-
-    def test_move_child_category_with_children(self):
-        self.assertEqual(self.child_category.get_root(), self.category)
-        self.assertTrue(self.child_of_child in self.child_category.get_descendants())
-
-        self.child_category.collection = self.collection_B
-        self.child_category.save()
-
-        self.referesh_categories()
-
-
-        self.assertEqual(self.category.collection, self.collection_A)
-        self.assertEqual(self.child_category.collection, self.collection_B)
-        self.assertTrue(self.child_category.is_root_node())
-        self.assertTrue(self.child_of_child in self.child_category.get_descendants())
-
-
-class CollectionTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
-    test_model = Collection
-
-    def setUp(self):
-        self.test_object = Collection.objects.create(name='An instance')
-        self.test_object.save()
-        # most views list categories in the collection, so we create one
-        cat = Category(name='A Category', collection=self.test_object)
-        cat.save()
-        frontend.autodiscover()
-
-    def test_get_widget_ajax(self):
-        collection = Collection.objects.get(pk=1)
-        response = self.client.get("/collection_categories_json",
-                                  {"q": "1"})
-        categories = json.loads(response.content)
-        self.assertEqual(len(categories), 2)
-        self.assertEqual(categories[0]["category_id"], "")
-        self.assertEqual(categories[1]["category_id"], 1)
-        self.assertContains(response, "A Category")
+        response = self.client.get(u'/author/an-instance/')
+        self.assertContains(response, 'An instance')
+        self.assertContains(response, 'Article authored')
 
 
 class MenuItemTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
     test_model = MenuItem
 
     def setUp(self):
@@ -672,26 +418,18 @@ class MenuItemTestCase(ViewableTestCase):
 
 
 class MenuTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
     test_model = Menu
 
 
-class TopicTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
-    test_model = Topic
+class StaticPageTestCase(ViewableTestCase):
+    test_model = StaticPage
 
-    def setUp(self):
-        User = get_model('auth', 'user')
-        self.user = User(username='admin')
-        self.user.set_password('password')
-        self.user.save()
-        self.test_object = Topic(name='An instance', user=self.user)
-        self.test_object.save()
-        frontend.autodiscover()
+
+class PollTestCase(ViewableTestCase):
+    test_model = Poll
 
 
 class FeedTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
     test_model = Feed
 
     def setUp(self):
@@ -700,26 +438,8 @@ class FeedTestCase(ViewableTestCase):
         frontend.autodiscover()
 
 
-class DynamicFormTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
-    test_model = DynamicForm
-
-    def setUp(self):
-        form = DynamicForm.objects.create(title="An instance")
-        form.sites.add(Site.objects.get_current())
-        form.save()
-        form.fields.create(label="field", field_type=1, required=True, visible=True)
-        self.test_object = form
-        frontend.autodiscover()
-
-    def test_empty_form(self):
-        view = frontend.site.get_views(self.test_object)[0]
-        url = '/'+ get_instance_url(self.test_object, view.name)
-        response = self.client.post(url, data={})
-        self.assertEqual(response.status_code, 200)
-
-
 class MultipleFieldTestCase(TestCase):
+
     def setUp(self):
         class CategoryTeaserListOptions(forms.Form):
             items_per_page = forms.IntegerField(label='Items per page', initial=3, min_value=1)
@@ -741,7 +461,6 @@ class MultipleFieldTestCase(TestCase):
 
 
 class CommentsViewsTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
     test_model = django.contrib.comments.get_model()
 
     def setUp(self):
@@ -752,8 +471,6 @@ class CommentsViewsTestCase(ViewableTestCase):
         self.test_object = comment
         frontend.autodiscover()
 
-    def test_creation(self):
-        pass
 
 class UserProfileViewsTestCase(ViewableTestCase):
     test_model = UserProfile
@@ -765,8 +482,6 @@ class UserProfileViewsTestCase(ViewableTestCase):
         self.test_object = user.get_profile()
         frontend.autodiscover()
 
-    def test_creation(self):
-        pass
 
 class DispatcherTestCase(TestCase):
 
@@ -785,7 +500,6 @@ class TestDemoFixture(TestCase):
 
 
 class TestSitemaps(TestCase):
-
     fixtures = ['default_users.json', 'default_groups.json', 'cyclope_demo.json']
     sitemaps = [CollectionSitemap, CategorySitemap, MenuSitemap]
     longMessage = False
@@ -810,14 +524,14 @@ class ThemesTestCase(TestCase):
         self.assertTrue("four_elements.html" in choices)
 
     def test_default_themes_integration(self):
-        form = SiteSettingsAdminForm()
+        form = DesignSettingsAdminForm()
         choices = [choice[0] for choice in form.fields["theme"].choices]
         self.assertTrue(DEFAULT_THEME in choices)
         self.assertTrue("frecuency" in choices)
 
     @unittest.skip("this test fails when there is now custom_theme directory")
     def test_custom_theme_integration(self):
-        form = SiteSettingsAdminForm()
+        form = DesignSettingsAdminForm()
         choices = [choice[0] for choice in form.fields["theme"].choices]
         self.assertTrue("custom_theme" in choices)
 
@@ -926,7 +640,7 @@ class DeleteFromLayoutsAndMenuItems(TestCase):
 
 
 class FrontendEditTestCase(TestCase):
-    fixtures = ['simplest_site.json']
+
 
     def setUp(self):
         self.article = Article.objects.create(name='Article')
@@ -984,6 +698,7 @@ class FrontendEditTestCase(TestCase):
         response = self.client.get('/category/category/')
         self.assertNotContains(response, 'class="category_add_content"')
 
+
 class SimpleAdminTests(TestCase):
     """
     This is a realy simple test to catch errors on GET of some pages of the
@@ -1009,32 +724,6 @@ class SimpleAdminTests(TestCase):
             status = self.client.get(page).status_code
             self.assertEqual(status, 200, "status: %d | page: %s" % (status, page))
 
-
-class CategorizationManagerTests(TestCase):
-
-    def test_get_for_category(self):
-        """
-        Tests that get_for_category returns the correct elements and making the correct
-        number of queries.
-        """
-        col = Collection.objects.create(name='tema')
-        article_ct = ContentType.objects.get(model="article")
-        col.content_types.add(article_ct)
-        col.save()
-        category = Category.objects.create(name='Category', collection=col)
-        for n in range(10):
-            static_page = StaticPage.objects.create(name="static %d" % n, text="prueba"*100)
-            static_page.categories.create(category=category)
-            article = Article.objects.create(name="Test article %d" % n, text="prueba"*100)
-            article.categories.create(category=category)
-
-        self.assertNumQueries(4, Categorization.objects.get_for_category, category)
-
-        cats = Categorization.objects.get_for_category(category, sort_property="creation_date", reverse=True)
-        self.assertEqual(cats[0].content_object, Article.objects.latest("creation_date"))
-
-        cats_random = Categorization.objects.get_for_category(category, sort_property="random")
-        self.assertEqual(len(cats), len(cats_random))
 
 
 
