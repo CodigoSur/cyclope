@@ -190,7 +190,9 @@ class CategorizationManager(models.Manager):
             cats = list(cats)
             random.shuffle(cats)
         elif sort_property == "creation_date":
-            pass # this is the default ordering
+            # the default ordering is reversed
+            if not reverse:
+                cats = cats.reverse()
         else:
             # Iterate over content_types fetching the sort_key of the content_object and saving in sort_attrs dict
             sort_attrs = {}
@@ -232,15 +234,13 @@ class Categorization(models.Model):
     def object_creation_date(self):
         return self.content_object.creation_date
 
-    def __unicode__(self):
-        return '%(collection_name)s: %(category_name)s' % {
-            'collection_name': self.category.collection.name,
-            'category_name': self.category.name}
+    def __repr__(self):
+        return '<%s@%s>' % (repr(self.content_object), repr(self.category))
 
     class Meta:
         verbose_name = _('categorization')
         verbose_name_plural = _('categorizations')
-        ordering = ('order', 'id')
+        ordering = ('order', '-id')
 
 
 class Collectible(models.Model):

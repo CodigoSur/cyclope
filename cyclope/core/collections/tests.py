@@ -64,7 +64,9 @@ class CategorizationOrderTestCase(TestCase):
         ctgz2 = Categorization(content_object=self.stpage2, category=self.category)
         ctgz2.save()
         first = self.category.categorizations.all()[0].content_object
-        self.assertEqual(first, self.stpage1)
+        # The default ordering is that the first element corresponds to the last
+        # categorization created
+        self.assertEqual(first, self.stpage2)
 
     def test_create_with_order_defined(self):
         ctgz = Categorization(content_object=self.stpage1, category=self.category,
@@ -87,9 +89,8 @@ class CategorizationOrderTestCase(TestCase):
         ctgz2.save()
 
         self.category.categorizations.all()[0]
-        first = self.category.categorizations.all()[0].content_object
-        self.assertEqual(first, self.stpage3)
-
+        contents = [c.content_object for c in self.category.categorizations.all()]
+        self.assertEqual(contents, [self.stpage2, self.stpage3, self.stpage1])
 
 class MoveCategoryTestCase(TestCase):
     def setUp(self):
