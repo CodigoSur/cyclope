@@ -32,43 +32,46 @@ from django.contrib.comments.signals import comment_was_posted
 from ratings.signals import vote_was_saved
 from ratings.models import Vote
 
-def creation_activity(sender, request, instance, **kwargs):
-    action.send(request.user, verb=_('created'), action_object=instance)
 
-models = [Article] + medialibrary.models.actual_models
+if settings.ACTSTREAM_SETTINGS_ENABLED:
 
-for model in models:
-    admin_post_create.connect(creation_activity, sender=model,
-                              dispatch_uid="%s_creation_activity" % model._meta.object_name.lower())
+    def creation_activity(sender, request, instance, **kwargs):
+        action.send(request.user, verb=_('created'), action_object=instance)
 
-def comment_activity(sender, **kwargs):
-    instance = kwargs.pop("instance")
-    user = instance.user
-    target_user = getattr(instance.content_object, "user", None)
-    if not kwargs.get("created") or not user:
-        return
-    action.send(user, verb=_('commented'), action_object=instance,
-                target=target_user)
+    models = [Article] + medialibrary.models.actual_models
 
-post_save.connect(comment_activity, sender=CustomComment,
-                  dispatch_uid="custom_comment_creation_activity")
+    for model in models:
+        admin_post_create.connect(creation_activity, sender=model,
+                                  dispatch_uid="%s_creation_activity" % model._meta.object_name.lower())
 
+    def comment_activity(sender, **kwargs):
+        instance = kwargs.pop("instance")
+        user = instance.user
+        target_user = getattr(instance.content_object, "user", None)
+        if not kwargs.get("created") or not user:
+            return
+        action.send(user, verb=_('commented'), action_object=instance,
+                    target=target_user)
 
-def rating_activity(sender, **kwargs):
-    instance = kwargs.pop("instance")
-    user = instance.user
-    target_user = getattr(instance.content_object, "user", None)
-    if not kwargs.get("created") or not user:
-        return
-    action.send(user, verb=_('voted'), action_object=instance,
-                target=target_user)
-
-post_save.connect(rating_activity, sender=Vote, dispatch_uid="vote_activity")
+    post_save.connect(comment_activity, sender=CustomComment,
+                      dispatch_uid="custom_comment_creation_activity")
 
 
-activities = set(settings.ACTSTREAM_SETTINGS["MODELS"])
-activities.add('custom_comments.customcomment')
-activities.add('ratings.vote')
-[activities.add('%s.%s' % (model._meta.app_label,model._meta.object_name.lower())) for model in models]
-settings.ACTSTREAM_SETTINGS["MODELS"] = list(activities)
+    def rating_activity(sender, **kwargs):
+        instance = kwargs.pop("instance")
+        user = instance.user
+        target_user = getattr(instance.content_object, "user", None)
+        if not kwargs.get("created") or not user:
+            return
+        action.send(user, verb=_('voted'), action_object=instance,
+                    target=target_user)
+
+    post_save.connect(rating_activity, sender=Vote, dispatch_uid="vote_activity")
+
+
+    activities = set(settings.ACTSTREAM_SETTINGS["MODELS"])
+    activities.add('custom_comments.customcomment')
+    activities.add('ratings.vote')
+    [activities.add('%s.%s' % (model._meta.app_label,model._meta.object_name.lower())) for model in models]
+    settings.ACTSTREAM_SETTINGS["MODELS"] = list(activities)
 
