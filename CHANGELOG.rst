@@ -1,8 +1,31 @@
 Changelog for Cyclope 3
 =======================
 
-0.3.1 (unreleased)
-==================
+0.4 (unreleased)
+================
+
+- Ordered Categorizations. Content on a category can be manualy sorted in the admin.
+  Added batch categorization.
+
+- Created Social application. Users of the site now generates activities that another
+  users can follow.
+
+- Improved Layout admin page.
+
+
+- Added Portuguese translation (thanks to Emanuela Castro and Maria Betania Teixeira)
+
+- Improved password reset templates.
+
+- Refactored inter-registration of apps to a new post_init app.
+
+- Big refactoring on tests:
+
+  * Refactored ViewableTestCase to use FrontendView.__call__ instead of doing get(url)
+  * Created a TestSuiteRunner to run all cyclope apps tests by default
+  * Moved tests from main tests module to app.tests
+
+- As always, a lot of fixes.
 
 0.3 (24-01-2013)
 ==================
