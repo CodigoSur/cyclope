@@ -20,7 +20,7 @@ class NewsletterContentTeasers(frontend.FrontendView):
     def get_response(self, request, req_context, options, content_object):
         newsletter = content_object
         category = newsletter.content_category
-        categorizations_list = Categorization.objects.get_for_category(category, 'creation_date')
+        categorizations_list = category.categorizations.all()
 
         req_context.update({'category': category,
                             'newsletter': newsletter,
