@@ -1,7 +1,13 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_static %}
+{% load url from future %}
 
-{% block extrastyle %}{% load adminmedia %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static 'admin/css/login.css' %}" />{% endblock %}
+{% block extrastyle %}{% load adminmedia %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static 'admin/css/login.css' %}" />
+<style type="text/css">
+ .login .form-row a { color: #fff; margin: -25px 0 0 0; position: absolute;}
+ .login .form-row a:hover {text-decoration: underline;}
+</style>
+{% endblock %}
 
 {% block bodyclass %}login{% endblock %}
 
@@ -40,6 +46,9 @@
   </div>
   <div class="submit-row">
     <label>&nbsp;</label><input type="submit" value="{% trans 'Log in' %}" />
+  </div>
+  <div class="form-row">
+    <a href="{% url 'auth_password_reset' %}"> {% trans 'Forgot your password?' %} </a>
   </div>
 </form>
 
