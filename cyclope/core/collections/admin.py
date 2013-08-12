@@ -203,7 +203,7 @@ admin.site.register(Collection, CollectionAdmin)
 class CategorizationAdmin(admin.ModelAdmin):
     list_display = ["edit_object", "view_on_site", "content_type",
                     "object_creation_date", "order"]
-    list_per_page = 500
+    list_per_page = 9999
     list_editable = ("order", )
     list_display_links = ('object_creation_date', )
 
