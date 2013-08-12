@@ -200,6 +200,7 @@ class CollectionAdmin (admin.ModelAdmin):
 
 admin.site.register(Collection, CollectionAdmin)
 
+
 class CategorizationAdmin(admin.ModelAdmin):
     list_display = ["edit_object", "view_on_site", "content_type",
                     "object_creation_date", "order"]
@@ -233,6 +234,10 @@ class CategorizationAdmin(admin.ModelAdmin):
             extra_context["category"] = None
         return super(CategorizationAdmin, self).changelist_view(request,
                                                                  extra_context=extra_context)
+
+    def get_changelist_formset(self, request, **kwargs):
+        kwargs["max_num"] = self.list_per_page
+        return super(CategorizationAdmin, self).get_changelist_formset(request, **kwargs)
 
     class Media:
         js = (
