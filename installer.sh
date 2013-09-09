@@ -40,7 +40,7 @@ activate_virtualenv() {
 }
 
 install_cyclope() {
-    pip install --use-mirrors --timeout=50 $CYCLOPE_PACKAGE;
+    pip install --use-mirrors --timeout=50 $CYCLOPE_PACKAGE || { echo -e >&2 "\n\nError installing cyclope"; exit 1; }
 }
 
 post_install_message() {
