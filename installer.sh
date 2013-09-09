@@ -1,7 +1,7 @@
 #!/bin/bash
 
 VIRTUALENV_SCRIPT=virtualenv.py
-VIRTUALENV_DOWNLOAD_URL=https://raw.github.com/pypa/virtualenv/master/virtualenv.py
+VIRTUALENV_DOWNLOAD_URL=https://raw.github.com/pypa/virtualenv/f731ddc882ede9b45ba9f0815ff68734784dbfcd/virtualenv.py
 VIRTUALENV_PATH=cyclope_workenv
 DEBIAN_OS_DEPENDENCIES="mercurial git-core python-imaging"
 PYTHON=
