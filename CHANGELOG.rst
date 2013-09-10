@@ -1,8 +1,13 @@
 Changelog for Cyclope 3
 =======================
 
-0.3.1 (unreleased)
+0.3.1 (10-9-2013)
 ==================
+
+Mostly bugfix release:
+
+- Refactored inter-registration of apps to a post_init app
+- Resolved installation issues
 
 0.3 (24-01-2013)
 ==================
