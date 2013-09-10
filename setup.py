@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2012 Código Sur Sociedad Civil
+# Copyright 2010-2013 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -22,7 +22,7 @@
 import codecs
 from setuptools import setup, find_packages
 
-version = '0.3'
+version = '0.3.1'
 
 
 def read(filename):
@@ -46,7 +46,7 @@ setup(
     license='GPL v3',
     platforms=['OS Independent'],
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Django",
         "Intended Audience :: Developers",
