@@ -29,7 +29,7 @@ body{
   font-family: Arial, Verdana, Helvetica, Sans-serif;
   margin: 0;
   font-size:12pt;
-  background-color:@colorc;}
+  background-color:@colora;}
 
 * {
   margin:0;
@@ -98,7 +98,7 @@ GENERAL SKEL
 -----------------------------------------------------------------------------------------------*/
 
 #mask {
-  background:@color-alpha;}
+  background:transparent;}
 
 #middling {
   overflow:auto;
@@ -598,6 +598,68 @@ margin:0 0 20px;}
 .login_form .uniForm .buttonHolder {
   text-align:left !important;}
 
+.category_add_content {
+    margin-left: 0;
+    margin-top: 0;
+    position: relative;
+    }
+
+.category_add_content span {
+    background: @colora url(../images/css/edit-icon.png) left 2px no-repeat;
+    color: @colore;
+    cursor: pointer;
+    height: 20px;
+    margin: 0 0 0 0 !important;
+    font-size:.8em;
+    overflow: auto;
+    padding: 4px 0 0 25px !important;
+    position: relative;
+    width: 120px;
+    right:0;
+    z-index: 1;
+    display:block;
+    .rounded-corners-top(3px);
+}
+.category_add_content span:hover {
+    background-color: @colorb;
+}
+.category_add_content .content_types {
+    background-color: @color-alpha;
+    border: 3px solid @colorb;
+    color: @color-omega !important;
+    display: block;
+    font-size: 12px !important;
+    line-height: normal !important;
+    list-style: none outside none !important;
+    margin: 0 0 0 0 !important;
+    padding: 10px 15px !important;
+    position: absolute;
+    width: 130px;
+    z-index: 2000;
+}
+.category_add_content .content_types li {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.category_add_content .content_types li a {
+    background-color: @colora !important;
+    color: @colord !important;
+    float: left;
+    font-size: 12px !important;
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    .rounded-corners(5px);
+    }
+
+.category_add_content .content_types li a:hover {
+    background-color: @colorc !important;
+    color: @color-alpha !important;
+}
 
 p span.caps {
   display:inline;
