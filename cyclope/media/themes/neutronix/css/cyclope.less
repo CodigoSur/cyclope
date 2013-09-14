@@ -1,3 +1,4 @@
+
 /*
 # Cyclope 3 GPL
 # Neutronix Workflow Design
@@ -755,14 +756,6 @@ margin:0 0 20px;}
 #fire .addthis_toolbox {
 	position:relative;
 	top:0;}
-
-p span.caps {
-  display:inline;
-  margin:0;
-  padding:0;
-  background:none;
-  width:auto;} /*leave this class always in the last line for textile caps*/
-
 
 /*------------------
 AIR MENU
@@ -2521,26 +2514,34 @@ jQuery lightBox plugin
 /*------------------
 COMMENTS
 -------------------*/
-
+#user_comments {width:80%;}
 #user_comments .show_comment_form {
   width:250px;
   margin:0 0 20px;
   padding:3px;
   color:@color-alpha;
-  background:@colord;
-  border:1px solid @color-omega;
+  background:@colorc;
   text-align:center;
- .rounded-corners(4px);}
+  border:1px solid @colord;
+  .rounded-corners(4px);}
 
 #user_comments .show_comment_form a {
-  color:@color-alpha !important;}
+  color:inherit !important;}
+
+#user_comments p {}
 
 #user_comments .when_who {
-  color:@colorc;
-  font-size:0.7em;}
+  color:@colore;
+  font-size:0.9em;
+  background:@colora;
+  display:block;
+  font-weight:700;
+  padding:0 20px;
+  border-bottom:1px solid @colorb;
+  .rounded-corners-top(4px);}
 
 #user_comments .when_who a {
-  color:@colorc;}
+  color:@color-omega;}
 
 #user_comments .bottom-post {
   margin:20px 0;
@@ -2566,8 +2567,26 @@ COMMENTS
   width:350px;
   clear:both;
   font-size:0.8em;}
+  
+#user_comments ul {list-style:none;background:#fff;margin:0 0 20px;padding:0;}
+#user_comments li {margin:0;padding:0;font-size:0.8em;overflow:auto;border:1px solid @colorb;.rounded-corners-top(4px)}
+#user_comments li p {padding:7px 20px;}
+#user_comments a.comment_reply_link {font-size:.85em;float:right;padding:1px;margin:0 20px 20px 0;display:block;width:100px;text-align:center;background:@colora;color:@color-omega;border:1px solid @colorb;.rounded-corners(8px);}
+#user_comments ul ul {display:block;clear:both;border:none;margin:0 10px 10px;}
+#user_comments li li {display:block;border:1px solid #ccc;margin:0 0 15px;}
+#user_comments li li .when_who {
+  color:#000;
+  font-size:0.9em;
+  background:@colora;
+  display:block;
+  font-weight:700;
+  padding:0 10px;
+}
+  
+#user_comments ul ul a.comment_reply_link {float:right;padding:0;margin:0 10px 20px 0;display:block;width:100px;text-align:center;color:@colore;.rounded-corners(0);border:none;background:@color-alpha;}
 
-
+#user_comments li li .when_who a {
+  color:#000;}
 /*-----------------------------------------------------------------------------------------------
 LOVE
 -----------------------------------------------------------------------------------------------*/
@@ -3559,3 +3578,9 @@ body{min-width:960px}
 .pull_22{left:-880px}
 .pull_23{left:-920px} 
 
+p span.caps {
+  display:inline;
+  margin:0;
+  padding:0;
+  background:none;
+  width:auto;} /*leave this class always in the last line for textile caps*/
