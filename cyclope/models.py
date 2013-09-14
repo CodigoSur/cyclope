@@ -51,6 +51,22 @@ from cyclope.core.collections.models import Collection
 from cyclope.utils import (ThumbnailMixin, get_singleton,
                             get_object_name, get_app_label)
 
+FONT_CHOICES = (
+   (' ', _('- Default -')),
+   ('architects', _('Architects')),
+   ('bonveno', _('Bonveno')),
+   ('comfortaa', _('Comfortaa')),
+   ('coolvetica', _('Coolvetica')),
+   ('earthbound', _('Earthbound')),
+   ('lato', _('Lato')),
+   ('sofia', _('Sofia')),
+   ('toscuchet', _('toscuchet')),
+   ('ubuntu', _('Ubuntu')),
+   ('arial', _('Arial')),
+   ('times new roman', _('Times New Roman')),
+   ('verdana', _('Verdana')),
+   ('custom_body', _('Custom Body')),
+)
 
 class SiteSettings(models.Model):
     """Model to store site-wide settings.
@@ -103,6 +119,29 @@ class SiteSettings(models.Model):
                                        help_text=_("Change USERNAME by your username in each service you want to enable." \
                                                    " Eg for youtube: if your page is http://youtube.com/user/cyclope/" \
                                                    " then replace the 'USERNAME' bellow youtube with 'cyclope'."))
+    # theme customization
+    head_image = models.ImageField(_('header image'), 
+                                   upload_to='theme/images', blank=True, null=True,
+                                   help_text=_('select image for head: 960px width x 170px height'))
+    show_head_title = models.BooleanField(_('show head title'), default=True,
+                                          help_text=_('show title and url site in head. If disabled, ' \
+                                          'header image links to home.'))
+    body_font = models.CharField(_('body font'), max_length=50,
+                                 choices=FONT_CHOICES , default='', 
+                                 help_text=_('change the font of the body'))
+    body_custom_font =  models.FileField(_('body custom font'), 
+                                         blank=True, null=True, 
+                                         upload_to='theme/fonts', 
+                                         help_text="Upload a custom font for the body. Allowed formats: .otf, .tff")
+    titles_font = models.CharField(_('font for titles'), max_length=50,
+                                   choices=FONT_CHOICES, default='', 
+                                   help_text=_('change the font of the head and titles'))
+    titles_custom_font =  models.FileField(_('titles custom font'), blank=True, null=True, 
+                                           upload_to='theme/fonts', 
+                                           help_text="Upload a custom font for head and titles. Allowed formats: .otf, .tff")
+    font_size = models.DecimalField(_('font size'), max_digits=4, decimal_places=2, default=12)
+    hide_content_icons = models.BooleanField(_('hide content icons'), default=False,
+                                             help_text=_('Content icons are shown beside the title of the content'))
 
     def save(self, *args, **kwargs):
         self.id = 1

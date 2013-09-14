@@ -35,6 +35,7 @@
     <link href="{{ CYCLOPE_STATIC_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
     <link rel="stylesheet" href="{{ CYCLOPE_STATIC_URL }}css/uni-form.css" type="text/css" />
     <link rel="stylesheet" href="{{ CYCLOPE_STATIC_URL }}css/default.uni-form.css" type="text/css" />
+    <link rel="stylesheet" href="{{ CYCLOPE_STATIC_URL }}css/fonts.css" type="text/css" />
     {% endblock displaycss %}
     {% endcompress %}
     {% if not COMPRESS_ENABLED %}
@@ -71,7 +72,22 @@
        $('form.uniForm').uniform();
      });
     </script>
+    {% block sitesettings_css %}
+    <style type="text/css">
+      @font-face {font-family: custom_body; src: url('{{ CYCLOPE_SITE_SETTINGS.body_custom_font }}');}
+      @font-face {font-family: custom_titles; src: url('{{ CYCLOPE_SITE_SETTINGS.titles_custom_font }}');}
+      {% if CYCLOPE_SITE_SETTINGS.titles_font %}
+      .brand h1, .title, .title a { font-family:{{ CYCLOPE_SITE_SETTINGS.titles_font  }}; }
+      {% endif %}
+      body { {% if CYCLOPE_SITE_SETTINGS.body_font %}
+             font-family: {{ CYCLOPE_SITE_SETTINGS.body_font }};
+             {% endif %}
+             font-size:{{ CYCLOPE_SITE_SETTINGS.font_size  }}pt;}
+      {% if CYCLOPE_SITE_SETTINGS.hide_content_icons %} .type_icon { display: none;} {% endif %}
+    </style>
+    {% endblock sitesettings_css %}
     {% block extra_head %}{% endblock %}
+    
 </head>
 
 <body class="{% block body_class %}{%endblock%}">
@@ -79,10 +95,16 @@
 {% block page_header %}
 <div id="mask" class="container_24">
 {% region 'air' %}
-  <div class="brand">
-    <h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
-    <h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
-  </div>
+ {% if CYCLOPE_SITE_SETTINGS.show_head_title  %}
+  <div class="brand" {% if CYCLOPE_SITE_SETTINGS.head_image %}style="background:url({{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.head_image }}); background-repeat: no-repeat;"{% endif %}>
+    <h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>  
+    <h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2></a>
+   </div>
+ {% else %}
+  <a href="/">
+    <img src="{% if CYCLOPE_SITE_SETTINGS.head_image %}{{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.head_image }}{% else %}{{ CYCLOPE_THEME_MEDIA_URL }}images/css/cabezal.png{% endif %}">
+  </a>
+ {% endif %}
   <div class="clear"></div>
 {% endblock %}
 
