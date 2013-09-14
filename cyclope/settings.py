@@ -55,7 +55,7 @@ from django.db.models.signals import post_save
 from django.core.exceptions import ImproperlyConfigured
 from django.db.utils import DatabaseError
 
-from cyclope.models import SiteSettings
+from cyclope.models import SiteSettings, DesignSettings
 
 from cyclope.core.frontend.sites import site
 
@@ -177,3 +177,4 @@ def _refresh_site_settings(sender, instance, created, **kwargs):
         reload(sys.modules[__name__])
 
 post_save.connect(_refresh_site_settings, sender=SiteSettings)
+post_save.connect(_refresh_site_settings, sender=DesignSettings)

@@ -179,9 +179,15 @@ class SingletonAdminMixin(admin.ModelAdmin):
         else:
             return super(SingletonAdminMixin, self).response_change(request, obj)
 
+DESIGN_FIELDS = ('global_title', 'theme', 'default_layout', 
+              'head_image', 'show_head_title', 'body_font', 'body_custom_font',
+              'titles_font', 'titles_custom_font', 'font_size', 
+              'hide_content_icons')
+ 
+
 class SiteSettingsAdmin(SingletonAdminMixin):
     form = SiteSettingsAdminForm
-    exclude = ('global_title', 'theme', 'default_layout', 'site')
+    exclude = ('site', ) + DESIGN_FIELDS
 
 
 admin.site.register(SiteSettings, SiteSettingsAdmin)
@@ -189,7 +195,7 @@ admin.site.register(SiteSettings, SiteSettingsAdmin)
 
 class DesignSettingsAdmin(SingletonAdminMixin):
     form = DesignSettingsAdminForm
-    fields = ('global_title', 'theme', 'default_layout', 'home_layout')
+    fields = ('home_layout',) + DESIGN_FIELDS
 
 admin.site.register(DesignSettings, DesignSettingsAdmin)
 
