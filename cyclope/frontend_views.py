@@ -214,8 +214,7 @@ class SiteMap(frontend.FrontendView):
         #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
         link_template = Template(
             '{% if has_content %}'
-              '<a href="{% url category-teaser_list slug %}">'
-                 '<span>{{ name }}</span></a>'
+            '<span><a href="{% url category-teaser_list slug %}">{{ name }}</a></span>'
             '{% else %} {{ name }}'
             '{% endif %}'
             ' <a href="{% url category_feed slug %}">'
