@@ -5,7 +5,7 @@
 
 <script type="text/javascript">
   $(function (){
-     html = '<div class="form-row"><label for="id_colour_palette"> Colour palette </label>'
+     html = '<div class="form-row"><label for="id_colour_palette">{% trans "Colour palette" %}</label>'
             +'<select id="colour_palette"><option value=""></option>'
             +'{% for name, color in adminform.form.Meta.palette %}<option value="{{ color }}">{{ name }}</option>{% endfor %}'
             +'</select><p class="help">{% trans "You may pick a colour palette to start your design" %}</p></div>'
