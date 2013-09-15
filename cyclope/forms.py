@@ -206,8 +206,9 @@ class DesignSettingsAdminForm(forms.ModelForm):
     class Meta:
         model = DesignSettings
         
-        widgets = {'color_' + key:forms.TextInput(attrs={'cols': 10, 'class': 'color'}) \
-                   for key in ('a', 'b', 'c', 'd', 'e')}
+        widgets = {}
+        for fieldname in ['color_'+l for l in ('a', 'b', 'c', 'd', 'e')]:
+            widgets[fieldname] = forms.TextInput(attrs={'cols': 10, 'class': 'color'})
                
         palette = (
             (_('Corn field'), 'f9f145,b4ac01,fec90a,e86e1b,d41e46'),
