@@ -10,27 +10,27 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'SiteSettings.color_a'
         db.add_column('cyclope_sitesettings', 'color_a',
-                      self.gf('django.db.models.fields.CharField')(default='#eee', max_length=8),
+                      self.gf('django.db.models.fields.CharField')(default='eee', max_length=8),
                       keep_default=False)
 
         # Adding field 'SiteSettings.color_b'
         db.add_column('cyclope_sitesettings', 'color_b',
-                      self.gf('django.db.models.fields.CharField')(default='#ccc', max_length=8),
+                      self.gf('django.db.models.fields.CharField')(default='ccc', max_length=8),
                       keep_default=False)
 
         # Adding field 'SiteSettings.color_c'
         db.add_column('cyclope_sitesettings', 'color_c',
-                      self.gf('django.db.models.fields.CharField')(default='#999', max_length=8),
+                      self.gf('django.db.models.fields.CharField')(default='999', max_length=8),
                       keep_default=False)
 
         # Adding field 'SiteSettings.color_d'
         db.add_column('cyclope_sitesettings', 'color_d',
-                      self.gf('django.db.models.fields.CharField')(default='#666', max_length=8),
+                      self.gf('django.db.models.fields.CharField')(default='666', max_length=8),
                       keep_default=False)
 
         # Adding field 'SiteSettings.color_e'
         db.add_column('cyclope_sitesettings', 'color_e',
-                      self.gf('django.db.models.fields.CharField')(default='#333', max_length=8),
+                      self.gf('django.db.models.fields.CharField')(default='333', max_length=8),
                       keep_default=False)
 
 
