@@ -193,32 +193,29 @@ DEFAULT'S
 .title {
   padding:0 0 10px;
   display:block;
-  border-bottom:1px solid @colord;}
+  border-bottom:1px solid @colorb;}
 
 .title a {
-  color:@color-omega;}
-
-.title a:hover {
   color:@colore;}
 
+.title a:hover {
+  color:@colord;}
+
 .summary {
-  color:@colore;
+  color:@color-omega;
   font-weight:700;
   padding:10px 0;}
 
 .summary a {
-  color:@color-omega;}
-
-.summary a:hover {
-  color:@colorc;
+  color:@colord;
   text-decoration:underline;}
 
-/*.author {
-  color:@colord;
-  border-left:4px solid @colorb;
-  padding:0 0 0 10px;
-  margin:10px 0 0;
-  font-size:.9em;}*/
+.summary a:hover {
+  color:@colore;
+  text-decoration:underline;}
+
+.author {
+  margin:10px 0 0;}
 
 .pretitle {
   color:@colord;
@@ -238,7 +235,7 @@ img.teaser_icon {
   clear:both;
   border:1px solid @colorb;
   padding:3px;
-  background:@colora;}
+  background:@color-alpha;}
 
 img.image {
   float:left;
@@ -327,8 +324,7 @@ TEASER VIEWS
   color:@colore;
   font-weight:700;
   padding:0;
-  text-align:justify;
-  line-height:1.5em;}
+  text-align:left;}
 
 /*------------------
 
@@ -1008,7 +1004,6 @@ WATER
   font-weight:400;
   padding:0;
   text-align:left;
-  line-height:1.2em;
   font-size:.8em;
   margin:-3px 0 5px;}
   
@@ -1117,7 +1112,7 @@ WATER
   padding:3px 0; 
   list-style:none;
   display:block;
-  background:@colorc;
+  background:transparent;
   .rounded-corners(5px);}
   
 #water .menuitems_hierarchy li,
@@ -1128,14 +1123,13 @@ WATER
 #water .menuitem li
 #water .category_root_item_list li {
   font-size:.85em;
-  margin:1px 0 !important;
+  margin:0 0 2px !important;
   text-decoration:none;
   font-weight:700;
   border:none;
   background:@colorb;
   padding:8px 10px;
-  cursor:pointer;
-  .rounded-corners(0);}
+  .rounded-corners(3px);}
   
 #water .menuitems_hierarchy li:hover,
 #water .categories_hierarchy li:hover,
@@ -1144,8 +1138,16 @@ WATER
 #water .root_items_list li:hover,
 #water .menuitem li:hover,
 #water .category_root_item_list li:hover {
-  background:@colore;
+  background:@colorc;
   color:@color-alpha;}
+
+#water li.expanded {
+  background:@colorc !important;
+  color:@color-alpha !important;}
+  
+#water li.expanded a {
+  background:@colorc !important;
+  color:@color-alpha !important;}
 
 #water .menuitems_hierarchy li a,
 #water .categories_hierarchy li a,
@@ -1155,7 +1157,7 @@ WATER
 #water .menuitem li a,
 #water .category_root_item_list li a {
   text-decoration:none;
-  color:@color-omega;
+  color:@colord;
   display:block;}
 
 #water .menuitems_hierarchy li a:hover,
@@ -1175,7 +1177,7 @@ WATER
 #water .root_items_list ul ul,
 #water .menuitem ul ul,
 #water .category_root_item_list ul ul {
-  margin:0;
+  margin:6px 0 0;
   padding:0;
   display:block;
   border:none;}
@@ -1189,10 +1191,10 @@ WATER
 #water .category_root_item_list li li {
   font-size:1em;
   display:block;
-  padding:3px 3px;
-  margin:4px 0;
+  padding:3px;
+  margin:0 0 4px;
   border:none;
-  border-bottom:1px dotted @colorb;
+  border-bottom:1px dotted @colord;
   background:transparent;
   .rounded-corners(0);}
 
@@ -1283,7 +1285,6 @@ li li:hover a {
   font-weight:700;
   padding:0;
   text-align:left;
-  line-height:1.5em;
   font-size:.8em;}
   
 #water .collection_teaser .summary p {
@@ -1609,11 +1610,10 @@ DETAILS CONTENTS
   margin:5px 0 0;}
 
 #fire .summary {
-  color:@colore;
+  color:@color-omega;
   font-weight:700;
   padding:10px 0;
   text-align:left;
-  line-height:1.5em;
   font-size:1.2em;}
 
 #fire .media .summary {
@@ -1691,8 +1691,7 @@ VISTA LISTA DETALLADA ARTICULOS
   color:@colore;
   font-weight:400;
   padding:10px 0;
-  text-align:justify;
-  line-height:1.4em;
+  text-align:left;
   font-size:1.2em;}
 
 .media h4.author {
@@ -1881,7 +1880,6 @@ TEASERS
   text-decoration:underline;}
 
 #fire .teaser .summary {
-  color:@colore;
   font-weight:400;
   padding:5px 0 0;
   font-size:1em;}
@@ -1899,7 +1897,7 @@ TEASERS
 #fire .teaser img.teaser_icon {
   margin:5px 0 0 10px;
   padding:5px;
-  .rounded-corners(8px);}
+  .rounded-corners(0);}
 
 #fire .teaser img.icon {
   float:right;
@@ -2371,7 +2369,7 @@ TEXTILE FORMAT
   max-width:620px;
   margin:0 auto;
   display:block;
-  .shadows(2px, 2px, 5px, #333);}
+  .shadows(2px, 2px, 5px, @colore);}
   
 #fire div.text p img.right {
   float:right;}
@@ -2397,7 +2395,7 @@ TEXTILE FORMAT
   margin:20px 0 20px 20px;
   padding:0;
   float:none;
-  .shadows(2px 2px 20px #666);}
+  .shadows(2px 2px 20px @colord);}
 
 #fire #container .content-view h1 {
   color:@color-omega;
@@ -2483,7 +2481,7 @@ jQuery lightBox plugin
   max-width:620px;
   margin:0 auto;
   display:block;
-  .shadows(2px, 2px, 5px, #333);}
+  .shadows(2px, 2px, 5px, @colore);}
 
 #fire #gallery ul a:hover img {
   border: none;
@@ -2559,13 +2557,13 @@ COMMENTS
   font-size:0.8em;}
   
 #user_comments ul {list-style:none;background:#fff;margin:0 0 20px;padding:0;}
-#user_comments li {margin:0;padding:0;font-size:0.8em;overflow:auto;border:1px solid @colorb;.rounded-corners-top(4px)}
+#user_comments li {margin:0;padding:0;font-size:12px;overflow:auto;border:1px solid @colorb;.rounded-corners-top(4px)}
 #user_comments li p {padding:7px 20px;}
 #user_comments a.comment_reply_link {font-size:.85em;float:right;padding:1px;margin:0 20px 20px 0;display:block;width:100px;text-align:center;background:@colora;color:@color-omega;border:1px solid @colorb;.rounded-corners(8px);}
 #user_comments ul ul {display:block;clear:both;border:none;margin:0 10px 10px;}
 #user_comments li li {display:block;border:1px solid #ccc;margin:0 0 15px;}
 #user_comments li li .when_who {
-  color:#000;
+  color:@color-omega;
   font-size:0.9em;
   background:@colora;
   display:block;
@@ -2576,7 +2574,7 @@ COMMENTS
 #user_comments ul ul a.comment_reply_link {float:right;padding:0;margin:0 10px 20px 0;display:block;width:100px;text-align:center;color:@colore;.rounded-corners(0);border:none;background:@color-alpha;}
 
 #user_comments li li .when_who a {
-  color:#000;}
+  color@color-omega;}
 /*-----------------------------------------------------------------------------------------------
 LOVE
 -----------------------------------------------------------------------------------------------*/
@@ -2623,7 +2621,6 @@ LOVE
 
 #love .teaser .title {
   margin:0 0 10px 0;
-  color:@color-omega;
   position:relative;
   overflow:auto;
   font-size:.95em;
@@ -2632,8 +2629,7 @@ LOVE
   .rounded-corners(0);}
 
 #love .teaser .title a {
-  text-decoration:none;
-  color:inherit;}
+  text-decoration:none;}
 
 #love .teaser .title a:hover {
   text-decoration:underline;
@@ -2683,11 +2679,9 @@ LOVE
   float:right;}
 
 #love .teaser .summary {
-  color:@colore;
   font-weight:400;
   padding:0;
   text-align:left;
-  line-height:1.2em;
   font-size:.8em;
   margin:-3px 0 5px;}
 
@@ -2940,7 +2934,6 @@ LOVE
   font-weight:700;
   padding:0;
   text-align:left;
-  line-height:1.5em;
   font-size:.8em;}
 
 #love .collection_teaser .summary p {
@@ -3243,7 +3236,6 @@ MODE STANDAR VIEW
   color: @color-omega !important;
   font-size: .95em !important;
   font-weight: 400;
-  line-height: 1.2em;
   padding: 0 20px 0 0 !important;
   margin:0 !important;
   text-align: left !important;
