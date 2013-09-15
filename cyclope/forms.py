@@ -205,6 +205,21 @@ class DesignSettingsAdminForm(forms.ModelForm):
                                          initial=lambda : get_home_menu_item().layout)
     class Meta:
         model = DesignSettings
+        
+        widgets = {'color_' + key:forms.TextInput(attrs={'cols': 10, 'class': 'color'}) \
+                   for key in ('a', 'b', 'c', 'd', 'e')}
+               
+        palette = (
+            (_('Corn field'), 'f9f145,b4ac01,fec90a,e86e1b,d41e46'),
+            (_('Pizza party'), 'c7f465,4ecdc4,ff6b6b,c54d57,556370'),
+            (_('Nogal'), 'fcfce4,fbcfd0,cebb9a,a47e59,755d3b'),
+            (_('Deep ocean'), 'd8d7ec,c1c0dd,8f8db1,4f4c7b,302e57'),
+            (_('Eggplant'), 'ffe99c,fec90a,a55e93,9b1a7b,64074d'),
+            (_('Teddy bear'), 'fca,f95,d45500,a40,803300'),
+            (_('Green Day'), 'dde9af,cdde87,abc837,677821,445016'),
+            (_('Happy Birthday'), 'ffff00,f17c36,01c000,fe0000,7900bf'),
+            (_('Romance'), 'ffd5d5,ff8080,ff5555,d40000,800000'),
+        )
 
     def save(self, *args, **kwargs):
         m = super(DesignSettingsAdminForm, self).save(*args, **kwargs)

@@ -34,6 +34,7 @@ from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponseRedirect
 from django.contrib.sites.models import Site
+import django.forms
 
 from mptt_tree_editor.admin import TreeEditor
 
@@ -179,23 +180,43 @@ class SingletonAdminMixin(admin.ModelAdmin):
         else:
             return super(SingletonAdminMixin, self).response_change(request, obj)
 
-DESIGN_FIELDS = ('global_title', 'theme', 'default_layout', 
-              'head_image', 'show_head_title', 'body_font', 'body_custom_font',
-              'titles_font', 'titles_custom_font', 'font_size', 
-              'hide_content_icons')
+DESIGN_FIELDS = (
+    'global_title', 'theme', 'default_layout', 'head_image', 
+    'show_head_title', 'body_font', 'body_custom_font', 'titles_font', 
+    'titles_custom_font', 'font_size', 'hide_content_icons', 
+    'color_a', 'color_b', 'color_c', 'color_d', 'color_e',
+)
  
 
 class SiteSettingsAdmin(SingletonAdminMixin):
     form = SiteSettingsAdminForm
     exclude = ('site', ) + DESIGN_FIELDS
 
-
 admin.site.register(SiteSettings, SiteSettingsAdmin)
 
 
 class DesignSettingsAdmin(SingletonAdminMixin):
     form = DesignSettingsAdminForm
-    fields = ('home_layout',) + DESIGN_FIELDS
+
+    fieldsets = (
+        (_('General'), {
+            'fields': ('global_title', 'show_head_title', 'head_image', 'theme', 'home_layout', 'default_layout', )
+        }),
+        (_('Fonts'), {
+            'fields': ('font_size', ('body_font', 'body_custom_font'), 
+                       ('titles_font', 'titles_custom_font',) )
+        }),
+        (_('Colours'), {
+            'classes': ['colours', ],
+            'fields': ('color_a', 'color_b', 'color_c', 'color_d', 'color_e')
+        }),                                 
+        (_('Other'), {
+            'fields': ( 'hide_content_icons', )
+        }),
+    )
+    
+    class Media:
+        js = (cyc_settings.CYCLOPE_STATIC_URL + "js/jscolor/jscolor.js",)
 
 admin.site.register(DesignSettings, DesignSettingsAdmin)
 

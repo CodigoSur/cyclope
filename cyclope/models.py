@@ -143,6 +143,17 @@ class SiteSettings(models.Model):
     hide_content_icons = models.BooleanField(_('hide content icons'), default=False,
                                              help_text=_('Content icons are shown beside the title of the content'))
 
+    color_a	= models.CharField(_('color A'), max_length=8, default='#eee', 
+                               help_text=_('change the color A'))
+    color_b	= models.CharField(_('color B'), max_length=8, default='#ccc',
+                               help_text=_('change the color B'))
+    color_c	= models.CharField(_('color C'), max_length=8, default='#999', 
+                               help_text=_('change the color C'))
+    color_d	= models.CharField(_('color D'), max_length=8, default='#666', 
+                               help_text=_('change the color D'))
+    color_e	= models.CharField(_('color E'), max_length=8, default='#333', 
+                               help_text=_('change the color E'))
+
     def save(self, *args, **kwargs):
         self.id = 1
         super(SiteSettings, self).save(*args, **kwargs)
