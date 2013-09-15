@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-07 00:04-0300\n"
+"POT-Creation-Date: 2013-09-15 19:19-0300\n"
 "PO-Revision-Date: 2013-01-24 13:51-0300\n"
 "Last-Translator: SAn <spiccinini@codigosur.org>\n"
 "MIME-Version: 1.0\n"
@@ -14,23 +14,39 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: admin.py:128
+#: admin.py:129
 msgid "content details"
 msgstr "detalles de contenido"
 
-#: admin.py:131
+#: admin.py:132
 msgid "Either set an URL here or select a contenttype and view."
 msgstr "Configura la URL aquí o selecciona un tipo de contenido y vista."
 
-#: admin.py:134 models.py:175 models.py:300 apps/newsletter/models.py:44
+#: admin.py:135 models.py:225 models.py:350 apps/newsletter/models.py:44
 msgid "layout"
 msgstr "esquema"
 
-#: admin.py:137
+#: admin.py:138
 msgid "Set the layout that will be used when this menuitem is selected."
 msgstr ""
 "Establezca el esquema que será utilizado cuando este ítem de menú sea "
 "seleccionado"
+
+#: admin.py:202
+msgid "General"
+msgstr "General"
+
+#: admin.py:205
+msgid "Fonts"
+msgstr "Tipografias"
+
+#: admin.py:209
+msgid "Colours"
+msgstr "Colores"
+
+#: admin.py:213
+msgid "Other"
+msgstr "Otros"
 
 #: dashboard.py:55
 msgid "Site Administration"
@@ -228,11 +244,11 @@ msgstr "Miniatura cortada (140x140px)"
 msgid "Slideshow"
 msgstr "Rotador"
 
-#: forms.py:117 forms.py:242 apps/newsletter/admin.py:38
+#: forms.py:117 forms.py:259 apps/newsletter/admin.py:38
 msgid "View"
 msgstr "Vista"
 
-#: forms.py:118 forms.py:243
+#: forms.py:118 forms.py:260
 msgid "Content object"
 msgstr "Contenido"
 
@@ -240,7 +256,7 @@ msgstr "Contenido"
 msgid "Parent"
 msgstr "Padre"
 
-#: forms.py:123 forms.py:244 core/collections/admin.py:170
+#: forms.py:123 forms.py:261 core/collections/admin.py:170
 #: core/frontend/sites.py:355
 msgid "View options"
 msgstr "Opciones de la vista"
@@ -251,11 +267,11 @@ msgid ""
 "associated content"
 msgstr "No puede setear una URL para Entradas de Menú con contenido asociado."
 
-#: forms.py:162 forms.py:295
+#: forms.py:162 forms.py:312
 msgid "You need to select a content view"
 msgstr "Debe seleccionar una Vista del contenido"
 
-#: forms.py:168 forms.py:301
+#: forms.py:168 forms.py:318
 msgid "The selected view requires a content object"
 msgstr "La vista seleccionada requiere que elija un objeto de contenido"
 
@@ -263,23 +279,63 @@ msgstr "La vista seleccionada requiere que elija un objeto de contenido"
 msgid "Theme"
 msgstr "Tema"
 
+#: forms.py:214
+msgid "Default"
+msgstr "Por defecto"
+
+#: forms.py:215
+msgid "Corn field"
+msgstr "Maizal"
+
+#: forms.py:216
+msgid "Pizza party"
+msgstr ""
+
 #: forms.py:217
+msgid "Nogal"
+msgstr ""
+
+#: forms.py:218
+msgid "Deep ocean"
+msgstr "Oceano profundo"
+
+#: forms.py:219
+msgid "Eggplant"
+msgstr "Berenjena"
+
+#: forms.py:220
+msgid "Teddy bear"
+msgstr ""
+
+#: forms.py:221
+msgid "Green Day"
+msgstr ""
+
+#: forms.py:222
+msgid "Happy Birthday"
+msgstr "Cumpleaños"
+
+#: forms.py:223
+msgid "Romance"
+msgstr "Romance"
+
+#: forms.py:234
 msgid "Template"
 msgstr "Plantilla"
 
-#: forms.py:241
+#: forms.py:258
 msgid "Region"
 msgstr "Región"
 
-#: forms.py:288
+#: forms.py:305
 msgid "Content type can not be empty"
 msgstr "El Tipo de contenido no debe estar vacío"
 
-#: forms.py:292
+#: forms.py:309
 msgid "You need to select a region"
 msgstr "Debe seleccionar una región"
 
-#: forms.py:325 apps/custom_comments/forms.py:49
+#: forms.py:342 apps/custom_comments/forms.py:49
 #: apps/dynamicforms/models.py:37 apps/polls/forms.py:35
 #: core/captcha_contact_form/forms.py:31
 msgid "Security code"
@@ -309,7 +365,7 @@ msgstr "horizontal"
 msgid "on click"
 msgstr "al clickear"
 
-#: frontend_views.py:89 models.py:80 models.py:354
+#: frontend_views.py:89 models.py:96 models.py:404
 msgid "disabled"
 msgstr "deshabilitado"
 
@@ -419,99 +475,155 @@ msgstr "Vertical grande"
 msgid "sharing buttons"
 msgstr "botones para compartir"
 
+#: models.py:55
+msgid "- Default -"
+msgstr "Por defecto"
+
+#: models.py:56
+msgid "Architects"
+msgstr "Architects"
+
+#: models.py:57
+msgid "Bonveno"
+msgstr "Bonveno"
+
+#: models.py:58
+msgid "Comfortaa"
+msgstr "Comfortaa"
+
+#: models.py:59
+msgid "Coolvetica"
+msgstr "Coolvetica"
+
+#: models.py:60
+msgid "Earthbound"
+msgstr "Earthbound"
+
 #: models.py:61
+msgid "Lato"
+msgstr "Lato"
+
+#: models.py:62
+msgid "Sofia"
+msgstr "Sofia"
+
+#: models.py:63
+msgid "toscuchet"
+msgstr "toscuchet"
+
+#: models.py:64
+msgid "Ubuntu"
+msgstr "Ubuntu"
+
+#: models.py:65
+msgid "Arial"
+msgstr "Arial"
+
+#: models.py:66
+msgid "Times New Roman"
+msgstr "Times New Roman"
+
+#: models.py:67
+msgid "Verdana"
+msgstr "Verdana"
+
+#: models.py:68
+msgid "Custom Body"
+msgstr "Body customizado"
+
+#: models.py:77
 msgid "templating theme"
 msgstr "tema de la plantilla"
 
-#: models.py:63
+#: models.py:79
 msgid "default layout"
 msgstr "esquema por defecto"
 
-#: models.py:66
+#: models.py:82
 msgid "global title"
 msgstr "titulo global"
 
-#: models.py:68
+#: models.py:84
 msgid "keywords"
 msgstr "palabras clave"
 
-#: models.py:69 apps/medialibrary/models.py:39 apps/polls/models.py:36
+#: models.py:85 apps/medialibrary/models.py:39 apps/polls/models.py:36
 #: core/collections/models.py:60 core/collections/models.py:101
 #: core/series/models.py:61
 msgid "description"
 msgstr "descripción"
 
-#: models.py:72
+#: models.py:88
 msgid "newsletter collection"
 msgstr "colección para boletines"
 
-#: models.py:73
+#: models.py:89
 msgid ""
 "This is the collection that will group the contents for your newsletters."
 msgstr ""
 "Esta es la colección que agrupará los contenidos a enviar en los boletines."
 
-#: models.py:75
+#: models.py:91
 msgid "whole feed contents"
 msgstr "contenidos del RSS"
 
-#: models.py:76
+#: models.py:92
 msgid "contents to show in the whole feed"
 msgstr "contenidos que se publicarán en el RSS general"
 
-#: models.py:77 models.py:350
+#: models.py:93 models.py:400
 msgid "allow comments"
 msgstr "permitir comentarios"
 
-#: models.py:79 models.py:353
+#: models.py:95 models.py:403
 msgid "enabled"
 msgstr "habilitado"
 
-#: models.py:82
+#: models.py:98
 msgid "moderate comments"
 msgstr "moderar comentarios"
 
-#: models.py:84
+#: models.py:100
 msgid "enable comments email notifications"
 msgstr "habilitar notificaciones por email cuando lleguen comentarios"
 
-#: models.py:86
+#: models.py:102
 msgid "enable abuse reports"
 msgstr "habilitar las denuncias por contenido indebido"
 
-#: models.py:87 models.py:357
+#: models.py:103 models.py:407
 msgid "show author"
 msgstr "mostrar autoría"
 
-#: models.py:89 models.py:359 models.py:467 apps/articles/models.py:45
+#: models.py:105 models.py:409 models.py:517 apps/articles/models.py:45
 #: apps/medialibrary/models.py:35
 msgid "author"
 msgstr "autoría"
 
-#: models.py:90 models.py:360
+#: models.py:106 models.py:410
 msgid "user if author is empty"
 msgstr "mostrar user si el campo autoría está vacío"
 
-#: models.py:92
+#: models.py:108
 msgid "Select which field to use to show as author of the content."
 msgstr ""
 "Seleccione el campo que desea usar para mostrar como autoría de los "
 "contenidos."
 
-#: models.py:93
+#: models.py:109
 msgid "enable rating (like/dislike) content"
 msgstr "habilitar rating (like/dislike) de contenido"
 
-#: models.py:95
+#: models.py:111
 msgid "enable social sharing buttons (facebook, twitter, etc)"
 msgstr ""
 "habilitar botones para compartir en redes sociales (facebook, twitter, etc)"
 
-#: models.py:97
+#: models.py:113
 msgid "enable social follow buttons (facebook, twitter, etc)"
 msgstr "habilitar botones follow de redes sociales (facebook, twitter, etc)"
 
-#: models.py:103
+#: models.py:119
 msgid ""
 "Change USERNAME by your username in each service you want to enable. Eg for "
 "youtube: if your page is http://youtube.com/user/cyclope/ then replace the "
@@ -521,47 +633,141 @@ msgstr ""
 "Ejemplo para youtube: si su página es http://youtube.com/user/cyclope/ "
 "entonces reemplaze el 'USERNAME' debajo de youtube por 'cyclope'."
 
-#: models.py:118 models.py:119
+#: models.py:123
+msgid "header image"
+msgstr "imágen del encabezado"
+
+#: models.py:125
+msgid "select image for head: 960px width x 170px height"
+msgstr "elige una imagen para el cabezal de 960px por 170px"
+
+#: models.py:126
+msgid "show head title"
+msgstr "mostrar título del encabezado"
+
+#: models.py:127
+msgid ""
+"show title and url site in head. If disabled, header image links to home."
+msgstr ""
+"muestra el título y la url del sitio en el cablezal. La imágen del cabezal enlaza al inicio."
+
+#: models.py:129
+msgid "body font"
+msgstr "tipografía general"
+
+#: models.py:131
+msgid "change the font of the body"
+msgstr "cambia la tipografía general del sitio"
+
+#: models.py:132
+msgid "body custom font"
+msgstr "tipografía personalizada"
+
+#: models.py:136
+msgid "font for titles"
+msgstr "tipografía de los títulos"
+
+#: models.py:138
+msgid "change the font of the head and titles"
+msgstr "cambia la tipografía del cabezal y los títulos"
+
+#: models.py:139
+msgid "titles custom font"
+msgstr "tipografía personalizada de los títulos"
+
+#: models.py:142
+msgid "font size"
+msgstr "tamaño de la tipografía"
+
+#: models.py:143
+msgid "hide content icons"
+msgstr "ocultar iconos de contenido"
+
+#: models.py:144
+msgid "Content icons are shown beside the title of the content"
+msgstr "Los íconos de contenido son los que se muestran al costado del título del contenido"
+
+#: models.py:146
+msgid "color A"
+msgstr "coloar A"
+
+#: models.py:147
+msgid "change the color A"
+msgstr "cambiar el color A"
+
+#: models.py:148
+msgid "color B"
+msgstr "color B"
+
+#: models.py:149
+msgid "change the color B"
+msgstr "cambiar el color B"
+
+#: models.py:150
+msgid "color C"
+msgstr "color C"
+
+#: models.py:151
+msgid "change the color C"
+msgstr "cambiar el color C"
+
+#: models.py:152
+msgid "color D"
+msgstr "color D"
+
+#: models.py:153
+msgid "change the color D"
+msgstr "cambiar el color D"
+
+#: models.py:154
+msgid "color E"
+msgstr "color E"
+
+#: models.py:155
+msgid "change the color E"
+msgstr "cambiar el color E"
+
+#: models.py:168 models.py:169
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:134 models.py:164 models.py:285 models.py:336 models.py:449
-#: models.py:477 apps/abuse/models.py:15 apps/locations/models.py:36
+#: models.py:184 models.py:214 models.py:335 models.py:386 models.py:499
+#: models.py:527 apps/abuse/models.py:15 apps/locations/models.py:36
 #: apps/locations/models.py:43 apps/locations/models.py:50
 #: apps/newsletter/models.py:34 apps/staticpages/models.py:41
 #: core/collections/models.py:50 core/collections/models.py:95
 msgid "name"
 msgstr "nombre"
 
-#: models.py:136
+#: models.py:186
 msgid "main menu"
 msgstr "menu principal"
 
-#: models.py:153 models.py:162
+#: models.py:203 models.py:212
 msgid "menu"
 msgstr "menú"
 
-#: models.py:154
+#: models.py:204
 msgid "menus"
 msgstr "menús"
 
-#: models.py:165 core/collections/models.py:98
+#: models.py:215 core/collections/models.py:98
 msgid "parent"
 msgstr "relacionado"
 
-#: models.py:170
+#: models.py:220
 msgid "site home"
 msgstr "página de inicio"
 
-#: models.py:171
+#: models.py:221
 msgid "custom URL"
 msgstr "URL personalizada"
 
-#: models.py:177
+#: models.py:227
 msgid "Persistent layout"
 msgstr "Esquema persistente"
 
-#: models.py:178
+#: models.py:228
 msgid ""
 "If the layout is marked as persistent it will be in use until the user "
 "navigates to a menu item which explicitly specifies a different Layout"
@@ -569,83 +775,83 @@ msgstr ""
 "Si el esquema es marcado como persistente se seguirá usando hasta que el "
 "visitante seleccione otro item de menú que especifique un esquema diferente"
 
-#: models.py:182 models.py:261 apps/contacts/models.py:46
+#: models.py:232 models.py:311 apps/contacts/models.py:46
 msgid "type"
 msgstr "tipo"
 
-#: models.py:184 models.py:269 apps/abuse/models.py:26 apps/abuse/models.py:60
+#: models.py:234 models.py:319 apps/abuse/models.py:26 apps/abuse/models.py:60
 msgid "object"
 msgstr "objeto"
 
-#: models.py:190 models.py:263 apps/newsletter/models.py:41
+#: models.py:240 models.py:313 apps/newsletter/models.py:41
 msgid "view"
 msgstr "vista"
 
-#: models.py:246
+#: models.py:296
 msgid "menu item"
 msgstr "item de menú"
 
-#: models.py:247
+#: models.py:297
 msgid "menu items"
 msgstr "items de menú"
 
-#: models.py:257 apps/locations/models.py:57
+#: models.py:307 apps/locations/models.py:57
 msgid "region"
 msgstr "región"
 
-#: models.py:266
+#: models.py:316
 msgid "weight"
 msgstr "peso"
 
-#: models.py:290
+#: models.py:340
 msgid "layout template"
 msgstr "plantilla para este esquema"
 
-#: models.py:301
+#: models.py:351
 msgid "layouts"
 msgstr "esquemas"
 
-#: models.py:308 models.py:313 apps/abuse/models.py:25 apps/abuse/models.py:59
+#: models.py:358 models.py:363 apps/abuse/models.py:25 apps/abuse/models.py:59
 #: core/collections/models.py:221 core/series/models.py:33
 #: core/series/models.py:37
 msgid "content type"
 msgstr "tipo de contenido"
 
-#: models.py:328
+#: models.py:378
 msgid "related content"
 msgstr "contenido relacionado"
 
-#: models.py:329
+#: models.py:379
 msgid "related contents"
 msgstr "contenidos relacionados"
 
-#: models.py:340
+#: models.py:390
 msgid "published"
 msgstr "publicar"
 
-#: models.py:346
+#: models.py:396
 msgid "creation date"
 msgstr "fecha de creación"
 
-#: models.py:348
+#: models.py:398
 msgid "modification date"
 msgstr "fecha de modificación"
 
-#: models.py:352 models.py:361
+#: models.py:402 models.py:411
 msgid "default"
 msgstr "por defecto"
 
-#: models.py:362
+#: models.py:412
 msgid "Select which field to use to show as author of this content."
 msgstr ""
 "Seleccione el campo que desea usar para mostrar como autoría de este "
 "contenido."
 
-#: models.py:435
+#: models.py:485
 msgid "translations"
 msgstr "traducciones"
 
-#: models.py:453 models.py:493 models.py:497 apps/medialibrary/models.py:61
+#: models.py:503 models.py:543 models.py:547 apps/medialibrary/models.py:61
 #: apps/medialibrary/models.py:75 apps/medialibrary/models.py:108
 #: apps/medialibrary/models.py:122 apps/medialibrary/models.py:136
 #: apps/medialibrary/models.py:150 core/collections/models.py:61
@@ -653,39 +859,39 @@ msgstr "traducciones"
 msgid "image"
 msgstr "imagen"
 
-#: models.py:456
+#: models.py:506
 msgid "origin"
 msgstr "origen"
 
-#: models.py:458
+#: models.py:508
 msgid "notes"
 msgstr "notas"
 
-#: models.py:460 core/collections/models.py:59
+#: models.py:510 core/collections/models.py:59
 msgid "content types"
 msgstr "tipos de contenido"
 
-#: models.py:461
+#: models.py:511
 msgid "Select the content types this author is related to."
 msgstr "Seleccione los tipos de contenido que corresponden a esta autoría"
 
-#: models.py:468
+#: models.py:518
 msgid "authors"
 msgstr "autorías"
 
-#: models.py:481
+#: models.py:531
 msgid "link"
 msgstr "enlace"
 
-#: models.py:487 apps/articles/models.py:47 apps/medialibrary/models.py:37
+#: models.py:537 apps/articles/models.py:47 apps/medialibrary/models.py:37
 msgid "source"
 msgstr "fuente"
 
-#: models.py:488
+#: models.py:538
 msgid "sources"
 msgstr "fuentes"
 
-#: models.py:498
+#: models.py:548
 msgid "images"
 msgstr "imágenes"
 
@@ -1601,16 +1807,16 @@ msgstr "Categoría"
 msgid "Default category listing view"
 msgstr "Vista por defecto para listados"
 
-#: core/collections/admin.py:267
+#: core/collections/admin.py:272
 #, python-format
 msgid "Successfully categorized %(count)d %(items)s."
 msgstr "Categorizados correctamente %(count)d %(items)s."
 
-#: core/collections/admin.py:278
+#: core/collections/admin.py:283
 msgid "Categorize selected objects"
 msgstr "Categorizar objetos seleccionados"
 
-#: core/collections/admin.py:297
+#: core/collections/admin.py:302
 #, python-format
 msgid "Categorize selected %(verbose_name_plural)s"
 msgstr "Categorizar %(verbose_name_plural)s seleccionados"
@@ -2296,6 +2502,7 @@ msgstr "Administración de Cyclope"
 #: templates/admin/categorize_selected_choose_category.html:8
 #: templates/admin/change_form.html:31 templates/admin/change_list.html:63
 #: templates/admin/contact_form/contactformsettings/change_form.html:6
+#: templates/admin/cyclope/designsettings/change_form.html:26
 #: templates/admin/cyclope/sitesettings/change_form.html:6
 #: templates/rosetta/pofile.html:46
 msgid "Home"
@@ -2318,7 +2525,7 @@ msgid "History"
 msgstr "Historial"
 
 #: templates/admin/change_form.html:56 templates/admin/change_list.html:99
-#: templates/admin/login.html:17
+#: templates/admin/login.html:23
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] "Por favor corrija el error detallado"
@@ -2343,17 +2550,22 @@ msgstr "Agregar %(name)s"
 msgid " By %(filter_title)s "
 msgstr " Por %(filter_title)s "
 
-#: templates/admin/login.html:33
+#: templates/admin/login.html:39
 msgid "Username:"
 msgstr "Nombre de ingreso:"
 
-#: templates/admin/login.html:37
+#: templates/admin/login.html:43
 msgid "Password:"
 msgstr "Clave:"
 
-#: templates/admin/login.html:42 templates/registration/user_block.html:14
+#: templates/admin/login.html:48 templates/registration/user_block.html:14
 msgid "Log in"
 msgstr "Ingresar"
+
+#: templates/admin/login.html:51
+#: templates/registration/password_reset_form.html:8
+msgid "Forgot your password?"
+msgstr "¿Olvidaste tu clave?"
 
 #: templates/admin/articles/change_list.html:6
 msgid ""
@@ -2368,6 +2580,14 @@ msgstr ""
 "Los Artículos son un tipo de contenido rico, que puedes utilizar para "
 "publicar material categorizado en tu sitio.\n"
 "</p>\n"
+
+#: templates/admin/cyclope/designsettings/change_form.html:8
+msgid "Colour palette"
+msgstr "Paleta de colores"
+
+#: templates/admin/cyclope/designsettings/change_form.html:11
+msgid "You may pick a colour palette to start your design"
+msgstr "Puedes elegir una paleta para iniciar tu diseño"
 
 #: templates/comments/approved.html:4
 msgid "Thanks for approving"
@@ -2446,7 +2666,7 @@ msgid "Page"
 msgstr "Página"
 
 #: templates/cyclope/pagination_block.html:13
-#: templates/cyclope/themes/neutronix/base.html:65
+#: templates/cyclope/themes/neutronix/base.html:77
 msgid "of"
 msgstr "de"
 
@@ -3012,7 +3232,7 @@ msgstr "Frecuency"
 msgid "Neutronix"
 msgstr "Neutronix"
 
-#: templates/cyclope/themes/neutronix/base.html:64
+#: templates/cyclope/themes/neutronix/base.html:76
 msgid "Image"
 msgstr "Imagen"
 
@@ -3169,10 +3389,6 @@ msgstr ""
 #: templates/registration/password_reset_form.html:17
 msgid "Reset Password"
 msgstr "Re-configurar Clave"
-
-#: templates/registration/password_reset_form.html:8
-msgid "Forgot your password?"
-msgstr "¿Olvidaste tu clave?"
 
 #: templates/registration/password_reset_form.html:11
 msgid ""
