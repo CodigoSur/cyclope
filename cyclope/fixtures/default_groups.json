@@ -390,6 +390,11 @@
           "relatedcontent"
         ], 
         [
+          "change_designsettings", 
+          "cyclope", 
+          "sitesettings"
+        ], 
+        [
           "change_sitesettings", 
           "cyclope", 
           "sitesettings"
@@ -408,6 +413,81 @@
           "delete_source", 
           "cyclope", 
           "source"
+        ], 
+        [
+          "add_feed", 
+          "feeds", 
+          "feed"
+        ], 
+        [
+          "change_feed", 
+          "feeds", 
+          "feed"
+        ], 
+        [
+          "delete_feed", 
+          "feeds", 
+          "feed"
+        ], 
+        [
+          "add_field", 
+          "forms", 
+          "field"
+        ], 
+        [
+          "change_field", 
+          "forms", 
+          "field"
+        ], 
+        [
+          "delete_field", 
+          "forms", 
+          "field"
+        ], 
+        [
+          "add_fieldentry", 
+          "forms", 
+          "fieldentry"
+        ], 
+        [
+          "change_fieldentry", 
+          "forms", 
+          "fieldentry"
+        ], 
+        [
+          "delete_fieldentry", 
+          "forms", 
+          "fieldentry"
+        ], 
+        [
+          "add_form", 
+          "forms", 
+          "form"
+        ], 
+        [
+          "change_form", 
+          "forms", 
+          "form"
+        ], 
+        [
+          "delete_form", 
+          "forms", 
+          "form"
+        ], 
+        [
+          "add_formentry", 
+          "forms", 
+          "formentry"
+        ], 
+        [
+          "change_formentry", 
+          "forms", 
+          "formentry"
+        ], 
+        [
+          "delete_formentry", 
+          "forms", 
+          "formentry"
         ], 
         [
           "add_document", 

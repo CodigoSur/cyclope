@@ -3,23 +3,41 @@
     "pk": 1, 
     "model": "cyclope.sitesettings", 
     "fields": {
+      "global_title": "Demo Site", 
+      "site": 1, 
+      "show_head_title": true, 
+      "keywords": "cyclope cms codigo sur ", 
+      "body_custom_font": "", 
+      "show_author": "AUTHOR", 
+      "head_image": "", 
       "rss_content_types": [
         [
           "articles", 
           "article"
         ]
       ], 
-      "allow_comments": "YES", 
-      "description": "Neutrona es una plantilla \u201cneutra\u201d realizada para Cyclope 3 en colores grises, para servir de base de trabajo para dise\u00f1os m\u00e1s complejos. Ha sido realizada bajo el framework 960 Grid System (www.960.gs) y est\u00e1 totalmente desarrollada con la t\u00e9cnica tableless. Los navegadores basados en est\u00e1ndares web pueden visualizarla de forma correcta. ", 
-      "global_title": "Demo Site", 
-      "site": 1, 
-      "moderate_comments": false, 
       "theme": "neutronix", 
+      "titles_font": "", 
       "enable_abuse_reports": false, 
       "enable_comments_notifications": true, 
-      "keywords": "cyclope cms codigo sur ", 
+      "enable_ratings": false, 
+      "moderate_comments": false, 
+      "default_layout": 1, 
+      "hide_content_icons": false, 
+      "description": "Neutrona es una plantilla \u201cneutra\u201d realizada para Cyclope 3 en colores grises, para servir de base de trabajo para dise\u00f1os m\u00e1s complejos. Ha sido realizada bajo el framework 960 Grid System (www.960.gs) y est\u00e1 totalmente desarrollada con la t\u00e9cnica tableless. Los navegadores basados en est\u00e1ndares web pueden visualizarla de forma correcta. ", 
+      "color_e": "333", 
+      "color_d": "666", 
+      "color_c": "999", 
+      "color_b": "ccc", 
+      "color_a": "eee", 
+      "social_follow_services": "[[\"twitter\", \"USERNAME\"], [\"facebook\", \"USERNAME\"], [\"google\", \"USERNAME\"], [\"flickr\", \"USERNAME\"], [\"linkedin\", \"USERNAME\"], [\"vimeo\", \"USERNAME\"], [\"youtube\", \"USERNAME\"]]", 
+      "body_font": "", 
       "newsletter_collection": null, 
-      "default_layout": 1
+      "enable_follow_buttons": false, 
+      "allow_comments": "YES", 
+      "font_size": "12", 
+      "enable_share_buttons": true, 
+      "titles_custom_font": ""
     }
   }, 
   {
@@ -359,38 +377,6 @@
     }
   }, 
   {
-    "pk": 102, 
-    "model": "cyclope.regionview", 
-    "fields": {
-      "layout": 10, 
-      "weight": 1, 
-      "content_view": "detail", 
-      "region": "water", 
-      "object_id": 4, 
-      "view_options": "{}", 
-      "content_type": [
-        "staticpages", 
-        "htmlblock"
-      ]
-    }
-  }, 
-  {
-    "pk": 103, 
-    "model": "cyclope.regionview", 
-    "fields": {
-      "layout": 1, 
-      "weight": 1, 
-      "content_view": "detail", 
-      "region": "water", 
-      "object_id": 4, 
-      "view_options": "{}", 
-      "content_type": [
-        "staticpages", 
-        "htmlblock"
-      ]
-    }
-  }, 
-  {
     "pk": 104, 
     "model": "cyclope.regionview", 
     "fields": {
@@ -403,6 +389,38 @@
       "content_type": [
         "collections", 
         "category"
+      ]
+    }
+  }, 
+  {
+    "pk": 105, 
+    "model": "cyclope.regionview", 
+    "fields": {
+      "layout": 10, 
+      "weight": 0, 
+      "content_view": "share-content", 
+      "region": "air", 
+      "object_id": null, 
+      "view_options": "{\"show_rss\": true, \"style\": \"addthis_default_style\", \"show_social_buttons\": true}", 
+      "content_type": [
+        "sites", 
+        "site"
+      ]
+    }
+  }, 
+  {
+    "pk": 106, 
+    "model": "cyclope.regionview", 
+    "fields": {
+      "layout": 1, 
+      "weight": 0, 
+      "content_view": "share-content", 
+      "region": "air", 
+      "object_id": null, 
+      "view_options": "{\"show_rss\": true, \"style\": \"addthis_default_style\", \"show_social_buttons\": true}", 
+      "content_type": [
+        "sites", 
+        "site"
       ]
     }
   }, 
@@ -468,67 +486,6 @@
     }
   }, 
   {
-    "pk": 1, 
-    "model": "cyclope.author", 
-    "fields": {
-      "origin": "Chino", 
-      "name": "admin", 
-      "image": "/media/uploads/wp_logo.png", 
-      "slug": "admin", 
-      "content_types": [
-        [
-          "articles", 
-          "article"
-        ], 
-        [
-          "contacts", 
-          "contact"
-        ], 
-        [
-          "medialibrary", 
-          "document"
-        ], 
-        [
-          "medialibrary", 
-          "externalcontent"
-        ], 
-        [
-          "medialibrary", 
-          "regularfile"
-        ], 
-        [
-          "medialibrary", 
-          "flashmovie"
-        ], 
-        [
-          "medialibrary", 
-          "movieclip"
-        ], 
-        [
-          "medialibrary", 
-          "picture"
-        ], 
-        [
-          "polls", 
-          "poll"
-        ], 
-        [
-          "medialibrary", 
-          "soundtrack"
-        ], 
-        [
-          "staticpages", 
-          "staticpage"
-        ], 
-        [
-          "forum", 
-          "topic"
-        ]
-      ], 
-      "notes": "No se sane m\u00e1s nana."
-    }
-  }, 
-  {
     "pk": 2, 
     "model": "cyclope.author", 
     "fields": {
@@ -538,69 +495,12 @@
       "slug": "author", 
       "content_types": [
         [
-          "medialibrary", 
-          "document"
-        ]
-      ], 
-      "notes": ""
-    }
-  }, 
-  {
-    "pk": 7, 
-    "model": "cyclope.author", 
-    "fields": {
-      "origin": "", 
-      "name": "Santiago Hoerth Moura", 
-      "image": "", 
-      "slug": "santiago-hoerth-moura", 
-      "content_types": [
-        [
           "articles", 
           "article"
         ], 
         [
-          "contacts", 
-          "contact"
-        ], 
-        [
           "medialibrary", 
           "document"
-        ], 
-        [
-          "medialibrary", 
-          "externalcontent"
-        ], 
-        [
-          "medialibrary", 
-          "regularfile"
-        ], 
-        [
-          "medialibrary", 
-          "flashmovie"
-        ], 
-        [
-          "medialibrary", 
-          "movieclip"
-        ], 
-        [
-          "medialibrary", 
-          "picture"
-        ], 
-        [
-          "polls", 
-          "poll"
-        ], 
-        [
-          "medialibrary", 
-          "soundtrack"
-        ], 
-        [
-          "staticpages", 
-          "staticpage"
-        ], 
-        [
-          "forum", 
-          "topic"
         ]
       ], 
       "notes": ""
@@ -777,123 +677,16 @@
     }
   }, 
   {
-    "pk": 10, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 1, 
-      "object_id": 1, 
-      "content_type": [
-        "medialibrary", 
-        "document"
-      ]
-    }
-  }, 
-  {
-    "pk": 12, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 1, 
-      "object_id": 1, 
-      "content_type": [
-        "medialibrary", 
-        "regularfile"
-      ]
-    }
-  }, 
-  {
-    "pk": 66, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 1, 
-      "object_id": 1, 
-      "content_type": [
-        "medialibrary", 
-        "picture"
-      ]
-    }
-  }, 
-  {
-    "pk": 69, 
+    "pk": 79, 
     "model": "collections.categorization", 
     "fields": {
       "category": 20, 
       "object_id": 1, 
       "content_type": [
         "medialibrary", 
-        "document"
-      ]
-    }
-  }, 
-  {
-    "pk": 70, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 20, 
-      "object_id": 1, 
-      "content_type": [
-        "medialibrary", 
-        "regularfile"
-      ]
-    }
-  }, 
-  {
-    "pk": 73, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 20, 
-      "object_id": 1, 
-      "content_type": [
-        "staticpages", 
-        "staticpage"
-      ]
-    }
-  }, 
-  {
-    "pk": 74, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 20, 
-      "object_id": 1, 
-      "content_type": [
-        "medialibrary", 
-        "picture"
-      ]
-    }
-  }, 
-  {
-    "pk": 75, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 20, 
-      "object_id": 1, 
-      "content_type": [
-        "medialibrary", 
-        "movieclip"
-      ]
-    }
-  }, 
-  {
-    "pk": 76, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 20, 
-      "object_id": 1, 
-      "content_type": [
-        "medialibrary", 
-        "externalcontent"
-      ]
-    }
-  }, 
-  {
-    "pk": 77, 
-    "model": "collections.categorization", 
-    "fields": {
-      "category": 20, 
-      "object_id": 1, 
-      "content_type": [
-        "articles", 
-        "article"
-      ]
+        "soundtrack"
+      ], 
+      "order": null
     }
   }, 
   {
@@ -905,19 +698,138 @@
       "content_type": [
         "medialibrary", 
         "flashmovie"
-      ]
+      ], 
+      "order": null
     }
   }, 
   {
-    "pk": 79, 
+    "pk": 77, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
+      "object_id": 1, 
+      "content_type": [
+        "articles", 
+        "article"
+      ], 
+      "order": null
+    }
+  }, 
+  {
+    "pk": 76, 
     "model": "collections.categorization", 
     "fields": {
       "category": 20, 
       "object_id": 1, 
       "content_type": [
         "medialibrary", 
-        "soundtrack"
-      ]
+        "externalcontent"
+      ], 
+      "order": null
+    }
+  }, 
+  {
+    "pk": 75, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
+      "object_id": 1, 
+      "content_type": [
+        "medialibrary", 
+        "movieclip"
+      ], 
+      "order": null
+    }
+  }, 
+  {
+    "pk": 74, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
+      "object_id": 1, 
+      "content_type": [
+        "medialibrary", 
+        "picture"
+      ], 
+      "order": null
+    }
+  }, 
+  {
+    "pk": 73, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
+      "object_id": 1, 
+      "content_type": [
+        "staticpages", 
+        "staticpage"
+      ], 
+      "order": null
+    }
+  }, 
+  {
+    "pk": 70, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
+      "object_id": 1, 
+      "content_type": [
+        "medialibrary", 
+        "regularfile"
+      ], 
+      "order": null
+    }
+  }, 
+  {
+    "pk": 69, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 20, 
+      "object_id": 1, 
+      "content_type": [
+        "medialibrary", 
+        "document"
+      ], 
+      "order": null
+    }
+  }, 
+  {
+    "pk": 66, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 1, 
+      "object_id": 1, 
+      "content_type": [
+        "medialibrary", 
+        "picture"
+      ], 
+      "order": null
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 1, 
+      "object_id": 1, 
+      "content_type": [
+        "medialibrary", 
+        "regularfile"
+      ], 
+      "order": null
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "collections.categorization", 
+    "fields": {
+      "category": 1, 
+      "object_id": 1, 
+      "content_type": [
+        "medialibrary", 
+        "document"
+      ], 
+      "order": null
     }
   }, 
   {
@@ -962,14 +874,18 @@
     "fields": {
       "allow_comments": "SITE", 
       "name": "Un art\u00edculo Pi", 
-      "modification_date": "2012-07-10T16:15:14.298", 
-      "author": null, 
-      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet risus in neque lobortis viverra et scelerisque dolor. Ut pellentesque pharetra odio, aliquam congue nisl tempus nec. Etiam ullamcorper nisi ut tellus blandit cursus. Suspendisse tristique ullamcorper metus sed luctus. ", 
+      "modification_date": "2013-09-15T18:35:10.546", 
+      "author": 2, 
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dui quis nunc interdum lobortis scelerisque quis velit. Aenean vel turpis erat. Fusce a tincidunt urna. Suspendisse quis luctus libero. Pellentesque non posuere turpis. Vivamus luctus tincidunt enim sed pharetra. Etiam suscipit sagittis lacus, consequat aliquet neque adipiscing eget. Nullam eget purus in metus aliquam aliquam.\r\n\r\nSed ultrices, dolor laoreet congue aliquam, nulla lectus semper neque, id euismod tellus turpis in mauris. Aenean accumsan quis nibh vel pharetra. In hac habitasse platea dictumst. Aliquam pretium tincidunt lorem a tincidunt. Duis risus sem, laoreet in viverra a, dapibus id ipsum. Nam elit tellus, malesuada id sem vitae, varius venenatis risus. Phasellus egestas, mauris et hendrerit bibendum, erat sem varius mi, in consequat mauris orci non metus. Aliquam posuere ultrices congue. Quisque congue vitae neque ut ultricies. Praesent egestas dolor ut felis auctor feugiat. Aliquam enim felis, sagittis nec risus a, viverra laoreet enim. Aenean gravida laoreet lobortis. Mauris ultrices lorem orci, ac vulputate odio sollicitudin id. Nam porttitor ipsum a nibh volutpat, id pharetra erat faucibus. Phasellus rutrum eu dui et vehicula.\r\n\r\nInterdum et malesuada fames ac ante ipsum primis in faucibus. Aenean pretium erat in porttitor mattis. Nulla ac turpis velit. Nam suscipit quis enim non luctus. Nulla gravida fringilla pretium. Nam interdum interdum tortor in molestie. Nam fermentum, mi sit amet tristique malesuada, dolor nisl mollis lorem, sit amet tempus urna tortor at mauris. Duis vulputate accumsan eleifend. Duis convallis quis lacus sit amet suscipit. In cursus consequat massa iaculis tempor. Suspendisse potenti. Quisque mollis orci fringilla, porttitor nisl quis, aliquam est. Proin eget hendrerit eros. Praesent pharetra ultricies nunc, rutrum consectetur mi pharetra id. Nulla gravida ipsum dolor. ", 
       "creation_date": "2012-07-10T16:04:17", 
       "source": null, 
+      "user": [
+        "admin"
+      ], 
       "published": true, 
       "date": null, 
-      "summary": "", 
+      "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet dui quis nunc interdum lobortis scelerisque quis velit.", 
+      "show_author": "SITE", 
       "slug": "un-articulo-pi", 
       "pretitle": ""
     }
@@ -983,8 +899,10 @@
       "modification_date": "2012-07-10T15:50:31.670", 
       "text": "h2. Te damos la bienvenida al sitio de demostraci\u00f3n de Neutrona Theme para Cyclope 3\r\n\r\np(text). Neutrona es una plantilla \u201cneutra\u201d realizada para \"Cyclope 3(Cyclope 3)\":http://cyclope.codigosur.org en colores grises, para servir de base de trabajo para dise\u00f1os m\u00e1s complejos. Ha sido realizada bajo el framework 960 Grid System (\"www.960.gs(www.960.gs)\":http://www.960.gs) y est\u00e1 totalmente desarrollada con la t\u00e9cnica tableless. Los navegadores basados en est\u00e1ndares web pueden visualizarla de forma correcta. \r\n\r\np(text). La estructura del *Neutrona* est\u00e1 basadas en 4 y 5 elementos para organizar nuestra portada y contenidos. Podemos encontrar 4 regiones generales: Aire, Fuego, Agua y Tierra. El quinto elemento es una regi\u00f3n adicional llamada Amor. \r\n\r\np(text). Neutrona se realiz\u00f3 primeramente para Cyclope 2, y luego se adapt\u00f3 y perfeccion\u00f3 para Cyclope 3, y est\u00e1 liberada bajo licencia GPL.\r\n\r\np(text). Su creador es _Santiago Hoerth Moura_ y han colaborado en su desarrollo _Juan Pablo Su\u00e1rez_, _Nicol\u00e1s Ech\u00e1niz_, _Federico Hoerth_ y _Alicia Viana_.", 
       "creation_date": "2010-09-17T20:22:39", 
+      "user": null, 
       "published": true, 
       "summary": "", 
+      "show_author": "SITE", 
       "slug": "neutrona-theme"
     }
   }, 
@@ -997,8 +915,10 @@
       "modification_date": "2011-06-18T22:25:24", 
       "text": "Puedes modificar este texto desde el Backend en P\u00e1ginas est\u00e1ticas > Modifica p\u00e1gina est\u00e1tica > Pie de p\u00e1gina. ", 
       "creation_date": "2011-06-18T22:14:01", 
+      "user": null, 
       "published": true, 
       "summary": "", 
+      "show_author": "SITE", 
       "slug": "pie-de-pagina"
     }
   }, 
@@ -1031,7 +951,9 @@
       "image": "/media/uploads/images/pictures/neptuno.jpg", 
       "creation_date": "2012-04-21T15:36:45", 
       "source": null, 
+      "user": null, 
       "published": true, 
+      "show_author": "SITE", 
       "slug": "planeta-neptuno", 
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed diam non mi porta convallis at sit amet tellus. Nunc sed justo vel nulla elementum dictum. Vivamus sit amet tellus sed nunc consectetur viverra. Maecenas sem enim, euismod eget sollicitudin pharetra, rhoncus quis neque."
     }
@@ -1047,7 +969,9 @@
       "image": "/media/uploads/images/pictures/pi-max.jpg", 
       "creation_date": "2012-07-10T16:04:17", 
       "source": null, 
+      "user": null, 
       "published": true, 
+      "show_author": "SITE", 
       "slug": "pi", 
       "description": ""
     }
@@ -1063,7 +987,9 @@
       "image": "/media/uploads/images/pictures/jupiter.jpg", 
       "creation_date": "2012-09-13T15:02:19", 
       "source": null, 
+      "user": null, 
       "published": true, 
+      "show_author": "SITE", 
       "slug": "nueva-imagen", 
       "description": "desc"
     }
@@ -1079,8 +1005,10 @@
       "image": "/media/uploads/images/medialibrary/shangrila.jpg", 
       "creation_date": "2012-07-10T16:04:17", 
       "source": null, 
+      "user": null, 
       "published": true, 
       "audio": "/media/uploads/soundtrack/footstepsinwater.mp3", 
+      "show_author": "SITE", 
       "slug": "un-audio-de-radialistas", 
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet risus in neque lobortis viverra et scelerisque dolor. Ut pellentesque pharetra odio, aliquam congue nisl tempus nec. Etiam ullamcorper nisi ut tellus blandit cursus. Suspendisse tristique ullamcorper metus sed luctus. "
     }
@@ -1096,8 +1024,10 @@
       "creation_date": "2012-07-10T13:43:17", 
       "source": null, 
       "video": "/media/uploads/videos/unvideo.flv", 
+      "user": null, 
       "published": true, 
       "still": "/media/uploads/images/medialibrary/back-to-future.jpg", 
+      "show_author": "SITE", 
       "slug": "volver-al-futuro", 
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet risus in neque lobortis viverra et scelerisque dolor. Ut pellentesque pharetra odio, aliquam congue nisl tempus nec. Etiam ullamcorper nisi ut tellus blandit cursus. Suspendisse tristique ullamcorper metus sed luctus. "
     }
@@ -1113,8 +1043,10 @@
       "image": "/media/uploads/images/medialibrary/creativecommons-800x533.jpg", 
       "creation_date": "2010-09-17T20:22:43", 
       "source": null, 
+      "user": null, 
       "published": true, 
       "document": "/media/uploads/documents/documento.pdf", 
+      "show_author": "SITE", 
       "slug": "cultura-libre", 
       "description": "*Cultura libre* c\u00f3mo los grandes medios usan la tecnolog\u00eda y las leyes para encerrar la cultura y controlar la creatividad (su t\u00edtulo original en ingl\u00e9s Free Culture), es un ensayo de Lawrence Lessig publicado el 25 de marzo de 2004 en Internet con licencia Creative Commons publicado tambi\u00e9n en papel por la editorial Penguin Books. Trata sobre los excesos de los actuales derechos de autor, la pirater\u00eda y el copyleft."
     }
@@ -1131,7 +1063,9 @@
       "flash": "/media/uploads/flash/edificios.swf", 
       "creation_date": "2012-07-10T16:04:17", 
       "source": null, 
+      "user": null, 
       "published": true, 
+      "show_author": "SITE", 
       "slug": "edificios-flash-movie", 
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet risus in neque lobortis viverra et scelerisque dolor. Ut pellentesque pharetra odio, aliquam congue nisl tempus nec. Etiam ullamcorper nisi ut tellus blandit cursus. Suspendisse tristique ullamcorper metus sed luctus. "
     }
@@ -1147,8 +1081,10 @@
       "image": "/media/uploads/images/medialibrary/star_wars_3.jpg", 
       "creation_date": "2010-09-17T20:22:40", 
       "source": null, 
+      "user": null, 
       "file": "/media/uploads/regularfiles/archivito/", 
       "published": true, 
+      "show_author": "SITE", 
       "slug": "archivo-stars-wars", 
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet risus in neque lobortis viverra et scelerisque dolor. Ut pellentesque pharetra odio, aliquam congue nisl tempus nec. Etiam ullamcorper nisi ut tellus blandit cursus. Suspendisse tristique ullamcorper metus sed luctus. "
     }
@@ -1167,7 +1103,9 @@
       "creation_date": "2012-07-10T13:43:17", 
       "source": null, 
       "new_window": true, 
+      "user": null, 
       "published": true, 
+      "show_author": "SITE", 
       "slug": "la-famosa-wikipedia", 
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet risus in neque lobortis viverra et scelerisque dolor. Ut pellentesque pharetra odio, aliquam congue nisl tempus nec. Etiam ullamcorper nisi ut tellus blandit cursus. Suspendisse tristique ullamcorper metus sed luctus. "
     }
@@ -1180,7 +1118,9 @@
       "name": "encuesta de prueba", 
       "modification_date": "2012-06-25T12:44:38.366", 
       "creation_date": "2012-06-25T12:37:28", 
+      "user": null, 
       "published": true, 
+      "show_author": "SITE", 
       "slug": "encuesta-de-prueba", 
       "description": "esta es una encuesta de prueba"
     }
@@ -1193,7 +1133,9 @@
       "name": "otra encuesta de prueba", 
       "modification_date": "2012-06-25T12:47:17.423", 
       "creation_date": "2012-06-25T12:37:28", 
+      "user": null, 
       "published": true, 
+      "show_author": "SITE", 
       "slug": "otra-encuesta-de-prueba", 
       "description": "esta es otra encuesta de prueba"
     }
@@ -1272,9 +1214,11 @@
       "url": "http://www.lavecindaria.org.ar/rss", 
       "number_of_entries": 10, 
       "creation_date": "2012-05-31T20:29:42", 
+      "user": null, 
       "titles_only": false, 
       "published": true, 
       "summary": "RSS feed de La Vecindaria, un sitio amigo.", 
+      "show_author": "SITE", 
       "slug": "la-vecindaria"
     }
   }, 
@@ -1294,6 +1238,17 @@
     "model": "dashboard.dashboardpreferences", 
     "fields": {
       "dashboard_id": "forum-dashboard", 
+      "data": "{}", 
+      "user": [
+        "admin"
+      ]
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "dashboard.dashboardpreferences", 
+    "fields": {
+      "dashboard_id": "articles-dashboard", 
       "data": "{}", 
       "user": [
         "admin"
