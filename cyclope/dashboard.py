@@ -313,10 +313,25 @@ class CustomIndexDashboard(Dashboard):
                     'external': True,
                     },
                 {
-                    'title': _('Tutorials'),
-                    'url': 'http://tutorialcyclope3.codigosur.net/',
+                    'title': _('Documentation'),
+                    'url': 'http://cyclope.codigosur.org/documentacion',
                     'external': True,
                     },
+                {
+                    'title': _('Mailing List'),
+                    'url': 'http://listas.codigosur.org/cgi-bin/mailman/listinfo/cyclopegpl',
+                    'external': True,
+                    },   
+                {
+                    'title': _('News'),
+                    'url': 'http://www.codigosur.org',
+                    'external': True,
+                    },  
+                {
+                    'title': _('Newsletter'),
+                    'url': 'http://listas.codigosur.org/cgi-bin/mailman/listinfo/informativo',
+                    'external': True,
+                    },                                                            
                 ]
         ))
 
