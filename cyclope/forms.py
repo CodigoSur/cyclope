@@ -211,6 +211,7 @@ class DesignSettingsAdminForm(forms.ModelForm):
             widgets[fieldname] = forms.TextInput(attrs={'cols': 10, 'class': 'color'})
                
         palette = (
+            (_('Default'), 'eee,ccc,999,666,333'),
             (_('Corn field'), 'f9f145,b4ac01,fec90a,e86e1b,d41e46'),
             (_('Pizza party'), 'c7f465,4ecdc4,ff6b6b,c54d57,556370'),
             (_('Nogal'), 'fcfce4,fbcfd0,cebb9a,a47e59,755d3b'),
