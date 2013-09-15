@@ -50,15 +50,15 @@
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/ratings.js" ></script>
     {% endif %}
     <script type="text/javascript">
-		less.modifyVars({ 
-			'color-alpha': '#fff',
-            'colora': '#FFD168',
-            'colorb': '#FDC849',
-            'colorc': 'FDA900',
-            'colord': 'EF6200',
-            'colore': '#CD4518',
+        less.modifyVars({
+            'color-alpha': '#fff',
+            'colora': '#{{ CYCLOPE_SITE_SETTINGS.color_a }}',
+            'colorb': '#{{ CYCLOPE_SITE_SETTINGS.color_b }}',
+            'colorc': '#{{ CYCLOPE_SITE_SETTINGS.color_c }}',
+            'colord': '#{{ CYCLOPE_SITE_SETTINGS.color_d }}',
+            'colore': '#{{ CYCLOPE_SITE_SETTINGS.color_e }}',
             'color-omega':'#000'
-            });
+        });
     </script>
     <script type="text/javascript">
     $(function() {
