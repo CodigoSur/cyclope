@@ -98,7 +98,7 @@
     </style>
     {% endblock sitesettings_css %}
     {% block extra_head %}{% endblock %}
-    
+
 </head>
 
 <body class="{% block body_class %}{%endblock%}">
@@ -108,8 +108,8 @@
 {% region 'air' %}
  {% if CYCLOPE_SITE_SETTINGS.show_head_title  %}
   <div class="brand" {% if CYCLOPE_SITE_SETTINGS.head_image %}style="background:url({{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.head_image }}); background-repeat: no-repeat;"{% endif %}>
-    <h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>  
-    <h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2></a>
+    <h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
+    <h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
    </div>
  {% else %}
   <a href="/">
