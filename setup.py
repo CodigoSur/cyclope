@@ -22,7 +22,7 @@
 import codecs
 from setuptools import setup, find_packages
 
-version = '0.4.dev0'
+version = '0.4'
 
 
 def read(filename):
@@ -46,7 +46,7 @@ setup(
     license='GPL v3',
     platforms=['OS Independent'],
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Django",
         "Intended Audience :: Developers",
