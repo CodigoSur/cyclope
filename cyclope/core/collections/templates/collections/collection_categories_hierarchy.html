@@ -1,9 +1,10 @@
 {% extends host_template %}
+{% load cyclope_utils %}
 
 {% block content %}
 <div class="collection_categories_hierarchy">
   <ul class="cyclope_menu {{ align|lower }}">
-  {{ categories|unordered_list }}
+  {{ categories|unordered_list_css }}
   </ul>
 </div>
 {% endblock content%}

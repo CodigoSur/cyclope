@@ -51,11 +51,16 @@
                 var param = $(this).val();
                 var key = $(this).attr('id') + '::' + param;
 
-                $$.attr('disabled', 'disabled');
+                //$$.attr('disabled', 'disabled');
 
                 var data = cache.getItem(key);
                 if (data) {
                     addOptions($$, opts, data);
+                } else if (opts.accesor_function) {
+                    data = opts.accesor_function(param);
+
+                    addOptions($$, opts, data);
+                    cache.setItem(key, data);
                 } else {
                     showPreloader();
                     $.ajax({
@@ -76,7 +81,7 @@
                 }
             });
 
-            if (opts.parent.val()) {
+            if (opts.parent.val() && !opts.notTriggetParentChange) {
                 // If the parent list has a selected value, trigger
                 // its "change" event so chained lists can update
                 // their options:
@@ -168,7 +173,7 @@
         label: 'name',                          // The name of the field containing text for the option's label
         preloadUrl: '',                         // The URL to a GIF image to be used as a preloader
         cacheClass: $.fn.chainedSelect.Cache,   // The cache used to store the results of AJAX calls
-        cacheLength: 10,                        // The maximum number of entries that should be cached
+        cacheLength: 0,                        // The maximum number of entries that should be cached
         error: null                             // Function called if an AJAX call returns an error
     }
 })(jQuery);

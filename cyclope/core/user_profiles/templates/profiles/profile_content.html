@@ -1,9 +1,41 @@
-{% load i18n fb_versions %}
+{% load i18n fb_versions activity_tags social %}
+{% load url from future %}
 
 <h1 class="title">{{ current_object.user.get_full_name|default:current_object.user.username }}</h1>
 
+<script>
+$(function() {
+
+    function follow_unfollow_button(el){
+        ffobject = {"follow_url": $(el).attr("urlFollow"), "unfollow_url":  $(el).attr("urlUnfollow"),
+                    "following": $(el).attr("following") === "true"}
+        render = function (){
+            text = {% if request.user.is_authenticated %} this.ffobject.following ? '{% trans "Unfollow" %}' : '{% trans "Follow" %}' {% else %} '{% trans "Please" %} <a href="{% url 'auth_login' %}?next={% firstof request.path '/' %}">{% trans "login" %}</a> {% trans "to follow" %}.'{% endif %};
+            return this.el.innerHTML = text;
+        }
+        toggle = function (){
+            this.ffobject.following = !this.ffobject.following;
+        }
+        click = function (){
+            $.post(this.ffobject.following ? this.ffobject.unfollow_url : this.ffobject.follow_url)
+            this.toggle();
+            this.render();
+        }
+        obj = {"render": render, "toggle": toggle, "ffobject": ffobject, "el": el, "click": click}
+        $(el).click(function(){obj.click()});
+        obj.render();
+        return  obj;
+    }
+    $(".follow-unfollow").each(function(){follow_unfollow_button(this)});
+});
+</script>
+
+<div class="follow-unfollow" urlUnfollow="{% unfollow_url current_object.user %}"  urlFollow="{% actual_follow_all_url current_object.user %}" following="{% if request.user|is_following:current_object.user %}true{% else %}false{% endif %}"></div>
+
+<div class="activity"><a href="{% actor_url current_object.user %}">{% trans "Activity" %}</a></div>
+
 {% if current_object.city %} {% trans "City" %}: {{current_object.city}} {% endif %}
 
-{{current_object.about|linebreaks}}
+{{ current_object.about|linebreaks }}
 
 {% if current_object.avatar %}<img src="{% version current_object.avatar.path 'croppedthumbnail' %}" alt="profile avatar" />{% endif %}

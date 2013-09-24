@@ -11,6 +11,7 @@
 
     <form action="." method="post" class="uniForm login">{% csrf_token %}
       {{form|crispy}}
+      <input type="hidden" name="next" value="{{ next }}" />
       <div class="buttonHolder">
         <input type="submit" value="{% trans "login"|capfirst %}" />
 

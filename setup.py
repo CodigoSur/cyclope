@@ -22,7 +22,7 @@
 import codecs
 from setuptools import setup, find_packages
 
-version = '0.3.1'
+version = '0.4'
 
 
 def read(filename):
@@ -73,7 +73,7 @@ setup(
         'Django>=1.4,<1.5',
         'django-autoslug==1.4.1',
         'django-mptt==0.4.2', # 0.4 breaks compatibility
-        'django-mptt-tree-editor>=0.1,<0.2',
+        'django-mptt-tree-editor>=0.1.1,<0.2',
         'PIL>=1.1.7', # in PIL we trust
         'django-simple-captcha==0.2.0',
         'django-filebrowser-nograpup>=3.0.3,<3.1',
@@ -95,6 +95,7 @@ setup(
         'django-crispy-forms>=1.2,<1.3',
         'django-compressor>=1.2,<1.3',
         'django-generic-ratings>=0.6,<0.7',
+        'django-activity-stream==0.4.4',
     ],
 
     scripts=['cyclope/bin/cyclopeproject','cyclope/bin/cyclopedemo'],

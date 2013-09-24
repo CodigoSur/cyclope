@@ -20,7 +20,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from ratings.handlers import ratings
-from cyclope.core.ratings.forms import LikeDislikeVoteForm
+from cyclope.apps.ratings.forms import LikeDislikeVoteForm
 from cyclope.apps import medialibrary
 from cyclope.apps.articles.models import Article
 

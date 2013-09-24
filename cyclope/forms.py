@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2012 Código Sur Sociedad Civil.
+# Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -32,8 +32,8 @@ from django.contrib.admin.widgets import AdminTextareaWidget
 from mptt.forms import TreeNodeChoiceField
 
 from cyclope.core.frontend import site
-from cyclope.models import MenuItem, RelatedContent, SiteSettings, Layout, \
-                            RegionView
+from cyclope.models import (MenuItem, RelatedContent, SiteSettings, Layout,
+                             RegionView, DesignSettings)
 from cyclope.fields import MultipleField
 from cyclope.themes import get_all_themes, get_theme
 from cyclope.apps.related_admin import GenericFKWidget, GenericModelForm
@@ -178,24 +178,57 @@ class MenuItemAdminForm(GenericModelForm, ViewOptionsFormMixin):
 
 
 class SiteSettingsAdminForm(forms.ModelForm):
-    theme = forms.ChoiceField(label=_('Theme'),
-        choices=[(theme_name,  theme.verbose_name)
-                 for theme_name, theme in get_all_themes().iteritems()],
-        required=True)
-
     def __init__(self, *args, **kwargs):
         super(SiteSettingsAdminForm, self).__init__(*args, **kwargs)
-        self.fields["keywords"].widget = AdminTextareaWidget()
-        self.fields["description"].widget = AdminTextareaWidget()
+        self.fields["keywords"].widget = AdminTextareaWidget(attrs={'rows': 3})
+        self.fields["description"].widget = AdminTextareaWidget(attrs={'rows': 5})
         self.fields['rss_content_types'].choices = site.get_base_ctype_choices()
 
-        #TODO(diegoM): I don't like this...
+
         if ('', '------') in self.fields['rss_content_types'].choices:
             self.fields['rss_content_types'].choices.remove(('', '------'))
 
     class Meta:
         model = SiteSettings
 
+def get_home_menu_item():
+    return MenuItem.objects.get(site_home=True)
+
+class DesignSettingsAdminForm(forms.ModelForm):
+
+    theme = forms.ChoiceField(label=_('Theme'),
+        choices=sorted([(theme_name,  theme.verbose_name)
+                         for theme_name, theme in get_all_themes().iteritems()],
+                         key=lambda t: t[1]),
+        required=True)
+    home_layout = forms.ModelChoiceField(queryset=Layout.objects.all(),
+                                         initial=lambda : get_home_menu_item().layout)
+    class Meta:
+        model = DesignSettings
+        
+        widgets = {}
+        for fieldname in ['color_'+l for l in ('a', 'b', 'c', 'd', 'e')]:
+            widgets[fieldname] = forms.TextInput(attrs={'cols': 10, 'class': 'color'})
+               
+        palette = (
+            (_('Default'), 'eee,ccc,999,666,333'),
+            (_('Corn field'), 'f9f145,b4ac01,fec90a,e86e1b,d41e46'),
+            (_('Pizza party'), 'c7f465,4ecdc4,ff6b6b,c54d57,556370'),
+            (_('Nogal'), 'fcfce4,fbcfd0,cebb9a,a47e59,755d3b'),
+            (_('Deep ocean'), 'd8d7ec,c1c0dd,8f8db1,4f4c7b,302e57'),
+            (_('Eggplant'), 'ffe99c,fec90a,a55e93,9b1a7b,64074d'),
+            (_('Teddy bear'), 'fca,f95,d45500,a40,803300'),
+            (_('Green Day'), 'dde9af,cdde87,abc837,677821,445016'),
+            (_('Happy Birthday'), 'ffff00,f17c36,01c000,fe0000,7900bf'),
+            (_('Romance'), 'ffd5d5,ff8080,ff5555,d40000,800000'),
+        )
+
+    def save(self, *args, **kwargs):
+        m = super(DesignSettingsAdminForm, self).save(*args, **kwargs)
+        home = get_home_menu_item()
+        home.layout = self.cleaned_data['home_layout']
+        home.save()
+        return m
 
 class LayoutAdminForm(forms.ModelForm):
     template = forms.ChoiceField(label=_('Template'), required=True)

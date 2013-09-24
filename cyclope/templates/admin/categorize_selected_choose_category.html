@@ -1,0 +1,48 @@
+{% extends "admin/base_site.html" %}
+{% load i18n l10n %}
+{% load url from future %}
+{% load admin_urls %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=app_label %}">{{ app_label|capfirst|escape }}</a>
+&rsaquo; <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+&rsaquo; {% trans 'Categorize multiple objects' %}
+</div>
+{% endblock %}
+
+{% block content %}
+    <h3>Objects to categorize:</h3>
+    <ul>
+    {% for object in queryset %}
+        <li><a href="{{ object.get_absolute_url }}">{{ object }}</a></li>
+    {% endfor %}
+    </ul>
+
+    <form action="" method="post">{% csrf_token %}
+    <h3>Select one or more categories:</h3>
+    {% for collection in collections %}
+        {% if collection.categories.all %}
+        <div>
+        <h5>{{collection}}</h5>
+            <ul>
+            {% for category in collection.categories.all %}
+                <li><input type="checkbox" name="categories" value="{{ category.pk }}" /> <label class="vCheckboxLabel">{{ category }} </label></li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% endfor %}
+
+    <div>
+    {% for obj in queryset %}
+    <input type="hidden" name="{{ action_checkbox_name }}" value="{{ obj.pk|unlocalize }}" />
+    {% endfor %}
+
+    <input type="hidden" name="action" value="categorize_selected" />
+    <input type="hidden" name="post" value="yes" />
+    <input type="submit" value="{% trans "Categorize" %}" />
+    </div>
+    </form>
+{% endblock %}

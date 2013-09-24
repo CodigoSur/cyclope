@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 #
-# Copyright 2010-2012 Código Sur Sociedad Civil.
+# Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.

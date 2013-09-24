@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2012 Código Sur Sociedad Civil.
+# Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -37,7 +37,7 @@ from django.db.models import get_model
 
 from cyclope.models import MenuItem, SiteSettings, BaseContent
 import cyclope
-from cyclope.utils import layout_for_request, LazyJSONEncoder
+from cyclope.utils import layout_for_request, LazyJSONEncoder, get_object_name
 from cyclope.themes import get_theme
 
 class CyclopeSite(object):
@@ -86,6 +86,9 @@ class CyclopeSite(object):
     def get_registry_ctype_choices(self):
         return sorted(self._registry_ctype_choices, key=lambda choice: choice[1])
 
+    def get_all_registry_models(self):
+        return self._registry.keys()
+
     def get_urls(self):
         urlpatterns = patterns('',
             url(r'^$', self.index, name='index'),
@@ -101,10 +104,10 @@ class CyclopeSite(object):
 
         # url patterns for registered views
         for model, model_views in self._registry.items():
+            model_name = get_object_name(model)
             for view in model_views:
-                url_pattern = view.get_url_pattern(model)
-                model_name = model._meta.object_name.lower()
-                url_name = "%s-%s" % (model_name, view.name)
+                url_pattern = self.get_url_pattern_for_view(view, model_name)
+                url_name = self.get_url_name_for_view(view, model_name)
                 urlpatterns += patterns('', url(url_pattern, view, name=url_name))
                 if view.is_default:
                     urlpatterns += patterns('', url(url_pattern, view, name=model_name))
@@ -113,6 +116,20 @@ class CyclopeSite(object):
         urlpatterns.extend(self.get_menuitem_urls())
         return urlpatterns
 
+    def get_url_pattern_for_view(self, view, model_name):
+        if view.is_default:
+            if view.is_instance_view:
+                pattern = '%s/(?P<slug>[\w-]+)/$' % (model_name, )
+            else:
+                pattern = '%s/$' % model_name
+        elif view.is_instance_view:
+            pattern = '%s/(?P<slug>[\w-]+)/View/%s' % (model_name, view.name)
+        else:
+            pattern =  '%s/View/%s' % (model_name, view.name)
+        return pattern
+
+    def get_url_name_for_view(self, view, model_name):
+        return "%s-%s" % (model_name, view.name)
 
     def get_menuitem_urls(self):
         urlpatterns = []
@@ -241,6 +258,7 @@ class CyclopeSite(object):
         template_filename = request.GET['q']
         theme_name = SiteSettings.objects.get().theme
         theme_settings = get_theme(theme_name)
+
         regions = theme_settings.layout_templates[template_filename]['regions']
         regions_data = [{'region_name': '', 'verbose_name': '------'}]
         regions_data.extend([ {'region_name': region_name,

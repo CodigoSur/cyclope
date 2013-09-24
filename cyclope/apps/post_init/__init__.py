@@ -22,3 +22,4 @@
 import ratings_registration
 import comments_moderator
 import abuse_registration
+import activity_stream_registration

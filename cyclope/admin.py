@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2012 Código Sur Sociedad Civil.
+# Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -29,26 +29,28 @@ configuration for the Django admin
 from django.db import models
 from django.contrib import admin
 from django.core import urlresolvers
+
 from django.contrib.admin.options import FORMFIELD_FOR_DBFIELD_DEFAULTS
 from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponseRedirect
 from django.contrib.sites.models import Site
+import django.forms
 
 from mptt_tree_editor.admin import TreeEditor
 
 from cyclope.models import *
-from cyclope.forms import MenuItemAdminForm,\
-                          SiteSettingsAdminForm,\
-                          LayoutAdminForm,\
-                          RegionViewInlineForm,\
-                          RelatedContentForm,\
-                          AuthorAdminForm
+from cyclope.forms import (MenuItemAdminForm, SiteSettingsAdminForm,
+                            LayoutAdminForm, RegionViewInlineForm,
+                            RelatedContentForm, AuthorAdminForm,
+                            DesignSettingsAdminForm)
 
 from cyclope.widgets import get_default_text_widget
 from cyclope.core.collections.admin import CollectibleAdmin
 from cyclope.core.collections.models import Category
 import cyclope.settings as cyc_settings
 from cyclope.utils import PermanentFilterMixin
+from cyclope.signals import admin_post_create
+
 
 # Set default widget for all admin textareas
 default_admin_textfield = FORMFIELD_FOR_DBFIELD_DEFAULTS[models.TextField]
@@ -80,6 +82,7 @@ class BaseContentAdmin(admin.ModelAdmin):
         return super(BaseContentAdmin, self).response_change(request, obj)
 
     def response_add(self, request, obj, post_url_continue='../%s/'):
+        admin_post_create.send(sender=obj.__class__, request=request, instance=obj)
         if '_frontend' in request.REQUEST:
             return HttpResponseRedirect(obj.get_absolute_url())
         return super(BaseContentAdmin, self).response_add(request, obj, post_url_continue)
@@ -163,10 +166,7 @@ class LayoutAdmin(admin.ModelAdmin):
 
 admin.site.register(Layout, LayoutAdmin)
 
-
-class SiteSettingsAdmin(admin.ModelAdmin):
-    form = SiteSettingsAdminForm
-
+class SingletonAdminMixin(admin.ModelAdmin):
     def has_add_permission(self, request):
         """ Prevent addition of new objects """
         return False
@@ -174,7 +174,52 @@ class SiteSettingsAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
+    def response_change(self, request, obj):
+        if not '_continue' in request.POST:
+            return HttpResponseRedirect(urlresolvers.reverse('admin:index'))
+        else:
+            return super(SingletonAdminMixin, self).response_change(request, obj)
+
+DESIGN_FIELDS = (
+    'global_title', 'theme', 'default_layout', 'head_image', 
+    'show_head_title', 'body_font', 'body_custom_font', 'titles_font', 
+    'titles_custom_font', 'font_size', 'hide_content_icons', 
+    'color_a', 'color_b', 'color_c', 'color_d', 'color_e',
+)
+ 
+
+class SiteSettingsAdmin(SingletonAdminMixin):
+    form = SiteSettingsAdminForm
+    exclude = ('site', ) + DESIGN_FIELDS
+
 admin.site.register(SiteSettings, SiteSettingsAdmin)
+
+
+class DesignSettingsAdmin(SingletonAdminMixin):
+    form = DesignSettingsAdminForm
+
+    fieldsets = (
+        (_('General'), {
+            'fields': ('global_title', 'show_head_title', 'head_image', 'theme', 'home_layout', 'default_layout', )
+        }),
+        (_('Fonts'), {
+            'fields': ('font_size', ('body_font', 'body_custom_font'), 
+                       ('titles_font', 'titles_custom_font',) )
+        }),
+        (_('Colours'), {
+            'classes': ['colours', ],
+            'fields': ('color_a', 'color_b', 'color_c', 'color_d', 'color_e')
+        }),
+        (_('Other'), {
+            'fields': ( 'hide_content_icons', )
+        }),
+    )
+
+    class Media:
+        js = (cyc_settings.CYCLOPE_STATIC_URL + "js/jscolor/jscolor.js",)
+
+admin.site.register(DesignSettings, DesignSettingsAdmin)
+
 
 class ImageAdmin(admin.ModelAdmin):
     list_display = ['thumbnail']

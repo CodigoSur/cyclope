@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2012 Código Sur Sociedad Civil.
+# Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -48,8 +48,25 @@ from jsonfield import JSONField
 
 import cyclope
 from cyclope.core.collections.models import Collection
-from cyclope.utils import ThumbnailMixin, get_singleton
+from cyclope.utils import (ThumbnailMixin, get_singleton,
+                            get_object_name, get_app_label)
 
+FONT_CHOICES = (
+   (' ', _('- Default -')),
+   ('architects', _('Architects')),
+   ('bonveno', _('Bonveno')),
+   ('comfortaa', _('Comfortaa')),
+   ('coolvetica', _('Coolvetica')),
+   ('earthbound', _('Earthbound')),
+   ('lato', _('Lato')),
+   ('sofia', _('Sofia')),
+   ('toscuchet', _('toscuchet')),
+   ('ubuntu', _('Ubuntu')),
+   ('arial', _('Arial')),
+   ('times new roman', _('Times New Roman')),
+   ('verdana', _('Verdana')),
+   ('custom_body', _('Custom Body')),
+)
 
 class SiteSettings(models.Model):
     """Model to store site-wide settings.
@@ -102,6 +119,40 @@ class SiteSettings(models.Model):
                                        help_text=_("Change USERNAME by your username in each service you want to enable." \
                                                    " Eg for youtube: if your page is http://youtube.com/user/cyclope/" \
                                                    " then replace the 'USERNAME' bellow youtube with 'cyclope'."))
+    # theme customization
+    head_image = models.ImageField(_('header image'), 
+                                   upload_to='theme/images', blank=True, null=True,
+                                   help_text=_('select image for head: 960px width x 170px height'))
+    show_head_title = models.BooleanField(_('show head title'), default=True,
+                                          help_text=_('show title and url site in head. If disabled, ' \
+                                          'header image links to home.'))
+    body_font = models.CharField(_('body font'), max_length=50,
+                                 choices=FONT_CHOICES , default='', 
+                                 help_text=_('change the font of the body'))
+    body_custom_font =  models.FileField(_('body custom font'), 
+                                         blank=True, null=True, 
+                                         upload_to='theme/fonts', 
+                                         help_text="Upload a custom font for the body. Allowed formats: .otf, .tff")
+    titles_font = models.CharField(_('font for titles'), max_length=50,
+                                   choices=FONT_CHOICES, default='', 
+                                   help_text=_('change the font of the head and titles'))
+    titles_custom_font =  models.FileField(_('titles custom font'), blank=True, null=True, 
+                                           upload_to='theme/fonts', 
+                                           help_text="Upload a custom font for head and titles. Allowed formats: .otf, .tff")
+    font_size = models.DecimalField(_('font size'), max_digits=4, decimal_places=2, default=12)
+    hide_content_icons = models.BooleanField(_('hide content icons'), default=False,
+                                             help_text=_('Content icons are shown beside the title of the content'))
+
+    color_a	= models.CharField(_('color A'), max_length=8, default='eee', 
+                               help_text=_('change the color A'))
+    color_b	= models.CharField(_('color B'), max_length=8, default='ccc',
+                               help_text=_('change the color B'))
+    color_c	= models.CharField(_('color C'), max_length=8, default='999', 
+                               help_text=_('change the color C'))
+    color_d	= models.CharField(_('color D'), max_length=8, default='666', 
+                               help_text=_('change the color D'))
+    color_e	= models.CharField(_('color E'), max_length=8, default='333', 
+                               help_text=_('change the color E'))
 
     def save(self, *args, **kwargs):
         self.id = 1
@@ -116,6 +167,12 @@ class SiteSettings(models.Model):
     class Meta:
         verbose_name = _('site settings')
         verbose_name_plural = _('site settings')
+
+
+class DesignSettings(SiteSettings):
+    'Proxy model to use in the admin'
+    class Meta:
+        proxy = True
 
 
 class Menu(models.Model):
@@ -267,6 +324,10 @@ class RegionView(models.Model):
     def __unicode__(self):
         return '%s/%s' % (self.content_type.model, self.content_view)
 
+    def get_view(self):
+        return cyclope.core.frontend.site.get_view(self.content_type.model_class(),
+                                                    self.content_view)
+
 
 class Layout(models.Model):
     """Given a theme template, a Layout configures which frontend views will be displayed in each region.
@@ -355,11 +416,11 @@ class BaseContent(models.Model):
 
     @classmethod
     def get_app_label(cls):
-        return cls._meta.app_label
+        return get_app_label(cls)
 
     @classmethod
     def get_object_name(cls):
-        return cls._meta.object_name.lower()
+        return get_object_name(cls)
 
     @classmethod
     def get_verbose_name(cls):
@@ -455,6 +516,7 @@ class Author(models.Model, ThumbnailMixin):
     class Meta:
         verbose_name = _('author')
         verbose_name_plural = _('authors')
+        ordering = ['name']
 
     @models.permalink
     def get_absolute_url(self):

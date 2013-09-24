@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2012 Código Sur Sociedad Civil
+# Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -34,6 +34,12 @@ from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 import cyclope
+
+def get_object_name(model):
+    return model._meta.object_name.lower()
+
+def get_app_label(model):
+    return model._meta.app_label
 
 def get_extension(filename):
     """
@@ -361,3 +367,28 @@ def mail_managers(subject, message, fail_silently=False, connection=None,
     if html_message:
         mail.attach_alternative(html_message, 'text/html')
     mail.send(fail_silently=fail_silently)
+
+
+class HyerarchyBuilderMixin(object):
+
+    template_item = ""
+
+    def render_item(self, item, *args):
+        """
+        Render one item of the hierarchy. This must me implemented by the subclass.
+        """
+        raise NotImplementedError
+
+    def make_nested_list(self, base, *render_args):
+        nested_list = []
+        for child in base.get_children().filter(active=True):
+            if child.get_descendant_count() > 0:
+                nested_list.extend(self.make_nested_list(child, *render_args))
+            else:
+                nested_list.append((self.render_item(child, *render_args), child.slug))
+
+        include = (self.render_item(base, *render_args), base.slug)
+        if nested_list:
+            return [include, nested_list]
+        else:
+            return [include]

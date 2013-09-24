@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2012 Código Sur Asociación Civil
+# Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -35,5 +35,7 @@ class TopicForm(forms.ModelForm):
 
 class TopicAdmin(CollectibleAdmin, BaseContentAdmin):
     form = TopicForm
+    list_display = ('name', 'creation_date') + CollectibleAdmin.list_display
+    list_filter = ('creation_date',) + CollectibleAdmin.list_filter
 
 admin.site.register(Topic, TopicAdmin)

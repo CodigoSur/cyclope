@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -36,6 +36,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from cyclope import settings as cyc_settings
+from cyclope.utils import get_object_name, get_app_label
 
 
 def object_detail(request, req_context, content_object, extra_context=None, view_name='detail',
@@ -45,11 +46,11 @@ def object_detail(request, req_context, content_object, extra_context=None, view
     """
     obj = content_object
     if not template_object_name:
-        template_object_name = obj._meta.object_name.lower()
+        template_object_name = get_object_name(obj)
 
     if not template_name:
-        template_name = "%s/%s_%s.html" % (
-            obj._meta.app_label, obj._meta.object_name.lower(), view_name)
+        template_name = "%s/%s_%s.html" % (get_app_label(obj), get_object_name(obj),
+                                           view_name)
     t = loader.get_template(template_name)
 
     req_context.update({template_object_name: obj})
@@ -104,7 +105,7 @@ def object_list(request, req_context, queryset, view_name='list',
     if extra_context is None: extra_context = {}
     queryset = queryset._clone()
     if not template_object_name:
-        template_object_name = queryset.model._meta.object_name.lower()
+        template_object_name = get_object_name(queryset.model)
 
     if paginate_by:
         paginator = Paginator(queryset, paginate_by, allow_empty_first_page=allow_empty)
@@ -159,8 +160,7 @@ def object_list(request, req_context, queryset, view_name='list',
 
     if not template_name:
         model = queryset.model
-        template_name = "%s/%s_%s.html" % (
-            model._meta.app_label, model._meta.object_name.lower(), view_name)
+        template_name = "%s/%s_%s.html" % (get_app_label(model), get_object_name(model), view_name)
 
     t = template_loader.get_template(template_name)
     return t.render(req_context)

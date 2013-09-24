@@ -42,6 +42,7 @@ class LikeDislikeWidget(BaseWidget):
             'widget_id': self.get_widget_id('likedislike', name, self.key),
             'score': self._get_score_annotated(),
             'cyc_settings': cyc_settings,
+            'instance': self.instance,
         }
 
     def render(self, name, value, attrs=None):

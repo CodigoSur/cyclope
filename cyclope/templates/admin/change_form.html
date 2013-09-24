@@ -9,7 +9,7 @@
 {{ media }}
 <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/reuse_django_jquery.js"></script>
 <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery.chainedSelect.js"></script>
-<script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less-1.3.0.min.js"></script>
+<script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less.min.js"></script>
 {% endblock %}
 
 {% block extrastyle %}
@@ -40,7 +40,7 @@
 {% block object-tools %}
 {% if change %}{% if not is_popup %}
   <ul class="object-tools">
-    {% block object-tools-items %}
+    {% block object-tools-items %}{{super}}
     <li><a href="history/" class="historylink">{% trans "History" %}</a></li>
     {% if has_absolute_url %}<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif%}
     {% endblock %}

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2012 Código Sur Sociedad Civil
+# Copyright 2010-2013 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -35,6 +35,7 @@ from cyclope.feeds import CategoryFeed, WholeSiteFeed, ContentTypeFeed
 from cyclope.sitemaps import CategorySitemap, CollectionSitemap, MenuSitemap
 from cyclope.core.user_profiles.forms import UserProfileForm
 
+
 urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
         {'sitemaps': {"menus": MenuSitemap, "categories": CategorySitemap,
@@ -46,6 +47,7 @@ urlpatterns = patterns('',
     url(r'^locations/', include('cyclope.apps.locations.urls')),
     url(r'^newsletter/', include('cyclope.apps.newsletter.urls')),
     url(r'^abuse/', include('cyclope.apps.abuse.urls')),
+    url(r'^social/', include('cyclope.apps.social.urls')),
     url(r'^related_admin/', include('cyclope.apps.related_admin.urls')),
     url(r'^rss/category/(?P<slug>[\w-]+)/$', CategoryFeed(), name='category_feed'),
     url(r'^rss/$', WholeSiteFeed(), name='whole_site_feed'),
@@ -93,6 +95,8 @@ urlpatterns = patterns('',
     url(r'^forms/', include("forms_builder.forms.urls")),
     # django-generic-ratings
     (r'^ratings/', include('ratings.urls')),
+    # django-activity-stream
+    ('^activity/', include('actstream.urls')),
 )
 
 if django_settings.DEBUG:

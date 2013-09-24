@@ -78,11 +78,13 @@ MIDDLEWARE_CLASSES = (
 
 # the order of the INSTALLED_APPS is relevant to get the template load order right
 INSTALLED_APPS = [
+
     'dbgettext',
     'rosetta',
     'haystack',
 
     'cyclope',
+    'cyclope.core.frontend',
     'cyclope.core.collections',
     'cyclope.core.series',
     'cyclope.core.perms',
@@ -100,6 +102,7 @@ INSTALLED_APPS = [
     'cyclope.apps.abuse',
     'cyclope.apps.related_admin',
     'cyclope.apps.custom_comments',
+    'cyclope.apps.social',
 
     'admin_tools',
     'admin_tools.theming',
@@ -133,6 +136,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'compressor',
     'ratings',
+    'actstream',
 
 #    'debug_toolbar',
 #    'django_extensions',
@@ -149,6 +153,8 @@ AUTHENTICATION_BACKENDS = (
 ADMIN_MEDIA_PREFIX = "/media/admin/"
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+TEST_RUNNER = 'cyclope.tests.CyclopeTestSuiteRunner'
 
 # debug_toolbar settings
 #DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
@@ -170,12 +176,12 @@ FILEBROWSER_EXTENSIONS = {
     'Folder': [''],
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
     'Video': ['.ogv', '.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.flv', '.mp4'],
-    'Document': ['.odt', 'docx', '.pdf','.doc','.rtf','.txt',
+    'Document': ['.odt', '.docx', '.pdf','.doc','.rtf','.txt',
                  '.ods', '.xls', '.xlsx', '.csv', '.ppt', '.pptx'],
     'Audio': ['.ogg', '.oga', '.mp3','.wav','.aiff','.midi','.m4p'],
-    'Code': ['.html','.py','.js','.css'],
+    'Code': ['.html', '.js','.css'],
+    'Archives': ['.zip', '.rar', '.7z', '.xs', '.gz', '.tar'],
     'Flash_App': ['.swf',],
-    'Flash_Movie': ['.flv',],
 }
 
 FILEBROWSER_SELECT_FORMATS = {
@@ -279,3 +285,13 @@ COMPRESS_PRECOMPILERS = (
 )
 
 COMPRESS_DEBUG_TOGGLE = 'nocompress'
+
+ACTSTREAM_SETTINGS = {
+    'MODELS': ['auth.user', 'auth.group', 'custom_comments.customcomment'],
+    'FETCH_RELATIONS': True,
+    'USE_PREFETCH': True,
+    'USE_JSONFIELD': True,
+    'GFK_FETCH_DEPTH': 1,
+}
+
+ACTSTREAM_SETTINGS_ENABLED = False

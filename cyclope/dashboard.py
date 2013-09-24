@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2012 Código Sur Sociedad Civil.
+# Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -154,6 +154,9 @@ class CustomIndexDashboard(Dashboard):
                         {'title': _('Site Settings'),
                          'url': '/admin/cyclope/sitesettings/%s/' % site_settings.id,
                          },
+                        {'title': _('Design'),
+                         'url': '/admin/cyclope/designsettings/%s/' % site_settings.id,
+                         },
                         {'title': _('Contact Form'),
                          'url': '/admin/contact_form/contactformsettings/%s/' % contact_form.id,
                          },
@@ -179,6 +182,12 @@ class CustomIndexDashboard(Dashboard):
                 include_list=[
                     'cyclope.apps.polls.models.Poll',
                     'cyclope.apps.polls.models.Question',
+                    ]),
+            modules.ModelList(
+                title=_('Forum'),
+                css_classes = ('dbmodule-forum', 'main-area-modules',),
+                include_list=[
+                    'cyclope.apps.forum.models.Topic',
                     ]),
             modules.ModelList(
                 title=_('Feeds'),
@@ -304,10 +313,25 @@ class CustomIndexDashboard(Dashboard):
                     'external': True,
                     },
                 {
-                    'title': _('Tutorials'),
-                    'url': 'http://tutorialcyclope3.codigosur.net/',
+                    'title': _('Documentation'),
+                    'url': 'http://cyclope.codigosur.org/documentacion',
                     'external': True,
                     },
+                {
+                    'title': _('Mailing List'),
+                    'url': 'http://listas.codigosur.org/cgi-bin/mailman/listinfo/cyclopegpl',
+                    'external': True,
+                    },   
+                {
+                    'title': _('News'),
+                    'url': 'http://www.codigosur.org',
+                    'external': True,
+                    },  
+                {
+                    'title': _('Newsletter'),
+                    'url': 'http://listas.codigosur.org/cgi-bin/mailman/listinfo/informativo',
+                    'external': True,
+                    },                                                            
                 ]
         ))
 

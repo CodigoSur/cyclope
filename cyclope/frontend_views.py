@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 Código Sur - Nuestra América Asoc. Civil / Fundación Pacificar.
+# Copyright 2010-2013 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -33,6 +33,7 @@ from django.contrib.comments.models import Comment
 from django.template.loader import render_to_string
 
 import cyclope.utils
+from cyclope.utils import HyerarchyBuilderMixin
 from cyclope import settings as cyc_settings
 from cyclope.core import frontend
 from cyclope.core.collections.models import Collection, Category
@@ -88,8 +89,7 @@ class MenuHierarchyOptions(forms.Form):
                                        ("DISABLED", _("disabled"))),
                               initial="HORIZONTAL")
 
-# TODO(nicoechaniz): refactor this view and CollectionCategoriesHierarchy which share most of their code.
-class MenuMenuItemsHierarchy(frontend.FrontendView):
+class MenuMenuItemsHierarchy(frontend.FrontendView, HyerarchyBuilderMixin):
     """A hierarchical list view of the menu items in a menu.
     """
     name='menuitems_hierarchy'
@@ -97,6 +97,7 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
     is_region_view = True
     options_form = MenuHierarchyOptions
     template = "cyclope/menu_menuitems_hierarchy.html"
+    template_item = "cyclope/menu_menuitems_hierarchy_item.html"
 
     def get_response(self, request, req_context, options, content_object):
         menu = content_object
@@ -104,44 +105,24 @@ class MenuMenuItemsHierarchy(frontend.FrontendView):
         menu_items_list = []
         current_url = request.path_info[1:]
         for item in menu_items:
-            menu_items_list.extend(self._get_menuitems_nested_list(item, current_url))
+            value = self.make_nested_list(item, current_url)
+            menu_items_list.extend(value)
         return render_to_string(self.template, {
             'menu_items': menu_items_list,
             'menu_slug': menu.slug,
             'expand_style': options["align"]
         }, req_context)
 
-    def _get_menuitems_nested_list(self, base_item, current_url=None, name_field='name'):
-        """Creates a nested list to be used with unordered_list template tag
-        """
-        #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
-        link_template = Template(
-             '<span class="{% if has_children %}has_children{% else %}no_children{% endif %}{% if current_url == menu_item.url%} current{% endif%}{% if menu_item.site_home %} site_home{% endif %}">'
-             '{% if menu_item.custom_url %}'
-             '   <a href="{{menu_item.url}}">'
-             '{% else %}'
-             '   <a href="/{{CYCLOPE_PREFIX}}{{menu_item.url}}">'
-             '{% endif %}'
-             '{{ menu_item.name }}</a></span>'
-            )
-        nested_list = []
-        for child in base_item.get_children().filter(active=True):
-            if child.get_descendant_count() > 0:
-                nested_list.extend(self._get_menuitems_nested_list(
-                    child, current_url, name_field=name_field))
-            else:
-                name = getattr(child, name_field)
-                nested_list.append(link_template.render(
-                    Context({'menu_item': child, 'current_url': current_url})))
+    def render_item(self, item, current_url):
+        has_children = 'has_children' if item.get_descendant_count() \
+                       else 'no_children'
 
-        name = getattr(base_item, name_field)
-        include = link_template.render(
-            Context({'menu_item': base_item, 'current_url': current_url,
-                     'has_children': base_item.get_descendant_count()}))
-        if nested_list:
-            return [include, nested_list]
-        else:
-            return [include]
+        is_current_url = 'current' if item.url == current_url else ''
+
+        context = Context({'menu_item': item,
+                           'current_url': is_current_url,
+                           'has_children': has_children,})
+        return render_to_string(self.template_item, context)
 
 frontend.site.register_view(Menu, MenuMenuItemsHierarchy)
 
@@ -164,10 +145,10 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
 
         if current_item:
             children = current_item[0].get_children().filter(active=True)
-            return render_to_string(self.template, {'menu_items': children},
-                                    req_context)
         else:
-            return ''
+            children = []
+        return render_to_string(self.template, {'menu_items': children},
+                                 req_context)
 
 frontend.site.register_view(MenuItem, MenuItemChildrenOfCurrentItem)
 
@@ -215,7 +196,7 @@ class SiteMap(frontend.FrontendView):
             for item in MenuItem.tree.filter(menu=menu, level=0):
                 # TODO(diegoM): Change this line when the refactorization is done
                 menu_items_list.extend(
-                    MenuMenuItemsHierarchy()._get_menuitems_nested_list(item))
+                    MenuMenuItemsHierarchy().make_nested_list(item, None))
             if menu_items_list:
                 menus_list.extend([menu.name, menu_items_list])
             else:
@@ -233,8 +214,7 @@ class SiteMap(frontend.FrontendView):
         #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
         link_template = Template(
             '{% if has_content %}'
-              '<a href="{% url category-teaser_list slug %}">'
-                 '<span>{{ name }}</span></a>'
+            '<span><a href="{% url category-teaser_list slug %}">{{ name }}</a></span>'
             '{% else %} {{ name }}'
             '{% endif %}'
             ' <a href="{% url category_feed slug %}">'
