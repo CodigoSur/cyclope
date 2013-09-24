@@ -4,6 +4,8 @@ Changelog for Cyclope 3
 0.4 (unreleased)
 ================
 
+- Theme customization. Change fonts, colors and header image from the admin interface.
+
 - Ordered Categorizations. Content on a category can be manualy sorted in the admin.
   Added batch categorization.
 
@@ -12,12 +14,13 @@ Changelog for Cyclope 3
 
 - Improved Layout admin page.
 
-
 - Added Portuguese translation (thanks to Emanuela Castro and Maria Betania Teixeira)
 
 - Improved password reset templates.
 
 - Refactored inter-registration of apps to a new post_init app.
+
+- Improved style of sitemap and comments views
 
 - Big refactoring on tests:
 
@@ -25,7 +28,7 @@ Changelog for Cyclope 3
   * Created a TestSuiteRunner to run all cyclope apps tests by default
   * Moved tests from main tests module to app.tests
 
-- As always, a lot of fixes.
+- As always, a lot of fixes and small improvements.
 
 0.3 (24-01-2013)
 ==================
