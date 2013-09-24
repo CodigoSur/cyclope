@@ -1,8 +1,8 @@
 Changelog for Cyclope 3
 =======================
 
-0.4 (unreleased)
-================
+0.4 (24-9-2013)
+===============
 
 - Theme customization. Change fonts, colors and header image from the admin interface.
 
@@ -30,8 +30,16 @@ Changelog for Cyclope 3
 
 - As always, a lot of fixes and small improvements.
 
+0.3.1 (10-9-2013)
+=================
+
+Mostly bugfix release:
+
+- Refactored inter-registration of apps to a post_init app
+- Resolved installation issues
+
 0.3 (24-01-2013)
-==================
+================
 
 - Improved related contents display: added embedded audio and video player and download links.
   Contribution of Santiago García.
