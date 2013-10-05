@@ -60,15 +60,6 @@ setup(
         "Topic :: Software Development :: Libraries :: Application Frameworks",
     ],
 
-    # revision number is indicated in the dependency_links for packages
-    # that are downloaded from source to ensure a tested revision is used.
-    dependency_links=[
-        'hg+http://bitbucket.org/diegom/django-contact-form#egg=django-contact-form-0.4a1',
-        'hg+http://bitbucket.org/nicoechaniz/django-rosetta_temp#egg=django-rosetta-0.6.2-temp',
-        'hg+http://bitbucket.org/san/django-jsonfield#egg=django-jsonfield-0.6.0-cyclope',
-        'git+http://github.com/HonzaKral/django-threadedcomments.git@issue/39#egg=django-threadedcomments-0.9'
-    ],
-
     install_requires=[
         'Django>=1.4,<1.5',
         'django-autoslug==1.4.1',
@@ -85,12 +76,12 @@ setup(
         'django-haystack>=1.2.7,<1.3',
         'textile==2.1.4',
         'django-dbgettext>=0.1',
-        'django-rosetta==0.6.2-temp', # installed from our clone
+        'django-rosetta==0.7.2',
         'django-markitup==1.0',
-        'django-jsonfield==0.6.0-cyclope', # installed from our clone
+        'django-jsonfield==0.9.10',
         'feedparser==5.1',
         'django-forms-builder>=0.7.5,<0.8',
-        'django-threadedcomments==0.9',
+        'django-threadedcomments==0.9.0',
         'django-crispy-forms>=1.2,<1.3',
         'django-compressor>=1.2,<1.3',
         'django-generic-ratings>=0.6,<0.7',
