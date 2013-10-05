@@ -1,0 +1,34 @@
+# Danish translation of django contact form.
+# Copyright (C) 2009 Mikkel Høgh
+# This file is distributed under the same license as the django contact form package.
+# Mikkel Høgh <mikkel@hoegh.org>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: hg\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-29 14:22+0200\n"
+"PO-Revision-Date: 2009-09-29 14:31+0200\n"
+"Last-Translator: Mikkel Høgh <mikkel@hoegh.org>\n"
+"Language-Team: Dansk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: forms.py:143
+msgid "Your name"
+msgstr "Dit navn"
+
+#: forms.py:146
+msgid "Your email address"
+msgstr "Din e-mail-adresse"
+
+#: forms.py:148
+msgid "Your message"
+msgstr "Din besked"
+
+#: forms.py:259
+msgid "Akismet thinks this message is spam"
+msgstr "Akismet mener denne besked er spam"
+

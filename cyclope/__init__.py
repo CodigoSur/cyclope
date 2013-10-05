@@ -18,4 +18,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+import os
+import sys
+sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "third_party"))

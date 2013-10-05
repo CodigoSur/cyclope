@@ -81,7 +81,6 @@ setup(
         'django-registration==0.8',
         'django-profiles==0.2',
         'django-admin-tools==0.4.1',
-        'django-contact-form==0.4a1', # installed from our clone
         'Whoosh>=2.4.1,<2.5',
         'django-haystack>=1.2.7,<1.3',
         'textile==2.1.4',
