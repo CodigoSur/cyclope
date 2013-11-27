@@ -39,25 +39,18 @@ class QuestionForm(forms.Form):
         super(QuestionForm, self).__init__(*args, **kwargs)
         self.question = question
         choices = [(a.id, a.text) for a in Answer.objects.filter(question=question)]
+        field_args = {
+            "choices": choices,
+            "label": question.text.capitalize()
+        }
+
 
         if question.allow_multiple_answers:
-            self.fields['answers'] = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple())
+            self.fields['answers'] = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), **field_args)
         else:
-            self.fields['answers'] = forms.ChoiceField(widget=forms.RadioSelect())
-
-        self.fields['answers'].label = question.text.capitalize()
-        # TODO: review unlisted for choicefield
-        #if question.allow_unlisted:
-        #    self.fields['unlisted'] = forms.CharField(required=False)
-
-        self.fields['answers'].choices = choices
-
-# TODO: implement clean for unlisted answers
-#    def clean(self):
-#        pass
+            self.fields['answers'] = forms.ChoiceField(widget=forms.RadioSelect(), **field_args)
 
     def get_answers(self):
-#        unlisted_text = self.cleaned_data.get('unlisted', None)
         answer_ids = self.cleaned_data['answers']
 
         # if not multiple_answers
@@ -65,11 +58,7 @@ class QuestionForm(forms.Form):
         if not type(answer_ids) == list:
             answer_ids = [answer_ids]
 
-        #if unlisted_text:
-        #    unlisted_answer = Answer.objects.create(question=self.question, text=unlisted_text, unlisted=True)
-        #    answer_ids.append(unlisted_answer.id)
         return answer_ids
-
 
     class Meta:
         model = Submission
