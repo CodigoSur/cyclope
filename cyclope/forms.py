@@ -75,6 +75,8 @@ class ViewOptionsFormMixin(object):
 
     def set_initial_view_options(self, obj, model):
         view_name = getattr(obj, self.view_field_name)
+        if not view_name:
+            return
         view = site.get_view(model, view_name)
 
         self.fields[self.options_field_name] = MultipleField(form=view.options_form,
@@ -205,11 +207,11 @@ class DesignSettingsAdminForm(forms.ModelForm):
                                          initial=lambda : get_home_menu_item().layout)
     class Meta:
         model = DesignSettings
-        
+
         widgets = {}
         for fieldname in ['color_'+l for l in ('a', 'b', 'c', 'd', 'e')]:
             widgets[fieldname] = forms.TextInput(attrs={'cols': 10, 'class': 'color'})
-               
+
         palette = (
             (_('Default'), 'eee,ccc,999,666,333'),
             (_('Corn field'), 'f9f145,b4ac01,fec90a,e86e1b,d41e46'),

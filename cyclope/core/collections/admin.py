@@ -163,13 +163,11 @@ class CategorizationInline(generic.GenericStackedInline):
         return super(CategorizationInline, self).queryset(request)
 
 
-
 class CollectionAdminForm(forms.ModelForm, ViewOptionsFormMixin):
     raw_id_fields = ['picture',]
     default_list_view = forms.ChoiceField(label=_('Default category listing view'), required=False)
     view_options = MultipleField(label=_('View options'), form=None, required=False)
 
-    options_field_name = 'view_options'
     view_field_name = 'default_list_view'
     field_names = ["default_list_view"]
     model = Category
@@ -182,10 +180,9 @@ class CollectionAdminForm(forms.ModelForm, ViewOptionsFormMixin):
                                      for view in frontend.site.get_views(model)
                                      if view.name != 'default']
         self.fields['default_list_view'].choices = views
-        self.model = model
 
         if self.instance.id is not None:
-            self.set_initial_view_options(self.instance, self.instance)
+            self.set_initial_view_options(self.instance, Category)
 
     class Meta:
         model = Collection
