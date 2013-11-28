@@ -28,7 +28,7 @@ $(function() {
     function update_to_default_view_options(){
         var view_name = $("#id_content_view option:selected").val();
         var content_type_id = $("#id_content_type option:selected").val();
-        // $("#view_options_multiple").parent().parent().hide();
+
         if (view_name && content_type_id){
             $.get("/{{CYCLOPE_PREFIX}}options_view_widget_html",
                { content_type_id: content_type_id, view_name: view_name },
@@ -42,7 +42,9 @@ $(function() {
                         div_container.hide();
                     }
                });
-        }
+        }else{
+           div_container.hide();
+       }
     }
 
     $.cyclope = {
