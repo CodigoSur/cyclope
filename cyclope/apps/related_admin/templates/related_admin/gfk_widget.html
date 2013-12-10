@@ -1,0 +1,62 @@
+<input class="vGenericFKAdminField" type="text" name="{{ name }}" value="{{ value }}" id="id_{{ name }}" />
+<div class="object-representation float-left">{{ obj_repr|safe }}</div>
+{{generic_script|safe}}
+<a href="{{ related }}{{ url}}" class="related-lookup" id="lookup_id_{{ name }}" onclick="return showGenericRelatedObjectLookupPopup('{{ ct_field }}', this, '../../../{{ url }}');">
+  <img src="{{static_admin}}img/selector-search.gif" width="16" height="16" alt="Lookup" />
+</a>
+
+<script type="text/javascript">
+function showGenericRelatedObjectLookupPopup(ct_field, triggering_link, url_base) {
+    var id_name = triggering_link.id.replace(/^lookup_/, '');
+    // If ct is inline
+    var indx_prefix = ct_field.indexOf("__prefix__")
+    if (indx_prefix != -1){
+        // get the index of the inline
+        var index = triggering_link.id.split("lookup_id_")[1].slice(indx_prefix).split("-")[0];
+        ct_field = ct_field.replace("__prefix__", index);
+    }
+    ct_select = document.getElementById('id_' + ct_field);
+
+    var getCTId = function(ct_select){
+        return ct_select.options[ct_select.selectedIndex].value;
+    }
+    var ct_id = getCTId(ct_select);
+    var url = content_types[ct_id];
+
+    function setNewValue(id_name, value){
+        var obj = $("#" + id_name);
+        obj.attr("newValue", value);
+        obj.val(value);
+    }
+
+    var ensureRepresentation = function(id_name, ct_select){
+        var obj = $("#" + id_name);
+        var ct_id = getCTId(ct_select);
+        if (obj.attr("value") !== obj.attr("newValue")){
+            var obj_id = obj.attr("value");
+            setNewValue(id_name, ct_id + "-" + obj.attr("value"));
+            $.get("/related_admin/render_object/" + ct_id + "/" + obj_id + "/", function(data) {
+                obj.siblings(".object-representation").html(data);
+            });
+        }
+    }
+    // Yes this is insane but there isn't a robust way to fire an event by a
+    // closing window that has a long ajax function inside without blocking
+    setInterval(function() {ensureRepresentation(id_name, ct_select); }, 200);
+
+    if (url != undefined) {
+        triggering_link.href = url_base + url;
+        var rv = showRelatedObjectLookupPopup(triggering_link);
+        setNewValue(id_name, "");
+        return rv;
+    }
+    return false;
+}
+
+$(".vGenericFKAdminField").css("display", "none");
+
+var content_types = new Array();
+{% for ct in content_types %}
+    content_types[{{ ct.0 }}] = '{{ ct.1 }}/{{ ct.2 }}/';
+{% endfor %}
+</script>
