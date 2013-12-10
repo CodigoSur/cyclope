@@ -55,7 +55,7 @@ class AjaxChoiceField(forms.ChoiceField):
 
 class RelatedContentForm(GenericModelForm):
 
-    other_object = GMCField(label='object', widget=GenericFKWidget('other_type',
+    other_object = GMCField(label=_('Object'), widget=GenericFKWidget('other_type',
                                                    cts=site.base_content_types))
 
     def __init__(self, *args, **kwargs):
