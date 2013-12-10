@@ -164,7 +164,6 @@ class CategorizationInline(generic.GenericStackedInline):
 
 
 class CollectionAdminForm(forms.ModelForm, ViewOptionsFormMixin):
-    raw_id_fields = ['picture',]
     default_list_view = forms.ChoiceField(label=_('Default category listing view'), required=False)
     view_options = MultipleField(label=_('View options'), form=None, required=False)
 
