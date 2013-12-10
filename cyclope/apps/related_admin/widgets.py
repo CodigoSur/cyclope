@@ -52,10 +52,12 @@ class GenericFKWidget(ForeignKeyRawIdWidget):
     def render(self, name, value, attrs=None):
         # if it is inline build the proper ct_field name
         ct_field = self.ct_field
+
         if "__prefix__" in name:
             ct_field = re.sub('__prefix__.*', "__prefix__-" + ct_field, name)
         elif re.match('.*\-(\d+\-).*', name):
             ct_field = re.sub('(\d+\-).*', "\g<1>" + ct_field , name)
+        self._test_ct_field = ct_field # for testing purposes only
         actual_object = self.get_actual_object(value)
         if attrs is None:
             attrs = {}
