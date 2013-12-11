@@ -35,7 +35,6 @@ class WholeSiteFeed(Feed):
     def title(self, obj):
         return cyc_settings.CYCLOPE_SITE_SETTINGS.global_title
 
-    # TODO(diegoM): It would be better show the first paragraph?
     def item_description(self, content):
         if hasattr(content, 'text'):
             return content.text
@@ -49,8 +48,7 @@ class WholeSiteFeed(Feed):
         return reverse('whole_site_feed')
 
     def item_title(self, item):
-        #FIXME(diegoM): How to get the right translation of the object_name ?
-        return "%s  (%s)" % (item.name, item.get_verbose_name().capitalize())
+        return item.name
 
     def item_pubdate(self, item):
         return item.creation_date
