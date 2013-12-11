@@ -52,6 +52,9 @@ class WholeSiteFeed(Feed):
         #FIXME(diegoM): How to get the right translation of the object_name ?
         return "%s  (%s)" % (item.name, item.get_verbose_name().capitalize())
 
+    def item_pubdate(self, item):
+        return item.creation_date
+
     def items(self):
         N = cyc_settings.CYCLOPE_RSS_LIMIT
         objs = []
