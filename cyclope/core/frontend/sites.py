@@ -25,7 +25,7 @@ core.frontend.sites
 Frontend views' URL handling.
 """
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.template import RequestContext, loader
 from django.conf.urls import patterns, url
 from django.utils.translation import ugettext_lazy as _, ugettext
@@ -34,6 +34,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import post_save
 from django.utils import simplejson
 from django.db.models import get_model
+from django.contrib.admin.views.decorators import staff_member_required
 
 from cyclope.models import MenuItem, SiteSettings, BaseContent
 import cyclope
@@ -100,6 +101,7 @@ class CyclopeSite(object):
             url(r'^objects_for_ctype_json$', self.objects_for_ctype_json),
             url(r'^menu_items_for_menu_json$', self.menu_items_for_menu_json),
             url(r'^options_view_widget_html$', self.options_view_widget_html),
+            url(r'^api/create/$', self.api_create_content),
         )
 
         # url patterns for registered views
@@ -357,6 +359,28 @@ class CyclopeSite(object):
                                           value=frontend_view.get_default_options())
         return HttpResponse(html)
 
+    def api_create_content(self, request):
+        from django import forms
+        from cyclope.apps.medialibrary.models import Picture
+
+        def create_form():
+
+            meta = type('Meta', (), {"model": Picture})
+            aux_model_form_class = type('modelform', (forms.ModelForm,), {"Meta": meta})
+            f = aux_model_form_class()
+            fields = [n  for n,field in f.fields.iteritems() if field.required and not field.initial]
+            meta = type('Meta', (), {"model": Picture, "fields": fields})
+            return type('modelform', (forms.ModelForm,), {"Meta": meta})()
+
+        if request.user.is_staff:
+            if request.method == "POST":
+                HttpResponse("")
+            elif request.method == "GET":
+                model = ContentType.objects.get_for_id(request.GET['ct_id']).model_class()
+                return HttpResponse(create_form().as_ul())
+            return HttpResponse("")
+        else:
+            return HttpResponseForbidden()
 
 ####
 

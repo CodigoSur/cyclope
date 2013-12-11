@@ -754,3 +754,31 @@ class LayoutAndRegionsJsonTemplateTagTests(TestCase):
         self.assertTrue("views_for_models" in data)
 
 
+class CreateContentApiTests(TestCase):
+    fixtures = ['default_users.json']
+
+    def test_json_picture_form(self):
+        from cyclope.apps.medialibrary.models import Picture
+        ct = ContentType.objects.get(model='picture').pk
+        self.client.login(username='admin', password='password')
+        response = self.client.get("/api/create/", {"ct_id": ct})
+        print response
+        self.assertEqual(response.status_code, 200)
+
+        self.assertTrue(Picture.objects.get(name=""))
+
+    def test_json_picture_content_creation(self):
+        from cyclope.apps.medialibrary.models import Picture
+        ct = ContentType.objects.get(model='picture').pk
+        import StringIO
+        from django.core.files import File
+        f = File(StringIO.StringIO("foo"), "image.jpg")
+        self.client.login(username='admin', password='password')
+        response = self.client.post("/api/create/", {"ct_id": ct, "name": "image.jpg", "file":f})
+        self.assertEqual(response.status_code, 200)
+
+        self.assertTrue(Picture.objects.get(name=""))
+
+    def test_json_normal_user_forbiden(self):
+        response = self.client.post("/api/create/")
+        self.assertEqual(response.status_code, 403)

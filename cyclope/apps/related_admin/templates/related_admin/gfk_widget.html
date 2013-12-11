@@ -1,9 +1,16 @@
-<input class="vGenericFKAdminField" type="text" name="{{ name }}" value="{{ value }}" id="id_{{ name }}" />
-<div class="object-representation float-left">{{ obj_repr|safe }}</div>
-{{generic_script|safe}}
-<a href="{{ related }}{{ url}}" class="related-lookup" id="lookup_id_{{ name }}" onclick="return showGenericRelatedObjectLookupPopup('{{ ct_field }}', this, '../../../{{ url }}');">
-  <img src="{{static_admin}}img/selector-search.gif" width="16" height="16" alt="Lookup" />
-</a>
+{% load i18n %}
+<div class="GenericFKAdmin">
+  <div>
+    <input class="vGenericFKAdminField" type="text" name="{{ name }}" value="{{ value }}" id="id_{{ name }}">
+    <div class="object-representation float-left">{{ obj_repr|safe }}</div>
+    <a href="{{ related }}{{ url}}" class="related-lookup" id="lookup_id_{{ name }}" onclick="return showGenericRelatedObjectLookupPopup('{{ ct_field }}', this, '../../../{{ url }}');">
+      <img src="{{static_admin}}img/selector-search.gif" width="16" height="16" alt="Lookup" />
+    </a>
+  </div>
+  <div class="create-content">
+    <div class="create-button">{% trans "Create" %}</div>
+  </div>
+</div>
 
 <script type="text/javascript">
 function showGenericRelatedObjectLookupPopup(ct_field, triggering_link, url_base) {
@@ -59,4 +66,8 @@ var content_types = new Array();
 {% for ct in content_types %}
     content_types[{{ ct.0 }}] = '{{ ct.1 }}/{{ ct.2 }}/';
 {% endfor %}
+    $.get("/api/create", {"ct_id":20}, function (data){
+        $("#id_{{ name }}").after(data);
+        console.log(data);
+    })
 </script>
