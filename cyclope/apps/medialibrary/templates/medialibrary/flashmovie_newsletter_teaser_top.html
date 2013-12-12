@@ -1,0 +1,9 @@
+{% extends "medialibrary/medialibrary_base_newsletter_teaser_top.html" %}
+{% load i18n %}
+
+        {% block media_content %}
+            <div class="download_link">
+                <a target="_blank" href="{{ current_object.media_file }}">{% trans "Open" %}</a>
+            </div>
+        {% endblock media_content %}
+

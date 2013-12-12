@@ -56,5 +56,17 @@ class NewsletterAdminForm(forms.ModelForm):
 class NewsletterAdmin(admin.ModelAdmin):
     form = NewsletterAdminForm
     change_form_template = "admin/newsletter_change_form.html"
+    fieldsets = (
+        (None,
+            {'fields': ('name', 'content_category', 'view',
+                        'head_image', 'show_title', 'show_ToC', 'header')}),
+        (_('Layout options'),
+            {'fields': ('regions', 'n_contents_top', 
+                        'n_contents_center', 'n_contents_lateral',)}),
+        (_('Extra info'),
+            {'classes': ('collapse',),
+             'fields': ('layout', 'sender_name', 'sender', 
+                        'test_recipients', 'recipients', 'list_admin',)}),
+    )
 
 admin.site.register(Newsletter, NewsletterAdmin)
