@@ -16,7 +16,7 @@
 
   {% if current_object.image %}
   <div class="media-content">
-    <img src="{% version media.image.path 'croppedthumbnail' %}" />
+    <img src="{% version current_object.image.path 'croppedthumbnail' %}" />
   </div>
   {% endif %}
 
