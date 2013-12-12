@@ -363,6 +363,10 @@ class CyclopeSite(object):
         from django import forms
         from cyclope.apps.medialibrary.models import Picture
 
+        class SimplestPictureForm(forms.Form):
+            name = forms.CharField()
+            image = forms.ImageField()
+
         def create_form():
 
             meta = type('Meta', (), {"model": Picture})
@@ -377,7 +381,7 @@ class CyclopeSite(object):
                 HttpResponse("")
             elif request.method == "GET":
                 model = ContentType.objects.get_for_id(request.GET['ct_id']).model_class()
-                return HttpResponse(create_form().as_ul())
+                return HttpResponse(SimplestPictureForm(prefix="__simplified__").as_ul())
             return HttpResponse("")
         else:
             return HttpResponseForbidden()
