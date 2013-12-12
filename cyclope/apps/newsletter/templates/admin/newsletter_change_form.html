@@ -1,12 +1,84 @@
 {% extends "admin/change_form.html" %}
-{% load i18n  %}
+{% load i18n layout cyclope_utils %}
 
 {% block object-tools %}
-{% if change %}{% if not is_popup %}
-  <ul class="object-tools">
-    <li><a href="/newsletter/preview/{{ object_id }}" class="viewsitelink" target="_blank">{% trans "Preview" %}</a></li>
-    <li><a href="/newsletter/send_test/{{ object_id }}/" class="viewsitelink">{% trans "Send test" %}</a></li>
-    <li><a href="/newsletter/send/{{ object_id }}/" class="viewsitelink">{% trans "Send e-mail" %}</a></li>
-  </ul>
-{% endif %}{% endif %}
+    {% if change %}{% if not is_popup %}
+        <ul class="object-tools">
+            <li><a href="/newsletter/preview/{{ object_id }}" class="viewsitelink" target="_blank">{% trans "Preview" %}</a></li>
+            <li><a href="/newsletter/send_test/{{ object_id }}/" class="viewsitelink">{% trans "Send test" %}</a></li>
+            <li><a href="/newsletter/send/{{ object_id }}/" class="viewsitelink">{% trans "Send e-mail" %}</a></li>
+            {% if original.list_admin %}<li><a href="{{ original.list_admin }}" target="_blank" class="viewsitelink">{% trans "List admin" %}</a></li>{% endif %}
+        </ul> 
+    {% endif %}{% endif %}
+
+    <div class="number-objects">
+        <div class="number-objects-title">{% trans "Contents in this newssletter" %} (<a href="/admin/collections/categorization/?category__id__exact={{ original.content_category.id }} " target="_blank" class="orderelements">{% trans "View and sort objects" %}</a>)</div>
+                 {% with catz_by_region=original.catz_by_region %}
+                 {% with categorizations=catz_by_region.0 %} 
+                     <ul class="">Region top: {{ categorizations|length }} 
+                    {% for categorization in categorizations %} {{ categorization|length }}
+                               <li><a href="/admin/{{ categorization.content_object.get_app_label }}/{{ categorization.content_object.get_object_name }}/{{ categorization.content_object.id }}" class="viewsitelink" target="_blank">{{ categorization.content_object.name }}</a> / <a href="{{ categorization.content_object.get_absolute_url }}" class="viewsitelink" target="_blank">View on site</a></li>  
+                            {% endfor %}
+                 </ul> 
+                 {% endwith %}
+
+                 {% with categorizations=catz_by_region.1 %} 
+                     <ul class=""> Region center: {{ categorizations|length }} 
+                    {% for categorization in categorizations %} {{ categorization|length }}
+                               <li><a href="/admin/{{ categorization.content_object.get_app_label }}/{{ categorization.content_object.get_object_name }}/{{ categorization.content_object.id }}" class="viewsitelink" target="_blank">{{ categorization.content_object.name }}</a> / <a href="{{ categorization.content_object.get_absolute_url }}" class="viewsitelink" target="_blank">View on site</a></li>  
+                            {% endfor %}
+                 </ul> 
+                 {% endwith %}
+
+                 {% with categorizations=catz_by_region.2 %} 
+                     <ul class=""> Region lateral: {{ categorizations|length }}
+                    {% for categorization in categorizations %} {{ categorization|length }}
+                               <li><a href="/admin/{{ categorization.content_object.get_app_label }}/{{ categorization.content_object.get_object_name }}/{{ categorization.content_object.id }}" class="viewsitelink" target="_blank">{{ categorization.content_object.name }}</a> / <a href="{{ categorization.content_object.get_absolute_url }}" class="viewsitelink" target="_blank">View on site</a></li>   
+                           {% endfor %}
+                 </ul> 
+                 {% endwith %}
+                 {% endwith %}
+    </div>
+    
+
+<script type="text/javascript">
+$(document).ready(function() {
+    var display_row = function(name, show){
+        var el = $("#id_n_contents_" + name).closest(".form-row");
+        console.log(el);
+        if (show == false){
+            el.hide(200)
+        } else {
+            el.show(200)
+        }
+    }
+	$('#id_regions').click(function() {
+        var val = $(this).val();
+        if (val === "c"){
+            display_row("top", false);
+            display_row("lateral", false);
+            display_row("central", true);
+
+        } else if (val === "tc"){
+            display_row("top", true);
+            display_row("lateral", false);
+            display_row("central", true);
+        }
+        else if (val === "cl"){
+            display_row("top", false);
+            display_row("lateral", true);
+            display_row("central", true);
+        } else if (val === "tcl"){
+            display_row("top", true);
+            display_row("lateral", true);
+            display_row("central", true);
+        }
+	});
+    $('#id_regions').click();
+});
+
+</script>
+
 {% endblock %}
+
+

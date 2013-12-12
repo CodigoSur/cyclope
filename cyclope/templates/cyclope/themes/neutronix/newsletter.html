@@ -1,14 +1,21 @@
 {% load layout i18n fb_versions cyclope_utils %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
-    Plantilla Boletín Neutron para Cyclope 3 GPL
-    Esta plantilla fue desarrollada por Codigo Sur: www.codigosur.org
-    Diseno conceptual + HTML + CSS: Santiago Hoerth
-    Codigo HTML realizado bajo licencia GPL (copialo, mejoralo, pasalo)
-    Ver licencia en: http://creativecommons.org/licenses/GPL/2.0/deed.es_AR
-    Ten en cuenta que las imagenes, los nombres y los logos de este sitio no pueden usarse. Solo el codigo HTML y CSS es GPL. Gracias :)
-    Si modificas no borres estas lineas :)
-  -->
+# Cyclope 3 GPL
+# Neutronix Workflow Design
+# Layouts: 4 & 5 Elements
+# Copyright 2010-2013 Código Sur Sociedad Civil.
+# All rights reserved.
+# This file is part of Cyclope 3.
+# Cyclope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# Development: Codigo Sur www.codigosur.org
+# Less CSS based www.lesscss.org
+# 960 Grid System Based www.960.gs
+# Neutronix is developed by Santiago Hoerth Moura
+ -->
 
 {% join CYCLOPE_BASE_URL CYCLOPE_THEME_MEDIA_URL as base_theme_media_url %}
 
@@ -18,84 +25,72 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <style>
       body {color:#000;margin:0;padding:0;}
-      .mascara {color:#000;padding:0 50px;background-color:#ccc;}
-      #menucito td {background-color: #fff;}
-      #contenedora {background-color: #fff;}
-      .encabezado {padding:0 0 0 10px;color:#666;font-size:13px;display:block;margin:5px 0 0;top:0;float:left;font-family: Arial,Helvetica,sans-serif;font-weight:700;}
-      .menuh {display:block;padding:0;color:#000;margin:5px 0;font-family: Arial,Helvetica,sans-serif;text-align:right;width:720px;}
-      .menuh a {padding:5px;color:#333;font-size:12px;text-decoration:none;}
-      .medianera {padding:15px 0 0;}
-      .editorial {margin:0 0;}
-
+      .newsletter_teaser  {width:95%;margin:0 auto;display:block;}
+      .newsletter_teaser a {text-decoration:none;}
+      .newsletter_teaser .title {font-family:Arial,Helvetica,sans-serif;font-size:22px;padding:0 0 0;margin:0;color:#000;}
+      .newsletter_teaser .author {font-family:Arial,Helvetica,sans-serif;font-size:16px;padding:0 0 0;margin:0;}
+      .newsletter_teaser .summary {font-family:Arial,Helvetica,sans-serif;padding:0 0 0;margin:5px 0;color:#666;text-align:left;font-size:14px;}
+      .newsletter_teaser .content {font-weight:700;font-size:16px;}
+      .newsletter_teaser p {font-family:Arial,Helvetica,sans-serif;padding:0;margin:0;}
+      .newsletter_teaser p img {display:block;margin:10px auto;width:450px;}
+      .newsletter_teaser .newsletter_image {padding:5px 0 10px 15px;float:right;display:block;}
+      .newsletter_teaser hr {border:none;border-top:2px solid #ccc;margin:15px 0;}
+      .newsletter_teaser .pretitle {color:#000;font-family:Arial,Helvetica,sans-serif;font-size:12px;padding:5px 0;background:transparent;text-transform:uppercase;}
+      .newsletter_teaser .pretitle a {color:#000;text-decoration:none;}
+      .newsletter_teaser.text {color:#666;font-family:Arial,Helvetica,sans-serif;font-size:16px;}
+      #newsletter_menu td {background-color: #fff;border:none;pading:0;margin:0;}
+      .mask {color:#000;padding:0 50px;background-color:#ccc;}
+      .newsletter_menuitems {display:block;padding:0;color:#000;margin:5px 0;font-family: Arial,Helvetica,sans-serif;text-align:right;width:720px;}
+      .newsletter_menuitems a {padding:5px;color:#333;font-size:12px;text-decoration:none;}
+      .category_name {padding:0 0 0 10px;color:#666;font-size:13px;display:block;margin:5px 0 0;top:0;float:left;font-family: Arial,Helvetica,sans-serif;font-weight:700;}
       .header {background-color: #fff;}
-      .header td {background: #ccc url({{ base_theme_media_url }}images/boletin/cabezal.png) no-repeat 0 0;}
+      .header td {background: #ccc url({% if newsletter.head_image %}http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}{{ MEDIA_URL }}{{ newsletter.head_image }}{% else %}{{ base_theme_media_url }}images/boletin/cabezal.png{% endif %}) no-repeat 0 0;}
       .header .title {color:#fff;text-align:center;font-family: Arial,Helvetica,sans-serif;font-size:30px;padding:5px 10px 0;margin:0;}
       .header .summary {text-align:center;font-family: Arial,Helvetica,sans-serif;color:#fff;display:block;}
-
-      .category_description {background:#fff;}
-      .category_description .mask {padding:0; }
-      .category_description img {padding:0 0 0 10px;}
-      .category_description .summary {margin:0;padding:0 10px 0;font-family: Arial,Helvetica,sans-serif;text-align:left;font-size:18px;display:block;}
-
-      .table_of_contents {border:1px solid #999;background-color:#333;margin:0 10px 0 0;padding:0;}
-      .table_of_contents .mask {margin:0 auto;}
-      .table_of_contents .content {background:#e6e6e6;font-family: Arial,Helvetica,sans-serif; font-size: 11px; color:#000;padding: 0 0 10px 0;}
-      .table_of_contents .general_title {padding:4px 0;margin:0 0 0;background:#333;color:#fff;font-weight:700;text-align:center;font-size:16px;}
-      .table_of_contents .general_title a {color:fff;}
-      .table_of_contents .pretitle {padding:0 8px;display:block;text-transform:uppercase;}
-      .table_of_contents .title {text-align:left;padding:15px 8px 0;display:block;font-size:14px;font-weight:700;color:#333;}
-      .table_of_contents .author {padding:0 8px;margin:0;}
-
-      .block_content {display:block;width:720px;padding:0 5px;background:#fff;border-top:1px dotted #ccc;margin-top:0;}
-      .block_content .title {font-family:Arial,Helvetica,sans-serif;font-size:28px;padding:0 0 0;margin:0;color:#999;}
-      .block_content a {text-decoration:none;}
-      .block_content .title {font-family:Arial,Helvetica,sans-serif;font-size:28px;padding:0 0 0;margin:0;color:#000;}
-      .block_content .author {font-family:Arial,Helvetica,sans-serif;font-size:16px;padding:0 0 0;margin:0;}
-      .block_content .summary {font-family:Arial,Helvetica,sans-serif;padding:0 0 0;margin:0;color:#666;text-align:justify;font-size:16px;}
-      .block_content .content {font-weight:700;font-size:16px;}
-      .block_content p {font-family:Arial,Helvetica,sans-serif;padding:2px;margin:5px 0;text-align:justify;}
-      .block_content img {padding:5px 0 10px 15px;float:right;}
-      .block_content hr {border:none;border-top:2px solid #ccc;margin:15px 0;}
-      .block_content .pretitle {color:#000;font-family:Arial,Helvetica,sans-serif;font-size:12px;padding:5px 0;background:transparent;text-transform:uppercase;}
-      .block_content .pretitle a {color:#000;text-decoration:none;}
-      .block_content .show-ToC {font-family:Arial,Helvetica,sans-serif;font-size:11px;padding:5px;margin: 0;float:none;text-align:right;display:block;}
-      .block_content .show-ToC {color:#999;text-decoration:none;}
-
-      .block_content .teaser {border-bottom:1px dotted #ccc;margin:0 0 15px;}
-      .block_content .detail {border-bottom:1px dotted #ccc;margin:0 0 15px;}
-
-      .editorial-titulo {font-family: Arial,Helvetica,sans-serif;font-size:30px;font-weight:700;color:#000;padding:0;display:block;}
-      .editorial-titulo h2 {font-family: Arial,Helvetica,sans-serif;font-size:30px;font-weight:700;color:#000;padding:0;display:block;}
-
-      .newsletter_detail {border-bottom:1px dotted #ccc;margin:0 0 15px;}
-      .pie {text-align:center;padding:10px 0;color:#fff;font-size:13px;display:block;margin:0;font-family: Arial,Helvetica,sans-serif; background-color: #666;}
-      .pie a {color:#fff;text-decoration:none;}
-      .clear {clear:both;}
-      .image_content {width:240px;}
-
-      .permalink {font-family:Arial,Helvetica,sans-serif;font-size:16px;padding:0 0 0;margin:10px 0 0;font-weight:700;}
-
+      #container {background-color: #fff;}
+      .middling {padding:15px 0 0;}
+      .table_of_contents {font-family: Arial,Helvetica,sans-serif;border:1px solid #333;margin:20px auto;padding:10px;background-color: #fff;width:95%;}
+      .table_of_contents .toc_title {font-family: Arial,Helvetica,sans-serif;font-weight:700;}
+      .table_of_contents .title {font-size:14px;}
+      .show-ToC {margin:0;padding:0;overflow:auto;font-family:Arial,Helvetica,sans-serif;font-size:12px;}
+      .show-ToC a {margin:0 0;padding:0;display:block;text-align:left;font-family:Arial,Helvetica,sans-serif;}
+      .download_link {font-family: Arial,Helvetica,sans-serif;background:#000;width:100px;font-size:11px;text-align:center;margin:5px 0;}
+      .download_link a {display:block;padding:5px;color:#fff;}
+      .top_content {background:#eee;margin:0;padding:5px;}
+      .top_content .title {font-size:28px;}
+      .top_content .summary {font-size:16px;padding:5px 0 0;}
+      .top_content .newsletter_image {width:250px;}
+      .central_content .teaser {border-bottom:1px dotted #ccc;margin:0 0 20px;padding:0 0 10px;display:block;overflow:auto;width:auto;}
+      .central_content .detail {border-bottom:1px dotted #ccc;margin:0 0;}
+      .lateral_content {width: 220px;border-left:1px dotted #ccc;}
+      .lateral_content .teaser {border-bottom:1px dotted #ccc;padding:5px 0 5px 5px;margin:0 0 5px;}
+      .lateral_content .title {font-size:16px;}
+      .lateral_content .summary {font-size:12px;}
+      .lateral_content .author {font-size:12px;}
+      .lateral_content .newsletter_image {width:65px;float:left;margin:8px 5px 0 0;padding:0:}
+      .footer {text-align:center;padding:10px 0;color:#fff;font-size:13px;display:block;margin:0;font-family: Arial,Helvetica,sans-serif; background-color: #666;}
+      .footer a {color:#fff;text-decoration:none;}
     </style>
   </head>
   <body leftmargin="0" topmargin="0">
     {% region 'header' %}
-    <a name="arriba"></a>
+    <a name="up"></a>
 
-    <table class="mascara" align="center">
+    <table class="mask" align="center">
       <tr>
         <td>
 
-          <!-- inicia menucito -->
-          <table id="menucito" align="center" border="0" cellpadding="0" cellspacing="0" width="720">
+          <!-- start newsletter_menu -->
+          <table id="newsletter_menu" align="center" border="0" cellpadding="0" cellspacing="0" width="720">
             <tr>
               <td valign="middle">
-                <span class="encabezado">{{ newsletter.content_category.name }}</span>
-                <span class="menuh"><a href="{% url index %}">{% trans "Visit our website" %}</a> <a href="{% url collection newsletter.content_category.collection.slug %}">{% trans "View archives" %}</a> <a href="http://listas.codigosur.org/mailman/listinfo">{% trans "Subscription options" %}</a>
+                <span class="category_name">{{ newsletter.content_category.name }}</span>
+                <span class="newsletter_menuitems"><a href="{% url index %}">{% trans "Visit our website" %}</a> <a href="{% url collection newsletter.content_category.collection.slug %}">{% trans "View archives" %}</a> <a href="http://listas.codigosur.org/mailman/listinfo">{% trans "Subscription options" %}</a>
                 </span>
               </td>
             </tr>
           </table>
-          <!-- fin menucito -->
+          <!-- end newsletter_menu -->
 
           <!-- header -->
           <table class="header" align="center" border="0" cellpadding="0" cellspacing="0" width="720">
@@ -110,8 +105,8 @@
 
           {% region 'before_content' %}
 
-          <!-- tabla contenedora de columnas -->
-          <table id="contenedora" align="center"  border="0" cellpadding="0" cellspacing="0" width="720" class="medianera">
+          <!-- start content-table -->
+          <table id="container" align="center"  border="0" cellpadding="0" cellspacing="0" width="720" class="middling">
             <tr>
               <td valign="top">
 
@@ -134,19 +129,18 @@
                 <!-- /category_description -->
 
                 <!-- table_of_contents -->
-                <table class="table_of_contents" width="180" align="right" border="0" cellpadding="0" cellspacing="0">
+                <table class="table_of_contents" align="center" border="0" cellpadding="0" cellspacing="0">
                   <tr>
                     <td valign="top">
                       <!-- ToC-->
 
-                      <table align="center" border="0" cellpadding="0" cellspacing="0" width="180" class="mask">
+                      <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
                           <td class="content">
-                            <div class="general_title"><a name="ToC">{% trans "Table of Contents" %}</a></div>
+                            <div class="toc_title"><a name="ToC">{% trans "Table of Contents" %}</a></div>
                             {% for categorization in categorizations %}
                             {% alias categorization.content_object as 'article' %}
                             <a href='#{{ categorization.content_type.model }}__{{ article.slug }}' class="title">{{ article.name }}</a>
-                            {% if article.author %}<span class="author">{% trans "By"%} {{ article.author }}</span>{% endif %}
                             {% endfor %}
                           </td>
                         </tr>
@@ -178,28 +172,26 @@
                 <div class="clear"></div>
 
                 <!-- block_content -->
-                <table align="center" class="block_content">
-                  <tr>
-                    <td>
                       {% block content%}{% endblock %}
-                    </td>
-                  </tr>
-                </table>
                 <!-- /block_content -->
 
 
-                <!-- fin tabla contenedora de columnas -->
+                <!-- end content-table -->
               </td>
             </tr>
+             <tr>
+            <td valign="top" colspan="2" height="15px">
+            </td>
+        </tr>
           </table>
 
           {% region 'after_content' %}
 
-          <!-- inicia pie -->
+          <!-- start footer -->
           <table align="center" border="0" cellpadding="0" cellspacing="0" width="720">
             <tr>
               <td height="80" valign="top">
-                <span class="pie">
+                <span class="footer">
                   Una Publicación de .<br/>
                   Boletín realizado con <a href="http://cyclope.codigosur.org" >Cyclope3 GPL</a>. Hecho por <a href="http://codigosur.org" >Código Sur</a>. <br/>
                   Los contenidos de este sitio web están bajo una <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO" >Licencia Creative Commons</a>.<br/>
@@ -208,11 +200,10 @@
               </td>
             </tr>
           </table>
-          <!-- fin pie -->
+          <!-- end footer -->
         </td>
       </tr>
     </table>
 
   </body>
 </html>
-

@@ -1,0 +1,44 @@
+{% load i18n cyclope_utils fb_versions dbgettext_tags %}
+
+  <div class="newsletter_teaser">
+<table border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>
+	  <div class="teaser">
+		 
+      {% if article.pictures %}
+      <a href="{% url article-detail article.slug %}">
+        <img class="newsletter_image" src="{% version article.pictures.0.image.path 'newsletter_teaser' %}" alt="{{ article.pictures.0.name }}"/>
+      </a>
+      {% endif %}
+      {% if article.pretitle %} <span class="pretitle"><a name="editorial">{% trans article.pretitle %}</a></span>{% endif %}
+      <h2 class="title"><a name="article__{{ article.slug }}" href="{% url article-detail article.slug %}">
+        {% trans article.name  %}</a></h2>
+ 
+
+
+      <a href="{% url article-detail article.slug %}">
+        <div class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</div>
+      </a> <div class="download_link"><a href="{{ article.get_absolute_url }}"> {% trans "Open" %}</a></div>
+      {% if article.author %}
+      <h4 class="author">{% trans "By"%} {{ article.author }}</h4>
+      {% endif %}
+
+        {% block media_content %}
+        {% endblock media_content %}
+
+        {% if newsletter.view == "content" %}
+            <span class="text">
+                {{ article|parsed_gettext:"text"|smart_style}}
+            </span>
+        {% endif %}
+             
+   {% if newsletter.show_ToC %}<div class="show-ToC"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></div>{% endif %}
+      <div class="clear"></div> 
+
+</div>
+
+    </td>
+  </tr>
+</table>
+</div>

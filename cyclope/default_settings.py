@@ -212,10 +212,12 @@ FILEBROWSER_VERSIONS = {
                 'width': 60, 'height': 60, 'opts': 'crop'},
     'croppedthumbnail': {'verbose_name': ugettext('Cropped Thumbnail (140x140px)'),
                          'width': 140, 'height': 140, 'opts': 'crop'},
-    'slideshow': {'verbose_name': ugettext('Slideshow'),
+    'slideshow': {'verbose_name': ugettext('Slideshow (300x300px)'),
                   'width': 300, 'height': 300, 'opts': 'crop'},
-    'slideshow-background': {'verbose_name': ugettext('Slideshow'),
+    'slideshow-background': {'verbose_name': ugettext('Slideshow Background (550px'),
                   'width': 550, 'height': '', 'opts': 'crop'},
+    'newsletter_teaser': {'verbose_name': ugettext('Newsletter Teaser (150x150px)'),
+                  'width': 150, 'height': 150, 'opts': 'crop'},
 }
 
 FILEBROWSER_MAX_UPLOAD_SIZE = 1024*1024*20 # 20MB

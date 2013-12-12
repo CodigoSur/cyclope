@@ -3,39 +3,54 @@
 {% load i18n cyclope_utils fb_versions dbgettext_tags %}
 
 {% block content %}
+<div class="newsletter_teaser">
+    <table align="center" border="0" cellpadding="0" cellspacing="0">
+        {% if newsletter.regions == 'tc' or newsletter.regions == 'tcl' %}
+        <tr>
+            <td class="top_content" valign="top" colspan="2"> 
+                {% with categorizations=newsletter.catz_by_region.0 %} 
+                    {% for categorization in categorizations %} 
+                        {% spaceless %}
+                            {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name "_top.html" as template_path %}
+                            {% alias categorization.content_object as categorization.content_type.model %}
+                        {% endspaceless %}
+                        {% include template_path with current_object=categorization.content_object host_template="cyclope/inline_view.html" %}
+                    {% endfor %}
+                {% endwith %}
+            <td>
+        </tr>
+          <tr>
+            <td valign="top" colspan="2" height="15px">
+            </td>
+        </tr>
 
-  {% for categorization in categorizations %}
-    {% alias categorization.content_object as 'article' %}
-<div class="teaser">
-<table>
-  <tr>
-    <td>
-      {% if newsletter.show_ToC %}<div class="show-ToC"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></div>{% endif %}
-      <div class="clear"></div>
-      {% if article.pictures %}
-      <a href="{% url article-detail article.slug %}">
-        <img class="newsletter_image" src="{% version article.pictures.0.image.path 'thumbnail' %}" alt="{{ article.pictures.0.name }}"/>
-      </a>
-      {% endif %}
-      {% if article.pretitle %} <span class="pretitle"><a name="editorial">{% trans article.pretitle %}</a></span>{% endif %}
-      <a name="article__{{ article.slug }}" href="{% url article-detail article.slug %}">
-        <h2 class="title">{% trans article.name  %}</h2>
-      </a>
-
-
-      <a href="{% url article-detail article.slug %}">
-        <div class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</div>
-      </a>
-      {% if article.author %}
-      <h4 class="author">{% trans "By"%} {{ article.author }}</h4>
-      {% endif %}
-
-
-    </td>
-  </tr>
-</table>
+        {% endif %}
+        <tr>
+            <td class="central_content" valign="top">
+                {% with categorizations=newsletter.catz_by_region.1 %} 
+                    {% for categorization in categorizations %} 
+                        {% spaceless %}
+                            {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name "_center.html" as template_path %}
+                            {% alias categorization.content_object as categorization.content_type.model %}
+                        {% endspaceless %}
+                        {% include template_path with current_object=categorization.content_object host_template="cyclope/inline_view.html" %}
+                    {% endfor %}
+                {% endwith %}
+            </td>
+            {% if newsletter.regions == 'cl' or newsletter.regions == 'tcl' %}          
+            <td class="lateral_content" valign="top">
+                {% with categorizations=newsletter.catz_by_region.2 %} 
+                    {% for categorization in categorizations %} 
+                        {% spaceless %}
+                            {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name "_lateral.html" as template_path %}
+                            {% alias categorization.content_object as categorization.content_type.model %}
+                        {% endspaceless %}
+                        {% include template_path with current_object=categorization.content_object host_template="cyclope/inline_view.html" %}
+                    {% endfor %}
+                {% endwith %}
+            </td>
+            {% endif %}
+        </tr>
+    </table>
 </div>
-
-  {% endfor %}
-
 {% endblock %}

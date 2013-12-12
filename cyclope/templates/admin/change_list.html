@@ -40,6 +40,13 @@
     });
 })(django.jQuery);
 
+(function($) {
+    $(document).ready(function() {
+        $("#boton").click(function () { 
+            $('#changelist-filter-div').toggle();
+        });
+    });
+})(django.jQuery);
 </script>
 
 
@@ -107,8 +114,8 @@
       {% block filters %}
         {% if cl.has_filters %}
           <div id="changelist-filter">
-            <h2>{% trans 'Filter' %}</h2>
-            {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
+            <h2>{% trans 'Filter' %} <a class="changelist-filter-a"  id="boton" value="toggle()">{% trans "Hide" %}</a></h2>
+            <div id="changelist-filter-div">{% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}</div>
           </div>
         {% endif %}
       {% endblock %}

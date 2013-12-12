@@ -97,7 +97,6 @@ border: none;
 /* --- change list search ---- */
 
 #changelist #toolbar #changelist-search{
--moz-border-radius: 8px 8px 8px 8px;
 padding: 8px 12px 8px 8px;
 background: none no-repeat 0 0 white;
 display: inline-block;
@@ -109,7 +108,6 @@ margin-bottom: 15px;
  background: url('../images/actions.png') no-repeat 12px 14px #C3D5F0;
  padding: 8px 12px 8px 35px;
  color: #555;
- -moz-border-radius: 8px 8px 8px 8px;
  border: none;
  margin-bottom: 15px;
 
@@ -221,7 +219,6 @@ border: 2px solid #83a9de;
 #changelist-filter {
  border-left: 2px solid #C3D5F0;
  border-bottom: 2px solid #C3D5F0;
--moz-border-radius: 0px 0px 0px 16px;
  background-color: white;
 width: 180px;
 }
@@ -275,7 +272,6 @@ background: none no-repeat 0 0 #C3D5F0;
 padding: 8px 12px;
 text-align: center;
 border: none;
--moz-border-radius: 8px 8px 8px 8px;
 margin-bottom: 15px;
 }
 
@@ -299,7 +295,6 @@ padding: 3px;
 background: none no-repeat 0 0 white;
 border: 2px solid #C3D5F0;
 color:black;
--moz-border-radius: 5px 5px 5px 5px;
 padding:2px 4px;
 margin-left:0;
 }
@@ -308,7 +303,6 @@ margin-left:0;
 background: none no-repeat 0 0 #1a1a1a;
 border: 2px solid #000;
 color:#eee;
--moz-border-radius: 5px 5px 5px 5px;
 padding:2px 4px;
 margin-left:0;
 }
@@ -347,7 +341,7 @@ border: 1px solid #C3D5F0;
  padding: 10px 10px;
  border: 2px solid #008000;
  background: none no-repeat 0 0 #cfeecf;
- -moz-border-radius: 8px 8px 8px 8px;
+
 }
 
 #content-main ul.object-tools li:hover{
@@ -432,7 +426,6 @@ font-size: 14px;
 .change-list #content h2, .change-form #content h2 {
 font-size: 14px;
 padding: 7px 12px;
--moz-border-radius: 0px 5px 0px 0px;
 }
 
 .change-list #content h3, .change-form #content h3 {
@@ -440,7 +433,6 @@ padding: 7px 12px;
 
 .change-list .module, .change-list .filtered {
 display: block;
--moz-border-radius: 12px 12px 12px 12px;
 border: 2px solid #c3d5f0;
 background: none !important;
 background-color: #e8eff9 !important;
@@ -451,7 +443,6 @@ background-color: #e8eff9 !important;
 /* ===== default module ===== */
 
 .dashboard-module {
--moz-border-radius: 0px 0px 0px 0px;
 border: none;
 margin: 0;
 padding: 0;
@@ -467,7 +458,6 @@ background: url("../images/engranaje.png") no-repeat scroll 8px 7px #800000;
 color: white;
 padding-left: 35px;
 color: white;
--moz-border-radius: 6px 6px 6px 6px;
 font-weight: bold;
 
 }
@@ -485,7 +475,6 @@ width:614px;
 display: block;
 height: 67px;
 margin: 0 0 13px 0;
--moz-border-radius: 6px 6px 6px 6px;
 border: 2px solid #ddd; /* celeste borde c3d5f0; */
 background-color: #efefef; /* celeste #e8eff9; */
 }
@@ -573,7 +562,6 @@ border:1px solid #ccc;
 .right-area-modules {
 width: 300px;
 margin-left: 650px;
--moz-border-radius: 0px 0px 0px 0px;
 margin-top: 20px;
 /* display: none; */
 }
@@ -589,7 +577,6 @@ margin-right: 6px;
 padding-top: 0;
 }
 .right-area-modules .dashboard-module-content > ul > li {
--moz-border-radius: 0px 0px 0px 0px;
 background: none no-repeat 0 0 transparent;
 border: none;
 border-top: 1px solid #efdede;
@@ -601,7 +588,6 @@ margin: 0;
 
 .right-area-modules .dashboard-module-content > ul > li.odd {
 background: none no-repeat 0 0 transparent;
--moz-border-radius: 0px 0px 0px 0px;
 }
 
 .right-area-modules .dashboard-module-content > ul > li > a {
@@ -617,13 +603,11 @@ height: auto;
 .right-area-modules {
 border: 2px solid #a00a0a;
  -webkit-border-radius:6px;
-  -moz-border-radius:6px;
   border-radius:6px;
 }
 
 .right-area-modules h2 {
 background: url("../images/right-area-default-icon.png") no-repeat scroll 8px 7px #a00a0a;
--moz-border-radius: 3px 3px 0px 0px;
 }
 
 /* --- feeds --- */
@@ -803,6 +787,7 @@ h1.dashboard-title {float:none !important;width:960px;margin:30px auto 0;float:n
 #footer {width:960px;margin:10px auto;border-top:1px dotted #ccc;text-align:center;}
 .login #footer {display:none;}
 ul.messagelist li {width:880px !important;margin:0 auto !important;padding:20px 40px;background-position:20px center;font-size:1.2em;}
+ul.messagelist { margin: 0 0 34px 0;}
 .changelink {background: url("../images/admin-cyclope-sitesettings-small.png") no-repeat !important;}
 
 /*# GFKWidget */
@@ -826,3 +811,7 @@ fieldset .inlined{
   border-left-color: #CCCCCC;
 }
 
+.number-objects-title{ background:#f1f1f1;margin:10px auto; padding:10px; font-weight:700;}
+.number-objects { font-weight:700;}
+.number-objects li { padding: 6px 0 0 0; font-weight:400;}
+.changelist-filter-a { font-weight:700; font-size:0.8em; margin: 0 0 0 62px; cursor:pointer; color: #FFFFFF !important; }

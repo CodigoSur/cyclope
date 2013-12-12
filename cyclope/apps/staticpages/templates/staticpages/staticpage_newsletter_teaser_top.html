@@ -1,0 +1,33 @@
+{% load i18n fb_versions cyclope_utils %}
+
+  <div class="newsletter_teaser">
+<table border="0" cellpadding="0" cellspacing="0" >
+    <tr>
+    <td>
+<div class="teaser">
+    {% if staticpage.pictures %}
+     <div class="teaser_icon_container"><a href="{% url staticpage-detail staticpage.slug %}">
+        <img class="newsletter_image" src="{% version staticpage.pictures.0.image.path 'newsletter_teaser' %}" border="0"/>
+      </a></div>
+    {% endif %}
+    
+    <h2 class="title"><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a></h2>
+
+    {% if staticpage.summary %}
+      <div class="html-content summary">{{ staticpage.summary|smart_style }}</div>
+      <div class="download_link"><a href="{{ staticpage.get_absolute_url }}"> {% trans "Open" %}</a></div>
+    {% endif %}
+
+    {% if staticpage.text %}
+      <div class="html-content summary">{{ staticpage.text|smart_style|striptags|truncatewords:40 }}</div>
+      <div class="download_link"><a href="{{ staticpage.get_absolute_url }}"> {% trans "Open" %}</a></div>
+    {% endif %}
+
+ {% if newsletter.show_ToC %}<div class="show-ToC"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></div>{% endif %}
+      <div class="clear"></div>
+ </div>
+ </td>
+ </tr>
+</table>
+</div>
+
