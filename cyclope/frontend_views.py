@@ -310,7 +310,7 @@ class AuthorDetail(AuthoredMixin, frontend.FrontendView):
     verbose_name=_('detailed view of the selected Author')
     is_default = True
     is_instance_view = True
-    is_region_view = False
+    is_region_view = True
     is_content_view = True
     template = "cyclope/author_detail.html"
 
@@ -337,6 +337,25 @@ class AuthorDetail(AuthoredMixin, frontend.FrontendView):
 
 
 frontend.site.register_view(Author, AuthorDetail)
+
+class AuthorTeaser(AuthoredMixin, frontend.FrontendView):
+    """Display an author's teaser
+    """
+    name='author_teaser'
+    verbose_name=_('teaser view of all Authors')
+    is_instance_view = False
+    is_region_view = True
+    is_content_view = True
+    template = "cyclope/author_teaser.html"
+
+    def get_response(self, request, req_context, options):
+        author_list = Author.objects.all()
+
+        return render_to_string(self.template, {
+            'author_list': author_list,
+        }, req_context)
+
+frontend.site.register_view(Author, AuthorTeaser)
 
 class SharingContentOptions(forms.Form):
     show_rss = forms.BooleanField(label=_('Show rss button'),
