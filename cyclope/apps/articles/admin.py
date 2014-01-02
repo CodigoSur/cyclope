@@ -74,7 +74,9 @@ from cyclope.apps.related_admin import GenericModelChoiceField as GMCField
 class SearchAndCreateFKWidget(GenericFKWidget):
     def render(self, name, value, attrs):
         out = super(SearchAndCreateFKWidget, self).render(name, value, attrs)
-        return mark_safe(out + "<select id='id_%s_none' style='display:none'><option value='20'>Picture</option></select>" % name)
+        name = "%s_none" % name
+        fake_ctfield = "<select id='id_{0}' name='{0}' style='display:none'><option value='20'>Picture</option></select>".format(name) # FIXME
+        return mark_safe("<fieldset class='inlined'>" + fake_ctfield + out + "</fieldset")
 
     def get_actual_object(self, value):
         try:

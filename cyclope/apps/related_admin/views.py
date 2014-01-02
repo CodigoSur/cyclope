@@ -15,7 +15,7 @@ def staff_required(function=None):
 
 def do_render_object(obj):
     data = []
-    data.append('<div class="object-text-repr float-left">%s</div>' % unicode(obj))
+    data.append('<div class="object-text-repr">%s</div>' % unicode(obj))
     if hasattr(obj, "thumbnail"):
         try:
             data.append(obj.thumbnail())

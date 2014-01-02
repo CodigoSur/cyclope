@@ -1,14 +1,16 @@
 {% load i18n %}
 <div class="GenericFKAdmin">
-  <div>
+  <div class="current-object">
     <input class="vGenericFKAdminField" type="text" name="{{ name }}" value="{{ value }}" id="id_{{ name }}">
     <div class="object-representation float-left">{{ obj_repr|safe }}</div>
-    <a href="{{ related }}{{ url}}" class="related-lookup" id="lookup_id_{{ name }}" onclick="return showGenericRelatedObjectLookupPopup('{{ ct_field }}', this, '../../../{{ url }}');">
-      <img src="{{static_admin}}img/selector-search.gif" width="16" height="16" alt="Lookup" />
-    </a>
+    <div class="search-widget">
+        <label>{% trans "Search" %}</label>
+        <a href="{{ related }}{{ url}}" class="related-lookup float-left" id="lookup_id_{{ name }}" onclick="return showGenericRelatedObjectLookupPopup('{{ ct_field }}', this, '../../../{{ url }}');">
+            <img src="{{static_admin}}img/selector-search.gif" width="16" height="16" alt="Lookup" />
+        </a>
+    </div>
   </div>
-  <div class="create-content">
-    <!-- <div class="create-button">{% trans "Create" %}</div> -->
+  <div class="create-content-inlined-form">
   </div>
 </div>
 
@@ -67,19 +69,45 @@ var content_types = new Array();
 {% for ct in content_types %}
     content_types[{{ ct.0 }}] = '{{ ct.1 }}/{{ ct.2 }}/';
 {% endfor %}
-    $.get("/api/create/", {"ct_id": 20/*FIXME*/}, function (data){
-        $("#id_{{ name }}").parent().parent().parent().after(data + '<div class="gfk_create_button">Create</div>');
-    })
+    var htmlGFKCreateButton = function(html){
+        return html + '<div class="gfk_create_button">{% trans "Create" %}</div>';
+    };
+    var ct_id = $("#id_{{ ct_field }}").val();
+    if (ct_id){
+        $.get("/api/create/", {"ct_id": ct_id}, function (data){
+            if(data){
+                $("#id_{{ name }}").closest(".GenericFKAdmin").find(".create-content-inlined-form").html(htmlGFKCreateButton(data));
+            }
+        })
+    }
+
+    $( "body" ).delegate("fieldset select", "change", function(event){
+        ct_field = event.currentTarget;
+        if ($(ct_field).closest("fieldset").find(".GenericFKAdmin")){
+            $.ajax({
+                url: "/api/create/",
+                data: {"ct_id": $(ct_field).val()},
+                context: ct_field,
+                success: function(data){
+                    if(data){
+                        $(this).closest("fieldset").find(".create-content-inlined-form").html(htmlGFKCreateButton(data));
+                    }
+                }
+            });
+        }
+        return false;
+    });
 
     $( "body" ).delegate( ".gfk_create_button", "click", function(event) {
-        console.log($( this ).text());
 
         var fileInput = $(this).siblings().find("input[name*=simplified__-file]")[0];
         var name = $(this).siblings().find("input[name*=simplified__-name]").val();
         var file = fileInput.files[0];
         var formData = new FormData();
+        var ct_id = $(this).closest("fieldset").find("select").val();
         formData.append('file', file);
         formData.append('name', name);
+        formData.append('ct_id', ct_id);
 
         var xhr = new XMLHttpRequest();
         xhr.onload = function(){
@@ -87,7 +115,7 @@ var content_types = new Array();
             $("#"+this.gfk_id).val(jsonResponse.obj_id);
             gfkEnsureRepresentation(this.gfk_id, jsonResponse.ct_id);
         }
-        xhr.gfk_id = $(this).siblings().find(".vGenericFKAdminField").attr("id");
+        xhr.gfk_id = $(this).closest(".GenericFKAdmin").find(".vGenericFKAdminField").attr("id");
         xhr.open('POST', "/api/create/", true);
         xhr.setRequestHeader("X-CSRFToken", $("input[name=csrfmiddlewaretoken]").val());
         xhr.send(formData);

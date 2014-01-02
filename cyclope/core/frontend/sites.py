@@ -38,8 +38,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 from cyclope.models import MenuItem, SiteSettings, BaseContent
 import cyclope
-from cyclope.utils import (layout_for_request, LazyJSONEncoder, get_object_name,
-                            generate_fb_version)
+from cyclope.utils import layout_for_request, LazyJSONEncoder, get_object_name
 from cyclope.themes import get_theme
 
 class CyclopeSite(object):
@@ -363,37 +362,22 @@ class CyclopeSite(object):
     def api_create_content(self, request):
         from django import forms
         from cyclope.apps.medialibrary.models import Picture
-
-        class SimplestMediaForm(forms.Form):
-            name = forms.CharField()
-            file = forms.ImageField()
+        from cyclope.apps.medialibrary.forms import InlinedPictureForm
 
         if request.user.is_staff:
             if request.method == "POST":
-                form = SimplestMediaForm(request.POST, request.FILES)
+                form = InlinedPictureForm(request.POST, request.FILES)
                 if form.is_valid():
-                    import os
-                    from filebrowser.functions import handle_file_upload, convert_filename
-                    from django.conf import settings
-                    from filebrowser.settings import ADMIN_THUMBNAIL
-
-                    abs_path = os.path.join(settings.MEDIA_ROOT,
-                               Picture._meta.get_field_by_name("image")[0].directory)
-
-                    p = Picture(name=form.cleaned_data["name"])
-                    f = form.cleaned_data['file']
-                    f.name = convert_filename(f.name)
-                    p.image = handle_file_upload(abs_path, f)
-                    generate_fb_version(p.image.path, ADMIN_THUMBNAIL)
-                    p.save()
-
-                    ct_id = ContentType.objects.get_for_model(Picture).pk
-                    json_data = simplejson.dumps({"ct_id": ct_id, "obj_id": p.pk})
+                    obj = form.save()
+                    ct_id = form.cleaned_data["ct_id"]
+                    json_data = simplejson.dumps({"ct_id": ct_id, "obj_id": obj.pk})
                     return HttpResponse(json_data, mimetype='application/json')
 
             elif request.method == "GET":
                 model = ContentType.objects.get_for_id(request.GET['ct_id']).model_class()
-                return HttpResponse(SimplestMediaForm(prefix="__simplified__").as_ul())
+                if model != Picture:
+                    return HttpResponse("")
+                return HttpResponse(InlinedPictureForm(prefix="__simplified__").as_ul())
             return HttpResponse("")
         else:
             return HttpResponseForbidden()
