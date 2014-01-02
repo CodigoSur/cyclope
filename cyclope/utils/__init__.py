@@ -290,6 +290,16 @@ def get_or_set_cache(func, args, kwargs, key, timeout=None):
         cache.set(key, out, timeout)
     return out
 
+def generate_fb_version(image_path, version_suffix):
+    from filebrowser.functions import get_version_path, version_generator
+    version_path = get_version_path(image_path, version_suffix)
+    if not os.path.isfile(version_path):
+        version_path = version_generator(image_path, version_suffix)
+    elif os.path.getmtime(image_path) > os.path.getmtime(version_path):
+        version_path = version_generator(image_path, version_suffix, force=True)
+    return version_path
+
+
 class PermanentFilterMixin(object):
     """
     Mixin class that adds a default filter to a changelist that also is permanent

@@ -13,6 +13,24 @@
 </div>
 
 <script type="text/javascript">
+
+var gfkSetNewValue = function( id_name,value){
+    var obj = $("#" + id_name);
+    obj.attr("newValue", value);
+    obj.val(value);
+}
+
+var gfkEnsureRepresentation = function(id_name, ct_id){
+    var obj = $("#" + id_name);
+    if (obj.attr("value") !== obj.attr("newValue")){
+        var obj_id = obj.attr("value");
+        gfkSetNewValue(id_name, ct_id + "-" + obj.attr("value"));
+        $.get("/related_admin/render_object/" + ct_id + "/" + obj_id + "/", function(data) {
+            obj.siblings(".object-representation").html(data);
+        });
+    }
+}
+
 function showGenericRelatedObjectLookupPopup(ct_field, triggering_link, url_base) {
     var id_name = triggering_link.id.replace(/^lookup_/, '');
     // If ct is inline
@@ -30,31 +48,14 @@ function showGenericRelatedObjectLookupPopup(ct_field, triggering_link, url_base
     var ct_id = getCTId(ct_select);
     var url = content_types[ct_id];
 
-    function setNewValue(id_name, value){
-        var obj = $("#" + id_name);
-        obj.attr("newValue", value);
-        obj.val(value);
-    }
-
-    var ensureRepresentation = function(id_name, ct_select){
-        var obj = $("#" + id_name);
-        var ct_id = getCTId(ct_select);
-        if (obj.attr("value") !== obj.attr("newValue")){
-            var obj_id = obj.attr("value");
-            setNewValue(id_name, ct_id + "-" + obj.attr("value"));
-            $.get("/related_admin/render_object/" + ct_id + "/" + obj_id + "/", function(data) {
-                obj.siblings(".object-representation").html(data);
-            });
-        }
-    }
     // Yes this is insane but there isn't a robust way to fire an event by a
     // closing window that has a long ajax function inside without blocking
-    setInterval(function() {ensureRepresentation(id_name, ct_select); }, 200);
+    setInterval(function() {gfkEnsureRepresentation(id_name, getCTId(ct_select)); }, 200);
 
     if (url != undefined) {
         triggering_link.href = url_base + url;
         var rv = showRelatedObjectLookupPopup(triggering_link);
-        setNewValue(id_name, "");
+        gfkSetNewValue(id_name, "");
         return rv;
     }
     return false;
@@ -66,8 +67,31 @@ var content_types = new Array();
 {% for ct in content_types %}
     content_types[{{ ct.0 }}] = '{{ ct.1 }}/{{ ct.2 }}/';
 {% endfor %}
-    /*$.get("/api/create", {"ct_id": 20}, function (data){
-        $("#id_{{ name }}").parent().parent().parent().after(data);
+    $.get("/api/create/", {"ct_id": 20/*FIXME*/}, function (data){
+        $("#id_{{ name }}").parent().parent().parent().after(data + '<div class="gfk_create_button">Create</div>');
     })
-    */
+
+    $( "body" ).delegate( ".gfk_create_button", "click", function(event) {
+        console.log($( this ).text());
+
+        var fileInput = $(this).siblings().find("input[name*=simplified__-file]")[0];
+        var name = $(this).siblings().find("input[name*=simplified__-name]").val();
+        var file = fileInput.files[0];
+        var formData = new FormData();
+        formData.append('file', file);
+        formData.append('name', name);
+
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+            var jsonResponse = JSON.parse(this.responseText);
+            $("#"+this.gfk_id).val(jsonResponse.obj_id);
+            gfkEnsureRepresentation(this.gfk_id, jsonResponse.ct_id);
+        }
+        xhr.gfk_id = $(this).siblings().find(".vGenericFKAdminField").attr("id");
+        xhr.open('POST', "/api/create/", true);
+        xhr.setRequestHeader("X-CSRFToken", $("input[name=csrfmiddlewaretoken]").val());
+        xhr.send(formData);
+
+        return false; // prevent multiple events
+    });
 </script>
