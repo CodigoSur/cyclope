@@ -1,6 +1,15 @@
 Changelog for Cyclope 3
 =======================
 
+
+0.4.1 (5-2-2014)
+================
+
+- Improved RSS generation (added publication date)
+- Use new version of django-simple-captcha
+- Fixed bugs on the Admin for Collection and MenuItem
+
+
 0.4 (24-9-2013)
 ===============
 
