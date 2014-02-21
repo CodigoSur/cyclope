@@ -40,7 +40,9 @@ activate_virtualenv() {
 }
 
 install_cyclope() {
-    pip install --use-mirrors --timeout=50 --allow-external $CYCLOPE_PACKAGE || { echo -e >&2 "\n\nError installing cyclope"; exit 1; }
+    # use pip 1.4, 1.5 has several incompatibilities with external sources
+    pip install pip==1.4.1 || { echo -e >&2 "\n\nError installing pip"; exit 1; }
+    pip install --use-mirrors --timeout=50 $CYCLOPE_PACKAGE || { echo -e >&2 "\n\nError installing cyclope"; exit 1; }
 }
 
 post_install_message() {
