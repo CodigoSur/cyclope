@@ -12,12 +12,12 @@ get_python_version() {
       PYTHON=python2;
     else PYTHON=python;
     fi
-    echo "using python binary:"; 
+    echo "using python binary:";
     which $PYTHON;
 }
 
 install_dependencies() {
-    if apt-get >/dev/null 2>&1; then 
+    if apt-get >/dev/null 2>&1; then
         sudo apt-get install -y $DEBIAN_OS_DEPENDENCIES || { echo -e >&2 "\n\nplease install $DEBIAN_OS_DEPENDENCIES and. Aborting."; exit 1; }
     else
         git --version >/dev/null 2>&1 || { echo -e >&2 "\n\ngit not found. Please install git package and retry.  Aborting."; exit 1; }
@@ -28,10 +28,10 @@ install_dependencies() {
 
 bootstrap_virtualenv() {
     echo "Downloading virtualenv";
-    
+
     #try to download with curl and wget
     curl -o $VIRTUALENV_SCRIPT -O $VIRTUALENV_DOWNLOAD_URL || wget -O $VIRTUALENV_SCRIPT $VIRTUALENV_DOWNLOAD_URL || { echo -e >&2 "\n\nPlease install curl or wget and retry.  Aborting."; exit 1; }
-    
+
     $PYTHON $VIRTUALENV_SCRIPT --system-site-packages $VIRTUALENV_PATH;
 }
 
@@ -40,6 +40,8 @@ activate_virtualenv() {
 }
 
 install_cyclope() {
+    # use pip 1.4, 1.5 has several incompatibilities with external sources
+    pip install pip==1.4.1 || { echo -e >&2 "\n\nError installing pip"; exit 1; }
     pip install --use-mirrors --timeout=50 $CYCLOPE_PACKAGE || { echo -e >&2 "\n\nError installing cyclope"; exit 1; }
 }
 
@@ -48,7 +50,7 @@ post_install_message() {
     echo "run 'source cyclope_workenv/bin/activate' to activate virtualenv and then"
     echo "run 'cyclopeproject project_name' to create an empty project OR"
     echo "run 'cyclopedemo demo' to create a demo project with some content"
-    
+
 }
 
 # deactivate if inside virtualenv
