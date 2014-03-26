@@ -6,13 +6,18 @@
     <td>
       <div class="teaser">
      
-      {% if article.pretitle %} <span class="pretitle"><a name="editorial">{% trans article.pretitle %}</a></span>{% endif %}
-      <h2 class="title"><a name="article__{{ article.slug }}" href="{% url article-detail article.slug %}">
-        {% trans article.name  %}</a></h2>
+      {% if current_object.pretitle %} <span class="pretitle"><a name="editorial">{% trans current_object.pretitle %}</a></span>{% endif %}
+      <h2 class="title"><a name="article__{{ current_object.slug }}" href="{% url article-detail current_object.slug %}">
+        {% trans current_object.name  %}</a></h2>
  
- {% if article.pictures %}
+ 
+	  {% if current_object.picture %}
+      <a href="{% url article-detail current_object.slug %}">
+        <img class="newsletter_image" src="/media/{{ current_object.picture.image.path }}" alt="{{ current_object.picture.name }}"/>
+      </a>
+	  {% elif current_object.pictures %}
       <a href="{% url article-detail article.slug %}">
-        <img class="newsletter_image" src="{% version article.pictures.0.image.path 'newsletter_teaser' %}" alt="{{ article.pictures.0.name }}"/>
+        <img class="newsletter_image" src="{% version current_object.pictures.0.image.path 'newsletter_teaser' %}" alt="{{ current_object.pictures.0.name }}"/>
       </a>
       {% endif %}
 

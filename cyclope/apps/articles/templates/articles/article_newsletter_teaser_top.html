@@ -6,22 +6,26 @@
     <td>
 	  <div class="teaser">
 		 
-      {% if article.pictures %}
-      <a href="{% url article-detail article.slug %}">
-        <img class="newsletter_image" src="{% version article.pictures.0.image.path 'newsletter_teaser' %}" alt="{{ article.pictures.0.name }}"/>
+      {% if current_object.picture %}
+      <a href="{% url article-detail current_object.slug %}">
+        <img class="newsletter_image_top" src="/media/{{ current_object.picture.image.path }}" alt="{{ current_object.picture.name }}"/>
+      </a>
+      {% elif current_object.pictures %}
+      <a href="{% url article-detail current_object.slug %}">
+        <img class="newsletter_image" src="{% version article.pictures.0.image.path 'newsletter_teaser' %}" alt="{{ current_object.pictures.0.name }}"/>
       </a>
       {% endif %}
-      {% if article.pretitle %} <span class="pretitle"><a name="editorial">{% trans article.pretitle %}</a></span>{% endif %}
-      <h2 class="title"><a name="article__{{ article.slug }}" href="{% url article-detail article.slug %}">
-        {% trans article.name  %}</a></h2>
+      {% if current_object.pretitle %} <span class="pretitle"><a name="editorial">{% trans current_object.pretitle %}</a></span>{% endif %}
+      <h2 class="title"><a name="article__{{ current_object.slug }}" href="{% url article-detail current_object.slug %}">
+        {% trans current_object.name  %}</a></h2>
  
 
 
-      <a href="{% url article-detail article.slug %}">
-        <div class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</div>
+      <a href="{% url article-detail current_object.slug %}">
+        <div class="summary">{{ current_object|parsed_gettext:"summary"|smart_style }}</div>
       </a> <div class="download_link"><a href="{{ article.get_absolute_url }}"> {% trans "Open" %}</a></div>
-      {% if article.author %}
-      <h4 class="author">{% trans "By"%} {{ article.author }}</h4>
+      {% if current_object.author %}
+      <h4 class="author">{% trans "By"%} {{ current_object.author }}</h4>
       {% endif %}
 
         {% block media_content %}
@@ -29,7 +33,7 @@
 
         {% if newsletter.view == "content" %}
             <span class="text">
-                {{ article|parsed_gettext:"text"|smart_style}}
+                {{ current_object|parsed_gettext:"text"|smart_style}}
             </span>
         {% endif %}
              

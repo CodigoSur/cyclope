@@ -76,7 +76,7 @@ class SearchAndCreateFKWidget(GenericFKWidget):
         out = super(SearchAndCreateFKWidget, self).render(name, value, attrs)
         name = "%s_none" % name
         fake_ctfield = "<select id='id_{0}' name='{0}' style='display:none'><option value='20'>Picture</option></select>".format(name) # FIXME
-        return mark_safe("<fieldset class='inlined'>" + fake_ctfield + out + "</fieldset")
+        return mark_safe("<fieldset class='inlined'>" + fake_ctfield + out + "</fieldset>")
 
     def get_actual_object(self, value):
         try:
@@ -121,7 +121,7 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
 
     fieldsets = ((None,
                   {'fields': ('name', 'author', 'pretitle', 'picture',
-                   'summary', 'text')}),
+                   'picture_show', 'summary', 'text')}),
                  (_('Publication data'),
                   {
                     'classes': ('collapse',),

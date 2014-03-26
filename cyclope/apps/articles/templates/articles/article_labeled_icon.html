@@ -2,7 +2,10 @@
 
   <div class="content-view article labeled_icon">
     <a href="{% url article-detail article.slug %}">
-      {% if article.pictures %}
+	  {% if article.picture %}
+        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
+        <img class="icon" src="/media/{{ article.picture.image.path }}" border="0"/>
+      {% elif article.pictures %}
         <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
         <img class="icon" src="{% version article.pictures.0.image.path 'thumbnail' %}" border="0"/>
       {% else %}

@@ -90,7 +90,7 @@ class Newsletter(models.Model):
         if self.regions == "c":
             top, center, lateral = [], data[:c], []
         elif self.regions == "tc":
-            top, center, lateral = data[:t], data[c:c+t], []
+            top, center, lateral = data[:t], data[t:c+t], []
         elif self.regions == "cl":
             top, center, lateral = [], data[:c], data[c:c+l]
         elif self.regions == "tcl":

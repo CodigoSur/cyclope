@@ -21,25 +21,39 @@
   {% endif %}
   <!-- /descripcion -->
 
-  {% if article.pictures %}
-  <div id="gallery" class="media-content">
-    <ul>
-      {% for picture in article.pictures %}
-      <li {% if not forloop.first %} style="display:none;" {% endif %} >
-        <a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
-          <img src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
-
-        <p>{{ picture.name }}
-        {% if article.pictures|length >= 2 %}
-        ({{ article.pictures|length }} {% trans "pictures" %})
-        {% endif %}
-        </p>
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+  {% if article.picture_show == 0 %}
+	{% if article.picture %}
+	<div id="gallery" class="media-content">
+		<ul>
+		  <li>
+			<a href="/media/{{ article.picture.image.path }}"  title="{{ article.picture.name }}">
+				<img src="/media/{{ article.picture.image.path }}" alt="{{ article.picture.name }}" border="0"/>
+				<p>{{ article.picture.name }}</p>
+			</a>
+		  </li>
+		</ul>
+	</div>
+	{% elif article.pictures %}
+	<div id="gallery" class="media-content">
+		<ul>
+		  {% for picture in article.pictures %}
+		  <li {% if not forloop.first %} style="display:none;" {% endif %} >
+			<a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
+			  <img src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
+				<p>{{ picture.name }}
+					{% if article.pictures|length >= 2 %}
+					({{ article.pictures|length }} {% trans "pictures" %})
+					{% endif %}
+				</p>
+			</a>
+		  </li>
+		  {% endfor %}
+		</ul>
+	</div>
+	{% else %}
+	{% endif %}
   {% endif %}
+
 
   <!-- author -->
   {% include "cyclope/author_block.html" %}

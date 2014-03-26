@@ -10,7 +10,9 @@
     <div class="teaser_icon_container">
           <img title="article" class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
     <a href="{% url article-detail article.slug %}">
-        {% if article.pictures %}
+		{% if article.picture %}
+          <img src="media/{{ article.picture.image.path }}" alt="{{ article.picture.name }}" border="0"/>
+        {% elif article.pictures %}
             {% if not view_options.show_title and not view_options.show_description %}
           <img class="icon big" src="{% version article.pictures.0.image.path 'big' %}" border="0"/>
             {% else %}

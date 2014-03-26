@@ -1,12 +1,12 @@
 {% load i18n %}
 <div class="GenericFKAdmin">
+  <input class="vGenericFKAdminField" type="text" name="{{ name }}" value="{{ value }}" id="id_{{ name }}">
+  <div class="object-representation float-left">{{ obj_repr|safe }}</div>
   <div class="current-object">
-    <input class="vGenericFKAdminField" type="text" name="{{ name }}" value="{{ value }}" id="id_{{ name }}">
-    <div class="object-representation float-left">{{ obj_repr|safe }}</div>
     <div class="search-widget">
         <label>{% trans "Search" %}</label>
         <a href="{{ related }}{{ url}}" class="related-lookup float-left" id="lookup_id_{{ name }}" onclick="return showGenericRelatedObjectLookupPopup('{{ ct_field }}', this, '../../../{{ url }}');">
-            <img src="{{static_admin}}img/selector-search.gif" width="16" height="16" alt="Lookup" />
+           <div class="search-widget-image"> <img src="{{static_admin}}img/selector-search.gif" width="16" height="16" alt="Lookup" /></div>
         </a>
     </div>
   </div>
@@ -70,7 +70,7 @@ var content_types = new Array();
     content_types[{{ ct.0 }}] = '{{ ct.1 }}/{{ ct.2 }}/';
 {% endfor %}
     var htmlGFKCreateButton = function(html){
-        return html + '<div class="gfk_create_button">{% trans "Create" %}</div>';
+        return '<div class="gfk_create_title">{% trans "Create a new image" %}</div>' + html + '<div class="gfk_create_button">{% trans "Load" %}</div>';
     };
     var ct_id = $("#id_{{ ct_field }}").val();
     if (ct_id){

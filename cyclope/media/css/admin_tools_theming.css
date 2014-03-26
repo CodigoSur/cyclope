@@ -800,8 +800,23 @@ fieldset .inlined{
   padding-right: 20px;
 }
 
+.GenericFKAdmin .search-widget {
+  float:left; }
+
+.GenericFKAdmin .search-widget-image {
+  padding: 5px;
+  background-color: #f1f1f1;
+  margin: 8px 0 0 0;
+  width: 85px;
+  text-align: center;
+   -webkit-border-radius:5px;
+  border-radius: 5px;
+  border: 1px solid #C3D5F0;
+ }
+
 .GenericFKAdmin .search-widget label{
-}
+ float:none;
+ color: #333; }
 
 .GenericFKAdmin .create-content-inlined-form{
   float:left;
@@ -809,6 +824,44 @@ fieldset .inlined{
   border-left-style: solid;
   border-left-width: 1px;
   border-left-color: #CCCCCC;
+}
+
+.GenericFKAdmin .float-left {
+  margin: 0 25px 0 0;
+}
+
+.GenericFKAdmin .object-text-repr {
+  margin: 0 0 3px 0;
+  font-size: 12px;
+  width: 100px;
+}
+
+.GenericFKAdmin .gfk_create_title {
+  padding: 3px 10px 6px 0;
+  color: #333;
+  font-size: 12px;
+}
+
+.GenericFKAdmin .create-content-inlined-form label  {
+  width: 60px;
+}
+
+.GenericFKAdmin input[type="text"] {
+  width: 250px;
+}
+
+.GenericFKAdmin .gfk_create_button {
+  padding: 5px;
+  background-color: #f1f1f1;
+  margin: 10px 0 0 82px;
+  width: 85px;
+  text-align: center;
+   -webkit-border-radius:5px;
+  border-radius: 5px;
+  border: 1px solid #C3D5F0;
+  color: #5b80b2;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .number-objects-title{ background:#f1f1f1;margin:10px auto; padding:10px; font-weight:700;}
