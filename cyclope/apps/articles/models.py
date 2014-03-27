@@ -43,14 +43,20 @@ class Article(BaseContent, Collectible):
     summary = models.TextField(_('summary'), blank=True)
     picture = models.ForeignKey(Picture, verbose_name=_('image'), null=True,
                                 blank=True, on_delete=models.SET_NULL)
-    picture_show = models.BooleanField(_('only display the image in the teaser of articles, not in the detail'),
-                                               default=False)
     text = models.TextField(_('text'))
     author = models.ForeignKey(Author, verbose_name=_('author'),
                                null=True, blank=True, on_delete=models.SET_NULL)
     source = models.ForeignKey(Source, verbose_name=_('source'),
                                blank=True, null=True)
     date = models.DateTimeField(_('date'), blank=True, null=True)
+
+    def get_picture(self):
+        if self.picture:
+            return self.picture
+
+        related_content_pictures = self.pictures()
+        if related_content_pictures:
+            return related_content_pictures[0]
 
     class Meta:
         verbose_name = _('article')

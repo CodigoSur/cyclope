@@ -10,13 +10,11 @@
     <div class="teaser_icon_container">
           <img title="article" class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
     <a href="{% url article-detail article.slug %}">
-		{% if article.picture %}
-          <img src="media/{{ article.picture.image.path }}" alt="{{ article.picture.name }}" border="0"/>
-        {% elif article.pictures %}
+        {% if article.get_picture %}
             {% if not view_options.show_title and not view_options.show_description %}
-          <img class="icon big" src="{% version article.pictures.0.image.path 'big' %}" border="0"/>
+          <img class="icon big" src="{% version article.get_picture.image.path 'big' %}" border="0"/>
             {% else %}
-          <img class="slideshow_picture" src="{% version article.pictures.0.image.path view_options.visualization_mode %}" border="0"/>
+          <img class="slideshow_picture" src="{% version article.get_picture.image.path view_options.visualization_mode %}" border="0"/>
             {% endif %}
         {% else %}
           <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>

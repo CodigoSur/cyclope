@@ -5,25 +5,20 @@
   <tr>
     <td>
       <div class="teaser">
-     
+
       {% if current_object.pretitle %} <span class="pretitle"><a name="editorial">{% trans current_object.pretitle %}</a></span>{% endif %}
       <h2 class="title"><a name="article__{{ current_object.slug }}" href="{% url article-detail current_object.slug %}">
         {% trans current_object.name  %}</a></h2>
- 
- 
-	  {% if current_object.picture %}
-      <a href="{% url article-detail current_object.slug %}">
-        <img class="newsletter_image" src="/media/{{ current_object.picture.image.path }}" alt="{{ current_object.picture.name }}"/>
-      </a>
-	  {% elif current_object.pictures %}
+
+      {% if current_object.get_picture %}
       <a href="{% url article-detail article.slug %}">
-        <img class="newsletter_image" src="{% version current_object.pictures.0.image.path 'newsletter_teaser' %}" alt="{{ current_object.pictures.0.name }}"/>
+        <img class="newsletter_image" src="{% version current_object.get_picture.image.path 'newsletter_teaser' %}" alt="{{ current_object.get_picture.name }}"/>
       </a>
       {% endif %}
 
       <a href="{% url article-detail article.slug %}">
         <div class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</div>
-      </a> 
+      </a>
       <div class="download_link"><a href="{{ article.get_absolute_url }}"> {% trans "Open" %}</a></div>
       {% if article.author %}
       <h4 class="author">{% trans "By"%} {{ article.author }}</h4>
@@ -37,9 +32,9 @@
                 {{ article|parsed_gettext:"text"|smart_style}}
             </span>
         {% endif %}
-             
+
    {% if newsletter.show_ToC %}<div class="show-ToC"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></div>{% endif %}
-      <div class="clear"></div> 
+      <div class="clear"></div>
 
 </div>
 

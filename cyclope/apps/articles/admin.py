@@ -121,7 +121,7 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
 
     fieldsets = ((None,
                   {'fields': ('name', 'author', 'pretitle', 'picture',
-                   'picture_show', 'summary', 'text')}),
+                   'summary', 'text')}),
                  (_('Publication data'),
                   {
                     'classes': ('collapse',),

@@ -17,13 +17,9 @@
       <a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
     </h2>
 
-    {% if not simplified_view and article.picture or article.pictures %}
-      <div class="teaser_icon_container"><a href="{{ article.get_absolute_url }}" title="{{ article.pictures.0.name }}{{ article.picture.name }}"> 
-        {% if article.picture %}
-          <img class="teaser_icon" src="media/{{ article.picture.image.path }}" alt="{{ article.picture.name }}" width="135" border="0"/>
-        {% else %}
-          <img class="teaser_icon" src="{% version article.pictures.0.image.path 'small' %}" alt="{{ article.pictures.0.name }}" width="135" border="0"/>
-        {% endif %}
+    {% if not simplified_view and article.get_picture %}
+      <div class="teaser_icon_container"><a href="{{ article.get_absolute_url }}" title="{{ article.get_picture.name }}">
+          <img class="teaser_icon" src="{% version article.get_picture.image.path 'small' %}" alt="{{ article.get_picture.name }}" width="135" border="0"/>
       </a></div>
     {% endif %}
 

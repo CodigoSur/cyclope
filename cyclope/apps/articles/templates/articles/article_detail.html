@@ -21,37 +21,32 @@
   {% endif %}
   <!-- /descripcion -->
 
-  {% if article.picture_show == 0 %}
-	{% if article.picture %}
-	<div id="gallery" class="media-content">
-		<ul>
-		  <li>
-			<a href="/media/{{ article.picture.image.path }}"  title="{{ article.picture.name }}">
-				<img src="/media/{{ article.picture.image.path }}" alt="{{ article.picture.name }}" border="0"/>
-				<p>{{ article.picture.name }}</p>
-			</a>
-		  </li>
-		</ul>
-	</div>
-	{% elif article.pictures %}
-	<div id="gallery" class="media-content">
-		<ul>
-		  {% for picture in article.pictures %}
-		  <li {% if not forloop.first %} style="display:none;" {% endif %} >
-			<a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
-			  <img src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
-				<p>{{ picture.name }}
-					{% if article.pictures|length >= 2 %}
-					({{ article.pictures|length }} {% trans "pictures" %})
-					{% endif %}
-				</p>
-			</a>
-		  </li>
-		  {% endfor %}
-		</ul>
-	</div>
-	{% else %}
-	{% endif %}
+  {% if article.picture or article.pictures %}
+  <div id="gallery" class="media-content">
+    <ul>
+      {% if article.picture %}
+      <li>
+      <a href="{% version article.picture.image.path 'big' %}"  title="{{ article.picture.name }}">
+        <img src="{% version article.picture.image.path 'big' %}" alt="{{ article.picture.name }}"/>
+        <p>{{ article.picture.name }}</p>
+      </a>
+      </li>
+      {% if endif %}
+      {% for picture in article.pictures %}
+      <li {% if not forloop.first %} style="display:none;" {% endif %} >
+      <a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
+        <img src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
+        <p>{{ picture.name }}
+          {% if article.pictures|length >= 2 %}
+          ({{ article.pictures|length }} {% trans "pictures" %})
+          {% endif %}
+        </p>
+      </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% else %}
   {% endif %}
 
 

@@ -4,22 +4,16 @@
 <table border="0" cellpadding="0" cellspacing="0">
   <tr>
     <td>
-	  <div class="teaser">
-		 
-      {% if current_object.picture %}
+    <div class="teaser">
+
+      {% if current_object.get_picture %}
       <a href="{% url article-detail current_object.slug %}">
-        <img class="newsletter_image_top" src="/media/{{ current_object.picture.image.path }}" alt="{{ current_object.picture.name }}"/>
-      </a>
-      {% elif current_object.pictures %}
-      <a href="{% url article-detail current_object.slug %}">
-        <img class="newsletter_image" src="{% version article.pictures.0.image.path 'newsletter_teaser' %}" alt="{{ current_object.pictures.0.name }}"/>
+        <img class="newsletter_image" src="{% version article.get_picture.image.path 'newsletter_teaser' %}" alt="{{ current_object.get_picture.name }}"/>
       </a>
       {% endif %}
       {% if current_object.pretitle %} <span class="pretitle"><a name="editorial">{% trans current_object.pretitle %}</a></span>{% endif %}
       <h2 class="title"><a name="article__{{ current_object.slug }}" href="{% url article-detail current_object.slug %}">
         {% trans current_object.name  %}</a></h2>
- 
-
 
       <a href="{% url article-detail current_object.slug %}">
         <div class="summary">{{ current_object|parsed_gettext:"summary"|smart_style }}</div>
@@ -36,9 +30,9 @@
                 {{ current_object|parsed_gettext:"text"|smart_style}}
             </span>
         {% endif %}
-             
+
    {% if newsletter.show_ToC %}<div class="show-ToC"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></div>{% endif %}
-      <div class="clear"></div> 
+      <div class="clear"></div>
 
 </div>
 

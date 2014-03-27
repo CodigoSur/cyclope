@@ -21,11 +21,9 @@
   {% include "cyclope/author_block.html" %}
 
   <div class="article_content">
-	{% if article.picture %}
-      <img src="/media/{{ article.picture.image.path }}" alt="{{ article.picture.name }}" width="300" hspace="0" vspace="0" align="right" />
-    {% elif article.pictures %}
-      <img src="{% version article.pictures.0.image.path 'small' %}" alt="{{ article.pictures.0.name }}" hspace="0" vspace="0" align="right" />
-    {% endif %}
+  {% if article.get_picture %}
+      <img src="{% version article.get_picture.image.path 'small' %}" alt="{{ article.get_picture.name }}" hspace="0" vspace="0" align="right" />
+  {% endif %}
 
     <div class="html-text html-content text">
       {{ article|parsed_gettext:"text"|smart_style}}
