@@ -75,7 +75,8 @@ class SearchAndCreateFKWidget(GenericFKWidget):
     def render(self, name, value, attrs):
         out = super(SearchAndCreateFKWidget, self).render(name, value, attrs)
         name = "%s_none" % name
-        fake_ctfield = "<select id='id_{0}' name='{0}' style='display:none'><option value='20'>Picture</option></select>".format(name) # FIXME
+        picture_content_type_id = ContentType.objects.get_by_natural_key("medialibrary", "picture").id
+        fake_ctfield = "<select id='id_{0}' name='{0}' style='display:none'><option value='{1}'>Picture</option></select>".format(name, picture_content_type_id)
         return mark_safe("<fieldset class='inlined'>" + fake_ctfield + out + "</fieldset>")
 
     def get_actual_object(self, value):
@@ -91,7 +92,7 @@ class FakeGMCField(GMCField):
         super(FakeGMCField, self).__init__(*args, **kwargs)
 
     def prepare_value(self, value):
-        if value and not isinstance(value, models.Model):
+        if value and not value == "None" and not isinstance(value, models.Model):
             value = self.queryset.get(pk=value)
         return super(FakeGMCField, self).prepare_value(value)
 
