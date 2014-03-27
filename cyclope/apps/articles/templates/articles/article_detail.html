@@ -31,7 +31,7 @@
         <p>{{ article.picture.name }}</p>
       </a>
       </li>
-      {% if endif %}
+      {% endif %}
       {% for picture in article.pictures %}
       <li {% if not forloop.first %} style="display:none;" {% endif %} >
       <a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
