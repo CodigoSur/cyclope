@@ -67,7 +67,7 @@ class GenericModelChoiceField(fields.Field):
         Given a string like '3-5', return the model of content type id 3 and pk
         5.
         """
-        if not value:
+        if not value or value == "None":
             return None
         try:
             content_type_id, object_id = value.split('-')

@@ -97,7 +97,8 @@ class FakeGMCField(GMCField):
         return super(FakeGMCField, self).prepare_value(value)
 
 class ArticleForm(GenericModelForm):
-    picture = FakeGMCField(queryset=Picture.objects.all(), widget=SearchAndCreateFKWidget("picture_none", [Picture]))
+    picture = FakeGMCField(queryset=Picture.objects.all(), widget=SearchAndCreateFKWidget("picture_none", [Picture]),
+                           required=False)
 
     def __init__(self, *args, **kwargs):
         super(ArticleForm, self).__init__(*args, **kwargs)
