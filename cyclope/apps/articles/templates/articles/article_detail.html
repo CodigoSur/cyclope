@@ -31,19 +31,20 @@
         <p>{{ article.picture.name }}</p>
       </a>
       </li>
+      {% elif article.pictures %}
+          {% for picture in article.pictures %}
+          <li {% if not forloop.first %} style="display:none;" {% endif %} >
+          <a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
+            <img src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
+            <p>{{ picture.name }}
+              {% if article.pictures|length >= 2 %}
+              ({{ article.pictures|length }} {% trans "pictures" %})
+              {% endif %}
+            </p>
+          </a>
+          </li>
+          {% endfor %}
       {% endif %}
-      {% for picture in article.pictures %}
-      <li {% if not forloop.first %} style="display:none;" {% endif %} >
-      <a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
-        <img src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
-        <p>{{ picture.name }}
-          {% if article.pictures|length >= 2 %}
-          ({{ article.pictures|length }} {% trans "pictures" %})
-          {% endif %}
-        </p>
-      </a>
-      </li>
-      {% endfor %}
     </ul>
   </div>
   {% else %}
