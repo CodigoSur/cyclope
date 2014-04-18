@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-15 20:25-0300\n"
+"POT-Creation-Date: 2014-04-17 16:52-0600\n"
 "PO-Revision-Date: 2013-01-24 13:51-0300\n"
 "Last-Translator: SAn <spiccinini@codigosur.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr "detalles de contenido"
 msgid "Either set an URL here or select a contenttype and view."
 msgstr "Configura la URL aquí o selecciona un tipo de contenido y vista."
 
-#: admin.py:135 models.py:225 models.py:350 apps/newsletter/models.py:44
+#: admin.py:135 models.py:225 models.py:350 apps/newsletter/models.py:65
 msgid "layout"
 msgstr "esquema"
 
@@ -249,102 +249,114 @@ msgstr "Cortada (60x60px)"
 msgid "Cropped Thumbnail (140x140px)"
 msgstr "Miniatura cortada (140x140px)"
 
-#: default_settings.py:215 default_settings.py:217
-msgid "Slideshow"
-msgstr "Rotador"
+#: default_settings.py:215
+msgid "Slideshow (300x300px)"
+msgstr "Slideshow (300x300px)"
 
-#: forms.py:117 forms.py:259 apps/newsletter/admin.py:38
+#: default_settings.py:217
+msgid "Slideshow Background (550px"
+msgstr "Slideshow Background (550px)"
+
+#: default_settings.py:219
+msgid "Newsletter Teaser (150x150px)"
+msgstr "Newsletter Teaser (150x150px)"
+
+#: forms.py:58
+msgid "Object"
+msgstr "objeto"
+
+#: forms.py:119 forms.py:261 apps/newsletter/admin.py:38
 msgid "View"
 msgstr "Vista"
 
-#: forms.py:118 forms.py:260
+#: forms.py:120 forms.py:262
 msgid "Content object"
 msgstr "Contenido"
 
-#: forms.py:121 core/collections/admin.py:79
+#: forms.py:123 core/collections/admin.py:79
 msgid "Parent"
 msgstr "Padre"
 
-#: forms.py:123 forms.py:261 core/collections/admin.py:170
-#: core/frontend/sites.py:355
+#: forms.py:125 forms.py:263 core/collections/admin.py:168
+#: core/frontend/sites.py:357
 msgid "View options"
 msgstr "Opciones de la vista"
 
-#: forms.py:155
+#: forms.py:157
 msgid ""
 "You can not set a Custom URL for menu entries                     with "
 "associated content"
 msgstr "No puede setear una URL para Entradas de Menú con contenido asociado."
 
-#: forms.py:162 forms.py:312
+#: forms.py:164 forms.py:314
 msgid "You need to select a content view"
 msgstr "Debe seleccionar una Vista del contenido"
 
-#: forms.py:168 forms.py:318
+#: forms.py:170 forms.py:320
 msgid "The selected view requires a content object"
 msgstr "La vista seleccionada requiere que elija un objeto de contenido"
 
-#: forms.py:199
+#: forms.py:201
 msgid "Theme"
 msgstr "Tema"
 
-#: forms.py:214
+#: forms.py:216
 msgid "Default"
 msgstr "Por defecto"
 
-#: forms.py:215
+#: forms.py:217
 msgid "Corn field"
 msgstr "Maizal"
 
-#: forms.py:216
+#: forms.py:218
 msgid "Pizza party"
 msgstr "Pizza party"
 
-#: forms.py:217
+#: forms.py:219
 msgid "Nogal"
 msgstr "Nogal"
 
-#: forms.py:218
+#: forms.py:220
 msgid "Deep ocean"
 msgstr "Oceano profundo"
 
-#: forms.py:219
+#: forms.py:221
 msgid "Eggplant"
 msgstr "Berenjena"
 
-#: forms.py:220
+#: forms.py:222
 msgid "Teddy bear"
 msgstr "Teddy bear"
 
-#: forms.py:221
+#: forms.py:223
 msgid "Green Day"
 msgstr "Green Day"
 
-#: forms.py:222
+#: forms.py:224
 msgid "Happy Birthday"
 msgstr "Cumpleaños"
 
-#: forms.py:223
+#: forms.py:225
 msgid "Romance"
 msgstr "Romance"
 
-#: forms.py:234
+#: forms.py:236
 msgid "Template"
 msgstr "Plantilla"
 
-#: forms.py:258
+#: forms.py:260
 msgid "Region"
 msgstr "Región"
 
-#: forms.py:305
+#: forms.py:307
 msgid "Content type can not be empty"
 msgstr "El Tipo de contenido no debe estar vacío"
 
-#: forms.py:309
+#: forms.py:311
 msgid "You need to select a region"
 msgstr "Debe seleccionar una región"
 
-#: forms.py:342 apps/custom_comments/forms.py:49
+#: forms.py:344 apps/custom_comments/forms.py:49
 #: apps/dynamicforms/models.py:37 apps/polls/forms.py:35
 #: core/captcha_contact_form/forms.py:31
 msgid "Security code"
@@ -452,35 +464,39 @@ msgstr "Alfabéticamente"
 msgid "detailed view of the selected Author"
 msgstr "vista detallada del Autor"
 
-#: frontend_views.py:342
+#: frontend_views.py:345
+msgid "teaser view of all Authors"
+msgstr "vista detallada de todos los autores"
+
+#: frontend_views.py:361
 msgid "Show rss button"
 msgstr "Mostrar botón rss"
 
-#: frontend_views.py:344
+#: frontend_views.py:363
 msgid "Show social buttons"
 msgstr "Mostrar botones sociales"
 
-#: frontend_views.py:347
+#: frontend_views.py:366
 msgid "Style"
 msgstr "Estilo"
 
-#: frontend_views.py:348
+#: frontend_views.py:367
 msgid "Horizontal small"
 msgstr "Horizontal pequeño"
 
-#: frontend_views.py:349
+#: frontend_views.py:368
 msgid "Horizontal large"
 msgstr "Horizontal grande"
 
-#: frontend_views.py:350
+#: frontend_views.py:369
 msgid "Vertical small"
 msgstr "Vertical pequeño"
 
-#: frontend_views.py:351
+#: frontend_views.py:370
 msgid "Vertical large"
 msgstr "Vertical grande"
 
-#: frontend_views.py:359
+#: frontend_views.py:378
 msgid "sharing buttons"
 msgstr "botones para compartir"
 
@@ -604,7 +620,7 @@ msgstr "habilitar las denuncias por contenido indebido"
 msgid "show author"
 msgstr "mostrar autoría"
 
-#: models.py:105 models.py:409 models.py:517 apps/articles/models.py:45
+#: models.py:105 models.py:409 models.py:517 apps/articles/models.py:47
 #: apps/medialibrary/models.py:35
 msgid "author"
 msgstr "autoría"
@@ -746,7 +762,7 @@ msgstr "configuración del sitio"
 #: models.py:184 models.py:214 models.py:335 models.py:386 models.py:499
 #: models.py:527 apps/abuse/models.py:15 apps/locations/models.py:36
 #: apps/locations/models.py:43 apps/locations/models.py:50
-#: apps/newsletter/models.py:34 apps/staticpages/models.py:41
+#: apps/newsletter/models.py:35 apps/staticpages/models.py:41
 #: core/collections/models.py:50 core/collections/models.py:95
 msgid "name"
 msgstr "nombre"
@@ -795,7 +811,7 @@ msgstr "tipo"
 msgid "object"
 msgstr "objeto"
 
-#: models.py:240 models.py:313 apps/newsletter/models.py:41
+#: models.py:240 models.py:313 apps/newsletter/models.py:42
 msgid "view"
 msgstr "vista"
 
@@ -863,11 +879,12 @@ msgstr ""
 msgid "translations"
 msgstr "traducciones"
 
-#: models.py:503 models.py:543 models.py:547 apps/medialibrary/models.py:61
-#: apps/medialibrary/models.py:75 apps/medialibrary/models.py:108
-#: apps/medialibrary/models.py:122 apps/medialibrary/models.py:136
-#: apps/medialibrary/models.py:150 core/collections/models.py:61
-#: core/collections/models.py:102 core/series/models.py:63
+#: models.py:503 models.py:543 models.py:547 apps/articles/models.py:44
+#: apps/medialibrary/models.py:61 apps/medialibrary/models.py:75
+#: apps/medialibrary/models.py:108 apps/medialibrary/models.py:122
+#: apps/medialibrary/models.py:136 apps/medialibrary/models.py:150
+#: core/collections/models.py:61 core/collections/models.py:102
+#: core/series/models.py:63
 msgid "image"
 msgstr "imagen"
 
@@ -895,7 +912,7 @@ msgstr "autorías"
 msgid "link"
 msgstr "enlace"
 
-#: models.py:537 apps/articles/models.py:47 apps/medialibrary/models.py:37
+#: models.py:537 apps/articles/models.py:49 apps/medialibrary/models.py:37
 msgid "source"
 msgstr "fuente"
 
@@ -1015,7 +1032,7 @@ msgstr "Gracias por la denuncia. En breve el contenido será revisado"
 msgid "return"
 msgstr "volver"
 
-#: apps/articles/admin.py:59 apps/feeds/admin.py:40
+#: apps/articles/admin.py:127 apps/feeds/admin.py:40
 #: apps/staticpages/admin.py:68
 msgid "Publication data"
 msgstr "Datos de la publicación"
@@ -1049,45 +1066,98 @@ msgstr "pre-título"
 msgid "summary"
 msgstr "resumen"
 
-#: apps/articles/models.py:44 apps/forum/models.py:38 apps/polls/models.py:48
+#: apps/articles/models.py:46 apps/forum/models.py:38 apps/polls/models.py:48
 #: apps/polls/models.py:67 apps/staticpages/models.py:33
 #: apps/staticpages/models.py:45
 msgid "text"
 msgstr "texto"
 
-#: apps/articles/models.py:49
+#: apps/articles/models.py:51
 msgid "date"
 msgstr "fecha"
 
-#: apps/articles/models.py:52
+#: apps/articles/models.py:62
 msgid "article"
 msgstr "artículo"
 
-#: apps/articles/models.py:53
+#: apps/articles/models.py:63
 msgid "articles"
 msgstr "artículos"
 
-#: apps/articles/templates/articles/article_detail.html:34
+#: apps/articles/templates/articles/article_detail.html:41
 #: apps/medialibrary/models.py:67
 msgid "pictures"
 msgstr "imágenes"
 
-#: apps/articles/templates/articles/article_detail.html:60
+#: apps/articles/templates/articles/article_detail.html:70
 #: apps/medialibrary/templates/medialibrary/medialibrary_base_detail.html:37
 #: templates/cyclope/base_content_detail.html:26
 msgid "Last modification date"
 msgstr "Última modificación"
 
 #: apps/articles/templates/articles/article_inline_detail.html:10
-#: apps/newsletter/templates/newsletter/content.html:14
-#: apps/newsletter/templates/newsletter/content_teasers.html:13
+#: apps/articles/templates/articles/article_newsletter_teaser_center.html:36
+#: apps/articles/templates/articles/article_newsletter_teaser_lateral.html:36
+#: apps/articles/templates/articles/article_newsletter_teaser_top.html:34
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_newsletter_teaser_center.html:44
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_newsletter_teaser_lateral.html:45
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_newsletter_teaser_top.html:44
+#: apps/staticpages/templates/staticpages/staticpage_newsletter_teaser_center.html:30
+#: apps/staticpages/templates/staticpages/staticpage_newsletter_teaser_lateral.html:30
+#: apps/staticpages/templates/staticpages/staticpage_newsletter_teaser_top.html:26
 msgid "Return to Table of Contents"
-msgstr "Volver al Sumario"
+msgstr "Volver a Sumario"
+
+#: apps/articles/templates/articles/article_newsletter_teaser_center.html:22
+#: apps/articles/templates/articles/article_newsletter_teaser_lateral.html:22
+#: apps/articles/templates/articles/article_newsletter_teaser_top.html:20
+#: apps/medialibrary/templates/medialibrary/externalcontent_newsletter_teaser_center.html:7
+#: apps/medialibrary/templates/medialibrary/externalcontent_newsletter_teaser_lateral.html:7
+#: apps/medialibrary/templates/medialibrary/externalcontent_newsletter_teaser_top.html:7
+#: apps/medialibrary/templates/medialibrary/flashmovie_newsletter_teaser_center.html:6
+#: apps/medialibrary/templates/medialibrary/flashmovie_newsletter_teaser_lateral.html:6
+#: apps/medialibrary/templates/medialibrary/flashmovie_newsletter_teaser_top.html:6
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_newsletter_teaser_center.html:37
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_newsletter_teaser_lateral.html:38
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_newsletter_teaser_top.html:37
+#: apps/staticpages/templates/staticpages/staticpage_newsletter_teaser_center.html:20
+#: apps/staticpages/templates/staticpages/staticpage_newsletter_teaser_center.html:27
+#: apps/staticpages/templates/staticpages/staticpage_newsletter_teaser_lateral.html:20
+#: apps/staticpages/templates/staticpages/staticpage_newsletter_teaser_lateral.html:27
+#: apps/staticpages/templates/staticpages/staticpage_newsletter_teaser_top.html:18
+#: apps/staticpages/templates/staticpages/staticpage_newsletter_teaser_top.html:23
+msgid "Open"
+msgstr "Abrir"
+
+#: apps/articles/templates/articles/article_newsletter_teaser_center.html:24
+#: apps/articles/templates/articles/article_newsletter_teaser_lateral.html:24
+#: apps/articles/templates/articles/article_newsletter_teaser_top.html:22
+#: templates/comments/list.html:11 templates/cyclope/author_block.html:7
+#: templates/cyclope/themes/alternative/newsletter.html:139
+#: templates/cyclope/themes/baseline/newsletter.html:139
+#: templates/cyclope/themes/curiouslygreen/newsletter.html:139
+#: templates/cyclope/themes/cyblog/newsletter.html:139
+#: templates/cyclope/themes/cyorg/newsletter.html:139
+#: templates/cyclope/themes/cyportal/newsletter.html:139
+#: templates/cyclope/themes/diversia/newsletter.html:139
+#: templates/cyclope/themes/experience/newsletter.html:139
+#: templates/cyclope/themes/frecuency/newsletter.html:139
+#: templates/cyclope/themes/newfangled/newsletter.html:139
+#: templates/cyclope/themes/newflash/newsletter.html:139
+#: templates/cyclope/themes/nonzeroblue/newsletter.html:139
+#: templates/cyclope/themes/plantation/newsletter.html:139
+#: templates/cyclope/themes/potentix/newsletter.html:139
+#: templates/cyclope/themes/supplementary/newsletter.html:139
+msgid "By"
+msgstr "Por"
 
 #: apps/articles/templates/articles/article_teaser.html:32
 #: apps/contacts/templates/contacts/contact_teaser.html:27
 #: apps/feeds/templates/feeds/feed_teaser.html:12
 #: apps/forum/templates/forum/topic_teaser.html:9
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_newsletter_teaser_center.html:28
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_newsletter_teaser_lateral.html:29
+#: apps/medialibrary/templates/medialibrary/medialibrary_base_newsletter_teaser_top.html:28
 #: apps/medialibrary/templates/medialibrary/medialibrary_base_teaser.html:22
 msgid "More"
 msgstr "Más"
@@ -1299,7 +1369,6 @@ msgid "detailed view of the selected Feed"
 msgstr "vista detallada de la sindicación seleccionada"
 
 #: apps/feeds/models.py:40
-#: apps/newsletter/templates/newsletter/content.html:35
 msgid "URL"
 msgstr "URL"
 
@@ -1531,6 +1600,14 @@ msgstr ""
 "Esta es la categoría que agrupa los contenidos que serán enviados con el "
 "boletín."
 
+#: apps/newsletter/admin.py:63
+msgid "Layout options"
+msgstr "Opciones del esquema"
+
+#: apps/newsletter/admin.py:66 core/collections/admin.py:94
+msgid "Extra info"
+msgstr "Información extra"
+
 #: apps/newsletter/frontend_views.py:12
 msgid "show content teasers linked to the website"
 msgstr "mostrar resúmenes del contenido enlazados al sitio web"
@@ -1539,15 +1616,72 @@ msgstr "mostrar resúmenes del contenido enlazados al sitio web"
 msgid "show the full content (no external links)"
 msgstr "mostrar el contenido completo (sin enlaces externos)"
 
-#: apps/newsletter/models.py:38
+#: apps/newsletter/models.py:39
 msgid "sent date"
 msgstr "fecha de envío"
 
-#: apps/newsletter/models.py:42
-msgid "show table of contents"
-msgstr "mostrar sumario"
-
 #: apps/newsletter/models.py:43
+msgid "regions"
+msgstr "regiones"
+
+#: apps/newsletter/models.py:45
+msgid "only central"
+msgstr "sólo central"
+
+#: apps/newsletter/models.py:46
+msgid "top and central"
+msgstr "superior y central"
+
+#: apps/newsletter/models.py:47
+msgid "central and lateral"
+msgstr "central y lateral"
+
+#: apps/newsletter/models.py:48
+msgid "top, central and lateral"
+msgstr "superior, central y lateral"
+
+#: apps/newsletter/models.py:50
+msgid "top"
+msgstr "superior"
+
+#: apps/newsletter/models.py:51
+msgid "Number of categorized contents to show in the top region."
+msgstr "Número de contenidos categorizados que se mostrarán en la región superior"
+
+#: apps/newsletter/models.py:52
+msgid "center"
+msgstr "central"
+
+#: apps/newsletter/models.py:53
+msgid "Number of categorized contents to show in the central region."
+msgstr "Número de contenidos categorizados que se mostrarán en la región central"
+
+#: apps/newsletter/models.py:54
+msgid "lateral"
+msgstr "lateral"
+
+#: apps/newsletter/models.py:55
+msgid "Number of categorized contents to show in the lateral region."
+msgstr "Número de contenidos categorizados que se mostrarán en la región lateral"
+
+#: apps/newsletter/models.py:56
+msgid "header newsletter"
+msgstr "imagen del boletín"
+
+#: apps/newsletter/models.py:58
+
+msgid "select image for head: 720px width x 124px height"
+msgstr "elige una imagen para el cabezal de 720px por 170px"
+
+#: apps/newsletter/models.py:59
+msgid "show title name in header"
+msgstr "mostrar el nombre del boletín"
+
+#: apps/newsletter/models.py:61
+msgid "show table of contents"
+msgstr "mostrar tabla de contenidos (sumario)"
+
+#: apps/newsletter/models.py:63
 #: templates/cyclope/themes/alternative/__init__.py:47
 #: templates/cyclope/themes/baseline/__init__.py:47
 #: templates/cyclope/themes/curiouslygreen/__init__.py:47
@@ -1567,27 +1701,62 @@ msgstr "mostrar sumario"
 msgid "header"
 msgstr "encabezado"
 
-#: apps/newsletter/models.py:45
+#: apps/newsletter/models.py:64
+msgid "Text that will always be added on top of the content."
+msgstr "Este texto aparecerá en la parte de arriba del boletín. Se puede dejar en blanco."
+
+#: apps/newsletter/models.py:66
+msgid "Layout to use to build the resulting HTML."
+msgstr "Esquema usado para construir el boletín"
+
+#: apps/newsletter/models.py:67
 msgid "sender name"
 msgstr "nombre del remitente"
 
-#: apps/newsletter/models.py:46
+#: apps/newsletter/models.py:68
+msgid "name that will displayed as the sender of the newsletter."
+msgstr "nombre de quién envía el boletín"
+
+#: apps/newsletter/models.py:70
 msgid "sender e-mail"
 msgstr "e-mail del remitente"
 
-#: apps/newsletter/models.py:47
+#: apps/newsletter/models.py:71
+msgid "e-mail address that will be used to send the newsletter."
+msgstr "emial que será usado para enviar el boletín"
+
+#: apps/newsletter/models.py:72
 msgid "test recipients"
 msgstr "destinatarios de prueba"
 
-#: apps/newsletter/models.py:48
+#: apps/newsletter/models.py:73
+msgid "comma separated list of test e-mail addresses"
+msgstr "separa con una coma la lista de emails que recibirán el correo de prueba"
+
+#: apps/newsletter/models.py:75
 msgid "recipients"
 msgstr "destinatarios"
 
-#: apps/newsletter/models.py:54
+#: apps/newsletter/models.py:76
+msgid "comma separated list of recipient e-mail addresses"
+msgstr "separa con una coma los emails de quienes recibirán el correo"
+
+#: apps/newsletter/models.py:78
+msgid "url list manager"
+msgstr "URL Administración de la lista"
+
+#: apps/newsletter/models.py:79
+msgid ""
+"creates a shortcut to the administrator of your mailing list (full url with "
+"http://)"
+msgstr "Crea un acceso directo a la web de adminsitración de tu lista (colocar URL completa con "
+"http://)"
+
+#: apps/newsletter/models.py:101
 msgid "newsletter"
 msgstr "boletín"
 
-#: apps/newsletter/models.py:55
+#: apps/newsletter/models.py:102
 msgid "newsletters"
 msgstr "boletines"
 
@@ -1603,27 +1772,18 @@ msgstr "Enviar prueba"
 msgid "Send e-mail"
 msgstr "Enviar correo"
 
-#: apps/newsletter/templates/newsletter/content.html:22
-#: apps/newsletter/templates/newsletter/content_teasers.html:30
-#: templates/comments/list.html:11 templates/cyclope/author_block.html:7
-#: templates/cyclope/themes/alternative/newsletter.html:139
-#: templates/cyclope/themes/baseline/newsletter.html:139
-#: templates/cyclope/themes/curiouslygreen/newsletter.html:139
-#: templates/cyclope/themes/cyblog/newsletter.html:139
-#: templates/cyclope/themes/cyorg/newsletter.html:139
-#: templates/cyclope/themes/cyportal/newsletter.html:139
-#: templates/cyclope/themes/diversia/newsletter.html:139
-#: templates/cyclope/themes/experience/newsletter.html:139
-#: templates/cyclope/themes/frecuency/newsletter.html:139
-#: templates/cyclope/themes/neutronix/newsletter.html:149
-#: templates/cyclope/themes/newfangled/newsletter.html:139
-#: templates/cyclope/themes/newflash/newsletter.html:139
-#: templates/cyclope/themes/nonzeroblue/newsletter.html:139
-#: templates/cyclope/themes/plantation/newsletter.html:139
-#: templates/cyclope/themes/potentix/newsletter.html:139
-#: templates/cyclope/themes/supplementary/newsletter.html:139
-msgid "By"
-msgstr "Por"
+#: apps/newsletter/templates/admin/newsletter_change_form.html:10
+msgid "List admin"
+msgstr "Administrar la lista"
+
+#: apps/newsletter/templates/admin/newsletter_change_form.html:15
+msgid "Contents in this newssletter"
+msgstr "Contenidos en este boletín"
+
+#: apps/newsletter/templates/admin/newsletter_change_form.html:15
+#: core/collections/templates/admin/collections/category/change_form.html:5
+msgid "View and sort objects"
+msgstr "Ver y ordenar elementos"
 
 #: apps/newsletter/templates/newsletter/mail_sent.html:5
 msgid "The e-mail has been sent for newsletter "
@@ -1699,12 +1859,12 @@ msgid "submissions"
 msgstr "envíos"
 
 #: apps/polls/templates/admin/polls/change_list.html:7
-#: templates/admin/change_list.html:110
+#: templates/admin/change_list.html:117
 msgid "Filter"
 msgstr "Filtro"
 
 #: apps/polls/templates/polls/poll_submission.html:22
-#: core/user_profiles/forms.py:34 utils/__init__.py:339
+#: core/user_profiles/forms.py:34 utils/__init__.py:349
 msgid "Submit"
 msgstr "Enviar"
 
@@ -1728,6 +1888,19 @@ msgstr "%(field)s no pudo validarse %(value)s"
 #: apps/related_admin/fields.py:76
 msgid "Wrong content type or object"
 msgstr "Tipo de contenido u objecto inválido"
+
+#: apps/related_admin/templates/related_admin/gfk_widget.html:7
+#: templates/rosetta/pofile.html:69 templates/search/search.html:11
+msgid "Search"
+msgstr "Buscar"
+
+#: apps/related_admin/templates/related_admin/gfk_widget.html:73
+msgid "Create a new image"
+msgstr "Crear una nueva imagen"
+
+#: apps/related_admin/templates/related_admin/gfk_widget.html:73
+msgid "Load"
+msgstr "Cargar"
 
 #: apps/social/frontend_views.py:15
 msgid "Global activity or user's feed if authenticated"
@@ -1798,10 +1971,6 @@ msgstr "categoría"
 msgid "Description"
 msgstr "Descrición"
 
-#: core/collections/admin.py:94
-msgid "Extra info"
-msgstr "Información extra"
-
 #: core/collections/admin.py:108
 msgid "sort"
 msgstr "ordenar"
@@ -1815,20 +1984,20 @@ msgstr "Colección"
 msgid "Category"
 msgstr "Categoría"
 
-#: core/collections/admin.py:169
+#: core/collections/admin.py:167
 msgid "Default category listing view"
 msgstr "Vista por defecto para listados"
 
-#: core/collections/admin.py:272
+#: core/collections/admin.py:268
 #, python-format
 msgid "Successfully categorized %(count)d %(items)s."
 msgstr "Categorizados correctamente %(count)d %(items)s."
 
-#: core/collections/admin.py:283
+#: core/collections/admin.py:279
 msgid "Categorize selected objects"
 msgstr "Categorizar objetos seleccionados"
 
-#: core/collections/admin.py:302
+#: core/collections/admin.py:298
 #, python-format
 msgid "Categorize selected %(verbose_name_plural)s"
 msgstr "Categorizar %(verbose_name_plural)s seleccionados"
@@ -2046,10 +2215,6 @@ msgstr "Ver en el sitio"
 msgid "You may order the contents of this Category. Dont forget to save!"
 msgstr "Puedes ordenar los contenidos de esta Categoría. No olvides guardar!"
 
-#: core/collections/templates/admin/collections/category/change_form.html:5
-msgid "View and sort objects"
-msgstr "Ver y ordenar elementos"
-
 #: core/collections/templates/collections/category_contents_base.html:11
 msgid "Add content"
 msgstr "Agregar contenido"
@@ -2085,22 +2250,22 @@ msgstr "No hay una vista por defecto para %s"
 msgid "You can set only one default view for %s"
 msgstr "Puedes definir solo una vista por defecto para %s"
 
-#: core/frontend/sites.py:198
+#: core/frontend/sites.py:200
 msgid "You need to create you site settings"
 msgstr "Tu sitio aún no ha sido configurado"
 
-#: core/frontend/sites.py:203
+#: core/frontend/sites.py:205
 msgid "You need to select a layout for the site"
 msgstr "Debe seleccionar un esquema para el sitio"
 
-#: core/frontend/sites.py:209
+#: core/frontend/sites.py:211
 msgid "The site home page has not been set."
 msgstr ""
 "La página de inicio no ha sido establecida. Debe ingresar al área de "
 "administración -> Ítems de menú, elejir el item que desee que aparezca al "
 "ingresar al sitio y tildar la opción 'Página de inicio'."
 
-#: core/frontend/sites.py:221
+#: core/frontend/sites.py:223
 msgid "No content object selected"
 msgstr "No ha seleccionado contenido"
 
@@ -2512,7 +2677,7 @@ msgid "Cyclope site admin"
 msgstr "Administración de Cyclope"
 
 #: templates/admin/categorize_selected_choose_category.html:8
-#: templates/admin/change_form.html:31 templates/admin/change_list.html:63
+#: templates/admin/change_form.html:31 templates/admin/change_list.html:70
 #: templates/admin/contact_form/contactformsettings/change_form.html:6
 #: templates/admin/cyclope/designsettings/change_form.html:26
 #: templates/admin/cyclope/sitesettings/change_form.html:6
@@ -2536,14 +2701,14 @@ msgstr "Agregar"
 msgid "History"
 msgstr "Historial"
 
-#: templates/admin/change_form.html:56 templates/admin/change_list.html:99
+#: templates/admin/change_form.html:56 templates/admin/change_list.html:106
 #: templates/admin/login.html:23
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] "Por favor corrija el error detallado"
 msgstr[1] "Por favor corrija los errores detallados"
 
-#: templates/admin/change_list.html:79
+#: templates/admin/change_list.html:86
 #, python-format
 msgid ""
 "You may use the filters and search form to narrow the list of "
@@ -2552,10 +2717,14 @@ msgstr ""
 "Puedes utilizar los filtros y el formulario de búsqueda para acotar el "
 "listado de %(plural_name)s."
 
-#: templates/admin/change_list.html:90
+#: templates/admin/change_list.html:97
 #, python-format
 msgid "Add %(name)s"
 msgstr "Agregar %(name)s"
+
+#: templates/admin/change_list.html:117
+msgid "Hide"
+msgstr "Ocultar"
 
 #: templates/admin/filter.html:2
 #, python-format
@@ -2656,6 +2825,16 @@ msgstr "escribió"
 #: templates/contact_form/contact_form_sent.html:6
 msgid "Thank you for contacting us!"
 msgstr "¡Gracias por contactarnos!"
+
+#: templates/cyclope/author_teaser.html:7
+#, fuzzy
+msgid "List of Authors"
+msgstr "lista de Productos"
+
+#: templates/cyclope/author_teaser.html:29
+#, fuzzy
+msgid "View contents"
+msgstr "contenidos de la serie"
 
 #: templates/cyclope/breadcrumb.html:8
 msgid "Breadcrumb"
@@ -2974,7 +3153,7 @@ msgstr "después del contenido"
 #: templates/cyclope/themes/diversia/newsletter.html:73
 #: templates/cyclope/themes/experience/newsletter.html:73
 #: templates/cyclope/themes/frecuency/newsletter.html:73
-#: templates/cyclope/themes/neutronix/newsletter.html:93
+#: templates/cyclope/themes/neutronix/newsletter.html:91
 #: templates/cyclope/themes/newfangled/newsletter.html:73
 #: templates/cyclope/themes/newflash/newsletter.html:73
 #: templates/cyclope/themes/nonzeroblue/newsletter.html:73
@@ -2993,7 +3172,7 @@ msgstr "Ir al sitio web"
 #: templates/cyclope/themes/diversia/newsletter.html:73
 #: templates/cyclope/themes/experience/newsletter.html:73
 #: templates/cyclope/themes/frecuency/newsletter.html:73
-#: templates/cyclope/themes/neutronix/newsletter.html:93
+#: templates/cyclope/themes/neutronix/newsletter.html:91
 #: templates/cyclope/themes/newfangled/newsletter.html:73
 #: templates/cyclope/themes/newflash/newsletter.html:73
 #: templates/cyclope/themes/nonzeroblue/newsletter.html:73
@@ -3012,7 +3191,7 @@ msgstr "Ver archivo"
 #: templates/cyclope/themes/diversia/newsletter.html:73
 #: templates/cyclope/themes/experience/newsletter.html:73
 #: templates/cyclope/themes/frecuency/newsletter.html:73
-#: templates/cyclope/themes/neutronix/newsletter.html:93
+#: templates/cyclope/themes/neutronix/newsletter.html:91
 #: templates/cyclope/themes/newfangled/newsletter.html:73
 #: templates/cyclope/themes/newflash/newsletter.html:73
 #: templates/cyclope/themes/nonzeroblue/newsletter.html:73
@@ -3031,7 +3210,7 @@ msgstr "Opciones de suscripción"
 #: templates/cyclope/themes/diversia/newsletter.html:128
 #: templates/cyclope/themes/experience/newsletter.html:128
 #: templates/cyclope/themes/frecuency/newsletter.html:128
-#: templates/cyclope/themes/neutronix/newsletter.html:145
+#: templates/cyclope/themes/neutronix/newsletter.html:143
 #: templates/cyclope/themes/newfangled/newsletter.html:128
 #: templates/cyclope/themes/newflash/newsletter.html:128
 #: templates/cyclope/themes/nonzeroblue/newsletter.html:128
@@ -3482,10 +3661,6 @@ msgstr "Sólo dudosos"
 msgid "Translated only"
 msgstr "Sólo traducidos"
 
-#: templates/rosetta/pofile.html:69 templates/search/search.html:11
-msgid "Search"
-msgstr "Buscar"
-
 #: templates/rosetta/pofile.html:71
 msgid "Go"
 msgstr "Ir"
@@ -3533,9 +3708,66 @@ msgstr "Resultados"
 msgid "No results found."
 msgstr "No se encontró ningún resultado"
 
-#: utils/__init__.py:333
+#: third_party/contact_form/admin.py:17
+msgid ""
+"You have to select at least one recipient or an e-mail                     "
+"address"
+msgstr "Tienes que seleccionar al menos una dirección de email"
+"que recibirá el mensaje"
+
+#: third_party/contact_form/forms.py:253
+msgid "Your name"
+msgstr "Nombre"
+
+#: third_party/contact_form/forms.py:256
+msgid "Your email address"
+msgstr "Dirección de correo electrónico"
+
+#: third_party/contact_form/forms.py:258
+msgid "Your message"
+msgstr "Mensaje"
+
+#: third_party/contact_form/forms.py:288
+msgid "Akismet thinks this message is spam"
+msgstr "Pensamos que este mensaje es spam"
+
+#: third_party/contact_form/forms.py:297
+msgid "Send me a copy"
+msgstr "Enviarme una copia del correo"
+
+#: third_party/contact_form/models.py:8
+msgid "Recipients"
+msgstr "Destinatarios"
+
+#: third_party/contact_form/models.py:10
+msgid "E-mail"
+msgstr "E-mail"
+
+#: third_party/contact_form/models.py:11
+msgid ""
+"Destination e-mail address. You have to                   select at least "
+"one recipient or an e-mail address"
+msgstr "Direcciones de los destinatarios del correo.Debes colocar al menos una dirección."
+
+#: third_party/contact_form/models.py:13
+msgid "E-mail subject"
+msgstr "Asunto del correo"
+
+#: third_party/contact_form/models.py:14
+msgid "Message to show before the form"
+msgstr "Mensaje que se mostrará después de enviar el formulario"
+
+#: third_party/contact_form/models.py:18 third_party/contact_form/models.py:21
+#: third_party/contact_form/models.py:22
+msgid "Contact form settings"
+msgstr "Formulario de Contacto"
+
+#: utils/__init__.py:343
 msgid "Thumbnail Image"
 msgstr "Imagen miniatura"
+
+#~ msgid "Slideshow"
+#~ msgstr "Rotador"
 
 #~ msgid "Tutorials"
 #~ msgstr "Tutoriales"
