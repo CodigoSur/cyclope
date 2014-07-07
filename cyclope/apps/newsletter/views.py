@@ -25,10 +25,6 @@ def _newsletter_html(request, newsletter):
     template_name = cyc_settings.CYCLOPE_THEME_PREFIX + newsletter.layout.template
     nl_template = loader.get_template(template_name)
     categorizations_list = category.categorizations.all()
-    categorizations_list = sorted(categorizations_list,
-                                  key=lambda c: c.object_modification_date,
-                                  reverse=True)
-
     context = RequestContext(request, {'host_template': nl_template,
                                        'layout': newsletter.layout,
                                        'newsletter': newsletter,

@@ -83,8 +83,7 @@ class Newsletter(models.Model):
         return self.name
 
     def catz_by_region(self):
-        data = Categorization.objects.get_for_category(self.content_category, 
-                                        'modification_date', reverse=True)
+        data = self.content_category.categorizations.all()
         t, c, l = self.n_contents_top, self.n_contents_center, self.n_contents_lateral
         top, center, lateral = [], [], []
         if self.regions == "c":
