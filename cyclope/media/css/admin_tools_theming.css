@@ -864,6 +864,22 @@ fieldset .inlined{
   cursor: pointer;
 }
 
+.remove_picture {
+float: left;
+margin: 80px 0 0 0;
+position: absolute;
+padding: 5px;
+background-color: #f1f1f1;
+width: 85px;
+text-align: center;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+border: 1px solid #C3D5F0;
+color: #5b80b2;
+font-weight: 700;
+cursor: pointer;
+}
+
 .number-objects-title{ background:#f1f1f1;margin:10px auto; padding:10px; font-weight:700;}
 .number-objects { font-weight:700;}
 .number-objects li { padding: 6px 0 0 0; font-weight:400;}
