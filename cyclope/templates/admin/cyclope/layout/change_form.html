@@ -1,26 +1,27 @@
 {% extends "admin/change_form.html" %}
 {% load i18n layout cyclope_utils %}
 
-
-
 {% block after_related_objects %}
 {{ block.super }}
 
 {# CYCLOPE: Tree structure of regions #}
 {% regroup original.regionview_set.all|dictsort:"region" by region as region_list %}
+
 <ul id="regions_tree" style="display:none;">
-{% for region in region_list %}
-    <li>{% trans region.grouper|capfirst %}
-    <ul>
-        {% for item in region.list %}
-          <li>{{ item.content_type|capfirst }} ->  {{ item.get_view.verbose_name|capfirst }} {% if item.content_object %} -> {{ item.content_object }}{% endif %}</li>
-        {% endfor %}
-    </ul>
-    </li>
-{% endfor %}
+	<img class="img_layout" src="/media/cyclope/images/layout.png">
+	<div class="regions_layout">
+	{% for region in region_list %}
+		<li>{% trans region.grouper|capfirst %}
+		<ul>
+			{% for item in region.list %}
+			  <li>{{ item.content_type|capfirst }} ->  {{ item.get_view.verbose_name|capfirst }} {% if item.content_object %} -> {{ item.content_object }}{% endif %}</li>
+			{% endfor %}
+		</ul>
+		</li>
+	{% endfor %}
+	</div>
 </ul>
-
-
+	
 <script type="text/javascript">
 //<![CDATA[
 
