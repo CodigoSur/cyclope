@@ -373,7 +373,7 @@ class CyclopeSite(object):
                     json_data = simplejson.dumps({"ct_id": ct_id, "obj_id": obj.pk})
                     return HttpResponse(json_data, mimetype='application/json')
 
-            elif request.method == "GET":
+            elif request.method == "GET" and request.GET.get('ct_id', False):
                 model = ContentType.objects.get_for_id(request.GET['ct_id']).model_class()
                 if model != Picture:
                     return HttpResponse("")

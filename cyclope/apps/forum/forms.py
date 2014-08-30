@@ -27,7 +27,10 @@ apps.forum.forms
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from captcha.fields import CaptchaField
+
 from models import Topic
+
 
 class CreateTopicForm(forms.ModelForm):
     name = forms.CharField(label = _('subject'), required=True)
@@ -35,3 +38,12 @@ class CreateTopicForm(forms.ModelForm):
     class Meta:
         model = Topic
         fields = ('name', 'text')
+
+class CreateTopicCaptchaForm(forms.ModelForm):
+    name = forms.CharField(label = _('Subject'), required=True)
+    anonymous_name = forms.CharField(label = _('Your name'), required=True)
+    captcha = CaptchaField(label=_("Security code"))
+
+    class Meta:
+        model = Topic
+        fields = ('name', 'anonymous_name', 'text', )

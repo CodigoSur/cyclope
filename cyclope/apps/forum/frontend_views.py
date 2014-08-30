@@ -35,7 +35,7 @@ from cyclope import views
 from cyclope.core.collections.models import Category
 
 from models import Topic
-from forms import CreateTopicForm
+from forms import CreateTopicForm, CreateTopicCaptchaForm
 
 
 class TopicDetail(frontend.FrontendView):
@@ -67,10 +67,10 @@ class CreateTopic(frontend.FrontendView):
 
     def get_response(self, request, req_context, options, content_object):
         if not request.user.is_authenticated():
-            from django.conf import settings
-            tup = (settings.LOGIN_URL, REDIRECT_FIELD_NAME,
-                   urlquote(request.get_full_path()))
-            return HttpResponseRedirect('%s?%s=%s' % tup)
+            form_class = CreateTopicCaptchaForm
+        else:
+            form_class = CreateTopicForm
+
         category = content_object
 
         req_context.update({'forum': category.name})
@@ -82,11 +82,12 @@ class CreateTopic(frontend.FrontendView):
         else:
             not_allowed = False
             if request.method == 'POST':
-                form = CreateTopicForm(data=request.POST)
+                form = form_class(data=request.POST)
                 if form.is_valid():
                     # partial save
                     topic = form.save(commit=False)
-                    topic.user = request.user
+                    if request.user.is_authenticated():
+                        topic.user = request.user
                     topic.allow_comments = 'YES'
                     topic.save()
                     # category added
@@ -97,7 +98,7 @@ class CreateTopic(frontend.FrontendView):
                     topic.save()
                     return redirect(topic)
             else:
-                form = CreateTopicForm()
+                form = form_class()
 
         req_context.update({'form': form,
                             'not_allowed': not_allowed,
