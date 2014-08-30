@@ -36,6 +36,7 @@ from cyclope.models import BaseContent
 
 class Topic(BaseContent, Collectible):
     text = models.TextField(_('text'))
+    anonymous_name = models.CharField(_('name'), max_length=50, default="", blank=True, help_text=_('your name'))
 
     class Meta:
         verbose_name = _('topic')

@@ -12,7 +12,7 @@
   <h2 class="title"> {{ topic.name }} </h2>
   <span class="submitted">{{ topic.creation_date|date:'DATETIME_FORMAT' }}</span>
   <div class="author_container">
-    <span class="author">{{ topic.user }}</span>
+    <span class="author">{{ topic.anonymous_name|default:topic.user }}</span>
     <div class="avatar">{% if avatar %}<img src="{{MEDIA_URL}}/{{ avatar }}" alt=""></img>{% endif %}</div>
   </div>
   <div class="text"><span class="html-text html-content">
