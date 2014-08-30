@@ -38,6 +38,13 @@
                 $('#form-comment').toggle();
             });
         });
+
+        jQuery(document).ready(function(){
+            // sort comments from newest to oldest
+            var list = $('#user_comments');
+            var listItems = list.children('ul');
+            list.append(listItems.get().reverse());
+        });
     </script>
 
 
