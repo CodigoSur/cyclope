@@ -880,6 +880,16 @@ font-weight: 700;
 cursor: pointer;
 }
 
+.regions_layout {   
+	min-height: 250px;
+	margin-top: 10px;
+ }
+
+.img_layout { 
+float: right;
+padding: 10px;
+ }
+ 
 .number-objects-title{ background:#f1f1f1;margin:10px auto; padding:10px; font-weight:700;}
 .number-objects { font-weight:700;}
 .number-objects li { padding: 6px 0 0 0; font-weight:400;}
