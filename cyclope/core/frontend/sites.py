@@ -374,7 +374,10 @@ class CyclopeSite(object):
                     return HttpResponse(json_data, mimetype='application/json')
 
             elif request.method == "GET" and request.GET.get('ct_id', False):
-                model = ContentType.objects.get_for_id(request.GET['ct_id']).model_class()
+                try:
+                    model = ContentType.objects.get_for_id(request.GET['ct_id']).model_class()
+                except (AttributeError, ContentType.DoesNotExist):
+                    return HttpResponse("")
                 if model != Picture:
                     return HttpResponse("")
                 return HttpResponse(InlinedPictureForm(prefix="__simplified__").as_ul())
