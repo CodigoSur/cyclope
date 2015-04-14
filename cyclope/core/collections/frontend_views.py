@@ -106,19 +106,24 @@ frontend.site.register_view(Category, CategoryDefaultList)
 SORT_BY = {
     "DATE-": ('creation_date', True, Paginator),
     "DATE+": ('creation_date', False, Paginator),
-    "ALPHABETIC": ('name', None, NamePaginator),
+    "ALPHABETIC": ('name', False, NamePaginator), # TODO(nicoechaniz): reverse was None here, test and remove this comment
     "RANDOM": ('random', False, Paginator),
 }
 
 def _get_paginator_page(category, options, request):
-    traverse_children = options["traverse_children"]
+    traverse_children = options.get("traverse_children", False)
+    intersection = options.get("intersection", False)
     sort_by = options["sort_by"]
     limit = options["limit_to_n_items"] or None
     sort_property, reverse, paginator_class = SORT_BY[sort_by]
-    search_args = [category, sort_property, limit, traverse_children]
+    try:
+        iter(category)
+        search_args = [category, sort_property, limit, traverse_children, reverse, intersection]
+    except:
+        search_args = [[category], sort_property, limit, traverse_children, reverse, intersection]
+        
     paginator, page = None, None
-    if 'DATE' in sort_by:
-        search_args.append(reverse)
+
     categorizations_list = Categorization.objects.get_for_category(*search_args)
     if options.get("items_per_page"):
         paginator_kwargs = {"per_page": options["items_per_page"]}

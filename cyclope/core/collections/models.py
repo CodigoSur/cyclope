@@ -42,7 +42,6 @@ from filebrowser.fields import FileBrowseField
 import cyclope
 from cyclope.utils import ThumbnailMixin
 
-
 class Collection(models.Model, ThumbnailMixin):
     """A facility for creating custom content collections.
     """
@@ -83,7 +82,6 @@ def changed_ctypes(sender, instance, action, reverse, model, pk_set, **kwargs):
             category__collection=instance).exclude(content_type__pk__in=pk_set).delete()
 
 m2m_changed.connect(changed_ctypes, sender=Collection.content_types.through)
-
 
 class Category(models.Model, ThumbnailMixin):
     """Categories are associated with a specific Collection,
@@ -143,7 +141,41 @@ class Category(models.Model, ThumbnailMixin):
 mptt.register(Category)
 
 
+def dictfetchall(cursor): 
+    "Returns all rows from a cursor as a dict" 
+    desc = cursor.description 
+    return [
+        dict(zip([col[0] for col in desc], row)) 
+        for row in cursor.fetchall() 
+    ]
+
 class CategorizationManager(models.Manager):
+
+    def _content_in_categories(self, q):
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute( q )
+        result_list = []
+        for row in dictfetchall(cursor):
+            num_cat = row.pop("num_cat", None)
+            cat = self.model(**row)
+            if num_cat: cat.num_cat = num_cat
+            result_list.append(cat)
+        return result_list
+        
+    def content_object_in_all(self, categories):
+        category_ids = ",".join([ str(category.id) for category in categories ])
+        q = """
+        SELECT *, COUNT("collections_categorization"."category_id") AS "num_cat" FROM "collections_categorization" WHERE ("collections_categorization"."category_id" IN (%s)) GROUP BY "collections_categorization"."content_type_id", "collections_categorization"."object_id" HAVING COUNT("collections_categorization"."category_id") = %s  ORDER BY "collections_categorization"."order" ASC, "collections_categorization"."id" DESC
+        """ % (category_ids, len(categories))
+        return self._content_in_categories(q)
+
+    def content_object_in_any(self, categories):
+        category_ids = ",".join([ str(category.id) for category in categories ])
+        q = """
+        SELECT * FROM "collections_categorization" WHERE ("collections_categorization"."category_id" IN (%s)) GROUP BY "collections_categorization"."content_type_id", "collections_categorization"."object_id" ORDER BY "collections_categorization"."order" ASC, "collections_categorization"."id" DESC
+        """ % category_ids
+        return self._content_in_categories(q)
 
     def get_for_object(self, obj):
         """Get all Categorizations for an instance of a content object.
@@ -164,27 +196,25 @@ class CategorizationManager(models.Manager):
         return self.filter(content_type__pk=ctype.pk)
 
     def get_for_category(self, category, sort_property="name", limit=None,
-                         traverse_children=False, reverse=False):
-        # Here are two ways of order categorizations by a content_object attribute:
-        #
-        # 1) using prefetch_related:
-        #      it's short but it prefetches ALL fields from all the instances.
-        #      also it makes 1 query for content_type (only content_types that are used in this category)
-        #      This implementation is commented below in case django add defer/only support to prefetch_related.
-        #
-        #      categorizations = Categorization.objects.filter(category__in=categories).prefetch_related("content_object")
-        #
-        # 2) doing what prefetch_related does but only using needed fields.
-        #
-        categories = [category]
-        if traverse_children:
-            categories += list(category.get_descendants())
+                         traverse_children=False, reverse=False, intersection=False):
 
-        # First fetch object_id's and content_types and build a dict with key on content_type
-        cats = Categorization.objects.filter(category__in=categories)
-        ct_vals = defaultdict(list)
-        for cat_id, obj_id, ct_id in cats.values_list("pk", "object_id", "content_type_id"):
-            ct_vals[ct_id].append(obj_id)
+        try:
+            categories = list(category)
+        except:
+            categories = [category]
+
+        if traverse_children:
+            # TODO(nicoechaniz): fix (intersection==True and get_descendants==True) case
+            # then enable traverse_children option in CategoryFilteredList view
+            # and remove intersection = False here
+            intersection = False
+            for cat in categories:
+                categories += list(cat.get_descendants())
+
+        if intersection:
+            cats = Categorization.objects.content_object_in_all(categories)
+        else:
+            cats = Categorization.objects.content_object_in_any(categories)
 
         if sort_property == "random":
             cats = list(cats)
@@ -193,7 +223,10 @@ class CategorizationManager(models.Manager):
             # the default ordering is reversed
             if not reverse:
                 cats = cats.reverse()
-        else:
+        else: # sort by name
+            ct_vals = defaultdict(list)
+            for cat in cats:
+                ct_vals[cat.content_type_id].append(cat.object_id)
             # Iterate over content_types fetching the sort_key of the content_object and saving in sort_attrs dict
             sort_attrs = {}
             def chunks(l, n):
@@ -206,6 +239,7 @@ class CategorizationManager(models.Manager):
                 for object_ids in chunks(object_ids, 450):
                     for obj_id, val in ct.get_all_objects_for_this_type(pk__in=object_ids).values_list("pk", sort_property):
                         sort_attrs[(ct_id, obj_id)] = val
+
             cats = sorted(cats, key=lambda c: sort_attrs[(c.content_type_id, c.object_id)],
                           reverse=reverse)
         return cats[slice(limit)]
