@@ -1,0 +1,38 @@
+{% extends host_template %}
+
+{% load i18n cyclope_utils crispy_forms_tags %}
+
+{% comment %}
+The content of this view is composed by including a template for each content matching the selected filters.
+It is based on the category_teaser_list template.
+{% endcomment %}
+
+{% block content %}
+{% if form %}
+{# TODO(nicoechaniz): remove this style once proper CSS styling is done #}
+{
+<div style="width: 300px; clear: both; display: block; background-color:red;">
+ {% crispy form %}
+</div>
+{% endif %}
+
+{% block category_content %}
+  {% for categorization in categorizations %}
+    {% spaceless %}
+    {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name ".html" as template_path %}
+    {% endspaceless %}
+    {% include template_path with current_object=categorization.content_object host_template="cyclope/inline_view.html" %}
+  {% endfor %}
+{% endblock %}
+
+  {% spaceless %}
+  {% if page %}
+    {% if view_options.sort_by == "ALPHABETIC" %}
+      {% include 'cyclope/alphabetical_pagination_block.html' %}
+    {% else %}
+      {% include 'cyclope/pagination_block.html' %}
+    {% endif %}
+  {% endif %}
+  {% endspaceless %}
+
+{% endblock %}

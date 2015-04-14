@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010 - 2012 Código Sur Sociedad Civil
+# Copyright 2010 - 2015 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -37,6 +37,15 @@ from cyclope.utils import NamePaginator, HyerarchyBuilderMixin
 from cyclope.core import frontend
 from cyclope import settings as cyc_settings
 from cyclope.core.collections.models import Collection, Category, Categorization
+from cyclope.core.collections.forms import ContentFilterForm
+
+SORT_BY_FIELD_DEF = forms.ChoiceField(label=_('Sort by'),
+                                      choices=(("DATE-", _(u"Date ↓ (newest first)")),
+                                               ("DATE+", _(u"Date ↑ (oldest first)")),
+                                               ("ALPHABETIC", _(u"Alphabetic")),
+                                               ("RANDOM", _(u"Random"))),
+                                      initial="DATE-")
+
 
 class CategoryRootItemsList(frontend.FrontendView):
     """A flat list view of the root members for a Category.
@@ -66,12 +75,7 @@ class TeaserListOptions(forms.Form):
                                         initial=cyc_settings.CYCLOPE_PAGINATION['TEASER'],)
     limit_to_n_items = forms.IntegerField(label=_('Limit to N items (0 = no limit)'),
                                           min_value=0, initial=0)
-    sort_by = forms.ChoiceField(label=_('Sort by'),
-                              choices=(("DATE-", _(u"Date ↓ (newest first)")),
-                                       ("DATE+", _(u"Date ↑ (oldest first)")),
-                                       ("ALPHABETIC", _(u"Alphabetic")),
-                                       ("RANDOM", _(u"Random"))),
-                              initial="DATE-")
+    sort_by = SORT_BY_FIELD_DEF
     simplified = forms.BooleanField(label=_("Simplified"), initial=False, required=False)
     traverse_children = forms.BooleanField(label=_("Include descendant's elements"),
                                                     initial=False, required=False)
@@ -80,6 +84,24 @@ class TeaserListOptions(forms.Form):
                                        ("BOTTOM", _(u"Bottom")),
                                        ("DISABLED", _(u"Disabled"))),
                               initial="TOP")
+
+class FilteredListOptions(forms.Form):
+    items_per_page = forms.IntegerField(label=_('Items per page'), min_value=1,
+                                        initial=cyc_settings.CYCLOPE_PAGINATION['TEASER'],)
+    limit_to_n_items = forms.IntegerField(label=_('Limit to N items (0 = no limit)'),
+                                          min_value=0, initial=0)
+    sort_by = SORT_BY_FIELD_DEF
+
+# traverse_children is not yet implemented for multiple categories
+# TODO(nicoechaniz): evaluate if it could be implemented in a reasonably efficient way
+#    traverse_children = forms.BooleanField(label=_("Include descendant's elements"),
+#                                                    initial=False, required=False)
+    intersection = forms.BooleanField(label=_("Only show content matching all filters"),
+                                     initial=False, required=False)
+    collection_filters = forms.MultipleChoiceField(label=_('Collections to use for category filters'),
+                                                   choices=Collection.objects.all().values_list("slug", "name"),
+                                                   required=False)
+
 
 
 class CategoryDefaultList(frontend.FrontendView):
@@ -158,6 +180,43 @@ class CategoryTeaserList(frontend.FrontendView):
 
 frontend.site.register_view(Category, CategoryTeaserList)
 
+class CategoryFilteredList(frontend.FrontendView):
+    """A filtered list view of Category members.
+       Supports filtering on multiple collections at once.
+    """
+    name = 'filtered_list'
+    verbose_name = _('filtered list of Category members')
+    is_instance_view = False
+    is_content_view = True
+    is_region_view = True
+    options_form = FilteredListOptions
+    inline_view_name = 'teaser'
+    template = "collections/category_filtered_list.html"
+
+    def get_response(self, request, req_context, options):
+        collections =  Collection.objects.filter(slug__in=options["collection_filters"])
+        form = ContentFilterForm(collections, request.GET)
+
+        category_ids = []
+        for collection in collections:
+            category_id = request.GET.get(collection.slug)
+            if category_id != "":
+                try: category_id = int(category_id)
+                except: continue
+                category_ids.append(category_id)
+
+        categories = Category.objects.filter(pk__in=category_ids)
+        _, _, page = _get_paginator_page(categories, options, request)
+
+        req_context.update({'categorizations': page.object_list,
+                            'page': page,
+                            'inline_view_name': self.inline_view_name,
+                            'form': form
+                            })
+        t = loader.get_template(self.template)
+        return t.render(req_context)
+
+frontend.site.register_view(Category, CategoryFilteredList)
 
 class CategoryLabeledIconList(CategoryTeaserList):
     """A labeled icon list view of Category members.
@@ -184,12 +243,7 @@ class SlideshowOptions(forms.Form):
     show_image = forms.BooleanField(label=_("Show image"), initial=True, required=False)
     limit_to_n_items = forms.IntegerField(label=_('Limit to N items (0 = no limit)'),
                                           min_value=0, initial=10)
-    sort_by = forms.ChoiceField(label=_('Sort by'),
-                              choices=(("DATE-", _(u"Date ↓ (newest first)")),
-                                       ("DATE+", _(u"Date ↑ (oldest first)")),
-                                       ("ALPHABETIC", _(u"Alphabetic")),
-                                       ("RANDOM", _(u"Random"))),
-                              initial="DATE-")
+    sort_by = SORT_BY_FIELD_DEF
     traverse_children = forms.BooleanField(label=_("Include descendant's elements"),
                                                     initial=False, required=False)
     scroll_by = forms.IntegerField(label=_('Scroll by N items'),
