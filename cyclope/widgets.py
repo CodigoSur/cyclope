@@ -151,11 +151,13 @@ class MultipleWidget(forms.Widget):
         return mark_safe(u"<div id='%s_multiple'>" % name + u'\n'.join(out) +u"</div>")
 
     def value_from_datadict(self, data, files, name):
-        out_names = ['%s_multiple_%s' % (name, field_name) for field_name in self.fields.keys()]
+        field_out_names = [(field_name, '%s_multiple_%s' % (name, field_name)) for field_name in self.fields.keys()]
         values = {}
-        for out_name in out_names:
-            field_name = self._field_regexp.search(out_name).groups()[0]
-            values[field_name] = data.get(out_name)
+        for field_name, out_name in field_out_names:
+            if type(self.fields[field_name]) == forms.fields.MultipleChoiceField:
+                values[field_name] = data.getlist(out_name)
+            else:
+                values[field_name] = data.get(out_name)
         return values
 
 
