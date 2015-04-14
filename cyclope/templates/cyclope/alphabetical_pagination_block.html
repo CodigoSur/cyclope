@@ -1,3 +1,4 @@
+{% load cyclope_utils %}
 
   {% if page %}
   <div class="paginator">
@@ -5,7 +6,7 @@
       {% if p == page %}
           <span class="selected">{{page}}</span>
       {% else %}
-        <a href="?{% if query %}q={{ query }}&amp;{% endif %}page={{ p.number }}">{{p}}</a>
+          <a href="?{% append_to_get page=p.number %}">{{p}}</a>
       {% endif %}
       {% if not forloop.last %}|{% endif %}
     {% endfor %}
