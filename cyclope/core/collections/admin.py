@@ -47,6 +47,8 @@ from models import *
 from cyclope.fields import MultipleField
 from cyclope import settings as cyc_settings
 from cyclope.core.perms.admin import CategoryPermissionInline
+from cyclope.core.perms.models import CategoryPermission
+
 from cyclope.forms import ViewOptionsFormMixin
 from cyclope.utils import PermanentFilterMixin
 
@@ -146,20 +148,26 @@ class CategorizationInline(generic.GenericStackedInline):
     )
 
     def queryset(self, request):
-        # TODO(nicoechaniz):We only override the queryset for the category field.
+        # TODO(nicoechaniz):
         # This piece of code is here because we need it to be called
         # when showing the form. So __init__ can't be used
         # It still looks like quite "hacky" a place to put it...
         req_model_ctype = ContentType.objects.get_for_model(self.parent_model)
 
-        self.form.base_fields['category'].queryset = \
-            Category.tree.filter(
-            collection__content_types=req_model_ctype).order_by('collection__name')
+        u = request.user
+        cols = Collection.objects.filter(content_types=req_model_ctype).order_by('name')
+        cats = Category.tree.filter(collection__in=cols).order_by('collection__name')
+        # row based perms.
+        # only return collections containing categories where the user is allowed to add content
+        if not (u.is_authenticated() and (u.is_superuser or
+           u.is_staff and u.has_perm('collections.change_category'))):
+            allowed_cat_ids = CategoryPermission.objects.values_list("category").filter(category__in=cats, user=u, can_add_content=True)
+            allowed_col_ids = cats.values_list("collection_id").filter(id__in=allowed_cat_ids)
+            cols = cols.filter(id__in=allowed_col_ids)
+            cats = cats.filter(id__in=allowed_cat_ids)
 
-        self.form.base_fields['collection'].queryset = \
-            Collection.objects.filter(
-            content_types=req_model_ctype).order_by('name')
-
+        self.form.base_fields['category'].queryset = cats
+        self.form.base_fields['collection'].queryset = cols
         return super(CategorizationInline, self).queryset(request)
 
 

@@ -240,15 +240,25 @@ class CyclopeSite(object):
         """Returns the categories that belong to the sellected collection."""
         Collection = get_model('collections','collection')
         Category = get_model('collections','category')
+        CategoryPermission = get_model('perms','CategoryPermission')
         try:
             pk = int(request.GET['q'])
             collection = Collection.objects.get(pk=pk)
+            u = request.user
             col_categories = Category.tree.filter(collection=collection)
+            # if the user can modify any category, we infer he can categorize any content in those categories
+            if u.is_authenticated() and (u.is_superuser or
+               u.is_staff and u.has_perm('collections.change_category')):
+                allowed_categories = col_categories
+            # row based perms. only return categories where the user is allowed to add content
+            else:
+                allowed_cat_ids = CategoryPermission.objects.values_list("category").filter(category__in=col_categories, user=u, can_add_content=True)
+                allowed_categories = col_categories.filter(id__in=allowed_cat_ids)
             categories = [{'category_id': '', 'category_name': '------'}]
             categories.extend([
                     {'category_id': category.id,
                      'category_name': u"%s %s" % ('--' * category.level, category.name)}
-                    for category in col_categories])
+                    for category in allowed_categories])
         except ValueError:
             categories = []
         json_data = simplejson.dumps(categories)

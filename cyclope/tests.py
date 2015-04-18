@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2010-2013 Código Sur Sociedad Civil
+# Copyright 2010-2015 Código Sur Sociedad Civil
 # All rights reserved.
 #
 # This file is part of Cyclope.
@@ -770,9 +770,9 @@ class CreateContentApiTests(TestCase):
         ct = ContentType.objects.get(model='picture').pk
         f = open("media/cyclope/images/cyclope-icon.png")
         self.client.login(username='admin', password='password')
-        response = self.client.post("/api/create/", {"ct_id": ct, "name": "image.jpg", "file":f})
+        response = self.client.post("/api/create/", {"ct_id": ct, "name": "image.png", "file":f})
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(Picture.objects.get(name="image.jpg"))
+        self.assertTrue(Picture.objects.get(name="image.png"))
 
     def test_json_normal_user_forbiden(self):
         response = self.client.post("/api/create/")

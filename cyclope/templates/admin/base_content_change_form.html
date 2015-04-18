@@ -41,7 +41,6 @@ jQuery(document).ready(function($){
 </script>
 
 {# chainedSelect for RelatedContents #}
-
 <script type="text/javascript">
 //<![CDATA[
 function setup_chainedSelect_for_relatedcontent(i) {
@@ -109,6 +108,12 @@ jQuery(document).ready(function($){
     var initial = $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-collection']").val();
     {% endif %}
 
+    {% if initial_category %} {# initial category when the content is added from the frontend #}
+    var initial_category = {{ initial_category }};
+    {% else %}
+    var initial_category = null;
+    {% endif %}
+
     $('#collections-categorization-content_type-object_id-group h2').after('<div id="collection-tabs-container"><ul id="collection-tabs-list"></ul></div>');
 
     $('#id_collections-categorization-content_type-object_id-__prefix__-collection option')
@@ -137,12 +142,29 @@ jQuery(document).ready(function($){
                 select_collection(current_collection);
                 $(sel).change();
                 $(sel).parents(".collection").hide();
+                if (initial_category!=null){
+                  cat_sel = '#id_collections-categorization-content_type-object_id-'+i+'-category';
+                  $(cat_sel).val(initial_category);
+                }
             }
         });
 
     select_collection(initial);
-
     $(".dynamic-collections-categorization-content_type-object_id .collection").hide();
+    
+    if (initial_category != null){
+// check if the initial_category is already selected (usually true after a form validation error)
+      category_selections = $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-category']").filter(":visible");
+      already_selected = false;
+      $(category_selections).each(function(i,sel){
+        if ($(sel).val() == initial_category){
+          already_selected = true
+        }
+      });
+      if (!already_selected){
+        $("#collections-categorization-content_type-object_id-group .add-row a").trigger("click");
+      }
+   }
 
 })
 //]]>

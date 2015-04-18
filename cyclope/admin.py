@@ -35,6 +35,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponseRedirect
 from django.contrib.sites.models import Site
 import django.forms
+from django.contrib.auth import load_backend
 
 from mptt_tree_editor.admin import TreeEditor
 
@@ -102,17 +103,39 @@ class BaseContentAdmin(admin.ModelAdmin):
         return super(BaseContentAdmin, self).change_view(request, object_id,
                                                           form_url, extra_context)
 
+    def changelist_view(self, request, extra_context=None):
+        cat_perm_backend = load_backend('cyclope.core.perms.backends.CategoryPermBackend')
+        response = super(BaseContentAdmin, self).changelist_view(request, extra_context)
+        u = request.user
+        # row based perms.
+        # only return content objects for which user is granted edit perms
+        if not (u.is_authenticated() and (u.is_superuser or
+           u.is_staff and u.has_perm('collections.change_category'))):
+            cl = response.context_data["cl"]
+            query_set = cl.query_set._clone()
+            forbidden = []
+            for content_object in query_set:
+                if not cat_perm_backend.has_perm(u, "edit_content", content_object):
+                    forbidden.append(content_object.pk)
+            ## TODO(nicoechaniz: there might be a way to achieve this without repeating this steps from ChangeList view. Investigate and refactor if possible.
+            new_query_set = query_set.exclude(id__in=forbidden)
+            cl.query_set = new_query_set
+            cl.get_results(request)
+            response.context_data["cl"] = cl
+
+        return response
+
     def add_view(self, request, form_url='', extra_context=None):
         if '_frontend' in request.REQUEST:
             if extra_context is None:
                 extra_context = {}
             extra_context['frontend_admin'] = 'frontend_admin'
         if '_from_category' in request.REQUEST:
-            ## TODO(nicoechaniz): this could be used to set the categorization, but is not implemented yet
             category_slug = request.REQUEST['_from_category']
-            category = Category.objects.get(slug=category_slug)
-            extra_context['initial_category'] = category.id
-            extra_context['initial_collection'] = category.collection.id
+            if category_slug:
+                category = Category.objects.get(slug=category_slug)
+                extra_context['initial_category'] = category.id
+                extra_context['initial_collection'] = category.collection.id
         return super(BaseContentAdmin, self).add_view(request, form_url, extra_context)
 
     def save_model(self, request, obj, form, change):
