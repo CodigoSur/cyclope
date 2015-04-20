@@ -44,7 +44,7 @@ from cyclope.models import SiteSettings, Menu, MenuItem, RelatedContent
 from cyclope.models import Layout, RegionView, Author
 from cyclope.core import frontend
 from cyclope.core.collections.models import *
-from cyclope.core.perms.models import CategoryPermission
+from cyclope.core.perms.models import CategoryPermission, CollectionPermission
 from cyclope.core.user_profiles.models import UserProfile
 from cyclope.templatetags.cyclope_utils import do_join
 from cyclope.apps.staticpages.models import StaticPage
@@ -651,17 +651,21 @@ class FrontendEditTestCase(TestCase):
         self.non_perm_user.set_password('password')
         self.non_perm_user.save()
         self.anonymous_user = AnonymousUser()
-        col = Collection.objects.create(name='Collection')
-        col.content_types.add(ContentType.objects.get(model="article"))
-        col.save()
-        self.category = Category(name='Category', collection=col)
+        self.collection = Collection.objects.create(name='Collection')
+        self.collection.content_types.add(ContentType.objects.get(model="article"))
+        self.collection.save()
+        self.category = Category(name='Category', collection=self.collection)
         self.category.save()
+        self.cat2 = Category(name='Another Category', collection=self.collection)
+        self.cat2.save()
         categorization = Categorization(category=self.category, content_object=self.article)
         self.article.categories.add(categorization)
         perm = CategoryPermission(user=self.perm_user, category=self.category,
                                   can_edit_content=True, can_add_content=True)
         perm.save()
-
+        col_perm = CollectionPermission(user=self.perm_user, collection=self.collection,
+                                        can_edit_content=True, can_add_content=False)
+        col_perm.save()
         frontend.autodiscover()
 
     def test_add_content_perm(self):
@@ -673,6 +677,10 @@ class FrontendEditTestCase(TestCase):
         self.assertTrue(self.perm_user.has_perm('edit_content', self.article))
         self.assertFalse(self.non_perm_user.has_perm('add_content', self.article))
         self.assertFalse(self.anonymous_user.has_perm('add_content', self.article))
+
+    def test_col_perm(self):
+        self.assertTrue(self.perm_user.has_perm('edit_content', self.cat2))
+        self.assertFalse(self.perm_user.has_perm('add_content', self.cat2))
 
     def test_edit_link(self):
         response = self.client.get('/article/article/')

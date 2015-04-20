@@ -36,6 +36,7 @@ from django.contrib.admin.util import model_ngettext
 from django.db import router
 from django.template.response import TemplateResponse
 from django.utils.encoding import force_unicode
+from django.db.models import Q
 
 from markitup.widgets import AdminMarkItUpWidget
 from mptt.forms import TreeNodeChoiceField
@@ -46,8 +47,8 @@ from cyclope.core import frontend
 from models import *
 from cyclope.fields import MultipleField
 from cyclope import settings as cyc_settings
-from cyclope.core.perms.admin import CategoryPermissionInline
-from cyclope.core.perms.models import CategoryPermission
+from cyclope.core.perms.admin import CategoryPermissionInline, CollectionPermissionInline
+from cyclope.core.perms.models import CategoryPermission, CollectionPermission
 
 from cyclope.forms import ViewOptionsFormMixin
 from cyclope.utils import PermanentFilterMixin
@@ -157,14 +158,16 @@ class CategorizationInline(generic.GenericStackedInline):
         u = request.user
         cols = Collection.objects.filter(content_types=req_model_ctype).order_by('name')
         cats = Category.tree.filter(collection__in=cols).order_by('collection__name')
-        # row based perms.
-        # only return collections containing categories where the user is allowed to add content
         if not (u.is_authenticated() and (u.is_superuser or
            u.is_staff and u.has_perm('collections.change_category'))):
-            allowed_cat_ids = CategoryPermission.objects.values_list("category").filter(category__in=cats, user=u, can_add_content=True)
-            allowed_col_ids = cats.values_list("collection_id").filter(id__in=allowed_cat_ids)
+            # collection and category based perms
+            col_ids_by_col_perm = CollectionPermission.objects.values_list("collection_id").filter(collection__id__in=cols, user=u, can_add_content=True)
+            allowed_cats = cats.filter(Q(collection__in=col_ids_by_col_perm) | Q(id__in=CategoryPermission.objects.values_list("category").filter(user=u, can_add_content=True)))
+
+            allowed_col_ids = allowed_cats.values_list("collection_id")
+
             cols = cols.filter(id__in=allowed_col_ids)
-            cats = cats.filter(id__in=allowed_cat_ids)
+            cats = cats.filter(id__in=allowed_cats)
 
         self.form.base_fields['category'].queryset = cats
         self.form.base_fields['collection'].queryset = cols
@@ -201,6 +204,8 @@ class CollectionAdmin (admin.ModelAdmin):
     form = CollectionAdminForm
     list_display = ["name", "thumbnail", "visible", "default_list_view"]
     list_editable = ("visible", )
+
+    inlines = (CollectionPermissionInline,)
 
 admin.site.register(Collection, CollectionAdmin)
 

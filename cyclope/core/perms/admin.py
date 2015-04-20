@@ -25,9 +25,13 @@ core.perms.admin
 """
 
 from django.contrib import admin
-from cyclope.core.perms.models import CategoryPermission
+from cyclope.core.perms.models import CategoryPermission, CollectionPermission
 
 
 class CategoryPermissionInline(admin.StackedInline):
     model = CategoryPermission
+    extra = 0
+
+class CollectionPermissionInline(admin.StackedInline):
+    model = CollectionPermission
     extra = 0
