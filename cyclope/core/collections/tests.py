@@ -169,10 +169,15 @@ class CollectionTestCase(ViewableTestCase):
         self.test_object.save()
         # most views list categories in the collection, so we create one
         cat = Category(name='A Category', collection=self.test_object)
+        self.perm_user = User(username='perm_user', is_staff=True, is_superuser=True)
+        self.perm_user.set_password('password')
+        self.perm_user.save()
         cat.save()
+
 
     def test_get_widget_ajax(self):
         collection = Collection.objects.get(pk=1)
+        response = self.client.login(username= "perm_user", password= "password")
         response = self.client.get("/collection_categories_json",
                                   {"q": "1"})
         categories = json.loads(response.content)
@@ -200,7 +205,7 @@ class CategorizationManagerTests(TestCase):
             article = Article.objects.create(name="Test article %d" % n, text="prueba"*100)
             article.categories.create(category=category)
 
-        self.assertNumQueries(4, Categorization.objects.get_for_category, category)
+        self.assertNumQueries(3, Categorization.objects.get_for_category, category)
 
         cats = Categorization.objects.get_for_category(category, sort_property="creation_date", reverse=True)
         self.assertEqual(cats[0].content_object, Article.objects.latest("creation_date"))

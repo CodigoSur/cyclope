@@ -251,6 +251,8 @@ class CyclopeSite(object):
             if u.is_authenticated() and (u.is_superuser or
                u.is_staff and u.has_perm('collections.change_category')):
                 allowed_categories = col_categories
+            elif u.is_anonymous():
+                allowed_categories = Category.tree.none()
             else:
                 has_col_perm = CollectionPermission.objects.filter(collection=collection, user=u,
                                                                    can_add_content=True)

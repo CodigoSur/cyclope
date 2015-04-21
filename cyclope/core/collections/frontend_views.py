@@ -194,7 +194,12 @@ class CategoryFilteredList(frontend.FrontendView):
     template = "collections/category_filtered_list.html"
 
     def get_response(self, request, req_context, options):
-        collections =  Collection.objects.filter(slug__in=options["collection_filters"])
+        col_filters = options["collection_filters"]
+        if col_filters:
+            collections =  Collection.objects.filter(slug__in=col_filters)
+        else:
+            collections = Collection.objects.none()
+
         form = ContentFilterForm(collections, request.GET)
 
         category_ids = []
