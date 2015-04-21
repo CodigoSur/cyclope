@@ -162,18 +162,21 @@ class CategorizationManager(models.Manager):
             if num_cat: cat.num_cat = num_cat
             result_list.append(cat)
         return result_list
-        
+
+# These queries are not ANSI SQL standard, backticks are MySQL specific although Sqlite accepts them.
+# Might be better to change backticks for double quotes. MySQL should then be set to use ANSI:
+# SET GLOBAL SQL_MODE=ANSI_QUOTES; for the queries to work properly
     def content_object_in_all(self, categories):
         category_ids = ",".join([ str(category.id) for category in categories ])
         q = """
-        SELECT *, COUNT("collections_categorization"."category_id") AS "num_cat" FROM "collections_categorization" WHERE ("collections_categorization"."category_id" IN (%s)) GROUP BY "collections_categorization"."content_type_id", "collections_categorization"."object_id" HAVING COUNT("collections_categorization"."category_id") = %s  ORDER BY "collections_categorization"."order" ASC, "collections_categorization"."id" DESC
+        SELECT *, COUNT(collections_categorization.category_id) AS num_cat FROM collections_categorization WHERE (collections_categorization.category_id IN (%s)) GROUP BY collections_categorization.content_type_id, collections_categorization.object_id HAVING COUNT(collections_categorization.category_id) = %s  ORDER BY `collections_categorization`.`order` ASC, `collections_categorization`.`id` DESC
         """ % (category_ids, len(categories))
         return self._content_in_categories(q)
 
     def content_object_in_any(self, categories):
         category_ids = ",".join([ str(category.id) for category in categories ])
         q = """
-        SELECT * FROM "collections_categorization" WHERE ("collections_categorization"."category_id" IN (%s)) GROUP BY "collections_categorization"."content_type_id", "collections_categorization"."object_id" ORDER BY "collections_categorization"."order" ASC, "collections_categorization"."id" DESC
+        SELECT * FROM collections_categorization WHERE (collections_categorization.category_id IN (%s)) GROUP BY collections_categorization.content_type_id, collections_categorization.object_id ORDER BY `collections_categorization`.`order` ASC, `collections_categorization`.`id` DESC
         """ % category_ids
         return self._content_in_categories(q)
 
