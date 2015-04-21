@@ -242,8 +242,10 @@ class CategorizationManager(models.Manager):
 
             cats = sorted(cats, key=lambda c: sort_attrs[(c.content_type_id, c.object_id)],
                           reverse=reverse)
-        return cats[slice(limit)]
-
+        if cats:
+            return cats[slice(limit)]
+        else:
+            return Categorization.objects.none()
 
 
 class Categorization(models.Model):
