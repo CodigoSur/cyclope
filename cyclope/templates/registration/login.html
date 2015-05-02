@@ -1,5 +1,6 @@
 {% extends CYCLOPE_DEFAULT_TEMPLATE %}
 {% load i18n crispy_forms_tags %}
+{% load url from future %}
 
 {% block content %}
 <div class="login_form">
@@ -12,16 +13,19 @@
     <form action="." method="post" class="uniForm login">{% csrf_token %}
       {{form|crispy}}
       <input type="hidden" name="next" value="{{ next }}" />
+      
       <div class="buttonHolder">
-        <input type="submit" value="{% trans "login"|capfirst %}" />
-
+        <input type="submit" class="submit" value="{% trans 'login'|capfirst %}" />
+      </div>
+      <div class="register_content">
+		  <span class="register"> <a href="{% url 'auth_password_reset' %}"> {% trans 'Forgot your password?' %} </a></span>
         <span class="register">{% blocktrans %}
         If you have not yet created an account you need to
         <a href="/accounts/register?next={{next}}">register</a>
         before you may login.
         {% endblocktrans %}
         </span>
-      </div>
+       </div>
     </form>
 
 <script type="text/javascript">
