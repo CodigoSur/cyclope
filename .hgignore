@@ -18,7 +18,7 @@ requirements.txt
 doc
 initial_data.json.init
 initial_data.json
-django_cyclope.egg-info
+*cyclope*.egg-info
 fulldb.json
 demo/cyclope_project/cyclope_project_index/*
 cyclope/server_global_settings.py
