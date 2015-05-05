@@ -1,8 +1,6 @@
-<span class="{{has_children}} {{current_url}} {% if menu_item.site_home %} site_home{% endif %}">
 {% if menu_item.custom_url %}
   <a href="{{menu_item.url}}">
 {% else %}
   <a href="/{{CYCLOPE_PREFIX}}{{menu_item.url}}">
 {% endif %}
 {{ menu_item.name }}</a>
-</span>
