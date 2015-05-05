@@ -77,7 +77,7 @@ install_cyclope() {
     then
         pip install --allow-all-external --use-mirrors --timeout=50 $CYCLOPE_PACKAGE || { echo -e >&2 "\n\nError installing cyclope"; exit 1; }
     else
-        pip install --allow-all-external --use-mirrors --timeout=50 -e hg+$REPO#egg=cyclope3  || { echo -e >&2 "\n\nError installing cyclope. Maybe your cyclope mercurial repo URL and try again."; exit 1; }
+        pip install --allow-all-external --use-mirrors --timeout=50 -e hg+$REPO#egg=cyclope3  || { echo -e >&2 "\n\nError installing cyclope. Maybe your cyclope mercurial repo URL is wrong."; exit 1; }
     fi
 }
 
