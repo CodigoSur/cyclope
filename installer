@@ -2,10 +2,36 @@
 
 VIRTUALENV_SCRIPT=virtualenv.py
 VIRTUALENV_DOWNLOAD_URL=https://raw.github.com/pypa/virtualenv/f731ddc882ede9b45ba9f0815ff68734784dbfcd/virtualenv.py
+VIRTUALENV_PACKAGE_URL=https://pypi.python.org/packages/source/v/virtualenv/virtualenv-12.1.1.tar.gz
+VIRTUALENV_PACKAGE=virtualenv.tar.gz
 VIRTUALENV_PATH=cyclope_workenv
 DEBIAN_OS_DEPENDENCIES="mercurial git-core python-imaging"
 PYTHON=
 CYCLOPE_PACKAGE="cyclope3"
+CYCLOPE_REPO_URL="ssh://hg@forja.codigosur.org/cyclope/"
+
+# parse arguments
+while [[ $# > 0 ]]
+do
+    key="$1"
+    
+    case $key in
+        -d|--devel)
+            if [ -z $2 ]
+            then
+                REPO=$CYCLOPE_REPO_URL
+            else
+                REPO=$2
+            fi
+            shift
+            ;;
+        *)
+            # unknown option
+            ;;
+    esac
+    shift
+done
+
 
 get_python_version() {
     if python2 --version >/dev/null 2>&1; then
@@ -26,13 +52,18 @@ install_dependencies() {
     fi
 }
 
-bootstrap_virtualenv() {
-    echo "Downloading virtualenv";
+
+bootstrap_virtualenv_from_tgz(){
+    echo "Downloading virtualenv package";
 
     #try to download with curl and wget
-    curl -o $VIRTUALENV_SCRIPT -O $VIRTUALENV_DOWNLOAD_URL || wget -O $VIRTUALENV_SCRIPT $VIRTUALENV_DOWNLOAD_URL || { echo -e >&2 "\n\nPlease install curl or wget and retry.  Aborting."; exit 1; }
-
-    $PYTHON $VIRTUALENV_SCRIPT --system-site-packages $VIRTUALENV_PATH;
+    curl -o $VIRTUALENV_PACKAGE -O $VIRTUALENV_PACKAGE_URL || wget -O $VIRTUALENV_PACKAGE $VIRTUALENV_PACKAGE_URL || { echo -e >&2 "\n\nPlease install curl or wget and retry.  Aborting."; exit 1; }
+    mkdir -p virtualenv_package
+    cd virtualenv_package
+    tar --strip-components=1 -xvzf ../virtualenv.tar.gz
+    $PYTHON $VIRTUALENV_SCRIPT --system-site-packages ../$VIRTUALENV_PATH;
+    cd ../
+    rm $VIRTUALENV_PACKAGE
 }
 
 activate_virtualenv() {
@@ -42,7 +73,12 @@ activate_virtualenv() {
 install_cyclope() {
     # use pip 1.4, 1.5 has several incompatibilities with external sources
     pip install pip==1.4.1 || { echo -e >&2 "\n\nError installing pip"; exit 1; }
-    pip install --use-mirrors --timeout=50 $CYCLOPE_PACKAGE || { echo -e >&2 "\n\nError installing cyclope"; exit 1; }
+    if [ -z $REPO ];
+    then
+        pip install --allow-all-external --use-mirrors --timeout=50 $CYCLOPE_PACKAGE || { echo -e >&2 "\n\nError installing cyclope"; exit 1; }
+    else
+        pip install --allow-all-external --use-mirrors --timeout=50 -e hg+$CYCLOPE_REPO_URL#egg=cyclope3  || { echo -e >&2 "\n\nError installing cyclope. Maybe your cyclope mercurial repo URL and try again."; exit 1; }
+    fi
 }
 
 post_install_message() {
@@ -58,7 +94,7 @@ deactivate >/dev/null 2>&1;
 
 get_python_version;
 install_dependencies;
-bootstrap_virtualenv;
+bootstrap_virtualenv_from_tgz;
 activate_virtualenv $VIRTUALENV_PATH;
 install_cyclope;
 post_install_message;
