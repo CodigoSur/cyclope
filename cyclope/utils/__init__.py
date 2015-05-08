@@ -399,7 +399,7 @@ class HyerarchyBuilderMixin(object):
                 classes.append('no_children')
             if type(object_) == MenuItem:
                 if object_.url == current_url:
-                    classes.append('current')
+                    classes.append('active')
                 if object_.site_home:
                     classes.append('site_home')
             return " ".join(classes)
