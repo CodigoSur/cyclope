@@ -1,0 +1,41 @@
+{% load i18n obj_perms cyclope_utils %}
+
+{% per_category_perms current_object as cat_perms %}
+
+{% if cat_perms.edit_content %}
+<ol class="breadcrumb">
+
+  {% if view_options.navigation == "TOP" %}
+    {% include 'collections/hierarchycal_navigation_block.html' %}
+  {% endif %}
+
+
+
+	 {% if view_options.show_title %}
+  <!-- <ol class="category_title breadcrumb"> -->
+    <li>
+      <a href="{% url category-default category.slug %}">{{ category.name }}</a>
+    </li>
+  {% endif %}
+  
+  
+  {% if not request.hide_frontend_edit %}
+    {% per_category_perms category as cat_perms %}
+    {% if cat_perms.add_content %}
+    
+      <li onClick="$(this).siblings('ol').toggle()">{% trans "Add content" %}</li>
+      <ol class="content_types" style="display:none;">
+        {% for c_type in category.collection.content_types.all %}
+        <li>
+          <a href="/admin/{{ c_type.app_label }}/{{ c_type.model }}/add?_frontend=1&_popup=1&_from_category={{category.slug}}" class="add_content add_{{ c_type.model }}">
+            {{ c_type.name.capitalize }}
+          </a>
+        </li>
+        {% endfor %}
+      </ol>
+   
+    {% endif %}
+  {% endif %}
+  
+</ol>
+{% endif %}
