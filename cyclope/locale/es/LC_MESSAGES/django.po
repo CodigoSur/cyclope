@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-17 16:52-0600\n"
+"POT-Creation-Date: 2015-05-11 02:06-0300\n"
 "PO-Revision-Date: 2013-01-24 13:51-0300\n"
 "Last-Translator: SAn <spiccinini@codigosur.org>\n"
 "MIME-Version: 1.0\n"
@@ -14,37 +14,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: admin.py:129
+#: admin.py:152
 msgid "content details"
 msgstr "detalles de contenido"
 
-#: admin.py:132
+#: admin.py:155
 msgid "Either set an URL here or select a contenttype and view."
 msgstr "Configura la URL aquí o selecciona un tipo de contenido y vista."
 
-#: admin.py:135 models.py:225 models.py:350 apps/newsletter/models.py:65
+#: admin.py:158 models.py:225 models.py:350 apps/newsletter/models.py:65
 msgid "layout"
 msgstr "esquema"
 
-#: admin.py:138
+#: admin.py:161
 msgid "Set the layout that will be used when this menuitem is selected."
 msgstr ""
 "Establezca el esquema que será utilizado cuando este ítem de menú sea "
 "seleccionado"
 
-#: admin.py:202
+#: admin.py:225
 msgid "General"
 msgstr "General"
 
-#: admin.py:205
+#: admin.py:228
 msgid "Fonts"
 msgstr "Tipografias"
 
-#: admin.py:209
+#: admin.py:232
 msgid "Colours"
 msgstr "Colores"
 
-#: admin.py:213
+#: admin.py:236
 msgid "Other"
 msgstr "Otros"
 
@@ -273,12 +273,12 @@ msgstr "Vista"
 msgid "Content object"
 msgstr "Contenido"
 
-#: forms.py:123 core/collections/admin.py:79
+#: forms.py:123 core/collections/admin.py:82
 msgid "Parent"
 msgstr "Padre"
 
-#: forms.py:125 forms.py:263 core/collections/admin.py:168
-#: core/frontend/sites.py:357
+#: forms.py:125 forms.py:263 core/collections/admin.py:179
+#: core/frontend/sites.py:377
 msgid "View options"
 msgstr "Opciones de la vista"
 
@@ -357,8 +357,8 @@ msgid "You need to select a region"
 msgstr "Debe seleccionar una región"
 
 #: forms.py:344 apps/custom_comments/forms.py:49
-#: apps/dynamicforms/models.py:37 apps/polls/forms.py:35
-#: core/captcha_contact_form/forms.py:31
+#: apps/dynamicforms/models.py:37 apps/forum/forms.py:45
+#: apps/polls/forms.py:35 core/captcha_contact_form/forms.py:31
 msgid "Security code"
 msgstr "Código de seguridad"
 
@@ -431,32 +431,29 @@ msgid "Inline type"
 msgstr "Tipo de embebido"
 
 #: frontend_views.py:269 apps/contacts/frontend_views.py:49
-#: core/collections/frontend_views.py:65
+#: core/collections/frontend_views.py:74 core/collections/frontend_views.py:89
 msgid "Items per page"
 msgstr "Ítems por página"
 
-#: frontend_views.py:271 core/collections/frontend_views.py:67
-#: core/collections/frontend_views.py:180
+#: frontend_views.py:271 core/collections/frontend_views.py:76
+#: core/collections/frontend_views.py:91
+#: core/collections/frontend_views.py:249
 msgid "Limit to N items (0 = no limit)"
 msgstr "Limitar a N items (0 = sin límite)"
 
-#: frontend_views.py:273 core/collections/frontend_views.py:69
-#: core/collections/frontend_views.py:182
+#: frontend_views.py:273 core/collections/frontend_views.py:42
 msgid "Sort by"
 msgstr "Ordenar por"
 
-#: frontend_views.py:274 core/collections/frontend_views.py:70
-#: core/collections/frontend_views.py:183
+#: frontend_views.py:274 core/collections/frontend_views.py:43
 msgid "Date ↓ (newest first)"
 msgstr "Fecha ↓ (más nuevo primero)"
 
-#: frontend_views.py:275 core/collections/frontend_views.py:71
-#: core/collections/frontend_views.py:184
+#: frontend_views.py:275 core/collections/frontend_views.py:44
 msgid "Date ↑ (oldest first)"
 msgstr "Fecha ↓ (más antiguo primero)"
 
-#: frontend_views.py:276 core/collections/frontend_views.py:72
-#: core/collections/frontend_views.py:185
+#: frontend_views.py:276 core/collections/frontend_views.py:45
 msgid "Alphabetic"
 msgstr "Alfabéticamente"
 
@@ -573,7 +570,7 @@ msgid "keywords"
 msgstr "palabras clave"
 
 #: models.py:85 apps/medialibrary/models.py:39 apps/polls/models.py:36
-#: core/collections/models.py:60 core/collections/models.py:101
+#: core/collections/models.py:59 core/collections/models.py:99
 #: core/series/models.py:61
 msgid "description"
 msgstr "descripción"
@@ -760,10 +757,11 @@ msgid "site settings"
 msgstr "configuración del sitio"
 
 #: models.py:184 models.py:214 models.py:335 models.py:386 models.py:499
-#: models.py:527 apps/abuse/models.py:15 apps/locations/models.py:36
-#: apps/locations/models.py:43 apps/locations/models.py:50
-#: apps/newsletter/models.py:35 apps/staticpages/models.py:41
-#: core/collections/models.py:50 core/collections/models.py:95
+#: models.py:527 apps/abuse/models.py:15 apps/forum/models.py:39
+#: apps/locations/models.py:36 apps/locations/models.py:43
+#: apps/locations/models.py:50 apps/newsletter/models.py:35
+#: apps/staticpages/models.py:41 core/collections/models.py:49
+#: core/collections/models.py:93
 msgid "name"
 msgstr "nombre"
 
@@ -779,7 +777,7 @@ msgstr "menú"
 msgid "menus"
 msgstr "menús"
 
-#: models.py:215 core/collections/models.py:98
+#: models.py:215 core/collections/models.py:96
 msgid "parent"
 msgstr "relacionado"
 
@@ -840,7 +838,7 @@ msgid "layouts"
 msgstr "esquemas"
 
 #: models.py:358 models.py:363 apps/abuse/models.py:25 apps/abuse/models.py:59
-#: core/collections/models.py:221 core/series/models.py:33
+#: core/collections/models.py:260 core/series/models.py:33
 #: core/series/models.py:37
 msgid "content type"
 msgstr "tipo de contenido"
@@ -883,7 +881,7 @@ msgstr "traducciones"
 #: apps/medialibrary/models.py:61 apps/medialibrary/models.py:75
 #: apps/medialibrary/models.py:108 apps/medialibrary/models.py:122
 #: apps/medialibrary/models.py:136 apps/medialibrary/models.py:150
-#: core/collections/models.py:61 core/collections/models.py:102
+#: core/collections/models.py:60 core/collections/models.py:100
 #: core/series/models.py:63
 msgid "image"
 msgstr "imagen"
@@ -896,7 +894,7 @@ msgstr "origen"
 msgid "notes"
 msgstr "notas"
 
-#: models.py:510 core/collections/models.py:59
+#: models.py:510 core/collections/models.py:58
 msgid "content types"
 msgstr "tipos de contenido"
 
@@ -1032,7 +1030,11 @@ msgstr "Gracias por la denuncia. En breve el contenido será revisado"
 msgid "return"
 msgstr "volver"
 
-#: apps/articles/admin.py:127 apps/feeds/admin.py:40
+#: apps/articles/admin.py:78
+msgid "Remove"
+msgstr "Eliminar"
+
+#: apps/articles/admin.py:129 apps/feeds/admin.py:40
 #: apps/staticpages/admin.py:68
 msgid "Publication data"
 msgstr "Datos de la publicación"
@@ -1388,9 +1390,18 @@ msgstr "sindicación"
 msgid "feeds"
 msgstr "sindicaciones"
 
-#: apps/forum/forms.py:33
+#: apps/forum/forms.py:36
 msgid "subject"
 msgstr "asunto"
+
+#: apps/forum/forms.py:43
+#: core/collections/templates/collections/category_list_as_forum.html:16
+msgid "Subject"
+msgstr "Asunto"
+
+#: apps/forum/forms.py:44 third_party/contact_form/forms.py:253
+msgid "Your name"
+msgstr "Nombre"
 
 #: apps/forum/frontend_views.py:43
 msgid "detailed view of the selected Topic"
@@ -1400,11 +1411,15 @@ msgstr "vista detallada del Tema seleccionado"
 msgid "create a new topic in the Forum selected"
 msgstr "crear un nuevo tema en el foro seleccionado"
 
-#: apps/forum/models.py:41
+#: apps/forum/models.py:39
+msgid "your name"
+msgstr "tu nombre"
+
+#: apps/forum/models.py:42
 msgid "topic"
 msgstr "tema"
 
-#: apps/forum/models.py:42
+#: apps/forum/models.py:43
 msgid "topics"
 msgstr "temas"
 
@@ -1604,7 +1619,7 @@ msgstr ""
 msgid "Layout options"
 msgstr "Opciones del esquema"
 
-#: apps/newsletter/admin.py:66 core/collections/admin.py:94
+#: apps/newsletter/admin.py:66 core/collections/admin.py:97
 msgid "Extra info"
 msgstr "Información extra"
 
@@ -1646,7 +1661,8 @@ msgstr "superior"
 
 #: apps/newsletter/models.py:51
 msgid "Number of categorized contents to show in the top region."
-msgstr "Número de contenidos categorizados que se mostrarán en la región superior"
+msgstr ""
+"Número de contenidos categorizados que se mostrarán en la región superior"
 
 #: apps/newsletter/models.py:52
 msgid "center"
@@ -1654,7 +1670,8 @@ msgstr "central"
 
 #: apps/newsletter/models.py:53
 msgid "Number of categorized contents to show in the central region."
-msgstr "Número de contenidos categorizados que se mostrarán en la región central"
+msgstr ""
+"Número de contenidos categorizados que se mostrarán en la región central"
 
 #: apps/newsletter/models.py:54
 msgid "lateral"
@@ -1662,14 +1679,14 @@ msgstr "lateral"
 
 #: apps/newsletter/models.py:55
 msgid "Number of categorized contents to show in the lateral region."
-msgstr "Número de contenidos categorizados que se mostrarán en la región lateral"
+msgstr ""
+"Número de contenidos categorizados que se mostrarán en la región lateral"
 
 #: apps/newsletter/models.py:56
 msgid "header newsletter"
 msgstr "imagen del boletín"
 
 #: apps/newsletter/models.py:58
-
 msgid "select image for head: 720px width x 124px height"
 msgstr "elige una imagen para el cabezal de 720px por 170px"
 
@@ -1703,7 +1720,9 @@ msgstr "encabezado"
 
 #: apps/newsletter/models.py:64
 msgid "Text that will always be added on top of the content."
-msgstr "Este texto aparecerá en la parte de arriba del boletín. Se puede dejar en blanco."
+msgstr ""
+"Este texto aparecerá en la parte de arriba del boletín. Se puede dejar en "
+"blanco."
 
 #: apps/newsletter/models.py:66
 msgid "Layout to use to build the resulting HTML."
@@ -1731,7 +1750,8 @@ msgstr "destinatarios de prueba"
 
 #: apps/newsletter/models.py:73
 msgid "comma separated list of test e-mail addresses"
-msgstr "separa con una coma la lista de emails que recibirán el correo de prueba"
+msgstr ""
+"separa con una coma la lista de emails que recibirán el correo de prueba"
 
 #: apps/newsletter/models.py:75
 msgid "recipients"
@@ -1749,14 +1769,15 @@ msgstr "URL Administración de la lista"
 msgid ""
 "creates a shortcut to the administrator of your mailing list (full url with "
 "http://)"
-msgstr "Crea un acceso directo a la web de adminsitración de tu lista (colocar URL completa con "
-"http://)"
+msgstr ""
+"Crea un acceso directo a la web de adminsitración de tu lista (colocar URL "
+"completa con http://)"
 
-#: apps/newsletter/models.py:101
+#: apps/newsletter/models.py:100
 msgid "newsletter"
 msgstr "boletín"
 
-#: apps/newsletter/models.py:102
+#: apps/newsletter/models.py:101
 msgid "newsletters"
 msgstr "boletines"
 
@@ -1842,7 +1863,7 @@ msgstr "respuesta"
 msgid "answers"
 msgstr "respuestas"
 
-#: apps/polls/models.py:83 core/perms/models.py:35
+#: apps/polls/models.py:83 core/perms/models.py:35 core/perms/models.py:46
 msgid "user"
 msgstr "persona"
 
@@ -1859,7 +1880,7 @@ msgid "submissions"
 msgstr "envíos"
 
 #: apps/polls/templates/admin/polls/change_list.html:7
-#: templates/admin/change_list.html:117
+#: core/collections/forms.py:40 templates/admin/change_list.html:117
 msgid "Filter"
 msgstr "Filtro"
 
@@ -1960,249 +1981,262 @@ msgstr "bloque html"
 msgid "html blocks"
 msgstr "bloques html"
 
-#: core/collections/admin.py:54 core/collections/models.py:139
-#: core/collections/models.py:218
+#: core/collections/admin.py:57 core/collections/models.py:137
+#: core/collections/models.py:257
 #: core/collections/templates/admin/collections/categorization/change_list.html:6
 #: core/perms/models.py:38
 msgid "category"
 msgstr "categoría"
 
-#: core/collections/admin.py:77
+#: core/collections/admin.py:80
 msgid "Description"
 msgstr "Descrición"
 
-#: core/collections/admin.py:108
+#: core/collections/admin.py:111
 msgid "sort"
 msgstr "ordenar"
 
-#: core/collections/admin.py:125
+#: core/collections/admin.py:128
 msgid "Collection"
 msgstr "Colección"
 
-#: core/collections/admin.py:127
+#: core/collections/admin.py:130
 #: core/collections/templates/admin/collections/categorization/change_list.html:14
 msgid "Category"
 msgstr "Categoría"
 
-#: core/collections/admin.py:167
+#: core/collections/admin.py:178
 msgid "Default category listing view"
 msgstr "Vista por defecto para listados"
 
-#: core/collections/admin.py:268
+#: core/collections/admin.py:281
 #, python-format
 msgid "Successfully categorized %(count)d %(items)s."
 msgstr "Categorizados correctamente %(count)d %(items)s."
 
-#: core/collections/admin.py:279
+#: core/collections/admin.py:292
 msgid "Categorize selected objects"
 msgstr "Categorizar objetos seleccionados"
 
-#: core/collections/admin.py:298
+#: core/collections/admin.py:311
 #, python-format
 msgid "Categorize selected %(verbose_name_plural)s"
 msgstr "Categorizar %(verbose_name_plural)s seleccionados"
 
-#: core/collections/frontend_views.py:45
-msgid "list of root items for the selected Category"
-msgstr "lista de items raíz para la Categoría seleccionada"
-
-#: core/collections/frontend_views.py:62
-#: core/collections/frontend_views.py:177
-msgid "Show title"
-msgstr "Mostrar título"
-
-#: core/collections/frontend_views.py:63
-#: core/collections/frontend_views.py:178
-msgid "Show description"
-msgstr "Mostrar descripción"
-
-#: core/collections/frontend_views.py:64
-#: core/collections/frontend_views.py:179
-msgid "Show image"
-msgstr "Mostrar imagen"
-
-#: core/collections/frontend_views.py:73
-#: core/collections/frontend_views.py:186
+#: core/collections/frontend_views.py:46
 msgid "Random"
 msgstr "Al azar"
 
-#: core/collections/frontend_views.py:75
+#: core/collections/frontend_views.py:54
+msgid "list of root items for the selected Category"
+msgstr "lista de items raíz para la Categoría seleccionada"
+
+#: core/collections/frontend_views.py:71
+#: core/collections/frontend_views.py:246
+msgid "Show title"
+msgstr "Mostrar título"
+
+#: core/collections/frontend_views.py:72
+#: core/collections/frontend_views.py:247
+msgid "Show description"
+msgstr "Mostrar descripción"
+
+#: core/collections/frontend_views.py:73
+#: core/collections/frontend_views.py:248
+msgid "Show image"
+msgstr "Mostrar imagen"
+
+#: core/collections/frontend_views.py:79
 msgid "Simplified"
 msgstr "Simplificada"
 
-#: core/collections/frontend_views.py:76
-#: core/collections/frontend_views.py:188
+#: core/collections/frontend_views.py:80
+#: core/collections/frontend_views.py:252
 msgid "Include descendant's elements"
 msgstr "Incluir elementos de los decendientes"
 
-#: core/collections/frontend_views.py:78
+#: core/collections/frontend_views.py:82
 msgid "Show navigation"
 msgstr "Mostrar navegación"
 
-#: core/collections/frontend_views.py:79
+#: core/collections/frontend_views.py:83
 msgid "Top"
 msgstr "Arriba"
 
-#: core/collections/frontend_views.py:80
+#: core/collections/frontend_views.py:84
 msgid "Bottom"
 msgstr "Abajo"
 
-#: core/collections/frontend_views.py:81
+#: core/collections/frontend_views.py:85
 msgid "Disabled"
 msgstr "No visible"
 
-#: core/collections/frontend_views.py:87
+#: core/collections/frontend_views.py:99
+msgid "Only show content matching all filters"
+msgstr "Sólo mostrar contenido que coincide con todos los filtros"
+
+#: core/collections/frontend_views.py:101
+msgid "Collections to use for category filters"
+msgstr "Colecciones que se usarán para el filtro"
+
+#: core/collections/frontend_views.py:109
 msgid "default view for the Collection"
 msgstr "vista por defecto para la Colección"
 
-#: core/collections/frontend_views.py:135
+#: core/collections/frontend_views.py:162
 msgid "teaser list of Category members"
 msgstr "lista de resúmenes de miembros de una Categoría"
 
-#: core/collections/frontend_views.py:161
+#: core/collections/frontend_views.py:188
+msgid "filtered list of Category members"
+msgstr "lista filtrada por Categorías de diferentes Colecciones"
+
+#: core/collections/frontend_views.py:230
 msgid "labeled icon list of Category members"
 msgstr "lista de iconos con nombre de los miembros de una Categoría"
 
-#: core/collections/frontend_views.py:172
+#: core/collections/frontend_views.py:241
 msgid "Visual Mode"
 msgstr "Modo visual"
 
-#: core/collections/frontend_views.py:173
+#: core/collections/frontend_views.py:242
 msgid "Standard view"
 msgstr "Vista estándar"
 
-#: core/collections/frontend_views.py:175
+#: core/collections/frontend_views.py:244
 msgid "With background image view"
 msgstr "Con imagen de fondo"
 
-#: core/collections/frontend_views.py:190
+#: core/collections/frontend_views.py:254
 msgid "Scroll by N items"
 msgstr "Avanzar de a N items"
 
-#: core/collections/frontend_views.py:192
+#: core/collections/frontend_views.py:256
 msgid "Speed of transition (in milliseconds)"
 msgstr "Velocidad de la transición (en milisegundos)"
 
-#: core/collections/frontend_views.py:194
+#: core/collections/frontend_views.py:258
 msgid "Automatic playback"
 msgstr "Rotación automática"
 
-#: core/collections/frontend_views.py:196
+#: core/collections/frontend_views.py:260
 msgid "Stop automatic playback after click"
 msgstr "Detener la rotación al hacer click"
 
-#: core/collections/frontend_views.py:198
+#: core/collections/frontend_views.py:262
 msgid "Delay between transitions (seconds)"
 msgstr "Espera entre transiciones (segundos)"
 
-#: core/collections/frontend_views.py:200
+#: core/collections/frontend_views.py:264
 msgid "Circular navigation"
 msgstr "Navegación circular"
 
-#: core/collections/frontend_views.py:202
+#: core/collections/frontend_views.py:266
 msgid "Navigation wrap"
 msgstr "Navegación"
 
-#: core/collections/frontend_views.py:203
+#: core/collections/frontend_views.py:267
 msgid "Circular"
 msgstr "Circular"
 
-#: core/collections/frontend_views.py:204
+#: core/collections/frontend_views.py:268
 msgid "First"
 msgstr "Inicio"
 
-#: core/collections/frontend_views.py:205
+#: core/collections/frontend_views.py:269
 msgid "Last"
 msgstr "Fin"
 
-#: core/collections/frontend_views.py:206
+#: core/collections/frontend_views.py:270
 msgid "Both"
 msgstr "Ambos"
 
-#: core/collections/frontend_views.py:207
+#: core/collections/frontend_views.py:271
 msgid "None"
 msgstr "Ninguno"
 
-#: core/collections/frontend_views.py:214
+#: core/collections/frontend_views.py:278
 msgid "slideshow of Category members"
 msgstr "rotador de los miembros de la Categoría"
 
-#: core/collections/frontend_views.py:242
+#: core/collections/frontend_views.py:306
 msgid "full content of Category members"
 msgstr "contenido completo de una Categoría"
 
-#: core/collections/frontend_views.py:257
+#: core/collections/frontend_views.py:321
 msgid "teaser list of the root Categories of a Collection"
 msgstr "lista de resúmenes de las Categorías raíz de una Colección"
 
-#: core/collections/frontend_views.py:277
+#: core/collections/frontend_views.py:341
 msgid "list of the root Categories of a Collection"
 msgstr "listado de las Categorías raíz de la Colección"
 
-#: core/collections/frontend_views.py:289
+#: core/collections/frontend_views.py:353
 msgid "hierarchical list of Categories in a Collection"
 msgstr "lista jerarquizada de las Categorias de una Colección"
 
-#: core/collections/frontend_views.py:326
+#: core/collections/frontend_views.py:390
 msgid "hierarchical list of Categories that will show an icon list on click"
 msgstr "lista jerarquizada de las Categorias que llevará a una vista de íconos"
 
-#: core/collections/frontend_views.py:335
+#: core/collections/frontend_views.py:399
 msgid ""
 "alphabetical teaser list of all the members of the Collection's Categories"
 msgstr ""
 "lista alfabética de resúmenes de los contenidos completos de una Colección"
 
-#: core/collections/frontend_views.py:364
+#: core/collections/frontend_views.py:428
 msgid "list of Category members as forum view"
 msgstr "listar la Categoría como un foro"
 
-#: core/collections/models.py:54
+#: core/collections/models.py:53
 msgid "visible"
 msgstr "visible"
 
-#: core/collections/models.py:57
+#: core/collections/models.py:56
 msgid "navigation root"
 msgstr "raíz de navegación"
 
-#: core/collections/models.py:63
+#: core/collections/models.py:62
 msgid "default list view"
 msgstr "vista de listado por defecto"
 
-#: core/collections/models.py:74 core/collections/models.py:94
+#: core/collections/models.py:73 core/collections/models.py:92
+#: core/perms/models.py:49
 msgid "collection"
 msgstr "colección"
 
-#: core/collections/models.py:75
+#: core/collections/models.py:74
 msgid "collections"
 msgstr "colecciones"
 
-#: core/collections/models.py:100
+#: core/collections/models.py:98
 msgid "active"
 msgstr "activo"
 
-#: core/collections/models.py:140 core/collections/models.py:251
+#: core/collections/models.py:138 core/collections/models.py:290
 msgid "categories"
 msgstr "categorías"
 
-#: core/collections/models.py:225
+#: core/collections/models.py:264
 msgid "order"
 msgstr "ordenar"
 
-#: core/collections/models.py:241
+#: core/collections/models.py:280
 msgid "categorization"
 msgstr "Categorización"
 
-#: core/collections/models.py:242
+#: core/collections/models.py:281
 msgid "categorizations"
 msgstr "Categorizaciones"
 
-#: core/collections/models.py:258
+#: core/collections/models.py:297
 msgid "is orphan"
 msgstr "sin categorizar"
 
 #: core/collections/templates/admin/collections/categorization/change_list.html:14
 #: templates/cyclope/content_tools_block.html:33
+#: templates/cyclope/teaser_tools_block.html:8
 msgid "Edit"
 msgstr "Editar"
 
@@ -2222,10 +2256,6 @@ msgstr "Agregar contenido"
 #: core/collections/templates/collections/category_list_as_forum.html:11
 msgid "Create a new topic"
 msgstr "Crear nuevo tema"
-
-#: core/collections/templates/collections/category_list_as_forum.html:16
-msgid "Subject"
-msgstr "Asunto"
 
 #: core/collections/templates/collections/category_list_as_forum.html:18
 msgid "Created"
@@ -2269,11 +2299,11 @@ msgstr ""
 msgid "No content object selected"
 msgstr "No ha seleccionado contenido"
 
-#: core/perms/models.py:36
+#: core/perms/models.py:36 core/perms/models.py:47
 msgid "can edit content"
 msgstr "puede editar contenido"
 
-#: core/perms/models.py:37
+#: core/perms/models.py:37 core/perms/models.py:48
 msgid "can add content"
 msgstr "puede agregar contenido"
 
@@ -2284,6 +2314,14 @@ msgstr "permiso de categoría"
 #: core/perms/models.py:43
 msgid "category permissions"
 msgstr "permisos de categoría"
+
+#: core/perms/models.py:53
+msgid "collection permission"
+msgstr "permiso de colección"
+
+#: core/perms/models.py:54
+msgid "collection permissions"
+msgstr "permisos de colección"
 
 #: core/series/frontend_views.py:35
 msgid "detailed view of the selected Series"
@@ -2367,7 +2405,7 @@ msgstr "Por favor"
 #: core/user_profiles/templates/profiles/profile_content.html:13
 #: templates/ratings/rating_block.html:13
 #: templates/registration/activation_complete.html:8
-#: templates/registration/login.html:6 templates/registration/login.html:16
+#: templates/registration/login.html:7 templates/registration/login.html:18
 msgid "login"
 msgstr "ingresar"
 
@@ -2668,7 +2706,7 @@ msgstr "SEGUIR"
 msgid "View my actions"
 msgstr "Ver mis acciones"
 
-#: templates/admin/base_content_change_form.html:131
+#: templates/admin/base_content_change_form.html:136
 msgid "You must choose a collection first."
 msgstr "Primero debe serleccinar una colección."
 
@@ -2743,7 +2781,7 @@ msgstr "Clave:"
 msgid "Log in"
 msgstr "Ingresar"
 
-#: templates/admin/login.html:51
+#: templates/admin/login.html:51 templates/registration/login.html:21
 #: templates/registration/password_reset_form.html:8
 msgid "Forgot your password?"
 msgstr "¿Olvidaste tu clave?"
@@ -2785,12 +2823,12 @@ msgstr ""
 msgid "return."
 msgstr "volver."
 
-#: templates/comments/comments_block.html:46
+#: templates/comments/comments_block.html:53
 #, python-format
 msgid " There are %(comment_count)s comments "
 msgstr " Hay %(comment_count)s comentarios "
 
-#: templates/comments/comments_block.html:52
+#: templates/comments/comments_block.html:59
 msgid "comment on this content"
 msgstr "comentar este contenido"
 
@@ -2827,14 +2865,26 @@ msgid "Thank you for contacting us!"
 msgstr "¡Gracias por contactarnos!"
 
 #: templates/cyclope/author_teaser.html:7
-#, fuzzy
 msgid "List of Authors"
-msgstr "lista de Productos"
+msgstr "Lista de Autores"
 
 #: templates/cyclope/author_teaser.html:29
-#, fuzzy
 msgid "View contents"
-msgstr "contenidos de la serie"
+msgstr "Ver contenidos"
+
+#: templates/cyclope/base_content_confirm_delete.html:6
+msgid "Delete "
+msgstr "Borrar "
+
+#: templates/cyclope/base_content_confirm_delete.html:8
+msgid "Are you sure you want to delete it?"
+msgstr "Confirmas que deseas eliminar el contenido?"
+
+#: templates/cyclope/base_content_confirm_delete.html:13
+#: templates/cyclope/content_tools_block.html:38
+#: templates/cyclope/teaser_tools_block.html:11
+msgid "Delete"
+msgstr "Borrar"
 
 #: templates/cyclope/breadcrumb.html:8
 msgid "Breadcrumb"
@@ -3521,11 +3571,11 @@ msgstr ""
 msgid "Account activation for"
 msgstr "Actviación de cuenta para"
 
-#: templates/registration/login.html:9
+#: templates/registration/login.html:10
 msgid "Please enter your credentials"
 msgstr "Por favor introduzca sus datos de acceso"
 
-#: templates/registration/login.html:18
+#: templates/registration/login.html:22
 #, python-format
 msgid ""
 "\n"
@@ -3712,12 +3762,8 @@ msgstr "No se encontró ningún resultado"
 msgid ""
 "You have to select at least one recipient or an e-mail                     "
 "address"
-msgstr "Tienes que seleccionar al menos una dirección de email"
-"que recibirá el mensaje"
-
-#: third_party/contact_form/forms.py:253
-msgid "Your name"
-msgstr "Nombre"
+msgstr ""
+"Tienes que seleccionar al menos una dirección de emailque recibirá el mensaje"
 
 #: third_party/contact_form/forms.py:256
 msgid "Your email address"
@@ -3747,7 +3793,9 @@ msgstr "E-mail"
 msgid ""
 "Destination e-mail address. You have to                   select at least "
 "one recipient or an e-mail address"
-msgstr "Direcciones de los destinatarios del correo.Debes colocar al menos una dirección."
+msgstr ""
+"Direcciones de los destinatarios del correo.Debes colocar al menos una "
+"dirección."
 
 #: third_party/contact_form/models.py:13
 msgid "E-mail subject"
