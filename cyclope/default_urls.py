@@ -34,11 +34,6 @@ import cyclope.settings as cyc_settings
 from cyclope.feeds import CategoryFeed, WholeSiteFeed, ContentTypeFeed
 from cyclope.sitemaps import CategorySitemap, CollectionSitemap, MenuSitemap
 from cyclope.core.user_profiles.forms import UserProfileForm
-from cyclope.views import ContentDeleteView
-from cyclope.core.frontend.sites import site
-
-app_options = "|".join(set([ model._meta.app_label for model in site.base_content_types.keys() ]))
-ct_options = "|".join([ model._meta.object_name.lower() for model in site.base_content_types.keys() ])
 
 urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
@@ -48,7 +43,13 @@ urlpatterns = patterns('',
         {'template': 'cyclope/robots.txt', 'mimetype': 'text/plain'}),
 
     ## cyclope apps
-    url(r'(?P<app>%s)/(?P<content_type>%s)/(?P<slug>[\w-]+)/delete/$' % (app_options, ct_options), ContentDeleteView.as_view(), name='content-delete'),
+    url(r'', include('cyclope.apps.articles.urls')),
+    url(r'', include('cyclope.apps.medialibrary.urls')),
+    url(r'', include('cyclope.apps.staticpages.urls')),
+    url(r'', include('cyclope.apps.forum.urls')),
+    url(r'', include('cyclope.apps.contacts.urls')),
+    url(r'', include('cyclope.apps.polls.urls')),
+    url(r'', include('cyclope.apps.feeds.urls')),
     url(r'^locations/', include('cyclope.apps.locations.urls')),
     url(r'^newsletter/', include('cyclope.apps.newsletter.urls')),
     url(r'^abuse/', include('cyclope.apps.abuse.urls')),
