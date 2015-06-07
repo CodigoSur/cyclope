@@ -18,8 +18,8 @@ layout_templates = {
         'regions' : {
             'header': _('Header'),
             'left': _('Left'),
-            'right': _('right'),
-            'up': _('Up'),
+            'right': _('Right'),
+            'top': _('Top'),
             'bottom': _('Bottom'),
             'footer': _('Footer'),
             }
@@ -31,8 +31,8 @@ layout_templates = {
         'regions' : {
             'header': _('Header'),
             'left': _('Left'),
-            'right': _('right'),
-            'up': _('Up'),
+            'right': _('Right'),
+            'top': _('Top'),
             'bottom': _('Bottom'),
             'footer': _('Footer'),
             }
