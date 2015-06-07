@@ -1,0 +1,17 @@
+{% extends CYCLOPE_THEME_BASE_TEMPLATE %}
+{% load layout %}
+{% block body_class %}main{% endblock %}
+
+{% block page_content %}
+<!-- div class="col-md-3" >{% region 'left' %}</div -->
+<div id="block_content" class="col-xs-12 col-sm-9">
+	<!-- toogle nav for different devices and resolutions -->
+	<p class="pull-right visible-xs">
+		<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+    </p> <!-- end toogle nav -->
+    <div class="col-xs-6 col-lg-4">{% region 'up' %}</div>
+    <div class="jumbotron">{% block content %}{% endblock %}</div>
+    <div>{% region 'bottom' %}</div>
+</div>
+<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">{% region 'right'%}</div>
+{% endblock %}

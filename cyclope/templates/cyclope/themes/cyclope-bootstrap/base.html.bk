@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--
+# Cyclope 3 GPL
+# Neutronix Workflow Design
+# Layouts: 4 & 5 Elements
+# Copyright 2010-2013 Código Sur Sociedad Civil.
+# All rights reserved.
+# This file is part of Cyclope 3.
+# Cyclope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# Development: Codigo Sur www.codigosur.org
+# Less CSS based www.lesscss.org
+# 960 Grid System Based www.960.gs
+# Neutronix is developed by Santiago Hoerth Moura
+ -->
+
+{% load layout i18n cyclope_utils compress %}
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{% block title %}{{ CYCLOPE_SITE_SETTINGS.global_title }}{%endblock%}</title>
+    <meta name="Keywords" content="{{ CYCLOPE_SITE_SETTINGS.keywords }}" />
+    <meta name="Description" content="{{ CYCLOPE_SITE_SETTINGS.description }}" />
+    <link href="/rss" title="RSS" type="application/rss+xml" rel="alternate" />
+    {% compress css %}
+    {% block displaycss %}
+    {% block neutronixcss %}
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
+    {% endblock neutronixcss %}
+    <link href="{{ CYCLOPE_STATIC_URL }}themes/neutronix/css/print.css" rel="stylesheet" type="text/css" media="print"/>
+    <link href="{{ CYCLOPE_STATIC_URL }}js/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="{{ CYCLOPE_STATIC_URL }}css/uni-form.css" type="text/css" />
+    <link rel="stylesheet" href="{{ CYCLOPE_STATIC_URL }}css/default.uni-form.css" type="text/css" />
+    <link rel="stylesheet" href="{{ CYCLOPE_STATIC_URL }}css/fonts.css" type="text/css" />
+    {% endblock displaycss %}
+    {% endcompress %}
+    {% if not COMPRESS_ENABLED %}
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less.min.js"></script>
+    {% endif %}
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/menuitems.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/cyclope.js" ></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/uni-form.jquery.min.js" ></script>
+    {% if CYCLOPE_SITE_SETTINGS.enable_ratings %}
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/ratings.js" ></script>
+    {% endif %}
+    <script type="text/javascript">
+        less.modifyVars({
+            'color-alpha': '#fff',
+            'colora': '#{{ CYCLOPE_SITE_SETTINGS.color_a }}',
+            'colorb': '#{{ CYCLOPE_SITE_SETTINGS.color_b }}',
+            'colorc': '#{{ CYCLOPE_SITE_SETTINGS.color_c }}',
+            'colord': '#{{ CYCLOPE_SITE_SETTINGS.color_d }}',
+            'colore': '#{{ CYCLOPE_SITE_SETTINGS.color_e }}',
+            'color-omega':'#000'
+        });
+    </script>
+    <script type="text/javascript">
+    $(function() {
+        $('#gallery a').lightBox({
+            overlayBgColor:         '#000',
+            overlayOpacity:         0.8,
+            fixedNavigation:        false,
+            imageLoading:           '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-ico-loading.gif',
+            imageBtnPrev:           '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-btn-prev.gif',
+            imageBtnNext:           '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-btn-next.gif',
+            imageBtnClose:          '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-btn-close.gif',
+            imageBlank:             '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-blank.gif',
+            containerBorderSize:    10,
+            containerResizeSpeed:   400,
+            txtImage:               '{% trans "Image"%}',
+            txtOf:                  '{% trans "of"%}'
+        });
+    });
+    </script>
+    <script type="text/javascript">
+     $(function(){
+       $('form.uniForm').uniform();
+     });
+    </script>
+    {% block sitesettings_css %}
+    <style type="text/css">
+      @font-face {font-family: custom_body; src: url('{{ CYCLOPE_SITE_SETTINGS.body_custom_font }}');}
+      @font-face {font-family: custom_titles; src: url('{{ CYCLOPE_SITE_SETTINGS.titles_custom_font }}');}
+      {% if CYCLOPE_SITE_SETTINGS.titles_font %}
+      .brand h1, .title, .title a { font-family:{{ CYCLOPE_SITE_SETTINGS.titles_font  }}; }
+      {% endif %}
+      body { {% if CYCLOPE_SITE_SETTINGS.body_font %}
+             font-family: {{ CYCLOPE_SITE_SETTINGS.body_font }};
+             {% endif %}
+             font-size:{{ CYCLOPE_SITE_SETTINGS.font_size  }}pt;}
+      {% if CYCLOPE_SITE_SETTINGS.hide_content_icons %} .type_icon { display: none;} {% endif %}
+    </style>
+    {% endblock sitesettings_css %}
+    {% block extra_head %}{% endblock %}
+
+</head>
+
+<body class="{% block body_class %}{%endblock%}">
+
+{% block page_header %}
+<div id="mask" class="container_24">
+{% region 'air' %}
+ {% if CYCLOPE_SITE_SETTINGS.show_head_title  %}
+  <div class="brand" {% if CYCLOPE_SITE_SETTINGS.head_image %}style="background:url({{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.head_image }}); background-repeat: no-repeat;"{% endif %}>
+    <h1><a href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a></h1>
+    <h2><a href="/">http://{{ CYCLOPE_SITE_SETTINGS.site.domain }}</a></h2>
+   </div>
+ {% else %}
+  <a href="/">
+    <img src="{% if CYCLOPE_SITE_SETTINGS.head_image %}{{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.head_image }}{% else %}{{ CYCLOPE_THEME_MEDIA_URL }}images/css/cabezal.png{% endif %}">
+  </a>
+ {% endif %}
+  <div class="clear"></div>
+{% endblock %}
+
+  <div id="middling">{% block page_content %} {% endblock %}</div>
+
+{% block page_footer %}
+  {% include "cyclope/themes/neutronix/footer.html" %}
+</div><!-- /end mask -->
+{% endblock %}
+{% if CYCLOPE_SITE_SETTINGS.enable_share_buttons or CYCLOPE_SITE_SETTINGS.enable_follow_buttons %}
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+{% endif %}
+</body>
+</html>
