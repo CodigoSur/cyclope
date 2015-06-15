@@ -52,11 +52,15 @@ class MediaAdmin(CollectibleAdmin, BaseContentAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         media_file_field = self.model.media_file_field
+        image_file_field = self.model.image_file_field
         form = super(MediaAdmin, self).get_form(request, obj, **kwargs)
         simple_widgets = False
         if not request.user.is_superuser:
             simple_widgets = True
             form.base_fields[media_file_field].widget = CustomFileInput()
+            if image_file_field:
+                form.base_fields[image_file_field].widget = CustomFileInput()
+
         form.simple = simple_widgets
         if obj:
             form.media_file_initial = getattr(obj, media_file_field)
@@ -64,6 +68,9 @@ class MediaAdmin(CollectibleAdmin, BaseContentAdmin):
             # when the user does not upload a file.
             # TODO(nicoechaniz): implement proper validation for this case
             form.base_fields[media_file_field].required = False
+            if image_file_field:
+                form.image_file_initial = getattr(obj, image_file_field)
+                form.base_fields[image_file_field].required = False
         return form
 
 has_thumbnail = [Picture, MovieClip, FlashMovie]
@@ -84,16 +91,29 @@ def media_admin_factory(media_model):
             if self.simple:
                 instance = super(MediaLibraryForm, self).save(commit=False)
                 media_folder = media_model._meta.get_field_by_name(instance.media_file_field)[0].directory
-                abs_path = os.path.join( 
+                abs_media_path = os.path.join( 
                     settings.MEDIA_ROOT, settings.FILEBROWSER_DIRECTORY, media_folder
                     )
+                image_file_field = instance.image_file_field
+                if image_file_field:
+                    image_folder = media_model._meta.get_field_by_name(image_file_field)[0].directory
+                    abs_image_path = os.path.join( 
+                        settings.MEDIA_ROOT, settings.FILEBROWSER_DIRECTORY, image_folder
+                    )
                 if self.files:
-                    f = self.files[instance.media_file_field]
-                    f.name = convert_filename(f.name)
-                    name = handle_file_upload(abs_path, f)
+                    mf = self.files[instance.media_file_field]
+                    mf.name = convert_filename(mf.name)
+                    name = handle_file_upload(abs_media_path, mf)
                     setattr(instance, instance.media_file_field, name)
+                    if image_file_field and image_file_field in self.files.keys():
+                        imf = self.files[image_file_field]
+                        imf.name = convert_filename(imf.name)
+                        name = handle_file_upload(abs_image_path, imf)
+                        setattr(instance, image_file_field, name)
                 else:
                     setattr(instance, instance.media_file_field, self.media_file_initial)
+                    if image_file_field:
+                        setattr(instance, image_file_field, self.image_file_initial)
                 instance.save()
                 return instance
             else:
