@@ -89,31 +89,31 @@ def media_admin_factory(media_model):
             # We override the standard behavior because we've overriden the FileBrowseField
             # with a simple ClearableFileInput
             if self.simple:
+                abs_paths = {}
                 instance = super(MediaLibraryForm, self).save(commit=False)
-                media_folder = media_model._meta.get_field_by_name(instance.media_file_field)[0].directory
-                abs_media_path = os.path.join( 
-                    settings.MEDIA_ROOT, settings.FILEBROWSER_DIRECTORY, media_folder
-                    )
                 image_file_field = instance.image_file_field
+
+                file_fields = [ instance.media_file_field ]
                 if image_file_field:
-                    image_folder = media_model._meta.get_field_by_name(image_file_field)[0].directory
-                    abs_image_path = os.path.join( 
-                        settings.MEDIA_ROOT, settings.FILEBROWSER_DIRECTORY, image_folder
+                    file_fields.append(image_file_field)
+                for f_field in file_fields:
+                    folder = media_model._meta.get_field_by_name(f_field)[0].directory
+                    abs_paths[f_field] = os.path.join( 
+                        settings.MEDIA_ROOT, settings.FILEBROWSER_DIRECTORY, folder
                     )
-                if self.files:
-                    mf = self.files[instance.media_file_field]
-                    mf.name = convert_filename(mf.name)
-                    name = handle_file_upload(abs_media_path, mf)
-                    setattr(instance, instance.media_file_field, name)
-                    if image_file_field and image_file_field in self.files.keys():
-                        imf = self.files[image_file_field]
-                        imf.name = convert_filename(imf.name)
-                        name = handle_file_upload(abs_image_path, imf)
-                        setattr(instance, image_file_field, name)
-                else:
-                    setattr(instance, instance.media_file_field, self.media_file_initial)
-                    if image_file_field:
-                        setattr(instance, image_file_field, self.image_file_initial)
+                    if f_field in self.files.keys():
+                        f = self.files[f_field]
+                        f.name = convert_filename(f.name)
+                        name = handle_file_upload(abs_paths[f_field], f)
+                        setattr(instance, f_field, name)
+                    else:
+                        # TODO(nicoechaniz): this is ugly! refactor
+                        if f_field in ["image", "still"]:
+                            if hasattr(self, "image_file_initial"):
+                                setattr(instance, f_field, self.image_file_initial)
+                        else:
+                            if hasattr(self, "media_file_initial"):
+                                setattr(instance, f_field, self.media_file_initial)
                 instance.save()
                 return instance
             else:
