@@ -13,9 +13,9 @@
       {% endif %}
     </div>
 
-    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
+    <h1 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
       <a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
-    </h2>
+    </h1>
 
     {% if not simplified_view and article.get_picture %}
       <div class="teaser_icon_container"><a href="{{ article.get_absolute_url }}" title="{{ article.get_picture.name }}">
