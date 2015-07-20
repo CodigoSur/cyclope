@@ -12,10 +12,11 @@
       <div class="date">{{ article.date|date:'SHORT_DATE_FORMAT' }}</div>
       {% endif %}
     </div>
-
-    <h1 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
-      <a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
-    </h1>
+	
+    <h2 class="title">
+		<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
+		<a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
+    </h2>
 
     {% if not simplified_view and article.get_picture %}
       <div class="teaser_icon_container"><a href="{{ article.get_absolute_url }}" title="{{ article.get_picture.name }}">
@@ -29,12 +30,14 @@
       {% else %}
         {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
       {% endif %}
-      <span class="more"><a href="{{ article.get_absolute_url }}"> {% trans "More" %}</a></span>
+       <p><a class="btn btn-primary" href="{{ article.get_absolute_url }}" role="button">{% trans "More" %}</a> {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %} </p>
+      	
     </div>
 
     {% if not simplified_view %}
         {% include "cyclope/author_block.html"  %}
     {% endif %}
+    
 
     {% if article.pictures and not simplified_view %}
     <br class="floating-img-clear" />
