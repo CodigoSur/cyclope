@@ -14,7 +14,7 @@
     </div>
 	
     <h2 class="title">
-		<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
+		
 		<a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
     </h2>
 
@@ -30,8 +30,11 @@
       {% else %}
         {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
       {% endif %}
-       <p><a class="btn btn-primary" href="{{ article.get_absolute_url }}" role="button">{% trans "More" %}</a> {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %} </p>
-      	
+      
+       <p><a class="btn btn-primary" href="{{ article.get_absolute_url }}" role="button">{% trans "More" %}</a> 
+       {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
+        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/></p>
+      	 
     </div>
 
     {% if not simplified_view %}
