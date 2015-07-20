@@ -4,11 +4,22 @@
 {% block title %}{%if title %}{{title}} | {%endif%}{{ CYCLOPE_SITE_SETTINGS.global_title }}{%endblock%}
 {% block body_class %}default{% endblock %}
 
+
+
 {% block page_content %}
-<div class="grid_5" >{% region 'water' %}</div>
-<div class="grid_19">
-  {% region 'spark' %}
-  <div id="fire">{% block content %} {% endblock %}</div>
-  {% region 'ash' %}
+<!-- div class="col-md-3" >{% region 'left' %}</div -->
+<div id="block_content" class="row">
+	<!-- toogle nav for different devices and resolutions -->
+	<p class="pull-right visible-xs">
+		<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+    </p> <!-- end toogle nav -->
+    <div class="col-xs-12 col-lg-9">
+		<div>{% region 'top' %}</div>
+		<div>{% block content %}{% endblock %}</div>
+		<div>{% region 'bottom' %}</div>
+	</div>
+    <div class="col-xs-12 col-lg-3 sidebar-offcanvas" id="sidebar">{% region 'right'%}</div>
 </div>
+
 {% endblock %}
+
