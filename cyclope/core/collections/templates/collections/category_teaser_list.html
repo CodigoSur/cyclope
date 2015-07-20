@@ -17,7 +17,7 @@ The included template may be something different from a teaser
     {% alias categorization.content_object as categorization.content_type.model %}
     {% alias categorization.content_object as 'media' %}
     {% endspaceless %}
-    {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %} 
+    
     {% include template_path with current_object=categorization.content_object host_template="cyclope/inline_view.html" %}
   {% endfor %}
 {% endblock %}
