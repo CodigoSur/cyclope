@@ -302,7 +302,6 @@ class ThemeClasses(template.Node):
         if region == None:
             region = "content"
         classes = ""
-        print region
         if hasattr(theme, "content_classes"):
             # if content_classes are defined return them otherwise return empty
             classes = theme.content_classes.get(region, "")
@@ -310,5 +309,4 @@ class ThemeClasses(template.Node):
 
 @register.tag('theme_classes')
 def do_append_to_get(parser, token):
-    print "theme classes"
-    return ThemeClasses()
+print    return ThemeClasses()

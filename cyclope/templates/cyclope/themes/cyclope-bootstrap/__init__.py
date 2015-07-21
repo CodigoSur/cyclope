@@ -53,7 +53,7 @@ layout_templates = {
 }
 
 content_classes = {
-    'content': 'my_content_classes',
-    'left': 'my_left_classes',
+    'content': '',
+    'left': '',
     'bottom': 'col-xs-6 col-md-6  col-sm-3 col-lg-3'
 }
