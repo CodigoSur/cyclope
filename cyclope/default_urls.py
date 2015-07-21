@@ -35,7 +35,6 @@ from cyclope.feeds import CategoryFeed, WholeSiteFeed, ContentTypeFeed
 from cyclope.sitemaps import CategorySitemap, CollectionSitemap, MenuSitemap
 from cyclope.core.user_profiles.forms import UserProfileForm
 
-
 urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
         {'sitemaps': {"menus": MenuSitemap, "categories": CategorySitemap,
@@ -44,6 +43,13 @@ urlpatterns = patterns('',
         {'template': 'cyclope/robots.txt', 'mimetype': 'text/plain'}),
 
     ## cyclope apps
+    url(r'', include('cyclope.apps.articles.urls')),
+    url(r'', include('cyclope.apps.medialibrary.urls')),
+    url(r'', include('cyclope.apps.staticpages.urls')),
+    url(r'', include('cyclope.apps.forum.urls')),
+    url(r'', include('cyclope.apps.contacts.urls')),
+    url(r'', include('cyclope.apps.polls.urls')),
+    url(r'', include('cyclope.apps.feeds.urls')),
     url(r'^locations/', include('cyclope.apps.locations.urls')),
     url(r'^newsletter/', include('cyclope.apps.newsletter.urls')),
     url(r'^abuse/', include('cyclope.apps.abuse.urls')),

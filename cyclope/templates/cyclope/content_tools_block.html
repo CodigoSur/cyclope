@@ -33,6 +33,11 @@
           {% trans "Edit" %}
         </a>
       </li>
+      <li>
+        <a href="/{{ current_object.get_object_name }}/{{ current_object.slug }}/delete/" class="delete_link">
+          {% trans "Delete" %}
+        </a>
+      </li>
       {% endif %}
     </ul>
   </div>

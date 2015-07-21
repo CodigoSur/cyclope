@@ -39,7 +39,11 @@ class BaseMedia(BaseContent, Collectible, ThumbnailMixin):
     description = models.TextField(_('description'), blank=True)
 
     media_file_field = None # This must me set to the media_file on the model
-                            # (eg: audio for Soundtrack)
+                            # (eg: "audio" for Soundtrack)
+    image_file_field = "image" # This must me set to the image_file on the model
+                               # if the field name is not "image"
+                               # (eg: "still" for MovieClip)
+
     @property
     def media_file(self):
         return getattr(self, self.media_file_field)
@@ -61,6 +65,7 @@ class Picture(BaseMedia):
     image =  FileBrowseField(_('image'), max_length=100, format='Image',
                              directory='images/pictures/')
     media_file_field = "image"
+    image_file_field = None
 
     class Meta:
         verbose_name = _('picture')
@@ -90,6 +95,7 @@ class MovieClip(BaseMedia):
     video =  FileBrowseField(_('video'), max_length=100, format='Video',
                              directory='movie_clips/')
     media_file_field = "video"
+    image_file_field = "still"
 
     def image(self):
         return self.still

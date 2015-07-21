@@ -35,6 +35,11 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
+from django.db.models import get_model
+from django.views.generic import DeleteView
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
 from cyclope import settings as cyc_settings
 from cyclope.utils import get_object_name, get_app_label
 
@@ -179,3 +184,32 @@ def error_500(request):
                                context_instance = RequestContext(request))
     response.status_code = 500
     return response
+
+class LoginRequiredMixin(object):
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+
+class ContentDeleteView(DeleteView, LoginRequiredMixin):
+    success_url = "/"
+
+    def set_model(self, **kwargs):
+        ct = kwargs.pop("content_type")
+        app = kwargs.pop("app")
+        self.model = get_model(app, ct)
+
+    def get(self, request, *args, **kwargs):
+        self.set_model(**kwargs)
+        return super(ContentDeleteView, self).get(request, *args, **kwargs)
+
+    def post(self, *args, **kwargs):
+        self.set_model(**kwargs)
+        return super(ContentDeleteView, self).post(*args, **kwargs)
+   
+    def get_object(self, queryset=None):
+        object = super(ContentDeleteView, self).get_object(queryset)
+        if object.user == self.request.user or self.request.user.is_superuser:
+            return object
+        else:
+            raise Http404
+

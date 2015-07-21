@@ -706,6 +706,11 @@ class FrontendEditTestCase(TestCase):
         response = self.client.get('/category/category/')
         self.assertNotContains(response, 'class="category_add_content"')
 
+    def test_delete_content_link(self):
+        self.client.login(username='perm_user', password='password')
+        response = self.client.get('/article/article/')
+        self.assertContains(response, 'class="delete_link"', count=1)
+        
 
 class SimpleAdminTests(TestCase):
     """
