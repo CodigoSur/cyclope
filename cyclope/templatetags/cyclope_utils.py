@@ -287,3 +287,28 @@ def unordered_list_css(value, autoescape=None):
             i += 1
         return '\n'.join(output)
     return mark_safe(_helper(value))
+
+from cyclope.themes import get_theme
+
+class ThemeClasses(template.Node):
+    """
+    Return the class names to be added for the selected theme
+    according to the region name or lack of (meaning main content).
+    """
+    def render(self, context):
+        theme = get_theme(context["CYCLOPE_CURRENT_THEME"])
+        # if region_name is none, it is the main content
+        region = context["region_name"]
+        if region == None:
+            region = "content"
+        classes = ""
+        print region
+        if hasattr(theme, "content_classes"):
+            # if content_classes are defined return them otherwise return empty
+            classes = theme.content_classes.get(region, "")
+        return classes
+
+@register.tag('theme_classes')
+def do_append_to_get(parser, token):
+    print "theme classes"
+    return ThemeClasses()

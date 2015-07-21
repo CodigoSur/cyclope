@@ -1,6 +1,6 @@
 {% load i18n fb_versions cyclope_utils %}
 
-  <div class="content-view staticpage teaser staticpage-teaser">
+  <div class="content-view staticpage teaser staticpage-teaser {% theme_classes %}">
 
     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png" /><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a></h2>
 

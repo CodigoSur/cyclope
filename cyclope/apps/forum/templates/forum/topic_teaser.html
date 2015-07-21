@@ -1,6 +1,6 @@
 {% load i18n fb_versions markup comments %}
 
-  <div class="content-view topic teaser topic-teaser">
+  <div class="content-view topic teaser topic-teaser {% theme_classes %}">
 
     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/topid.png" /><a href="{% url topic-detail topic.slug %}">{{ topic.name }}</a></h2>
 

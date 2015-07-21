@@ -1,6 +1,6 @@
 {% load i18n fb_versions dbgettext_tags cyclope_utils %}
 
-  <div class="content-view feed teaser feed-teaser">
+  <div class="content-view feed teaser feed-teaser {% theme_classes %}">
 
     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/feed.png" /><a href="{% url feed-detail feed.slug %}">{{ feed.name }}</a></h2>
 

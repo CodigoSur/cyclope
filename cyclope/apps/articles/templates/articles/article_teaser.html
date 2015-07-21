@@ -1,6 +1,6 @@
 {% load i18n fb_versions dbgettext_tags cyclope_utils %}
 
-  <div class="content-view article teaser article-teaser">
+  <div class="content-view article teaser article-teaser {% theme_classes %}">
 
     <div class="pretitle-container first meta-content">
       {% if  article.pretitle and not simplified_view %}
@@ -12,9 +12,9 @@
       <div class="date">{{ article.date|date:'SHORT_DATE_FORMAT' }}</div>
       {% endif %}
     </div>
-	
+
     <h2 class="title">
-		
+
 		<a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
     </h2>
 
@@ -30,17 +30,17 @@
       {% else %}
         {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
       {% endif %}
-      
-       <p><a class="btn btn-primary" href="{{ article.get_absolute_url }}" role="button">{% trans "More" %}</a> 
+
+       <p><a class="btn btn-primary" href="{{ article.get_absolute_url }}" role="button">{% trans "More" %}</a>
        {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
         <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/></p>
-      	 
+
     </div>
 
     {% if not simplified_view %}
         {% include "cyclope/author_block.html"  %}
     {% endif %}
-    
+
 
     {% if article.pictures and not simplified_view %}
     <br class="floating-img-clear" />
