@@ -309,4 +309,4 @@ class ThemeClasses(template.Node):
 
 @register.tag('theme_classes')
 def do_append_to_get(parser, token):
-print    return ThemeClasses()
+    return ThemeClasses()
