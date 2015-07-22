@@ -57,3 +57,11 @@ content_classes = {
     'left': '',
     'bottom': 'col-xs-6 col-md-6  col-sm-3 col-lg-3'
 }
+
+region_ids = {
+    'content': '',
+    'left': '',
+    'right': 'sidebar',
+    'top': '',
+    'bottom': '',
+}
