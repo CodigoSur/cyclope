@@ -20,7 +20,7 @@
 
     {% if not simplified_view and article.get_picture %}
       <div class="teaser_icon_container"><a href="{{ article.get_absolute_url }}" title="{{ article.get_picture.name }}">
-          <img class="teaser_icon img-responsive" src="{% version article.get_picture.image.path 'small' %}" alt="{{ article.get_picture.name }}" width="135" border="0"/>
+          <img class="teaser_icon img-responsive" src="{% version article.get_picture.image.path 'small' %}" alt="{{ article.get_picture.name }}" border="0"/>
       </a></div>
     {% endif %}
 
