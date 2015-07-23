@@ -2,7 +2,6 @@
 
 {% per_category_perms current_object as cat_perms %}
 
-{% if cat_perms.edit_content %}
 <ol class="breadcrumb">
 
   {% if view_options.navigation == "TOP" %}
@@ -38,4 +37,3 @@
   {% endif %}
   
 </ol>
-{% endif %}
