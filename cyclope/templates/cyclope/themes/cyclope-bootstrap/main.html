@@ -3,18 +3,14 @@
 {% block body_class %}main{% endblock %}
 
 {% block page_content %}
-<!-- div class="col-md-3" >{% region 'left' %}</div -->
-<div id="block_content" class="row">
-	
-    <div class="col-xs-12 col-lg-9">
-		<!-- toogle nav for different devices and resolutions -->
-		<p class="pull-right visible-xs">
-			<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-		</p> <!-- end toogle nav -->
-		<div>{% region 'top' %}</div>
-		<div class="jumbotron">{% block content %}{% endblock %}</div>
-		<div>{% region 'bottom' %}</div>
-	</div>
-    <div class="col-lg-3 sidebar-offcanvas" id="sidebar">{% region 'right'%}</div>
-</div>
+<!-- <div class="row">{% region 'left' %}</div> -->
+    <div class="col-xs-12 col-sm-9">
+        <div class="row">{% region 'top' %}</div>
+         <!-- toogle nav for different devices and resolutions -->
+        <p class="pull-right visible-xs"><button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button></p> <!-- end toogle nav -->
+        <div class="jumbotron">{% block content %}{% endblock %}</div>
+        <div class="row">{% region 'bottom' %}</div>
+    </div>
+    <div class="row">{% region 'right'%}</div>
 {% endblock %}
+

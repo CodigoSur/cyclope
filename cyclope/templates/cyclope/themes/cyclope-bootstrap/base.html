@@ -10,9 +10,9 @@
 
 {% load layout i18n cyclope_utils compress %}
 
-<html>
+<html lang="es">
 <head>
-	<!-- ### Meta ### -->
+    <!-- ### Meta ### -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
     <meta name="Description" content="{{ CYCLOPE_SITE_SETTINGS.description }}"/>
     <meta name="author" content="CyclopeCMS"/>
     <!-- /Meta -->
-	<!-- ### Extras ### -->
+    <!-- ### Extras ### -->
     <link rel="alternate" href="/rss" title="RSS" type="application/rss+xml"/>
     <link rel="icon" href="{{ CYCLOPE_THEME_MEDIA_URL }}images/favicon.ico" sizes="16x16" type="image/png"/>
     <!-- /Extras -->
@@ -34,7 +34,7 @@
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/css.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
       <!-- <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"> -->
@@ -55,7 +55,7 @@
       body { {% if CYCLOPE_SITE_SETTINGS.body_font %}
              font-family: {{ CYCLOPE_SITE_SETTINGS.body_font }};
              {% endif %}
-             font-size:{{ CYCLOPE_SITE_SETTINGS.font_size  }}pt;}
+             font-size:{{ CYCLOPE_SITE_SETTINGS.font_size  }}px;}
       {% if CYCLOPE_SITE_SETTINGS.hide_content_icons %} .type_icon { display: none;} {% endif %}
        <script type="text/javascript">
         less.modifyVars({
@@ -117,36 +117,25 @@
     {% endif %}
     <!-- /JS --> 
    </head>
-
-
 <body>
-	
-	
-	
-	
     <nav class="navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a>
-        </div>
-          {% region 'header' %}
-      </div><!-- /.container -->
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a>
+            </div>
+            <!-- header -->  {% region 'header' %} <!-- /header -->	
+        </div><!-- /.container -->
     </nav><!-- /.navbar -->
-
+    
     <div class="container">
-
-      <div class="row row-offcanvas row-offcanvas-right">
-           <div id="row">{% block page_content %} {% endblock %}</div>
-        </div>
-
-        
-      </div><!--/row-->
+        <div class="row row-offcanvas row-offcanvas-right">{% block page_content %} {% endblock %}</div>
+    </div><!--/.container-->
 
       <hr>
 
