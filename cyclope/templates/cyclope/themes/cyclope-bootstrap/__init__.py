@@ -52,11 +52,6 @@ layout_templates = {
          },
 }
 
-content_classes = {
-    'content': '',
-    'left': '',
-    'bottom': 'col-xs-6 col-md-6  col-sm-3 col-lg-3'
-}
 
 region_ids = {
     'content': '',
@@ -64,4 +59,18 @@ region_ids = {
     'right': 'sidebar',
     'top': '',
     'bottom': '',
+}
+
+region_classes = {
+    'content': '',
+    'left': '',
+    'bottom': '',
+    'right': 'col-xs-6 col-sm-3 sidebar-offcanvas',
+}
+
+content_classes = {
+    'content': '',
+    'left': '',
+    'bottom': 'col-xs-12 col-sm-12 col-md-6 col-lg-4',
+    'right': '',
 }
