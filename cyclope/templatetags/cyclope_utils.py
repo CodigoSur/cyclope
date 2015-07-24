@@ -280,7 +280,7 @@ def unordered_list_css(value, autoescape=None):
                     i += 1
             if sublist_item:
                 sublist = _helper(sublist_item, tabs+1)
-                sublist = '\n%s<ul>\n%s\n%s</ul>\n%s' % (indent, sublist,
+                sublist = '\n%s<ul class="dropdown-menu">\n%s\n%s</ul>\n%s' % (indent, sublist,
                                                          indent, indent)
             output.append('%s<li class="%s">%s%s</li>' % (indent, css_class,
                     escaper(force_unicode(title)), sublist))

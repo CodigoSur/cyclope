@@ -394,7 +394,7 @@ class HyerarchyBuilderMixin(object):
         def _classes(object_, current_url):
             classes = [object_.slug]
             if object_.get_descendant_count():
-                classes.append('has_children')
+                classes.append('has_children dropdown')
             else:
                 classes.append('no_children')
             if type(object_) == MenuItem:
