@@ -1,6 +1,5 @@
 {% if category.collection.visible %}
   {% with children=category.children.all %}
-  <!-- <ol id="categories_navigation" class=" {{ category.collection.slug }} {{ category.slug }}{% if children %} children{% endif %}" style="background:#333;"> -->
     {% if category.parent %}
       <li><a href="{% url category-default category.parent.slug %}" class="parent">{{ category.parent.name }}</a></li>
     {% else %}
@@ -14,6 +13,5 @@
         {% endfor %}
       </ol>
     {% endif %}
-  <!-- </ol> -->
   {% endwith %}
 {% endif %}
