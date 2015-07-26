@@ -13,9 +13,9 @@
 {% include "cyclope/author_block.html" with author=current_object.author %}
 
 {% if current_object.image %}
-  <div class="media-content">
+  <div class="teaser_icon_container media-content">
     {% if current_object.content_url %}<a href="{{ current_object.content_url }}" {% if current_object.new_window %}target="_blank"{% endif%} >{% endif%}
-    <img align="center" src="{% version current_object.image.path 'big' %}"/>
+    <img align="center" class="center-block" src="{% version current_object.image.path 'big' %}"/>
     {% if current_object.content_url %}</a>{% endif%}
   </div>
 {% endif %}
@@ -25,7 +25,7 @@
 
 {% block media_content_download %}
 <div class="action-content download_link">
-    <a target="_blank" href="{{ current_object.media_file }}">{% trans "download file" %}</a>
+    <a target="_blank" class="btn btn-primary" role="button" href="{{ current_object.media_file }}"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>{% trans "download file" %}</a>
 </div>
 {% endblock %}
 

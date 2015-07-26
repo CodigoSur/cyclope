@@ -4,7 +4,7 @@
   {% if content_relations %}
   {% regroup content_relations by other_type as relations %}
   <div class="related_contents">
-    <span class="title">{% trans "Related:" %} </span>
+    <h3 class="title">{% trans "Related:" %} </h3>
     <ul>
     {% for relation in relations %}
       <li class='related_type {{ relation.grouper }}'>
@@ -17,11 +17,7 @@
                         {% if current_object.media_file %}
                             <a target="_blank" href="{{ current_object.media_file }}">({% trans "download file" %})</a>
                         {% endif %}
-                    {% with type=current_object.get_object_name player_video_height='180' player_video_width='240' %}
-                        {% if type == 'soundtrack' or type == 'movieclip' %}
-                            {% include 'medialibrary/media_player.html' %}
-                        {% endif %}
-                    {% endwith %}
+                   
                 </li>
             {% endwith %}
         {% endfor %}

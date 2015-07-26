@@ -1,16 +1,18 @@
 {% load i18n cyclope_utils %}
 {% if current_object.categories.values %}
-<div><span class="categories">
+<div>
+<span class="categories">
 {% comment %}    {% trans "Categories" %}: {% endcomment %}
-    <ul>
-        {% for categorization in current_object.categories.all %}
+     {% for categorization in current_object.categories.all %}
             {% alias categorization.category as 'category' %}
             {% if category.collection.visible %}
-                <li>
-                    <a href="{% url category-default category.slug %}">{{ category.name }}</a>
-                </li>
+
+            <a href="{% url category-default category.slug %}" class="btn btn-default" role="button">
+               
+                    {{ category.name }} <span class="glyphicon glyphicon-tags" aria-hidden="true"></span></a>
+               
             {% endif %}
         {% endfor %}
-    </ul>
+   
 </span></div>
 {% endif %}

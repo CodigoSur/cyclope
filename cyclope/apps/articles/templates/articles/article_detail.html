@@ -15,45 +15,27 @@
   <!-- herramientas -->
   {% include 'cyclope/content_tools_block.html' %}
 
-  <!-- descripcion -->
-  {% if article.summary %}
-  <div class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</div>
-  {% endif %}
-  <!-- /descripcion -->
-
-  {% if article.picture or article.pictures %}
-  <div id="gallery" class="media-content">
-    <ul>
-      {% if article.picture %}
-      <li>
-      <a href="{% version article.picture.image.path 'big' %}"  title="{{ article.picture.name }}">
-        <img src="{% version article.picture.image.path 'big' %}" alt="{{ article.picture.name }}"/>
-        <p>{{ article.picture.name }}</p>
-      </a>
-      </li>
-      {% elif article.pictures %}
-          {% for picture in article.pictures %}
-          <li {% if not forloop.first %} style="display:none;" {% endif %} >
-          <a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
-            <img src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
-            <p>{{ picture.name }}
-              {% if article.pictures|length >= 2 %}
-              ({{ article.pictures|length }} {% trans "pictures" %})
-              {% endif %}
-            </p>
-          </a>
-          </li>
-          {% endfor %}
-      {% endif %}
-    </ul>
-  </div>
-  {% else %}
-  {% endif %}
-
-
   <!-- author -->
   {% include "cyclope/author_block.html" %}
   <!-- /autor -->
+
+  {% if article.get_last_change_date %}
+
+    <span class="date">
+      {% trans "Last modification date" %}: {{ article.get_last_change_date }}
+    </span>
+    {% endif %}
+  
+  <!-- descripcion -->
+  {% if article.summary %}
+  <h3 class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</h3>
+  {% endif %}
+  <!-- /descripcion -->
+
+  
+  {% if article.picture or article.pictures %}
+  {% include 'cyclope/article_pictures.html' %}
+  {% endif %}
 
   <div class="text"><span class="html-text html-content">
     {{ article|parsed_gettext:"text"|smart_style}}
