@@ -55,22 +55,24 @@ layout_templates = {
 
 region_ids = {
     'content': '',
+    'top': '',
     'left': '',
     'right': 'sidebar',
-    'top': '',
     'bottom': '',
 }
 
 region_classes = {
     'content': '',
+    'top':'',
     'left': '',
-    'bottom': '',
     'right': 'col-xs-6 col-sm-3 sidebar-offcanvas',
+    'bottom': '',
 }
 
 content_classes = {
     'content': '',
+    'top':,
     'left': '',
+    'right':
     'bottom': 'col-xs-12 col-sm-12 col-md-6 col-lg-4',
-    'right': '',
 }
