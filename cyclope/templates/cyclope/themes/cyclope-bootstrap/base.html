@@ -105,11 +105,11 @@
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less.min.js"></script>
     {% endif %}
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/menuitems.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/cyclope.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/dropdown.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/carousel.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/npm.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/offcanvas.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
@@ -119,7 +119,7 @@
     {% endif %}
     <!-- /JS --> 
    </head>
-<body>
+<body class="{% block body_class %}{%endblock%}">
     <nav class="navbar navbar-fixed-top navbar-inverse">
         <div class="container">
             <div class="navbar-header">
