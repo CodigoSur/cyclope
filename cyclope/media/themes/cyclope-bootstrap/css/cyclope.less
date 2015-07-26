@@ -3,7 +3,7 @@
  * --------------------------------------------------
  */
 
-@import "../less/bootstrap.less";
+/*@import "../less/bootstrap.less";*/
 
 html,
 body {
@@ -20,14 +20,65 @@ footer {
 
 img.type_icon {display:inline;}
 .jumbotron .title {font-size: 63px;}
-
+.jumbotron img.teaser_icon {float:left;margin:0 10px 0 0;border-radius:50%;}
+.teaser_more {margin:20px 0 0;}
+.jumbotron .teaser_more {margin:30px 0 0;}
+.breadcrumb ol.content_types {background:#ccc;position:absolute;list-style:none;padding:0;margin:0;}
 #block_content {overflow:auto;}
 
 
-#bottom .teaser_icon_container {background:#eee;overflow:auto;margin:10px 0;}
-#bottom .teaser_icon_container:hover {background:#ccc;}
-#bottom img.teaser_icon {border-radius:50%;margin:10px auto;}
+.related_contents ul  {list-style:none !important;padding:0;margin:0;}
 
+.category_add_content span:hover {
+  background-color: #cccccc;
+}
+.category_add_content .content_types {
+  background-color: #ffffff;
+  border: 3px solid #cccccc;
+  color: #000000 !important;
+  display: block;
+  font-size: 12px !important;
+  line-height: normal !important;
+  list-style: none outside none !important;
+  margin: 0 0 0 0 !important;
+  padding: 10px 15px !important;
+  position: absolute;
+  width: 130px;
+  z-index: 2000;
+}
+.category_add_content .content_types li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.category_add_content .content_types li a {
+  background-color: #eeeeee !important;
+  color: #666666 !important;
+  float: left;
+  font-size: 12px !important;
+  font-weight: bold;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.category_add_content .content_types li a:hover {
+  background-color: #999999 !important;
+  color: #ffffff !important;
+}
+.summary img {display:none;}
+.download_link {margin:0 0 10px 0;}
+.download_link .glyphicon {padding:0 5px 0 0;}
+.default .teaser_icon_container {padding:20px 0;}
+.default .teaser_icon_container p {margin:10px 0;}
+.teaser_icon_container {background:#eee;margin:10px 0;}
+.teaser_icon_container:hover {background:#ccc;}
+.movieclip_picture {background:#fff;padding:10px 0;margin:10px 0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;}
+#bottom img.teaser_icon {border-radius:50%;margin:10px auto;}
 
 #bottom .pretitle {display:none;}
 #bottom .breadcrumb,
