@@ -1,0 +1,60 @@
+{% load comments i18n fb_versions cyclope_utils dbgettext_tags %}
+
+{% if article.picture %}
+<div class="teaser_icon_container">
+    <img class="center-block" src="{% version article.picture.image.path 'big' %}" alt="{{ article.picture.name }}"/>
+    <div>
+        <a href="{% version article.picture.image.path 'big' %}"  title="{{ article.picture.name }}">
+            <p>{{ article.picture.name }}</p>
+        </a>
+    </div>
+</div>
+{% endif %}
+{% if article.pictures %}
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for slides / first)-->
+    {% with article.pictures|first as picture %}
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ article.picture.name }}"/>
+            <div class="carousel-caption">
+                <a href="{% version article.picture.image.path 'big' %}"  title="{{ article.picture.name }}">
+                    <p>{{ article.picture.name }}</p>
+                </a>
+            </div>
+        </div>
+        {% endwith %}
+         <!-- Wrapper for slides / others-->
+        {% with article.pictures|slice:"1:" as pics %}
+        {%  for picture in pics %}
+        <div class="item">
+            <img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
+            <div class="carousel-caption">
+                <a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
+                    <p>{{ picture.name }}
+                    {% if article.pictures|length >= 2 %}
+                    ({{ article.pictures|length }} {% trans "pictures" %})
+                    {% endif %}
+                    </p>
+                </a>
+            </div>
+        </div>
+       {% endfor %}
+       {% endwith %}
+    </div>
+     
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div> <!-- Carousel -->
+{% endif %}
