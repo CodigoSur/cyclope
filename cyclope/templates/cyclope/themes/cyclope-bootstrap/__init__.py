@@ -71,8 +71,8 @@ region_classes = {
 
 content_classes = {
     'content': '',
-    'top':,
+    'top':'',
     'left': '',
-    'right':
+    'right':'',
     'bottom': 'col-xs-12 col-sm-12 col-md-6 col-lg-4',
 }
