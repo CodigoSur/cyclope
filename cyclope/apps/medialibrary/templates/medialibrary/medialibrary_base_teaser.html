@@ -1,14 +1,15 @@
 {% load i18n cyclope_utils fb_versions %}
 
 {% block content %}
-<div class="content-view {{ current_object.get_object_name }} teaser {{ current_object.get_object_name }}-teaser {% theme_classes %}">
-<div class="{% joker_classes %}">
+<div class="content-view {{ current_object.get_object_name }} teaser {{ current_object.get_object_name }}-teaser {% inline_content_classes %}">
+
+ 
   <h2 class="title">
 
   <a href="{% if current_object.skip_detail %}{{ current_object.content_url }}{% else %} {{ current_object.get_absolute_url }} {% endif%}" {% if current_object.new_window %}target="_blank"{% endif%}>{{ current_object.name }}</a>
   </h2>
 
-  {% if current_object.image %}
+    {% if current_object.image %}
       <div class="teaser_icon_container media-content">
       <a href="{% if current_object.skip_detail %}{{ current_object.content_url }}{% else %} {{ current_object.get_absolute_url }} {% endif%}" {% if current_object.new_window %}target="_blank"{% endif%}>
         <img class="teaser_icon img-responsive" src="{% version current_object.image.path 'small' %}" border="0"/>
@@ -20,15 +21,15 @@
   <div class="html-content summary">{{ current_object.description|smart_style }}
    {% block player %}
   {% endblock %}
-       <p class="teaser_more">{% if not current_object.skip_detail %}<a class="btn btn-primary" href="{{ current_object.get_absolute_url  }}" role="button">{% trans "More" %}</a> {% endif %}
-       {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
-       <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/{{ current_object.get_object_name }}.png" alt="icon" /></p>
-      </div>
-  {% endif %}
-  
+   </div>
+   {% endif %}
+ 
   {% include "cyclope/author_block.html" with author=current_object.author %}
-
+   <p class="teaser_more center-block">
+   <a class="btn btn-primary" href="{{ current_object.get_absolute_url  }}" role="button">{% trans "More" %}</a>
+   {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
+   <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/{{ current_object.get_object_name }}.png" alt="icon" />
+   </p>
   <div class="clear"></div>
-</div>
 </div>
 {% endblock content%}

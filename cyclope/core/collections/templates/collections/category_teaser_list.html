@@ -9,15 +9,16 @@ The included template may be something different from a teaser
 
 {% block category_content %}
   {% for categorization in categorizations %}
-    {% spaceless %}
-    {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name ".html" as template_path %}
-    {% comment %}
-    The alias to the model name and 'media' are deprecated and remains only for backwards compatibility
-    {% endcomment %}
-    {% alias categorization.content_object as categorization.content_type.model %}
-    {% alias categorization.content_object as 'media' %}
-    {% endspaceless %}
-    
-    {% include template_path with current_object=categorization.content_object host_template="cyclope/inline_view.html" %}
+    <div class="{% teaser_layout_classes %}">
+        {% spaceless %}
+        {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name ".html" as template_path %}
+        {% comment %}
+        The alias to the model name and 'media' are deprecated and remains only for backwards compatibility
+        {% endcomment %}
+        {% alias categorization.content_object as categorization.content_type.model %}
+        {% alias categorization.content_object as 'media' %}
+        {% endspaceless %}
+        {% include template_path with current_object=categorization.content_object host_template="cyclope/inline_view.html" %}
+    </div>
   {% endfor %}
 {% endblock %}

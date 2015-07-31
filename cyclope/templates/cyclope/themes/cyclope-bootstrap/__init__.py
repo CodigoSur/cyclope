@@ -52,27 +52,38 @@ layout_templates = {
          },
 }
 
-
-region_ids = {
+region_layout_ids = {
     'content': '',
     'top': '',
     'left': '',
-    'right': 'sidebar',
+    'right': '',
     'bottom': '',
 }
 
-region_classes = {
+region_layout_classes = {
     'content': '',
+    'header':'',
     'top':'',
     'left': '',
-    'right': 'col-xs-6 col-sm-3 sidebar-offcanvas',
+    'right': '',
     'bottom': '',
+    'extra_bottom': '',
 }
 
-content_classes = {
+teaser_layout_classes = {
     'content': '',
     'top':'',
     'left': '',
     'right':'',
-    'bottom': 'col-xs-12 col-sm-12 col-md-6 col-lg-4',
+    'bottom': 'col-xs-12 col-sm-12 col-md-4 col-lg-4',
+}
+
+inline_content_classes = {
+    'content': '',
+    'header':'',
+    'top':'',
+    'left': '',
+    'right': '',
+    'bottom': '',
+    'extra_bottom': '',
 }

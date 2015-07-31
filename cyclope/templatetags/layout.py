@@ -55,22 +55,23 @@ def region(context, region_name):
     """
 
     theme = get_theme(SiteSettings.objects.get().theme)
-    id_ = ""
-    if hasattr(theme, "region_ids"):
-        # if region_ids are defined return them otherwise return empty
-        id_ = theme.region_ids.get(region_name, "")
-    
-    regionclasses = ""
-    if hasattr(theme, "region_classes"):
-        # if content_classes are defined return them otherwise return empty
-        regionclasses = theme.region_classes.get(region_name, "")
 
+    region_ids = ""
+    if hasattr(theme, "region_layout_ids"):
+        # if region_ids are defined return them otherwise return empty
+        region_ids = theme.region_layout_ids.get(region_name, "")
+    
+    region_classes = ""
+    if hasattr(theme, "region_layout_classes"):
+        # if content_classes are defined return them otherwise return empty
+        region_classes = theme.region_layout_classes.get(region_name, "")
+        
     # if we have a layout in the context use that one, otherwise guess it from the request
     layout = context.get('layout', layout_for_request(context['request']))
     region_vars = {'layout_name': layout.slug,
                    'region_name': region_name,
-                   'region_theme_id': id_,
-                   'region_classes': regionclasses}
+                   'region_layout_ids': region_ids,
+                   'region_layout_classes': region_classes}
 
     regionviews = layout.regionview_set.filter(
         region=region_name).order_by('weight')

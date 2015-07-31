@@ -290,7 +290,8 @@ def unordered_list_css(value, autoescape=None):
 
 from cyclope.themes import get_theme
 
-class ThemeClasses(template.Node):
+
+class TeaserLayoutClasses(template.Node):
     """
     Return the class names to be added for the selected theme
     according to the region name or lack of (meaning main content).
@@ -301,17 +302,17 @@ class ThemeClasses(template.Node):
         region = context["region_name"]
         if region == None:
             region = "content"
-        classes = ""
-        if hasattr(theme, "content_classes"):
+        teaser_classes = ""
+        if hasattr(theme, "teaser_layout_classes"):
             # if content_classes are defined return them otherwise return empty
-            classes = theme.content_classes.get(region, "")
-        return classes
+            teaser_classes = theme.teaser_layout_classes.get(region, "")
+        return teaser_classes
 
-@register.tag('theme_classes')
+@register.tag('teaser_layout_classes')
 def do_append_to_get(parser, token):
-    return ThemeClasses()
-
-class JokerClasses(template.Node):
+    return TeaserLayoutClasses()
+    
+class InlineContentClasses(template.Node):
     """
     Return the class names to be added for the selected theme
     according to the region name or lack of (meaning main content).
@@ -322,12 +323,12 @@ class JokerClasses(template.Node):
         region = context["region_name"]
         if region == None:
             region = "content"
-        classes = ""
-        if hasattr(theme, "joker_classes"):
+        content_classes = ""
+        if hasattr(theme, "inline_content_classes"):
             # if content_classes are defined return them otherwise return empty
-            classes = theme.joker_classes.get(region, "")
-        return classes
+            content_classes = theme.inline_content_classes.get(region, "")
+        return content_classes
 
-@register.tag('joker_classes')
+@register.tag('inline_content_classes')
 def do_append_to_get(parser, token):
-    return JokerClasses()
+    return InlineContentClasses()
