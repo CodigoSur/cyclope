@@ -1,23 +1,39 @@
 {% load i18n cyclope_utils %}
 
    {% if page.paginator.num_pages != 1 %}
-    <div class="paginator">
-        <span class="step-links">
+   <nav>
+        <ul class="pagination">
             {% if page.has_previous %}
                 {# query is present when this block is included in the search view #}
-                <a href="?{% append_to_get page=1 %}">{% trans 'first' %}</a>&nbsp
-                <a href="?{% append_to_get page=page.previous_page_number %}">{% trans 'previous' %}</a>
+                 <li>
+                  <a href="?{% append_to_get page=1 %}" aria-label="First">
+                    <span aria-hidden="true">&laquo; {% trans 'first' %}</span>
+                  </a>
+                </li>
+                 <li>
+                  <a href="?{% append_to_get page=page.previous_page_number %}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo; {% trans 'previous' %}</span>
+                  </a>
+                </li>
             {% endif %}
 
-            <span class="current">
-               {% trans 'Page' %} {{ page.number }} {% trans 'of' %} {{ page.paginator.num_pages }}
-            </span>
+            <li class="active">
+               <span >{% trans 'Page' %} {{ page.number }} {% trans 'of' %} {{ page.paginator.num_pages }}</span>
+            </li>
+
 
             {% if page.has_next %}
-                <a href="?{% append_to_get page=page.next_page_number %}">{% trans 'next' %}</a>&nbsp
-                <a href="?{% append_to_get page=page.paginator.num_pages %}">{% trans 'last' %}</a>
+              <li>
+                  <a href="?{% append_to_get page=page.next_page_number %}" aria-label="Next">
+                    <span aria-hidden="true">{% trans 'next' %} &raquo;</span>
+                  </a>
+              </li>
+              <li>
+                  <a href="?{% append_to_get page=page.paginator.num_pages %}" aria-label="Last">
+                    <span aria-hidden="true">{% trans 'last' %} &raquo;</span>
+                  </a>
+              </li>
             {% endif %}
-        </span>
-    </div>
+        </ul>
+    </nav>
    {% endif %}
-
