@@ -1,0 +1,51 @@
+{% extends host_template %}
+
+{% load i18n cyclope_utils fb_versions %}
+
+{# Bootstrap carousel docs: http://getbootstrap.com/javascript/#carousel #}
+
+{% block extra_head %}
+{% endblock %}
+
+{% block content %}
+<div id="carousel-{% if region_name %}-{{region_name}}{% endif %}-{{category_slug}}" class="carousel slide" {% if view_options.auto_play %}data-ride="carousel"{% endif %}>
+
+  {% with categorizations|first as first_categorization %}
+    {% alias first_categorization.content_object as 'first_content' %}
+    <div class="carousel-inner" role="listbox">
+    {% for categorization in categorizations %}
+      {% spaceless %}
+      {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name ".html" as template_path %}
+
+      {% comment %}
+        we alias the actual object with the model name so the included template
+        is reusable and can access the content object using an explicit name
+        we also alias as 'media' because some medialibrary templates expect this name
+      {% endcomment %}
+      {% alias categorization.content_object as categorization.content_type.model %}
+      {% alias categorization.content_object as 'media' %}
+      {% endspaceless %}
+          {% include template_path with current_object=categorization.content_object %}
+    {% endfor %}
+    </div>
+
+    <ol class="carousel-indicators">
+    {% for categorization in categorizations %}
+      {% alias categorization.content_object as 'media' %}
+      <li data-target="#carousel-{% if region_name %}-{{region_name}}{% endif %}-{{category_slug}}" data-slide-to="{{ forloop.counter0 }}" class="{% ifequal first_content media %}active{% endifequal %}"></li>
+    {% endfor %}
+    </ol>
+
+  {% endwith%}
+
+  <a class="left carousel-control" href="#carousel-{% if region_name %}-{{region_name}}{% endif %}-{{category_slug}}" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">{% trans "Previous" %}</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-{% if region_name %}-{{region_name}}{% endif %}-{{category_slug}}" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">{% trans "Next" %}</span>
+  </a>
+
+</div>
+{% endblock %}

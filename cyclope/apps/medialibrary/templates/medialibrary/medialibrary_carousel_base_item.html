@@ -1,0 +1,30 @@
+{% load i18n fb_versions cyclope_utils dbgettext_tags %}
+<div class="item {% ifequal first_content current_object %}active{% endifequal %}  {{ current_object.get_object_name }} media content-view">
+  <a href="{% if current_object.skip_detail %}{{ current_object.content_url }}{% else %} {{ current_object.get_absolute_url }}{% endif%}" {% if current_object.new_window %}target="_blank"{% endif%}>
+
+    {% if view_options.show_image %}
+      <a href="{% if current_object.skip_detail %}{{ current_object.content_url }}{% else %} {{ current_object.get_absolute_url }}{% endif %}" {% if current_object.new_window %}target="_blank"{% endif%}>
+        {% if current_object.image %}
+        <img src="{% version current_object.image.path view_options.visualization_mode %}" alt="{{ current_object.name }}" /></a>
+        {% else %}
+        <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt=""/>
+        {% endif %}
+      </a>
+    {% endif %}
+  <div class="carousel-caption">
+    {% if view_options.show_title %}
+    <h3>
+      <a href="{% if current_object.skip_detail %}{{ current_object.content_url }}{% else %}{{ current_object.get_absolute_url }}{% endif%}" {% if current_object.new_window %}target="_blank"{% endif%}>
+        {{ current_object.name }}
+      </a>
+    </h3>
+    {% endif %}
+    {% block description %}
+      {% if view_options.show_description and current_object.description %}
+      <p>
+        {{ current_object.description|smart_style }}
+      </p>
+      {% endif %}
+    {% endblock description %}
+  </div>
+</div>

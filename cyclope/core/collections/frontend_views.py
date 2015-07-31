@@ -299,6 +299,17 @@ class CategorySlideshow(frontend.FrontendView):
 frontend.site.register_view(Category, CategorySlideshow)
 
 
+class CategoryCarousel(CategorySlideshow):
+    """A carousel view of Category members for Bootstrap based themes.
+    """
+    name='carousel'
+    verbose_name=_('carousel view of Category members for Bootstrap based themes.')
+    inline_view_name = 'carousel_item'
+    template = "collections/category_carousel.html"
+
+frontend.site.register_view(Category, CategoryCarousel)
+
+
 class CategoryContents(CategoryTeaserList):
     """Full content of Category members.
     """
