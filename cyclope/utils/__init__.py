@@ -347,7 +347,10 @@ class ThumbnailMixin(object):
 class CrispyFormsSimpleMixin(object):
     helper = FormHelper()
     helper.add_input(Submit('submit', _('Submit')))
-
+    helper.form_class = ''
+    helper.label_class = ''
+    helper.field_class = ''
+    
 
 from django.conf import settings
 from django.core.mail.message import EmailMultiAlternatives
