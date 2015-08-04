@@ -43,6 +43,40 @@
 
 <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
+
+{% with author=current_object.get_author_or_user %}
+{% with author_url=author.get_absolute_url %}
+{% if author %}
+    <a name="author"></a> 
+    <div class="author-container meta-content media alert alert-info" role="alert">
+        <div class="author-container-data">
+            {% if author.image %}
+            <div class="media-left">
+                <a href="#">
+                    <img class="author img-circle" src="{{ author.image }}" border="0" title="Author"/>
+                </a>
+            </div>
+                
+            {% endif %}
+            <div class="author-container-data-text media-body">
+                <h4  class="author">
+                    {% if author_url %}<a href='{{ author_url }}'>{% endif %}
+                    {{ author }}
+                    {% if author_url %}</a>{% endif %}
+                    {% if author.origin %}
+                    <small>{{ author.origin }}</small>
+                    {% endif %}
+                </h4>
+                <div class="author-notes">{{ author.notes|smart_style }}</div> 
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% endwith %}
+{% endwith %}
+
+
 {% include 'cyclope/related_contents_block.html' %}
 
 {% include 'ratings/rating_block.html' %}
