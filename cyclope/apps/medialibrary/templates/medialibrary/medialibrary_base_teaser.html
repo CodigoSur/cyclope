@@ -23,8 +23,8 @@
   {% endblock %}
    </div>
    {% endif %}
- 
-  {% include "cyclope/author_block.html" with author=current_object.author %}
+  
+  {% include "cyclope/author_block_teaser.html" with author=current_object.author %}
    <p class="teaser_more center-block">
    <a class="btn btn-primary" href="{{ current_object.get_absolute_url  }}" role="button">{% trans "More" %}</a>
    {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
