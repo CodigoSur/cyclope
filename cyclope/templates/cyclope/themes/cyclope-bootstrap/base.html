@@ -34,6 +34,7 @@
     <!-- Bootstrap Core CSS -->
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
     <!-- Custom Fonts -->
@@ -109,6 +110,8 @@
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/dropdown.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.bootstrap.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/carousel.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/npm.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/offcanvas.js"></script>
@@ -129,7 +132,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a>
+               
+                    <a class="navbar-brand" href="#">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a>
+                
             </div>
             <!-- header -->  {% region 'header' %} <!-- /header -->	
         </div><!-- /.container -->
