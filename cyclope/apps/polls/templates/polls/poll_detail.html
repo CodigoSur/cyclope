@@ -15,6 +15,10 @@
   <!-- herramientas -->
   {% include 'cyclope/content_tools_block.html' %}
 
+  <h3 class="summary">
+    {{ poll.description}}
+  </h3>
+  
     <div class="poll_results">
       {% for question in poll.question_set.all %}
         <p>{{ question.text }}</p>
