@@ -53,7 +53,7 @@
             {% if author.image %}
             <div class="media-left">
                 <a href="#">
-                    <img class="author img-circle" src="{{ author.image }}" border="0" title="Author"/>
+                    <img class="author img-circle" src="{% version author.image.path 'cropped' %}" border="0" title="Author"/>
                 </a>
             </div>
                 
