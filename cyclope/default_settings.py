@@ -209,7 +209,7 @@ FILEBROWSER_VERSIONS = {
     'big': {'verbose_name': ugettext('Big (620px width)'),
             'width': 620, 'height': '', 'opts': ''},
     'cropped': {'verbose_name': ugettext('Cropped (60x60px)'),
-                'width': 60, 'height': 60, 'opts': 'crop'},
+                'width': 64, 'height': 64, 'opts': 'crop'},
     'croppedthumbnail': {'verbose_name': ugettext('Cropped Thumbnail (140x140px)'),
                          'width': 140, 'height': 140, 'opts': 'crop'},
     'slideshow': {'verbose_name': ugettext('Slideshow (300x300px)'),

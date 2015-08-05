@@ -4,31 +4,38 @@
 
 {% block content %}
 
-      <div class="authors_category_title">{% trans "List of Authors" %}</div>
-
+<h1 class="title authors_title">{% trans "Authors" %}</h1>
 {% for author in author_list %}
-
 {% with current_object=author %}
-  <div class="content-view authors authors-teaser">
-      
-      <h1 class="title"><a href="{{ current_object.get_absolute_url }}">{{ current_object.name }}</a></h1>
-  {% if current_object.image %}
-      <div class="media-content">
-        <img src="{% version current_object.image.path 'croppedthumbnail' %}" />
-      </div>
-      {% endif %}
+<div class="content-view authors authors-teaser media">
+    {% if current_object.image %}
+        <div class="media-left">
+            <a href="#">
+                <img src="{% version current_object.image.path 'cropped' %}" class="img-circle"/>
+            </a>
+        </div>
+        {% else %}
+        <div class="media-left">
+            <a href="#">
+                <img src="/media/cyclope/images/img-author-not-available.png" class="img-circle"/>
+            </a>
+        </div>
+    {% endif %}
 
-      {% if current_object.notes %}
-      <div class="notes"><a href="{{ current_object.get_absolute_url }}">{{ current_object.notes|smart_style }}</a></div>
-      {% endif %}
-      
-  {% if current_object.origin %}
-      <div class="origin">{{ current_object.origin }}</div>
-      {% endif %}
-      
-      <div class="link"><a href="{{ current_object.get_absolute_url }}">{% trans "View contents" %}</a></div>
-
-  </div>
+    <div class="media-body">
+        <h3 class="media-heading">
+            <a href="{{ current_object.get_absolute_url }}">{{ current_object.name }}</a>
+            {% if current_object.origin %}
+            <small>{{ current_object.origin }}</small>
+            {% endif %}
+        </h3>
+        {% if current_object.notes %}
+        <div class="notes">{{ current_object.notes|smart_style }}</div>
+        {% endif %}
+        <div class="btn btn-default btn-sm"><a href="{{ current_object.get_absolute_url }}">{% trans "View contents" %}</a></div>
+    </div>
+    <hr>
+</div>
 
 {% endwith %}
 

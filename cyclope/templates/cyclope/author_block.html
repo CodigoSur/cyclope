@@ -4,7 +4,9 @@
 {% with author_url=author.get_absolute_url %}
 {% if author %}
 <div class="author-container meta-content">
-  <h4  class="author">{% if author_url %}<a href='{{ author_url }}'>{% endif %}{% trans "By" %} {{ author }}{% if author_url %}</a>{% endif %}</h4>
+  <h4  class="author">
+   <a href="#author">{% trans "By" %} {{ author }}</a>
+   </h4>
 </div>
 {% endif %}
 {% endwith %}

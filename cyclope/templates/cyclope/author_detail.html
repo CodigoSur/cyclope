@@ -3,25 +3,32 @@
 {% load i18n fb_versions cyclope_utils dbgettext_tags %}
 
 {% block content %}
-<div class="content-view authors detail authors-detail">
-  <h1 class="title">{{ current_object.name }}</h1>
 
-  {% if current_object.image %}
-  <div class="media-content">
-    <img src="{% version current_object.image.path 'croppedthumbnail' %}" />
-  </div>
-  {% endif %}
+<div class="well content-view authors detail authors-detail">
+        <center>
+      
+         {% if current_object.image %}
+          <div class="media-content">
+            <img src="{% version current_object.image.path 'small' %}" name="aboutme" class="img-circle"/>
+          </div>
+          {% endif %}
+           
 
-  {% if current_object.origin %}
-  <div class="origin">{{ current_object.origin }}</div>
-  {% endif %}
+        <h2>{{ current_object.name }}</h2>
+       
 
   {% if current_object.notes %}
   <div class="notes">{{ current_object.notes|smart_style }}</div>
   {% endif %}
+     {% if current_object.origin %}
+  <div class="origin">{{ current_object.origin }}</div>
+  {% endif %}
 
-</div>
-
-  {% include "cyclope/authored_content_block.html" %}
+		</center>
+        
+    </div>
+  
+{% include "cyclope/authored_content_block.html" %}
+    
 
 {% endblock content%}

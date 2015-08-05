@@ -1,10 +1,6 @@
 {% load cyclope_utils  %}
   {% if page %}
-    {% if view_options.sort_by == "ALPHABETIC" %}
-      {% include 'cyclope/alphabetical_pagination_block.html' %}
-    {% else %}
-      {% include 'cyclope/pagination_block.html' %}
-    {% endif %}
+    
 
     <div class='authored-content'>
     {% for content in page.object_list %}
@@ -17,4 +13,10 @@
       {% include template_path with current_object=content host_template="cyclope/inline_view.html"%}
     {% endfor %}
     </div>
+
+    {% if view_options.sort_by == "ALPHABETIC" %}
+      {% include 'cyclope/alphabetical_pagination_block.html' %}
+    {% else %}
+      {% include 'cyclope/pagination_block.html' %}
+    {% endif %}
   {% endif %}
