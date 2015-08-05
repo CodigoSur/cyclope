@@ -56,16 +56,16 @@ region_layout_ids = {
     'content': '',
     'top': '',
     'left': '',
-    'right': '',
+    'right': 'sidebar',
     'bottom': '',
 }
 
 region_layout_classes = {
-    'content': '',
+    'content': 'jumbotron',
     'header':'',
     'top':'',
     'left': '',
-    'right': '',
+    'right': 'col-xs-4 col-sm-3 col-md-3 col-lg-3',
     'bottom': '',
     'extra_bottom': '',
 }
