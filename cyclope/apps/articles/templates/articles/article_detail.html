@@ -63,9 +63,9 @@
 						</div>
 						<div class="modal-body">
 							{% if picture %}
-								<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
+								<img class="img-responsive" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
 							{% elif pictures %}
-								<img class="center-block" src="{% version pictures.image.path 'big' %}" alt="{{ pictures.name }}"/>
+								<img class="img-responsive" src="{% version pictures.image.path 'big' %}" alt="{{ pictures.name }}"/>
 							{% endif %}
 						</div>
 						<div class="modal-footer">
@@ -107,7 +107,7 @@
 									<h4 class="modal-title" id="myModalLabel">{{ picture.name }}</h4>
 							  </div>
 							  <div class="modal-body">
-									<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
+									<img class="img-responsive" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
 							  </div>
 							  <div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
