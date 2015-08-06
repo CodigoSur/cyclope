@@ -31,11 +31,102 @@
   <h3 class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</h3>
   {% endif %}
   <!-- /descripcion -->
-
   
-  {% if article.picture or article.pictures %}
-  {% include 'articles/article_pictures.html' %}
-  {% endif %}
+	<!-- picture -->
+	<!-- case with image for new widget o for related contents only with one picture -->
+	{% if article.picture or article.pictures|length == 1 %}
+		{% with article.picture as picture and article.pictures|first as pictures %}
+		<div class="teaser_icon_container">
+    	<div class="teaser_icon_container">
+				<div class="modals-picture" data-toggle="modal" data-target="#myModal">
+					{% if picture %}
+						<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
+					{% elif pictures %}
+						<img class="center-block" src="{% version pictures.image.path 'big' %}" alt="{{ pictures.name }}"/>
+					{% endif %}			
+					<div class="picture-link">
+						<a href="{% version article.picture.image.path 'big' %}"  title="{{ article.picture.name }}">
+							<p>{% if picture %}{{ picture.name }}{% elif pictures %}{{ pictures.name }}{% endif %}</p>
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">
+								{% if picture %}{{ picture.name }}{% elif pictures %}{{ pictures.name }}{% endif %}
+							</h4>
+						</div>
+						<div class="modal-body">
+							{% if picture %}
+								<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
+							{% elif pictures %}
+								<img class="center-block" src="{% version pictures.image.path 'big' %}" alt="{{ pictures.name }}"/>
+							{% endif %}
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+						</div>
+					</div>
+				</div>
+			</div><!-- / Modal -->
+		</div> <!-- / Teaser Icon Container --> 
+		{% endwith %}
+	<!-- case with various pictures in related contents -->	
+	{% elif article.pictures >= 2 %}
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				{% for picture in article.pictures %}
+					<li data-target="#carousel-example-generic" data-slide-to="{{forloop.counter0}}" {% if forloop.first %}class="active"{% endif %}></li>
+				{% endfor %}
+			</ol>
+			<div class="carousel-inner" role="listbox">
+				<!-- Wrapper for slides -->
+				{%  for picture in article.pictures %}
+					<div class="item {% if forloop.first %}active{% endif %}">
+						<!-- Div trigger modal -->
+						<div class="modals-picture" data-toggle="modal" data-target="#myModal{{forloop.counter}}">
+							<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
+							<div class="carousel-caption">
+								<a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
+									<p>{{ picture.name }}</p>
+								</a>
+							</div>
+						</div>
+					</div>
+					<!-- Modal -->
+					<div class="modal fade" id="myModal{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">{{ picture.name }}</h4>
+							  </div>
+							  <div class="modal-body">
+									<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
+							  </div>
+							  <div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+							  </div>
+							</div>
+						</div>
+					</div><!-- / Modal -->
+				{% endfor %}
+				</div> <!-- / Listbox -->
+			<!-- Controls -->
+			<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+			</a>
+			<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</a>
+		</div> <!-- Carousel -->   
+	{% endif %}
+	<!-- /picture -->
 
   <div class="text"><span class="html-text html-content">
     {{ article|parsed_gettext:"text"|smart_style}}
