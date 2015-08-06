@@ -32,10 +32,19 @@ img.type_icon {display:inline;}
 .carousel-control.right, .carousel-control.left {background:none;}
 .carousel-inner {margin:0;}
 .carousel-caption {bottom:0;padding:0;left:0;right:0;background:#000;color:#fff;filter: alpha(opacity=50);opacity: .7;}
+.default .carousel-caption {background:transparent;color:#000;}
 .carousel-caption h2 a {color:#fff;padding:0 10px;}
 .carousel-caption p {padding:0 10px 5px;margin:0;width:100%;font-size:15px;}
 .carousel-inner > .item {background:#fff;}
-.carousel-indicators {background-color: #000;display: block;position:relative;top:5px;}
+.default .carousel-inner > .item {background:#eee;padding:20px 0;}
+.carousel-indicators {display: block;position:relative;top:5px;}
+.carousel-indicators li {background-color: #ccc;}
+.carousel-indicators .active {
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  background-color: #999;
+}
 .jumbotron .carousel-control {width:0;}
 .default .title {border-bottom:1px solid #999;padding:0 0 10px;}
 #map ul {margin:0;padding:0;list-style:none;}
@@ -98,7 +107,7 @@ ul.media-list ul {margin-left:64px;}
 .download_link {margin:0 0 10px 0;}
 .download_link .glyphicon {padding:0 5px 0 0;}
 .default .teaser_icon_container {padding:20px 0;}
-.default .teaser_icon_container p {margin:10px 0;}
+.default .teaser_icon_container p {margin:10px auto;text-align:center;}
 .detail .teaser_icon_container {background:#eee;margin:10px 0;}
 .teaser_icon_container:hover {background:#ccc;}
 .movieclip_picture {background:#fff;padding:10px 0;margin:10px 0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;}
