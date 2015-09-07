@@ -332,17 +332,3 @@ class InlineContentClasses(template.Node):
 @register.tag('inline_content_classes')
 def do_append_to_get(parser, token):
     return InlineContentClasses()
-
-class ThemeSettings(template.Node):
-    """
-    Return the type of theme and other settings of theme. 
-    """
-    def render(self, context):
-        theme = get_theme(context["CYCLOPE_CURRENT_THEME"])
-        theme_type = theme.settings_theme.get('type', "")
-        #theme_version = theme.settings_theme.get('version', "") Fix with array function
-        return theme_type
-
-@register.tag('settings_theme')
-def do_append_to_get(parser, token):
-    return ThemeSettings()
