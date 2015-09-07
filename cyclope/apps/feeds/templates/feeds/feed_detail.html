@@ -15,20 +15,21 @@
 
   <!-- descripcion -->
   {% if feed.summary %}
-  <div class="summary">{{ feed.summary|smart_style }}</div>
+  <h3 class="summary">{{ feed.summary|smart_style }}</h3>
   {% endif%}
   <!-- /descripcion -->
 
   {% for entry in entries %}
-  <div class="text html-text html-content">
+  <div class="text html-text html-content feed_teaser">
       <h2><a href="{{ entry.link }}">{{ entry.title }}</a></h2>
       {% if not view_options.titles_only %}
         {% if entry.summary_detail.type == 'text/html' %}
-          {{ entry.summary_detail.value|safe }}
+         <div class="summary"> <p>{{ entry.summary_detail.value|safe }}</p></div>
         {% else %}
-          {{ entry.summary_detail.value }}
+          <div class="summary"> <p>{{ entry.summary_detail.value }}</p></div>
         {% endif %}
       {% endif %}
+    <a class="btn btn-primary" href="{{ entry.link }}">{% trans "More" %}</a>
   </div>
   {% endfor %}
 
