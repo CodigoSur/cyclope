@@ -1,2 +1,2 @@
-<a href="{% if menu_item.custom_url %}{{menu_item.url}}{% else %}/{{CYCLOPE_PREFIX}}{{menu_item.url}}{% endif %}"
-{% if has_children == "has_children" %} class=" dropdown-toggle" data-toggle="dropdown" role="button"{% endif %}>{{ menu_item.name }}{% if has_children == "has_children" %}<span class="caret"></span>{% endif %}</a>
+	<a href="{% if menu_item.custom_url %}{{menu_item.url}}{% else %}/{{CYCLOPE_PREFIX}}{{menu_item.url}}{% endif %}"
+	{% if has_children == "has_children" %} class=" dropdown-toggle" data-toggle="dropdown" role="button"{% endif %}>{{ menu_item.name }}{% if has_children == "has_children" %}<span class="caret"></span>{% endif %}</a>

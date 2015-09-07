@@ -22,21 +22,32 @@ $(function() {
 </script>
 {% endblock %}
 
+
+
 {% block content %}
 <div class="content-view site search-box">
-  <form action="/search/" method="get" class="navbar-form" role="search">
-   
-	<div  class="input-group">
-		{% for model in CYCLOPE_BASE_CONTENT_TYPES %}
+	{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+		<form action="/search/" method="get" class="navbar-form" role="search">
+		<div  class="input-group">
+			{% for model in CYCLOPE_BASE_CONTENT_TYPES %}
+				<input type="hidden" name="models" value="{{model.get_app_label}}.{{model.get_object_name}}" />
+			{% endfor %}
+				<input type="text" value="{% trans "Site wide search" %}" title="{% trans "Site wide search" %}" name="q" class="form-control cleardefault"/>
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-default">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+		</div>
+		</form>
+	{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+		<form action="/search/" method="get">
+			{% for model in CYCLOPE_BASE_CONTENT_TYPES %}
 			<input type="hidden" name="models" value="{{model.get_app_label}}.{{model.get_object_name}}" />
-		{% endfor %}
-			<input type="text" value="{% trans "Site wide search" %}" title="{% trans "Site wide search" %}" name="q" class="form-control cleardefault"/>
-				<span class="input-group-btn">
-					<button type="submit" class="btn btn-default">
-						<span class="glyphicon glyphicon-search"></span>
-					</button>
-				</span>
-	</div>
-  </form>
+			{% endfor %}
+			<input type="text" value="{% trans "Site wide search" %}" title="{% trans "Site wide search" %}" name="q" class="cleardefault"/>
+			<input type="submit" value=" " class="submit"/>
+		</form>
+	{% endif %}
 </div>
 {% endblock %}

@@ -28,107 +28,144 @@
   
   <!-- descripcion -->
   {% if article.summary %}
-  <h3 class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</h3>
+		{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+			<h3 class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</h3>
+		{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+			<div class="summary">{{ article|parsed_gettext:"summary"|smart_style }}</div>
+		{% endif %}
   {% endif %}
   <!-- /descripcion -->
-  
-	<!-- picture -->
-	<!-- case with image for new widget o for related contents only with one picture -->
-	{% if article.picture or article.pictures|length == 1 %}
-		{% with article.picture as picture and article.pictures|first as pictures %}
-		<div class="teaser_icon_container">
-    	<div class="teaser_icon_container">
-				<div class="modals-picture" data-toggle="modal" data-target="#myModal">
-					{% if picture %}
-						<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
-					{% elif pictures %}
-						<img class="center-block" src="{% version pictures.image.path 'big' %}" alt="{{ pictures.name }}"/>
-					{% endif %}			
-					<div class="picture-link">
-						<a href="{% version article.picture.image.path 'big' %}"  title="{{ article.picture.name }}">
-							<p>{% if picture %}{{ picture.name }}{% elif pictures %}{{ pictures.name }}{% endif %}</p>
+ 
+  {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+		<!-- picture bootstrap -->
+		<!-- case with image for new widget o for related contents only with one picture -->
+		{% if article.picture or article.pictures|length == 1 %}
+			{% with article.picture as picture and article.pictures|first as pictures %}
+			<div class="teaser_icon_container">
+				<div class="teaser_icon_container">
+					<div class="modals-picture" data-toggle="modal" data-target="#myModal">
+						{% if picture %}
+							<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
+						{% elif pictures %}
+							<img class="center-block" src="{% version pictures.image.path 'big' %}" alt="{{ pictures.name }}"/>
+						{% endif %}			
+						<div class="picture-link">
+							<a href="{% version article.picture.image.path 'big' %}"  title="{{ article.picture.name }}">
+								<p>{% if picture %}{{ picture.name }}{% elif pictures %}{{ pictures.name }}{% endif %}</p>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">
+									{% if picture %}{{ picture.name }}{% elif pictures %}{{ pictures.name }}{% endif %}
+								</h4>
+							</div>
+							<div class="modal-body">
+								{% if picture %}
+									<img class="img-responsive" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
+								{% elif pictures %}
+									<img class="img-responsive" src="{% version pictures.image.path 'big' %}" alt="{{ pictures.name }}"/>
+								{% endif %}
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+							</div>
+						</div>
+					</div>
+				</div><!-- / Modal -->
+			</div> <!-- / Teaser Icon Container --> 
+			{% endwith %}
+		<!-- case with various pictures in related contents -->	
+		{% elif article.pictures >= 2 %}
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				<ol class="carousel-indicators">
+					{% for picture in article.pictures %}
+						<li data-target="#carousel-example-generic" data-slide-to="{{forloop.counter0}}" {% if forloop.first %}class="active"{% endif %}></li>
+					{% endfor %}
+				</ol>
+				<div class="carousel-inner" role="listbox">
+					<!-- Wrapper for slides -->
+					{%  for picture in article.pictures %}
+						<div class="item {% if forloop.first %}active{% endif %}">
+							<!-- Div trigger modal -->
+							<div class="modals-picture" data-toggle="modal" data-target="#myModal{{forloop.counter}}">
+								<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
+								<div class="carousel-caption">
+									<a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
+										<p>{{ picture.name }}</p>
+									</a>
+								</div>
+							</div>
+						</div>
+						<!-- Modal -->
+						<div class="modal fade" id="myModal{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">{{ picture.name }}</h4>
+									</div>
+									<div class="modal-body">
+										<img class="img-responsive" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+									</div>
+								</div>
+							</div>
+						</div><!-- / Modal -->
+					{% endfor %}
+					</div> <!-- / Listbox -->
+				<!-- Controls -->
+				<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</a>
+			</div> <!-- Carousel -->   
+		{% endif %}
+		<!-- /picture bootstrap -->
+	{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+		<!-- picture classic -->
+		{% if article.picture or article.pictures %}
+		<div id="gallery" class="media-content">
+			<ul>
+				{% if article.picture %}
+				<li>
+				<a href="{% version article.picture.image.path 'big' %}"  title="{{ article.picture.name }}">
+					<img src="{% version article.picture.image.path 'big' %}" alt="{{ article.picture.name }}"/>
+					<p>{{ article.picture.name }}</p>
+				</a>
+				</li>
+				{% elif article.pictures %}
+						{% for picture in article.pictures %}
+						<li {% if not forloop.first %} style="display:none;" {% endif %} >
+						<a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
+							<img src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
+							<p>{{ picture.name }}
+								{% if article.pictures|length >= 2 %}
+								({{ article.pictures|length }} {% trans "pictures" %})
+								{% endif %}
+							</p>
 						</a>
-					</div>
-				</div>
-			</div>
-			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel">
-								{% if picture %}{{ picture.name }}{% elif pictures %}{{ pictures.name }}{% endif %}
-							</h4>
-						</div>
-						<div class="modal-body">
-							{% if picture %}
-								<img class="img-responsive" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
-							{% elif pictures %}
-								<img class="img-responsive" src="{% version pictures.image.path 'big' %}" alt="{{ pictures.name }}"/>
-							{% endif %}
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
-						</div>
-					</div>
-				</div>
-			</div><!-- / Modal -->
-		</div> <!-- / Teaser Icon Container --> 
-		{% endwith %}
-	<!-- case with various pictures in related contents -->	
-	{% elif article.pictures >= 2 %}
-		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-				{% for picture in article.pictures %}
-					<li data-target="#carousel-example-generic" data-slide-to="{{forloop.counter0}}" {% if forloop.first %}class="active"{% endif %}></li>
-				{% endfor %}
-			</ol>
-			<div class="carousel-inner" role="listbox">
-				<!-- Wrapper for slides -->
-				{%  for picture in article.pictures %}
-					<div class="item {% if forloop.first %}active{% endif %}">
-						<!-- Div trigger modal -->
-						<div class="modals-picture" data-toggle="modal" data-target="#myModal{{forloop.counter}}">
-							<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
-							<div class="carousel-caption">
-								<a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
-									<p>{{ picture.name }}</p>
-								</a>
-							</div>
-						</div>
-					</div>
-					<!-- Modal -->
-					<div class="modal fade" id="myModal{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									<h4 class="modal-title" id="myModalLabel">{{ picture.name }}</h4>
-							  </div>
-							  <div class="modal-body">
-									<img class="img-responsive" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
-							  </div>
-							  <div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
-							  </div>
-							</div>
-						</div>
-					</div><!-- / Modal -->
-				{% endfor %}
-				</div> <!-- / Listbox -->
-			<!-- Controls -->
-			<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left"></span>
-			</a>
-			<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			</a>
-		</div> <!-- Carousel -->   
+						</li>
+						{% endfor %}
+				{% endif %}
+			</ul>
+		</div>
+		{% else %}
+		{% endif %}
+		<!-- / picture classic -->
 	{% endif %}
-	<!-- /picture -->
-
-  <div class="text"><span class="html-text html-content">
+	
+	<div class="text"><span class="html-text html-content">
     {{ article|parsed_gettext:"text"|smart_style}}
   </span></div>
 
@@ -150,37 +187,39 @@
 <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
 
-{% with author=current_object.get_author_or_user %}
-{% with author_url=author.get_absolute_url %}
-{% if author %}
-    <a name="author"></a> 
-    <div class="author-container meta-content media alert alert-info" role="alert">
-        <div class="author-container-data">
-            {% if author.image %}
-            <div class="media-left">
-                <a href="#">
-                    <img class="author img-circle" src="{% version author.image.path 'cropped' %}" border="0" title="Author"/>
-                </a>
-            </div>
-                
-            {% endif %}
-            <div class="author-container-data-text media-body">
-                <h4  class="author">
-                    {% if author_url %}<a href='{{ author_url }}'>{% endif %}
-                    {{ author }}
-                    {% if author_url %}</a>{% endif %}
-                    {% if author.origin %}
-                    <small>{{ author.origin }}</small>
-                    {% endif %}
-                </h4>
-                <div class="author-notes">{{ author.notes|smart_style }}</div> 
-            </div>
-        </div>
-    </div>
-{% endif %}
+	{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+		{% with author=current_object.get_author_or_user %}
+		{% with author_url=author.get_absolute_url %}
+		{% if author %}
+				<a name="author"></a> 
+				<div class="author-container meta-content media alert alert-info" role="alert">
+						<div class="author-container-data">
+								{% if author.image %}
+								<div class="media-left">
+										<a href="#">
+												<img class="author img-circle" src="{% version author.image.path 'cropped' %}" border="0" title="Author"/>
+										</a>
+								</div>
+										
+								{% endif %}
+								<div class="author-container-data-text media-body">
+										<h4  class="author">
+												{% if author_url %}<a href='{{ author_url }}'>{% endif %}
+												{{ author }}
+												{% if author_url %}</a>{% endif %}
+												{% if author.origin %}
+												<small>{{ author.origin }}</small>
+												{% endif %}
+										</h4>
+										<div class="author-notes">{{ author.notes|smart_style }}</div> 
+								</div>
+						</div>
+				</div>
+		{% endif %}
 
-{% endwith %}
-{% endwith %}
+		{% endwith %}
+		{% endwith %}
+	{% endif %}
 
 {% include 'cyclope/related_contents_block.html' %}
 

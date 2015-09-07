@@ -13,8 +13,9 @@
       {% endif %}
     </div>
 
-    <h2 class="title">
 
+	{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+    <h2 class="title">
         <a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
     </h2>
 
@@ -38,7 +39,26 @@
     {% if not simplified_view %}
         {% include "cyclope/author_block_teaser.html"  %}
     {% endif %}
+	{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
+      <a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
+    </h2>
 
+    {% if not simplified_view and article.get_picture %}
+      <div class="teaser_icon_container"><a href="{{ article.get_absolute_url }}" title="{{ article.get_picture.name }}">
+          <img class="teaser_icon" src="{% version article.get_picture.image.path 'small' %}" alt="{{ article.get_picture.name }}" width="135" border="0"/>
+      </a></div>
+    {% endif %}
+
+    <div class="html-content summary">
+      {% if article.summary %}
+        {{ article|parsed_gettext:"summary"|smart_style }}
+      {% else %}
+        {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
+      {% endif %}
+      <span class="more"><a href="{{ article.get_absolute_url }}"> {% trans "More" %}</a></span>
+    </div>
+	{% endif %}
 
     {% if article.pictures and not simplified_view %}
     <br class="floating-img-clear" />
