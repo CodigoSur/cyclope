@@ -3,7 +3,7 @@
 {% load i18n fb_versions cyclope_utils dbgettext_tags %}
 
 {% block content %}
-
+{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
 <h1 class="title authors_title">{% trans "Authors" %}</h1>
 {% for author in author_list %}
 {% with current_object=author %}
@@ -36,10 +36,36 @@
     </div>
     <hr>
 </div>
-
 {% endwith %}
-
 {% endfor %}
+
+{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+<div class="authors_category_title">{% trans "List of Authors" %}</div>
+{% for author in author_list %}
+{% with current_object=author %}
+ <div class="content-view authors authors-teaser">
+      
+      <h1 class="title"><a href="{{ current_object.get_absolute_url }}">{{ current_object.name }}</a></h1>
+  {% if current_object.image %}
+      <div class="media-content">
+        <img src="{% version current_object.image.path 'croppedthumbnail' %}" />
+      </div>
+      {% endif %}
+
+      {% if current_object.notes %}
+      <div class="notes"><a href="{{ current_object.get_absolute_url }}">{{ current_object.notes|smart_style }}</a></div>
+      {% endif %}
+      
+  {% if current_object.origin %}
+      <div class="origin">{{ current_object.origin }}</div>
+      {% endif %}
+      
+      <div class="link"><a href="{{ current_object.get_absolute_url }}">{% trans "View contents" %}</a></div>
+
+  </div>
+  {% endwith %}
+{% endfor %}
+{% endif %}
 
   {% if page %}
     {% if view_options.sort_by == "ALPHABETIC" %}
@@ -50,5 +76,4 @@
   {% endif %}
 
 {% endblock content %}
-
 

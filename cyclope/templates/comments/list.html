@@ -1,4 +1,5 @@
 {% load threadedcomments_tags i18n %}
+  {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
 <div class="comments">
 {% for comment in comment_list|fill_tree|annotate_tree %}{% ifchanged comment.parent_id %}{% else %}</li>{% endifchanged %}{% if not comment.open and not comment.close %}</li>{% endif %}{% if comment.open %}
 <ul class="media-list">{% endif %}
@@ -18,3 +19,31 @@
         {% for close in comment.close %}</li></ul>{% endfor %}
 {% endfor %}
 </div>
+
+
+   {% elif CYCLOPE_THEME_TYPE == 'classic' %}
+
+
+{% for comment in comment_list|fill_tree|annotate_tree %}{% ifchanged comment.parent_id %}{% else %}</li>{% endifchanged %}{% if not comment.open and not comment.close %}</li>{% endif %}{% if comment.open %}
+<ul>{% endif %}
+    <li id="c{{ comment.id }}">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
+        <dl class="comment">
+            <dt>
+                <span class="when_who">
+                  {{ comment.submit_date|date:'DATETIME_FORMAT' }}
+                  {% if comment.name %}
+                       - {% trans 'By' %}: {{ comment.name }}
+                  {% endif %}
+                 - (<a href="{{ comment.get_absolute_url }}">permalink</a>)
+                </span>
+
+            </dt>
+            <dd>
+                {{ comment.comment|linebreaks }}
+            </dd>
+            <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link">{% trans 'Reply' %}</a>
+        </dl>
+        {% for close in comment.close %}</li></ul>{% endfor %}
+{% endfor %}
+
+        {% endif %}

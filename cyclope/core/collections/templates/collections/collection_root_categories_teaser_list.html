@@ -1,26 +1,29 @@
 {% extends host_template %}
-
 {% load i18n cyclope_utils fb_versions %}
-
 {% block content %}
-  <div>
+<div>
     {% include 'collections/collection_info.html' %}
     {% for category in categories %}
-    <div class="category teaser {% if category.image %}clear_right{% endif %}" >
-      <h2 class="title"><a href="{% url category-default category.slug %}">{{ category.name }}</a></h2>
-      {% if category.image %}
-      <a href="{% url category-default category.slug %}">
-
-        <img class="icon" src="{% version category.image.path 'small' %}" border="0"/>
-      </a>
-      {% endif %}
-      {% if category.description %}
-      <div class="summary">
-        {{ category.description|smart_style }}
-      </div>
-      {% endif %}
-      <a class="btn btn-primary" href="{% url category-default category.slug %}">{% trans "View contents" %}</a>
-    </div>
+        <div class="category teaser {% if category.image %}clear_right{% endif %}" >
+            <h2 class="title"><a href="{% url category-default category.slug %}">{{ category.name }}</a></h2>
+            {% if category.image %}
+                <a href="{% url category-default category.slug %}">
+                {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+                    <img class="icon" src="{% version category.image.path 'small' %}" border="0"/>
+                {% elif CYCLOPE_THEME_TYPE == 'classic' %}
+                    <img class="icon" src="{% version category.image.path 'thumbnail' %}" border="0"/>
+                {% endif %}
+                </a>
+            {% endif %}
+            {% if category.description %}
+            <div class="summary">
+            {{ category.description|smart_style }}
+            </div>
+            {% endif %}
+            {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+            <a class="btn btn-primary" href="{% url category-default category.slug %}">{% trans "View contents" %}</a>
+            {% endif %}
+        </div>
     {% endfor %}
-  </div>
+</div>
 {% endblock %}

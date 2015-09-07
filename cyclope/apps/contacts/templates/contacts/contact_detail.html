@@ -1,82 +1,122 @@
 {% extends host_template %}
-
 {% load comments i18n fb_versions cyclope_utils markup dbgettext_tags%}
-
 {% block content %}
-
 {% alias contact as 'current_object' %}
 
-
+{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
 <div class="well content-view authors detail contact-detail">
-        <center>
-      
- {% if contact.photo %}
-     <div class="user-image">
-      <img class="contact_photo img-circle" src="{% version contact.photo 'small' %}" />
-      </div>
-    {% endif %}
-
-  <h2>{{contact}}</h2>
-  <!-- herramientas -->
-  {% include 'cyclope/content_tools_block.html' %}
-  <!-- /herramientas -->
-  
-{# TODO: sanhoerth - here in p tag insert description when implemented is ready #}
- 
-
-     <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
-
-     
-
-  {% if contact.tags %}
-    <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}</span> {{ contact.tags }}</span></div>
-  {% endif %}
-       
-  {% if current_object.notes %}
-  <div class="notes">{{ current_object.notes|smart_style }}</div>
-  {% endif %}
-     {% if current_object.origin %}
-  <div class="origin">{{ current_object.origin }}</div>
-  {% endif %}
-
-
-		</center>
-        
-    </div>
- 
+    <center>
+        {% if contact.photo %}
+        <div class="user-image">
+            <img class="contact_photo img-circle" src="{% version contact.photo 'small' %}" />
+        </div>
+        {% endif %}
+        <h2>{{contact}}</h2>
+        <!-- herramientas -->
+        {% include 'cyclope/content_tools_block.html' %}
+        <!-- /herramientas -->
+        {# TODO: sanhoerth - here in p tag insert description when implemented is ready #}
+        <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+        {% if contact.tags %}
+            <div class="meta-content"><span class="tags"><span class="tags-label">{% trans "Tags" %}</span> {{ contact.tags }}</span></div>
+        {% endif %}
+        {% if current_object.notes %}
+            <div class="notes">{{ current_object.notes|smart_style }}</div>
+        {% endif %}
+        {% if current_object.origin %}
+            <div class="origin">{{ current_object.origin }}</div>
+        {% endif %}
+    </center>
+</div>
 <div class="contact_fields center-block">
-        <h3>{% trans "General information" %}</h3>
-        <div class="contact_field"><p class="text-right">{% trans "Given name" %}</p> <p class="text-left">{{contact.given_name}}</p></div>
-        <div class="contact_field"><p class="text-right">{% trans "Surname" %}</p> <p class="text-left">{{contact.surname}}</p></div>
-        <div class="contact_field"><p class="text-right">{% trans "Birth date" %}</p> <p class="text-left">{{contact.birth_date|default:""}}</p></div>
-        <div class="contact_field"><p class="text-right">{% trans "Gender" %}</p> <p class="text-left">{{contact.get_gender_display}}</p></div>
-        {% if contact.email %}<div class="contact_field"><p class="text-right">{% trans "Email" %}</p> <p class="text-left">{{contact.email}}</p></div>{% endif %}
-   </div>
+    <h3>{% trans "General information" %}</h3>
+    <div class="contact_field"><p class="text-right">{% trans "Given name" %}</p> <p class="text-left">{{contact.given_name}}</p></div>
+    <div class="contact_field"><p class="text-right">{% trans "Surname" %}</p> <p class="text-left">{{contact.surname}}</p></div>
+    <div class="contact_field"><p class="text-right">{% trans "Birth date" %}</p> <p class="text-left">{{contact.birth_date|default:""}}</p></div>
+    <div class="contact_field"><p class="text-right">{% trans "Gender" %}</p> <p class="text-left">{{contact.get_gender_display}}</p></div>
+    {% if contact.email %}
+        <div class="contact_field"><p class="text-right">{% trans "Email" %}</p> <p class="text-left">{{contact.email}}</p></div>
+    {% endif %}
+</div>
     {% if contact.contactaddress_set.all %}
     {% for address in contact.contactaddress_set.all %}
-    <div class="contact_fields center-block {{address.type}}">
-        <h3>{{address.get_type_display}}</h3>
+<div class="contact_fields center-block {{address.type}}">
+    <h3>{{address.get_type_display}}</h3>
         <div class="contact_field"><p class="text-right">{% trans "Address" %}:</p> <p class="text-left">{{address}}</p></div>
         <div class="contact_field"><p class="text-right">{% trans "Post Office Box" %}:</p> <p class="text-left">{{address.post_office_box}}</p></div>
         <div class="contact_field"><p class="text-right">{% trans "Phone Number" %}:</p> <p class="text-left">{{address.phone_number}}</p></div>
     </div>
     {% endfor %}
     {% endif %}
-{% if contact.has_profile %}
- <div class="profile">
+    {% if contact.has_profile %}
+        <div class="profile">
     {% with contact.get_profile as profile %}
-        {% include CYCLOPE_CONTACTS_PROFILE_TEMPLATE %}
+    {% include CYCLOPE_CONTACTS_PROFILE_TEMPLATE %}
     {% endwith %}
- </div>
+</div>
 {% endif %}
-
 <div class="contact_fields center-block text-center">
-{% if contact.email %} <a class="btn btn-info" href="mailto:{{contact.email}}">{% trans "Send mail" %}</a>{% endif %}
+    {% if contact.email %}
+        <a class="btn btn-info" href="mailto:{{contact.email}}">{% trans "Send mail" %}</a>
+    {% endif %}
+    <small class="center-block">{% trans "Last update" %}: {{contact.modification_date}}</small>
+</div>
 
-  <small class="center-block">{% trans "Last update" %}: {{contact.modification_date}}</small>
-  
-   </div>
-        
+{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+<div class="content-view contact detail contact-detail">
+    <h1 class="title">{{contact}}</h1>
+    <!-- herramientas -->
+    <div class="tools meta-content">
+        <ul>
+            <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a></li>
+            {% if contact.email %}
+            <li><a href="mailto:{{contact.email}}">{% trans "Send mail" %}</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <!-- /herramientas -->
+    {% if contact.photo %}
+        <img class="contact_photo" src="{% version contact.photo 'cropped' %}" />
+    {% endif %}
+    <div class="contact_teaser_detail">
+        <div class="details-list">
+            <div>{% trans "Given name" %}: <span>{{contact.given_name}}</span></div>
+            <div>{% trans "Surname" %}: <span>{{contact.surname}}</span></div>
+            <div>{% trans "Birth date" %}: <span>{{contact.birth_date|default:""}}</span></div>
+            <div>{% trans "Gender" %}: <span>{{contact.get_gender_display}}</span></div>
+            <div>{% trans "Email" %}: <span>{{contact.email}}</span></div>
+            <div>{% trans "Web" %}: <span>{{contact.web}}</span></div>
+            <div>{% trans "Mobile" %}: <span>{{contact.mobile_phone_number}}</span></div>
+        </div>
+        {% if contact.contactaddress_set.all %}
+
+        <div class="address-list">
+        {% for address in contact.contactaddress_set.all %}
+            <div class="address {{address.type}}">
+                <div id="address-type">{{address.get_type_display}}</div>
+                <div class="field"><div class="field-name">{% trans "Address" %}:</div> <div class="field-value">{{address}}</div></div>
+                <div class="field"><div class="field-name">{% trans "Post Office Box" %}:</div> <div class="field-value">{{address.post_office_box}}</div></div>
+                <div class="field"><div class="field-name">{% trans "Phone Number" %}:</div> <div class="field-value">{{address.phone_number}}</div></div>
+            </div>
+        {% endfor %}
+        </div>
+        {% endif %}
+        <div class="profile">
+        {% if contact.has_profile %}
+        {% with contact.get_profile as profile %}
+        {% include CYCLOPE_CONTACTS_PROFILE_TEMPLATE %}
+        {% endwith %}
+        {% endif %}
+        </div>
+        {% if contact.tags %}
+        <div class="meta-content">
+            <span class="tags"><span class="tags-label">{% trans "Tags" %}</span> {{ contact.tags }}</span>
+        </div>
+        {% endif %}
+
+        <div>{% trans "Last update" %}: {{contact.modification_date}}</div>
+        <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+    </div>
+</div>
+{% endif %}  
 {% endblock content%}
-
- 

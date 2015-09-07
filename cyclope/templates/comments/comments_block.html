@@ -49,9 +49,10 @@
 
 
     <div id="user_comments">
-      <div class="top comments_length">
+    {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+    <div class="top comments_length">
         <h3 class="title">{% blocktrans %} There are {{ comment_count }} comments {% endblocktrans %}</h3>
-      </div>
+    </div>
 
 
       <div class="action-content show_comment_form">
@@ -66,8 +67,28 @@
         </div>
       </div>
 
+      {% render_comment_list for current_object %} 
+
+         {% elif CYCLOPE_THEME_TYPE == 'classic' %}
+
+  <div class="top comments_length">
+        <h6>{% blocktrans %} There are {{ comment_count }} comments {% endblocktrans %}</h6>
+      </div>
+
       {% render_comment_list for current_object %}
-      
+
+      <div class="action-content show_comment_form">
+        <a name="comments" href="#comments" id="show_comment_form">{% trans "comment on this content" %}</a>
+      </div>
+
+      <div>
+        <div id="wrap_write_comment">
+        <!--form comentario -->
+         <div id="form-comment">{% render_comment_form for current_object %}</div>
+        </div>
+      </div>
+    </div>
+        {% endif %}
     </div>
    </div>
 {% endif %}

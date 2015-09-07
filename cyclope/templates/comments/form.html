@@ -19,8 +19,16 @@ $(function(){
   {% endif %}
   {{ form|crispy }}
 
-  <div class="submit action-content submit-comment ">
-    <input type="submit" name="post" class="btn btn-default btn-sm" value="{% trans "Post your comment" %}" />
-    <a href="#c0" id="cancel_reply" class="btn btn-default btn-sm">{% trans "Cancel reply" %}</a>
-  </div>
+
+<div class="submit action-content submit-comment ">
+    {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+        <input type="submit" name="post" class="btn btn-default btn-sm" value="{% trans "Post your comment" %}" />
+        <a href="#c0" id="cancel_reply" class="btn btn-default btn-sm">{% trans "Cancel reply" %}</a>
+    {% elif CYCLOPE_THEME_TYPE == 'classic' %}
+        <input type="submit" name="post" class="submit" value="{% trans "Post your comment" %}" />
+        <a href="#c0" id="cancel_reply">{% trans "Cancel reply" %}</a>
+    {% endif%}
+</div>
+
 </form>
+
