@@ -4,29 +4,23 @@
 
 {% block content %}
   <div>
-  
     {% include 'collections/collection_info.html' %}
-
     {% for category in categories %}
-
     <div class="category teaser {% if category.image %}clear_right{% endif %}" >
       <h2 class="title"><a href="{% url category-default category.slug %}">{{ category.name }}</a></h2>
       {% if category.image %}
       <a href="{% url category-default category.slug %}">
-        <img class="icon" src="{% version category.image.path 'thumbnail' %}" border="0"/>
+
+        <img class="icon" src="{% version category.image.path 'small' %}" border="0"/>
       </a>
       {% endif %}
-
       {% if category.description %}
       <div class="summary">
         {{ category.description|smart_style }}
       </div>
       {% endif %}
-
-
+      <a class="btn btn-primary" href="{% url category-default category.slug %}">{% trans "View contents" %}</a>
     </div>
     {% endfor %}
-
   </div>
-
 {% endblock %}

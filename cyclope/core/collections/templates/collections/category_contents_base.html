@@ -8,7 +8,7 @@
     {% include 'cyclope/breadcrumb_block.html' %}
   {% endif %}
 
-
+<div class="category_description">
     {% if view_options.show_title and  region_name %}
   <span class="category_title">
       <a href="{% url category-default category.slug %}">{{ category.name }}</a>
@@ -19,13 +19,15 @@
   {% if category.description and view_options.show_description or category.image and view_options.show_image %}
   <div class="collection_teaser">
     {% if category.image and view_options.show_image %}
-    <img class="image" src="{% version category.image.path 'small' %}" border="0"/>
+    <img class="image" src="{% version category.image.path 'fb_thumb' %}" border="0"/>
     {% endif %}
     {% if category.description and view_options.show_description %}
     <div class="summary">{{ category.description|smart_style }}</div>
     {% endif %}
   </div>
   {% endif %}
+
+</div>
 
   {% block category_content %}{% endblock %}
   {% spaceless %}

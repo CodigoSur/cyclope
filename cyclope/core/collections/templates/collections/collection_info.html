@@ -10,10 +10,9 @@
 <div class="collection_teaser">
 
 {% if collection.image %}
-        <img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
+        <div class="collection_image"><img class="image" src="{% version collection.image.path 'medium' %}" border="0"/></div>
         {% endif %}
         <div class="summary">
-
           {{ collection.description|smart_style }}
         </div>
         </div>
