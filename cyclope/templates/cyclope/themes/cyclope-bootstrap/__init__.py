@@ -10,6 +10,11 @@ from django.utils.translation import ugettext_lazy as _
 
 verbose_name = _('Cyclope-Bootstrap')
 
+settings_theme = {
+    'type': 'bootstrap',
+    'version': '3',
+}
+
 layout_templates = {
 
     'default.html':

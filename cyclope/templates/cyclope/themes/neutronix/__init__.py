@@ -10,6 +10,11 @@ from django.utils.translation import ugettext_lazy as _
 
 verbose_name = _('Neutronix')
 
+settings_theme = {
+    'type': 'classic',
+    'version': '3',
+}
+
 layout_templates = {
 
     'four_elements.html':
