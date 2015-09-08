@@ -10,7 +10,7 @@ It is based on the category_teaser_list template.
 {% block content %}
 {% if form %}
 {# TODO(nicoechaniz): remove this style once proper CSS styling is done #}
-<div style="width: 300px; clear: both; display: block; background-color:red;">
+<div class="jumbotron">
  {% crispy form %}
 </div>
 {% endif %}
@@ -25,7 +25,6 @@ It is based on the category_teaser_list template.
     {% alias categorization.content_object as categorization.content_type.model %}
     {% alias categorization.content_object as 'media' %}
     {% endspaceless %}
-    {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %} 
     {% include template_path with current_object=categorization.content_object host_template="cyclope/inline_view.html" %}
   {% endfor %}
 {% endblock %}

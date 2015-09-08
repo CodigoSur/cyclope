@@ -17,18 +17,16 @@
 			</span>
 		{% endif %}
 
-
 		{% if category.description and view_options.show_description or category.image and view_options.show_image %}
 		<div class="collection_teaser">
 			{% if category.image and view_options.show_image %}
-			<img class="image" {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}src="{% version category.image.path 'fb_thumb' %}{% elif CYCLOPE_THEME_TYPE == 'classic' %}src="{% version category.image.path 'small' %}{% endif %}" border="0"/>
+			<img class="image" src="{% version category.image.path 'fb_thumb' %}" border="0"/>
 			{% endif %}
 			{% if category.description and view_options.show_description %}
 			<div class="summary">{{ category.description|smart_style }}</div>
 			{% endif %}
 		</div>
 		{% endif %}
-
 </div>
 
 {% elif CYCLOPE_THEME_TYPE == 'classic' %}

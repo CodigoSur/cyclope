@@ -218,6 +218,8 @@ FILEBROWSER_VERSIONS = {
                   'width': 550, 'height': '', 'opts': 'crop'},
     'newsletter_teaser': {'verbose_name': ugettext('Newsletter Teaser (150x150px)'),
                   'width': 150, 'height': 150, 'opts': 'crop'},
+    'carrousel_bootstrap': {'verbose_name': ugettext('Carrousel Bootstrap'),
+                 'width': 730, 'height': 350, 'opts': 'crop upscale'},
 }
 
 FILEBROWSER_MAX_UPLOAD_SIZE = 1024*1024*20 # 20MB

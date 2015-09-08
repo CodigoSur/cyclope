@@ -1,9 +1,13 @@
 {% load i18n fb_versions cyclope_utils %}
 
-
 {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+  <div class="content-view staticpage teaser staticpage-teaser {% if region_name %}{% inline_content_classes %}{% endif%}">
 
-  <div class="content-view staticpage teaser staticpage-teaser {% inline_content_classes %}">
+    <div class="pretitle-container first meta-content">
+      <div class="date">
+        {{ current_object.creation_date|date:'SHORT_DATE_FORMAT' }}
+      </div>
+    </div>
 
     <h2 class="title"><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a></h2>
 

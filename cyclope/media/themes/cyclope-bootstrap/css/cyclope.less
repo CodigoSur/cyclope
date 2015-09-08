@@ -24,20 +24,29 @@ img.type_icon {display:inline;}
 .jumbotron {background:#eee;}
 .jumbotron .title {font-size: 63px;}
 .jumbotron img.teaser_icon {float:left;margin:0 10px 0 0;border-radius:50%;}
-.teaser_more {margin:20px 0 0;}
+.teaser_more {margin:5px 0 0;}
 .jumbotron .teaser_more {margin:30px 0 0;}
 .breadcrumb ol.content_types {background:#ccc;position:absolute;list-style:none;padding:0;margin:0;}
 #block_content {overflow:auto;}
 .center-block { cursor: pointer; }
+.center-block { width: 100%; }
 .carousel-control.right, .carousel-control.left {background:none;}
 .carousel-control.right, .carousel-control.left {background:none;}
+
+@media screen and (min-width: 768px) {
+.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev { margin-left: -40px!important; }
+.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next { margin-right: -40px!important;}
+}
+
 .carousel-inner {margin:0;}
-.carousel-caption {bottom:0;padding:0;left:0;right:0;background:#000;color:#fff;filter: alpha(opacity=50);opacity: .7;}
-.default .carousel-caption {background:transparent;color:#000;}
+.carousel-caption, .default .carousel-caption 
+{bottom:0;padding:0;left:0;right:0;background:#000;color:#fff;filter: alpha(opacity=50);opacity: .7;}
+.default .carousel-caption {}
 .carousel-caption h2 a {color:#fff;padding:0 10px;}
 .carousel-caption p {padding:0 10px 5px;margin:0;width:100%;font-size:15px;}
 .carousel-inner > .item {background:#fff;}
-.default .carousel-inner > .item {background:#eee;padding:20px 0;}
+.default .carousel-inner > .item {background:#eee;padding: 0;}
+.carousel-inner > .item > a > img { width:100%;}
 .carousel-indicators {display: block;position:relative;top:5px;}
 .carousel-indicators li {background-color: #ccc;}
 .carousel-indicators .active {
@@ -46,7 +55,10 @@ img.type_icon {display:inline;}
   margin: 0;
   background-color: #999;
 }
+.modals-picture .carousel-caption {background:#eee; position: relative; padding: 15px 5px 0 5px; margin: 0; width: 100%; font-size: 15px; color: #337ab7;}
+.modals-picture .carousel-caption p { padding:0; text-shadow:none;cursor: pointer; }
 .jumbotron .carousel-control {width:0;}
+
 .default .title {border-bottom:1px solid #999;padding:0 0 10px;}
 #map ul {margin:0;padding:0;list-style:none;}
 #map li {font-weight:700;}
@@ -55,6 +67,7 @@ img.type_icon {display:inline;}
 #map li li {font-weight:400;margin:0 0 0 20px;}
 ul.media-list {margin:25px 0 0;}
 ul.media-list ul {margin-left:64px;}
+.media { margin-top: 0px !important; }
 #user_comments #wrap_write_comment {margin-top:20px;}
 .related_contents ul  {list-style:none !important;padding:0;margin:0;}
 .contact_fields  {margin:0 auto;}
@@ -115,9 +128,12 @@ ul.media-list ul {margin-left:64px;}
 #bottom img.teaser_icon {border-radius:50%;margin:10px auto;}
 
 #bottom .pretitle {display:none;}
+#bottom .date {display:none; font-size: 1em; color: #337AB7; margin:15px 0 -15px 0;}
 #bottom .breadcrumb,
 #bottom .category_title,
 #bottom .collection_teaser {margin-left:15px;margin-right:15px;}
+
+
 
 #sidebar .collapse {display:block;}
 #sidebar .navbar-nav {width: 100% !important;margin:0 0 10px;padding:0;}
@@ -157,6 +173,20 @@ ul.media-list ul {margin-left:64px;}
 #sidebar .search-box {padding:3px 0;background:#eee;margin:0;border-radius:4px;}
 #sidebar .search-box .form-control {color:#959595;}
 
+@media (max-width: 767px) {
+    .affix{
+        position: static;
+    }
+}
+@media (max-width: 480px) {
+    .affix{
+        position: static;
+    }
+}
+
+.navbar { border-radius: 0; }
+nav.affix {top:0px;z-index:20;}
+.affix {width:100%;}
 
 .poll-submission .radio,.poll-submission .checkbox {margin-top: 0px;margin-bottom: 0px;}
 .poll-submission label.checkbox, .poll-submission label.radio {margin-left:30px;display:block;font-weight:400;}
@@ -239,6 +269,20 @@ ul.media-list ul {margin-left:64px;}
     position: absolute;
     top: 0;
     width: 50%; /* 6 columns */
+  }
+}
+ 
+@media (min-width: 1200px) {
+	.col-lg-4 { 
+		/* height:450px;  */ 
+		/*	 overflow:auto; */
+  }
+}
+
+@media (min-width: 992px) {
+	.col-md-4 { 
+		/* height:450px;  */
+		/*	 overflow:auto; */
   }
 }
 

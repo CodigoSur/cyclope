@@ -108,7 +108,7 @@
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/cyclope.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.js"></script>
-    <!-- <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.min.js"></script> 
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/dropdown.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.bootstrap.js"></script>
@@ -117,13 +117,26 @@
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/offcanvas.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/uni-form.jquery.min.js" ></script>
+        <script type="text/javascript" src="/media/cyclope/js/bootstrap/affix.js"></script>
     {% if CYCLOPE_SITE_SETTINGS.enable_ratings %}
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/ratings.js" ></script>
     {% endif %}
     <!-- /JS --> 
    </head>
-<body class="{% block body_class %}{%endblock%}">
-    <nav class="navbar navbar-fixed-top navbar-inverse">
+<body class="{% block body_class %}{%endblock%}" >
+	
+	{% block page_header %}
+	{% if CYCLOPE_SITE_SETTINGS.head_image %}
+	 <style type="text/css"> html { padding-top: 10px; } body { padding-top: 0; }</style>
+			<div class="brand container">
+				<a href="/">
+					<img src="{{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.head_image }}" alt="{{ CYCLOPE_SITE_SETTINGS.head_image }}" class="img-responsive">
+				</a>
+			</div>
+		{% endif %}
+	{% endblock %}
+	
+    <nav class="navbar {% if not CYCLOPE_SITE_SETTINGS.head_image %}navbar-fixed-top{% endif %} navbar-inverse" {% if CYCLOPE_SITE_SETTINGS.head_image %}data-spy="affix" data-offset-top="150"{% endif %}>
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -132,7 +145,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a>
+                {% if CYCLOPE_SITE_SETTINGS.show_head_title  %}
+									<a class="navbar-brand visible-xs" href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a>
+								{% endif %}
             </div>
             <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
             <!-- header -->  {% region 'header' %} <!-- /header -->

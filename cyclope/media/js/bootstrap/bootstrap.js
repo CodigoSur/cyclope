@@ -908,6 +908,9 @@ if (typeof jQuery === 'undefined') {
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
+/* =================================================================================
+   !!!!! COMMENT FOR PROBLEMS WITH DOUBLE MODAL.JS IN THIS AND bootstrap.min.js !!!
+   =================================================================================
 
 +function ($) {
   'use strict';
@@ -1238,7 +1241,9 @@ if (typeof jQuery === 'undefined') {
     Plugin.call($target, option, this)
   })
 
-}(jQuery);
+}(jQuery); 
+
+*/
 
 /* ========================================================================
  * Bootstrap: tooltip.js v3.3.4

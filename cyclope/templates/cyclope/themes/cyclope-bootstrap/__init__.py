@@ -65,7 +65,7 @@ region_layout_classes = {
     'header':'',
     'top':'',
     'left': '',
-    'right': 'col-xs-4 col-sm-3 col-md-3 col-lg-3',
+    'right': 'col-xs-4 col-sm-3 col-md-3 col-lg-3 sidebar-offcanvas',
     'bottom': '',
     'extra_bottom': '',
 }

@@ -4,7 +4,7 @@
 
   <a href="{% url article-detail article.slug %}">
     {% if article.get_picture %}
-      <img src="{% version article.get_picture.image.path view_options.visualization_mode %}" alt="{{ article.name }}" border="0"/>
+      <img src="{% version article.get_picture.image.path 'carrousel_bootstrap' %}" alt="{{ article.name }}" border="0"/>
     {% else %}
       <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="" border="0"/>
     {% endif %}
@@ -13,14 +13,14 @@
   <div class="carousel-caption">
     {% if view_options.show_title %}
     <h3>
-      <a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:70 }}</a>
+      <a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:80 }}</a>
     </h3>
     {% endif %}
     {% if view_options.show_description %}
     <p>
       {% if article.summary %}
-        {{ article|parsed_gettext:"summary"|smart_style }}
-      {% else %}
+        {{ article|parsed_gettext:"summary"|smart_style|truncatewords_html:40 }}
+      {% else %}-
         {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
       {% endif %}
     </p>
