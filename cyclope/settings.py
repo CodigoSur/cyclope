@@ -110,6 +110,8 @@ CYCLOPE_PROJECT_NAME = os.path.basename(CYCLOPE_PROJECT_PATH)
 
 CYCLOPE_BASE_CONTENT_TYPES = site.base_content_types
 
+CYCLOPE_THEME_TYPE = 'bootstrap'
+
 import themes
 
 def get_site_settings():
