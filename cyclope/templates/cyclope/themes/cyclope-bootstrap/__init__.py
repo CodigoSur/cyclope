@@ -61,7 +61,7 @@ region_layout_ids = {
 }
 
 region_layout_classes = {
-    'content': 'jumbotron',
+    'content': '',
     'header':'',
     'top':'',
     'left': '',

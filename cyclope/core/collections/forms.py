@@ -38,7 +38,7 @@ class ContentFilterForm(forms.Form):
         self.helper.form_id = 'content-filter-form'
         self.helper.form_method = 'get'
         self.helper.add_input(Submit('submit', _('Filter')))
-        self.helper.form_class = 'form-horizontal'
+        self.helper.form_class = 'form-filter'
         print self.fields.items()
         for collection in collections:
             self.fields[collection.slug] = TreeNodeChoiceField(label=_(collection.name),

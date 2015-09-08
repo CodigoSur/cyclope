@@ -10,9 +10,17 @@ It is based on the category_teaser_list template.
 {% block content %}
 {% if form %}
 {# TODO(nicoechaniz): remove this style once proper CSS styling is done #}
-<div class="jumbotron">
- {% crispy form %}
-</div>
+
+	<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title"> {% trans "Filter" %}</h3>
+    </div>
+		<div class="panel-body">
+			{% crispy form %}
+		</div>
+  </div>
+
+
 {% endif %}
 
 {% block category_content %}

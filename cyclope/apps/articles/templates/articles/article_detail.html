@@ -41,7 +41,7 @@
 		<!-- case with image for new widget o for related contents only with one picture -->
 		{% if article.picture or article.pictures|length == 1 %}
 			{% with article.picture as picture and article.pictures|first as pictures %}
-			<div class="jumbotron">
+			<div class="{% inline_content_classes %}">
 					<div class="modals-picture" data-toggle="modal" data-target="#myModal">
 						{% if picture %}
 							<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
@@ -79,7 +79,7 @@
 			{% endwith %}
 		<!-- case with various pictures in related contents -->	
 		{% elif article.pictures >= 2 %}
-			<div class="jumbotron">
+			<div class="{% inline_content_classes %}">
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 					<ol class="carousel-indicators">
 						{% for picture in article.pictures %}
