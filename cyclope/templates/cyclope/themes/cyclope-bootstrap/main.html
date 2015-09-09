@@ -7,7 +7,7 @@
     <div class="col-xs-12 col-sm-9"> 
         <div class="row">{% region 'top' %}</div>
          <!-- toogle nav for different devices and resolutions -->
-        <p class="pull-right visible-xs"><button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">{% trans "Toggle nav" %}</button></p> <!-- end toogle nav -->
+        <div class= "toggle-botton-nav"><p class="pull-right visible-xs"><button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">{% trans "Toggle nav" %}</button></p></div> <!-- end toogle nav -->
         {% block content %}{% endblock %}
         <div class="row">{% region 'bottom' %}</div>
     </div>
