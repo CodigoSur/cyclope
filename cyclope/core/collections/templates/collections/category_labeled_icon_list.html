@@ -8,8 +8,7 @@
   We show a teaser view of every object belonging to this category.
   {% endcomment %}
 
-  <div class="icon_list_container">
-
+	<div class="icon_list_container"> 
   {% for categorization in categorizations %}
     {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name ".html" as template_path %}
 
@@ -22,8 +21,8 @@
     {% alias categorization.content_object as categorization.content_type.model %}
     {% include template_path with current_object=categorization.content_object %}
   {% endfor %}
+	</div>
 
-  </div>
   <br class="clear" />
 
 {% endblock %}

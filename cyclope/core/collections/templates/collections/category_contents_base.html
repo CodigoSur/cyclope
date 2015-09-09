@@ -11,7 +11,7 @@
   {% endif %}
 
 	<div class="category_description">
-    {% if view_options.show_title and  region_name %}
+    {% if view_options.show_title %}
 			<span class="category_title">
 				<a href="{% url category-default category.slug %}">{{ category.name }}</a>
 			</span>

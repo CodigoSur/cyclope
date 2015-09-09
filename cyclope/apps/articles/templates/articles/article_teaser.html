@@ -4,12 +4,13 @@
 
     <div class="pretitle-container first meta-content">
       {% if  article.pretitle and not simplified_view %}
-      <div class="pretitle">{% trans article.pretitle %}
-        {% if article.date %}<span class="pretitle-separator"> | </span>{% endif %}</div>
+      <div class="pretitle">
+				{% trans article.pretitle %}
+      </div>
       {% endif%}
 
       {% if article.date %}
-      <div class="date">{{ article.date|date:'SHORT_DATE_FORMAT' }}</div>
+      <div class="date"><span class="pretitle-separator"> | </span>{{ article.date|date:'SHORT_DATE_FORMAT' }}</div>
       {% endif %}
     </div>
 

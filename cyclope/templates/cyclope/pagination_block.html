@@ -3,7 +3,8 @@
 {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
 
    {% if page.paginator.num_pages != 1 %}
-   <nav>
+   <div class="paginator">
+		 <nav>
         <ul class="pagination">
             {% if page.has_previous %}
                 {# query is present when this block is included in the search view #}
@@ -38,6 +39,7 @@
             {% endif %}
         </ul>
     </nav>
+    </div>
    {% endif %}
 
 {% elif CYCLOPE_THEME_TYPE == 'classic' %}

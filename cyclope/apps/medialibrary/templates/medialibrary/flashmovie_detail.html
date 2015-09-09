@@ -17,6 +17,8 @@
 
 {% block media_content_download %}
     <div class="action-content download_link">
-    <a target="_blank" href="{{ current_object.media_file }}">{% trans "full screen view (new window)" %}</a>
+     <a class="btn btn-primary" role="button" target="_blank" href="{{ current_object.media_file }}">
+			 <span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span>
+			 {% trans "full screen view (new window)" %}</a>
     </div>
 {% endblock %}

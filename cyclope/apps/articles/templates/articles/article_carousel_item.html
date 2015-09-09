@@ -4,7 +4,7 @@
 
   <a href="{% url article-detail article.slug %}">
     {% if article.get_picture %}
-      <img src="{% version article.get_picture.image.path 'carrousel_bootstrap' %}" alt="{{ article.name }}" border="0"/>
+      <img class="img-responsive" src="{% version article.get_picture.image.path 'carrousel_bootstrap' %}" alt="{{ article.name }}" border="0"/>
     {% else %}
       <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="" border="0"/>
     {% endif %}

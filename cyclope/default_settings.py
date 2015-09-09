@@ -220,6 +220,8 @@ FILEBROWSER_VERSIONS = {
                   'width': 150, 'height': 150, 'opts': 'crop'},
     'carrousel_bootstrap': {'verbose_name': ugettext('Carrousel Bootstrap'),
                  'width': 730, 'height': 350, 'opts': 'crop upscale'},
+    'labeled_icon_bootstrap': {'verbose_name': ugettext('Labeled Bootstrap'),
+                 'width': 250, 'height': 200, 'opts': 'crop upscale'},
 }
 
 FILEBROWSER_MAX_UPLOAD_SIZE = 1024*1024*20 # 20MB

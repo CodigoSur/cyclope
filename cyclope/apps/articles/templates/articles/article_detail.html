@@ -19,10 +19,9 @@
   {% include "cyclope/author_block.html" %}
   <!-- /autor -->
 
-  {% if article.get_last_change_date %}
-
+  {% if article.date %}
     <span class="date">
-      {% trans "Last modification date" %}: {{ article.get_last_change_date }}
+      {% trans "Publication date" %}: {{ article.date|date:"j F, Y" }}
     </span>
     {% endif %}
   
@@ -188,7 +187,7 @@
 		{% with author_url=author.get_absolute_url %}
 		{% if author %}
 				<a name="author"></a> 
-				<div class="author-container meta-content media alert alert-info" role="alert">
+				<div class="author-container meta-content alert alert-info" role="alert">
 						<div class="author-container-data">
 								{% if author.image %}
 								<div class="media-left">
