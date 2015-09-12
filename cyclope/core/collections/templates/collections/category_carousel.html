@@ -27,14 +27,18 @@
 					{% alias categorization.content_object as categorization.content_type.model %}
 					{% alias categorization.content_object as 'media' %}
 					{% endspaceless %}
+					{% if not user.is_authenticated and not media.published %}{% else %}
 							{% include template_path with current_object=categorization.content_object %}
+				{% endif %}
 				{% endfor %}
 				</div>
 
 				<ol class="carousel-indicators">
 				{% for categorization in categorizations %}
 					{% alias categorization.content_object as 'media' %}
+					{% if not user.is_authenticated and not media.published %}{% else %}
 					<li data-target="#carousel-{% if region_name %}-{{region_name}}{% endif %}-{{category_slug}}" data-slide-to="{{ forloop.counter0 }}" class="{% ifequal first_content media %}active{% endifequal %}"></li>
+				{% endif %}
 				{% endfor %}
 				</ol>
 

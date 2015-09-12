@@ -122,14 +122,21 @@ ul.media-list ul {margin-left:64px;}
 .default .teaser_icon_container {padding:20px 0;}
 .default .teaser_icon_container p {margin:10px auto;text-align:center;}
 .detail .teaser_icon_container {background:#eee;margin:10px 0;}
-.teaser_icon_container:hover {background:#ccc;}
 .movieclip_picture {background:#fff;padding:10px 0;margin:10px 0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;}
+.teaser_icon_container:hover {background:transparent;}
 #bottom img.teaser_icon {border-radius:50%;margin:10px auto;}
+#bottom img.teaser_icon:hover {border-radius:0;
+ 
+  -webkit-transition-duration: 0.4s;
+   -moz-transition-duration: 0.4s;
+   -o-transition-duration: 0.4s;
+   transition-duration: 0.4s;}
+
 
 #bottom .pretitle {display:none;}
-.main .media .date, .default .media .date,
-.main .staticpage .date, .default .staticpage .date,
-.main .article-teaser .date, .default .article-teaser .date
+.media .date, 
+.staticpage .date,
+.article-teaser .date
 	{display:none; font-size: 1em; color: #337AB7; margin:15px 0 -15px 0;}
 #bottom .breadcrumb,
 #bottom .category_title,
@@ -220,6 +227,16 @@ nav.affix {top:0px;z-index:20;}
 .detail .categories .btn {text-transform:uppercase;font-size:12px;}
 .detail .categories .btn span {padding-right:10px;}
 
+.forum h2 {font-size:15px;}
+.forum th {    padding: 10px 0;
+    background-color: #f2f2f2;
+    text-align: center;}
+
+.forum tr.item {     border-bottom: 1px solid #E4E4E4;}
+.forum .comment { text-align: center;}
+ .forum  td.created {  font-size: 13px;}
+ .forum  td.last_comment {  font-size: 13px;}
+
 .user-details .user-image {position: relative;  z-index: 1; width: 100%; text-align: center;}
  .user-image img { clear: both; margin: auto; position: relative;}
 
@@ -279,7 +296,6 @@ nav.affix {top:0px;z-index:20;}
  
 @media (min-width: 1200px) {
 	.col-lg-4 { 
-		height:450px;   
 		overflow:auto; 
   }
   .icon_list_container .col-lg-4 { 
@@ -290,7 +306,6 @@ nav.affix {top:0px;z-index:20;}
 
 @media (min-width: 992px) {
 	.col-md-4 { 
-		height:450px; 
 		overflow:auto; 
   }
   .icon_list_container .col-md-4 { 

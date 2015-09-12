@@ -4,6 +4,14 @@
 
 {% block content %}
 
+{% if not user.is_authenticated and not current_object.published %}
+  <div class="alert alert-danger" role="alert">
+		<span class="glyphicon glyphicon-ban-circle"></span>
+			<a href="{% url auth_login %}?next={{ request.path }}">{% trans "This content isn't public, please log in" %}
+		</a>
+	</div>
+{% else %}
+
 <!-- Optimizado para bootstrap, en classic pisar con el contenido de medialibrary_base_detail_classic.html  
 No permite if CYCLOPE_THEME_TYPE porque todos los media library tienen blocks propios -->
 
@@ -91,4 +99,5 @@ No permite if CYCLOPE_THEME_TYPE porque todos los media library tienen blocks pr
 
 	</div> <!--end media_detail -->
 
+{% endif %}
 {% endblock content %}

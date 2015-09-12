@@ -33,7 +33,9 @@ It is based on the category_teaser_list template.
     {% alias categorization.content_object as categorization.content_type.model %}
     {% alias categorization.content_object as 'media' %}
     {% endspaceless %}
-    {% include template_path with current_object=categorization.content_object host_template="cyclope/inline_view.html" %}
+    {% if not user.is_authenticated and not media.published %}{% else %}
+			{% include template_path with current_object=categorization.content_object host_template="cyclope/inline_view.html" %}
+		{% endif %}
   {% endfor %}
 {% endblock %}
 

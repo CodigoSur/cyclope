@@ -19,7 +19,9 @@
     {% endcomment %}
 
     {% alias categorization.content_object as categorization.content_type.model %}
-    {% include template_path with current_object=categorization.content_object %}
+    {% if not user.is_authenticated and not categorization.content_object.published %}{% else %}
+			{% include template_path with current_object=categorization.content_object %}
+		{% endif %}
   {% endfor %}
 	</div>
 

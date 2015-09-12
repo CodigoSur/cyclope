@@ -22,7 +22,9 @@
     {% endcomment %}
 
     {% alias object as object.get_object_name %}
-    {% include template_path %}
+    {% if not user.is_authenticated and not object.published %}{% else %}
+      {% include template_path %}
+		{% endif %}
   {% endfor %}
 
 {% endblock %}

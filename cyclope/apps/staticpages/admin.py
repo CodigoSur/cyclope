@@ -61,7 +61,7 @@ class StaticPageAdminForm(forms.ModelForm):
 class StaticPageAdmin(CollectibleAdmin, BaseContentAdmin):
     # updates related menu_items information when a StaticPaget is saved
     form = StaticPageAdminForm
-    list_display = ('__unicode__', ) + CollectibleAdmin.list_display
+    list_display = ('__unicode__', 'published') + CollectibleAdmin.list_display
     search_fields = ('name', 'text', )
     fieldsets = ((None,
                   {'fields': ('name', 'text',)}),

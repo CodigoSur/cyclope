@@ -1,4 +1,4 @@
-{% load fb_versions cyclope_utils %}
+{% load i18n fb_versions cyclope_utils %}
 
 	{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
   <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -29,4 +29,3 @@
 		<h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:40 }}</a></h2>
 	</div>
   {% endif %}  
-

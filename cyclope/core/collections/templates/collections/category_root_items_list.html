@@ -8,11 +8,13 @@ TODO(nicoechaniz): adapt this view to work in the same way as category_teaser_li
 <div class="category_root_item_list">
 <ul>
 {% for categorization in categorizations %}
+  {% if not user.is_authenticated and not categorization.content_object.published %}{% else %}
   <li>
     <a href="/{{CYCLOPE_PREFIX}}{{ categorization.content_type.app_label }}/{{ categorization.content_type.model }}/{{ categorization.content_object.slug }}">
       <span>{{ categorization.content_object.name }}</span>
     </a>
   </li>
+	{% endif %}
 {% endfor %}
 </ul>
 </div>

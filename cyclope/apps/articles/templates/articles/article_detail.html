@@ -2,8 +2,14 @@
 
 {% load comments i18n fb_versions cyclope_utils dbgettext_tags %}
 
-{% block content %}
-
+{% block content %} 
+{% if not user.is_authenticated and not article.published %}
+  <div class="alert alert-danger" role="alert">
+		<span class="glyphicon glyphicon-ban-circle"></span>
+			<a href="{% url auth_login %}?next={{ request.path }}">{% trans "This content isn't public, please log in" %}
+		</a>
+	</div>
+{% else %}
 <div class="content-view article detail article-detail">
 
   {% if article.pretitle %}
@@ -38,7 +44,8 @@
   {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
 		<!-- picture bootstrap -->
 		<!-- case with image for new widget o for related contents only with one picture -->
-		{% if article.picture or article.pictures|length == 1 %}
+		{% if article.pictures|length == 0 and not article.picture %}
+		{% elif article.picture or article.pictures|length == 1 %}
 			{% with article.picture as picture and article.pictures|first as pictures %}
 			<div class="{% inline_content_classes %}">
 					<div class="modals-picture" data-toggle="modal" data-target="#myModal">
@@ -229,4 +236,5 @@
 
 
 </div> <!--termina article_detail -->
+{% endif %}
 {% endblock content%}
