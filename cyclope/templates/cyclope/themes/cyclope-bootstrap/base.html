@@ -10,6 +10,8 @@
 
 {% load layout i18n cyclope_utils compress %}
 
+
+
 {# TODO(sanhoerth): find best way to show lang-tag in mulitlang enviroment #}
 <html lang="es">
 <head>
@@ -25,8 +27,15 @@
     <!-- /Meta -->
     <!-- ### Extras ### -->
     <link rel="alternate" href="/rss" title="RSS" type="application/rss+xml"/>
-    <link rel="icon" href="{{ CYCLOPE_THEME_MEDIA_URL }}images/favicon.ico" sizes="16x16" type="image/png"/>
-    <!-- /Extras -->
+    <!-- /Extras -->   
+ 
+    <!-- ### Favicon custom ### -->
+		{% if CYCLOPE_SITE_SETTINGS.favicon_image %}
+			<link rel="icon" href="{{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.favicon_image }}" sizes="16x16" type="image/png"/>
+		{% else %}
+			<link rel="icon" href="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/favicon.png" sizes="16x16" type="image/png"/>
+		{% endif %}
+	
     <!-- ### CSS ### -->
     {% compress css %}
     {% block displaycss %}
