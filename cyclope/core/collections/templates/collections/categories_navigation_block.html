@@ -1,16 +1,36 @@
 {% load i18n cyclope_utils %}
 {% if current_object.categories.values %}
-<div><span class="categories">
-{% comment %}    {% trans "Categories" %}: {% endcomment %}
-    <ul>
-        {% for categorization in current_object.categories.all %}
+    <div>
+        <span class="categories">
+        {% comment %}{% trans "Categories" %}:{% endcomment %}
+        {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+            {% for categorization in current_object.categories.all %}
             {% alias categorization.category as 'category' %}
             {% if category.collection.visible %}
+                <a href="{% url category-default category.slug %}" class="btn btn-primary" role="button">
+                    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+                    {{ category.name }}
+                </a>
+            {% endif %}
+            {% endfor %}
+        {% elif CYCLOPE_THEME_TYPE == 'classic' %}
+            <ul>
+                {% for categorization in current_object.categories.all %}
+                {% alias categorization.category as 'category' %}
+                {% if category.collection.visible %}
                 <li>
                     <a href="{% url category-default category.slug %}">{{ category.name }}</a>
                 </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-</span></div>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </span>
+    </div>
 {% endif %}
+
+
+
+
+
+

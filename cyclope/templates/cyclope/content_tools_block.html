@@ -12,16 +12,28 @@
       {% endblock %}
     {% endif %}
 
-    <ul>
-      <li class="first"><a href="javascript:window.print()" class="print">{% trans "Print" %}</a>
+    <ul class="list-inline">
+      <li>
+          <a href="javascript:window.print()" class="print">
+              <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+              {% trans "Print" %}
+          </a>
       </li>
       {% if user.is_authenticated and CYCLOPE_SITE_SETTINGS.enable_abuse_reports %}
-      <li class='abuse-report'><a href="{{current_object|abuse_report_link}}">{% trans "Report abuse" %}</a></li>
+      <li class='abuse-report'>
+          <a href="{{current_object|abuse_report_link}}">
+              <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+              {% trans "Report abuse" %}
+          </a>
+      </li>
       {% endif %}
       {% if current_object.allow_comments == 'YES' or current_object.allow_comments == 'SITE' and CYCLOPE_SITE_SETTINGS.allow_comments == 'YES' %}
       {% if comment_count %}
       <li>
-        <a href="#comments" class="comments_link">{% trans "Comments" %} ({{ comment_count }})</a>
+          <a href="#comments" class="comments_link">
+              <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+              {% trans "Comments" %} <span class="badge alert-info">{{ comment_count }}</span>
+          </a>
       </li>
       {% endif %}
       {% endif %}
@@ -30,11 +42,13 @@
       {% if cat_perms.edit_content %}
       <li>
         <a href="/admin/{{ current_object.get_app_label }}/{{ current_object.get_object_name }}/{{current_object.pk }}?_frontend=1&_popup=1" class="edit_link">
+          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
           {% trans "Edit" %}
         </a>
       </li>
       <li>
         <a href="/{{ current_object.get_object_name }}/{{ current_object.slug }}/delete/" class="delete_link">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
           {% trans "Delete" %}
         </a>
       </li>

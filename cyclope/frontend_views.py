@@ -97,7 +97,10 @@ class MenuMenuItemsHierarchy(frontend.FrontendView, HyerarchyBuilderMixin):
     is_region_view = True
     options_form = MenuHierarchyOptions
     template = "cyclope/menu_menuitems_hierarchy.html"
-    template_item = "cyclope/menu_menuitems_hierarchy_item.html"
+    if cyc_settings.CYCLOPE_THEME_TYPE == 'bootstrap':
+        template_item = "cyclope/menu_menuitems_hierarchy_item_bootstrap.html"
+    else:
+        template_item = "cyclope/menu_menuitems_hierarchy_item_classic.html"    
 
     def get_response(self, request, req_context, options, content_object):
         menu = content_object

@@ -1,0 +1,20 @@
+{% extends CYCLOPE_THEME_BASE_TEMPLATE %}
+
+{% load i18n layout%}
+{% block title %}{%if title %}{{title}} | {%endif%}{{ CYCLOPE_SITE_SETTINGS.global_title }}{%endblock%}
+{% block body_class %}default{% endblock %}
+
+
+
+{% block page_content %}
+{# <div class="row">{% region 'left' %}</div> #}
+    <div class="col-xs-12 col-sm-9">
+        <div class="row">{% region 'top' %}</div>
+         <!-- toogle nav for different devices and resolutions -->
+        <div class= "toggle-botton-nav"><p class="pull-right visible-xs"><button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"> <span class="glyphicon glyphicon-menu-left"></span> {% trans "Toggle nav" %}</button></p></div> <!-- end toogle nav -->
+        <div class="row">{% block content %}{% endblock %}</div>
+        <div class="row">{% region 'bottom' %}</div>
+    </div>
+    <div class="row">{% region 'right'%}</div>
+{% endblock %}
+

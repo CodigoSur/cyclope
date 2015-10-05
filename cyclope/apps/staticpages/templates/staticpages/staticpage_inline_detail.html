@@ -1,4 +1,4 @@
-{% load cyclope_utils %}
+{% load i18n cyclope_utils %}
 
 {% comment %}
 When inserted in a layout region the host template used is just a wrapper (see inline_view.html).
@@ -7,6 +7,10 @@ When showing the StaticPage as the main content of the view, the host_template i
 
 {% block content %}
 
+{% if not user.is_authenticated and not staticpage.published %}
+  <a href="{% url auth_login %}?next={{ request.path }}">{% trans "This content isn't public, please log in" %}</a>
+{% else %}
+
 <div class="content-view staticpage detail staticpage-detail html-content">
   
   <div class="text">{{ staticpage.text|smart_style }}</div>
@@ -14,5 +18,7 @@ When showing the StaticPage as the main content of the view, the host_template i
   {% include 'cyclope/related_contents_block.html' %}
 
 </div>
+
+{% endif %}
 
 {% endblock content%}

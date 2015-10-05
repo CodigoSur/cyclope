@@ -1,14 +1,31 @@
-{% load fb_versions cyclope_utils %}
+{% load i18n fb_versions cyclope_utils %}
 
-  <div class="content-view article labeled_icon">
-    <a href="{% url article-detail article.slug %}">
-      {% if article.get_picture %}
-        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
-        <img class="icon" src="{% version article.get_picture.image.path 'thumbnail' %}" border="0"/>
-      {% else %}
-        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
-        <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
-      {% endif %}
- </a>
-    <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:40 }}</a></h2>
-  </div>
+	{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+		<div class="thumbnail">
+			<a href="{% url article-detail article.slug %}">
+				{% if article.get_picture %}
+				  <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
+					<img class="img-responsive" src="{% version article.get_picture.image.path 'labeled_icon_bootstrap' %}" border="0"/>
+				{% else %}
+					<img class="img-responsive" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
+				{% endif %}
+			</a>
+			<div class="caption">
+				<h4><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:40 }}</a></h4>
+			</div>
+		</div>
+	</div>
+	{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+		<div class="content-view article labeled_icon">
+		<a href="{% url article-detail article.slug %}">
+			{% if article.get_picture %}
+				<img class="icon" src="{% version article.get_picture.image.path 'thumbnail' %}" border="0"/>
+			{% else %}
+				<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
+				<img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
+			{% endif %}
+		</a>
+		<h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:40 }}</a></h2>
+	</div>
+  {% endif %}  

@@ -1,0 +1,31 @@
+Changelog for Cyclope-Bootstrap Theme
+=======================
+2015-06-06  San Hoerth  <@SanHoerth> 
+
+===============
+
+Unrealese
+
+* Add breadcrumbs in other views
+
+Realease
+
+* Deleted form.uniForm to head in base.html.
+* New bootstrap javascripts and css.
+* Updated jquery library.
+* Added breadcrumbs_block.html: new block to collection/category and AddContent (teaser-lists only)
+* Adapted hierarchical menu to Bootstrap (first testing)
+* Renamed five_elements.html to main.html
+* Renamed four_elements.html por default.html
+* Renamed regions of the template as follows:
+     OldName   NewName
+     Air       Header
+     Water     Left
+     Love      Right
+     Spark     Top
+     Ash       Bottom
+     Earth     Footer
+* Main and default are the same regions, so that each user organize it your way. 
+* Deprecated 960 GS
+* Cyclope-Bootstrap Theme begins
+

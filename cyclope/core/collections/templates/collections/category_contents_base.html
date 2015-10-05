@@ -4,6 +4,33 @@
 
 {% block content %}
 
+{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+
+  {% if view_options.navigation == "TOP" %}
+    {% include 'cyclope/breadcrumb_block.html' %}
+  {% endif %}
+
+	<div class="category_description">
+    {% if view_options.show_title %}
+			<span class="category_title">
+				<a href="{% url category-default category.slug %}">{{ category.name }}</a>
+			</span>
+		{% endif %}
+
+		{% if category.description and view_options.show_description or category.image and view_options.show_image %}
+		<div class="collection_teaser">
+			{% if category.image and view_options.show_image %}
+			<img class="image" src="{% version category.image.path 'fb_thumb' %}" border="0"/>
+			{% endif %}
+			{% if category.description and view_options.show_description %}
+			<div class="summary">{{ category.description|smart_style }}</div>
+			{% endif %}
+		</div>
+		{% endif %}
+</div>
+
+{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+
   {% if not request.hide_frontend_edit %}
     {% per_category_perms category as cat_perms %}
     {% if cat_perms.add_content %}
@@ -45,10 +72,12 @@
   </div>
   {% endif %}
 
+{% endif %}
+
   {% block category_content %}{% endblock %}
   {% spaceless %}
   {% if view_options.navigation == "BOTTOM" %}
-    {% include 'collections/hierarchycal_navigation_block.html' %}
+    {% include 'cyclope/breadcrumb_block.html' %}
   {% endif %}
 
   {% if page %}
@@ -59,4 +88,5 @@
     {% endif %}
   {% endif %}
   {% endspaceless %}
+
 {% endblock %}

@@ -8,7 +8,8 @@
   <h1 class="title">{{ category }}</h1>
   <div class='forum'>
   <div class='link-create-topic'>
-    <a href="{% url category-create_topic category.slug %}">{% trans 'Create a new topic' %}</a>
+	<!-- Indicates a successful or positive action -->
+	<a href="{% url category-create_topic category.slug %}" type="button" class="btn btn-success">{% trans 'Create a new topic' %}</a>
   </div>
 <div class="clear"></div>
   <table >
@@ -20,15 +21,17 @@
       </tr>
       {% for categorization in categorizations %}
        {% alias categorization.content_object as 'obj' %}
-     <tr>
-       <td><h2 class="topic"><a href="{{ obj.url }}">{{ obj.name }}</a></h2></td>
-       <td class="comment">{{ obj.comments_count }}</td>
-       <td>{{ obj.creation_date|date:'DATETIME_FORMAT' }}
-           {% if obj.author %} {% trans 'by' %} {{ obj.author }} {% endif %}
-       </td>
-       <td>{% if obj.last_comment_date %}{{ obj.last_comment_date|date:'DATETIME_FORMAT' }}  {% trans 'by' %} {{ obj.last_comment_author }} {% endif %}
-       </td>
-      </tr>  
+				{% if not user.is_authenticated and not obj.published %}{% else %}
+     		<tr class="item">
+				 <td><h2 class="topic"><a href="{{ obj.url }}">{{ obj.name }}</a></h2></td>
+				 <td class="comment">{{ obj.comments_count }}</td>
+				 <td class="created">{{ obj.creation_date|date:'DATETIME_FORMAT' }}
+						 {% if obj.author %} {% trans 'by' %} {{ obj.author }} {% endif %}
+				 </td>
+				 <td class="last_comment">{% if obj.last_comment_date %}{{ obj.last_comment_date|date:'DATETIME_FORMAT' }}  {% trans 'by' %} {{ obj.last_comment_author }} {% endif %}
+				 </td>
+				</tr>  
+				{% endif %}
       {% endfor %}
   </table>
   </div>

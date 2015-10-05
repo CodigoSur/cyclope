@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--
+# CyclopeCMS GPL / http://cyclope.codigosur.org
+# Cyclope-Bootstrap Workflow Design
+# Version 1 / 2015-5-10
+# Copyright 2010-2015 CódigoSur Sociedad Civil / http://www.codigosur.org
+# Author San Hoerth / @SanHoerth
+# Please, view LICENSE.txt
+ -->
+
+{% load layout i18n cyclope_utils compress %}
+
+
+
+{# TODO(sanhoerth): find best way to show lang-tag in mulitlang enviroment #}
+<html lang="es">
+<head>
+    <!-- ### Meta ### -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>{% block title %}{{ CYCLOPE_SITE_SETTINGS.global_title }}{%endblock%}</title>
+    <meta name="Keywords" content="{{ CYCLOPE_SITE_SETTINGS.keywords }}"/>
+    <meta name="Description" content="{{ CYCLOPE_SITE_SETTINGS.description }}"/>
+    <meta name="author" content="CyclopeCMS"/>
+    <!-- /Meta -->
+    <!-- ### Extras ### -->
+    <link rel="alternate" href="/rss" title="RSS" type="application/rss+xml"/>
+    <!-- /Extras -->   
+ 
+    <!-- ### Favicon custom ### -->
+		{% if CYCLOPE_SITE_SETTINGS.favicon_image %}
+			<link rel="icon" href="{{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.favicon_image }}" sizes="16x16" type="image/png"/>
+		{% else %}
+			<link rel="icon" href="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/favicon.png" sizes="16x16" type="image/png"/>
+		{% endif %}
+	
+    <!-- ### CSS ### -->
+    {% compress css %}
+    {% block displaycss %}
+    {% block cyclopecss %}
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      <!-- <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"> -->
+      <!-- <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"> -->
+    {% endblock cyclopecss %}
+    {% endblock displaycss %}
+    {% endcompress %}
+     <!-- /CSS -->
+     
+    <!-- ### Cyclope-SiteSettings ### -->
+    {% block sitesettings_css %}
+    <style type="text/css">
+      @font-face {font-family: custom_body; src: url('{{ CYCLOPE_SITE_SETTINGS.body_custom_font }}');}
+      @font-face {font-family: custom_titles; src: url('{{ CYCLOPE_SITE_SETTINGS.titles_custom_font }}');}
+      {% if CYCLOPE_SITE_SETTINGS.titles_font %}
+      .brand h1, .title, .title a { font-family:{{ CYCLOPE_SITE_SETTINGS.titles_font  }}; }
+      {% endif %}
+      body { {% if CYCLOPE_SITE_SETTINGS.body_font %}
+             font-family: {{ CYCLOPE_SITE_SETTINGS.body_font }};
+             {% endif %}
+             font-size:{{ CYCLOPE_SITE_SETTINGS.font_size  }}px;}
+      {% if CYCLOPE_SITE_SETTINGS.hide_content_icons %} .type_icon { display: none;} {% endif %}
+       <script type="text/javascript">
+        less.modifyVars({
+            'color-alpha': '#fff',
+            'colora': '#{{ CYCLOPE_SITE_SETTINGS.color_a }}',
+            'colorb': '#{{ CYCLOPE_SITE_SETTINGS.color_b }}',
+            'colorc': '#{{ CYCLOPE_SITE_SETTINGS.color_c }}',
+            'colord': '#{{ CYCLOPE_SITE_SETTINGS.color_d }}',
+            'colore': '#{{ CYCLOPE_SITE_SETTINGS.color_e }}',
+            'color-omega':'#000'
+        });
+    </script>
+    <script type="text/javascript">
+    $(function() {
+        $('#gallery a').lightBox({
+            overlayBgColor:         '#000',
+            overlayOpacity:         0.8,
+            fixedNavigation:        false,
+            imageLoading:           '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-ico-loading.gif',
+            imageBtnPrev:           '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-btn-prev.gif',
+            imageBtnNext:           '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-btn-next.gif',
+            imageBtnClose:          '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-btn-close.gif',
+            imageBlank:             '{{ CYCLOPE_STATIC_URL }}js/lightbox/images/lightbox-blank.gif',
+            containerBorderSize:    10,
+            containerResizeSpeed:   400,
+            txtImage:               '{% trans "Image"%}',
+            txtOf:                  '{% trans "of"%}'
+        });
+    });
+    </script>
+    </style>
+    {% endblock sitesettings_css %}
+  <!-- /Cyclope-SiteSettings -->  
+  
+    {% block extra_head %}{% endblock %}
+ <!-- ### JS ### -->
+
+     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    {% if not COMPRESS_ENABLED %}
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less.min.js"></script>
+    {% endif %}
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/cyclope.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.min.js"></script> 
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/dropdown.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.bootstrap.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/carousel.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/npm.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/offcanvas.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/uni-form.jquery.min.js" ></script>
+        <script type="text/javascript" src="/media/cyclope/js/bootstrap/affix.js"></script>
+    {% if CYCLOPE_SITE_SETTINGS.enable_ratings %}
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/ratings.js" ></script>
+    {% endif %}
+    <!-- /JS --> 
+   </head>
+<body class="{% block body_class %}{%endblock%}" >
+	
+	{% block page_header %}
+	{% if CYCLOPE_SITE_SETTINGS.head_image %}
+	 <style type="text/css"> html { padding-top: 10px; } body { padding-top: 0; }</style>
+			<div class="brand container">
+				<a href="/">
+					<img src="{{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.head_image }}" alt="{{ CYCLOPE_SITE_SETTINGS.head_image }}" class="img-responsive">
+				</a>
+			</div>
+		{% endif %}
+	{% endblock %}
+	
+    <nav class="navbar {% if not CYCLOPE_SITE_SETTINGS.head_image %}navbar-fixed-top{% endif %} navbar-inverse" {% if CYCLOPE_SITE_SETTINGS.head_image %}data-spy="affix" data-offset-top="150"{% endif %}>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                {% if CYCLOPE_SITE_SETTINGS.show_head_title  %}
+									<a class="navbar-brand visible-xs" href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a>
+								{% endif %}
+            </div>
+            <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+            <!-- header -->  {% region 'header' %} <!-- /header -->
+            </div>
+        </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+    
+    <div class="container">
+        <div class="row row-offcanvas row-offcanvas-right">{% block page_content %} {% endblock %}</div>
+    </div><!--/.container-->
+
+      <hr>
+
+      <footer>
+       {% block page_footer %}
+ <div class="footer">
+  <div class="container">
+      {% region 'earth' %}
+      <span id="creativecommons">Los contenidos de este sitio web están bajo una
+        <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO">
+          Licencia Creative Commons BY-NC-ND
+        </a></span>.<br/>
+        <span id="codigo_sur">Tecnología: <a href="http://cyclope.codigosur.org">CyclopeCMS</a>. Desarrollo: <a href="http://www.codigosur.org">CódigoSur</a>.
+        </span><br/>
+  </div>
+  </div>
+</div><!-- /end mask -->
+{% endblock %}
+      </footer>
+
+    </div><!--/.container-->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+    
+  </body>
+  
+</html>

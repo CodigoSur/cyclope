@@ -123,6 +123,9 @@ class SiteSettings(models.Model):
     head_image = models.ImageField(_('header image'), 
                                    upload_to='theme/images', blank=True, null=True,
                                    help_text=_('select image for head: 960px width x 170px height'))
+    favicon_image = models.ImageField(_('favicon'), 
+                                   upload_to='theme/images/favicon', blank=True, null=True,
+                                   help_text=_('select image for favicon, only .ico or .png: 16px width x 16px height'))
     show_head_title = models.BooleanField(_('show head title'), default=True,
                                           help_text=_('show title and url site in head. If disabled, ' \
                                           'header image links to home.'))

@@ -347,7 +347,10 @@ class ThumbnailMixin(object):
 class CrispyFormsSimpleMixin(object):
     helper = FormHelper()
     helper.add_input(Submit('submit', _('Submit')))
-
+    helper.form_class = ''
+    helper.label_class = ''
+    helper.field_class = ''
+    
 
 from django.conf import settings
 from django.core.mail.message import EmailMultiAlternatives
@@ -390,14 +393,29 @@ class HyerarchyBuilderMixin(object):
         raise NotImplementedError
 
     def make_nested_list(self, base, *render_args):
+        from cyclope.models import MenuItem
+        def _classes(object_, current_url):
+            classes = [object_.slug]
+            if object_.get_descendant_count():
+                classes.append('has_children dropdown')
+            else:
+                classes.append('no_children')
+            if type(object_) == MenuItem:
+                if object_.url == current_url:
+                    classes.append('active')
+                if object_.site_home:
+                    classes.append('site_home')
+            return " ".join(classes)
+
         nested_list = []
         for child in base.get_children().filter(active=True):
             if child.get_descendant_count() > 0:
                 nested_list.extend(self.make_nested_list(child, *render_args))
             else:
-                nested_list.append((self.render_item(child, *render_args), child.slug))
+                nested_list.append((self.render_item(child, *render_args), _classes(child, *render_args)))
 
-        include = (self.render_item(base, *render_args), base.slug)
+        include = (self.render_item(base, *render_args), _classes(base, *render_args))
+
         if nested_list:
             return [include, nested_list]
         else:

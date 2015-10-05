@@ -280,10 +280,55 @@ def unordered_list_css(value, autoescape=None):
                     i += 1
             if sublist_item:
                 sublist = _helper(sublist_item, tabs+1)
-                sublist = '\n%s<ul>\n%s\n%s</ul>\n%s' % (indent, sublist,
+                sublist = '\n%s<ul class="dropdown-menu">\n%s\n%s</ul>\n%s' % (indent, sublist,
                                                          indent, indent)
             output.append('%s<li class="%s">%s%s</li>' % (indent, css_class,
                     escaper(force_unicode(title)), sublist))
             i += 1
         return '\n'.join(output)
     return mark_safe(_helper(value))
+
+from cyclope.themes import get_theme
+
+
+class TeaserLayoutClasses(template.Node):
+    """
+    Return the class names to be added for the selected theme
+    according to the region name or lack of (meaning main content).
+    """
+    def render(self, context):
+        theme = get_theme(context["CYCLOPE_CURRENT_THEME"])
+        # if region_name is none, it is the main content
+        region = context["region_name"]
+        if region == None:
+            region = "content"
+        teaser_classes = ""
+        if hasattr(theme, "teaser_layout_classes"):
+            # if content_classes are defined return them otherwise return empty
+            teaser_classes = theme.teaser_layout_classes.get(region, "")
+        return teaser_classes
+
+@register.tag('teaser_layout_classes')
+def do_append_to_get(parser, token):
+    return TeaserLayoutClasses()
+    
+class InlineContentClasses(template.Node):
+    """
+    Return the class names to be added for the selected theme
+    according to the region name or lack of (meaning main content).
+    """
+    def render(self, context):
+        theme = get_theme(context["CYCLOPE_CURRENT_THEME"])
+        # if region_name is none, it is the main content
+        region = context["region_name"]
+        if region == None:
+            region = "content"
+        content_classes = ""
+        if hasattr(theme, "inline_content_classes"):
+            # if content_classes are defined return them otherwise return empty
+            content_classes = theme.inline_content_classes.get(region, "")
+        return content_classes
+
+@register.tag('inline_content_classes')
+def do_append_to_get(parser, token):
+    return InlineContentClasses()

@@ -204,7 +204,7 @@ class SingletonAdminMixin(admin.ModelAdmin):
             return super(SingletonAdminMixin, self).response_change(request, obj)
 
 DESIGN_FIELDS = (
-    'global_title', 'theme', 'default_layout', 'head_image', 
+    'global_title', 'theme', 'default_layout', 'head_image', 'favicon_image',
     'show_head_title', 'body_font', 'body_custom_font', 'titles_font', 
     'titles_custom_font', 'font_size', 'hide_content_icons', 
     'color_a', 'color_b', 'color_c', 'color_d', 'color_e',
@@ -223,7 +223,7 @@ class DesignSettingsAdmin(SingletonAdminMixin):
 
     fieldsets = (
         (_('General'), {
-            'fields': ('global_title', 'show_head_title', 'head_image', 'theme', 'home_layout', 'default_layout', )
+            'fields': ('global_title', 'show_head_title', 'head_image', 'favicon_image', 'theme', 'home_layout', 'default_layout', )
         }),
         (_('Fonts'), {
             'fields': ('font_size', ('body_font', 'body_custom_font'), 

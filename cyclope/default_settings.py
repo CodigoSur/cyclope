@@ -202,14 +202,14 @@ FILEBROWSER_VERSIONS = {
                  'width': 60, 'height': 60, 'opts': 'crop upscale'},
     'thumbnail': {'verbose_name': ugettext('Thumbnail (100px height)'),
                   'width': '', 'height': 100, 'opts': ''},
-    'small': {'verbose_name': ugettext('Small (300x300px)'),
-              'width': 300, 'height': 300, 'opts': 'crop'},
+    'small': {'verbose_name': ugettext('Small (150x150px)'),
+              'width': 135, 'height': 135, 'opts': 'crop'},
     'medium': {'verbose_name': ugettext('Medium (460px width)'),
                'width': 460, 'height': '', 'opts': ''},
     'big': {'verbose_name': ugettext('Big (620px width)'),
             'width': 620, 'height': '', 'opts': ''},
     'cropped': {'verbose_name': ugettext('Cropped (60x60px)'),
-                'width': 60, 'height': 60, 'opts': 'crop'},
+                'width': 64, 'height': 64, 'opts': 'crop'},
     'croppedthumbnail': {'verbose_name': ugettext('Cropped Thumbnail (140x140px)'),
                          'width': 140, 'height': 140, 'opts': 'crop'},
     'slideshow': {'verbose_name': ugettext('Slideshow (300x300px)'),
@@ -218,6 +218,10 @@ FILEBROWSER_VERSIONS = {
                   'width': 550, 'height': '', 'opts': 'crop'},
     'newsletter_teaser': {'verbose_name': ugettext('Newsletter Teaser (150x150px)'),
                   'width': 150, 'height': 150, 'opts': 'crop'},
+    'carrousel_bootstrap': {'verbose_name': ugettext('Carrousel Bootstrap'),
+                 'width': 730, 'height': 350, 'opts': 'crop upscale'},
+    'labeled_icon_bootstrap': {'verbose_name': ugettext('Labeled Bootstrap'),
+                 'width': 250, 'height': 200, 'opts': 'crop upscale'},
 }
 
 FILEBROWSER_MAX_UPLOAD_SIZE = 1024*1024*20 # 20MB
@@ -271,7 +275,7 @@ MARKITUP_SET = 'cyclope/markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
 
 # crispy forms settings
-CRISPY_TEMPLATE_PACK = 'uni_form'
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 
 # compressor settings

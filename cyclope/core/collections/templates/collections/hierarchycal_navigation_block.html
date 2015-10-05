@@ -1,21 +1,41 @@
-{% if category.collection.visible %}
-  {% with children=category.children.all %}
-  {% if not region_name %}
-  <div id="categories_navigation" class="{{ category.collection.slug }} {{ category.slug }}{% if children %} children{% endif %}">
-    {% if category.parent %}
-      <a href="{% url category-default category.parent.slug %}" class="parent">{{ category.parent.name }}</a>
-    {% else %}
-      <a href="{% url collection-root_categories_teaser_list category.collection.slug %}" class="parent">{{ category.collection.name }}</a>
-    {% endif %}
+{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+	{% if category.collection.visible %}
+		{% with children=category.children.all %}
+			{% if category.parent %}
+				<li><a href="{% url category-default category.parent.slug %}" class="parent">{{ category.parent.name }}</a></li>
+			{% else %}
+				<li><a href="{% url collection-root_categories_teaser_list category.collection.slug %}" class="parent">{{ category.collection.name }}</a></li>
+			{% endif %}
 
-    {% if children %}
-      <ul>
-        {% for child in children %}
-          <li> <a href="{% url category-default child.slug %}" class="children">{{ child.name }}</a> </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  </div>
-  {% endif%}
-  {% endwith %}
+			{% if children %}
+				<ol>
+					{% for child in children %}
+						<li> <a href="{% url category-default child.slug %}" class="children">{{ child.name }}</a> </li>
+					{% endfor %}
+				</ol>
+			{% endif %}
+		{% endwith %}
+	{% endif %}
+{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+	{% if category.collection.visible %}
+		{% with children=category.children.all %}
+		{% if not region_name %}
+		<div id="categories_navigation" class="{{ category.collection.slug }} {{ category.slug }}{% if children %} children{% endif %}">
+			{% if category.parent %}
+				<a href="{% url category-default category.parent.slug %}" class="parent">{{ category.parent.name }}</a>
+			{% else %}
+				<a href="{% url collection-root_categories_teaser_list category.collection.slug %}" class="parent">{{ category.collection.name }}</a>
+			{% endif %}
+
+			{% if children %}
+				<ul>
+					{% for child in children %}
+						<li> <a href="{% url category-default child.slug %}" class="children">{{ child.name }}</a> </li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		</div>
+		{% endif%}
+		{% endwith %}
+	{% endif %}
 {% endif %}

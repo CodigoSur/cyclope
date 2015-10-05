@@ -1,0 +1,29 @@
+{% load i18n fb_versions cyclope_utils dbgettext_tags %}
+
+<div class="item {% ifequal first_content media %}active{% endifequal %} media content-view">
+
+    {% if view_options.show_image %}
+        {% if current_object.image %}
+					<a href="{% if current_object.skip_detail %}{{ current_object.content_url }}{% else %} {{ current_object.get_absolute_url }}{% endif %}" {% if current_object.new_window %}target="_blank"{% endif%}><img src="{% version current_object.image.path 'carrousel_bootstrap' %}" alt="{{ current_object.name }}" /></a>
+        {% else %}
+					<img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="{{ article.name }}" border="0" />
+        {% endif %}
+    {% endif %}
+    
+  <div class="carousel-caption">
+    {% if view_options.show_title %}
+    <h3>
+      <a href="{% if current_object.skip_detail %}{{ current_object.content_url }}{% else %}{{ current_object.get_absolute_url }}{% endif%}" {% if current_object.new_window %}target="_blank"{% endif%}>
+        {{ current_object.name|truncatechars:80 }}
+      </a>
+    </h3>
+    {% endif %}
+    {% block description %}
+      {% if view_options.show_description and current_object.description %}
+      <p>
+        {{ current_object.description|smart_style|truncatewords_html:40 }}
+      </p>
+      {% endif %}
+    {% endblock description %}
+  </div>
+</div>

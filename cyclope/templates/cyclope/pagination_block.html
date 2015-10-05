@@ -1,5 +1,49 @@
 {% load i18n cyclope_utils %}
 
+{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+
+   {% if page.paginator.num_pages != 1 %}
+   <div class="paginator">
+		 <nav>
+        <ul class="pagination">
+            {% if page.has_previous %}
+                {# query is present when this block is included in the search view #}
+                 <li>
+                  <a href="?{% append_to_get page=1 %}" aria-label="First">
+                    <span aria-hidden="true">&laquo; {% trans 'first' %}</span>
+                  </a>
+                </li>
+                 <li>
+                  <a href="?{% append_to_get page=page.previous_page_number %}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo; {% trans 'previous' %}</span>
+                  </a>
+                </li>
+            {% endif %}
+
+            <li class="active">
+               <span >{% trans 'Page' %} {{ page.number }} {% trans 'of' %} {{ page.paginator.num_pages }}</span>
+            </li>
+
+
+            {% if page.has_next %}
+              <li>
+                  <a href="?{% append_to_get page=page.next_page_number %}" aria-label="Next">
+                    <span aria-hidden="true">{% trans 'next' %} &raquo;</span>
+                  </a>
+              </li>
+              <li>
+                  <a href="?{% append_to_get page=page.paginator.num_pages %}" aria-label="Last">
+                    <span aria-hidden="true">{% trans 'last' %} &raquo;</span>
+                  </a>
+              </li>
+            {% endif %}
+        </ul>
+    </nav>
+    </div>
+   {% endif %}
+
+{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+
    {% if page.paginator.num_pages != 1 %}
     <div class="paginator">
         <span class="step-links">
@@ -21,3 +65,4 @@
     </div>
    {% endif %}
 
+{% endif %}

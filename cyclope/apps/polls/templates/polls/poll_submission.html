@@ -6,23 +6,51 @@
 
 {% alias poll as 'current_object' %}
 
-<div class="content-view poll submission poll-submission">
+	{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
 
-  <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+		<div class="content-view poll submission poll-submission panel panel-primary">
 
-  <h1 class="title">{{ poll.name }}</h1>
+			<div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+			<div class="panel-heading">
+				<h3 class="panel-title">{{ poll.name }}</h3>
+		 	</div>
+			<div class="summary">
+				{{ poll.description}}
+			</div>
 
-  <form action="{% url poll-submission poll.slug %}" method="POST" class="uniForm">
-    {% csrf_token %}
-    {% for form in forms %}
-        {{ form|crispy }}
-    {% endfor %}
-    {{ captcha_form|crispy }}
-    <div class="buttonHolder">
-      <input type="submit" value="{% trans 'Submit' %}" />
-    </div>
-  </form>
+			<form action="{% url poll-submission poll.slug %}" method="POST">
+				{% csrf_token %}
+				{% for form in forms %}
+						{{ form|crispy }}
+				{% endfor %}
+				{{ captcha_form|crispy }}
+				<div  class="panel-footer">
+					<input class="btn btn-primary btn-sm" type="submit" value="{% trans 'Vote' %}" />
+					<a class="btn btn-default btn-sm" href="{% url poll poll.slug %}">{% trans 'View Results' %}</a>
+				</div>
+			</form>
 
-</div>
+		</div>
+	{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+
+		<div class="content-view poll submission poll-submission">
+
+			<div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+
+			<h1 class="title">{{ poll.name }}</h1>
+
+			<form action="{% url poll-submission poll.slug %}" method="POST" class="uniForm">
+				{% csrf_token %}
+				{% for form in forms %}
+						{{ form|crispy }}
+				{% endfor %}
+				{{ captcha_form|crispy }}
+				<div class="buttonHolder">
+					<input type="submit" value="{% trans 'Submit' %}" />
+				</div>
+			</form>
+
+		</div>
+{% endif %}
 
 {% endblock content%}

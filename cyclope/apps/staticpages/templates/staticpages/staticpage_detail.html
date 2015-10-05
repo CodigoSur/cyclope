@@ -1,5 +1,5 @@
 {% extends host_template %}
-{% load cyclope_utils %}
+{% load i18n cyclope_utils fb_versions %}
 
 {% comment %}
 When inserted in a layout region the host template used is just a wrapper (see inline_view.html).
@@ -8,12 +8,42 @@ When showing the StaticPage as the main content of the view, the host_template i
 
 {% block content %}
 
+{% if not user.is_authenticated and not staticpage.published %}
+  <div class="alert alert-danger" role="alert">
+		<span class="glyphicon glyphicon-ban-circle"></span>
+			<a href="{% url auth_login %}?next={{ request.path }}">{% trans "This content isn't public, please log in" %}
+		</a>
+	</div>
+{% else %}
+
 <div class="content-view staticpage detail staticpage-detail html-content">
   
+	{# include 'cyclope/content_tools_block.html' #}
+
+  
+  {% if staticpage.pictures %}
+    <a href="{% url staticpage-detail staticpage.slug %}">
+        <img class="img-responsive" src="{% version staticpage.pictures.0.image.path 'big' %}" border="0"/>
+    </a>
+  {% endif %}
+  
+    <!-- descripcion -->
+  {% if staticpage.summary %}
+		{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+			<h3 class="summary">{{ staticpage.summary|smart_style }}</h3>
+		{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+			<div class="summary">{{ staticpage.summary|smart_style}}</div>
+		{% endif %}
+  {% endif %}
+  <!-- /descripcion -->
+  
   <div class="text">{{ staticpage.text|smart_style }}</div>
+
+<div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
   {% include 'cyclope/related_contents_block.html' %}
 
 </div>
 
+{% endif %}
 {% endblock content%}
