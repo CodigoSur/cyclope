@@ -110,8 +110,6 @@ CYCLOPE_PROJECT_NAME = os.path.basename(CYCLOPE_PROJECT_PATH)
 
 CYCLOPE_BASE_CONTENT_TYPES = site.base_content_types
 
-CYCLOPE_THEME_TYPE = 'bootstrap'
-
 import themes
 
 def get_site_settings():
@@ -134,6 +132,8 @@ def populate_from_site_settings(site_settings):
     CYCLOPE_SITE_SETTINGS = site_settings
     CYCLOPE_BASE_URL = "http://" + CYCLOPE_SITE_SETTINGS.site.domain # FIXME: could be https
     CYCLOPE_CURRENT_THEME = CYCLOPE_SITE_SETTINGS.theme
+    CYCLOPE_THEME_TYPE = getattr(themes.get_theme(CYCLOPE_CURRENT_THEME), 'theme_type', 'classic')
+    
     if CYCLOPE_CURRENT_THEME in themes.get_local_themes():
         CYCLOPE_THEME_MEDIA_URL = '%s%s/' % (
             settings.CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX, CYCLOPE_CURRENT_THEME)

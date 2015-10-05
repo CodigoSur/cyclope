@@ -9,6 +9,7 @@ Attributes:
 from django.utils.translation import ugettext_lazy as _
 
 verbose_name = _('Cyclope-Bootstrap')
+theme_type = 'bootstrap'
 
 layout_templates = {
 
