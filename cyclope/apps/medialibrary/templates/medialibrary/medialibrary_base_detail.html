@@ -2,6 +2,8 @@
 
 {% load i18n comments cyclope_utils fb_versions %}
 
+{% block content %}
+
 {% if not user.is_authenticated and not current_object.published %}
   <a href="{% url auth_login %}?next={{ request.path }}">{% trans "This content isn't public, please log in" %}</a>
 {% else %}
@@ -55,3 +57,5 @@
 
 	</div> <!--end media_detail -->
 {% endif %}
+
+{% endblock content %}
