@@ -1,3 +1,5 @@
+{% extends host_template %}
+
 {% load i18n comments cyclope_utils fb_versions %}
 
 {% if not user.is_authenticated and not current_object.published %}
