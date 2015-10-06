@@ -1,103 +1,55 @@
-{% extends host_template %}
-
 {% load i18n comments cyclope_utils fb_versions %}
 
-{% block content %}
-
 {% if not user.is_authenticated and not current_object.published %}
-  <div class="alert alert-danger" role="alert">
-		<span class="glyphicon glyphicon-ban-circle"></span>
-			<a href="{% url auth_login %}?next={{ request.path }}">{% trans "This content isn't public, please log in" %}
-		</a>
-	</div>
+  <a href="{% url auth_login %}?next={{ request.path }}">{% trans "This content isn't public, please log in" %}</a>
 {% else %}
 
-<!-- Optimizado para bootstrap, en classic pisar con el contenido de medialibrary_base_detail_classic.html  
-No permite if CYCLOPE_THEME_TYPE porque todos los media library tienen blocks propios -->
+	<div class="content-view {{ current_object.get_object_name }} media detail">
 
-<div class="content-view {{ current_object.get_object_name }} media detail">
+		<h1 class="title">{{ current_object.name }}</h1>
 
-	<h1 class="title">{{ current_object.name }}</h1>
+		{% include 'cyclope/content_tools_block.html' %}
 
-	{% include 'cyclope/content_tools_block.html' %}
+		{% include "cyclope/author_block.html" with author=current_object.author %}
 
-	{% include "cyclope/author_block.html" with author=current_object.author %}
-
-	{% block media_content %}
-	{% endblock %}
-
-	{% block media_content_download %}
-	<div class="action-content download_link">
-			<a target="_blank" class="btn btn-primary" role="button" href="{{ current_object.media_file }}"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>{% trans "download file" %}</a>
-	</div>
-	{% endblock %}
-
-	<div class="html-content summary">{{ current_object.description|smart_style }}</div>
-
-	{% if current_object.image %}
-  <div class="movieclip_picture media-content">
-    {% if current_object.content_url %}<a href="{{ current_object.content_url }}" {% if current_object.new_window %}target="_blank"{% endif%} >{% endif%}
-    <img class="center-block" src="{% version current_object.image.path 'medium' %}"/>
-    {% if current_object.content_url %}</a>{% endif%}
-  </div>
-	{% endif %}
-
-	{% if current_object.get_last_change_date or current_object.source %}
-		<div class="meta-content">
-			{% if current_object.get_last_change_date %}
-				<h6 class="date">{% trans "Last modification date" %}: {{ current_object.get_last_change_date }}</h6>
-			{% endif %}
-
-			{% include "cyclope/source_block.html" with source=current_object.source %}
-		</div>
-	{% endif %}
-
-	<div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
-
-  <div class="clear"></div>
-
-	{% with author=current_object.get_author_or_user %}
-	{% with author_url=author.get_absolute_url %}
-	{% if author %}
-			<a name="author"></a> 
-			<div class="author-container meta-content alert alert-info" role="alert">
-					<div class="author-container-data">
-							{% if author.image %}
-							<div class="media-left">
-									<a href="#">
-											<img class="author img-circle" src="{% version author.image.path 'cropped' %}" border="0" title="Author"/>
-									</a>
-							</div>
-									
-							{% endif %}
-							<div class="author-container-data-text media-body">
-									<h4  class="author">
-											{% if author_url %}<a href='{{ author_url }}'>{% endif %}
-											{{ author }}
-											{% if author_url %}</a>{% endif %}
-											{% if author.origin %}
-											<small>{{ author.origin }}</small>
-											{% endif %}
-									</h4>
-									<div class="author-notes">{{ author.notes|smart_style }}</div> 
-							</div>
-					</div>
+		{% if current_object.image %}
+			<div class="media-content">
+				{% if current_object.content_url %}<a href="{{ current_object.content_url }}" {% if current_object.new_window %}target="_blank"{% endif%} >{% endif%}
+				<img align="center" src="{% version current_object.image.path 'big' %}"/>
+				{% if current_object.content_url %}</a>{% endif%}
 			</div>
-	{% endif %}
+		{% endif %}
 
-	{% endwith %}
-	{% endwith %}
+		{% block media_content %}
+		{% endblock %}
 
+		{% block media_content_download %}
+		<div class="action-content download_link">
+				<a target="_blank" href="{{ current_object.media_file }}">{% trans "download file" %}</a>
+		</div>
+		{% endblock %}
 
-	{% include 'cyclope/related_contents_block.html' %}
+		<div class="html-content summary">{{ current_object.description|smart_style }}</div>
 
-	{% include 'ratings/rating_block.html' %}
+		{% if current_object.get_last_change_date or current_object.source %}
+			<div class="meta-content">
+				{% if current_object.get_last_change_date %}
+					<h6 class="date">{% trans "Last modification date" %}: {{ current_object.get_last_change_date }}</h6>
+				{% endif %}
 
-	{% block media_comments %}
-			{% include 'comments/comments_block.html' %}
-	{% endblock %}
+				{% include "cyclope/source_block.html" with source=current_object.source %}
+			</div>
+		{% endif %}
+
+		<div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+
+		{% include 'cyclope/related_contents_block.html' %}
+
+		{% include 'ratings/rating_block.html' %}
+
+		{% block media_comments %}
+				{% include 'comments/comments_block.html' %}
+		{% endblock %}
 
 	</div> <!--end media_detail -->
-
 {% endif %}
-{% endblock content %}
