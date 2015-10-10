@@ -2224,7 +2224,7 @@ msgstr "categorização"
 
 #: core/collections/models.py:281
 msgid "categorizations"
-msgstr "categorizaçãos"
+msgstr "categorizações"
 
 #: core/collections/models.py:297
 msgid "is orphan"
