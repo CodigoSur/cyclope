@@ -2,7 +2,7 @@
 {% if current_object.allow_comments == 'YES' or current_object.allow_comments == 'SITE' and CYCLOPE_SITE_SETTINGS.allow_comments == 'YES' %}
 
   {% get_comment_count for current_object as comment_count %}
-   <div>
+  <div>
     <script type="text/javascript">
 
         function cancel_reply_form(event) {
@@ -49,46 +49,46 @@
 
 
     <div id="user_comments">
-    {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
-    <div class="top comments_length">
-        <h3 class="title">{% blocktrans %} There are {{ comment_count }} comments {% endblocktrans %}</h3>
+			{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+				<div class="top comments_length">
+						<h3 class="title">{% blocktrans %} There are {{ comment_count }} comments {% endblocktrans %}</h3>
+				</div>
+
+
+				<div class="action-content show_comment_form">
+					<a name="comments" id="show_comment_form" class="btn btn-primary" role="button" data-toggle="collapse" href="#wrap_write_comment" aria-expanded="false" aria-controls="collapseExample">{% trans "comment on this content" %}</a>
+				</div>
+
+
+				<div>
+					<div class="collapse" id="wrap_write_comment">
+					<!--form comentario -->
+					 <div id="form-comment">{% render_comment_form for current_object %}</div>
+					</div>
+				</div>
+
+				{% render_comment_list for current_object %} 
+
+      {% elif CYCLOPE_THEME_TYPE == 'classic' %}
+
+				<div class="top comments_length">
+					<h6>{% blocktrans %} There are {{ comment_count }} comments {% endblocktrans %}</h6>
+				</div>
+
+				{% render_comment_list for current_object %}
+
+				<div class="action-content show_comment_form">
+					<a name="comments" href="#comments" id="show_comment_form">{% trans "comment on this content" %}</a>
+				</div>
+
+				<div>
+					<div id="wrap_write_comment">
+						<!--form comentario -->
+						<div id="form-comment">{% render_comment_form for current_object %}</div>
+					</div>
+				</div>
+
+			{% endif %}
     </div>
-
-
-      <div class="action-content show_comment_form">
-        <a name="comments" id="show_comment_form" class="btn btn-primary" role="button" data-toggle="collapse" href="#wrap_write_comment" aria-expanded="false" aria-controls="collapseExample">{% trans "comment on this content" %}</a>
-      </div>
-
-
-      <div>
-        <div class="collapse" id="wrap_write_comment">
-        <!--form comentario -->
-         <div id="form-comment">{% render_comment_form for current_object %}</div>
-        </div>
-      </div>
-
-      {% render_comment_list for current_object %} 
-
-         {% elif CYCLOPE_THEME_TYPE == 'classic' %}
-
-  <div class="top comments_length">
-        <h6>{% blocktrans %} There are {{ comment_count }} comments {% endblocktrans %}</h6>
-      </div>
-
-      {% render_comment_list for current_object %}
-
-      <div class="action-content show_comment_form">
-        <a name="comments" href="#comments" id="show_comment_form">{% trans "comment on this content" %}</a>
-      </div>
-
-      <div>
-        <div id="wrap_write_comment">
-        <!--form comentario -->
-         <div id="form-comment">{% render_comment_form for current_object %}</div>
-        </div>
-      </div>
-    </div>
-        {% endif %}
-    </div>
-   </div>
+  </div>
 {% endif %}
