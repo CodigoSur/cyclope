@@ -367,7 +367,10 @@ class CollectionCategoriesHierarchy(frontend.FrontendView, HyerarchyBuilderMixin
     is_region_view = True
     options_form = MenuHierarchyOptions
     template = "collections/collection_categories_hierarchy.html"
-    template_item = "collections/collection_categories_hierarchy_item.html"
+    if cyc_settings.CYCLOPE_THEME_TYPE == 'bootstrap':
+        template_item = "collections/collection_categories_hierarchy_item_bootstrap.html"
+    else:
+        template_item = "collections/collection_categories_hierarchy_item.html"
 
     def get_response(self, request, req_context, options, content_object):
         collection = content_object
