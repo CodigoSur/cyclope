@@ -394,7 +394,7 @@ class HyerarchyBuilderMixin(object):
 
     def make_nested_list(self, base, *render_args):
         from cyclope.models import MenuItem
-        def _classes(object_, current_url):
+        def _classes(object_, current_url=None):
             classes = [object_.slug]
             if object_.get_descendant_count():
                 classes.append('has_children dropdown')

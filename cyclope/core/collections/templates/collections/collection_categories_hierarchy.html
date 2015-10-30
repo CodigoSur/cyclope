@@ -3,9 +3,8 @@
 
 {% block content %}
 <div class="collection_categories_hierarchy">
-  <ul class="cyclope_menu {{ align|lower }}">
+  <ul class="cyclope_menu {{ align|lower }} {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}nav navbar-nav{% endif %}">
   {{ categories|unordered_list_css }}
   </ul>
 </div>
 {% endblock content%}
-

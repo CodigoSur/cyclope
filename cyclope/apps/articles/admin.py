@@ -124,12 +124,12 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
     inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines
 
     fieldsets = ((None,
-                  {'fields': ('name', 'author', 'pretitle', 'picture',
-                   'summary', 'text')}),
+                  {'fields': ('name', 'author', 'published', 'pretitle', 'picture',
+                      'summary', 'text' )}),
                  (_('Publication data'),
                   {
                     'classes': ('collapse',),
-                    'fields':('slug', 'published', 'show_author', 'source',
+                    'fields':('slug', 'show_author', 'source',
                               'date', 'allow_comments', 'creation_date')}),
                 )
 
