@@ -51,7 +51,7 @@ class Collection(models.Model, ThumbnailMixin):
                          editable=True, blank=True)
     # collections that aren't visible can be used to customize content behaviour
     visible = models.BooleanField(_('visible'), default=True)
-    # the idea with navigation_root collections is that
+    # TODO the idea with navigation_root collections is that
     # URLS for these collections should be simplified. not used at the moment.
     navigation_root = models.BooleanField(_('navigation root'), default=False)
     content_types = models.ManyToManyField(ContentType, db_index=True,

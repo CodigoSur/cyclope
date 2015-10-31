@@ -206,6 +206,7 @@ class CollectionAdmin (admin.ModelAdmin):
     list_editable = ("visible", )
 
     inlines = (CollectionPermissionInline,)
+    exclude = ('navigation_root',)
 
 admin.site.register(Collection, CollectionAdmin)
 
