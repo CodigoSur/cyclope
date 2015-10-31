@@ -33,6 +33,7 @@ from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from django.template import Template, Context
 import cyclope
 
 def get_object_name(model):
@@ -392,7 +393,7 @@ class HyerarchyBuilderMixin(object):
         """
         raise NotImplementedError
 
-    def make_nested_list(self, base, *render_args):
+    def make_nested_list(self, base, clazzes=False, *render_args):
         from cyclope.models import MenuItem
         def _classes(object_, current_url=None):
             classes = [object_.slug]
@@ -410,13 +411,60 @@ class HyerarchyBuilderMixin(object):
         nested_list = []
         for child in base.get_children().filter(active=True):
             if child.get_descendant_count() > 0:
-                nested_list.extend(self.make_nested_list(child, *render_args))
+                nested_list.extend(self.make_nested_list(child, classes, *render_args))
             else:
-                nested_list.append((self.render_item(child, *render_args), _classes(child, *render_args)))
+                if clazzes :
+                    x = (self.render_item(child, *render_args), _classes(child, *render_args))
+                else :
+                    x = self.render_item(child, *render_args)
+                nested_list.append(x)
 
-        include = (self.render_item(base, *render_args), _classes(base, *render_args))
-
+        if clazzes :
+            include = (self.render_item(base, *render_args), _classes(base, *render_args))
+        else :
+            include = self.render_item(base, *render_args)
+        
         if nested_list:
             return [include, nested_list]
         else:
             return [include]
+
+    def _get_categories_nested_list(self, base_category, name_field='name'):
+	    """Creates a nested list to be used with unordered_list template tag
+	    """
+	    #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
+	    link_template = Template(
+	        '{% if has_content %}'
+	        '<span><a href="{% url category-teaser_list slug %}">{{ name }}</a></span>'
+	        '{% else %} {{ name }}'
+	        '{% endif %}'
+	        ' <a href="{% url category_feed slug %}">'
+	        '<img src="{{ media_url }}images/css/rss_logo.png"/></a>'
+	        )
+	    nested_list = []
+	    for child in base_category.get_children():
+	        if child.get_descendant_count()>0:
+	            nested_list.extend(self._get_categories_nested_list(
+	                child, name_field=name_field))
+	        else:
+	            name = getattr(child, name_field)
+	            has_content = child.categorizations.exists()
+	            nested_list.append(link_template.render(
+	                Context({'name': name,
+	                         'slug': child.slug,
+	                         'has_content': has_content,
+	                         'media_url': cyclope.settings.CYCLOPE_THEME_MEDIA_URL,})))
+
+
+	    name = getattr(base_category, name_field)
+	    has_content = base_category.categorizations.exists()
+	    include = link_template.render(
+	        Context({'name': name,
+	                 'slug': base_category.slug,
+	                 'has_content': has_content,
+	                 'has_children': base_category.get_descendant_count(),
+	                 'media_url':cyclope.settings.CYCLOPE_THEME_MEDIA_URL,}))
+	    if nested_list:
+	        return [include, nested_list]
+	    else:
+	        return [include]

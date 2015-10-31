@@ -377,7 +377,7 @@ class CollectionCategoriesHierarchy(frontend.FrontendView, HyerarchyBuilderMixin
         categories = Category.tree.filter(collection=collection, level=0)
         category_list = []
         for category in categories:
-            category_list.extend(self.make_nested_list(category))
+            category_list.extend(self.make_nested_list(category, True))
         req_context.update({'categories': category_list,
                             'collection_slug': collection.slug,
                             'align': options["align"]})
