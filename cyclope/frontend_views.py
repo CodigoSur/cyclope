@@ -108,7 +108,7 @@ class MenuMenuItemsHierarchy(frontend.FrontendView, HyerarchyBuilderMixin):
         menu_items_list = []
         current_url = request.path_info[1:]
         for item in menu_items:
-            value = self.make_nested_list(item, current_url)
+            value = self.make_nested_list(item, True, current_url)
             menu_items_list.extend(value)
         return render_to_string(self.template, {
             'menu_items': menu_items_list,
@@ -171,7 +171,7 @@ class SiteSearchBox(frontend.FrontendView):
 frontend.site.register_view(Site, SiteSearchBox)
 
 
-class SiteMap(frontend.FrontendView):
+class SiteMap(frontend.FrontendView, HyerarchyBuilderMixin):
     """Show an expanded hierarchical list of all collection and menus
     """
     name='map'
@@ -199,7 +199,7 @@ class SiteMap(frontend.FrontendView):
             for item in MenuItem.tree.filter(menu=menu, level=0):
                 # TODO(diegoM): Change this line when the refactorization is done
                 menu_items_list.extend(
-                    MenuMenuItemsHierarchy().make_nested_list(item, None))
+                    MenuMenuItemsHierarchy().make_nested_list(item, False, None))
             if menu_items_list:
                 menus_list.extend([menu.name, menu_items_list])
             else:
@@ -210,45 +210,6 @@ class SiteMap(frontend.FrontendView):
             'menus':menus_list,
         }, req_context)
 
-    def _get_categories_nested_list(self, base_category, name_field='name'):
-
-        """Creates a nested list to be used with unordered_list template tag
-        """
-        #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
-        link_template = Template(
-            '{% if has_content %}'
-            '<span><a href="{% url category-teaser_list slug %}">{{ name }}</a></span>'
-            '{% else %} {{ name }}'
-            '{% endif %}'
-            ' <a href="{% url category_feed slug %}">'
-            '<img src="{{ media_url }}images/css/rss_logo.png"/></a>'
-            )
-        nested_list = []
-        for child in base_category.get_children():
-            if child.get_descendant_count()>0:
-                nested_list.extend(self._get_categories_nested_list(
-                    child, name_field=name_field))
-            else:
-                name = getattr(child, name_field)
-                has_content = child.categorizations.exists()
-                nested_list.append(link_template.render(
-                    Context({'name': name,
-                             'slug': child.slug,
-                             'has_content': has_content,
-                             'media_url':cyc_settings.CYCLOPE_THEME_MEDIA_URL,})))
-
-        name = getattr(base_category, name_field)
-        has_content = base_category.categorizations.exists()
-        include = link_template.render(
-            Context({'name': name,
-                     'slug': base_category.slug,
-                     'has_content': has_content,
-                     'has_children': base_category.get_descendant_count(),
-                     'media_url':cyc_settings.CYCLOPE_THEME_MEDIA_URL,}))
-        if nested_list:
-            return [include, nested_list]
-        else:
-            return [include]
 frontend.site.register_view(Site, SiteMap)
 
 
