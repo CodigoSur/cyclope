@@ -393,7 +393,8 @@ class HyerarchyBuilderMixin(object):
         """
         raise NotImplementedError
 
-    def make_nested_list(self, base, clazzes=False, *render_args):
+    def make_nested_list(self, base, bootstrap=False, *render_args):
+        # optional bootstrap param to add css classes for nested dropdowns
         from cyclope.models import MenuItem
         def _classes(object_, current_url=None):
             classes = [object_.slug]
@@ -411,15 +412,15 @@ class HyerarchyBuilderMixin(object):
         nested_list = []
         for child in base.get_children().filter(active=True):
             if child.get_descendant_count() > 0:
-                nested_list.extend(self.make_nested_list(child, classes, *render_args))
+                nested_list.extend(self.make_nested_list(child, bootstrap, *render_args))
             else:
-                if clazzes :
+                if bootstrap :
                     x = (self.render_item(child, *render_args), _classes(child, *render_args))
                 else :
                     x = self.render_item(child, *render_args)
                 nested_list.append(x)
 
-        if clazzes :
+        if bootstrap :
             include = (self.render_item(base, *render_args), _classes(base, *render_args))
         else :
             include = self.render_item(base, *render_args)
