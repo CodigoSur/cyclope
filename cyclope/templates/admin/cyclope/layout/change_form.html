@@ -8,7 +8,6 @@
 {% regroup original.regionview_set.all|dictsort:"region" by region as region_list %}
 
 <ul id="regions_tree" style="display:none;">
-	<img class="img_layout" src="/media/cyclope/images/layout.png">
 	<div class="regions_layout">
 	{% for region in region_list %}
 		<li>{% trans region.grouper|capfirst %}
