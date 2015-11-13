@@ -1,0 +1,38 @@
+{
+  "api_uri": "https://api.codigosur.org:4430",
+  "api_version": "1",
+  "ca_cert_fingerprint": "SHA256: c2e9313a1ec605ff0952ed43fd90c80808c127b9d2e92810ad8e92d90d24e97d",
+  "ca_cert_uri": "https://codigosur.org/ca.crt",
+  "default_language": "en",
+  "description": {
+    "en": "Código Sur"
+  },
+  "domain": "codigosur.org",
+  "enrollment_policy": "open",
+  "languages": [
+    "en"
+  ],
+  "name": {
+    "en": "CodigoSur"
+  },
+  "service": {
+    "allow_anonymous": false,
+    "allow_free": true,
+    "allow_limited_bandwidth": false,
+    "allow_paid": false,
+    "allow_registration": true,
+    "allow_unlimited_bandwidth": true,
+    "bandwidth_limit": 102400,
+    "default_service_level": 1,
+    "levels": {
+      "1": {
+        "description": "Please donate.",
+        "name": "free"
+      }
+    }
+  },
+  "services": [
+    "mx",
+    "openvpn"
+  ]
+}
