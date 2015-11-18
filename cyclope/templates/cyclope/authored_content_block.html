@@ -1,7 +1,7 @@
 {% load cyclope_utils  %}
-  {% if page %}
+{% if page %}
 
-{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+	{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
     <div class='authored-content'>
     {% for content in page.object_list %}
        {% comment %}
@@ -19,11 +19,8 @@
     {% else %}
       {% include 'cyclope/pagination_block.html' %}
     {% endif %}
-  {% endif %}
 
-
-{% elif CYCLOPE_THEME_TYPE == 'classic' %}
-
+	{% elif CYCLOPE_THEME_TYPE == 'classic' %}
 
     {% if view_options.sort_by == "ALPHABETIC" %}
       {% include 'cyclope/alphabetical_pagination_block.html' %}
@@ -44,4 +41,5 @@
     </div>
   {% endif %}
 
+{% endif %}
 
