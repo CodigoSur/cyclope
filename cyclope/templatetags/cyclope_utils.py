@@ -34,7 +34,6 @@ import cyclope.settings as cyc_settings
 from cyclope.utils import nohang, get_object_name, get_app_label
 from cyclope.utils.lru_cache import LRULimitedSizeDict
 
-
 MARKUP_RENDERER_WAIT = 5
 MARKUP_CACHE_SIZE = 250
 
@@ -57,9 +56,9 @@ class JoinedStrings(template.Node):
     def render(self, context):
         strings = []
         for item in self.data:
-            if isinstance(item, template.Variable):
+           if isinstance(item, template.Variable):
                 strings.append(item.resolve(context))
-            else:
+           else:
                 strings.append(item)
 
         context[self.var_name] = "".join(strings)
@@ -200,7 +199,6 @@ class PdbNode(template.Node):
             for k, v in dict.items():
                 vars.append(k)
                 locals()[k] = v
-        pdb.set_trace()
         # You may access all context variables directly (they are stored in locals())
         return ''
 
@@ -299,9 +297,10 @@ class TeaserLayoutClasses(template.Node):
     def render(self, context):
         theme = get_theme(context["CYCLOPE_CURRENT_THEME"])
         # if region_name is none, it is the main content
-        region = context["region_name"]
-        if region == None:
+        if not context.has_key("region_name") or not context["region_name"]:
             region = "content"
+        else:
+            region = context["region_name"]
         teaser_classes = ""
         if hasattr(theme, "teaser_layout_classes"):
             # if content_classes are defined return them otherwise return empty
@@ -320,9 +319,10 @@ class InlineContentClasses(template.Node):
     def render(self, context):
         theme = get_theme(context["CYCLOPE_CURRENT_THEME"])
         # if region_name is none, it is the main content
-        region = context["region_name"]
-        if region == None:
+        if not context.has_key("region_name") or not context["region_name"]:
             region = "content"
+        else:
+            region = context["region_name"]
         content_classes = ""
         if hasattr(theme, "inline_content_classes"):
             # if content_classes are defined return them otherwise return empty
