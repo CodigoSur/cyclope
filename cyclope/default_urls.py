@@ -34,6 +34,7 @@ import cyclope.settings as cyc_settings
 from cyclope.feeds import CategoryFeed, WholeSiteFeed, ContentTypeFeed
 from cyclope.sitemaps import CategorySitemap, CollectionSitemap, MenuSitemap
 from cyclope.core.user_profiles.forms import UserProfileForm
+from cyclope.forms import DateSearchForm
 
 urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
@@ -60,6 +61,7 @@ urlpatterns = patterns('',
     url(r'^rss/(?P<object_name>[\w-]+)/$', ContentTypeFeed(), name='content_type_feed'),
     url(r'^search/', search_view_factory(
         view_class=SearchView,
+        form_class=DateSearchForm,#TODO site setting
         results_per_page=cyc_settings.CYCLOPE_PAGINATION['TEASER']),
         name='haystack_search'),
 

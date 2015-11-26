@@ -38,7 +38,7 @@ from cyclope.fields import MultipleField
 from cyclope.themes import get_all_themes, get_theme
 from cyclope.apps.related_admin import GenericFKWidget, GenericModelForm
 from cyclope.apps.related_admin import GenericModelChoiceField as GMCField
-
+from haystack.forms import ModelSearchForm
 
 
 class AjaxChoiceField(forms.ChoiceField):
@@ -342,3 +342,25 @@ from cyclope.utils import CrispyFormsSimpleMixin
 class RegistrationFormWithCaptcha(RegistrationFormUniqueEmail,
                                     CrispyFormsSimpleMixin):
     captcha = CaptchaField(label=_("Security code"))
+
+# adds the ability to search by date
+class DateSearchForm(ModelSearchForm):
+    # date fields 
+    date_format = ['%d-%m-%Y',      # '25-12-2006'
+                   '%d/%m/%Y',      # '25/12/2006'
+                   '%d/%m/%y']      # '25/12/06'
+    start_date = forms.DateField(label=_('Desde'), required=False, input_formats=date_format)
+    end_date = forms.DateField(label=_('Hasta'), required=False, input_formats=date_format, help_text=_('25/12/2015'))
+    #TODO l10n localize=True
+    #TODO help_text='...'
+    # override search
+    def search(self):
+        sqs = super(DateSearchForm, self).search()
+        if not self.is_valid():
+            return self.no_query_found()
+        #pub_date is defined in search_indexes.py
+        if self.cleaned_data['start_date']:
+            sqs = sqs.filter(pub_date__gte=self.cleaned_data['start_date'])
+        if self.cleaned_data['end_date']:
+            sqs = sqs.filter(pub_date__lte=self.cleaned_data['end_date'])
+        return sqs
