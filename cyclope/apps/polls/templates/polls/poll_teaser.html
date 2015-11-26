@@ -1,6 +1,6 @@
-{% load i18n %}
+{% load i18n cyclope_utils %}
 
-<div class="content-view poll teaser poll-teaser {% theme_classes %}">
+<div class="content-view poll teaser poll-teaser {% teaser_layout_classes %}">
 
   <h2 class="title"><a href="{% url poll-submission poll.slug %}">{{ poll.name }}</a></h2>
 

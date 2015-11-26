@@ -308,7 +308,7 @@ class TeaserLayoutClasses(template.Node):
         return teaser_classes
 
 @register.tag('teaser_layout_classes')
-def do_append_to_get(parser, token):
+def do_teaser_layout_classes(parser, token):
     return TeaserLayoutClasses()
     
 class InlineContentClasses(template.Node):
@@ -330,5 +330,5 @@ class InlineContentClasses(template.Node):
         return content_classes
 
 @register.tag('inline_content_classes')
-def do_append_to_get(parser, token):
+def do_inline_content_classes(parser, token):
     return InlineContentClasses()
