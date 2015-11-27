@@ -349,10 +349,9 @@ class DateSearchForm(ModelSearchForm):
     date_format = ['%d-%m-%Y',      # '25-12-2006'
                    '%d/%m/%Y',      # '25/12/2006'
                    '%d/%m/%y']      # '25/12/06'
-    start_date = forms.DateField(label=_('Desde'), required=False, input_formats=date_format)
-    end_date = forms.DateField(label=_('Hasta'), required=False, input_formats=date_format, help_text=_('25/12/2015'))
+    start_date = forms.DateField(label=_('Desde'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015'))
+    end_date = forms.DateField(label=_('Hasta'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015'))
     #TODO l10n localize=True
-    #TODO help_text='...'
     # override search
     def search(self):
         sqs = super(DateSearchForm, self).search()
