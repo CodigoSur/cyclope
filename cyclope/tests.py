@@ -348,6 +348,15 @@ class SiteSearchViewTestCase(TestCase):
         response = self.client.get(search_url)
         self.assertContains(response, 'id="search_results"', count=1)
 
+    def test_enable_search_by_date(self)
+        search_url = '/search/?q=cyclope'
+        site_settings = SiteSettings(site=self.site,
+                                     theme=DEFAULT_THEME,
+                                     enable_search_by_date=True)
+        site_settings.save()
+        response = self.client.get(search_url)
+        self.assertContains(response, 'id="id_start_date"', count=1)
+        self.assertContains(response, 'id="id_end_date"', count=1)
 
 class AuthorTestCase(ViewableTestCase):
     test_model = Author

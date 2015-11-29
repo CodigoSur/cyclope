@@ -110,12 +110,6 @@ CYCLOPE_PROJECT_NAME = os.path.basename(CYCLOPE_PROJECT_PATH)
 
 CYCLOPE_BASE_CONTENT_TYPES = site.base_content_types
 
-# Search: custom form including start_date and end_date fields
-# in order to use this feature each site has to explicitly set
-# CYCLOPE_SEARCH_DATE = True
-# in its settings.py file.
-CYCLOPE_SEARCH_DATE = getattr(settings, 'CYCLOPE_SEARCH_DATE', False)
-
 import themes
 
 def get_site_settings():
@@ -139,6 +133,7 @@ def populate_from_site_settings(site_settings):
     CYCLOPE_BASE_URL = "http://" + CYCLOPE_SITE_SETTINGS.site.domain # FIXME: could be https
     CYCLOPE_CURRENT_THEME = CYCLOPE_SITE_SETTINGS.theme
     CYCLOPE_THEME_TYPE = getattr(themes.get_theme(CYCLOPE_CURRENT_THEME), 'theme_type', 'classic')
+    CYCLOPE_SEARCH_DATE = CYCLOPE_SITE_SETTINGS.enable_search_by_date
     
     if CYCLOPE_CURRENT_THEME in themes.get_local_themes():
         CYCLOPE_THEME_MEDIA_URL = '%s%s/' % (

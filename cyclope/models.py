@@ -119,6 +119,8 @@ class SiteSettings(models.Model):
                                        help_text=_("Change USERNAME by your username in each service you want to enable." \
                                                    " Eg for youtube: if your page is http://youtube.com/user/cyclope/" \
                                                    " then replace the 'USERNAME' bellow youtube with 'cyclope'."))
+    enable_search_by_date = models.BooleanField(_('Enable search by date.'), default=False)
+
     # theme customization
     head_image = models.ImageField(_('header image'), 
                                    upload_to='theme/images', blank=True, null=True,
