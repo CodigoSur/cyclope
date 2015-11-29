@@ -343,10 +343,11 @@ class RegistrationFormWithCaptcha(RegistrationFormUniqueEmail,
                                     CrispyFormsSimpleMixin):
     captcha = CaptchaField(label=_("Security code"))
 
-# adds the ability to search by date
 class DateSearchForm(ModelSearchForm):
+    " Advanced search with models' checkboxes (inherited) and the ability to search by date range. "
     # date fields 
     date_format = ['%d-%m-%Y',      # '25-12-2006'
+                   '%d-%m-%y',      # '25-12-06'
                    '%d/%m/%Y',      # '25/12/2006'
                    '%d/%m/%y']      # '25/12/06'
     start_date = forms.DateField(label=_('Desde'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015'))
