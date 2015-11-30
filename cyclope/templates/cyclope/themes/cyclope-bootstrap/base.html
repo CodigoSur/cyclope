@@ -101,7 +101,6 @@
     {% endblock sitesettings_css %}
   <!-- /Cyclope-SiteSettings -->  
   
-    {% block extra_head %}{% endblock %}
  <!-- ### JS ### -->
 
      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -126,11 +125,12 @@
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/offcanvas.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/lightbox/js/jquery.lightbox-0.5.pack.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/uni-form.jquery.min.js" ></script>
-        <script type="text/javascript" src="/media/cyclope/js/bootstrap/affix.js"></script>
+    <script type="text/javascript" src="/media/cyclope/js/bootstrap/affix.js"></script>
     {% if CYCLOPE_SITE_SETTINGS.enable_ratings %}
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/ratings.js" ></script>
     {% endif %}
-    <!-- /JS --> 
+    <!-- /JS -->
+    {% block extra_head %}{% endblock %}
    </head>
 <body class="{% block body_class %}{%endblock%}" >
 	

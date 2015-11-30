@@ -1,48 +1,53 @@
 {% extends CYCLOPE_DEFAULT_TEMPLATE %}
 {% load i18n cyclope_utils crispy_forms_tags %}
 
+{% block extra_head %}
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-ui-1.11.4-min.js"></script>
+    <link href="{{ CYCLOPE_STATIC_URL }}css/jquery-ui-1.11.4-min.css" rel="stylesheet">
+    <script type="text/javascript">
+        $(function() {
+		$("#id_start_date").datepicker();
+		$("#id_end_date").datepicker();
+	 }); 
+    </script>
+{% endblock %}
+
 {% block content %}
 
 {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
 
-	<div class="panel panel-primary">
+<div class="panel panel-primary">
     <div class="panel-heading">
-      <a class="btn btn-default" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><span class="glyphicon glyphicon-collapse-down"></span> {% trans "Advanced search" %}</a>
+        <a class="btn btn-default" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><span class="glyphicon glyphicon-collapse-down"></span> {% trans "Advanced search" %}</a>
     </div>
-		<div class="collapse" id="collapseExample">
-			<div class="panel-body" id='advanced_search'>
-			<form method="get" action=".">
-					{{ form|crispy }}
-					<div class="buttonHolder">
-						<input type="submit" name="submit" value="{% trans 'Search' %}" class="btn btn-primary" id="submit-id-submit">
-					</div>
-			</form>
+    <div class="collapse" id="collapseExample">
+        <div class="panel-body" id='advanced_search'>
+	    <form method="get" action=".">
+		{{ form|crispy }}
+		<div class="buttonHolder">
+		    <input type="submit" name="submit" value="{% trans 'Search' %}" class="btn btn-primary" id="submit-id-submit">
 		</div>
-		</div>
-  </div>
-
-
-	{% if query %}
-			<div id="search_results" class="search_results" >
-					<h3>{% trans "Results" %}</h3>
-
-					{% for result in page.object_list %}
-							{# show teaser_views for all results objects #}
-							{% join result.object.get_app_label  "/" result.object.get_object_name "_teaser.html" as template_path %}
-							{% alias result.object as result.object.get_object_name %}
-							{% include template_path with current_object=result.object host_template="cyclope/inline_view.html" %}
-
-					{% empty %}
-							<p>{% trans "No results found." %}</p>
-					{% endfor %}
-
-					{% include 'cyclope/pagination_block.html' %}
-
-			</div>
-	{% else %}
-			{# TODO(diegoM): Show advanced search div #}
-			{# Show some example queries to run, maybe query syntax, something else? #}
-	{% endif %}
+	    </form>
+	</div>
+    </div>
+</div>
+    {% if query %}
+        <div id="search_results" class="search_results" >
+	    <h3>{% trans "Results" %}</h3>
+                {% for result in page.object_list %}
+		    {# show teaser_views for all results objects #}
+		    {% join result.object.get_app_label  "/" result.object.get_object_name "_teaser.html" as template_path %}
+		    {% alias result.object as result.object.get_object_name %}
+		    {% include template_path with current_object=result.object host_template="cyclope/inline_view.html" %}
+		{% empty %}
+                    <p>{% trans "No results found." %}</p>
+		{% endfor %}
+		{% include 'cyclope/pagination_block.html' %}
+	</div>
+    {% else %}
+	{# TODO(diegoM): Show advanced search div #}
+	{# Show some example queries to run, maybe query syntax, something else? #}
+    {% endif %}
 	
 {% elif CYCLOPE_THEME_TYPE == 'classic' %}
 
