@@ -363,8 +363,8 @@ class DateSearchForm(ModelSearchForm):
         if not self.is_valid():
             return self.no_query_found()
         #pub_date is defined in search_indexes.py
-        if self.cleaned_data['start_date']:
+        if self.cleaned_data.has_key('start_date') and self.cleaned_data['start_date'] :
             sqs = sqs.filter(pub_date__gte=self.cleaned_data['start_date'])
-        if self.cleaned_data['end_date']:
+        if self.cleaned_data.has_key('end_date') and self.cleaned_data['end_date'] :
             sqs = sqs.filter(pub_date__lte=self.cleaned_data['end_date'])
         return sqs
