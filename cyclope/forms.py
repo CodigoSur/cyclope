@@ -357,7 +357,6 @@ class DateSearchForm(ModelSearchForm):
                            '%d/%m/%y']      # '25/12/06'
             self.fields['start_date']=forms.DateField(label=_('Desde'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015'))
             self.fields['end_date']=forms.DateField(label=_('Hasta'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015'))
-            import pdb; pdb.set_trace()
     
     # override search
     def search(self):
