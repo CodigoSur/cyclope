@@ -350,13 +350,12 @@ class DateSearchForm(ModelSearchForm):
     def __init__(self, *args, **kwargs):
         super(DateSearchForm, self).__init__(*args, **kwargs)
         if cyc_settings.CYCLOPE_SEARCH_DATE :
-            #TODO better place for this list
             date_format = ['%d-%m-%Y',      # '25-12-2006'
                            '%d-%m-%y',      # '25-12-06'
                            '%d/%m/%Y',      # '25/12/2006'
                            '%d/%m/%y']      # '25/12/06'
-            self.fields['start_date']=forms.DateField(label=_('Desde'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015'))
-            self.fields['end_date']=forms.DateField(label=_('Hasta'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015'))
+            self.fields.insert(1, 'start_date', forms.DateField(label=_('Desde'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015')))
+            self.fields.insert(2, 'end_date', forms.DateField(label=_('Hasta'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015')))
     
     # override search
     def search(self):
