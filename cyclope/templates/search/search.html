@@ -4,9 +4,14 @@
 {% block extra_head %}
     {% if CYCLOPE_SEARCH_DATE %}
         <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-ui-1.11.4-min.js"></script>
+	<script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/datepicker-es.js"></script>
         <link href="{{ CYCLOPE_STATIC_URL }}css/jquery-ui-1.11.4-min.css" rel="stylesheet">
         <script type="text/javascript">
         $(function() {
+		//TODO other locales, cyclope-wide setting
+		$.datepicker.setDefaults( $.datepicker.regional[ "es" ] );
+		$.datepicker.setDefaults({dateFormat: "dd-mm-yy"});
+
 		$("#id_start_date").datepicker();
 		$("#id_end_date").datepicker();
 	 }); 
