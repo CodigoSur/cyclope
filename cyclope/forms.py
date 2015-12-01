@@ -39,6 +39,7 @@ from cyclope.themes import get_all_themes, get_theme
 from cyclope.apps.related_admin import GenericFKWidget, GenericModelForm
 from cyclope.apps.related_admin import GenericModelChoiceField as GMCField
 from haystack.forms import ModelSearchForm
+import cyclope.settings as cyc_settings
 
 
 class AjaxChoiceField(forms.ChoiceField):
@@ -345,14 +346,19 @@ class RegistrationFormWithCaptcha(RegistrationFormUniqueEmail,
 
 class DateSearchForm(ModelSearchForm):
     " Advanced search with models' checkboxes (inherited) and the ability to search by date range. "
-    # date fields 
-    date_format = ['%d-%m-%Y',      # '25-12-2006'
-                   '%d-%m-%y',      # '25-12-06'
-                   '%d/%m/%Y',      # '25/12/2006'
-                   '%d/%m/%y']      # '25/12/06'
-    start_date = forms.DateField(label=_('Desde'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015'))
-    end_date = forms.DateField(label=_('Hasta'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015'))
-    #TODO l10n localize=True
+   
+    def __init__(self, *args, **kwargs):
+        super(DateSearchForm, self).__init__(*args, **kwargs)
+        if cyc_settings.CYCLOPE_SEARCH_DATE :
+            #TODO better place for this list
+            date_format = ['%d-%m-%Y',      # '25-12-2006'
+                           '%d-%m-%y',      # '25-12-06'
+                           '%d/%m/%Y',      # '25/12/2006'
+                           '%d/%m/%y']      # '25/12/06'
+            self.fields['start_date']=forms.DateField(label=_('Desde'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015'))
+            self.fields['end_date']=forms.DateField(label=_('Hasta'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015'))
+            import pdb; pdb.set_trace()
+    
     # override search
     def search(self):
         sqs = super(DateSearchForm, self).search()

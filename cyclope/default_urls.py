@@ -61,7 +61,7 @@ urlpatterns = patterns('',
     url(r'^rss/(?P<object_name>[\w-]+)/$', ContentTypeFeed(), name='content_type_feed'),
     url(r'^search/', search_view_factory(
         view_class=SearchView,
-        form_class= DateSearchForm if cyc_settings.CYCLOPE_SEARCH_DATE else ModelSearchForm,
+        form_class= DateSearchForm,
         results_per_page=cyc_settings.CYCLOPE_PAGINATION['TEASER']),
         name='haystack_search'),
 
