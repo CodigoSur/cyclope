@@ -10,7 +10,10 @@
         $(function() {
 		//TODO other locales, cyclope-wide setting
 		$.datepicker.setDefaults( $.datepicker.regional[ "es" ] );
-		$.datepicker.setDefaults({dateFormat: "dd-mm-yy"});
+		$.datepicker.setDefaults({
+			dateFormat: "dd-mm-yy",
+			changeYear: true
+		});
 
 		$("#id_start_date").datepicker();
 		$("#id_end_date").datepicker();
