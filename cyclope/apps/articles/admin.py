@@ -133,4 +133,9 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
                               'date', 'allow_comments', 'creation_date')}),
                 )
 
+    class Media:
+        js =(
+            cyc_settings.CYCLOPE_STATIC_URL + 'js/cyclope_media_widget.js',        
+        )
+
 admin.site.register(Article, ArticleAdmin)

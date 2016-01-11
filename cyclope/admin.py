@@ -73,8 +73,9 @@ class BaseContentAdmin(admin.ModelAdmin):
 
     class Media:
         js = (
-            cyc_settings.CYCLOPE_STATIC_URL + 'js/reuse_django_jquery.js',
-            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-ui-1.8.4.custom.min.js',
+            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-2.1.4.min.js', # latest jQuery, used by latest django
+            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-migrate-1.2.1.min.js', # backwards compatibility
+            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-ui-1.11.4-min.js' # latest jQuery UI
         )
 
     def response_change(self, request, obj):
