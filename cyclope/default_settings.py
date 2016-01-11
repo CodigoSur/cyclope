@@ -270,6 +270,7 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
     )
 
 # martkitup settings
+JQUERY_URL = "cyclope/js/reuse_django_jquery.js" # We dont want jquery to be included twice in the admin.
 MARKITUP_SET = 'cyclope/markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
 
