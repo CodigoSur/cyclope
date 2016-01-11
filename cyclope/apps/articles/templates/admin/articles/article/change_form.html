@@ -1,17 +1,4 @@
 {% extends "admin/base_content_change_form.html" %}
-{% block extrahead %}
-	{{ block.super }}
-	<script type="text/javascript">
-	$(function(){
-		//form becomes widget
-		$('#mediaUpload').mediaWidget();
-		// button triggers widget
-		$(".clickMe").click(function(){
-			var widget = $("#mediaUpload").mediaWidget("position", this).mediaWidget("open");
-		});
-	});
-	</script>
-{% endblock %}
 {% block content %}
 	{{ block.super }}
 	{% include "admin/articles/article/media_upload.html" %}

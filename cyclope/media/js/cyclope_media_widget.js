@@ -1,4 +1,8 @@
-$.widget("cyclope.mediaWidget", $.ui.dialog, {
+/** https://api.jquery.com/jquery.noconflict/ */
+var jQ2 = jQuery.noConflict(true);
+
+/**jQuery-UI Widget declaration*/
+jQ2.widget("cyclope.mediaWidget", jQ2.ui.dialog, {
     options: {
         autoOpen: false,
         modal: true,
@@ -10,4 +14,14 @@ $.widget("cyclope.mediaWidget", $.ui.dialog, {
     position: function(objt){
         this.options.position = {my: "left top", at: "left button", of: objt}
     }
+});
+
+/**Widget usage*/
+jQ2(function(){
+    //form becomes widget
+    jQ2('#mediaUpload').mediaWidget();
+    // picture button triggers widget
+    jQ2("#lookup_id_picture").click(function(){
+        var widget = jQ2("#mediaUpload").mediaWidget("position", this).mediaWidget("open");
+    });
 });
