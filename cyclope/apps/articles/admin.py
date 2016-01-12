@@ -36,18 +36,15 @@ from models import *
 
 import re
 
-from django import forms
 from django.conf import settings
-from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ugettext
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.admin.widgets import ForeignKeyRawIdWidget
 
-from cyclope.apps.related_admin.views import do_render_object
+from cyclope.apps.related_admin import GenericModelForm
+from cyclope.apps.media_widget import MediaWidget
+from cyclope.apps.media_widget import MediaWidgetField
 
-#TODO MOVE TO forms.py
-class ArticleForm(forms.ModelForm):
+class ArticleForm(GenericModelForm):
+    picture = MediaWidgetField(queryset=Picture.objects.all(), widget=MediaWidget("picture_none", [Picture]), required=False)
+
     def __init__(self, *args, **kwargs):
         super(ArticleForm, self).__init__(*args, **kwargs)
         author_choices = [('', '------')]
