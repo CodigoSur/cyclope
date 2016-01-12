@@ -1,0 +1,73 @@
+<head>
+    <!--styles-->
+    <link href="{{CYCLOPE_STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
+    <!--scripts-->
+    <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/bootstrap/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">
+                            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                            Subir
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#search" aria-controls="search" role="tab" data-toggle="tab">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            Buscar en biblioteca
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="upload">
+                        <form>
+                            <div class="pull-right">
+                                Mostrar junto al contenido
+                                <input type="checkbox" name="show_name" value="no">
+                            </div>
+                            <div class="form-group">
+                                <label for="fileName">Nombre</label>
+                                <input type="text" class="form-control" id="fileName" placeholder="Nombre">
+                            </div>
+                            <div class="pull-right">
+                                Mostrar junto al contenido
+                                <input type="checkbox" name="show_desc" value="no">
+                            </div>
+                            <div class="form-group">
+                                <label for="fileDesc">Descripci&oacute;n</label>
+                                <input type="text" class="form-control" id="fileDesc">
+                            </div>
+                            <div class="form-group">
+                                <label for="file">Archivo</label>
+                                <input type="file" id="file">
+                                <p class="help-block">Seleccionar archivo</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button type="submit" class="btn btn-danger btn-block">
+                                        <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+                                        Subir
+                                    </button>
+                                </div>
+                                <div class="col-xs-6 text-muted" style="font-size: 10px;">
+                                    Recuerda que puedes agregar m&aacute;s datos a este contenido desde la Biblioteca Multimedia.
+                                </div>
+                            </div>
+                        </form>                    
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="search">
+                        <br />
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        Estamos trabajando para Ud.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

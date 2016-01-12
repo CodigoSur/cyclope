@@ -103,6 +103,7 @@ INSTALLED_APPS = [
     'cyclope.apps.related_admin',
     'cyclope.apps.custom_comments',
     'cyclope.apps.social',
+    'cyclope.apps.media_widget',
 
     'admin_tools',
     'admin_tools.theming',

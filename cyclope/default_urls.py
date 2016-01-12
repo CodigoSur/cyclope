@@ -64,6 +64,7 @@ urlpatterns = patterns('',
         form_class= DateSearchForm,
         results_per_page=cyc_settings.CYCLOPE_PAGINATION['TEASER']),
         name='haystack_search'),
+    url(r'^media_widget/', include('cyclope.apps.media_widget.urls')),
 
     ## admin & django contrib
     url(r'^admin/filebrowser/', include('filebrowser.urls')),
