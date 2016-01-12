@@ -12,7 +12,7 @@ jQ2.widget("cyclope.mediaWidget", jQ2.ui.dialog, {
         closeText: "Cerrar"
     },
     position: function(objt){
-        this.options.position = {my: "left top", at: "left button", of: objt}
+        this.options.position = {my: "left bottom", at: "left button", of: objt}
     }
 });
 
@@ -21,7 +21,7 @@ jQ2(function(){
     //form becomes widget
     jQ2('#mediaUpload').mediaWidget();
     // picture button triggers widget
-    jQ2("#lookup_id_picture").click(function(){
+    jQ2("#media_widget_button").click(function(){
         var widget = jQ2("#mediaUpload").mediaWidget("position", this).mediaWidget("open");
     });
 });
