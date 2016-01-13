@@ -1,3 +1,7 @@
+/**
+* TODO Move this & related scripts inside Cyclope's Media Widget App
+*/
+
 /** https://api.jquery.com/jquery.noconflict/ */
 var jQ2 = jQuery.noConflict(true);
 
@@ -8,7 +12,7 @@ jQ2.widget("cyclope.mediaWidget", jQ2.ui.dialog, {
         modal: true,
         title: 'Subir archivos multimedia',
         minWidth: 400,
-        minHeight: 400,
+        minHeight: 470,
         closeText: "Cerrar"
     },
     position: function(objt){

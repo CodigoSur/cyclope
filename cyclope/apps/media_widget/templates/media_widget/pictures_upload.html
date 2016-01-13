@@ -26,26 +26,41 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="upload">
-                        <form>
+                        <form method="POST" action="{% url pictures-create %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.non_field_errors }}
+                            <!--
                             <div class="pull-right">
                                 Mostrar junto al contenido
                                 <input type="checkbox" name="show_name" value="no">
                             </div>
-                            <div class="form-group">
+                            -->
+                            <div class="form-group {%if form.name.errors%}has-error{%endif%}">
                                 <label for="fileName">Nombre</label>
-                                <input type="text" class="form-control" id="fileName" placeholder="Nombre">
+                                {{ form.name }}
+                                <span id="helpName" class="help-block">
+                                    {{ form.name.errors }}
+                                </span>
                             </div>
+                            <!--
                             <div class="pull-right">
                                 Mostrar junto al contenido
                                 <input type="checkbox" name="show_desc" value="no">
                             </div>
-                            <div class="form-group">
+                            -->
+                            <div class="form-group {%if form.name.errors%}has-error{%endif%}">
                                 <label for="fileDesc">Descripci&oacute;n</label>
-                                <input type="text" class="form-control" id="fileDesc">
+                                {{ form.description }}
+                                <span id="helpName" class="help-block">
+                                    {{ form.description.errors }}
+                                </span>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group {%if form.name.errors%}has-error{%endif%}">
                                 <label for="file">Archivo</label>
-                                <input type="file" id="file">
+                                {{ form.image }}
+                                <span id="helpName" class="help-block">
+                                    {{ form.image.errors }}
+                                </span>
                                 <p class="help-block">Seleccionar archivo</p>
                             </div>
                             <div class="row">

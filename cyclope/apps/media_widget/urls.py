@@ -1,6 +1,7 @@
-from django.conf.urls import patterns
-from views import pictures_upload
+from django.conf.urls import patterns, url
+from views import pictures_upload, pictures_create
 
 urlpatterns = patterns('',
-    (r'^pictures/new$', pictures_upload),         
+    (r'^pictures/new$', pictures_upload),
+    url(r'^pictures/create$', pictures_create, name="pictures-create")     
 )
