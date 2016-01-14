@@ -8,6 +8,8 @@ from forms import MediaWidgetForm
 from filebrowser.functions import handle_file_upload, convert_filename
 from django.conf import settings
 import os
+from filebrowser.settings import ADMIN_THUMBNAIL
+from cyclope.utils import generate_fb_version
 
 # GET /pictures/new
 def pictures_upload(request):
@@ -29,6 +31,7 @@ def pictures_create(request):
             #filesystem save
             path = os.path.join(settings.MEDIA_ROOT, Picture._meta.get_field_by_name("image")[0].directory)
             uploaded_path = handle_file_upload(path, image)
+            generate_fb_version(uploaded_path, ADMIN_THUMBNAIL)
             #database save
             picture = Picture(
                 name = form.cleaned_data['name'],#TODO or image.name
