@@ -10,6 +10,7 @@ from django.conf import settings
 import os
 from filebrowser.settings import ADMIN_THUMBNAIL
 from cyclope.utils import generate_fb_version
+from django.contrib import messages
 
 # GET /pictures/new
 def pictures_upload(request):
@@ -41,7 +42,8 @@ def pictures_create(request):
             )
             picture.save()
             #TODO associate picture with current Article
-            return redirect('pictures-create') #POST/Redirect/GET #TODO or just render with thumbnail?
+            messages.success(request, 'Imagen cargada: '+image.name)
+            return redirect('pictures-new') #POST/Redirect/GET
         else:
             return render(request, 'media_widget/pictures_upload.html', {'form': form})
     else:
