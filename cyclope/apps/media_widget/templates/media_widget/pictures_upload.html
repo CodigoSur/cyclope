@@ -42,6 +42,11 @@
                     <div role="tabpanel" class="tab-pane active" id="upload">
                         <form method="POST" action="{% url pictures-create %}" enctype="multipart/form-data">
                             {% csrf_token %}
+                            <div style="display: none;">
+                                {% for hidden in form.hidden_fields %}
+                                    {{ hidden }}
+                                {% endfor %}
+                            </div>
                             {{ form.non_field_errors }}
                             <!--
                             <div class="pull-right">

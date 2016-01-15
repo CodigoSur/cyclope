@@ -11,13 +11,20 @@ import os
 from filebrowser.settings import ADMIN_THUMBNAIL
 from cyclope.utils import generate_fb_version
 from django.contrib import messages
+from django.http import HttpResponseBadRequest, HttpResponseForbidden
+from cyclope.apps.articles.models import Article
 
 # GET /pictures/new
 def pictures_upload(request):
     """ Returns widget's inner HTML to be viewed through an iframe.
         This ensures bootstrap styles isolation."""
-    form = MediaWidgetForm()
-    return render(request, 'media_widget/pictures_upload.html', {'form': form})
+    if request.GET.has_key('article_id'):
+        form = MediaWidgetForm(initial={
+            'article_id': request.GET['article_id']
+        })
+        return render(request, 'media_widget/pictures_upload.html', {'form': form})
+    else:
+        return HttpResponseBadRequest("Missing Article ID")#http error 400
 
 # POST /pictures/create
 #TODO use chunks with FileBrowseField?
@@ -41,9 +48,16 @@ def pictures_create(request):
                 #TODO user, etc.
             )
             picture.save()
-            #TODO associate picture with current Article
+            #associate picture with current Article
+            article_id = form.cleaned_data['article_id']
+            article = Article.objects.get(pk=int(article_id))
+            article.picture = picture
+            article.save()
+            #POST/Redirect/GET
             messages.success(request, 'Imagen cargada: '+image.name)
-            return redirect('pictures-new') #POST/Redirect/GET
+            response = redirect('pictures-new')
+            response['Location']+='?article_id='+article_id
+            return response
         else:
             return render(request, 'media_widget/pictures_upload.html', {'form': form})
     else:
