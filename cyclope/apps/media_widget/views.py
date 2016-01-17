@@ -15,21 +15,16 @@ from django.http import HttpResponseBadRequest, HttpResponseForbidden
 from cyclope.apps.articles.models import Article
 
 # GET /pictures/new
-def pictures_upload(request):
+def pictures_upload(request, article_id):
     """ Returns widget's inner HTML to be viewed through an iframe.
         This ensures bootstrap styles isolation."""
-    if request.GET.has_key('article_id'):
-        form = MediaWidgetForm(initial={
-            'article_id': request.GET['article_id']
-        })
-        return render(request, 'media_widget/pictures_upload.html', {'form': form})
-    else:
-        return HttpResponseBadRequest("Missing Article ID")#http error 400
+    form = MediaWidgetForm()
+    return render(request, 'media_widget/pictures_upload.html', {'form': form, 'article_id': article_id})
 
 # POST /pictures/create
 #TODO use chunks with FileBrowseField?
 @require_POST
-def pictures_create(request):
+def pictures_create(request, article_id):
     if request.user.is_staff:
         form = MediaWidgetForm(request.POST, request.FILES)
         if form.is_valid():
@@ -49,16 +44,14 @@ def pictures_create(request):
             )
             picture.save()
             #associate picture with current Article
-            article_id = form.cleaned_data['article_id']
-            article = Article.objects.get(pk=int(article_id))
+            article = Article.objects.get(pk=article_id)
             article.picture = picture
             article.save()
-            #POST/Redirect/GET
+            #
             messages.success(request, 'Imagen cargada: '+image.name)
-            response = redirect('pictures-new')
-            response['Location']+='?article_id='+article_id
-            return response
+            #POST/Redirect/GET
+            return redirect('pictures-new', article_id)
         else:
-            return render(request, 'media_widget/pictures_upload.html', {'form': form})
+            return render(request, 'media_widget/pictures_upload.html', {'form': form, 'article_id': article_id})
     else:
         return HttpResponseForbidden()
