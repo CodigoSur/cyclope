@@ -16,7 +16,7 @@ jQ2.widget("cyclope.mediaWidget", jQ2.ui.dialog, {
         closeText: "Cerrar"
     },
     position: function(objt){
-        this.options.position = {my: "left bottom", at: "left button", of: objt}
+        this.options.position = {my: "left top", at: "right bottom", of: objt, collision: "fit"}
     }
 });
 
