@@ -14,8 +14,3 @@ class MediaWidgetField(GMCField):
     def __init__(self, queryset, *args, **kwargs):
         self.queryset = queryset
         super(MediaWidgetField, self).__init__(*args, **kwargs)
-
-    def prepare_value(self, value):
-        if value and not value == "None" and not isinstance(value, models.Model):
-            value = self.queryset.get(pk=value)
-        return super(MediaWidgetField, self).prepare_value(value)
