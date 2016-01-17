@@ -22,7 +22,6 @@ def pictures_upload(request, article_id):
     return render(request, 'media_widget/pictures_upload.html', {'form': form, 'article_id': article_id})
 
 # POST /pictures/create
-#TODO use chunks with FileBrowseField?
 @require_POST
 def pictures_create(request, article_id):
     if request.user.is_staff:
@@ -34,17 +33,20 @@ def pictures_create(request, article_id):
             #filesystem save
             path = os.path.join(settings.MEDIA_ROOT, Picture._meta.get_field_by_name("image")[0].directory)
             uploaded_path = handle_file_upload(path, image)
+            #thumnnails
             generate_fb_version(uploaded_path, ADMIN_THUMBNAIL)
             #database save
+            article = Article.objects.get(pk=article_id)
             picture = Picture(
-                name = form.cleaned_data['name'],#TODO or image.name
-                description = form.cleaned_data['description'],#TODO or None
-                image = uploaded_path
-                #TODO user, etc.
+                name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else image.name,
+                description = form.cleaned_data['description'],
+                image = uploaded_path,
+                user = article.user,
+                author = article.author,
+                source = article.source
             )
             picture.save()
             #associate picture with current Article
-            article = Article.objects.get(pk=article_id)
             article.picture = picture
             article.save()
             #
