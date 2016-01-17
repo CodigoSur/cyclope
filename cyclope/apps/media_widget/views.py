@@ -13,6 +13,7 @@ from cyclope.utils import generate_fb_version
 from django.contrib import messages
 from django.http import HttpResponseBadRequest, HttpResponseForbidden
 from cyclope.apps.articles.models import Article
+from cyclope.models import RelatedContent
 
 # GET /pictures/new
 def pictures_upload(request, article_id):
@@ -49,7 +50,12 @@ def pictures_create(request, article_id):
             #associate picture with current Article
             article.picture = picture
             article.save()
-            #
+            #article as Picture's related content
+            related = RelatedContent(
+                self_object = picture,
+                other_object = article
+            )
+            related.save()
             messages.success(request, 'Imagen cargada: '+image.name)
             #POST/Redirect/GET
             return redirect('pictures-new', article_id)
