@@ -1,1 +1,17 @@
-<button id="media_widget_button" type="button" value="">Seleccionar</button> 
+<table class="mw_table">
+    <tr>
+        <td class="mw_button">
+            <button id="media_widget_button" type="button" value="">Seleccionar</button>
+        </td>
+        <td class="mw_thumbnail" align="center">
+            {% if obj_repr %}
+                {{ obj_repr|safe }}
+            {% else %}
+                <div class="mw_no_picture">
+                    <br/>
+                    Imágenes del artículo...
+                </div>
+            {% endif %}
+        </td>
+    </tr>
+</table>

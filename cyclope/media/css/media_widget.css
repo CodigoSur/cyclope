@@ -1,0 +1,27 @@
+table.mw_table td, table.mw_table th, table.mw_table tr{
+    border-bottom: 0;
+    padding: 0px 10px 0 6px;
+}
+table.mw_table, table.mw_table td{
+    border-right: 0 !important;
+}
+table.mw_table td.mw_button{
+    border-right: 1px solid #83a9de !important;
+}
+
+/**inverter object representation's text-image order*/
+.mw_thumbnail {
+  /* Setup Flexbox */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  /* Reverse Column Order */
+  -webkit-flex-flow: column-reverse;
+  flex-flow: column-reverse;
+}
+
+.mw_no_picture{
+    color: gray;
+}
