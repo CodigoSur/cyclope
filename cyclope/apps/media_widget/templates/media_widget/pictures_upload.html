@@ -102,7 +102,7 @@
                                     </td>
                                     <td>{{ picture.name }}</td>
                                     <td>
-                                        <a href="{{ picture.image }}" target="_blank"><img src="{% version picture.image.path 'thumbnail' %}" title="{{picture.description}}"/></a>
+                                        <a href="{{ picture.image }}" target="_blank"><img src="{% version picture.image.path 'fb_thumb' %}" title="{{picture.description}}" class="thumbnail"/></a>
                                     </td>
                                 </tr>
                                 {% endfor %}

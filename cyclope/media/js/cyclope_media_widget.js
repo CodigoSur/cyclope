@@ -11,7 +11,7 @@ jQ2.widget("cyclope.mediaWidget", jQ2.ui.dialog, {
         autoOpen: false,
         modal: true,
         title: 'Subir archivos multimedia',
-        minWidth: 400,
+        minWidth: 470,
         minHeight: 470,
         closeText: "Cerrar"
     },
