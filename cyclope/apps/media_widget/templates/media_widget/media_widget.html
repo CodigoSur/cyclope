@@ -5,7 +5,9 @@
         </td>
         <td class="mw_thumbnail" align="center">
             {% if obj_repr %}
-                {{ obj_repr|safe }}
+                <div class="object-representation">
+                    {{ obj_repr|safe }}
+                </div>
             {% else %}
                 <div class="mw_no_picture">
                     <br/>

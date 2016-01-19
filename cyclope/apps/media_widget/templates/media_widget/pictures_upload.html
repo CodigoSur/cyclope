@@ -7,8 +7,25 @@
     <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript">
-        $(function(){ // clean message alerts after 8s
+        $(function(){ 
+            //TODO move to .js in MdWdgt
+        
+            // clean message alerts after 8s
             $(".message-row").delay(8000).fadeOut();
+            
+            {% if new_picture %}
+                //refresh parent (article's admin) media widget picture
+                function media_widget_refresh(ct_id, obj_id){
+                    $.get("/related_admin/render_object/" + ct_id + "/" + obj_id + "/", function(data) {
+                        //parent because representation is outside the iframe
+                        $(".object-representation", window.parent.document).html(data);
+                    });
+                }
+                //
+                var ct_id = {{ new_picture.picture_ct }};
+                var obj_id = {{ new_picture.picture_id }};
+                media_widget_refresh(ct_id, obj_id);
+            {% endif %}
         });
     </script>
 </head>

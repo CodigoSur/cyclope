@@ -14,6 +14,7 @@ from django.contrib import messages
 from django.http import HttpResponseBadRequest, HttpResponseForbidden
 from cyclope.apps.articles.models import Article
 from cyclope.models import RelatedContent
+from django.contrib.contenttypes.models import ContentType
 
 # GET /pictures/new/article_id
 def pictures_upload(request, article_id):
@@ -21,13 +22,24 @@ def pictures_upload(request, article_id):
         This ensures bootstrap styles isolation."""
     #picture upload
     form = MediaWidgetForm()
+    #TODO MediaWidgetSelectForm to select multiple pictures
+    
     #picture selection
     pictures_list = Picture.objects.all().order_by('-creation_date')
-    #TODO MediaWidgetSelectForm to select multiple pictures
+    
+    #admin picture refresh
+    new_picture = {}
+    if request.session.has_key('refresh'):
+        new_picture = {
+            'picture_id': request.session.pop('refresh', False), 
+            'picture_ct': ContentType.objects.get(model='picture').pk
+        }
+
     return render(request, 'media_widget/pictures_upload.html', {
         'form': form, 
         'article_id': article_id,
-        'pictures_list': pictures_list
+        'pictures_list': pictures_list,
+        'new_picture': new_picture
     })
 
 # POST /pictures/create/article_id
@@ -55,8 +67,12 @@ def pictures_create(request, article_id):
                 source = article.source
             )
             picture.save()
+            
             _associate_picture_to_article(article, picture)
+            
             messages.success(request, 'Imagen cargada: '+image.name)
+            request.session['refresh'] = picture.id
+            
             #POST/Redirect/GET
             return redirect('pictures-new', article_id)
         else:
@@ -77,8 +93,12 @@ def pictures_update(request, article_id):
         article = Article.objects.get(pk=article_id)
         picture_id = int(request.POST.get('picture_id'))
         picture = Picture.objects.get(pk=picture_id)
+        
         _associate_picture_to_article(article, picture)
+        
         messages.success(request, 'Imagen seleccionada: '+picture.name)
+        request.session['refresh'] = picture_id
+        
         return redirect('pictures-new', article_id) # POST/Redirect/GET 
     else:
         return HttpResponseForbidden()
