@@ -29,17 +29,22 @@ def pictures_upload(request, article_id):
     
     #admin picture refresh
     new_picture = {}
+    delete_picture = False
     if request.session.has_key('refresh'):
         new_picture = {
             'picture_id': request.session.pop('refresh', False), 
             'picture_ct': ContentType.objects.get(model='picture').pk
         }
+    elif request.session.has_key('delete'):
+        #clean it from session
+        delete_picture = request.session.pop('delete')
 
     return render(request, 'media_widget/pictures_upload.html', {
         'form': form, 
         'article_id': article_id,
         'pictures_list': pictures_list,
-        'new_picture': new_picture
+        'new_picture': new_picture,
+        'delete_picture': delete_picture
     })
 
 # POST /pictures/create/article_id
@@ -102,7 +107,21 @@ def pictures_update(request, article_id):
         return redirect('pictures-new', article_id) # POST/Redirect/GET 
     else:
         return HttpResponseForbidden()
+
+#GET /pictures/delete/article_id
+def pictures_delete(request, article_id):
+    if request.user.is_staff:
+        article = Article.objects.get(pk=article_id)
+        article.picture = None
+        article.save()
         
+        messages.warning(request, 'Imagen eliminada.')
+        request.session['delete'] = True
+        
+        return redirect('pictures-new', article_id) # POST/Redirect/GET
+    else:
+        return HttpResponseForbidden()
+
 #HELPERS
 def _associate_picture_to_article(article, picture):
     """Helper method to DRY picture create and update"""

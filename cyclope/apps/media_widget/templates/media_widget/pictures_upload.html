@@ -12,19 +12,20 @@
         
             // clean message alerts after 8s
             $(".message-row").delay(8000).fadeOut();
-            
+
+            //refresh parent (article's admin) media widget picture
+            function media_widget_refresh(ct_id, obj_id){
+                $.get("/related_admin/render_object/" + ct_id + "/" + obj_id + "/", function(data) {
+                    //parent because representation is outside the iframe
+                    $(".object-representation", window.parent.document).html(data);
+                });
+            }            
             {% if new_picture %}
-                //refresh parent (article's admin) media widget picture
-                function media_widget_refresh(ct_id, obj_id){
-                    $.get("/related_admin/render_object/" + ct_id + "/" + obj_id + "/", function(data) {
-                        //parent because representation is outside the iframe
-                        $(".object-representation", window.parent.document).html(data);
-                    });
-                }
-                //
                 var ct_id = {{ new_picture.picture_ct }};
                 var obj_id = {{ new_picture.picture_id }};
                 media_widget_refresh(ct_id, obj_id);
+            {% elif delete_picture %}
+                $(".object-representation", window.parent.document).html("<br/>Imágenes del artículo...");
             {% endif %}
         });
     </script>
@@ -53,6 +54,12 @@
                         <a href="#search" aria-controls="search" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             Buscar en biblioteca
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#delete" aria-controls="search" role="tab" data-toggle="tab">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            Eliminar
                         </a>
                     </li>
                 </ul>
@@ -87,7 +94,7 @@
                                     {{ form.description.errors }}
                                 </span>
                             </div>
-                            <div class="form-group {%if form.image.errors%}has-error{%endif%}">
+                            <div class="form-group {%if form.image.errors%}has-error bg-danger{%endif%}">
                                 <label for="file">Archivo</label>
                                 {{ form.image }}
                                 <span id="helpName" class="help-block">
@@ -97,7 +104,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <button type="submit" class="btn btn-danger btn-block">
+                                    <button type="submit" class="btn btn-danger btn-block btn-lg">
                                         <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
                                         Subir
                                     </button>
@@ -125,6 +132,27 @@
                                 {% endfor %}
                             </table>
                         </form>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="delete">
+                        <div class="jumbotron">
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <h1>¿Eliminar?</h1>
+                                    <p class="text-muted">Ésto sólo desasocia la imágen del artículo, la imágen sigue disponible en la biblioteca.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-2">
+                                </div>
+                                <div class="col-xs-8">
+                                    <form method="GET" action="{% url pictures-delete article_id=article_id %}">
+                                        <button type="submit" class="btn btn-danger btn-block">Eliminar</button>
+                                    </form>
+                                </div>
+                                <div class="col-xs-2">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
