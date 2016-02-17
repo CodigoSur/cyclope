@@ -34,3 +34,4 @@ cyclope/server_global_settings.py
 *_slideshow-background* 
 *_crop*
 build/
+dist/

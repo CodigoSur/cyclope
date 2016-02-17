@@ -1,6 +1,15 @@
 Changelog for Cyclope 3
 =======================
 
+0.4.1.2 (17-2-2016)
+=======================
+
+- Deprecate PIL in favour of Pillow. PIL is no longer in PyPi index and is unmaintained.
+
+- Added to Search feature ability to search by dates range.
+
+- Many bug fixes...
+  
 0.4 (24-9-2013)
 ===============
 
