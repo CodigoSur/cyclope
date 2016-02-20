@@ -63,11 +63,9 @@ var FileBrowserHelper = {
     insertPicture: function(markItUp) {
                 $("#markItUp"+markItUp.capitalize() +" .markItUpButton20").click(function (){
                     FileBrowserHelper.markItUp = markItUp;
-                    var id2 = String(markItUp).replace(/\-/g,"____").split(".").join("___");
-                    FBWindow = window.open('/admin/filebrowser/browse/?pop=1&type=',
-                                            String(id2),
-                                            'height=600,width=960,resizable=yes,scrollbars=yes');
-                    FBWindow.focus();
+         
+                    var widget = $("#mediaUpload").mediaWidget("position", this).mediaWidget("open");
+           
                 });
     },
     triggerInsert: function(url) {

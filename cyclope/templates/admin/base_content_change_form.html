@@ -17,52 +17,57 @@
 
 <script type="text/javascript">
 //<![CDATA[
-function setup_chainedSelect_for_categorization(i) {
-    $("#id_collections-categorization-content_type-object_id-"+ i +"-category").chainedSelect({
-        parent: '#id_collections-categorization-content_type-object_id-'+ i +'-collection',
-        url: "/{{CYCLOPE_PREFIX}}collection_categories_json",
-        value: 'category_id',
-        label: 'category_name'
-    });
-};
+(function($){
+    function setup_chainedSelect_for_categorization(i) {
+        $("#id_collections-categorization-content_type-object_id-"+ i +"-category").chainedSelect({
+            parent: '#id_collections-categorization-content_type-object_id-'+ i +'-collection',
+            url: "/{{CYCLOPE_PREFIX}}collection_categories_json",
+            value: 'category_id',
+            label: 'category_name'
+        });
+    };
+    $(function(){
+      $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-category']").each(function(i, sel){
+            setup_chainedSelect_for_categorization(i);
+      });
 
-jQuery(document).ready(function($){
-  $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-category']").each(function(i, sel){
-        setup_chainedSelect_for_categorization(i);
-  });
-
-  $("#collections-categorization-content_type-object_id-group .add-row a").click(
-    function(){
-      i = $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-category']").length - 2
-      setup_chainedSelect_for_categorization(i);
+      $("#collections-categorization-content_type-object_id-group .add-row a").click(
+        function(){
+          i = $("select[id^='id_collections-categorization-content_type-object_id-'][id$='-category']").length - 2
+          setup_chainedSelect_for_categorization(i);
+        });
     });
-});
+})(django.jQuery)
 //]]>
 </script>
 
 {# chainedSelect for RelatedContents #}
 <script type="text/javascript">
 //<![CDATA[
-function setup_chainedSelect_for_relatedcontent(i) {
-    $('#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_id').chainedSelect({
-        parent: '#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_type',
-        url: "/{{CYCLOPE_PREFIX}}objects_for_ctype_json",
-        value: 'object_id',
-        label: 'verbose_name'
-    });
-};
+(function($){
 
-jQuery(document).ready(function($){
-  $("select[id^='id_cyclope-relatedcontent-self_type-self_id-'][id$='-other_id']").each(function(i, sel){
-        setup_chainedSelect_for_relatedcontent(i);
-  });
+    function setup_chainedSelect_for_relatedcontent(i) {
+        $('#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_id').chainedSelect({
+            parent: '#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_type',
+            url: "/{{CYCLOPE_PREFIX}}objects_for_ctype_json",
+            value: 'object_id',
+            label: 'verbose_name'
+        });
+    };
 
-  $("#cyclope-relatedcontent-self_type-self_id-group .add-row a").click(
-    function(){
-      i = $("select[id^='id_cyclope-relatedcontent-self_type-self_id-'][id$='-other_id']").length - 2
-      setup_chainedSelect_for_relatedcontent(i);
+    jQuery(document).ready(function($){
+      $("select[id^='id_cyclope-relatedcontent-self_type-self_id-'][id$='-other_id']").each(function(i, sel){
+            setup_chainedSelect_for_relatedcontent(i);
+      });
+
+      $("#cyclope-relatedcontent-self_type-self_id-group .add-row a").click(
+        function(){
+          i = $("select[id^='id_cyclope-relatedcontent-self_type-self_id-'][id$='-other_id']").length - 2
+          setup_chainedSelect_for_relatedcontent(i);
+        });
     });
-});
+    
+})(django.jQuery)
 //]]>
 
 </script>

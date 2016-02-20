@@ -3,10 +3,9 @@
 */
 
 /** https://api.jquery.com/jquery.noconflict/ */
-var jQ2 = jQuery.noConflict(true);
 
 /**jQuery-UI Widget declaration*/
-jQ2.widget("cyclope.mediaWidget", jQ2.ui.dialog, {
+$.widget("cyclope.mediaWidget", $.ui.dialog, {
     options: {
         autoOpen: false,
         modal: true,
@@ -21,11 +20,11 @@ jQ2.widget("cyclope.mediaWidget", jQ2.ui.dialog, {
 });
 
 /**Widget usage*/
-jQ2(function(){
+$(function(){
     //form becomes widget
-    jQ2('#mediaUpload').mediaWidget();
+    $('#mediaUpload').mediaWidget();
     // picture button triggers widget
-    jQ2("#media_widget_button").click(function(){
-        var widget = jQ2("#mediaUpload").mediaWidget("position", this).mediaWidget("open");
+    $("#media_widget_button").click(function(){
+        var widget = $("#mediaUpload").mediaWidget("position", this).mediaWidget("open");
     });
 });

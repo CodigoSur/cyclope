@@ -1,4 +1,9 @@
 {% extends "admin/base_content_change_form.html" %}
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-ui-1.11.4-min.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/cyclope_media_widget.js"></script>
+{% endblock %}
 {% block content %}
 	{{ block.super }}
 	{% include "admin/articles/article/media_upload.html" %}

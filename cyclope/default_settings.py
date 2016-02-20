@@ -271,7 +271,7 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
     )
 
 # martkitup settings
-JQUERY_URL = "cyclope/js/reuse_django_jquery.js" # We dont want jquery to be included twice in the admin.
+JQUERY_URL = "cyclope/js/jquery-1.11.3.min.js" # django jquery is outdated in v.1.4, latest even uses jQv.2. jQv.1.9+ is still IE8 compatible
 MARKITUP_SET = 'cyclope/markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
 

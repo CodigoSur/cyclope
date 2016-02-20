@@ -176,4 +176,4 @@
         cacheLength: 0,                        // The maximum number of entries that should be cached
         error: null                             // Function called if an AJAX call returns an error
     }
-})(jQuery);
+})(django.jQuery);
