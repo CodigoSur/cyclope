@@ -122,6 +122,16 @@ def pictures_delete(request, article_id):
     else:
         return HttpResponseForbidden()
 
+#GET /embed/new
+def embed_new(request):
+    if request.user.is_staff:
+        #form = MediaWidgetForm()
+        return render(request, 'media_widget/media_upload.html', {
+#            'form': form, 
+        })
+    else:
+        return HttpResponseForbidden()
+
 #HELPERS
 def _associate_picture_to_article(article, picture):
     """Helper method to DRY picture create and update"""

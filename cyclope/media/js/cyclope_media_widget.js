@@ -47,6 +47,6 @@ $.widget("cyclope.mediaWidget", $.ui.dialog, {
 });
 //bindings
 $(function(){
-    $('#mediaUpload').mediaWidget();
+    $('#media_iframe').mediaWidget();
 });
 // trigger is fired by markitup
