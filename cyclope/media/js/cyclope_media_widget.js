@@ -4,12 +4,15 @@
 
 /** https://api.jquery.com/jquery.noconflict/ */
 
-/**jQuery-UI Widget declaration*/
-$.widget("cyclope.mediaWidget", $.ui.dialog, {
+/**jQuery-UI Widgets declaration*/
+
+//Pictures Upload Widget
+
+$.widget("cyclope.picturesWidget", $.ui.dialog, {
     options: {
         autoOpen: false,
         modal: true,
-        title: 'Subir archivos multimedia',
+        title: 'Imágenes del Artículo',
         minWidth: 470,
         minHeight: 470,
         closeText: "Cerrar"
@@ -18,13 +21,32 @@ $.widget("cyclope.mediaWidget", $.ui.dialog, {
         this.options.position = {my: "left top", at: "right bottom", of: objt, collision: "fit"}
     }
 });
-
-/**Widget usage*/
+//bindings
 $(function(){
     //form becomes widget
-    $('#mediaUpload').mediaWidget();
+    $('#pictures_iframe').picturesWidget();
     // picture button triggers widget
     $("#media_widget_button").click(function(){
-        var widget = $("#mediaUpload").mediaWidget("position", this).mediaWidget("open");
+        var widget = $("#pictures_iframe").picturesWidget("position", this).picturesWidget("open");
     });
 });
+
+//Embedded Media Widget
+$.widget("cyclope.mediaWidget", $.ui.dialog, {
+    options: {
+        autoOpen: false,
+        modal: true,
+        title: 'Insertar Contenido Multimedia',
+        minWidth: 470,
+        minHeight: 470,
+        closeText: "Cerrar"
+    },
+    position: function(objt){
+        this.options.position = {my: "left top", at: "right bottom", of: objt, collision: "fit"}
+    }
+});
+//bindings
+$(function(){
+    $('#mediaUpload').mediaWidget();
+});
+// trigger is fired by markitup

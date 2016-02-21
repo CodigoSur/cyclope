@@ -62,10 +62,8 @@ var FileBrowserHelper = {
     markItUp: false, // objet to store id of the textarea clicked
     insertPicture: function(markItUp) {
                 $("#markItUp"+markItUp.capitalize() +" .markItUpButton20").click(function (){
-                    FileBrowserHelper.markItUp = markItUp;
-         
+                    FileBrowserHelper.markItUp = markItUp;         
                     var widget = $("#mediaUpload").mediaWidget("position", this).mediaWidget("open");
-           
                 });
     },
     triggerInsert: function(url) {

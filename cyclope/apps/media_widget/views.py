@@ -59,7 +59,7 @@ def pictures_create(request, article_id):
             #filesystem save
             path = os.path.join(settings.MEDIA_ROOT, Picture._meta.get_field_by_name("image")[0].directory)
             uploaded_path = handle_file_upload(path, image)
-            #thumnnails
+            #thumbnails
             generate_fb_version(uploaded_path, ADMIN_THUMBNAIL)
             #database save
             article = Article.objects.get(pk=article_id)
