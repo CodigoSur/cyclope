@@ -32,15 +32,6 @@
 </head>
 <body>
     <div class="container-fluid">
-        {% if messages %}
-            {% for message in messages %}
-                <div  class="row message-row">
-                    <div class="col-xs-12 {% if message.tags %} alert alert-{{ message.tags }}{% endif %}">
-                        {{ message }}
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
         <div class="row">
             <div class="col-xs-12">
                 <ul class="nav nav-tabs" role="tablist">
@@ -77,7 +68,7 @@
                             <div class="form-group {%if form.name.errors%}has-error{%endif%}">
                                 <label for="fileName">Nombre</label>
                                 {{ form.name }}
-                                <span id="helpName" class="help-block">
+                                <span id="fileName" class="help-block">
                                     {{ form.name.errors }}
                                 </span>
                             </div>
@@ -95,12 +86,12 @@
                                 </span>
                             </div>
                             <div class="form-group {%if form.image.errors%}has-error bg-danger{%endif%}">
-                                <label for="file">Archivo</label>
+                                <label for="file">Im&aacute;gen</label>
                                 {{ form.image }}
                                 <span id="helpName" class="help-block">
                                     {{ form.image.errors }}
                                 </span>
-                                <p class="help-block">Seleccionar archivo</p>
+                                <p class="help-block">Seleccionar im&aacute;gen para subir</p>
                             </div>
                             <div class="row">
                                 <div class="col-xs-6">
@@ -146,6 +137,7 @@
                                 </div>
                                 <div class="col-xs-8">
                                     <form method="GET" action="{% url pictures-delete article_id=article_id %}">
+                                        {% csrf_token %}
                                         <button type="submit" class="btn btn-danger btn-block">Eliminar</button>
                                     </form>
                                 </div>
@@ -157,5 +149,14 @@
                 </div>
             </div>
         </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div  class="row message-row">
+                    <div class="col-xs-12 {% if message.tags %} alert alert-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 </body>

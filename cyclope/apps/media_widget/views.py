@@ -125,9 +125,9 @@ def pictures_delete(request, article_id):
 #GET /embed/new
 def embed_new(request):
     if request.user.is_staff:
-        #form = MediaWidgetForm()
+        form = MediaWidgetForm()
         return render(request, 'media_widget/media_upload.html', {
-#            'form': form, 
+            'form': form, 
         })
     else:
         return HttpResponseForbidden()
