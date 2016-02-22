@@ -153,10 +153,11 @@ def embed_create(request):
                 #TODO user = article.user,
             )
             picture.save()
-            #TODO embeber !!!
             ###
-            #POST/Redirect/GET
-            return redirect('embed-new')
+            return render(request, 'media_widget/media_upload.html', {
+                'form': form,
+                'file_url': picture.media_file
+            })
         else:
             return render(request, 'media_widget/media_upload.html', {
                 'form': form, 

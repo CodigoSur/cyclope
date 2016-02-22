@@ -6,10 +6,16 @@
     <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/bootstrap/bootstrap.min.js"></script>
+    {% if file_url %}
+    <script type="text/javascript">
+        var media_widget = parent.media_widget;
+        media_widget.fb_helper.triggerInsert('{{file_url}}');
+        media_widget.mediaWidget("close");
+    </script>
+    {% endif %}
 </head>
 <body>
     <div id="mediaUpload" class="container-fluid">
-        <!-- TODO 2° STEP
         <div class="row">
             <div class="col-md-12">
                 <div class="dropdown">
@@ -26,6 +32,8 @@
                 </div>
             </div>
         </div>
+        <hr/>
+        <!-- TODO ?
         <br />
         <div class="row">
             <div class="col-md-12">
@@ -102,9 +110,9 @@
 
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <button type="submit" class="btn btn-warning btn-block">
+                                    <button type="submit" class="btn btn-danger btn-block">
                                         <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-                                        Subir
+                                        Subir e Insertar
                                     </button>
                                 </div>
                                 <div class="col-xs-6 text-muted" style="font-size: 10px;">

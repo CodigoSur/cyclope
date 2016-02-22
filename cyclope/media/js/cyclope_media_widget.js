@@ -43,7 +43,8 @@ $.widget("cyclope.mediaWidget", $.ui.dialog, {
     },
     position: function(objt){
         this.options.position = {my: "left top", at: "right bottom", of: objt, collision: "fit"}
-    }
+    },
+    fb_helper: false
 });
 //bindings
 $(function(){

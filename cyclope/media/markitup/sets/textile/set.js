@@ -56,14 +56,16 @@ String.prototype.capitalize = function() {
 /**
 I added the FileBrowserHelper object so that it can store the original markitup
 object that fired the event / popup, so that I can use it when trying to return
-to the edittor.
+to the editor.
 **/
+var media_widget = null;
 var FileBrowserHelper = {
     markItUp: false, // objet to store id of the textarea clicked
     insertPicture: function(markItUp) {
                 $("#markItUp"+markItUp.capitalize() +" .markItUpButton20").click(function (){
-                    FileBrowserHelper.markItUp = markItUp;         
-                    var widget = $("#media_iframe").mediaWidget("position", this).mediaWidget("open");
+                    FileBrowserHelper.markItUp = markItUp;
+                    media_widget = $("#media_iframe").mediaWidget("position", this).mediaWidget("open");
+                    media_widget.fb_helper = FileBrowserHelper; //ESTO O CUALQUIER REFERENCIA
                 });
     },
     triggerInsert: function(url) {
