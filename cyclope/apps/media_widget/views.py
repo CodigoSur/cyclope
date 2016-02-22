@@ -139,23 +139,27 @@ def embed_create(request):
     if request.user.is_staff:
         form = MediaEmbedForm(request.POST, request.FILES)
         if form.is_valid():
+            # fetch data
+            multimedia = form.cleaned_data['multimedia']
+            klass = ContentType.objects.get(model=form.cleaned_data['media_type']).model_class()
+            instance = klass() # generic instance of media model
+            name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else multimedia.name
+            description = form.cleaned_data['description']
+            user = request.user
             #filesystem save 
             path = os.path.join(
                 settings.MEDIA_ROOT, 
-                generic_obj._meta.get_field_by_name(generic_obj.media_file_field)[0].directory #TODO or just uploads?
+                klass._meta.get_field_by_name(klass.media_file_field)[0].directory # TODO or just uploads?
             )
             uploaded_path = handle_file_upload(path, multimedia)
-            #match file with type
-            media_type = ContentType.objects.get(model=form.cleaned_data['media_type'])
-            generic_obj = media_type.model_class()
-            generic_obj._meta.get_field_by_name(generic_obj.media_file_field)[0] = uploaded_path
-            #if generic_obj.valid():
+            #TODO validate file type
+            setattr(instance, klass.media_file_field, uploaded_path)
+            #if instance.full_clean():
             #database save
-            generic_obj.name = form.cleaned_data['name'],# TODO if form.cleaned_data['name']!='' else image.name,
-            generic_obj.description = form.cleaned_data['description'],
-            generic_obj.image = uploaded_path,
-            #TODO user = article.user,
-            generic_obj.picture.save()
+            instance.name = name
+            instance.description = description
+            instance.user = user
+            instance.save()
             #else:
             #    return render(request, 'media_widget/media_upload.html', {
             #        'form': form,
@@ -163,7 +167,7 @@ def embed_create(request):
             ###
             return render(request, 'media_widget/media_upload.html', {
                 'form': form,
-                'file_url': picture.media_file
+                'file_url': instance.media_file
             })
         else:
             return render(request, 'media_widget/media_upload.html', {

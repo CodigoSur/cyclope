@@ -65,7 +65,7 @@ var FileBrowserHelper = {
                 $("#markItUp"+markItUp.capitalize() +" .markItUpButton20").click(function (){
                     FileBrowserHelper.markItUp = markItUp;
                     media_widget = $("#media_iframe").mediaWidget("position", this).mediaWidget("open");
-                    media_widget.fb_helper = FileBrowserHelper; //ESTO O CUALQUIER REFERENCIA
+                    media_widget.fb_helper = FileBrowserHelper;
                 });
     },
     triggerInsert: function(url) {
