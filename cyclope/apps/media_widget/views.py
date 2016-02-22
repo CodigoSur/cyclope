@@ -4,7 +4,7 @@ from cyclope.apps.medialibrary.models import Picture
 from cyclope.apps.medialibrary.forms import InlinedPictureForm
 from django.views.decorators.http import require_POST
 from django.core.urlresolvers import reverse
-from forms import MediaWidgetForm
+from forms import MediaWidgetForm, MediaEmbedForm
 from filebrowser.functions import handle_file_upload, convert_filename
 from django.conf import settings
 import os
@@ -125,10 +125,42 @@ def pictures_delete(request, article_id):
 #GET /embed/new
 def embed_new(request):
     if request.user.is_staff:
-        form = MediaWidgetForm()
+        form = MediaEmbedForm()
         return render(request, 'media_widget/media_upload.html', {
             'form': form, 
         })
+    else:
+        return HttpResponseForbidden()
+
+#POST /embed/create
+@require_POST
+def embed_create(request):
+    if request.user.is_staff:
+        form = MediaEmbedForm(request.POST, request.FILES)
+        if form.is_valid():
+            multimedia = form.cleaned_data['multimedia']
+            ###
+            #TODO asociar tipo de archivo por extension
+            #filesystem save
+            path = os.path.join(settings.MEDIA_ROOT, Picture._meta.get_field_by_name("image")[0].directory)
+            uploaded_path = handle_file_upload(path, multimedia)
+            #database save
+            #TODO guardar objeto generico
+            picture = Picture(
+                name = form.cleaned_data['name'],# TODO if form.cleaned_data['name']!='' else image.name,
+                description = form.cleaned_data['description'],
+                image = uploaded_path,
+                #TODO user = article.user,
+            )
+            picture.save()
+            #TODO embeber !!!
+            ###
+            #POST/Redirect/GET
+            return redirect('embed-new')
+        else:
+            return render(request, 'media_widget/media_upload.html', {
+                'form': form, 
+            })
     else:
         return HttpResponseForbidden()
 
