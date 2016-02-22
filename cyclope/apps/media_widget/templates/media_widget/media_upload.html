@@ -6,29 +6,37 @@
     <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/bootstrap/bootstrap.min.js"></script>
+    <!-- TODO move scripts inside app -->
+    <script type="text/javascript">
+        $(function(){
+            $("#selectMediaType").change(function(){
+                $("#id_media_type").val($(this).val());                
+            });
+        });
+    </script>
     {% if file_url %}
+    <!-- return to markItUp & insert code -->
     <script type="text/javascript">
         var media_widget = parent.media_widget;
         media_widget.fb_helper.triggerInsert('{{file_url}}');
         media_widget.mediaWidget("close");
     </script>
-    {% endif %}
+   {% endif %}
+   
 </head>
 <body>
     <div id="mediaUpload" class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="dropdown">
-                  <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Tipo de contenido a insertar
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="#">Im&aacute;gen</a></li>
-                    <li><a href="#">Audio</a></li>
-                    <li><a href="#">Video</a></li>
-                    <li><a href="#">Flash</a></li>
-                  </ul>
+                <div class="form-group" style="margin-bottom:0;">
+                    <label for="selectMediaType">Tipo de contenido a insertar</label>
+                    <select id="selectMediaType" class="form-control">
+                        <option value="picture">Im&aacute;gen</option>
+                        <option value="soundtrack">Audio</option>
+                        <option value="movieclip">Video</option>
+                        <option value="document">PDF</option>
+                        <option value="flashmovie">Flash</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -72,6 +80,7 @@
                         <!-- Upload file to library before embedding it -->
                         <form method="POST" action="{% url embed-create %}" enctype="multipart/form-data">
                             {% csrf_token %}
+                            {{ form.media_type }}
                             <!--
                             <div class="pull-right">
                                 Mostrar junto al contenido

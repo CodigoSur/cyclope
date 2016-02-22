@@ -6,7 +6,7 @@
 
 /**jQuery-UI Widgets declaration*/
 
-//Pictures Upload Widget
+/**Pictures Upload Widget*/
 
 $.widget("cyclope.picturesWidget", $.ui.dialog, {
     options: {
@@ -31,7 +31,7 @@ $(function(){
     });
 });
 
-//Embedded Media Widget
+/**Embedded Media Widget*/
 $.widget("cyclope.mediaWidget", $.ui.dialog, {
     options: {
         autoOpen: false,
@@ -51,3 +51,5 @@ $(function(){
     $('#media_iframe').mediaWidget();
 });
 // trigger is fired by markitup
+
+

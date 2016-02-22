@@ -132,27 +132,34 @@ def embed_new(request):
     else:
         return HttpResponseForbidden()
 
+#TODO asociar automagicamente tipo de archivo por extension
 #POST /embed/create
 @require_POST
 def embed_create(request):
     if request.user.is_staff:
         form = MediaEmbedForm(request.POST, request.FILES)
         if form.is_valid():
-            multimedia = form.cleaned_data['multimedia']
-            ###
-            #TODO asociar tipo de archivo por extension
-            #filesystem save
-            path = os.path.join(settings.MEDIA_ROOT, Picture._meta.get_field_by_name("image")[0].directory)
-            uploaded_path = handle_file_upload(path, multimedia)
-            #database save
-            #TODO guardar objeto generico
-            picture = Picture(
-                name = form.cleaned_data['name'],# TODO if form.cleaned_data['name']!='' else image.name,
-                description = form.cleaned_data['description'],
-                image = uploaded_path,
-                #TODO user = article.user,
+            #filesystem save 
+            path = os.path.join(
+                settings.MEDIA_ROOT, 
+                generic_obj._meta.get_field_by_name(generic_obj.media_file_field)[0].directory #TODO or just uploads?
             )
-            picture.save()
+            uploaded_path = handle_file_upload(path, multimedia)
+            #match file with type
+            media_type = ContentType.objects.get(model=form.cleaned_data['media_type'])
+            generic_obj = media_type.model_class()
+            generic_obj._meta.get_field_by_name(generic_obj.media_file_field)[0] = uploaded_path
+            #if generic_obj.valid():
+            #database save
+            generic_obj.name = form.cleaned_data['name'],# TODO if form.cleaned_data['name']!='' else image.name,
+            generic_obj.description = form.cleaned_data['description'],
+            generic_obj.image = uploaded_path,
+            #TODO user = article.user,
+            generic_obj.picture.save()
+            #else:
+            #    return render(request, 'media_widget/media_upload.html', {
+            #        'form': form,
+            #    })
             ###
             return render(request, 'media_widget/media_upload.html', {
                 'form': form,
