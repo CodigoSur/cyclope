@@ -34,6 +34,15 @@
 </head>
 <body>
     <div class="container-fluid">
+        {% if messages %}
+            {% for message in messages %}
+                <div  class="row message-row">
+                    <div class="col-xs-12 {% if message.tags %} alert alert-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
         <div class="row">
             <div class="col-xs-12">
                 <ul class="nav nav-tabs" role="tablist">
@@ -151,14 +160,5 @@
                 </div>
             </div>
         </div>
-        {% if messages %}
-            {% for message in messages %}
-                <div  class="row message-row">
-                    <div class="col-xs-12 {% if message.tags %} alert alert-{{ message.tags }}{% endif %}">
-                        {{ message }}
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
     </div>
 </body>
