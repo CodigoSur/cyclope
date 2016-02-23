@@ -9,9 +9,12 @@
     <!-- TODO move scripts inside app -->
     <script type="text/javascript">
         $(function(){
+            // bind select to hidden field
             $("#selectMediaType").change(function(){
                 $("#id_media_type").val($(this).val());                
             });
+            // clean message alerts after 5s
+            $(".message-row").delay(5000).fadeOut();
         });
     </script>
     {% if file_url %}
@@ -26,6 +29,15 @@
 </head>
 <body>
     <div id="mediaUpload" class="container-fluid">
+        {% if messages %}
+            {% for message in messages %}
+                <div  class="row message-row">
+                    <div class="col-xs-12 {% if message.tags %} alert alert-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group" style="margin-bottom:0;">

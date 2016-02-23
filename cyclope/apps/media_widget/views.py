@@ -132,45 +132,42 @@ def embed_new(request):
     else:
         return HttpResponseForbidden()
 
-#TODO asociar automagicamente tipo de archivo por extension
+#TODO asociar automagicamente tipo de archivo por extension?
 #POST /embed/create
 @require_POST
 def embed_create(request):
     if request.user.is_staff:
         form = MediaEmbedForm(request.POST, request.FILES)
         if form.is_valid():
-            # fetch data
             multimedia = form.cleaned_data['multimedia']
             media_type = form.cleaned_data['media_type']
-            klass = ContentType.objects.get(model=media_type).model_class()
-            instance = klass() # generic instance of media model
-            name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else multimedia.name
-            description = form.cleaned_data['description']
-            user = request.user
-            #filesystem save 
-            path = os.path.join(
-                settings.MEDIA_ROOT, 
-                klass._meta.get_field_by_name(klass.media_file_field)[0].directory # TODO or just uploads?
-            )
-            uploaded_path = handle_file_upload(path, multimedia)
-            #TODO validate file type
-            setattr(instance, klass.media_file_field, uploaded_path)
-            #if instance.full_clean():
-            #database save
-            instance.name = name
-            instance.description = description
-            instance.user = user
-            instance.save()
-            #else:
-            #    return render(request, 'media_widget/media_upload.html', {
-            #        'form': form,
-            #    })
-            ###
-            return render(request, 'media_widget/media_upload.html', {
-                'form': form,
-                'file_url': instance.media_file,
-                'media_type': media_type
-            })
+            if _validate_file_extension(media_type, multimedia):
+                klass = ContentType.objects.get(model=media_type).model_class()
+                instance = klass() # generic instance of media model
+                #filesystem save 
+                path = os.path.join(
+                    settings.MEDIA_ROOT, 
+                    klass._meta.get_field_by_name(klass.media_file_field)[0].directory # TODO or just uploads?
+                )
+                uploaded_path = handle_file_upload(path, multimedia)
+                #database save
+                instance.name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else multimedia.name
+                instance.description = form.cleaned_data['description']
+                instance.user = request.user
+                setattr(instance, klass.media_file_field, uploaded_path)
+                instance.save()
+                #response
+                return render(request, 'media_widget/media_upload.html', {
+                    'form': form,
+                    'file_url': instance.media_file,
+                    'media_type': media_type
+                })
+            else:
+                msg = _validation_error_message(multimedia, media_type)
+                messages.error(request, msg)
+                return render(request, 'media_widget/media_upload.html', {
+                    'form': form,
+                })
         else:
             return render(request, 'media_widget/media_upload.html', {
                 'form': form, 
@@ -190,3 +187,37 @@ def _associate_picture_to_article(article, picture):
         other_object = article
     )
     related.save()
+    
+#TODO what about validating this in javascript?
+#TODO validate file extension too?
+def _validate_file_extension(media_type, multimedia):
+    """
+    Validate uploaded file MIME type matches intended Content Type.
+    Allowed MIME types are different than FileBrowser's because they're the ones allowed by HTML5.
+    """
+    if media_type == 'picture':
+        top_level_mime, mime_type = tuple(multimedia.content_type.split('/'))
+        return top_level_mime == 'image' # allow all image types TODO?
+    else:
+        if media_type == 'soundtrack':
+            allowed_mime_types = ['audio/mpeg', 'audio/ogg', 'audio/wav']
+        elif media_type == 'movieclip':
+            allowed_mime_types = ['video/mp4', 'video/webm', 'video/ogg']
+        elif media_type == 'document':
+            allowed_mime_types = ['application/pdf']
+        elif media_type == 'flashmovie':
+            allowed_mime_types = ['x-shockwave-flash', 'x-flv']
+        else:
+            return False
+        return multimedia.content_type in allowed_mime_types
+
+def _validation_error_message(multimedia, media_type):
+    type_name = {
+        'picture': 'Image',
+        'soundtrack': 'Audio',
+        'movieclip': 'Video',
+        'document': 'PDF',
+        'flashmovie': 'Flash'
+    }
+    msg = multimedia.content_type+' is not a valid '+type_name[media_type]+' type!'
+    return msg       

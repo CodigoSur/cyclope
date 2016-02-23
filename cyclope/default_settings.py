@@ -301,3 +301,9 @@ ACTSTREAM_SETTINGS = {
 }
 
 ACTSTREAM_SETTINGS_ENABLED = False
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
+

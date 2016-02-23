@@ -38,7 +38,7 @@ $.widget("cyclope.mediaWidget", $.ui.dialog, {
         modal: true,
         title: 'Insertar Contenido Multimedia',
         minWidth: 470,
-        minHeight: 470,
+        minHeight: 480,
         closeText: "Cerrar"
     },
     position: function(objt){
