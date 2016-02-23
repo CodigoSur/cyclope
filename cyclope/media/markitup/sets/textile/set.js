@@ -49,8 +49,28 @@ mySettings = {
 	]
 }
 
+//TODO MOVE EVERYTHING BELOW TO ITS OWN SCRIPT
+
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+//Content Type to HTML 5 mapping
+function generate_media_tag(url, media_type){
+    switch(media_type){
+        case 'picture':
+            return {replaceWith: '!(left)'+url+'(alt_text)!'};
+        case 'soundtrack':
+            return {replaceWith: ''};
+        case 'movieclip':
+            return {replaceWith: ''};
+        case 'document':
+            return {replaceWith: ''};
+        case 'flashmovie':
+            return {replaceWith: ''};
+        default:
+            throw 'Embedded Media Widget: unexistent content type!';
+    }
 }
 
 /**
@@ -68,7 +88,8 @@ var FileBrowserHelper = {
                     media_widget.fb_helper = FileBrowserHelper;
                 });
     },
-    triggerInsert: function(url) {
-        $("#"+this.markItUp).trigger('insertion', [{replaceWith: '!(left)'+url+'(alt_text)!'}]);
+    triggerInsert: function(url, media_type) {
+        tag_hash = generate_media_tag(url, media_type);
+        $("#"+this.markItUp).trigger('insertion', [tag_hash]);
     }
 };

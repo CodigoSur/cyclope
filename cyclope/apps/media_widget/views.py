@@ -141,7 +141,8 @@ def embed_create(request):
         if form.is_valid():
             # fetch data
             multimedia = form.cleaned_data['multimedia']
-            klass = ContentType.objects.get(model=form.cleaned_data['media_type']).model_class()
+            media_type = form.cleaned_data['media_type']
+            klass = ContentType.objects.get(model=media_type).model_class()
             instance = klass() # generic instance of media model
             name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else multimedia.name
             description = form.cleaned_data['description']
@@ -167,7 +168,8 @@ def embed_create(request):
             ###
             return render(request, 'media_widget/media_upload.html', {
                 'form': form,
-                'file_url': instance.media_file
+                'file_url': instance.media_file,
+                'media_type': media_type
             })
         else:
             return render(request, 'media_widget/media_upload.html', {
