@@ -15,8 +15,10 @@
 
             //refresh parent (article's admin) media widget picture
             function media_widget_refresh(ct_id, obj_id){
+                //hidden input value
+                $("#id_picture", window.parent.document).val(ct_id+"-"+obj_id)
+                //representation
                 $.get("/related_admin/render_object/" + ct_id + "/" + obj_id + "/", function(data) {
-                    //parent because representation is outside the iframe
                     $(".object-representation", window.parent.document).html(data);
                 });
             }            
