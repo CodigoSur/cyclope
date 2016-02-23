@@ -13,6 +13,10 @@
             $("#selectMediaType").change(function(){
                 $("#id_media_type").val($(this).val());                
             });
+            //retrieve value from hidden field
+            if($("#id_media_type").val()){
+                $("#selectMediaType").val($("#id_media_type").val());
+            }
             // clean message alerts after 5s
             $(".message-row").delay(5000).fadeOut();
         });
