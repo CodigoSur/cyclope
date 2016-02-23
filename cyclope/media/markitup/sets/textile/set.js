@@ -56,18 +56,29 @@ String.prototype.capitalize = function() {
 }
 
 //Content Type to HTML 5 mapping
+//TODO source elements can specify MIME type. may be should for video codecs...
+//TODO handle browsers that don't support HTML5
 function generate_media_tag(url, media_type){
     switch(media_type){
         case 'picture':
             return {replaceWith: '!(left)'+url+'(alt_text)!'};
         case 'soundtrack':
-            return {replaceWith: ''};
+            audio = "<audio controls>"
+                   +"<source src='"+url+"'>"
+                   //+"Su navegador no soporta HTML5"
+                   +"</audio>";
+            return {replaceWith: '=='+audio+'=='};
         case 'movieclip':
-            return {replaceWith: ''};
-        case 'document':
-            return {replaceWith: ''};
+            video = "<video controls>"
+                   +"<source src='"+url+"'>"
+                   +"</video>";
+            return {replaceWith: '=='+video+'=='};
+        case 'document': // most browsers require a plugin for this to work
+            doc = "<object data='"+url+"' width='550' height='400' type='application/pdf'></object>";
+            return {replaceWith: '=='+doc+'=='};
         case 'flashmovie':
-            return {replaceWith: ''};
+            flash = "<object data='"+url+"' width='550' height='400'></object>";
+            return {replaceWith: '=='+flash+'=='};
         default:
             throw 'Embedded Media Widget: unexistent content type!';
     }
