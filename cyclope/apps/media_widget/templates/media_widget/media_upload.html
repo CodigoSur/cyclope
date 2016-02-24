@@ -147,9 +147,25 @@
                         </form>                    
                     </div>
                     <div role="tabpanel" class="tab-pane" id="search">
-                        <br />
-                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        Estamos trabajando para Ud.
+                    <div id="select_media_widget">
+                        <table class="table table-striped table-condensed">
+                        {% for media in media_list %}
+                            <tr>
+                                <td>
+                                    <button class="select_media btn btn-primary btn-xs" name="media_id" value="{{media.pk}}">Seleccionar</button>
+                                <td/>
+                                <td>{{ media.name }}</td>
+                                {% if  media.media_file_field == "image" or media.image_file_field == "image" and media.image != None %}
+                                    <td>
+                                        <a href="{{ media.image }}" target="_blank"><img src="{% version media.image.path 'fb_thumb' %}" title="{{picture.description}}" class="thumbnail"/></a>
+                                    </td>
+                                {% elif media.image_file_field == "image" and media.image == None %}
+                                    <td></td>
+                                {% endif %}
+                            <tr/>
+                        {% endfor %}
+                        </table>
+                    </div>
                     </div>
                 </div>
             </div>

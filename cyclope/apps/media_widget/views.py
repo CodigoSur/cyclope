@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django import forms
-from cyclope.apps.medialibrary.models import Picture
+from cyclope.apps.medialibrary.models import Picture, BaseMedia, SoundTrack
 from cyclope.apps.medialibrary.forms import InlinedPictureForm
 from django.views.decorators.http import require_POST
 from django.core.urlresolvers import reverse
@@ -125,9 +125,13 @@ def pictures_delete(request, article_id):
 #GET /embed/new
 def embed_new(request):
     if request.user.is_staff:
+        # file upload form
         form = MediaEmbedForm()
+        # media selection list
+        media_list = _fetch_selection_from_library(None)
         return render(request, 'media_widget/media_upload.html', {
-            'form': form, 
+            'form': form,
+            'media_list': media_list
         })
     else:
         return HttpResponseForbidden()
@@ -175,7 +179,9 @@ def embed_create(request):
     else:
         return HttpResponseForbidden()
 
+########
 #HELPERS
+
 def _associate_picture_to_article(article, picture):
     """Helper method to DRY picture create and update"""
     #associate picture with current Article
@@ -212,6 +218,9 @@ def _validate_file_extension(media_type, multimedia):
         return multimedia.content_type in allowed_mime_types
 
 def _validation_error_message(multimedia, media_type):
+    """
+    Error message string for MIME type server-side validation
+    """
     type_name = {
         'picture': 'Image',
         'soundtrack': 'Audio',
@@ -220,4 +229,14 @@ def _validation_error_message(multimedia, media_type):
         'flashmovie': 'Flash'
     }
     msg = multimedia.content_type+' is not a valid '+type_name[media_type]+' type!'
-    return msg       
+    return msg
+    
+#TODO this function can also be used for pagination, even search
+def _fetch_selection_from_library(media_type):
+    """
+    Returns media lists filtered by content type
+    For selection in Embed Widget search tab.
+    Shared by embed_new & select_type actions.
+    """
+    if media_type == None: # Pictures is first selection
+        return Picture.objects.all().order_by('-creation_date')
