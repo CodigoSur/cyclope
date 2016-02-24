@@ -1,18 +1,76 @@
 {% load fb_versions %}
-<table class="table table-striped table-condensed">
-{% for media in media_list %}
-    <tr>
-        <td>
-            <button class="select_media btn btn-primary btn-xs" value="{{media.media_file}}">Seleccionar</button>
-        <td/>
-        <td>{{ media.name }}</td>
-        {% if  media.media_file_field == "image" or media.image_file_field == "image" and media.image != None %}
-            <td>
-                <a href="{{ media.image }}" target="_blank"><img src="{% version media.image.path 'fb_thumb' %}" title="{{media.description}}" class="thumbnail"/></a>
-            </td>
-        {% elif media.image_file_field == "image" and media.image == None %}
-            <td></td>
+
+<div class="row text-center">
+    <div class="col-xs-3" style="margin-top: 8px;">
+        {% if pagina.has_previous %}
+            <a href="?n={{ pagina.previous_page_number }}&nRows={{nRows}}" class="paginacion">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>&nbsp;Atr&aacute;s
+            </a>
         {% endif %}
-    <tr/>
-{% endfor %}
-</table>
+    </div>
+    <div class="col-xs-6">
+        <h4>
+            {%if pagina.has_previous %}
+                {% if n != '2' %}
+                    <small><a href="?n=1&nRows={{nRows}}" class="paginacion">1</a>...</small>
+                {% endif %}
+                <a href="?n={{pagina.previous_page_number}}&nRows={{nRows}}" class="paginacion">{{pagina.previous_page_number}}</a>&nbsp;
+            {%endif%}
+            <strong><u>{{n}}</u></strong>
+            {%if pagina.has_next%}
+                &nbsp;<a href="?n={{pagina.next_page_number}}&nRows={{nRows}}" class="paginacion">{{pagina.next_page_number}}</a>
+                {% if n != pen_ultimo %}
+                    <small>...<a href="?n={{pagina.paginator.num_pages}}&nRows={{nRows}}" class="paginacion">{{ pagina.paginator.num_pages }}</a></small>
+                {% endif %}
+            {%endif%}
+        </h4>
+    </div>
+    <div class="col-xs-3" style="margin-top: 8px;">
+        {% if pagina.has_next %}
+            <a href="?n={{pagina.next_page_number}}&nRows={{nRows}}" class="paginacion">
+                Siguiente&nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            </a>
+        {% endif %}
+    </div>
+</div>
+<div class="row">
+    <table class="table table-striped table-condensed">
+    {% for media in pagina.object_list %}
+        <tr>
+            {% if  media.media_file_field == "image" or media.image_file_field == "image" and media.image != None %}
+                <td style="vertical-align: middle;">
+                    <a href="{{ media.image }}" target="_blank"><img src="{% version media.image.path 'fb_thumb' %}" title="{{picture.description}}" class="thumbnail"/></a>
+                </td>
+            {% elif media.image_file_field == "image" and media.image == None %}
+                <td></td>
+            {% endif %}
+            <td style="vertical-align: middle;">{{ media.name }}</td>
+            <td style="vertical-align: middle;">
+                <button class="select_media btn btn-primary btn-xs" value="{{media.media_file}}">Seleccionar</button>
+            <td/>
+        <tr/>
+    {% endfor %}
+    </table>
+</div>
+<div class="row">
+    <div class="col-xs-6 text-left" style="margin-top: 6px;">
+        Resultados <strong>{{pagina.start_index}}</strong> a <strong>{{pagina.end_index}}</strong> de <strong>{{pagina.paginator.count}}</strong>.
+    </div>
+    <div class="col-xs-6 text-right">
+        Mostrar <input id="nPerPage" type="number" style="width: 50px;" value="{{nRows}}"/> por página.
+    </div>
+</div>
+
+<!--Re-bind nRows input on Ajax-->
+<script type="text/javascript">
+$("#nPerPage").change(function(){
+    url = '/media_widget/library/'+$("#id_media_type").val()+'?n={{n}}&nRows='+$(this).val()
+    $.get(url, function(data){
+        $("#select_media_widget").html(data);
+        //re-bind
+        $(".select_media").click(function(){
+            insert_markitup($(this).val());
+        });
+    });
+});
+</script>

@@ -20,7 +20,7 @@
                     $(".select_media").click(function(){
                         insert_markitup($(this).val());
                     });
-                });//?nRows=10&from=20 ...TODO
+                });
             });
             //retrieve value from hidden field
             if($("#id_media_type").val()){
@@ -28,6 +28,18 @@
             }
             // clean message alerts after 5s
             $(".message-row").delay(5000).fadeOut();
+            // nRows input
+            $("#nPerPage").change(function(){
+                url = '/media_widget/library/'+$("#id_media_type").val()+'?n={{n}}&nRows='+$(this).val()
+                // TODO encapsulate l.17
+                $.get(url, function(data){
+                    $("#select_media_widget").html(data);
+                    //re-bind
+                    $(".select_media").click(function(){
+                        insert_markitup($(this).val());
+                    });
+                });
+            });
         });
     </script>
     {% if file_url %}
@@ -171,59 +183,7 @@
                     </div>
                     <div role="tabpanel" class="tab-pane active" id="search">
                     <div id="select_media_widget">
-                        <div class="row text-center">
-                            <div class="col-xs-3" style="margin-top: 8px;">
-                                {% if pagina.has_previous %}
-                                    <a href="?n={{ pagina.previous_page_number }}">
-                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>&nbsp;Atr&aacute;s
-                                    </a>
-                                {% endif %}
-                            </div>
-                            <div class="col-xs-6">
-                                <h4>
-                                    {%if pagina.has_previous %}
-                                        {% if n != '2' %}
-                                            <small><a href="?n=1">1</a>...</small>
-                                        {% endif %}
-                                        <a href="?n={{ pagina.previous_page_number }}">{{pagina.previous_page_number}}</a>&nbsp;
-                                    {%endif%}
-                                    <strong><u>{{n}}</u></strong>
-                                    {%if pagina.has_next%}
-                                        &nbsp;<a href="?n={{ pagina.next_page_number }}">{{pagina.next_page_number}}</a>
-                                        {% if n != pen_ultimo %}
-                                            <small>...<a href="?n={{ pagina.paginator.num_pages }}">{{ pagina.paginator.num_pages }}</a></small>
-                                        {% endif %}
-                                    {%endif%}
-                                </h4>
-                            </div>
-                            <div class="col-xs-3" style="margin-top: 8px;">
-                                {% if pagina.has_next %}
-                                    <a href="?n={{ pagina.next_page_number }}" >
-                                        Siguiente&nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                    </a>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <table class="table table-striped table-condensed">
-                            {% for media in pagina.object_list %}
-                                <tr>
-                                    {% if  media.media_file_field == "image" or media.image_file_field == "image" and media.image != None %}
-                                        <td style="vertical-align: middle;">
-                                            <a href="{{ media.image }}" target="_blank"><img src="{% version media.image.path 'fb_thumb' %}" title="{{picture.description}}" class="thumbnail"/></a>
-                                        </td>
-                                    {% elif media.image_file_field == "image" and media.image == None %}
-                                        <td></td>
-                                    {% endif %}
-                                    <td style="vertical-align: middle;">{{ media.name }}</td>
-                                    <td style="vertical-align: middle;">
-                                        <button class="select_media btn btn-primary btn-xs" value="{{media.media_file}}">Seleccionar</button>
-                                    <td/>
-                                <tr/>
-                            {% endfor %}
-                            </table>
-                        </div>
-                    </div>
+                        {% include "media_widget/media_select.html" %}
                     </div>
                 </div>
             </div>

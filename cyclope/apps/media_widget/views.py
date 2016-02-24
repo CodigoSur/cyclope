@@ -131,18 +131,15 @@ def embed_new(request):
         # media selection list
         media_list = _fetch_selection_from_library(None)
         # pagination
-        if request.GET.has_key(u'n'):
-            n = request.GET[u'n']  #url query string
-        else:
-            n = 1 #defaults to first
-        #import pdb; pdb.set_trace()
-        paginator = Paginator(media_list, 5)#TODO ?&nRows
+        n, nRows = _paginator_query_string(request)
+        paginator = Paginator(media_list, nRows)
         pagina = paginator.page(n)
         # render
         return render(request, 'media_widget/media_upload.html', {
             'form': form,
             'pagina': pagina,
             'n': n,
+            'nRows': nRows,
             'pen_ultimo': str(pagina.paginator.num_pages -1)
         })
     else:
@@ -200,8 +197,15 @@ def library_fetch(request, media_type):
     if request.user.is_staff:
         # media selection list
         media_list = _fetch_selection_from_library(media_type)
+        # pagination
+        n, nRows = _paginator_query_string(request)
+        paginator = Paginator(media_list, nRows)
+        pagina = paginator.page(n)
         return render(request, 'media_widget/media_select.html', {
-            'media_list': media_list
+            'pagina': pagina,
+            'n': n,
+            'nRows': nRows,
+            'pen_ultimo': str(pagina.paginator.num_pages -1)
         })
     else:
         return HttpResponseForbidden()
@@ -258,7 +262,7 @@ def _validation_error_message(multimedia, media_type):
     msg = multimedia.content_type+' is not a valid '+type_name[media_type]+' type!'
     return msg
     
-#TODO this function can also be used for pagination, even search
+#TODO this function can also be used for search
 def _fetch_selection_from_library(media_type):
     """
     Returns media lists filtered by content type
@@ -269,4 +273,14 @@ def _fetch_selection_from_library(media_type):
         media_type = 'picture' # Pictures is first selection
     media_list = ContentType.objects.get(model=media_type).get_all_objects_for_this_type().order_by('-creation_date')
     return media_list
-    #<class 'django.db.models.query.QuerySet'>
+    
+def _paginator_query_string(request):
+    if request.GET.has_key(u'n'):
+            n = request.GET[u'n']  #url query string
+    else:
+        n = 1 #defaults to first
+    if request.GET.has_key(u'nRows'):
+        nRows = request.GET[u'nRows']  #url query string
+    else:
+        nRows = 5
+    return (n, nRows)
