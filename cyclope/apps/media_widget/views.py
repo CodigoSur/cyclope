@@ -253,16 +253,7 @@ def _fetch_selection_from_library(media_type):
     For selection in Embed Widget search tab.
     Shared by embed_new & select_type actions.
     """
-    # Pictures is first selection
-    if media_type == None or media_type == 'picture':
-        return Picture.objects.all().order_by('-creation_date')
-    elif media_type == 'soundtrack':
-        return SoundTrack.objects.all().order_by('-creation_date')
-    elif media_type == 'movieclip':
-        pass
-    elif media_type == 'document':
-        pass
-    elif media_type == 'flashmovie':
-        pass
-    
-    
+    if media_type == None:
+        media_type = 'picture' # Pictures is first selection
+    return ContentType.objects.get(model=media_type).get_all_objects_for_this_type().order_by('-creation_date')
+    #<class 'django.db.models.query.QuerySet'>
