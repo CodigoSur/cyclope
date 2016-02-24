@@ -9,9 +9,14 @@
     <!-- TODO move scripts inside app -->
     <script type="text/javascript">
         $(function(){
-            // bind select to hidden field
+            // bind select...
             $("#selectMediaType").change(function(){
-                $("#id_media_type").val($(this).val());                
+                //...to hidden field
+                $("#id_media_type").val($(this).val());
+                //...to library list        /media_type
+                $.get('/media_widget/library/'+$(this).val(), function(data){
+                    $("#select_media_widget").html(data);
+                });//?nRows=10&from=20 ...TODO
             });
             //retrieve value from hidden field
             if($("#id_media_type").val()){

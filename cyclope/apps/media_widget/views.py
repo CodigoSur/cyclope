@@ -179,6 +179,21 @@ def embed_create(request):
     else:
         return HttpResponseForbidden()
 
+def library_fetch(request, media_type):
+    """
+    Query Media objects list according to selected media content type.
+    Return them as the HTML to render to refresh the area.
+    This method could also do pagination and even search.
+    """
+    if request.user.is_staff:
+        # media selection list
+        media_list = _fetch_selection_from_library(media_type)
+        return render(request, 'media_widget/media_select.html', {
+            'media_list': media_list
+        })
+    else:
+        return HttpResponseForbidden()
+
 ########
 #HELPERS
 
@@ -238,5 +253,16 @@ def _fetch_selection_from_library(media_type):
     For selection in Embed Widget search tab.
     Shared by embed_new & select_type actions.
     """
-    if media_type == None: # Pictures is first selection
+    # Pictures is first selection
+    if media_type == None or media_type == 'picture':
         return Picture.objects.all().order_by('-creation_date')
+    elif media_type == 'soundtrack':
+        return SoundTrack.objects.all().order_by('-creation_date')
+    elif media_type == 'movieclip':
+        pass
+    elif media_type == 'document':
+        pass
+    elif media_type == 'flashmovie':
+        pass
+    
+    
