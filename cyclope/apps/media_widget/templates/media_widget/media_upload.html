@@ -18,12 +18,7 @@
                     $("#select_media_widget").html(data);
                     //re-bind
                     $(".select_media").click(function(){
-                        var media_widget = parent.media_widget;
-                        file_url = $(this).val();
-                        media_type = $("#selectMediaType").val();
-                        media_widget.fb_helper.triggerInsert(file_url, media_type);
-                        //the end
-                        media_widget.mediaWidget("close");
+                        insert_markitup($(this).val());
                     });
                 });//?nRows=10&from=20 ...TODO
             });
@@ -45,14 +40,16 @@
     {% endif %}
     <!-- select media from library & insert code -->
     <script type="text/javascript">
+        var insert_markitup = function(file_url){
+            var media_widget = parent.media_widget;
+            media_type = $("#selectMediaType").val();
+            media_widget.fb_helper.triggerInsert(file_url, media_type);
+            //the end
+            media_widget.mediaWidget("close");
+        };
         $(function(){
             $(".select_media").click(function(){
-                var media_widget = parent.media_widget;
-                file_url = $(this).val();
-                media_type = $("#selectMediaType").val();
-                media_widget.fb_helper.triggerInsert(file_url, media_type);
-                //the end
-                media_widget.mediaWidget("close");
+                insert_markitup($(this).val());
             });
         }); 
     </script>
