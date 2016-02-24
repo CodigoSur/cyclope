@@ -15,6 +15,7 @@ from django.http import HttpResponseBadRequest, HttpResponseForbidden
 from cyclope.apps.articles.models import Article
 from cyclope.models import RelatedContent
 from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import Paginator
 
 # GET /pictures/new/article_id
 def pictures_upload(request, article_id):
@@ -129,9 +130,20 @@ def embed_new(request):
         form = MediaEmbedForm()
         # media selection list
         media_list = _fetch_selection_from_library(None)
+        # pagination
+        if request.GET.has_key(u'n'):
+            n = request.GET[u'n']  #url query string
+        else:
+            n = 1 #defaults to first
+        #import pdb; pdb.set_trace()
+        paginator = Paginator(media_list, 5)#TODO ?&nRows
+        pagina = paginator.page(n)
+        # render
         return render(request, 'media_widget/media_upload.html', {
             'form': form,
-            'media_list': media_list
+            'pagina': pagina,
+            'n': n,
+            'pen_ultimo': str(pagina.paginator.num_pages -1)
         })
     else:
         return HttpResponseForbidden()
@@ -255,5 +267,6 @@ def _fetch_selection_from_library(media_type):
     """
     if media_type == None:
         media_type = 'picture' # Pictures is first selection
-    return ContentType.objects.get(model=media_type).get_all_objects_for_this_type().order_by('-creation_date')
+    media_list = ContentType.objects.get(model=media_type).get_all_objects_for_this_type().order_by('-creation_date')
+    return media_list
     #<class 'django.db.models.query.QuerySet'>
