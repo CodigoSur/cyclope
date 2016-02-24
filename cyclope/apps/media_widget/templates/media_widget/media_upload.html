@@ -16,6 +16,15 @@
                 //...to library list        /media_type
                 $.get('/media_widget/library/'+$(this).val(), function(data){
                     $("#select_media_widget").html(data);
+                    //re-bind
+                    $(".select_media").click(function(){
+                        var media_widget = parent.media_widget;
+                        file_url = $(this).val();
+                        media_type = $("#selectMediaType").val();
+                        media_widget.fb_helper.triggerInsert(file_url, media_type);
+                        //the end
+                        media_widget.mediaWidget("close");
+                    });
                 });//?nRows=10&from=20 ...TODO
             });
             //retrieve value from hidden field
@@ -168,7 +177,7 @@
                         <table class="table table-striped table-condensed">
                         {% for media in media_list %}
                             <tr>
-                                <td valign="center">
+                                <td>
                                     <button class="select_media btn btn-primary btn-xs" value="{{media.media_file}}">Seleccionar</button>
                                 <td/>
                                 <td>{{ media.name }}</td>
