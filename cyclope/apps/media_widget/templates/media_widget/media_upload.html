@@ -22,14 +22,26 @@
         });
     </script>
     {% if file_url %}
-    <!-- return to markItUp & insert code -->
+    <!-- return to markItUp from upload & insert code -->
     <script type="text/javascript">
         var media_widget = parent.media_widget;
         media_widget.fb_helper.triggerInsert('{{file_url}}', '{{media_type}}');
         media_widget.mediaWidget("close");
     </script>
-   {% endif %}
-   
+    {% endif %}
+    <!-- select media from library & insert code -->
+    <script type="text/javascript">
+        $(function(){
+            $(".select_media").click(function(){
+                var media_widget = parent.media_widget;
+                file_url = $(this).val();
+                media_type = $("#selectMediaType").val();
+                media_widget.fb_helper.triggerInsert(file_url, media_type);
+                //the end
+                media_widget.mediaWidget("close");
+            });
+        }); 
+    </script>
 </head>
 <body>
     <div id="mediaUpload" class="container-fluid">
@@ -151,8 +163,8 @@
                         <table class="table table-striped table-condensed">
                         {% for media in media_list %}
                             <tr>
-                                <td>
-                                    <button class="select_media btn btn-primary btn-xs" name="media_id" value="{{media.pk}}">Seleccionar</button>
+                                <td valign="center">
+                                    <button class="select_media btn btn-primary btn-xs" value="{{media.media_file}}">Seleccionar</button>
                                 <td/>
                                 <td>{{ media.name }}</td>
                                 {% if  media.media_file_field == "image" or media.image_file_field == "image" and media.image != None %}
