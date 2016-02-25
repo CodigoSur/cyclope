@@ -124,23 +124,27 @@ def pictures_delete(request, article_id):
         return HttpResponseForbidden()
 
 #GET /embed/new
-def embed_new(request):
+def embed_new(request, media_type):
     if request.user.is_staff:
         # file upload form
         form = MediaEmbedForm()
+        # override parameter because url didn't change on ajax partial update
+        if request.GET.has_key(u'media_type'):
+            media_type = request.GET[u'media_type']
         # media selection list
-        media_list = _fetch_selection_from_library(None)
+        media_list = _fetch_selection_from_library(media_type)
         # pagination
         n, nRows = _paginator_query_string(request)
         paginator = Paginator(media_list, nRows)
         pagina = paginator.page(n)
+        pen_ultimo = str(pagina.paginator.num_pages -1)
         # render
         return render(request, 'media_widget/media_upload.html', {
             'form': form,
             'pagina': pagina,
             'n': n,
             'nRows': nRows,
-            'pen_ultimo': str(pagina.paginator.num_pages -1)
+            'pen_ultimo': pen_ultimo
         })
     else:
         return HttpResponseForbidden()
@@ -201,11 +205,13 @@ def library_fetch(request, media_type):
         n, nRows = _paginator_query_string(request)
         paginator = Paginator(media_list, nRows)
         pagina = paginator.page(n)
+        pen_ultimo = str(pagina.paginator.num_pages -1)
         return render(request, 'media_widget/media_select.html', {
             'pagina': pagina,
             'n': n,
             'nRows': nRows,
-            'pen_ultimo': str(pagina.paginator.num_pages -1)
+            'pen_ultimo': pen_ultimo,
+            'media_type': media_type
         })
     else:
         return HttpResponseForbidden()
@@ -269,8 +275,6 @@ def _fetch_selection_from_library(media_type):
     For selection in Embed Widget search tab.
     Shared by embed_new & select_type actions.
     """
-    if media_type == None:
-        media_type = 'picture' # Pictures is first selection
     media_list = ContentType.objects.get(model=media_type).get_all_objects_for_this_type().order_by('-creation_date')
     return media_list
     

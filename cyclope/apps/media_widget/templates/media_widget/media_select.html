@@ -3,7 +3,7 @@
 <div class="row text-center">
     <div class="col-xs-3" style="margin-top: 8px;">
         {% if pagina.has_previous %}
-            <a href="?n={{ pagina.previous_page_number }}&nRows={{nRows}}" class="paginacion">
+            <a href="?n={{ pagina.previous_page_number }}&nRows={{nRows}}{%if media_type%}&media_type={{media_type}}{%endif%}" class="paginacion">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>&nbsp;Atr&aacute;s
             </a>
         {% endif %}
@@ -12,22 +12,22 @@
         <h4>
             {%if pagina.has_previous %}
                 {% if n != '2' %}
-                    <small><a href="?n=1&nRows={{nRows}}" class="paginacion">1</a>...</small>
+                    <small><a href="?n=1&nRows={{nRows}}{%if media_type%}&media_type={{media_type}}{%endif%}" class="paginacion">1</a>...</small>
                 {% endif %}
-                <a href="?n={{pagina.previous_page_number}}&nRows={{nRows}}" class="paginacion">{{pagina.previous_page_number}}</a>&nbsp;
+                <a href="?n={{pagina.previous_page_number}}&nRows={{nRows}}{%if media_type%}&media_type={{media_type}}{%endif%}" class="paginacion">{{pagina.previous_page_number}}</a>&nbsp;
             {%endif%}
             <strong><u>{{n}}</u></strong>
             {%if pagina.has_next%}
-                &nbsp;<a href="?n={{pagina.next_page_number}}&nRows={{nRows}}" class="paginacion">{{pagina.next_page_number}}</a>
+                &nbsp;<a href="?n={{pagina.next_page_number}}&nRows={{nRows}}{%if media_type%}&media_type={{media_type}}{%endif%}" class="paginacion">{{pagina.next_page_number}}</a>
                 {% if n != pen_ultimo %}
-                    <small>...<a href="?n={{pagina.paginator.num_pages}}&nRows={{nRows}}" class="paginacion">{{ pagina.paginator.num_pages }}</a></small>
+                    <small>...<a href="?n={{pagina.paginator.num_pages}}&nRows={{nRows}}{%if media_type%}&media_type={{media_type}}{%endif%}" class="paginacion">{{ pagina.paginator.num_pages }}</a></small>
                 {% endif %}
             {%endif%}
         </h4>
     </div>
     <div class="col-xs-3" style="margin-top: 8px;">
         {% if pagina.has_next %}
-            <a href="?n={{pagina.next_page_number}}&nRows={{nRows}}" class="paginacion">
+            <a href="?n={{pagina.next_page_number}}&nRows={{nRows}}{%if media_type%}&media_type={{media_type}}{%endif%}" class="paginacion">
                 Siguiente&nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
             </a>
         {% endif %}
