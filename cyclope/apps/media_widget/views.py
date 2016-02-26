@@ -128,23 +128,19 @@ def embed_new(request, media_type):
     if request.user.is_staff:
         # file upload form
         form = MediaEmbedForm()
-        # override parameter because url didn't change on ajax partial update
-        if request.GET.has_key(u'media_type'):
-            media_type = request.GET[u'media_type']
         # media selection list
         media_list = _fetch_selection_from_library(media_type)
         # pagination
         n, nRows = _paginator_query_string(request)
         paginator = Paginator(media_list, nRows)
         pagina = paginator.page(n)
-        pen_ultimo = str(pagina.paginator.num_pages -1)
         # render
         return render(request, 'media_widget/media_upload.html', {
             'form': form,
             'pagina': pagina,
             'n': n,
             'nRows': nRows,
-            'pen_ultimo': pen_ultimo
+            'media_type': media_type
         })
     else:
         return HttpResponseForbidden()
@@ -205,16 +201,12 @@ def library_fetch(request, media_type):
         n, nRows = _paginator_query_string(request)
         paginator = Paginator(media_list, nRows)
         pagina = paginator.page(n)
-        pen_ultimo = str(pagina.paginator.num_pages-1)
-        select_flag = request.GET.has_key(u'media_type')
-        
+        # response
         return render(request, 'media_widget/media_select.html', {
             'pagina': pagina,
             'n': n,
             'nRows': nRows,
-            'pen_ultimo': pen_ultimo,
             'media_type': media_type,
-            'select_flag': select_flag
         })
     else:
         return HttpResponseForbidden()
