@@ -205,13 +205,16 @@ def library_fetch(request, media_type):
         n, nRows = _paginator_query_string(request)
         paginator = Paginator(media_list, nRows)
         pagina = paginator.page(n)
-        pen_ultimo = str(pagina.paginator.num_pages -1)
+        pen_ultimo = str(pagina.paginator.num_pages-1)
+        select_flag = request.GET.has_key(u'media_type')
+        
         return render(request, 'media_widget/media_select.html', {
             'pagina': pagina,
             'n': n,
             'nRows': nRows,
             'pen_ultimo': pen_ultimo,
-            'media_type': media_type
+            'media_type': media_type,
+            'select_flag': select_flag
         })
     else:
         return HttpResponseForbidden()
