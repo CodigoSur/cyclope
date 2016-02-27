@@ -6,3 +6,25 @@
         Mostrar <input id="nPerPage" type="number" style="width: 50px;" value="{{nRows}}"/> por página.
     </div>
 </div>
+
+<!-- TODO bind scripts in links -->
+
+<!--Re-bind nRows input on Ajax-->
+<script type="text/javascript">
+$("#nPerPage").change(function(){
+    query_str = '?n={{n}}&nRows='+$(this).val()
+    {% if widget == 'embed' %}
+        url = '/media_widget/library/'+$("#id_media_type").val()+query_str
+        $.get(url, function(data){
+            $("#select_media_widget").html(data);
+            //re-bind
+            $(".select_media").click(function(){
+                insert_markitup($(this).val());
+            });
+        });
+    {% elif widget == 'pictures' %}
+        url = "{% url pictures-new article_id=param %}"+query_str
+        window.location.href = url // just navigate while there's no ajax
+    {% endif %}
+});
+</script>

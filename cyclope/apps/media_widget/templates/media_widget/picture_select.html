@@ -1,0 +1,22 @@
+{% load fb_versions %}
+
+{% include "media_widget/pagination_header.html" with widget='pictures' %}
+
+<form method="POST" action="{% url pictures-update article_id=article_id %}">
+    {% csrf_token %}
+    <table class="table table-striped table-condensed">                
+        {% for picture in pagina.object_list %}
+        <tr>
+            <td>
+                <button class="btn btn-primary btn-xs" name="picture_id" value="{{picture.pk}}">Seleccionar</button>
+            </td>
+            <td>{{ picture.name }}</td>
+            <td>
+                <a href="{{ picture.image }}" target="_blank"><img src="{% version picture.image.path 'fb_thumb' %}" title="{{picture.description}}" class="thumbnail"/></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+
+{% include "media_widget/pagination_footer.html" with widget='pictures' %}

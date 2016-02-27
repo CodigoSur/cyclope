@@ -17,6 +17,9 @@ from cyclope.models import RelatedContent
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
 
+###########################
+##Article's pictures widget
+
 # GET /pictures/new/article_id
 def pictures_upload(request, article_id):
     """ Returns widget's inner HTML to be viewed through an iframe.
@@ -27,6 +30,10 @@ def pictures_upload(request, article_id):
     
     #picture selection
     pictures_list = Picture.objects.all().order_by('-creation_date')
+    # pagination
+    n, nRows = _paginator_query_string(request)
+    paginator = Paginator(pictures_list, nRows)
+    pagina = paginator.page(n)
     
     #admin picture refresh
     new_picture = {}
@@ -43,9 +50,12 @@ def pictures_upload(request, article_id):
     return render(request, 'media_widget/pictures_upload.html', {
         'form': form, 
         'article_id': article_id,
-        'pictures_list': pictures_list,
         'new_picture': new_picture,
-        'delete_picture': delete_picture
+        'delete_picture': delete_picture,
+        'pagina': pagina,
+        'n': n,
+        'nRows': nRows,
+        'param': article_id,
     })
 
 # POST /pictures/create/article_id
@@ -123,6 +133,9 @@ def pictures_delete(request, article_id):
     else:
         return HttpResponseForbidden()
 
+####################
+##Embed Media Widget
+
 #GET /embed/new
 def embed_new(request, media_type):
     if request.user.is_staff:
@@ -140,12 +153,12 @@ def embed_new(request, media_type):
             'pagina': pagina,
             'n': n,
             'nRows': nRows,
-            'media_type': media_type
+            'media_type': media_type,
+            'param': media_type
         })
     else:
         return HttpResponseForbidden()
 
-#TODO asociar automagicamente tipo de archivo por extension?
 #POST /embed/create
 @require_POST
 def embed_create(request):
@@ -173,7 +186,7 @@ def embed_create(request):
                 return render(request, 'media_widget/media_upload.html', {
                     'form': form,
                     'file_url': instance.media_file,
-                    'media_type': media_type
+                    'media_type': media_type,
                 })
             else:
                 msg = _validation_error_message(multimedia, media_type)
@@ -188,6 +201,7 @@ def embed_create(request):
     else:
         return HttpResponseForbidden()
 
+# GET /library/media_type?n=1&nRows=5
 def library_fetch(request, media_type):
     """
     Query Media objects list according to selected media content type.
@@ -206,6 +220,7 @@ def library_fetch(request, media_type):
             'pagina': pagina,
             'n': n,
             'nRows': nRows,
+            'param': media_type,
             'media_type': media_type,
         })
     else:
@@ -274,6 +289,9 @@ def _fetch_selection_from_library(media_type):
     return media_list
     
 def _paginator_query_string(request):
+    """
+    Interpret /library/media_type query string
+    """
     if request.GET.has_key(u'n'):
             n = request.GET[u'n']  #url query string
     else:

@@ -1,4 +1,3 @@
-{% load fb_versions %}
 <head>
     <!--styles-->
     <link href="{{CYCLOPE_STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
@@ -46,13 +45,13 @@
         <div class="row">
             <div class="col-xs-12">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active">
+                    <li role="presentation">
                         <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                             Subir
                         </a>
                     </li>
-                    <li role="presentation">
+                    <li role="presentation" class="active">
                         <a href="#search" aria-controls="search" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             Buscar en biblioteca
@@ -66,7 +65,7 @@
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="upload">
+                    <div role="tabpanel" class="tab-pane" id="upload">
                         <form method="POST" action="{% url pictures-create article_id=article_id %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ form.non_field_errors }}
@@ -117,23 +116,8 @@
                             </div>
                         </form>                    
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="search">
-                        <form method="POST" action="{% url pictures-update article_id=article_id %}">
-                            {% csrf_token %}
-                            <table class="table table-striped table-condensed">                
-                                {% for picture in pictures_list %}
-                                <tr>
-                                    <td>
-                                        <button class="btn btn-primary btn-xs" name="picture_id" value="{{picture.pk}}">Seleccionar</button>
-                                    </td>
-                                    <td>{{ picture.name }}</td>
-                                    <td>
-                                        <a href="{{ picture.image }}" target="_blank"><img src="{% version picture.image.path 'fb_thumb' %}" title="{{picture.description}}" class="thumbnail"/></a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </table>
-                        </form>
+                    <div role="tabpanel" class="tab-pane active" id="search">
+                        {% include "media_widget/picture_select.html" %}
                     </div>
                     <div role="tabpanel" class="tab-pane" id="delete">
                         <div class="jumbotron">
