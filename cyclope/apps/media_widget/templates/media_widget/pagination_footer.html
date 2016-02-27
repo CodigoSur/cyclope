@@ -24,7 +24,7 @@ $("#nPerPage").change(function(){
         });
     {% elif widget == 'pictures' %}
         url = "{% url pictures-new article_id=param %}"+query_str
-        window.location.href = url // just navigate while there's no ajax
+        window.location.href = url // TODO just navigate while there's no ajax
     {% endif %}
 });
 </script>

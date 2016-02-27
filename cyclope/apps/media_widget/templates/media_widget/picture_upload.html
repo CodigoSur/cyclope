@@ -1,0 +1,49 @@
+<form method="POST" action="{% url pictures-create article_id=article_id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <!--
+    <div class="pull-right">
+        Mostrar junto al contenido
+        <input type="checkbox" name="show_name" value="no">
+    </div>
+    -->
+    <div class="form-group {%if form.name.errors%}has-error{%endif%}">
+        <label for="fileName">Nombre</label>
+        {{ form.name }}
+        <span id="fileName" class="help-block">
+            {{ form.name.errors }}
+        </span>
+    </div>
+    <!--
+    <div class="pull-right">
+        Mostrar junto al contenido
+        <input type="checkbox" name="show_desc" value="no">
+    </div>
+    -->
+    <div class="form-group {%if form.description.errors%}has-error{%endif%}">
+        <label for="fileDesc">Descripci&oacute;n</label>
+        {{ form.description }}
+        <span id="helpName" class="help-block">
+            {{ form.description.errors }}
+        </span>
+    </div>
+    <div class="form-group {%if form.image.errors%}has-error bg-danger{%endif%}">
+        <label for="file">Im&aacute;gen</label>
+        {{ form.image }}
+        <span id="helpName" class="help-block">
+            {{ form.image.errors }}
+        </span>
+        <p class="help-block">Seleccionar im&aacute;gen para subir</p>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <button type="submit" class="btn btn-danger btn-block btn-lg">
+                <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+                Subir
+            </button>
+        </div>
+        <div class="col-xs-6 text-muted" style="font-size: 10px;">
+            Recuerda que puedes agregar m&aacute;s datos a este contenido desde la Biblioteca Multimedia.
+        </div>
+    </div>
+</form>                    

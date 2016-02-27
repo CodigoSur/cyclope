@@ -47,7 +47,7 @@ def pictures_upload(request, article_id):
         #clean it from session
         delete_picture = request.session.pop('delete')
 
-    return render(request, 'media_widget/pictures_upload.html', {
+    return render(request, 'media_widget/pictures_widget.html', {
         'form': form, 
         'article_id': article_id,
         'new_picture': new_picture,
@@ -92,12 +92,21 @@ def pictures_create(request, article_id):
             #POST/Redirect/GET
             return redirect('pictures-new', article_id)
         else:
-            #picture selection
+            # picture selection
             pictures_list = Picture.objects.all().order_by('-creation_date')
-            return render(request, 'media_widget/pictures_upload.html', {
+            # pagination
+            n, nRows = _paginator_query_string(request)
+            paginator = Paginator(pictures_list, nRows)
+            pagina = paginator.page(n)
+            #
+            return render(request, 'media_widget/pictures_widget.html', {
                 'form': form, 
                 'article_id': article_id,
-                'pictures_list': pictures_list
+                'pictures_list': pictures_list,
+                'pagina': pagina,
+                'n': n,
+                'nRows': nRows,
+                'param': article_id,
             })
     else:
         return HttpResponseForbidden()
