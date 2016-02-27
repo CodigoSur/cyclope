@@ -1,32 +1,7 @@
-{% load fb_versions pagination_link %}
+{% load fb_versions %}
 
-<div class="row text-center">
-    <div class="col-xs-3" style="margin-top: 8px;">
-        {% if pagina.has_previous %}
-            <a href="{% pagination_link media_type pagina.previous_page_number nRows %}" class="paginacion">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>&nbsp;Atr&aacute;s
-            </a>
-        {% endif %}
-    </div>
-    <div class="col-xs-6">
-        <h4>
-            {%if pagina.has_previous %}
-                <small><a href="{% pagination_link media_type 1 nRows %}" class="paginacion">1</a>...</small>
-            {%endif%}
-            <strong><u>{{n}}</u></strong>
-            {%if pagina.has_next%}
-                <small>...<a href="{% pagination_link media_type pagina.paginator.num_pages nRows %}" class="paginacion">{{ pagina.paginator.num_pages }}</a></small>
-            {%endif%}
-        </h4>
-    </div>
-    <div class="col-xs-3" style="margin-top: 8px;">
-        {% if pagina.has_next %}
-            <a href="{% pagination_link media_type pagina.next_page_number nRows %}" class="paginacion">
-                Siguiente&nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            </a>
-        {% endif %}
-    </div>
-</div>
+{% include "media_widget/pagination_header.html" %}
+
 <div class="row">
     <table class="table table-striped table-condensed">
     {% for media in pagina.object_list %}
@@ -46,14 +21,10 @@
     {% endfor %}
     </table>
 </div>
-<div class="row">
-    <div class="col-xs-6 text-left" style="margin-top: 6px;">
-        Resultados <strong>{{pagina.start_index}}</strong> a <strong>{{pagina.end_index}}</strong> de <strong>{{pagina.paginator.count}}</strong>.
-    </div>
-    <div class="col-xs-6 text-right">
-        Mostrar <input id="nPerPage" type="number" style="width: 50px;" value="{{nRows}}"/> por página.
-    </div>
-</div>
+
+{% include "media_widget/pagination_footer.html" %}
+
+<!-- TODO bind scripts in links -->
 
 <!--Re-bind nRows input on Ajax-->
 <script type="text/javascript">
