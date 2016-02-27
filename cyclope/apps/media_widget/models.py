@@ -10,7 +10,7 @@ from cyclope import settings as cyc_settings
 
 class MediaWidget(GenericFKWidget):
     def __init__(self, ct_field, cts=None, attrs=None, template=None):
-        super(MediaWidget, self).__init__(ct_field, cts, attrs, template="media_widget/media_widget.html")
+        super(MediaWidget, self).__init__(ct_field, cts, attrs, template="media_widget/pictures_button.html")
 
 class MediaWidgetField(GMCField):
     def __init__(self, queryset, *args, **kwargs):

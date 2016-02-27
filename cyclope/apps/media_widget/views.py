@@ -157,7 +157,7 @@ def embed_new(request, media_type):
         paginator = Paginator(media_list, nRows)
         pagina = paginator.page(n)
         # render
-        return render(request, 'media_widget/media_upload.html', {
+        return render(request, 'media_widget/media_widget.html', {
             'form': form,
             'pagina': pagina,
             'n': n,
@@ -192,7 +192,7 @@ def embed_create(request):
                 setattr(instance, klass.media_file_field, uploaded_path)
                 instance.save()
                 #response
-                return render(request, 'media_widget/media_upload.html', {
+                return render(request, 'media_widget/media_widget.html', {
                     'form': form,
                     'file_url': instance.media_file,
                     'media_type': media_type,
@@ -200,11 +200,11 @@ def embed_create(request):
             else:
                 msg = _validation_error_message(multimedia, media_type)
                 messages.error(request, msg)
-                return render(request, 'media_widget/media_upload.html', {
+                return render(request, 'media_widget/media_widget.html', {
                     'form': form,
                 })
         else:
-            return render(request, 'media_widget/media_upload.html', {
+            return render(request, 'media_widget/media_widget.html', {
                 'form': form, 
             })
     else:

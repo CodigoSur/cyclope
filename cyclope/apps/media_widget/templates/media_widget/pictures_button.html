@@ -1,0 +1,18 @@
+<input type="hidden" name="{{ name }}" value="{{ value }}" id="id_{{ name }}">
+<table class="mw_table">
+    <tr>
+        <td class="mw_button">
+            <button id="media_widget_button" type="button" value="">Seleccionar</button>
+        </td>
+        <td class="mw_thumbnail" align="center">
+            <div class="object-representation">
+                {% if obj_repr %}
+                    {{ obj_repr|safe }}
+                {% else %}
+                    <br/>
+                    Imágenes del artículo...
+                {% endif %}
+            </div>
+        </td>
+    </tr>
+</table>
