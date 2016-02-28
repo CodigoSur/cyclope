@@ -4,7 +4,6 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
-
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
@@ -16,11 +15,9 @@ class Migration(SchemaMigration):
         ))
         db.create_unique('articles_article_pictures', ['article_id', 'picture_id'])
 
-
     def backwards(self, orm):
         # Removing M2M table for field pictures on 'Article'
         db.delete_table('articles_article_pictures')
-
 
     models = {
         'actstream.action': {

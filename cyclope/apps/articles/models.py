@@ -41,8 +41,8 @@ YES_NO = (('YES', _('yes')), ('NO', _('no')),)
 class Article(BaseContent, Collectible):
     pretitle = models.CharField(_('pre-title'), max_length=250, blank=True)
     summary = models.TextField(_('summary'), blank=True)
-    
-    #TODO conflict w/ BaseContent .pictures?
+
+    # overrides BaseContent's pictures
     pictures = models.ManyToManyField(Picture, related_name='pictures')
     
     text = models.TextField(_('text'))
@@ -56,11 +56,3 @@ class Article(BaseContent, Collectible):
         verbose_name = _('article')
         verbose_name_plural = _('articles')
         ordering = ('-creation_date', 'name')
-
-# Foreign Key or from BaseContent's Related Contents
-#    def get_picture(self):
-#        if self.picture:
-#            return self.picture
-#        related_content_pictures = self.pictures()
-#        if related_content_pictures:
-#            return related_content_pictures[0]

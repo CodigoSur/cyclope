@@ -43,19 +43,15 @@
  
   {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
 		<!-- picture bootstrap -->
-		<!-- case with image for new widget o for related contents only with one picture -->
-		{% if article.pictures|length == 0 and not article.picture %}
-		{% elif article.picture or article.pictures|length == 1 %}
-			{% with article.picture as picture and article.pictures|first as pictures %}
+		
+		{% if article.pictures.count == 0 %}
+		{% elif article.pictures.count == 1 %}
+			{% with article.pictures.all|first as picture %}
 			<div class="{% inline_content_classes %}">
 					<div class="modals-picture" data-toggle="modal" data-target="#myModal">
-						{% if picture %}
-							<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
-						{% elif pictures %}
-							<img class="center-block" src="{% version pictures.image.path 'big' %}" alt="{{ pictures.name }}"/>
-						{% endif %}			
+						<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
 						<div class="carousel-caption">
-								<p>{% if picture %}{{ picture.name|truncatechars:80 }}{% elif pictures %}{{ pictures.name|truncatechars:80 }}{% endif %}</p>
+								<p>{{ picture.name|truncatechars:80 }}</p>
 						</div>
 				</div>
 				<!-- Modal -->
@@ -65,15 +61,11 @@
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 								<h4 class="modal-title" id="myModalLabel">
-									{% if picture %}{{ picture.name }}{% elif pictures %}{{ pictures.name }}{% endif %}
+									{{ picture.name }}
 								</h4>
 							</div>
 							<div class="modal-body">
-								{% if picture %}
-									<img class="img-responsive" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
-								{% elif pictures %}
-									<img class="img-responsive" src="{% version pictures.image.path 'big' %}" alt="{{ pictures.name }}"/>
-								{% endif %}
+								<img class="img-responsive" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
@@ -84,17 +76,17 @@
 			</div> <!-- / Teaser Icon Container --> 
 			{% endwith %}
 		<!-- case with various pictures in related contents -->	
-		{% elif article.pictures >= 2 %}
+		{% elif article.pictures.count >= 2 %}
 			<div class="{% inline_content_classes %}">
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 					<ol class="carousel-indicators">
-						{% for picture in article.pictures %}
+						{% for picture in article.pictures.all %}
 							<li data-target="#carousel-example-generic" data-slide-to="{{forloop.counter0}}" {% if forloop.first %}class="active"{% endif %}></li>
 						{% endfor %}
 					</ol>
 					<div class="carousel-inner" role="listbox">
 						<!-- Wrapper for slides -->
-						{%  for picture in article.pictures %}
+						{%  for picture in article.pictures.all %}
 							<div class="item {% if forloop.first %}active{% endif %}">
 								<!-- Div trigger modal -->
 								<div class="modals-picture" data-toggle="modal" data-target="#myModal{{forloop.counter}}">
@@ -136,33 +128,23 @@
 		<!-- /picture bootstrap -->
 	{% elif CYCLOPE_THEME_TYPE == 'classic' %}
 		<!-- picture classic -->
-		{% if article.picture or article.pictures %}
+		{% if article.pictures.count > 0 %}
 		<div id="gallery" class="media-content">
 			<ul>
-				{% if article.picture %}
-				<li>
-				<a href="{% version article.picture.image.path 'big' %}"  title="{{ article.picture.name }}">
-					<img src="{% version article.picture.image.path 'big' %}" alt="{{ article.picture.name }}"/>
-					<p>{{ article.picture.name }}</p>
-				</a>
-				</li>
-				{% elif article.pictures %}
-						{% for picture in article.pictures %}
-						<li {% if not forloop.first %} style="display:none;" {% endif %} >
-						<a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
-							<img src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
-							<p>{{ picture.name }}
-								{% if article.pictures|length >= 2 %}
-								({{ article.pictures|length }} {% trans "pictures" %})
-								{% endif %}
-							</p>
-						</a>
-						</li>
-						{% endfor %}
-				{% endif %}
+			    {% for picture in article.pictures.all %}
+		        <li {% if not forloop.first %} style="display:none;" {% endif %} >
+		        <a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
+			        <img src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
+			        <p>{{ picture.name }}
+				        {% if article.pictures.count >= 2 %}
+				            ({{ article.pictures.count }} {% trans "pictures" %})
+				        {% endif %}
+			        </p>
+		        </a>
+		        </li>
+			    {% endfor %}
 			</ul>
 		</div>
-		{% else %}
 		{% endif %}
 		<!-- / picture classic -->
 	{% endif %}

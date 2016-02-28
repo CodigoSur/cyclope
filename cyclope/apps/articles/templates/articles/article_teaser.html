@@ -61,7 +61,7 @@
     </div>
 	{% endif %}
 
-    {% if article.pictures and not simplified_view %}
+    {% if article.pictures.count > 0 and not simplified_view %}
     <br class="floating-img-clear" />
     {% endif %}
 
