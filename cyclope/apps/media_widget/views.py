@@ -68,7 +68,7 @@ def pictures_create(request, article_id):
             #normalize file name
             image.name = convert_filename(image.name)
             #filesystem save
-            path = os.path.join(settings.MEDIA_ROOT, Picture._meta.get_field_by_name("image")[0].directory)
+            path = os.path.join(settings.MEDIA_ROOT, 'uploads')
             uploaded_path = handle_file_upload(path, image)
             #thumbnails
             generate_fb_version(uploaded_path, ADMIN_THUMBNAIL)
@@ -176,14 +176,11 @@ def embed_create(request):
         if form.is_valid():
             multimedia = form.cleaned_data['multimedia']
             media_type = form.cleaned_data['media_type']
-            if _validate_file_extension(media_type, multimedia):
+            if _validate_file_type(media_type, multimedia):
                 klass = ContentType.objects.get(model=media_type).model_class()
                 instance = klass() # generic instance of media model
                 #filesystem save 
-                path = os.path.join(
-                    settings.MEDIA_ROOT, 
-                    klass._meta.get_field_by_name(klass.media_file_field)[0].directory # TODO or just uploads?
-                )
+                path = os.path.join(settings.MEDIA_ROOT, 'uploads')
                 uploaded_path = handle_file_upload(path, multimedia)
                 #database save
                 instance.name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else multimedia.name
@@ -250,16 +247,15 @@ def _associate_picture_to_article(article, picture):
     )
     related.save()
     
-#TODO what about validating this in javascript?
-#TODO validate file extension too?
-def _validate_file_extension(media_type, multimedia):
+# what about validating ile extensions in javascript?
+def _validate_file_type(media_type, multimedia):
     """
     Validate uploaded file MIME type matches intended Content Type.
     Allowed MIME types are different than FileBrowser's because they're the ones allowed by HTML5.
     """
     if media_type == 'picture':
         top_level_mime, mime_type = tuple(multimedia.content_type.split('/'))
-        return top_level_mime == 'image' # allow all image types TODO?
+        return top_level_mime == 'image' # allow all image types FIXME?
     else:
         if media_type == 'soundtrack':
             allowed_mime_types = ['audio/mpeg', 'audio/ogg', 'audio/wav']
@@ -287,7 +283,7 @@ def _validation_error_message(multimedia, media_type):
     msg = multimedia.content_type+' is not a valid '+type_name[media_type]+' type!'
     return msg
     
-#TODO this function can also be used for search
+# this function can also be used for search
 def _fetch_selection_from_library(media_type):
     """
     Returns media lists filtered by content type
