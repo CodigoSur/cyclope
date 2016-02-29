@@ -127,11 +127,13 @@ def pictures_update(request, article_id):
     else:
         return HttpResponseForbidden()
 
-#GET /pictures/delete/article_id
+#TODO
+#POST /pictures/delete/article_id
+#POST.get('picture_id')... 
 def pictures_delete(request, article_id):
     if request.user.is_staff:
         article = Article.objects.get(pk=article_id)
-        article.picture = None
+        article.pictures = []
         article.save()
         
         messages.warning(request, 'Imagen eliminada.')
@@ -236,9 +238,8 @@ def library_fetch(request, media_type):
 
 def _associate_picture_to_article(article, picture):
     """Helper method to DRY picture create and update"""
-    #associate picture with current Article
-    article.picture = picture
-    article.save()
+    #add picture to current Article's
+    article.pictures.add(picture)
     #article as Picture's related content
     related = RelatedContent(
         self_object = picture,
