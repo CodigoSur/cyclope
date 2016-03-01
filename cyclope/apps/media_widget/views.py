@@ -11,11 +11,12 @@ import os
 from filebrowser.settings import ADMIN_THUMBNAIL
 from cyclope.utils import generate_fb_version
 from django.contrib import messages
-from django.http import HttpResponseBadRequest, HttpResponseForbidden
+from django.http import HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
 from cyclope.apps.articles.models import Article
 from cyclope.models import RelatedContent
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
+from models import MediaWidget
 
 ###########################
 ##Article's pictures widget
@@ -34,23 +35,13 @@ def pictures_upload(request, article_id):
     paginator = Paginator(pictures_list, nRows)
     pagina = paginator.page(n)
     
-    #admin picture refresh
-    new_picture = {}
-    delete_picture = False
-    if request.session.has_key('refresh'):
-        new_picture = {
-            'picture_id': request.session.pop('refresh', False), 
-            'picture_ct': ContentType.objects.get(model='picture').pk
-        }
-    elif request.session.has_key('delete'):
-        #clean it from session
-        delete_picture = request.session.pop('delete')
+    # parent admin pictures widget refresh
+    refresh_widget = request.session.pop('refresh_widget', False)
 
     return render(request, 'media_widget/pictures_widget.html', {
         'form': form, 
         'article_id': article_id,
-        'new_picture': new_picture,
-        'delete_picture': delete_picture,
+        'refresh_widget': refresh_widget,
         'pagina': pagina,
         'n': n,
         'nRows': nRows,
@@ -86,7 +77,7 @@ def pictures_create(request, article_id):
             _associate_picture_to_article(article, picture)
             
             messages.success(request, 'Imagen cargada: '+image.name)
-            request.session['refresh'] = picture.id
+            request.session['refresh_widget'] = True
             
             #POST/Redirect/GET
             return redirect('pictures-new', article_id)
@@ -140,6 +131,18 @@ def pictures_delete(request, article_id):
         request.session['delete'] = True
         
         return redirect('pictures-new', article_id) # POST/Redirect/GET
+    else:
+        return HttpResponseForbidden()
+
+#GET /pictures/widget/article_id
+def pictures_widget(request, article_id):
+    """
+    Ajax call to this method refreshes Article Admin's pictures widget thumbnails.
+    """
+    if request.user.is_staff:
+        pictures_list = [picture.id for picture in Article.objects.get(pk=article_id).pictures.all()]
+        html = MediaWidget().render("fake_widget", pictures_list)
+        return HttpResponse(html)
     else:
         return HttpResponseForbidden()
 

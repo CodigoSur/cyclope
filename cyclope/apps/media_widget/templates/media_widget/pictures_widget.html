@@ -7,23 +7,18 @@
     <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript">
         $(function(){ 
-            //refresh parent (article's admin) media widget picture
-            function media_widget_refresh(ct_id, obj_id){
-                //hidden input value
-                $("#id_picture", window.parent.document).val(ct_id+"-"+obj_id)
-                //representation
-                $.get("/related_admin/render_object/" + ct_id + "/" + obj_id + "/", function(data) {
-                    $(".object-representation", window.parent.document).html(data);
+            //TODO move to .js in MdWdgt
+            
+            //refresh parent (article's admin) widget pictures
+            function media_widget_refresh(article_id){
+                $.get("/media_widget/pictures/widget/"+article_id, function(data) {
+                    $("#media_widget_pictures", window.parent.document).html(data);
                 });
             }            
-            {% if new_picture %}
-                var ct_id = {{ new_picture.picture_ct }};
-                var obj_id = {{ new_picture.picture_id }};
-                media_widget_refresh(ct_id, obj_id);
-            {% elif delete_picture %}
-                $(".object-representation", window.parent.document).html("<br/>Imágenes del artículo...");
+            
+            {% if refresh_widget %}
+                media_widget_refresh({{article_id}});
             {% endif %}
-            //TODO move to .js in MdWdgt
         
             // clean message alerts after 8s
             $(".message-row").delay(8000).fadeOut();

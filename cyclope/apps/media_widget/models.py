@@ -18,13 +18,13 @@ class MediaWidget(Widget):
         super(MediaWidget, self).__init__(attrs)
         
     def render(self, name, value, attrs=None):        
-        # value [5015, 5016, 5017, 5018, 5019, 5020]
+        #TODO... value [5015, 5016, 5017, 5018, 5019, 5020]
+        #hidden = u'<input id="id_pictures" type="hidden" value="%s"/>' % ",".join(str(n) for n in value)
         button = u'<button id="media_widget_button" type="button">Administrar</button>\n'
         thumbs = u''
         for pic_id in value:
             thumbs += Picture.objects.get(pk=pic_id).thumbnail()+'&nbsp;\n'
-        #
-        widget = button + thumbs
+        widget = u'<div id="media_widget_pictures">'+ button + thumbs + "</div>"
         widget = mark_safe(widget)
         return widget
 
