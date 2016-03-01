@@ -26,7 +26,6 @@ def pictures_upload(request, article_id):
         This ensures bootstrap styles isolation."""
     #picture upload
     form = MediaWidgetForm()
-    #TODO MediaWidgetSelectForm to select multiple pictures
     
     #picture selection
     pictures_list = Picture.objects.all().order_by('-creation_date')
@@ -111,6 +110,7 @@ def pictures_create(request, article_id):
         return HttpResponseForbidden()
         
 #POST /pictures/update/article_id
+# TODO update multiple pictures
 @require_POST
 def pictures_update(request, article_id):
     if request.user.is_staff:
@@ -127,7 +127,7 @@ def pictures_update(request, article_id):
     else:
         return HttpResponseForbidden()
 
-#TODO
+#TODO delete pictures selectively
 #POST /pictures/delete/article_id
 #POST.get('picture_id')... 
 def pictures_delete(request, article_id):
@@ -247,7 +247,7 @@ def _associate_picture_to_article(article, picture):
     )
     related.save()
     
-# what about validating ile extensions in javascript?
+# what about validating file extensions in javascript?
 def _validate_file_type(media_type, multimedia):
     """
     Validate uploaded file MIME type matches intended Content Type.
@@ -295,7 +295,7 @@ def _fetch_selection_from_library(media_type):
     
 def _paginator_query_string(request):
     """
-    Interpret /library/media_type query string
+    Interpret ?n=1&nRows=5 query string
     """
     if request.GET.has_key(u'n'):
             n = request.GET[u'n']  #url query string

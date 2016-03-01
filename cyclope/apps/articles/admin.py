@@ -18,10 +18,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Based on patches #9976 (https://code.djangoproject.com/ticket/9976)
-
-"""
 
 from django.contrib import admin
 from django import forms
@@ -42,14 +38,18 @@ from cyclope.apps.related_admin import GenericModelForm
 from cyclope.apps.media_widget import MediaWidget
 from cyclope.apps.media_widget import MediaWidgetField
 
-class ArticleForm(GenericModelForm):
-    picture = MediaWidgetField(queryset=Picture.objects.all(), widget=MediaWidget("picture_none", [Picture]), required=False)
+class ArticleForm(forms.ModelForm):
+
+    pictures = MediaWidgetField(
+        widget = MediaWidget, 
+        required=False
+    )
 
     def __init__(self, *args, **kwargs):
         super(ArticleForm, self).__init__(*args, **kwargs)
         author_choices = [('', '------')]
         for author in Author.objects.all():
-            if  Article in [ctype.model_class() for ctype in author.content_types.all()]:
+            if Article in [ctype.model_class() for ctype in author.content_types.all()]:
                 author_choices.append((author.id, author.name))
         self.fields['author'].choices = author_choices
 
@@ -67,7 +67,7 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
     inlines = CollectibleAdmin.inlines + BaseContentAdmin.inlines
 
     fieldsets = ((None,
-                  {'fields': ('name', 'author', 'published', 'pretitle', 'picture',
+                  {'fields': ('name', 'author', 'published', 'pretitle', 'pictures',
                       'summary', 'text' )}),
                  (_('Publication data'),
                   {
