@@ -11,18 +11,22 @@ from django.forms import fields
 
 from cyclope.apps.medialibrary.models import Picture
 from django.utils.safestring import mark_safe
+from django.utils.html import escape
 
 class MediaWidget(Widget):
     def __init__(self, attrs=None):
         super(MediaWidget, self).__init__(attrs)#,template="media_widget/pictures_button.html")
         
-    def render(self, name, value, attrs=None):
-        button = '<button id="media_widget_button" type="button" value="">Administrar</button>'
-        #value [5015, 5016, 5017, 5018, 5019, 5020]
-        thumbs = ''
+    def render(self, name, value, attrs=None):        
+        # svalue [5015, 5016, 5017, 5018, 5019, 5020]
+        button = u'<button id="media_widget_button" type="button">Administrar</button>\n'
+        thumbs = u''
         for pic_id in value:
-            thumbs += Picture.objects.get(pk=pic_id).thumbnail()+'&nbsp;'
-        return mark_safe(button+thumbs)
+            thumbs += Picture.objects.get(pk=pic_id).thumbnail()+'&nbsp;\n'
+        #
+        widget = button + thumbs
+        widget = mark_safe(widget)
+        return widget
 
 class MediaWidgetField(fields.MultiValueField):
     pass
