@@ -112,7 +112,7 @@ def pictures_update(request, article_id):
         _associate_picture_to_article(article, picture)
         
         messages.success(request, 'Imagen seleccionada: '+picture.name)
-        request.session['refresh'] = picture_id
+        request.session['refresh_widget'] = True
         
         return redirect('pictures-new', article_id) # POST/Redirect/GET 
     else:
@@ -128,7 +128,7 @@ def pictures_delete(request, article_id):
         article.save()
         
         messages.warning(request, 'Imagen eliminada.')
-        request.session['delete'] = True
+        request.session['refresh_widget'] = True
         
         return redirect('pictures-new', article_id) # POST/Redirect/GET
     else:
