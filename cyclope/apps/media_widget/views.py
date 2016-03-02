@@ -102,7 +102,6 @@ def pictures_create(request, article_id):
             return render(request, 'media_widget/pictures_widget.html', {
                 'form': form, 
                 'article_id': article_id,
-                'pictures_list': pictures_list,
                 'pagina': pagina,
                 'n': n,
                 'nRows': nRows,
