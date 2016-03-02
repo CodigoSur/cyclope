@@ -141,7 +141,7 @@ def pictures_widget(request, article_id):
     """
     if request.user.is_staff:
         pictures_list = [picture.id for picture in Article.objects.get(pk=article_id).pictures.all()]
-        html = MediaWidget().render("fake_widget", pictures_list)
+        html = MediaWidget().render("pictures", pictures_list)
         return HttpResponse(html)
     else:
         return HttpResponseForbidden()
