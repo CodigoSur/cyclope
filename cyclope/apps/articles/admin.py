@@ -37,6 +37,9 @@ from django.conf import settings
 from cyclope.apps.media_widget import MediaWidget, MediaWidgetField
 
 class ArticleForm(forms.ModelForm):
+
+    pictures = MediaWidgetField(queryset=Picture.objects.all(), widget=MediaWidget())
+
     def __init__(self, *args, **kwargs):
         super(ArticleForm, self).__init__(*args, **kwargs)
         # Author
@@ -45,8 +48,6 @@ class ArticleForm(forms.ModelForm):
             if Article in [ctype.model_class() for ctype in author.content_types.all()]:
                 author_choices.append((author.id, author.name))
         self.fields['author'].choices = author_choices
-        # Pictures
-        self.fields['pictures'] = MediaWidgetField(queryset=Picture.objects.all(), widget=MediaWidget())
     
     class Meta:
         model = Article
