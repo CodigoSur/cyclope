@@ -27,14 +27,19 @@ def pictures_upload(request, article_id):
         This ensures bootstrap styles isolation."""
     #picture upload
     form = MediaWidgetForm()
+    #TODO picture_select and picture_delete forms
     
     #picture selection
-    pictures_list = Picture.objects.all().order_by('-creation_date')
+    article = Article.objects.get(pk=article_id)
+    all_pictures = Picture.objects.all().order_by('-creation_date')
+    article_pictures = article.pictures.all()
+    pictures = [picture for picture in all_pictures if not picture in article_pictures]
     # pagination
     n, nRows = _paginator_query_string(request)
-    paginator = Paginator(pictures_list, nRows)
-    pagina = paginator.page(n)
-    
+    paginator = Paginator(pictures, nRows)
+    select_page = paginator.page(n)
+    #TODO delete_page pagination
+        
     # parent admin pictures widget refresh
     refresh_widget = request.session.pop('refresh_widget', False)
 
@@ -42,7 +47,8 @@ def pictures_upload(request, article_id):
         'form': form, 
         'article_id': article_id,
         'refresh_widget': refresh_widget,
-        'pagina': pagina,
+        'select_page': select_page,
+        'delete_page': article_pictures,
         'n': n,
         'nRows': nRows,
         'param': article_id,
@@ -118,18 +124,16 @@ def pictures_update(request, article_id):
     else:
         return HttpResponseForbidden()
 
-#TODO delete pictures selectively
 #POST /pictures/delete/article_id
-#POST.get('picture_id')... 
 def pictures_delete(request, article_id):
     if request.user.is_staff:
         article = Article.objects.get(pk=article_id)
-        article.pictures = []
-        article.save()
-        
-        messages.warning(request, 'Imagen eliminada.')
+        picture_id = request.POST['picture_id']
+        article.pictures.remove(picture_id)
+        #
+        messages.warning(request, 'Imagenes eliminadas.')
         request.session['refresh_widget'] = True
-        
+    
         return redirect('pictures-new', article_id) # POST/Redirect/GET
     else:
         return HttpResponseForbidden()

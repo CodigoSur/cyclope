@@ -24,6 +24,7 @@ class MediaWidget(MultipleHiddenInput):
         button = u'<button id="media_widget_button" type="button">Administrar</button>\n'
         thumbs = u''
         for pic_id in value:
+            #TODO if has thumbnail
             thumbs += Picture.objects.get(pk=pic_id).thumbnail()+'&nbsp;\n'
         widget = u'<div id="media_widget_pictures">'+ inputs + button + thumbs + "</div>"
         widget = mark_safe(widget)
