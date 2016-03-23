@@ -25,15 +25,29 @@ from models import MediaWidget
 def pictures_upload(request, article_id):
     """ Returns widget's inner HTML to be viewed through an iframe.
         This ensures bootstrap styles isolation."""
-    #picture upload
-    form = MediaWidgetForm()
-    #TODO picture_select and picture_delete forms
-    
+    # !!!
+    if article_id:
+        article = Article.objects.get(pk=article_id)
+    else:
+        article = Article()
+        
+    #FORMS
+    form = MediaWidgetForm()#picture upload
+    #TODO picture_select
+    #TODO picture_delete
+
     #picture selection
-    article = Article.objects.get(pk=article_id)
     all_pictures = Picture.objects.all().order_by('-creation_date')
-    article_pictures = article.pictures.all()
-    pictures = [picture for picture in all_pictures if not picture in article_pictures]
+    pictures = all_pictures
+    #TODO FEO, SEPARAR TODO POR ARTICLE_ID, O INCLUSO POR URL
+    if article_id:
+        article_pictures = article.pictures.all()
+        pictures = [picture for picture in all_pictures if not picture in article_pictures]
+    else:
+        article_pictures = [] 
+    #TODO MAS FEO
+
+
     # pagination
     n, nRows = _paginator_query_string(request)
     paginator = Paginator(pictures, nRows)
@@ -48,7 +62,7 @@ def pictures_upload(request, article_id):
         'article_id': article_id,
         'refresh_widget': refresh_widget,
         'select_page': select_page,
-        'delete_page': article_pictures,
+        'delete_page': article_pictures ,
         'n': n,
         'nRows': nRows,
         'param': article_id,
