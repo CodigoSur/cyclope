@@ -21,7 +21,7 @@ from models import MediaWidget
 ###########################
 ##Article's pictures widget
 
-# Upload pictures for new Article
+# for new Article
 # GET /pictures/new
 def pictures_new(request):
     #Model
@@ -45,8 +45,7 @@ def pictures_new(request):
         'n': n,
         'nRows': nRows,
     })
-
-# Upload pictures for existing Article
+# for existing Article
 # GET /pictures/new/article_id
 def pictures_upload(request, article_id):
     """ Returns widget's inner HTML to be viewed through an iframe.
@@ -96,24 +95,26 @@ def pictures_create(request, article_id):
             #thumbnails
             generate_fb_version(uploaded_path, ADMIN_THUMBNAIL)
             #database save
-            article = Article.objects.get(pk=article_id)
             picture = Picture(
                 name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else image.name,
                 description = form.cleaned_data['description'],
-                image = uploaded_path,
-                user = article.user,
-                author = article.author,
-                source = article.source
+                image = uploaded_path
             )
+            if article_id:
+                article = Article.objects.get(pk=article_id)    
+                picture.user = article.user
+                picture.author = article.author
+                picture.source = article.source
             picture.save()
-            
-            _associate_picture_to_article(article, picture)
-            
+
             messages.success(request, 'Imagen cargada: '+image.name)
             request.session['refresh_widget'] = True
-            
-            #POST/Redirect/GET
-            return redirect('pictures-upload', article_id)
+
+            if article_id:
+                _associate_picture_to_article(article, picture)
+                return redirect('pictures-upload', article_id)
+            else:
+                return redirect('pictures-new')
         else:
             # picture selection
             pictures_list = Picture.objects.all().order_by('-creation_date')
@@ -138,30 +139,40 @@ def pictures_create(request, article_id):
 @require_POST
 def pictures_update(request, article_id):
     if request.user.is_staff:
-        article = Article.objects.get(pk=article_id)
         picture_id = int(request.POST.get('picture_id'))
         picture = Picture.objects.get(pk=picture_id)
-        
-        _associate_picture_to_article(article, picture)
+    
+        if article_id:
+            article = Article.objects.get(pk=article_id)    
+            _associate_picture_to_article(article, picture)
         
         messages.success(request, 'Imagen seleccionada: '+picture.name)
+        #TODO...
         request.session['refresh_widget'] = True
-        
-        return redirect('pictures-upload', article_id) # POST/Redirect/GET 
+        # POST/Redirect/GET
+        if article_id:
+            return redirect('pictures-upload', article_id)
+        else:
+            return redirect('pictures-new')
     else:
         return HttpResponseForbidden()
 
 #POST /pictures/delete/article_id
 def pictures_delete(request, article_id):
-    if request.user.is_staff:
-        article = Article.objects.get(pk=article_id)
+    if request.user.is_staff:    
         picture_id = request.POST['picture_id']
-        article.pictures.remove(picture_id)
-        #
+        if article_id:
+            article = Article.objects.get(pk=article_id)
+            article.pictures.remove(picture_id)
+        
         messages.warning(request, 'Imagenes eliminadas.')
+        #...TODO
         request.session['refresh_widget'] = True
-    
-        return redirect('pictures-upload', article_id) # POST/Redirect/GET
+        # POST/Redirect/GET
+        if article_id:
+            return redirect('pictures-upload', article_id)
+        else:
+            return redirect('pictures-new')
     else:
         return HttpResponseForbidden()
 

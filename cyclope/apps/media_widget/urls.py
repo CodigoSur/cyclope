@@ -4,8 +4,8 @@ from views import pictures_new, pictures_upload, pictures_create, pictures_updat
 urlpatterns = patterns('',
     # Article's pictures
     # Upload
+    url(r'^pictures/new/(?P<article_id>\d+)$', pictures_upload, name="pictures-upload"), #existing article, MUST GO FIRST
     url(r'^pictures/new', pictures_new, name='pictures-new'), # new article
-    url(r'^pictures/new/(?P<article_id>\d+)$', pictures_upload, name="pictures-upload"), #existing article
     url(r'^pictures/create/(?P<article_id>\d*)$', pictures_create, name="pictures-create"),
     # Edit
     url(r'^pictures/update/(?P<article_id>\d*)$', pictures_update, name="pictures-update"),

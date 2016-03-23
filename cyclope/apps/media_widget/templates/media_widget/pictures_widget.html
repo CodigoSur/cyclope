@@ -16,7 +16,7 @@
                 });
             }            
             
-            {% if refresh_widget %}
+            {% if refresh_widget and article_id %}
                 media_widget_refresh({{article_id}});
             {% endif %}
         
