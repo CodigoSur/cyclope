@@ -13,6 +13,9 @@
                 <button class="btn btn-danger btn-xs" name="picture_id" value="{{picture.pk}}">Eliminar</button>
             </td>
         </tr>
+        {% empty %}
+            <br/>
+            <p class="lead">No ha seleccionado ninguna im&aacute;gen para este art&iacute;culo.</p>
         {% endfor %}
     </table>
 </form>

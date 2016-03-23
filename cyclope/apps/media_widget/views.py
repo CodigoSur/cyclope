@@ -21,33 +21,46 @@ from models import MediaWidget
 ###########################
 ##Article's pictures widget
 
+# Upload pictures for new Article
+# GET /pictures/new
+def pictures_new(request):
+    #Model
+    article = Article()
+    #Forms
+    form = MediaWidgetForm()
+    #TODO picture_select form
+    pictures = Picture.objects.all().order_by('-creation_date')
+    # pagination
+    n, nRows = _paginator_query_string(request)
+    paginator = Paginator(pictures, nRows)
+    select_page = paginator.page(n)
+    # parent admin pictures widget refresh
+    refresh_widget = request.session.pop('refresh_widget', False)
+    #
+    return render(request, 'media_widget/pictures_widget.html', {
+        'form': form, 
+        'refresh_widget': refresh_widget,
+        'select_page': select_page,
+        #'delete_page': article_pictures, TODO...
+        'n': n,
+        'nRows': nRows,
+    })
+
+# Upload pictures for existing Article
 # GET /pictures/new/article_id
 def pictures_upload(request, article_id):
     """ Returns widget's inner HTML to be viewed through an iframe.
         This ensures bootstrap styles isolation."""
-    # !!!
-    if article_id:
-        article = Article.objects.get(pk=article_id)
-    else:
-        article = Article()
-        
-    #FORMS
-    form = MediaWidgetForm()#picture upload
+    #Model
+    article = Article.objects.get(pk=article_id)
+    #Forms
+    form = MediaWidgetForm()
     #TODO picture_select
     #TODO picture_delete
-
     #picture selection
     all_pictures = Picture.objects.all().order_by('-creation_date')
-    pictures = all_pictures
-    #TODO FEO, SEPARAR TODO POR ARTICLE_ID, O INCLUSO POR URL
-    if article_id:
-        article_pictures = article.pictures.all()
-        pictures = [picture for picture in all_pictures if not picture in article_pictures]
-    else:
-        article_pictures = [] 
-    #TODO MAS FEO
-
-
+    article_pictures = article.pictures.all()
+    pictures = [picture for picture in all_pictures if not picture in article_pictures]
     # pagination
     n, nRows = _paginator_query_string(request)
     paginator = Paginator(pictures, nRows)
@@ -100,7 +113,7 @@ def pictures_create(request, article_id):
             request.session['refresh_widget'] = True
             
             #POST/Redirect/GET
-            return redirect('pictures-new', article_id)
+            return redirect('pictures-upload', article_id)
         else:
             # picture selection
             pictures_list = Picture.objects.all().order_by('-creation_date')
@@ -134,7 +147,7 @@ def pictures_update(request, article_id):
         messages.success(request, 'Imagen seleccionada: '+picture.name)
         request.session['refresh_widget'] = True
         
-        return redirect('pictures-new', article_id) # POST/Redirect/GET 
+        return redirect('pictures-upload', article_id) # POST/Redirect/GET 
     else:
         return HttpResponseForbidden()
 
@@ -148,7 +161,7 @@ def pictures_delete(request, article_id):
         messages.warning(request, 'Imagenes eliminadas.')
         request.session['refresh_widget'] = True
     
-        return redirect('pictures-new', article_id) # POST/Redirect/GET
+        return redirect('pictures-upload', article_id) # POST/Redirect/GET
     else:
         return HttpResponseForbidden()
 
@@ -234,7 +247,7 @@ def library_fetch(request, media_type):
     """
     Query Media objects list according to selected media content type.
     Return them as the HTML to render to refresh the area.
-    This method could also do pagination and even search.
+    This method could also search?
     """
     if request.user.is_staff:
         # media selection list

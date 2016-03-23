@@ -23,7 +23,12 @@ $("#nPerPage").change(function(){
             });
         });
     {% elif widget == 'pictures' %}
-        url = "{% url pictures-new article_id=param %}"+query_str
+        {# param is article_id, absence means new article #}
+        {% if param %}
+            url = "{% url pictures-upload article_id=param %}"+query_str
+        {% else %}
+            url = "{% url pictures-new %}"+query_str
+        {% endif %}
         window.location.href = url // TODO just navigate while there's no ajax
     {% endif %}
 });
