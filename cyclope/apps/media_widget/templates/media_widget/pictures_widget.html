@@ -10,8 +10,9 @@
             //TODO move to .js in MdWdgt
             
             //refresh parent (article's admin) widget pictures
-            function media_widget_refresh(article_id){
-                url = "/media_widget/pictures/widget/"+article_id;
+            function media_widget_refresh(type, param){
+                url = type=="article_id" ? "/media_widget/pictures/widget/article/" : "/media_widget/pictures/widget/pictures/";
+                url += param;
                 $.get(url, function(data) {
                     $("#media_widget_pictures", window.parent.document).html(data);
                 });
@@ -25,7 +26,7 @@
             
             {% if refresh_widget %}
                 {% if article_id %}
-                    media_widget_refresh({{article_id}});
+                    media_widget_refresh("article_id", {{article_id}});
                 {% else %}
                     var pictures_list = "" ;
                     //pre-existent pictures
@@ -39,10 +40,10 @@
                     {% if new_picture %}
                         pictures_list += "{{new_picture}},";
                     {% elif remove_picture %}
-                        pictures_list.replace("{{remove_picture}},",''); //TODO
+                        pictures_list = pictures_list.replace("{{remove_picture}},",'');
                     {% endif %}
                     //
-                    media_widget_refresh(pictures_list);
+                    media_widget_refresh("pictures_list", pictures_list);
                     delete_pictures_refresh(pictures_list);
                 {% endif %}
             {% endif %}

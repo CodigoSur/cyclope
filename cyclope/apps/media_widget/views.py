@@ -221,7 +221,7 @@ def delete_pictures_list(request, pictures_ids):
         #TODO delete_form
         pictures_list = [int(x) for x in pictures_ids.split(',') if x]
         pictures = [Picture.objects.get(pk=x) for x in pictures_list]
-        # pagination
+        #TODO pagination
         n, nRows = _paginator_query_string(request)
         paginator = Paginator(pictures, nRows)
         delete_page = paginator.page(n)

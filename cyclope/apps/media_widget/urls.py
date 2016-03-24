@@ -11,9 +11,9 @@ urlpatterns = patterns('',
     url(r'^pictures/update/(?P<article_id>\d*)$', pictures_update, name="pictures-update"),
     url(r'^pictures/delete/(?P<article_id>\d*)$', pictures_delete, name="pictures-delete"),
     # Ajax
-    url(r'^pictures/widget/(?P<pictures_ids>(\d+,)+)$', pictures_widget_new, name="pictures-widget-new"),
-    url(r'^pictures/widget/(?P<article_id>\d+)$', pictures_widget, name="pictures-widget"),
-    url(r'^pictures/delete_list/(?P<pictures_ids>(\d+,)+)$', delete_pictures_list, name="pictures-list"),
+    url(r'^pictures/widget/article/(?P<article_id>\d+)$', pictures_widget, name="pictures-widget"),
+    url(r'^pictures/widget/pictures/(?P<pictures_ids>(\d+,)*)$', pictures_widget_new, name="pictures-widget-new"),
+    url(r'^pictures/delete_list/(?P<pictures_ids>(\d+,)*)$', delete_pictures_list, name="pictures-list"),
     
     # Embed media in content
     url(r'^embed/new/(?P<media_type>\w*)$', embed_new, name="embed-new"),
