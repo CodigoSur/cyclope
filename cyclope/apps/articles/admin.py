@@ -48,8 +48,9 @@ class ArticleForm(forms.ModelForm):
             if Article in [ctype.model_class() for ctype in author.content_types.all()]:
                 author_choices.append((author.id, author.name))
         self.fields['author'].choices = author_choices
-        # Pictures default 
-        self.initial['pictures'] = []
+        # Pictures default
+        if not kwargs.has_key('instance'):
+            self.initial['pictures'] = []
 
     class Meta:
         model = Article
