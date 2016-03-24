@@ -29,21 +29,23 @@ def pictures_new(request):
     #Forms
     form = MediaWidgetForm()
     #TODO picture_select&delete forms
+
+    # defaults for new articles, after it's javascript's
     pictures = Picture.objects.all().order_by('-creation_date')
+    article_pictures = []
+
     # pagination
     n, nRows = _paginator_query_string(request)
     paginator = Paginator(pictures, nRows)
     select_page = paginator.page(n)
+
     # parent admin pictures widget refresh
     refresh_widget = request.session.pop('refresh_widget', False)
-    # for new articles, add new picture as input for save
+
+    # for new articles
     new_picture = request.session.pop('new_picture', None)
     remove_picture = request.session.pop('remove_picture', None)
-    #TODO
-    article_pictures = []
-    #if new_picture:    
-    #    article_pictures = [Picture.objects.get(pk=new_picture)]
-    #elif remove_picture:
+   
     return render(request, 'media_widget/pictures_widget.html', {
         'form': form, 
         'refresh_widget': refresh_widget,
@@ -155,7 +157,8 @@ def pictures_update(request, article_id):
         picture = Picture.objects.get(pk=picture_id)
         
         messages.success(request, 'Imagen seleccionada: '+picture.name)
-        request.session['refresh_widget'] = True    
+        request.session['refresh_widget'] = True
+        
         if article_id:
             article = Article.objects.get(pk=article_id)    
             _associate_picture_to_article(article, picture)
@@ -208,6 +211,28 @@ def pictures_widget_new(request, pictures_ids):
         return HttpResponse(html)
     else:
         return HttpResponseForbidden()
+
+def delete_pictures_list(request, pictures_ids):
+    """
+    For new articles:
+    Render a delete form with specified picture ids
+    """
+    if request.user.is_staff:
+        #TODO delete_form
+        pictures_list = [int(x) for x in pictures_ids.split(',') if x]
+        pictures = [Picture.objects.get(pk=x) for x in pictures_list]
+        # pagination
+        n, nRows = _paginator_query_string(request)
+        paginator = Paginator(pictures, nRows)
+        delete_page = paginator.page(n)
+        return render(request, 'media_widget/picture_delete.html', {
+            'delete_page': delete_page,
+            'n': n,
+            'nRows': nRows,
+        })
+    else:
+        return HttpResponseForbidden()
+
 
 ####################
 ##Embed Media Widget

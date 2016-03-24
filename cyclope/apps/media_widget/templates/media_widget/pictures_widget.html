@@ -11,9 +11,15 @@
             
             //refresh parent (article's admin) widget pictures
             function media_widget_refresh(article_id){
-                url = "/media_widget/pictures/widget/"+article_id
+                url = "/media_widget/pictures/widget/"+article_id;
                 $.get(url, function(data) {
                     $("#media_widget_pictures", window.parent.document).html(data);
+                });
+            }
+            function delete_pictures_refresh(pictures_list){
+                url = "/media_widget/pictures/delete_list/"+pictures_list;
+                $.get(url, function(data) {
+                    $("#delete").html(data);
                 });
             }
             
@@ -30,9 +36,14 @@
                         pictures_list += inputs + ",";
                     }
                     //new picture
-                    pictures_list += "{{new_picture}},";
+                    {% if new_picture %}
+                        pictures_list += "{{new_picture}},";
+                    {% elif remove_picture %}
+                        pictures_list.replace("{{remove_picture}},",''); //TODO
+                    {% endif %}
                     //
                     media_widget_refresh(pictures_list);
+                    delete_pictures_refresh(pictures_list);
                 {% endif %}
             {% endif %}
         
