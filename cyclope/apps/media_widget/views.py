@@ -97,6 +97,8 @@ def pictures_upload(request, article_id):
 def pictures_create(request, article_id):
     if request.user.is_staff:
         form = MediaWidgetForm(request.POST, request.FILES)
+        if article_id:
+            article = Article.objects.get(pk=article_id)
         if form.is_valid():
             image = form.cleaned_data['image']
             #normalize file name
@@ -113,7 +115,6 @@ def pictures_create(request, article_id):
                 image = uploaded_path
             )
             if article_id:
-                article = Article.objects.get(pk=article_id)    
                 picture.user = article.user
                 picture.author = article.author
                 picture.source = article.source
@@ -129,22 +130,28 @@ def pictures_create(request, article_id):
                 request.session['new_picture'] = str(picture.id)
                 return redirect('pictures-new')
         else:
-            #TODO HANDLE FAILURE, SET LISTS, RENDER
             # picture selection
             pictures_list = Picture.objects.all().order_by('-creation_date')
             # pagination
             n, nRows = _paginator_query_string(request)
             paginator = Paginator(pictures_list, nRows)
-            pagina = paginator.page(n)
+            select_page = paginator.page(n)
+            if article_id:
+                article_pictures = article.pictures.all()
+            else:
+                article_pictures = []
             #
             return render(request, 'media_widget/pictures_widget.html', {
                 'form': form, 
                 'article_id': article_id,
-                'pagina': pagina,
+                'select_page': select_page,
+                'delete_page': article_pictures ,
                 'n': n,
                 'nRows': nRows,
                 'param': article_id,
+                'refresh_widget': True
             })
+            
     else:
         return HttpResponseForbidden()
         
