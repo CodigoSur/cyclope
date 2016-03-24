@@ -1,7 +1,10 @@
 {% csrf_token %}
+
+<br/>
+
 {{ form.non_field_errors }}
 
-<div class="form-group {%if form.image.errors%}has-error bg-danger{%endif%}">
+<div class="form-group {%if form.image.errors%}has-error bg-danger{% else %}bg-success{%endif%}">
     <label for="file">Im&aacute;gen</label>
     {{ form.image }}
     <span id="helpName" class="help-block">
@@ -17,7 +20,7 @@
 </div>
 -->
 <div class="form-group {%if form.name.errors%}has-error{%endif%}">
-    <label for="fileName">Nombre</label>
+    <label for="fileName">Nombre*</label>
     {{ form.name }}
     <span id="fileName" class="help-block">
         {{ form.name.errors }}
@@ -30,7 +33,7 @@
 </div>
 -->
 <div class="form-group {%if form.description.errors%}has-error{%endif%}">
-    <label for="fileDesc">Descripci&oacute;n</label>
+    <label for="fileDesc">Descripci&oacute;n*</label>
     {{ form.description }}
     <span id="helpName" class="help-block">
         {{ form.description.errors }}

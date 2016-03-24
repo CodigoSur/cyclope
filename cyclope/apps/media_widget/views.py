@@ -28,7 +28,7 @@ def pictures_new(request):
     article = Article()
     #Forms
     form = MediaWidgetForm()
-    #TODO picture_select form
+    #TODO picture_select&delete forms
     pictures = Picture.objects.all().order_by('-creation_date')
     # pagination
     n, nRows = _paginator_query_string(request)
@@ -36,15 +36,22 @@ def pictures_new(request):
     select_page = paginator.page(n)
     # parent admin pictures widget refresh
     refresh_widget = request.session.pop('refresh_widget', False)
+    # for new articles, add new picture as input for save
+    new_picture = request.session.pop('new_picture', None)
+    article_pictures = []
+    if new_picture:
+        article_pictures = [Picture.objects.get(pk=new_picture)]
     #
     return render(request, 'media_widget/pictures_widget.html', {
         'form': form, 
         'refresh_widget': refresh_widget,
         'select_page': select_page,
-        #'delete_page': article_pictures, TODO...
+        'delete_page': article_pictures,
         'n': n,
         'nRows': nRows,
+        'new_picture': new_picture
     })
+
 # for existing Article
 # GET /pictures/new/article_id
 def pictures_upload(request, article_id):
@@ -114,8 +121,10 @@ def pictures_create(request, article_id):
                 _associate_picture_to_article(article, picture)
                 return redirect('pictures-upload', article_id)
             else:
+                request.session['new_picture'] = str(picture.id)
                 return redirect('pictures-new')
         else:
+            #TODO HANDLE FAILURE, SET LISTS, RENDER
             # picture selection
             pictures_list = Picture.objects.all().order_by('-creation_date')
             # pagination
@@ -182,7 +191,19 @@ def pictures_widget(request, article_id):
     Ajax call to this method refreshes Article Admin's pictures widget thumbnails.
     """
     if request.user.is_staff:
-        pictures_list = [picture.id for picture in Article.objects.get(pk=article_id).pictures.all()]
+        article = Article.objects.get(pk=article_id)
+        pictures_list = [picture.id for picture in article.pictures.all()]
+        html = MediaWidget().render("pictures", pictures_list)
+        return HttpResponse(html)        
+    else:
+        return HttpResponseForbidden()
+
+def pictures_widget_new(request, pictures_ids):
+    """
+    Same as above but receives comma separated pictures ids to let them as inputs for save.
+    """
+    if request.user.is_staff:
+        pictures_list = [int(x) for x in pictures_ids.split(',') if x]
         html = MediaWidget().render("pictures", pictures_list)
         return HttpResponse(html)
     else:

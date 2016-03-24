@@ -11,13 +11,29 @@
             
             //refresh parent (article's admin) widget pictures
             function media_widget_refresh(article_id){
-                $.get("/media_widget/pictures/widget/"+article_id, function(data) {
+                url = "/media_widget/pictures/widget/"+article_id
+                $.get(url, function(data) {
                     $("#media_widget_pictures", window.parent.document).html(data);
                 });
-            }            
+            }
             
-            {% if refresh_widget and article_id %}
-                media_widget_refresh({{article_id}});
+            {% if refresh_widget %}
+                {% if article_id %}
+                    media_widget_refresh({{article_id}});
+                {% else %}
+                    var pictures_list = "" ;
+                    //pre-existent pictures
+                    inputs = $('[name="pictures"]', window.parent.document).map(function() { 
+                        return $(this).val(); 
+                    }).get();
+                    if(inputs!=""){
+                        pictures_list += inputs + ",";
+                    }
+                    //new picture
+                    pictures_list += "{{new_picture}},";
+                    //
+                    media_widget_refresh(pictures_list);
+                {% endif %}
             {% endif %}
         
             // clean message alerts after 8s
