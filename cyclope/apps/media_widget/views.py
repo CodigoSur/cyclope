@@ -38,10 +38,12 @@ def pictures_new(request):
     refresh_widget = request.session.pop('refresh_widget', False)
     # for new articles, add new picture as input for save
     new_picture = request.session.pop('new_picture', None)
+    remove_picture = request.session.pop('remove_picture', None)
+    #TODO
     article_pictures = []
-    if new_picture:
-        article_pictures = [Picture.objects.get(pk=new_picture)]
-    #
+    #if new_picture:    
+    #    article_pictures = [Picture.objects.get(pk=new_picture)]
+    #elif remove_picture:
     return render(request, 'media_widget/pictures_widget.html', {
         'form': form, 
         'refresh_widget': refresh_widget,
@@ -49,7 +51,8 @@ def pictures_new(request):
         'delete_page': article_pictures,
         'n': n,
         'nRows': nRows,
-        'new_picture': new_picture
+        'new_picture': new_picture,
+        'remove_picture': remove_picture
     })
 
 # for existing Article
@@ -150,18 +153,15 @@ def pictures_update(request, article_id):
     if request.user.is_staff:
         picture_id = int(request.POST.get('picture_id'))
         picture = Picture.objects.get(pk=picture_id)
-    
+        
+        messages.success(request, 'Imagen seleccionada: '+picture.name)
+        request.session['refresh_widget'] = True    
         if article_id:
             article = Article.objects.get(pk=article_id)    
             _associate_picture_to_article(article, picture)
-        
-        messages.success(request, 'Imagen seleccionada: '+picture.name)
-        #TODO...
-        request.session['refresh_widget'] = True
-        # POST/Redirect/GET
-        if article_id:
             return redirect('pictures-upload', article_id)
         else:
+            request.session['new_picture'] = str(picture.id)
             return redirect('pictures-new')
     else:
         return HttpResponseForbidden()
@@ -170,17 +170,17 @@ def pictures_update(request, article_id):
 def pictures_delete(request, article_id):
     if request.user.is_staff:    
         picture_id = request.POST['picture_id']
-        if article_id:
-            article = Article.objects.get(pk=article_id)
-            article.pictures.remove(picture_id)
-        
-        messages.warning(request, 'Imagenes eliminadas.')
-        #...TODO
+        picture = Picture.objects.get(pk=picture_id)
+
+        messages.warning(request, 'Imagenes eliminadas: '+picture.name)
         request.session['refresh_widget'] = True
-        # POST/Redirect/GET
+        
         if article_id:
+            article = Article.objects.get(pk=article_id)    
+            article.pictures.remove(picture_id)
             return redirect('pictures-upload', article_id)
         else:
+            request.session['remove_picture'] = str(picture.id)
             return redirect('pictures-new')
     else:
         return HttpResponseForbidden()
