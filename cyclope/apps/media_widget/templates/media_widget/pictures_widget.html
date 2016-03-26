@@ -14,7 +14,7 @@
                 url = type=="article_id" ? "/media_widget/pictures/widget/article/" : "/media_widget/pictures/widget/pictures/";
                 url += param;
                 $.get(url, function(data) {
-                    $("#media_widget_pictures", window.parent.document).html(data);
+                    $("#media_widget", window.parent.document).html(data);
                 });
             }
             function delete_pictures_refresh(pictures_list){

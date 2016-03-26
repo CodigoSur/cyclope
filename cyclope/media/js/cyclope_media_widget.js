@@ -26,7 +26,7 @@ $(function(){
     //form becomes widget
     $('#pictures_iframe').picturesWidget();
     // picture button triggers widget
-    $("#media_widget_button").click(function(){
+    $("#media_widget").on('click', "#media_widget_button", function(){
         var widget = $("#pictures_iframe").picturesWidget("position", this).picturesWidget("open");
     });
 });
