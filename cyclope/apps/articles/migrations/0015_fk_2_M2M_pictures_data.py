@@ -5,8 +5,9 @@ from south.v2 import SchemaMigration
 from django.db import models
 from cyclope.apps.articles.models import Article
 from cyclope.apps.medialibrary.models import Picture
-
+from django.contrib.contenttypes.models import ContentType
 from django.db import connection
+from cyclope.models import RelatedContent
 
 class Migration(SchemaMigration):
 
@@ -15,17 +16,25 @@ class Migration(SchemaMigration):
 #    )
 
     def forwards(self, orm):
+        # picture in removed attribute
         cursor = connection.cursor()
         cursor.execute("SELECT id, picture_id FROM articles_article WHERE picture_id IS NOT NULL;")
         for article_id, picture_id in cursor.fetchall():
             article = Article.objects.get(pk=article_id)
             article.pictures.add(Picture.objects.get(pk=picture_id))
+        #related content pictures
+        article_type = ContentType.objects.get(name='article')
+        picture_type = ContentType.objects.get(name='picture')
+        related_contents = RelatedContent.objects.filter(self_type=article_type).filter(other_type=picture_type)
+        for related_content in related_contents:
+            article = related_content.self_object
+            article.pictures.add(related_content.other_object)
 
-        #TODO take in account related content pictures
-
-    def backwards(self, orm):
+    def backwards(self, orm):        
         for article in Article.objects.all():
-            article.picture = article.pictures[0]#TODO
+            for picture in article.pictures.all():
+                related_picture = RelatedContent(self_object=article, other_object=picture)
+                related_picture.save()
  
     models = {
         'actstream.action': {
