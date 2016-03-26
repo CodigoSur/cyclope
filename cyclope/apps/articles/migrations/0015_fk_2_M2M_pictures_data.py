@@ -4,6 +4,9 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 from cyclope.apps.articles.models import Article
+from cyclope.apps.medialibrary.models import Picture
+
+from django.db import connection
 
 class Migration(SchemaMigration):
 
@@ -12,10 +15,13 @@ class Migration(SchemaMigration):
 #    )
 
     def forwards(self, orm):
-        for article in Article.objects.all():
-            if article.picture:
-                article.pictures.add(article.picture)
-            #TODO take in account related content pictures too?
+        cursor = connection.cursor()
+        cursor.execute("SELECT id, picture_id FROM articles_article WHERE picture_id IS NOT NULL;")
+        for article_id, picture_id in cursor.fetchall():
+            article = Article.objects.get(pk=article_id)
+            article.pictures.add(Picture.objects.get(pk=picture_id))
+
+        #TODO take in account related content pictures
 
     def backwards(self, orm):
         for article in Article.objects.all():
