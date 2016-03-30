@@ -186,8 +186,8 @@ def pictures_delete(request, article_id):
         request.session['refresh_widget'] = True
         
         if article_id:
-            article = Article.objects.get(pk=article_id)    
-            article.pictures.remove(picture_id)
+            article = Article.objects.get(pk=article_id)
+            ArticlePicture.objects.filter(article_id=article_id, picture_id=picture_id).delete()
             return redirect('pictures-upload', article_id)
         else:
             request.session['remove_picture'] = str(picture.id)
@@ -336,14 +336,24 @@ def library_fetch(request, media_type):
 
 def _associate_picture_to_article(article, picture):
     """Helper method to DRY picture create and update"""
+    # handle order
+    article_pictures = ArticlePicture.objects.filter(article=article)
+    if article_pictures.count() > 0:
+        last_order = article_pictures.aggregate(Max('order'))
+    else:
+        last_order = 0
     #add picture to current Article's
-    article.pictures.add(picture)
+    ArticlePicture.objects.create(
+        article = article,
+        picture = picture,
+        order = last_order + 1,
+    )
+    #
     #article as Picture's related content
-    related = RelatedContent(
+    RelatedContent.objects.create(
         self_object = picture,
         other_object = article
     )
-    related.save()
     
 # what about validating file extensions in javascript?
 def _validate_file_type(media_type, multimedia):
