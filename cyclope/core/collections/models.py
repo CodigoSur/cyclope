@@ -200,7 +200,6 @@ class CategorizationManager(models.Manager):
 
     def get_for_category(self, category, sort_property="name", limit=None,
                          traverse_children=False, reverse=False, intersection=False):
-
         try:
             categories = list(category)
         except:
@@ -225,7 +224,7 @@ class CategorizationManager(models.Manager):
         elif sort_property == "creation_date":
             # the default ordering is reversed
             if not reverse:
-                cats = cats.reverse()
+                cats.reverse()
         else: # sort by name
             ct_vals = defaultdict(list)
             for cat in cats:
@@ -242,9 +241,10 @@ class CategorizationManager(models.Manager):
                 for object_ids in chunks(object_ids, 450):
                     for obj_id, val in ct.get_all_objects_for_this_type(pk__in=object_ids).values_list("pk", sort_property):
                         sort_attrs[(ct_id, obj_id)] = val
-
+            
             cats = sorted(cats, key=lambda c: sort_attrs[(c.content_type_id, c.object_id)],
                           reverse=reverse)
+
         if cats:
             return cats[slice(limit)]
         else:
