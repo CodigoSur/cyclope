@@ -57,7 +57,7 @@ class CustomComment(ThreadedComment):
         mail_managers(subject, managers_message, fail_silently=True)
 
         # Send mail to suscribed users of the tree path
-        comments = CustomComment.objects.filter(id=self.root_path, subscribe=True)
+        comments = CustomComment.objects.filter(id__in=self.root_path, subscribe=True)
         if comments:
             messages = [(subject, message, settings.DEFAULT_FROM_EMAIL,
                          [comment.userinfo["email"]]) for comment in comments]
