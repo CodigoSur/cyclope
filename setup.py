@@ -82,7 +82,7 @@ setup(
         'feedparser==5.1',
         'django-forms-builder>=0.7.5,<0.8',
         'django-threadedcomments==0.9.0',
-        'django-crispy-forms>=1.6.0',
+        'django-crispy-forms==1.5.2',
         'django-compressor>=1.2,<1.3',
         'django-generic-ratings>=0.6,<0.7',
         'django-activity-stream==0.4.4',
