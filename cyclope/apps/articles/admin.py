@@ -36,7 +36,6 @@ from django.conf import settings
 
 from cyclope.apps.media_widget import MediaWidget, MediaWidgetField
 
-
 class ArticleForm(forms.ModelForm):
 
     pictures = MediaWidgetField(queryset=Picture.objects.all(), widget=MediaWidget())
@@ -55,9 +54,6 @@ class ArticleForm(forms.ModelForm):
 
     class Meta:
         model = Article
-    
-class ArticlePictureInline(admin.TabularInline):
-    model = ArticlePicture
 
 class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
     form = ArticleForm

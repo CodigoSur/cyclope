@@ -3,39 +3,50 @@ import datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
-from cyclope.apps.articles.models import Article
-from cyclope.apps.medialibrary.models import Picture
-from django.contrib.contenttypes.models import ContentType
-from django.db import connection
-from cyclope.models import RelatedContent
+
 
 class Migration(SchemaMigration):
 
-#    depends_on = (
-#        ("cyclope", "0014_M2M_pictures_article"),
-#    )
-
     def forwards(self, orm):
-        # picture in removed attribute
-        cursor = connection.cursor()
-        cursor.execute("SELECT id, picture_id FROM articles_article WHERE picture_id IS NOT NULL;")
-        for article_id, picture_id in cursor.fetchall():
-            article = Article.objects.get(pk=article_id)
-            article.pictures.add(Picture.objects.get(pk=picture_id))
-        #related content pictures
-        article_type = ContentType.objects.get(name='article')
-        picture_type = ContentType.objects.get(name='picture')
-        related_contents = RelatedContent.objects.filter(self_type=article_type).filter(other_type=picture_type)
-        for related_content in related_contents:
-            article = related_content.self_object
-            article.pictures.add(related_content.other_object)
+        # Removing unique constraint on 'ArticlePicture', fields ['article', 'picture']
+        db.delete_unique('articles_articlepicture', ['article_id', 'picture_id'])
 
-    def backwards(self, orm):        
-        for article in Article.objects.all():
-            for picture in article.pictures.all():
-                related_picture = RelatedContent(self_object=article, other_object=picture)
-                related_picture.save()
- 
+        # Removing unique constraint on 'ArticlePicture', fields ['article', 'order']
+        db.delete_unique('articles_articlepicture', ['article_id', 'order'])
+
+        # Deleting model 'ArticlePicture'
+        db.delete_table('articles_articlepicture')
+
+        # Adding M2M table for field pictures on 'Article'
+        db.create_table('articles_article_pictures', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('article', models.ForeignKey(orm['articles.article'], null=False)),
+            ('picture', models.ForeignKey(orm['medialibrary.picture'], null=False))
+        ))
+        db.create_unique('articles_article_pictures', ['article_id', 'picture_id'])
+
+
+    def backwards(self, orm):
+        # Adding model 'ArticlePicture'
+        db.create_table('articles_articlepicture', (
+            ('picture', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['medialibrary.Picture'])),
+            ('is_teaser', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('order', self.gf('django.db.models.fields.IntegerField')()),
+            ('article', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['articles.Article'])),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+        ))
+        db.send_create_signal('articles', ['ArticlePicture'])
+
+        # Adding unique constraint on 'ArticlePicture', fields ['article', 'order']
+        db.create_unique('articles_articlepicture', ['article_id', 'order'])
+
+        # Adding unique constraint on 'ArticlePicture', fields ['article', 'picture']
+        db.create_unique('articles_articlepicture', ['article_id', 'picture_id'])
+
+        # Removing M2M table for field pictures on 'Article'
+        db.delete_table('articles_article_pictures')
+
+
     models = {
         'actstream.action': {
             'Meta': {'ordering': "('-timestamp',)", 'object_name': 'Action'},
@@ -61,7 +72,6 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modification_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'auto_now': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'db_index': 'True'}),
-            'picture': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'picture'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': "orm['medialibrary.Picture']"}),
             'pictures': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'pictures'", 'symmetrical': 'False', 'to': "orm['medialibrary.Picture']"}),
             'pretitle': ('django.db.models.fields.CharField', [], {'max_length': '250', 'blank': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),

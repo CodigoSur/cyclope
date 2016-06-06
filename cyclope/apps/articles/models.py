@@ -43,7 +43,7 @@ class Article(BaseContent, Collectible):
     summary = models.TextField(_('summary'), blank=True)
 
     # overrides BaseContent's pictures
-    pictures = models.ManyToManyField(Picture, related_name='pictures', through='ArticlePicture')
+    pictures = models.ManyToManyField(Picture, related_name='pictures')
     
     text = models.TextField(_('text'))
     author = models.ForeignKey(Author, verbose_name=_('author'),
@@ -56,13 +56,3 @@ class Article(BaseContent, Collectible):
         verbose_name = _('article')
         verbose_name_plural = _('articles')
         ordering = ('-creation_date', 'name')
-
-class ArticlePicture(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    picture = models.ForeignKey(Picture, on_delete=models.CASCADE)
-    #CASCADE: if article or picture disappear, so does this relation TODO
-    order = models.IntegerField()
-    is_teaser = models.BooleanField(default=True)
-    
-    class Meta:
-        unique_together = (("article", "order"), ("article", "picture"))
