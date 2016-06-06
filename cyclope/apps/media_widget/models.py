@@ -4,7 +4,6 @@ from django.utils.translation import ugettext
 from django.utils.safestring import mark_safe
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from cyclope import settings as cyc_settings
 
 from django.forms.widgets import MultipleHiddenInput
 from django.forms import fields
