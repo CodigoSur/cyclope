@@ -72,6 +72,7 @@ def pictures_upload(request, article_id):
     all_pictures = Picture.objects.all().order_by('-creation_date')
     article_pictures = article.pictures.all()
     pictures = [picture for picture in all_pictures if not picture in article_pictures]
+    
     # pagination
     n, nRows = _paginator_query_string(request)
     paginator = Paginator(pictures, nRows)
@@ -216,6 +217,28 @@ def pictures_widget_new(request, pictures_ids):
         pictures_list = [int(x) for x in pictures_ids.split(',') if x]
         html = MediaWidget().render("pictures", pictures_list)
         return HttpResponse(html)
+    else:
+        return HttpResponseForbidden()
+
+def pictures_widget_select(request, pictures_ids):
+    """
+    Opposite as above: returns all Pictures but those in the picture ids list.
+    """
+    if request.user.is_staff:
+        def no_nulo(x): return x!='' and x is not None
+        pictures_ids = filter(no_nulo, pictures_ids.split(','))
+        pictures = Picture.objects.exclude(pk__in=pictures_ids).order_by('-creation_date')
+        
+        # pagination
+        n, nRows = _paginator_query_string(request)
+        paginator = Paginator(pictures, nRows)
+        select_page = paginator.page(n)
+        
+        return render(request, 'media_widget/picture_select.html', {
+            'select_page': select_page,
+            'n': n,
+            'nRows': nRows,
+        })
     else:
         return HttpResponseForbidden()
 

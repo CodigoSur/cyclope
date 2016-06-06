@@ -23,6 +23,12 @@
                     $("#delete").html(data);
                 });
             }
+            function search_refresh(pictures_list){ //param=LIB-pictures_list
+                url = "/media_widget/pictures/widget/select/"+pictures_list;
+                $.get(url, function(data) {
+                    $("#search").html(data);
+                });
+            }
             
             {% if refresh_widget %}
                 {% if article_id %}
@@ -45,6 +51,7 @@
                     //
                     media_widget_refresh("pictures_list", pictures_list);
                     delete_pictures_refresh(pictures_list);
+                    search_refresh(pictures_list);
                 {% endif %}
             {% endif %}
         

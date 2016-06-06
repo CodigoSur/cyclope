@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from views import pictures_new, pictures_upload, pictures_create, pictures_update, pictures_delete, embed_new, embed_create, library_fetch, pictures_widget, pictures_widget_new, delete_pictures_list
+from views import pictures_new, pictures_upload, pictures_create, pictures_update, pictures_delete, embed_new, embed_create, library_fetch, pictures_widget, pictures_widget_new, delete_pictures_list, pictures_widget_select
 
 urlpatterns = patterns('',
     # Article's pictures
@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^pictures/widget/article/(?P<article_id>\d+)$', pictures_widget, name="pictures-widget"),
     url(r'^pictures/widget/pictures/(?P<pictures_ids>(\d+,)*)$', pictures_widget_new, name="pictures-widget-new"),
     url(r'^pictures/delete_list/(?P<pictures_ids>(\d+,)*)$', delete_pictures_list, name="pictures-list"),
-    
+    url(r'^pictures/widget/select/(?P<pictures_ids>(\d+,)*)$', pictures_widget_select, name="pictures-widget-select"),
     # Embed media in content
     url(r'^embed/new/(?P<media_type>\w*)$', embed_new, name="embed-new"),
     url(r'^embed/create$', embed_create, name="embed-create"),
