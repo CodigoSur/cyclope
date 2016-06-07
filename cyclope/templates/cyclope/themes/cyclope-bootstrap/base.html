@@ -44,6 +44,7 @@
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
+    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     {% endblock cyclopecss %}
@@ -139,6 +140,8 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.min.js"></script> 
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.js"></script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.bootstrap.js"></script>
     {% if not COMPRESS_ENABLED %}
         <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less.min.js"></script>
     {% endif %}
