@@ -70,7 +70,8 @@
     </style>
     {% endblock sitesettings_css %}
     <!-- /Cyclope-SiteSettings -->  
-
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-1.11.3.min.js"></script>
+     <!--jquery needs to be here to work properly clear search box --> 
     {% block extra_head %}{% endblock %}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -138,7 +139,6 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.min.js"></script> 
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.js"></script>
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.bootstrap.js"></script>
@@ -150,5 +150,6 @@
     {% endif %}
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
 </body>
 </html>
