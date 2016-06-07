@@ -10,8 +10,6 @@
 
 {% load layout i18n cyclope_utils compress %}
 
-
-
 {# TODO(sanhoerth): find best way to show lang-tag in mulitlang enviroment #}
 <html lang="es">
 <head>
@@ -30,11 +28,11 @@
     <!-- /Extras -->   
  
     <!-- ### Favicon custom ### -->
-		{% if CYCLOPE_SITE_SETTINGS.favicon_image %}
-			<link rel="icon" href="{{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.favicon_image }}" sizes="16x16" type="image/png"/>
-		{% else %}
-			<link rel="icon" href="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/favicon.png" sizes="16x16" type="image/png"/>
-		{% endif %}
+	{% if CYCLOPE_SITE_SETTINGS.favicon_image %}
+		<link rel="icon" href="{{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.favicon_image }}" sizes="16x16" type="image/png"/>
+	{% else %}
+		<link rel="icon" href="{{ CYCLOPE_THEME_MEDIA_URL }}images/css/favicon.png" sizes="16x16" type="image/png"/>
+	{% endif %}
 	
     <!-- ### CSS ### -->
     {% compress css %}
@@ -131,75 +129,68 @@
     {% endif %}
     <!-- /JS -->
     {% block extra_head %}{% endblock %}
-   </head>
+</head>
+
 <body class="{% block body_class %}{%endblock%}" >
-	
-	{% block page_header %}
-	{% if CYCLOPE_SITE_SETTINGS.head_image %}
-	 <style type="text/css"> html { padding-top: 10px; } body { padding-top: 0; }</style>
-			<div class="brand container">
-				<a href="/">
-					<img src="{{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.head_image }}" alt="{{ CYCLOPE_SITE_SETTINGS.head_image }}" class="img-responsive">
-				</a>
-			</div>
-		{% endif %}
-	{% endblock %}
-	
-    <nav class="navbar {% if not CYCLOPE_SITE_SETTINGS.head_image %}navbar-fixed-top{% endif %} navbar-inverse" {% if CYCLOPE_SITE_SETTINGS.head_image %}data-spy="affix" data-offset-top="150"{% endif %}>
-        <div class="container">
-            <div class="navbar-header">
+
+    <div class="container">
+
+        {% block page_header %}
+            {% if CYCLOPE_SITE_SETTINGS.head_image %}
+                <style type="text/css"> html { padding-top: 10px; } body { padding-top: 0; }</style>
+                <div class="brand">
+                    <a href="/">
+                    <img src="{{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.head_image }}" alt="{{ CYCLOPE_SITE_SETTINGS.head_image }}" class="img-responsive">
+                    </a>
+                </div>
+            {% endif %}
+        {% endblock %}
+
+        <nav class="navbar {% if not CYCLOPE_SITE_SETTINGS.head_image %}navbar-fixed-top{% endif %} navbar-inverse" {% if CYCLOPE_SITE_SETTINGS.head_image %}data-spy="affix" data-offset-top="150"{% endif %}>
+			<div class="container">
+			<div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
+                    <span class="sr-only">{% trans 'Toggle navigation' %}</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
                 {% if CYCLOPE_SITE_SETTINGS.show_head_title  %}
-									<a class="navbar-brand visible-xs" href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a>
-								{% endif %}
+                    <a class="navbar-brand visible-xs" href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a>
+                {% endif %}
             </div>
             <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
-            <!-- header -->  {% region 'header' %} <!-- /header -->
+                <!-- header -->  {% region 'header' %} <!-- /header -->
             </div>
         </div><!-- /.container -->
-    </nav><!-- /.navbar -->
-    
-    <div class="container">
-        <div class="row row-offcanvas row-offcanvas-right">{% block page_content %} {% endblock %}</div>
-    </div><!--/.container-->
+        </nav><!-- /.navbar -->
 
-      <hr>
+        <div class="row">{% block page_content %} {% endblock %}</div>
 
-      <footer>
-       {% block page_footer %}
- <div class="footer">
-  <div class="container">
-      {% region 'footer' %}
-      <span id="creativecommons">Los contenidos de este sitio web están bajo una
-        <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO">
-          Licencia Creative Commons BY-NC-ND
-        </a></span>.<br/>
-        <span id="codigo_sur">Tecnología: <a href="http://cyclope.codigosur.org">CyclopeCMS</a>. Desarrollo: <a href="http://www.codigosur.org">CódigoSur</a>.
-        </span><br/>
-  </div>
-  </div>
-</div><!-- /end mask -->
-{% endblock %}
-      </footer>
+        <hr>
+
+        <footer>
+            {% block page_footer %}
+                <div class="footer">
+                    {% region 'footer' %}
+                    <span id="creativecommons">Los contenidos de este sitio web están bajo una
+                    <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO">
+                    Licencia Creative Commons BY-NC-ND
+                    </a></span>.<br/>
+                    <span id="codigo_sur">Tecnología: <a href="http://cyclope.codigosur.org">CyclopeCMS</a>. Desarrollo: <a href="http://www.codigosur.org">CódigoSur</a>.
+                    </span><br/>
+                </div><!-- /end mask -->
+            {% endblock %}
+        </footer>
 
     </div><!--/.container-->
 
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-
-
-    
-    
-  </body>
-  
+</body>
 </html>

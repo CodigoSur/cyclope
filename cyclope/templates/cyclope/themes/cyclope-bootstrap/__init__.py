@@ -57,7 +57,7 @@ region_layout_ids = {
     'content': '',
     'top': '',
     'left': '',
-    'right': 'sidebar',
+    'right': '',
     'bottom': '',
 }
 
@@ -66,7 +66,7 @@ region_layout_classes = {
     'header':'',
     'top':'',
     'left': '',
-    'right': 'col-xs-4 col-sm-3 col-md-3 col-lg-3 sidebar-offcanvas',
+    'right': '',
     'bottom': '',
     'extra_bottom': '',
 }
@@ -76,7 +76,7 @@ teaser_layout_classes = {
     'top':'',
     'left': '',
     'right':'',
-    'bottom': 'col-xs-12 col-sm-12 col-md-4 col-lg-4',
+    'bottom': '',
 }
 
 inline_content_classes = {
