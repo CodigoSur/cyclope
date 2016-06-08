@@ -209,7 +209,7 @@ class DesignSettingsAdminForm(forms.ModelForm):
         (_('flatly'), 'flatly'),
         (_('lumen'), 'lumen'),
         (_('readable'), 'readable'),
-        (_('simple'), 'simple'),
+        (_('simplex'), 'simplex'),
         (_('spacelab'), 'spacelab'),
         (_('united'), 'united'),
         (_('cosmo'), 'cosmo'),
