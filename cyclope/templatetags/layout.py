@@ -148,7 +148,6 @@ def bootstrap_skin_link():
     """
     from cyclope import settings
     path = settings.CYCLOPE_THEME_MEDIA_URL
-    from django.conf import settings as settings_
-    skin = settings_.CYCLOPE_BOOTSTRAP_SKIN
-    link = '<link href="{}css/{}.min.css" rel="stylesheet">'.format(path, skin)
+    skin = SiteSettings.objects.get().skin_setting
+    link = '<link href="{}css/skins/{}.min.css" rel="stylesheet">'.format(path, skin)
     return link

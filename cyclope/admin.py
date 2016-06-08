@@ -207,7 +207,7 @@ DESIGN_FIELDS = (
     'global_title', 'theme', 'default_layout', 'head_image', 'favicon_image',
     'show_head_title', 'body_font', 'body_custom_font', 'titles_font', 
     'titles_custom_font', 'font_size', 'hide_content_icons', 
-    'color_a', 'color_b', 'color_c', 'color_d', 'color_e',
+    'skin_setting',
 )
  
 
@@ -231,7 +231,7 @@ class DesignSettingsAdmin(SingletonAdminMixin):
         }),
         (_('Colours'), {
             'classes': ['colours', ],
-            'fields': ('color_a', 'color_b', 'color_c', 'color_d', 'color_e')
+            'fields': ('skin_setting',)
         }),
         (_('Other'), {
             'fields': ( 'hide_content_icons', )
