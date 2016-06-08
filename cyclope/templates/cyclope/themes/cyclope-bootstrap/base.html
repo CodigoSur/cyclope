@@ -43,8 +43,6 @@
     <!-- Custom CSS -->
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
     <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     {% endblock cyclopecss %}
     {% endblock displaycss %}
     {% endcompress %}
@@ -147,7 +145,7 @@
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/ratings.js" ></script>
     {% endif %}
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="{{ CYCLOPE_STATIC_URL }}js/ie10-viewport-bug-workaround.js"></script>
 
 </body>
 </html>
