@@ -147,7 +147,10 @@ def bootstrap_skin_link():
     https://github.com/thomaspark/bootswatch
     """
     from cyclope import settings
-    path = settings.CYCLOPE_THEME_MEDIA_URL
+    url = settings.CYCLOPE_THEME_MEDIA_URL
+    path = "css/"
     skin = SiteSettings.objects.get().skin_setting
-    link = '<link href="{}css/skins/{}.min.css" rel="stylesheet">'.format(path, skin)
+    if skin != 'bootstrap':
+        path += 'skins/'
+    link = '<link href="{}{}{}.min.css" rel="stylesheet">'.format(url, path, skin)
     return link

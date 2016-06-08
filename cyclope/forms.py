@@ -199,11 +199,15 @@ def get_home_menu_item():
 
 class DesignSettingsAdminForm(forms.ModelForm):
 
-    theme = forms.ChoiceField(label=_('Theme'),
-    choices = sorted([(theme_name, theme.verbose_name) for theme_name, theme in get_all_themes().iteritems()], key=lambda t: t[1]), required=True)
+    theme = forms.ChoiceField(
+        label=_('Theme'),
+        choices = sorted([(theme_name, theme.verbose_name) for theme_name, theme in get_all_themes().iteritems()], key=lambda t: t[1]), 
+        required=True
+    )
     home_layout = forms.ModelChoiceField(queryset=Layout.objects.all(), initial=lambda : get_home_menu_item().layout)
     
     SKINS = (
+        (_('bootstrap'), 'bootstrap'),
         (_('cerulean'), 'cerulean'),
         (_('cyborg'), 'cyborg'),
         (_('flatly'), 'flatly'),
