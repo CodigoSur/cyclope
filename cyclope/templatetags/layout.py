@@ -139,3 +139,16 @@ def layout_regions_data():
     out_dict["views_for_models"] = views_for_models
     json_data = json.dumps(out_dict, cls=LazyJSONEncoder)
     return json_data
+    
+@register.simple_tag
+def bootstrap_skin_link():
+    """
+    Returns CSS link to the configured Bootswatch skin
+    https://github.com/thomaspark/bootswatch
+    """
+    from cyclope import settings
+    path = settings.CYCLOPE_THEME_MEDIA_URL
+    from django.conf import settings as settings_
+    skin = settings_.CYCLOPE_BOOTSTRAP_SKIN
+    link = '<link href="{}css/{}.min.css" rel="stylesheet">'.format(path, skin)
+    return link
