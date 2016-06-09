@@ -38,36 +38,18 @@
     {% compress css %}
     {% block displaycss %}
     {% block cyclopecss %}
-    <!-- Bootstrap Core CSS -->
-    {% bootstrap_skin_link %}
-    <!-- Custom CSS -->
-    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
-    <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
+        {% bootstrap_skin_link %}
+        <!-- Custom CSS -->
+        <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
+        <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
     {% endblock cyclopecss %}
     {% endblock displaycss %}
     {% endcompress %}
     <!-- /CSS -->
      
-    <!-- ### Cyclope-SiteSettings ### -->
-    {% block sitesettings_css %}
-    <style type="text/css">
-        @font-face {font-family: custom_body; src: url('{{ CYCLOPE_SITE_SETTINGS.body_custom_font }}');}
-        @font-face {font-family: custom_titles; src: url('{{ CYCLOPE_SITE_SETTINGS.titles_custom_font }}');}
-        {% if CYCLOPE_SITE_SETTINGS.titles_font %}
-        .brand h1, .title, .title a { font-family:{{ CYCLOPE_SITE_SETTINGS.titles_font  }}; }
-        {% endif %}
-        body{
-            {% if CYCLOPE_SITE_SETTINGS.body_font %}
-                font-family: {{ CYCLOPE_SITE_SETTINGS.body_font }};
-            {% endif %}
-            font-size:{{ CYCLOPE_SITE_SETTINGS.font_size  }}px;
-        }
-        {% if CYCLOPE_SITE_SETTINGS.hide_content_icons %} .type_icon { display: none;} {% endif %}
-    </style>
-    {% endblock sitesettings_css %}
-    <!-- /Cyclope-SiteSettings -->  
+    <!--jquery needs to be here to work properly clear search box --> 
     <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-1.11.3.min.js"></script>
-     <!--jquery needs to be here to work properly clear search box --> 
+     
     {% block extra_head %}{% endblock %}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -132,20 +114,21 @@
 
     </div><!--/.container-->
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.min.js"></script> 
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.js"></script>
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.bootstrap.js"></script>
-    {% if not COMPRESS_ENABLED %}
-        <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less.min.js"></script>
-    {% endif %}
-    {% if CYCLOPE_SITE_SETTINGS.enable_ratings %}
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/ratings.js" ></script>
-    {% endif %}
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="{{ CYCLOPE_STATIC_URL }}js/ie10-viewport-bug-workaround.js"></script>
-
+    {% compress js %}
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.min.js"></script> 
+        <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.js"></script>
+        <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.bootstrap.js"></script>
+        {% if not COMPRESS_ENABLED %}
+            <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less.min.js"></script>
+        {% endif %}
+        {% if CYCLOPE_SITE_SETTINGS.enable_ratings %}
+        <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/ratings.js" ></script>
+        {% endif %}
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="{{ CYCLOPE_STATIC_URL }}js/ie10-viewport-bug-workaround.js"></script>
+    {% endcompress %}
 </body>
 </html>
