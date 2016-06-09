@@ -1,46 +1,61 @@
 {% load i18n fb_versions dbgettext_tags cyclope_utils %}
-
-  <div class="content-view article teaser article-teaser {% if region_name %}{% inline_content_classes %}{% endif%}">
-
-    <div class="pretitle-container first meta-content">
-      {% if  article.pretitle and not simplified_view %}
-      <div class="pretitle">
-				{% trans article.pretitle %}
-      </div>
-      {% endif%}
-
-      {% if article.date %}
-      <div class="date"><span class="pretitle-separator"> | </span>{{ article.date|date:'SHORT_DATE_FORMAT' }}</div>
-      {% endif %}
-    </div>
-
-
+<div class="content-view article teaser article-teaser {% if region_name %}{% inline_content_classes %}{% endif%}">
+	{# ##### BOOTSTRAP ##### #}
 	{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
-    <h2 class="title">
-        <a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
-    </h2>
-
-    {% if not simplified_view and article.get_picture %}
-      <div class="teaser_icon_container"><a href="{{ article.get_absolute_url }}" title="{{ article.get_picture.name }}">
-          <img class="teaser_icon img-responsive" src="{% version article.get_picture.image.path 'small' %}" alt="{{ article.get_picture.name }}" border="0"/>
-      </a></div>
-    {% endif %}
-
-    <div class="html-content summary">
-      {% if article.summary %}
-        {{ article|parsed_gettext:"summary"|smart_style }}
-      {% else %}
-        {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
-      {% endif %}
-    </div>
-   <p class="teaser_more"><a class="btn btn-primary" href="{{ article.get_absolute_url }}" role="button">{% trans "More" %}</a>
-       {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
-        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
-        </p>
-    {% if not simplified_view %}
-        {% include "cyclope/author_block_teaser.html"  %}
-    {% endif %}
+		<div class="teaser_text_container">
+			<div class="pretitle-container first meta-content"> {# pretitle+date div #}
+				{% if  article.pretitle and not simplified_view %}
+					<div class="pretitle">{% trans article.pretitle %}</div>
+				{% endif%}
+				{% if article.date %}
+					<div class="date">
+						<span class="pretitle-separator"> | </span>{{ article.date|date:'SHORT_DATE_FORMAT' }}
+					</div>
+				{% endif %}
+			</div>{# end pretitle+date div #}
+			<h2 class="title">
+				<a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
+			</h2>
+			<div class="html-content summary">
+				{% if article.summary %}
+					{{ article|parsed_gettext:"summary"|smart_style }}
+				{% else %}
+					{{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
+				{% endif %}
+			</div>
+			{% if not simplified_view %}
+				{% include "cyclope/author_block_teaser.html"  %}
+			{% endif %}
+			<p class="teaser_more">
+				<a class="btn btn-primary" href="{{ article.get_absolute_url }}" role="button">{% trans "More" %}</a>
+				{% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
+				<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
+			</p>
+		</div>
+		{% if not simplified_view and article.get_picture %}
+			<div class="teaser_icon_container">
+				<a href="{{ article.get_absolute_url }}" title="{{ article.get_picture.name }}">
+					<img class="teaser_icon img-responsive" src="{% version article.get_picture.image.path 'small' %}" alt="{{ article.get_picture.name }}" border="0"/>
+				</a>
+			</div>
+		{% endif %}
+	{# END BOOTSTRAP #}
+	{# ##### CLASSIC ##### #}
 	{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+		<div class="pretitle-container first meta-content">
+			{% if  article.pretitle and not simplified_view %}
+				<div class="pretitle">
+					{% trans article.pretitle %}
+				</div>
+			{% endif%}
+			{% if article.date %}
+				<div class="date">
+					<span class="pretitle-separator"> | </span>{{ article.date|date:'SHORT_DATE_FORMAT' }}
+				</div>
+			{% endif %}
+		</div>
+
+
     <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
       <a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
     </h2>
@@ -70,3 +85,5 @@
     <div class="clear"></div>
     {% endif %}
   </div>
+
+{# END CLASSIC #}
