@@ -40,11 +40,7 @@ from cyclope.apps.related_admin import GenericFKWidget, GenericModelForm
 from cyclope.apps.related_admin import GenericModelChoiceField as GMCField
 from haystack.forms import ModelSearchForm
 import cyclope.settings as cyc_settings
-
-from django.forms.widgets import RadioFieldRenderer
-from django.forms import RadioSelect
-from django.utils.encoding import force_unicode
-from django.utils.safestring import mark_safe
+from django.forms.widgets import RadioSelect
 
 class AjaxChoiceField(forms.ChoiceField):
     """ChoiceField that always returns true for validate().
@@ -211,36 +207,27 @@ class DesignSettingsAdminForm(forms.ModelForm):
     home_layout = forms.ModelChoiceField(queryset=Layout.objects.all(), initial=lambda : get_home_menu_item().layout)
     
     SKINS = (
-        ('bootstrap', _('bootstrap')),
-        ('cerulean', _('cerulean')),
-        ('cyborg', _('cyborg')),
-        ('flatly', _('flatly')),
-        ('lumen', _('lumen')),
-        ('readable', _('readable')),
-        ('simplex', _('simplex')),
-        ('spacelab', _('spacelab')),
-        ('united', _('united')),
-        ('cosmo', _('cosmo')),
-        ('darkly', _('darkly')),
-        ('journal', _('journal')),
-        ('paper', _('paper')),
-        ('sandstone', _('sandstone')),
-        ('slate', _('slate')),
-        ('superhero' ,_('superhero')),
-        ('yeti', _('yeti')),
+        (_('bootstrap'), 'bootstrap'),
+        (_('cerulean'), 'cerulean'),
+        (_('cyborg'), 'cyborg'),
+        (_('flatly'), 'flatly'),
+        (_('lumen'), 'lumen'),
+        (_('readable'), 'readable'),
+        (_('simplex'), 'simplex'),
+        (_('spacelab'), 'spacelab'),
+        (_('united'), 'united'),
+        (_('cosmo'), 'cosmo'),
+        (_('darkly'), 'darkly'),
+        (_('journal'), 'journal'),
+        (_('paper'), 'paper'),
+        (_('sandstone'), 'sandstone'),
+        (_('slate'), 'slate'),
+        (_('superhero'), 'superhero'),
+        (_('yeti'), 'yeti'),
     )
-
-    class TableRadioSelect(RadioSelect):
-        class TableRadioFieldRenderer(RadioFieldRenderer):
-            def render(self):
-                """Outputs a table for this set of radio fields."""
-                src = cyc_settings.CYCLOPE_MEDIA_URL+u'images/theme-skins-thumbnail/{}.png'
-                row = u'<tr><td>{}</td><td><image src="'+src+u'"/></td></tr>'
-                return mark_safe(u'<table class="radio-skin-tbl">\n%s\n</table>' % u'\n'.join([row.format(force_unicode(w),force_unicode(w.choice_value)) for w in self]))
-        renderer = TableRadioFieldRenderer
-    #
-    skin_setting = forms.ChoiceField(widget=TableRadioSelect(), choices=SKINS)
-        
+    
+    skin_setting = forms.ChoiceField(widget=RadioSelect, choices=SKINS)
+    
     class Meta:
         model = DesignSettings
 

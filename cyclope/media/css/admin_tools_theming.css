@@ -894,6 +894,3 @@ padding: 10px;
 .number-objects { font-weight:700;}
 .number-objects li { padding: 6px 0 0 0; font-weight:400;}
 .changelist-filter-a { font-weight:700; font-size:0.8em; margin: 0 0 0 62px; cursor:pointer; color: #FFFFFF !important; }
-
-/* DesignSettings RadioSelect table for skins */
-table.radio-skin-tbl tr td { vertical-align: middle; }

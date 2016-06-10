@@ -1,6 +1,8 @@
 {% extends "admin/change_form.html" %}
 {% load i18n cyclope_utils %}
 
+{% block extrahead %}{{ block.super }}{% endblock %}
+
 {% block breadcrumbs %}{% if not is_popup %}
 <div class="breadcrumbs">
      <a href="../../../">{% trans "Home" %}</a> &rsaquo; {{ opts.verbose_name }}
