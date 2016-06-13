@@ -186,6 +186,7 @@ class RegionViewInline(admin.StackedInline):
 class LayoutAdmin(admin.ModelAdmin):
     form = LayoutAdminForm
     inlines = (RegionViewInline, )
+    exclude = ('image_path',)
 
 admin.site.register(Layout, LayoutAdmin)
 
