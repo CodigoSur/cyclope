@@ -881,14 +881,14 @@ cursor: pointer;
 }
 
 .regions_layout {   
-	min-height: 250px;
+	min-height: 320px;
 	margin-top: 10px;
  }
 
 .img_layout { 
-float: right;
-padding: 10px;
- }
+    float: right;
+    padding-right: 10px;
+}
  
 .number-objects-title{ background:#f1f1f1;margin:10px auto; padding:10px; font-weight:700;}
 .number-objects { font-weight:700;}

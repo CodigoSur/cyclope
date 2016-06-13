@@ -7,20 +7,22 @@
 {# CYCLOPE: Tree structure of regions #}
 {% regroup original.regionview_set.all|dictsort:"region" by region as region_list %}
 
-<ul id="regions_tree" style="display:none;">
-    <img class="img_layout" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/layouts/{{original.image_path}}">
-	<div class="regions_layout">
-	{% for region in region_list %}
-		<li>{% trans region.grouper|capfirst %}
-		<ul>
-			{% for item in region.list %}
-			  <li>{{ item.content_type|capfirst }} ->  {{ item.get_view.verbose_name|capfirst }} {% if item.content_object %} -> {{ item.content_object }}{% endif %}</li>
-			{% endfor %}
-		</ul>
-		</li>
-	{% endfor %}
-	</div>
-</ul>
+<div id="regions_tree" style="display:none;">
+    <div class="img_layout"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/layouts/{{original.image_path}}"></div>
+    <div class="regions_layout">
+        <ul>
+	        {% for region in region_list %}
+		        <li>{% trans region.grouper|capfirst %}
+		        <ul>
+			        {% for item in region.list %}
+			          <li>{{ item.content_type|capfirst }} ->  {{ item.get_view.verbose_name|capfirst }} {% if item.content_object %} -> {{ item.content_object }}{% endif %}</li>
+			        {% endfor %}
+		        </ul>
+		        </li>
+	        {% endfor %}
+        </ul>
+    </div>
+</div>
 	
 <script type="text/javascript">
 //<![CDATA[
