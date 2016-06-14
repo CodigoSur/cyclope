@@ -182,11 +182,19 @@ class RegionViewInline(admin.StackedInline):
     model = RegionView
     extra = 1
 
-
+####################################
+from cyclope.models import SiteSettings
+from cyclope.themes import get_theme
 class LayoutAdmin(admin.ModelAdmin):
     form = LayoutAdminForm
     inlines = (RegionViewInline, )
     exclude = ('image_path',)
+    # override change_view TODO django > 1.4  must override get_context_data instead?
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        theme_settings = get_theme(SiteSettings.objects.get().theme)
+        layout_regions = theme_settings.layout_templates['main.html']['regions'] #TODO NO MAI!
+        extra_context = {'layout_regions': layout_regions.iteritems()}
+        return super(LayoutAdmin, self).change_view(request, object_id, form_url, extra_context)
 
 admin.site.register(Layout, LayoutAdmin)
 

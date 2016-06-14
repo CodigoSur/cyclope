@@ -323,7 +323,7 @@ class RegionView(models.Model):
 
     def get_view(self):
         return cyclope.core.frontend.site.get_view(self.content_type.model_class(),
-                                                    self.content_view)
+                                                   self.content_view)
 
 
 class Layout(models.Model):

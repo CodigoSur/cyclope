@@ -19,7 +19,6 @@ layout_templates = {
         'regions' : {
             'header': _('Header'),
             'left': _('Left'),
-            'right': _('Right'),
             'top': _('Top'),
             'bottom': _('Bottom'),
             'footer': _('Footer'),
