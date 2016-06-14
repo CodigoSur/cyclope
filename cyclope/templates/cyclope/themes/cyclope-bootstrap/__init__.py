@@ -13,7 +13,7 @@ theme_type = 'bootstrap'
 
 layout_templates = {
 
-    'default.html':
+    'layout_two_columns_left.html':
         {
         'verbose_name': _('Default'),
         'regions' : {
@@ -24,8 +24,31 @@ layout_templates = {
             'footer': _('Footer'),
             }
         },
-
-    'main.html':
+    'layout_two_columns_right.html':
+        {
+        'verbose_name': _('Main'),
+        'regions' : {
+            'header': _('Header'),
+            'left': _('Left'),
+            'right': _('Right'),
+            'top': _('Top'),
+            'bottom': _('Bottom'),
+            'footer': _('Footer'),
+            }
+        },
+    'layout_three_columns.html':
+        {
+        'verbose_name': _('Main'),
+        'regions' : {
+            'header': _('Header'),
+            'left': _('Left'),
+            'right': _('Right'),
+            'top': _('Top'),
+            'bottom': _('Bottom'),
+            'footer': _('Footer'),
+            }
+        },
+    'layout_one_column.html':
         {
         'verbose_name': _('Main'),
         'regions' : {
