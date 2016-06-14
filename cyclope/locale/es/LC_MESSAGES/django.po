@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-14 13:53-0600\n"
+"POT-Creation-Date: 2016-06-14 14:57-0600\n"
 "PO-Revision-Date: 2013-01-24 13:51-0300\n"
 "Last-Translator: SAn <spiccinini@codigosur.org>\n"
 "MIME-Version: 1.0\n"
@@ -254,144 +254,144 @@ msgstr ""
 msgid "Labeled Bootstrap"
 msgstr "Íconos etiquetados"
 
-#: forms.py:59
+#: forms.py:63
 msgid "Object"
 msgstr "objeto"
 
-#: forms.py:120 forms.py:267 apps/newsletter/admin.py:38
+#: forms.py:124 forms.py:280 apps/newsletter/admin.py:38
 msgid "View"
 msgstr "Vista"
 
-#: forms.py:121 forms.py:268
+#: forms.py:125 forms.py:281
 msgid "Content object"
 msgstr "Contenido"
 
-#: forms.py:124 core/collections/admin.py:82
+#: forms.py:128 core/collections/admin.py:82
 msgid "Parent"
 msgstr "Padre"
 
-#: forms.py:126 forms.py:269 core/collections/admin.py:179
+#: forms.py:130 forms.py:282 core/collections/admin.py:179
 #: core/frontend/sites.py:377
 msgid "View options"
 msgstr "Opciones de la vista"
 
-#: forms.py:158
+#: forms.py:162
 msgid ""
 "You can not set a Custom URL for menu entries                     with "
 "associated content"
 msgstr "No puede setear una URL para Entradas de Menú con contenido asociado."
 
-#: forms.py:165 forms.py:320
+#: forms.py:169 forms.py:333
 msgid "You need to select a content view"
 msgstr "Debe seleccionar una Vista del contenido"
 
-#: forms.py:171 forms.py:326
+#: forms.py:175 forms.py:339
 msgid "The selected view requires a content object"
 msgstr "La vista seleccionada requiere que elija un objeto de contenido"
 
-#: forms.py:203
+#: forms.py:207
 msgid "Theme"
 msgstr "Tema"
 
-#: forms.py:210
+#: forms.py:214
 msgid "bootstrap"
 msgstr "Bootstrap (por defecto)"
 
-#: forms.py:211
+#: forms.py:215
 msgid "cerulean"
 msgstr "Cerulean"
 
-#: forms.py:212
+#: forms.py:216
 msgid "cyborg"
 msgstr "Cyborg"
 
-#: forms.py:213
+#: forms.py:217
 msgid "flatly"
 msgstr "Flatly"
 
-#: forms.py:214
+#: forms.py:218
 msgid "lumen"
 msgstr "Lumen"
 
-#: forms.py:215
+#: forms.py:219
 msgid "readable"
 msgstr "Readable"
 
-#: forms.py:216
+#: forms.py:220
 msgid "simplex"
 msgstr "Simplex"
 
-#: forms.py:217
+#: forms.py:221
 msgid "spacelab"
 msgstr "Spacelab"
 
-#: forms.py:218
+#: forms.py:222
 msgid "united"
 msgstr "United"
 
-#: forms.py:219
+#: forms.py:223
 msgid "cosmo"
 msgstr "Cosmo"
 
-#: forms.py:220
+#: forms.py:224
 msgid "darkly"
 msgstr "Darkly"
 
-#: forms.py:221
+#: forms.py:225
 msgid "journal"
 msgstr "Journal"
 
-#: forms.py:222
+#: forms.py:226
 msgid "paper"
 msgstr "Paper"
 
-#: forms.py:223
+#: forms.py:227
 msgid "sandstone"
 msgstr "Sandstone"
 
-#: forms.py:224
+#: forms.py:228
 msgid "slate"
 msgstr "Slate"
 
-#: forms.py:225
+#: forms.py:229
 msgid "superhero"
 msgstr "Superhero"
 
-#: forms.py:226
+#: forms.py:230
 msgid "yeti"
 msgstr "Yeti"
 
-#: forms.py:242
+#: forms.py:255
 msgid "Template"
 msgstr "Plantilla"
 
-#: forms.py:266
+#: forms.py:279
 msgid "Region"
 msgstr "Región"
 
-#: forms.py:313
+#: forms.py:326
 msgid "Content type can not be empty"
 msgstr "El Tipo de contenido no debe estar vacío"
 
-#: forms.py:317
+#: forms.py:330
 msgid "You need to select a region"
 msgstr "Debe seleccionar una región"
 
-#: forms.py:350 apps/custom_comments/forms.py:49
+#: forms.py:363 apps/custom_comments/forms.py:49
 #: apps/dynamicforms/models.py:37 apps/forum/forms.py:45
 #: apps/polls/forms.py:35 core/captcha_contact_form/forms.py:31
 msgid "Security code"
 msgstr "Código de seguridad"
 
-#: forms.py:362
+#: forms.py:375
 msgid "Desde"
 msgstr "Publicado después de la fecha"
 
-#: forms.py:362 forms.py:363
+#: forms.py:375 forms.py:376
 msgid "ejemplo: 25/12/2015"
 msgstr " Día / Mes / Año. ej. 25/12/2015, 25-12-15..."
 
-#: forms.py:363
+#: forms.py:376
 msgid "Hasta"
 msgstr "Publicado antes de la fecha:"
 
