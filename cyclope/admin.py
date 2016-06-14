@@ -194,7 +194,8 @@ class LayoutAdmin(admin.ModelAdmin):
         theme_settings = get_theme(SiteSettings.objects.get().theme)
         layout_template = Layout.objects.get(pk=object_id).template
         layout_regions = theme_settings.layout_templates[layout_template]['regions']
-        extra_context = {'layout_regions': layout_regions.iteritems()}
+        layout_regions = sorted(layout_regions.items(), key=lambda x: x[1]['weight'])
+        extra_context = {'layout_regions': layout_regions}
         return super(LayoutAdmin, self).change_view(request, object_id, form_url, extra_context)
 
 admin.site.register(Layout, LayoutAdmin)

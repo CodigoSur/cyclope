@@ -15,49 +15,46 @@ layout_templates = {
 
     'layout_two_columns_left.html':
         {
-        'verbose_name': _('Default'),
+        'verbose_name': _('Two columns Left'),
         'regions' : {
-            'header': _('Header'),
-            'left': _('Left'),
-            'top': _('Top'),
-            'bottom': _('Bottom'),
-            'footer': _('Footer'),
+            'header': {'name': _('Header'), 'weight': 1},
+            'left': {'name': _('Left'), 'weight': 2},
+            'top': {'name': _('Top'), 'weight': 3},
+            'bottom': {'name': _('Bottom'), 'weight': 4},
+            'footer': {'name': _('Footer'), 'weight': 5}
             }
         },
     'layout_two_columns_right.html':
         {
-        'verbose_name': _('Main'),
+        'verbose_name': _('Two columns Right'),
         'regions' : {
-            'header': _('Header'),
-            'left': _('Left'),
-            'right': _('Right'),
-            'top': _('Top'),
-            'bottom': _('Bottom'),
-            'footer': _('Footer'),
+            'header': {'name': _('Header'), 'weight': 1},
+            'right': {'name': _('Right'), 'weight': 4},
+            'top': {'name': _('Top'), 'weight': 2},
+            'bottom': {'name': _('Bottom'), 'weight': 3},
+            'footer': {'name': _('Footer'), 'weight': 5},
             }
         },
     'layout_three_columns.html':
         {
-        'verbose_name': _('Main'),
+        'verbose_name': _('Three columns'),
         'regions' : {
-            'header': _('Header'),
-            'left': _('Left'),
-            'right': _('Right'),
-            'top': _('Top'),
-            'bottom': _('Bottom'),
-            'footer': _('Footer'),
+            'header': {'name': _('Header'), 'weight': 1},
+            'left': {'name': _('Left'), 'weight': 2},
+            'right': {'name': _('Right'), 'weight': 5},
+            'top': {'name': _('Top'), 'weight': 3},
+            'bottom': {'name': _('Bottom'), 'weight': 4},
+            'footer': {'name': _('Footer'), 'weight': 6}
             }
         },
     'layout_one_column.html':
         {
-        'verbose_name': _('Main'),
+        'verbose_name': _('One column'),
         'regions' : {
-            'header': _('Header'),
-            'left': _('Left'),
-            'right': _('Right'),
-            'top': _('Top'),
-            'bottom': _('Bottom'),
-            'footer': _('Footer'),
+            'header': {'name': _('Header'), 'weight': 1},
+            'top': {'name': _('Top'), 'weight': 2},
+            'bottom': {'name': _('Bottom'), 'weight': 3},
+            'footer': {'name': _('Footer'), 'weight': 4}
             }
         },
     'empty.html':
