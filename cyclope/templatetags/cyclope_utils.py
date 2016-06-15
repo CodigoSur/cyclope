@@ -194,12 +194,14 @@ class PdbNode(template.Node):
             import pdb
         # Access vars at the prompt for an easy reference to
         # variables in the context
+
         vars = []
         for dict in context.dicts:
             for k, v in dict.items():
                 vars.append(k)
                 locals()[k] = v
         # You may access all context variables directly (they are stored in locals())
+        pdb.set_trace()
         return ''
 
 @register.tag("pdb_debug")
