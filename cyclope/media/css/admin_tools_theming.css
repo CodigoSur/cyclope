@@ -898,3 +898,9 @@ cursor: pointer;
 .regions_layout ol li {
     list-style-type: decimal;
 }
+
+.regions_layout a {
+    font-size: 14px;
+    vertical-align: top;
+    text-decoration: underline;
+}

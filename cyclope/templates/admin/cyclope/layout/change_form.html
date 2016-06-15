@@ -28,7 +28,7 @@
 			                          {{ item.content_type|capfirst }} ->  {{ item.get_view.verbose_name|capfirst }} {% if item.content_object %} -> {{ item.content_object }}{% endif %}
 			                          </a>
 			                          &nbsp;--&nbsp;
-			                          <a href="#" title="{% trans 'Delete' %}" onclick="alert('¿Segurísimo??')"><img src="{{CYCLOPE_MEDIA_URL}}/images/codigo_sur-ext-link.png"/></a>
+			                          <a href="#" title="{% trans 'Delete' %}" onclick="alert('¿Segurísimo??')"><img src="{{CYCLOPE_MEDIA_URL}}/images/delete.png"/></a>
 		                          </li>
 			                    {% endfor %}
 		                    </ol>
@@ -82,6 +82,7 @@
   }
 
   jQuery(document).ready(function($){
+      
       $("select[id^='id_regionview_set-'][id$='-region']").each(function(i, sel){
           setup_chainedSelect_for_layout(i, true);
       });
@@ -89,6 +90,7 @@
       $("#regionview_set-group .add-row a").click(function() {
         setup_chainedSelect_for_layout($("select[id^='id_regionview_set-'][id$='-region']").length - 2, false);
       });
+      
       $('#id_template').trigger('change');
 
 
@@ -99,7 +101,7 @@
           var content_type_id = $(prefix+"content_type  option:selected").val()
 
           if (view_name && content_type_id){
-              $.get("/{{CYCLOPE_PREFIX}}options_view_widget_html",
+                $.get("/{{CYCLOPE_PREFIX}}options_view_widget_html",
                  {
                     content_type_id: content_type_id,
                     view_name: view_name,
