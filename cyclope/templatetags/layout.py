@@ -117,8 +117,8 @@ def layout_regions_data():
     for name, dic_ in theme_settings.layout_templates.iteritems():
         regions = dic_['regions']
         regions_data = [{'region_name': '', 'verbose_name': '------'}]
-        
-        for region_name, data in regions.items():
+        items = sorted(regions.items(), key = lambda region: region[1]['weight'])    
+        for region_name, data in items:
             if region_name != 'content':
                 regions_data.extend([{'region_name': region_name,'verbose_name': data['name']}])
                             

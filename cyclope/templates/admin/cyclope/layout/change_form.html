@@ -44,7 +44,7 @@
   function setup_chainedSelect_for_layout(i, notTriggetParentChange) {
       $("#id_regionview_set-" + i + "-region").chainedSelect({
           parent: '#id_template',
-          accesor_function: function (param){return layout_data["layout_templates"][param];},
+          accesor_function: function (param){ return layout_data["layout_templates"][param]; },
           value: 'region_name',
           label: 'verbose_name',
           notTriggetParentChange: notTriggetParentChange,
@@ -52,8 +52,7 @@
 
       $("#id_regionview_set-" + i + "-content_view").chainedSelect({
           parent: '#id_regionview_set-' + i + '-content_type',
-          accesor_function: function (param){
-              return layout_data["views_for_models"][param];},
+          accesor_function: function (param){ return layout_data["views_for_models"][param]; },
           value: 'view_name',
           label: 'verbose_name',
           notTriggetParentChange: notTriggetParentChange,
