@@ -894,3 +894,7 @@ cursor: pointer;
 .number-objects { font-weight:700;}
 .number-objects li { padding: 6px 0 0 0; font-weight:400;}
 .changelist-filter-a { font-weight:700; font-size:0.8em; margin: 0 0 0 62px; cursor:pointer; color: #FFFFFF !important; }
+
+.regions_layout ol li {
+    list-style-type: decimal;
+}
