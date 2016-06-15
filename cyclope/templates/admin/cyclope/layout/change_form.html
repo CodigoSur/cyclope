@@ -8,23 +8,25 @@
 {% regroup original.regionview_set.all|dictsort:"region" by region as region_list %}
 
 <div id="regions_tree" style="display:none;">
+
     <div class="img_layout"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/layouts/{{original.image_path}}"/></div>
+
     <div class="regions_layout">
         <ul>
             {% for name, region in layout_regions %}
                 <li><h3><a href="#">{{region.name}}</a></h3></li>
+                {% for o_region in region_list %}
+                    {% if o_region.grouper == name %}
+		                <ol>
+			                {% for item in o_region.list %}
+			                  <li><a href="#">
+			                  {{ item.content_type|capfirst }} ->  {{ item.get_view.verbose_name|capfirst }} {% if item.content_object %} -> {{ item.content_object }}{% endif %}
+			                  </a></li>
+			                {% endfor %}
+		                </ol>
+		            {% endif %}
+	            {% endfor %}
             {% endfor %}
-        </ul>
-        <ul>
-	        {% for region in region_list %}
-		        <li>{% trans region.grouper|capfirst %}
-		        <ul>
-			        {% for item in region.list %}
-			          <li>{{ item.content_type|capfirst }} ->  {{ item.get_view.verbose_name|capfirst }} {% if item.content_object %} -> {{ item.content_object }}{% endif %}</li>
-			        {% endfor %}
-		        </ul>
-		        </li>
-	        {% endfor %}
         </ul>
     </div>
 </div>
