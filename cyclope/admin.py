@@ -176,7 +176,6 @@ class MenuItemAdmin(TreeEditor, PermanentFilterMixin):
 admin.site.register(MenuItem, MenuItemAdmin)
 admin.site.register(Menu)
 
-
 class RegionViewInline(admin.StackedInline):
     form = RegionViewInlineForm
     model = RegionView
@@ -189,7 +188,9 @@ class LayoutAdmin(admin.ModelAdmin):
     form = LayoutAdminForm
     inlines = (RegionViewInline, )
     exclude = ('image_path',)
-    # override change_view TODO django > 1.4  must override get_context_data instead?
+    
+    # get current Layout's regions ordered by weight
+    # overrides change_view TODO django > 1.4  must override get_context_data instead?
     def change_view(self, request, object_id, form_url='', extra_context=None):
         theme_settings = get_theme(SiteSettings.objects.get().theme)
         layout_template = Layout.objects.get(pk=object_id).template
