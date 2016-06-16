@@ -346,7 +346,7 @@ class RegionViewInlineForm(forms.ModelForm, ViewOptionsFormMixin):
 
     class Meta:
         model = RegionView
-
+        exclude = ['weight']
 
 class AuthorAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
