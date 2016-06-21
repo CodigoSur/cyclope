@@ -21,7 +21,7 @@
                     </h3>
                     {% for o_region in region_list %}
                         {% if o_region.grouper == name %}
-		                    <ol>
+		                    <ol class="regionview">
 			                    {% for regionview in o_region.list %}
 			                      <li>
 			                          <a href="#" title="{% trans 'Edit' %}" class="edit_region_view" id="edit-region-view-{{regionview.pk}}" data-regionview="{{regionview.pk}}">
@@ -42,13 +42,19 @@
     </div>
 </div>
 
-<input type="hidden" value="{{CYCLOPE_PREFIX}}" id="CYCLOPE_PREFIX"/>
+<!--TODO extra block-->
 <script type="text/javascript">
 //<![CDATA[
-    var cyclope_prefix = $("#CYCLOPE_PREFIX").val();
+    var cyclope_prefix = "{{CYCLOPE_PREFIX}}";
     var layout_data = {% layout_regions_data %};
 //]]>
 </script>
 <script type="text/javascript" src="{{CYCLOPE_MEDIA_URL}}js/layouts.js"></script>
 
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-ui-1.8.4.custom.min.js"></script> <!--TODO v.11-->
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/drag_drop.js"></script>
 {% endblock %}

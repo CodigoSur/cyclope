@@ -280,6 +280,7 @@ class RegionViewInlineForm(forms.ModelForm, ViewOptionsFormMixin):
     content_view = AjaxChoiceField(label=_('View'), required=False)
     object_id = AjaxChoiceField(label=_('Content object'), required=False)
     view_options = MultipleField(label=_('View options'), form=None, required=False)
+    #weight = forms.IntegerField(widget=forms.HiddenInput()) #TODO HIDE!
 
     field_names = ['content_type', "content_view"]
 
@@ -346,7 +347,6 @@ class RegionViewInlineForm(forms.ModelForm, ViewOptionsFormMixin):
 
     class Meta:
         model = RegionView
-        exclude = ['weight']
 
 class AuthorAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
