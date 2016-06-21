@@ -324,7 +324,10 @@ class RegionView(models.Model):
     def get_view(self):
         return cyclope.core.frontend.site.get_view(self.content_type.model_class(),
                                                    self.content_view)
-
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.weight = len(self.layout.regionview_set.filter(region=self.region)) + 1
+        super(RegionView, self).save(*args, **kwargs)
 
 class Layout(models.Model):
     """Given a theme template, a Layout configures which frontend views will be displayed in each region.
