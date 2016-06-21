@@ -45,23 +45,3 @@ function updateChangelistOrder(event, ui) {
     });
 };
 
-// LAYOUT'S REGION VIEWS
-// TODO TO layouts.js?
-
-jQuery(function($){
-    $("ol.regionview").sortable({
-        update: updateLayoutRegionviewOrder,
-    });
-});
-
-function updateLayoutRegionviewOrder(event, ui){
-    //TODO this hace que no se pueda usar sin evento, sirve para que sólo reordene los de la lista actual
-    $(this).find("li").each(function(i){
-        regionview_id = $(this).find("a.edit_region_view").attr("data-regionview");
-        //alert(i+'->'+regionview_id);
-        regionview = $("input[id^='id_regionview_set-'][id$='-id'][value="+regionview_id+"]").parent() //TODO ENCAPSLT
-        weight = regionview.find("input[id^='id_regionview_set-'][id$='-weight']");
-        weight.val(i+1);
-    });
-    //$(this).focus(); //don't jump TODO
-}

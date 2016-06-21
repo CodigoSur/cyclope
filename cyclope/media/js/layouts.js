@@ -3,6 +3,8 @@ jQuery(document).ready(function($){
     //APPEARANCE
     $("#regionview_set-group h2").after($("#regions_tree"))
     $("#regions_tree").show();
+    //hide weights, managed by drag&drop
+    $(".field-weight").hide();
 
     /**
     *** CHAINED SELECTS
@@ -46,29 +48,35 @@ jQuery(document).ready(function($){
     //for all region view links
     $('.edit_region_view').each(function(){
         //on click select their region fieldset
-        $(this).click(function(){
+        $(this).click(function(e){
             regionview_id = $(this).attr('data-regionview');
             regionviews_hide_all();
             regionview = $("input[id^='id_regionview_set-'][id$='-id'][value="+regionview_id+"]").parent()
             regionview.show();
-            jump_bottom();
+            e.preventDefault();
         });
     });
     //for add to region + img links
     $('.add_view_to_region').each(function(){
-        $(this).click(function(){
+        $(this).click(function(e){
             regionviews_hide_all();
             region = $(this).attr('data-region');
-            //$("#regionview_set-empty").show();
             last_region_id = $("select[id^='id_regionview_set-'][id$='-region']").length - 2
             setup_chainedSelect_for_layout(last_region_id, false);
             $('select[id="id_regionview_set-'+last_region_id+'-region"]').val(region);
             $('#regionview_set-'+last_region_id).show();
+            e.preventDefault();
             jump_bottom();
         });
     });
     //
     show_errors();
+    
+    /** SORTABLE REGIONVIEW WEIGHT */
+    $("ol.regionview").sortable({
+        update: updateLayoutRegionviewOrder,
+    });
+    
 // END $
 });
 
@@ -148,4 +156,15 @@ function update_to_default_view_options(view_options_combo, prefix, div_containe
         $("#regionview_set-" + i + "-view_options_multiple").html("");
         div_container.hide();
     }
+}
+
+// SORTABLE REGIONVIEW WEIGHT
+
+function updateLayoutRegionviewOrder(event, ui){
+    $(this).find("li").each(function(i){
+        regionview_id = $(this).find("a.edit_region_view").attr("data-regionview");
+        regionview = $("input[id^='id_regionview_set-'][id$='-id'][value="+regionview_id+"]").parent() //TODO ENCAPSLT
+        weight = regionview.find("input[id^='id_regionview_set-'][id$='-weight']");
+        weight.val(i+1);
+    });
 }
