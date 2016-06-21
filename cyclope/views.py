@@ -213,3 +213,17 @@ class ContentDeleteView(DeleteView, LoginRequiredMixin):
         else:
             raise Http404
 
+# REGION VIEW DELETE
+
+from cyclope.models import RegionView, Layout
+from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.core.urlresolvers import reverse
+
+def delete_regionview(request, regionview_pk):
+    if request.user.is_superuser:
+        regionview = RegionView.objects.get(pk=regionview_pk)
+        regionview.delete()
+        return_to = reverse('admin:cyclope_layout_change', args=(regionview.layout.pk,))
+        return HttpResponseRedirect(return_to)
+    else:
+        return HttpResponseForbidden()

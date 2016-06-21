@@ -17,7 +17,7 @@
                 <li>
                     <h3>
                         <span>{{region.name}}</span>
-                        <a href="#" title="{% trans 'Add' %}" class="add_view_to_region" data-region="{{name}}"><img src="{{CYCLOPE_MEDIA_URL}}/images/add-small.png"/></a>
+                        <a href="#" title="{% trans 'Add' %}" class="add_view_to_region" data-region="{{name}}"><img src="{{CYCLOPE_MEDIA_URL}}images/add-small.png"/></a>
                     </h3>
                     {% for o_region in region_list %}
                         {% if o_region.grouper == name %}
@@ -28,7 +28,9 @@
 			                          {{ regionview.content_type|capfirst }} ->  {{ regionview.get_view.verbose_name|capfirst }} {% if regionview.content_object %} -> {{ regionview.content_object }}{% endif %}
 			                          </a>
 			                          &nbsp;--&nbsp;
-			                          <a href="#" title="{% trans 'Delete' %}"><img src="{{CYCLOPE_MEDIA_URL}}/images/delete.png"/></a>
+			                          <a href="{% url delete_regionview regionview.pk %}" title="{% trans 'Delete' %}" onclick="confirm('{%trans 'Do you really want to delete this region view?'%}');">
+			                            <img src="{{CYCLOPE_MEDIA_URL}}images/delete.png"/>
+		                              </a>
 		                          </li>
 			                    {% endfor %}
 		                    </ol>
