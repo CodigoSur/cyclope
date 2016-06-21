@@ -3,8 +3,12 @@ jQuery(document).ready(function($){
     //APPEARANCE
     $("#regionview_set-group h2").after($("#regions_tree"))
     $("#regions_tree").show();
+    //hide all fieldsets
+    regionviews_hide_all();
     //hide weights, managed by drag&drop
     $(".field-weight").hide();
+    //initially show new fieldset
+    show_last_regionview();
 
     /**
     *** CHAINED SELECTS
@@ -43,15 +47,13 @@ jQuery(document).ready(function($){
     /**
     *** SINGLE REGIONVIEW EDITION
     */
-    //hide all fieldsets
-    regionviews_hide_all();
+
     //for all region view links
     $('.edit_region_view').each(function(){
         //on click select their region fieldset
         $(this).click(function(e){
-            regionview_id = $(this).attr('data-regionview');
             regionviews_hide_all();
-            regionview = $("input[id^='id_regionview_set-'][id$='-id'][value="+regionview_id+"]").parent()
+            regionview = get_regionview_from_link($(this));
             regionview.show();
             e.preventDefault();
         });
@@ -61,10 +63,8 @@ jQuery(document).ready(function($){
         $(this).click(function(e){
             regionviews_hide_all();
             region = $(this).attr('data-region');
-            last_region_id = $("select[id^='id_regionview_set-'][id$='-region']").length - 2
-            setup_chainedSelect_for_layout(last_region_id, false);
+            last_region_id = show_last_regionview();
             $('select[id="id_regionview_set-'+last_region_id+'-region"]').val(region);
-            $('#regionview_set-'+last_region_id).show();
             e.preventDefault();
             jump_bottom();
         });
@@ -128,6 +128,17 @@ function show_errors(){
         $(this).parent().show();
     });
 }
+function show_last_regionview(){
+    last_region_id = $("select[id^='id_regionview_set-'][id$='-region']").length - 2
+    setup_chainedSelect_for_layout(last_region_id, false);
+    $('#regionview_set-'+last_region_id).show();
+    return last_region_id;
+}
+function get_regionview_from_link(link){
+    regionview_id = link.attr("data-regionview");
+    regionview = $("input[id^='id_regionview_set-'][id$='-id'][value="+regionview_id+"]").parent()
+    return regionview;
+}
 
 // VIEW OPTIONS
 function update_to_default_view_options(view_options_combo, prefix, div_container, i){
@@ -162,8 +173,8 @@ function update_to_default_view_options(view_options_combo, prefix, div_containe
 
 function updateLayoutRegionviewOrder(event, ui){
     $(this).find("li").each(function(i){
-        regionview_id = $(this).find("a.edit_region_view").attr("data-regionview");
-        regionview = $("input[id^='id_regionview_set-'][id$='-id'][value="+regionview_id+"]").parent() //TODO ENCAPSLT
+        link = $(this).find("a.edit_region_view");
+        regionview = get_regionview_from_link(link);
         weight = regionview.find("input[id^='id_regionview_set-'][id$='-weight']");
         weight.val(i+1);
     });
