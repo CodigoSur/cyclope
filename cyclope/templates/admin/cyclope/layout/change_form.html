@@ -36,7 +36,7 @@
                         {% for o_region in region_list %}
                             {% if o_region.grouper == name %}
 		                        <ol class="regionview">
-			                        {% for regionview in o_region.list %}
+			                        {% for regionview in o_region.list|dictsort:"weight" %}
 			                          <li>
 			                              <a href="#" title="{% trans 'Edit' %}" class="edit_region_view" id="edit-region-view-{{regionview.pk}}" data-regionview="{{regionview.pk}}">
 			                              {{ regionview.content_type|capfirst }} ->  {{ regionview.get_view.verbose_name|capfirst }} {% if regionview.content_object %} -> {{ regionview.content_object }}{% endif %}
