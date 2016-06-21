@@ -110,7 +110,7 @@ function setup_chainedSelect_for_layout(i, notTriggetParentChange) {
 
 // SINGLE REGIONVIEW EDITION
 function regionviews_hide_all(){
-    $('.dynamic-regionview_set').hide();
+    $('.inline-related').hide();
 }
 function jump_bottom(){
     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
