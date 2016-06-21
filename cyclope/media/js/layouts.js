@@ -67,7 +67,8 @@ jQuery(document).ready(function($){
             jump_bottom();
         });
     });
-    
+    //
+    show_errors();
 // END $
 });
 
@@ -113,6 +114,11 @@ function regionviews_hide_all(){
 }
 function jump_bottom(){
     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+}
+function show_errors(){
+    $("ul.errorlist").each(function(){
+        $(this).parent().show();
+    });
 }
 
 // VIEW OPTIONS
