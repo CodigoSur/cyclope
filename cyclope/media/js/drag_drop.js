@@ -45,3 +45,24 @@ function updateChangelistOrder(event, ui) {
     });
 };
 
+// DYNAMIC FORMS
+
+jQuery(function($){
+    $("body.forms-form .inline-group .tabular.inline-related tbody").sortable({
+        update: updateTableOrder,
+    });
+    //hide order and put an arrow
+    $('body.forms-form input[id$=order]').css('display', 'none');
+    $('body.forms-form input[id$=order]').after("<div class='order-arrow'>↕</div>");
+});
+
+function updateTableOrder(event, ui) {
+    var y = 0; //start at 0, don't count empty fields
+    $('input[id$=order]').each(function (i, elem){
+        //form includes empty fields, only give an order to those fields having a label
+        if($(elem).parent().parent().find("input[id$=label]").val() != ""){
+            $(elem).val(y);
+            y += 1;
+        }
+    });
+};
