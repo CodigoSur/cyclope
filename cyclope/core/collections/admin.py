@@ -185,6 +185,9 @@ class CollectionAdminForm(forms.ModelForm, ViewOptionsFormMixin):
     def __init__(self, *args, **kwargs):
         super(CollectionAdminForm, self).__init__(*args, **kwargs)
         self.fields['content_types'].choices = frontend.site.get_base_ctype_choices()
+        # add author, which is not a base content
+        author_ct = ContentType.objects.get(name='author')
+        self.fields['content_types'].choices += [(author_ct.id, author_ct.model_class()._meta.verbose_name)]
         model = get_model('collections', 'category')
         views = [('', '------')] + [ (view.name, view.verbose_name)
                                      for view in frontend.site.get_views(model)

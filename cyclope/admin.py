@@ -51,6 +51,7 @@ from cyclope.core.collections.models import Category
 import cyclope.settings as cyc_settings
 from cyclope.utils import PermanentFilterMixin
 from cyclope.signals import admin_post_create
+from cyclope.core.collections.admin import CollectibleAdmin
 
 
 # Set default widget for all admin textareas
@@ -261,10 +262,11 @@ class ImageAdmin(admin.ModelAdmin):
 
 admin.site.register(Image, ImageAdmin)
 
-class AuthorAdmin(admin.ModelAdmin):
+class AuthorAdmin(CollectibleAdmin):
     form = AuthorAdminForm
     list_display = ('name', 'thumbnail')
     search_fields = ('name', 'origin', 'notes')
+    inlines = CollectibleAdmin.inlines
 
 admin.site.register(Author, AuthorAdmin)
 

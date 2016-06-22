@@ -47,7 +47,7 @@ from filebrowser.fields import FileBrowseField
 from jsonfield import JSONField
 
 import cyclope
-from cyclope.core.collections.models import Collection
+from cyclope.core.collections.models import Collection, Collectible
 from cyclope.utils import (ThumbnailMixin, get_singleton,
                             get_object_name, get_app_label)
 
@@ -491,7 +491,7 @@ class BaseContent(models.Model):
         abstract = True
 
 
-class Author(models.Model, ThumbnailMixin):
+class Author(Collectible, ThumbnailMixin):
     """Model to be used for every content that needs an author.
 
     This referes to the author of the content, not to the user uploading it.
