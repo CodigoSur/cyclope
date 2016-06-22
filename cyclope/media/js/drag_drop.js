@@ -50,6 +50,7 @@ function updateChangelistOrder(event, ui) {
 jQuery(function($){
     $("body.forms-form .inline-group .tabular.inline-related tbody").sortable({
         update: updateTableOrder,
+        items: '> tr:has(input[id$=order][value!=""])', //limit sort to existing elements
     });
     //hide order and put an arrow
     $('body.forms-form input[id$=order]').css('display', 'none');
