@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-14 14:57-0600\n"
+"POT-Creation-Date: 2016-06-24 12:27-0600\n"
 "PO-Revision-Date: 2013-01-24 13:51-0300\n"
 "Last-Translator: SAn <spiccinini@codigosur.org>\n"
 "MIME-Version: 1.0\n"
@@ -14,37 +14,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: admin.py:152
+#: admin.py:153
 msgid "content details"
 msgstr "detalles de contenido"
 
-#: admin.py:155
+#: admin.py:156
 msgid "Either set an URL here or select a contenttype and view."
 msgstr "Configura la URL aquí o selecciona un tipo de contenido y vista."
 
-#: admin.py:158 models.py:222 models.py:347 apps/newsletter/models.py:65
+#: admin.py:159 models.py:222 models.py:350 apps/newsletter/models.py:65
 msgid "layout"
 msgstr "esquema"
 
-#: admin.py:161
+#: admin.py:162
 msgid "Set the layout that will be used when this menuitem is selected."
 msgstr ""
 "Establezca el esquema que será utilizado cuando este ítem de menú sea "
 "seleccionado"
 
-#: admin.py:236
+#: admin.py:238
 msgid "General"
 msgstr "General"
 
-#: admin.py:239
+#: admin.py:241
 msgid "Fonts"
 msgstr "Tipografias"
 
-#: admin.py:243
+#: admin.py:245
 msgid "Colours"
 msgstr "Colores"
 
-#: admin.py:247
+#: admin.py:249
 msgid "Other"
 msgstr "Otros"
 
@@ -281,11 +281,11 @@ msgid ""
 "associated content"
 msgstr "No puede setear una URL para Entradas de Menú con contenido asociado."
 
-#: forms.py:169 forms.py:333
+#: forms.py:169 forms.py:334
 msgid "You need to select a content view"
 msgstr "Debe seleccionar una Vista del contenido"
 
-#: forms.py:175 forms.py:339
+#: forms.py:175 forms.py:340
 msgid "The selected view requires a content object"
 msgstr "La vista seleccionada requiere que elija un objeto de contenido"
 
@@ -369,11 +369,11 @@ msgstr "Plantilla"
 msgid "Region"
 msgstr "Región"
 
-#: forms.py:326
+#: forms.py:327
 msgid "Content type can not be empty"
 msgstr "El Tipo de contenido no debe estar vacío"
 
-#: forms.py:330
+#: forms.py:331
 msgid "You need to select a region"
 msgstr "Debe seleccionar una región"
 
@@ -419,7 +419,7 @@ msgstr "horizontal"
 msgid "on click"
 msgstr "al clickear"
 
-#: frontend_views.py:89 models.py:96 models.py:401
+#: frontend_views.py:89 models.py:96 models.py:404
 msgid "disabled"
 msgstr "deshabilitado"
 
@@ -626,11 +626,11 @@ msgstr "contenidos del RSS"
 msgid "contents to show in the whole feed"
 msgstr "contenidos que se publicarán en el RSS general"
 
-#: models.py:93 models.py:397
+#: models.py:93 models.py:400
 msgid "allow comments"
 msgstr "permitir comentarios"
 
-#: models.py:95 models.py:400
+#: models.py:95 models.py:403
 msgid "enabled"
 msgstr "habilitado"
 
@@ -646,16 +646,16 @@ msgstr "habilitar notificaciones por email cuando lleguen comentarios"
 msgid "enable abuse reports"
 msgstr "habilitar las denuncias por contenido indebido"
 
-#: models.py:103 models.py:404
+#: models.py:103 models.py:407
 msgid "show author"
 msgstr "mostrar autoría"
 
-#: models.py:105 models.py:406 models.py:514 apps/articles/models.py:47
+#: models.py:105 models.py:409 models.py:517 apps/articles/models.py:47
 #: apps/medialibrary/models.py:35
 msgid "author"
 msgstr "autoría"
 
-#: models.py:106 models.py:407
+#: models.py:106 models.py:410
 msgid "user if author is empty"
 msgstr "mostrar user si el campo autoría está vacío"
 
@@ -762,16 +762,15 @@ msgstr ""
 "contenido"
 
 #: models.py:152
-#, fuzzy
 msgid "skin setting"
-msgstr "Elegir piel del tema"
+msgstr "Elegir la piel del tema"
 
 #: models.py:165 models.py:166
 msgid "site settings"
 msgstr "configuración del sitio"
 
-#: models.py:181 models.py:211 models.py:332 models.py:383 models.py:496
-#: models.py:524 apps/abuse/models.py:15 apps/forum/models.py:39
+#: models.py:181 models.py:211 models.py:335 models.py:386 models.py:499
+#: models.py:527 apps/abuse/models.py:15 apps/forum/models.py:39
 #: apps/locations/models.py:36 apps/locations/models.py:43
 #: apps/locations/models.py:50 apps/newsletter/models.py:35
 #: apps/staticpages/models.py:41 core/collections/models.py:49
@@ -843,59 +842,59 @@ msgstr "región"
 msgid "weight"
 msgstr "peso"
 
-#: models.py:335
+#: models.py:338
 msgid "layout template"
 msgstr "plantilla para este esquema"
 
-#: models.py:337
+#: models.py:340
 msgid "layout representation"
 msgstr "Imágen del esquema"
 
-#: models.py:348
+#: models.py:351
 msgid "layouts"
 msgstr "esquemas"
 
-#: models.py:355 models.py:360 apps/abuse/models.py:25 apps/abuse/models.py:59
+#: models.py:358 models.py:363 apps/abuse/models.py:25 apps/abuse/models.py:59
 #: core/collections/models.py:260 core/series/models.py:33
 #: core/series/models.py:37
 msgid "content type"
 msgstr "tipo de contenido"
 
-#: models.py:375
+#: models.py:378
 msgid "related content"
 msgstr "contenido relacionado"
 
-#: models.py:376
+#: models.py:379
 msgid "related contents"
 msgstr "contenidos relacionados"
 
-#: models.py:387
+#: models.py:390
 msgid "published"
 msgstr "publicar"
 
-#: models.py:393
+#: models.py:396
 msgid "creation date"
 msgstr "fecha de creación"
 
-#: models.py:395
+#: models.py:398
 msgid "modification date"
 msgstr "fecha de modificación"
 
-#: models.py:399 models.py:408
+#: models.py:402 models.py:411
 msgid "default"
 msgstr "por defecto"
 
-#: models.py:409
+#: models.py:412
 msgid "Select which field to use to show as author of this content."
 msgstr ""
 "Seleccione el campo que desea usar para mostrar como autoría de este "
 "contenido."
 
-#: models.py:482
+#: models.py:485
 msgid "translations"
 msgstr "traducciones"
 
-#: models.py:500 models.py:540 models.py:544 apps/articles/models.py:44
+#: models.py:503 models.py:543 models.py:547 apps/articles/models.py:44
 #: apps/medialibrary/models.py:65 apps/medialibrary/models.py:80
 #: apps/medialibrary/models.py:114 apps/medialibrary/models.py:128
 #: apps/medialibrary/models.py:142 apps/medialibrary/models.py:156
@@ -904,39 +903,39 @@ msgstr "traducciones"
 msgid "image"
 msgstr "imagen"
 
-#: models.py:503
+#: models.py:506
 msgid "origin"
 msgstr "origen"
 
-#: models.py:505
+#: models.py:508
 msgid "notes"
 msgstr "notas"
 
-#: models.py:507 core/collections/models.py:58
+#: models.py:510 core/collections/models.py:58
 msgid "content types"
 msgstr "tipos de contenido"
 
-#: models.py:508
+#: models.py:511
 msgid "Select the content types this author is related to."
 msgstr "Seleccione los tipos de contenido que corresponden a esta autoría"
 
-#: models.py:515
+#: models.py:518
 msgid "authors"
 msgstr "autorías"
 
-#: models.py:528
+#: models.py:531
 msgid "link"
 msgstr "enlace"
 
-#: models.py:534 apps/articles/models.py:49 apps/medialibrary/models.py:37
+#: models.py:537 apps/articles/models.py:49 apps/medialibrary/models.py:37
 msgid "source"
 msgstr "fuente"
 
-#: models.py:535
+#: models.py:538
 msgid "sources"
 msgstr "fuentes"
 
-#: models.py:545
+#: models.py:548
 msgid "images"
 msgstr "imágenes"
 
@@ -1404,6 +1403,21 @@ msgstr "formulario"
 #: apps/dynamicforms/models.py:48
 msgid "forms"
 msgstr "formularios"
+
+#: apps/dynamicforms/templates/admin/forms/change_form.html:10
+msgid "View entries"
+msgstr "Ver entradas"
+
+#: apps/dynamicforms/templates/admin/forms/change_form.html:13
+#: templates/admin/change_form.html:44
+msgid "History"
+msgstr "Historial"
+
+#: apps/dynamicforms/templates/admin/forms/change_form.html:17
+#: core/collections/templates/admin/collections/categorization/change_list.html:15
+#: templates/admin/change_form.html:45
+msgid "View on site"
+msgstr "Ver en el sitio"
 
 #: apps/feeds/frontend_views.py:40
 msgid "entries to show"
@@ -2053,16 +2067,16 @@ msgstr "Categoría"
 msgid "Default category listing view"
 msgstr "Vista por defecto para listados"
 
-#: core/collections/admin.py:282
+#: core/collections/admin.py:285
 #, python-format
 msgid "Successfully categorized %(count)d %(items)s."
 msgstr "Categorizados correctamente %(count)d %(items)s."
 
-#: core/collections/admin.py:293
+#: core/collections/admin.py:296
 msgid "Categorize selected objects"
 msgstr "Categorizar objetos seleccionados"
 
-#: core/collections/admin.py:312
+#: core/collections/admin.py:315
 #, python-format
 msgid "Categorize selected %(verbose_name_plural)s"
 msgstr "Categorizar %(verbose_name_plural)s seleccionados"
@@ -2293,15 +2307,11 @@ msgid "is orphan"
 msgstr "sin categorizar"
 
 #: core/collections/templates/admin/collections/categorization/change_list.html:14
+#: templates/admin/cyclope/layout/change_form.html:40
 #: templates/cyclope/content_tools_block.html:46
 #: templates/cyclope/teaser_tools_block.html:9
 msgid "Edit"
 msgstr "Editar"
-
-#: core/collections/templates/admin/collections/categorization/change_list.html:15
-#: templates/admin/change_form.html:45
-msgid "View on site"
-msgstr "Ver en el sitio"
 
 #: core/collections/templates/admin/collections/categorization/change_list.html:22
 msgid "You may order the contents of this Category. Dont forget to save!"
@@ -2829,12 +2839,9 @@ msgid "Categorize"
 msgstr "Categorizar"
 
 #: templates/admin/change_form.html:34
+#: templates/admin/cyclope/layout/change_form.html:33
 msgid "Add"
 msgstr "Agregar"
-
-#: templates/admin/change_form.html:44
-msgid "History"
-msgstr "Historial"
 
 #: templates/admin/change_form.html:56 templates/admin/change_list.html:106
 #: templates/admin/login.html:23
@@ -2896,6 +2903,17 @@ msgstr ""
 "Los Artículos son un tipo de contenido rico, que puedes utilizar para "
 "publicar material categorizado en tu sitio.\n"
 "</p>\n"
+
+#: templates/admin/cyclope/layout/change_form.html:44
+#: templates/cyclope/base_content_confirm_delete.html:13
+#: templates/cyclope/content_tools_block.html:52
+#: templates/cyclope/teaser_tools_block.html:12
+msgid "Delete"
+msgstr "Borrar"
+
+#: templates/admin/cyclope/layout/change_form.html:44
+msgid "Delete this region view?"
+msgstr "¿Eliminar esta vista de la región?"
 
 #: templates/comments/approved.html:4
 msgid "Thanks for approving"
@@ -2970,12 +2988,6 @@ msgstr "Borrar "
 #: templates/cyclope/base_content_confirm_delete.html:8
 msgid "Are you sure you want to delete it?"
 msgstr "Confirmas que deseas eliminar el contenido?"
-
-#: templates/cyclope/base_content_confirm_delete.html:13
-#: templates/cyclope/content_tools_block.html:52
-#: templates/cyclope/teaser_tools_block.html:12
-msgid "Delete"
-msgstr "Borrar"
 
 #: templates/cyclope/breadcrumb.html:8
 msgid "Breadcrumb"
@@ -3092,7 +3104,6 @@ msgid "after content"
 msgstr "después del contenido"
 
 #: templates/cyclope/themes/cyclope-bootstrap/base.html:82
-#, fuzzy
 msgid "Toggle navigation"
 msgstr "Mostrar navegación"
 
