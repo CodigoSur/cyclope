@@ -1,5 +1,11 @@
-jQuery(document).ready(function($){
+/** 
+*** DJANGO JQUERY
+**  because it is where chainedSelects are binded
+*   TODO upgrade django jQuery
+*/
+(function($) {
 
+$(function(){
     //APPEARANCE
     $("#regionview_set-group h2").after($("#regions_tree"))
     $("#regions_tree").show();
@@ -71,11 +77,6 @@ jQuery(document).ready(function($){
     });
     //
     show_errors();
-    
-    /** SORTABLE REGIONVIEW WEIGHT */
-    $("ol.regionview").sortable({
-        update: updateLayoutRegionviewOrder,
-    });
     
 // END $
 });
@@ -169,7 +170,20 @@ function update_to_default_view_options(view_options_combo, prefix, div_containe
     }
 }
 
-// SORTABLE REGIONVIEW WEIGHT
+//DJANGO JQUERY
+})(django.jQuery);
+
+/** 
+*** SORTABLE REGIONVIEW WEIGHT
+*** uses jQuery > v.1.11
+*/
+
+
+$(function(){
+    $("ol.regionview").sortable({
+        update: updateLayoutRegionviewOrder,
+    });
+});
 
 function updateLayoutRegionviewOrder(event, ui){
     $(this).find("li").each(function(i){
@@ -178,4 +192,11 @@ function updateLayoutRegionviewOrder(event, ui){
         weight = regionview.find("input[id^='id_regionview_set-'][id$='-weight']");
         weight.val(i+1);
     });
+}
+
+//needs to be repeated here because of jQuery versions isolation
+function get_regionview_from_link(link){
+    regionview_id = link.attr("data-regionview");
+    regionview = $("input[id^='id_regionview_set-'][id$='-id'][value="+regionview_id+"]").parent()
+    return regionview;
 }
