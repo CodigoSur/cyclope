@@ -1,0 +1,110 @@
+<head>
+    <!--styles-->
+    <link href="{{CYCLOPE_STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
+    <!--scripts-->
+    <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function(){ 
+            //TODO move to .js in MdWdgt
+            
+            //refresh parent (article's admin) widget pictures
+            function media_widget_refresh(type, param){
+                url = type=="article_id" ? "/media_widget/pictures/widget/article/" : "/media_widget/pictures/widget/pictures/";
+                url += param;
+                $.get(url, function(data) {
+                    $("#media_widget", window.parent.document).html(data);
+                });
+            }
+            function delete_pictures_refresh(pictures_list){
+                url = "/media_widget/pictures/delete_list/"+pictures_list;
+                $.get(url, function(data) {
+                    $("#delete").html(data);
+                });
+            }
+            function search_refresh(pictures_list){ //param=LIB-pictures_list
+                url = "/media_widget/pictures/widget/select/"+pictures_list;
+                $.get(url, function(data) {
+                    $("#search").html(data);
+                });
+            }
+            
+            {% if refresh_widget %}
+                {% if article_id %}
+                    media_widget_refresh("article_id", {{article_id}});
+                {% else %}
+                    var pictures_list = "" ;
+                    //pre-existent pictures
+                    inputs = $('[name="pictures"]', window.parent.document).map(function() { 
+                        return $(this).val(); 
+                    }).get();
+                    if(inputs!=""){
+                        pictures_list += inputs + ",";
+                    }
+                    //new picture
+                    {% if new_picture %}
+                        pictures_list += "{{new_picture}},";
+                    {% elif remove_picture %}
+                        pictures_list = pictures_list.replace("{{remove_picture}},",'');
+                    {% endif %}
+                    //
+                    media_widget_refresh("pictures_list", pictures_list);
+                    delete_pictures_refresh(pictures_list);
+                    search_refresh(pictures_list);
+                {% endif %}
+            {% endif %}
+        
+            // clean message alerts after 8s
+            $(".message-row").delay(8000).fadeOut();
+        });
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        {% if messages %}
+            {% for message in messages %}
+                <div  class="row message-row">
+                    <div class="col-xs-12 {% if message.tags %} alert alert-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation">
+                        <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">
+                            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                            Subir
+                        </a>
+                    </li>
+                    <li role="presentation" class="active">
+                        <a href="#search" aria-controls="search" role="tab" data-toggle="tab">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            Buscar en biblioteca
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#delete" aria-controls="search" role="tab" data-toggle="tab">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            Eliminar
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane" id="upload">
+                        {% include "media_widget/picture_upload.html" %}
+                    </div>
+                    <div role="tabpanel" class="tab-pane active" id="search">
+                        {% include "media_widget/picture_select.html" %}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="delete">
+                        {% include "media_widget/picture_delete.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

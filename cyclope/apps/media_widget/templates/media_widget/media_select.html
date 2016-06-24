@@ -1,0 +1,35 @@
+{% load fb_versions %}
+
+{% include "media_widget/pagination_header.html" with widget='embed' %}
+
+<div class="row">
+    <table class="table table-striped table-condensed">
+    {% for media in pagina.object_list %}
+        <tr>
+            {% if  media.media_file_field == "image" or media.image_file_field == "image" and media.image != None %}
+                <td style="vertical-align: middle;">
+                    <a href="{{ media.image }}" target="_blank"><img src="{% version media.image.path 'fb_thumb' %}" title="{{picture.description}}" class="thumbnail"/></a>
+                </td>
+            {% elif media.image_file_field == "image" and media.image == None %}
+                <td></td>
+            {% endif %}
+            <td style="vertical-align: middle;">{{ media.name }}</td>
+            <td style="vertical-align: middle;">
+                <button class="select_media btn btn-primary btn-xs" value="{{media.media_file}}">Seleccionar</button>
+            <td/>
+        <tr/>
+    {% endfor %}
+    </table>
+</div>
+
+{% include "media_widget/pagination_footer.html" with widget='embed' %}
+
+<!-- TODO bind scripts in links -->
+
+<!-- update media_type selected option on ajax calls -->
+<script type="text/javascript">
+$(function(){
+    $("#selectMediaType").val("{{media_type}}");
+});
+</script>
+

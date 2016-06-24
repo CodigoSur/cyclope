@@ -333,7 +333,14 @@ class ThumbnailMixin(object):
             image = getattr(self, "image")
         except AttributeError:
             raise NotImplemented
-        return getattr(image, "url_thumbnail")
+        # pictures without thumbnail throw
+        # AttributeError ... 'NoneType' object has no attribute 'replace'
+        # at url_thumbnail method
+        # TODO is there a better fix?
+        try:
+            return getattr(image, "url_thumbnail")
+        except AttributeError:
+            return ''
 
     def thumbnail(self):
         return '<img class="thumbnail" src="%s"/>' %  self.get_thumbnail_src()

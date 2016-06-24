@@ -74,8 +74,8 @@ class BaseContentAdmin(admin.ModelAdmin):
 
     class Media:
         js = (
-            cyc_settings.CYCLOPE_STATIC_URL + 'js/reuse_django_jquery.js',
-            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-ui-1.8.4.custom.min.js',
+            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-1.11.3.min.js', # latest jQuery, used by latest django
+            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-migrate-1.2.1.min.js', # backwards compatibility TODO FOR > 2?!
         )
 
     def response_change(self, request, obj):
@@ -199,6 +199,9 @@ class LayoutAdmin(admin.ModelAdmin):
         layout_regions = sorted(layout_regions.items(), key=lambda x: x[1]['weight'])
         extra_context = {'layout_regions': layout_regions}
         return super(LayoutAdmin, self).change_view(request, object_id, form_url, extra_context)
+        
+    class Media:
+        js = (cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-1.11.3.min.js',)
 
 admin.site.register(Layout, LayoutAdmin)
 

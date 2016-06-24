@@ -40,8 +40,7 @@ from cyclope.utils import get_app_label, get_object_name
 
 
 class GenericFKWidget(ForeignKeyRawIdWidget):
-    def __init__(self, ct_field, cts=None, attrs=None,
-                 template="related_admin/gfk_widget.html"):
+    def __init__(self, ct_field, cts=None, attrs=None, template="related_admin/gfk_widget.html"):
         self.ct_field = ct_field
         if cts is None:
             cts = []

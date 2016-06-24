@@ -3,15 +3,15 @@
 
 {% block extrahead %}
     {{ block.super }}
+    <!-- sortable regionviews -->
     <script type="text/javascript">
     //<![CDATA[
         var cyclope_prefix = "{{CYCLOPE_PREFIX}}";
         var layout_data = {% layout_regions_data %};
     //]]>
     </script>
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-ui-1.11.4-min.js"></script>
     <script type="text/javascript" src="{{CYCLOPE_MEDIA_URL}}js/layouts.js"></script>
-    <!-- sortable regionviews -->
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-ui-1.8.4.custom.min.js"></script> {# TODO v.11 #}
 {% endblock %}
 
 {% block after_related_objects %}
@@ -54,4 +54,5 @@
             </ul>
         </div>
     </div>
+
 {% endblock %}

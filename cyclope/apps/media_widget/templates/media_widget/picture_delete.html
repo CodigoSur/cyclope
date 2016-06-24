@@ -1,0 +1,21 @@
+{% load fb_versions %}
+
+<form method="POST" action="{% url pictures-delete article_id=article_id %}">
+    {% csrf_token %}
+    <table class="table table-striped table-condensed">                
+        {% for picture in delete_page %}
+        <tr>
+            <td>{{ picture.name }}</td>
+            <td>
+                <a href="{{ picture.image }}" target="_blank"><img src="{% version picture.image.path 'fb_thumb' %}" title="{{picture.description}}" class="thumbnail"/></a>
+            </td>
+            <td>
+                <button class="btn btn-danger btn-xs" name="picture_id" value="{{picture.pk}}">Eliminar</button>
+            </td>
+        </tr>
+        {% empty %}
+            <br/>
+            <p class="lead">No ha seleccionado ninguna im&aacute;gen para este art&iacute;culo.</p>
+        {% endfor %}
+    </table>
+</form>

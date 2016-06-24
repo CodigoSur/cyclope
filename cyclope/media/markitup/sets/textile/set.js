@@ -49,28 +49,58 @@ mySettings = {
 	]
 }
 
+//TODO MOVE EVERYTHING BELOW TO ITS OWN SCRIPT
+
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+//Content Type to HTML 5 mapping
+//TODO source elements can specify MIME type. may be should for video codecs...
+//TODO handle browsers that don't support HTML5
+function generate_media_tag(url, media_type){
+    switch(media_type){
+        case 'picture':
+            return {replaceWith: '!(left)'+url+'(alt_text)!'};
+        case 'soundtrack':
+            audio = "<audio controls>"
+                   +"<source src='"+url+"'>"
+                   //+"Su navegador no soporta HTML5"
+                   +"</audio>";
+            return {replaceWith: '=='+audio+'=='};
+        case 'movieclip':
+            video = "<video controls>"
+                   +"<source src='"+url+"'>"
+                   +"</video>";
+            return {replaceWith: '=='+video+'=='};
+        case 'document': // most browsers require a plugin for this to work
+            doc = "<object data='"+url+"' width='550' height='400' type='application/pdf'></object>";
+            return {replaceWith: '=='+doc+'=='};
+        case 'flashmovie':
+            flash = "<object data='"+url+"' width='550' height='400'></object>";
+            return {replaceWith: '=='+flash+'=='};
+        default:
+            throw 'Embedded Media Widget: unexistent content type!';
+    }
 }
 
 /**
 I added the FileBrowserHelper object so that it can store the original markitup
 object that fired the event / popup, so that I can use it when trying to return
-to the edittor.
+to the editor.
 **/
+var media_widget = null;
 var FileBrowserHelper = {
     markItUp: false, // objet to store id of the textarea clicked
     insertPicture: function(markItUp) {
                 $("#markItUp"+markItUp.capitalize() +" .markItUpButton20").click(function (){
                     FileBrowserHelper.markItUp = markItUp;
-                    var id2 = String(markItUp).replace(/\-/g,"____").split(".").join("___");
-                    FBWindow = window.open('/admin/filebrowser/browse/?pop=1&type=',
-                                            String(id2),
-                                            'height=600,width=960,resizable=yes,scrollbars=yes');
-                    FBWindow.focus();
+                    media_widget = $("#media_iframe").mediaWidget("position", this).mediaWidget("open");
+                    media_widget.fb_helper = FileBrowserHelper;
                 });
     },
-    triggerInsert: function(url) {
-        $("#"+this.markItUp).trigger('insertion', [{replaceWith: '!(left)'+url+'(alt_text)!'}]);
+    triggerInsert: function(url, media_type) {
+        tag_hash = generate_media_tag(url, media_type);
+        $("#"+this.markItUp).trigger('insertion', [tag_hash]);
     }
 };

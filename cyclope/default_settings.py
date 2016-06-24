@@ -103,6 +103,7 @@ INSTALLED_APPS = [
     'cyclope.apps.related_admin',
     'cyclope.apps.custom_comments',
     'cyclope.apps.social',
+    'cyclope.apps.media_widget',
 
     'admin_tools',
     'admin_tools.theming',
@@ -270,7 +271,7 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
     )
 
 # martkitup settings
-JQUERY_URL = "cyclope/js/reuse_django_jquery.js" # We dont want jquery to be included twice in the admin.
+JQUERY_URL = "cyclope/js/jquery-1.11.3.min.js" # django jquery is outdated in v.1.4, latest even uses jQv.2. jQv.1.9+ is still IE8 compatible
 MARKITUP_SET = 'cyclope/markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
 
@@ -300,5 +301,10 @@ ACTSTREAM_SETTINGS = {
 }
 
 ACTSTREAM_SETTINGS_ENABLED = False
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
 
 CYCLOPE_BOOTSTRAP_SKIN = 'bootstrap'
