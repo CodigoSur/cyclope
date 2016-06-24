@@ -41,6 +41,10 @@ from cyclope.apps.related_admin import GenericModelChoiceField as GMCField
 from haystack.forms import ModelSearchForm
 import cyclope.settings as cyc_settings
 
+from django.forms.widgets import RadioFieldRenderer
+from django.forms import RadioSelect
+from django.utils.encoding import force_unicode
+from django.utils.safestring import mark_safe
 
 class AjaxChoiceField(forms.ChoiceField):
     """ChoiceField that always returns true for validate().
@@ -199,32 +203,46 @@ def get_home_menu_item():
 
 class DesignSettingsAdminForm(forms.ModelForm):
 
-    theme = forms.ChoiceField(label=_('Theme'),
-        choices=sorted([(theme_name,  theme.verbose_name)
-                         for theme_name, theme in get_all_themes().iteritems()],
-                         key=lambda t: t[1]),
-        required=True)
-    home_layout = forms.ModelChoiceField(queryset=Layout.objects.all(),
-                                         initial=lambda : get_home_menu_item().layout)
+    theme = forms.ChoiceField(
+        label=_('Theme'),
+        choices = sorted([(theme_name, theme.verbose_name) for theme_name, theme in get_all_themes().iteritems()], key=lambda t: t[1]), 
+        required=True
+    )
+    home_layout = forms.ModelChoiceField(queryset=Layout.objects.all(), initial=lambda : get_home_menu_item().layout)
+    
+    SKINS = (
+        ('bootstrap', _('bootstrap')),
+        ('cerulean', _('cerulean')),
+        ('cyborg', _('cyborg')),
+        ('flatly', _('flatly')),
+        ('lumen', _('lumen')),
+        ('readable', _('readable')),
+        ('simplex', _('simplex')),
+        ('spacelab', _('spacelab')),
+        ('united', _('united')),
+        ('cosmo', _('cosmo')),
+        ('darkly', _('darkly')),
+        ('journal', _('journal')),
+        ('paper', _('paper')),
+        ('sandstone', _('sandstone')),
+        ('slate', _('slate')),
+        ('superhero' ,_('superhero')),
+        ('yeti', _('yeti')),
+    )
+
+    class TableRadioSelect(RadioSelect):
+        class TableRadioFieldRenderer(RadioFieldRenderer):
+            def render(self):
+                """Outputs a table for this set of radio fields."""
+                src = cyc_settings.CYCLOPE_MEDIA_URL+u'images/theme-skins-thumbnail/{}.png'
+                row = u'<tr><td>{}</td><td><image src="'+src+u'"/></td></tr>'
+                return mark_safe(u'<table class="radio-skin-tbl">\n%s\n</table>' % u'\n'.join([row.format(force_unicode(w),force_unicode(w.choice_value)) for w in self]))
+        renderer = TableRadioFieldRenderer
+    #
+    skin_setting = forms.ChoiceField(widget=TableRadioSelect(), choices=SKINS)
+        
     class Meta:
         model = DesignSettings
-
-        widgets = {}
-        for fieldname in ['color_'+l for l in ('a', 'b', 'c', 'd', 'e')]:
-            widgets[fieldname] = forms.TextInput(attrs={'cols': 10, 'class': 'color'})
-
-        palette = (
-            (_('Default'), 'eee,ccc,999,666,333'),
-            (_('Corn field'), 'f9f145,b4ac01,fec90a,e86e1b,d41e46'),
-            (_('Pizza party'), 'c7f465,4ecdc4,ff6b6b,c54d57,556370'),
-            (_('Nogal'), 'fcfce4,fbcfd0,cebb9a,a47e59,755d3b'),
-            (_('Deep ocean'), 'd8d7ec,c1c0dd,8f8db1,4f4c7b,302e57'),
-            (_('Eggplant'), 'ffe99c,fec90a,a55e93,9b1a7b,64074d'),
-            (_('Teddy bear'), 'fca,f95,d45500,a40,803300'),
-            (_('Green Day'), 'dde9af,cdde87,abc837,677821,445016'),
-            (_('Happy Birthday'), 'ffff00,f17c36,01c000,fe0000,7900bf'),
-            (_('Romance'), 'ffd5d5,ff8080,ff5555,d40000,800000'),
-        )
 
     def save(self, *args, **kwargs):
         m = super(DesignSettingsAdminForm, self).save(*args, **kwargs)
@@ -262,6 +280,7 @@ class RegionViewInlineForm(forms.ModelForm, ViewOptionsFormMixin):
     content_view = AjaxChoiceField(label=_('View'), required=False)
     object_id = AjaxChoiceField(label=_('Content object'), required=False)
     view_options = MultipleField(label=_('View options'), form=None, required=False)
+    #weight = forms.IntegerField(widget=forms.HiddenInput()) #TODO HIDE!
 
     field_names = ['content_type', "content_view"]
 
@@ -328,7 +347,6 @@ class RegionViewInlineForm(forms.ModelForm, ViewOptionsFormMixin):
 
     class Meta:
         model = RegionView
-
 
 class AuthorAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

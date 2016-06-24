@@ -307,3 +307,4 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
+CYCLOPE_BOOTSTRAP_SKIN = 'bootstrap'

@@ -27,7 +27,7 @@ from django.utils.translation import ugettext_lazy as _
 from captcha.fields import CaptchaField
 
 # Monkeypatching forms_builder.
-# fields must me monkeypatched before of models!
+# fields must me monkeypatched before models!
 from forms_builder.forms import fields as _fields
 
 # Adding Captcha to field options

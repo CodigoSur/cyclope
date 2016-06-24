@@ -117,13 +117,13 @@ def layout_regions_data():
     for name, dic_ in theme_settings.layout_templates.iteritems():
         regions = dic_['regions']
         regions_data = [{'region_name': '', 'verbose_name': '------'}]
-        regions_data.extend([ {'region_name': region_name,
-                               'verbose_name': verbose_name}
-                            for region_name, verbose_name
-                            in sorted(regions.items(), key=lambda r: r[1])
-                            if region_name != 'content' ])
+        items = sorted(regions.items(), key = lambda region: region[1]['weight'])    
+        for region_name, data in items:
+            if region_name != 'content':
+                regions_data.extend([{'region_name': region_name,'verbose_name': data['name']}])
+                            
         layout_templates[name] = regions_data
-
+        
     out_dict["layout_templates"] = layout_templates
 
     views_for_models = {}
@@ -139,3 +139,18 @@ def layout_regions_data():
     out_dict["views_for_models"] = views_for_models
     json_data = json.dumps(out_dict, cls=LazyJSONEncoder)
     return json_data
+    
+@register.simple_tag
+def bootstrap_skin_link():
+    """
+    Returns CSS link to the configured Bootswatch skin
+    https://github.com/thomaspark/bootswatch
+    """
+    from cyclope import settings
+    url = settings.CYCLOPE_THEME_MEDIA_URL
+    path = "css/"
+    skin = SiteSettings.objects.get().skin_setting
+    if skin != 'bootstrap':
+        path += 'skins/'
+    link = '<link href="{}{}{}.min.css" rel="stylesheet">'.format(url, path, skin)
+    return link

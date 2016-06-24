@@ -1,129 +1,58 @@
 {% extends "admin/change_form.html" %}
 {% load i18n layout cyclope_utils %}
 
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript">
+    //<![CDATA[
+        var cyclope_prefix = "{{CYCLOPE_PREFIX}}";
+        var layout_data = {% layout_regions_data %};
+    //]]>
+    </script>
+    <script type="text/javascript" src="{{CYCLOPE_MEDIA_URL}}js/layouts.js"></script>
+    <!-- sortable regionviews -->
+    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery-ui-1.8.4.custom.min.js"></script> {# TODO v.11 #}
+{% endblock %}
+
 {% block after_related_objects %}
-{{ block.super }}
+    {{ block.super }}
 
-{# CYCLOPE: Tree structure of regions #}
-{% regroup original.regionview_set.all|dictsort:"region" by region as region_list %}
+    {# CYCLOPE: Tree structure of regions #}
+    {% regroup original.regionview_set.all|dictsort:"region" by region as region_list %}
 
-<ul id="regions_tree" style="display:none;">
-	<div class="regions_layout">
-	{% for region in region_list %}
-		<li>{% trans region.grouper|capfirst %}
-		<ul>
-			{% for item in region.list %}
-			  <li>{{ item.content_type|capfirst }} ->  {{ item.get_view.verbose_name|capfirst }} {% if item.content_object %} -> {{ item.content_object }}{% endif %}</li>
-			{% endfor %}
-		</ul>
-		</li>
-	{% endfor %}
-	</div>
-</ul>
-	
-<script type="text/javascript">
-//<![CDATA[
+    <div id="regions_tree" style="display:none;">
 
-{# CYCLOPE: chainedSelect for Layout #}
-(function($){
-    
-    var layout_data = {% layout_regions_data %};
+        <div class="img_layout"><img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/layouts/{{original.image_path}}"/></div>
 
-    $("#regionview_set-group h2").after($("#regions_tree"))
-    $("#regions_tree").show();
-
-    $("select[id^='id_regionview_set-'][id$='-region']").each(function(i, sel){
-        setup_chainedSelect_for_layout(i, true);
-    });
-
-    $("#regionview_set-group .add-row a").click(function() {
-        setup_chainedSelect_for_layout($("select[id^='id_regionview_set-'][id$='-region']").length - 2, false);
-    });
-
-    $('#id_template').trigger('change');
-
-    function setup_chainedSelect_for_layout(i, notTriggetParentChange) {
-        $("#id_regionview_set-" + i + "-region").chainedSelect({
-            parent: '#id_template',
-            accesor_function: function (param){return layout_data["layout_templates"][param];},
-            value: 'region_name',
-            label: 'verbose_name',
-            notTriggetParentChange: notTriggetParentChange,
-        });
-
-        $("#id_regionview_set-" + i + "-content_view").chainedSelect({
-            parent: '#id_regionview_set-' + i + '-content_type',
-            accesor_function: function (param){return layout_data["views_for_models"][param];},
-            value: 'view_name',
-            label: 'verbose_name',
-            notTriggetParentChange: notTriggetParentChange,
-        });
-
-        $("#id_regionview_set-" + i + "-object_id").chainedSelect({
-            parent: '#id_regionview_set-' + i + '-content_type',
-            url: '/{{CYCLOPE_PREFIX}}objects_for_ctype_json',
-            value: 'object_id',
-            label: 'verbose_name',
-            notTriggetParentChange: notTriggetParentChange,
-        });
-
-        if ($('#id_regionview_set-' + i + '-content_type').val()){
-            $('#id_regionview_set-' + i + '-content_type').trigger('change');
-        }
-    }
-
-    // View options
-
-    function update_to_default_view_options(view_options_combo, prefix, div_container, i){
-        var view_name = view_options_combo.val();
-        var content_type_id = $(prefix+"content_type  option:selected").val()
-
-        if (view_name && content_type_id){
-            $.get("/{{CYCLOPE_PREFIX}}options_view_widget_html",
-            {
-                content_type_id: content_type_id,
-                view_name: view_name,
-                prefix_name: "regionview_set-"+i+"-"
-            },
-            function(data){
-                if (data){
-                    $("#regionview_set-" + i + "-view_options_multiple").replaceWith(data);
-                    div_container.show();
-                }
-                else{
-                    $("#regionview_set-" + i + "-view_options_multiple").html("");
-                    div_container.hide();
-                }
-            });
-        }
-        else {
-            $("#regionview_set-" + i + "-view_options_multiple").html("");
-            div_container.hide();
-        }
-    }
-
-    $.cyclope = {access_number: [], initial_content: []};
-
-    $("select[id^='id_regionview_set-'][id$='-content_view']").each(function(i, sel){
-        $.cyclope.access_number[i] = 2;
-
-        var prefix = "#id_regionview_set-" + i + "-"
-        var div_container = $("#regionview_set-"+i+"-view_options_multiple").parent().parent();
-        var html = $("#regionview_set-" + i + "-view_options_multiple").html() || "";
-        if (html && (html.indexOf("form-row") !== -1)){
-            $.cyclope.initial_content[i] = true;
-        }
-        else {
-            div_container.hide();
-            $.cyclope.initial_content[i] = false;
-        }
-        $(this).change(function(){
-            update_to_default_view_options($(this), prefix, div_container, i);
-        });
-    });
-
-})(django.jQuery);
-//]]>
-</script>
+        <div class="regions_layout">
+            <ul>
+                {% for name, region in layout_regions %}
+                    <li>
+                        <h3>
+                            <span>{{region.name}}</span>
+                            <a href="#" title="{% trans 'Add' %}" class="add_view_to_region" data-region="{{name}}"><img src="{{CYCLOPE_MEDIA_URL}}images/add-small.png"/></a>
+                        </h3>
+                        {% for o_region in region_list %}
+                            {% if o_region.grouper == name %}
+		                        <ol class="regionview">
+			                        {% for regionview in o_region.list|dictsort:"weight" %}
+			                          <li>
+			                              <a href="#" title="{% trans 'Edit' %}" class="edit_region_view" id="edit-region-view-{{regionview.pk}}" data-regionview="{{regionview.pk}}">
+			                              {{ regionview.content_type|capfirst }} ->  {{ regionview.get_view.verbose_name|capfirst }} {% if regionview.content_object %} -> {{ regionview.content_object }}{% endif %}
+			                              </a>
+			                              &nbsp;--&nbsp;
+			                              <a href="{% url delete_regionview regionview.pk %}" title="{% trans 'Delete' %}" onclick="return confirm('{%trans 'Delete this region view?'%}');">
+			                                <img src="{{CYCLOPE_MEDIA_URL}}images/delete.png" height="10px;"/>
+		                                  </a>
+		                              </li>
+			                        {% endfor %}
+		                        </ol>
+		                    {% endif %}
+	                    {% endfor %}
+	                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 
 {% endblock %}

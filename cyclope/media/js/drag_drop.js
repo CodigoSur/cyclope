@@ -1,3 +1,5 @@
+// RELATED CONTENTS
+
 jQuery(function($) {
     $("#cyclope-relatedcontent-self_type-self_id-group, #question_set-group").sortable({
         //axis: 'y',
@@ -24,6 +26,7 @@ jQuery(document).ready(function($){
     });
 });
 
+// CATEGORIZATIONS
 
 jQuery(function($) {
     $("body.categorizations-changelist table#result_list").sortable({
@@ -39,5 +42,28 @@ jQuery(function($) {
 function updateChangelistOrder(event, ui) {
     $('input[id$=order]').each(function (i, elem){
         $(elem).val(i+1);
+    });
+};
+
+// DYNAMIC FORMS
+
+jQuery(function($){
+    $("body.forms-form .inline-group .tabular.inline-related tbody").sortable({
+        update: updateTableOrder,
+        items: '> tr:has(input[id$=order][value!=""])', //limit sort to existing elements
+    });
+    //hide order and put an arrow
+    $('body.forms-form input[id$=order]').css('display', 'none');
+    $('body.forms-form input[id$=order]').after("<div class='order-arrow'>↕</div>");
+});
+
+function updateTableOrder(event, ui) {
+    var y = 0; //start at 0, don't count empty fields
+    $('input[id$=order]').each(function (i, elem){
+        //form includes empty fields, only give an order to those fields having a label
+        if($(elem).parent().parent().find("input[id$=label]").val() != ""){
+            $(elem).val(y);
+            y += 1;
+        }
     });
 };

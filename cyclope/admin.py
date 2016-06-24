@@ -51,6 +51,7 @@ from cyclope.core.collections.models import Category
 import cyclope.settings as cyc_settings
 from cyclope.utils import PermanentFilterMixin
 from cyclope.signals import admin_post_create
+from cyclope.core.collections.admin import CollectibleAdmin
 
 
 # Set default widget for all admin textareas
@@ -176,16 +177,28 @@ class MenuItemAdmin(TreeEditor, PermanentFilterMixin):
 admin.site.register(MenuItem, MenuItemAdmin)
 admin.site.register(Menu)
 
-
 class RegionViewInline(admin.StackedInline):
     form = RegionViewInlineForm
     model = RegionView
     extra = 1
 
-
+####################################
+from cyclope.models import SiteSettings
+from cyclope.themes import get_theme
 class LayoutAdmin(admin.ModelAdmin):
     form = LayoutAdminForm
     inlines = (RegionViewInline, )
+    exclude = ('image_path',)
+    
+    # get current Layout's regions ordered by weight
+    # overrides change_view TODO django > 1.4  must override get_context_data instead?
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        theme_settings = get_theme(SiteSettings.objects.get().theme)
+        layout_template = Layout.objects.get(pk=object_id).template
+        layout_regions = theme_settings.layout_templates[layout_template]['regions']
+        layout_regions = sorted(layout_regions.items(), key=lambda x: x[1]['weight'])
+        extra_context = {'layout_regions': layout_regions}
+        return super(LayoutAdmin, self).change_view(request, object_id, form_url, extra_context)
 
 admin.site.register(Layout, LayoutAdmin)
 
@@ -207,7 +220,7 @@ DESIGN_FIELDS = (
     'global_title', 'theme', 'default_layout', 'head_image', 'favicon_image',
     'show_head_title', 'body_font', 'body_custom_font', 'titles_font', 
     'titles_custom_font', 'font_size', 'hide_content_icons', 
-    'color_a', 'color_b', 'color_c', 'color_d', 'color_e',
+    'skin_setting',
 )
  
 
@@ -231,7 +244,7 @@ class DesignSettingsAdmin(SingletonAdminMixin):
         }),
         (_('Colours'), {
             'classes': ['colours', ],
-            'fields': ('color_a', 'color_b', 'color_c', 'color_d', 'color_e')
+            'fields': ('skin_setting',)
         }),
         (_('Other'), {
             'fields': ( 'hide_content_icons', )
@@ -249,10 +262,11 @@ class ImageAdmin(admin.ModelAdmin):
 
 admin.site.register(Image, ImageAdmin)
 
-class AuthorAdmin(admin.ModelAdmin):
+class AuthorAdmin(CollectibleAdmin):
     form = AuthorAdminForm
     list_display = ('name', 'thumbnail')
     search_fields = ('name', 'origin', 'notes')
+    inlines = CollectibleAdmin.inlines
 
 admin.site.register(Author, AuthorAdmin)
 

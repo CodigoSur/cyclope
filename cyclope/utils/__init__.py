@@ -262,9 +262,6 @@ def get_page(paginator, request):
 
     return page
 
-
-
-
 def _invalidate_cache(sender, **kwargs):
     sender._instance = None
 

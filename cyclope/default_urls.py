@@ -28,13 +28,13 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings as django_settings
 from django.contrib import admin
 from haystack.views import SearchView, search_view_factory
-from cyclope.core.captcha_contact_form.forms import  \
-                                       AdminSettingsContactFormWithCaptcha
+from cyclope.core.captcha_contact_form.forms import AdminSettingsContactFormWithCaptcha
 import cyclope.settings as cyc_settings
 from cyclope.feeds import CategoryFeed, WholeSiteFeed, ContentTypeFeed
 from cyclope.sitemaps import CategorySitemap, CollectionSitemap, MenuSitemap
 from cyclope.core.user_profiles.forms import UserProfileForm
 from cyclope.forms import DateSearchForm, ModelSearchForm
+from cyclope.views import delete_regionview
 
 urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
@@ -72,6 +72,8 @@ urlpatterns = patterns('',
     url(r'^admin_tools/', include('admin_tools.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^comments/', include('django.contrib.comments.urls')),
+    # custom layout's admin
+    url(r'^regionview/([0-9]+)/delete', delete_regionview, name="delete_regionview"),
 
     ## 3rd party
     # captcha (django-simple-captcha)

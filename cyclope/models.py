@@ -47,7 +47,7 @@ from filebrowser.fields import FileBrowseField
 from jsonfield import JSONField
 
 import cyclope
-from cyclope.core.collections.models import Collection
+from cyclope.core.collections.models import Collection, Collectible
 from cyclope.utils import (ThumbnailMixin, get_singleton,
                             get_object_name, get_app_label)
 
@@ -148,16 +148,8 @@ class SiteSettings(models.Model):
     hide_content_icons = models.BooleanField(_('hide content icons'), default=False,
                                              help_text=_('Content icons are shown beside the title of the content'))
 
-    color_a	= models.CharField(_('color A'), max_length=8, default='eee', 
-                               help_text=_('change the color A'))
-    color_b	= models.CharField(_('color B'), max_length=8, default='ccc',
-                               help_text=_('change the color B'))
-    color_c	= models.CharField(_('color C'), max_length=8, default='999', 
-                               help_text=_('change the color C'))
-    color_d	= models.CharField(_('color D'), max_length=8, default='666', 
-                               help_text=_('change the color D'))
-    color_e	= models.CharField(_('color E'), max_length=8, default='333', 
-                               help_text=_('change the color E'))
+    ###MultipleChoiceField
+    skin_setting = models.CharField(_('skin setting'), max_length=20, default='bootstrap')
 
     def save(self, *args, **kwargs):
         self.id = 1
@@ -331,18 +323,21 @@ class RegionView(models.Model):
 
     def get_view(self):
         return cyclope.core.frontend.site.get_view(self.content_type.model_class(),
-                                                    self.content_view)
-
+                                                   self.content_view)
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.weight = len(self.layout.regionview_set.filter(region=self.region)) + 1
+        super(RegionView, self).save(*args, **kwargs)
 
 class Layout(models.Model):
     """Given a theme template, a Layout configures which frontend views will be displayed in each region.
     """
-    name = models.CharField(_('name'), max_length=50,
-                            db_index=True, unique=True)
-    slug = AutoSlugField(populate_from='name', db_index=True,
-                         always_update=True)
-    # template choices are set in the form
+    name = models.CharField(_('name'), max_length=50, db_index=True, unique=True)
+    slug = AutoSlugField(populate_from='name', db_index=True, always_update=True)
+    # template choices are set in the theme
     template = models.CharField(_('layout template'), max_length=100)
+    # relative to theme media url, ex. cyclope/media/themes/cyclope-bootstrap/images/layout/main.png
+    image_path = models.CharField(_('layout representation'), max_length=100, default='main.png')
 
     def __unicode__(self):
         return self.name
@@ -496,7 +491,7 @@ class BaseContent(models.Model):
         abstract = True
 
 
-class Author(models.Model, ThumbnailMixin):
+class Author(Collectible, ThumbnailMixin):
     """Model to be used for every content that needs an author.
 
     This referes to the author of the content, not to the user uploading it.
