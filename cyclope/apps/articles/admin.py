@@ -38,7 +38,7 @@ from cyclope.apps.media_widget import MediaWidget, MediaWidgetField
 
 class ArticleForm(forms.ModelForm):
 
-    pictures = MediaWidgetField(queryset=Picture.objects.all(), widget=MediaWidget())
+    pictures = MediaWidgetField(queryset=Picture.objects.all(), widget=MediaWidget(), required=False)
 
     def __init__(self, *args, **kwargs):
         super(ArticleForm, self).__init__(*args, **kwargs)
