@@ -75,7 +75,7 @@ class BaseContentAdmin(admin.ModelAdmin):
     class Media:
         js = (
             cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-1.11.3.min.js', # latest jQuery, used by latest django
-            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-migrate-1.2.1.min.js', # backwards compatibility TODO FOR > 2?!
+            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-migrate-1.2.1.min.js', # backwards compatibility
         )
 
     def response_change(self, request, obj):
