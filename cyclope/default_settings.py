@@ -271,8 +271,7 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
     )
 
 # martkitup settings
-#from cyclope import settings as cyc_settings
-#JQUERY_URL = 'cyclope/' + cyc_settings.JQUERY_PATH
+JQUERY_URL = 'cyclope/js/jquery-1.12.4.min.js' # TODO import it from settings.py
 MARKITUP_SET = 'cyclope/markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
 
