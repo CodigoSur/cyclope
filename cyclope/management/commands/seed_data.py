@@ -43,7 +43,7 @@ class Command(BaseCommand):
     #https://docs.djangoproject.com/en/1.9/howto/custom-management-commands/
     option_list = BaseCommand.option_list + (
         make_option('--demo',
-            action='store',
+            action='store_true',
             dest='demo',
             default=False,
             help=_('Fill site with demo elements (Menus, Cateories, Article...)')
@@ -58,7 +58,7 @@ class Command(BaseCommand):
         ######
         # DEMO
         if options['demo']:           
-            self.create_demo_objects()
+            self.create_demo_objects(site)
 
     def create_site(self):
         # SITE
@@ -91,7 +91,7 @@ class Command(BaseCommand):
             layout.save()
         self.stdout.write(_("Layouts creados \n"))
 
-    def create_demo_objects(self):
+    def create_demo_objects(self, site):
         # MAIN MENU
         menu = Menu(name="Main menu", main_menu=True)
         menu.save()
@@ -131,7 +131,6 @@ class Command(BaseCommand):
         )
         contact_menu_item.save()
         # USER GROUPS
-        self.create_user_groups()
         for g in ("editors", "managers", "translators"):
             group, created = Group.objects.get_or_create(name=g)
             if created: #?
