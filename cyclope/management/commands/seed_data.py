@@ -8,6 +8,7 @@ from django.contrib.auth.models import User, Group
 from cyclope.apps.articles.models import Article
 from cyclope.core.collections.models import Collection, Category, Categorization
 from django.contrib.contenttypes.models import ContentType
+from optparse import make_option
 
 class Command(BaseCommand):
     help = 'POPULATES LAYOUT SEED DATA'
@@ -37,18 +38,19 @@ class Command(BaseCommand):
     
     DEFAULT_VIEW_OPTIONS = '{"sort_by": "DATE-", "show_title": true, "show_description": true, "show_image": true, "items_per_page": 5, "limit_to_n_items": 0, "simplified": false, "traverse_children": false, "navigation": "TOP"}'
 
+    #NOTE django > 1.8 uses argparse instead of optparse module, 
+    #so "You are encouraged to exclusively use **options for new commands."
+    #https://docs.djangoproject.com/en/1.9/howto/custom-management-commands/
+    option_list = BaseCommand.option_list + (
+        make_option('--demo',
+            action='store',
+            dest='demo',
+            default=False,
+            help=_('Fill site with demo elements (Menus, Cateories, Article...)')
+        ),
+    )
+
     def handle(self, *args, **options):
-        #NOTE django > 1.8 uses argparse instead of optparse module, 
-        #so "You are encouraged to exclusively use **options for new commands."
-        #https://docs.djangoproject.com/en/1.9/howto/custom-management-commands/
-        option_list = BaseCommand.option_list + (
-            make_option('--demo',
-                action='store',
-                dest='demo',
-                default=False,
-                help=_('Fill site with demo elements (Menus, Cateories, Article...)')
-            ),
-        )
         # SITE
         site = self.create_site()
         # LAYOUTS
