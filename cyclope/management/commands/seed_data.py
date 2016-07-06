@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from cyclope.models import Layout
-from django.utils.translation import ugettext as _ # TODO NO TRADUCE
+from django.utils.translation import ugettext as _
 from django.contrib.sites.models import Site
 from cyclope.models import Menu, MenuItem, Layout, SiteSettings, RegionView
 from contact_form.models import ContactFormSettings
@@ -38,35 +38,62 @@ class Command(BaseCommand):
     DEFAULT_VIEW_OPTIONS = '{"sort_by": "DATE-", "show_title": true, "show_description": true, "show_image": true, "items_per_page": 5, "limit_to_n_items": 0, "simplified": false, "traverse_children": false, "navigation": "TOP"}'
 
     def handle(self, *args, **options):
-        # TODO clean_all()
-        self.create_site()
+        #NOTE django > 1.8 uses argparse instead of optparse module, 
+        #so "You are encouraged to exclusively use **options for new commands."
+        #https://docs.djangoproject.com/en/1.9/howto/custom-management-commands/
+        option_list = BaseCommand.option_list + (
+            make_option('--demo',
+                action='store',
+                dest='demo',
+                default=False,
+                help=_('Fill site with demo elements (Menus, Cateories, Article...)')
+            ),
+        )
+        # SITE
+        site = self.create_site()
+        # LAYOUTS
+        self.create_layouts()
+        ######
+        # DEMO
+        if options['demo']:           
+            self.create_demo_objects()
 
     def create_site(self):
         # SITE
-        # Domain name
-        domain = "localhost:8000"
-        #if kwargs.get('interactive', True):
-        msg = "\nDomain name (leave empty for default: %s: " % domain
-        input_domain = raw_input(msg)
-        domain = input_domain or domain
-        # Site name
-        site_name = "CyclopeCMS demo"
-        #if kwargs.get('interactive', True):
-        msg = "\nSite name (leave empty for default: %s): " % site_name
-        input_name = raw_input(msg)
-        site_name = input_name or site_name
         if Site.objects.all():
             site = Site.objects.all()[0]
         else:
             site = Site()
-        site.domain = domain
-        site.name = site_name
-        site.save()
+            domain = "localhost:8000"
+            #if kwargs.get('interactive', True):
+            msg = "\nDomain name (leave empty for default: %s: " % domain
+            input_domain = raw_input(msg)
+            domain = input_domain or domain
+            site_name = "CyclopeCMS demo"
+            #if kwargs.get('interactive', True):
+            msg = "\nSite name (leave empty for default: %s): " % site_name
+            input_name = raw_input(msg)
+            site_name = input_name or site_name
+            #
+            site.domain = domain
+            site.name = site_name
+            site.save()
+        return site
+
+    def create_layouts(self):
+        for key, value in self.LYS.iteritems():
+            layout = Layout()
+            layout.name = value['name']
+            layout.template = value['template']
+            layout.image_path = value['image']
+            layout.save()
+        self.stdout.write(_("Layouts creados \n"))
+
+    def create_demo_objects(self):
         # MAIN MENU
         menu = Menu(name="Main menu", main_menu=True)
         menu.save()
-        # LAYOUTS
-        self.create_layouts()
+        #REGIONS
         default_layout = Layout.objects.get(slug='two-columns-right') # BLOG
         RegionView.objects.create(region='header', layout=default_layout, content_object=menu, weight=1, content_view='menuitems_hierarchy', view_options='{"align": "HORIZONTAL"}')
         site_content_type =ContentType.objects.get(name='site')
@@ -78,7 +105,7 @@ class Command(BaseCommand):
         site_settings = SiteSettings(site=site, theme="cyclope-bootstrap", default_layout=default_layout, allow_comments='YES')
         site_settings.save()
         # COLLECTION & CATEGORY
-        collection = Collection.objects.create(name="Contenidos", description="Agrupa todos los contenidos generados en el sitio por el script de arranque.")#, content_types=)
+        collection = Collection.objects.create(name="Contenidos", description="Agrupa todos los contenidos generados en el sitio por el script de arranque.")#TODO, content_types=)
         category = collection.categories.create(name="Noticias")
         # ARTICLE (welcome)
         article = Article.objects.create(name="Te damos la bienvenida a CyclopeCMS", text="Morbi cursus, enim nec mollis condimentum, nisl nisl porta tortor, ut accumsan lorem metus et nunc. Aenean eget accumsan massa. In sodales ligula eu lectus efficitur tincidunt. Nunc non massa vulputate, pellentesque sapien ac, congue erat. Nam in quam lectus. Mauris hendrerit dignissim ex, in sollicitudin ipsum lacinia vitae. Aenean pellentesque diam quis quam mollis, ac mattis ante rutrum. Sed id vulputate ligula.")
@@ -89,7 +116,8 @@ class Command(BaseCommand):
         menu_item.view_options = self.DEFAULT_VIEW_OPTIONS
         menu_item.save()
         # CONTACT FORM
-        contact = self.create_contact_form_settings()
+        contact = ContactFormSettings(subject="Contact mail")
+        contact.save()
         contact_menu_item = MenuItem(
             menu=menu, 
             name="Contacto", 
@@ -102,25 +130,8 @@ class Command(BaseCommand):
         contact_menu_item.save()
         # USER GROUPS
         self.create_user_groups()
-        #.
-
-    def create_layouts(self):
-        for key, value in self.LYS.iteritems():
-            layout = Layout()
-            layout.name = value['name']
-            layout.template = value['template']
-            layout.image_path = value['image']
-            layout.save()
-        #self.stdout.write("Layouts creados \n")
-
-    def create_contact_form_settings(self):
-        cfs = ContactFormSettings(subject="Contact mail")
-        cfs.save()
-        return cfs
-
-    def create_user_groups(self):
         for g in ("editors", "managers", "translators"):
             group, created = Group.objects.get_or_create(name=g)
             if created: #?
                 group.save()
-
+        #.
