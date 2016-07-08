@@ -74,8 +74,8 @@ class BaseContentAdmin(admin.ModelAdmin):
 
     class Media:
         js = (
-            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-1.11.3.min.js', # latest jQuery, used by latest django
-            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-migrate-1.2.1.min.js', # backwards compatibility TODO FOR > 2?!
+            cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_PATH,
+            #cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_MIGRATE_PATH, TODO
         )
 
     def response_change(self, request, obj):
@@ -201,7 +201,7 @@ class LayoutAdmin(admin.ModelAdmin):
         return super(LayoutAdmin, self).change_view(request, object_id, form_url, extra_context)
         
     class Media:
-        js = (cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-1.11.3.min.js',)
+        js = (cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_PATH,)
 
 admin.site.register(Layout, LayoutAdmin)
 

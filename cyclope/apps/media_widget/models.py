@@ -32,6 +32,6 @@ class MediaWidgetField(ModelMultipleChoiceField):
     """
     Just inheriting:
     - unpacks multiple hidden inputs as pictures list
-    - validates all ids belong to Pictures.
+    - validates that all ids belong to Pictures.
     """
     pass

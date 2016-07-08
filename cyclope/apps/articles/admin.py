@@ -32,13 +32,11 @@ from models import *
 
 import re
 
-from django.conf import settings
-
 from cyclope.apps.media_widget import MediaWidget, MediaWidgetField
 
 class ArticleForm(forms.ModelForm):
 
-    pictures = MediaWidgetField(queryset=Picture.objects.all(), widget=MediaWidget())
+    pictures = MediaWidgetField(queryset=Picture.objects.all(), widget=MediaWidget(), required=False)
 
     def __init__(self, *args, **kwargs):
         super(ArticleForm, self).__init__(*args, **kwargs)
@@ -77,7 +75,7 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
 
     class Media:
         css = {
-            'all' : (cyc_settings.CYCLOPE_STATIC_URL + 'css/jquery-ui-1.11.4.min.css',
+            'all' : (cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_UI_CSS_PATH,
                      cyc_settings.CYCLOPE_STATIC_URL + 'css/media_widget.css')
         }
 

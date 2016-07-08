@@ -47,6 +47,7 @@ from cyclope.core import frontend
 from models import *
 from cyclope.fields import MultipleField
 from cyclope import settings as cyc_settings
+from django.conf import settings
 from cyclope.core.perms.admin import CategoryPermissionInline, CollectionPermissionInline
 from cyclope.core.perms.models import CategoryPermission, CollectionPermission
 
@@ -254,8 +255,9 @@ class CategorizationAdmin(admin.ModelAdmin):
 
     class Media:
         js = (
-            cyc_settings.CYCLOPE_STATIC_URL + 'js/reuse_django_jquery.js',
-            cyc_settings.CYCLOPE_STATIC_URL + 'js/jquery-ui-1.8.4.custom.min.js',
+            cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_PATH,
+            #cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_MIGRATE_PATH, TODO
+            cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_UI_PATH,
             cyc_settings.CYCLOPE_STATIC_URL + 'js/drag_drop.js',
         )
 

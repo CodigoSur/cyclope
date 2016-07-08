@@ -110,6 +110,16 @@ CYCLOPE_PROJECT_NAME = os.path.basename(CYCLOPE_PROJECT_PATH)
 
 CYCLOPE_BASE_CONTENT_TYPES = site.base_content_types
 
+# SINGLE jQuery VERSION - updatable application-wide
+# django jquery is outdated in v.1.4, latest even uses jQv.3! jQv.1.9+ is still IE8 compatible
+CYCLOPE_JQUERY_PATH = "js/jquery-1.12.4.min.js"
+# backwards compatibility
+CYCLOPE_JQUERY_MIGRATE_PATH = 'js/jquery-migrate-1.4.1.min.js'
+# jQuery UI
+CYCLOPE_JQUERY_UI_PATH = 'js/jquery-ui-1.11.4-min.js'
+CYCLOPE_JQUERY_UI_CSS_PATH = 'css/jquery-ui-1.11.4-min.css'
+
+
 import themes
 
 def get_site_settings():

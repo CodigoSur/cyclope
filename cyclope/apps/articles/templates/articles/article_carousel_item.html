@@ -3,10 +3,12 @@
 <div class="item {% ifequal first_content article %}active{% endifequal %} article content-view">
 
   <a href="{% url article-detail article.slug %}">
-    {% if article.get_picture %}
-      <img class="img-responsive" src="{% version article.get_picture.image.path 'carrousel_bootstrap' %}" alt="{{ article.name }}" border="0"/>
+    {% if article.pictures %}
+	{% with article.pictures.all|first as first_pic %}
+        <img class="img-responsive" src="{% version first_pic.image.path 'slideshow'%}" alt="{{ article.name }}" border="0"/>
+	{% endwith %}
     {% else %}
-      <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="" border="0"/>
+        <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="" border="0"/>
     {% endif %}
   </a>
 
