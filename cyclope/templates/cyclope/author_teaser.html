@@ -1,6 +1,6 @@
 {% extends host_template %}
 
-{% load i18n fb_versions cyclope_utils dbgettext_tags %}
+{% load i18n fb_versions cyclope_utils dbgettext_tags staticfiles%}
 
 {% block content %}
 {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
@@ -17,7 +17,7 @@
         {% else %}
         <div class="media-left">
             <a href="#">
-                <img src="/media/cyclope/images/img-author-not-available.png" class="img-circle"/>
+		    <img src="{% static 'cyclope/images/img-author-not-available.png' %}" class="img-circle"/>
             </a>
         </div>
     {% endif %}

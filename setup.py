@@ -77,7 +77,7 @@ setup(
         'textile==2.1.4',
         'django-dbgettext>=0.1',
         'django-rosetta==0.7.2',
-        'django-markitup==1.0',
+        'django-markitup==2.3.1',
         'django-jsonfield==0.9.10',
         'feedparser==5.1',
         'django-forms-builder>=0.7.5,<0.8',

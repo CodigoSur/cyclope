@@ -28,7 +28,7 @@ TIME_ZONE = 'America/Argentina/Buenos_Aires'
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = os.path.join(CYCLOPE_PROJECT_PATH, 'media/')
 
-STATIC_ROOT = os.path.join(CYCLOPE_PROJECT_PATH, 'media/')
+STATIC_ROOT = os.path.join(CYCLOPE_PROJECT_PATH, 'static/')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -37,7 +37,7 @@ MEDIA_URL = '/media/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/media/'
+STATIC_URL = '/static/'
 
 ROOT_URLCONF = '{{ project_name }}.urls'
 
@@ -121,7 +121,7 @@ LOGGING = {
 # Cyclope settings
 
 #CYCLOPE_LOCAL_THEMES_DIR = os.path.join(CYCLOPE_PROJECT_PATH, 'templates/cyclope/themes/')
-#CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/media/local_themes/'
+#CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX = '/static/local_themes/'
 
 CYCLOPE_PREFIX = ''
 

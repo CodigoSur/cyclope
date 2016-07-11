@@ -336,7 +336,7 @@ class Layout(models.Model):
     slug = AutoSlugField(populate_from='name', db_index=True, always_update=True)
     # template choices are set in the theme
     template = models.CharField(_('layout template'), max_length=100)
-    # relative to theme media url, ex. cyclope/media/themes/cyclope-bootstrap/images/layout/main.png
+    # relative to theme media url, ex. cyclope/static/themes/cyclope-bootstrap/images/layout/main.png
     image_path = models.CharField(_('layout representation'), max_length=100, default='main.png')
 
     def __unicode__(self):

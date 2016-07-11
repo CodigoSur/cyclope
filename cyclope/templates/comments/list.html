@@ -1,11 +1,11 @@
-{% load threadedcomments_tags i18n %}
+{% load threadedcomments_tags i18n staticfiles %}
   {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
 <div class="comments">
 {% for comment in comment_list|fill_tree|annotate_tree %}{% ifchanged comment.parent_id %}{% else %}</li>{% endifchanged %}{% if not comment.open and not comment.close %}</li>{% endif %}{% if comment.open %}
 <ul class="media-list">{% endif %}
     <li id="c{{ comment.id }}" class="media">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
         <div class="media-left" href="#">
-            <img class="media-object img-circle" src="/media/cyclope/images/img-author-not-available.png" alt="Image not available">
+		<img class="media-object img-circle" src="{% static 'cyclope/images/img-author-not-available.png' %}" alt="Image not available">
         </div>
         <div class="comment media-body">
             <h4 class="media-heading"> {% if comment.name %}{% trans 'By' %} {{ comment.name }}{% endif %}</h4>

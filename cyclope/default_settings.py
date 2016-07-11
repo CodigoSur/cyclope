@@ -26,7 +26,7 @@ a new app is installed.
 import os
 ugettext = lambda s: s
 
-#workaround for PIL when importing Image using different methods.
+# workaround for PIL when importing Image using different methods.
 # see http://jaredforsyth.com/blog/2010/apr/28/accessinit-hash-collision-3-both-1-and-1/
 # and https://sourceforge.net/tracker/?func=detail&atid=422030&aid=2993756&group_id=38414
 import sys
@@ -63,7 +63,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "cyclope.core.context_processors.compressor",
 )
 
-
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -73,7 +72,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.locale.LocaleMiddleware',
     'cyclope.middleware.LayoutMiddleware',
 #    'debug_toolbar.middleware.DebugToolbarMiddleware',
-
 )
 
 # the order of the INSTALLED_APPS is relevant to get the template load order right
@@ -122,7 +120,8 @@ INSTALLED_APPS = [
     'django.contrib.markup',
     'django.contrib.messages',
     'django.contrib.sitemaps',
-
+    'django.contrib.staticfiles',
+    
     'autoslug',
     'mptt_tree_editor',
     'mptt',
@@ -138,9 +137,7 @@ INSTALLED_APPS = [
     'compressor',
     'ratings',
     'actstream',
-
-#    'debug_toolbar',
-#    'django_extensions',
+    
     'cyclope.apps.post_init',
 ]
 
@@ -151,7 +148,7 @@ AUTHENTICATION_BACKENDS = (
 
 # ADMIN_MEDIA_PREFIX is deprecated but it's here
 # only for compatibility with admin tools 0.4.1
-ADMIN_MEDIA_PREFIX = "/media/admin/"
+ADMIN_MEDIA_PREFIX = "/static/admin/" # TODO upgrade admin_tools
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
