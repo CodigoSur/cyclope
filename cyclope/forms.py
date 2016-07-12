@@ -234,7 +234,7 @@ class DesignSettingsAdminForm(forms.ModelForm):
         class TableRadioFieldRenderer(RadioFieldRenderer):
             def render(self):
                 """Outputs a table for this set of radio fields."""
-                src = cyc_settings.CYCLOPE_MEDIA_URL+u'images/theme-skins-thumbnail/{}.png'
+                src = cyc_settings.CYCLOPE_STATIC_URL+u'images/theme-skins-thumbnail/{}.png'
                 row = u'<tr><td>{}</td><td><image src="'+src+u'"/></td></tr>'
                 return mark_safe(u'<table class="radio-skin-tbl">\n%s\n</table>' % u'\n'.join([row.format(force_unicode(w),force_unicode(w.choice_value)) for w in self]))
         renderer = TableRadioFieldRenderer
@@ -358,8 +358,7 @@ from registration.forms import RegistrationFormUniqueEmail
 from captcha.fields import CaptchaField
 from cyclope.utils import CrispyFormsSimpleMixin
 
-class RegistrationFormWithCaptcha(RegistrationFormUniqueEmail,
-                                    CrispyFormsSimpleMixin):
+class RegistrationFormWithCaptcha(RegistrationFormUniqueEmail, CrispyFormsSimpleMixin):
     captcha = CaptchaField(label=_("Security code"))
 
 class DateSearchForm(ModelSearchForm):

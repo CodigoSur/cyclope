@@ -59,20 +59,14 @@ from cyclope.models import SiteSettings, DesignSettings
 
 from cyclope.core.frontend.sites import site
 
-CYCLOPE_PREFIX = getattr(settings, 'CYCLOPE_PREFIX',
-                           'cyclope/')
-CYCLOPE_STATIC_URL = getattr(settings, 'CYCLOPE_STATIC_URL',
-                             '%scyclope/' % settings.STATIC_URL)
-CYCLOPE_STATIC_ROOT = getattr(settings, 'CYCLOPE_STATIC_ROOT',
-                            '%scyclope/' % settings.MEDIA_ROOT)
+CYCLOPE_PREFIX = getattr(settings, 'CYCLOPE_PREFIX', 'cyclope/')
+
+CYCLOPE_STATIC_URL = getattr(settings, 'CYCLOPE_STATIC_URL', '%scyclope/' % settings.STATIC_URL)
+CYCLOPE_STATIC_ROOT = getattr(settings, 'CYCLOPE_STATIC_ROOT', '%scyclope/' % settings.STATIC_ROOT)
 
 # For backwards compatibility only!
 CYCLOPE_MEDIA_URL =  CYCLOPE_STATIC_URL
 CYCLOPE_MEDIA_ROOT = CYCLOPE_STATIC_ROOT
-
-
-# FIXME #120: STATIC_ROOT is pointing to MEDIA_ROOT because some
-# apps doesn't upgraded to static django 1.3 convention.
 
 CYCLOPE_TEXT_STYLE = getattr(settings, 'CYCLOPE_TEXT_STYLE', 'textile')
 
@@ -153,8 +147,7 @@ def populate_from_site_settings(site_settings):
                                                     CYCLOPE_CURRENT_THEME)
 
     CYCLOPE_THEME_PREFIX = 'cyclope/themes/%s/' % CYCLOPE_CURRENT_THEME
-    CYCLOPE_THEME_BASE_TEMPLATE = 'cyclope/themes/%s/base.html' \
-                                   % CYCLOPE_CURRENT_THEME
+    CYCLOPE_THEME_BASE_TEMPLATE = 'cyclope/themes/%s/base.html' % CYCLOPE_CURRENT_THEME
 
     if CYCLOPE_SITE_SETTINGS.default_layout_id:
         try:
