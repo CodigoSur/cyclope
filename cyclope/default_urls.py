@@ -35,6 +35,7 @@ from cyclope.sitemaps import CategorySitemap, CollectionSitemap, MenuSitemap
 from cyclope.core.user_profiles.forms import UserProfileForm
 from cyclope.forms import DateSearchForm, ModelSearchForm
 from cyclope.views import delete_regionview
+from django.conf.urls.static import static
 
 urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
@@ -110,11 +111,8 @@ urlpatterns = patterns('',
     ('^activity/', include('actstream.urls')),
 )
 
-if django_settings.DEBUG:
-    urlpatterns+= patterns('',
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
-            {'document_root': django_settings.MEDIA_ROOT, 'show_indexes': True})
-    )
+# staticfiles serves uploaded media, only when DEBUG is True 
+urlpatterns += static(django_settings.MEDIA_URL, document_root=django_settings.MEDIA_ROOT)
 
 if 'live' in django_settings.INSTALLED_APPS:
     urlpatterns += patterns('',
