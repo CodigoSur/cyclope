@@ -1,4 +1,4 @@
-{% load fb_versions %}
+{% load fb_versions staticfiles %}
 
 {% include "media_widget/pagination_header.html" with widget='embed' %}
 
@@ -24,12 +24,5 @@
 
 {% include "media_widget/pagination_footer.html" with widget='embed' %}
 
-<!-- TODO bind scripts in links -->
-
 <!-- update media_type selected option on ajax calls -->
-<script type="text/javascript">
-$(function(){
-    $("#selectMediaType").val("{{media_type}}");
-});
-</script>
-
+<script type="text/javascript" src="{% static 'media_widget/media_select.js' %}"></script>
