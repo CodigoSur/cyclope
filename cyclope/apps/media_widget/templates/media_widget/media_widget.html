@@ -116,13 +116,13 @@
         <div class="row">
             <div class="col-md-12">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation">
+                    <li role="presentation" class="active">
                         <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                             Subir
                         </a>
                     </li>
-                    <li role="presentation" class="active">
+                    <li role="presentation">
                         <a href="#search" aria-controls="search" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             Buscar en biblioteca
@@ -130,10 +130,10 @@
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane" id="upload">
+                    <div role="tabpanel" class="tab-pane active" id="upload">
                         {% include "media_widget/media_upload.html" %}
                     </div>
-                    <div role="tabpanel" class="tab-pane active" id="search">
+                    <div role="tabpanel" class="tab-pane" id="search">
                     <div id="select_media_widget">
                         {% include "media_widget/media_select.html" %}
                     </div>
