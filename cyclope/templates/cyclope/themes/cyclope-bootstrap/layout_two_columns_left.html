@@ -7,9 +7,9 @@
 {% block page_content %}
     <div class="col-xs-12 col-sm-3">{% region 'left' %}</div>
     <div class="col-xs-12 col-sm-9">
-        <div class="row">{% region 'top' %}</div>
-        <div class="row">{% block content %}{% endblock %}</div>
-        <div class="row">{% region 'bottom' %}</div>
+        {% region 'top' %}
+        {% block content %}{% endblock %}
+        {% region 'bottom' %}
     </div>
 {% endblock %}
 
