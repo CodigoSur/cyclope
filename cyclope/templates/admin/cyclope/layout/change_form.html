@@ -1,5 +1,5 @@
 {% extends "admin/change_form.html" %}
-{% load i18n layout cyclope_utils %}
+{% load i18n layout cyclope_utils staticfiles %}
 
 {% block extrahead %}
     {{ block.super }}
@@ -10,8 +10,8 @@
         var layout_data = {% layout_regions_data %};
     //]]>
     </script>
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}{{ CYCLOPE_JQUERY_UI_PATH }}"></script>
-    <script type="text/javascript" src="{{CYCLOPE_MEDIA_URL}}js/layouts.js"></script>
+    <script type="text/javascript" src="{% static CYCLOPE_JQUERY_UI_PATH %}"></script>
+    <script type="text/javascript" src="{% static 'js/layouts.js' %}"></script>
 {% endblock %}
 
 {% block after_related_objects %}
@@ -30,7 +30,7 @@
                     <li>
                         <h3>
                             <span>{{region.name}}</span>
-                            <a href="#" title="{% trans 'Add' %}" class="add_view_to_region" data-region="{{name}}"><img src="{{CYCLOPE_MEDIA_URL}}images/add-small.png"/></a>
+                            <a href="#" title="{% trans 'Add' %}" class="add_view_to_region" data-region="{{name}}"><img src="{% static 'images/add-small.png' %}"/></a>
                         </h3>
                         {% for o_region in region_list %}
                             {% if o_region.grouper == name %}
@@ -42,7 +42,7 @@
 			                              </a>
 			                              &nbsp;--&nbsp;
 			                              <a href="{% url delete_regionview regionview.pk %}" title="{% trans 'Delete' %}" onclick="return confirm('{%trans 'Delete this region view?'%}');">
-			                                <img src="{{CYCLOPE_MEDIA_URL}}images/delete.png" height="10px;"/>
+			                                <img src="{% static 'images/delete.png' %}" height="10px;"/>
 		                                  </a>
 		                              </li>
 			                        {% endfor %}
