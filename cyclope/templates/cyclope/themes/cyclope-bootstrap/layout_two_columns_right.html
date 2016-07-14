@@ -5,11 +5,15 @@
 {% block body_class %}two_columns_right{% endblock %}
 
 {% block page_content %}
-    <div class="col-xs-12 col-sm-9">
-        <div class="row">{% region 'top' %}</div>
-        <div class="row">{% block content %}{% endblock %}</div>
-        <div class="row">{% region 'bottom' %}</div>
-    </div>
-    <div class="col-xs-12 col-sm-3">{% region 'right'%}</div>
+	<div class="row">   
+		<div class="col-xs-12 col-sm-9">
+			{% region 'top' %}
+			{% block content %}{% endblock %}
+			{% region 'bottom' %}
+		</div>
+		<div class="col-xs-12 col-sm-3">
+			{% region 'right'%}
+		</div>
+	</div> 
 {% endblock %}
 
