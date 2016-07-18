@@ -1,4 +1,31 @@
 Changelog for Cyclope-Bootstrap Theme
+
+
+=======================
+2016-14-07  San Hoerth  <@SanHoerth> 
+
+Realease
+
+* Validate HTML
+* Validate CSS
+* Validate Bootstrap
+* Added new templates layouts
+* Deleted main.html y default.html
+
+
+===============
+
+Unrealese
+
+* Add breadcrumbs in other views
+
+Realease
+
+* Deleted form.uniForm to head in base.html.
+* New bootstrap javascripts and css.
+
+
+
 =======================
 2015-06-06  San Hoerth  <@SanHoerth> 
 

@@ -74,7 +74,7 @@
             {% endif %}
         {% endblock %}
 
-        <nav class="navbar {% if not CYCLOPE_SITE_SETTINGS.head_image %}navbar-fixed-top{% endif %} navbar-inverse" {% if CYCLOPE_SITE_SETTINGS.head_image %}data-spy="affix" data-offset-top="150"{% endif %}>
+        <nav class="navbar {% if not CYCLOPE_SITE_SETTINGS.head_image %}navbar-fixed-top{% endif %} navbar-inverse" {% if CYCLOPE_SITE_SETTINGS.head_image %}data-spy="affix" data-offset-top="150"{% endif %} >
 			<div class="container">
 			    <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -87,13 +87,13 @@
                         <a class="navbar-brand visible-xs" href="/">{{ CYCLOPE_SITE_SETTINGS.global_title }}</a>
                     {% endif %}
                 </div>
-                <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+                <div id="navbar" role="navigation" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
                     <!-- header -->  {% region 'header' %} <!-- /header -->
                 </div>
             </div><!-- /.container -->
         </nav><!-- /.navbar -->
 
-        <div class="row">{% block page_content %} {% endblock %}</div>
+        <div>{% block page_content %} {% endblock %}</div>
 
     </div><!--/.container-->
     
