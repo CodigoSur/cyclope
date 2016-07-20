@@ -14,7 +14,7 @@
     });
     </script>
     <!-- return to markItUp from upload & insert code -->
-    {% if file_url %}<script type="text/javascript">media_widget_markitup(file_url, media_type);</script>{% endif %}
+    {% if file_url %}<script type="text/javascript">media_widget_markitup('{{file_url}}', '{{media_type}}');</script>{% endif %}
 </head>
 <body>
     <div id="mediaUpload" class="container-fluid">
