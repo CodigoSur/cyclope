@@ -13,8 +13,8 @@ $.widget("cyclope.picturesWidget", $.ui.dialog, {
         autoOpen: false,
         modal: true,
         title: 'Imágenes del Artículo',
-        minWidth: 470,
-        minHeight: 470,
+        minWidth: 531,
+        minHeight: 571,
         closeText: "Cerrar"
     },
     position: function(objt){
