@@ -34,13 +34,13 @@
         <div class="row">
             <div class="col-xs-12">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active">
+                    <li role="presentation" {% if n == 1 %}class="active"{% endif %}>
                         <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                             Subir
                         </a>
                     </li>
-                    <li role="presentation">
+                    <li role="presentation" {% if n > 1 %}class="active"{% endif %}>
                         <a href="#search" aria-controls="search" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             Buscar en biblioteca
@@ -54,10 +54,10 @@
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="upload">
+                    <div role="tabpanel" class="tab-pane {% if n == 1 %}active{% endif %}" id="upload">
                         {% include "media_widget/picture_upload.html" %}
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="search">
+                    <div role="tabpanel" class="tab-pane {% if n > 1 %}active{% endif %}" id="search">
                         {% include "media_widget/picture_select.html" %}
                     </div>
                     <div role="tabpanel" class="tab-pane" id="delete">
