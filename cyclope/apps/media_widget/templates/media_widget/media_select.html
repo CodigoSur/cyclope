@@ -25,4 +25,8 @@
 {% include "media_widget/pagination_footer.html" with widget='embed' %}
 
 <!-- update media_type selected option on ajax calls -->
-<script type="text/javascript" src="{% static 'media_widget/media_select.js' %}"></script>
+<script type="text/javascript">
+$(function(){
+    $("#selectMediaType").val("{{media_type}}");
+});
+</script>
