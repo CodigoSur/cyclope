@@ -12,9 +12,13 @@ $(function(){
 
     // clean message alerts after 8s
     $("#full-alert").delay(8000).fadeOut();
-
     window.setTimeout(keep_visor, 8000);
     $(".message-row").delay(8008).fadeOut();
+    
+    //exit button
+    $("#btn-volver").click(function(){
+        parent.pictures_widget.picturesWidget('close');
+    });
 });
 
 function keep_visor(){ 

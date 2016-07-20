@@ -21,13 +21,16 @@ $.widget("cyclope.picturesWidget", $.ui.dialog, {
         this.options.position = {my: "left top", at: "right bottom", of: objt, collision: "fit"}
     }
 });
+
+var pictures_widget;
+
 //bindings
 $(function(){
     //form becomes widget
     $('#pictures_iframe').picturesWidget();
     // picture button triggers widget
     $("#media_widget").on('click', "#media_widget_button", function(){
-        var widget = $("#pictures_iframe").picturesWidget("position", this).picturesWidget("open");
+        pictures_widget = $("#pictures_iframe").picturesWidget("position", this).picturesWidget("open");
     });
 });
 
