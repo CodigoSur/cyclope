@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <div class="row">
     <div class="col-xs-6 text-left" style="margin-top: 6px;">
         Resultados <strong>{{pagina.start_index}}</strong> a <strong>{{pagina.end_index}}</strong> de <strong>{{pagina.paginator.count}}</strong>.
@@ -7,29 +9,24 @@
     </div>
 </div>
 
-<!-- TODO bind scripts in links -->
-
 <!--Re-bind nRows input on Ajax-->
+<script type="text/javascript" src="{% static 'media_widget/pagination_footer.js' %}"></script>
 <script type="text/javascript">
-$("#nPerPage").change(function(){
-    query_str = '?n={{n}}&nRows='+$(this).val()
-    {% if widget == 'embed' %}
-        url = '/media_widget/library/'+$("#id_media_type").val()+query_str
-        $.get(url, function(data){
-            $("#select_media_widget").html(data);
-            //re-bind
-            $(".select_media").click(function(){
-                insert_markitup($(this).val());
-            });
-        });
-    {% elif widget == 'pictures' %}
-        {# param is article_id, absence means new article #}
-        {% if param %}
-            url = "{% url pictures-upload article_id=param %}"+query_str
-        {% else %}
-            url = "{% url pictures-new %}"+query_str
+$(function(){
+    $("#nPerPage").change(function(){
+        var query_str = "?n={{n}}" + "&nRows=" + $(this).val();
+        {% if widget == 'embed' %}
+            change_embed_widget(query_str);
+        {% elif widget == 'pictures' %}
+            var url = window.location.href;
+            //{# param is article_id, absence means new article #}
+            {% if param %}
+                url = "{% url pictures-upload article_id=param %}" + query_str;
+            {% else %}
+                url = "{% url pictures-new %}" + query_str;
+            {% endif %}
+            window.location.href = url; {#// just navigate, or ajax?#}
         {% endif %}
-        window.location.href = url // TODO just navigate while there's no ajax
-    {% endif %}
+    });
 });
 </script>

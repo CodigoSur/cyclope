@@ -25,3 +25,9 @@ table.mw_table td.mw_button{
 .mw_no_picture{
     color: gray;
 }
+
+/*VISOR*/
+#visor_pictures_widget{
+    display: inline-block;
+    width: 100%;
+}

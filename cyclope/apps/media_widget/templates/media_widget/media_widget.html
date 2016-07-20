@@ -1,73 +1,20 @@
-{% load fb_versions %}
+{% load fb_versions staticfiles %}
 <head>
     <!--styles-->
     <link href="{{CYCLOPE_STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
     <!--scripts-->
     <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}{{ CYCLOPE_JQUERY_PATH }}"></script>
     <script type="text/javascript" src="{{CYCLOPE_STATIC_URL}}js/bootstrap/bootstrap.min.js"></script>
-    <!-- TODO move scripts inside app -->
+    <script type="text/javascript" src="{% static 'media_widget/media_widget.js' %}"></script>
     <script type="text/javascript">
-        $(function(){
-            // bind select...
-            $("#selectMediaType").change(function(){
-                //...to hidden field
-                $("#id_media_type").val($(this).val());
-                //...to library list        /media_type
-                $.get('/media_widget/library/'+$(this).val(), function(data){
-                    $("#select_media_widget").html(data);
-                    //re-bind
-                    $(".select_media").click(function(){
-                        insert_markitup($(this).val());
-                    });
-                });
-            });
-            //retrieve value from hidden field
-            if($("#id_media_type").val()){
-                $("#selectMediaType").val($("#id_media_type").val());
-            }
-
-            // clean message alerts after 5s
-            $(".message-row").delay(5000).fadeOut();
-
-            // nRows input
-            $("#nPerPage").change(function(){
-                url = '/media_widget/library/'+$("#id_media_type").val()+'?n={{n}}&nRows='+$(this).val()
-                // TODO encapsulate l.17
-                $.get(url, function(data){
-                    $("#select_media_widget").html(data);
-                    //re-bind
-                    $(".select_media").click(function(){
-                        insert_markitup($(this).val());
-                    });
-                });
-            });
+    $(function(){ // nRows input
+        $("#nPerPage").change(function(){
+            n_per_page_change("{{n}}", $(this).val());
         });
+    });
     </script>
-    {% if file_url %}
-
     <!-- return to markItUp from upload & insert code -->
-    <script type="text/javascript">
-        var media_widget = parent.media_widget;
-        media_widget.fb_helper.triggerInsert('{{file_url}}', '{{media_type}}');
-        media_widget.mediaWidget("close");
-    </script>
-    {% endif %}
-
-    <!-- select media from library & insert code -->
-    <script type="text/javascript">
-        var insert_markitup = function(file_url){
-            var media_widget = parent.media_widget;
-            media_type = $("#selectMediaType").val();
-            media_widget.fb_helper.triggerInsert(file_url, media_type);
-            //the end
-            media_widget.mediaWidget("close");
-        };
-        $(function(){
-            $(".select_media").click(function(){
-                insert_markitup($(this).val());
-            });
-        }); 
-    </script>
+    {% if file_url %}<script type="text/javascript">media_widget_markitup('{{file_url}}', '{{media_type}}');</script>{% endif %}
 </head>
 <body>
     <div id="mediaUpload" class="container-fluid">
@@ -95,34 +42,17 @@
             </div>
         </div>
         <hr/>
-        <!-- TODO
-        <br />
-        <div class="row">
-            <div class="col-md-12">
-                <div class="dropdown">
-                  <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Alineaci&oacute;n
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><a href="#">Izquierda</a></li>
-                    <li><a href="#">Derecha</a></li>
-                  </ul>
-                </div>
-            </div>
-        </div>
-        <hr />
-        -->
+        
         <div class="row">
             <div class="col-md-12">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation">
+                    <li role="presentation" {% if n == 1 %}class="active"{% endif %}>
                         <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                             Subir
                         </a>
                     </li>
-                    <li role="presentation" class="active">
+                    <li role="presentation" {% if n > 1 %}class="active"{% endif %}>
                         <a href="#search" aria-controls="search" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             Buscar en biblioteca
@@ -130,10 +60,10 @@
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane" id="upload">
+                    <div role="tabpanel" class="tab-pane {% if n == 1 %}active{% endif %}" id="upload">
                         {% include "media_widget/media_upload.html" %}
                     </div>
-                    <div role="tabpanel" class="tab-pane active" id="search">
+                    <div role="tabpanel" class="tab-pane {% if n > 1 %}active{% endif %}" id="search">
                     <div id="select_media_widget">
                         {% include "media_widget/media_select.html" %}
                     </div>
