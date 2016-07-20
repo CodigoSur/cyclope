@@ -10,7 +10,7 @@
     <span class="ToC_link"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></span>
   {% endif %}
 
-  <a name="article__{{ article.slug }}" href="{% url article-detail article.slug %}">
+  <a id="article-{{ article.slug }}" href="{% url article-detail article.slug %}">
     <h3 class="title">{% trans article.name  %}</h3>
   </a>
 
