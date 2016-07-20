@@ -18,6 +18,7 @@ $(function(){
             });
         });
     });
+    
     //retrieve value from hidden field
     if($("#id_media_type").val()){
         $("#selectMediaType").val($("#id_media_type").val());
@@ -40,6 +41,16 @@ function n_per_page_change(n, val){
 }
 
 /**
+** MediaWidget binding with MarkItUp
+*/
+
+$(function(){
+    $(".select_media").click(function(){
+        insert_markitup($(this).val());
+    });
+}); 
+
+/**
     select media from library & insert code
 */
 var insert_markitup = function(file_url){
@@ -49,12 +60,6 @@ var insert_markitup = function(file_url){
     //the end
     media_widget.mediaWidget("close");
 };
-
-$(function(){
-    $(".select_media").click(function(){
-        insert_markitup($(this).val());
-    });
-}); 
 
 /**
     return to markItUp from upload & insert code

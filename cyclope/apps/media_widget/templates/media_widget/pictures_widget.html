@@ -11,9 +11,9 @@
         {% if article_id %}
             media_widget_refresh("article_id", {{article_id}});
         {% else %}
-            {% if new_picture %}
+            {% if new_picture %} // Limon Blues
                 dance_hall_queen("blues", new_picture, null);
-            {% elif remove_picture %}
+            {% elif remove_picture %} // Limon Reggae
                 dance_hall_queen("reggae", null, remove_picture);
             {% endif %}
         {% endif %}
@@ -31,6 +31,7 @@
                 </div>
             {% endfor %}
         {% endif %}
+        <div class="row text-center" id="visor_pictures_widget"><!--Widget--></div>
         <div class="row">
             <div class="col-xs-12">
                 <ul class="nav nav-tabs" role="tablist">

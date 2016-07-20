@@ -1,4 +1,15 @@
 $(function(){ 
+    //VISOR
+    visor = $("#media_widget_pictures", window.parent.document).clone();
+    //mostrar en linea
+    visor.find('img').each(function(){
+        $(this).css('display', 'inline');
+    });
+    //solo fotos
+    visor.find('input').remove();
+    //cargar
+    $("#visor_pictures_widget").html(visor.html());
+
     // clean message alerts after 8s
     $(".message-row").delay(8000).fadeOut();
 });
