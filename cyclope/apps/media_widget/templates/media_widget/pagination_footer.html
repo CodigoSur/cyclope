@@ -14,16 +14,16 @@
 <script type="text/javascript">
 $(function(){
     $("#nPerPage").change(function(){
-        set_query_str("{{n}}");
+        var query_str = "?n={{n}}" + "&nRows=" + $(this).val();
         {% if widget == 'embed' %}
-            change_embed_widget();
+            change_embed_widget(query_str);
         {% elif widget == 'pictures' %}
             var url = window.location.href;
             //{# param is article_id, absence means new article #}
             {% if param %}
-                url = append_query_str_smooth("{% url pictures-upload article_id=param %}");
+                url = "{% url pictures-upload article_id=param %}" + query_str;
             {% else %}
-                url = append_query_str_smooth("{% url pictures-new %}");
+                url = "{% url pictures-new %}" + query_str;
             {% endif %}
             window.location.href = url; // just navigate, or ajax?
         {% endif %}
