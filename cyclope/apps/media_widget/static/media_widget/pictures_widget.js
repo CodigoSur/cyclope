@@ -11,8 +11,21 @@ $(function(){
     $("#visor_pictures_widget").html(visor.html());
 
     // clean message alerts after 8s
-    $(".message-row").delay(8000).fadeOut();
+    $("#full-alert").delay(8000).fadeOut();
+    window.setTimeout(keep_visor, 8000);
+    $(".message-row").delay(8008).fadeOut();
+    
+    //exit button
+    $("#btn-volver").click(function(){
+        parent.pictures_widget.picturesWidget('close');
+    });
 });
+
+function keep_visor(){ 
+    flow = $("#full-alert").clone();
+    flow.find(".message-row").remove();
+    $(".container-fluid").prepend(flow.html());
+}
 
 function dance_hall_queen(tune, new_picture, remove_picture){
     var pictures_list = "" ;
