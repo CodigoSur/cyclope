@@ -20,5 +20,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         username = options['username']
         if username:
-            import pdb; pdb.set_trace()
             User.objects.filter(username=username).delete()
+        else:
+            raise CommandError(_("Missing --username to delete"))
