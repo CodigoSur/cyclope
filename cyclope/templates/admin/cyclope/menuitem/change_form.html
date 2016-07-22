@@ -8,6 +8,10 @@
 
 <script type="text/javascript">
 //<![CDATA[
+
+{#// TODO when upgrading django, and django.jQuery, remove isolation #}
+(function($){
+
 $(function() {
   $("#id_content_view").chainedSelect({
         parent: '#id_content_type',
@@ -87,6 +91,9 @@ $(function() {
     });
 
 });
+
+})(django.jQuery);
+
 //]]>
 </script>
 
