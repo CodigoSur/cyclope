@@ -12,9 +12,9 @@
             media_widget_refresh("article_id", {{article_id}});
         {% else %}
             {% if new_picture %} // Limon Blues
-                dance_hall_queen("blues", new_picture, null);
+                dance_hall_queen("blues", "{{new_picture}}", null);
             {% elif remove_picture %} // Limon Reggae
-                dance_hall_queen("reggae", null, remove_picture);
+                dance_hall_queen("reggae", null, "{{remove_picture}}");
             {% endif %}
         {% endif %}
     {% endif %}
