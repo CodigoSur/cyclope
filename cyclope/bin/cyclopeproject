@@ -100,10 +100,8 @@ class Command(TemplateCommand):
             sync_msg = u"" \
                 u"Now you must:\n\n" \
                 u"    1) cd to %s\n" \
-                u"    2) run 'python manage.py syncdb --all' to create all database tables\n" \
-                u"    3) run 'python manage.py migrate --fake' to load cyclope db migrations\n" \
-                u"    4] run 'python manage.py loaddata default_groups.json' to load\n" \
-                u"       cyclope default group permissions (Optional)\n"  % top_dir
+                u"    2) run 'python manage.py syncdb --all; python manage.py migrate --fake; python manage.py loaddata default_groups.json; python manage.py seed_data --demo' \n" \
+                u"    Notes: python manage.py syncdb --all to create all database tables, run 'python manage.py migrate --fake' to load cyclope db migrations, python manage.py loaddata default_groups.json cyclope default group permissions (Optional), python manage.py seed_data --demo load layouts for default  \n" % top_dir
             print sync_msg
 
 if __name__ == "__main__":
