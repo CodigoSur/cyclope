@@ -10,7 +10,7 @@
 				{% include "cyclope/author_block_teaser.html"  %}
 			</div>
 		{% else%}
-			<div class="teaser_text_container{% if not article.get_picture %}_fullwidth{% endif %}">
+			<div class="teaser_text_container{% if not article.pictures %}_fullwidth{% endif %}">
 				<div class="pretitle-container first meta-content"> {# pretitle+date div #}
 					{% if  article.pretitle %}
 						<div class="pretitle">{% trans article.pretitle %}</div>
@@ -38,12 +38,14 @@
 					<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
 				</p>
 			</div>
-			{% if article.get_picture %}
+			{% if article.pictures %}
+			{% with picture=article.pictures.values|first %}
 				<div class="teaser_icon_container">
-					<a href="{{ article.get_absolute_url }}" title="{{ article.get_picture.name }}">
-						<img class="teaser_icon img-responsive" src="{% version article.get_picture.image.path 'small' %}" alt="{{ article.get_picture.name }}" border="0"/>
+					<a href="{{ article.get_absolute_url }}" title="{{ picture.name }}">
+						<img class="teaser_icon img-responsive" src="{% version picture.image 'small' %}" alt="{{ picture.name }}" border="0"/>
 					</a>
 				</div>
+			{% endwith %}
 			{% endif %}
 		{% endif %}
 	{# END BOOTSTRAP #}
