@@ -105,8 +105,7 @@ def pictures_create(request, article_id):
             #normalize file name
             image.name = convert_filename(image.name)
             #filesystem save
-            path = os.path.join(settings.MEDIA_ROOT, 'uploads')
-            uploaded_path = handle_file_upload(path, image)
+            uploaded_path = handle_file_upload(settings.MEDIA_ROOT, image)
             #thumbnails
             generate_fb_version(uploaded_path, ADMIN_THUMBNAIL)
             #database save
@@ -302,8 +301,7 @@ def embed_create(request):
                 klass = ContentType.objects.get(model=media_type).model_class()
                 instance = klass() # generic instance of media model
                 #filesystem save 
-                path = os.path.join(settings.MEDIA_ROOT, 'uploads')
-                uploaded_path = handle_file_upload(path, multimedia)
+                uploaded_path = handle_file_upload(settings.MEDIA_ROOT, multimedia)
                 #database save
                 instance.name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else multimedia.name
                 instance.description = form.cleaned_data['description']

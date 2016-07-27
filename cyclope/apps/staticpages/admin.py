@@ -25,7 +25,6 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.widgets import AdminTextareaWidget
-from markitup.widgets import AdminMarkItUpWidget
 
 from cyclope.core.collections.admin import CollectibleAdmin
 from cyclope.admin import BaseContentAdmin

@@ -177,7 +177,6 @@ class FBAdminMarkItUpWidget(AdminMarkItUpWidget):
                  'FileBrowserHelper.insertPicture("%(id)s");'
                  '});'
                  '})(jQuery);'
-
                  '</script>' % {'id': attrs['id'],
                                 'auto_preview': auto_preview })
         return mark_safe(html)

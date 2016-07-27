@@ -30,7 +30,7 @@ class UserProfile(models.Model):
     slug = AutoSlugField(populate_from=lambda obj:obj.user.username, unique=True,
                          null=False, db_index=True)
     avatar = models.ImageField(_('avatar'), max_length=100,
-                               blank=True, upload_to="uploads/avatars/")
+                               blank=True, upload_to="avatars/")
     city = models.CharField(_('city'), max_length=100, blank=True)
     about = models.TextField(_('about myself'), max_length=1000, blank=True)
 

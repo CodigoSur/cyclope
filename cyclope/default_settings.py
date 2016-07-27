@@ -169,7 +169,9 @@ CAPTCHA_LETTER_ROTATION=(-15,15)
 
 # filebrowser settings
 FILEBROWSER_DEBUG = False
-FILEBROWSER_DIRECTORY = 'uploads/'
+
+FILEBROWSER_DIRECTORY = ''
+
 FILEBROWSER_EXTENSIONS = {
     'Folder': [''],
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],

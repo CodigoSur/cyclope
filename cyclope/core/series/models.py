@@ -61,7 +61,7 @@ class Series(BaseContent, Collectible):
     description = models.TextField(_('description'), blank=True)
 
     image = models.ImageField(_('image'), max_length=100,
-                               blank=True, upload_to="uploads/series/")
+                               blank=True, upload_to="series/")
 
     series_contents = generic.GenericRelation(SeriesContent,
                                               object_id_field='self_id',
