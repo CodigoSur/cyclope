@@ -1,35 +1,21 @@
 {% load i18n fb_versions cyclope_utils %}
 
-	{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
-  <div class="teaser_icon {% if region_name %}{% inline_content_classes %}{% endif%}">
-		<div class="thumbnail">
-			<a href="{% url article-detail article.slug %}">
-				{% if article.pictures.values %}
-				{% with picture=article.pictures.values|first %}
-				  <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
-					<img class="img-responsive" src="{% version picture.image 'labeled_icon_bootstrap' %}" border="0"/>
-				{% endwith %}
-				{% else %}
-					<img class="img-responsive" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
-				{% endif %}
-			</a>
-			<div class="caption">
-				<h4 class="title"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:40 }}</a></h4>
-			</div>
-		</div>
-	</div>
-	{% elif CYCLOPE_THEME_TYPE == 'classic' %}
-		<div class="content-view article labeled_icon">
+<div class="teaser_icon {% inline_content_classes %}">
+	<div class="thumbnail">
 		<a href="{% url article-detail article.slug %}">
 			{% if article.pictures.values %}
 				{% with picture=article.pictures.values|first %}
-				<img class="icon" src="{% version picture.image 'thumbnail' %}" border="0"/>
-			    {% endwith %}
+					<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
+					<img class="img-responsive" src="{% version picture.image 'labeled_icon_bootstrap' %}" alt="{{ article.name }}" border="0"/>
+				{% endwith %}
 			{% else %}
-				<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
-				<img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
+				<img class="img-responsive" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="not-available" border="0"/>
 			{% endif %}
 		</a>
-		<h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:40 }}</a></h2>
+		<div class="caption">
+			<h4 class="title">
+				<a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:40 }}</a>
+			</h4>
+		</div>
 	</div>
-  {% endif %}  
+</div>

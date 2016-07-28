@@ -1,17 +1,17 @@
 {% load i18n fb_versions cyclope_utils %}
 {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
-	<div class="teaser_icon {% if region_name %}{% inline_content_classes %}{% endif%}">
+	<div class="teaser_icon {% inline_content_classes %}">
 		<div class="thumbnail">
 			<a href="{% url staticpage-detail staticpage.slug %}">
 				{% if staticpage.pictures %}
 					<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png" alt="staticpage icon"/>
 					<img class="img-responsive" src="{% version staticpage.pictures.0.image.path 'labeled_icon_bootstrap' %}" alt="{{ staticpage.name }} "border="0"/>
 				{% else %}
-					<img class="img-responsive" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
+					<img class="img-responsive" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png"  alt="not-available" border="0"/>
 				{% endif %}
 			</a>
 			<div class="caption">
-				<h4>
+				<h4 class="title">
 					<a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name|truncatechars:40 }}</a>
 				</h4>
 			</div>

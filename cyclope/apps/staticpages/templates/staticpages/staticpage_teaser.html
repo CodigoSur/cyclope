@@ -1,7 +1,7 @@
 {% load i18n fb_versions cyclope_utils %}
 
 {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
-  <div class="content-view staticpage teaser staticpage-teaser {% if region_name %}{% inline_content_classes %}{% endif%}">
+  <div class="content-view staticpage teaser staticpage-teaser {% inline_content_classes %}">
 
     <div class="pretitle-container first meta-content">
       <div class="date">
@@ -17,7 +17,7 @@
 
     {% if staticpage.pictures %}
      <div class="teaser_icon_container"><a href="{% url staticpage-detail staticpage.slug %}">
-        <img class="teaser_icon img-responsive" src="{% version staticpage.pictures.0.image.path 'small' %}" width="135" border="0"/>
+        <img class="teaser_icon img-responsive" src="{% version staticpage.pictures.0.image.path 'small' %}" alt="{{ staticpage.text|smart_style|striptags|truncatewords:40 }}" width="135" border="0"/>
       </a></div>
     {% endif %}
 
