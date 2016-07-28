@@ -21,8 +21,10 @@
   {% include "cyclope/author_block.html" %}
 
   <div class="article_content">
-  {% if article.get_picture %}
-      <img src="{% version article.get_picture.image.path 'small' %}" alt="{{ article.get_picture.name }}" hspace="0" vspace="0" align="right" />
+  {% if article.pictures.values %}
+  {% with picture=article.pictures.values|first %}
+      <img src="{% version picture.image 'small' %}" alt="{{ picture.name }}" hspace="0" vspace="0" align="right" />
+  {% endwith %}
   {% endif %}
 
     <div class="html-text html-content text">
