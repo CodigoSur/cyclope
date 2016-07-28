@@ -5,7 +5,6 @@
 		<a href="{% url article-detail article.slug %}">
 			{% if article.pictures.values %}
 				{% with picture=article.pictures.values|first %}
-					<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
 					<img class="img-responsive" src="{% version picture.image 'labeled_icon_bootstrap' %}" alt="{{ article.name }}" border="0"/>
 				{% endwith %}
 			{% else %}
@@ -16,6 +15,11 @@
 			<h4 class="title">
 				<a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:40 }}</a>
 			</h4>
+			<p class="teaser_more">
+				<a class="btn btn-primary" href="{{ article.get_absolute_url }}" role="button">{% trans "More" %}</a>
+				{% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
+				<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
+			</p>
 		</div>
 	</div>
 </div>
