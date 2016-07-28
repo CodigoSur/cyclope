@@ -1,44 +1,14 @@
 {% load i18n fb_versions dbgettext_tags cyclope_utils %}
 <div class="content-view article teaser article-teaser {% if region_name %}{% inline_content_classes %}{% endif%}">
-	{# ##### BOOTSTRAP ##### #}
-	{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
-		{% if simplified_view %}
-			<div class="teaser_text_container_simplified">
-				<h2 class="title">
-					<a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
-				</h2>
-				{% include "cyclope/author_block_teaser.html"  %}
-			</div>
-		{% else%}
-			<div class="teaser_text_container{% if not article.pictures %}_fullwidth{% endif %}">
-				<div class="pretitle-container first meta-content"> {# pretitle+date div #}
-					{% if  article.pretitle %}
-						<div class="pretitle">{% trans article.pretitle %}</div>
-					{% endif%}
-					{% if  article.date %}
-						<div class="date">
-							<span class="pretitle-separator"> | </span>{{ article.date|date:'SHORT_DATE_FORMAT' }}
-						</div>
-					{% endif %}
-				</div>{# end pretitle+date div #}
-				<h2 class="title">
-					<a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
-				</h2>
-				<div class="html-content summary">
-					{% if article.summary %}
-						{{ article|parsed_gettext:"summary"|smart_style }}
-					{% else %}
-						{{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
-					{% endif %}
-				</div>
-				{% include "cyclope/author_block_teaser.html"  %}
-				<p class="teaser_more">
-					<a class="btn btn-primary" href="{{ article.get_absolute_url }}" role="button">{% trans "More" %}</a>
-					{% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
-					<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
-				</p>
-			</div>
-			{% if article.pictures %}
+	{% if simplified_view %}
+		<div class="teaser_text_container_simplified">
+			<h2 class="title">
+				<a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
+			</h2>
+			{% include "cyclope/author_block_teaser.html"  %}
+		</div>
+	{% else%}
+		{% if article.pictures.values %}
 			{% with picture=article.pictures.values|first %}
 				<div class="teaser_icon_container">
 					<a href="{{ article.get_absolute_url }}" title="{{ picture.name }}">
@@ -46,53 +16,34 @@
 					</a>
 				</div>
 			{% endwith %}
-			{% endif %}
 		{% endif %}
-	{# END BOOTSTRAP #}
-	{# ##### CLASSIC ##### #}
-	{% elif CYCLOPE_THEME_TYPE == 'classic' %}
-		<div class="pretitle-container first meta-content">
-			{% if  article.pretitle and not simplified_view %}
-				<div class="pretitle">
-					{% trans article.pretitle %}
-				</div>
-			{% endif%}
-			{% if article.date %}
-				<div class="date">
-					<span class="pretitle-separator"> | </span>{{ article.date|date:'SHORT_DATE_FORMAT' }}
-				</div>
-			{% endif %}
+		<div class="teaser_text_container{% if article.pictures.values.count == 0 %}_fullwidth{% endif %}">
+			<div class="pretitle-container first meta-content">
+				{% if  article.pretitle %}
+					<div class="pretitle">{% trans article.pretitle %}</div>
+				{% endif%}
+				{% if  article.date %}
+					<div class="date">
+						<span class="pretitle-separator"> | </span>{{ article.date|date:'SHORT_DATE_FORMAT' }}
+					</div>
+				{% endif %}
+			</div>
+			<h2 class="title">
+				<a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
+			</h2>
+			<div class="html-content summary">
+				{% if article.summary %}
+					{{ article|parsed_gettext:"summary"|smart_style }}
+				{% else %}
+					{{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
+				{% endif %}
+			</div>
+			{% include "cyclope/author_block_teaser.html"  %}
+			<p class="teaser_more">
+				<a class="btn btn-primary" href="{{ article.get_absolute_url }}" role="button">{% trans "More" %}</a>
+				{% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
+				<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
+			</p>
 		</div>
-
-
-    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
-      <a href="{{ article.get_absolute_url }}">{{ article.name }}</a>
-    </h2>
-
-    {% if not simplified_view and article.get_picture %}
-      <div class="teaser_icon_container"><a href="{{ article.get_absolute_url }}" title="{{ article.get_picture.name }}">
-          <img class="teaser_icon" src="{% version article.get_picture.image.path 'small' %}" alt="{{ article.get_picture.name }}" width="135" border="0"/>
-      </a></div>
-    {% endif %}
-
-    <div class="html-content summary">
-      {% if article.summary %}
-        {{ article|parsed_gettext:"summary"|smart_style }}
-      {% else %}
-        {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
-      {% endif %}
-      <span class="more"><a href="{{ article.get_absolute_url }}"> {% trans "More" %}</a></span>
-    </div>
 	{% endif %}
-
-    {% if article.pictures.count > 0 and not simplified_view %}
-    <br class="floating-img-clear" />
-    {% endif %}
-
-    {% if not simplified_view %}
-
-    <div class="clear"></div>
-    {% endif %}
-  </div>
-
-{# END CLASSIC #}
+</div>
