@@ -23,7 +23,7 @@
 		<a href="{% url article-detail article.slug %}">
 			{% if article.pictures.values %}
 				{% with picture=article.pictures.values|first %}
-				<img class="icon" src="{% version article.get_picture.image.path 'thumbnail' %}" border="0"/>
+				<img class="icon" src="{% version picture.image 'thumbnail' %}" border="0"/>
 			    {% endwith %}
 			{% else %}
 				<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>

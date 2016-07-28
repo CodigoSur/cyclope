@@ -10,10 +10,12 @@
       <h2 class="title"><a name="article__{{ current_object.slug }}" href="{% url article-detail current_object.slug %}">
         {% trans current_object.name  %}</a></h2>
 
-      {% if current_object.get_picture %}
+      {% if current_object.pictures.values %}
+      {% with picture=current_object.pictures.values|first %}
       <a href="{% url article-detail article.slug %}">
-        <img class="newsletter_image" src="{% version current_object.get_picture.image.path 'newsletter_teaser' %}" alt="{{ current_object.get_picture.name }}"/>
+        <img class="newsletter_image" src="{% version picture.image 'newsletter_teaser' %}" alt="{{ picture.name }}"/>
       </a>
+      {% endwith %}
       {% endif %}
 
       <a href="{% url article-detail article.slug %}">
