@@ -4,9 +4,11 @@
   <div class="teaser_icon {% if region_name %}{% inline_content_classes %}{% endif%}">
 		<div class="thumbnail">
 			<a href="{% url article-detail article.slug %}">
-				{% if article.get_picture %}
+				{% if article.pictures.values %}
+				{% with picture=article.pictures.values|first %}
 				  <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" alt="article icon"/>
-					<img class="img-responsive" src="{% version article.get_picture.image.path 'labeled_icon_bootstrap' %}" border="0"/>
+					<img class="img-responsive" src="{% version picture.image 'labeled_icon_bootstrap' %}" border="0"/>
+				{% endwith %}
 				{% else %}
 					<img class="img-responsive" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
 				{% endif %}
@@ -19,8 +21,10 @@
 	{% elif CYCLOPE_THEME_TYPE == 'classic' %}
 		<div class="content-view article labeled_icon">
 		<a href="{% url article-detail article.slug %}">
-			{% if article.get_picture %}
-				<img class="icon" src="{% version article.get_picture.image.path 'thumbnail' %}" border="0"/>
+			{% if article.pictures.values %}
+				{% with picture=article.pictures.values|first %}
+				<img class="icon" src="{% version picture.image 'thumbnail' %}" border="0"/>
+			    {% endwith %}
 			{% else %}
 				<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
 				<img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>

@@ -6,9 +6,11 @@
     <td>
     <div class="teaser">
 
-      {% if current_object.get_picture %}
+      {% if current_object.pictures.values %}
       <a href="{% url article-detail current_object.slug %}">
-        <img class="newsletter_image" src="{% version article.get_picture.image.path 'newsletter_teaser' %}" alt="{{ current_object.get_picture.name }}"/>
+        {% with picture=current_object.pictures.values|first %}        
+        <img class="newsletter_image" src="{% version picture.image 'newsletter_teaser' %}" alt="{{ picture.name }}"/>
+        {% endwith %}
       </a>
       {% endif %}
       {% if current_object.pretitle %} <span class="pretitle"><a name="editorial">{% trans current_object.pretitle %}</a></span>{% endif %}
