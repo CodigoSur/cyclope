@@ -1,16 +1,19 @@
 {% load layout  cyclope_utils %}
 
-<footer>
+<footer class="container">
     {% block page_footer %}
-        <div class="footer container">
-          <hr/>
-            {% region 'footer' %}
-            <span id="creativecommons">Los contenidos de este sitio web están bajo una
-            <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO">
-            Licencia Creative Commons BY-NC-ND
-            </a></span>.<br/>
-            <span id="codigo_sur">Tecnología: <a href="http://cyclope.codigosur.org">CyclopeCMS</a>. Desarrollo: <a href="http://www.codigosur.org">CódigoSur</a>.
-            </span><br/>
-        </div><!-- /end mask -->
+        <div class="footer">
+			<hr/>
+			{% region 'footer' %}
+			<span id="creativecommons">Los contenidos de este sitio web están bajo una
+			<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.es_CO">
+			Licencia Creative Commons BY-NC-ND
+			</a></span>.
+			<br/>
+			<span id="codigo_sur">Tecnología: 
+				<a href="http://cyclope.codigosur.org">CyclopeCMS</a>. Desarrollo: <a href="http://www.codigosur.org">CódigoSur</a>.
+			</span>
+			<br/>
+        </div>
     {% endblock %}
 </footer>
