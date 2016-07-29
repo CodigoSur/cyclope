@@ -46,6 +46,16 @@ SORT_BY_FIELD_DEF = forms.ChoiceField(label=_('Sort by'),
                                                ("RANDOM", _(u"Random"))),
                                       initial="DATE-")
 
+class CategoryRootListOptions(forms.Form):
+    show_title = forms.BooleanField(label=_("Show title"), initial=True, required=False)
+    show_description = forms.BooleanField(label=_("Show description"), initial=True, required=False)
+    show_image = forms.BooleanField(label=_("Show image"), initial=True, required=False)
+    traverse_children = forms.BooleanField(label=_("Include descendant's elements"), initial=False, required=False)
+    navigation = forms.ChoiceField(label=_('Show navigation'),
+                              choices=(("TOP", _(u"Top")),
+                                       ("BOTTOM", _(u"Bottom")),
+                                       ("DISABLED", _(u"Disabled"))),
+                              initial="TOP")
 
 class CategoryRootItemsList(frontend.FrontendView):
     """A flat list view of the root members for a Category.
@@ -55,7 +65,8 @@ class CategoryRootItemsList(frontend.FrontendView):
 
     is_content_view = True
     is_region_view = True
-
+    options_form = CategoryRootListOptions
+    
     def get_response(self, request, req_context, options, content_object):
         category = content_object
         categorizations_list = category.categorizations.all()
@@ -84,6 +95,10 @@ class TeaserListOptions(forms.Form):
                                        ("BOTTOM", _(u"Bottom")),
                                        ("DISABLED", _(u"Disabled"))),
                               initial="TOP")
+                              
+
+
+
 
 class FilteredListOptions(forms.Form):
     items_per_page = forms.IntegerField(label=_('Items per page'), min_value=1,
