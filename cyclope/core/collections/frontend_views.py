@@ -443,7 +443,7 @@ class CategoryListAsForum(frontend.FrontendView):
     is_default = False
     items_per_page = cyc_settings.CYCLOPE_PAGINATION['FORUM']
     is_content_view = True
-    is_region_view = True
+    is_region_view = False
 
     template = "collections/category_list_as_forum.html"
 
