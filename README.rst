@@ -1,8 +1,8 @@
-Cyclope 3
-=========
+CyclopeCMS
+========
 
 :synopsys: Cyclope 3 is a django based CMS for pythonistas who don't mind coding a bit and dislike overly-complex user interfaces. It is based on the concept of categorized collections of heterogeneous content types with associated front-end views that can be laid out in the website's page regions. The goal of this project is to create a CMS that is friendly to the end user and versatile for the developer. It won't solve every complex problem at UI level but will let you "expose" the solution.
-:copyright: 2010-2012 by `Código Sur Sociedad Civil <http://www.codigosur.org>`_
+:copyright: 2010-2016 by `Código Sur Sociedad Civil <http://www.codigosur.org>`_
 :url: http://forja.codigosur.org/projects/cyclope
 :licence: GPL v3
 
