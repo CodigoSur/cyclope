@@ -1,40 +1,47 @@
-{% extends host_template %}
+{% extends 'collections/category_contents_base.html' %}
 
 {% load i18n cyclope_utils %}
 
-{% block content %}
+{% block category_content %}
 
-{% include 'collections/hierarchycal_navigation_block.html' %}
-  <h1 class="title">{{ category }}</h1>
-  <div class='forum'>
-  <div class='link-create-topic'>
-	<!-- Indicates a successful or positive action -->
-	<a href="{% url category-create_topic category.slug %}" type="button" class="btn btn-success">{% trans 'Create a new topic' %}</a>
-  </div>
-<div class="clear"></div>
-  <table >
-      <tr>
-        <th class="name">{% trans 'Subject' %}</th>
-        <th class="comments">{% trans 'Replies'%}</th>
-        <th class="created">{% trans 'Created' %}</th>
-        <th class="last_comment">{% trans 'Last comment' %}</th>
-      </tr>
-      {% for categorization in categorizations %}
-       {% alias categorization.content_object as 'obj' %}
-				{% if not user.is_authenticated and not obj.published %}{% else %}
-     		<tr class="item">
-				 <td><h2 class="topic"><a href="{{ obj.url }}">{{ obj.name }}</a></h2></td>
-				 <td class="comment">{{ obj.comments_count }}</td>
-				 <td class="created">{{ obj.creation_date|date:'DATETIME_FORMAT' }}
-						 {% if obj.author %} {% trans 'by' %} {{ obj.author }} {% endif %}
-				 </td>
-				 <td class="last_comment">{% if obj.last_comment_date %}{{ obj.last_comment_date|date:'DATETIME_FORMAT' }}  {% trans 'by' %} {{ obj.last_comment_author }} {% endif %}
-				 </td>
-				</tr>  
+<!--{% include 'collections/hierarchycal_navigation_block.html' %}-->
+
+    <div class='link-create-topic'>
+        <!-- Indicates a successful or positive action -->
+	    <a href="{% url category-create_topic category.slug %}" type="button" class="btn btn-success">{% trans 'Create a new topic' %}</a>
+    </div>
+
+
+        <div class="clear"></div>
+
+
+    <div class='forum'>
+
+        <table>
+
+            <tr>
+                <th class="name">{% trans 'Subject' %}</th>
+                <th class="comments">{% trans 'Replies'%}</th>
+                <th class="last_comment">{% trans 'Last comment' %}</th>
+            </tr>
+
+            {% for categorization in categorizations %}
+            {% alias categorization.content_object as 'obj' %}
+                {% if not user.is_authenticated and not obj.published %}{% else %}
+                <tr class="item">
+                     <td class="object">
+                         <h5 class="topic"><a href="{{ obj.url }}">{{ obj.name }}</a></h5>
+                         <p class="created"> {% trans 'Created'%} {{ obj.creation_date|date:'DATETIME_FORMAT' }}</p>
+                     </td>
+                     <td class="comment">{{ obj.comments_count }}</td>
+                     <td class="last_comment">{% if obj.last_comment_date %}{{ obj.last_comment_date|date:'m/d/Y, P' }}  {% trans 'by' %} {{ obj.last_comment_author }} {% endif %}
+                     </td>
+                <tr>
 				{% endif %}
-      {% endfor %}
-  </table>
-  </div>
+            {% endfor %}
+        </table>
+    </div>
+
   {% if page %}
     {% include 'cyclope/pagination_block.html' %}
   {% endif %}
