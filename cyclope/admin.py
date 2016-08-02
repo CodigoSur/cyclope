@@ -170,6 +170,11 @@ class MenuItemAdmin(TreeEditor, PermanentFilterMixin):
          lambda request: unicode(Menu.objects.all()[0].id)),
     )
 
+    class Media:
+        js = (
+            cyc_settings.CYCLOPE_STATIC_URL + 'js/reuse_django_jquery.js',
+        )
+
     def changelist_view(self, request, extra_context=None):
         self.do_permanent_filters(request)
         return super(MenuItemAdmin, self).changelist_view(request, extra_context)
