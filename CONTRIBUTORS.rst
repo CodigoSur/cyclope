@@ -10,3 +10,5 @@ Contributors
 * Juan Pablo Suarez / minombresbond / derechoaleer
 * Mariano Falcon / mf
 * Santiago García / santiagogg
+* Daniel Ortega / dan
+* Maureen Hernández / mauhernandez
