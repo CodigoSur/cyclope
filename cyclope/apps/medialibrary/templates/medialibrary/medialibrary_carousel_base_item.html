@@ -21,7 +21,7 @@
     {% block description %}
       {% if view_options.show_description and current_object.description %}
       <p>
-        {{ current_object.description|smart_style|truncatewords_html:40 }}
+        {{ current_object.description|smart_style|truncatewords_html:20 }}
       </p>
       {% endif %}
     {% endblock description %}
