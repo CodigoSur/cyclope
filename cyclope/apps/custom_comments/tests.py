@@ -20,6 +20,8 @@ moderator.register(Site, CustomCommentModerator)
 
 class CustomCommentTest(TestCase):
 
+    fixtures = ['simplest_site.json']
+    
     def setUp(self):
         self.site = Site.objects.all()[0]
         self.site.name = "TestSite"

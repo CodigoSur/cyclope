@@ -1,15 +1,24 @@
 {% load cyclope_utils %}
-
-  {% if page %}
-  <div class="paginator">
-    {% for p in page.paginator.pages %}
-      {% if p == page %}
-          <span class="selected">{{page}}</span>
-      {% else %}
-          <a href="?{% append_to_get page=p.number %}">{{p}}</a>
-      {% endif %}
-      {% if not forloop.last %}|{% endif %}
-    {% endfor %}
-</div>
-  {% endif %}
-
+{% if page %}
+  <nav aria-label="alphabetical_pagination" class="text-center alphabetical-pagination">
+    <ul class="pagination">
+      {% for p in page.paginator.pages %}
+        {% if p == page %}
+        <li class="active">
+          <a href="#">
+            {{page}}
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        {% else %}
+        <li class="disable">
+          <a href="?{% append_to_get page=p.number %}">
+            {{p}}
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}

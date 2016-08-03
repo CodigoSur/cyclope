@@ -21,7 +21,7 @@
       {% if staticpage.summary %}
       	{{ staticpage.summary|smart_style }}</h3>
       {% else %}
-        {{ staticpage.text|smart_style|striptags|truncatewords:40 }}
+        {{ staticpage.text|smart_style|striptags|truncatewords:20 }}
       {% endif %}
     </p>
     {% endif %}

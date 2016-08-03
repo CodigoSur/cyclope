@@ -1,4 +1,5 @@
 {% load i18n %}
+
 <div class="GenericFKAdmin">
   <input class="vGenericFKAdminField" type="text" name="{{ name }}" value="{{ value }}" id="id_{{ name }}">
   <div class="object-representation float-left">{{ obj_repr|safe }}</div>
@@ -15,8 +16,6 @@
 </div>
 
 <script type="text/javascript">
-{#// TODO when upgrading django, and django.jQuery, remove isolation #}
-(function($){
 
 var gfkSetNewValue = function( id_name,value){
     var obj = $("#" + id_name);
@@ -29,9 +28,11 @@ var gfkEnsureRepresentation = function(id_name, ct_id){
     if (obj.attr("value") !== obj.attr("newValue")){
         var obj_id = obj.attr("value");
         gfkSetNewValue(id_name, ct_id + "-" + obj.attr("value"));
-        $.get("/related_admin/render_object/" + ct_id + "/" + obj_id + "/", function(data) {
-            obj.siblings(".object-representation").html(data);
-        });
+        if(ct_id != "" && obj_id != ""){
+            $.get("/related_admin/render_object/" + ct_id + "/" + obj_id + "/", function(data) {
+                obj.siblings(".object-representation").html(data);
+            });
+        }
     }
 }
 
@@ -54,8 +55,13 @@ function showGenericRelatedObjectLookupPopup(ct_field, triggering_link, url_base
 
     // Yes this is insane but there isn't a robust way to fire an event by a
     // closing window that has a long ajax function inside without blocking
-    setInterval(function() {gfkEnsureRepresentation(id_name, getCTId(ct_select)); }, 200);
-
+    var var_ct_select = getCTId(ct_select);
+    if(var_ct_select!=""){//no content type selected
+        setInterval(function() {gfkEnsureRepresentation(id_name, var_ct_select); }, 200);
+    }
+    else{
+        alert('{% trans "Escoja un Tipo de Contenido" %}');
+    }
     if (url != undefined) {
         triggering_link.href = url_base + url;
         var rv = showRelatedObjectLookupPopup(triggering_link);
@@ -71,9 +77,11 @@ var content_types = new Array();
 {% for ct in content_types %}
     content_types[{{ ct.0 }}] = '{{ ct.1 }}/{{ ct.2 }}/';
 {% endfor %}
+    
     var htmlGFKCreateButton = function(html){
         return '<div class="gfk_create_title">{% trans "Create a new image" %}</div>' + html + '<div class="gfk_create_button">{% trans "Load" %}</div>';
     };
+    
     var ct_id = $("#id_{{ ct_field }}").val();
     if (ct_id){
         $.get("/api/create/", {"ct_id": ct_id}, function (data){
@@ -125,5 +133,4 @@ var content_types = new Array();
         return false; // prevent multiple events
     });
     
-})(django.jQuery);
 </script>
