@@ -61,8 +61,8 @@ from cyclope import themes
 from cyclope import templatetags as cyclope_templatetags
 from cyclope.templatetags.cyclope_utils import smart_style
 
-DEFAULT_THEME = "neutronix"
-DEFAULT_THEME_REGION = "ash"
+DEFAULT_THEME = "cyclope-bootstrap"
+DEFAULT_THEME_REGION = "top"
 
 
 def add_region_view(model, view_name, content_object=None):
@@ -92,11 +92,8 @@ class CyclopeTestSuiteRunner(DjangoTestSuiteRunner):
     """
     def run_tests(self, test_labels, extra_tests=None, **kwargs):
         if not test_labels:
-            test_labels = ["cyclope"] + [c.split(".")[-1] for c in \
-                                         settings.INSTALLED_APPS if "cyclope." in c]
-        super(CyclopeTestSuiteRunner, self).run_tests(test_labels, extra_tests,
-                                                       **kwargs)
-
+            test_labels = ["cyclope"] + [c.split(".")[-1] for c in settings.INSTALLED_APPS if "cyclope." in c]
+        super(CyclopeTestSuiteRunner, self).run_tests(test_labels, extra_tests, **kwargs)
 
 class ViewableTestCase(TestCase):
     """
@@ -156,7 +153,7 @@ class SiteSettingsTestCase(TestCase):
 
     def test_force_not_deletion(self):
         col = Collection.objects.create(name='A collection')
-        layout = Layout.objects.create(name="Test Layout", template='five_elements.html')
+        layout = Layout.objects.create(name="Test Layout", template='layout_two_columns_left.html')
 
         site_settings = SiteSettings(site=self.site, theme=DEFAULT_THEME,
                                      allow_comments='YES',
@@ -182,14 +179,15 @@ class SiteSettingsTestCase(TestCase):
 
 class SiteTestCase(TestCase):
 
+    fixtures = ['simplest_site.json']
+
     def testSimplestSite(self):
         """
         Test the simplest creation of a Cyclope-site.
         """
         # Simplest site should be created by syncdb
         response = self.client.get("/")
-        self.assertTemplateUsed(response,
-                                u'cyclope/themes/neutronix/five_elements.html')
+        self.assertTemplateUsed(response, u'cyclope/themes/cyclope-bootstrap/layout_two_columns_left.html')
 
     def testBugMenuItemWithoutLayout(self):
         # saving a MenuItem without setting a default site Layout failed
@@ -240,7 +238,7 @@ class RegressionTests(TestCase):
         menu_item = MenuItem(menu=menu, name="home",
                                             site_home=True, active=True)
         menu_item.save()
-        layout = Layout(name="default", template='five_elements.html')
+        layout = Layout(name="default", template='layout_two_columns_left.html')
         layout.save()
         site_settings = SiteSettings.objects.create(site=site,
                                 theme=DEFAULT_THEME,
@@ -312,6 +310,7 @@ class TemplateTagsTestCase(TestCase):
 
 class SiteMapViewTestCase(TestCase):
 
+    fixtures = ['simplest_site.json']
     test_model = Site
 
     def test_creation(self):
@@ -333,6 +332,7 @@ class SiteMapViewTestCase(TestCase):
 
 
 class SiteSearchViewTestCase(TestCase):
+
     fixtures = ['default_users.json', 'default_groups.json', 'cyclope_demo.json']
 
     def setUp(self):
@@ -348,9 +348,10 @@ class SiteSearchViewTestCase(TestCase):
         response = self.client.get(search_url)
         self.assertContains(response, 'id="search_results"', count=1)
 
-    def test_enable_search_by_date(self)
+    def test_enable_search_by_date(self):
+        site = Site.objects.all()[0]
         search_url = '/search/?q=cyclope'
-        site_settings = SiteSettings(site=self.site,
+        site_settings = SiteSettings(site=site,
                                      theme=DEFAULT_THEME,
                                      enable_search_by_date=True)
         site_settings.save()
@@ -494,6 +495,8 @@ class UserProfileViewsTestCase(ViewableTestCase):
 
 class DispatcherTestCase(TestCase):
 
+    fixtures = ['simplest_site.json']
+
     def test_unknown_url_returns_404(self):
         # Ticket https://trac.usla.org.ar/cyclope/ticket/43
         self.assertEqual(self.client.get("/category/foo/").status_code, 404)
@@ -529,8 +532,8 @@ class ThemesTestCase(TestCase):
     def test_layout_form(self):
         form = LayoutAdminForm()
         choices = [choice[0] for choice in form.fields["template"].choices]
-        self.assertTrue("five_elements.html" in choices)
-        self.assertTrue("four_elements.html" in choices)
+        self.assertTrue("layout_two_columns_left.html" in choices)
+        self.assertTrue("layout_two_columns_right.html" in choices)
 
     def test_default_themes_integration(self):
         form = DesignSettingsAdminForm()
@@ -547,7 +550,7 @@ class ThemesTestCase(TestCase):
     def test_api(self):
         all_themes = themes.get_all_themes()
         theme = all_themes[DEFAULT_THEME]
-        self.assertTrue("five_elements.html" in theme.layout_templates)
+        self.assertTrue("layout_two_columns_left.html" in theme.layout_templates)
         self.assertTrue(theme is themes.get_theme(DEFAULT_THEME))
 
 
@@ -650,6 +653,7 @@ class DeleteFromLayoutsAndMenuItems(TestCase):
 
 class FrontendEditTestCase(TestCase):
 
+    fixtures = ['simplest_site.json']
 
     def setUp(self):
         self.article = Article.objects.create(name='Article')
@@ -750,6 +754,9 @@ class SimpleAdminTests(TestCase):
 
 
 class GetSingletonTests(TestCase):
+
+    fixtures = ['simplest_site.json']
+
     def test_get_singleton(self):
         from cyclope.utils import get_singleton
         site_settings = get_singleton(SiteSettings)
@@ -772,7 +779,7 @@ class LayoutAndRegionsJsonTemplateTagTests(TestCase):
                 "{% layout_regions_data %}"
             ).render(Context())
         data = json.loads(out)
-        self.assertTrue("five_elements.html" in data["layout_templates"])
+        self.assertTrue("layout_two_columns_left.html" in data["layout_templates"])
         self.assertTrue("views_for_models" in data)
 
 
@@ -790,7 +797,7 @@ class CreateContentApiTests(TestCase):
     def test_json_picture_content_creation(self):
         from cyclope.apps.medialibrary.models import Picture
         ct = ContentType.objects.get(model='picture').pk
-        f = open("media/cyclope/images/cyclope-icon.png")
+        f = open("static/images/cyclope-icon.png")
         self.client.login(username='admin', password='password')
         response = self.client.post("/api/create/", {"ct_id": ct, "name": "image.png", "file":f})
         self.assertEqual(response.status_code, 200)

@@ -23,6 +23,8 @@ class Migration(SchemaMigration):
             article = Article.objects.get(pk=article_id)
             article.pictures.add(Picture.objects.get(pk=picture_id))
         #related content pictures
+        if ContentType.objects.filter(name='picture').count()==0: # TODO picture content type doesn't exist in tests
+            return
         article_type = ContentType.objects.get(name='article')
         picture_type = ContentType.objects.get(name='picture')
         related_contents = RelatedContent.objects.filter(self_type=article_type).filter(other_type=picture_type)

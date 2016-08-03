@@ -10,7 +10,6 @@
       "is_superuser": true, 
       "is_staff": true, 
       "last_login": "2012-09-01T17:52:54.175", 
-      "groups": [], 
       "user_permissions": [], 
       "password": "pbkdf2_sha256$10000$B4ELlRfuHpnx$xAStJCe1B3OG0qS5Kau7mPxwUxB81ZX4XsBrGtN/mWY=", 
       "email": "", 
@@ -28,11 +27,6 @@
       "is_superuser": false, 
       "is_staff": true, 
       "last_login": "2012-06-25T12:43:54.418", 
-      "groups": [
-        [
-          "managers"
-        ]
-      ], 
       "user_permissions": [], 
       "password": "sha1$12d4c$8e73c7df37d144f98d2e2a4847f1d856c35f6ca1", 
       "email": "", 
@@ -50,11 +44,6 @@
       "is_superuser": false, 
       "is_staff": true, 
       "last_login": "2012-06-25T10:13:22.353", 
-      "groups": [
-        [
-          "editors"
-        ]
-      ], 
       "user_permissions": [], 
       "password": "sha1$a6528$370f64a6bc31325fd8d5e9fc7e1f2b373797d227", 
       "email": "", 
