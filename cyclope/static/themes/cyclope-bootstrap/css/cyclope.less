@@ -9,14 +9,18 @@ body {
 	float:none;
 	display:block;}
 
+/* collection and Categories default styles */
+
 .category_description {
 	overflow:auto;}
 
-.category_description .category_title {
+.category_description .category_title,
+.collection .title {
 	border-top:1px solid #000;
 	border-bottom:1px solid #000;}
 
-.category_description .image {
+.category_description .image,
+.collection .image {
 	float:left;
 	border-radius:50%;
 	margin:0 20px 0 0;}
@@ -50,6 +54,8 @@ span.category_title a {
 .media .date,
 .staticpage .date {
 	font-size: 1em;}
+
+
 
 /* ### teaser list of Category members ### */
 
@@ -102,3 +108,12 @@ span.category_title a {
 #right .category_title, #left .category_title {font-size:22px;border-top: 1px solid #000;border-bottom: 1px solid #000;font-weight: 600;}
 #right .collection_header, #left .collection_header {margin:0;}
 #right .category_root_item_list ul, #left .category_root_item_list ul {margin-top:10px; padding-left:15px;}
+
+/* ### collections ### */
+.collection .title {
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;}
+
+/* ### alphabetical teaser list of all the members of the Collection's Categories ### */
+	.alphabetical-pagination .pagination > li > a {text-align:center;margin:0 5px 0 0;}
+	.alphabetical-pagination .pagination {margin:0 0 20px;}
