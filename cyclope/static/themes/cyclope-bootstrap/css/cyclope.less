@@ -1,75 +1,27 @@
-html,
-body {
-	overflow-x: hidden; /* Prevent scroll on narrow devices */
-	padding-top: 35px;}
+html, body {overflow-x: hidden; /* Prevent scroll on narrow devices */padding-top: 35px;}
 
 /* fix float vertical navbar */
-#left .navbar-nav > li,
-#rigth .navbar-nav > li {
-	float:none;
-	display:block;}
+#left .navbar-nav > li, #rigth .navbar-nav > li {float:none;display:block;}
 
 /* collection and Categories default styles */
 
-.category_description {
-	overflow:auto;}
-
-.category_description .category_title,
-.collection .title {
-	border-top:1px solid #000;
-	border-bottom:1px solid #000;}
-
-.category_description .image,
-.collection .image {
-	float:left;
-	border-radius:50%;
-	margin:0 20px 0 0;}
-
-span.category_title {
-	display:block;
-	font-size:28px;
-	margin:0;
-	font-weight:600;}
-
-span.category_title a {
-	color:#000;}
-
-.collection_teaser {
-	background:#eee;
-	padding:8px;
-	margin:0 0 20px;}
-
-.collection_image {
-	background:#eee;
-	margin:0 0 10px;}
-
-.collection_image img {
-	margin: auto;
-	display:block;
-	padding:20px 0;}
-
-.collection .title {
-	margin-bottom:0;}
-
-.media .date,
-.staticpage .date {
-	font-size: 1em;}
-
-
+.category_description, .collection_header {overflow:auto;}
+.category_description .category_title, .collection_header .title {border-top:1px solid #000;border-bottom:1px solid #000;}
+.category_description .image, .collection .image {float:left;border-radius:50%;margin:0 20px 0 0;}
+span.category_title {display:block;font-size:28px;margin:0;font-weight:600;}
+span.category_title a {color:#000;}
+.collection_teaser {background:#eee;padding:8px;margin:0 0 20px;}
+.collection_image {background:#eee;margin:0 0 10px;}
+.collection_image img {margin: auto;display:block;padding:20px 0;}
+.collection .title {margin-bottom:0;}
+.media .date,.staticpage .date {font-size: 1em;}
 
 /* ### teaser list of Category members ### */
 
-.teaser .pretitle {
-	text-transform:uppercase;
-	float:left;
-	padding-right:5px;}
-
-.teaser_icon {}
-
-.article-teaser{  }
+.teaser .pretitle {text-transform:uppercase;float:left;padding-right:5px;}
 .teaser_icon_container:hover {background:transparent;}
 .teaser_icon_container {display:inline-block;vertical-align:top;}
-.teaser_text_container {width:73%;display:inline-block;float:right;}
+.teaser_text_container {width:70%;display:inline-block;float:right;}
 .teaser_text_container_fullwidth {width:100%;margin-top:5px;clear:both;}
 .pretitle-container {margin:0;}
 .article-teaser .date {font-size: 1em;}
@@ -109,14 +61,11 @@ span.category_title a {
 #right .collection_header, #left .collection_header {margin:0;}
 #right .category_root_item_list ul, #left .category_root_item_list ul {margin-top:10px; padding-left:15px;}
 
-/* ### collections ### */
-.collection .title {
-	border-top:1px solid #000;
-	border-bottom:1px solid #000;}
+
 
 /* ### alphabetical teaser list of all the members of the Collection's Categories ### */
-	.alphabetical-pagination .pagination > li > a {text-align:center;margin:0 5px 0 0;}
-	.alphabetical-pagination .pagination {margin:0 0 20px;}
+.alphabetical-pagination .pagination > li > a {text-align:center;margin:0 5px 0 0;}
+.alphabetical-pagination .pagination {margin:0 0 20px;}
 	
 /*### carousel view of Category members left and right ###*/
 #right .carousel-caption p, #left .carousel-caption p {display:none;}
@@ -129,3 +78,6 @@ span.category_title a {
 /*### carousel view of Category members###*/
 .carousel .carousel-indicators {Bottom:0;}
 .carousel .media {margin-top:0;}
+
+/* region clears */
+header, footer, #top, #bottom, #right, #left {clear:both;}
