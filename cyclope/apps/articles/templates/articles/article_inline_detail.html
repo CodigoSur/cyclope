@@ -11,7 +11,7 @@
   {% endif %}
 
   <a id="article-{{ article.slug }}" href="{% url article-detail article.slug %}">
-    <h3 class="title">{% trans article.name  %}</h3>
+    <h3 class="title">{% trans article.name  %} <span class="glyphicon glyphicon-link" aria-hidden="true"></span> </h3>
   </a>
 
   {% if article.summary %}
