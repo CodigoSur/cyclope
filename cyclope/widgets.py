@@ -28,11 +28,11 @@ import re
 
 from django import forms
 from django.conf import settings
-from django.forms.util import flatatt
+from django.forms.utils import flatatt
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import escape
-from django.utils.text import truncate_words
+from django.template.defaultfilters import truncatewords as truncate_words
 from django.utils.html import conditional_escape
 from django.utils.encoding import force_unicode
 from django.core.urlresolvers import reverse

@@ -53,8 +53,8 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as ugettext
 from django.db.models.signals import post_save
 from django.core.exceptions import ImproperlyConfigured
-from django.db.utils import DatabaseError
-
+from django.db.utils import DatabaseError, OperationalError
+from django.core.exceptions import ObjectDoesNotExist
 from cyclope.models import SiteSettings, DesignSettings
 
 from cyclope.core.frontend.sites import site
@@ -127,7 +127,9 @@ def get_site_settings():
         # a Cyclope project is supposed to have only one SiteSettings object
         site_settings = SiteSettings.objects.get()
     # catch exceptions if no settings are created
-    except IndexError:
+#    except IndexError:
+    except:
+#    except OperationalError, ObjectDoesNotExist:
         site_settings = None
     return site_settings
 
@@ -169,7 +171,8 @@ def populate_from_site_settings(site_settings):
             globals()[name] = value
 
 CYCLOPE_SITE_SETTINGS = get_site_settings()
-populate_from_site_settings(CYCLOPE_SITE_SETTINGS)
+if CYCLOPE_SITE_SETTINGS:
+    populate_from_site_settings(CYCLOPE_SITE_SETTINGS)
 
 def _refresh_site_settings(sender, instance, created, **kwargs):
     "Callback to refresh site settings when they are modified in the database"

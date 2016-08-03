@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
@@ -28,7 +28,7 @@ General utility helper tags.
 
 from django import template
 from django.utils.safestring import mark_safe
-from django.contrib.markup.templatetags import markup
+from django_markwhat.templatetags import markup
 
 import cyclope.settings as cyc_settings
 from cyclope.utils import nohang, get_object_name, get_app_label
@@ -166,12 +166,14 @@ def smart_style(value):
     if result is not None:
         return result
 
-    style = cyc_settings.CYCLOPE_TEXT_STYLE
+    style = cyc_settings.CYCLOPE_TEXT_STYLE    
     styles = {"wysiwyg": mark_safe,
               "markdown": markup.markdown,
               "textile": markup.textile,
               "raw": mark_safe}
+
     renderer = styles.get(style, None)
+    
     if renderer is None:
         raise ValueError("Bad TEXT_STYLE option: %s" % style)
     else:
@@ -230,7 +232,7 @@ def inline_template(obj, inline_view_name):
                               inline_view_name)
 
 from django.utils.encoding import force_unicode
-from django.utils.html import (conditional_escape, escapejs, fix_ampersands,
+from django.utils.html import (conditional_escape, escapejs,
     escape, urlize as urlize_impl, linebreaks, strip_tags)
 
 @register.filter(is_safe=True, needs_autoescape=True)

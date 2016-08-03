@@ -29,7 +29,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.template import Template, Context
 from django.contrib.sites.models import Site
-from django.contrib.comments.models import Comment
+from django_comments.models import Comment
 from django.template.loader import render_to_string
 
 import cyclope.utils
@@ -50,7 +50,7 @@ class MenuRootItemsList(frontend.FrontendView):
     template = "cyclope/menu_flat_items_list.html"
 
     def get_response(self, request, req_context, options, content_object):
-        menu_items = MenuItem.tree.filter(menu=content_object,
+        menu_items = MenuItem.objects.filter(menu=content_object,
                                           level=0, active=True)
         current_url = request.path_info[1:].split('/')[0]
         return render_to_string(self.template, {
@@ -71,7 +71,7 @@ class MenuFlatItemsList(frontend.FrontendView):
     template = "cyclope/menu_flat_items_list.html"
 
     def get_response(self, request, req_context, options, content_object):
-        menu_items = MenuItem.tree.filter(menu=content_object, active=True)
+        menu_items = MenuItem.objects.filter(menu=content_object, active=True)
         current_url = request.path_info[1:].split('/')[0]
         return render_to_string(self.template, {
             'menu_items': menu_items,
@@ -104,7 +104,7 @@ class MenuMenuItemsHierarchy(frontend.FrontendView, HyerarchyBuilderMixin):
 
     def get_response(self, request, req_context, options, content_object):
         menu = content_object
-        menu_items = MenuItem.tree.filter(menu=menu, level=0, active=True)
+        menu_items = MenuItem.objects.filter(menu=menu, level=0, active=True)
         menu_items_list = []
         current_url = request.path_info[1:]
         for item in menu_items:
@@ -142,9 +142,9 @@ class MenuItemChildrenOfCurrentItem(frontend.FrontendView):
     def get_response(self, request, req_context, options):
         base_url = request.path_info[1:].split('/')[0]
         if base_url == '':
-            current_item = MenuItem.tree.filter(site_home=True)
+            current_item = MenuItem.objects.filter(site_home=True)
         else:
-            current_item = MenuItem.tree.filter(url=base_url)
+            current_item = MenuItem.objects.filter(url=base_url)
 
         if current_item:
             children = current_item[0].get_children().filter(active=True)
@@ -185,7 +185,7 @@ class SiteMap(frontend.FrontendView, HyerarchyBuilderMixin):
         collections_list = []
         for collection in Collection.objects.filter(visible=True):
             category_list = []
-            for category in Category.tree.filter(collection=collection, level=0):
+            for category in Category.objects.filter(collection=collection, level=0):
                 # TODO(diegoM): Change this line when the refactorization is done
                 category_list.extend(self._get_categories_nested_list(category))
             if category_list:
@@ -196,7 +196,7 @@ class SiteMap(frontend.FrontendView, HyerarchyBuilderMixin):
         menus_list = []
         for menu in Menu.objects.all():
             menu_items_list = []
-            for item in MenuItem.tree.filter(menu=menu, level=0):
+            for item in MenuItem.objects.filter(menu=menu, level=0):
                 # TODO(diegoM): Change this line when the refactorization is done
                 menu_items_list.extend(
                     MenuMenuItemsHierarchy().make_nested_list(item, False, None))

@@ -21,7 +21,7 @@
 
 
 from django.contrib import admin
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.admin import GenericStackedInline
 
 from cyclope.core.frontend import site
 from cyclope.core.collections.admin import CollectibleAdmin
@@ -44,7 +44,7 @@ def series_inline_factory(series_model):
             model = SeriesContent
             fields = ('order', 'other_type', 'other_object')
 
-    class SeriesContentInline(generic.GenericStackedInline):
+    class SeriesContentInline(GenericStackedInline):
         model = SeriesContent
         form = SeriesContentForm
         ct_field = 'self_type'

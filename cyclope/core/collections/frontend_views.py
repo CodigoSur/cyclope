@@ -24,7 +24,7 @@
 from django import forms
 from django.template import loader
 from django.core.urlresolvers import reverse
-from django.contrib.comments.models import Comment
+from django_comments.models import Comment
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
@@ -353,7 +353,7 @@ class CollectionRootCategoriesTeaserList(frontend.FrontendView):
     def get_response(self, request, req_context, options, content_object):
         collection = content_object
         req_context.update(
-            {'categories': Category.tree.filter(collection=collection, level=0),
+            {'categories': Category.objects.filter(collection=collection, level=0),
              'collection': collection })
         t = loader.get_template(self.template)
         return t.render(req_context)
@@ -389,7 +389,7 @@ class CollectionCategoriesHierarchy(frontend.FrontendView, HyerarchyBuilderMixin
 
     def get_response(self, request, req_context, options, content_object):
         collection = content_object
-        categories = Category.tree.filter(collection=collection, level=0)
+        categories = Category.objects.filter(collection=collection, level=0)
         category_list = []
         for category in categories:
             category_list.extend(self.make_nested_list(category, True))

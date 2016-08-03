@@ -29,7 +29,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
 
 from cyclope.models import BaseContent
 from cyclope.core.collections.models import Collectible

@@ -32,7 +32,7 @@ from models import *
 
 import re
 
-from cyclope.apps.media_widget import MediaWidget, MediaWidgetField
+from cyclope.apps.media_widget.models import MediaWidget, MediaWidgetField
 
 class ArticleForm(forms.ModelForm):
 
@@ -52,7 +52,8 @@ class ArticleForm(forms.ModelForm):
 
     class Meta:
         model = Article
-
+        exclude = ['',]
+        
 class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
     form = ArticleForm
     list_filter = CollectibleAdmin.list_filter + \

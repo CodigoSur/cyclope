@@ -31,7 +31,7 @@ from collections import defaultdict
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.db.models.signals import m2m_changed
 
 import mptt
@@ -107,7 +107,7 @@ class Category(models.Model, ThumbnailMixin):
         return '/%s/%s/' % (self._meta.object_name.lower(), self.slug)
 
     def valid_parents(self):
-        return Category.tree.filter(pk__isnot=self.pk)
+        return Category.objects.filter(pk__isnot=self.pk)
 
     def save(self, moving_childs=False, *args, **kwargs):
         # If is not a new Category and the Collection is changed, we move all
@@ -259,7 +259,7 @@ class Categorization(models.Model):
     content_type = models.ForeignKey(ContentType, db_index=True,
                                      verbose_name=_('content type'))
     object_id = models.PositiveIntegerField(db_index=True)
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
     order = models.IntegerField(blank=True, null=True, db_index=True,
                                 verbose_name=_('order'))
 
@@ -285,7 +285,7 @@ class Categorization(models.Model):
 class Collectible(models.Model):
     """Base class for collectible objects
     """
-    categories = generic.GenericRelation('Categorization',
+    categories = GenericRelation('Categorization',
         content_type_field='content_type', object_id_field='object_id',
         verbose_name = _('categories'))
 

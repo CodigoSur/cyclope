@@ -30,7 +30,6 @@ from django import forms
 from django.conf import settings
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.contenttypes.models import ContentType
 from django.template.loader import render_to_string
 from django.contrib.admin.widgets import ForeignKeyRawIdWidget
 
@@ -49,6 +48,8 @@ class GenericFKWidget(ForeignKeyRawIdWidget):
         forms.TextInput.__init__(self, attrs)
 
     def render(self, name, value, attrs=None):
+        #[1.9] moved import here because we cannot import models at app startup
+        from django.contrib.contenttypes.models import ContentType
         # if it is inline build the proper ct_field name
         ct_field = self.ct_field
 

@@ -30,10 +30,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404
 
-from sites import site
-
 from cyclope.utils import template_for_request
-
+from sites import site
 
 class FrontendView(object):
     """Parent class for frontend views.

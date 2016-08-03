@@ -1,5 +1,4 @@
 from django.http import HttpResponse
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -30,6 +29,8 @@ def render_object(request, ct_id, obj_id):
     Returns the html of an arbitrary object to display in the admin FK widget
     via ajax.
     """
+    from django.contrib.contenttypes.models import ContentType
+
     html = ""
     try:
         obj = ContentType.objects.get_for_id(ct_id).get_object_for_this_type(pk=obj_id)

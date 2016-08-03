@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
@@ -25,9 +25,13 @@ from django.utils.translation import ugettext_lazy as _
 from autoslug.fields import AutoSlugField
 from registration import signals as registration_signals
 
+def _slug_populate(obj):
+    return obj.user.username
+
 class UserProfile(models.Model):
+
     user = models.ForeignKey(User, unique=True)
-    slug = AutoSlugField(populate_from=lambda obj:obj.user.username, unique=True,
+    slug = AutoSlugField(populate_from=_slug_populate, unique=True,
                          null=False, db_index=True)
     avatar = models.ImageField(_('avatar'), max_length=100,
                                blank=True, upload_to="avatars/")

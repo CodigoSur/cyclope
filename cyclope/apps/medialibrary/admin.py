@@ -121,6 +121,7 @@ def media_admin_factory(media_model):
 
         class Meta:
             model = media_model
+            exclude = ['',]
 
     if media_model in has_thumbnail:
         list_display = ['name', 'published', 'thumbnail']

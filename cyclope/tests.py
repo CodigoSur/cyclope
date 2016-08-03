@@ -37,8 +37,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.template import TemplateSyntaxError, Template, Context
 from django import template
 from django.db import models
-from django.db.models import get_model
-import django.contrib.comments
+import django_comments
 
 from cyclope.models import SiteSettings, Menu, MenuItem, RelatedContent
 from cyclope.models import Layout, RegionView, Author
@@ -470,7 +469,7 @@ class MultipleFieldTestCase(TestCase):
 
 
 class CommentsViewsTestCase(ViewableTestCase):
-    test_model = django.contrib.comments.get_model()
+    test_model = django_comments.get_model()
 
     def setUp(self):
         site = Site.objects.get_current()

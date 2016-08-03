@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
@@ -19,11 +19,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from forms import CustomCommentForm
-from models import CustomComment
 
 def get_model():
+    #[1.9] moved import here because we cannot import models at app startup
+    from models import CustomComment
     return CustomComment
 
 def get_form():
+    #[1.9] moved import here because we cannot import models at app startup
+    from forms import CustomCommentForm
     return CustomCommentForm

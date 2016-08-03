@@ -28,12 +28,12 @@ from datetime import datetime
 import os
 
 from django.db import models
-from django.db.models import get_model
+from haystack.utils.app_loading import haystack_get_model as get_model
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.comments import Comment
+from django_comments.models import Comment
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
@@ -230,7 +230,7 @@ class MenuItem(models.Model):
                      blank=True, null=True)
     object_id = models.PositiveIntegerField(_('object'),
         db_index=True, blank=True, null=True)
-    content_object = generic.GenericForeignKey(
+    content_object = GenericForeignKey(
         'content_type', 'object_id')
 
     # content_view choices are set through an AJAX view
@@ -293,10 +293,7 @@ class MenuItem(models.Model):
         verbose_name = _('menu item')
         verbose_name_plural = _('menu items')
 
-try:
-    mptt.register(MenuItem)
-except mptt.AlreadyRegistered:
-    pass
+mptt.register(MenuItem)
 
 class RegionView(models.Model):
     """Holds configuration data for a frontend view to be displayed in a region of a particular Layout.
@@ -315,7 +312,7 @@ class RegionView(models.Model):
     object_id = models.PositiveIntegerField(
         db_index=True, verbose_name=_('object'),
         blank=True, null=True)
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
     view_options = JSONField(default="{}") # default is taken from ViewOptionsForm
 
     def __unicode__(self):
@@ -364,9 +361,9 @@ class RelatedContent(models.Model):
                                      related_name='related_contents_rt')
     other_id = models.PositiveIntegerField(db_index=True)
 
-    self_object = generic.GenericForeignKey(ct_field='self_type',
+    self_object = GenericForeignKey(ct_field='self_type',
                                                   fk_field='self_id')
-    other_object = generic.GenericForeignKey(ct_field='other_type',
+    other_object = GenericForeignKey(ct_field='other_type',
                                                   fk_field='other_id')
 
     order = models.IntegerField(blank = True, null = True, db_index=True)
@@ -390,20 +387,20 @@ class BaseContent(models.Model):
     published =  models.BooleanField(_('published'), default=True)
     # user that uploads the content
     user = models.ForeignKey(User, editable=False, blank=True, null=True)
-    related_contents = generic.GenericRelation(RelatedContent,
+    related_contents = GenericRelation(RelatedContent,
                                                object_id_field='self_id',
                                                content_type_field='self_type')
     creation_date = models.DateTimeField(_('creation date'), editable=True,
                                          default=datetime.now)
     modification_date = models.DateTimeField(_('modification date'), auto_now=True,
-                                             editable=False, default=datetime.now)
+                                             editable=False)#, default=datetime.now)
     allow_comments = models.CharField(_('allow comments'), max_length=4,
                                 choices = (
                                     ('SITE',_('default')),
                                     ('YES',_('enabled')),
                                     ('NO',_('disabled'))
                                 ), default='SITE')
-    comments = generic.GenericRelation(Comment, object_id_field="object_pk")
+    comments = GenericRelation(Comment, object_id_field="object_pk")
     show_author = models.CharField(_('show author'), max_length=6, default='SITE',
                                    choices = (
                                         ('AUTHOR', _('author')),

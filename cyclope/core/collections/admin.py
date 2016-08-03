@@ -26,13 +26,13 @@ core.collections.admin
 import django
 from django import forms
 from django.contrib import admin
-from django.db.models import get_model
+from haystack.utils.app_loading import haystack_get_model as get_model
 from django.core.urlresolvers import reverse
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.admin import GenericStackedInline
 from django.contrib.admin import SimpleListFilter
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import helpers
-from django.contrib.admin.util import model_ngettext
+from django.contrib.admin.utils import model_ngettext
 from django.db import router
 from django.template.response import TemplateResponse
 from django.utils.encoding import force_unicode
@@ -65,7 +65,7 @@ class CategoryListFilter(SimpleListFilter):
         collections = Collection.objects.filter(content_types=object_ctype)
         lookup_choices = []
         for collection in collections:
-            categories = Category.tree.filter(collection=collection)
+            categories = Category.objects.filter(collection=collection)
             lookup_choices.append(("COLLECTION", collection.name))
             for category in categories:
                 lookup_choices.append((category.slug, u'%s%s' % ('--'* category.level, category.name)))
@@ -81,11 +81,11 @@ class CategoryForm(forms.ModelForm):
     description = forms.CharField(label=_('Description'),
                                   widget=AdminMarkItUpWidget(), required=False)
     parent = TreeNodeChoiceField(label=_('Parent'),
-                                 queryset=Category.tree.all(), required=False)
+                                 queryset=Category.objects.all(), required=False)
 
     class Meta:
         model = Category
-
+        exclude = ['',]
 
 class CategoryAdmin(TreeEditor, PermanentFilterMixin):
     form = CategoryForm
@@ -101,10 +101,12 @@ class CategoryAdmin(TreeEditor, PermanentFilterMixin):
         }),
     )
     inlines = (CategoryPermissionInline,)
-    permanent_filters = (
-        (u"collection__id__exact",
-         lambda request: unicode(Collection.objects.all()[0].id)),
-    )
+# TODO(nicoechaniz)[1.9]: fix and uncomment (this crashes when there are no Collections)
+#    permanent_filters = (
+#        (u"collection__id__exact",
+#         lambda request: unicode(Collection.objects.all()[0].id)),
+#    )
+    permanent_filters = []
 
     def actions_column(self, instance):
         return u' '.join(self._actions_column(instance))
@@ -136,7 +138,7 @@ class CategorizationForm(forms.ModelForm):
             self.fields['collection'].initial = self.instance.category.collection.pk
 
 
-class CategorizationInline(generic.GenericStackedInline):
+class CategorizationInline(GenericStackedInline):
     """Limits choices to those suitable for the content type
     of the object being created / changed.
     """
@@ -158,7 +160,7 @@ class CategorizationInline(generic.GenericStackedInline):
 
         u = request.user
         cols = Collection.objects.filter(content_types=req_model_ctype).order_by('name')
-        cats = Category.tree.filter(collection__in=cols).order_by('collection__name')
+        cats = Category.objects.filter(collection__in=cols).order_by('collection__name')
         if not (u.is_authenticated() and (u.is_superuser or
            u.is_staff and u.has_perm('collections.change_category'))):
             # collection and category based perms
@@ -200,6 +202,7 @@ class CollectionAdminForm(forms.ModelForm, ViewOptionsFormMixin):
 
     class Meta:
         model = Collection
+        exclude = ['',]
 
 
 class CollectionAdmin (admin.ModelAdmin):

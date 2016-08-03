@@ -26,9 +26,6 @@ https://github.com/yourlabs/django-autocomplete-light
 """
 
 from django import forms
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.generic import GenericForeignKey
-
 
 class GenericModelForm(forms.ModelForm):
     """
@@ -71,6 +68,10 @@ class GenericModelForm(forms.ModelForm):
         This should probably be done in the GFK field itself, but it's here for
         convenience until Django fixes that.
         """
+        #[1.9] moved import here because we cannot import models at app startup
+        from django.contrib.contenttypes.models import ContentType
+        from django.contrib.contenttypes.fields import GenericForeignKey
+
         for field in self._meta.model._meta.virtual_fields:
             if isinstance(field, GenericForeignKey):
                 value = self.cleaned_data.get(field.name, None)
@@ -85,6 +86,9 @@ class GenericModelForm(forms.ModelForm):
         return super(GenericModelForm, self).save(commit)
 
     def clean(self):
+        #[1.9] moved import here because we cannot import models at app startup
+        from django.contrib.contenttypes.fields import GenericForeignKey
+
         super(GenericModelForm, self).clean()
         # Add fk_fields of GenericFK to cleaned data (for inline forms)
         for field in self._meta.model._meta.virtual_fields:

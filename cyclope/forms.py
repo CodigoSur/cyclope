@@ -125,7 +125,7 @@ class MenuItemAdminForm(GenericModelForm, ViewOptionsFormMixin):
     content_object = GMCField(label=_('Content object'), required=False,
                               widget=GenericFKWidget("content_type",
                                                      cts=site._registry.keys()))
-    parent = TreeNodeChoiceField(label=_('Parent'), queryset=MenuItem.tree.all(),
+    parent = TreeNodeChoiceField(label=_('Parent'), queryset=MenuItem.objects.all(),
                                  required=False)
     view_options = MultipleField(label=_('View options'), form=None, required=False)
 
@@ -182,6 +182,7 @@ class MenuItemAdminForm(GenericModelForm, ViewOptionsFormMixin):
 
     class Meta:
         model = MenuItem
+        exclude = ['',]
 
 
 class SiteSettingsAdminForm(forms.ModelForm):
@@ -197,6 +198,7 @@ class SiteSettingsAdminForm(forms.ModelForm):
 
     class Meta:
         model = SiteSettings
+        exclude = ['',]
 
 def get_home_menu_item():
     return MenuItem.objects.get(site_home=True)
@@ -243,6 +245,7 @@ class DesignSettingsAdminForm(forms.ModelForm):
         
     class Meta:
         model = DesignSettings
+        exclude = ['',]
 
     def save(self, *args, **kwargs):
         m = super(DesignSettingsAdminForm, self).save(*args, **kwargs)
@@ -271,6 +274,7 @@ class LayoutAdminForm(forms.ModelForm):
 
     class Meta:
         model = Layout
+        exclude = ['',]
 
 
 class RegionViewInlineForm(forms.ModelForm, ViewOptionsFormMixin):
@@ -347,6 +351,7 @@ class RegionViewInlineForm(forms.ModelForm, ViewOptionsFormMixin):
 
     class Meta:
         model = RegionView
+        exclude = ['',]
 
 class AuthorAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

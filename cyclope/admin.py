@@ -37,6 +37,8 @@ from django.contrib.sites.models import Site
 import django.forms
 from django.contrib.auth import load_backend
 
+from django.contrib.contenttypes.admin import GenericStackedInline
+
 from mptt_tree_editor.admin import TreeEditor
 
 from cyclope.models import *
@@ -58,7 +60,7 @@ from cyclope.core.collections.admin import CollectibleAdmin
 default_admin_textfield = FORMFIELD_FOR_DBFIELD_DEFAULTS[models.TextField]
 default_admin_textfield['widget'] = get_default_text_widget()
 
-class RelatedContentInline(generic.GenericStackedInline):
+class RelatedContentInline(GenericStackedInline):
     form = RelatedContentForm
     ct_field = 'self_type'
     ct_fk_field = 'self_id'
@@ -79,24 +81,24 @@ class BaseContentAdmin(admin.ModelAdmin):
         )
 
     def response_change(self, request, obj):
-        if '_frontend' in request.REQUEST:
+        if '_frontend' in request.GET:
             return HttpResponseRedirect(obj.get_absolute_url())
         return super(BaseContentAdmin, self).response_change(request, obj)
 
     def response_add(self, request, obj, post_url_continue='../%s/'):
         admin_post_create.send(sender=obj.__class__, request=request, instance=obj)
-        if '_frontend' in request.REQUEST:
+        if '_frontend' in request.GET:
             return HttpResponseRedirect(obj.get_absolute_url())
         return super(BaseContentAdmin, self).response_add(request, obj, post_url_continue)
 
     def has_delete_permission(self, request, obj=None):
         # this is redundant with _popup, which already sets delete_permission to False
-        if '_frontend' in request.REQUEST:
+        if '_frontend' in request.GET:
             return False
         return super(BaseContentAdmin, self).has_delete_permission(request, obj)
 
     def change_view(self, request, object_id, form_url="", extra_context=None):
-        if '_frontend' in request.REQUEST:
+        if '_frontend' in request.GET:
             if extra_context is None:
                 extra_context = {}
             extra_context['frontend_admin'] = 'frontend_admin'
@@ -127,12 +129,12 @@ class BaseContentAdmin(admin.ModelAdmin):
         return response
 
     def add_view(self, request, form_url='', extra_context=None):
-        if '_frontend' in request.REQUEST:
+        if '_frontend' in request.GET:
             if extra_context is None:
                 extra_context = {}
             extra_context['frontend_admin'] = 'frontend_admin'
-        if '_from_category' in request.REQUEST:
-            category_slug = request.REQUEST['_from_category']
+        if '_from_category' in request.GET:
+            category_slug = request.GET['_from_category']
             if category_slug:
                 category = Category.objects.get(slug=category_slug)
                 extra_context['initial_category'] = category.id

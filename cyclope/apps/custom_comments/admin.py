@@ -22,8 +22,8 @@
 from django.contrib import admin
 from django.core import urlresolvers
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.comments.admin import CommentsAdmin
-from django.contrib.comments.models import Comment
+from django_comments.admin import CommentsAdmin
+from django_comments.models import Comment
 
 from models import CustomComment
 

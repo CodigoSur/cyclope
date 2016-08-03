@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
-from django.contrib import comments
-from django.contrib.comments import signals
+import django_comments as comments
+from django_comments import signals
 from django.test.client import RequestFactory
 
 from forms import CustomCommentForm

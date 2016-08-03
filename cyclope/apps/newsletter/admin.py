@@ -33,14 +33,14 @@ from cyclope.utils import get_singleton
 
 class NewsletterAdminForm(forms.ModelForm):
     content_category = TreeNodeChoiceField(
-        queryset=Category.tree.all(), label=_('Current content category'),
+        queryset=Category.objects.all(), label=_('Current content category'),
         help_text=_('This is the category which groups the content that will be sent with the newsletter.'))
     view = forms.ChoiceField(label=_('View'))
 
     def __init__(self, *args, **kwargs):
         super(NewsletterAdminForm, self).__init__(*args, **kwargs)
         nl_collection = get_singleton(SiteSettings).newsletter_collection
-        self.fields['content_category'].queryset = Category.tree.filter(collection=nl_collection)
+        self.fields['content_category'].queryset = Category.objects.filter(collection=nl_collection)
         self.fields['content_category'].initial = Category.objects.latest()
 
         views = [('', '------')]
@@ -51,6 +51,7 @@ class NewsletterAdminForm(forms.ModelForm):
 
     class Meta:
         model = Newsletter
+        exclude = ['',]
 
 
 class NewsletterAdmin(admin.ModelAdmin):

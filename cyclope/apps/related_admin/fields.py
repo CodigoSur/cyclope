@@ -30,7 +30,6 @@ from django import forms
 from django.db import models
 from django.forms import fields
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.contenttypes.models import ContentType
 
 class GenericModelChoiceField(fields.Field):
     """
@@ -53,6 +52,8 @@ class GenericModelChoiceField(fields.Field):
         Given a model instance as value, with content type id of 3 and pk of 5,
         return such a string '3-5'.
         """
+        #[1.9] moved import here because we cannot import models at app startup
+        from django.contrib.contenttypes.models import ContentType
         if isinstance(value, (str, unicode)):
             # Apparently there's a bug in django, that causes a python value to
             # be passed here. This ONLY happens when in an inline ....
@@ -67,6 +68,8 @@ class GenericModelChoiceField(fields.Field):
         Given a string like '3-5', return the model of content type id 3 and pk
         5.
         """
+        #[1.9] moved import here because we cannot import models at app startup
+        from django.contrib.contenttypes.models import ContentType
         if not value or value == "None":
             return None
         try:

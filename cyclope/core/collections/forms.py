@@ -42,4 +42,4 @@ class ContentFilterForm(forms.Form):
         print self.fields.items()
         for collection in collections:
             self.fields[collection.slug] = TreeNodeChoiceField(label=_(collection.name),
-              queryset=Category.tree.filter(collection=collection), required=False)
+              queryset=Category.objects.filter(collection=collection), required=False)

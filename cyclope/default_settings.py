@@ -81,6 +81,18 @@ INSTALLED_APPS = [
     'rosetta',
     'haystack',
 
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.humanize',
+    'django.contrib.admin',
+    'django_comments',
+    'django_markwhat',
+    'django.contrib.messages',
+    'django.contrib.sitemaps',
+    'django.contrib.staticfiles',
+
     'cyclope',
     'cyclope.core.frontend',
     'cyclope.core.collections',
@@ -93,7 +105,7 @@ INSTALLED_APPS = [
     'cyclope.apps.polls',
     'cyclope.apps.forum',
     'cyclope.apps.newsletter',
-    'cyclope.apps.contacts',
+#    'cyclope.apps.contacts',
     'cyclope.apps.locations',
     'cyclope.apps.feeds',
     'cyclope.apps.dynamicforms',
@@ -110,24 +122,11 @@ INSTALLED_APPS = [
 
     'threadedcomments',
 
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.humanize',
-    'django.contrib.admin',
-    'django.contrib.comments',
-    'django.contrib.markup',
-    'django.contrib.messages',
-    'django.contrib.sitemaps',
-    'django.contrib.staticfiles',
-    
     'autoslug',
     'mptt_tree_editor',
     'mptt',
     'captcha',
     'filebrowser',
-    'south',
     'registration',
     'profiles',
     'contact_form',
@@ -137,8 +136,8 @@ INSTALLED_APPS = [
     'compressor',
     'ratings',
     'actstream',
-    
-    'cyclope.apps.post_init',
+
+#   'cyclope.apps.post_init',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -240,8 +239,11 @@ ADMIN_TOOLS_THEMING_CSS = 'cyclope/css/admin_tools_theming.css'
 LOCALE_PATHS = (os.path.join(os.path.dirname(__file__), "locale_external"), )
 
 # django-haystack settings
-HAYSTACK_SITECONF = 'cyclope_project.search_sites'
-HAYSTACK_SEARCH_ENGINE = 'whoosh'
+#HAYSTACK_SITECONF = 'cyclope_project.search_sites'
+HAYSTACK_CONNECTIONS = {
+      'default': { 'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',}
+}
+#HAYSTACK_SEARCH_ENGINE = 'whoosh'
 
 # dbgettext options
 #DBGETTEXT_PROJECT_OPTIONS = 'cyclope.dbgettext_options'
@@ -272,7 +274,7 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
 # martkitup settings
 JQUERY_URL = 'cyclope/js/jquery-1.12.4.min.js' # TODO import it from settings.py
 MARKITUP_SET = 'cyclope/markitup/sets/textile'
-MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
+MARKITUP_FILTER = ('django_markwhat.templatetags.markup.textile', {})
 
 # crispy forms settings
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -292,7 +294,7 @@ COMPRESS_PRECOMPILERS = (
 COMPRESS_DEBUG_TOGGLE = 'nocompress'
 
 ACTSTREAM_SETTINGS = {
-    'MODELS': ['auth.user', 'auth.group', 'custom_comments.customcomment'],
+    'MODELS': ['auth.user', 'auth.group'],#, 'custom_comments.customcomment'],
     'FETCH_RELATIONS': True,
     'USE_PREFETCH': True,
     'USE_JSONFIELD': True,
@@ -308,6 +310,6 @@ MESSAGE_TAGS = {
 
 CYCLOPE_BOOTSTRAP_SKIN = 'bootstrap'
 
-# behind proxy traffic is http, so urls in redirects get blocked by browsers. 
+# behind proxy traffic is http, so urls in redirects get blocked by browsers.
 # this works together with HTTP header 'X-Forwarded-Proto' set by Nginx
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

@@ -32,6 +32,7 @@ class TopicForm(forms.ModelForm):
 
     class Meta:
         model = Topic
+        exclude = ['',]
 
 class TopicAdmin(CollectibleAdmin, BaseContentAdmin):
     form = TopicForm

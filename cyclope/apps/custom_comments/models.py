@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
@@ -25,9 +25,9 @@ from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mass_mail
-from django.contrib.comments.managers import CommentManager
+from django_comments.managers import CommentManager
 
-from threadedcomments import ThreadedComment
+from threadedcomments.models import ThreadedComment
 from cyclope.utils import mail_managers
 
 

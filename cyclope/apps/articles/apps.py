@@ -19,15 +19,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from dbgettext.registry import registry, Options
-from dbgettext.lexicons import html
+from django.apps import AppConfig
+from dbgettext_registration import dbgettext_register
 
-class ArticleOptions(Options):
-    attributes = ('name',)
-    parsed_attributes = {'text': html.lexicon, 'summary':html.lexicon}
+class ArticleConfig(AppConfig):
+    name = 'cyclope.apps.articles'
+    verbose_name = "Articles"
 
-    def get_path_identifier(self, obj):
-        return obj.slug
-
-def dbgettext_register(model):
-    registry.register(model, ArticleOptions)
+    def ready(self):
+        Article = self.get_model('Article')
+        dbgettext_register(Article)

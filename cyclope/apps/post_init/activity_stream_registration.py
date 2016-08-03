@@ -28,7 +28,7 @@ from cyclope.signals import admin_post_create
 from cyclope.apps import medialibrary
 from cyclope.apps.articles.models import Article
 from cyclope.apps.custom_comments.models import CustomComment
-from django.contrib.comments.signals import comment_was_posted
+from django_comments.signals import comment_was_posted
 from ratings.signals import vote_was_saved
 from ratings.models import Vote
 

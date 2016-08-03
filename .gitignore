@@ -1,4 +1,3 @@
-syntax: glob
 *.pyc
 *.pyo
 *~
@@ -35,4 +34,3 @@ cyclope/server_global_settings.py
 *_crop*
 build/
 dist/
-.git*

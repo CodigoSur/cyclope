@@ -27,7 +27,6 @@ Helper methods and classes.
 """
 
 import os
-from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import InvalidPage, EmptyPage
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
@@ -102,8 +101,8 @@ def template_for_request(request):
 
 
 from django.utils.functional import Promise
-from django.utils.translation import force_unicode
-from django.utils.simplejson import JSONEncoder
+from django.utils.encoding import force_unicode
+from simplejson import JSONEncoder
 
 # snippet from http://code.djangoproject.com/ticket/5868
 # to fix json encoding of lazy translated strings
@@ -359,9 +358,10 @@ class CrispyFormsSimpleMixin(object):
 
 from django.conf import settings
 from django.core.mail.message import EmailMultiAlternatives
-from django.contrib.auth.models import Group
 
 def _get_managers_mails():
+    #[1.9] moved import here because we cannot import models at app startup
+    from django.contrib.auth.models import Group
     emails = [a[1] for a in settings.MANAGERS]
     try:
         emails.extend(Group.objects.get(name="managers").user_set.values_list("email",

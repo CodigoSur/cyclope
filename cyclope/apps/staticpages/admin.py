@@ -37,7 +37,7 @@ from models import StaticPage, HTMLBlock
 
 class StaticPageAdminForm(forms.ModelForm):
     menu_items = forms.ModelMultipleChoiceField(label=_('Menu items'),
-                    queryset = MenuItem.tree.all(), required=False,
+                    queryset = MenuItem.objects.all(), required=False,
                     )
     def __init__(self, *args, **kwargs):
     # this was initially written to be used for any BaseContent, that's
@@ -55,7 +55,7 @@ class StaticPageAdminForm(forms.ModelForm):
 
     class Meta:
         model = StaticPage
-
+        exclude = ['',]
 
 class StaticPageAdmin(CollectibleAdmin, BaseContentAdmin):
     # updates related menu_items information when a StaticPaget is saved

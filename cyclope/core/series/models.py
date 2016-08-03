@@ -20,7 +20,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.db import models
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 
@@ -38,9 +38,9 @@ class SeriesContent(models.Model):
                                      related_name='series_contents_rt')
     other_id = models.PositiveIntegerField(db_index=True)
 
-    self_object = generic.GenericForeignKey(ct_field='self_type',
+    self_object = GenericForeignKey(ct_field='self_type',
                                                   fk_field='self_id')
-    other_object = generic.GenericForeignKey(ct_field='other_type',
+    other_object = GenericForeignKey(ct_field='other_type',
                                                   fk_field='other_id')
 
     order = models.IntegerField(blank=True, null=True, db_index=True)
@@ -63,7 +63,7 @@ class Series(BaseContent, Collectible):
     image = models.ImageField(_('image'), max_length=100,
                                blank=True, upload_to="series/")
 
-    series_contents = generic.GenericRelation(SeriesContent,
+    series_contents = GenericRelation(SeriesContent,
                                               object_id_field='self_id',
                                               content_type_field='self_type')
 

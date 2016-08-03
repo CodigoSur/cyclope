@@ -35,7 +35,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from django.db.models import get_model
+from haystack.utils.app_loading import haystack_get_model as get_model
 from django.views.generic import DeleteView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required

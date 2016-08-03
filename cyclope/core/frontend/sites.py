@@ -30,13 +30,10 @@ from django.template import RequestContext, loader
 from django.conf.urls import patterns, url
 from django.utils.translation import ugettext_lazy as _, ugettext
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
-from django.contrib.contenttypes.models import ContentType
-from django.db.models.signals import post_save
-from django.utils import simplejson
-from django.db.models import get_model
+import simplejson
+from haystack.utils.app_loading import haystack_get_model as get_model
 from django.contrib.admin.views.decorators import staff_member_required
 
-from cyclope.models import MenuItem, SiteSettings, BaseContent
 import cyclope
 from cyclope.utils import layout_for_request, LazyJSONEncoder, get_object_name
 from cyclope.themes import get_theme
@@ -59,6 +56,10 @@ class CyclopeSite(object):
             model: a model.Model that has at least a name attribute
             view_class: a view derived from core.frontend.FrontendView
         """
+        #[1.9] moved import here because we cannot import models at app startup
+        from django.contrib.contenttypes.models import ContentType
+        from cyclope.models import BaseContent
+
         view = view_class()
         view.model = model
         if not model in self._registry:
@@ -134,8 +135,11 @@ class CyclopeSite(object):
         return "%s-%s" % (model_name, view.name)
 
     def get_menuitem_urls(self):
+        #[1.9] moved import here because we cannot import models at app startup
+        from cyclope.models import MenuItem
+
         urlpatterns = []
-        for item in MenuItem.tree.filter(active=True):
+        for item in MenuItem.objects.filter(active=True):
             # custom urls are not supposed to be handled by Cyclope
             if item.custom_url:
                 continue
@@ -194,6 +198,9 @@ class CyclopeSite(object):
     def index(self, request):
         """The root Cyclope URL view"""
 
+        #[1.9] moved import here because we cannot import models at app startup
+        from cyclope.models import MenuItem
+
         #TODO(nicoechaniz): return prettier messages.
         if not cyclope.settings.CYCLOPE_SITE_SETTINGS:
             # the site has not been set up in the admin interface yet
@@ -246,13 +253,13 @@ class CyclopeSite(object):
             pk = int(request.GET['q'])
             collection = Collection.objects.get(pk=pk)
             u = request.user
-            col_categories = Category.tree.filter(collection=collection)
+            col_categories = Category.objects.filter(collection=collection)
             # if the user can modify any category, we infer he can categorize any content also
             if u.is_authenticated() and (u.is_superuser or
                u.is_staff and u.has_perm('collections.change_category')):
                 allowed_categories = col_categories
             elif u.is_anonymous():
-                allowed_categories = Category.tree.none()
+                allowed_categories = Category.objects.none()
             else:
                 has_col_perm = CollectionPermission.objects.filter(collection=collection, user=u,
                                                                    can_add_content=True)
@@ -277,6 +284,9 @@ class CyclopeSite(object):
 
     def layout_regions_json(self, request):
         """View to dynamically update template regions select in the admin."""
+        #[1.9] moved import here because we cannot import models at app startup
+        from cyclope.models import SiteSettings
+
         template_filename = request.GET['q']
         theme_name = SiteSettings.objects.get().theme
         theme_settings = get_theme(theme_name)
@@ -292,6 +302,9 @@ class CyclopeSite(object):
         return HttpResponse(json_data, mimetype='application/json')
 
     def _registered_views(self, request, region_views=False):
+        #[1.9] moved import here because we cannot import models at app startup
+        from django.contrib.contenttypes.models import ContentType
+
         content_type_id = request.GET['q']
         model = ContentType.objects.get(pk=content_type_id).model_class()
         views = [{'view_name': '', 'verbose_name': '------'}]
@@ -318,6 +331,9 @@ class CyclopeSite(object):
         return HttpResponse(json_data, mimetype='application/json')
 
     def menu_items_for_menu_json(self, request):
+        #[1.9] moved import here because we cannot import models at app startup
+        from cyclope.models import MenuItem
+
         id_menu = request.GET['q']
 
         action_or_id = request.META['HTTP_REFERER'].split('/')[-2]
@@ -332,7 +348,7 @@ class CyclopeSite(object):
         choices = [{'object_id': '', 'verbose_name': '------'}]
 
         if not id_menu == '':
-            menu_items =  MenuItem.tree.filter(menu = id_menu)
+            menu_items =  MenuItem.objects.filter(menu = id_menu)
 
             choices.extend([ {'object_id': item.id,
                             'verbose_name': u'%s %s' % ('---' * item.level, item.name)}
@@ -342,11 +358,14 @@ class CyclopeSite(object):
         return HttpResponse(json_data, mimetype='application/json')
 
     def objects_for_ctype_json(self, request):
+        #[1.9] moved import here because we cannot import models at app startup
+        from django.contrib.contenttypes.models import ContentType
+
         content_type_id = request.GET['q']
         model = ContentType.objects.get(pk=content_type_id).model_class()
         objects = [{'object_id': '', 'verbose_name': '------'}]
         if hasattr(model, 'tree'):
-            objs = model.tree.all()
+            objs = model.objects.all()
             objects.extend([ {'object_id': obj.id,
                             'verbose_name': '%s%s' % ('--'*obj.level, obj.name)}
                            for obj in objs ])
@@ -360,6 +379,10 @@ class CyclopeSite(object):
     def options_view_widget_html(self, request):
         """Returns the html with the options of a frontend view"""
         from cyclope.fields import MultipleField
+
+        #[1.9] moved import here because we cannot import models at app startup
+        from django.contrib.contenttypes.models import ContentType
+
         content_type_name = request.GET.get("content_type_name")
         if content_type_name:
             ct = ContentType.objects.get(name=content_type_name)
@@ -383,6 +406,9 @@ class CyclopeSite(object):
         from django import forms
         from cyclope.apps.medialibrary.models import Picture
         from cyclope.apps.medialibrary.forms import InlinedPictureForm
+
+        #[1.9] moved import here because we cannot import models at app startup
+        from django.contrib.contenttypes.models import ContentType
 
         if request.user.is_staff:
             if request.method == "POST":
@@ -408,14 +434,3 @@ class CyclopeSite(object):
 ####
 
 site = CyclopeSite()
-
-def _refresh_site_urls(sender, instance, created, **kwargs):
-    "Callback to refresh site url patterns when a MenuItem is modified"
-    from django.conf import settings
-    import sys
-    try:
-        return reload(sys.modules[settings.ROOT_URLCONF])
-    except KeyError:
-        # fails when testing...
-        pass
-post_save.connect(_refresh_site_urls, sender=MenuItem, dispatch_uid="cyclope.core.frontend.sites")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright 2010-2013 Código Sur Sociedad Civil.
 # All rights reserved.
@@ -25,3 +25,4 @@ apps.articles
 -------------
 Standard news article content.
 """
+default_app_config = 'cyclope.apps.articles.apps.ArticleConfig'

@@ -103,7 +103,7 @@ class CustomIndexDashboard(Dashboard):
                     css_classes = ('dbmodule-comments'),
                     #pre_content = _('Review and moderate user comments'),
                     include_list=[
-                        'django.contrib.comments.models.Comment',
+                        'django_comments.models.Comment',
                     ]),
                 )))
 

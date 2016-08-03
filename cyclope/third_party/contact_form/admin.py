@@ -7,6 +7,7 @@ from models import ContactFormSettings
 
 class ContactFormSettingsForm(ModelForm):
     class Meta:
+        exclude =  ('',)
         model = ContactFormSettings
 
     def clean(self):

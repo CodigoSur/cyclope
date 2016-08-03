@@ -4,7 +4,7 @@ from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 from cyclope.utils import mail_managers
 
@@ -24,7 +24,7 @@ class AbuseType(models.Model):
 class AbuseReportElement(models.Model):
     content_type = models.ForeignKey(ContentType, verbose_name=_('content type'))
     object_id = models.PositiveIntegerField(_('object'))
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
     abuse_type = models.ForeignKey(AbuseType, verbose_name=_('abuse type'))
     user = models.ForeignKey(User)
     date = models.DateTimeField(auto_now_add=True)
@@ -58,7 +58,7 @@ class AbuseReportElement(models.Model):
 class AbuseReport(models.Model):
     content_type = models.ForeignKey(ContentType, verbose_name=_('content type'))
     object_id = models.PositiveIntegerField(_('object'))
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
     status = models.CharField(_('status'), max_length=4,
                                 choices = (
                                     ('REP',_('reported')),
