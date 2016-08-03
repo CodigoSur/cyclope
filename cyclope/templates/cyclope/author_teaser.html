@@ -7,7 +7,7 @@
 <h1 class="title authors_title">{% trans "Authors" %}</h1>
 {% for author in author_list %}
 {% with current_object=author %}
-<div class="content-view authors authors-teaser media">
+<div class="regionview author author_teaser content-view authors-teaser media">
     {% if current_object.image %}
         <div class="media-left">
             <a href="#">

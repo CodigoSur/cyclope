@@ -8,7 +8,7 @@
   We show a teaser view of every object belonging to this category.
   {% endcomment %}
 
-	<div class="icon_list_container row"> 
+	<div class="regionview category labeled_icon_list icon_list_container row"> 
   {% for categorization in categorizations %}
     {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name ".html" as template_path %}
 

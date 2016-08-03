@@ -19,6 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import re
 import time
 import json
 import unittest
@@ -60,6 +61,7 @@ from cyclope.forms import (SiteSettingsAdminForm, LayoutAdminForm, MenuItemAdmin
 from cyclope import themes
 from cyclope import templatetags as cyclope_templatetags
 from cyclope.templatetags.cyclope_utils import smart_style
+from cyclope import settings as cyc_settings
 
 DEFAULT_THEME = "cyclope-bootstrap"
 DEFAULT_THEME_REGION = "top"
@@ -127,8 +129,8 @@ class ViewableTestCase(TestCase):
                 self.assertEqual(response.status_code, 200)
 
                 if view.is_region_view:
-                    self.assertContains(response, 'class="regionview %s %s"' %
-                                        (model_name, view.name), count=1)
+                    regex = 'class=".*regionview.*%s.*%s.*"' % (model_name, view.name)
+                    self.assertTrue(re.search(regex, response.content))
 
     def get_request(self):
         request = RequestFactory().get('/foo/')
@@ -249,6 +251,8 @@ class RegressionTests(TestCase):
 
 class RegionViewTestCase(TestCase):
 
+    fixtures = ['simplest_site.json']
+
     def testAddLayoutRegionView(self):
         layout = get_default_layout()
         content_type = ContentType.objects.get(model='staticpage')
@@ -351,9 +355,11 @@ class SiteSearchViewTestCase(TestCase):
     def test_enable_search_by_date(self):
         site = Site.objects.all()[0]
         search_url = '/search/?q=cyclope'
+        any_layout = Layout.objects.all()[0]
         site_settings = SiteSettings(site=site,
                                      theme=DEFAULT_THEME,
-                                     enable_search_by_date=True)
+                                     enable_search_by_date=True,
+                                     default_layout=any_layout)
         site_settings.save()
         response = self.client.get(search_url)
         self.assertContains(response, 'id="id_start_date"', count=1)
@@ -443,8 +449,7 @@ class FeedTestCase(ViewableTestCase):
     test_model = Feed
 
     def setUp(self):
-        self.test_object = Feed.objects.create(name="An instance",
-                                               url="http://not.existant/rss")
+        self.test_object = Feed.objects.create(name="An instance", url="http://not.existant/rss")
         frontend.autodiscover()
 
 
@@ -529,6 +534,8 @@ class TestSitemaps(TestCase):
 
 class ThemesTestCase(TestCase):
 
+    fixtures = ['default_users.json', 'default_groups.json', 'cyclope_demo.json']
+
     def test_layout_form(self):
         form = LayoutAdminForm()
         choices = [choice[0] for choice in form.fields["template"].choices]
@@ -539,7 +546,6 @@ class ThemesTestCase(TestCase):
         form = DesignSettingsAdminForm()
         choices = [choice[0] for choice in form.fields["theme"].choices]
         self.assertTrue(DEFAULT_THEME in choices)
-        self.assertTrue("frecuency" in choices)
 
     @unittest.skip("this test fails when there is now custom_theme directory")
     def test_custom_theme_integration(self):

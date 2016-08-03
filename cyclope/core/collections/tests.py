@@ -31,7 +31,7 @@ from cyclope.apps.staticpages.models import StaticPage
 
 
 class CategoryTestCase(ViewableTestCase):
-    fixtures = ['simplest_site.json']
+    fixtures = ['default_users.json', 'default_groups.json', 'cyclope_demo.json']
     test_model = Category
 
     def setUp(self):
@@ -39,6 +39,8 @@ class CategoryTestCase(ViewableTestCase):
         col = Collection.objects.create(name='A collection')
         self.test_object = Category(name='An instance', collection=col)
         self.test_object.save()
+        article = Article.objects.create(name="Test article", text="prueba"*100)
+        Categorization.objects.create(category=self.test_object, content_object=article)
 
     def get_request(self):
         request = RequestFactory().get('/foo/')

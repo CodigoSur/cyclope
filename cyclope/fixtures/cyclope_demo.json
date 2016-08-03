@@ -266,7 +266,7 @@
       "layout": 1, 
       "weight": 0, 
       "content_view": "detail", 
-      "region": "earth", 
+      "region": "bottom", 
       "object_id": 3, 
       "view_options": "{}", 
       "content_type": [
@@ -282,7 +282,7 @@
       "layout": 10, 
       "weight": 0, 
       "content_view": "detail", 
-      "region": "earth", 
+      "region": "bottom", 
       "object_id": 3, 
       "view_options": "{}", 
       "content_type": [
@@ -298,7 +298,7 @@
       "layout": 10, 
       "weight": 0, 
       "content_view": "menuitems_hierarchy", 
-      "region": "water", 
+      "region": "right", 
       "object_id": 3, 
       "view_options": "{\"align\": \"ON_CLICK\"}", 
       "content_type": [
@@ -314,7 +314,7 @@
       "layout": 10, 
       "weight": 0, 
       "content_view": "teaser_list", 
-      "region": "love", 
+      "region": "left", 
       "object_id": 1, 
       "view_options": "{\"limit_to_n_items\": 8, \"show_description\": false, \"sort_by\": \"DATE-\", \"items_per_page\": 8, \"traverse_children\": false, \"show_title\": true, \"show_image\": false, \"simplified\": false, \"navigation\": \"TOP\"}", 
       "content_type": [
@@ -330,7 +330,7 @@
       "layout": 10, 
       "weight": 0, 
       "content_view": "menuitems_hierarchy", 
-      "region": "air", 
+      "region": "header", 
       "object_id": 1, 
       "view_options": "{\"align\": \"ON_CLICK\"}", 
       "content_type": [
@@ -346,7 +346,7 @@
       "layout": 10, 
       "weight": 1, 
       "content_view": "search", 
-      "region": "air", 
+      "region": "header", 
       "object_id": null, 
       "view_options": "{}", 
       "content_type": [
@@ -362,7 +362,7 @@
       "layout": 1, 
       "weight": 0, 
       "content_view": "menuitems_hierarchy", 
-      "region": "water", 
+      "region": "right", 
       "object_id": 3, 
       "view_options": "{\"align\": \"ON_CLICK\"}", 
       "content_type": [
@@ -377,8 +377,8 @@
     "fields": {
       "layout": 10, 
       "weight": 0, 
-      "content_view": "slodeshow", 
-      "region": "spark", 
+      "content_view": "slideshow", 
+      "region": "top", 
       "object_id": 20, 
       "view_options": "{\"auto_pause\": true, \"limit_to_n_items\": 0, \"visualization_mode\": \"slideshow-background\", \"navigation\": \"'circular'\", \"auto_play\": true, \"show_description\": true, \"sort_by\": \"DATE-\", \"delay\": 2, \"scroll_by\": 2, \"traverse_children\": false, \"show_title\": true, \"show_image\": true, \"speed\": 100, \"circular\": false}", 
       "content_type": [
@@ -394,7 +394,7 @@
       "layout": 10, 
       "weight": 0, 
       "content_view": "share-content", 
-      "region": "air", 
+      "region": "header", 
       "object_id": null, 
       "view_options": "{\"show_rss\": true, \"style\": \"addthis_default_style\", \"show_social_buttons\": true}", 
       "content_type": [
@@ -410,7 +410,7 @@
       "layout": 1, 
       "weight": 0, 
       "content_view": "share-content", 
-      "region": "air", 
+      "region": "header", 
       "object_id": null, 
       "view_options": "{\"show_rss\": true, \"style\": \"addthis_default_style\", \"show_social_buttons\": true}", 
       "content_type": [
@@ -423,9 +423,9 @@
     "pk": 1, 
     "model": "cyclope.layout", 
     "fields": {
-      "name": "Four Elements", 
+      "name": "Two Columns Right", 
       "template": "layout_two_columns_right.html", 
-      "slug": "four-elements"
+      "slug": "two-columns-right"
     }
   }, 
   {
@@ -441,9 +441,9 @@
     "pk": 10, 
     "model": "cyclope.layout", 
     "fields": {
-      "name": "Five Elements", 
-      "template": "five_elements.html", 
-      "slug": "five-elements"
+      "name": "Two Columns Left", 
+      "template": "layout_two_columns_left.html", 
+      "slug": "two-columns-left"
     }
   }, 
   {

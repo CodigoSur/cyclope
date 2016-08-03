@@ -2,7 +2,7 @@
 
 {% block category_content %}
 
-<div class="category_root_item_list">
+<div class="regionview category root_items_list category_root_item_list">
 <ul>
 {% for categorization in categorizations %}
   {% if not user.is_authenticated and not categorization.content_object.published %}{% else %}
