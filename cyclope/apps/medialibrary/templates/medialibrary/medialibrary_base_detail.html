@@ -10,27 +10,26 @@
 
 	<div class="content-view {{ current_object.get_object_name }} media detail">
 
-		<h1 class="title">{{ current_object.name }}</h1>
+
+		<h3 class="title">{{ current_object.name }}</h3>
 
 		{% include 'cyclope/content_tools_block.html' %}
 
 		{% include "cyclope/author_block.html" with author=current_object.author %}
 
+        {% block media_content_download %}
+				<a class="action-content download_link btn btn-success" target="_blank" href="{{ current_object.media_file }}">{% trans "download file" %}</a>
+		{% endblock %}
+
 		{% if current_object.image %}
 			<div class="media-content">
 				{% if current_object.content_url %}<a href="{{ current_object.content_url }}" {% if current_object.new_window %}target="_blank"{% endif%} >{% endif%}
-				<img align="center" src="{% version current_object.image.path 'big' %}"/>
+				<img class="center img-responsive" align="center" src="{% version current_object.image.path 'big' %}"/>
 				{% if current_object.content_url %}</a>{% endif%}
 			</div>
 		{% endif %}
 
 		{% block media_content %}
-		{% endblock %}
-
-		{% block media_content_download %}
-		<div class="action-content download_link">
-				<a target="_blank" href="{{ current_object.media_file }}">{% trans "download file" %}</a>
-		</div>
 		{% endblock %}
 
 		<div class="html-content summary">{{ current_object.description|smart_style }}</div>
@@ -45,7 +44,10 @@
 			</div>
 		{% endif %}
 
+
+
 		<div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+
 
 		{% include 'cyclope/related_contents_block.html' %}
 
