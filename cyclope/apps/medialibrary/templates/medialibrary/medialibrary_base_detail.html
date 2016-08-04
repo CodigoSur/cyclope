@@ -13,9 +13,13 @@
 
 		<h3 class="title">{{ current_object.name }}</h3>
 
-		<!--{% include 'cyclope/content_tools_block.html' %}-->
+		{% include 'cyclope/content_tools_block.html' %}
 
 		{% include "cyclope/author_block.html" with author=current_object.author %}
+
+        {% block media_content_download %}
+				<a class="action-content download_link btn btn-success" target="_blank" href="{{ current_object.media_file }}">{% trans "download file" %}</a>
+		{% endblock %}
 
 		{% if current_object.image %}
 			<div class="media-content">
@@ -30,26 +34,16 @@
 
 		<div class="html-content summary">{{ current_object.description|smart_style }}</div>
 
-		<div class="row">
-			<div class="col-xs-12 col-md-3 deliverables-links">
-				{% block media_content_download %}
-					<button type="button" class="action-content download_link btn btn-default">
-						<a target="_blank" href="{{ current_object.media_file }}">{% trans "download file" %}</a>
-					</button>
-				{% endblock %}
-			</div>
-			<div class="col-xs-12 col-md-9">
-				{% if current_object.get_last_change_date or current_object.source %}
-					<div class="meta-content">
-						{% if current_object.get_last_change_date %}
-							<h6 class="date">{% trans "Last modification date" %}: {{ current_object.get_last_change_date }}</h6>
-						{% endif %}
-
-						{% include "cyclope/source_block.html" with source=current_object.source %}
-					</div>
+		{% if current_object.get_last_change_date or current_object.source %}
+			<div class="meta-content">
+				{% if current_object.get_last_change_date %}
+					<h6 class="date">{% trans "Last modification date" %}: {{ current_object.get_last_change_date }}</h6>
 				{% endif %}
+
+				{% include "cyclope/source_block.html" with source=current_object.source %}
 			</div>
-		</div>
+		{% endif %}
+
 
 
 		<div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>

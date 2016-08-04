@@ -79,8 +79,10 @@ span.category_title a {color:#000;}
 
 
 /* Full Category content -  media_library_base_detail */
-.content-view.document.media.detail .tools.meta-content{
-	display: inline-block;
+.content-view.externalcontent.media.detail .tools.meta-content,
+.content-view.pictures.media.detail .tools.meta-content,
+.content-view.article.media.detail .tools.meta-content,
+.content-view.document.media.detail .tools.meta-content	{
 	padding: 5px 10px;
 }
 
@@ -91,6 +93,10 @@ span.category_title a {color:#000;}
 
 .content-view.document.media.detail .meta-content{
 	padding:5px 0;
+}
+
+.meta-content+a{
+	margin: 5px 0;
 }
 
 .deliverables-links{
