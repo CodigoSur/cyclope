@@ -269,7 +269,6 @@ class LayoutAdminForm(forms.ModelForm):
         tpl_choices = [(tpl, tpl_settings['verbose_name'])
                        for tpl, tpl_settings
                        in theme.layout_templates.items()]
-
         self.fields['template'].choices = tpl_choices
 
     class Meta:

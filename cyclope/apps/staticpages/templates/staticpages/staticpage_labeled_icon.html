@@ -1,6 +1,5 @@
 {% load i18n fb_versions cyclope_utils %}
-{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
-	<div class="teaser_icon {% inline_content_classes %}">
+<div class="teaser_icon {% inline_content_classes %}">
 		<div class="thumbnail">
 			<a href="{% url staticpage-detail staticpage.slug %}">
 				{% if staticpage.pictures %}
@@ -16,20 +15,4 @@
 				</h4>
 			</div>
 		</div>
-	</div>
-{% elif CYCLOPE_THEME_TYPE == 'classic' %}
-	<div class="labeled_icon staticpage">
-		<a href="{% url staticpage-detail staticpage.slug %}">
-		{% if staticpage.image %}
-			<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png"/>
-			<img class="icon" src="{% version staticpage.image.path 'thumbnail' %}"/>
-		{% else %}
-			<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png" border="0"/>
-			<img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
-		{% endif %}
-		</a>
-		<h2 class="title">
-			<a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name|truncatechars:40 }}</a>
-		</h2>
-	</div>
-{% endif %}  
+</div>

@@ -24,7 +24,9 @@ It is based on the category_teaser_list template.
 {% endif %}
 
 {% block category_content %}
+  <div class="regionview category filtered_list">
   {% for categorization in categorizations %}
+
     {% spaceless %}
     {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name ".html" as template_path %}
     {% comment %}
@@ -37,6 +39,7 @@ It is based on the category_teaser_list template.
 			{% include template_path with current_object=categorization.content_object host_template="cyclope/inline_view.html" %}
 		{% endif %}
   {% endfor %}
+  </div>
 {% endblock %}
 
   {% spaceless %}

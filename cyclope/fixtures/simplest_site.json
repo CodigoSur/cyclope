@@ -55,9 +55,9 @@
         "pk":1,
         "model":"cyclope.layout",
         "fields":{
-            "name":"default",
+            "name":"Two Columns Left",
             "template":"layout_two_columns_left.html",
-            "slug":"default"
+            "slug":"two-columns-left"
         }
     }
 ]
