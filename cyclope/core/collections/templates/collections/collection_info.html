@@ -7,7 +7,7 @@
             <div class="collection_teaser">
                 {% if collection.image %}
                 <div class="collection_image">
-                    <img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
+                    <img class="image" src="{% version collection.image.path 'fb_thumb' %}" border="0"/>
                 </div>
                 {% endif %}
                 <div class="summary">
@@ -17,7 +17,7 @@
             {% else %}
                 {% if collection.image %}
                 <div class="collection_teaser">
-                    <img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
+                    <img class="image" src="{% version collection.image.path 'fb_thumb' %}" border="0"/>
                 </div>
                 {% endif %}
             {% endif %}
