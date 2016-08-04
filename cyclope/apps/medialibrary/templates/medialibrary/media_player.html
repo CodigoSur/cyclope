@@ -1,9 +1,9 @@
-{% load i18n %}
+{% load i18n staticfiles %}
 
 {% block extra_head %}
-<script src="{{ CYCLOPE_STATIC_URL }}mediaelement/mediaelement-and-player.min.js"></script>
-<link rel="stylesheet" href="{{ CYCLOPE_STATIC_URL }}mediaelement/mediaelementplayer.min.css" type="text/css" />
-<link rel="stylesheet" href="{{ CYCLOPE_STATIC_URL }}mediaelement/mejs-skins.css" type="text/css" />
+<script src="{% static 'mediaelement/mediaelement-and-player.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'mediaelement/mediaelementplayer.min.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'mediaelement/mejs-skins.css'" type="text/css" />
 <script type='text/javascript'>
 // Here we are loading the media player for all media in the page.
 // We are using an indirect method to prevent multiple loading
@@ -53,8 +53,8 @@ var media_loaded = media_loaded || loadMedia();
   {% elif file_type == 'ogv' or file_type == 'flv' or file_type == 'mp4' or file_type == 'webm' %}
     <video width="{{ player_video_width|default:480 }}" height="{{ player_video_height|default:360 }}"  controls="controls" preload="none">
       <source src="{{ current_object.media_file }}" {% if file_type == 'ogv' %}type="video/ogg"{% else %}type="video/{{ file_type }}"{% endif %} />
-      <object width="{{ player_video_width|default:480 }}" height="{{ player_video_height|default:360 }}"  type="application/x-shockwave-flash" data="{{ CYCLOPE_STATIC_URL }}player/flashmediaelement.swf">
-        <param name="movie" value="{{ CYCLOPE_STATIC_URL }}player/flashmediaelement.swf" />
+      <object width="{{ player_video_width|default:480 }}" height="{{ player_video_height|default:360 }}"  type="application/x-shockwave-flash" data="{% static 'player/flashmediaelement.swf' %}">
+        <param name="movie" value="{% static 'player/flashmediaelement.swf' %}" />
         <param name="flashvars" value="controls=true&file={{ current_object.media_file }}" />
       </object>
     </video>

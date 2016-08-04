@@ -1,5 +1,5 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_modify adminmedia admin_static %}
+{% load i18n admin_modify adminmedia staticfiles %}
 {% load url from future %}
 {% load admin_urls %}
 
@@ -8,15 +8,15 @@
 {% url 'admin:jsi18n' as jsi18nurl %}
 <script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
 {{ media }}
-<script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery.chainedSelect.js"></script>
-<script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less.min.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery.chainedSelect.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/less.min.js' %}"></script>
 {% endblock %}
 
 {% block extrastyle %}
 {{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
 {% if frontend_admin %}
-<link href="{{ CYCLOPE_STATIC_URL }}css/frontend_edit.css" rel="stylesheet" type="text/css"/>
+<link href="{% static 'css/frontend_edit.css' %}" rel="stylesheet" type="text/css"/>
 <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/frontend_edit.less" rel="stylesheet/less" type="text/css"/>
 {% endif %}
 {% endblock %}
