@@ -1,26 +1,26 @@
 {% load i18n cyclope_utils fb_versions %}
 <div class="collection {{ collection.slug }}">
-	<div class="collection_header">
-		{% if collection.visible %}
-			<h1 class="title">{{ collection.name }}</h1>
-			{% if collection.description %}
-			<div class="collection_teaser">
-				{% if collection.image %}
-				<div class="collection_image">
-					<img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
-				</div>
-				{% endif %}
-				<div class="summary">
-					{{ collection.description|smart_style }}
-				</div>
-			</div>
-			{% else %}
-				{% if collection.image %}
-				<div class="collection_teaser">
-					<img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
-				</div>
-				{% endif %}
-			{% endif %}
-		{% endif %}
-	</div>
+    <div class="collection_header">
+        {% if collection.visible %}
+            <h1 class="title">{{ collection.name }}</h1>
+            {% if collection.description %}
+            <div class="collection_teaser">
+                {% if collection.image %}
+                <div class="collection_image">
+                    <img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
+                </div>
+                {% endif %}
+                <div class="summary">
+                    {{ collection.description|smart_style }}
+                </div>
+            </div>
+            {% else %}
+                {% if collection.image %}
+                <div class="collection_teaser">
+                    <img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
+                </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </div>
 </div>
