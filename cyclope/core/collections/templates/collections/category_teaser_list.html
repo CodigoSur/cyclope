@@ -9,7 +9,7 @@ The included template may be something different from a teaser
 
 {% block category_content %}
   {% for categorization in categorizations %}
-    <div class="{% teaser_layout_classes %}">
+    <div class="regionview category teaser_list {% teaser_layout_classes %}">
         {% spaceless %}
         {% join categorization.content_type.app_label  "/" categorization.content_type.model "_" inline_view_name ".html" as template_path %}
         {% comment %}

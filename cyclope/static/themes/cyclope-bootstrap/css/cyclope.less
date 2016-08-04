@@ -1,7 +1,4 @@
-html,
-body {
-	overflow-x: hidden; /* Prevent scroll on narrow devices */
-	padding-top: 35px;}
+html, body {overflow-x: hidden; /* Prevent scroll on narrow devices */padding-top: 35px;}
 
 .clear{
 	clear: both;
@@ -12,13 +9,9 @@ body {
 	margin: 0 auto;
 }
 /* fix float vertical navbar */
-#left .navbar-nav > li,
-#rigth .navbar-nav > li {
-	float:none;
-	display:block;}
+#left .navbar-nav > li, #rigth .navbar-nav > li {float:none;display:block;}
 
-.category_description {
-	overflow:auto;}
+/* collection and Categories default styles */
 
 .category_description .category_title {
 	border-top:1px solid #000;
@@ -60,19 +53,23 @@ span.category_title a {
 .staticpage .date {
 	font-size: 1em;}
 
+.category_description, .collection_header {overflow:auto;}
+.category_description .category_title, .collection_header .title {border-top:1px solid #000;border-bottom:1px solid #000;}
+.category_description .image, .collection .image {float:left;border-radius:50%;margin:0 20px 0 0;}
+span.category_title {display:block;font-size:28px;margin:0;font-weight:600;}
+span.category_title a {color:#000;}
+.collection_teaser {background:#eee;padding:8px;margin:0 0 20px;}
+.collection_image {background:#eee;margin:0 0 10px;}
+.collection_image img {margin: auto;display:block;padding:20px 0;}
+.collection .title {margin-bottom:0;}
+.media .date,.staticpage .date {font-size: 1em;}
+
 /* ### teaser list of Category members ### */
 
-.teaser .pretitle {
-	text-transform:uppercase;
-	float:left;
-	padding-right:5px;}
-
-.teaser_icon {}
-
-.article-teaser{  }
+.teaser .pretitle {text-transform:uppercase;float:left;padding-right:5px;}
 .teaser_icon_container:hover {background:transparent;}
 .teaser_icon_container {display:inline-block;vertical-align:top;}
-.teaser_text_container {width:73%;display:inline-block;float:right;}
+.teaser_text_container {width:70%;display:inline-block;float:right;}
 .teaser_text_container_fullwidth {width:100%;margin-top:5px;clear:both;}
 .pretitle-container {margin:0;}
 .article-teaser .date {font-size: 1em;}
@@ -227,3 +224,23 @@ td.comment {
 .forum .topic{
 	font-weight: bold;
 }
+
+
+/* ### alphabetical teaser list of all the members of the Collection's Categories ### */
+.alphabetical-pagination .pagination > li > a {text-align:center;margin:0 5px 0 0;}
+.alphabetical-pagination .pagination {margin:0 0 20px;}
+	
+/*### carousel view of Category members left and right ###*/
+#right .carousel-caption p, #left .carousel-caption p {display:none;}
+#right .carousel-caption, #left .carousel-caption {padding-bottom:10px;}
+#right .carousel-caption h3, #left .carousel-caption h3 {margin-bottom:0;}
+#right .carousel-indicators, #left .carousel-indicators {bottom:0;}
+#right .carousel-indicators ol, #left .carousel-indicators ol {margin-bottom:0;}
+#right .carousel-inner > .item > a > img, #left .carousel-inner > .item > a > img {margin:0 auto;}
+
+/*### carousel view of Category members###*/
+.carousel .carousel-indicators {Bottom:0;}
+.carousel .media {margin-top:0;}
+
+/* region clears */
+header, footer, #top, #bottom, #right, #left {clear:both;}

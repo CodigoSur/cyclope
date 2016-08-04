@@ -12,6 +12,9 @@ from . import register
 register(AbuseType)
 
 class AbuseReportTest(TestCase):
+
+    fixtures = ['simplest_site.json']
+    
     def setUp(self):
         # Fake sending email
         self.subject, self.message, self.mail_sent = "", "", False

@@ -11,6 +11,9 @@ class ConcreteSeries(Series):
     pass
 
 class SeriesTest(TestCase):
+
+    fixtures = ['simplest_site.json']
+    
     def test_content_types(self):
 
         ConcreteSeries.content_models = [ConcreteSeries]

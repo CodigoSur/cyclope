@@ -42,7 +42,7 @@
 
 {% block content %}
     {% comment %}TODO: review the ID definition{% endcomment %}
-    <div class="{{view_options.visualization_mode}}">
+    <div class="{{view_options.visualization_mode}} regionview category slideshow">
     <ul id="slideshow{% if region_name %}-{{region_name}}{% endif %}-{{category_slug}}" class="jcarousel-skin-cyclope">
     {% for categorization in categorizations %}
       {% spaceless %}

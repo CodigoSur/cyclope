@@ -1,1 +1,63 @@
-[{"pk": 1, "model": "sites.site", "fields": {"domain": "mydomain.com", "name": "mydomain"}}, {"pk": 1, "model": "cyclope.sitesettings", "fields": {"allow_comments": "YES", "description": "", "global_title": "", "site": 1, "theme": "neutronix", "keywords": "", "default_layout": 1}}, {"pk": 1, "model": "cyclope.menu", "fields": {"main_menu": true, "name": "Main menu", "slug": "main-menu"}}, {"pk": 1, "model": "cyclope.menuitem", "fields": {"site_home": true, "rght": 2, "layout": 1, "name": "home", "parent": null, "level": 0, "url": "home", "menu": 1, "tree_id": 1, "custom_url": "", "object_id": null, "lft": 1, "content_type": null, "content_view": "", "active": true, "slug": "home"}}, {"pk": 1, "model": "cyclope.layout", "fields": {"name": "default", "template": "five_elements.html", "slug": "default"}}]
+[
+    {
+        "pk":1,
+        "model":"sites.site",
+        "fields":{
+            "domain":"mydomain.com",
+            "name":"mydomain"
+        }
+    },
+    {
+        "pk":1,
+        "model":"cyclope.sitesettings",
+        "fields":{
+            "allow_comments":"YES",
+            "description":"",
+            "global_title":"",
+            "site":1,
+            "theme":"cyclope-bootstrap",
+            "keywords":"",
+            "default_layout":1
+        }
+    },
+    {
+        "pk":1,
+        "model":"cyclope.menu",
+        "fields":{
+            "main_menu":true,
+            "name":"Main menu",
+            "slug":"main-menu"
+        }
+    },
+    {
+        "pk":1,
+        "model":"cyclope.menuitem",
+        "fields":{
+            "site_home":true,
+            "rght":2,
+            "layout":1,
+            "name":"home",
+            "parent":null,
+            "level":0,
+            "url":"home",
+            "menu":1,
+            "tree_id":1,
+            "custom_url":"",
+            "object_id":null,
+            "lft":1,
+            "content_type":null,
+            "content_view":"",
+            "active":true,
+            "slug":"home"
+        }
+    },
+    {
+        "pk":1,
+        "model":"cyclope.layout",
+        "fields":{
+            "name":"Two Columns Left",
+            "template":"layout_two_columns_left.html",
+            "slug":"two-columns-left"
+        }
+    }
+]

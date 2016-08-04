@@ -293,7 +293,7 @@ class SlideshowOptions(forms.Form):
 class CategorySlideshow(frontend.FrontendView):
     """A slideshow view of Category members.
     """
-    name='slodeshow'
+    name='slideshow'
     verbose_name=_('slideshow of Category members')
     is_content_view = True
     is_region_view = True
