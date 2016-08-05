@@ -19,7 +19,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from datetime import datetime
+from django.utils import timezone
+
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
@@ -58,7 +59,7 @@ class FeedDetail(frontend.FrontendView):
         if not options['titles_only']:
             options['titles_only'] = content_object.titles_only
 
-        now = datetime.now()
+        now = timezone.now()
         d, last_access = self._feed_cache.get(content_object.url, (None, None))
         if d is None or total_seconds(now - last_access) > cyc_settings.CYCLOPE_FEED_CACHE_TIME:
             d = feedparser.parse(content_object.url)

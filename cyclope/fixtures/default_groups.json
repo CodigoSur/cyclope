@@ -286,32 +286,32 @@
         ], 
         [
           "can_moderate", 
-          "comments", 
+          "django_comments", 
           "comment"
         ], 
         [
           "change_comment", 
-          "comments", 
+          "django_comments", 
           "comment"
         ], 
         [
           "delete_comment", 
-          "comments", 
+          "django_comments", 
           "comment"
         ], 
         [
           "add_commentflag", 
-          "comments", 
+          "django_comments", 
           "commentflag"
         ], 
         [
           "change_commentflag", 
-          "comments", 
+          "django_comments", 
           "commentflag"
         ], 
         [
           "delete_commentflag", 
-          "comments", 
+          "django_comments", 
           "commentflag"
         ], 
         [

@@ -77,7 +77,7 @@ def changed_ctypes(sender, instance, action, reverse, model, pk_set, **kwargs):
     ## we remove previous categorizations that were set for content types
     ## that are no longer accepted by the collection
     if action == 'post_add' and pk_set:
-        Categorization = models.get_model('collections', 'categorization')
+#        Categorization = models.get_model('collections', 'categorization')
         cats = Categorization.objects.filter(
             category__collection=instance).exclude(content_type__pk__in=pk_set).delete()
 
@@ -285,7 +285,7 @@ class Categorization(models.Model):
 class Collectible(models.Model):
     """Base class for collectible objects
     """
-    categories = GenericRelation('Categorization',
+    categories = GenericRelation(Categorization,
         content_type_field='content_type', object_id_field='object_id',
         verbose_name = _('categories'))
 

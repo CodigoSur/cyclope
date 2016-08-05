@@ -103,7 +103,7 @@ class MoveCategoryTestCase(TestCase):
         collection_A.save()
 
         collection_B = Collection.objects.create(name='collection B')
-        collection_B.content_types.add(ContentType.objects.get(name="article"))
+        collection_B.content_types.add(ContentType.objects.get(model="article"))
         collection_B.save()
 
         category = Category(name='Parent', collection=collection_A)

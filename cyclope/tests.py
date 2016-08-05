@@ -28,7 +28,7 @@ from collections import defaultdict
 
 from django import forms
 from django.test import TestCase
-from django.test.simple import DjangoTestSuiteRunner
+from django.test.runner import DiscoverRunner
 from django.test.utils import setup_test_environment
 from django.test.client import RequestFactory
 from django.contrib.sites.models import Site
@@ -68,7 +68,7 @@ DEFAULT_THEME_REGION = "top"
 
 def add_region_view(model, view_name, content_object=None):
     layout = get_default_layout()
-    content_type = ContentType.objects.get(model=model._meta.module_name)
+    content_type = ContentType.objects.get(model=model._meta.model_name)
     content_view = view_name
     region = DEFAULT_THEME_REGION
     region_view = RegionView(layout=layout, content_type=content_type,
@@ -86,7 +86,7 @@ def get_default_layout():
 get_default_layout.cache = None
 
 
-class CyclopeTestSuiteRunner(DjangoTestSuiteRunner):
+class CyclopeTestSuiteRunner(DiscoverRunner):
     """
     This TestSuiteRunner if fed without app labels runs all the cyclope's apps
     tests. Eg cyclope.core.collection, cyclope.apps.articles, etc.
@@ -109,7 +109,7 @@ class ViewableTestCase(TestCase):
 
     def test_views(self):
         if self.test_model:
-            model_name = self.test_model._meta.module_name
+            model_name = self.test_model._meta.model_name
             for view in frontend.site.get_views(self.test_model):
 
                 if view.is_instance_view and self.test_object is None:

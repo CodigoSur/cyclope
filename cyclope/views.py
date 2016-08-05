@@ -30,7 +30,6 @@ which should be declared in a frontend_views.py file for each app."""
 
 from django.template import loader
 from django.http import Http404
-from django.core.xheaders import populate_xheaders
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render_to_response
 from django.template import RequestContext
