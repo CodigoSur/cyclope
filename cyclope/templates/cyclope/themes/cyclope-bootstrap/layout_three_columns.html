@@ -4,12 +4,15 @@
 {% block body_class %}three_columns{% endblock %}
 
 {% block page_content %}
-    <div class="col-xs-12 col-sm-4 col-md-3">{% region 'left' %}</div>
-    <div class="col-xs-12 col-sm-4 col-md-6">
-        {% region 'top' %}
-        {% block content %}{% endblock %}
-        {% region 'bottom' %}
+    <div class="row">
+       <div class="col-xs-12 col-sm-4 col-md-3">{% region 'left' %}</div>
+        <div class="col-xs-12 col-sm-4 col-md-6">
+            {% region 'top' %}
+            {% block content %}{% endblock %}
+            {% region 'bottom' %}
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3">{% region 'right'%}</div>
     </div>
-    <div class="col-xs-12 col-sm-4 col-md-3">{% region 'right'%}</div>
+
 {% endblock %}
 

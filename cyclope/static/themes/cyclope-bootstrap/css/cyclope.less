@@ -90,9 +90,10 @@ span.category_title a {color:#000;}
 	margin: 0;
 }
 
-.content-view.document.media.detail .html-content.summary{
-	clear: both;
-	margin-top: 10px;
+.html-content.summary {
+    clear: both;
+	padding: 10px 0;
+    text-align: justify;
 }
 
 .meta-content+a{
@@ -257,6 +258,27 @@ td.comment {
 	font-weight: bold;
 }
 
+/* Detail view of the selected File */
+#user_comments .comments{
+	margin-top: 30px;
+}
+
+.collapse.in  #form-comment,
+.collapsing  #form-comment{
+	padding: 15px 0
+}
+
+#user_comments .comments ul:nth-child(even){
+    background-color: #f5f5f5;
+}
+
+.media-list .media{
+	padding: 10px;
+}
+
+.comments small{
+	margin: 0 9px;
+}
 
 /* ### alphabetical teaser list of all the members of the Collection's Categories ### */
 .alphabetical-pagination .pagination > li > a {text-align:center;margin:0 5px 0 0;}
