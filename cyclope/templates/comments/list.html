@@ -5,7 +5,7 @@
 <ul class="media-list">{% endif %}
     <li id="c{{ comment.id }}" class="media">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
         <div class="media-left" href="#">
-		<img class="media-object img-circle" src="{% static 'cyclope/images/img-author-not-available.png' %}" alt="Image not available">
+		<img class="media-object img-circle" src="{% static 'images/img-author-not-available.png' %}" alt="Image not available">
         </div>
         <div class="comment media-body">
             <h4 class="media-heading"> {% if comment.name %}{% trans 'By' %} {{ comment.name }}{% endif %}</h4>

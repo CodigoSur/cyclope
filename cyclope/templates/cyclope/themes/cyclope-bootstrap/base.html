@@ -8,7 +8,7 @@
 # (at your option) any later version.
  -->
 
-{% load layout i18n cyclope_utils compress %}
+{% load layout i18n cyclope_utils compress staticfiles %}
 
 {# TODO(sanhoerth): find best way to show lang-tag in mulitlang enviroment #}
 <html lang="es">
@@ -47,7 +47,7 @@
     {% endcompress %}
     <!-- /CSS -->
     <!--jquery needs to be here to work properly clear search box --> 
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}{{ CYCLOPE_JQUERY_PATH }}"></script>
+    <script type="text/javascript" src="{% static CYCLOPE_JQUERY_PATH %}"></script>
      
     {% block extra_head %}{% endblock %}
 
@@ -103,17 +103,17 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/bootstrap.min.js"></script> 
-        <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.js"></script>
-        <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/bootstrap/addons/jquery.smartmenus.bootstrap.js"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script> 
+        <script type="text/javascript" src="{% static 'js/bootstrap/addons/jquery.smartmenus.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap/addons/jquery.smartmenus.bootstrap.js' %}"></script>
         {% if not COMPRESS_ENABLED %}
-            <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less.min.js"></script>
+            <script type="text/javascript" src="{% static 'js/less.min.js' %}"></script>
         {% endif %}
         {% if CYCLOPE_SITE_SETTINGS.enable_ratings %}
-        <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/ratings.js" ></script>
+        <script type="text/javascript" src="{% static 'js/ratings.js' %}" ></script>
         {% endif %}
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="{{ CYCLOPE_STATIC_URL }}js/ie10-viewport-bug-workaround.js"></script>
+        <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
     {% endcompress %}
 </body>
 </html>
