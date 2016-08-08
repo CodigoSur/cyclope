@@ -2815,7 +2815,7 @@ msgstr "Ver mis acciones"
 
 #: templates/admin/base_content_change_form.html:136
 msgid "You must choose a collection first."
-msgstr "Primero debe serleccinar una colección."
+msgstr "Primero debe seleccionar una colección."
 
 #: templates/admin/base_site.html:4 templates/rosetta/base.html:5
 msgid "Cyclope site admin"
