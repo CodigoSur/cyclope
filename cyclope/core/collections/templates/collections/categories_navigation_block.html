@@ -7,7 +7,7 @@
             {% for categorization in current_object.categories.all %}
             {% alias categorization.category as 'category' %}
             {% if category.collection.visible %}
-                <a href="{% url category-default category.slug %}" class="btn btn-primary" role="button">
+                <a href="{% url category-default category.slug %}" class="btn btn-default" role="button">
                     <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
                     {{ category.name }}
                 </a>
