@@ -74,7 +74,7 @@ span.category_title a {color:#000;}
 .pretitle-container {margin:0;}
 .article-teaser .date {font-size: 1em;}
 .teaser h2.title {clear:both;margin:0;}
-.teaser_more {margin:5px 0 10px;clear:both;}
+.teaser_more, .contact_more {margin:5px 0 10px;clear:both;}
 .teaser {margin:15px 0;vertical-align:top;clear:both;border-bottom:1px dotted;overflow:auto;}
 
 
@@ -90,9 +90,9 @@ span.category_title a {color:#000;}
 	margin: 0;
 }
 
-.content-view.document.media.detail .html-content.summary{
-	clear: both;
-	margin-top: 10px;
+.html-content.summary {
+    clear: both;
+	padding: 10px 0;
 }
 
 .meta-content+a{
@@ -105,14 +105,6 @@ span.category_title a {color:#000;}
 
 .content-view.article.inline_detail.article-inline_detail h3>span{
 	font-size: 15px;
-}
-
-.content-view.document.media.detail .html-content.summary p,
-.content-view.article.inline_detail.article-inline_detail .summary p,
-.content-view.article.inline_detail.article-inline_detail .article_content p,
-.content-view.externalcontent.media.detail p,
-.content-view.flashmovie.media.detail p{
-	text-align: justify;
 }
 
 .content-view.article.inline_detail.article-inline_detail .pretitle{
@@ -157,31 +149,50 @@ span.category_title a {color:#000;}
 /* ### teaser labeled icon ### */
 
 .icon_list_container .title {text-align:center;height:40px;overflow:hidden;margin:10px 0 0;}
+
 .icon_list_container .teaser_more {text-align:center;}
+
 .icon_list_container .thumbnail .caption {padding:2px;}
 
 
 /* ### teaser list of Category members left and right ### */
-#right .teaser_icon_container, #left .teaser_icon_container {display:block;float:none;padding:4px;}
-#right .teaser_text_container, #left .teaser_text_container {width:100% ;display:inline;margin-top:5px;}
-#right .teaser_icon_container img, #left .teaser_icon_container img {margin:0 auto; }
-#right .teaser h2.title, #left .teaser h2.title {font-size:18px;font-weight:700;margin-bottom:5px;}
-#right .teaser .summary, #left .teaser .summary {font-size:12px; margin:0;}
-#right .btn, #left .btn {padding: 1px 5px;font-size: 12px;line-height: 1.5;border-radius: 3px;}
-#right .pretitle-container, #left .pretitle-container {font-size:12px;}
-#right .author, #left .author {font-size:12px; margin-top:5px; margin-bottom:5px;}
-#right .teaser_more, #left .teaser_more {margin:0 0 10px;}
-#right .teaser_more img, #left .teaser_more img {width:10%;}
 
+#right .teaser_icon_container, #left .teaser_icon_container {display:block;float:none;padding:4px;}
+
+#right .teaser_text_container, #left .teaser_text_container {width:100% ;display:inline;margin-top:5px;}
+
+#right .teaser_icon_container img, #left .teaser_icon_container img {margin:0 auto; width: 100%}
+
+#right .teaser h2.title, #left .teaser h2.title {font-size:18px;font-weight:700;margin-bottom:5px;}
+
+#right .teaser .summary, #left .teaser .summary {font-size:12px; margin:0;}
+
+#right .btn, #left .btn {padding: 1px 5px;font-size: 12px;line-height: 1.5;border-radius: 3px;}
+
+#right .pretitle-container, #left .pretitle-container {font-size:12px;}
+
+#right .author, #left .author {font-size:12px; margin-top:5px; margin-bottom:5px;}
+
+
+#right .teaser_more, #left .teaser_more, #right .contact_more, #left .contact_more {margin:0 0 10px;}
+#right .teaser_more img, #left .teaser_more img#right .contact_more img, #left .contact_more img {width:10%;}
 
 /* ### teaser list of Category of a collection left and right ### */
+
 #right .collection h1.title, #left .colecction h1.title {font-size:22px;border-top: 1px solid #000;border-bottom: 1px solid #000;font-weight: 600;}
+
 #right .collection_image img, #left .collection_image img {padding:0;}
+
 #right .collection .summary, #left .collection .summary {font-size:12px;}
+
 #right .teaser, #left .teaser {padding-bottom:10px; margin-bottom:5px;}
+
 #right .collection_teaser, #left .collection_teaser {margin:0;}
+
 #right .category_title, #left .category_title {font-size:22px;border-top: 1px solid #000;border-bottom: 1px solid #000;font-weight: 600;}
+
 #right .collection_header, #left .collection_header {margin:0;}
+
 #right .category_root_item_list ul, #left .category_root_item_list ul {margin-top:10px; padding-left:15px;}
 
 /*  category list as forum  */
@@ -228,7 +239,7 @@ td.comment {
 }
 
 .link-create-topic .btn{
-	border-radius: 0px;
+	border-radius: 0;
 }
 
 .create_forum input#id_name{
@@ -257,6 +268,41 @@ td.comment {
 	font-weight: bold;
 }
 
+/* Detail view of the selected File */
+
+#user_comments .comments{
+	margin-top: 30px;
+}
+
+.collapse.in  #form-comment,
+.collapsing  #form-comment{
+	padding: 15px 0
+}
+
+#user_comments .comments ul:nth-child(even){
+    background-color: #f5f5f5;
+}
+
+.media-list .media{
+	padding: 10px;
+}
+
+.comments small{
+	margin: 0 9px;
+}
+
+/* list of Article labeled Icons*/
+.teaser_icon .thumbnail .caption{
+	text-align: center;
+}
+
+.teaser_icon .thumbnail img{
+	margin-top: 20px;
+}
+
+.teaser_icon .thumbnail img.type_icon{
+	margin: 0;
+}
 
 /* ### alphabetical teaser list of all the members of the Collection's Categories ### */
 .alphabetical-pagination .pagination > li > a {text-align:center;margin:0 5px 0 0;}
@@ -274,6 +320,19 @@ td.comment {
 .carousel .carousel-indicators {Bottom:0;}
 .carousel .media {margin-top:0;}
 
+/*### Article Teaser list  Left and Right ###*/
+#right .article.teaser-list > .teaser.article-teaser > .teaser_icon_container,
+#left .article.teaser-list > .teaser.article-teaser > .teaser_icon_container{
+	width: 100% !important;
+}
+
+
+/*### Article Teaser list ###*/
+div:not(#right ) .teaser.article-teaser > .teaser_icon_container,
+div:not(#left) .teaser.article-teaser > .teaser_icon_container{
+	width: 30%;
+}
+
 /* region clears */
 header, footer, #top, #bottom, #right, #left {clear:both;}
 
@@ -282,3 +341,18 @@ header, footer, #top, #bottom, #right, #left {clear:both;}
 .categories_hierarchy > ul {font-size:18px;}
 .categories_hierarchy .collection_teaser {margin-bottom:10px;}
 
+
+/*### detailed of the select Article ###*/
+.text img {max-width:75%; margin:20px auto; display:block;}
+.vote-like{display:inline}
+.vote-results-pos{display:inline-block}
+.vote-dislike{display:inline-block}
+.vote-results-neg{display:inline-block}
+
+/*Contact*/
+.contact_fields  {margin:0 auto;}
+.contact_fields h3 {text-align:center;font-weight:700;font-size:20px;text-transform:uppercase;border-bottom:1px solid #999;margin:30px 20px 0;}
+.contact_fields p {display:inline-block;padding:3px 10px;margin:5px auto;width:40%;}
+.contact_field {display:block;margin:0 auto;text-align:center;}
+.contact_field .text-right {font-weight:700;}
+.contact_fields small,.contact_fields .btn {margin:20px 0 0;}

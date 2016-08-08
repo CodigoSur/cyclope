@@ -528,7 +528,7 @@ class Source(models.Model):
                              db_index=True, blank=False, unique=True)
     slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
                          always_update=True)
-    link = models.CharField(_('link'), max_length=250, blank=True, default='')
+    link = models.CharField(_('link'), help_text="Please include http:// or https://", max_length=250, blank=True, default='')
 
     def __unicode__(self):
         return self.name
