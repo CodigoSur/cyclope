@@ -3,7 +3,7 @@
 
 {% block extrastyle %}
 {{ block.super }}
-<link rel="stylesheet" type="text/css" href="{{ CYCLOPE_STATIC_URL }}css/tabbed_collections.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/tabbed_collections.css' %}" />
 {% endblock %}
 
 
@@ -176,7 +176,7 @@ jQuery(document).ready(function($){
 </script>
 
 {% if original.related_contents.count >= 0 %}
-    <script type="text/javascript" src="{% static 'cyclope/js/drag_drop.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/drag_drop.js' %}"></script>
 {% endif %}
 
 {% endblock %}

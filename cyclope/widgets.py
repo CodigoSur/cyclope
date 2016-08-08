@@ -58,9 +58,7 @@ class CKEditor(forms.Textarea):
     Widget providing CKEditor for Rich Text Editing.
     """
     class Media:
-        js = (
-            cyc_settings.CYCLOPE_STATIC_URL + 'ckeditor/ckeditor.js',
-        )
+        js = ('ckeditor/ckeditor.js', )
 
     def render(self, name, value, attrs={}):
         language = settings.LANGUAGE_CODE[:2]

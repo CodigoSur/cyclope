@@ -75,8 +75,8 @@ class ArticleAdmin(CollectibleAdmin, BaseContentAdmin):
 
     class Media:
         css = {
-            'all' : (cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_UI_CSS_PATH,
-                     cyc_settings.CYCLOPE_STATIC_URL + 'css/media_widget.css')
+            'all' : (cyc_settings.CYCLOPE_JQUERY_UI_CSS_PATH,
+                    'css/media_widget.css')
         }
 
 admin.site.register(Article, ArticleAdmin)

@@ -1,9 +1,57 @@
 html, body {overflow-x: hidden; /* Prevent scroll on narrow devices */padding-top: 35px;}
 
+.clear{
+	clear: both;
+}
+
+.center{
+	float: none;
+	margin: 0 auto;
+}
 /* fix float vertical navbar */
 #left .navbar-nav > li, #rigth .navbar-nav > li {float:none;display:block;}
 
 /* collection and Categories default styles */
+
+.category_description .category_title {
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;}
+
+.category_description .image {
+	float:left;
+	border-radius:50%;
+	margin:0 20px 0 0;}
+
+span.category_title {
+	display:block;
+	font-size:28px;
+	margin:0;
+	font-weight:600;}
+
+span.category_title a {
+	color:#000;}
+
+.collection_teaser {
+	background:#eee;
+	padding:8px;
+	margin:0 0 10px;
+}
+
+.collection_image {
+	background:#eee;
+	margin:0 0 10px;}
+
+.collection_image img {
+	margin: auto;
+	display:block;
+	padding:20px 0;}
+
+.collection .title {
+	margin-bottom:0;}
+
+.media .date,
+.staticpage .date {
+	font-size: 1em;}
 
 .category_description, .collection_header {overflow:auto;}
 .category_description .category_title, .collection_header .title {border-top:1px solid #000;border-bottom:1px solid #000;}
@@ -30,6 +78,81 @@ span.category_title a {color:#000;}
 .teaser {margin:15px 0;vertical-align:top;clear:both;border-bottom:1px dotted;overflow:auto;}
 
 
+/* Full Category content -  media_library_base_detail */
+.content-view.externalcontent.media.detail .tools.meta-content,
+.content-view.pictures.media.detail .tools.meta-content,
+.content-view.document.media.detail .tools.meta-content,
+.content-view.article.media.detail .tools.meta-content	{
+	padding: 5px 10px;
+}
+
+.content-view.media.detail .tools.meta-content .list-inline{
+	margin: 0;
+}
+
+.content-view.document.media.detail .html-content.summary{
+	clear: both;
+	margin-top: 10px;
+}
+
+.meta-content+a{
+	margin: 5px 0;
+}
+
+.deliverables-links{
+	margin-top: 10px;
+}
+
+.content-view.article.inline_detail.article-inline_detail h3>span{
+	font-size: 15px;
+}
+
+.content-view.document.media.detail .html-content.summary p,
+.content-view.article.inline_detail.article-inline_detail .summary p,
+.content-view.article.inline_detail.article-inline_detail .article_content p,
+.content-view.externalcontent.media.detail p,
+.content-view.flashmovie.media.detail p{
+	text-align: justify;
+}
+
+.content-view.article.inline_detail.article-inline_detail .pretitle{
+	margin: 0;
+}
+
+.content-view.soundtrack.media.detail .mejs-container.mejs-audio{
+	height: 30px !important;
+	width: 240px !important;
+	float: none;
+	margin: 0 auto;
+}
+
+.content-view.document.media.detail,
+.content-view.article.inline_detail.article-inline_detail,
+.content-view.externalcontent.media.detail{
+    padding: 10px 0;
+    border-bottom: solid 2px #f5f5f5;
+}
+
+.flashmovie-inline-detail{
+	width: 100%;
+	height: 550px;
+}
+
+.flashmovie-inline-detail embed,
+.flashmovie-inline-detail object{
+	width: 100% !important;
+	height: 100% !important;
+}
+
+.player video{
+	width: 480px;
+	height: 360px
+}
+
+.player object{
+	width: 480px;
+	height: 360px;
+}
 
 /* ### teaser labeled icon ### */
 
@@ -60,6 +183,81 @@ span.category_title a {color:#000;}
 #right .category_title, #left .category_title {font-size:22px;border-top: 1px solid #000;border-bottom: 1px solid #000;font-weight: 600;}
 #right .collection_header, #left .collection_header {margin:0;}
 #right .category_root_item_list ul, #left .category_root_item_list ul {margin-top:10px; padding-left:15px;}
+
+<<<<<<< HEAD
+=======
+/*  category list as forum  */
+.forum{
+	overflow-x:auto;
+}
+
+.forum .object {
+	width: 60%;
+}
+
+.forum .topic{
+	margin-bottom: 0;
+}
+
+th {
+    background-color: #337ab7;
+    color: white;
+	text-align: center;
+	padding:5px;
+}
+
+td.comment {
+	text-align: center	;
+}
+
+.forum .object, .forum .comment, th.name, th.comments{
+	border-right: solid 3px #f5f5f5;
+}
+
+.forum .created, td.last_comment{
+	font-size: 12px;
+}
+
+.new-topic-title{
+	text-align: center;
+	border-bottom: solid 2px;
+	padding-bottom: 10px;
+}
+
+.link-create-topic{
+	float: right;
+	margin: 10px auto;
+}
+
+.link-create-topic .btn{
+	border-radius: 0px;
+}
+
+.create_forum input#id_name{
+    display: block;
+    width: 100%;
+}
+
+.create_forum textarea#id_text{
+	width: 100%;
+	border:none;
+	border-radius: 4px;
+	box-shadow: none;
+}
+
+.create_forum .submit {
+    background-color: #5cb85c;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.forum .topic{
+	font-weight: bold;
+}
 
 /* ### alphabetical teaser list of all the members of the Collection's Categories ### */
 .alphabetical-pagination .pagination > li > a {text-align:center;margin:0 5px 0 0;}
@@ -100,6 +298,3 @@ header, footer, #top, #bottom, #right, #left {clear:both;}
 .contact_field {display:block;margin:0 auto;text-align:center;}
 .contact_field .text-right {font-weight:700;}
 .contact_fields small,.contact_fields .btn {margin:20px 0 0;}
-
-
-

@@ -67,20 +67,6 @@ class Command(TemplateCommand):
 
         super(Command, self).handle('project', project_name, target, **options)
 
-        # Create media
-        import markitup
-        import admin_tools
-        import filebrowser
-        import mptt_tree_editor
-        media = (
-            ("admin", os.path.join(django.__path__[0], "contrib", "admin", "static", "admin")),
-            ("markitup", os.path.join(markitup.__path__[0], "static", "markitup")),
-            ("admin_tools", os.path.join(admin_tools.__path__[0], "media", "admin_tools")), # esta app es la que no esta conforme a static?
-            ("filebrowser", os.path.join(filebrowser.__path__[0], "static", "filebrowser")),
-            ("cyclope", os.path.join(cyclope.__path__[0], "static")),
-            ("mptt_tree_editor", os.path.join(mptt_tree_editor.__path__[0], "static", "mptt_tree_editor")),
-        )
-
         directory = options.get("directory")
         top_dir = os.path.join(directory, project_name)
         #/media
@@ -89,8 +75,6 @@ class Command(TemplateCommand):
         #/static
         static_dir = os.path.join(top_dir, "static")
         os.mkdir(static_dir)
-        for name, path in media:
-            os.symlink(path, os.path.join(static_dir, name))
 
         # FIXME: this should not be here
         # Create db
