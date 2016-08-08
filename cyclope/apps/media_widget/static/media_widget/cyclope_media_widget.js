@@ -1,13 +1,7 @@
-/**
-* TODO Move this & related scripts inside Cyclope's Media Widget App
-*/
-
 /** https://api.jquery.com/jquery.noconflict/ */
-
 /**jQuery-UI Widgets declaration*/
 
 /**Pictures Upload Widget*/
-
 $.widget("cyclope.picturesWidget", $.ui.dialog, {
     options: {
         autoOpen: false,
@@ -54,5 +48,3 @@ $(function(){
     $('#media_iframe').mediaWidget();
 });
 // trigger is fired by markitup
-
-
