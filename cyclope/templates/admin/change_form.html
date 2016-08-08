@@ -83,6 +83,10 @@
 {# JavaScript for prepopulated fields #}
 {% prepopulated_fields_js %}
 
+
+{# TODO(NumericA) MediaWidget is used by any form containing a TextField #}
+{% include "media_widget/media_iframe.html" %}
+
 </div>
 </form></div>
 {% endblock %}

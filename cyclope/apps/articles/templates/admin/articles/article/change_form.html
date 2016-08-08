@@ -6,11 +6,8 @@
     {{ media }}
     <script type="text/javascript" src="{% static 'js/jquery.chainedSelect.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/less.min.js' %}"></script>
-    <script type="text/javascript" src="{% static CYCLOPE_JQUERY_UI_PATH %}"></script>
-    <script type="text/javascript" src="{% static 'js/cyclope_media_widget.js' %}"></script>
 {% endblock %}
 {% block content %}
 	{{ block.super }}
 	{% include "admin/articles/article/pictures_iframe.html" %}
-    {% include "media_widget/media_iframe.html" %}
 {% endblock %}

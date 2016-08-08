@@ -160,6 +160,7 @@ class MultipleWidget(forms.Widget):
 
 
 class FBAdminMarkItUpWidget(AdminMarkItUpWidget):
+
     def render(self, name, value, attrs=None):
         html = super(MarkItUpWidget, self).render(name, value, attrs)
 
@@ -178,3 +179,12 @@ class FBAdminMarkItUpWidget(AdminMarkItUpWidget):
                  '</script>' % {'id': attrs['id'],
                                 'auto_preview': auto_preview })
         return mark_safe(html)
+    
+    class Media:
+        js = (
+            cyc_settings.CYCLOPE_JQUERY_UI_PATH,
+            'media_widget/cyclope_media_widget.js',
+        )
+        css = {
+            'all': (cyc_settings.CYCLOPE_JQUERY_UI_CSS_PATH,)
+        }
