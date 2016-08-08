@@ -235,7 +235,7 @@ AUTH_PROFILE_MODULE = "user_profiles.UserProfile"
 # admin-tools settings
 ADMIN_TOOLS_INDEX_DASHBOARD = 'cyclope.dashboard.CustomIndexDashboard'
 ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'cyclope.dashboard.CustomAppIndexDashboard'
-ADMIN_TOOLS_THEMING_CSS = 'cyclope/css/admin_tools_theming.css'
+ADMIN_TOOLS_THEMING_CSS = 'css/admin_tools_theming.css'
 
 LOCALE_PATHS = (os.path.join(os.path.dirname(__file__), "locale_external"), )
 
@@ -270,8 +270,8 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
     )
 
 # martkitup settings
-JQUERY_URL = 'cyclope/js/jquery-1.12.4.min.js' # TODO import it from settings.py
-MARKITUP_SET = 'cyclope/markitup/sets/textile'
+JQUERY_URL = 'js/jquery-1.12.4.min.js' # TODO import it from settings.py
+MARKITUP_SET = 'markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
 
 # crispy forms settings

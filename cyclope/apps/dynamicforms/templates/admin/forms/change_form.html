@@ -1,6 +1,6 @@
 {% extends "admin/change_form.html" %}
 
-{% load i18n %}
+{% load i18n staticfiles %}
 {% load url from future %}
 
 {% block object-tools %}
@@ -23,6 +23,6 @@
 
 {% block extrahead %}
     {{ block.super }}
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}{{ CYCLOPE_JQUERY_UI_PATH }}"></script>
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/drag_drop.js"></script>
+    <script type="text/javascript" src="{% static CYCLOPE_JQUERY_UI_PATH %}"></script>
+    <script type="text/javascript" src="{% static 'js/drag_drop.js' %}"></script>
 {% endblock %}

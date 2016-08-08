@@ -14,7 +14,7 @@
 {% block extrahead %}
     {{ block.super }}
     {% ifequal query.pop '1' %} <!-- FileBrowseField -->
-    <script language="javascript" type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}filebrowser/FB_FileBrowseField.js"></script>
+    <script language="javascript" type="text/javascript" src="{% static 'filebrowser/FB_FileBrowseField.js' %}"></script>
     {% endifequal %}
     {% ifequal query.pop '2' %} <!-- TinyMCE -->
     <script language="javascript" type="text/javascript" src="{{ settings_var.URL_TINYMCE }}tiny_mce_popup.js"></script>

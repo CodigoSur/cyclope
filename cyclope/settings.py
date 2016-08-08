@@ -30,8 +30,6 @@ Attributes:
 
     CYCLOPE_PROJECT_PATH: path to the django project that will be serving Cyclope
     CYCLOPE_PREFIX: prefix for Cyclope URLs, defaults to 'cyclope/'
-    CYCLOPE_STATIC_URL: URL to Cyclope static files
-    CYCLOPE_STATIC_ROOT: defaults to cyclope/ folder of the project's STATIC_ROOT
 
   Automatic (based on database values):
 
@@ -61,10 +59,9 @@ from cyclope.core.frontend.sites import site
 
 CYCLOPE_PREFIX = getattr(settings, 'CYCLOPE_PREFIX', 'cyclope/')
 
-CYCLOPE_STATIC_URL = getattr(settings, 'CYCLOPE_STATIC_URL', '%scyclope/' % settings.STATIC_URL)
-CYCLOPE_STATIC_ROOT = getattr(settings, 'CYCLOPE_STATIC_ROOT', '%scyclope/' % settings.STATIC_ROOT)
-
 # For backwards compatibility only!
+CYCLOPE_STATIC_URL = getattr(settings, 'CYCLOPE_STATIC_URL', settings.STATIC_URL)
+CYCLOPE_STATIC_ROOT = getattr(settings, 'CYCLOPE_STATIC_ROOT', settings.STATIC_ROOT)
 CYCLOPE_MEDIA_URL =  CYCLOPE_STATIC_URL
 CYCLOPE_MEDIA_ROOT = CYCLOPE_STATIC_ROOT
 
@@ -143,7 +140,7 @@ def populate_from_site_settings(site_settings):
         CYCLOPE_THEME_MEDIA_URL = '%s%s/' % (
             settings.CYCLOPE_LOCAL_THEMES_MEDIA_PREFIX, CYCLOPE_CURRENT_THEME)
     else:
-        CYCLOPE_THEME_MEDIA_URL = '%sthemes/%s/' % (CYCLOPE_STATIC_URL,
+        CYCLOPE_THEME_MEDIA_URL = '%sthemes/%s/' % (settings.STATIC_URL,
                                                     CYCLOPE_CURRENT_THEME)
 
     CYCLOPE_THEME_PREFIX = 'cyclope/themes/%s/' % CYCLOPE_CURRENT_THEME

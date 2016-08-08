@@ -74,8 +74,8 @@ class BaseContentAdmin(admin.ModelAdmin):
 
     class Media:
         js = (
-            cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_PATH,
-            #cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_MIGRATE_PATH, TODO
+            cyc_settings.CYCLOPE_JQUERY_PATH,
+            #cyc_settings.CYCLOPE_JQUERY_MIGRATE_PATH, TODO
         )
 
     def response_change(self, request, obj):
@@ -171,9 +171,7 @@ class MenuItemAdmin(TreeEditor, PermanentFilterMixin):
     )
 
     class Media:
-        js = (
-            cyc_settings.CYCLOPE_STATIC_URL + 'js/reuse_django_jquery.js',
-        )
+        js = ( 'js/reuse_django_jquery.js',)
 
     def changelist_view(self, request, extra_context=None):
         self.do_permanent_filters(request)
@@ -206,7 +204,7 @@ class LayoutAdmin(admin.ModelAdmin):
         return super(LayoutAdmin, self).change_view(request, object_id, form_url, extra_context)
         
     class Media:
-        js = (cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_PATH,)
+        js = (cyc_settings.CYCLOPE_JQUERY_PATH,)
 
 admin.site.register(Layout, LayoutAdmin)
 
@@ -260,7 +258,7 @@ class DesignSettingsAdmin(SingletonAdminMixin):
     )
 
     class Media:
-        js = (cyc_settings.CYCLOPE_STATIC_URL + "js/jscolor/jscolor.js",)
+        js = ("js/jscolor/jscolor.js",)
 
 admin.site.register(DesignSettings, DesignSettingsAdmin)
 

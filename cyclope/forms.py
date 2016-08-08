@@ -40,7 +40,7 @@ from cyclope.apps.related_admin import GenericFKWidget, GenericModelForm
 from cyclope.apps.related_admin import GenericModelChoiceField as GMCField
 from haystack.forms import ModelSearchForm
 import cyclope.settings as cyc_settings
-
+from django.conf import settings
 from django.forms.widgets import RadioFieldRenderer
 from django.forms import RadioSelect
 from django.utils.encoding import force_unicode
@@ -234,7 +234,7 @@ class DesignSettingsAdminForm(forms.ModelForm):
         class TableRadioFieldRenderer(RadioFieldRenderer):
             def render(self):
                 """Outputs a table for this set of radio fields."""
-                src = cyc_settings.CYCLOPE_STATIC_URL+u'images/theme-skins-thumbnail/{}.png'
+                src = settings.STATIC_URL+u'images/theme-skins-thumbnail/{}.png'
                 row = u'<tr><td>{}</td><td><image src="'+src+u'"/></td></tr>'
                 return mark_safe(u'<table class="radio-skin-tbl">\n%s\n</table>' % u'\n'.join([row.format(force_unicode(w),force_unicode(w.choice_value)) for w in self]))
         renderer = TableRadioFieldRenderer

@@ -74,7 +74,7 @@ span.category_title a {color:#000;}
 .pretitle-container {margin:0;}
 .article-teaser .date {font-size: 1em;}
 .teaser h2.title {clear:both;margin:0;}
-.teaser_more {margin:5px 0 10px;clear:both;}
+.teaser_more, .contact_more {margin:5px 0 10px;clear:both;}
 .teaser {margin:15px 0;vertical-align:top;clear:both;border-bottom:1px dotted;overflow:auto;}
 
 
@@ -173,16 +173,15 @@ span.category_title a {color:#000;}
 
 #right .author, #left .author {font-size:12px; margin-top:5px; margin-bottom:5px;}
 
-#right .teaser_more, #left .teaser_more {margin:0 0 10px;}
 
-#right .teaser_more img, #left .teaser_more img {width:10%;}
-
+#right .teaser_more, #left .teaser_more, #right .contact_more, #left .contact_more {margin:0 0 10px;}
+#right .teaser_more img, #left .teaser_more img#right .contact_more img, #left .contact_more img {width:10%;}
 
 /* ### teaser list of Category of a collection left and right ### */
 
 #right .collection h1.title, #left .colecction h1.title {font-size:22px;border-top: 1px solid #000;border-bottom: 1px solid #000;font-weight: 600;}
 
-#right .collection_image img, #left .collection_image img {width:70%;padding:0;}
+#right .collection_image img, #left .collection_image img {padding:0;}
 
 #right .collection .summary, #left .collection .summary {font-size:12px;}
 
@@ -305,7 +304,6 @@ td.comment {
 	margin: 0;
 }
 
-
 /* ### alphabetical teaser list of all the members of the Collection's Categories ### */
 .alphabetical-pagination .pagination > li > a {text-align:center;margin:0 5px 0 0;}
 .alphabetical-pagination .pagination {margin:0 0 20px;}
@@ -337,3 +335,24 @@ div:not(#left) .teaser.article-teaser > .teaser_icon_container{
 
 /* region clears */
 header, footer, #top, #bottom, #right, #left {clear:both;}
+
+/*### list of root category of a collection ###*/
+.categories_hierarchy .title {font-size:22px; border-top:1px solid; border-bottom:1px solid; font-weight:600; margin-bottom:10px;}
+.categories_hierarchy > ul {font-size:18px;}
+.categories_hierarchy .collection_teaser {margin-bottom:10px;}
+
+
+/*### detailed of the select Article ###*/
+.text img {max-width:75%; margin:20px auto; display:block;}
+.vote-like{display:inline}
+.vote-results-pos{display:inline-block}
+.vote-dislike{display:inline-block}
+.vote-results-neg{display:inline-block}
+
+/*Contact*/
+.contact_fields  {margin:0 auto;}
+.contact_fields h3 {text-align:center;font-weight:700;font-size:20px;text-transform:uppercase;border-bottom:1px solid #999;margin:30px 20px 0;}
+.contact_fields p {display:inline-block;padding:3px 10px;margin:5px auto;width:40%;}
+.contact_field {display:block;margin:0 auto;text-align:center;}
+.contact_field .text-right {font-weight:700;}
+.contact_fields small,.contact_fields .btn {margin:20px 0 0;}
