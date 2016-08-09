@@ -30,13 +30,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group" style="margin-bottom:0;">
-                    <label for="selectMediaType">Tipo de contenido a insertar</label>
+                    <label for="selectMediaType">{% trans 'Tipo de contenido a insertar' %}</label>
                     <select id="selectMediaType" class="form-control">
-                        <option value="picture">Im&aacute;gen</option>
-                        <option value="soundtrack">Audio</option>
-                        <option value="movieclip">Video</option>
-                        <option value="document">PDF</option>
-                        <option value="flashmovie">Flash</option>
+                        <option value="picture">{% trans 'Im&aacute;gen' %}</option>
+                        <option value="soundtrack">{% trans 'Audio' %}</option>
+                        <option value="movieclip">{% trans 'Video' %}</option>
+                        <option value="document">{% trans 'PDF' %}</option>
+                        <option value="flashmovie">{% trans 'Flash' %}</option>
                     </select>
                 </div>
             </div>
@@ -49,13 +49,13 @@
                     <li role="presentation" {% if n == 1 %}class="active"{% endif %}>
                         <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-                            Subir
+                            {% trans 'Subir' %}
                         </a>
                     </li>
                     <li role="presentation" {% if n > 1 %}class="active"{% endif %}>
                         <a href="#search" aria-controls="search" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                            Buscar en biblioteca
+                            {% trans 'Buscar en biblioteca' %}
                         </a>
                     </li>
                 </ul>

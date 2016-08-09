@@ -4,7 +4,7 @@
     <div class="col-xs-3" style="margin-top: 8px;">
         {% if pagina.has_previous %}
             <a href="{% pagination_link widget param pagina.previous_page_number nRows %}" class="paginacion">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>&nbsp;Atr&aacute;s
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>&nbsp;{% trans 'Atr&aacute;s' %}
             </a>
         {% endif %}
     </div>
@@ -22,7 +22,7 @@
     <div class="col-xs-3" style="margin-top: 8px;">
         {% if pagina.has_next %}
             <a href="{% pagination_link widget param pagina.next_page_number nRows %}" class="paginacion">
-                Siguiente&nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                {% trans 'Siguiente' %}&nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
             </a>
         {% endif %}
     </div>

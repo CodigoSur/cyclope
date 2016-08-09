@@ -12,11 +12,11 @@
                 <a href="{{ picture.image }}" target="_blank"><img src="{% version picture.image.path 'fb_thumb' %}" title="{{picture.description}}" class="thumbnail"/></a>
             </td>
             <td>
-                <button class="btn btn-primary btn-xs" name="picture_id" value="{{picture.pk}}">Seleccionar</button>
+                <button class="btn btn-primary btn-xs" name="picture_id" value="{{picture.pk}}">{% trans 'Seleccionar' %}</button>
             </td>
         </tr>
         {% empty %}
-            <p class="lead">No ha subido im&aacute;genes para seleccionar.</P>
+            <p class="lead">{% trans 'No ha subido im&aacute;genes para seleccionar.' %}</P>
         {% endfor %}
     </table>
 </form>

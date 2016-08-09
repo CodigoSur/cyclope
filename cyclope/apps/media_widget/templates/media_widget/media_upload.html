@@ -2,27 +2,27 @@
 <form method="POST" action="{% url embed-create %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.media_type }}
-    <!--
+    <!--{#
     <div class="pull-right">
         TODO checkbox x carrousel, radio button for teasera
         <input type="checkbox" name="show_name" value="no">
     </div>
-    -->
+    #}-->
     <div class="form-group {%if form.name.errors%}has-error{%endif%}">
-        <label for="fileName">Nombre</label>
+        <label for="fileName">{% trans 'Nombre' %}</label>
         {{ form.name }}
         <span id="fileName" class="help-block">
             {{ form.name.errors }}
         </span>
     </div>
-    <!--
+    <!--{#
     <div class="pull-right">
         TODO checkbox x carrousel, radio button for teasera
         <input type="checkbox" name="show_desc" value="no">
     </div>
-    -->
+    #}-->
     <div class="form-group {%if form.description.errors%}has-error{%endif%}">
-        <label for="fileDesc">Descripci&oacute;n</label>
+        <label for="fileDesc">{% trans 'Descripci&oacute;n' %}</label>
         {{ form.description }}
         <span id="fileDesc" class="help-block">
             {{ form.description.errors }}
@@ -30,23 +30,23 @@
     </div>
 
     <div class="form-group {%if form.multimedia.errors%}has-error bg-danger{%endif%}">
-        <label for="file">Archivo</label>
+        <label for="file">{% trans 'Archivo' %}</label>
         {{ form.multimedia }}
         <span id="helpName" class="help-block">
             {{ form.multimedia.errors }}
         </span>
-        <p class="help-block">Selecciona el archivo para subir</p>
+        <p class="help-block">{% trans 'Selecciona el archivo para subir' %}</p>
     </div>
 
     <div class="row">
         <div class="col-xs-6">
             <button type="submit" class="btn btn-danger btn-block">
                 <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-                Subir e Insertar
+                {% trans 'Subir e Insertar' %}
             </button>
         </div>
         <div class="col-xs-6 text-muted" style="font-size: 10px;">
-            Recuerda que puedes agregar m&aacute;s datos a este contenido desde la Biblioteca Multimedia.
+            {% trans 'Recuerda que puedes agregar m&aacute;s datos a este contenido desde la Biblioteca Multimedia.' %}
         </div>
     </div>
 </form>
