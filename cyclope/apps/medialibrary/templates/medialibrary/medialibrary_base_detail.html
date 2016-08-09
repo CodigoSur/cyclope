@@ -11,7 +11,7 @@
 	<div class="content-view {{ current_object.get_object_name }} media detail">
 
 
-		<h3 class="title">{{ current_object.name }}</h3>
+		<h2 class="title">{{ current_object.name }}</h2>
 
 		{% include 'cyclope/content_tools_block.html' %}
 
@@ -45,14 +45,44 @@
 			</div>
 		{% endif %}
 
+		{% include 'ratings/rating_block.html' %}
 
 
 		<div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+{% with author=current_object.get_author_or_user %}
+		{% with author_url=author.get_absolute_url %}
+		{% if author %}
+				<a name="author"></a> 
+				<div class="author-container meta-content alert alert-info" role="alert">
+						<div class="author-container-data">
+								{% if author.image %}
+								<div class="media-left">
+										<a href="#">
+												<img class="author img-circle" src="{% version author.image.path 'cropped' %}" border="0" title="Author"/>
+										</a>
+								</div>
+										
+								{% endif %}
+								<div class="author-container-data-text media-body">
+										<h4  class="author">
+												{% if author_url %}<a href='{{ author_url }}'>{% endif %}
+												{{ author }}
+												{% if author_url %}</a>{% endif %}
+												{% if author.origin %}
+												<small>{{ author.origin }}</small>
+												{% endif %}
+										</h4>
+										<div class="author-notes">{{ author.notes|smart_style }}</div> 
+								</div>
+						</div>
+				</div>
+		{% endif %}
 
+		{% endwith %}
+		{% endwith %}
 
 		{% include 'cyclope/related_contents_block.html' %}
 
-		{% include 'ratings/rating_block.html' %}
 
 		{% block media_comments %}
 				{% include 'comments/comments_block.html' %}
