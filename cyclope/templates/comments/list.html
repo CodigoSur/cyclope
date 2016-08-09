@@ -17,38 +17,40 @@
                 {% trans 'Reply' %}</a>
             </p>
         </div>
-        {% for close in comment.close %}</li></ul>{% endfor %}
+        {% for close in comment.close %}
+    </li>
+</ul>{% endfor %}
 {% endfor %}
-</div>
-        {% for comment in comment_list|fill_tree|annotate_tree %}
-                {% ifchanged comment.parent_id %}
-                {% else %}
-                {% endifchanged %}
-            {% if not comment.open and not comment.close %}
-            {% endif %}
 
-            {% if comment.open %}
-                <ul class="media-list">
-            {% endif %}
+{% for comment in comment_list|fill_tree|annotate_tree %}
+    {% ifchanged comment.parent_id %}
+    {% else %}
+    {% endifchanged %}
+    {% if not comment.open and not comment.close %}
+    {% endif %}
 
-            <li id="c{{ comment.id }}" class="media">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
-                <div class="media-left">
-                    <img class="media-object img-circle" src="{% static 'cyclope/images/img-author-not-available.png' %}" alt="Image not available">
-                </div>
+    {% if comment.open %}
+        <ul class="media-list">
+    {% endif %}
 
-                <div class="comment media-body">
-                    <h4 class="media-heading"> {% if comment.name %}{% trans 'By' %} {{ comment.name }}{% endif %}</h4>
-                    {{ comment.comment|linebreaks }}
-                    <small>{{ comment.submit_date|date:'DATETIME_FORMAT' }} - (<a href="{{ comment.get_absolute_url }}">permalink</a>)</small>
-                    <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link btn btn-default btn-sm pull-left">
-                    {% trans 'Reply' %}
-                    </a>
-                </div>
-            </li>
-            {% for close in comment.close %}
-                </ul>{% endfor %}
-        {% endfor %}
-</div>
+    <li id="c{{ comment.id }}" class="media">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
+        <div class="media-left">
+            <img class="media-object img-circle" src="{% static 'cyclope/images/img-author-not-available.png' %}" alt="Image not available">
+        </div>
+
+        <div class="comment media-body">
+            <h4 class="media-heading"> {% if comment.name %}{% trans 'By' %} {{ comment.name }}{% endif %}</h4>
+            {{ comment.comment|linebreaks }}
+            <small>{{ comment.submit_date|date:'DATETIME_FORMAT' }} - (<a href="{{ comment.get_absolute_url }}">permalink</a>)</small>
+            <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link btn btn-default btn-sm pull-left">
+                {% trans 'Reply' %}
+            </a>
+        </div>
+    </li>
+
+    {% for close in comment.close %}
+        </ul>{% endfor %}
+    {% endfor %}
 
 <!--#TODO: Erase Classic?  -->
    {% elif CYCLOPE_THEME_TYPE == 'classic' %}
