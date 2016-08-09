@@ -12,10 +12,11 @@
             <h4 class="media-heading"> {% if comment.name %}{% trans 'By' %} {{ comment.name }}{% endif %}</h4>
             <p>{{ comment.comment|linebreaks }}</p>
             <small>{{ comment.submit_date|date:'DATETIME_FORMAT' }} - (<a href="{{ comment.get_absolute_url }}">permalink</a>)</small>
-            <p>
+            <div class="reply-div">
                 <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link btn btn-default btn-sm">
-                {% trans 'Reply' %}</a>
-            </p>
+                    {% trans 'Reply' %}
+                </a>
+            </div>
         </div>
         {% for close in comment.close %}
     </li>
@@ -42,9 +43,11 @@
             <h4 class="media-heading"> {% if comment.name %}{% trans 'By' %} {{ comment.name }}{% endif %}</h4>
             {{ comment.comment|linebreaks }}
             <small>{{ comment.submit_date|date:'DATETIME_FORMAT' }} - (<a href="{{ comment.get_absolute_url }}">permalink</a>)</small>
-            <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link btn btn-default btn-sm pull-left">
-                {% trans 'Reply' %}
-            </a>
+            <div class="reply-div">
+                <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link btn btn-default btn-sm pull-left">
+                    {% trans 'Reply' %}
+                </a>
+            </div>
         </div>
     </li>
 
