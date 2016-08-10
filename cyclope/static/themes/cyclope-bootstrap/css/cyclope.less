@@ -211,10 +211,49 @@ span.category_title a {
   height: 360px;
 }
 /*###  Comments List  ###*/
-.regionview.customcomment.list.comments-list .media-body {
+#right .regionview.customcomment.list.comments-list .media-body,
+#left .regionview.customcomment.list.comments-list .media-body {
   width: 100%;
   display: block;
   padding: 10px 5px;
+}
+
+.customcomment.list > ul{
+  border:solid 4px #f5f5f5;
+}
+
+#left .customcomment.list .media-list > li > .media-left img,
+#right .customcomment.list .media-list > li > .media-left img{
+  display: none;
+}
+//prueba
+#user_comments .media-list .media{
+  width: 100%;
+}
+
+#user_comments .media-list .media .media-left,
+#user_comments .media-list .media .media-body{
+  display: inline-block;
+}
+
+#user_comments .media-list .media .media-left{
+  width: 15%;
+  float: left;
+}
+
+#user_comments .media-list .media .media-body{
+  width: 85%;
+  float: right;
+}
+
+.customcomment.list > ul > li > ul{
+  background-color: #f7f7f7;
+  border: solid 5px white;
+}
+
+.customcomment.list > ul > li > ul > li > ul{
+  background-color: white;
+  border: 0;
 }
 
 .main-block .reply-div,
@@ -339,8 +378,8 @@ td.last_comment {
 .collapsing #form-comment {
   padding: 15px 0;
 }
-#user_comments .comments ul:nth-child(even),
-.comments-list ul:nth-child(even){
+#user_comments .comments ul:nth-child(even)
+{
   background-color: #f5f5f5;
 }
 .media-list .media {

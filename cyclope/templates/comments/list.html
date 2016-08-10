@@ -1,84 +1,77 @@
 {% load threadedcomments_tags i18n staticfiles %}
+JOE PINO
+{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
 
-  {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
-
-{% for comment in comment_list|fill_tree|annotate_tree %}{% ifchanged comment.parent_id %}{% else %}</li>{% endifchanged %}{% if not comment.open and not comment.close %}</li>{% endif %}{% if comment.open %}
-<ul class="media-list">{% endif %}
-    <li id="c{{ comment.id }}" class="media">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
-        <div class="media-left" href="#">
-		<img class="media-object img-circle" src="{% static 'images/img-author-not-available.png' %}" alt="Image not available">
-        </div>
-        <div class="comment media-body">
-            <h4 class="media-heading"> {% if comment.name %}{% trans 'By' %} {{ comment.name }}{% endif %}</h4>
-            <p>{{ comment.comment|linebreaks }}</p>
-            <small>{{ comment.submit_date|date:'DATETIME_FORMAT' }} - (<a href="{{ comment.get_absolute_url }}">permalink</a>)</small>
-            <div class="reply-div">
-                <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link btn btn-default btn-sm">
-                    {% trans 'Reply' %}
-                </a>
+    {% for comment in comment_list|fill_tree|annotate_tree %}
+        {% ifchanged comment.parent_id %}
+        {% else %}
+            </li>
+        {% endifchanged %}
+        {% if not comment.open and not comment.close %}
+            </li>
+        {% endif %}
+        {% if comment.open %}
+            <ul class="media-list">
+        {% endif %}
+        <li id="c{{ comment.id }}" class="media">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
+            <div class="media-left" href="#">
+                <img class="media-object img-circle" src="{% static 'images/img-author-not-available.png' %}" alt="Image not available">
             </div>
-        </div>
+            <div class="comment media-body">
+                <h4 class="media-heading">
+                    {% if comment.name %}
+                        {% trans 'By' %} {{ comment.name }}
+                    {% endif %}
+                </h4>
+
+                {{ comment.comment|linebreaks }}
+
+                <small>{{ comment.submit_date|date:'DATETIME_FORMAT' }} - (<a href="{{ comment.get_absolute_url }}">permalink</a>)</small>
+
+                <div class="reply-div">
+                    <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link btn btn-default btn-sm">
+                        {% trans 'Reply' %}
+                    </a>
+                </div>
+            </div>
         {% for close in comment.close %}
-    </li>
-</ul>{% endfor %}
-{% endfor %}
-
-{% for comment in comment_list|fill_tree|annotate_tree %}
-    {% ifchanged comment.parent_id %}
-    {% else %}
-    {% endifchanged %}
-    {% if not comment.open and not comment.close %}
-    {% endif %}
-
-    {% if comment.open %}
-        <ul class="media-list">
-    {% endif %}
-
-    <li id="c{{ comment.id }}" class="media">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
-        <div class="media-left">
-            <img class="media-object img-circle" src="{% static 'cyclope/images/img-author-not-available.png' %}" alt="Image not available">
-        </div>
-
-        <div class="comment media-body">
-            <h4 class="media-heading"> {% if comment.name %}{% trans 'By' %} {{ comment.name }}{% endif %}</h4>
-            {{ comment.comment|linebreaks }}
-            <small>{{ comment.submit_date|date:'DATETIME_FORMAT' }} - (<a href="{{ comment.get_absolute_url }}">permalink</a>)</small>
-            <div class="reply-div">
-                <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link btn btn-default btn-sm pull-left">
-                    {% trans 'Reply' %}
-                </a>
-            </div>
-        </div>
-    </li>
-
-    {% for close in comment.close %}
-        </ul>{% endfor %}
+            </li></ul>
+        {% endfor %}
     {% endfor %}
 
-<!--#TODO: Erase Classic?  -->
-   {% elif CYCLOPE_THEME_TYPE == 'classic' %}
+{# TODO: Erase Classic?  #}
+{% elif CYCLOPE_THEME_TYPE == 'classic' %}
 
-
-{% for comment in comment_list|fill_tree|annotate_tree %}{% ifchanged comment.parent_id %}{% else %}</li>{% endifchanged %}{% if not comment.open and not comment.close %}</li>{% endif %}{% if comment.open %}
-<ul>{% endif %}
-    <li id="c{{ comment.id }}">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
-        <dl class="comment">
-            <dt>
-                <span class="when_who">
-                  {{ comment.submit_date|date:'DATETIME_FORMAT' }}
-                  {% if comment.name %}
-                       - {% trans 'By' %}: {{ comment.name }}
-                  {% endif %}
-                 - (<a href="{{ comment.get_absolute_url }}">permalink</a>)
-                </span>
-
-            </dt>
-            <dd>
-                {{ comment.comment|linebreaks }}
-            </dd>
-            <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link">{% trans 'Reply' %}</a>
-        </dl>
-        {% for close in comment.close %}</li></ul>{% endfor %}
-{% endfor %}
-
+    {% for comment in comment_list|fill_tree|annotate_tree %}
+        {% ifchanged comment.parent_id %}
+        {% else %}
+            </li>
+        {% endifchanged %}
+        {% if not comment.open and not comment.close %}
+            </li>
         {% endif %}
+        {% if comment.open %}
+            <ul>
+        {% endif %}
+        <li id="c{{ comment.id }}">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
+            <dl class="comment">
+                <dt>
+                    <span class="when_who">
+                      {{ comment.submit_date|date:'DATETIME_FORMAT' }}
+                      {% if comment.name %}
+                           - {% trans 'By' %}: {{ comment.name }}
+                      {% endif %}
+                     - (<a href="{{ comment.get_absolute_url }}">permalink</a>)
+                    </span>
+                </dt>
+                <dd>
+                    {{ comment.comment|linebreaks }}
+                </dd>
+                <a href="#c{{ comment.id }}" data-comment-id="{{ comment.id }}" class="comment_reply_link">{% trans 'Reply' %}</a>
+            </dl>
+            {% for close in comment.close %}
+                </li></ul>
+            {% endfor %}
+    {% endfor %}
+
+{% endif %}
