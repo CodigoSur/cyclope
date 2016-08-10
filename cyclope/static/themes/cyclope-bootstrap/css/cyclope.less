@@ -186,12 +186,15 @@ span.category_title a {
   padding: 10px 0;
   border-bottom: solid 2px #f5f5f5;
 }
-.flashmovie-inline-detail {
+.flashmovie-inline-detail,
+.flashmovie-detail{
   width: 100%;
   height: 550px;
 }
 .flashmovie-inline-detail embed,
-.flashmovie-inline-detail object {
+.flashmovie-inline-detail object,
+.flashmovie.media.detail object,
+.flashmovie.media.detail embed{
   width: 100% !important;
   height: 100% !important;
 }
@@ -207,6 +210,65 @@ span.category_title a {
   width: 480px;
   height: 360px;
 }
+/*###  Comments List  ###*/
+#right .regionview.customcomment.list.comments-list .media-body,
+#left .regionview.customcomment.list.comments-list .media-body {
+  width: 100%;
+  display: block;
+  padding: 10px 5px;
+}
+
+.customcomment.list > ul,
+#user_comments > ul{
+  border:solid 4px #f5f5f5;
+}
+
+#left .customcomment.list .media-list > li > .media-left img,
+#right .customcomment.list .media-list > li > .media-left img{
+  display: none;
+}
+
+#user_comments .media-list .media{
+  width: 100%;
+}
+
+#user_comments .media-list .media .media-left,
+#user_comments .media-list .media .media-body{
+  display: inline-block;
+}
+
+#user_comments .media-list .media .media-left{
+  width: 15%;
+  float: left;
+}
+
+#user_comments .media-list .media .media-body{
+  width: 85%;
+  float: right;
+}
+
+.customcomment.list > ul > li > ul > li,
+#user_comments > ul > li > ul > li{
+  background-color: #f7f7f7;
+  border: solid 5px white;
+  margin: 0;
+}
+
+.main-block .reply-div,
+.one_column .reply-div{
+  display: inline;
+  float: left;
+  margin: 0 5px 0 0;
+}
+
+#left .reply-div, #right .reply-div{
+  display: block;
+}
+
+#left .comment_reply_link, #right .comment_reply_link {
+    margin: 5px 0;
+}
+
 /* ### teaser labeled icon ### */
 .icon_list_container .title {
   text-align: center;
@@ -314,7 +376,8 @@ td.last_comment {
 .collapsing #form-comment {
   padding: 15px 0;
 }
-#user_comments .comments ul:nth-child(even) {
+#user_comments .comments ul:nth-child(even)
+{
   background-color: #f5f5f5;
 }
 .media-list .media {
@@ -348,6 +411,14 @@ td.last_comment {
 #right .carousel-indicators, #left .carousel-indicators {bottom: 0;}
 #right .carousel-indicators ol, #left .carousel-indicators ol {margin-bottom: 0;}
 #right .carousel-inner > .item > a > img, #left .carousel-inner > .item > a > img {margin: 0 auto;}
+
+/*### carousel view of Category members###*/
+.carousel .carousel-indicators {
+  bottom: 0;
+}
+.carousel .media {
+  margin-top: 0;
+}
 
 /*### carousel view of Category members###*/
 .carousel .carousel-indicators {Bottom: 0;}
