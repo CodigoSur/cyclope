@@ -1,4 +1,4 @@
-{% load fb_versions %}
+{% load fb_versions i18n %}
 
 <form method="POST" action="{% url pictures-delete article_id=article_id %}">
     {% csrf_token %}
