@@ -108,9 +108,6 @@ span.category_title a {
   float: left;
   padding-right: 5px;
 }
-.teaser_icon_container:hover {
-  background: transparent;
-}
 .teaser_icon_container {
   display: inline-block;
   vertical-align: top;
@@ -283,13 +280,20 @@ span.category_title a {
   padding: 2px;
 }
 
+/*### Soundtrack Detail  ###*/
+.soundtrack-detail{
+  display: block;
+}
+
+
+
 /* ### teaser list of Category members left and right ### */
 #right .teaser_icon_container, #left .teaser_icon_container {display:block;float:none;padding:4px;}
 #right .teaser_text_container, #left .teaser_text_container {width:100% ;display:inline;margin-top:5px;}
 #right .teaser_icon_container img, #left .teaser_icon_container img {margin:0 auto; }
 #right .teaser h2.title, #left .teaser h2.title {font-size:18px;font-weight:700;margin-bottom:5px;}
 #right .teaser .summary, #left .teaser .summary {font-size:12px; margin:0;}
-#right .btn, #left .btn {padding: 1px 5px;font-size: 12px;line-height: 1.5;border-radius: 3px;}
+#right .btn:not(.input-group-btn .btn), #left .btn:not(.input-group-btn .btn) {padding: 1px 5px;font-size: 12px;line-height: 1.5;border-radius: 3px;}
 #right .pretitle-container, #left .pretitle-container {font-size:12px;}
 #right .author, #left .author {font-size:12px; margin-top:5px; margin-bottom:5px;}
 #right .teaser_more, #left .teaser_more, #right .contact_more, #left .contact_more {margin:0 0 10px;}
@@ -304,6 +308,12 @@ span.category_title a {
 #right .category_title, #left .category_title {font-size:22px;border-top: 1px solid #000;border-bottom: 1px solid #000;font-weight: 600;}
 #right .collection_header, #left .collection_header {margin:0;}
 #right .category_root_item_list ul, #left .category_root_item_list ul {margin-top:10px; padding-left:15px;}
+
+/* Media Library tune ups */
+.media-content {
+    background: #eee;
+    padding: 20px;
+}
 
 /*  category list as forum  */
 .forum {
@@ -456,11 +466,7 @@ body.one_column .teaser.article-teaser > .teaser_icon_container {
 .contact_fields small,.contact_fields .btn {margin:20px 0 0;}
 
 /*External Content*/
-.show_comment_form {margin:10px 0;}
-.action-content.download_link {margin:20px 0;}
-.detail .meta-content, .detail .ratings {margin-bottom:20px;}
-.detail .media-content {margin-bottom:20px;}
-.detail .submit {margin-bottom:20px;}
+.show_comment_form, .action-content.download_link, .detail .meta-content, .detail .ratings, .detail .media-content, .detail .submit  {margin-bottom: 10px !important;}
 
 /* region clears */
 header,
