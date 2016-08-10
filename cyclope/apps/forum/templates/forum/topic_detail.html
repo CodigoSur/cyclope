@@ -10,14 +10,15 @@
   <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
   <h2 class="title"> {{ topic.name }} </h2>
-  <span class="submitted">{{ topic.creation_date|date:'DATETIME_FORMAT' }}</span>
+  
   <div class="author_container">
-    <span class="author">{{ topic.anonymous_name|default:topic.user }}</span>
+    <h4 class="author">{{ topic.anonymous_name|default:topic.user }}</h4>
     <div class="avatar">{% if avatar %}<img src="{{MEDIA_URL}}/{{ avatar }}" alt=""></img>{% endif %}</div>
   </div>
   <div class="text"><span class="html-text html-content">
     {{ topic.text|smart_style}}
   </span></div>
+  <h6 class="submitted date">{{ topic.creation_date|date:'DATETIME_FORMAT' }}</h6>
 
   {% include 'comments/comments_block.html' %}
 </div>
