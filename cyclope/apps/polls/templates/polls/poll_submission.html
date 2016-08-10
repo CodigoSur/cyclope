@@ -8,15 +8,13 @@
 
 	{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
 
-		<div class="content-view poll submission poll-submission panel panel-primary">
+		<div class="content-view poll submission poll-submission">
 
 			<div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
-			<div class="panel-heading">
-				<h3 class="panel-title">{{ poll.name }}</h3>
-		 	</div>
-			<div class="summary">
+            <h2 class="title">{{ poll.name }}</h2>
+            <h4 class="summary">
 				{{ poll.description}}
-			</div>
+			</h4>
 
 			<form action="{% url poll-submission poll.slug %}" method="POST">
 				{% csrf_token %}
@@ -24,10 +22,8 @@
 						{{ form|crispy }}
 				{% endfor %}
 				{{ captcha_form|crispy }}
-				<div  class="panel-footer">
-					<input class="btn btn-primary btn-sm" type="submit" value="{% trans 'Vote' %}" />
+					<input class="btn btn-success btn-sm" type="submit" value="{% trans 'Vote' %}" />
 					<a class="btn btn-default btn-sm" href="{% url poll poll.slug %}">{% trans 'View Results' %}</a>
-				</div>
 			</form>
 
 		</div>
