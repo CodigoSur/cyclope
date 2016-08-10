@@ -46,22 +46,24 @@ SORT_BY_FIELD_DEF = forms.ChoiceField(label=_('Sort by'),
                                                ("RANDOM", _(u"Random"))),
                                       initial="DATE-")
 
+
 class CategoryRootListOptions(forms.Form):
     show_title = forms.BooleanField(label=_("Show title"), initial=True, required=False)
     show_description = forms.BooleanField(label=_("Show description"), initial=True, required=False)
     show_image = forms.BooleanField(label=_("Show image"), initial=True, required=False)
     traverse_children = forms.BooleanField(label=_("Include descendant's elements"), initial=False, required=False)
     navigation = forms.ChoiceField(label=_('Show navigation'),
-                              choices=(("TOP", _(u"Top")),
-                                       ("BOTTOM", _(u"Bottom")),
-                                       ("DISABLED", _(u"Disabled"))),
-                              initial="TOP")
+                                   choices=(("TOP", _(u"Top")),
+                                            ("BOTTOM", _(u"Bottom")),
+                                            ("DISABLED", _(u"Disabled"))),
+                                   initial="TOP")
+
 
 class CategoryRootItemsList(frontend.FrontendView):
     """A flat list view of the root members for a Category.
     """
-    name='root_items_list'
-    verbose_name=_('list of root items for the selected Category')
+    name = 'root_items_list'
+    verbose_name = _('list of root items for the selected Category')
 
     is_content_view = True
     is_region_view = True
@@ -78,6 +80,7 @@ class CategoryRootItemsList(frontend.FrontendView):
 
 frontend.site.register_view(Category, CategoryRootItemsList)
 
+
 class TeaserListOptions(forms.Form):
     show_title = forms.BooleanField(label=_("Show title"), initial=True, required=False)
     show_description = forms.BooleanField(label=_("Show description"), initial=True, required=False)
@@ -89,15 +92,12 @@ class TeaserListOptions(forms.Form):
     sort_by = SORT_BY_FIELD_DEF
     simplified = forms.BooleanField(label=_("Simplified"), initial=False, required=False)
     traverse_children = forms.BooleanField(label=_("Include descendant's elements"),
-                                                    initial=False, required=False)
+                                           initial=False, required=False)
     navigation = forms.ChoiceField(label=_('Show navigation'),
-                              choices=(("TOP", _(u"Top")),
-                                       ("BOTTOM", _(u"Bottom")),
-                                       ("DISABLED", _(u"Disabled"))),
-                              initial="TOP")
-                              
-
-
+                                   choices=(("TOP", _(u"Top")),
+                                            ("BOTTOM", _(u"Bottom")),
+                                            ("DISABLED", _(u"Disabled"))),
+                                   initial="TOP")
 
 
 class FilteredListOptions(forms.Form):
@@ -116,7 +116,6 @@ class FilteredListOptions(forms.Form):
     collection_filters = forms.MultipleChoiceField(label=_('Collections to use for category filters'),
                                                    choices=Collection.objects.all().values_list("slug", "name"),
                                                    required=False)
-
 
 
 class CategoryDefaultList(frontend.FrontendView):
@@ -147,6 +146,7 @@ SORT_BY = {
     "RANDOM": ('random', False, Paginator),
 }
 
+
 def _get_paginator_page(category, options, request):
     traverse_children = options.get("traverse_children", False)
     intersection = options.get("intersection", False)
@@ -169,6 +169,7 @@ def _get_paginator_page(category, options, request):
         paginator = paginator_class(categorizations_list, **paginator_kwargs)
         page = cyclope.utils.get_page(paginator, request)
     return categorizations_list, paginator, page
+
 
 class CategoryTeaserList(frontend.FrontendView):
     """A teaser list view of Category members.
@@ -194,6 +195,7 @@ class CategoryTeaserList(frontend.FrontendView):
         return t.render(req_context)
 
 frontend.site.register_view(Category, CategoryTeaserList)
+
 
 class CategoryFilteredList(frontend.FrontendView):
     """A filtered list view of Category members.
@@ -238,11 +240,12 @@ class CategoryFilteredList(frontend.FrontendView):
 
 frontend.site.register_view(Category, CategoryFilteredList)
 
+
 class CategoryLabeledIconList(CategoryTeaserList):
     """A labeled icon list view of Category members.
     """
-    name='labeled_icon_list'
-    verbose_name=_('labeled icon list of Category members')
+    name = 'labeled_icon_list'
+    verbose_name = _('labeled icon list of Category members')
     is_default = False
     items_per_page = cyc_settings.CYCLOPE_PAGINATION['LABELED_ICON']
 
@@ -254,10 +257,10 @@ frontend.site.register_view(Category, CategoryLabeledIconList)
 
 class SlideshowOptions(forms.Form):
     visualization_mode = forms.ChoiceField(label=_('Visual Mode'),
-                              choices=(("slideshow", _(u"Standard view")),
-                                       ("slideshow-background",
-                                       _(u"With background image view"))),
-                              initial="slideshow-background")
+                                           choices=(("slideshow", _(u"Standard view")),
+                                                    ("slideshow-background",
+                                                     _(u"With background image view"))),
+                                           initial="slideshow-background")
     show_title = forms.BooleanField(label=_("Show title"), initial=True, required=False)
     show_description = forms.BooleanField(label=_("Show description"), initial=True, required=False)
     show_image = forms.BooleanField(label=_("Show image"), initial=True, required=False)
@@ -265,9 +268,9 @@ class SlideshowOptions(forms.Form):
                                           min_value=0, initial=10)
     sort_by = SORT_BY_FIELD_DEF
     traverse_children = forms.BooleanField(label=_("Include descendant's elements"),
-                                                    initial=False, required=False)
+                                           initial=False, required=False)
     scroll_by = forms.IntegerField(label=_('Scroll by N items'),
-                               min_value=1, initial=3)
+                                   min_value=1, initial=3)
     speed = forms.IntegerField(label=_('Speed of transition (in milliseconds)'),
                                min_value=0, initial=1000)
     auto_play = forms.BooleanField(label=_("Automatic playback"),
@@ -279,12 +282,13 @@ class SlideshowOptions(forms.Form):
     circular = forms.BooleanField(label=_("Circular navigation"), initial=False,
                                   required=False)
     navigation = forms.ChoiceField(label=_('Navigation wrap'),
-                              choices=(("'circular'", _(u"Circular")),
-                                       ("'first'", _(u"First")),
-                                       ("'last'", _(u"Last")),
-                                       ("'both'", _(u"Both")),
-                                       ("null", _(u"None"))),
-                              initial="circular")
+                                   choices=(("'circular'", _(u"Circular")),
+                                            ("'first'", _(u"First")),
+                                            ("'last'", _(u"Last")),
+                                            ("'both'", _(u"Both")),
+                                            ("null", _(u"None"))),
+                                   initial="circular")
+
 
 class CategorySlideshow(frontend.FrontendView):
     """A slideshow view of Category members.
@@ -317,8 +321,8 @@ frontend.site.register_view(Category, CategorySlideshow)
 class CategoryCarousel(CategorySlideshow):
     """A carousel view of Category members for Bootstrap based themes.
     """
-    name='carousel'
-    verbose_name=_('carousel view of Category members for Bootstrap based themes.')
+    name = 'carousel'
+    verbose_name = _('carousel view of Category members for Bootstrap based themes.')
     inline_view_name = 'carousel_item'
     template = "collections/category_carousel.html"
 
@@ -360,11 +364,12 @@ class CollectionRootCategoriesTeaserList(frontend.FrontendView):
 
 frontend.site.register_view(Collection, CollectionRootCategoriesTeaserList)
 
+
 class CollectionRootCategoriesList(CollectionRootCategoriesTeaserList):
     """ A list of the root Categories of a Collection
     """
     name = 'root_categories_list'
-    verbose_name=_('list of the root Categories of a Collection')
+    verbose_name = _('list of the root Categories of a Collection')
     is_default = False
     is_region_view = True
     template = "collections/collection_root_categories_list.html"
@@ -410,16 +415,18 @@ class CollectionCategoriesHierarchy(frontend.FrontendView, HyerarchyBuilderMixin
 
 frontend.site.register_view(Collection, CollectionCategoriesHierarchy)
 
+
 class CollectionCategoriesHierarchyToIconlist(CollectionCategoriesHierarchy):
     """A hierarchical list view of the Categories in a Collection that will
     show a labeled_icon list view of the category that the user makes a
     selection.
     """
-    name='categories_hierarchy_to_iconlist'
-    verbose_name=_('hierarchical list of Categories that will show an icon list on click')
+    name = 'categories_hierarchy_to_iconlist'
+    verbose_name = _('hierarchical list of Categories that will show an icon list on click')
     target_view = 'labeled_icon_list'
 
 frontend.site.register_view(Collection, CollectionCategoriesHierarchyToIconlist)
+
 
 class CollectionCategoriesMembersAlphabeticTeaserList(frontend.FrontendView):
     """An alphabetic teaser list of all the members of the collection's categories.
@@ -449,6 +456,24 @@ class CollectionCategoriesMembersAlphabeticTeaserList(frontend.FrontendView):
 
 frontend.site.register_view(Collection, CollectionCategoriesMembersAlphabeticTeaserList)
 
+
+class CategoryListAsForumOptions(forms.Form):
+    show_title = forms.BooleanField(label=_("Show title"), initial=True, required=False)
+    show_description = forms.BooleanField(label=_("Show description"), initial=True, required=False)
+    show_image = forms.BooleanField(label=_("Show image"), initial=True, required=False)
+    items_per_page = forms.IntegerField(label=_('Items per page'), min_value=1,
+                                        initial=cyc_settings.CYCLOPE_PAGINATION['TEASER'],)
+    limit_to_n_items = forms.IntegerField(label=_('Limit to N items (0 = no limit)'),
+                                          min_value=0, initial=0)
+    sort_by = SORT_BY_FIELD_DEF
+    simplified = forms.BooleanField(label=_("Simplified"), initial=False, required=False)
+    navigation = forms.ChoiceField(label=_('Show navigation'),
+                                   choices=(("TOP", _(u"Top")),
+                                   ("BOTTOM", _(u"Bottom")),
+                                   ("DISABLED", _(u"Disabled"))),
+                                   initial="TOP")
+
+
 class CategoryListAsForum(frontend.FrontendView):
     """ A list view of Category Members that will show a table with some extra
         information of the content (creation_date, count of comments, etc)
@@ -459,6 +484,7 @@ class CategoryListAsForum(frontend.FrontendView):
     items_per_page = cyc_settings.CYCLOPE_PAGINATION['FORUM']
     is_content_view = True
     is_region_view = False
+    options_form = CategoryListAsForumOptions
 
     template = "collections/category_list_as_forum.html"
 

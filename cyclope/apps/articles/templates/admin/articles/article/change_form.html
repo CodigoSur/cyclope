@@ -1,15 +1,13 @@
 {% extends "admin/base_content_change_form.html" %}
+{% load staticfiles %}
 {% block extrahead %}
     {% url 'admin:jsi18n' as jsi18nurl %}
     <script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
     {{ media }}
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/jquery.chainedSelect.js"></script>
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/less.min.js"></script>
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}{{ CYCLOPE_JQUERY_UI_PATH }}"></script>
-    <script type="text/javascript" src="{{ CYCLOPE_STATIC_URL }}js/cyclope_media_widget.js"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.chainedSelect.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/less.min.js' %}"></script>
 {% endblock %}
 {% block content %}
 	{{ block.super }}
 	{% include "admin/articles/article/pictures_iframe.html" %}
-    {% include "media_widget/media_iframe.html" %}
 {% endblock %}

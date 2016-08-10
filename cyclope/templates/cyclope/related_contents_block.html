@@ -10,7 +10,7 @@
 		{% elif CYCLOPE_THEME_TYPE == 'classic' %}
 			<span class="title">{% trans "Related:" %} </span>
 		{% endif %}
-		
+
     <ul>
     {% for relation in relations %}
       <li class='related_type {{ relation.grouper }}'>
@@ -23,7 +23,7 @@
                         {% if current_object.media_file %}
                             <a target="_blank" href="{{ current_object.media_file }}">({% trans "download file" %})</a>
                         {% endif %}
-                        
+
 												{% if CYCLOPE_THEME_TYPE == 'classic' %}
 													{% with type=current_object.get_object_name player_video_height='180' player_video_width='240' %}
 														{% if type == 'soundtrack' or type == 'movieclip' %}
@@ -31,7 +31,7 @@
 														{% endif %}
 													{% endwith %}
 												{% endif %}
-                   
+
                 </li>
             {% endwith %}
         {% endfor %}

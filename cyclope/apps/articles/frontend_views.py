@@ -52,11 +52,10 @@ class ArticleTeaserList(frontend.FrontendView):
     is_region_view = True
 
     def get_response(self, request, req_context, options):
-        return views.object_list(request, req_context, Article.objects.all(), 
-                                 view_name=self.name)
-
+        return views.object_list(request, req_context, Article.objects.all(),view_name=self.name)
 
 frontend.site.register_view(Article, ArticleTeaserList)
+
 
 class ArticleLabeledIconList(ArticleTeaserList):
     """Labeled icon list view for Articles.

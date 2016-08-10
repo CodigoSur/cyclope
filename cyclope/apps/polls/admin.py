@@ -52,13 +52,5 @@ class QuestionInline(admin.StackedInline):
 class PollAdmin(admin.ModelAdmin):
     inlines = [QuestionInline]
 
-    class Media:
-        # This js is needed because drag&drop will be used
-        js = (
-            cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_PATH,
-            #cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_MIGRATE_PATH, TODO
-            cyc_settings.CYCLOPE_STATIC_URL + cyc_settings.CYCLOPE_JQUERY_UI_PATH,
-        )
-
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Poll, PollAdmin)

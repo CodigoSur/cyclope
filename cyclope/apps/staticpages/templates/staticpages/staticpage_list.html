@@ -1,15 +1,20 @@
 {% extends host_template %}
-
+{% load i18n %}
 {% block content %}
 <div class="staticpage-teaser">
-<ul>
-{% for staticpage in staticpage_list %}
-  <li><h2>
-    <a href="{% url staticpage-detail staticpage.slug %}">
-    {{  staticpage.name}}
-    </a></h2>
-  </li>
-{% endfor %}
-</ul>
+    <div class="category_description">
+        <span class="category_title">
+            {% trans "list of Static Pages" %}
+        </span>
+    </div>    
+    <ul>
+        {% for staticpage in staticpage_list %}
+          <li>
+            <a href="{% url staticpage-detail staticpage.slug %}">
+                {{  staticpage.name}}
+            </a>
+          </li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock content%}

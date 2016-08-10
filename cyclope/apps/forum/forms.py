@@ -33,7 +33,7 @@ from models import Topic
 
 
 class CreateTopicForm(forms.ModelForm):
-    name = forms.CharField(label = _('subject'), required=True)
+    name = forms.CharField(label = _('Subject'), required=True)
 
     class Meta:
         model = Topic

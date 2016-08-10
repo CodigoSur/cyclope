@@ -58,9 +58,7 @@ class CKEditor(forms.Textarea):
     Widget providing CKEditor for Rich Text Editing.
     """
     class Media:
-        js = (
-            cyc_settings.CYCLOPE_STATIC_URL + 'ckeditor/ckeditor.js',
-        )
+        js = ('ckeditor/ckeditor.js', )
 
     def render(self, name, value, attrs={}):
         language = settings.LANGUAGE_CODE[:2]
@@ -162,6 +160,7 @@ class MultipleWidget(forms.Widget):
 
 
 class FBAdminMarkItUpWidget(AdminMarkItUpWidget):
+
     def render(self, name, value, attrs=None):
         html = super(MarkItUpWidget, self).render(name, value, attrs)
 
@@ -180,3 +179,12 @@ class FBAdminMarkItUpWidget(AdminMarkItUpWidget):
                  '</script>' % {'id': attrs['id'],
                                 'auto_preview': auto_preview })
         return mark_safe(html)
+    
+    class Media:
+        js = (
+            cyc_settings.CYCLOPE_JQUERY_UI_PATH,
+            'media_widget/cyclope_media_widget.js',
+        )
+        css = {
+            'all': (cyc_settings.CYCLOPE_JQUERY_UI_CSS_PATH,)
+        }

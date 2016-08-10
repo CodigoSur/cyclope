@@ -4,58 +4,102 @@
 
 {% block content %}
 
-{% if not user.is_authenticated and not current_object.published %}
-  <a href="{% url auth_login %}?next={{ request.path }}">{% trans "This content isn't public, please log in" %}</a>
-{% else %}
+    {% if not user.is_authenticated and not current_object.published %}
+      <a href="{% url auth_login %}?next={{ request.path }}">
+          {% trans "This content isn't public, please log in" %}
+      </a>
 
-	<div class="content-view {{ current_object.get_object_name }} media detail">
+    {% else %}
 
-		<h1 class="title">{{ current_object.name }}</h1>
+        <div class="content-view {{ current_object.get_object_name }} media detail">
 
-		{% include 'cyclope/content_tools_block.html' %}
 
-		{% include "cyclope/author_block.html" with author=current_object.author %}
+            <h2 class="title">{{ current_object.name }}</h2>
 
-		{% if current_object.image %}
-			<div class="media-content">
-				{% if current_object.content_url %}<a href="{{ current_object.content_url }}" {% if current_object.new_window %}target="_blank"{% endif%} >{% endif%}
-				<img align="center" src="{% version current_object.image.path 'big' %}"/>
-				{% if current_object.content_url %}</a>{% endif%}
-			</div>
-		{% endif %}
+            {% include 'cyclope/content_tools_block.html' %}
 
-		{% block media_content %}
-		{% endblock %}
+            {% block media_content_download %}
+                    <a class="action-content download_link btn btn-success"
+                       target="_blank" href="{{ current_object.media_file }}">
+                        {% trans "download file" %}</a>
+            {% endblock %}
 
-		{% block media_content_download %}
-		<div class="action-content download_link">
-				<a target="_blank" href="{{ current_object.media_file }}">{% trans "download file" %}</a>
-		</div>
-		{% endblock %}
+            {% include "cyclope/author_block.html" with author=current_object.author %}
 
-		<div class="html-content summary">{{ current_object.description|smart_style }}</div>
+            {% block media_content %}
+                {# This is a block created because in Puerto Viejo BaseCamp we agree that the media content should be priority in it's detail view #}
+            {% endblock %}
 
-		{% if current_object.get_last_change_date or current_object.source %}
-			<div class="meta-content">
-				{% if current_object.get_last_change_date %}
-					<h6 class="date">{% trans "Last modification date" %}: {{ current_object.get_last_change_date }}</h6>
-				{% endif %}
+            {% if current_object.image %}
+                <div class="media-content">
+                    {% if current_object.content_url %}
+                        <a href="{{ current_object.content_url }}" {% if current_object.new_window %}target="_blank"{% endif%}>
+                    {% endif%}
 
-				{% include "cyclope/source_block.html" with source=current_object.source %}
-			</div>
-		{% endif %}
+                    <img alt="{{ current_object.image.name }}" class="center img-responsive" src="{% version current_object.image.path 'big' %}"/>
+                    {% if current_object.content_url %}</a>{% endif%}
+                </div>
+            {% endif %}
 
-		<div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+            <div class="html-content summary">{{ current_object.description|smart_style }}</div>
 
-		{% include 'cyclope/related_contents_block.html' %}
+            {% if current_object.get_last_change_date or current_object.source %}
+                <div class="meta-content">
+                    {% if current_object.get_last_change_date %}
+                        <h6 class="date">{% trans "Last modification date" %}: {{ current_object.get_last_change_date }}</h6>
+                    {% endif %}
 
-		{% include 'ratings/rating_block.html' %}
+                    {% include "cyclope/source_block.html" with source=current_object.source %}
+                </div>
+            {% endif %}
 
-		{% block media_comments %}
-				{% include 'comments/comments_block.html' %}
-		{% endblock %}
+            {% include 'ratings/rating_block.html' %}
 
-	</div> <!--end media_detail -->
-{% endif %}
+
+            <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
+
+            {% with author=current_object.get_author_or_user %}
+            {% with author_url=author.get_absolute_url %}
+
+            {% if author %}
+                    <a name="author"></a>
+                    <div class="author-container meta-content alert alert-info" role="alert">
+                            <div class="author-container-data">
+                                    {% if author.image %}
+                                    <div class="media-left">
+                                            <a href="#"><img class="author img-circle"
+                                                             src="{% version author.image.path 'cropped' %}"
+                                                             border="0" title="Author"/>
+                                            </a>
+                                    </div>
+
+                                    {% endif %}
+                                    <div class="author-container-data-text media-body">
+                                            <h4  class="author">
+                                                    {% if author_url %}<a href='{{ author_url }}'>{% endif %}
+                                                    {{ author }}
+                                                    {% if author_url %}</a>{% endif %}
+                                                    {% if author.origin %}
+                                                    <small>{{ author.origin }}</small>
+                                                    {% endif %}
+                                            </h4>
+                                            <div class="author-notes">{{ author.notes|smart_style }}</div>
+                                    </div>
+                            </div>
+                    </div>
+            {% endif %}
+
+            {% endwith %}
+            {% endwith %}
+
+            {% include 'cyclope/related_contents_block.html' %}
+
+
+            {% block media_comments %}
+                    {% include 'comments/comments_block.html' %}
+            {% endblock %}
+
+        </div> <!--end media_detail -->
+    {% endif %}
 
 {% endblock content %}

@@ -34,7 +34,8 @@ class CustomCaptchaTextInput(CaptchaTextInput):
     """
     def render(self, name, value, attrs=None):
         ret = super(CustomCaptchaTextInput, self).render(name, value, attrs=None)
-        return ret.replace("src=", "src_=")
+        # return ret.replace("src=", "src_=")
+        return ret
 
 
 class CustomCaptchaField(CaptchaField):
@@ -47,11 +48,10 @@ class CustomCaptchaField(CaptchaField):
 class CustomCommentForm(ThreadedCommentForm):
     url = forms.URLField(label=_("Website or Blog"), required=False)
     captcha = CustomCaptchaField(label=_("Security code"))
-    subscribe = forms.BooleanField(help_text=_('I want to be notified by email ' \
-                                               'when there is a new comment.'),
-                                   required=False)
+    subscribe = forms.BooleanField(help_text=_('I want to be notified by email when there is a new comment.'), required=False)
 
     def clean(self):
+        # TODO: validate captcha and user log status
         # captcha_ input only exists when the user is authenticated
         # this is not a real validation, submiting the form without the captcha_
         # will pass. The problem is that there's no way to know if the user us logged in

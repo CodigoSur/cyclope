@@ -1,15 +1,6 @@
 $(function(){ 
-    //VISOR
-    visor = $("#media_widget_pictures", window.parent.document).clone();
-    //mostrar en linea
-    visor.find('img').each(function(){
-        $(this).css('display', 'inline');
-    });
-    //solo fotos
-    visor.find('input').remove();
-    //cargar
-    $("#visor_pictures_widget").html(visor.html());
-
+    //
+    make_visor();
     // clean message alerts after 8s
     $("#full-alert").delay(8000).fadeOut();
     window.setTimeout(keep_visor, 8000);
@@ -20,6 +11,18 @@ $(function(){
         parent.pictures_widget.picturesWidget('close');
     });
 });
+
+function make_visor(){
+    visor = $("#media_widget_pictures", window.parent.document).clone();
+    //mostrar en linea
+    visor.find('img').each(function(){
+        $(this).css('display', 'inline');
+    });
+    //solo fotos
+    visor.find('input').remove();
+    //cargar
+    $("#visor_pictures_widget").html(visor.html());
+}
 
 function keep_visor(){ 
     flow = $("#full-alert").clone();
@@ -55,6 +58,7 @@ function media_widget_refresh(type, param){
     $.get(url, function(data) {
         $("#media_widget", window.parent.document).html(data);
     });
+    make_visor();
 }
 
 function delete_pictures_refresh(pictures_list){

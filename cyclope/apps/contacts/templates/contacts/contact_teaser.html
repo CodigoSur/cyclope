@@ -11,7 +11,7 @@
     {% else %}
         <div class="media-left">
             <a href="#">
-		    <img class="photo img-circle" src="{% static 'cyclope/images/img-author-not-available.png' %}" alt="Image not available" />
+		    <img class="photo img-circle" src="{% static 'images/img-author-not-available.png' %}" alt="Image not available" />
             </a>
         </div>
     {% endif %}  
@@ -24,11 +24,13 @@
                     <li><strong>{% trans "Web" %}:</strong> {{contact.web}}</li>
                     <li><strong>{% trans "Mobile" %}:</strong> {{contact.mobile_phone_number}}</li>
                 </ul>
-                <a class="btn btn-default" href="{% url contact-detail contact.slug %}">{% trans "More" %}</a>
-                <!-- herramientas -->
-                {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
-                <!-- /herramientas -->
-                <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png" alt="contact" />
+                <div class="contact_more">
+                    <a class="btn btn-primary" href="{% url contact-detail contact.slug %}">{% trans "More" %}</a>
+                    <!-- herramientas -->
+                    {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
+                    <!-- /herramientas -->
+                    <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png" alt="contact" />
+                </div>
             </div>
         </div>
     </div>    

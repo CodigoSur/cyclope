@@ -18,8 +18,18 @@ When showing the StaticPage as the main content of the view, the host_template i
 
 <div class="content-view staticpage detail staticpage-detail html-content">
   
-	{# include 'cyclope/content_tools_block.html' #}
+    <h2 class="title">{{ staticpage.name }}</h2>
+   	{% include 'cyclope/content_tools_block.html' %}
 
+ <!-- descripcion -->
+  {% if staticpage.summary %}
+		{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
+			<h4 class="summary">{{ staticpage.summary|smart_style }}</h4>
+		{% elif CYCLOPE_THEME_TYPE == 'classic' %}
+			<div class="summary">{{ staticpage.summary|smart_style}}</div>
+		{% endif %}
+  {% endif %}
+  <!-- /descripcion -->
   
   {% if staticpage.pictures %}
     <a href="{% url staticpage-detail staticpage.slug %}">
@@ -27,15 +37,7 @@ When showing the StaticPage as the main content of the view, the host_template i
     </a>
   {% endif %}
   
-    <!-- descripcion -->
-  {% if staticpage.summary %}
-		{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
-			<h3 class="summary">{{ staticpage.summary|smart_style }}</h3>
-		{% elif CYCLOPE_THEME_TYPE == 'classic' %}
-			<div class="summary">{{ staticpage.summary|smart_style}}</div>
-		{% endif %}
-  {% endif %}
-  <!-- /descripcion -->
+   
   
   <div class="text">{{ staticpage.text|smart_style }}</div>
 
