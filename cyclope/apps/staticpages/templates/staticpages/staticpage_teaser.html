@@ -11,17 +11,15 @@
 
     <h2 class="title"><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a></h2>
 
-    {% if staticpage.summary %}
-      <h3 class="html-content summary">{{ staticpage.summary|smart_style }}</h3>
-    {% endif %}
-
-    {% if staticpage.pictures %}
+{% if staticpage.pictures %}
      <div class="teaser_icon_container"><a href="{% url staticpage-detail staticpage.slug %}">
         <img class="teaser_icon img-responsive" src="{% version staticpage.pictures.0.image.path 'small' %}" alt="{{ staticpage.text|smart_style|striptags|truncatewords:40 }}" width="135" border="0"/>
       </a></div>
     {% endif %}
-
-    {% if staticpage.text %}
+    
+    {% if staticpage.summary %}
+      <h4 class="html-content summary">{{ staticpage.summary|smart_style }}</h4>
+    {% else %}
       <div class="html-content summary">{{ staticpage.text|smart_style|striptags|truncatewords:40 }}</div>
     {% endif %}
     
@@ -50,7 +48,7 @@
     {% endif %}
 
     {% if staticpage.text %}
-      <h3 class="html-content summary">{{ staticpage.text|smart_style|striptags|truncatewords:40 }}</h3>
+      <h4 class="html-content summary">{{ staticpage.text|smart_style|striptags|truncatewords:40 }}</h4>
     {% endif %}
 
     <div class="clear"></div>
