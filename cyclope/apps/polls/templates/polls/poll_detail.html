@@ -10,14 +10,14 @@
 
   <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
 
-  <h1 class="title">{{ poll.name }}</h1>
+  <h2 class="title">{{ poll.name }}</h2>
 
   <!-- herramientas -->
   {% include 'cyclope/content_tools_block.html' %}
 
-  <h3 class="summary">
+  <h4 class="summary">
     {{ poll.description}}
-  </h3>
+  </h4>
   
     <div class="poll_results">
       {% for question in poll.question_set.all %}
