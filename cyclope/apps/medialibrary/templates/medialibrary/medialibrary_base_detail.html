@@ -26,8 +26,8 @@
 
             {% include "cyclope/author_block.html" with author=current_object.author %}
 
-            {% block soundtrack_content %}
-                {# This is a block created because in Puerto Viejo BaseCamp we agree that the soundtrack should be priority in it's detail view #}
+            {% block media_content %}
+                {# This is a block created because in Puerto Viejo BaseCamp we agree that the media content should be priority in it's detail view #}
             {% endblock %}
 
             {% if current_object.image %}
@@ -40,9 +40,6 @@
                     {% if current_object.content_url %}</a>{% endif%}
                 </div>
             {% endif %}
-
-            {% block media_content %}
-            {% endblock %}
 
             <div class="html-content summary">{{ current_object.description|smart_style }}</div>
 
