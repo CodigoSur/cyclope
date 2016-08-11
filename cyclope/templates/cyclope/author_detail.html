@@ -5,10 +5,9 @@
 {% block content %}
 {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
 <div class="regionview author detail well content-view authors-detail">
-        <center>
             {% if current_object.image %}
             <div class="media-content">
-                <img src="{% version current_object.image.path 'small' %}" name="aboutme" class="img-circle"/>
+                <img src="{% version current_object.image.path 'small' %}" class="img-circle center-block" alt="{{ current_object.name }}"/>
             </div>
             {% endif %}
             <h2>{{ current_object.name }}</h2>
@@ -18,14 +17,13 @@
             {% if current_object.origin %}
             <div class="origin">{{ current_object.origin }}</div>
             {% endif %}
-        </center>
     </div>
 {% elif CYCLOPE_THEME_TYPE == 'classic' %}
 <div class="content-view authors detail authors-detail">
     <h1 class="title">{{ current_object.name }}</h1>
     {% if current_object.image %}
     <div class="media-content">
-        <img src="{% version current_object.image.path 'croppedthumbnail' %}" />
+        <img src="{% version current_object.image.path 'croppedthumbnail' %}" alt="{{ current_object.name }}"/>
     </div>
     {% endif %}
     {% if current_object.origin %}
