@@ -17,7 +17,6 @@
 
 <script type="text/javascript">
 //<![CDATA[
-(function($){
     function setup_chainedSelect_for_categorization(i) {
         $("#id_collections-categorization-content_type-object_id-"+ i +"-category").chainedSelect({
             parent: '#id_collections-categorization-content_type-object_id-'+ i +'-collection',
@@ -37,15 +36,12 @@
           setup_chainedSelect_for_categorization(i);
         });
     });
-})(django.jQuery)
 //]]>
 </script>
 
 {# chainedSelect for RelatedContents #}
 <script type="text/javascript">
 //<![CDATA[
-(function($){
-
     function setup_chainedSelect_for_relatedcontent(i) {
         $('#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_id').chainedSelect({
             parent: '#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_type',
@@ -55,7 +51,7 @@
         });
     };
 
-    jQuery(document).ready(function($){
+    $(function(){
       $("select[id^='id_cyclope-relatedcontent-self_type-self_id-'][id$='-other_id']").each(function(i, sel){
             setup_chainedSelect_for_relatedcontent(i);
       });
@@ -67,7 +63,6 @@
         });
     });
     
-})(django.jQuery)
 //]]>
 
 </script>
@@ -81,7 +76,7 @@
 <script type="text/javascript">
 //<![CDATA[
 
-jQuery(document).ready(function($){
+$(function(){
 
     var current_collection = null;
 
