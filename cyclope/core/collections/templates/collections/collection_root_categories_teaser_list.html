@@ -9,7 +9,7 @@
           {% if category.image %}
             <div class="teaser_icon_container">
               <a href="{% url category-default category.slug %}">
-                <img class="icon" src="{% version category.image.path 'small' %}" border="0" alt="{{ category.name }}"/>
+                <img class="icon" src="{% version category.image.path 'small' %}" alt="{{ category.name }}"/>
               </a>
             </div>
           {% endif %}

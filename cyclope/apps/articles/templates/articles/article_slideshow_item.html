@@ -8,18 +8,18 @@
 
     {% if view_options.show_image %}
     <div class="teaser_icon_container">
-          <img title="article" class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
+          <img title="article" class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" />
     <a href="{% url article-detail article.slug %}">
         {% if article.pictures.values %}
         {% with picture=article.pictures.values|first %}
             {% if not view_options.show_title and not view_options.show_description %}
-          <img class="icon big" src="{% version picture.image 'big' %}" border="0"/>
+          <img class="icon big" src="{% version picture.image 'big' %}" />
             {% else %}
-          <img class="slideshow_picture" src="{% version picture.image view_options.visualization_mode %}" border="0"/>
+          <img class="slideshow_picture" src="{% version picture.image view_options.visualization_mode %}" />
             {% endif %}
         {% endwith %}
         {% else %}
-          <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>
+          <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" />
         {% endif %}
     </a>
     </div>
