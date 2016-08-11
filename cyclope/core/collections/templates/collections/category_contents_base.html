@@ -67,7 +67,7 @@
       {% if category.description and view_options.show_description or category.image and view_options.show_image %}
       <div class="collection_teaser">
         {% if category.image and view_options.show_image %}
-        <img alt="{{ category.image.path }}" class="image" src="{% version category.image.path 'small' %}" border="0"/>
+        <img alt="{{ category.image.path }}" class="image" src="{% version category.image.path 'small' %}" />
         {% endif %}
         {% if category.description and view_options.show_description %}
         <div class="summary">{{ category.description|smart_style }}</div>
