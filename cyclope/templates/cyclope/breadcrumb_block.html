@@ -1,6 +1,6 @@
 {% load i18n obj_perms cyclope_utils %}
 {% per_category_perms current_object as cat_perms %}
-<ol class="category_title breadcrumb">
+<ul class="category_title breadcrumb">
     {% if view_options.navigation == "TOP" %}
         {% include 'collections/hierarchycal_navigation_block.html' %}
     {% endif %}
@@ -13,13 +13,13 @@
         <li>
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans "Add content" %} <span class="caret"></span></button>
-                    <ol class="dropdown-menu">
+                    <ul class="dropdown-menu">
                     {% for c_type in category.collection.content_types.all %}
                         <li><a href="/admin/{{ c_type.app_label }}/{{ c_type.model }}/add?_frontend=1&_popup=1&_from_category={{category.slug}}" class="add_content add_{{ c_type.model }}">{{ c_type.name.capitalize }}</a></li>
                     {% endfor %}
-                    </ol>
+                    </ul>
             </div>
         </li>
         {% endif %}
     {% endif %}
-</ol>
+</ul>
