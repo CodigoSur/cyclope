@@ -66,7 +66,13 @@
 
 
 				<div class="action-content show_comment_form">
-					<a name="comments" id="show_comment_form" class="btn btn-primary" role="button" data-toggle="collapse" href="#wrap_write_comment" aria-expanded="false" aria-controls="collapseExample">{% trans "comment on this content" %}</a>
+					<a id="show_comment_form"
+                       class="btn btn-primary"
+                       role="button"
+                       data-toggle="collapse"
+                       href="#wrap_write_comment"
+                       aria-expanded="false"
+                       aria-controls="wrap_write_comment">{% trans "comment on this content" %}</a>
 				</div>
 
 
@@ -98,7 +104,7 @@
 				{% render_comment_list for current_object %}
 
 				<div class="action-content show_comment_form">
-					<a name="comments" href="#comments" id="show_comment_form">{% trans "comment on this content" %}</a>
+					<a href="#comments" id="show_comment_form">{% trans "comment on this content" %}</a>
 				</div>
 
 				<div>

@@ -6,7 +6,7 @@
         {% if current_object.image %}
 					<a href="{% if current_object.skip_detail %}{{ current_object.content_url }}{% else %} {{ current_object.get_absolute_url }}{% endif %}" {% if current_object.new_window %}target="_blank"{% endif%}><img src="{% version current_object.image.path 'carrousel_bootstrap' %}" alt="{{ current_object.name }}" /></a>
         {% else %}
-					<img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="{{ article.name }}" border="0" />
+					<img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="{{ article.name }}" />
         {% endif %}
     {% endif %}
     
