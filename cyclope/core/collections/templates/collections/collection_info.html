@@ -7,7 +7,7 @@
             <div class="collection_teaser">
                 {% if collection.image %}
                 <div class="collection_image">
-                    <img class="image" src="{% version collection.image.path 'fb_thumb' %}"/>
+                    <img class="image" src="{% version collection.image.path 'fb_thumb' %}" alt="{{ collection.name }} picture"/>
                 </div>
                 {% endif %}
                 <div class="summary">
