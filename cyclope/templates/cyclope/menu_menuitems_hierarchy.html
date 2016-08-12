@@ -11,26 +11,34 @@
                 {% for menu_item, menu_item_children in menu_items_dict %}
                     <div class="panel-heading" role="tab" id="heading-{{ menu_item.slug }}">
                         <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion-{{ menu_slug }}" href="#collapse-{{ menu_item.slug }}" aria-expanded="true" aria-controls="collapse-{{ menu_item.slug }}">
-                                <div class="menu_item-titulo">{{ menu_item.name }} <span class="glyphicon glyphicon-triangle-bottom"></span></div>
-                            </a>
+                            {% if menu_item_children|length > 0 %}
+                                <a href="#collapse-{{ menu_item.slug }}" class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-{{ menu_slug }}" aria-expanded="false" aria-controls="collapse-{{ menu_item.slug }}">
+                                    <div class="menu_item-titulo">{{ menu_item.name }} <span class="glyphicon glyphicon-triangle-bottom"></span></div>
+                                </a>
+                            {% else %}
+                                <a href="{{ menu_item.url }}" role="button">
+                                    <div class="menu_item-titulo">{{ menu_item.name }}
+                                </a>
+                            {% endif %}
                         </h4>
                     </div>
-                    <div id="collapse-{{ menu_item.slug }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{ menu_item.slug }}">
-                        <div class="panel-body">
-                            <ul>
-                                {% for menu_item_child in menu_item_children %}
-                                    <li class="level-{{menu_item_child.level}}">
-                                        {% if menu_item_child.custom_url %}
-                                            <a href="{{menu_item_child.url}}">{{ menu_item_child.name }}</a>
-                                        {% else %}
-                                            <a href="/{{CYCLOPE_PREFIX}}{{menu_item_child.url}}">{{ menu_item_child.name }}</a>
-                                        {% endif %}
-                                    </li>           
-                                {% endfor %}
-                            </ul>    
+                    {% if menu_item_children|length > 0 %}
+                        <div id="collapse-{{ menu_item.slug }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{ menu_item.slug }}">
+                            <div class="panel-body">
+                                <ul>
+                                    {% for menu_item_child in menu_item_children %}
+                                        <li class="level-{{menu_item_child.level}}">
+                                            {% if menu_item_child.custom_url %}
+                                                <a href="{{menu_item_child.url}}">{{ menu_item_child.name }}</a>
+                                            {% else %}
+                                                <a href="/{{CYCLOPE_PREFIX}}{{menu_item_child.url}}">{{ menu_item_child.name }}</a>
+                                            {% endif %}
+                                        </li>           
+                                    {% endfor %}
+                                </ul>    
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
