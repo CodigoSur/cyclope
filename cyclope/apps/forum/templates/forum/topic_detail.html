@@ -13,11 +13,15 @@
   
   <div class="author_container">
     <h4 class="author">{{ topic.anonymous_name|default:topic.user }}</h4>
-    <div class="avatar">{% if avatar %}<img src="{{MEDIA_URL}}/{{ avatar }}" alt=""></img>{% endif %}</div>
+    <div class="avatar">
+      {% if avatar %}
+          <img src="{{MEDIA_URL}}/{{ avatar }}" alt=""></img>
+      {% endif %}
+    </div>
   </div>
-  <div class="text"><span class="html-text html-content">
-    {{ topic.text|smart_style}}
-  </span></div>
+  <div class="text">
+      <div class="html-text html-content">{{ topic.text|smart_style}}</div>
+  </div>
   <h6 class="submitted date">{{ topic.creation_date|date:'DATETIME_FORMAT' }}</h6>
 
   {% include 'comments/comments_block.html' %}

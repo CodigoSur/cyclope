@@ -18,7 +18,7 @@
     <div class="create_forum">
         <form action="{{ action_url }}" method="post">{% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" class="submit" value="{% trans "Create" %}" />
+            <input type="submit" class="btn btn-success" value="{% trans "Create" %}" />
         </form>
     </div>
 {% endif %}

@@ -24,7 +24,7 @@ When showing the StaticPage as the main content of the view, the host_template i
  <!-- descripcion -->
   {% if staticpage.summary %}
 		{% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
-			<h4 class="summary">{{ staticpage.summary|smart_style }}</h4>
+			<div class="summary">{{ staticpage.summary|smart_style }}</div>
 		{% elif CYCLOPE_THEME_TYPE == 'classic' %}
 			<div class="summary">{{ staticpage.summary|smart_style}}</div>
 		{% endif %}
@@ -33,7 +33,7 @@ When showing the StaticPage as the main content of the view, the host_template i
   
   {% if staticpage.pictures %}
     <a href="{% url staticpage-detail staticpage.slug %}">
-        <img class="img-responsive" src="{% version staticpage.pictures.0.image.path 'big' %}" border="0"/>
+        <img class="img-responsive" src="{% version staticpage.pictures.0.image.path 'big' %}" />
     </a>
   {% endif %}
   

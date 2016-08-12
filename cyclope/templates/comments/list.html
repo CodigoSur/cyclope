@@ -14,7 +14,7 @@
             <ul class="media-list">
         {% endif %}
         <li id="c{{ comment.id }}" class="media">{# c## is used by the absolute URL of the Comment model, so keep that as it is. #}
-            <div class="media-left" href="#">
+            <div class="media-left">
                 <img class="media-object img-circle" src="{% static 'images/img-author-not-available.png' %}" alt="Image not available">
             </div>
             <div class="comment media-body">
@@ -35,7 +35,8 @@
                 </div>
             </div>
         {% for close in comment.close %}
-            </li></ul>
+            </li>
+        </ul>
         {% endfor %}
     {% endfor %}
 
