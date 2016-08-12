@@ -5,7 +5,7 @@
 	{% if category.collection.visible %}
 		{% with children=category.children.all %}
 			{% if category.parent %}
-				<li>jskdj<a href="{% url category-default category.parent.slug %}" class="parent">{{ category.parent.name }}</a></li>
+				<li><a href="{% url category-default category.parent.slug %}" class="parent">{{ category.parent.name }}</a></li>
 			{% else %}
 				<li><a href="{% url collection-root_categories_teaser_list category.collection.slug %}" class="parent">{{ category.collection.name }}</a></li>
 			{% endif %}
