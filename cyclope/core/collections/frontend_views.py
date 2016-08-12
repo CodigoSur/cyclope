@@ -293,9 +293,9 @@ class CategoryCarrousel(frontend.FrontendView):
     """A carrousel view of Category members for Bootstrap based themes.
     """
     name = 'carrousel'
-    verbose_name = _('carrousel view of Category members.')
-    inline_view_name = 'carrousel_item'
-    template = "collections/category_carrousel.html"
+    verbose_name = _('carousel view of Category members.')
+    inline_view_name = 'carousel_item'
+    template = "collections/category_carousel.html"
     is_content_view = True
     is_region_view = True
     is_default = False
