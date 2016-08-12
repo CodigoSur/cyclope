@@ -181,7 +181,7 @@
 								{% if author.image %}
 								<div class="media-left">
 										<a href='{{ author_url }}'>
-												<img alt="{% author.image.name %}"
+												<img alt="{{ author.image.name }}"
                                                      class="author img-circle"
 													 src="{% version author.image.path 'cropped' %}"
                                                      title="Author"/>

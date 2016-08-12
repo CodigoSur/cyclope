@@ -8,7 +8,7 @@
 
     <div class='link-create-topic'>
         <!-- Indicates a successful or positive action -->
-	    <a href="{% url category-create_topic category.slug %}" type="button" class="btn btn-success">{% trans 'Create a new topic' %}</a>
+	    <a href="{% url category-create_topic category.slug %}" class="btn btn-success">{% trans 'Create a new topic' %}</a>
     </div>
 
 
@@ -18,25 +18,27 @@
     <div class='forum'>
 
         <table>
-
-            <tr>
-                <th class="name">{% trans 'Subject' %}</th>
-                <th class="comments">{% trans 'Replies'%}</th>
-                <th class="last_comment">{% trans 'Last comment' %}</th>
-            </tr>
-
+            <thead>
+                <tr>
+                    <th class="name">{% trans 'Subject' %}</th>
+                    <th class="comments">{% trans 'Replies'%}</th>
+                    <th class="last_comment">{% trans 'Last comment' %}</th>
+                </tr>
+            </thead>
             {% for categorization in categorizations %}
             {% alias categorization.content_object as 'obj' %}
                 {% if not user.is_authenticated and not obj.published %}{% else %}
-                <tr class="item">
-                     <td class="object">
-                         <h5 class="topic"><a href="{{ obj.url }}">{{ obj.name }}</a></h5>
-                         <p class="created"> {% trans 'Created'%} {{ obj.creation_date|date:'DATETIME_FORMAT' }}</p>
-                     </td>
-                     <td class="comment">{{ obj.comments_count }}</td>
-                     <td class="last_comment">{% if obj.last_comment_date %}{{ obj.last_comment_date|date:'m/d/Y, P' }}  {% trans 'by' %} {{ obj.last_comment_author }} {% endif %}
-                     </td>
-                <tr>
+                    <tbody>
+                        <tr class="item">
+                             <td class="object">
+                                 <h5 class="topic"><a href="{{ obj.url }}">{{ obj.name }}</a></h5>
+                                 <p class="created"> {% trans 'Created'%} {{ obj.creation_date|date:'DATETIME_FORMAT' }}</p>
+                             </td>
+                             <td class="comment">{{ obj.comments_count }}</td>
+                             <td class="last_comment">{% if obj.last_comment_date %}{{ obj.last_comment_date|date:'m/d/Y, P' }}  {% trans 'by' %} {{ obj.last_comment_author }} {% endif %}
+                             </td>
+                        </tr>
+                    </tbody>       
 				{% endif %}
             {% endfor %}
         </table>
