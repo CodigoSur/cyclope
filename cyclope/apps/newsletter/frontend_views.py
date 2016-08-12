@@ -12,7 +12,7 @@ class NewsletterContentTeasers(frontend.FrontendView):
     verbose_name=_('show content teasers linked to the website')
     is_default = True
     is_instance_view = True
-    is_content_view = True
+    is_content_view = False
     is_region_view = False
 
     template = "newsletter/content_teasers.html"
@@ -39,7 +39,7 @@ class NewsletterContent(NewsletterContentTeasers):
     verbose_name=_('show the full content (no external links)')
     is_default = False
     is_instance_view = True
-    is_content_view = True
+    is_content_view = False
     is_region_view = False
 
     template = "newsletter/content.html"
