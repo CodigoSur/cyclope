@@ -18,7 +18,7 @@
     {% endif %}
     
     {% if staticpage.summary %}
-      <h4 class="html-content summary">{{ staticpage.summary|smart_style }}</h4>
+      <div class="html-content summary">{{ staticpage.summary|smart_style }}</div>
     {% else %}
       <div class="html-content summary">{{ staticpage.text|smart_style|striptags|truncatewords:40 }}</div>
     {% endif %}
@@ -35,7 +35,10 @@
 
 	<div class="content-view staticpage teaser staticpage-teaser">
 
-    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png" /><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a></h2>
+    <h2 class="title">
+        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png" alt="static page icon"/>
+        <a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a>
+    </h2>
 
     {% if staticpage.summary %}
       <h3 class="html-content summary">{{ staticpage.summary|smart_style }}</h3>

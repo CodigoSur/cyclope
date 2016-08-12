@@ -10,14 +10,14 @@
 <div class="regionview author author_teaser content-view authors-teaser media">
     {% if current_object.image %}
         <div class="media-left">
-            <a href="#">
-                <img src="{% version current_object.image.path 'cropped' %}" class="img-circle"/>
+            <a href=href="{{ current_object.get_absolute_url }}">
+                <img alt="{{ current_object.name }}" src="{% version current_object.image.path 'cropped' %}" class="img-circle"/>
             </a>
         </div>
         {% else %}
         <div class="media-left">
             <a href="#">
-		    <img src="{% static 'images/img-author-not-available.png' %}" class="img-circle"/>
+		    <img alt="image not avalaible" src="{% static 'images/img-author-not-available.png' %}" class="img-circle"/>
             </a>
         </div>
     {% endif %}

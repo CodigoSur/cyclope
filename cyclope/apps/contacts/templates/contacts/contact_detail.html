@@ -5,10 +5,9 @@
 
 {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
 <div class="well content-view authors detail contact-detail">
-    <center>
         {% if contact.photo %}
         <div class="user-image">
-            <img class="contact_photo img-circle" src="{% version contact.photo 'small' %}" />
+            <img class="contact_photo img-circle" src="{% version contact.photo 'small' %}" alt="{{ contact.name }} profile pic"/>
         </div>
         {% endif %}
         <h2>{{contact}}</h2>
@@ -26,7 +25,6 @@
         {% if current_object.origin %}
             <div class="origin">{{ current_object.origin }}</div>
         {% endif %}
-    </center>
 </div>
 <div class="contact_fields center-block">
     <h3>{% trans "General information" %}</h3>
@@ -76,7 +74,7 @@
     </div>
     <!-- /herramientas -->
     {% if contact.photo %}
-        <img class="contact_photo" src="{% version contact.photo 'cropped' %}" />
+        <img class="contact_photo" src="{% version contact.photo 'cropped' %}"  alt="{{ contact.name }} profile pic"/>
     {% endif %}
     <div class="contact_teaser_detail">
         <div class="details-list">

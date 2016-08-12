@@ -9,7 +9,7 @@
 
 
 {% block content %}
-<div class="{% teaser_layout_classes %} regionview category carousel">
+<div class="{% teaser_layout_classes %} regionview category">
 	<div id="carousel-{% if region_name %}-{{region_name}}{% endif %}-{{category_slug}}" class="carousel slide" {% if view_options.auto_play %}data-ride="carousel"{% endif %}>
 
 			{% with categorizations|first as first_categorization %}
@@ -29,7 +29,7 @@
 					{% endspaceless %}
 					{% if not user.is_authenticated and not media.published %}{% else %}
 							{% include template_path with current_object=categorization.content_object %}
-				{% endif %}
+                    {% endif %}
 				{% endfor %}
 				</div>
 
