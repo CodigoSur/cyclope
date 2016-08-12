@@ -1,97 +1,61 @@
 {% extends host_template %}
-
 {% load i18n cyclope_utils fb_versions obj_perms %}
-
 {% block content %}
-
-  {% if category.collection.visible %}
-
-    {% if not request.hide_frontend_edit %}
-        {% per_category_perms category as cat_perms %}
-        {% if cat_perms.add_content %}
-            <div class="category_add_content">
-                <span onClick="$(this).siblings('ul').toggle()">{% trans "Add content" %}</span>
-                <ul class="content_types" style="display:none;">
-                {% for c_type in category.collection.content_types.all %}
-                    <li>
-                        <a href="/admin/{{ c_type.app_label }}/{{ c_type.model }}/add?_frontend=1&_popup=1&_from_category={{category.slug}}" class="add_content add_{{ c_type.model }}">
-                            {{ c_type.name.capitalize }}
-                        </a>
-                    </li>
-                {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-    {% endif %}
-
-
     {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
-
-      {% if view_options.navigation == "TOP" %}
-        {% include 'cyclope/breadcrumb_block.html' %}
-      {% endif %}
-
+        {% if view_options.navigation == "TOP" %}
+            {% include 'cyclope/breadcrumb_block.html' %}
+        {% endif %}
         <div class="category_description">
-        {% if view_options.show_title %}
+            {% if view_options.show_title %}
                 <span class="category_title">
                     <a href="{% url category-default category.slug %}">{{ category.name }}</a>
                 </span>
             {% endif %}
-
             {% if category.description and view_options.show_description or category.image and view_options.show_image %}
+                <div class="collection_teaser">
+                    {% if category.image and view_options.show_image %}
+                        <img alt="{{ category.image.path }}" class="image" src="{% version category.image.path 'fb_thumb' %}"/>
+                    {% endif %}
+                    {% if category.description and view_options.show_description %}
+                        <div class="summary">{{ category.description|smart_style }}</div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    {% elif CYCLOPE_THEME_TYPE == 'classic' %}
+        {% if view_options.navigation == "TOP" %}
+            {% include 'collections/hierarchycal_navigation_block.html' %}
+        {% endif %}
+        {% if view_options.show_title %}
+            <div class="category_title">
+                <h1 class="title">
+                    <a href="{% url category-default category.slug %}">{{ category.name }}</a>
+                </h1>
+            </div>
+        {% endif %}
+        {% if category.description and view_options.show_description or category.image and view_options.show_image %}
             <div class="collection_teaser">
                 {% if category.image and view_options.show_image %}
-                <img alt="{{ category.image.path }}" class="image" src="{% version category.image.path 'fb_thumb' %}"/>
+                    <img alt="{{ category.image.path }}" class="image" src="{% version category.image.path 'small' %}" />
                 {% endif %}
                 {% if category.description and view_options.show_description %}
-                <div class="summary">{{ category.description|smart_style }}</div>
+                    <div class="summary">{{ category.description|smart_style }}</div>
                 {% endif %}
             </div>
+        {% endif %}
+    {% endif %}
+    {% block category_content %}
+    {% endblock %}
+    {% spaceless %}
+        {% if view_options.navigation == "BOTTOM" %}
+            {% include 'cyclope/breadcrumb_block.html' %}
+        {% endif %}
+        {% if page %}
+            {% if view_options.sort_by == "ALPHABETIC" %}
+                {% include 'cyclope/alphabetical_pagination_block.html' %}
+            {% else %}
+                {% include 'cyclope/pagination_block.html' %}
             {% endif %}
-    </div>
-
-    {% elif CYCLOPE_THEME_TYPE == 'classic' %}
-
-      {% if view_options.navigation == "TOP" %}
-        {% include 'collections/hierarchycal_navigation_block.html' %}
-      {% endif %}
-
-      {% if view_options.show_title %}
-      <div class="category_title">
-        <h1 class="title">
-          <a href="{% url category-default category.slug %}">{{ category.name }}</a>
-        </h1>
-      </div>
-      {% endif %}
-
-      {% if category.description and view_options.show_description or category.image and view_options.show_image %}
-      <div class="collection_teaser">
-        {% if category.image and view_options.show_image %}
-        <img alt="{{ category.image.path }}" class="image" src="{% version category.image.path 'small' %}" />
         {% endif %}
-        {% if category.description and view_options.show_description %}
-        <div class="summary">{{ category.description|smart_style }}</div>
-        {% endif %}
-      </div>
-      {% endif %}
-
-    {% endif %}
-    
-  {% endif %}
-
-  {% block category_content %}{% endblock %}
-  {% spaceless %}
-  {% if view_options.navigation == "BOTTOM" %}
-    {% include 'cyclope/breadcrumb_block.html' %}
-  {% endif %}
-
-  {% if page %}
-    {% if view_options.sort_by == "ALPHABETIC" %}
-      {% include 'cyclope/alphabetical_pagination_block.html' %}
-    {% else %}
-      {% include 'cyclope/pagination_block.html' %}
-    {% endif %}
-  {% endif %}
-  {% endspaceless %}
-
+    {% endspaceless %}
 {% endblock %}
