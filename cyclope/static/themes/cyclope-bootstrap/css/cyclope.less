@@ -10,7 +10,8 @@ img{
 .clear {
   clear: both;
 }
-.center {
+.center,
+.teaser_icon.img-responsive{
   float: none;
   margin: 0 auto;
 }
@@ -44,16 +45,14 @@ span.category_title a {
   background: #eee;
   padding: 8px;
   margin: 0 0 10px;
+  overflow: hidden;
 }
+
 .collection_image {
   background: #eee;
   margin: 0 0 10px;
 }
-.collection_image img {
-  margin: auto;
-  display: block;
-  padding: 20px 0;
-}
+
 .collection .title {
   margin-bottom: 0;
 }
@@ -82,11 +81,7 @@ span.category_title {
 span.category_title a {
   color: #000;
 }
-.collection_teaser {
-  background: #eee;
-  padding: 8px;
-  margin: 0 0 20px;
-}
+
 .collection_image {
   background: #eee;
   margin: 0 0 10px;
@@ -94,7 +89,7 @@ span.category_title a {
 .collection_image img {
   margin: auto;
   display: block;
-  padding: 20px 0;
+  padding: 0 0 10px 0;
 }
 .collection .title {
   margin-bottom: 0;
@@ -463,6 +458,13 @@ body.one_column .teaser.article-teaser > .teaser_icon_container {
 .detail .carousel-caption{position:relative; left:0; right:0;}
 
 /*Contact*/
+.well.content-view.authors.detail.contact-detail{
+  text-align: center;
+}
+
+.content-view.contact.teaser.contact-teaser h2{
+  margin-top: 0;
+}
 .contact_fields {margin:0 auto;}
 .contact_fields h3 {text-align:center;font-weight:700;font-size:20px;text-transform:uppercase;border-bottom:1px solid #999;margin:30px 20px 0;}
 .contact_fields p {display:inline-block;padding:3px 10px;margin:5px auto;width:40%;}
@@ -533,4 +535,13 @@ footer,
 .authors-detail {text-align: center;}
 
 
+
 .inline_detail img{float:right}
+
+.main-block .teaser .teaser_icon_container,
+.one_column .teaser .teaser_icon_container{
+    width: 29%;
+    display: inline-block;
+    float: left;
+}
+

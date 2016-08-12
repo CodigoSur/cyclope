@@ -4,8 +4,8 @@
     <div class="media">
         {% if contact.photo %}
         <div class="media-left">
-            <a href="#">
-                <img class="photo img-circle" src="{% version contact.photo 'cropped' %}" />
+            <a href="{% url contact-detail contact.slug %}">
+                <img class="photo img-circle" src="{% version contact.photo 'cropped' %}"  alt="{{ contact.name }} profile pic"/>
             </a>
         </div>
     {% else %}
