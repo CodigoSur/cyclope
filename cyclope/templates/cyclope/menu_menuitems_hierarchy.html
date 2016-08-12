@@ -1,7 +1,38 @@
 {% extends host_template %}
 {% load cyclope_utils %}
 {% block content %}
-    <ul id="menu-{{ expand_style|lower }}-{{ menu_slug }}" class="cyclope_menu {{ expand_style|lower }} {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}nav navbar-nav{% endif %}" >
-        {{ menu_items|unordered_list_css }}
-    </ul>
+    {% if view_options.align == "HORIZONTAL" %}
+        <ul id="menu-{{ expand_style|lower }}-{{ menu_slug }}" class="cyclope_menu {{ expand_style|lower }} {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}nav navbar-nav{% endif %}" >
+            {{ menu_items_list|unordered_list_css }}
+        </ul>
+    {% elif view_options.align == "VERTICAL" %}
+        <div class="panel-group" id="accordion-{{ menu_slug }}" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                {% for menu_item, menu_item_children in menu_items_dict %}
+                    <div class="panel-heading" role="tab" id="heading-{{ menu_item.slug }}">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion-{{ menu_slug }}" href="#collapse-{{ menu_item.slug }}" aria-expanded="true" aria-controls="collapse-{{ menu_item.slug }}">
+                                <div class="menu_item-titulo">{{ menu_item.name }} <span class="glyphicon glyphicon-triangle-bottom"></span></div>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse-{{ menu_item.slug }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{ menu_item.slug }}">
+                        <div class="panel-body">
+                            <ul>
+                                {% for menu_item_child in menu_item_children %}
+                                    <li class="level-{{menu_item_child.level}}">
+                                        {% if menu_item_child.custom_url %}
+                                            <a href="{{menu_item_child.url}}">{{ menu_item_child.name }}</a>
+                                        {% else %}
+                                            <a href="/{{CYCLOPE_PREFIX}}{{menu_item_child.url}}">{{ menu_item_child.name }}</a>
+                                        {% endif %}
+                                    </li>           
+                                {% endfor %}
+                            </ul>    
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
 {% endblock content %}
