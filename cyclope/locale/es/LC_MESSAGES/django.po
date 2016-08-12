@@ -2227,8 +2227,7 @@ msgstr "rotador de los miembros de la Categoría"
 
 #: core/collections/frontend_views.py:306
 msgid "carousel view of Category members."
-msgstr ""
-"Vista en carrusel de miembros de una Categoría."
+msgstr "Vista en carrusel de miembros de una Categoría."
 
 #: core/collections/frontend_views.py:317
 msgid "full content of Category members"
