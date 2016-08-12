@@ -2,7 +2,10 @@
 
   <div class="content-view feed teaser feed-teaser {% teaser_layout_classes %}">
 
-    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/feed.png" /><a href="{% url feed-detail feed.slug %}">{{ feed.name }}</a></h2>
+    <h2 class="title">
+      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/feed.png" alt="feed icon"/>
+        <a href="{% url feed-detail feed.slug %}">{{ feed.name }}</a>
+    </h2>
 
 
     <div class="html-content summary">

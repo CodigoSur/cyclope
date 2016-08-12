@@ -2,12 +2,11 @@
 
   <div class="content-view contact labeled_icon">
     <a href="{% url contact-detail contact.slug %}">
+      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png" alt="contact icon"/>
       {% if contact.photo %}
-      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png"/>
-      <img class="icon" src="{% version contact.photo.path 'thumbnail' %}" />
+      <img class="icon" src="{% version contact.photo.path 'thumbnail' %}" alt="{{ contact.name }}"/>
       {% else %}
-      <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png" />
-      <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" />
+      <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="contact picture not avalaible" />
       {% endif %}
     </a>
     <h2 class="title"><a href="{% url contact-detail contact.slug %}">{{ contact.name|truncatechars:40 }}</a></h2>
