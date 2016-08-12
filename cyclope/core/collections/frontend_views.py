@@ -255,7 +255,7 @@ class CategoryLabeledIconList(CategoryTeaserList):
 frontend.site.register_view(Category, CategoryLabeledIconList)
 
 
-class SlideshowOptions(forms.Form):
+class CarrouselOptions(forms.Form):
     visualization_mode = forms.ChoiceField(label=_('Visual Mode'),
                                            choices=(("slideshow", _(u"Standard view")),
                                                     ("slideshow-background",
@@ -289,24 +289,21 @@ class SlideshowOptions(forms.Form):
                                             ("null", _(u"None"))),
                                    initial="circular")
 
-
-class CategorySlideshow(frontend.FrontendView):
-    """A slideshow view of Category members.
+class CategoryCarrousel(frontend.FrontendView):
+    """A carrousel view of Category members for Bootstrap based themes.
     """
-    name='slideshow'
-    verbose_name=_('slideshow of Category members')
+    name = 'carrousel'
+    verbose_name = _('carrousel view of Category members.')
+    inline_view_name = 'carrousel_item'
+    template = "collections/category_carrousel.html"
     is_content_view = True
     is_region_view = True
     is_default = False
-    options_form = SlideshowOptions
-    inline_view_name = 'slideshow_item'
-    template = "collections/category_slideshow.html"
+    options_form = CarrouselOptions
 
     def get_response(self, request, req_context, options, content_object):
         category = content_object
-        categorizations_list, _, _ = _get_paginator_page(category,
-                                                         options,
-                                                         request)
+        categorizations_list, _, _ = _get_paginator_page(category, options, request)
         req_context.update({'categorizations': categorizations_list,
                             'category': category,
                             'inline_view_name': self.inline_view_name,
@@ -315,18 +312,7 @@ class CategorySlideshow(frontend.FrontendView):
         t = loader.get_template(self.template)
         return t.render(req_context)
 
-frontend.site.register_view(Category, CategorySlideshow)
-
-
-class CategoryCarousel(CategorySlideshow):
-    """A carousel view of Category members for Bootstrap based themes.
-    """
-    name = 'carousel'
-    verbose_name = _('carousel view of Category members for Bootstrap based themes.')
-    inline_view_name = 'carousel_item'
-    template = "collections/category_carousel.html"
-
-frontend.site.register_view(Category, CategoryCarousel)
+frontend.site.register_view(Category, CategoryCarrousel)
 
 
 class CategoryContents(CategoryTeaserList):

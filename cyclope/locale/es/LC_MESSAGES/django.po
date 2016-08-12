@@ -2226,10 +2226,9 @@ msgid "slideshow of Category members"
 msgstr "rotador de los miembros de la Categoría"
 
 #: core/collections/frontend_views.py:306
-msgid "carousel view of Category members for Bootstrap based themes."
+msgid "carrousel view of Category members."
 msgstr ""
-"(Sólo para temas que usen Twitter Bootstrap.) Vista en calesita de miembros "
-"de una Categoría."
+"Vista en carrusel de miembros de una Categoría."
 
 #: core/collections/frontend_views.py:317
 msgid "full content of Category members"
@@ -2317,11 +2316,11 @@ msgstr "Editar"
 msgid "You may order the contents of this Category. Dont forget to save!"
 msgstr "Puedes ordenar los contenidos de esta Categoría. No olvides guardar!"
 
-#: core/collections/templates/collections/category_carousel.html:50
+#: core/collections/templates/collections/category_carrousel.html:50
 msgid "Previous"
 msgstr "Anterior"
 
-#: core/collections/templates/collections/category_carousel.html:54
+#: core/collections/templates/collections/category_carrousel.html:54
 msgid "Next"
 msgstr "Siguiente"
 
