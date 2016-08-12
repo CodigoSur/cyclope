@@ -35,7 +35,6 @@ from django.db.models.signals import post_save
 from django.utils import simplejson
 from django.db.models import get_model
 from django.contrib.admin.views.decorators import staff_member_required
-
 from cyclope.models import MenuItem, SiteSettings, BaseContent
 import cyclope
 from cyclope.utils import layout_for_request, LazyJSONEncoder, get_object_name
@@ -49,6 +48,8 @@ class CyclopeSite(object):
         self.base_content_types = {}
         self._base_ctype_choices = [('', '------')]
         self._registry_ctype_choices = [('', '------')]
+        self._menuitem_ctype_choices = [('', '------')]
+        self._regionview_ctype_choices = [('', '------')]
 
     def register_view(self, model, view_class):
         """Register a view for a model.
@@ -66,10 +67,12 @@ class CyclopeSite(object):
             ctype = ContentType.objects.get_for_model(model)
             if issubclass(model, BaseContent):
                 self.base_content_types[model] = ctype
-                self._base_ctype_choices.append((ctype.id,
-                                                model._meta.verbose_name))
-            self._registry_ctype_choices.append((ctype.id,
-                                                model._meta.verbose_name))
+                self._base_ctype_choices.append((ctype.id, model._meta.verbose_name))
+            self._registry_ctype_choices.append((ctype.id, model._meta.verbose_name))
+            if view.is_region_view:
+                self._regionview_ctype_choices.append((ctype.id, model._meta.verbose_name))
+            if view.is_content_view:
+                self._menuitem_ctype_choices.append((ctype.id, model._meta.verbose_name))
         else:
             self._registry[model].append(view)
 
@@ -84,8 +87,12 @@ class CyclopeSite(object):
     def get_base_ctype_choices(self):
         return sorted(self._base_ctype_choices, key=lambda choice: choice[1])
 
-    def get_registry_ctype_choices(self):
-        return sorted(self._registry_ctype_choices, key=lambda choice: choice[1])
+    def get_registry_ctype_choices(self, caller):
+        if caller == 'RegionViewInlineForm':
+            choices = self._regionview_ctype_choices
+        elif caller == 'MenuItemAdminForm':
+            choices = self._menuitem_ctype_choices
+        return sorted(choices, key=lambda choice: choice[1])
 
     def get_all_registry_models(self):
         return self._registry.keys()
@@ -197,7 +204,7 @@ class CyclopeSite(object):
         #TODO(nicoechaniz): return prettier messages.
         if not cyclope.settings.CYCLOPE_SITE_SETTINGS:
             # the site has not been set up in the admin interface yet
-            return HttpResponse(ugettext('You need to create you site settings'))
+            return HttpResponse(ugettext('You need to create your site settings'))
 
         elif not hasattr(cyclope.settings, 'CYCLOPE_DEFAULT_LAYOUT')\
         or cyclope.settings.CYCLOPE_DEFAULT_LAYOUT is None:

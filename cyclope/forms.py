@@ -145,7 +145,7 @@ class MenuItemAdminForm(GenericModelForm, ViewOptionsFormMixin):
                 model = menu_item.content_type.model_class()
                 self.set_initial_view_options(menu_item, model)
 
-        self.fields['content_type'].choices = site.get_registry_ctype_choices()
+        self.fields['content_type'].choices = site.get_registry_ctype_choices('MenuItemAdminForm')
 
     def get_view(self, values):
         return site.get_view(values['content_type'].model_class(),
@@ -279,7 +279,6 @@ class RegionViewInlineForm(forms.ModelForm, ViewOptionsFormMixin):
     content_view = AjaxChoiceField(label=_('View'), required=False)
     object_id = AjaxChoiceField(label=_('Content object'), required=False)
     view_options = MultipleField(label=_('View options'), form=None, required=False)
-    #weight = forms.IntegerField(widget=forms.HiddenInput()) #TODO HIDE!
 
     field_names = ['content_type', "content_view"]
 
@@ -308,7 +307,7 @@ class RegionViewInlineForm(forms.ModelForm, ViewOptionsFormMixin):
                 self.fields['object_id'].choices = [(content_object.id,
                                                         content_object.name)]
 
-        self.fields['content_type'].choices = site.get_registry_ctype_choices()
+        self.fields['content_type'].choices = site.get_registry_ctype_choices('RegionViewInlineForm')
 
     def get_view(self, values):
         return site.get_view(values['content_type'].model_class(),
