@@ -44,9 +44,7 @@ class NewsletterAdminForm(forms.ModelForm):
         self.fields['content_category'].initial = Category.objects.latest()
 
         views = [('', '------')]
-        views.extend([(view.name, view.verbose_name)
-                       for view in site.get_views(Newsletter)
-                       if view.is_content_view])
+        views.extend([(view.name, view.verbose_name) for view in site.get_views(Newsletter)])
         self.fields['view'].choices = views
 
     class Meta:

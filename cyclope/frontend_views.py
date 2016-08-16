@@ -85,7 +85,6 @@ class MenuHierarchyOptions(forms.Form):
     align = forms.ChoiceField(label=_('Collapse style'),
                               choices=(("VERTICAL", _("vertical")),
                                        ("HORIZONTAL", _("horizontal")),
-                                       ("ON_CLICK", _("on click")),
                                        ("DISABLED", _("disabled"))),
                               initial="HORIZONTAL")
 
@@ -105,13 +104,17 @@ class MenuMenuItemsHierarchy(frontend.FrontendView, HyerarchyBuilderMixin):
     def get_response(self, request, req_context, options, content_object):
         menu = content_object
         menu_items = MenuItem.tree.filter(menu=menu, level=0, active=True)
-        menu_items_list = []
         current_url = request.path_info[1:]
+        menu_items_list = []
+        menu_items_dict = {}
         for item in menu_items:
             value = self.make_nested_list(item, True, current_url)
             menu_items_list.extend(value)
+        for item in menu_items:
+            menu_items_dict[item] = item.get_leafnodes()
         return render_to_string(self.template, {
-            'menu_items': menu_items_list,
+            'menu_items_list': menu_items_list,
+            'menu_items_dict': menu_items_dict.items(),
             'menu_slug': menu.slug,
             'expand_style': options["align"]
         }, req_context)
