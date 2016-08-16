@@ -42,6 +42,7 @@
 {# chainedSelect for RelatedContents #}
 <script type="text/javascript">
 //<![CDATA[
+
     function setup_chainedSelect_for_relatedcontent(i) {
         $('#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_id').chainedSelect({
             parent: '#id_cyclope-relatedcontent-self_type-self_id-'+ i +'-other_type',
@@ -52,21 +53,19 @@
     };
 
     $(function(){
-      $("select[id^='id_cyclope-relatedcontent-self_type-self_id-'][id$='-other_id']").each(function(i, sel){
-            setup_chainedSelect_for_relatedcontent(i);
+    
+      $("select[id^='id_cyclope-relatedcontent-self_type-self_id-'][id$='-other_id']").each(function(i, sel) {
+          setup_chainedSelect_for_relatedcontent(i);
       });
 
-      $("#cyclope-relatedcontent-self_type-self_id-group .add-row a").click(
-        function(){
+      $("#cyclope-relatedcontent-self_type-self_id-group .add-row a").click(function(){
           i = $("select[id^='id_cyclope-relatedcontent-self_type-self_id-'][id$='-other_id']").length - 2
           setup_chainedSelect_for_relatedcontent(i);
         });
     });
-    
-//]]>
 
+//]]>    
 </script>
-
 
 {% endblock %}
 
