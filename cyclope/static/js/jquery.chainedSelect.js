@@ -1,4 +1,10 @@
 /**
+    TODO(NumericA) THIS PLUGIN IS UNMAINTAINED
+    LAST REFERENCE IS https://blog.stanisla.us/2009/10/14/jquery-plugin-chained-select-lists/ (2009)
+    A NEWER VERSION THAN THIS ONE IS https://searchcode.com/codesearch/view/55253067/ WHICH ALSO MOVES THE cache VAR
+    SHOULD BE REPLACED BY https://plugins.jquery.com/chained/
+*/
+/**
 * jQuery ChainedSelect
 *
 * Chain multiple select lists to each other, so changing an option in one
@@ -50,8 +56,6 @@ $.fn.chainedSelect = function(options) {
             var param = $(this).val();
             var key = $(this).attr('id') + '::' + param;
 
-            //$$.attr('disabled', 'disabled');
-
             var data = cache.getItem(key);
             if (data) {
                 addOptions($$, opts, data);
@@ -84,7 +88,7 @@ $.fn.chainedSelect = function(options) {
             // If the parent list has a selected value, trigger
             // its "change" event so chained lists can update
             // their options:
-            opts.parent.trigger('change');
+            opts.parent.change();
         }
     });
 }
@@ -113,7 +117,8 @@ function addOptions(target, opts, data) {
     }
     // Trigger the change event, so other lists chained to this
     // one get updated too:
-    target.attr('disabled', '').trigger('change');
+    target.attr('disabled', false);
+    target.change();
 }
 
 /*
@@ -137,8 +142,11 @@ function addOptions(target, opts, data) {
  * In addition, its constructor should take a single argument; it'll be passed a hash
  * of options used to initialize the plugin.
  */
-var cache = {}, keys = [];
+
 $.fn.chainedSelect.Cache = function(opts) {
+
+    var cache = {}, keys = [];
+
     return {
         getItem: function(key) {
             key = this.replace(key);
