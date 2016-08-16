@@ -52,7 +52,7 @@ function dismissRelatedLookupPopup(win, chosenId) {
     if (elem.className.indexOf('vManyToManyRawIdAdminField') != -1 && elem.value) {
         elem.value += ',' + chosenId;
     } else {                        //OVERRIDING HERE
-        document.getElementById(name).value=chosenId;
+        document.getElementById(name).setAttribute('value', chosenId);
     }
     win.close();
 }
