@@ -9,7 +9,7 @@ $(function() {
         update: updateInlineOrder
     });
     //TODO THIS IS THE CODE BLOCKING CONTENT TYPE SELECT!
-    $("#cyclope-relatedcontent-self_type-self_id-group, #question_set-group").disableSelection();
+    // $("#cyclope-relatedcontent-self_type-self_id-group, #question_set-group").disableSelection();
 });
 
 function updateInlineOrder() {
