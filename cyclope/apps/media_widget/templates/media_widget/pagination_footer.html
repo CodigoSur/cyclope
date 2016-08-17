@@ -2,10 +2,14 @@
 
 <div class="row">
     <div class="col-xs-6 text-left" style="margin-top: 6px;">
-        Resultados <strong>{{pagina.start_index}}</strong> a <strong>{{pagina.end_index}}</strong> de <strong>{{pagina.paginator.count}}</strong>.
+        {% blocktrans with pagina.start_index as start and pagina.end_index as end and pagina.paginator.count as total %}
+            Results from <strong>{{start}}</strong> to <strong>{{end}}</strong> of <strong>{{total}}</strong>.
+        {% endblocktrans %}
     </div>
     <div class="col-xs-6 text-right">
-        Mostrar <input id="nPerPage" type="number" style="width: 50px;" value="{{nRows}}"/> por página.
+        {% blocktrans %}
+            Show <input id="nPerPage" type="number" style="width: 50px;" value="{{nRows}}"/> per page.
+        {% endblocktrans %}
     </div>
 </div>
 
