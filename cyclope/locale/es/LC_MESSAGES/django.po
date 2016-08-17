@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-17 15:46-0600\n"
+"POT-Creation-Date: 2016-08-17 17:28-0600\n"
 "PO-Revision-Date: 2016-08-17 15:46-0600\n"
 "Last-Translator: NumericA <roberto@numerica.cl>\n"
 "MIME-Version: 1.0\n"
@@ -1045,7 +1045,11 @@ msgstr "Gracias por la denuncia. En breve el contenido será revisado"
 msgid "return"
 msgstr "volver"
 
-#: apps/articles/admin.py:69 apps/feeds/admin.py:40
+#: apps/articles/admin.py:40
+msgid "Article's images"
+msgstr "Imágenes del artículo"
+
+#: apps/articles/admin.py:74 apps/feeds/admin.py:40
 #: apps/staticpages/admin.py:67
 msgid "Publication data"
 msgstr "Datos de la publicación"
@@ -1520,7 +1524,7 @@ msgstr "casilla postal"
 
 #: apps/media_widget/models.py:23
 msgid "Manage pictures"
-msgstr "Administrar imágenes"
+msgstr "Administrar"
 
 #: apps/media_widget/views.py:125
 #, python-format
