@@ -171,7 +171,7 @@ class MenuItemAdmin(TreeEditor, PermanentFilterMixin):
     )
 
     class Media:
-        js = ( 'js/reuse_django_jquery.js',)
+        js = ( cyc_settings.CYCLOPE_JQUERY_PATH,)
 
     def changelist_view(self, request, extra_context=None):
         self.do_permanent_filters(request)

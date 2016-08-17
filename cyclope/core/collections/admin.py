@@ -115,9 +115,6 @@ class CategoryAdmin(TreeEditor, PermanentFilterMixin):
         self.do_permanent_filters(request)
         return super(CategoryAdmin, self).changelist_view(request, extra_context)
 
-    class Media:
-        js = ('js/reuse_django_jquery.js',)
-
 admin.site.register(Category, CategoryAdmin)
 
 
