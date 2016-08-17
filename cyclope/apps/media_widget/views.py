@@ -17,6 +17,7 @@ from cyclope.models import RelatedContent
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
 from models import MediaWidget
+from django.utils.translation import ugettext_lazy as _
 
 ###########################
 ##Article's pictures widget
@@ -68,6 +69,7 @@ def pictures_upload(request, article_id):
     form = MediaWidgetForm()
     #TODO(NumericA) picture_select
     #TODO(NumericA) picture_delete
+
     #picture selection
     all_pictures = Picture.objects.all().order_by('-creation_date')
     article_pictures = article.pictures.all()
@@ -120,7 +122,7 @@ def pictures_create(request, article_id):
                 picture.source = article.source
             picture.save()
 
-            messages.success(request, 'Imagen cargada: '+image.name)
+            messages.success(request, _('Loaded image : %s' % image.name))
             request.session['refresh_widget'] = True
 
             if article_id:
@@ -163,7 +165,7 @@ def pictures_update(request, article_id):
         picture_id = int(request.POST.get('picture_id'))
         picture = Picture.objects.get(pk=picture_id)
         
-        messages.success(request, 'Imagen seleccionada: '+picture.name)
+        messages.success(request, _('Selected image : %s' % picture.name))
         request.session['refresh_widget'] = True
         
         if article_id:
@@ -182,7 +184,7 @@ def pictures_delete(request, article_id):
         picture_id = request.POST['picture_id']
         picture = Picture.objects.get(pk=picture_id)
 
-        messages.warning(request, 'Imagenes eliminadas: '+picture.name)
+        messages.warning(request, _('Deleted image: %s' % picture.name))
         request.session['refresh_widget'] = True
         
         if article_id:
@@ -376,7 +378,7 @@ def _validate_file_type(media_type, multimedia):
         top_level_mime, mime_type = tuple(multimedia.content_type.split('/'))
         return top_level_mime == 'image' # allow all image types FIXME?
     else:
-        if media_type == 'soundtrack':
+        if media_type == 'soundtrack': #TODO(NumericA) relax checks
             allowed_mime_types = ['audio/mpeg', 'audio/ogg', 'audio/wav']
         elif media_type == 'movieclip':
             allowed_mime_types = ['video/mp4', 'video/webm', 'video/ogg']
@@ -399,7 +401,7 @@ def _validation_error_message(multimedia, media_type):
         'document': 'PDF',
         'flashmovie': 'Flash'
     }
-    msg = multimedia.content_type+' is not a valid '+type_name[media_type]+' type!'
+    msg = _("%(real_type)s is not a valid %(desired_type)s type!" % {'real_type': multimedia.content_type, 'desired_type': type_name[media_type]})
     return msg
     
 # this function can also be used for search
