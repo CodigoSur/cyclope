@@ -183,6 +183,7 @@ class FBAdminMarkItUpWidget(AdminMarkItUpWidget):
     class Media:
         js = (
             cyc_settings.CYCLOPE_JQUERY_UI_PATH,
+            '/media_widget/jsi18n/',
             'media_widget/cyclope_media_widget.js',
         )
         css = {
