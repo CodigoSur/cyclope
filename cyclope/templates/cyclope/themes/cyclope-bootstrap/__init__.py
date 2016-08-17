@@ -65,9 +65,7 @@ layout_templates = {
     'newsletter.html':
         {'verbose_name': _('Newsletter'),
         'regions' : {
-            'header': {'name': _('header'), 'weight': 1},
-            'before_content': {'name': _('before content'), 'weight': 2},
-            'after_content': {'name': _('after content'), 'weight': 3}
+            'footer': {'name': _('footer'), 'weight': 1}
             }
          },
 }
