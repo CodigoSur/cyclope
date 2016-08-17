@@ -28,7 +28,7 @@ def pictures_new(request):
     article = Article()
     #Forms
     form = MediaWidgetForm()
-    #TODO picture_select&delete forms
+    #TODO(NumericA) picture_select&delete forms
 
     # defaults for new articles, after it's javascript's
     pictures = Picture.objects.all().order_by('-creation_date')
@@ -66,8 +66,8 @@ def pictures_upload(request, article_id):
     article = Article.objects.get(pk=article_id)
     #Forms
     form = MediaWidgetForm()
-    #TODO picture_select
-    #TODO picture_delete
+    #TODO(NumericA) picture_select
+    #TODO(NumericA) picture_delete
     #picture selection
     all_pictures = Picture.objects.all().order_by('-creation_date')
     article_pictures = article.pictures.all()
@@ -77,7 +77,7 @@ def pictures_upload(request, article_id):
     n, nRows = _paginator_query_string(request)
     paginator = Paginator(pictures, nRows)
     select_page = paginator.page(n)
-    #TODO delete_page pagination
+    #TODO(NumericA) delete_page pagination
         
     # parent admin pictures widget refresh
     refresh_widget = request.session.pop('refresh_widget', False)
@@ -156,7 +156,7 @@ def pictures_create(request, article_id):
         return HttpResponseForbidden()
         
 #POST /pictures/update/article_id
-# TODO update multiple pictures
+# TODO(NumericA) update multiple pictures
 @require_POST
 def pictures_update(request, article_id):
     if request.user.is_staff:
@@ -247,10 +247,10 @@ def delete_pictures_list(request, pictures_ids):
     Render a delete form with specified picture ids
     """
     if request.user.is_staff:
-        #TODO delete_form
+        #TODO(NumericA) delete_form
         pictures_list = [int(x) for x in pictures_ids.split(',') if x]
         pictures = [Picture.objects.get(pk=x) for x in pictures_list]
-        #TODO pagination
+        #TODO(NumericA) pagination
         n, nRows = _paginator_query_string(request)
         paginator = Paginator(pictures, nRows)
         delete_page = paginator.page(n)

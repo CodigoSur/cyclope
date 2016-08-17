@@ -115,9 +115,6 @@ class CategoryAdmin(TreeEditor, PermanentFilterMixin):
         self.do_permanent_filters(request)
         return super(CategoryAdmin, self).changelist_view(request, extra_context)
 
-    class Media:
-        js = ('js/reuse_django_jquery.js',)
-
 admin.site.register(Category, CategoryAdmin)
 
 
@@ -254,7 +251,6 @@ class CategorizationAdmin(admin.ModelAdmin):
     class Media:
         js = (
             cyc_settings.CYCLOPE_JQUERY_PATH,
-            #cyc_settings.CYCLOPE_JQUERY_MIGRATE_PATH, TODO
             cyc_settings.CYCLOPE_JQUERY_UI_PATH,
             'js/drag_drop.js',
         )

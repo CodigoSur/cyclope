@@ -1,11 +1,9 @@
 {% load i18n staticfiles %}
-
-<!--TODO (Maureen): remove inline JS-->
-
+{# TODO (Maureen): remove inline JS #}
 {% block extra_head %}
 <script src="{% static 'mediaelement/mediaelement-and-player.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'mediaelement/mediaelementplayer.min.css' %}" type="text/css" />
-<link rel="stylesheet" href="{% static 'mediaelement/mejs-skins.css'" type="text/css" />
+<link rel="stylesheet" href="{% static 'mediaelement/mejs-skins.css' %}" type="text/css" />
 <script type='text/javascript'>
 // Here we are loading the media player for all media in the page.
 // We are using an indirect method to prevent multiple loading

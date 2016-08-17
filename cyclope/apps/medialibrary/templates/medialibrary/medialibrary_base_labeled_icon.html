@@ -3,9 +3,9 @@
 		<div class="thumbnail">
 			<a href="{% if current_object.skip_detail %}{{ current_object.content_url }}{% else %} {{ current_object.get_absolute_url }} {% endif%}" {% if current_object.new_window %}target="_blank"{% endif%}>
 				{% if current_object.image %}
-					<img class="img-responsive" src="{% version current_object.image.path 'labeled_icon_bootstrap' %}" alt="{{ current_object.name }}" border="0"/>
+					<img class="img-responsive" src="{% version current_object.image.path 'labeled_icon_bootstrap' %}" alt="{{ current_object.name }}" />
 				{% else %}
-					<img class="img-responsive" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="not-available" border="0"/>
+					<img class="img-responsive" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="not-available" />
 				{% endif %}
 			</a>
 			<div class="caption">

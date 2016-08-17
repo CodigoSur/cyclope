@@ -175,13 +175,16 @@
 		{% with author=current_object.get_author_or_user %}
 		{% with author_url=author.get_absolute_url %}
 		{% if author %}
-				<a name="author"></a> 
+
 				<div class="author-container meta-content alert alert-info" role="alert">
 						<div class="author-container-data">
 								{% if author.image %}
 								<div class="media-left">
-										<a href="#">
-												<img class="author img-circle" src="{% version author.image.path 'cropped' %}" border="0" title="Author"/>
+										<a href='{{ author_url }}'>
+												<img alt="{{ author.image.name }}"
+                                                     class="author img-circle"
+													 src="{% version author.image.path 'cropped' %}"
+                                                     title="Author"/>
 										</a>
 								</div>
 										

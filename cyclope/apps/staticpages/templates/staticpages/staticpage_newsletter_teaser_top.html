@@ -7,7 +7,7 @@
 <div class="teaser">
     {% if staticpage.pictures %}
      <div class="teaser_icon_container"><a href="{% url staticpage-detail staticpage.slug %}">
-        <img class="newsletter_image" src="{% version staticpage.pictures.0.image.path 'newsletter_teaser' %}" border="0"/>
+        <img class="newsletter_image" src="{% version staticpage.pictures.0.image.path 'newsletter_teaser' %}" />
       </a></div>
     {% endif %}
     

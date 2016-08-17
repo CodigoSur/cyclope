@@ -1,6 +1,6 @@
 // RELATED CONTENTS
 
-jQuery(function($) {
+$(function() {
     $("#cyclope-relatedcontent-self_type-self_id-group, #question_set-group").sortable({
         //axis: 'y',
         placeholder: 'ui-state-highlight',
@@ -8,16 +8,17 @@ jQuery(function($) {
         items: 'div.inline-related',
         update: updateInlineOrder
     });
-    $("#cyclope-relatedcontent-self_type-self_id-group, #question_set-group").disableSelection();
+    //TODO(NumericA) THIS IS THE CODE BLOCKING CONTENT TYPE SELECT!
+    // $("#cyclope-relatedcontent-self_type-self_id-group, #question_set-group").disableSelection();
 });
 
 function updateInlineOrder() {
     $(this).find('div.inline-related').each(function(i) {
-            $(this).find('input[id$=order]').val(i+1);
+        $(this).find('input[id$=order]').val(i+1);
     });
 };
 
-jQuery(document).ready(function($){
+$(function(){
     $(this).find('input[id$=order]').parent('div').parent('div').hide().parent().parent().css('cursor','move');
     $("#cyclope-relatedcontent-self_type-self_id-group .add-row a, #question_set-group .add-row a").click(function(){
         $("#cyclope-relatedcontent-self_type-self_id-group, #question_set-group").find('div.inline-related').each(function(i){
@@ -28,7 +29,7 @@ jQuery(document).ready(function($){
 
 // CATEGORIZATIONS
 
-jQuery(function($) {
+$(function(){
     $("body.categorizations-changelist table#result_list").sortable({
         forcePlaceholderSize: 'true',
         items:'tr:gt(0)',
@@ -47,7 +48,7 @@ function updateChangelistOrder(event, ui) {
 
 // DYNAMIC FORMS
 
-jQuery(function($){
+$(function(){
     $("body.forms-form .inline-group .tabular.inline-related tbody").sortable({
         update: updateTableOrder,
         items: '> tr:has(input[id$=order][value!=""])', //limit sort to existing elements

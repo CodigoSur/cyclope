@@ -23,7 +23,7 @@
   <div class="article_content">
   {% if article.pictures.values %}
   {% with picture=article.pictures.values|first %}
-      <img src="{% version picture.image 'small' %}" alt="{{ picture.name }}" hspace="0" vspace="0" align="right" />
+      <img src="{% version picture.image 'small' %}" alt="{{ picture.name }}" />
   {% endwith %}
   {% endif %}
 
