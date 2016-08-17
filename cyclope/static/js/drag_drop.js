@@ -8,7 +8,7 @@ $(function() {
         items: 'div.inline-related',
         update: updateInlineOrder
     });
-    //TODO THIS IS THE CODE BLOCKING CONTENT TYPE SELECT!
+    //TODO(NumericA) THIS IS THE CODE BLOCKING CONTENT TYPE SELECT!
     // $("#cyclope-relatedcontent-self_type-self_id-group, #question_set-group").disableSelection();
 });
 
