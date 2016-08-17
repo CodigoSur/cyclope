@@ -40,7 +40,7 @@
     {% block cyclopecss %}
         {% bootstrap_skin_link %}
         <!-- Custom CSS -->
-        <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
+        <link href="{% static 'css/cyclope.less' %}" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
         <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
     {% endblock cyclopecss %}
     {% endblock displaycss %}
