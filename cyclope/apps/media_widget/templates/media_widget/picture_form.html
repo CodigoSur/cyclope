@@ -6,16 +6,16 @@
 {{ form.non_field_errors }}
 
 <div class="form-group {% if form.image.errors %}has-error bg-danger{% else %}bg-success{% endif %}">
-    <label for="file">{% trans 'Im&aacute;gen' %}</label>
+    <label for="file">{% trans 'Image' %}</label>
     {{ form.image }}
     <span id="helpName" class="help-block">
         {{ form.image.errors }}
     </span>
-    <p class="help-block">{% trans 'Seleccionar im&aacute;gen para subir' %}</p>
+    <p class="help-block">{% trans 'Select image to upload' %}</p>
 </div>
 
 <div class="form-group {% if form.name.errors %}has-error{% endif %}">
-    <label for="fileName">{% trans 'Nombre' %}</label>
+    <label for="fileName">{% trans 'Name' %}</label>
     {{ form.name }}
     <span id="fileName" class="help-block">
         {{ form.name.errors }}
@@ -23,7 +23,7 @@
 </div>
 
 <div class="form-group {% if form.description.errors %}has-error{% endif %}">
-    <label for="fileDesc">{% trans 'Descripci&oacute;n' %}</label>
+    <label for="fileDesc">{% trans 'Description' %}</label>
     {{ form.description }}
     <span id="helpName" class="help-block">
         {{ form.description.errors }}
@@ -34,10 +34,10 @@
     <div class="col-xs-6">
         <button type="submit" class="btn btn-danger btn-block btn-lg">
             <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-            {% trans 'Subir' %}
+            {% trans 'Upload' %}
         </button>
     </div>
     <div class="col-xs-6 text-muted" style="font-size: 10px;">
-        {% trans 'Recuerda que puedes agregar m&aacute;s datos a este contenido desde la Biblioteca Multimedia.' %}
+        {% trans 'Remember you can add more media to this content from the Media Library.' %}
     </div>
 </div>

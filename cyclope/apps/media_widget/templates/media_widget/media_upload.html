@@ -5,25 +5,20 @@
     {{ form.media_type }}
     <!--{#
     <div class="pull-right">
-        TODO(NumericA) checkbox x carrousel, radio button for teasera
+        TODO(NumericA) checkbox x carrousel, radio button for teaser
         <input type="checkbox" name="show_name" value="no">
     </div>
     #}-->
     <div class="form-group {%if form.name.errors%}has-error{%endif%}">
-        <label for="fileName">{% trans 'Nombre' %}</label>
+        <label for="fileName">{% trans 'Name' %}</label>
         {{ form.name }}
         <span id="fileName" class="help-block">
             {{ form.name.errors }}
         </span>
     </div>
-    <!--{#
-    <div class="pull-right">
-        TODO(NumericA) checkbox x carrousel, radio button for teasera
-        <input type="checkbox" name="show_desc" value="no">
-    </div>
-    #}-->
+
     <div class="form-group {%if form.description.errors%}has-error{%endif%}">
-        <label for="fileDesc">{% trans 'Descripci&oacute;n' %}</label>
+        <label for="fileDesc">{% trans 'Description' %}</label>
         {{ form.description }}
         <span id="fileDesc" class="help-block">
             {{ form.description.errors }}
@@ -31,23 +26,23 @@
     </div>
 
     <div class="form-group {%if form.multimedia.errors%}has-error bg-danger{%endif%}">
-        <label for="file">{% trans 'Archivo' %}</label>
+        <label for="file">{% trans 'File' %}</label>
         {{ form.multimedia }}
         <span id="helpName" class="help-block">
             {{ form.multimedia.errors }}
         </span>
-        <p class="help-block">{% trans 'Selecciona el archivo para subir' %}</p>
+        <p class="help-block">{% trans 'Select file to upload' %}</p>
     </div>
 
     <div class="row">
         <div class="col-xs-6">
             <button type="submit" class="btn btn-danger btn-block">
                 <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-                {% trans 'Subir e Insertar' %}
+                {% trans 'Upload and Embed' %}
             </button>
         </div>
         <div class="col-xs-6 text-muted" style="font-size: 10px;">
-            {% trans 'Recuerda que puedes agregar m&aacute;s datos a este contenido desde la Biblioteca Multimedia.' %}
+            {% trans 'Remember you can add more media to this content from the Media Library' %}
         </div>
     </div>
 </form>

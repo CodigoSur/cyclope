@@ -25,7 +25,7 @@ $(function(){
             {% else %}
                 url = "{% url pictures-new %}" + query_str;
             {% endif %}
-            window.location.href = url; //{# just navigate, or ajax? #}
+            window.location.href = url; //{#TODO(NumericA) just navigate, or ajax? #}
         {% endif %}
     });
 });

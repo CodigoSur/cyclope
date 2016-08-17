@@ -30,9 +30,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group" style="margin-bottom:0;">
-                    <label for="selectMediaType">{% trans 'Tipo de contenido a insertar' %}</label>
+                    <label for="selectMediaType">{% trans 'ContentType' %}</label>
+                    {# TODO(NumericA) Load Media Content Types from Cyclope #}
                     <select id="selectMediaType" class="form-control">
-                        <option value="picture">{% trans 'Im&aacute;gen' %}</option>
+                        <option value="picture">{% trans 'Image' %}</option>
                         <option value="soundtrack">{% trans 'Audio' %}</option>
                         <option value="movieclip">{% trans 'Video' %}</option>
                         <option value="document">{% trans 'PDF' %}</option>
@@ -49,13 +50,13 @@
                     <li role="presentation" {% if n == 1 %}class="active"{% endif %}>
                         <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-                            {% trans 'Subir' %}
+                            {% trans 'Upload' %}
                         </a>
                     </li>
                     <li role="presentation" {% if n > 1 %}class="active"{% endif %}>
                         <a href="#search" aria-controls="search" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                            {% trans 'Buscar en biblioteca' %}
+                            {% trans 'Search in library' %}
                         </a>
                     </li>
                 </ul>

@@ -20,7 +20,8 @@ class MediaWidget(MultipleHiddenInput):
         
     def render(self, name, value, attrs=None):
         inputs = super(MediaWidget, self).render(name, value, attrs)# <input id="id_pictures_0" type="hidden" name="pictures">
-        button = u'<button id="media_widget_button" type="button">Administrar</button>\n'
+        string = _('Manage pictures')
+        button = u'<button id="media_widget_button" type="button">%s</button>\n' % string
         thumbs = u''
         for pic_id in value:
             thumbs += Picture.objects.get(pk=pic_id).thumbnail()+'&nbsp;\n'

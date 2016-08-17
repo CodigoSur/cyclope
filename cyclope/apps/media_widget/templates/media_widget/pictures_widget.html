@@ -25,7 +25,6 @@
 
         {% if messages %}
             <div id="full-alert" class="alert alert-warning">
-            {#<!-- if message.tags %} alert alert-{{ message.tags }}{% endif -->#}
         {% endif %}
 
         <div class="row text-center" id="visor_pictures_widget"><!--Widget--></div>
@@ -46,19 +45,19 @@
                     <li role="presentation" {% if n == 1 %}class="active"{% endif %}>
                         <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-                            {% trans 'Subir' %}
+                            {% trans 'Upload' %}
                         </a>
                     </li>
                     <li role="presentation" {% if n > 1 %}class="active"{% endif %}>
                         <a href="#search" aria-controls="search" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                            {% trans 'Buscar en biblioteca' %}
+                            {% trans 'Search in library' %}
                         </a>
                     </li>
                     <li role="presentation">
                         <a href="#delete" aria-controls="search" role="tab" data-toggle="tab">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            {% trans 'Eliminar' %}
+                            {% trans 'Delete' %}
                         </a>
                     </li>
                 </ul>
@@ -77,7 +76,7 @@
         </div>
         <div class="row text-center">
             <br />
-            <button id="btn-volver" type="button" class="btn btn-default btn-lg btn-block">{% trans 'Volver' %} <small>(Esc)</small></button>
+            <button id="btn-volver" type="button" class="btn btn-default btn-lg btn-block">{% trans 'Go back' %} <small>(Esc)</small></button>
         </div>
     </div>
 </body>
