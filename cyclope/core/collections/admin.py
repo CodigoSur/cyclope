@@ -251,7 +251,6 @@ class CategorizationAdmin(admin.ModelAdmin):
     class Media:
         js = (
             cyc_settings.CYCLOPE_JQUERY_PATH,
-            #cyc_settings.CYCLOPE_JQUERY_MIGRATE_PATH, TODO
             cyc_settings.CYCLOPE_JQUERY_UI_PATH,
             'js/drag_drop.js',
         )

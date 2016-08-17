@@ -73,10 +73,7 @@ class BaseContentAdmin(admin.ModelAdmin):
     date_hierarchy = 'creation_date'
 
     class Media:
-        js = (
-            cyc_settings.CYCLOPE_JQUERY_PATH,
-            #cyc_settings.CYCLOPE_JQUERY_MIGRATE_PATH, TODO
-        )
+        js = (cyc_settings.CYCLOPE_JQUERY_PATH,)
 
     def response_change(self, request, obj):
         if '_frontend' in request.REQUEST:
@@ -118,7 +115,7 @@ class BaseContentAdmin(admin.ModelAdmin):
             for content_object in query_set:
                 if not cat_perm_backend.has_perm(u, "edit_content", content_object):
                     forbidden.append(content_object.pk)
-            ## TODO(nicoechaniz: there might be a way to achieve this without repeating this steps from ChangeList view. Investigate and refactor if possible.
+            ## TODO(nicoechaniz): there might be a way to achieve this without repeating this steps from ChangeList view. Investigate and refactor if possible.
             new_query_set = query_set.exclude(id__in=forbidden)
             cl.query_set = new_query_set
             cl.get_results(request)
@@ -194,7 +191,7 @@ class LayoutAdmin(admin.ModelAdmin):
     exclude = ('image_path',)
     
     # get current Layout's regions ordered by weight
-    # overrides change_view TODO django > 1.4  must override get_context_data instead?
+    # overrides change_view TODO(NumericA) django > 1.4  must override get_context_data instead?
     def change_view(self, request, object_id, form_url='', extra_context=None):
         theme_settings = get_theme(SiteSettings.objects.get().theme)
         layout_template = Layout.objects.get(pk=object_id).template

@@ -98,7 +98,6 @@ class AbuseReport(models.Model):
                 if self.content_object:
                     if hasattr(self.content_object, 'user'):
                         user = self.content_object.user
-                        # TODO
                         user.email_user(subject, message)
                     self.content_object.delete()
                     self.abusereportelement_set.all().delete()
