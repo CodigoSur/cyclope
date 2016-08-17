@@ -3,6 +3,8 @@
 {% block extrahead %}
     {% url 'admin:jsi18n' as jsi18nurl %}
     <script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+    <!-- MW translations-->
+    <script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
     {{ media }}
     <script type="text/javascript" src="{% static 'js/jquery.chainedSelect.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/less.min.js' %}"></script>
