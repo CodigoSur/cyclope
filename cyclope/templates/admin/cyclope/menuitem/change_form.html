@@ -4,13 +4,12 @@
 {% block after_related_objects %}
 {{ block.super }}
 
+{# TODO(NumericA) move to its own JS #}
+
 {# chainedSelect for MenuItem #}
 
 <script type="text/javascript">
 //<![CDATA[
-
-{#// TODO when upgrading django, and django.jQuery, remove isolation #}
-(function($){
 
 $(function() {
   $("#id_content_view").chainedSelect({
@@ -91,8 +90,6 @@ $(function() {
     });
 
 });
-
-})(django.jQuery);
 
 //]]>
 </script>

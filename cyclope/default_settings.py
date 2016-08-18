@@ -148,7 +148,7 @@ AUTHENTICATION_BACKENDS = (
 
 # ADMIN_MEDIA_PREFIX is deprecated but it's here
 # only for compatibility with admin tools 0.4.1
-ADMIN_MEDIA_PREFIX = "/static/admin/" # TODO upgrade admin_tools
+ADMIN_MEDIA_PREFIX = "/static/admin/" # TODO(NumericA) upgrade admin_tools
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
@@ -270,7 +270,7 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
     )
 
 # martkitup settings
-JQUERY_URL = 'js/jquery-1.12.4.min.js' # TODO import it from settings.py
+JQUERY_URL = 'js/jquery-1.12.4.min.js' # TODO(NumericA) import it from settings.py
 MARKITUP_SET = 'markitup/sets/textile'
 MARKITUP_FILTER = ('django.contrib.markup.templatetags.markup.textile', {})
 

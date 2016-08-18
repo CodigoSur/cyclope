@@ -26,7 +26,7 @@ $.widget("cyclope.picturesWidget", $.ui.dialog, {
     options: {
         autoOpen: false,
         modal: true,
-        title: 'Imágenes del Artículo',
+        title: gettext('Article images'),
         minWidth: 531,
         minHeight: 571,
         closeText: "Cerrar"
@@ -53,10 +53,10 @@ $.widget("cyclope.mediaWidget", $.ui.dialog, {
     options: {
         autoOpen: false,
         modal: true,
-        title: 'Insertar Contenido Multimedia',
+        title: gettext('Embed multimedia content'),
         minWidth: 470,
         minHeight: 480,
-        closeText: "Cerrar"
+        closeText: gettext("Cerrar")
     },
     position: function(objt){
         this.options.position = {my: "left top", at: "right bottom", of: objt, collision: "fit"}

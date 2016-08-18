@@ -17,6 +17,7 @@ from cyclope.models import RelatedContent
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
 from models import MediaWidget
+from django.utils.translation import ugettext_lazy as _
 
 ###########################
 ##Article's pictures widget
@@ -28,7 +29,7 @@ def pictures_new(request):
     article = Article()
     #Forms
     form = MediaWidgetForm()
-    #TODO picture_select&delete forms
+    #TODO(NumericA) picture_select&delete forms
 
     # defaults for new articles, after it's javascript's
     pictures = Picture.objects.all().order_by('-creation_date')
@@ -66,8 +67,9 @@ def pictures_upload(request, article_id):
     article = Article.objects.get(pk=article_id)
     #Forms
     form = MediaWidgetForm()
-    #TODO picture_select
-    #TODO picture_delete
+    #TODO(NumericA) picture_select
+    #TODO(NumericA) picture_delete
+
     #picture selection
     all_pictures = Picture.objects.all().order_by('-creation_date')
     article_pictures = article.pictures.all()
@@ -77,7 +79,7 @@ def pictures_upload(request, article_id):
     n, nRows = _paginator_query_string(request)
     paginator = Paginator(pictures, nRows)
     select_page = paginator.page(n)
-    #TODO delete_page pagination
+    #TODO(NumericA) delete_page pagination
         
     # parent admin pictures widget refresh
     refresh_widget = request.session.pop('refresh_widget', False)
@@ -120,7 +122,7 @@ def pictures_create(request, article_id):
                 picture.source = article.source
             picture.save()
 
-            messages.success(request, 'Imagen cargada: '+image.name)
+            messages.success(request, _('Loaded image : %s' % image.name))
             request.session['refresh_widget'] = True
 
             if article_id:
@@ -156,14 +158,14 @@ def pictures_create(request, article_id):
         return HttpResponseForbidden()
         
 #POST /pictures/update/article_id
-# TODO update multiple pictures
+# TODO(NumericA) update multiple pictures
 @require_POST
 def pictures_update(request, article_id):
     if request.user.is_staff:
         picture_id = int(request.POST.get('picture_id'))
         picture = Picture.objects.get(pk=picture_id)
         
-        messages.success(request, 'Imagen seleccionada: '+picture.name)
+        messages.success(request, _('Selected image : %s' % picture.name))
         request.session['refresh_widget'] = True
         
         if article_id:
@@ -182,7 +184,7 @@ def pictures_delete(request, article_id):
         picture_id = request.POST['picture_id']
         picture = Picture.objects.get(pk=picture_id)
 
-        messages.warning(request, 'Imagenes eliminadas: '+picture.name)
+        messages.warning(request, _('Deleted image: %s' % picture.name))
         request.session['refresh_widget'] = True
         
         if article_id:
@@ -247,10 +249,10 @@ def delete_pictures_list(request, pictures_ids):
     Render a delete form with specified picture ids
     """
     if request.user.is_staff:
-        #TODO delete_form
+        #TODO(NumericA) delete_form
         pictures_list = [int(x) for x in pictures_ids.split(',') if x]
         pictures = [Picture.objects.get(pk=x) for x in pictures_list]
-        #TODO pagination
+        #TODO(NumericA) pagination
         n, nRows = _paginator_query_string(request)
         paginator = Paginator(pictures, nRows)
         delete_page = paginator.page(n)
@@ -376,7 +378,7 @@ def _validate_file_type(media_type, multimedia):
         top_level_mime, mime_type = tuple(multimedia.content_type.split('/'))
         return top_level_mime == 'image' # allow all image types FIXME?
     else:
-        if media_type == 'soundtrack':
+        if media_type == 'soundtrack': #TODO(NumericA) relax checks
             allowed_mime_types = ['audio/mpeg', 'audio/ogg', 'audio/wav']
         elif media_type == 'movieclip':
             allowed_mime_types = ['video/mp4', 'video/webm', 'video/ogg']
@@ -399,7 +401,7 @@ def _validation_error_message(multimedia, media_type):
         'document': 'PDF',
         'flashmovie': 'Flash'
     }
-    msg = multimedia.content_type+' is not a valid '+type_name[media_type]+' type!'
+    msg = _("%(real_type)s is not a valid %(desired_type)s type!" % {'real_type': multimedia.content_type, 'desired_type': type_name[media_type]})
     return msg
     
 # this function can also be used for search

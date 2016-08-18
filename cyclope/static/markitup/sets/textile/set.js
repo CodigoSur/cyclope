@@ -49,14 +49,14 @@ mySettings = {
 	]
 }
 
-//TODO MOVE EVERYTHING BELOW TO ITS OWN SCRIPT
+//TODO(NumericA) MOVE EVERYTHING BELOW TO ITS OWN SCRIPT
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 //Content Type to HTML 5 mapping
-//TODO source elements can specify MIME type. may be should for video codecs...
+//TODO(NumericA) source elements can specify MIME type. may be should for video codecs...
 //TODO handle browsers that don't support HTML5
 function generate_media_tag(url, media_type){
     switch(media_type){

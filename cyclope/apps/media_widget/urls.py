@@ -1,6 +1,11 @@
 from django.conf.urls import patterns, url
 from views import pictures_new, pictures_upload, pictures_create, pictures_update, pictures_delete, embed_new, embed_create, library_fetch, pictures_widget, pictures_widget_new, delete_pictures_list, pictures_widget_select
 
+#TODO(NumericA) this will be deprecated when upgrading to django 1.10
+js_info_dict = {
+    'packages': ('cyclope.apps.media_widget',),
+}
+
 urlpatterns = patterns('',
     # Article's pictures
     # Upload
@@ -19,5 +24,7 @@ urlpatterns = patterns('',
     url(r'^embed/new/(?P<media_type>\w*)$', embed_new, name="embed-new"),
     url(r'^embed/create$', embed_create, name="embed-create"),
     # Ajax
-    url(r'^library/(?P<media_type>\w+)$', library_fetch, name="library-fetch")
+    url(r'^library/(?P<media_type>\w+)$', library_fetch, name="library-fetch"),
+    # JS i18n
+    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
 )
