@@ -3597,7 +3597,7 @@ msgstr "Asunto del correo"
 
 #: third_party/contact_form/models.py:14
 msgid "Message to show before the form"
-msgstr "Mensaje que se mostrará después de enviar el formulario"
+msgstr "Información de contacto"
 
 #: third_party/contact_form/models.py:18 third_party/contact_form/models.py:21
 #: third_party/contact_form/models.py:22
