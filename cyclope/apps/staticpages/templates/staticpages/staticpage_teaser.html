@@ -24,7 +24,7 @@
     {% endif %}
     
        <p class="teaser_more"><a class="btn btn-primary" href="{{ current_object.get_absolute_url  }}" role="button">{% trans "More" %}</a> 
-       {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
+       {% include "cyclope/teaser_tools_block.html" with current_object=staticpage %}
        <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/{{ current_object.get_object_name }}.png" alt="icon" /></p>
 
     <div class="clear"></div>
