@@ -4,6 +4,8 @@ import re
 import mimetypes
 from cyclope.apps.medialibrary.models import Picture, Document, RegularFile, SoundTrack, MovieClip, FlashMovie
 import urllib
+from filebrowser.base import FileObject
+from cyclope.utils import slugify
 
 class Command(BaseCommand):
     help = 'Finds media in /media/uploads & create their Model objects'
@@ -30,7 +32,7 @@ class Command(BaseCommand):
         top_level_mime, mime_type = self.guess_type(filename)
         instance = self.create_content_instance(top_level_mime, mime_type, filename, path)
         instance.save()
-        print('\t\t importadA %s %s' % (instance.get_object_name().upper(), instance.name) )
+        print('\t\t importar %s %s' % (instance.get_object_name().upper(), instance.name) )
         # be happy
         
     def guess_type(self, filename):
@@ -38,8 +40,14 @@ class Command(BaseCommand):
         top_level_mime, mime_type = tuple(mime_type[0].split('/'))
         print('\t\t MIME_TYPE %s' % top_level_mime)
         return (top_level_mime, mime_type)
-        
-    def create_content_instance(self, top_level_mime, mime_type, filename, path):
+
+    # MIME to MediaType copied from wp2cyclope command        
+    def create_content_instance(self, top_level_mime, mime_type, name, path):
+        # sanitize
+        filename = self.sanitize_filename(name)
+        if filename != name:
+            self.correct_file(path, name, filename)
+        # decide
         if  top_level_mime == 'image':
             return self.file_to_picture(filename, path)
         elif  top_level_mime == 'audio':
@@ -68,8 +76,9 @@ class Command(BaseCommand):
 
     def path_name(self, path, filename):
         ruta = "%s/%s" % (path, filename)
-        ruta = urllib.quote(ruta)
-        ruta = ruta.replace('./','/')
+        #ruta = urllib.quote(ruta)
+        ruta = ruta.replace('./media/','/')
+        ruta = FileObject(ruta) # TODO no 'graba' Object
         return ruta
 
     def file_to_picture(self, filename, path):
@@ -95,14 +104,36 @@ class Command(BaseCommand):
             name = self.file_name(filename),
             audio = self.path_name(path, filename)
         )
+
     def file_to_movie_clip(self, filename, path):
         return MovieClip(
             name = self.file_name(filename),
             video = self.path_name(path, filename)
         )
+
     def file_to_flash_movie(self, filename, path):
         return FlashMovie(
             name = self.file_name(filename),
             flash = self.path_name(path, filename)
         )
 
+    def sanitize_filename(self, filename):
+        # keep file extension
+        m = re.search('(?P<name>.*)(?P<extension>\.\w{3}$)', filename)
+        name = m.group('name')
+        extension = m.group('extension')
+        # truncate name to maximun chars
+        name = name[:250]
+        # sanitize name
+        name = slugify(name)
+        #return
+        filename = "%s%s" % (name, extension)
+        return filename
+
+    def correct_file(self, path, name, filename):
+        "mv name filename"
+        src = "%s/%s" % (path, name)
+        dest = "%s/%s" % (path, filename)
+        os.rename(src, dest)
+        
+        
