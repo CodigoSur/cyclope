@@ -442,5 +442,4 @@ def _get_todays_folder(path):
     generate path/year/month directory structure
     ex. /media/pictures/2016/8
     """
-    #import pdb; pdb.set_trace()
     return path+"/{:%Y/%m}".format(datetime.now())
