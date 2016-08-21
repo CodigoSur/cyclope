@@ -8,14 +8,27 @@ from cyclope.utils import slugify
 from datetime import datetime
 from django.conf import settings
 import errno
+from optparse import make_option
 
 class Command(BaseCommand):
     help = 'Finds media in /media/uploads & create their Model objects'
     
     VERSION_NAMES = ('fb_thumb', 'thumbnail', 'small', 'medium', 'big', 'cropped', 'croppedthumbnail', 'slideshow', 'slideshow-background', 'newsletter_teaser', 'carrousel_bootstrap', 'labeled_icon_bootstrap')
     
+    #NOTE django > 1.8 uses argparse instead of optparse module, 
+    #so "You are encouraged to exclusively use **options for new commands."
+    #https://docs.djangoproject.com/en/1.9/howto/custom-management-commands/
+    option_list = BaseCommand.option_list + (
+        make_option('--dir',
+            action='store',
+            dest='rootDir',
+            default='./media/uploads',
+            help='Directory to scan for files, treat, and create objects for them.'
+        ),
+    )
+    
     def handle(self, *args, **options):
-        rootDir = './media/uploads' # TODO argument
+        rootDir = options['rootDir']
         for dirName, subdirList, fileList in os.walk(rootDir):
             print('Found directory: %s' % dirName)
             for fname in fileList:
@@ -35,7 +48,7 @@ class Command(BaseCommand):
         # sanitize
         name = self.sanitize_filename(filename)
         if filename != name:
-            self.correct_filename(path, name, filename)
+            filename = self.correct_filename(path, name, filename)
         # media/type folder structure
         instance = self.create_content_object(top_level_mime, mime_type, filename, self._get_todays_folder(path))
         self.correct_path(path, instance, filename) # always put in today
@@ -64,7 +77,7 @@ class Command(BaseCommand):
                 return self.file_to_movie_clip(name, path)
         elif top_level_mime == 'application':
             if mime_type == 'pdf' : 
-                return self._wp_file_to_document(name, path)
+                return self.file_to_document(name, path)
             elif mime_type == 'x-shockwave-flash' : 
                 return self.file_to_flash_movie(name, path)
             else :
@@ -136,10 +149,11 @@ class Command(BaseCommand):
 
     def correct_filename(self, path, name, filename):
         "mv name filename"
-        src = "%s/%s" % (path, name)
-        dest = "%s/%s" % (path, filename)
+        src = "%s/%s" % (path, filename)
+        dest = "%s/%s" % (path, name)
         os.rename(src, dest)
         print('\t\t mover %s %s' % (src, dest) )
+        return name
         
     def correct_path(self, path, instance, filename):
         "mv path/filename new_path/instance.path"
