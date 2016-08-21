@@ -3,7 +3,6 @@ import os
 import re
 import mimetypes
 from cyclope.apps.medialibrary.models import Picture, Document, RegularFile, SoundTrack, MovieClip, FlashMovie
-import urllib
 from filebrowser.base import FileObject
 from cyclope.utils import slugify
 
@@ -76,9 +75,8 @@ class Command(BaseCommand):
 
     def path_name(self, path, filename):
         ruta = "%s/%s" % (path, filename)
-        #ruta = urllib.quote(ruta)
-        ruta = ruta.replace('./media/','/')
-        ruta = FileObject(ruta) # TODO no 'graba' Object
+        ruta = ruta.replace('./media/','/') # TODO relativizar
+        ruta = FileObject(ruta)
         return ruta
 
     def file_to_picture(self, filename, path):
