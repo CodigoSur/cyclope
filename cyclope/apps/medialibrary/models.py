@@ -44,6 +44,8 @@ class BaseMedia(BaseContent, Collectible, ThumbnailMixin):
     image_file_field = "image" # This must me set to the image_file on the model
                                # if the field name is not "image"
                                # (eg: "still" for MovieClip)
+    directory = None # Tells where in media/ to create this Content Type's directory structure
+                     # TODO(NumericA) auto - lower case class name hypenated
 
     @property
     def media_file(self):
@@ -74,7 +76,7 @@ class DateFileBrowseField(FileBrowseField):
 class Picture(BaseMedia):
     """Picture model.
     """
-
+    directory='pictures/'
     image = DateFileBrowseField(_('image'), max_length=100, format='Image', directory='pictures/')
     media_file_field = "image"
     image_file_field = None
@@ -83,10 +85,10 @@ class Picture(BaseMedia):
         verbose_name = _('picture')
         verbose_name_plural = _('pictures')
 
-
 class SoundTrack(BaseMedia):
     """AudioTrack model.
     """
+    directory='sound_tracks/'
     audio = DateFileBrowseField(_('audio'), max_length=250, format='Audio', directory='sound_tracks/')
     image = DateFileBrowseField(_('image'), max_length=100, format='Image', directory='pictures/', blank=True, null=True)
     media_file_field = "audio"
@@ -99,6 +101,7 @@ class SoundTrack(BaseMedia):
 class MovieClip(BaseMedia):
     """MovieClip model.
     """
+    directory='movie_clips/'
     still = DateFileBrowseField(_('still'), max_length=100, format='Image', directory='pictures/', blank=True)
     video = DateFileBrowseField(_('video'), max_length=100, format='Video', directory='movie_clips/')
     media_file_field = "video"
@@ -118,6 +121,7 @@ class MovieClip(BaseMedia):
 class Document(BaseMedia):
     """Document model.
     """
+    directory='documents/'
     image = DateFileBrowseField(_('image'), max_length=100, format='Image', directory='pictures/', blank=True)
     document = DateFileBrowseField(_('document'), max_length=100, format='Document', directory='documents/')
     media_file_field = "document"
@@ -130,6 +134,7 @@ class Document(BaseMedia):
 class FlashMovie(BaseMedia):
     """FlashMovie model.
     """
+    directory='flashmovies/'
     image = DateFileBrowseField(_('image'), max_length=100, format='Image', directory='pictures/', blank=True)
     flash = DateFileBrowseField(_('flash'), max_length=100, format='Flash',directory='flashmovies/', blank=True)
     media_file_field = "flash"
@@ -142,6 +147,7 @@ class FlashMovie(BaseMedia):
 class RegularFile(BaseMedia):
     """RegularFile model. Accepts any type of file.
     """
+    directory='regular_files/'
     image = DateFileBrowseField(_('image'), max_length=100, format='Image', directory='pictures/', blank=True)
     file = DateFileBrowseField(_('file'), max_length=100, directory='regular_files/')
     media_file_field = "file"

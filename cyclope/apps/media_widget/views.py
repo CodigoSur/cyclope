@@ -307,7 +307,7 @@ def embed_create(request):
                 klass = ContentType.objects.get(model=media_type).model_class()
                 instance = klass() # generic instance of media model
                 #filesystem save 
-                directory = "mundi" # TODO por tipo
+                directory = instance.directory
                 abs_path = os.path.join(settings.MEDIA_ROOT, _get_todays_folder(directory))
                 uploaded_path = handle_file_upload(abs_path, multimedia)
                 image_url = "%s/%s" % (_get_todays_folder(directory), multimedia.name)
@@ -316,9 +316,9 @@ def embed_create(request):
                 instance.name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else multimedia.name
                 instance.description = form.cleaned_data['description']
                 instance.user = request.user
-
                 setattr(instance, klass.media_file_field, objeto)
                 instance.save()
+
                 #response
                 return render(request, 'media_widget/media_widget.html', {
                     'form': form,
