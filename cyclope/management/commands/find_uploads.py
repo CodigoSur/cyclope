@@ -5,6 +5,9 @@ import mimetypes
 from cyclope.apps.medialibrary.models import Picture, Document, RegularFile, SoundTrack, MovieClip, FlashMovie
 from filebrowser.base import FileObject
 from cyclope.utils import slugify
+from datetime import datetime
+from django.conf import settings
+import errno
 
 class Command(BaseCommand):
     help = 'Finds media in /media/uploads & create their Model objects'
@@ -29,7 +32,14 @@ class Command(BaseCommand):
         
     def incorporate(self, filename, path):
         top_level_mime, mime_type = self.guess_type(filename)
-        instance = self.create_content_instance(top_level_mime, mime_type, filename, path)
+        # sanitize
+        name = self.sanitize_filename(filename)
+        if filename != name:
+            self.correct_filename(path, name, filename)
+        # media/type folder structure
+        instance = self.create_content_object(top_level_mime, mime_type, filename, self._get_todays_folder(path))
+        self.correct_path(path, instance, filename) # always put in today
+        # create
         instance.save()
         print('\t\t importar %s %s' % (instance.get_object_name().upper(), instance.name) )
         # be happy
@@ -41,32 +51,28 @@ class Command(BaseCommand):
         return (top_level_mime, mime_type)
 
     # MIME to MediaType copied from wp2cyclope command        
-    def create_content_instance(self, top_level_mime, mime_type, name, path):
-        # sanitize
-        filename = self.sanitize_filename(name)
-        if filename != name:
-            self.correct_file(path, name, filename)
+    def create_content_object(self, top_level_mime, mime_type, name, path):
         # decide
         if  top_level_mime == 'image':
-            return self.file_to_picture(filename, path)
+            return self.file_to_picture(name, path)
         elif  top_level_mime == 'audio':
-            return self.file_to_sound_track(filename, path)
+            return self.file_to_sound_track(name, path)
         elif  top_level_mime == 'video':              
             if mime_type == 'x-flv': 
-                return self.file_to_flash_movie(filename, path)
+                return self.file_to_flash_movie(name, path)
             else:
-                return self.file_to_movie_clip(filename, path)
+                return self.file_to_movie_clip(name, path)
         elif top_level_mime == 'application':
             if mime_type == 'pdf' : 
-                return self._wp_file_to_document(filename, path)
+                return self._wp_file_to_document(name, path)
             elif mime_type == 'x-shockwave-flash' : 
-                return self.file_to_flash_movie(filename, path)
+                return self.file_to_flash_movie(name, path)
             else :
-                return self.file_to_regular_file(filename, path)
+                return self.file_to_regular_file(name, path)
         elif top_level_mime == 'text':
-            return self.file_to_document(filename, path)
+            return self.file_to_document(name, path)
         else: #multipart, example, message, model
-            return self.file_to_regular_file(filename, path)
+            return self.file_to_regular_file(name, path)
 
     #TODO if not QUERIES
 
@@ -128,10 +134,33 @@ class Command(BaseCommand):
         filename = "%s%s" % (name, extension)
         return filename
 
-    def correct_file(self, path, name, filename):
+    def correct_filename(self, path, name, filename):
         "mv name filename"
         src = "%s/%s" % (path, name)
         dest = "%s/%s" % (path, filename)
         os.rename(src, dest)
+        print('\t\t mover %s %s' % (src, dest) )
         
+    def correct_path(self, path, instance, filename):
+        "mv path/filename new_path/instance.path"
+        new_path = '.' + settings.MEDIA_URL + instance.directory[:-1] #--/
+        new_path = self._get_todays_folder(new_path)
+        src = "%s/%s" % (path, filename)
+        dest = "%s/%s" % (new_path, filename)
+        self.make_sure_path_exists(new_path)
+        os.rename(src, dest)
+        print('\t\t mover %s %s' % (src, dest) )
         
+    def _get_todays_folder(self, path):
+        """
+        generate path/year/month directory structure
+        ex. /media/pictures/2016/8
+        """
+        return path+"/{:%Y/%m}".format(datetime.now())
+        
+    def make_sure_path_exists(self, path):
+        try:
+            os.makedirs(path)
+        except OSError as exception:
+            if exception.errno != errno.EEXIST:
+                raise
