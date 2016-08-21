@@ -19,6 +19,7 @@ from django.core.paginator import Paginator
 from models import MediaWidget
 from django.utils.translation import ugettext_lazy as _
 from filebrowser.base import FileObject
+from datetime import datetime
 
 ###########################
 ##Article's pictures widget
@@ -108,11 +109,10 @@ def pictures_create(request, article_id):
             #normalize file name
             image.name = convert_filename(image.name)
             #filesystem save
-            directory = "imago"
-            abs_path = os.path.join(settings.MEDIA_ROOT, directory)
+            directory = "pictures"
+            abs_path = os.path.join(settings.MEDIA_ROOT, _get_todays_folder(directory))
             uploaded_path = handle_file_upload(abs_path, image) # = abs_path + image.name
-            # TODO carpetas por fecha
-            image_url = "%s/%s" % (directory, image.name)
+            image_url = "%s/%s" % (_get_todays_folder(directory), image.name)
             objeto = FileObject(image_url)
             #database save
             picture = Picture(
@@ -308,15 +308,15 @@ def embed_create(request):
                 instance = klass() # generic instance of media model
                 #filesystem save 
                 directory = "mundi" # TODO por tipo
-                abs_path = os.path.join(settings.MEDIA_ROOT, directory)
+                abs_path = os.path.join(settings.MEDIA_ROOT, _get_todays_folder(directory))
                 uploaded_path = handle_file_upload(abs_path, multimedia)
-                # TODO carpetas por fecha
-                image_url = "%s/%s" % (directory, multimedia.name)
+                image_url = "%s/%s" % (_get_todays_folder(directory), multimedia.name)
                 objeto = FileObject(image_url)
                 # database save
                 instance.name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else multimedia.name
                 instance.description = form.cleaned_data['description']
                 instance.user = request.user
+
                 setattr(instance, klass.media_file_field, objeto)
                 instance.save()
                 #response
@@ -436,3 +436,11 @@ def _paginator_query_string(request):
     else:
         nRows = 5
     return (n, nRows)
+    
+def _get_todays_folder(path):
+    """
+    generate path/year/month directory structure
+    ex. /media/pictures/2016/8
+    """
+    #import pdb; pdb.set_trace()
+    return path+"/{:%Y/%m}".format(datetime.now())
