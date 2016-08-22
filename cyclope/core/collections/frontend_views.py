@@ -40,8 +40,8 @@ from cyclope.core.collections.models import Collection, Category, Categorization
 from cyclope.core.collections.forms import ContentFilterForm
 
 SORT_BY_FIELD_DEF = forms.ChoiceField(label=_('Sort by'),
-                                      choices=(("DATE+", _(u"Date ↓ (newest first)")),
-                                               ("DATE-", _(u"Date ↑ (oldest first)")),
+                                      choices=(("DATE-", _(u"Date ↓ (newest first)")),
+                                               ("DATE+", _(u"Date ↑ (oldest first)")),
                                                ("ALPHABETIC", _(u"Alphabetic")),
                                                ("RANDOM", _(u"Random"))),
                                       initial="DATE-")
