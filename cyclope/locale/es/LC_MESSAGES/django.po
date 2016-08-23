@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-17 17:28-0600\n"
+"POT-Creation-Date: 2016-08-23 12:31-0600\n"
 "PO-Revision-Date: 2016-08-17 15:46-0600\n"
 "Last-Translator: NumericA <roberto@numerica.cl>\n"
 "MIME-Version: 1.0\n"
@@ -601,7 +601,7 @@ msgstr "titulo global"
 msgid "keywords"
 msgstr "palabras clave"
 
-#: models.py:85 apps/medialibrary/models.py:39 apps/polls/models.py:36
+#: models.py:85 apps/medialibrary/models.py:40 apps/polls/models.py:36
 #: core/collections/models.py:59 core/collections/models.py:99
 #: core/series/models.py:61
 msgid "description"
@@ -650,7 +650,7 @@ msgid "show author"
 msgstr "mostrar autoría"
 
 #: models.py:105 models.py:409 models.py:517 apps/articles/models.py:49
-#: apps/medialibrary/models.py:35
+#: apps/medialibrary/models.py:36
 msgid "author"
 msgstr "autoría"
 
@@ -893,10 +893,10 @@ msgstr ""
 msgid "translations"
 msgstr "traducciones"
 
-#: models.py:503 models.py:543 models.py:547 apps/medialibrary/models.py:65
-#: apps/medialibrary/models.py:80 apps/medialibrary/models.py:114
-#: apps/medialibrary/models.py:128 apps/medialibrary/models.py:142
-#: apps/medialibrary/models.py:156 core/collections/models.py:60
+#: models.py:503 models.py:543 models.py:547 apps/medialibrary/models.py:80
+#: apps/medialibrary/models.py:93 apps/medialibrary/models.py:125
+#: apps/medialibrary/models.py:138 apps/medialibrary/models.py:151
+#: apps/medialibrary/models.py:163 core/collections/models.py:60
 #: core/collections/models.py:100 core/series/models.py:63
 msgid "image"
 msgstr "imágen"
@@ -925,7 +925,7 @@ msgstr "autorías"
 msgid "link"
 msgstr "enlace"
 
-#: models.py:537 apps/articles/models.py:51 apps/medialibrary/models.py:37
+#: models.py:537 apps/articles/models.py:51 apps/medialibrary/models.py:38
 msgid "source"
 msgstr "fuente"
 
@@ -1104,7 +1104,7 @@ msgstr "artículos"
 #: apps/articles/templates/articles/article_detail.html:9
 #: apps/medialibrary/templates/medialibrary/medialibrary_base_detail.html:9
 #: apps/medialibrary/templates/medialibrary/medialibrary_base_detail_bootstrap.html:10
-#: apps/staticpages/templates/staticpages/staticpage_detail.html:14
+#: apps/staticpages/templates/staticpages/staticpage_detail.html:11
 #: apps/staticpages/templates/staticpages/staticpage_inline_detail.html:11
 msgid "This content isn't public, please log in"
 msgstr "Este contenido no es público. Debe registrarse por favor."
@@ -1119,7 +1119,7 @@ msgid "Close"
 msgstr "Cerrar"
 
 #: apps/articles/templates/articles/article_detail.html:140
-#: apps/medialibrary/models.py:72
+#: apps/medialibrary/models.py:86
 msgid "pictures"
 msgstr "imágenes"
 
@@ -1526,22 +1526,22 @@ msgstr "casilla postal"
 msgid "Manage pictures"
 msgstr "Administrar"
 
-#: apps/media_widget/views.py:125
+#: apps/media_widget/views.py:129
 #, python-format
 msgid "Loaded image : %s"
 msgstr "Imágen cargada: %s"
 
-#: apps/media_widget/views.py:168
+#: apps/media_widget/views.py:172
 #, python-format
 msgid "Selected image : %s"
 msgstr "Imágen seleccionada: %s"
 
-#: apps/media_widget/views.py:187
+#: apps/media_widget/views.py:191
 #, python-format
 msgid "Deleted image: %s"
 msgstr "Imágen eliminada: %s"
 
-#: apps/media_widget/views.py:404
+#: apps/media_widget/views.py:413
 #, python-format
 msgid "%(real_type)s is not a valid %(desired_type)s type!"
 msgstr "¡%(real_type)s no es un tipo de %(desired_type)s válido!"
@@ -1551,31 +1551,31 @@ msgstr "¡%(real_type)s no es un tipo de %(desired_type)s válido!"
 msgid "Select"
 msgstr "Seleccionar"
 
-#: apps/media_widget/templates/media_widget/media_upload.html:13
+#: apps/media_widget/templates/media_widget/media_upload.html:14
+msgid "File"
+msgstr "Archivo"
+
+#: apps/media_widget/templates/media_widget/media_upload.html:19
+msgid "Select file to upload"
+msgstr "Seleccione archivo a subir"
+
+#: apps/media_widget/templates/media_widget/media_upload.html:24
 #: apps/media_widget/templates/media_widget/picture_form.html:18
 #: locale_external/external_translations.py:59
 msgid "Name"
 msgstr "Nombre"
 
-#: apps/media_widget/templates/media_widget/media_upload.html:21
+#: apps/media_widget/templates/media_widget/media_upload.html:32
 #: apps/media_widget/templates/media_widget/picture_form.html:26
 #: core/collections/admin.py:81
 msgid "Description"
 msgstr "Descripción"
 
-#: apps/media_widget/templates/media_widget/media_upload.html:29
-msgid "File"
-msgstr "Archivo"
-
-#: apps/media_widget/templates/media_widget/media_upload.html:34
-msgid "Select file to upload"
-msgstr "Seleccione archivo a subir"
-
-#: apps/media_widget/templates/media_widget/media_upload.html:41
+#: apps/media_widget/templates/media_widget/media_upload.html:43
 msgid "Upload and Embed"
 msgstr "Subir e insertar"
 
-#: apps/media_widget/templates/media_widget/media_upload.html:45
+#: apps/media_widget/templates/media_widget/media_upload.html:47
 #: apps/media_widget/templates/media_widget/picture_form.html:41
 msgid "Remember you can add more media to this content from the Media Library"
 msgstr ""
@@ -1650,7 +1650,7 @@ msgid "Back"
 msgstr "Anterior"
 
 #: apps/media_widget/templates/media_widget/pagination_header.html:25
-#: core/collections/templates/collections/category_carousel.html:54
+#: core/collections/templates/collections/category_carousel.html:53
 msgid "Next"
 msgstr "Siguiente"
 
@@ -1707,83 +1707,83 @@ msgstr "vista detallada del Contenido Externo seleccionado"
 msgid "detailed view of the selected Flash Movie"
 msgstr "vista detallada del elemento Flash seleccionado"
 
-#: apps/medialibrary/models.py:71
+#: apps/medialibrary/models.py:85
 msgid "picture"
 msgstr "imagen"
 
-#: apps/medialibrary/models.py:78
+#: apps/medialibrary/models.py:92
 msgid "audio"
 msgstr "audio"
 
-#: apps/medialibrary/models.py:86
+#: apps/medialibrary/models.py:97
 msgid "sound track"
 msgstr "pista de sonido"
 
-#: apps/medialibrary/models.py:87
+#: apps/medialibrary/models.py:98
 msgid "sound tracks"
 msgstr "pistas de sonido"
 
-#: apps/medialibrary/models.py:93
+#: apps/medialibrary/models.py:105
 msgid "still"
 msgstr "cuadro de muestra"
 
-#: apps/medialibrary/models.py:95
+#: apps/medialibrary/models.py:106
 msgid "video"
 msgstr "video"
 
-#: apps/medialibrary/models.py:107
+#: apps/medialibrary/models.py:117
 msgid "movie clip"
 msgstr "video"
 
-#: apps/medialibrary/models.py:108
+#: apps/medialibrary/models.py:118
 msgid "movie clips"
 msgstr "video"
 
-#: apps/medialibrary/models.py:116 apps/medialibrary/models.py:121
+#: apps/medialibrary/models.py:126 apps/medialibrary/models.py:130
 msgid "document"
 msgstr "documento"
 
-#: apps/medialibrary/models.py:122
+#: apps/medialibrary/models.py:131
 msgid "documents"
 msgstr "documentos"
 
-#: apps/medialibrary/models.py:130
+#: apps/medialibrary/models.py:139
 msgid "flash"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:135
+#: apps/medialibrary/models.py:143
 msgid "flash movie"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:136
+#: apps/medialibrary/models.py:144
 msgid "flash movies"
 msgstr "flash"
 
-#: apps/medialibrary/models.py:144 apps/medialibrary/models.py:149
+#: apps/medialibrary/models.py:152 apps/medialibrary/models.py:156
 msgid "file"
 msgstr "archivo"
 
-#: apps/medialibrary/models.py:150
+#: apps/medialibrary/models.py:157
 msgid "files"
 msgstr "archivos"
 
-#: apps/medialibrary/models.py:158
+#: apps/medialibrary/models.py:164
 msgid "content url"
 msgstr "URL del contenido"
 
-#: apps/medialibrary/models.py:159
+#: apps/medialibrary/models.py:165
 msgid "open in new window"
 msgstr "abrir en ventana nueva"
 
-#: apps/medialibrary/models.py:160
+#: apps/medialibrary/models.py:166
 msgid "skip detailed view"
 msgstr "saltear vista detallada"
 
-#: apps/medialibrary/models.py:164
+#: apps/medialibrary/models.py:170
 msgid "external content"
 msgstr "contenido externo"
 
-#: apps/medialibrary/models.py:165
+#: apps/medialibrary/models.py:171
 msgid "external contents"
 msgstr "contenidos externos"
 
@@ -2467,9 +2467,23 @@ msgstr "Editar"
 msgid "You may order the contents of this Category. Dont forget to save!"
 msgstr "Puedes ordenar los contenidos de esta Categoría. No olvides guardar!"
 
-#: core/collections/templates/collections/category_carousel.html:50
+#: core/collections/templates/collections/category_carousel.html:49
 msgid "Previous"
 msgstr "Anterior"
+
+#: core/collections/templates/collections/category_carousel.html:57
+msgid "Empty category"
+msgstr "Categoría vacía"
+
+#: core/collections/templates/collections/category_carousel.html:58
+#, python-format
+msgid ""
+"\n"
+"                        La categoría <em>%(cat_name)s</em> está vacía. <br/>\n"
+"                        Este <strong>carrusel</strong> mostrará aquí las"
+"imágenes de los contenidos que categorices en ella.\n"
+"                    "
+msgstr ""
 
 #: core/collections/templates/collections/category_list_as_forum.html:11
 msgid "Create a new topic"
@@ -3279,7 +3293,7 @@ msgstr "Derecha"
 msgid "Empty"
 msgstr "Vacío"
 
-#: templates/cyclope/themes/cyclope-bootstrap/base.html:81
+#: templates/cyclope/themes/cyclope-bootstrap/base.html:68
 msgid "Toggle navigation"
 msgstr "Mostrar navegación"
 
