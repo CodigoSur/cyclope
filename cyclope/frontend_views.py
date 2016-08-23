@@ -304,7 +304,7 @@ class AuthorDetail(AuthoredMixin, frontend.FrontendView):
 
 frontend.site.register_view(Author, AuthorDetail)
 
-class AuthorTeaser(AuthoredMixin, frontend.FrontendView):
+class AuthorTeaser(frontend.FrontendView):
     """Display an author's teaser
     """
     name='author_teaser'
