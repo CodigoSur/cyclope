@@ -60,7 +60,6 @@
 </head>
 
 <body class="{% block body_class %}{%endblock%}" >
-
     <nav class="navbar {% if not CYCLOPE_SITE_SETTINGS.head_image %}navbar-fixed-top{% endif %} navbar-inverse" {% if CYCLOPE_SITE_SETTINGS.head_image %}data-spy="affix" data-offset-top="0"{% endif %} >
         <div class="container">
             <div class="navbar-header">
@@ -79,7 +78,6 @@
             </div>
         </div><!-- /.container -->
     </nav><!-- /.navbar -->
-        
     <div class="container">
         {% block page_header %}
             {% if CYCLOPE_SITE_SETTINGS.head_image %}
