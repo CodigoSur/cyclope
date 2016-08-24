@@ -62,19 +62,31 @@ class CyclopeSite(object):
         """
         view = view_class()
         view.model = model
+        
+        ctype = ContentType.objects.get_for_model(model)
+        
         if not model in self._registry:
             self._registry[model] = [view]
-            ctype = ContentType.objects.get_for_model(model)
+            
             if issubclass(model, BaseContent):
                 self.base_content_types[model] = ctype
                 self._base_ctype_choices.append((ctype.id, model._meta.verbose_name))
+                
             self._registry_ctype_choices.append((ctype.id, model._meta.verbose_name))
-            if view.is_region_view:
-                self._regionview_ctype_choices.append((ctype.id, model._meta.verbose_name))
-            if view.is_content_view:
-                self._menuitem_ctype_choices.append((ctype.id, model._meta.verbose_name))
+            
         else:
             self._registry[model].append(view)
+        # TODO(NumericA) make unit test https://github.com/CodigoSur/cyclope/issues/32
+        ### always check for new views in each posible place
+        # possible content types for regionviews are those with frontend views with is_region_view true
+        if view.is_region_view and not self._already_in(ctype.id, self._regionview_ctype_choices):
+            self._regionview_ctype_choices.append((ctype.id, model._meta.verbose_name))
+        # possible content types for menuitems are those with frontend views with is_content_view true
+        if view.is_content_view and not self._already_in(ctype.id, self._menuitem_ctype_choices):
+            self._menuitem_ctype_choices.append((ctype.id, model._meta.verbose_name))
+
+    def _already_in(self, _id, lista):
+        return _id in [item[0] for item in lista]
 
     def unregister_view(self, model, view_class):
         views = self.get_views(model)

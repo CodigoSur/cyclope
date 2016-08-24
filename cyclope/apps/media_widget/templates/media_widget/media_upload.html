@@ -9,6 +9,17 @@
         <input type="checkbox" name="show_name" value="no">
     </div>
     #}-->
+
+    <div class="form-group {%if form.multimedia.errors%}has-error bg-danger{% else %}bg-success{% endif %}">
+        <label for="file">{% trans 'File' %}</label>
+        {{ form.multimedia }}
+        <span id="helpName" class="help-block">
+            {{ form.multimedia.errors }}
+        </span>
+        <p class="help-block">{% trans 'Select file to upload' %}</p>
+    </div>
+
+
     <div class="form-group {%if form.name.errors%}has-error{%endif%}">
         <label for="fileName">{% trans 'Name' %}</label>
         {{ form.name }}
@@ -23,15 +34,6 @@
         <span id="fileDesc" class="help-block">
             {{ form.description.errors }}
         </span>
-    </div>
-
-    <div class="form-group {%if form.multimedia.errors%}has-error bg-danger{%endif%}">
-        <label for="file">{% trans 'File' %}</label>
-        {{ form.multimedia }}
-        <span id="helpName" class="help-block">
-            {{ form.multimedia.errors }}
-        </span>
-        <p class="help-block">{% trans 'Select file to upload' %}</p>
     </div>
 
     <div class="row">

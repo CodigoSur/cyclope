@@ -8,7 +8,7 @@
     {% elif view_options.align == "VERTICAL" %}
         <div class="panel-group" id="accordion-{{ menu_slug }}" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
-                {% for menu_item, menu_item_children in menu_items_dict %}
+                {% for menu_item, menu_item_children in menu_items_objs %}
                     <div class="panel-heading" role="tab" id="heading-{{ menu_item.slug }}">
                         <h4 class="panel-title">
                             {% if menu_item_children|length > 0 %}

@@ -18,6 +18,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator
 from models import MediaWidget
 from django.utils.translation import ugettext_lazy as _
+from filebrowser.base import FileObject
+from datetime import datetime
 
 ###########################
 ##Article's pictures widget
@@ -107,14 +109,16 @@ def pictures_create(request, article_id):
             #normalize file name
             image.name = convert_filename(image.name)
             #filesystem save
-            uploaded_path = handle_file_upload(settings.MEDIA_ROOT, image)
-            #thumbnails
-            generate_fb_version(uploaded_path, ADMIN_THUMBNAIL)
+            directory = "pictures"
+            abs_path = os.path.join(settings.MEDIA_ROOT, _get_todays_folder(directory))
+            uploaded_path = handle_file_upload(abs_path, image) # = abs_path + image.name
+            image_url = "%s/%s" % (_get_todays_folder(directory), image.name)
+            objeto = FileObject(image_url)
             #database save
             picture = Picture(
                 name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else image.name,
                 description = form.cleaned_data['description'],
-                image = uploaded_path
+                image = objeto
             )
             if article_id:
                 picture.user = article.user
@@ -303,13 +307,18 @@ def embed_create(request):
                 klass = ContentType.objects.get(model=media_type).model_class()
                 instance = klass() # generic instance of media model
                 #filesystem save 
-                uploaded_path = handle_file_upload(settings.MEDIA_ROOT, multimedia)
-                #database save
+                directory = instance.directory
+                abs_path = os.path.join(settings.MEDIA_ROOT, _get_todays_folder(directory))
+                uploaded_path = handle_file_upload(abs_path, multimedia)
+                image_url = "%s/%s" % (_get_todays_folder(directory), multimedia.name)
+                objeto = FileObject(image_url)
+                # database save
                 instance.name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else multimedia.name
                 instance.description = form.cleaned_data['description']
                 instance.user = request.user
-                setattr(instance, klass.media_file_field, uploaded_path)
+                setattr(instance, klass.media_file_field, objeto)
                 instance.save()
+
                 #response
                 return render(request, 'media_widget/media_widget.html', {
                     'form': form,
@@ -427,3 +436,10 @@ def _paginator_query_string(request):
     else:
         nRows = 5
     return (n, nRows)
+    
+def _get_todays_folder(path):
+    """
+    generate path/year/month directory structure
+    ex. /media/pictures/2016/8
+    """
+    return path+"/{:%Y/%m}".format(datetime.now())

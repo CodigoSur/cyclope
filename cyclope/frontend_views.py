@@ -106,15 +106,14 @@ class MenuMenuItemsHierarchy(frontend.FrontendView, HyerarchyBuilderMixin):
         menu_items = MenuItem.tree.filter(menu=menu, level=0, active=True)
         current_url = request.path_info[1:]
         menu_items_list = []
-        menu_items_dict = {}
         for item in menu_items:
             value = self.make_nested_list(item, True, current_url)
             menu_items_list.extend(value)
-        for item in menu_items:
-            menu_items_dict[item] = item.get_leafnodes()
+        menu_items_objs = [ (item, item.get_leafnodes()) for item in menu_items ]
+
         return render_to_string(self.template, {
             'menu_items_list': menu_items_list,
-            'menu_items_dict': menu_items_dict.items(),
+            'menu_items_objs': menu_items_objs,
             'menu_slug': menu.slug,
             'expand_style': options["align"]
         }, req_context)
@@ -305,7 +304,7 @@ class AuthorDetail(AuthoredMixin, frontend.FrontendView):
 
 frontend.site.register_view(Author, AuthorDetail)
 
-class AuthorTeaser(AuthoredMixin, frontend.FrontendView):
+class AuthorTeaser(frontend.FrontendView):
     """Display an author's teaser
     """
     name='author_teaser'
