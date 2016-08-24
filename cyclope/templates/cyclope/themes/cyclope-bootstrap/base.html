@@ -11,7 +11,7 @@
 {% load layout i18n cyclope_utils compress staticfiles %}
 
 {# TODO(sanhoerth): find best way to show lang-tag in mulitlang enviroment #}
-<html lang="es">
+<html lang="es" {% if CYCLOPE_SITE_SETTINGS.head_image %}class="head_image"{% endif %}>
 <head>
     <!-- ### Meta ### -->
     <meta charset="utf-8">
