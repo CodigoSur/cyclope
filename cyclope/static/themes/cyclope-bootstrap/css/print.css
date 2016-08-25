@@ -15,18 +15,28 @@
 # Neutronix is developed by Santiago Hoerth Moura
 */
 
+@media print {
+
 * {font-family: Arial, Verdana, Helvetica, Sans-serif;}
 a {color:#000;text-decoration:none;}
-#water {display:none;}
-#love {display:none;}
-#air {display:none;}
-.footer_global {display:none;}
-.tools {display:none;}
-#user_comments {display:none;}
-.related_contents {display:none;}
-#gallery ul {list-style:none;margin:0;padding:0;}
-#gallery ul li p {display:none;}
-#gallery ul img {float:left;margin:0 20px 10px 0;padding:0;}
-.categories {display:none;}
-.brand h1 {margin:0;padding:0;}
-.brand h2 {font-size:1em;margin:0;padding:0;}
+.main-content, .content, .main{
+    width: 100%;
+}
+#right, #left, .tools, iframe, .nav, .navbar-bar, .action-content.show_comment_form {
+    display: none;
+}
+
+a[href]:after {
+    content: none !important;
+}
+
+.source a[href]:after{
+    content: " (" attr(href) ")" !important;
+}
+
+p {
+    text-align: justify;
+}
+
+
+}
