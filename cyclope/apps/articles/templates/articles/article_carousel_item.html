@@ -14,18 +14,14 @@
 
   <div class="carousel-caption">
     {% if view_options.show_title %}
-    <h3>
-      <a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:80 }}</a>
-    </h3>
+    <h3><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:80 }}</a></h3>
     {% endif %}
     {% if view_options.show_description %}
-    <p>
       {% if article.summary %}
         {{ article|parsed_gettext:"summary"|smart_style|truncatewords_html:20 }}
-      {% else %}-
+      {% else %}
         {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
       {% endif %}
-    </p>
     {% endif %}
   </div>
 
