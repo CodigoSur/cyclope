@@ -58,26 +58,27 @@ String.prototype.capitalize = function() {
 //Content Type to HTML 5 mapping
 //TODO(NumericA) source elements can specify MIME type. may be should for video codecs...
 //TODO handle browsers that don't support HTML5
-function generate_media_tag(url, media_type){
+function generate_media_tag(url, media_type, media_desc){
     switch(media_type){
         case 'picture':
-            return {replaceWith: '!(left)'+url+'(alt_text)!'};
+            return {replaceWith: '!(left)'+url+'('+media_desc+')!'};
         case 'soundtrack':
             audio = "<audio controls>"
                    +"<source src='"+url+"'>"
-                   //+"Su navegador no soporta HTML5"
+                   + media_desc
                    +"</audio>";
             return {replaceWith: '=='+audio+'=='};
         case 'movieclip':
             video = "<video controls>"
                    +"<source src='"+url+"'>"
+                   + media_desc
                    +"</video>";
             return {replaceWith: '=='+video+'=='};
         case 'document': // most browsers require a plugin for this to work
-            doc = "<object data='"+url+"' width='550' height='400' type='application/pdf'></object>";
+            doc = "<object data='"+url+"' width='550' height='400' type='application/pdf'>"+media_desc+"</object>";
             return {replaceWith: '=='+doc+'=='};
         case 'flashmovie':
-            flash = "<object data='"+url+"' width='550' height='400'></object>";
+            flash = "<object data='"+url+"' width='550' height='400'>"+media_desc+"</object>";
             return {replaceWith: '=='+flash+'=='};
         default:
             throw 'Embedded Media Widget: unexistent content type!';
@@ -99,8 +100,8 @@ var FileBrowserHelper = {
                     media_widget.fb_helper = FileBrowserHelper;
                 });
     },
-    triggerInsert: function(url, media_type) {
-        tag_hash = generate_media_tag(url, media_type);
+    triggerInsert: function(url, media_type, media_desc) {
+        tag_hash = generate_media_tag(url, media_type, media_desc);
         $("#"+this.markItUp).trigger('insertion', [tag_hash]);
     }
 };

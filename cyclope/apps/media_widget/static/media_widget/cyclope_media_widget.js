@@ -19,8 +19,9 @@ $(function(){
     insert_media_iframe();
 });
 
-/** https://api.jquery.com/jquery.noconflict/ */
-/**jQuery-UI Widgets declaration*/
+/**
+*** jQuery-UI Widgets declaration
+*/
 /**Pictures Upload Widget*/
 $.widget("cyclope.picturesWidget", $.ui.dialog, {
     options: {

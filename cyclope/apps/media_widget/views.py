@@ -318,10 +318,10 @@ def embed_create(request):
                 instance.user = request.user
                 setattr(instance, klass.media_file_field, objeto)
                 instance.save()
-
                 #response
                 return render(request, 'media_widget/media_widget.html', {
                     'form': form,
+                    'current_object': instance,
                     'file_url': instance.media_file,
                     'media_type': media_type,
                 })
