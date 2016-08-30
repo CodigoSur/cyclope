@@ -45,26 +45,33 @@ class Command(BaseCommand):
         
     def incorporate(self, filename, path):
         top_level_mime, mime_type = self.guess_type(filename)
-        # sanitize
-        name = self.sanitize_filename(filename)
-        if filename != name:
-            filename = self.correct_filename(path, name, filename)
-        # create
-        instance = self.create_content_object(top_level_mime, mime_type, filename, path)#self._get_tod+ys_folder(path))
-        # enforce media/type folder structure
-        path = self.correct_path(path, instance, filename)
-        # TODO(NumericA) REVISAR AQUI
-        setattr(instance, instance.media_file_field, FileObject(self.path_name(path, filename)))
-        # always
-        instance.save()
-        print('\t\t importar %s %s' % (instance.get_object_name().upper(), instance.name) )
-        # be happy
+        if top_level_mime != None:
+            # sanitize
+            path = unicode(path, 'utf8')
+            filename = unicode(filename, 'utf8')
+            name = self.sanitize_filename(filename)
+            if filename != name:
+                filename = self.correct_filename(path, name, filename)
+            # create
+            instance = self.create_content_object(top_level_mime, mime_type, filename, path)#self._get_todays_folder(path))
+            # enforce media/type folder structure
+            path = self.correct_path(path, instance, filename)
+            setattr(instance, instance.media_file_field, FileObject(self.path_name(path, filename)))
+            # always
+            instance.save()
+            print('\t\t importar %s %s' % (instance.get_object_name().upper(), instance.name) )
+            # be happy
+        else:
+            print ('\t\t skipping UNKNOWN %s' % filename)
         
     def guess_type(self, filename):
         mime_type = mimetypes.guess_type(filename) # 'image/png'
-        top_level_mime, mime_type = tuple(mime_type[0].split('/'))
-        print('\t\t MIME_TYPE %s' % top_level_mime)
-        return (top_level_mime, mime_type)
+        if mime_type[0] != None:
+            top_level_mime, mime_type = tuple(mime_type[0].split('/'))
+            print('\t\t MIME_TYPE %s' % top_level_mime)
+            return (top_level_mime, mime_type)
+        else:
+            return mime_type
 
     # MIME to MediaType copied from wp2cyclope command        
     def create_content_object(self, top_level_mime, mime_type, name, path):
@@ -94,12 +101,9 @@ class Command(BaseCommand):
         return os.path.splitext(filename)[0]
 
     def path_name(self, path, filename):
-        ruta = "%s/%s" % (path, filename)
-        media_url = settings.MEDIA_URL.replace('/','')
+        ruta = u"%s/%s" % (path, filename)
+        media_url = media_url = '.' + settings.MEDIA_URL
         ruta = ruta.replace(media_url,'') # relativizar
-        # TODO(NumericA) revisar aqui
-#       lista = path.replace('./','').split('/')[1:]#['documents', '2016', '08']
-#       ruta = os.path.join(tuple(lista))
         return ruta
     
     def file_to_picture(self, filename, path):
@@ -140,7 +144,7 @@ class Command(BaseCommand):
 
     def sanitize_filename(self, filename):
         # keep file extension
-        m = re.search('(?P<name>.*)(?P<extension>\.\w{3,}$)', filename)
+        m = re.search('(?P<name>.*)(?P<extension>\.\w{3,})', filename)
         name = m.group('name')
         extension = m.group('extension')
         # truncate name to maximun chars
@@ -153,10 +157,10 @@ class Command(BaseCommand):
 
     def correct_filename(self, path, name, filename):
         "mv name filename"
-        src = "%s/%s" % (path, filename)
-        dest = "%s/%s" % (path, name)
+        src = u'%s/%s' % (path, filename)
+        dest = u'%s/%s' % (path, name)
         os.rename(src, dest)
-        print('\t\t mover %s %s' % (src, dest) )
+        print(u'\t\t mover %s %s' % (src, dest) )
         return name
         
     def correct_path(self, path, instance, filename):
