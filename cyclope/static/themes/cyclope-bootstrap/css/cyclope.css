@@ -1,4 +1,4 @@
-html{padding-top:0 !important;}
+html {padding-top:35px;}
 
 body {
   overflow-x: hidden;
@@ -548,9 +548,6 @@ footer,
 /*Paginator*/
 #right .paginator, #left .paginator {padding:0; font-size: 12px; line-height:1.5;border-radius:3px;}
 
-/*Affix*/
-nav.affix {top:0; z-index:9999; margin-top:0;}
-.affix {width:100%;}
-.navbar {border-radius:0;margin-bottom:10px;}
 /*img-header*/
 .brand{margin-bottom:20px;}
+.brand img {margin:0 auto;}
