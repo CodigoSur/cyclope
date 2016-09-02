@@ -14,7 +14,7 @@ $(function(){
             $("#select_media_widget").html(data);
             //re-bind
             $(".select_media").click(function(){
-                insert_markitup($(this).val());
+                insert_markitup($(this));
             });
         });
     });
@@ -35,7 +35,7 @@ function n_per_page_change(n, val){
         $("#select_media_widget").html(data);
         //re-bind
         $(".select_media").click(function(){
-            insert_markitup($(this).val());
+            insert_markitup($(this));
         });
     });
 }
@@ -46,17 +46,21 @@ function n_per_page_change(n, val){
 
 $(function(){
     $(".select_media").click(function(){
-        insert_markitup($(this).val());
+        insert_markitup($(this));
     });
 }); 
 
 /**
     select media from library & insert code
 */
-var insert_markitup = function(file_url){
-    var media_widget = parent.media_widget;
+var insert_markitup = function(file){
+    file_url = file.val();
     media_type = $("#selectMediaType").val();
-    media_widget.fb_helper.triggerInsert(file_url, media_type);
+    file_pk = file.data("pk");
+    file_desc = $("#mediaSelectDesc-"+file_pk).text()
+    //
+    var media_widget = parent.media_widget;
+    media_widget.fb_helper.triggerInsert(file_url, media_type, file_desc);
     //the end
     media_widget.mediaWidget("close");
 };
@@ -64,8 +68,8 @@ var insert_markitup = function(file_url){
 /**
     return to markItUp from upload & insert code
 */
-function media_widget_markitup(file_url, media_type){
+function media_widget_markitup(file_url, media_type, description){
     var media_widget = parent.media_widget;
-    media_widget.fb_helper.triggerInsert(file_url, media_type);
+    media_widget.fb_helper.triggerInsert(file_url, media_type, description);
     media_widget.mediaWidget("close");
 }

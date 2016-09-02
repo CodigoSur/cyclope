@@ -318,10 +318,10 @@ def embed_create(request):
                 instance.user = request.user
                 setattr(instance, klass.media_file_field, objeto)
                 instance.save()
-
                 #response
                 return render(request, 'media_widget/media_widget.html', {
                     'form': form,
+                    'current_object': instance,
                     'file_url': instance.media_file,
                     'media_type': media_type,
                 })
@@ -410,7 +410,7 @@ def _validation_error_message(multimedia, media_type):
         'document': 'PDF',
         'flashmovie': 'Flash'
     }
-    msg = _("%(real_type)s is not a valid %(desired_type)s type!" % {'real_type': multimedia.content_type, 'desired_type': type_name[media_type]})
+    msg = _("%(real_type)s is not a valid %(desired_type)s type!") % {'real_type': multimedia.content_type, 'desired_type': type_name[media_type]}
     return msg
     
 # this function can also be used for search
