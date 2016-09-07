@@ -9,7 +9,6 @@ from cyclope.apps.articles.models import Article
 from cyclope.core.collections.models import Collection, Category, Categorization
 from django.contrib.contenttypes.models import ContentType
 from optparse import make_option
-from cyclope.forms import get_home_menu_item
 
 class Command(BaseCommand):
     help = 'POPULATES LAYOUT SEED DATA'
@@ -61,13 +60,13 @@ class Command(BaseCommand):
         self.create_layouts()
         # SITE
         site = self.create_site()
-        # unselect old layouts
-        self.select_layouts(site)
         ######
         # DEMO
         if options['demo']:           
             self.create_demo_objects(site)
-
+        # unselect old layouts
+        self.select_layouts(site)
+        
     def create_site(self):
         # SITE
         if Site.objects.all():
@@ -91,13 +90,14 @@ class Command(BaseCommand):
     def select_layouts(self, site):
         """select default layouts"""
         default_layout = self._get_default_layout()
+        home = MenuItem.objects.get(site_home=True)
+        home.layout = default_layout
+        home.save()
         settings,ok = SiteSettings.objects.get_or_create(site=site)
         settings.default_layout = default_layout
         settings.theme = 'cyclope-bootstrap'
         settings.save()
-        home = get_home_menu_item()
-        home.layout = default_layout
-        home.save()
+
         
     def create_demo_objects(self, site):
         # MAIN MENU
