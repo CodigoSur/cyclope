@@ -56,34 +56,25 @@ class Command(BaseCommand):
     )
 
     def handle(self, *args, **options):
-        # SITE
-        site = self.create_site()
         # LAYOUTS
         self.create_layouts()
+        # SITE
+        site = self.create_site()
         ######
         # DEMO
         if options['demo']:           
             self.create_demo_objects(site)
-
+        # unselect old layouts
+        self.select_layouts(site)
+        
     def create_site(self):
         # SITE
         if Site.objects.all():
             site = Site.objects.all()[0]
         else:
             site = Site()
-            domain = "localhost:8000"
-            #if kwargs.get('interactive', True):
-            msg = "\nDomain name (leave empty for default: %s: " % domain
-            input_domain = raw_input(msg)
-            domain = input_domain or domain
-            site_name = "CyclopeCMS demo"
-            #if kwargs.get('interactive', True):
-            msg = "\nSite name (leave empty for default: %s): " % site_name
-            input_name = raw_input(msg)
-            site_name = input_name or site_name
-            #
-            site.domain = domain
-            site.name = site_name
+            site.domain = "localhost:8000"
+            site.name = "CyclopeCMS demo"
             site.save()
         return site
 
@@ -96,21 +87,30 @@ class Command(BaseCommand):
             layout.save()
         self.stdout.write(_("Layouts creados \n"))
 
+    def select_layouts(self, site):
+        """select default layouts"""
+        default_layout = self._get_default_layout()
+        home = MenuItem.objects.get(site_home=True)
+        home.layout = default_layout
+        home.save()
+        settings,ok = SiteSettings.objects.get_or_create(site=site)
+        settings.default_layout = default_layout
+        settings.theme = 'cyclope-bootstrap'
+        settings.save()
+
+        
     def create_demo_objects(self, site):
         # MAIN MENU
         menu = Menu(name="Main menu", main_menu=True)
         menu.save()
         #REGIONS
-        default_layout = Layout.objects.get(slug='two-columns-right') # BLOG
+        default_layout = self._get_default_layout()
         RegionView.objects.create(region='header', layout=default_layout, content_object=menu, weight=1, content_view='menuitems_hierarchy', view_options='{"align": "HORIZONTAL"}')
         site_content_type =ContentType.objects.get(name='site')
         RegionView.objects.create(region='right', layout=default_layout, content_type_id=site_content_type.pk, weight=1, content_view='search')
         # HOME (MENU ITEM)
         menu_item = MenuItem(menu=menu, name="Inicio", site_home=True, active=True, layout=default_layout)
         menu_item.save()
-        # THEME
-        site_settings = SiteSettings(site=site, theme="cyclope-bootstrap", default_layout=default_layout, allow_comments='YES')
-        site_settings.save()
         # COLLECTION & CATEGORY
         collection = Collection.objects.create(name="Contenidos", description="Agrupa todos los contenidos generados en el sitio por el script de arranque.")#TODO, content_types=)
         category = collection.categories.create(name="Noticias")
@@ -137,3 +137,7 @@ class Command(BaseCommand):
             if created: #?
                 group.save()
         #.
+        
+    def _get_default_layout(self):
+        return Layout.objects.get(slug='two-columns-left')
+
