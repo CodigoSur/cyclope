@@ -33,6 +33,11 @@ class Command(BaseCommand):
             'name': _('One column'),
             'template': 'layout_one_column.html',
             'image': 'layout_one_column_thumbnail.png'
+        },
+        'NEWSLETTER': {
+            'name': _('Newsletter'),
+            'template': 'newsletter.html',
+            'image': 'layout_newsletters.png'
         }
     }
     
