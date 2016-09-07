@@ -128,11 +128,7 @@ class Command(BaseCommand):
         contact_menu_item = MenuItem(
             menu=menu, 
             name="Contacto", 
-            layout=default_layout, 
             custom_url="/contact",
-            content_object = contact,
-            content_view = "contents",
-            view_options = self.DEFAULT_VIEW_OPTIONS
         )
         contact_menu_item.save()
         # USER GROUPS
