@@ -14,8 +14,9 @@
                 <td></td>
             {% endif %}
             <td style="vertical-align: middle;">{{ media.name }}</td>
+            <td style="vertical-align: middle;"><small id="mediaSelectDesc-{{media.pk}}" class="text-muted">{{ media.description }}</small></td>
             <td style="vertical-align: middle;">
-                <button class="select_media btn btn-primary btn-xs" value="{{media.media_file}}">{% trans 'Select' %}</button>
+                <button class="select_media btn btn-primary btn-xs" value="{{media.media_file}}" data-pk="{{media.pk}}">{% trans 'Select' %}</button>
             <td/>
         <tr/>
     {% endfor %}

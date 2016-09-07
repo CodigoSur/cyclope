@@ -22,7 +22,7 @@ class Command(BaseCommand):
         make_option('--dir',
             action='store',
             dest='rootDir',
-            default='./media/uploads',
+            default='media/uploads',
             help='Directory to scan for files, treat, and create objects for them.'
         ),
     )
@@ -45,23 +45,33 @@ class Command(BaseCommand):
         
     def incorporate(self, filename, path):
         top_level_mime, mime_type = self.guess_type(filename)
-        # sanitize
-        name = self.sanitize_filename(filename)
-        if filename != name:
-            filename = self.correct_filename(path, name, filename)
-        # media/type folder structure
-        instance = self.create_content_object(top_level_mime, mime_type, filename, self._get_todays_folder(path))
-        self.correct_path(path, instance, filename) # always put in today
-        # create
-        instance.save()
-        print('\t\t importar %s %s' % (instance.get_object_name().upper(), instance.name) )
-        # be happy
+        if top_level_mime != None:
+            # sanitize
+            path = unicode(path, 'utf8')
+            filename = unicode(filename, 'utf8')
+            name = self.sanitize_filename(filename)
+            if filename != name:
+                filename = self.correct_filename(path, name, filename)
+            # create
+            instance = self.create_content_object(top_level_mime, mime_type, filename, path)#self._get_todays_folder(path))
+            # enforce media/type folder structure
+            path = self.correct_path(path, instance, filename)
+            setattr(instance, instance.media_file_field, FileObject(self.path_name(path, filename)))
+            # always
+            instance.save()
+            print('\t\t importar %s %s' % (instance.get_object_name().upper(), instance.name) )
+            # be happy
+        else:
+            print ('\t\t skipping UNKNOWN %s' % filename)
         
     def guess_type(self, filename):
         mime_type = mimetypes.guess_type(filename) # 'image/png'
-        top_level_mime, mime_type = tuple(mime_type[0].split('/'))
-        print('\t\t MIME_TYPE %s' % top_level_mime)
-        return (top_level_mime, mime_type)
+        if mime_type[0] != None:
+            top_level_mime, mime_type = tuple(mime_type[0].split('/'))
+            print('\t\t MIME_TYPE %s' % top_level_mime)
+            return (top_level_mime, mime_type)
+        else:
+            return mime_type
 
     # MIME to MediaType copied from wp2cyclope command        
     def create_content_object(self, top_level_mime, mime_type, name, path):
@@ -87,56 +97,54 @@ class Command(BaseCommand):
         else: #multipart, example, message, model
             return self.file_to_regular_file(name, path)
 
-    #TODO if not QUERIES
-
     def file_name(self, filename):
         return os.path.splitext(filename)[0]
 
     def path_name(self, path, filename):
-        ruta = "%s/%s" % (path, filename)
-        ruta = ruta.replace('./media/','/') # TODO relativizar
-        ruta = FileObject(ruta)
+        ruta = u"%s/%s" % (path, filename)
+        media_url = media_url = '.' + settings.MEDIA_URL
+        ruta = ruta.replace(media_url,'') # relativizar
         return ruta
-
+    
     def file_to_picture(self, filename, path):
         return Picture(
             name = self.file_name(filename),
-            image = self.path_name(path, filename)
+            image = FileObject(self.path_name(path, filename))
         )
 
     def file_to_document(self, filename, path):
         return Document(
             name = self.file_name(filename),
-            document = self.path_name(path, filename)
+            document = FileObject(self.path_name(path, filename))
         )
 
     def file_to_regular_file(self, filename, path):
         return RegularFile(
             name = self.file_name(filename),
-            file = self.path_name(path, filename)
+            file = FileObject(self.path_name(path, filename))
         )
 
     def file_to_sound_track(self, filename, path):
         return SoundTrack(
             name = self.file_name(filename),
-            audio = self.path_name(path, filename)
+            audio = FileObject(self.path_name(path, filename))
         )
 
     def file_to_movie_clip(self, filename, path):
         return MovieClip(
             name = self.file_name(filename),
-            video = self.path_name(path, filename)
+            video = FileObject(self.path_name(path, filename))
         )
 
     def file_to_flash_movie(self, filename, path):
         return FlashMovie(
             name = self.file_name(filename),
-            flash = self.path_name(path, filename)
+            flash = FileObject(self.path_name(path, filename))
         )
 
     def sanitize_filename(self, filename):
         # keep file extension
-        m = re.search('(?P<name>.*)(?P<extension>\.\w{3}$)', filename)
+        m = re.search('(?P<name>.*)(?P<extension>\.\w{3,})', filename)
         name = m.group('name')
         extension = m.group('extension')
         # truncate name to maximun chars
@@ -149,10 +157,10 @@ class Command(BaseCommand):
 
     def correct_filename(self, path, name, filename):
         "mv name filename"
-        src = "%s/%s" % (path, filename)
-        dest = "%s/%s" % (path, name)
+        src = u'%s/%s' % (path, filename)
+        dest = u'%s/%s' % (path, name)
         os.rename(src, dest)
-        print('\t\t mover %s %s' % (src, dest) )
+        print(u'\t\t mover %s %s' % (src, dest) )
         return name
         
     def correct_path(self, path, instance, filename):
@@ -164,6 +172,7 @@ class Command(BaseCommand):
         self.make_sure_path_exists(new_path)
         os.rename(src, dest)
         print('\t\t mover %s %s' % (src, dest) )
+        return new_path
         
     def _get_todays_folder(self, path):
         """

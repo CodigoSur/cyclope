@@ -336,14 +336,18 @@ class ThumbnailMixin(object):
         # pictures without thumbnail throw
         # AttributeError ... 'NoneType' object has no attribute 'replace'
         # at url_thumbnail method
-        # TODO is there a better fix?
+        # TODO(Numerica) is there a better fix?
         try:
             return getattr(image, "url_thumbnail")
         except AttributeError:
             return ''
 
     def thumbnail(self):
-        return '<img class="thumbnail" src="%s"/>' %  self.get_thumbnail_src()
+        src = self.get_thumbnail_src()
+        if src:
+            return '<img class="thumbnail" src="%s"/>' % src
+        else:
+            return ''           
 
     thumbnail.short_description = _('Thumbnail Image')
     thumbnail.allow_tags = True

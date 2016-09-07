@@ -268,7 +268,7 @@ msgstr "Contenido"
 
 #: forms.py:128 core/collections/admin.py:83
 msgid "Parent"
-msgstr "Padre"
+msgstr "Madre"
 
 #: forms.py:130 forms.py:281 core/collections/admin.py:175
 #: core/frontend/sites.py:384

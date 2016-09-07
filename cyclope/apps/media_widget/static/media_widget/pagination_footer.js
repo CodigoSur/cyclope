@@ -5,7 +5,7 @@ function change_embed_widget(query_str){
         $("#select_media_widget").html(data);
         //re-bind
         $(".select_media").click(function(){
-            insert_markitup($(this).val());
+            insert_markitup($(this));
         });
     });
 }
