@@ -1,29 +1,29 @@
 {% load i18n fb_versions cyclope_utils dbgettext_tags %}
-
 <div class="item {% ifequal first_content article %}active{% endifequal %} article content-view">
-
-  <a href="{% url article-detail article.slug %}">
-    {% if article.pictures %}
-	{% with article.pictures.all|first as first_pic %}
-        <img class="img-responsive" src="{% version first_pic.image.path 'carrousel_bootstrap'%}" alt="{{ article.name }}" />
-	{% endwith %}
-    {% else %}
-        <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="{{ image.path }}" />
-    {% endif %}
-  </a>
-
-  <div class="carousel-caption">
-    {% if view_options.show_title %}
-    <h3><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:80 }}</a></h3>
-    {% endif %}
-    {% if view_options.show_description %}
-      {% if article.summary %}
-        {{ article|parsed_gettext:"summary"|smart_style|truncatewords_html:20 }}
-      {% else %}
-        {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
-      {% endif %}
-    {% endif %}
-  </div>
-
+    <div class="carousel-image">
+        <a href="{% url article-detail article.slug %}">
+            {% if article.pictures %}
+                {% with article.pictures.all|first as first_pic %}
+                    <img class="img-responsive" src="{% version first_pic.image.path 'carrousel_bootstrap'%}" alt="{{ article.name }}" />
+                {% endwith %}
+            {% else %}
+                <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="{{ image.path }}" />
+            {% endif %}
+        </a>
+    </div>
+    <div class="carousel-caption">
+        {% if view_options.show_title %}
+            <h3>
+                <a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:80 }}</a>
+            </h3>
+        {% endif %}
+        {% if view_options.show_description %}
+            {% if article.summary %}
+                {{ article|parsed_gettext:"summary"|smart_style|truncatewords_html:20 }}
+            {% else %}
+                {{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
+            {% endif %}
+        {% endif %}
+    </div>
 </div>
 
