@@ -139,5 +139,5 @@ class Command(BaseCommand):
         #.
         
     def _get_default_layout(self):
-        return Layout.objects.get(slug='two-columns-left')
+        return Layout.objects.get(slug='two-columns-right')
 
