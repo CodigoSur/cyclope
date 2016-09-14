@@ -35,19 +35,27 @@ class Command(BaseCommand):
             dest='correctPath',
             help='Change file location if it is not under type/date directories structure'
         ),
+        make_option('--by_path',
+            action='store_true',
+            dest='getByPath',
+            help='Query Media objects by Path instead of by Name'
+        ),
     )
     
     
     def handle(self, *args, **options):
+        # options
         rootDir = options['rootDir']
         correctFilename = options['correctFilename']
         correctPath = options['correctPath']
+        getByPath = options['getByPath']
+        # iterate folder structure
         for dirName, subdirList, fileList in os.walk(rootDir):
             print('Found directory: %s' % dirName)
             for fname in fileList:
                 if not self.is_version_file(fname):
                     print('\t%s' % fname)
-                    self.incorporate(fname, dirName, correctFilename, correctPath)
+                    self.incorporate(fname, dirName, correctFilename, correctPath, getByPath)
                 
     def is_version_file(self, filename):
         for version in self.VERSION_NAMES:
@@ -56,7 +64,7 @@ class Command(BaseCommand):
                 return True
         return False
         
-    def incorporate(self, filename, path, correctFilename, correctPath):
+    def incorporate(self, filename, path, correctFilename, correctPath, getByPath):
         top_level_mime, mime_type = self.guess_type(filename)
         if top_level_mime != None:
             # sanitize
@@ -66,14 +74,13 @@ class Command(BaseCommand):
             if correctFilename and filename != name:
                 filename = self.correct_filename(path, name, filename)
             # create
-            instance = self.create_content_object(top_level_mime, mime_type, filename, path)
+            instance, created = self.create_content_object(top_level_mime, mime_type, filename, path, getByPath)
             # enforce media/type folder structure
             if correctPath:
                 path = self.correct_path(path, instance, filename)
-            # generic media attribute setter
-            setattr(instance, instance.media_file_field, FileObject(self.path_name(path, filename)))
-            # always
-            instance.save()
+            if created or correctPath:
+                setattr(instance, instance.media_file_field, FileObject(self.path_name(path, filename)))
+                instance.save()
             # be happy
         else:
             print ('\t\t skipping UNKNOWN %s' % filename)
@@ -88,9 +95,9 @@ class Command(BaseCommand):
             return mime_type
 
     # MIME to MediaType copied from wp2cyclope command        
-    def create_content_object(self, top_level_mime, mime_type, name, path):
+    def create_content_object(self, top_level_mime, mime_type, name, path, getByPath):
         if  top_level_mime == 'image':
-            return self.file_to_picture(name, path)
+            return self.file_to_picture(name, path, getByPath)
         elif  top_level_mime == 'audio':
             return self.file_to_sound_track(name, path)
         elif  top_level_mime == 'video':              
@@ -119,11 +126,14 @@ class Command(BaseCommand):
         ruta = ruta.replace(media_url,'') # relativizar
         return ruta
     
-    def file_to_picture(self, filename, path):
-        #instance, created = Picture.objects.get_or_create(image=self.path_name(path, filename) )
-        instance, created = Picture.objects.get_or_create(name=self.file_name(filename) )
+    def file_to_picture(self, filename, path, getByPath):
+        if not getByPath:
+            instance, created = Picture.objects.get_or_create(name=self.file_name(filename))
+        else:
+            preexistent = Picture.objects.filter(image='/%s/%s' % (path, filename))
+            instance, created = self.nudo_garganteo(preexistent, Picture, self.file_name(filename))
         self._print_import_query(instance, created)
-        return instance
+        return (instance, created)
 
     def file_to_document(self, filename, path):
         return Document(
@@ -206,3 +216,14 @@ class Command(BaseCommand):
             print( '\t\t IMPORTAR %s %s' % (instance.get_object_name().upper(), instance.name) )
         else:   
             print( '\t\t\t\t %s %s YA EXISTE' % (instance.get_object_name().upper(), instance.name) )
+            
+    def nudo_garganteo(self, preexistent, klass, filename):
+        if preexistent:
+            instance = preexistent.get(name=filename)
+            if not instance:
+                instance = preexistent[0]
+            created = False
+        else:
+            instance, created = klass.objects.get_or_create(name=filename)
+        return (instance, created)
+
