@@ -25,16 +25,29 @@ class Command(BaseCommand):
             default='media/uploads',
             help='Directory to scan for files, treat, and create objects for them.'
         ),
+        make_option('--filename',
+            action='store_true',
+            dest='correctFilename',
+            help='Change file name if it is not slugified'
+        ),
+        make_option('--path',
+            action='store_true',
+            dest='correctPath',
+            help='Change file location if it is not under type/date directories structure'
+        ),
     )
+    
     
     def handle(self, *args, **options):
         rootDir = options['rootDir']
+        correctFilename = options['correctFilename']
+        correctPath = options['correctPath']
         for dirName, subdirList, fileList in os.walk(rootDir):
             print('Found directory: %s' % dirName)
             for fname in fileList:
                 if not self.is_version_file(fname):
                     print('\t%s' % fname)
-                    self.incorporate(fname, dirName)
+                    self.incorporate(fname, dirName, correctFilename, correctPath)
                 
     def is_version_file(self, filename):
         for version in self.VERSION_NAMES:
@@ -43,19 +56,21 @@ class Command(BaseCommand):
                 return True
         return False
         
-    def incorporate(self, filename, path):
+    def incorporate(self, filename, path, correctFilename, correctPath):
         top_level_mime, mime_type = self.guess_type(filename)
         if top_level_mime != None:
             # sanitize
             path = unicode(path, 'utf8')
             filename = unicode(filename, 'utf8')
             name = self.sanitize_filename(filename)
-            if filename != name:
+            if correctFilename and filename != name:
                 filename = self.correct_filename(path, name, filename)
             # create
-            instance = self.create_content_object(top_level_mime, mime_type, filename, path)#self._get_todays_folder(path))
+            instance = self.create_content_object(top_level_mime, mime_type, filename, path)
             # enforce media/type folder structure
-            path = self.correct_path(path, instance, filename)
+            if correctPath:
+                path = self.correct_path(path, instance, filename)
+            # generic media attribute setter
             setattr(instance, instance.media_file_field, FileObject(self.path_name(path, filename)))
             # always
             instance.save()
@@ -75,7 +90,6 @@ class Command(BaseCommand):
 
     # MIME to MediaType copied from wp2cyclope command        
     def create_content_object(self, top_level_mime, mime_type, name, path):
-        # decide
         if  top_level_mime == 'image':
             return self.file_to_picture(name, path)
         elif  top_level_mime == 'audio':
@@ -102,7 +116,8 @@ class Command(BaseCommand):
 
     def path_name(self, path, filename):
         ruta = u"%s/%s" % (path, filename)
-        media_url = media_url = '.' + settings.MEDIA_URL
+#        import pdb; pdb.set_trace()
+        media_url = settings.MEDIA_URL.replace('/','')
         ruta = ruta.replace(media_url,'') # relativizar
         return ruta
     
