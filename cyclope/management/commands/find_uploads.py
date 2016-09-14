@@ -74,7 +74,6 @@ class Command(BaseCommand):
             setattr(instance, instance.media_file_field, FileObject(self.path_name(path, filename)))
             # always
             instance.save()
-            print('\t\t importar %s %s' % (instance.get_object_name().upper(), instance.name) )
             # be happy
         else:
             print ('\t\t skipping UNKNOWN %s' % filename)
@@ -116,16 +115,15 @@ class Command(BaseCommand):
 
     def path_name(self, path, filename):
         ruta = u"%s/%s" % (path, filename)
-#        import pdb; pdb.set_trace()
         media_url = settings.MEDIA_URL.replace('/','')
         ruta = ruta.replace(media_url,'') # relativizar
         return ruta
     
     def file_to_picture(self, filename, path):
-        return Picture(
-            name = self.file_name(filename),
-            image = FileObject(self.path_name(path, filename))
-        )
+        #instance, created = Picture.objects.get_or_create(image=self.path_name(path, filename) )
+        instance, created = Picture.objects.get_or_create(name=self.file_name(filename) )
+        self._print_import_query(instance, created)
+        return instance
 
     def file_to_document(self, filename, path):
         return Document(
@@ -202,3 +200,9 @@ class Command(BaseCommand):
         except OSError as exception:
             if exception.errno != errno.EEXIST:
                 raise
+                
+    def _print_import_query(self, instance, created):
+        if created:
+            print( '\t\t IMPORTAR %s %s' % (instance.get_object_name().upper(), instance.name) )
+        else:   
+            print( '\t\t\t\t %s %s YA EXISTE' % (instance.get_object_name().upper(), instance.name) )
