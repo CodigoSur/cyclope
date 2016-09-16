@@ -235,8 +235,10 @@ class Command(BaseCommand):
             
     def _preexistent_or_create(self, preexistent, klass, filename):
         if preexistent:
-            instance = preexistent.get(name=filename)
-            if not instance:
+            instance = preexistent.filter(name=filename)
+            if instance:
+                instance = instance[0]
+            else:
                 instance = preexistent[0]
             created = False
         else:
