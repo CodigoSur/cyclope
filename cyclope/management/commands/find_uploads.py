@@ -38,6 +38,7 @@ class Command(BaseCommand):
         make_option('--by_path',
             action='store_true',
             dest='getByPath',
+            default=True,
             help='Query Media objects by Path instead of by Name'
         ),
     )
