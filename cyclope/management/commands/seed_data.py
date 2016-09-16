@@ -9,6 +9,7 @@ from cyclope.apps.articles.models import Article
 from cyclope.core.collections.models import Collection, Category, Categorization
 from django.contrib.contenttypes.models import ContentType
 from optparse import make_option
+from cyclope.models import BaseContent
 
 class Command(BaseCommand):
     help = 'POPULATES LAYOUT SEED DATA'
@@ -112,7 +113,10 @@ class Command(BaseCommand):
         menu_item = MenuItem(menu=menu, name="Inicio", site_home=True, active=True, layout=default_layout)
         menu_item.save()
         # COLLECTION & CATEGORY
-        collection = Collection.objects.create(name="Contenidos", description="Agrupa todos los contenidos generados en el sitio por el script de arranque.")#TODO, content_types=)
+        collection_ctypes = self._get_base_ctypes()
+        collection = Collection.objects.create(name="Contenidos", description="Agrupa todos los contenidos generados en el sitio por el script de arranque.")
+        collection.content_types = collection_ctypes
+        collection.save()
         category = collection.categories.create(name="Noticias")
         # ARTICLE (welcome)
         article = Article.objects.create(name="Te damos la bienvenida a CyclopeCMS", text="Morbi cursus, enim nec mollis condimentum, nisl nisl porta tortor, ut accumsan lorem metus et nunc. Aenean eget accumsan massa. In sodales ligula eu lectus efficitur tincidunt. Nunc non massa vulputate, pellentesque sapien ac, congue erat. Nam in quam lectus. Mauris hendrerit dignissim ex, in sollicitudin ipsum lacinia vitae. Aenean pellentesque diam quis quam mollis, ac mattis ante rutrum. Sed id vulputate ligula.")
@@ -139,5 +143,11 @@ class Command(BaseCommand):
         #.
         
     def _get_default_layout(self):
-        return Layout.objects.get(slug='two-columns-left')
+        return Layout.objects.get(slug='two-columns-right')
 
+    # same logic as in cyclope/core/frontend/sites.py#99 get_base_ctype_choices but frontend isn't loaded yet at db creation time
+    def _get_base_ctypes(self):
+        tipos = [tipo for tipo in ContentType.objects.all() if issubclass(tipo.model_class(), BaseContent)]
+        # add author, which is not a base content. copied from cyclope/core/collections/admin.py#184
+        tipos.append(ContentType.objects.get(name='author'))
+        return tipos
