@@ -350,7 +350,7 @@ border: 1px solid #C3D5F0;
 
 #content-main ul.object-tools li a {
  font-size: 14px;
- line-height: 18px
+ line-height: 18px;
  float: none; display: inline;
  padding: 0px 0; margin: 0;
  height: auto;
@@ -903,4 +903,35 @@ cursor: pointer;
     font-size: 14px;
     vertical-align: top;
     text-decoration: underline;
+}
+
+.radio-skin-tbl{
+    clear: both;
+}
+
+.radio-skin-tbl .skins:nth-child(odd){
+     border-right: solid 2px #b0adad
+}
+
+.skins{
+    width: 49.5%;
+    display: inline-block;
+    float: left;
+    border-top: solid 2px #b0adad;
+    margin: 0px auto;
+    padding: 10px 0 25px;
+}
+
+.skins div:nth-child(1) label{
+    float: none ;
+    width: auto;
+    margin: 0 auto;
+    padding: 5px ;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.skin-image{
+    text-align: center;
+    .skins div:nth-child(1)
 }
