@@ -235,8 +235,8 @@ class DesignSettingsAdminForm(forms.ModelForm):
             def render(self):
                 """Outputs a table for this set of radio fields."""
                 src = settings.STATIC_URL+u'images/theme-skins-thumbnail/{}.png'
-                row = u'<tr><td>{}</td><td><image src="'+src+u'"/></td></tr>'
-                return mark_safe(u'<table class="radio-skin-tbl">\n%s\n</table>' % u'\n'.join([row.format(force_unicode(w),force_unicode(w.choice_value)) for w in self]))
+                row = u'<div class="skins"><div>{}</div><div class="skin-image"><image src="'+src+u'"/></div></div>'
+                return mark_safe(u'<div class="radio-skin-tbl">\n%s\n</div>' % u'\n'.join([row.format(force_unicode(w),force_unicode(w.choice_value)) for w in self]))
         renderer = TableRadioFieldRenderer
     #
     skin_setting = forms.ChoiceField(widget=TableRadioSelect(), choices=SKINS)
