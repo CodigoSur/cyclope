@@ -28,7 +28,7 @@ from django.core.management.base import CommandError
 from django.core.management.templates import TemplateCommand
 from django.utils.crypto import get_random_string
 from django.utils.importlib import import_module
-from django.core.management import call_command
+
 import cyclope
 
 class Command(TemplateCommand):
@@ -78,14 +78,16 @@ class Command(TemplateCommand):
 
         # Create db
         os.mkdir(os.path.join(top_dir, "db"))
-        os.chdir(top_dir) #...
-        #call_command('crearbd')
-        from django.core import management
-        from cyclope.management.commands import crearbd
-        
+        os.chdir(top_dir)
+        #TODO(NumericA) call_command('creardb') 
         
         if options['verbosity'] != "0":
             print u"\nProject %s created successfully!\n" % project_name
+            sync_msg = u"" \
+                u"Now you must create the database:\n\n" \
+                u"    1) cd to %s\n" \
+                u"    2) run 'python manage.py creardb' \n" \
+            print sync_msg
 
 if __name__ == "__main__":
     cmnd = Command()
