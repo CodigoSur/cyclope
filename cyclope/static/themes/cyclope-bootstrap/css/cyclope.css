@@ -431,6 +431,9 @@ td.last_comment {
   margin-top: 0;
 }
 
+/*### carousel default ###*/
+.carousel {margin-bottom: 20px;}
+
 /*### carousel view of Category members###*/
 .carousel .carousel-indicators {Bottom: 0;}
 .carousel .media {margin-top: 0;}
