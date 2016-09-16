@@ -86,7 +86,7 @@ class Command(TemplateCommand):
             sync_msg = u"" \
                 u"Now you must create the database:\n\n" \
                 u"    1) cd to %s\n" \
-                u"    2) run 'python manage.py creardb' \n" \
+                u"    2) run 'python manage.py creardb' \n" % project_name
             print sync_msg
 
 if __name__ == "__main__":
