@@ -15,31 +15,12 @@ class Command(TemplateCommand):
     help = ("Creates a Cyclope Demo project.")
 
     template = os.path.join(cyclope.__path__[0], "conf", "project_template")
-    
-    option_list = TemplateCommand.option_list + (
-        make_option('--directory', action='store', dest='directory',
-            default=".", help='Destination directory '
-                'where the project will be created.'),
-    )
 
     def handle(self, project_name="demo", target=None, *args, **options):
         # use django startproject with our template
         val = os.system("django-admin.py startproject %s --template=%s" % (project_name, self.template))
         if options['verbosity'] != "0":
             print u"\nProject %s created successfully!\n" % project_name
-            
-        # extra folders TODO(NumericA) add them from template
-        directory = options.get("directory")
-        top_dir = os.path.join(directory, project_name)
-        #/media
-        media_dir = os.path.join(top_dir, "media")
-        os.mkdir(media_dir)
-        #/static
-        static_dir = os.path.join(top_dir, "static")
-        os.mkdir(static_dir)
-        # Create db
-        os.mkdir(os.path.join(top_dir, "db"))
-        
         # Database creation
         sys.path.insert(0, ".")
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", project_name +".settings")
