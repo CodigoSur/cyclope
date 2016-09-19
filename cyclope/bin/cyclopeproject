@@ -26,6 +26,7 @@ from optparse import make_option
 import django
 from django.core.management.base import CommandError
 from django.core.management.templates import TemplateCommand
+from django.core.management import call_command
 from django.utils.crypto import get_random_string
 from django.utils.importlib import import_module
 
@@ -44,29 +45,12 @@ class Command(TemplateCommand):
     )
 
     def handle(self, project_name=None, target=None, *args, **options):
-        if project_name is None:
-            raise CommandError("you must provide a project name")
-
-        # Check that the project_name cannot be imported.
-        try:
-            import_module(project_name)
-        except ImportError:
-            pass
-        else:
-            raise CommandError("%r conflicts with the name of an existing "
-                               "Python module and cannot be used as a "
-                               "project name. Please try another name." %
-                               project_name)
-
-        # Create a random SECRET_KEY hash to put it in the main settings.
-        chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
-        options['secret_key'] = get_random_string(50, chars)
-
-        if not options.get("template", None):
-            options["template"] = self.template
-
-        super(Command, self).handle('project', project_name, target, **options)
-
+        # use django startproject with our template
+        val = os.system("django-admin.py startproject %s --template=%s" % (project_name, self.template))
+        if options['verbosity'] != "0":
+            print u"\nProject %s created successfully!\n" % project_name
+            
+        # extra folders TODO(NumericA) add them from template
         directory = options.get("directory")
         top_dir = os.path.join(directory, project_name)
         #/media
@@ -75,24 +59,19 @@ class Command(TemplateCommand):
         #/static
         static_dir = os.path.join(top_dir, "static")
         os.mkdir(static_dir)
-
         # Create db
         os.mkdir(os.path.join(top_dir, "db"))
-        os.chdir(top_dir)
-        #TODO(NumericA) call_command('creardb') 
-        
-        if options['verbosity'] != "0":
-            print u"\nProject %s created successfully!\n" % project_name
-            sync_msg = u"" \
-                u"Now you must create the database:\n\n" \
-                u"    1) cd to %s\n" \
-                u"    2) run 'python manage.py creardb' \n" % project_name
-            print sync_msg
+
+        # Database creation
+        sys.path.insert(0, ".")
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", project_name +".settings")
+        call_command("creardb")
+
 
 if __name__ == "__main__":
     cmnd = Command()
     if len(sys.argv) == 1:
-        cmnd.print_help("startcyclopeproject", "")
+        cmnd.print_help("startproject", "")
     else:
         sys.argv.insert(0, "") # Hack run_from_argv
         cmnd.run_from_argv(sys.argv)
