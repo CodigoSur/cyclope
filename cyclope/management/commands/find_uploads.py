@@ -25,16 +25,38 @@ class Command(BaseCommand):
             default='media/uploads',
             help='Directory to scan for files, treat, and create objects for them.'
         ),
+        make_option('--filename',
+            action='store_true',
+            dest='correctFilename',
+            help='Change file name if it is not slugified'
+        ),
+        make_option('--path',
+            action='store_true',
+            dest='correctPath',
+            help='Change file location if it is not under type/date directories structure'
+        ),
+        make_option('--by_path',
+            action='store_true',
+            dest='getByPath',
+            default=True,
+            help='Query Media objects by Path instead of by Name'
+        ),
     )
     
+    
     def handle(self, *args, **options):
+        # options
         rootDir = options['rootDir']
+        correctFilename = options['correctFilename']
+        correctPath = options['correctPath']
+        getByPath = options['getByPath']
+        # iterate folder structure
         for dirName, subdirList, fileList in os.walk(rootDir):
             print('Found directory: %s' % dirName)
             for fname in fileList:
                 if not self.is_version_file(fname):
                     print('\t%s' % fname)
-                    self.incorporate(fname, dirName)
+                    self.incorporate(fname, dirName, correctFilename, correctPath, getByPath)
                 
     def is_version_file(self, filename):
         for version in self.VERSION_NAMES:
@@ -43,23 +65,23 @@ class Command(BaseCommand):
                 return True
         return False
         
-    def incorporate(self, filename, path):
+    def incorporate(self, filename, path, correctFilename, correctPath, getByPath):
         top_level_mime, mime_type = self.guess_type(filename)
         if top_level_mime != None:
             # sanitize
             path = unicode(path, 'utf8')
             filename = unicode(filename, 'utf8')
             name = self.sanitize_filename(filename)
-            if filename != name:
+            if correctFilename and filename != name:
                 filename = self.correct_filename(path, name, filename)
             # create
-            instance = self.create_content_object(top_level_mime, mime_type, filename, path)#self._get_todays_folder(path))
+            instance, created = self.create_content_object(top_level_mime, mime_type, filename, path, getByPath)
             # enforce media/type folder structure
-            path = self.correct_path(path, instance, filename)
-            setattr(instance, instance.media_file_field, FileObject(self.path_name(path, filename)))
-            # always
-            instance.save()
-            print('\t\t importar %s %s' % (instance.get_object_name().upper(), instance.name) )
+            if correctPath:
+                path = self.correct_path(path, instance, filename)
+            if created or correctPath:
+                setattr(instance, instance.media_file_field, FileObject(self.path_name(path, filename)))
+                instance.save()
             # be happy
         else:
             print ('\t\t skipping UNKNOWN %s' % filename)
@@ -74,73 +96,90 @@ class Command(BaseCommand):
             return mime_type
 
     # MIME to MediaType copied from wp2cyclope command        
-    def create_content_object(self, top_level_mime, mime_type, name, path):
-        # decide
+    def create_content_object(self, top_level_mime, mime_type, name, path, getByPath):
         if  top_level_mime == 'image':
-            return self.file_to_picture(name, path)
+            return self.file_to_picture(name, path, getByPath)
         elif  top_level_mime == 'audio':
-            return self.file_to_sound_track(name, path)
+            return self.file_to_sound_track(name, path, getByPath)
         elif  top_level_mime == 'video':              
             if mime_type == 'x-flv': 
-                return self.file_to_flash_movie(name, path)
+                return self.file_to_flash_movie(name, path, getByPath)
             else:
-                return self.file_to_movie_clip(name, path)
+                return self.file_to_movie_clip(name, path, getByPath)
         elif top_level_mime == 'application':
             if mime_type == 'pdf' : 
-                return self.file_to_document(name, path)
+                return self.file_to_document(name, path, getByPath)
             elif mime_type == 'x-shockwave-flash' : 
-                return self.file_to_flash_movie(name, path)
+                return self.file_to_flash_movie(name, path, getByPath)
             else :
-                return self.file_to_regular_file(name, path)
+                return self.file_to_regular_file(name, path, getByPath)
         elif top_level_mime == 'text':
-            return self.file_to_document(name, path)
+            return self.file_to_document(name, path, getByPath)
         else: #multipart, example, message, model
-            return self.file_to_regular_file(name, path)
+            return self.file_to_regular_file(name, path, getByPath)
 
     def file_name(self, filename):
         return os.path.splitext(filename)[0]
 
     def path_name(self, path, filename):
         ruta = u"%s/%s" % (path, filename)
-        media_url = media_url = '.' + settings.MEDIA_URL
+        media_url = settings.MEDIA_URL.replace('/','')
         ruta = ruta.replace(media_url,'') # relativizar
         return ruta
     
-    def file_to_picture(self, filename, path):
-        return Picture(
-            name = self.file_name(filename),
-            image = FileObject(self.path_name(path, filename))
-        )
+    def file_to_picture(self, filename, path, getByPath):
+        if not getByPath:
+            instance, created = Picture.objects.get_or_create(name=self.file_name(filename))
+        else:
+            preexistent = Picture.objects.filter(image='/%s/%s' % (path, filename))
+            instance, created = self._preexistent_or_create(preexistent, Picture, self.file_name(filename))
+        self._print_import_query(instance, created)
+        return (instance, created)
 
-    def file_to_document(self, filename, path):
-        return Document(
-            name = self.file_name(filename),
-            document = FileObject(self.path_name(path, filename))
-        )
+    def file_to_document(self, filename, path, getByPath):
+        if not getByPath:
+            instance, created = Document.objects.get_or_create(name=self.file_name(filename))
+        else:
+            preexistent = Document.objects.filter(image='/%s/%s' % (path, filename))
+            instance, created = self._preexistent_or_create(preexistent, Document, self.file_name(filename))
+        self._print_import_query(instance, created)
+        return (instance, created)
 
-    def file_to_regular_file(self, filename, path):
-        return RegularFile(
-            name = self.file_name(filename),
-            file = FileObject(self.path_name(path, filename))
-        )
+    def file_to_regular_file(self, filename, path, getByPath):
+        if not getByPath:
+            instance, created = RegularFile.objects.get_or_create(name=self.file_name(filename))
+        else:
+            preexistent = RegularFile.objects.filter(image='/%s/%s' % (path, filename))
+            instance, created = self._preexistent_or_create(preexistent, RegularFile, self.file_name(filename))
+        self._print_import_query(instance, created)
+        return (instance, created)
 
-    def file_to_sound_track(self, filename, path):
-        return SoundTrack(
-            name = self.file_name(filename),
-            audio = FileObject(self.path_name(path, filename))
-        )
+    def file_to_sound_track(self, filename, path, getByPath):
+        if not getByPath:
+            instance, created = SoundTrack.objects.get_or_create(name=self.file_name(filename))
+        else:
+            preexistent = SoundTrack.objects.filter(image='/%s/%s' % (path, filename))
+            instance, created = self._preexistent_or_create(preexistent, SoundTrack, self.file_name(filename))
+        self._print_import_query(instance, created)
+        return (instance, created)
 
-    def file_to_movie_clip(self, filename, path):
-        return MovieClip(
-            name = self.file_name(filename),
-            video = FileObject(self.path_name(path, filename))
-        )
+    def file_to_movie_clip(self, filename, path, getByPath):
+        if not getByPath:
+            instance, created = MovieClip.objects.get_or_create(name=self.file_name(filename))
+        else:
+            preexistent = MovieClip.objects.filter(image='/%s/%s' % (path, filename))
+            instance, created = self._preexistent_or_create(preexistent, MovieClip, self.file_name(filename))
+        self._print_import_query(instance, created)
+        return (instance, created)
 
-    def file_to_flash_movie(self, filename, path):
-        return FlashMovie(
-            name = self.file_name(filename),
-            flash = FileObject(self.path_name(path, filename))
-        )
+    def file_to_flash_movie(self, filename, path, getByPath):
+        if not getByPath:
+            instance, created = FlashMovie.objects.get_or_create(name=self.file_name(filename))
+        else:
+            preexistent = FlashMovie.objects.filter(image='/%s/%s' % (path, filename))
+            instance, created = self._preexistent_or_create(preexistent, FlashMovie, self.file_name(filename))
+        self._print_import_query(instance, created)
+        return (instance, created)
 
     def sanitize_filename(self, filename):
         # keep file extension
@@ -187,3 +226,22 @@ class Command(BaseCommand):
         except OSError as exception:
             if exception.errno != errno.EEXIST:
                 raise
+                
+    def _print_import_query(self, instance, created):
+        if created:
+            print( '\t\t IMPORTAR %s %s' % (instance.get_object_name().upper(), instance.name) )
+        else:   
+            print( '\t\t\t\t %s %s YA EXISTE' % (instance.get_object_name().upper(), instance.name) )
+            
+    def _preexistent_or_create(self, preexistent, klass, filename):
+        if preexistent:
+            instance = preexistent.filter(name=filename)
+            if instance:
+                instance = instance[0]
+            else:
+                instance = preexistent[0]
+            created = False
+        else:
+            instance, created = klass.objects.get_or_create(name=filename)
+        return (instance, created)
+
