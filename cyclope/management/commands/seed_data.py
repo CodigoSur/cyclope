@@ -91,9 +91,11 @@ class Command(BaseCommand):
     def select_layouts(self, site):
         """select default layouts"""
         default_layout = self._get_default_layout()
-        home = MenuItem.objects.get(site_home=True)
-        home.layout = default_layout
-        home.save()
+        homes = MenuItem.objects.filter(site_home=True)
+        if homes:
+            home = homes[0]
+            home.layout = default_layout
+            home.save()
         settings,ok = SiteSettings.objects.get_or_create(site=site)
         settings.default_layout = default_layout
         settings.theme = 'cyclope-bootstrap'
