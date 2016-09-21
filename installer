@@ -4,10 +4,10 @@ VIRTUALENV_SCRIPT=virtualenv.py
 VIRTUALENV_PACKAGE_URL=https://pypi.python.org/packages/source/v/virtualenv/virtualenv-15.0.1.tar.gz # latest as of 21-9-16
 VIRTUALENV_PACKAGE=virtualenv.tar.gz
 VIRTUALENV_PATH=cyclope_workenv
-DEBIAN_OS_DEPENDENCIES="mercurial git-core python-dev python-imaging"
+DEBIAN_OS_DEPENDENCIES="git-core python-dev python-imaging"
 PYTHON=
 CYCLOPE_PACKAGE="cyclope3"
-CYCLOPE_REPO_URL="ssh://hg@forja.codigosur.org/cyclope/"
+CYCLOPE_REPO_URL="https://github.com/CodigoSur/cyclope.git"
 
 # parse arguments
 while [[ $# > 0 ]]
@@ -46,7 +46,6 @@ install_dependencies() {
         sudo apt-get install -y $DEBIAN_OS_DEPENDENCIES || { echo -e >&2 "\n\nplease install $DEBIAN_OS_DEPENDENCIES and. Aborting."; exit 1; }
     else
         git --version >/dev/null 2>&1 || { echo -e >&2 "\n\ngit not found. Please install git package and retry.  Aborting."; exit 1; }
-        hg --version >/dev/null 2>&1 || { echo -e >&2 "\n\nmercurial not found. Please install mercurial package and retry.  Aborting."; exit 1; }
         $PYTHON -c "import PIL" 2>&1 || { echo -e >&2 "\n\nPIL not found. Please install python-imaging or PIL package and retry.  Aborting."; exit 1; }
     fi
 }
@@ -70,13 +69,13 @@ activate_virtualenv() {
 }
 
 install_cyclope() {
-    # use pip 1.4, 1.5 has several incompatibilities with external sources
+    # use pip 1.4, 1.5 has several incompatibilities with external sources  TODO
     pip install pip==1.4.1 || { echo -e >&2 "\n\nError installing pip"; exit 1; }
     if [ -z $REPO ];
     then
         pip install --allow-all-external --use-mirrors --timeout=50 $CYCLOPE_PACKAGE || { echo -e >&2 "\n\nError installing cyclope"; exit 1; }
     else
-        pip install --allow-all-external --use-mirrors --timeout=50 -e hg+$REPO#egg=cyclope3  || { echo -e >&2 "\n\nError installing cyclope. Maybe your cyclope mercurial repo URL is wrong."; exit 1; }
+        pip install --allow-all-external --use-mirrors --timeout=50 -e git+$REPO#egg=cyclope3  || { echo -e >&2 "\n\nError installing cyclope. Maybe your cyclope git repo URL is wrong?"; exit 1; }
     fi
 }
 
