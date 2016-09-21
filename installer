@@ -69,13 +69,11 @@ activate_virtualenv() {
 }
 
 install_cyclope() {
-    # use pip 1.4, 1.5 has several incompatibilities with external sources  TODO
-    pip install pip==1.4.1 || { echo -e >&2 "\n\nError installing pip"; exit 1; }
     if [ -z $REPO ];
     then
-        pip install --allow-all-external --use-mirrors --timeout=50 $CYCLOPE_PACKAGE || { echo -e >&2 "\n\nError installing cyclope"; exit 1; }
+        pip install --timeout=50 $CYCLOPE_PACKAGE || { echo -e >&2 "\n\nError installing cyclope"; exit 1; }
     else
-        pip install --allow-all-external --use-mirrors --timeout=50 -e git+$REPO#egg=cyclope3  || { echo -e >&2 "\n\nError installing cyclope. Maybe your cyclope git repo URL is wrong?"; exit 1; }
+        pip install --timeout=50 -e git+$REPO#egg=cyclope3  || { echo -e >&2 "\n\nError installing cyclope. Maybe your cyclope git repo URL is wrong?"; exit 1; }
     fi
 }
 
