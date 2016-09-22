@@ -4,7 +4,7 @@ VIRTUALENV_SCRIPT=virtualenv.py
 VIRTUALENV_PACKAGE_URL=https://pypi.python.org/packages/source/v/virtualenv/virtualenv-15.0.1.tar.gz # latest as of 21-9-16
 VIRTUALENV_PACKAGE=virtualenv.tar.gz
 VIRTUALENV_PATH=cyclope_workenv
-DEBIAN_OS_DEPENDENCIES="git-core python-dev python-imaging"
+DEBIAN_OS_DEPENDENCIES="git-core python-dev"
 PYTHON=
 CYCLOPE_PACKAGE="cyclope3"
 CYCLOPE_REPO_URL="https://github.com/CodigoSur/cyclope.git"
@@ -46,7 +46,6 @@ install_dependencies() {
         sudo apt-get install -y $DEBIAN_OS_DEPENDENCIES || { echo -e >&2 "\n\nplease install $DEBIAN_OS_DEPENDENCIES and. Aborting."; exit 1; }
     else
         git --version >/dev/null 2>&1 || { echo -e >&2 "\n\ngit not found. Please install git package and retry.  Aborting."; exit 1; }
-        $PYTHON -c "import PIL" 2>&1 || { echo -e >&2 "\n\nPIL not found. Please install python-imaging or PIL package and retry.  Aborting."; exit 1; }
     fi
 }
 
