@@ -4,10 +4,10 @@
         <a href="{% url article-detail article.slug %}">
             {% if article.pictures %}
                 {% with article.pictures.all|first as first_pic %}
-                    <img class="img-responsive" src="{% version first_pic.image.path 'carrousel_bootstrap'%}" alt="{{ article.name }}" />
+                    <img src="{% version first_pic.image.path 'carrousel_bootstrap'%}" class="img-responsive center-block" alt="{{ article.name }}" />
                 {% endwith %}
-            {% else %}
-                <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="{{ image.path }}" />
+                {% else %}
+                    <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" class="img-responsive center-block" alt="image-not-avalaible" />
             {% endif %}
         </a>
     </div>
