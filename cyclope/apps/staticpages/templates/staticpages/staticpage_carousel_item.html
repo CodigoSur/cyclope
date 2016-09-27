@@ -1,30 +1,28 @@
 {% load i18n fb_versions cyclope_utils dbgettext_tags %}
-
 <div class="item {% ifequal first_content staticpage %}active{% endifequal %} staticpage content-view">
-	 
-  <a href="{% url staticpage-detail staticpage.slug %}">
-    {% if staticpage.pictures %}
-       <img src="{% version staticpage.pictures.0.image.path 'carrousel_bootstrap' %}" alt="{{ article.name }}" />
-    {% else %} 
-      <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="Not avalaible" />
-    {% endif %}
-  </a>
-
-  <div class="carousel-caption">
-    {% if view_options.show_title %}
-    <h3>
-      <a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name|truncatechars:70 }}</a>
-    </h3>
-    {% endif %}
-    {% if view_options.show_description %}
-    <p>
-      {% if staticpage.summary %}
-      	{{ staticpage.summary|smart_style }}</h3>
-      {% else %}
-        {{ staticpage.text|smart_style|striptags|truncatewords:20 }}
-      {% endif %}
-    </p>
-    {% endif %}
-  </div>
-
+    <div class="carousel-image">
+        <a href="{% url staticpage-detail staticpage.slug %}">
+            {% if staticpage.pictures %}
+                <img src="{% version staticpage.pictures.0.image.path 'carrousel_bootstrap' %}" class="img-responsive center-block" alt="{{ article.name }}" />
+            {% else %} 
+                <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" class="img-responsive center-block" alt="image-not-avalaible" />
+            {% endif %}
+        </a>
+    </div>
+    <div class="carousel-caption">
+        {% if view_options.show_title %}
+            <h3>
+                <a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name|truncatechars:70 }}</a>
+            </h3>
+        {% endif %}
+        {% if view_options.show_description %}
+            <p>
+                {% if staticpage.summary %}
+                    {{ staticpage.summary|smart_style }}</h3>
+                {% else %}
+                    {{ staticpage.text|smart_style|striptags|truncatewords:20 }}
+                {% endif %}
+            </p>
+        {% endif %}
+    </div>
 </div>
