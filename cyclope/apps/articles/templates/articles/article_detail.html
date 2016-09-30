@@ -47,7 +47,7 @@
 		{% if article.pictures.count == 0 %}
 		{% elif article.pictures.count == 1 %}
 			{% with article.pictures.all|first as picture %}
-			<div class="{% inline_content_classes %}">
+			<div>
 					<div class="modals-picture" data-toggle="modal" data-target="#myModal">
 						<img class="center-block img-responsive" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
 						<div class="carousel-caption">
