@@ -307,6 +307,7 @@ span.category_title a {
 #right .teaser, #left .teaser {padding-bottom:10px; margin-bottom:5px;}
 #right .collection_teaser, #left .collection_teaser {margin:0;}
 #right .category_title, #left .category_title {font-size:22px;border-top: 1px solid #000;border-bottom: 1px solid #000;font-weight: 600;}
+#right .breadcrumb, #left .breadcrumb {font-size:12px;}
 #right .collection_header, #left .collection_header {margin:0;}
 #right .category_root_item_list ul, #left .category_root_item_list ul {margin-top:10px; padding-left:15px;}
 
