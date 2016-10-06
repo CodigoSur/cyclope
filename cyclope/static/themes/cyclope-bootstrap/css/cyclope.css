@@ -555,3 +555,10 @@ footer,
 /*img-header*/
 .brand{margin-bottom:20px;}
 .brand img {margin:0 auto;}
+
+
+@media all and (max-width: 768px) {
+  .carousel-caption p {
+    display: none;
+  }
+}
