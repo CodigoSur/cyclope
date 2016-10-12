@@ -311,3 +311,5 @@ CYCLOPE_BOOTSTRAP_SKIN = 'bootstrap'
 # behind proxy traffic is http, so urls in redirects get blocked by browsers. 
 # this works together with HTTP header 'X-Forwarded-Proto' set by Nginx
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+FILE_UPLOAD_PERMISSIONS = 0o641
