@@ -312,4 +312,4 @@ CYCLOPE_BOOTSTRAP_SKIN = 'bootstrap'
 # this works together with HTTP header 'X-Forwarded-Proto' set by Nginx
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-FILE_UPLOAD_PERMISSIONS = 0o641
+FILE_UPLOAD_PERMISSIONS = 0o644
