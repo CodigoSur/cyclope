@@ -63,7 +63,7 @@ class StaticPageAdmin(CollectibleAdmin, BaseContentAdmin):
     list_display = ('__unicode__', 'published') + CollectibleAdmin.list_display
     search_fields = ('name', 'text', )
     fieldsets = ((None,
-                  {'fields': ('name', 'text',)}),
+                  {'fields': ('name', 'slug', 'text')}),
                  (_('Publication data'),
                   {
                     'classes': ('collapse',),
