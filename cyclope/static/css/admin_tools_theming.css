@@ -935,3 +935,6 @@ cursor: pointer;
     text-align: center;
     .skins div:nth-child(1)
 }
+
+/*esconde Add another Region View en el Admin de Layouts, no se usa*/
+#regionview_set-group .add-row {display: none;}
