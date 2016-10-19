@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth.models import User
 from optparse import make_option
 from django.utils.translation import ugettext as _
+from django.core.exceptions import ObjectDoesNotExist
 
 class Command(BaseCommand):
     help = 'Cambiar el Password de un Usuario Cyclope'
@@ -29,7 +30,10 @@ class Command(BaseCommand):
             raise CommandError(_("Missing --username to change password"))
         if not new_password:
             raise CommandError(_("Missing --new_password to set"))
-        #
-        user = User.objects.filter(username=username)
-        user.set_password(new_password)
-        user.save()
+        try:
+            user = User.objects.get(username=username)
+            user.set_password(new_password)
+            user.save()
+            print "%s reseteao" % user.username
+        except ObjectDoesNotExist:
+            print "%s no exist" % username
