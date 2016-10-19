@@ -4,7 +4,7 @@ from optparse import make_option
 from django.utils.translation import ugettext as _
 
 class Command(BaseCommand):
-    help = 'Borrar un usuario por username'
+    help = 'Cambiar el Password de un Usuario Cyclope'
    
      #NOTE django > 1.8 uses argparse instead of optparse module, 
      #so "You are encouraged to exclusively use **options for new commands."
@@ -13,13 +13,23 @@ class Command(BaseCommand):
         make_option('--username',
             action='store',
             dest='username',
-            help=_('Username to delete')
+            help=_('Username')
         ),
+        make_option('--new-password',
+            action='store',
+            dest='new_password',
+            help=_('New password')
+        )
     )
 
     def handle(self, *args, **options):
         username = options['username']
-        if username:
-            User.objects.filter(username=username).delete()
-        else:
-            raise CommandError(_("Missing --username to delete"))
+        new_password = options['new_password']
+        if not username:
+            raise CommandError(_("Missing --username to change password"))
+        if not new_password:
+            raise CommandError(_("Missing --new_password to set"))
+        #
+        user = User.objects.filter(username=username)
+        user.set_password(new_password)
+        user.save()
