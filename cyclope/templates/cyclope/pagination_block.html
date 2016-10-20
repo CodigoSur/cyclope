@@ -9,33 +9,38 @@
                 {# query is present when this block is included in the search view #}
                  <li>
                   <a href="?{% append_to_get page=1 %}" aria-label="First">
-                    <span aria-hidden="true">&laquo;&nbsp;1</span>
+                    <span class="hidden-xs" aria-hidden="true">&laquo; {% trans 'first' %}</span>
+                    <span class="visible-xs-block" aria-hidden="true">&laquo;&nbsp;1</span>
                   </a>
                 </li>
                 {% if page.previous_page_number != 1 %}
                  <li>
                   <a href="?{% append_to_get page=page.previous_page_number %}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;&nbsp;{{ page.previous_page_number }}</span>
+                    <span class="hidden-xs" aria-hidden="true">&laquo; {% trans 'previous' %}</span>
+                    <span class="visible-xs-block" aria-hidden="true">&laquo;&nbsp;{{ page.previous_page_number }}</span>
                   </a>
                 </li>
                 {% endif %}
             {% endif %}
 
             <li class="active">
-               <span >{{ page.number }}</span>
+               <span class="hidden-xs">{% trans 'Page' %} {{ page.number }} {% trans 'of' %} {{ page.paginator.num_pages }}</span>
+               <span class="visible-xs-block">{{ page.number }}</span>
             </li>
 
             {% if page.has_next %}
               {% if page.next_page_number != page.paginator.num_pages %}
               <li>
                   <a href="?{% append_to_get page=page.next_page_number %}" aria-label="Next">
-                    <span aria-hidden="true">{{ page.next_page_number }}&nbsp;&raquo;</span>
+                    <span class="hidden-xs" aria-hidden="true">{% trans 'next' %} &raquo;</span>
+                    <span class="visible-xs-block" aria-hidden="true">{{ page.next_page_number }}&nbsp;&raquo;</span>
                   </a>
               </li>
               {% endif %}
               <li>
                   <a href="?{% append_to_get page=page.paginator.num_pages %}" aria-label="Last">
-                    <span aria-hidden="true">{{ page.paginator.num_pages }}&nbsp;&raquo;</span>
+                    <span class="hidden-xs" aria-hidden="true">{% trans 'last' %} &raquo;</span>
+                    <span class="visible-xs-block" aria-hidden="true">{{ page.paginator.num_pages }}&nbsp;&raquo;</span>
                   </a>
               </li>
             {% endif %}
