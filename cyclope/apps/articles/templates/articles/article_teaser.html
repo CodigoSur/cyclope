@@ -10,8 +10,8 @@
 	{% else%}
 		{% if article.pictures.values %}
 			{% with picture=article.pictures.values|first %}
-				<div class="teaser_icon_container">
-					<a href="{{ article.get_absolute_url }}" title="{{ picture.name }}">
+				<div class="teaser_icon_container hidden-xs">
+					<a href="{{ article.get_absolute_url }} title="{{ picture.name }}">
 						<img class="teaser_icon img-responsive" src="{% version picture.image 'medium' %}" alt="{{ picture.name }}" />
 					</a>
 				</div>
@@ -38,6 +38,17 @@
 					{{ article|parsed_gettext:"text"|smart_style|truncatewords_html:40 }}
 				{% endif %}
 			</div>
+			
+			<div class="visible-xs-block text-left">
+			    {% if article.pictures.values %}
+			    {% with picture=article.pictures.values|first %}
+				<a href="{{ article.get_absolute_url }} title="{{ picture.name }}">
+					<img class="img-responsive" src="{% version picture.image 'medium' %}" alt="{{ picture.name }}" />
+				</a>
+			    {% endwith %}
+		        {% endif %}
+			</div>
+			
 			{% include "cyclope/author_block_teaser.html"  %}
 			<p class="teaser_more">
 				<a class="btn btn-primary" href="{{ article.get_absolute_url }}" role="button">{% trans "More" %}</a>
