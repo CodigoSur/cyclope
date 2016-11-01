@@ -47,6 +47,25 @@
     {% endblock displaycss %}
     {% endcompress %}
     <!-- /CSS -->
+    
+    <!-- ### Cyclope-SiteSettings ### -->
+    {% block sitesettings_css %}
+        <style type="text/css">
+            @font-face {font-family: custom_body; src: url('{{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.body_custom_font }}');}
+            @font-face {font-family: custom_titles; src: url('{{ MEDIA_URL }}{{ CYCLOPE_SITE_SETTINGS.titles_custom_font }}');}
+            {% if CYCLOPE_SITE_SETTINGS.titles_font %}
+                h1, h2, h3, h4, h5, h6, .title, .title a { font-family:{{ CYCLOPE_SITE_SETTINGS.titles_font  }}; }
+            {% endif %}
+            body{
+                {% if CYCLOPE_SITE_SETTINGS.body_font %}
+                    font-family: {{ CYCLOPE_SITE_SETTINGS.body_font }};
+                {% endif %}
+                font-size:{{ CYCLOPE_SITE_SETTINGS.font_size  }}px;
+            }
+            {% if CYCLOPE_SITE_SETTINGS.hide_content_icons %} .type_icon { display: none;} {% endif %}
+        </style>
+    {% endblock sitesettings_css %}
+    
     <!--jquery needs to be here to work properly clear search box --> 
     <script type="text/javascript" src="{% static CYCLOPE_JQUERY_PATH %}"></script>
      
