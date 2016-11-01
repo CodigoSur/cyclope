@@ -11,11 +11,15 @@ img{
 .clear {
   clear: both;
 }
-.center,
-.teaser_icon.img-responsive{
-  float: none;
-  margin: 0 auto;
+
+@media (min-width: 768px) {
+    .center,
+    .teaser_icon.img-responsive{
+      float: none;
+      margin: 0 auto;
+    }
 }
+
 /* fix float vertical navbar */
 #left .navbar-nav > li,
 #rigth .navbar-nav > li {
