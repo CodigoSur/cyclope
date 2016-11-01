@@ -39,7 +39,7 @@
 				{% endif %}
 			</div>
 			
-			<div class="visible-xs-block text-left">
+			<div class="visible-xs-block">
 			    {% if article.pictures.values %}
 			    {% with picture=article.pictures.values|first %}
 				<a href="{{ article.get_absolute_url }} title="{{ picture.name }}">
