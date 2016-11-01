@@ -22,35 +22,47 @@
 
       {% else%}
 
-        <div class="pretitle-container first meta-content">
-          <div class="date">
-            {{ current_object.creation_date|date:'SHORT_DATE_FORMAT' }}
-          </div>
-        </div>
-
-        <h2 class="title">
-            <a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a>
-        </h2>
-
         {% if staticpage.pictures %}
-             <div class="teaser_icon_container">
+             <div class="teaser_icon_container hidden-xs">
                  <a href="{% url staticpage-detail staticpage.slug %}">
-                    <img class="teaser_icon img-responsive" src="{% version staticpage.pictures.0.image.path 'small' %}" alt="{{ staticpage.text|smart_style|striptags|truncatewords:40 }}" width="135" />
+                    <img class="teaser_icon img-responsive" src="{% version staticpage.pictures.0.image.path 'medium' %}" alt="{{ staticpage.text|smart_style|striptags|truncatewords:40 }}"/>
                  </a>
              </div>
-            {% endif %}
+        {% endif %}
 
+		<div class="teaser_text_container{% if article.pictures.values.count == 0 %}_fullwidth{% endif %}">
+            <div class="pretitle-container first meta-content">
+              <div class="date">
+                {{ current_object.creation_date|date:'SHORT_DATE_FORMAT' }}
+              </div>
+            </div>
+
+            <h2 class="title">
+                <a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a>
+            </h2>
+		
             {% if staticpage.summary %}
-              <div class="html-content summary">{{ staticpage.summary|smart_style }}</div>
+                  <div class="html-content summary">{{ staticpage.summary|smart_style }}</div>
             {% else %}
-              <div class="html-content summary">{{ staticpage.text|smart_style|striptags|truncatewords:40 }}</div>
+                  <div class="html-content summary">{{ staticpage.text|smart_style|striptags|truncatewords:40 }}</div>
             {% endif %}
 
-               <p class="teaser_more">
-                   <a class="btn btn-primary" href="{{ current_object.get_absolute_url  }}" role="button">{% trans "More" %}</a>
-                   {% include "cyclope/teaser_tools_block.html" with current_object=staticpage %}
-                   <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/{{ current_object.get_object_name }}.png" alt="icon" />
-               </p>
+			<div class="visible-xs-block">
+			    {% if staticpage.pictures %}
+			    {% with picture=staticpage.pictures|first %}
+			    <a href="{% url staticpage-detail staticpage.slug %}">
+                    <img class="img-responsive" src="{% version picture.image 'medium' %}" alt="{{ staticpage.text|smart_style|striptags|truncatewords:40 }}"/>
+                </a>
+			    {% endwith %}
+		        {% endif %}
+			</div>
+
+           <p class="teaser_more">
+               <a class="btn btn-primary" href="{{ current_object.get_absolute_url  }}" role="button">{% trans "More" %}</a>
+               {% include "cyclope/teaser_tools_block.html" with current_object=staticpage %}
+               <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/{{ current_object.get_object_name }}.png" alt="icon" />
+           </p>
+        </div>
 
       {% endif %}
             <div class="clear"></div>
