@@ -66,6 +66,7 @@ FONT_CHOICES = (
    ('times new roman', _('Times New Roman')),
    ('verdana', _('Verdana')),
    ('custom_body', _('Custom Body')),
+   ('custom_titles', _('Custom Titles')),
 )
 
 class SiteSettings(models.Model):
@@ -144,7 +145,7 @@ class SiteSettings(models.Model):
     titles_custom_font =  models.FileField(_('titles custom font'), blank=True, null=True, 
                                            upload_to='theme/fonts', 
                                            help_text="Upload a custom font for head and titles. Allowed formats: .otf, .tff")
-    font_size = models.DecimalField(_('font size'), max_digits=4, decimal_places=2, default=12)
+    font_size = models.DecimalField(_('font size'), max_digits=4, decimal_places=2, default=14)
     hide_content_icons = models.BooleanField(_('hide content icons'), default=False,
                                              help_text=_('Content icons are shown beside the title of the content'))
 
