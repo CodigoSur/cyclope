@@ -3,7 +3,7 @@
  *
  */
 body {}
-body.frontend_admin {margin: 20px 65px;}
+body.frontend_admin {} /*style frontend admin body here*/
 #content {margin:10px auto;width:960px;}
 #header {
     /* background: url(/static/admin_tools/images/admin-tools.png) 0 0 repeat-x; */
