@@ -1,11 +1,10 @@
 from django.core.management.base import BaseCommand, CommandError
-from django.core.management import call_command
 from django.utils.translation import ugettext as _
-import os.path
 from django.conf import settings
-import shutil
 from django.utils.crypto import get_random_string
 from optparse import make_option
+import shutil
+import os.path
 
 class Command(BaseCommand):
     help = _('Copies settings.py file from local project template to current project')
