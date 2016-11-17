@@ -11,7 +11,7 @@
 		{% if article.pictures.values %}
 			{% with picture=article.pictures.values|first %}
 				<div class="teaser_icon_container hidden-xs">
-					<a href="{{ article.get_absolute_url }} title="{{ picture.name }}">
+					<a href="{{ article.get_absolute_url }}" title="{{ picture.name }}">
 						<img class="teaser_icon img-responsive" src="{% version picture.image 'medium' %}" alt="{{ picture.name }}" />
 					</a>
 				</div>
