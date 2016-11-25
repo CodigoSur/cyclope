@@ -77,6 +77,8 @@ class Command(BaseCommand):
             site.domain = "localhost:8000"
             site.name = "CyclopeCMS demo"
             site.save()
+        # CONTACT FORM
+        ContactFormSettings.objects.create(subject="Contact mail")
         return site
 
     def create_layouts(self):
@@ -129,8 +131,7 @@ class Command(BaseCommand):
         menu_item.view_options = self.DEFAULT_VIEW_OPTIONS
         menu_item.save()
         # CONTACT FORM
-        contact = ContactFormSettings(subject="Contact mail")
-        contact.save()
+        contact = ContactFormSettings.objects.get(subject="Contact mail")
         contact_menu_item = MenuItem(
             menu=menu, 
             name="Contacto", 
