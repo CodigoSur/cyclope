@@ -33,7 +33,7 @@ class AnswerInline(admin.StackedInline):
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [AnswerInline]
     list_filter = ('poll',)
-    fields = ('text', 'allow_multiple_answers',)
+    fields = ('text', 'allow_multiple_answers', 'poll')
 
     def changelist_view(self, request, extra_context=None):
         # questions changelist should only show items from one poll.

@@ -44,7 +44,7 @@ class Poll(BaseContent, Collectible):
 
 
 class Question(models.Model):
-    poll = models.ForeignKey(Poll, editable=False)
+    poll = models.ForeignKey(Poll, blank=False)
     text = models.CharField(_('text'), blank=False,
                             db_index=True, max_length=255)
     order = models.IntegerField(null=True, blank=True)
