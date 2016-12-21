@@ -7,7 +7,7 @@ VIRTUALENV_PATH=cyclope_workenv
 DEBIAN_OS_DEPENDENCIES="git-core python-dev"
 PYTHON=
 CYCLOPE_PACKAGE="cyclope3"
-CYCLOPE_REPO_URL="https://github.com/CodigoSur/cyclope.git"
+CYCLOPE_REPO_URL="http://github.com/CodigoSur/cyclope.git"
 
 # parse arguments
 while [[ $# > 0 ]]
