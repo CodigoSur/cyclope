@@ -79,8 +79,7 @@ install_cyclope() {
 post_install_message() {
     echo -e "\n\nCyclope3 installed."
     echo "run 'source cyclope_workenv/bin/activate' to activate virtualenv and then"
-    echo "run 'cyclopeproject project_name' to create an empty project OR"
-    echo "run 'cyclopedemo demo' to create a demo project with some content"
+    echo "run 'cyclopeproject cyclope_project' to create a new project."
 
 }
 

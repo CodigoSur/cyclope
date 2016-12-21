@@ -89,7 +89,7 @@ setup(
         'python-memcached',
     ],
 
-    scripts=['cyclope/bin/cyclopeproject','cyclope/bin/cyclopedemo'],
+    scripts=['cyclope/bin/cyclopeproject',]
 
     packages=find_packages(),
 
