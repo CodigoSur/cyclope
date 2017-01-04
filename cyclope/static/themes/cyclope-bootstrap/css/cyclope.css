@@ -19,11 +19,7 @@ img{
   display: block;
 }
 
-/* collection and Categories default styles */
-.category_description .category_title {
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
-}
+
 .category_description .image {
   float: left;
   border-radius: 50%;
@@ -35,9 +31,17 @@ span.category_title {
   margin: 0;
   font-weight: 600;
 }
+
 span.category_title a {
   color: #000;
 }
+
+.category_description .category_title,
+.collection_header .title {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+
 .collection_teaser {
   background: #eee;
   padding: 8px;
@@ -58,25 +62,12 @@ span.category_title a {
 .collection_header {
   overflow: auto;
 }
-.category_description .category_title,
-.collection_header .title {
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
-}
+
 .category_description .image,
 .collection .image {
   float: left;
   border-radius: 50%;
   margin: 0 20px 0 0;
-}
-span.category_title {
-  display: block;
-  font-size: 28px;
-  margin: 0;
-  font-weight: 600;
-}
-span.category_title a {
-  color: #000;
 }
 
 .collection_image {
