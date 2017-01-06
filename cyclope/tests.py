@@ -720,7 +720,7 @@ class FrontendEditTestCase(TestCase):
 
         self.client.login(username=self.perm_user.username, password='password')
         response = self.client.get('/category/category/')
-        self.assertContains(response, 'class="category_add_content"', count=1)
+        self.assertContains(response, 'class="category_add_content', count=1)
 
         self.client.login(username=self.non_perm_user.username, password='password')
         response = self.client.get('/category/category/')

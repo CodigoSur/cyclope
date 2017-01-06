@@ -31,7 +31,7 @@
         {% per_category_perms category as cat_perms %}
         {% if cat_perms.add_content %}
         <li>
-            <div class="btn-group">
+            <div class="category_add_content btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans "Add content" %} <span class="caret"></span></button>
                     <ul class="dropdown-menu">
                     {% for c_type in category.collection.content_types.all %}
