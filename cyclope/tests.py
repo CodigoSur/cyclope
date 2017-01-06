@@ -62,6 +62,7 @@ from cyclope import themes
 from cyclope import templatetags as cyclope_templatetags
 from cyclope.templatetags.cyclope_utils import smart_style
 from cyclope import settings as cyc_settings
+import os.path
 
 DEFAULT_THEME = "cyclope-bootstrap"
 DEFAULT_THEME_REGION = "top"
@@ -803,7 +804,9 @@ class CreateContentApiTests(TestCase):
     def test_json_picture_content_creation(self):
         from cyclope.apps.medialibrary.models import Picture
         ct = ContentType.objects.get(model='picture').pk
-        f = open("static/images/cyclope-icon.png")
+        # TODO(NumericA) Django > 1.8 includes BASE_DIR setting
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        f = open(BASE_DIR+"/static/images/cyclope-icon.png")
         self.client.login(username='admin', password='password')
         response = self.client.post("/api/create/", {"ct_id": ct, "name": "image.png", "file":f})
         self.assertEqual(response.status_code, 200)
