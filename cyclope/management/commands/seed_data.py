@@ -63,8 +63,7 @@ class Command(BaseCommand):
         site = self.create_site()
         ######
         # DEMO
-        if options['demo']:           
-            self.create_demo_objects(site)
+        self.create_demo_objects(site, options['demo'])
         # unselect old layouts
         self.select_layouts(site)
         
@@ -104,46 +103,46 @@ class Command(BaseCommand):
         settings.save()
 
         
-    def create_demo_objects(self, site):
+    def create_demo_objects(self, site, demo):
         # MAIN MENU
         menu = Menu(name="Main menu", main_menu=True)
         menu.save()
-        #REGIONS
         default_layout = self._get_default_layout()
-        RegionView.objects.create(region='header', layout=default_layout, content_object=menu, weight=1, content_view='menuitems_hierarchy', view_options='{"align": "HORIZONTAL"}')
-        site_content_type =ContentType.objects.get(name='site')
-        RegionView.objects.create(region='right', layout=default_layout, content_type_id=site_content_type.pk, weight=1, content_view='search')
         # HOME (MENU ITEM)
         menu_item = MenuItem(menu=menu, name="Inicio", site_home=True, active=True, layout=default_layout)
         menu_item.save()
-        # COLLECTION & CATEGORY
-        collection_ctypes = self._get_base_ctypes()
-        collection = Collection.objects.create(name="Contenidos", description="Agrupa todos los contenidos generados en el sitio por el script de arranque.")
-        collection.content_types = collection_ctypes
-        collection.save()
-        category = collection.categories.create(name="Noticias")
-        # ARTICLE (welcome)
-        article = Article.objects.create(name="Te damos la bienvenida a CyclopeCMS", text="Morbi cursus, enim nec mollis condimentum, nisl nisl porta tortor, ut accumsan lorem metus et nunc. Aenean eget accumsan massa. In sodales ligula eu lectus efficitur tincidunt. Nunc non massa vulputate, pellentesque sapien ac, congue erat. Nam in quam lectus. Mauris hendrerit dignissim ex, in sollicitudin ipsum lacinia vitae. Aenean pellentesque diam quis quam mollis, ac mattis ante rutrum. Sed id vulputate ligula.")
-        Categorization.objects.create(content_object=article, category=category)
-        # Home
-        menu_item.content_object = category
-        menu_item.content_view = "contents" 
-        menu_item.view_options = self.DEFAULT_VIEW_OPTIONS
-        menu_item.save()
-        # CONTACT FORM
-        contact = ContactFormSettings.objects.get(subject="Contact mail")
-        contact_menu_item = MenuItem(
-            menu=menu, 
-            name="Contacto", 
-            custom_url="/contact",
-        )
-        contact_menu_item.save()
-        # USER GROUPS
-        for g in ("editors", "managers", "translators"):
-            group, created = Group.objects.get_or_create(name=g)
-            if created: #?
-                group.save()
-        #.
+        if demo:
+            #REGIONS
+            RegionView.objects.create(region='header', layout=default_layout, content_object=menu, weight=1, content_view='menuitems_hierarchy', view_options='{"align": "HORIZONTAL"}')
+            site_content_type =ContentType.objects.get(name='site')
+            RegionView.objects.create(region='right', layout=default_layout, content_type_id=site_content_type.pk, weight=1, content_view='search')
+            # COLLECTION & CATEGORY
+            collection_ctypes = self._get_base_ctypes()
+            collection = Collection.objects.create(name="Contenidos", description="Agrupa todos los contenidos generados en el sitio por el script de arranque.")
+            collection.content_types = collection_ctypes
+            collection.save()
+            category = collection.categories.create(name="Noticias")
+            # ARTICLE (welcome)
+            article = Article.objects.create(name="Te damos la bienvenida a CyclopeCMS", text="Morbi cursus, enim nec mollis condimentum, nisl nisl porta tortor, ut accumsan lorem metus et nunc. Aenean eget accumsan massa. In sodales ligula eu lectus efficitur tincidunt. Nunc non massa vulputate, pellentesque sapien ac, congue erat. Nam in quam lectus. Mauris hendrerit dignissim ex, in sollicitudin ipsum lacinia vitae. Aenean pellentesque diam quis quam mollis, ac mattis ante rutrum. Sed id vulputate ligula.")
+            Categorization.objects.create(content_object=article, category=category)
+            # Home
+            menu_item.content_object = category
+            menu_item.content_view = "contents" 
+            menu_item.view_options = self.DEFAULT_VIEW_OPTIONS
+            menu_item.save()
+            # CONTACT FORM
+            contact = ContactFormSettings.objects.get(subject="Contact mail")
+            contact_menu_item = MenuItem(
+                menu=menu, 
+                name="Contacto", 
+                custom_url="/contact",
+            )
+            contact_menu_item.save()
+            # USER GROUPS
+            for g in ("editors", "managers", "translators"):
+                group, created = Group.objects.get_or_create(name=g)
+                if created: #?
+                    group.save()
         
     def _get_default_layout(self):
         return Layout.objects.get(slug='two-columns-right')
