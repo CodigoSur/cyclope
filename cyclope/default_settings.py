@@ -313,3 +313,7 @@ CYCLOPE_BOOTSTRAP_SKIN = 'bootstrap'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 FILE_UPLOAD_PERMISSIONS = 0o644
+
+# forms by default try to overwrite mail's from field copying the destination.
+# this raises an error from the smtp server, default should be not to.
+FORMS_BUILDER_SEND_FROM_SUBMITTER = False
