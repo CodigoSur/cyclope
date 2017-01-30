@@ -37,7 +37,7 @@ class CustomComment(ThreadedComment):
 
     objects = CommentManager()
 
-    def save(self, send_notifications=True, *args, **kwargs):
+    def save(self, send_notifications=False, *args, **kwargs):
         created = not self.pk
         super(CustomComment, self).save(*args, **kwargs)
 
