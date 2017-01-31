@@ -37,7 +37,7 @@ class CustomComment(ThreadedComment):
 
     objects = CommentManager()
 
-    def save(self, send_notifications=False, *args, **kwargs):
+    def save(self, send_notifications=True, *args, **kwargs):
         created = not self.pk
         super(CustomComment, self).save(*args, **kwargs)
 
@@ -56,12 +56,12 @@ class CustomComment(ThreadedComment):
 
         mail_managers(subject, managers_message, fail_silently=True)
 
-        # Send mail to suscribed users of the tree path
-        comments = CustomComment.objects.filter(id=self.root_path, subscribe=True)
-        if comments:
-            messages = [(subject, message, settings.DEFAULT_FROM_EMAIL,
-                         [comment.userinfo["email"]]) for comment in comments]
-            send_mass_mail(messages, fail_silently=True)
+#        # Send mail to suscribed users of the tree path
+#        comments = CustomComment.objects.filter(id=self.root_path, subscribe=True)
+#        if comments:
+#            messages = [(subject, message, settings.DEFAULT_FROM_EMAIL,
+#                         [comment.userinfo["email"]]) for comment in comments]
+#            send_mass_mail(messages, fail_silently=True)
 
     class Meta:
         verbose_name = _("comment")
