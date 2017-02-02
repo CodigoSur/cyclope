@@ -65,7 +65,7 @@ setup(
         'django-autoslug==1.4.1',
         'django-mptt==0.4.2', # 0.4 breaks compatibility
         'django-mptt-tree-editor>=0.1.1,<0.2',
-        'Pillow>=2.0',# python >= 2.6
+        'Pillow==3.3.0',# python >= 2.6, TODO < 4.0 because of bug
         'django-simple-captcha==0.4.1',
         'django-filebrowser-nograpup>=3.0.3,<3.1',
         'South>=0.7,<0.8',
