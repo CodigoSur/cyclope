@@ -33,7 +33,7 @@ class CustomCommentTest(TestCase):
         settings.MANAGERS = ('Manager', 'manager@test.org',)
         
     def test_suscribe(self):
-        self.set_moderation_setting(False)
+        custom_comment_models.moderation_enabled = lambda :False
         comment = self.create_comment()
         # mail sent to moderators only
         self.assertEqual(len(mail.outbox), 1)
@@ -49,17 +49,16 @@ class CustomCommentTest(TestCase):
 
     #MAIL
     def test_no_moderation_admin_mailed(self):
-        self.set_moderation_setting(False)
+        custom_comment_models.moderation_enabled = lambda :False
         comment = self.create_comment()
         self.assertEqual(len(mail.outbox), 1)
     
     def test_moderation_admin_mailed(self):
-        self.set_moderation_setting(True)
         comment = self.create_comment()
         self.assertEqual(len(mail.outbox), 1)
     
     def test_no_moderation_sucriptor_mails_sent(self): # FIXME not_sent
-        self.set_moderation_setting(False)
+        custom_comment_models.moderation_enabled = lambda :False
         comment = self.create_comment()
         self.assertEqual(len(mail.outbox), 1) # 1 to admin
         reply = CustomComment(
@@ -84,7 +83,6 @@ class CustomCommentTest(TestCase):
         self.assertEqual(len(mail.outbox), 5) # 3 to admin, 2 to suscriptor
         
     def test_moderation_suscriptor_mail_delayed(self):
-        self.set_moderation_setting(True)
         comment = self.create_comment()
         reply = CustomComment(
             name="Numerica", 
@@ -143,8 +141,3 @@ class CustomCommentTest(TestCase):
         comment.save()
         return comment
 
-    def set_moderation_setting(self, true_false):
-        site_settings = get_singleton(SiteSettings)
-        site_settings.moderate_comments = true_false
-        site_settings.save()
-#        SiteSettings._instance = None TODO invalidate cache
