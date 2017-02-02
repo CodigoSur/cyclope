@@ -15,6 +15,7 @@ from models import CustomComment
 import models as custom_comment_models
 from admin import CustomCommentsAdmin
 from moderator import CustomCommentModerator, moderator
+from django.contrib.comments.models import CommentFlag
 
 moderator.register(Site, CustomCommentModerator)
 
@@ -95,7 +96,42 @@ class CustomCommentTest(TestCase):
         reply.save()
         self.assertEqual(len(mail.outbox), 2) # 2 to admin, 0 to suscriptor 
     
-#  TODO  def test_moderation_suscriptor_mail_approved_sent
+    def test_moderation_suscriptor_mail_approved_sent(self):
+        custom_comment_models.moderation_enabled = lambda :True
+        # COMMENT CREATION
+        comment = self.create_comment()
+        # REPLY CREATION
+        reply = CustomComment(
+            name="Numerica", 
+            email="webmaster@numerica.cl", 
+            parent=comment, 
+            content_object=self.site, 
+            site=self.site, 
+            subscribe=True
+        )
+        reply.save()
+        self.assertEqual(len(mail.outbox), 2) # 2 to admin, 0 to suscriptor 
+        # COMMENT APPROVAL
+        # django_comments.views.moderation.perform_approve
+        request = RequestFactory().get('/')
+        user_admin = User.objects.create_superuser('admin', 'admin@codigosur.com', "password")
+        # Signal that the comment was approved
+        flag, created = CommentFlag.objects.get_or_create(
+            comment=reply,
+            user=user_admin,
+            flag=CommentFlag.MODERATOR_APPROVAL,
+        )
+        reply.is_removed = False
+        reply.is_public = True
+        reply.save()
+        responses = signals.comment_was_flagged.send(
+            sender  = reply.__class__,
+            comment = reply,
+            flag = flag,
+            created = created,
+            request = request
+        )
+        self.assertEqual(len(mail.outbox), 3) # 2 to admin, 1 to suscriptor 
 
     def test_needs_moderation(self):
         custom_comment_models.moderation_enabled = lambda :False
