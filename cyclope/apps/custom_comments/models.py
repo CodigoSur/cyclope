@@ -40,28 +40,30 @@ class CustomComment(ThreadedComment):
     def save(self, send_notifications=True, *args, **kwargs):
         created = not self.pk
         super(CustomComment, self).save(*args, **kwargs)
-
         if created and notification_enabled() and send_notifications:
-            self.send_email_notifications()
+            self.send_admin_notifications()
+            if not moderation_enabled():
+                self.send_subscriptors_notifications()
 
-    def send_email_notifications(self):
+    def send_admin_notifications(self):
         subject = _("New comment posted on '%s'") % self.content_object
         message = self.get_as_text()
-        managers_message = message
         if moderation_enabled():
-            url = "http://%s%s" % (self.site.domain, reverse('comments-approve',
-                                   args=(self.id,)))
+            url = "http://%s%s" % (self.site.domain, reverse('comments-approve', args=(self.id,)))
             managers_message = _("This comment is moderated!\nYou may approve it " \
                                  "on the following url: %s\n\n") % url + message
-
+        else:
+            managers_message = message
         mail_managers(subject, managers_message, fail_silently=True)
-
-#        # Send mail to suscribed users of the tree path
-#        comments = CustomComment.objects.filter(id=self.root_path, subscribe=True)
-#        if comments:
-#            messages = [(subject, message, settings.DEFAULT_FROM_EMAIL,
-#                         [comment.userinfo["email"]]) for comment in comments]
-#            send_mass_mail(messages, fail_silently=True)
+        
+    # Send mail to suscribed users of the tree path
+    def send_subscriptors_notifications(self):
+        subject = _("New comment posted on '%s'") % self.content_object
+        message = self.get_as_text()
+        comments = CustomComment.objects.filter(id=self.root_path, subscribe=True)
+        if comments:
+            messages = [(subject, message, settings.DEFAULT_FROM_EMAIL, [comment.userinfo["email"]]) for comment in comments]
+            send_mass_mail(messages, fail_silently=True)
 
     class Meta:
         verbose_name = _("comment")
