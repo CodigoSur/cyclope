@@ -20,8 +20,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.contrib.comments.moderation import CommentModerator, moderator
-
+from django.contrib.comments import signals
 import models
+from django.contrib.comments.models import CommentFlag
 
 class CustomCommentModerator(CommentModerator):
 
@@ -47,3 +48,10 @@ class CustomCommentModerator(CommentModerator):
             getattr(content_object, "allow_comments", True) != "NO":
             return True
         return False
+
+    def post_comment_approval(sender, **kwargs):
+        if kwargs['flag'].flag == CommentFlag.MODERATOR_APPROVAL:
+            kwargs['comment'].send_subscriptors_notifications()
+        
+    signals.comment_was_flagged.connect(post_comment_approval, sender=models.CustomComment)
+    

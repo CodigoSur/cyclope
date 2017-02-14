@@ -15,8 +15,12 @@ from models import CustomComment
 import models as custom_comment_models
 from admin import CustomCommentsAdmin
 from moderator import CustomCommentModerator, moderator
+from django.contrib.comments.models import CommentFlag
 
 moderator.register(Site, CustomCommentModerator)
+
+from cyclope.utils import get_singleton
+from cyclope.models import SiteSettings
 
 class CustomCommentTest(TestCase):
 
@@ -28,23 +32,106 @@ class CustomCommentTest(TestCase):
         self.site.domain = "example.com"
         self.site.save()
         settings.MANAGERS = ('Manager', 'manager@test.org',)
-
+        
     def test_suscribe(self):
-        CustomComment.moderation_enabled = lambda x:True
+        custom_comment_models.moderation_enabled = lambda :False
         comment = self.create_comment()
         # mail sent to moderators only
         self.assertEqual(len(mail.outbox), 1)
         self.assertTrue("New comment posted on '%s'" % self.site in mail.outbox[0].subject)
-
         other_comment = self.create_comment()
 
         reply = CustomComment(name="SAn AE", email="san-ae@test.com", parent=comment,
                               content_object=self.site, site=self.site, subscribe=True)
         reply.save()
-
         # mail sent to moderators and to original author of first comment
-        self.assertEqual(len(mail.outbox), 4)
-        self.assertEqual(mail.outbox[3].to[0], "san@test.com")
+        self.assertEqual(len(mail.outbox), 4) # 2 admin-new, 1 reply-admin + 1 reply-suscriptor 
+        self.assertEqual(mail.outbox[3].to[0], "san@test.com") # reply-admin 
+
+    #MAIL
+    def test_no_moderation_admin_mailed(self):
+        custom_comment_models.moderation_enabled = lambda :False
+        comment = self.create_comment()
+        self.assertEqual(len(mail.outbox), 1)
+    
+    def test_moderation_admin_mailed(self):
+        comment = self.create_comment()
+        self.assertEqual(len(mail.outbox), 1)
+    
+    def test_no_moderation_sucriptor_mails_sent(self): # FIXME not_sent
+        custom_comment_models.moderation_enabled = lambda :False
+        comment = self.create_comment()
+        self.assertEqual(len(mail.outbox), 1) # 1 to admin
+        reply = CustomComment(
+            name="Numerica", 
+            email="webmaster@numerica.cl", 
+            parent=comment, 
+            content_object=self.site, 
+            site=self.site, 
+            subscribe=True
+        )
+        reply.save()
+        self.assertEqual(len(mail.outbox), 3) # 2 to admin, 1 to suscriptor
+        reply_2 = CustomComment(
+            name="Numerica", 
+            email="roberto@numerica.cl", 
+            parent=reply, 
+            content_object=self.site, 
+            site=self.site, 
+            subscribe=True
+        )
+        reply_2.save()
+        self.assertEqual(len(mail.outbox), 5) # 3 to admin, 2 to suscriptor
+        
+    def test_moderation_suscriptor_mail_delayed(self):
+        comment = self.create_comment()
+        reply = CustomComment(
+            name="Numerica", 
+            email="webmaster@numerica.cl", 
+            parent=comment, 
+            content_object=self.site, 
+            site=self.site, 
+            subscribe=True
+        )
+        reply.save()
+        self.assertEqual(len(mail.outbox), 2) # 2 to admin, 0 to suscriptor 
+    
+    def test_moderation_suscriptor_mail_approved_sent(self):
+        custom_comment_models.moderation_enabled = lambda :True
+        # COMMENT CREATION
+        comment = self.create_comment()
+        # REPLY CREATION
+        reply = CustomComment(
+            name="Numerica", 
+            email="webmaster@numerica.cl", 
+            parent=comment, 
+            content_object=self.site, 
+            site=self.site, 
+            subscribe=True
+        )
+        reply.save()
+        self.assertEqual(len(mail.outbox), 2) # 2 to admin, 0 to suscriptor 
+        # COMMENT APPROVAL
+        # django_comments.views.moderation.perform_approve
+        request = RequestFactory().get('/')
+        user_admin = User.objects.create_superuser('admin', 'admin@codigosur.com', "password")
+        # Signal that the comment was approved
+        flag, created = CommentFlag.objects.get_or_create(
+            comment=reply,
+            user=user_admin,
+            flag=CommentFlag.MODERATOR_APPROVAL,
+        )
+        reply.is_removed = False
+        reply.is_public = True
+        reply.save()
+        responses = signals.comment_was_flagged.send(
+            sender  = reply.__class__,
+            comment = reply,
+            flag = flag,
+            created = created,
+            request = request
+        )
+        self.assertEqual(len(mail.outbox), 3) # 2 to admin, 1 to suscriptor 
 
     def test_needs_moderation(self):
         custom_comment_models.moderation_enabled = lambda :False
