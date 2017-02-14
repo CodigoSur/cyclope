@@ -59,6 +59,10 @@ String.prototype.capitalize = function() {
 //TODO(NumericA) source elements can specify MIME type. may be should for video codecs...
 //TODO handle browsers that don't support HTML5
 function generate_media_tag(url, media_type, media_desc){
+    // default media_desc
+    if(media_desc==undefined || media_desc==""){
+        media_desc = 'description'
+    }
     switch(media_type){
         case 'picture':
             return {replaceWith: '!(left)'+url+'('+media_desc+')!'};
