@@ -29,8 +29,6 @@ class MediaWidgetTests(TestCase):
                                     })
             self.assertEqual(response.status_code, 200)                                    
             #tf.close() x multiples post
-
-            # TODO regex here "media_widget_markitup('/media/pictures/2017/02/nunoa-comun.jpg', 'picture', '');"
-            self.assertContains(response, "media_widget_markitup('/media/pictures/2017/02/nunoa-comun.jpg', 'picture', '');")
-
+            # "media_widget_markitup('/media/pictures/2017/02/nunoa-comun.jpg', 'picture', '');"
+            self.assertRegexpMatches(response.content, "(media_widget_markitup).+(/media/pictures/).+(nunoa-comun.jpg)")
             # TODO Selenium test JS media_widget_markitup method call
