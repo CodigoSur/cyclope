@@ -306,9 +306,12 @@ def embed_create(request):
             if _validate_file_type(media_type, multimedia):
                 klass = ContentType.objects.get(model=media_type).model_class()
                 instance = klass() # generic instance of media model
+                
                 #filesystem save 
                 directory = instance.directory
                 abs_path = os.path.join(settings.MEDIA_ROOT, _get_todays_folder(directory))
+                #normalize file name
+                multimedia.name = convert_filename(multimedia.name)
                 uploaded_path = handle_file_upload(abs_path, multimedia)
                 image_url = "%s/%s" % (_get_todays_folder(directory), multimedia.name)
                 objeto = FileObject(image_url)
