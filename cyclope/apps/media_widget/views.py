@@ -20,12 +20,16 @@ from models import MediaWidget
 from django.utils.translation import ugettext_lazy as _
 from filebrowser.base import FileObject
 from datetime import datetime
+# an other good reason to merge media apps:
+from cyclope.apps.related_admin.views import staff_required
+
 
 ###########################
 ##Article's pictures widget
 
 # for new Article
 # GET /pictures/new
+@staff_required
 def pictures_new(request):
     #Model
     article = Article()
