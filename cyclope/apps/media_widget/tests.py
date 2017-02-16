@@ -15,7 +15,19 @@ from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium import webdriver
 
-class MediaWidgetTests(TestCase):
+class MediaWidgetMixin(object):
+    def create_test_superuser(self):
+        self.user = User.objects.create_superuser('john', 'lennon@thebeatles.com', 'johnpassword')
+        
+    def superuser_login(self):
+        self.c.login(username='john', password='johnpassword')
+    
+    def set_auth_cookie_to_browser(self):
+        cookie = self.c.cookies['sessionid']
+        self.browser.add_cookie({'name': 'sessionid', 'value': cookie.value, 'secure': False, 'path': '/'})
+        self.browser.refresh()
+
+class MediaWidgetTests(TestCase, MediaWidgetMixin):
 
     fixtures = ['simplest_site.json']
 
@@ -23,8 +35,8 @@ class MediaWidgetTests(TestCase):
         self.c = Client()
         self.PATH =  os.path.dirname(__file__)
         self.FILES_PATH = self.PATH+'/fixtures/files/'
-        self.user = User.objects.create_superuser('john', 'lennon@thebeatles.com', 'johnpassword')
-        self.c.login(username='john', password='johnpassword')
+        self.create_test_superuser()
+        self.superuser_login()
 
     def test_slugify_uploaded_media_file(self):
         """when uploading files, the file name has to bee slugified to ascii"""
@@ -40,7 +52,7 @@ class MediaWidgetTests(TestCase):
             self.assertRegexpMatches(response.content, "(media_widget_markitup).+(/media/pictures/).+(nunoa-comun.jpg)")
             # TODO Selenium test JS media_widget_markitup method call, or test responses objects
 
-class MediaWidgetFuncionalTests(LiveServerTestCase):
+class MediaWidgetFuncionalTests(LiveServerTestCase, MediaWidgetMixin):
     """Media Widget functional integration tests suite.
        https://docs.djangoproject.com/en/1.10/topics/testing/tools/#django.test.LiveServerTestCase
        Download geckodriver from https://github.com/mozilla/geckodriver/releases
@@ -55,16 +67,19 @@ class MediaWidgetFuncionalTests(LiveServerTestCase):
     @classmethod
     def setUpClass(self):
         super(MediaWidgetFuncionalTests, self).setUpClass()
-        self.selenium =  webdriver.Firefox(executable_path=self.EXEC_PATH)
-        self.selenium.implicitly_wait(10)
+        self.browser =  webdriver.Firefox(executable_path=self.EXEC_PATH)
+        self.browser.implicitly_wait(10)
+        self.create_test_superuser()
+        self.superuser_login()
+        self.set_auth_cookie_to_browser()
 
     @classmethod
     def tearDownClass(self):
         super(MediaWidgetFuncionalTests, self).tearDownClass()
-        self.selenium.quit()
+        self.browser.quit()
 
     def test_post_upload_widget_state(self):
         """widget should be refreshed after a succesful upload
            it cannot stay with previously uploaded file state
            mostly when an error was raised (500), it goes unsable."""
-        self.selenium.get('%s%s' % (self.live_server_url, reverse('embed-new', kwargs={'media_type': 'picture'})))
+        self.browser.get('%s%s' % (self.live_server_url, reverse('embed-new', kwargs={'media_type': 'picture'})))
