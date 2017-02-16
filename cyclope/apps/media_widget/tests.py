@@ -8,6 +8,7 @@ import os
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from cyclope.apps.articles.models import Article
+from cyclope.apps.medialibrary.models import Picture
 
 class MediaWidgetTests(TestCase):
 
@@ -45,10 +46,23 @@ class MediaWidgetTests(TestCase):
     def test_media_widget_is_reserved_to_staff(self):
         """This is how it is actually used today, however if we used group permissions instead this would have to be expanded."""
         article = Article.objects.create(name='test', text='no,test!')
+        art_params = {'article_id': article.pk}
+        pic = Picture.objects.create(name='test')
+        pic_params = {'pictures_ids': '{},'.format(pic.pk)}
         # NOT LOGGED IN
         urls = [
+            ('pictures-upload', art_params),
             ('pictures-new', None), 
-            ('pictures-upload', {'article_id': article.pk})
+#            ('pictures-create', art_params), TODO 405 POST required
+#             'pictures-update'
+#             'pictures-delete'
+            ('pictures-widget', art_params),
+            ('pictures-widget-new', pic_params),
+            ('pictures-list', pic_params),
+            ('pictures-widget-select', pic_params),
+            ('embed-new', {'media_type': 'picture'}),
+#           ('embed-creaste'),
+            ('library-fetch', {'media_type': 'picture'}),
         ]
         for url, params in urls:
             self.assert_login_required(url, params)

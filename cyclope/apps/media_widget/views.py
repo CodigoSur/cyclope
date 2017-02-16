@@ -207,98 +207,91 @@ def pictures_delete(request, article_id):
         return HttpResponseForbidden()
 
 #GET /pictures/widget/article_id
+@staff_required
 def pictures_widget(request, article_id):
     """
     Ajax call to this method refreshes Article Admin's pictures widget thumbnails.
     """
-    if request.user.is_staff:
-        article = Article.objects.get(pk=article_id)
-        pictures_list = [picture.id for picture in article.pictures.all()]
-        html = MediaWidget().render("pictures", pictures_list)
-        return HttpResponse(html)        
-    else:
-        return HttpResponseForbidden()
+    article = Article.objects.get(pk=article_id)
+    pictures_list = [picture.id for picture in article.pictures.all()]
+    html = MediaWidget().render("pictures", pictures_list)
+    return HttpResponse(html)        
 
+#GET /pictures/widget/1,11,2, (comma separated pictures ids)
+@staff_required
 def pictures_widget_new(request, pictures_ids):
     """
     Same as above but receives comma separated pictures ids to let them as inputs for save.
     """
-    if request.user.is_staff:
-        pictures_list = [int(x) for x in pictures_ids.split(',') if x]
-        html = MediaWidget().render("pictures", pictures_list)
-        return HttpResponse(html)
-    else:
-        return HttpResponseForbidden()
+    pictures_list = [int(x) for x in pictures_ids.split(',') if x]
+    html = MediaWidget().render("pictures", pictures_list)
+    return HttpResponse(html)
 
+# GET /pictures/widget/3,2, (comma separated pictures ids)
+@staff_required
 def pictures_widget_select(request, pictures_ids):
     """
-    Opposite as above: returns all Pictures but those in the picture ids list.
+    Opposite as above: returns all Pictures except those in the picture ids list.
     """
-    if request.user.is_staff:
-        def no_nulo(x): return x!='' and x is not None
-        pictures_ids = filter(no_nulo, pictures_ids.split(','))
-        pictures = Picture.objects.exclude(pk__in=pictures_ids).order_by('-creation_date')
-        
-        # pagination
-        n, nRows = _paginator_query_string(request)
-        paginator = Paginator(pictures, nRows)
-        select_page = paginator.page(n)
-        
-        return render(request, 'media_widget/picture_select.html', {
-            'select_page': select_page,
-            'n': n,
-            'nRows': nRows,
-        })
-    else:
-        return HttpResponseForbidden()
+    def no_nulo(x): return x!='' and x is not None
+    pictures_ids = filter(no_nulo, pictures_ids.split(','))
+    pictures = Picture.objects.exclude(pk__in=pictures_ids).order_by('-creation_date')
+    
+    # pagination
+    n, nRows = _paginator_query_string(request)
+    paginator = Paginator(pictures, nRows)
+    select_page = paginator.page(n)
+    
+    return render(request, 'media_widget/picture_select.html', {
+        'select_page': select_page,
+        'n': n,
+        'nRows': nRows,
+    })
 
+# GET pictures/delete_list/7,5,3,1
+@staff_required
 def delete_pictures_list(request, pictures_ids):
     """
     For new articles:
     Render a delete form with specified picture ids
     """
-    if request.user.is_staff:
-        #TODO(NumericA) delete_form
-        pictures_list = [int(x) for x in pictures_ids.split(',') if x]
-        pictures = [Picture.objects.get(pk=x) for x in pictures_list]
-        #TODO(NumericA) pagination
-        n, nRows = _paginator_query_string(request)
-        paginator = Paginator(pictures, nRows)
-        delete_page = paginator.page(n)
-        return render(request, 'media_widget/picture_delete.html', {
-            'delete_page': delete_page,
-            'n': n,
-            'nRows': nRows,
-        })
-    else:
-        return HttpResponseForbidden()
+    #TODO(NumericA) delete_form
+    pictures_list = [int(x) for x in pictures_ids.split(',') if x]
+    pictures = [Picture.objects.get(pk=x) for x in pictures_list]
+    #TODO(NumericA) pagination
+    n, nRows = _paginator_query_string(request)
+    paginator = Paginator(pictures, nRows)
+    delete_page = paginator.page(n)
+    return render(request, 'media_widget/picture_delete.html', {
+        'delete_page': delete_page,
+        'n': n,
+        'nRows': nRows,
+    })
 
 
 ####################
 ##Embed Media Widget
 
-#GET /embed/new
+#GET /embed/new/picture
+@staff_required
 def embed_new(request, media_type):
-    if request.user.is_staff:
-        # file upload form
-        form = MediaEmbedForm()
-        # media selection list
-        media_list = _fetch_selection_from_library(media_type)
-        # pagination
-        n, nRows = _paginator_query_string(request)
-        paginator = Paginator(media_list, nRows)
-        pagina = paginator.page(n)
-        # render
-        return render(request, 'media_widget/media_widget.html', {
-            'form': form,
-            'pagina': pagina,
-            'n': n,
-            'nRows': nRows,
-            'media_type': media_type,
-            'param': media_type
-        })
-    else:
-        return HttpResponseForbidden()
+    # file upload form
+    form = MediaEmbedForm()
+    # media selection list
+    media_list = _fetch_selection_from_library(media_type)
+    # pagination
+    n, nRows = _paginator_query_string(request)
+    paginator = Paginator(media_list, nRows)
+    pagina = paginator.page(n)
+    # render
+    return render(request, 'media_widget/media_widget.html', {
+        'form': form,
+        'pagina': pagina,
+        'n': n,
+        'nRows': nRows,
+        'media_type': media_type,
+        'param': media_type
+    })
 
 #POST /embed/create
 @require_POST
@@ -347,29 +340,27 @@ def embed_create(request):
         return HttpResponseForbidden()
 
 # GET /library/media_type?n=1&nRows=5
+@staff_required
 def library_fetch(request, media_type):
     """
     Query Media objects list according to selected media content type.
     Return them as the HTML to render to refresh the area.
     This method could also search?
     """
-    if request.user.is_staff:
-        # media selection list
-        media_list = _fetch_selection_from_library(media_type)
-        # pagination
-        n, nRows = _paginator_query_string(request)
-        paginator = Paginator(media_list, nRows)
-        pagina = paginator.page(n)
-        # response
-        return render(request, 'media_widget/media_select.html', {
-            'pagina': pagina,
-            'n': n,
-            'nRows': nRows,
-            'param': media_type,
-            'media_type': media_type,
-        })
-    else:
-        return HttpResponseForbidden()
+    # media selection list
+    media_list = _fetch_selection_from_library(media_type)
+    # pagination
+    n, nRows = _paginator_query_string(request)
+    paginator = Paginator(media_list, nRows)
+    pagina = paginator.page(n)
+    # response
+    return render(request, 'media_widget/media_select.html', {
+        'pagina': pagina,
+        'n': n,
+        'nRows': nRows,
+        'param': media_type,
+        'media_type': media_type,
+    })
 
 ########
 #HELPERS
