@@ -44,12 +44,20 @@ class MediaWidgetTests(TestCase):
     def test_media_widget_is_reserved_to_staff(self):
         """This is how it is actually used today, however if we used group permissions instead this would have to be expanded."""
         # NOT LOGGED IN
-        # pictures-new
-        response = self.c.get(reverse('pictures-new'))
-        self.assertNotEqual(response.status_code, 200)
-        self.assertEqual(response.status_code, 302) # it redirects to admin
+        urls = ['pictures-new']
+        for url in urls:
+            self.assert_login_required(url)
         # LOGGED IN
         self.superuser_login()
+        for url in urls:
+            self.assert_response_success(url)
+    
+    def assert_response_success(self, url):
         response = self.c.get(reverse('pictures-new'))
         self.assertEqual(response.status_code, 200)
-        # TODO TEST ALL URLs
+
+    def assert_login_required(self, url):
+        response = self.c.get(reverse(url))
+        self.assertNotEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302) # it redirects to admin
+    
