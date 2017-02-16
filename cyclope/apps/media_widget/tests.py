@@ -4,9 +4,16 @@ jQuery Media Widget tests
 """
 
 from django.test import TestCase, Client
+
 import os
+
 from django.core.urlresolvers import reverse
+
 from django.contrib.auth.models import User
+
+from django.test import LiveServerTestCase
+from selenium.webdriver.firefox.webdriver import WebDriver
+from selenium import webdriver
 
 class MediaWidgetTests(TestCase):
 
@@ -31,4 +38,33 @@ class MediaWidgetTests(TestCase):
             #tf.close() x multiples post
             # "media_widget_markitup('/media/pictures/2017/02/nunoa-comun.jpg', 'picture', '');"
             self.assertRegexpMatches(response.content, "(media_widget_markitup).+(/media/pictures/).+(nunoa-comun.jpg)")
-            # TODO Selenium test JS media_widget_markitup method call
+            # TODO Selenium test JS media_widget_markitup method call, or test responses objects
+
+class MediaWidgetFuncionalTests(LiveServerTestCase):
+    """Media Widget functional integration tests suite.
+       https://docs.djangoproject.com/en/1.10/topics/testing/tools/#django.test.LiveServerTestCase
+       Download geckodriver from https://github.com/mozilla/geckodriver/releases
+       export PATH=$PATH:/home/numerica/CS/geckodriver 
+       Or set yout EXEC_PATH constant below
+       """
+
+    fixtures = ['simplest_site.json']       
+
+    EXEC_PATH = '/home/numerica/CS/geckodriver'
+    
+    @classmethod
+    def setUpClass(self):
+        super(MediaWidgetFuncionalTests, self).setUpClass()
+        self.selenium =  webdriver.Firefox(executable_path=self.EXEC_PATH)
+        self.selenium.implicitly_wait(10)
+
+    @classmethod
+    def tearDownClass(self):
+        super(MediaWidgetFuncionalTests, self).tearDownClass()
+        self.selenium.quit()
+
+    def test_post_upload_widget_state(self):
+        """widget should be refreshed after a succesful upload
+           it cannot stay with previously uploaded file state
+           mostly when an error was raised (500), it goes unsable."""
+        self.selenium.get('%s%s' % (self.live_server_url, reverse('embed-new', kwargs={'media_type': 'picture'})))
