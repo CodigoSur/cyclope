@@ -66,6 +66,7 @@ def pictures_new(request):
 
 # for existing Article
 # GET /pictures/new/article_id
+@staff_required
 def pictures_upload(request, article_id):
     """ Returns widget's inner HTML to be viewed through an iframe.
         This ensures bootstrap styles isolation."""

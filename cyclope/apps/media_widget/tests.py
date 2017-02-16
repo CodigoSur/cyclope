@@ -7,6 +7,7 @@ from django.test import TestCase, Client
 import os
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from cyclope.apps.articles.models import Article
 
 class MediaWidgetTests(TestCase):
 
@@ -43,21 +44,26 @@ class MediaWidgetTests(TestCase):
     
     def test_media_widget_is_reserved_to_staff(self):
         """This is how it is actually used today, however if we used group permissions instead this would have to be expanded."""
+        article = Article.objects.create(name='test', text='no,test!')
         # NOT LOGGED IN
-        urls = ['pictures-new']
-        for url in urls:
-            self.assert_login_required(url)
+        urls = [
+            ('pictures-new', None), 
+            ('pictures-upload', {'article_id': article.pk})
+        ]
+        for url, params in urls:
+            self.assert_login_required(url, params)
         # LOGGED IN
         self.superuser_login()
-        for url in urls:
-            self.assert_response_success(url)
+        for url, params in urls:
+            self.assert_response_success(url, params)
     
-    def assert_response_success(self, url):
-        response = self.c.get(reverse('pictures-new'))
+    def assert_response_success(self, url, params):
+        """params is a dict"""
+        response = self.c.get(reverse(url, kwargs=params))
         self.assertEqual(response.status_code, 200)
 
-    def assert_login_required(self, url):
-        response = self.c.get(reverse(url))
+    def assert_login_required(self, url, params):
+        response = self.c.get(reverse(url, kwargs=params))
         self.assertNotEqual(response.status_code, 200)
         self.assertEqual(response.status_code, 302) # it redirects to admin
     
