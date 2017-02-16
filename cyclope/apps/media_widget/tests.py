@@ -49,35 +49,43 @@ class MediaWidgetTests(TestCase):
         art_params = {'article_id': article.pk}
         pic = Picture.objects.create(name='test')
         pic_params = {'pictures_ids': '{},'.format(pic.pk)}
+        art_pic_params = art_params.copy()
         # NOT LOGGED IN
         urls = [
-            ('pictures-upload', art_params),
-            ('pictures-new', None), 
-#            ('pictures-create', art_params), TODO 405 POST required
-#             'pictures-update'
-#             'pictures-delete'
-            ('pictures-widget', art_params),
-            ('pictures-widget-new', pic_params),
-            ('pictures-list', pic_params),
-            ('pictures-widget-select', pic_params),
-            ('embed-new', {'media_type': 'picture'}),
-#           ('embed-creaste'),
-            ('library-fetch', {'media_type': 'picture'}),
+            ('pictures-upload', art_params, 'get', None),
+            ('pictures-new', None, 'get', None), 
+            ('pictures-create', art_params, 'post', None),
+            ('pictures-update', art_params, 'post', {'picture_id': pic.pk}),
+            ('pictures-delete', art_params, 'post', {'picture_id': pic.pk}),
+            ('pictures-widget', art_params, 'get', None),
+            ('pictures-widget-new', pic_params, 'get', None),
+            ('pictures-list', pic_params, 'get', None),
+            ('pictures-widget-select', pic_params, 'get', None),
+            ('embed-new', {'media_type': 'picture'}, 'get', None),
+            ('embed-create', None, 'post', None),
+            ('library-fetch', {'media_type': 'picture'}, 'get', None),
         ]
-        for url, params in urls:
-            self.assert_login_required(url, params)
+        for uri, url_params, method, request_params in urls:
+            self.assert_login_required(uri, url_params, method, request_params)
         # LOGGED IN
         self.superuser_login()
-        for url, params in urls:
-            self.assert_response_success(url, params)
+        for uri, url_params, method, request_params in urls:
+            if uri in ('pictures-update', 'pictures-delete'): continue
+            self.assert_response_success(uri, url_params, method, request_params)
     
-    def assert_response_success(self, url, params):
-        """params is a dict"""
-        response = self.c.get(reverse(url, kwargs=params))
-        self.assertEqual(response.status_code, 200)
-
-    def assert_login_required(self, url, params):
-        response = self.c.get(reverse(url, kwargs=params))
+    def assert_login_required(self, uri, url_params, method, request_params):
+        response = self.get_response(uri, url_params, method, request_params)
         self.assertNotEqual(response.status_code, 200)
         self.assertEqual(response.status_code, 302) # it redirects to admin
+
+    def assert_response_success(self, uri, url_params, method, request_params):
+        response = self.get_response(uri, url_params, method, request_params)
+        self.assertEqual(response.status_code, 200)
     
+    def get_response(self, uri, url_params, method, request_params):
+        url = reverse(uri, kwargs=url_params)
+        if request_params:
+            response = getattr(self.c, method)(url, request_params)
+        else:
+            response = getattr(self.c, method)(url)
+        return response
