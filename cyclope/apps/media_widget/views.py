@@ -297,14 +297,17 @@ def embed_create(request):
         if _validate_file_type(media_type, multimedia):
             klass = ContentType.objects.get(model=media_type).model_class()
             instance = klass() # generic instance of media model
-            
             #filesystem save 
             directory = instance.directory
-            abs_path = os.path.join(settings.MEDIA_ROOT, _get_todays_folder(directory))
+            multimedia_folder = _get_todays_folder(directory)
+            abs_path = os.path.join(settings.MEDIA_ROOT, multimedia_folder)
             #normalize file name
             multimedia.name = convert_filename(multimedia.name)
+            # uploaded path can be different from name ex. if path already exists
             uploaded_path = handle_file_upload(abs_path, multimedia)
-            image_url = "%s/%s" % (_get_todays_folder(directory), multimedia.name)
+            uploaded_path_name = uploaded_path.split(multimedia_folder)[1]
+            image_url = "%s/%s" % (multimedia_folder, uploaded_path_name)
+            image_url = image_url.replace('//','/')
             objeto = FileObject(image_url)
             # database save
             instance.name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else multimedia.name
