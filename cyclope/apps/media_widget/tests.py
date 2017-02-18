@@ -94,7 +94,8 @@ class MediaWidgetTests(TestCase):
         return response
         
     def test_upload_files_w_same_name(self):
-        """if two files with the same name are uploaded, it should be overwritten."""
+        """if two files with the same name are uploaded, it should be overwritten.
+           this is for URL /media_widget/embed/create"""
         
         self.superuser_login()
         
@@ -121,8 +122,40 @@ class MediaWidgetTests(TestCase):
         self.assertEqual(Picture.objects.count(), 2)
         pics = Picture.objects.all()
         self.assertNotEqual(pics[0].image.path, pics[1].image.path)
-#        /media/pictures/2017/02/pic.jpg
-#        /media/pictures/2017/02/pic_HwOzRDt.jpg.jpg
+        
+        # finally recover first file
+        shutil.move(placeholder_file, first_file)
+
+
+    def test_upload_pictures_w_same_name(self):
+        """same as above, but for /media_widget/pictures/create"""
+        first_file = "{}pic.jpg".format(self.FILES_PATH)
+        other_file = "{}otr.jpg".format(self.FILES_PATH)
+        placeholder_file = "{}p.jpg".format(self.FILES_PATH)
+        art = Article.objects.create(name='test', text='no,test!')
+
+        self.superuser_login()
+
+        # upload picture to article
+        with open(first_file, 'rb') as tf:
+            self.c.post(reverse('pictures-create', kwargs={'article_id': art.pk}), { 'image': tf})
+
+        self.assertEqual(Picture.objects.count(), 1)
+        
+        # backup file in system
+        shutil.copy(first_file, placeholder_file)
+        # overwrite first file with second
+        shutil.copyfile(other_file, first_file)
+
+        # upload other file with same name
+        with open(first_file, 'rb') as tf:
+            self.c.post(reverse('pictures-create', kwargs={'article_id': art.pk}), { 'image': tf})
+
+        self.assertEqual(Picture.objects.count(), 2)
+
+        # each upload creates an object with different paths
+        pics = Picture.objects.all()
+        self.assertNotEqual(pics[0].image.path, pics[1].image.path)
         
         # finally recover first file
         shutil.move(placeholder_file, first_file)
