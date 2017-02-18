@@ -20,12 +20,16 @@ from models import MediaWidget
 from django.utils.translation import ugettext_lazy as _
 from filebrowser.base import FileObject
 from datetime import datetime
+# an other good reason to merge media apps:
+from cyclope.apps.related_admin.views import staff_required
+
 
 ###########################
 ##Article's pictures widget
 
 # for new Article
 # GET /pictures/new
+@staff_required
 def pictures_new(request):
     #Model
     article = Article()
@@ -62,6 +66,7 @@ def pictures_new(request):
 
 # for existing Article
 # GET /pictures/new/article_id
+@staff_required
 def pictures_upload(request, article_id):
     """ Returns widget's inner HTML to be viewed through an iframe.
         This ensures bootstrap styles isolation."""
@@ -99,272 +104,254 @@ def pictures_upload(request, article_id):
 
 # POST /pictures/create/article_id
 @require_POST
+@staff_required
 def pictures_create(request, article_id):
-    if request.user.is_staff:
-        form = MediaWidgetForm(request.POST, request.FILES)
+    form = MediaWidgetForm(request.POST, request.FILES)
+    if article_id:
+        article = Article.objects.get(pk=article_id)
+    if form.is_valid():
+        image = form.cleaned_data['image']
+        #normalize file name
+        image.name = convert_filename(image.name)
+        #filesystem save
+        directory = "pictures"
+        abs_path = os.path.join(settings.MEDIA_ROOT, _get_todays_folder(directory))
+        uploaded_path = handle_file_upload(abs_path, image) # = abs_path + image.name
+        image_url = "%s/%s" % (_get_todays_folder(directory), image.name)
+        objeto = FileObject(image_url)
+        #database save
+        picture = Picture(
+            name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else image.name,
+            description = form.cleaned_data['description'],
+            image = objeto
+        )
         if article_id:
-            article = Article.objects.get(pk=article_id)
-        if form.is_valid():
-            image = form.cleaned_data['image']
-            #normalize file name
-            image.name = convert_filename(image.name)
-            #filesystem save
-            directory = "pictures"
-            abs_path = os.path.join(settings.MEDIA_ROOT, _get_todays_folder(directory))
-            uploaded_path = handle_file_upload(abs_path, image) # = abs_path + image.name
-            image_url = "%s/%s" % (_get_todays_folder(directory), image.name)
-            objeto = FileObject(image_url)
-            #database save
-            picture = Picture(
-                name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else image.name,
-                description = form.cleaned_data['description'],
-                image = objeto
-            )
-            if article_id:
-                picture.user = article.user
-                picture.author = article.author
-                picture.source = article.source
-            picture.save()
+            picture.user = article.user
+            picture.author = article.author
+            picture.source = article.source
+        picture.save()
 
-            messages.success(request, _('Loaded image : %s' % image.name))
-            request.session['refresh_widget'] = True
-
-            if article_id:
-                _associate_picture_to_article(article, picture)
-                return redirect('pictures-upload', article_id)
-            else:
-                request.session['new_picture'] = str(picture.id)
-                return redirect('pictures-new')
-        else:
-            # picture selection
-            pictures_list = Picture.objects.all().order_by('-creation_date')
-            # pagination
-            n, nRows = _paginator_query_string(request)
-            paginator = Paginator(pictures_list, nRows)
-            select_page = paginator.page(n)
-            if article_id:
-                article_pictures = article.pictures.all()
-            else:
-                article_pictures = []
-            #
-            return render(request, 'media_widget/pictures_widget.html', {
-                'form': form, 
-                'article_id': article_id,
-                'select_page': select_page,
-                'delete_page': article_pictures ,
-                'n': n,
-                'nRows': nRows,
-                'param': article_id,
-                'refresh_widget': True
-            })
-            
-    else:
-        return HttpResponseForbidden()
-        
-#POST /pictures/update/article_id
-# TODO(NumericA) update multiple pictures
-@require_POST
-def pictures_update(request, article_id):
-    if request.user.is_staff:
-        picture_id = int(request.POST.get('picture_id'))
-        picture = Picture.objects.get(pk=picture_id)
-        
-        messages.success(request, _('Selected image : %s' % picture.name))
+        messages.success(request, _('Loaded image : %s' % image.name))
         request.session['refresh_widget'] = True
-        
+
         if article_id:
-            article = Article.objects.get(pk=article_id)    
             _associate_picture_to_article(article, picture)
             return redirect('pictures-upload', article_id)
         else:
             request.session['new_picture'] = str(picture.id)
             return redirect('pictures-new')
     else:
-        return HttpResponseForbidden()
+        # picture selection
+        pictures_list = Picture.objects.all().order_by('-creation_date')
+        # pagination
+        n, nRows = _paginator_query_string(request)
+        paginator = Paginator(pictures_list, nRows)
+        select_page = paginator.page(n)
+        if article_id:
+            article_pictures = article.pictures.all()
+        else:
+            article_pictures = []
+        #
+        return render(request, 'media_widget/pictures_widget.html', {
+            'form': form, 
+            'article_id': article_id,
+            'select_page': select_page,
+            'delete_page': article_pictures ,
+            'n': n,
+            'nRows': nRows,
+            'param': article_id,
+            'refresh_widget': True
+        })
+        
+#POST /pictures/update/article_id
+# TODO(NumericA) update multiple pictures
+@require_POST
+@staff_required
+def pictures_update(request, article_id):
+    picture_id = int(request.POST.get('picture_id'))
+    picture = Picture.objects.get(pk=picture_id)
+    
+    messages.success(request, _('Selected image : %s' % picture.name))
+    request.session['refresh_widget'] = True
+    
+    if article_id:
+        article = Article.objects.get(pk=article_id)    
+        _associate_picture_to_article(article, picture)
+        return redirect('pictures-upload', article_id)
+    else:
+        request.session['new_picture'] = str(picture.id)
+        return redirect('pictures-new')
 
 #POST /pictures/delete/article_id
+@staff_required
 def pictures_delete(request, article_id):
-    if request.user.is_staff:    
-        picture_id = request.POST['picture_id']
-        picture = Picture.objects.get(pk=picture_id)
+    picture_id = request.POST['picture_id']
+    picture = Picture.objects.get(pk=picture_id)
 
-        messages.warning(request, _('Deleted image: %s' % picture.name))
-        request.session['refresh_widget'] = True
-        
-        if article_id:
-            article = Article.objects.get(pk=article_id)    
-            article.pictures.remove(picture_id)
-            return redirect('pictures-upload', article_id)
-        else:
-            request.session['remove_picture'] = str(picture.id)
-            return redirect('pictures-new')
+    messages.warning(request, _('Deleted image: %s' % picture.name))
+    request.session['refresh_widget'] = True
+    
+    if article_id:
+        article = Article.objects.get(pk=article_id)    
+        article.pictures.remove(picture_id)
+        return redirect('pictures-upload', article_id)
     else:
-        return HttpResponseForbidden()
+        request.session['remove_picture'] = str(picture.id)
+        return redirect('pictures-new')
 
 #GET /pictures/widget/article_id
+@staff_required
 def pictures_widget(request, article_id):
     """
     Ajax call to this method refreshes Article Admin's pictures widget thumbnails.
     """
-    if request.user.is_staff:
-        article = Article.objects.get(pk=article_id)
-        pictures_list = [picture.id for picture in article.pictures.all()]
-        html = MediaWidget().render("pictures", pictures_list)
-        return HttpResponse(html)        
-    else:
-        return HttpResponseForbidden()
+    article = Article.objects.get(pk=article_id)
+    pictures_list = [picture.id for picture in article.pictures.all()]
+    html = MediaWidget().render("pictures", pictures_list)
+    return HttpResponse(html)        
 
+#GET /pictures/widget/1,11,2, (comma separated pictures ids)
+@staff_required
 def pictures_widget_new(request, pictures_ids):
     """
     Same as above but receives comma separated pictures ids to let them as inputs for save.
     """
-    if request.user.is_staff:
-        pictures_list = [int(x) for x in pictures_ids.split(',') if x]
-        html = MediaWidget().render("pictures", pictures_list)
-        return HttpResponse(html)
-    else:
-        return HttpResponseForbidden()
+    pictures_list = [int(x) for x in pictures_ids.split(',') if x]
+    html = MediaWidget().render("pictures", pictures_list)
+    return HttpResponse(html)
 
+# GET /pictures/widget/3,2, (comma separated pictures ids)
+@staff_required
 def pictures_widget_select(request, pictures_ids):
     """
-    Opposite as above: returns all Pictures but those in the picture ids list.
+    Opposite as above: returns all Pictures except those in the picture ids list.
     """
-    if request.user.is_staff:
-        def no_nulo(x): return x!='' and x is not None
-        pictures_ids = filter(no_nulo, pictures_ids.split(','))
-        pictures = Picture.objects.exclude(pk__in=pictures_ids).order_by('-creation_date')
-        
-        # pagination
-        n, nRows = _paginator_query_string(request)
-        paginator = Paginator(pictures, nRows)
-        select_page = paginator.page(n)
-        
-        return render(request, 'media_widget/picture_select.html', {
-            'select_page': select_page,
-            'n': n,
-            'nRows': nRows,
-        })
-    else:
-        return HttpResponseForbidden()
+    def no_nulo(x): return x!='' and x is not None
+    pictures_ids = filter(no_nulo, pictures_ids.split(','))
+    pictures = Picture.objects.exclude(pk__in=pictures_ids).order_by('-creation_date')
+    
+    # pagination
+    n, nRows = _paginator_query_string(request)
+    paginator = Paginator(pictures, nRows)
+    select_page = paginator.page(n)
+    
+    return render(request, 'media_widget/picture_select.html', {
+        'select_page': select_page,
+        'n': n,
+        'nRows': nRows,
+    })
 
+# GET pictures/delete_list/7,5,3,1
+@staff_required
 def delete_pictures_list(request, pictures_ids):
     """
     For new articles:
     Render a delete form with specified picture ids
     """
-    if request.user.is_staff:
-        #TODO(NumericA) delete_form
-        pictures_list = [int(x) for x in pictures_ids.split(',') if x]
-        pictures = [Picture.objects.get(pk=x) for x in pictures_list]
-        #TODO(NumericA) pagination
-        n, nRows = _paginator_query_string(request)
-        paginator = Paginator(pictures, nRows)
-        delete_page = paginator.page(n)
-        return render(request, 'media_widget/picture_delete.html', {
-            'delete_page': delete_page,
-            'n': n,
-            'nRows': nRows,
-        })
-    else:
-        return HttpResponseForbidden()
+    #TODO(NumericA) delete_form
+    pictures_list = [int(x) for x in pictures_ids.split(',') if x]
+    pictures = [Picture.objects.get(pk=x) for x in pictures_list]
+    #TODO(NumericA) pagination
+    n, nRows = _paginator_query_string(request)
+    paginator = Paginator(pictures, nRows)
+    delete_page = paginator.page(n)
+    return render(request, 'media_widget/picture_delete.html', {
+        'delete_page': delete_page,
+        'n': n,
+        'nRows': nRows,
+    })
 
 
 ####################
 ##Embed Media Widget
 
-#GET /embed/new
+#GET /embed/new/picture
+@staff_required
 def embed_new(request, media_type):
-    if request.user.is_staff:
-        # file upload form
-        form = MediaEmbedForm()
-        # media selection list
-        media_list = _fetch_selection_from_library(media_type)
-        # pagination
-        n, nRows = _paginator_query_string(request)
-        paginator = Paginator(media_list, nRows)
-        pagina = paginator.page(n)
-        # render
-        return render(request, 'media_widget/media_widget.html', {
-            'form': form,
-            'pagina': pagina,
-            'n': n,
-            'nRows': nRows,
-            'media_type': media_type,
-            'param': media_type
-        })
-    else:
-        return HttpResponseForbidden()
+    # file upload form
+    form = MediaEmbedForm()
+    # media selection list
+    media_list = _fetch_selection_from_library(media_type)
+    # pagination
+    n, nRows = _paginator_query_string(request)
+    paginator = Paginator(media_list, nRows)
+    pagina = paginator.page(n)
+    # render
+    return render(request, 'media_widget/media_widget.html', {
+        'form': form,
+        'pagina': pagina,
+        'n': n,
+        'nRows': nRows,
+        'media_type': media_type,
+        'param': media_type
+    })
 
 #POST /embed/create
 @require_POST
+@staff_required
 def embed_create(request):
-    if request.user.is_staff:
-        form = MediaEmbedForm(request.POST, request.FILES)
-        if form.is_valid():
-            multimedia = form.cleaned_data['multimedia']
-            media_type = form.cleaned_data['media_type']
-            if _validate_file_type(media_type, multimedia):
-                klass = ContentType.objects.get(model=media_type).model_class()
-                instance = klass() # generic instance of media model
-                
-                #filesystem save 
-                directory = instance.directory
-                abs_path = os.path.join(settings.MEDIA_ROOT, _get_todays_folder(directory))
-                #normalize file name
-                multimedia.name = convert_filename(multimedia.name)
-                uploaded_path = handle_file_upload(abs_path, multimedia)
-                image_url = "%s/%s" % (_get_todays_folder(directory), multimedia.name)
-                objeto = FileObject(image_url)
-                # database save
-                instance.name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else multimedia.name
-                instance.description = form.cleaned_data['description']
-                instance.user = request.user
-                setattr(instance, klass.media_file_field, objeto)
-                instance.save()
-                #response
-                return render(request, 'media_widget/media_widget.html', {
-                    'form': form,
-                    'current_object': instance,
-                    'file_url': instance.media_file,
-                    'media_type': media_type,
-                })
-            else:
-                msg = _validation_error_message(multimedia, media_type)
-                messages.error(request, msg)
-                return render(request, 'media_widget/media_widget.html', {
-                    'form': form,
-                })
-        else:
+    form = MediaEmbedForm(request.POST, request.FILES)
+    if form.is_valid():
+        multimedia = form.cleaned_data['multimedia']
+        media_type = form.cleaned_data['media_type']
+        if _validate_file_type(media_type, multimedia):
+            klass = ContentType.objects.get(model=media_type).model_class()
+            instance = klass() # generic instance of media model
+            
+            #filesystem save 
+            directory = instance.directory
+            abs_path = os.path.join(settings.MEDIA_ROOT, _get_todays_folder(directory))
+            #normalize file name
+            multimedia.name = convert_filename(multimedia.name)
+            uploaded_path = handle_file_upload(abs_path, multimedia)
+            image_url = "%s/%s" % (_get_todays_folder(directory), multimedia.name)
+            objeto = FileObject(image_url)
+            # database save
+            instance.name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else multimedia.name
+            instance.description = form.cleaned_data['description']
+            instance.user = request.user
+            setattr(instance, klass.media_file_field, objeto)
+            instance.save()
+            #response
             return render(request, 'media_widget/media_widget.html', {
-                'form': form, 
+                'form': form,
+                'current_object': instance,
+                'file_url': instance.media_file,
+                'media_type': media_type,
+            })
+        else:
+            msg = _validation_error_message(multimedia, media_type)
+            messages.error(request, msg)
+            return render(request, 'media_widget/media_widget.html', {
+                'form': form,
             })
     else:
-        return HttpResponseForbidden()
+        return render(request, 'media_widget/media_widget.html', {
+            'form': form, 
+        })
 
 # GET /library/media_type?n=1&nRows=5
+@staff_required
 def library_fetch(request, media_type):
     """
     Query Media objects list according to selected media content type.
     Return them as the HTML to render to refresh the area.
     This method could also search?
     """
-    if request.user.is_staff:
-        # media selection list
-        media_list = _fetch_selection_from_library(media_type)
-        # pagination
-        n, nRows = _paginator_query_string(request)
-        paginator = Paginator(media_list, nRows)
-        pagina = paginator.page(n)
-        # response
-        return render(request, 'media_widget/media_select.html', {
-            'pagina': pagina,
-            'n': n,
-            'nRows': nRows,
-            'param': media_type,
-            'media_type': media_type,
-        })
-    else:
-        return HttpResponseForbidden()
+    # media selection list
+    media_list = _fetch_selection_from_library(media_type)
+    # pagination
+    n, nRows = _paginator_query_string(request)
+    paginator = Paginator(media_list, nRows)
+    pagina = paginator.page(n)
+    # response
+    return render(request, 'media_widget/media_select.html', {
+        'pagina': pagina,
+        'n': n,
+        'nRows': nRows,
+        'param': media_type,
+        'media_type': media_type,
+    })
 
 ########
 #HELPERS
