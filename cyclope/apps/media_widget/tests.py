@@ -20,17 +20,22 @@ from selenium import webdriver
 class MediaWidgetMixin(object):
 
     def superuser_create(self): # this could also be a fixture
-        self.user = User.objects.create_superuser('john', 'lennon@thebeatles.com', 'johnpassword')
+        if not hasattr(self, 'user'):
+            self.user = User.objects.create_superuser('john', 'lennon@thebeatles.com', 'johnpassword')
 
     def superuser_login(self):
-        if not hasattr(self, 'user'):
-            self.superuser_create()
+        self.superuser_create()
         self.c.login(username='john', password='johnpassword')
     
-    def set_auth_cookie_to_browser(self):
-        cookie = self.c.cookies['sessionid']
-        self.browser.add_cookie({'name': 'sessionid', 'value': cookie.value, 'secure': False, 'path': '/'})
-        self.browser.refresh()
+    def superuser_login_browser(self):
+        self.superuser_create()
+        self.browser.get('%s%s' % (self.live_server_url, '/accounts/login')) # TODO reverse
+        username = self.browser.find_elements_by_id('id_username')[0]
+        username.send_keys('john')
+        password = self.browser.find_elements_by_id('id_password')[0]
+        password.send_keys('johnpassword')
+        form = self.browser.find_elements_by_css_selector('form')[0]
+        form.submit()
 
 class MediaWidgetTests(TestCase, MediaWidgetMixin):
 
@@ -131,8 +136,5 @@ class MediaWidgetFuncionalTests(LiveServerTestCase, MediaWidgetMixin):
         """widget should be refreshed after a succesful upload
            it cannot stay with previously uploaded file state
            mostly when an error was raised (500), it goes unsable."""
-        self.superuser_create()
-        self.superuser_login()
-        self.set_auth_cookie_to_browser()
+        self.superuser_login_browser()
         self.browser.get('%s%s' % (self.live_server_url, reverse('embed-new', kwargs={'media_type': 'picture'})))
-
