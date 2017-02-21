@@ -16,6 +16,7 @@ from cyclope.apps.medialibrary.models import Picture
 from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium import webdriver
+import time
 
 class MediaWidgetMixin(object):
 
@@ -59,7 +60,7 @@ class MediaWidgetTests(TestCase, MediaWidgetMixin):
             #tf.close() x multiples post
             #                                          "media_widget_markitup('/media/pictures/2017/02/nunoa-comun.jpg', 'picture', '');"
             self.assertRegexpMatches(response.content, "(media_widget_markitup).+(/media/pictures/).+(nunoa-comun.jpg)")
-            # TODO Selenium test JS media_widget_markitup method call, or test responses objects
+            # TODO test responses context
     
     def test_media_widget_is_reserved_to_staff(self):
         """This is how it is actually used today, however if we used group permissions instead this would have to be expanded."""
@@ -109,7 +110,7 @@ class MediaWidgetTests(TestCase, MediaWidgetMixin):
             response = getattr(self.c, method)(url)
         return response
 
-class MediaWidgetFuncionalTests(LiveServerTestCase, MediaWidgetMixin):
+class MediaWidgetFunctionalTests(LiveServerTestCase, MediaWidgetMixin):
     """Media Widget functional integration tests suite.
        https://docs.djangoproject.com/en/1.10/topics/testing/tools/#django.test.LiveServerTestCase
        Download geckodriver from https://github.com/mozilla/geckodriver/releases
@@ -122,19 +123,41 @@ class MediaWidgetFuncionalTests(LiveServerTestCase, MediaWidgetMixin):
     
     @classmethod
     def setUpClass(self):
-        super(MediaWidgetFuncionalTests, self).setUpClass()
+        super(MediaWidgetFunctionalTests, self).setUpClass()
         self.browser =  webdriver.Firefox(executable_path=self.EXEC_PATH)
         self.browser.implicitly_wait(10)
         self.c = Client()
+        self.PATH =  os.path.dirname(__file__)
+        self.FILES_PATH = self.PATH+'/fixtures/files/'
         
     @classmethod
     def tearDownClass(self):
-        super(MediaWidgetFuncionalTests, self).tearDownClass()
+        super(MediaWidgetFunctionalTests, self).tearDownClass()
         self.browser.quit()
 
     def test_post_upload_widget_state(self):
         """widget should be refreshed after a succesful upload
            it cannot stay with previously uploaded file state
-           mostly when an error was raised (500), it goes unsable."""
+           mostly when an error was raised (500), it goes unusable."""
         self.superuser_login_browser()
-        self.browser.get('%s%s' % (self.live_server_url, reverse('embed-new', kwargs={'media_type': 'picture'})))
+        time.sleep(1) # wait a sec
+        article = Article.objects.create(name='test', text='no,test!')
+        self.browser.get('%s/admin/articles/article/%s' % (self.live_server_url, article.pk))
+        # poner el puntero en el texto
+        textarea = self.browser.find_elements_by_id('id_text')[0]
+        textarea.click()
+        # levantar el media widget
+        widget_button = self.browser.find_elements_by_css_selector('.field-text .markItUpButton20 a')[0]
+        widget_button.click()
+        # cambiarse al iframe
+        frame = self.browser.find_elements_by_css_selector('#media_iframe iframe')[0]
+        self.browser.switch_to_frame(1) # self.browser.switch_to(frame) #  
+        multimedia_field = self.browser.find_elements_by_id('id_multimedia')[0]
+        multimedia_field.send_keys(self.FILES_PATH+'pic.jpg')
+        form = self.browser.find_elements_by_css_selector('form')[0]
+        form.submit()
+        time.sleep(3) # ajax call not waited
+        self.browser.switch_to_default_content()
+        self.assertEqual(Picture.objects.count(), 1)
+        updated_text = textarea.get_attribute('value') # textarea.text is not updated
+        self.assertRegexpMatches(updated_text, "(/media/pictures/).+(pic.jpg)")
