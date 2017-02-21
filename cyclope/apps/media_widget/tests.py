@@ -12,6 +12,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from cyclope.apps.articles.models import Article
 from cyclope.apps.medialibrary.models import Picture
+import shutil
 
 from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
@@ -59,7 +60,7 @@ class MediaWidgetTests(TestCase, MediaWidgetMixin):
             self.assertEqual(response.status_code, 200)                                    
             #tf.close() x multiples post
             #                                          "media_widget_markitup('/media/pictures/2017/02/nunoa-comun.jpg', 'picture', '');"
-            self.assertRegexpMatches(response.content, "(media_widget_markitup).+(/media/pictures/).+(nunoa-comun.jpg)")
+            self.assertRegexpMatches(response.content, "(media_widget_markitup).+(/media/pictures/).+(nunoa-comun).+(.jpg)")
             # TODO test responses context
     
     def test_media_widget_is_reserved_to_staff(self):
@@ -93,6 +94,8 @@ class MediaWidgetTests(TestCase, MediaWidgetMixin):
             if uri in ('pictures-update', 'pictures-delete'): continue
             self.assert_response_success(uri, url_params, method, request_params)
     
+    # helpers
+    
     def assert_login_required(self, uri, url_params, method, request_params):
         response = self.get_response(uri, url_params, method, request_params)
         self.assertNotEqual(response.status_code, 200)
@@ -109,6 +112,71 @@ class MediaWidgetTests(TestCase, MediaWidgetMixin):
         else:
             response = getattr(self.c, method)(url)
         return response
+        
+    def test_upload_files_w_same_name(self):
+        """if two files with the same name are uploaded, it should be overwritten.
+           this is for URL /media_widget/embed/create"""
+        self.superuser_login()
+        
+        first_file = "{}pic.jpg".format(self.FILES_PATH)
+        other_file = "{}otr.jpg".format(self.FILES_PATH)
+        placeholder_file = "{}p.jpg".format(self.FILES_PATH)
+        
+        # upload first file
+        with open(first_file, 'rb') as tf:
+            self.c.post(reverse('embed-create'), { 'multimedia': tf, 'media_type': 'picture' })
+        
+        self.assertEqual(Picture.objects.count(), 1)
+        
+        # backup file in system
+        shutil.copy(first_file, placeholder_file)
+        # overwrite first file with second
+        shutil.copyfile(other_file, first_file)
+               
+        # upload other file with same name
+        with open(first_file, 'rb') as tf:
+            self.c.post(reverse('embed-create'), { 'multimedia': tf, 'media_type': 'picture' })
+
+        # each upload creates an object with different paths
+        self.assertEqual(Picture.objects.count(), 2)
+        pics = Picture.objects.all()
+        self.assertNotEqual(pics[0].image.path, pics[1].image.path)
+        
+        # finally recover first file
+        shutil.move(placeholder_file, first_file)
+
+    def test_upload_pictures_w_same_name(self):
+        """same as above, but for /media_widget/pictures/create"""
+        first_file = "{}pic.jpg".format(self.FILES_PATH)
+        other_file = "{}otr.jpg".format(self.FILES_PATH)
+        placeholder_file = "{}p.jpg".format(self.FILES_PATH)
+        art = Article.objects.create(name='test', text='no,test!')
+
+        self.superuser_login()
+
+        # upload picture to article
+        with open(first_file, 'rb') as tf:
+            self.c.post(reverse('pictures-create', kwargs={'article_id': art.pk}), { 'image': tf})
+
+        self.assertEqual(Picture.objects.count(), 1)
+        
+        # backup file in system
+        shutil.copy(first_file, placeholder_file)
+        # overwrite first file with second
+        shutil.copyfile(other_file, first_file)
+
+        # upload other file with same name
+        with open(first_file, 'rb') as tf:
+            self.c.post(reverse('pictures-create', kwargs={'article_id': art.pk}), { 'image': tf})
+
+        self.assertEqual(Picture.objects.count(), 2)
+
+        # each upload creates an object with different paths
+        pics = Picture.objects.all()
+        self.assertNotEqual(pics[0].image.path, pics[1].image.path)
+        
+        # finally recover first file
+        shutil.move(placeholder_file, first_file)
 
 class MediaWidgetFunctionalTests(LiveServerTestCase, MediaWidgetMixin):
     """Media Widget functional integration tests suite.
@@ -160,4 +228,4 @@ class MediaWidgetFunctionalTests(LiveServerTestCase, MediaWidgetMixin):
         self.browser.switch_to_default_content()
         self.assertEqual(Picture.objects.count(), 1)
         updated_text = textarea.get_attribute('value') # textarea.text is not updated
-        self.assertRegexpMatches(updated_text, "(/media/pictures/).+(pic.jpg)")
+        self.assertRegexpMatches(updated_text, "(/media/pictures/).+(pic).+(.jpg)")
