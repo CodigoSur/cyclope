@@ -224,8 +224,14 @@ class MediaWidgetFunctionalTests(LiveServerTestCase, MediaWidgetMixin):
         multimedia_field.send_keys(self.FILES_PATH+'pic.jpg')
         form = self.browser.find_elements_by_css_selector('form')[0]
         form.submit()
-        time.sleep(3) # ajax call not waited
+        time.sleep(1) # ajax call not waited
         self.browser.switch_to_default_content()
         self.assertEqual(Picture.objects.count(), 1)
         updated_text = textarea.get_attribute('value') # textarea.text is not updated
         self.assertRegexpMatches(updated_text, "(/media/pictures/).+(pic).+(.jpg)")
+        # vuelvo a levantar el media widget
+        widget_button = self.browser.find_elements_by_css_selector('.field-text .markItUpButton20 a')[0]
+        widget_button.click()
+        self.browser.switch_to_frame(1)
+        # [] porque no esta activo, si el widget refrezca tiene un nuevo input
+        self.assertEqual(len(self.browser.find_elements_by_id("fileName")), 1)

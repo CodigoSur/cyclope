@@ -1,23 +1,38 @@
 /**
+    build MediaWidget HTML IFrame
 *** Insert the iframe from this script instead of including it as a template
 **  allows us to display it only in forms using rich text fields, as markitup
 *   is the default widget.
 */
-function insert_media_iframe(){
+
+function generate_widget() {
     media_iframe = $('<iframe></iframe>');
     media_iframe.attr('src',"/media_widget/embed/new/picture"); //TODO(NumericA) {% url ... %}
     media_iframe.attr('width',"100%"); 
     media_iframe.attr('height',"100%");
     media_iframe.attr('frameborder',"0");
     media_iframe.css("min-height", "480px");
-    //TODO(NumericA) AJAX media_iframe.html
     div_iframe = $('<div id="media_iframe"></div>');
     div_iframe.html(media_iframe);
-    $('body').append(div_iframe);
+    return div_iframe;
 }
+
+function insert_media_iframe(){
+    widget = generate_widget();
+    $('body').append(widget);
+}
+
+// on first load insert media-widget.html
 $(function(){
     insert_media_iframe();
 });
+
+// on close re-load media-widget.html
+function refresh_widget(){
+    media_iframe = $("#media_iframe iframe");
+    src = media_iframe.attr('src');
+    media_iframe.attr('src', src); // reload iframe
+}
 
 /**
 *** jQuery-UI Widgets declaration
@@ -62,10 +77,14 @@ $.widget("cyclope.mediaWidget", $.ui.dialog, {
     position: function(objt){
         this.options.position = {my: "left top", at: "right bottom", of: objt, collision: "fit"}
     },
-    fb_helper: false
+    fb_helper: false,
 });
 //bindings
 $(function(){
-    $('#media_iframe').mediaWidget();
+    $('#media_iframe').mediaWidget({
+        // bind dialog close callback to widget's iframe refresh
+        close: function( event, ui ) { return refresh_widget(); },
+    });
 });
 // trigger is fired by markitup
+
