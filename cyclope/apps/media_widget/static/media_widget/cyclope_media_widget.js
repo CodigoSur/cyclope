@@ -1,6 +1,6 @@
 /**
     build MediaWidget HTML IFrame
-*** Insert the iframe from this script instead of including it as a template
+*** Inserting the iframe from this script instead of including it as a template
 **  allows us to display it only in forms using rich text fields, as markitup
 *   is the default widget.
 */
@@ -27,9 +27,10 @@ $(function(){
     insert_media_iframe();
 });
 
-// on close re-load media-widget.html
-function refresh_widget(){
-    media_iframe = $("#media_iframe iframe");
+// on close re-load widget
+function refresh_widget(selector){
+    selector += " iframe";
+    media_iframe = $(selector);
     src = media_iframe.attr('src');
     media_iframe.attr('src', src); // reload iframe
 }
@@ -57,7 +58,9 @@ var pictures_widget;
 //bindings
 $(function(){
     //form becomes widget
-    $('#pictures_iframe').picturesWidget();
+    $('#pictures_iframe').picturesWidget({
+        close: function(event, ui){ return refresh_widget('#pictures_iframe'); },
+    });
     // picture button triggers widget
     $("#media_widget").on('click', "#media_widget_button", function(){
         pictures_widget = $("#pictures_iframe").picturesWidget("position", this).picturesWidget("open");
@@ -81,9 +84,9 @@ $.widget("cyclope.mediaWidget", $.ui.dialog, {
 });
 //bindings
 $(function(){
-    $('#media_iframe').mediaWidget({
+    $("#media_iframe").mediaWidget({
         // bind dialog close callback to widget's iframe refresh
-        close: function( event, ui ) { return refresh_widget(); },
+        close: function( event, ui ) { return refresh_widget("#media_iframe"); },
     });
 });
 // trigger is fired by markitup

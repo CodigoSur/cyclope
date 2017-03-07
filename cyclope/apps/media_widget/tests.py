@@ -17,7 +17,11 @@ import shutil
 from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium import webdriver
+# waits
 import time
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class MediaWidgetMixin(object):
 
@@ -219,7 +223,7 @@ class MediaWidgetFunctionalTests(LiveServerTestCase, MediaWidgetMixin):
         widget_button.click()
         # cambiarse al iframe
         frame = self.browser.find_elements_by_css_selector('#media_iframe iframe')[0]
-        self.browser.switch_to_frame(1) # self.browser.switch_to(frame) #  
+        self.browser.switch_to_frame(1) # self.browser.switch_to(frame)
         multimedia_field = self.browser.find_elements_by_id('id_multimedia')[0]
         multimedia_field.send_keys(self.FILES_PATH+'pic.jpg')
         form = self.browser.find_elements_by_css_selector('form')[0]
@@ -235,3 +239,34 @@ class MediaWidgetFunctionalTests(LiveServerTestCase, MediaWidgetMixin):
         self.browser.switch_to_frame(1)
         # [] porque no esta activo, si el widget refrezca tiene un nuevo input
         self.assertEqual(len(self.browser.find_elements_by_id("fileName")), 1)
+
+    def test_post_upload_picture_states(self):
+        """same as above for pictures widget."""
+        article = Article.objects.create(name='test', text='no,test!')
+        self.superuser_login_browser()
+        time.sleep(3) # wait a sec
+        self.browser.get('%s/admin/articles/article/%s' % (self.live_server_url, article.pk))
+        # pictures button
+        pictures_button = self.browser.find_element_by_id('media_widget_button')
+        pictures_button.click()
+        # cambiarse al iframe
+        frame =  self.browser.find_elements_by_css_selector('#pictures_iframe iframe')[0]
+        self.browser.switch_to_frame(frame)
+        # submit form
+        form = self.browser.find_elements_by_css_selector('form')[0]
+        form.submit()
+        WebDriverWait(self.browser, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, '.has-error.bg-danger')))
+        # resonse 200 empty fielf validation
+        self.assertRegexpMatches(self.browser.page_source, 'has-error bg-danger')
+        # close button
+        self.browser.switch_to_default_content() # close is outside iframe
+        close_button = self.browser.find_elements_by_css_selector('.ui-dialog-titlebar-close')[0]
+        close_button.click()
+        # volver
+        pictures_button = self.browser.find_element_by_id('media_widget_button')
+        pictures_button.click()
+        self.browser.switch_to_frame(frame)
+        self.assertNotRegexpMatches(self.browser.page_source, 'has-error bg-danger')
+
+    # TODO
+    # def test_post_upload_error_200_state
