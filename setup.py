@@ -87,6 +87,7 @@ setup(
         'django-generic-ratings>=0.6,<0.7',
         'django-activity-stream==0.4.4',
         'python-memcached',
+        'selenium'
     ],
 
     scripts=['cyclope/bin/cyclopeproject'],
