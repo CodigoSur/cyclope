@@ -1,8 +1,7 @@
 CyclopeCMS
 ========
 
-:synopsys:
-CyclopeCMS is a Content Management System or Content Management System developed by CódigoSur with organizations and social movements in Latin America since 2002.
+:synopsys: CyclopeCMS is a Content Management System or Content Management System developed by CódigoSur with organizations and social movements in Latin America since 2002.
 
 CyclopeCMS is a django based CMS for pythonistas who don't mind coding a bit and dislike overly-complex user interfaces. It is based on the concept of categorized collections of heterogeneous content types with associated front-end views that can be laid out in the website's page regions. The goal of this project is to create a CMS that is friendly to the end user and versatile for the developer. It won't solve every complex problem at UI level but will let you "expose" the solution.
 
