@@ -8,7 +8,7 @@ It is based on the concept of categorized collections of heterogeneous content t
 CyclopeCMS collaborates with the empowerment of organizations and social movements in building knowledge and own free technology while promoting freedom of expression. CyclopeCMS not pursue commercial purposes, so the software besides being free, is free. Being free software, economic CyclopeCMS development model is based on solidarity between the different organizations involved in the project and those new ones that want to join. CyclopeCMS is developed based on the support and participation of social organizations and movements in the project. Consider making a donation to the project or hire a service CódigoSur.
 
 :copyright: 2010-2017 by `Código Sur Sociedad Civil <http://www.codigosur.org>`_
-:url: https://codigosur.org
+:url: https://cyclope.codigosur.org
 :licence: GPL v3
 
 Target audience
