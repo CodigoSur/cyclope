@@ -238,12 +238,6 @@ ADMIN_TOOLS_THEMING_CSS = 'cyclope/css/admin_tools_theming.css'
 
 LOCALE_PATHS = (os.path.join(os.path.dirname(__file__), "locale_external"), )
 
-# django-haystack settings
-HAYSTACK_CONNECTIONS = {
-      'default': { 'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',}
-}
-#HAYSTACK_SEARCH_ENGINE = 'whoosh'
-
 # dbgettext options
 #DBGETTEXT_PROJECT_OPTIONS = 'cyclope.dbgettext_options'
 DBGETTEXT_SPLIT_SENTENCES = False
