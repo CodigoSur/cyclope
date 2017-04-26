@@ -21,12 +21,12 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
-from profiles.utils import get_profile_model
+# from profiles.utils import get_profile_model TODO issue 141
 
 from cyclope.core import frontend
 from cyclope.frontend_views import AuthoredMixin
 
-
+from cyclope.core.user_profiles.models import UserProfile
 
 class UserDetail(AuthoredMixin, frontend.FrontendView):
     """Display a user detail
@@ -66,4 +66,4 @@ class UserDetail(AuthoredMixin, frontend.FrontendView):
             'page': authored_contents_page
         }, req_context)
 
-frontend.site.register_view(get_profile_model(), UserDetail)
+frontend.site.register_view(UserProfile, UserDetail)
