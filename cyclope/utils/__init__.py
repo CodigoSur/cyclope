@@ -102,7 +102,7 @@ def template_for_request(request):
 
 from django.utils.functional import Promise
 from django.utils.encoding import force_unicode
-from simplejson import JSONEncoder
+from json import JSONEncoder
 
 # snippet from http://code.djangoproject.com/ticket/5868
 # to fix json encoding of lazy translated strings

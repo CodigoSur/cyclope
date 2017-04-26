@@ -30,7 +30,7 @@ from django.template import RequestContext, loader
 from django.conf.urls import patterns, url
 from django.utils.translation import ugettext_lazy as _, ugettext
 from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
-import simplejson
+import json
 from haystack.utils.app_loading import haystack_get_model as get_model
 from django.contrib.admin.views.decorators import staff_member_required
 
@@ -278,7 +278,7 @@ class CyclopeSite(object):
                     for category in allowed_categories])
         except ValueError:
             categories = []
-        json_data = simplejson.dumps(categories)
+        json_data = json.dumps(categories)
         return HttpResponse(json_data, mimetype='application/json')
 
 
@@ -298,7 +298,7 @@ class CyclopeSite(object):
                             for region_name, verbose_name
                             in sorted(regions.items(), key=lambda r: r[1])
                             if region_name != 'content' ])
-        json_data = simplejson.dumps(regions_data, cls=LazyJSONEncoder)
+        json_data = json.dumps(regions_data, cls=LazyJSONEncoder)
         return HttpResponse(json_data, mimetype='application/json')
 
     def _registered_views(self, request, region_views=False):
@@ -318,7 +318,7 @@ class CyclopeSite(object):
                             'verbose_name': view.verbose_name}
                            for view in self._registry[model]
                            if view.is_content_view])
-        json_data = simplejson.dumps(views, cls=LazyJSONEncoder)
+        json_data = json.dumps(views, cls=LazyJSONEncoder)
 
         return json_data
 
@@ -354,7 +354,7 @@ class CyclopeSite(object):
                             'verbose_name': u'%s %s' % ('---' * item.level, item.name)}
                            for item in menu_items if item.id != id_menu_item and
                                                      item not in descendants])
-        json_data = simplejson.dumps(choices)
+        json_data = json.dumps(choices)
         return HttpResponse(json_data, mimetype='application/json')
 
     def objects_for_ctype_json(self, request):
@@ -373,7 +373,7 @@ class CyclopeSite(object):
             objs = model.objects.all()
             objects.extend([ {'object_id': obj.id,
                             'verbose_name': obj.name} for obj in objs ])
-        json_data = simplejson.dumps(objects)
+        json_data = json.dumps(objects)
         return HttpResponse(json_data, mimetype='application/json')
 
     def options_view_widget_html(self, request):
@@ -416,7 +416,7 @@ class CyclopeSite(object):
                 if form.is_valid():
                     obj = form.save()
                     ct_id = form.cleaned_data["ct_id"]
-                    json_data = simplejson.dumps({"ct_id": ct_id, "obj_id": obj.pk})
+                    json_data = json.dumps({"ct_id": ct_id, "obj_id": obj.pk})
                     return HttpResponse(json_data, mimetype='application/json')
 
             elif request.method == "GET" and request.GET.get('ct_id', False):
