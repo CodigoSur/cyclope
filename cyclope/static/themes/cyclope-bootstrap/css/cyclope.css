@@ -436,13 +436,15 @@ body.one_column .teaser.article-teaser > .teaser_icon_container {
 
 /*### detailed of the select Article ###*/
 .text img {max-width:75%; margin:20px auto; display:block;}
+.text img.left {float:left;}
+.text img.right {float:right;}
 .vote-like{display:inline}
 .vote-results-pos{display:inline-block}
 .vote-dislike{display:inline-block; margin-left:5px;}
 .vote-results-neg{display:inline-block}
 .article > .title {margin-top:0;}
 .article > .pretitle {margin-bottom:0;}
-.text p {margin:5px 0 10px;}
+.text p {margin:5px 0 10px; clear:both;}
 .detail .carousel-caption{position:relative; left:0; right:0;}
 
 /*Contact*/
