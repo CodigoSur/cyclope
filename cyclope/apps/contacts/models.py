@@ -37,6 +37,8 @@ from cyclope.apps.locations.models import Location
 from autoslug.fields import AutoSlugField
 from filebrowser.fields import FileBrowseField
 
+from django.apps import apps
+
 ADDRESS_TYPE_CHOICES = (
     ('WORK', _('work')),
     ('HOME', _('home')),
@@ -100,7 +102,7 @@ class Contact(BaseContent, Collectible):
                         '_MODULE setting')
 
             try:
-                model = models.get_model(app_label, model_name)
+                model = apps.get_model(app_label, model_name)
                 if model is None:
                     raise SiteProfileNotAvailable('Unable to load the profile '
                         'model, check CYCLOPE_CONTACTS_PROFILE_MODULE in your '

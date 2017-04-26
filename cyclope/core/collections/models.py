@@ -77,9 +77,7 @@ def changed_ctypes(sender, instance, action, reverse, model, pk_set, **kwargs):
     ## we remove previous categorizations that were set for content types
     ## that are no longer accepted by the collection
     if action == 'post_add' and pk_set:
-#        Categorization = models.get_model('collections', 'categorization')
-        cats = Categorization.objects.filter(
-            category__collection=instance).exclude(content_type__pk__in=pk_set).delete()
+        cats = Categorization.objects.filter(category__collection=instance).exclude(content_type__pk__in=pk_set).delete()
 
 m2m_changed.connect(changed_ctypes, sender=Collection.content_types.through)
 

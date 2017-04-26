@@ -27,6 +27,7 @@ from django.utils import timezone
 import os
 
 from django.db import models
+from django.apps import apps
 from haystack.utils.app_loading import haystack_get_model as get_model
 from django.utils.translation import ugettext_lazy as _
 #from django_comments.models import Comment / los comentarios están deshabilitados
@@ -455,7 +456,7 @@ class BaseContent(models.Model):
             return self._pictures
         self._pictures = None
         if self.related_contents:
-            pic_model = models.get_model('medialibrary', 'picture')
+            pic_model = apps.get_model('medialibrary', 'picture')
             ctype = ContentType.objects.get_for_model(pic_model)
             rel_contents = self.related_contents.filter(other_type__pk=ctype.pk)
             self._pictures = [ r.other_object for r in rel_contents ]
