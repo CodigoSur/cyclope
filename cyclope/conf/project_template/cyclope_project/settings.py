@@ -7,7 +7,7 @@ import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-CYCLOPE_PROJECT_PATH = os.path.dirname(__file__)
+CYCLOPE_PROJECT_PATH = os.path.join(os.path.dirname(__file__), '..')
 
 INTERNAL_IPS = ('127.0.0.1',)
 
