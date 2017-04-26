@@ -134,7 +134,7 @@ INSTALLED_APPS = [
     'forms_builder.forms',
     'crispy_forms',
     'compressor',
-    'ratings',
+#    'ratings', 
     'actstream',
 
 #   'cyclope.apps.post_init',

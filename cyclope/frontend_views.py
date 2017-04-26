@@ -29,7 +29,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.template import Template, Context
 from django.contrib.sites.models import Site
-from django_comments.models import Comment
+#from django_comments.models import Comment / los comentarios están deshabilitados
 from django.template.loader import render_to_string
 
 import cyclope.utils

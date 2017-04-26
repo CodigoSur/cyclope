@@ -24,7 +24,7 @@
 from django import forms
 from django.template import loader
 from django.core.urlresolvers import reverse
-from django_comments.models import Comment
+# from django_comments.models import Comment / los comentarios están deshabilitados
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator

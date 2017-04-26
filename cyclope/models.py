@@ -29,7 +29,7 @@ import os
 from django.db import models
 from haystack.utils.app_loading import haystack_get_model as get_model
 from django.utils.translation import ugettext_lazy as _
-from django_comments.models import Comment
+#from django_comments.models import Comment / los comentarios están deshabilitados
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
@@ -399,7 +399,7 @@ class BaseContent(models.Model):
                                     ('YES',_('enabled')),
                                     ('NO',_('disabled'))
                                 ), default='SITE')
-    comments = GenericRelation(Comment, object_id_field="object_pk")
+    #comments = GenericRelation(Comment, object_id_field="object_pk")
     show_author = models.CharField(_('show author'), max_length=6, default='SITE',
                                    choices = (
                                         ('AUTHOR', _('author')),
