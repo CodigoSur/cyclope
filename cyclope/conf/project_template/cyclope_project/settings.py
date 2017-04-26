@@ -139,8 +139,13 @@ CYCLOPE_TEXT_STYLE = 'textile'
 #CYCLOPE_PAGINATION = {'TEASER' : 3, 'LABELED_ICON' : 5,
 #                      'FORUM' : 2, 'DETAIL': 5}
 
-#HAYSTACK_SITECONF = '{{ project_name }}.search_sites' The HAYSTACK_SITECONF setting is no longer used & can be removed.
-HAYSTACK_WHOOSH_PATH = os.path.join(CYCLOPE_PROJECT_PATH, 'cyclope_project_index')
+# django-haystack v.2 settings
+HAYSTACK_CONNECTIONS = {
+    'default': { 
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(CYCLOPE_PROJECT_PATH, 'cyclope_project_index'),
+    }
+}
 
 #FILEBROWSER_MAX_UPLOAD_SIZE = 1024*1024*20 # 20MB
 
