@@ -128,7 +128,7 @@ INSTALLED_APPS = [
     'captcha',
     'filebrowser',
     'registration',
-    'profiles',
+#    'profiles', / deshabiltado ver issue 141
     'contact_form',
     'markitup',
     'forms_builder.forms',
