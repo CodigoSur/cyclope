@@ -71,7 +71,7 @@ setup(
         'django-filebrowser-nograpup',
 #        'South',
         'django-registration',
-        'django-profiles',
+#        'django-profiles', / deshabiltado ver issue 141
         'django-admin-tools',
         'Whoosh',
         'django-haystack',
