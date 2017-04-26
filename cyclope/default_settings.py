@@ -87,7 +87,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.admin',
-    'django_comments',
+#    'django_comments', deprecado en 1.9 ver issue 138
     'django_markwhat',
     'django.contrib.messages',
     'django.contrib.sitemaps',
@@ -111,7 +111,7 @@ INSTALLED_APPS = [
     'cyclope.apps.dynamicforms',
     'cyclope.apps.abuse',
     'cyclope.apps.related_admin',
-    'cyclope.apps.custom_comments',
+#    'cyclope.apps.custom_comments', deprecado en 1.9 ver issue 138
     'cyclope.apps.social',
     'cyclope.apps.media_widget',
 
@@ -120,7 +120,7 @@ INSTALLED_APPS = [
     'admin_tools.menu',
     'admin_tools.dashboard',
 
-    'threadedcomments',
+#    'threadedcomments', deprecado en 1.9 ver issue 138
 
     'autoslug',
     'mptt_tree_editor',
@@ -157,7 +157,7 @@ TEST_RUNNER = 'cyclope.tests.CyclopeTestSuiteRunner'
 #DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
 
 # comments settings
-COMMENTS_APP = 'cyclope.apps.custom_comments'
+# COMMENTS_APP = 'cyclope.apps.custom_comments' // deprecado en 1.9 ver issue 138
 
 EMAIL_SUBJECT_PREFIX = '[Cyclope] '
 
