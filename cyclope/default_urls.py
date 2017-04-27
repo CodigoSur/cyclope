@@ -36,7 +36,8 @@ from cyclope.core.user_profiles.forms import UserProfileForm
 from cyclope.forms import DateSearchForm, ModelSearchForm
 from cyclope.views import delete_regionview
 from django.conf.urls.static import static
-
+from django.contrib.auth import views as auth_views
+#import pdb; pdb.set_trace()
 urlpatterns = [
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
         {'sitemaps': {"menus": MenuSitemap, "categories": CategorySitemap,
@@ -79,9 +80,10 @@ urlpatterns = [
     ## 3rd party
     # captcha (django-simple-captcha)
     url(r'^captcha/', include('captcha.urls')),
+    
     # accounts (django-registration)
-    url(r'^accounts/register/$', 'registration.views.register',
-        {'backend': 'cyclope.registration_backends.CaptchaBackend'},
+    url(r'^accounts/register/$', auth_views.login, # TODO encontrar equivalente de register en django 1.9
+#        {'backend': 'cyclope.registration_backends.CaptchaBackend'},
         name='registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
 
