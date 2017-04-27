@@ -258,7 +258,7 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
 #    'filebrowser',
     'south',
     'registration',
-    'profiles',
+#    'profiles',
     'haystack',
     'dbgettext',
     'rosetta',
