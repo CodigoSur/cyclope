@@ -5,7 +5,7 @@
 <ul>
 {% for staticpage in staticpage_list %}
   <li><h2>
-    <a href="{% url staticpage-detail staticpage.slug %}">
+    <a href="{% url 'staticpage-detail' staticpage.slug %}">
     {{  staticpage.name}}
     </a></h2>
   </li>

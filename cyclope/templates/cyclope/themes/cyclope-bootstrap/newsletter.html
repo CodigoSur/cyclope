@@ -88,7 +88,7 @@
             <tr>
               <td valign="middle">
                 <span class="category_name">{{ newsletter.content_category.name }}</span>
-                <span class="newsletter_menuitems"><a href="{% url index %}">{% trans "Visit our website" %}</a> <a href="{% url collection newsletter.content_category.collection.slug %}">{% trans "View archives" %}</a> <a href="http://listas.codigosur.org/mailman/listinfo">{% trans "Subscription options" %}</a>
+                <span class="newsletter_menuitems"><a href="{% url 'index' %}">{% trans "Visit our website" %}</a> <a href="{% url 'collection' newsletter.content_category.collection.slug %}">{% trans "View archives" %}</a> <a href="http://listas.codigosur.org/mailman/listinfo">{% trans "Subscription options" %}</a>
                 </span>
               </td>
             </tr>

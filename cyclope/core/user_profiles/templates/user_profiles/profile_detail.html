@@ -8,7 +8,7 @@
   {% include "profiles/profile_content.html" %}
 
   {% if request.user == current_object.user %}
-    <a href="{% url "profiles_edit_profile" %}">{% trans "Edit profile" %}</a>
+    <a href="{% url 'profiles_edit_profile' %}">{% trans "Edit profile" %}</a>
   {% endif %}
   {% include "cyclope/authored_content_block.html" %}
 </div>

@@ -41,7 +41,7 @@
 			                              {{ regionview.content_type|capfirst }} ->  {{ regionview.get_view.verbose_name|capfirst }} {% if regionview.content_object %} -> {{ regionview.content_object }}{% endif %}
 			                              </a>
 			                              &nbsp;--&nbsp;
-			                              <a href="{% url delete_regionview regionview.pk %}" title="{% trans 'Delete' %}" onclick="return confirm('{%trans 'Delete this region view?'%}');">
+			                              <a href="{% url 'delete_regionview' regionview.pk %}" title="{% trans 'Delete' %}" onclick="return confirm('{%trans 'Delete this region view?'%}');">
 			                                <img src="{{ CYCLOPE_STATIC_URL}}images/delete.png" height="10px;"/>
 		                                  </a>
 		                              </li>

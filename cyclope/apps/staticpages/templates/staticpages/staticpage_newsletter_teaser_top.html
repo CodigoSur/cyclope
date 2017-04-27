@@ -6,12 +6,12 @@
     <td>
 <div class="teaser">
     {% if staticpage.pictures %}
-     <div class="teaser_icon_container"><a href="{% url staticpage-detail staticpage.slug %}">
+     <div class="teaser_icon_container"><a href="{% url 'staticpage-detail' staticpage.slug %}">
         <img class="newsletter_image" src="{% version staticpage.pictures.0.image.path 'newsletter_teaser' %}" border="0"/>
       </a></div>
     {% endif %}
     
-    <h2 class="title"><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a></h2>
+    <h2 class="title"><a href="{% url 'staticpage-detail' staticpage.slug %}">{{ staticpage.name }}</a></h2>
 
     {% if staticpage.summary %}
       <div class="html-content summary">{{ staticpage.summary|smart_style }}</div>

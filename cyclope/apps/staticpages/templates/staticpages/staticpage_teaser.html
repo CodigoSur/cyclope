@@ -9,14 +9,14 @@
       </div>
     </div>
 
-    <h2 class="title"><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a></h2>
+    <h2 class="title"><a href="{% url 'staticpage-detail' staticpage.slug %}">{{ staticpage.name }}</a></h2>
 
     {% if staticpage.summary %}
       <h3 class="html-content summary">{{ staticpage.summary|smart_style }}</h3>
     {% endif %}
 
     {% if staticpage.pictures %}
-     <div class="teaser_icon_container"><a href="{% url staticpage-detail staticpage.slug %}">
+     <div class="teaser_icon_container"><a href="{% url 'staticpage-detail' staticpage.slug %}">
         <img class="teaser_icon img-responsive" src="{% version staticpage.pictures.0.image.path 'small' %}" alt="{{ staticpage.text|smart_style|striptags|truncatewords:40 }}" width="135" border="0"/>
       </a></div>
     {% endif %}
@@ -37,14 +37,14 @@
 
 	<div class="content-view staticpage teaser staticpage-teaser">
 
-    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png" /><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a></h2>
+    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png" /><a href="{% url 'staticpage-detail' staticpage.slug %}">{{ staticpage.name }}</a></h2>
 
     {% if staticpage.summary %}
       <h3 class="html-content summary">{{ staticpage.summary|smart_style }}</h3>
     {% endif %}
 
     {% if staticpage.pictures %}
-     <div class="teaser_icon_container"><a href="{% url staticpage-detail staticpage.slug %}">
+     <div class="teaser_icon_container"><a href="{% url 'staticpage-detail' staticpage.slug %}">
         <img class="teaser_icon" src="{% version staticpage.pictures.0.image.path 'small' %}" width="135" border="0"/>
       </a></div>
     {% endif %}

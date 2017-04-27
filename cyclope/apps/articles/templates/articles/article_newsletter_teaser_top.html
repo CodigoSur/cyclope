@@ -7,17 +7,17 @@
     <div class="teaser">
 
       {% if current_object.pictures.values %}
-      <a href="{% url article-detail current_object.slug %}">
+      <a href="{% url 'article-detail' current_object.slug %}">
         {% with picture=current_object.pictures.values|first %}        
         <img class="newsletter_image" src="{% version picture.image 'newsletter_teaser' %}" alt="{{ picture.name }}"/>
         {% endwith %}
       </a>
       {% endif %}
       {% if current_object.pretitle %} <span class="pretitle"><a name="editorial">{% trans current_object.pretitle %}</a></span>{% endif %}
-      <h2 class="title"><a name="article__{{ current_object.slug }}" href="{% url article-detail current_object.slug %}">
+      <h2 class="title"><a name="article__{{ current_object.slug }}" href="{% url 'article-detail' current_object.slug %}">
         {% trans current_object.name  %}</a></h2>
 
-      <a href="{% url article-detail current_object.slug %}">
+      <a href="{% url 'article-detail' current_object.slug %}">
         <div class="summary">{{ current_object|parsed_gettext:"summary"|smart_style }}</div>
       </a> <div class="download_link"><a href="{{ article.get_absolute_url }}"> {% trans "Open" %}</a></div>
       {% if current_object.author %}

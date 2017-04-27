@@ -2,7 +2,7 @@
 
 <div class="item {% ifequal first_content staticpage %}active{% endifequal %} staticpage content-view">
 	 
-  <a href="{% url staticpage-detail staticpage.slug %}">
+  <a href="{% url 'staticpage-detail' staticpage.slug %}">
     {% if staticpage.pictures %}
        <img src="{% version staticpage.pictures.0.image.path 'carrousel_bootstrap' %}" alt="{{ article.name }}" border="0"/>
     {% else %} 
@@ -13,7 +13,7 @@
   <div class="carousel-caption">
     {% if view_options.show_title %}
     <h3>
-      <a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name|truncatechars:70 }}</a>
+      <a href="{% url 'staticpage-detail' staticpage.slug %}">{{ staticpage.name|truncatechars:70 }}</a>
     </h3>
     {% endif %}
     {% if view_options.show_description %}

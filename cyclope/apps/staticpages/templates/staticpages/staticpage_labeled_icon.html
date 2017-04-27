@@ -1,7 +1,7 @@
 {% load i18n fb_versions cyclope_utils %}
 <div class="teaser_icon {% inline_content_classes %}">
 		<div class="thumbnail">
-			<a href="{% url staticpage-detail staticpage.slug %}">
+			<a href="{% url 'staticpage-detail' staticpage.slug %}">
 				{% if staticpage.pictures %}
 					<img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/staticpage.png" alt="staticpage icon"/>
 					<img class="img-responsive" src="{% version staticpage.pictures.0.image.path 'labeled_icon_bootstrap' %}" alt="{{ staticpage.name }} "border="0"/>
@@ -11,7 +11,7 @@
 			</a>
 			<div class="caption">
 				<h4 class="title">
-					<a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name|truncatechars:40 }}</a>
+					<a href="{% url 'staticpage-detail' staticpage.slug %}">{{ staticpage.name|truncatechars:40 }}</a>
 				</h4>
 			</div>
 		</div>

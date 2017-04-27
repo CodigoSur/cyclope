@@ -18,7 +18,7 @@
 				{{ poll.description}}
 			</div>
 
-			<form action="{% url poll-submission poll.slug %}" method="POST">
+			<form action="{% url 'poll-submission' poll.slug %}" method="POST">
 				{% csrf_token %}
 				{% for form in forms %}
 						{{ form|crispy }}
@@ -26,7 +26,7 @@
 				{{ captcha_form|crispy }}
 				<div  class="panel-footer">
 					<input class="btn btn-primary btn-sm" type="submit" value="{% trans 'Vote' %}" />
-					<a class="btn btn-default btn-sm" href="{% url poll poll.slug %}">{% trans 'View Results' %}</a>
+					<a class="btn btn-default btn-sm" href="{% url 'poll' poll.slug %}">{% trans 'View Results' %}</a>
 				</div>
 			</form>
 
@@ -39,7 +39,7 @@
 
 			<h1 class="title">{{ poll.name }}</h1>
 
-			<form action="{% url poll-submission poll.slug %}" method="POST" class="uniForm">
+			<form action="{% url 'poll-submission' poll.slug %}" method="POST" class="uniForm">
 				{% csrf_token %}
 				{% for form in forms %}
 						{{ form|crispy }}

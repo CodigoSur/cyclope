@@ -9,7 +9,7 @@
   <div class='forum'>
   <div class='link-create-topic'>
 	<!-- Indicates a successful or positive action -->
-	<a href="{% url category-create_topic category.slug %}" type="button" class="btn btn-success">{% trans 'Create a new topic' %}</a>
+	<a href="{% url 'category-create_topic' category.slug %}" type="button" class="btn btn-success">{% trans 'Create a new topic' %}</a>
   </div>
 <div class="clear"></div>
   <table >

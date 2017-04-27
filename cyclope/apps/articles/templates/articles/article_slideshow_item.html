@@ -3,13 +3,13 @@
   <div class="article content-view">
 
     {% if view_options.show_title %}
-    <h2 class="title"><a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:70 }}</a></h2>
+    <h2 class="title"><a href="{% url 'article-detail' article.slug %}">{{ article.name|truncatechars:70 }}</a></h2>
     {% endif %}
 
     {% if view_options.show_image %}
     <div class="teaser_icon_container">
           <img title="article" class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/article.png" border="0"/>
-    <a href="{% url article-detail article.slug %}">
+    <a href="{% url 'article-detail' article.slug %}">
         {% if article.pictures.values %}
         {% with picture=article.pictures.values|first %}
             {% if not view_options.show_title and not view_options.show_description %}

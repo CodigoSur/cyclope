@@ -11,7 +11,7 @@ When showing the StaticPage as the main content of the view, the host_template i
 {% if not user.is_authenticated and not staticpage.published %}
   <div class="alert alert-danger" role="alert">
 		<span class="glyphicon glyphicon-ban-circle"></span>
-			<a href="{% url auth_login %}?next={{ request.path }}">{% trans "This content isn't public, please log in" %}
+			<a href="{% url 'auth_login' %}?next={{ request.path }}">{% trans "This content isn't public, please log in" %}
 		</a>
 	</div>
 {% else %}
@@ -22,7 +22,7 @@ When showing the StaticPage as the main content of the view, the host_template i
 
   
   {% if staticpage.pictures %}
-    <a href="{% url staticpage-detail staticpage.slug %}">
+    <a href="{% url 'staticpage-detail' staticpage.slug %}">
         <img class="img-responsive" src="{% version staticpage.pictures.0.image.path 'big' %}" border="0"/>
     </a>
   {% endif %}

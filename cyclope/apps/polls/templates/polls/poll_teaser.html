@@ -2,7 +2,7 @@
 
 <div class="content-view poll teaser poll-teaser {% teaser_layout_classes %}">
 
-  <h2 class="title"><a href="{% url poll-submission poll.slug %}">{{ poll.name }}</a></h2>
+  <h2 class="title"><a href="{% url 'poll-submission' poll.slug %}">{{ poll.name }}</a></h2>
 
   <div class="summary">
     {{ poll.description}}

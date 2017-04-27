@@ -2,7 +2,7 @@
 
 <div class="teaser_icon {% inline_content_classes %}">
 	<div class="thumbnail">
-		<a href="{% url article-detail article.slug %}">
+		<a href="{% url 'article-detail' article.slug %}">
 			{% if article.pictures.values %}
 				{% with picture=article.pictures.values|first %}
 					<img class="img-responsive" src="{% version picture.image 'labeled_icon_bootstrap' %}" alt="{{ article.name }}" border="0"/>
@@ -13,7 +13,7 @@
 		</a>
 		<div class="caption">
 			<h4 class="title">
-				<a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:40 }}</a>
+				<a href="{% url 'article-detail' article.slug %}">{{ article.name|truncatechars:40 }}</a>
 			</h4>
 			<p class="teaser_more">
 				<a class="btn btn-primary" href="{{ article.get_absolute_url }}" role="button">{% trans "More" %}</a>

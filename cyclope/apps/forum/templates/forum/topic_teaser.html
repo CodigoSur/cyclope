@@ -2,11 +2,11 @@
 
   <div class="content-view topic teaser topic-teaser {% teaser_layout_classes %}">
 
-    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/topid.png" /><a href="{% url topic-detail topic.slug %}">{{ topic.name }}</a></h2>
+    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/topid.png" /><a href="{% url 'topic-detail' topic.slug %}">{{ topic.name }}</a></h2>
 
     <div class="summary">
       {{ topic.text|truncatewords:40 }}
-      <span class="more"><a href="{% url topic-detail topic.slug %}"> {% trans "More" %}</a></span>
+      <span class="more"><a href="{% url 'topic-detail' topic.slug %}"> {% trans "More" %}</a></span>
     </div>
 
     {% if not simplified_view %}

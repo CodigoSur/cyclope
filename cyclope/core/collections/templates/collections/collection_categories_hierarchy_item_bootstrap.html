@@ -1,5 +1,5 @@
 {% load url from future %}
-<a href="{% url target_view slug %}" {% if has_children == "has_children" %} class="dropdown-toggle" data-toggle="dropdown" role="button"{% endif %}>
+<a href="{% url 'target_view' slug %}" {% if has_children == "has_children" %} class="dropdown-toggle" data-toggle="dropdown" role="button"{% endif %}>
 {{ name }}
 {% if has_children == "has_children" %}<span class="caret"></span>{% endif %}
 </a>

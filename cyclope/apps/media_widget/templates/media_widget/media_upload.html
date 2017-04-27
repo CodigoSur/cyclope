@@ -1,5 +1,5 @@
 <!-- Upload file to library before embedding it -->
-<form method="POST" action="{% url embed-create %}" enctype="multipart/form-data">
+<form method="POST" action="{% url 'embed-create' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.media_type }}
     <!--

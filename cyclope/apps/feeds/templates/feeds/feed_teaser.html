@@ -2,14 +2,14 @@
 
   <div class="content-view feed teaser feed-teaser {% teaser_layout_classes %}">
 
-    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/feed.png" /><a href="{% url feed-detail feed.slug %}">{{ feed.name }}</a></h2>
+    <h2 class="title"><img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/feed.png" /><a href="{% url 'feed-detail' feed.slug %}">{{ feed.name }}</a></h2>
 
 
     <div class="html-content summary">
       {% if feed.summary %}
         {{ feed.summary|smart_style }}
       {% endif %}
-      <span class="more"><a href="{% url feed-detail feed.slug %}"> {% trans "More" %}</a></span> 
+      <span class="more"><a href="{% url 'feed-detail' feed.slug %}"> {% trans "More" %}</a></span> 
     </div>
 
     <div class="clear"></div>

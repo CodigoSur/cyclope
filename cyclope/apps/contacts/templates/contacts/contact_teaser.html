@@ -16,7 +16,7 @@
         </div>
     {% endif %}  
         <div class="media-body">
-            <h2><a  href="{% url contact-detail contact.slug %}">{{ contact }}</a></h2>
+            <h2><a  href="{% url 'contact-detail' contact.slug %}">{{ contact }}</a></h2>
             <div class="contact-details">
                 <ul class="list-unstyled">
                     <li><strong>{% trans "Gender" %}:</strong> {{contact.gender}}</li>
@@ -24,7 +24,7 @@
                     <li><strong>{% trans "Web" %}:</strong> {{contact.web}}</li>
                     <li><strong>{% trans "Mobile" %}:</strong> {{contact.mobile_phone_number}}</li>
                 </ul>
-                <a class="btn btn-default" href="{% url contact-detail contact.slug %}">{% trans "More" %}</a>
+                <a class="btn btn-default" href="{% url 'contact-detail' contact.slug %}">{% trans "More" %}</a>
                 <!-- herramientas -->
                 {% include "cyclope/teaser_tools_block.html" with current_object=categorization.content_object %}
                 <!-- /herramientas -->
@@ -37,13 +37,13 @@
     <div class="title">
         <img class="photo" src="{% version contact.photo 'cropped' %}" />
         <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png" alt="contact" />
-        <a  href="{% url contact-detail contact.slug %}">{{ contact }}</a>
+        <a  href="{% url 'contact-detail' contact.slug %}">{{ contact }}</a>
     </div>
     {% else %}
     <div class="title">
 	    <img class="photo" src="{% static 'uploads/images/contacts/no-photo.png' %}" alt="no photo" />
         <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png" alt="contact" />
-        <a  href="{% url contact-detail contact.slug %}">{{ contact }}</a>
+        <a  href="{% url 'contact-detail' contact.slug %}">{{ contact }}</a>
     </div>
     {% endif %}  
     <div class="contact-details">
@@ -53,7 +53,7 @@
             <li>{% trans "Web" %}: {{contact.web}}</li>
             <li>{% trans "Mobile" %}: {{contact.mobile_phone_number}}</li>
         </ul>
-        <span class="more"><a href="{% url contact-detail contact.slug %}"> {% trans "More" %}</a></span>
+        <span class="more"><a href="{% url 'contact-detail' contact.slug %}"> {% trans "More" %}</a></span>
         <span class="last_change">{% trans "Last change" %}: {{ contact.get_last_change_date }}</span>
     </div>
     <div class="clear"></div>

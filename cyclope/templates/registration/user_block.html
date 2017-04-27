@@ -6,12 +6,12 @@
     {% if profile %}
       <a href="{{ profile.get_absolute_url }}">{{ user.get_full_name|default:user.username }}</a>
     {% else %}
-      <a href="{% url profiles_create_profile %}">{{ user.username }} ({% trans "Create profile" %})</a>
+      <a href="{% url 'profiles_create_profile' %}">{{ user.username }} ({% trans "Create profile" %})</a>
     {% endif %} /
-    <a href="{% url auth_logout %}?next={{ request.path }}">{% trans "Log out" %}</a>
+    <a href="{% url 'auth_logout' %}?next={{ request.path }}">{% trans "Log out" %}</a>
   {% endwith %}
   {% else %}
-  <a href="{% url auth_login %}?next={{ request.path }}">{% trans "Log in" %}</a>
+  <a href="{% url 'auth_login' %}?next={{ request.path }}">{% trans "Log in" %}</a>
 {% endif %}
 
 {% if LANGUAGES|length > 1 %}

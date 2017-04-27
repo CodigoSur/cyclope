@@ -8,7 +8,7 @@ When showing the StaticPage as the main content of the view, the host_template i
 {% block content %}
 
 {% if not user.is_authenticated and not staticpage.published %}
-  <a href="{% url auth_login %}?next={{ request.path }}">{% trans "This content isn't public, please log in" %}</a>
+  <a href="{% url 'auth_login' %}?next={{ request.path }}">{% trans "This content isn't public, please log in" %}</a>
 {% else %}
 
 <div class="content-view staticpage detail staticpage-detail html-content">

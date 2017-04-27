@@ -21,9 +21,9 @@ $(function(){
             var url = window.location.href;
             //{# param is article_id, absence means new article #}
             {% if param %}
-                url = "{% url pictures-upload article_id=param %}" + query_str;
+                url = "{% url 'pictures-upload' article_id=param %}" + query_str;
             {% else %}
-                url = "{% url pictures-new %}" + query_str;
+                url = "{% url 'pictures-new' %}" + query_str;
             {% endif %}
             window.location.href = url; {#// just navigate, or ajax?#}
         {% endif %}

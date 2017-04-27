@@ -3,12 +3,12 @@
 <div class="content-view staticpage media">
 
     {% if view_options.show_title %}
-    <h2 class="title"><a href="{% url staticpage-detail staticpage.slug %}">{{ staticpage.name }}</a></h2>
+    <h2 class="title"><a href="{% url 'staticpage-detail' staticpage.slug %}">{{ staticpage.name }}</a></h2>
     {% endif %}
 
     {% if view_options.show_image %}
     <div class="teaser_icon_container">
-    <a href="{% url staticpage-detail staticpage.slug %}">
+    <a href="{% url 'staticpage-detail' staticpage.slug %}">
         {% if staticpage.pictures %}
             {% if not view_options.show_title and not view_options.show_description %}
           <img class="icon big" src="{% version staticpage.pictures.0.image.path 'big' %}" border="0"/>

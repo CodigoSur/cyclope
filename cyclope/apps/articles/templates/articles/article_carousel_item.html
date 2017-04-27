@@ -2,7 +2,7 @@
 
 <div class="item {% ifequal first_content article %}active{% endifequal %} article content-view">
 
-  <a href="{% url article-detail article.slug %}">
+  <a href="{% url 'article-detail' article.slug %}">
     {% if article.pictures %}
 	{% with article.pictures.all|first as first_pic %}
         <img class="img-responsive" src="{% version first_pic.image.path 'carrousel_bootstrap'%}" alt="{{ article.name }}" border="0"/>
@@ -15,7 +15,7 @@
   <div class="carousel-caption">
     {% if view_options.show_title %}
     <h3>
-      <a href="{% url article-detail article.slug %}">{{ article.name|truncatechars:80 }}</a>
+      <a href="{% url 'article-detail' article.slug %}">{{ article.name|truncatechars:80 }}</a>
     </h3>
     {% endif %}
     {% if view_options.show_description %}
