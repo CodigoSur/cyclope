@@ -9,7 +9,8 @@ from django import forms
 from django.conf import settings
 from django.core.mail import send_mail, EmailMessage
 from django.template import loader, RequestContext
-from django.contrib.sites.models import Site, RequestSite
+from django.contrib.sites.models import Site
+from django.contrib.sites.requests import RequestSite
 from django.utils.translation import ugettext_lazy as _
 
 from models import ContactFormSettings as Settings
