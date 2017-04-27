@@ -1,6 +1,6 @@
 {% extends host_template %}
 
-{% load comments i18n fb_versions cyclope_utils dbgettext_tags %}
+{% load comments i18n  cyclope_utils dbgettext_tags %}
 
 {% block content %} 
 {% if not user.is_authenticated and not article.published %}
