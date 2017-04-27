@@ -8,20 +8,20 @@
         <div class="teaser">
           {% if category.image %}
             <div class="teaser_icon_container">
-              <a href="{% url category-default category.slug %}">
+              <a href="{% url 'category-default' category.slug %}">
                 <img class="icon" src="{% version category.image.path 'small' %}" border="0" alt="{{ category.name }}"/>
               </a>
             </div>
           {% endif %}
           <div class="teaser_text_container{% if not category.image %}_fullwidth{% endif %}">
             <h2 class="title">
-              <a href="{% url category-default category.slug %}">{{ category.name }} </a>
+              <a href="{% url 'category-default' category.slug %}">{{ category.name }} </a>
             </h2>
             {% if category.description %}
               <div class="html-content summary">{{ category.description|smart_style }}</div>
             {% endif %}
             <p class="teaser_more">
-              <a class="btn btn-primary" href="{% url category-default category.slug %}">{% trans "View contents" %}</a>
+              <a class="btn btn-primary" href="{% url 'category-default' category.slug %}">{% trans "View contents" %}</a>
             </p>
           </div>
         </div>
