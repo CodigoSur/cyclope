@@ -106,7 +106,7 @@ urlpatterns = patterns('',
     # custom-forms (django-forms-builder)
     url(r'^forms/', include("forms_builder.forms.urls")),
     # django-generic-ratings
-    (r'^ratings/', include('ratings.urls')),
+#    (r'^ratings/', include('ratings.urls')),
     # django-activity-stream
     ('^activity/', include('actstream.urls')),
 )
