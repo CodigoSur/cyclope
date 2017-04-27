@@ -22,7 +22,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from filebrowser.fields import FileBrowseField
+#from filebrowser.fields import FileBrowseField
 
 from cyclope.models import BaseContent, Author, Source
 from cyclope.core.collections.models import Collectible
@@ -62,8 +62,7 @@ class Picture(BaseMedia):
     """Picture model.
     """
 
-    image =  FileBrowseField(_('image'), max_length=100, format='Image',
-                             directory='images/pictures/')
+#    image =  FileBrowseField(_('image'), max_length=100, format='Image', directory='images/pictures/')
     media_file_field = "image"
     image_file_field = None
 
@@ -75,11 +74,8 @@ class Picture(BaseMedia):
 class SoundTrack(BaseMedia):
     """AudioTrack model.
     """
-    audio =  FileBrowseField(_('audio'), max_length=250, format='Audio',
-                             directory='sound_tracks/')
-    image =  FileBrowseField(_('image'), max_length=100, format='Image',
-                             directory='images/medialibrary/', blank=True,
-                             null=True)
+#    audio =  FileBrowseField(_('audio'), max_length=250, format='Audio', directory='sound_tracks/')
+#    image =  FileBrowseField(_('image'), max_length=100, format='Image', directory='images/medialibrary/', blank=True, null=True)
     media_file_field = "audio"
 
     class Meta:
@@ -90,10 +86,8 @@ class SoundTrack(BaseMedia):
 class MovieClip(BaseMedia):
     """MovieClip model.
     """
-    still = FileBrowseField(_('still'), max_length=100, format='Image',
-                            directory='images/medialibrary/', blank=True)
-    video =  FileBrowseField(_('video'), max_length=100, format='Video',
-                             directory='movie_clips/')
+#    still = FileBrowseField(_('still'), max_length=100, format='Image', directory='images/medialibrary/', blank=True)
+#    video =  FileBrowseField(_('video'), max_length=100, format='Video', directory='movie_clips/')
     media_file_field = "video"
     image_file_field = "still"
 
@@ -111,10 +105,8 @@ class MovieClip(BaseMedia):
 class Document(BaseMedia):
     """Document model.
     """
-    image = FileBrowseField(_('image'), max_length=100, format='Image',
-                            directory='images/medialibrary/', blank=True)
-    document =  FileBrowseField(_('document'), max_length=100, format='Document',
-                            directory='documents/')
+#    image = FileBrowseField(_('image'), max_length=100, format='Image', directory='images/medialibrary/', blank=True)
+#    document =  FileBrowseField(_('document'), max_length=100, format='Document', directory='documents/')
     media_file_field = "document"
 
     class Meta:
@@ -125,10 +117,8 @@ class Document(BaseMedia):
 class FlashMovie(BaseMedia):
     """FlashMovie model.
     """
-    image = FileBrowseField(_('image'), max_length=100, format='Image',
-                            directory='images/medialibrary/', blank=True)
-    flash =  FileBrowseField(_('flash'), max_length=100, format='Flash',
-                                  directory='flashmovies/', blank=True)
+#    image = FileBrowseField(_('image'), max_length=100, format='Image', directory='images/medialibrary/', blank=True)
+#    flash =  FileBrowseField(_('flash'), max_length=100, format='Flash', directory='flashmovies/', blank=True)
     media_file_field = "flash"
 
     class Meta:
@@ -139,10 +129,8 @@ class FlashMovie(BaseMedia):
 class RegularFile(BaseMedia):
     """RegularFile model. Accepts any type of file.
     """
-    image = FileBrowseField(_('image'), max_length=100, format='Image',
-                            directory='images/medialibrary/', blank=True)
-    file =  FileBrowseField(_('file'), max_length=100,
-                            directory='regular_files/')
+#    image = FileBrowseField(_('image'), max_length=100, format='Image', directory='images/medialibrary/', blank=True)
+#    file =  FileBrowseField(_('file'), max_length=100, directory='regular_files/')
     media_file_field = "file"
 
     class Meta:
@@ -153,8 +141,7 @@ class RegularFile(BaseMedia):
 class ExternalContent(BaseMedia):
     """ExternalContent. For media that's displayed with custom html.
     """
-    image = FileBrowseField(_('image'), max_length=100, format='Image',
-                            directory='images/medialibrary/', blank=True)
+#    image = FileBrowseField(_('image'), max_length=100, format='Image', directory='images/medialibrary/', blank=True)
     content_url = models.CharField(_('content url'), max_length=100)
     new_window = models.BooleanField(_('open in new window'), default=False)
     skip_detail = models.BooleanField(_('skip detailed view'), default=False)

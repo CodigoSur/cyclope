@@ -37,7 +37,7 @@ from django.db.models.signals import m2m_changed
 import mptt
 from jsonfield import JSONField
 from autoslug.fields import AutoSlugField
-from filebrowser.fields import FileBrowseField
+#from filebrowser.fields import FileBrowseField
 
 import cyclope
 from cyclope.utils import ThumbnailMixin
@@ -57,8 +57,7 @@ class Collection(models.Model, ThumbnailMixin):
     content_types = models.ManyToManyField(ContentType, db_index=True,
                                            verbose_name=_('content types'))
     description = models.TextField(_('description'), blank=True, null=True)
-    image =  FileBrowseField(_('image'), max_length=250, format='Image',
-                             blank=True)
+#    image =  FileBrowseField(_('image'), max_length=250, format='Image', blank=True)
     default_list_view = models.CharField(_('default list view'), max_length=255,
                                          blank=True, default='')
     view_options = JSONField(default='{}') # default is taken from ViewOptionsForm
@@ -95,8 +94,7 @@ class Category(models.Model, ThumbnailMixin):
                               related_name='children', null=True, blank=True)
     active = models.BooleanField(_('active'), default=True, db_index=True)
     description = models.TextField(_('description'), blank=True, null=True)
-    image =  FileBrowseField(_('image'), max_length=250, format='Image',
-                             blank=True)
+#    image =  FileBrowseField(_('image'), max_length=250, format='Image', blank=True)
 
     def __unicode__(self):
         return self.name

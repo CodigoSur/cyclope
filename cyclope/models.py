@@ -43,7 +43,7 @@ from django.db.models.signals import pre_delete
 from rosetta.poutil import find_pos
 import mptt
 from autoslug.fields import AutoSlugField
-from filebrowser.fields import FileBrowseField
+# from filebrowser.fields import FileBrowseField
 from jsonfield import JSONField
 
 import cyclope
@@ -497,9 +497,9 @@ class Author(Collectible, ThumbnailMixin):
                             unique=True)
     slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
                          always_update=False, editable=True, blank=True)
-    image = FileBrowseField(_('image'), max_length=100, format='Image',
-                            directory='author_images/',
-                            blank=True, default='')
+#    image = FileBrowseField(_('image'), max_length=100, format='Image',
+#                            directory='author_images/',
+#                            blank=True, default='')
     origin = models.CharField(_('origin'), max_length=250, db_index=True,
                                blank=True, default='')
     notes = models.TextField(_('notes'), blank=True, default='')
@@ -537,8 +537,8 @@ class Source(models.Model):
 class Image(models.Model, ThumbnailMixin):
     """A simple image model.
     """
-    image =  FileBrowseField(_('image'), max_length=100, format='Image',
-                             directory='pictures/')
+#    image =  FileBrowseField(_('image'), max_length=100, format='Image',
+#                             directory='pictures/')
 
     class Meta:
         verbose_name = _('image')

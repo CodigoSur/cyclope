@@ -4,8 +4,8 @@ from django import forms
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 
-from filebrowser.functions import handle_file_upload, convert_filename
-from filebrowser.settings import ADMIN_THUMBNAIL
+#from filebrowser.functions import handle_file_upload, convert_filename
+#from filebrowser.settings import ADMIN_THUMBNAIL
 
 from cyclope.apps.medialibrary.models import Picture
 from cyclope.utils import generate_fb_version
@@ -26,8 +26,8 @@ class InlinedMediaForm(InlinedBaseForm):
         abs_path = os.path.join(settings.MEDIA_ROOT,
                    klass._meta.get_field_by_name(instance.media_file_field)[0].directory)
         f = self.cleaned_data['file']
-        f.name = convert_filename(f.name)
-        name = handle_file_upload(abs_path, f)
+#        f.name = convert_filename(f.name)
+#        name = handle_file_upload(abs_path, f)
         setattr(instance, instance.media_file_field, name)
         instance.save()
         return instance
@@ -36,6 +36,6 @@ class InlinedPictureForm(InlinedMediaForm):
 
     def save(self):
         instance = super(InlinedPictureForm, self).save()
-        generate_fb_version(instance.image.path, ADMIN_THUMBNAIL)
+#        generate_fb_version(instance.image.path, ADMIN_THUMBNAIL)
         return instance
 

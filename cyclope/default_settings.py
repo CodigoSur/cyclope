@@ -126,7 +126,7 @@ INSTALLED_APPS = [
     'mptt_tree_editor',
     'mptt',
     'captcha',
-    'filebrowser',
+#    'filebrowser',
     'registration',
 #    'profiles', / deshabiltado ver issue 141
     'contact_form',
@@ -167,63 +167,63 @@ CAPTCHA_FONT_SIZE=30
 CAPTCHA_LETTER_ROTATION=(-15,15)
 
 # filebrowser settings
-FILEBROWSER_DEBUG = False
+# FILEBROWSER_DEBUG = False
 
-FILEBROWSER_DIRECTORY = ''
+# FILEBROWSER_DIRECTORY = ''
 
-FILEBROWSER_EXTENSIONS = {
-    'Folder': [''],
-    'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
-    'Video': ['.ogv', '.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.flv', '.mp4'],
-    'Document': ['.odt', '.docx', '.pdf','.doc','.rtf','.txt',
-                 '.ods', '.xls', '.xlsx', '.csv', '.ppt', '.pptx'],
-    'Audio': ['.ogg', '.oga', '.mp3','.wav','.aiff','.midi','.m4p'],
-    'Code': ['.html', '.js','.css'],
-    'Archives': ['.zip', '.rar', '.7z', '.xs', '.gz', '.tar'],
-    'Flash_App': ['.swf',],
-}
+#FILEBROWSER_EXTENSIONS = {
+#    'Folder': [''],
+#    'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
+#    'Video': ['.ogv', '.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.flv', '.mp4'],
+#    'Document': ['.odt', '.docx', '.pdf','.doc','.rtf','.txt',
+#                 '.ods', '.xls', '.xlsx', '.csv', '.ppt', '.pptx'],
+#    'Audio': ['.ogg', '.oga', '.mp3','.wav','.aiff','.midi','.m4p'],
+#    'Code': ['.html', '.js','.css'],
+#    'Archives': ['.zip', '.rar', '.7z', '.xs', '.gz', '.tar'],
+#    'Flash_App': ['.swf',],
+#}
 
-FILEBROWSER_SELECT_FORMATS = {
-    'File': ['Folder','Document',],
-    'Image': ['Image'],
-    'Media': ['Video','Sound'],
-    'Document': ['Document'],
-    'Flash': ['Flash_App', 'Flash_Movie'],
-    'Video': ['Video', 'Flash_Movie',],
-    'Audio': ['Audio'],
+#FILEBROWSER_SELECT_FORMATS = {
+#    'File': ['Folder','Document',],
+#    'Image': ['Image'],
+#    'Media': ['Video','Sound'],
+#    'Document': ['Document'],
+#    'Flash': ['Flash_App', 'Flash_Movie'],
+#    'Video': ['Video', 'Flash_Movie',],
+#    'Audio': ['Audio'],
     # for TinyMCE we also have to define lower-case items
-    'image': ['Image'],
-    'file': ['Folder','Image','Document',],
-}
+#    'image': ['Image'],
+#    'file': ['Folder','Image','Document',],
+#}
 
-FILEBROWSER_VERSIONS = {
-    'fb_thumb': {'verbose_name': ugettext('Admin Thumbnail'),
-                 'width': 60, 'height': 60, 'opts': 'crop upscale'},
-    'thumbnail': {'verbose_name': ugettext('Thumbnail (100px height)'),
-                  'width': '', 'height': 100, 'opts': ''},
-    'small': {'verbose_name': ugettext('Small (150x150px)'),
-              'width': 135, 'height': 135, 'opts': 'crop'},
-    'medium': {'verbose_name': ugettext('Medium (460px width)'),
-               'width': 460, 'height': '', 'opts': ''},
-    'big': {'verbose_name': ugettext('Big (620px width)'),
-            'width': 620, 'height': '', 'opts': ''},
-    'cropped': {'verbose_name': ugettext('Cropped (60x60px)'),
-                'width': 64, 'height': 64, 'opts': 'crop'},
-    'croppedthumbnail': {'verbose_name': ugettext('Cropped Thumbnail (140x140px)'),
-                         'width': 140, 'height': 140, 'opts': 'crop'},
-    'slideshow': {'verbose_name': ugettext('Slideshow (300x300px)'),
-                  'width': 300, 'height': 300, 'opts': 'crop'},
-    'slideshow-background': {'verbose_name': ugettext('Slideshow Background (550px'),
-                  'width': 550, 'height': '', 'opts': 'crop'},
-    'newsletter_teaser': {'verbose_name': ugettext('Newsletter Teaser (150x150px)'),
-                  'width': 150, 'height': 150, 'opts': 'crop'},
-    'carrousel_bootstrap': {'verbose_name': ugettext('Carrousel Bootstrap'),
-                 'width': 730, 'height': 350, 'opts': 'crop upscale'},
-    'labeled_icon_bootstrap': {'verbose_name': ugettext('Labeled Bootstrap'),
-                 'width': 250, 'height': 200, 'opts': 'crop upscale'},
-}
+#FILEBROWSER_VERSIONS = {
+#    'fb_thumb': {'verbose_name': ugettext('Admin Thumbnail'),
+#                 'width': 60, 'height': 60, 'opts': 'crop upscale'},
+#    'thumbnail': {'verbose_name': ugettext('Thumbnail (100px height)'),
+#                  'width': '', 'height': 100, 'opts': ''},
+#    'small': {'verbose_name': ugettext('Small (150x150px)'),
+#              'width': 135, 'height': 135, 'opts': 'crop'},
+#    'medium': {'verbose_name': ugettext('Medium (460px width)'),
+#               'width': 460, 'height': '', 'opts': ''},
+#    'big': {'verbose_name': ugettext('Big (620px width)'),
+#            'width': 620, 'height': '', 'opts': ''},
+#    'cropped': {'verbose_name': ugettext('Cropped (60x60px)'),
+#                'width': 64, 'height': 64, 'opts': 'crop'},
+#    'croppedthumbnail': {'verbose_name': ugettext('Cropped Thumbnail (140x140px)'),
+#                         'width': 140, 'height': 140, 'opts': 'crop'},
+#    'slideshow': {'verbose_name': ugettext('Slideshow (300x300px)'),
+#                  'width': 300, 'height': 300, 'opts': 'crop'},
+#    'slideshow-background': {'verbose_name': ugettext('Slideshow Background (550px'),
+#                  'width': 550, 'height': '', 'opts': 'crop'},
+#    'newsletter_teaser': {'verbose_name': ugettext('Newsletter Teaser (150x150px)'),
+#                  'width': 150, 'height': 150, 'opts': 'crop'},
+#    'carrousel_bootstrap': {'verbose_name': ugettext('Carrousel Bootstrap'),
+#                 'width': 730, 'height': 350, 'opts': 'crop upscale'},
+#    'labeled_icon_bootstrap': {'verbose_name': ugettext('Labeled Bootstrap'),
+#                 'width': 250, 'height': 200, 'opts': 'crop upscale'},
+#}
 
-FILEBROWSER_MAX_UPLOAD_SIZE = 1024*1024*20 # 20MB
+#FILEBROWSER_MAX_UPLOAD_SIZE = 1024*1024*20 # 20MB
 
 # django-registration settings
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -255,7 +255,7 @@ ROSETTA_EXCLUDED_APPLICATIONS = (
     'mptt_tree_editor',
     'mptt',
     'captcha',
-    'filebrowser',
+#    'filebrowser',
     'south',
     'registration',
     'profiles',

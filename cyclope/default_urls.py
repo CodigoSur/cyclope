@@ -68,7 +68,7 @@ urlpatterns = patterns('',
     url(r'^media_widget/', include('cyclope.apps.media_widget.urls')),
 
     ## admin & django contrib
-    url(r'^admin/filebrowser/', include('filebrowser.urls')),
+#    url(r'^admin/filebrowser/', include('filebrowser.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin_tools/', include('admin_tools.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),

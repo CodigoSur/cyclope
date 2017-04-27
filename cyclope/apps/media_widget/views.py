@@ -5,10 +5,10 @@ from cyclope.apps.medialibrary.forms import InlinedPictureForm
 from django.views.decorators.http import require_POST
 from django.core.urlresolvers import reverse
 from forms import MediaWidgetForm, MediaEmbedForm
-from filebrowser.functions import handle_file_upload, convert_filename
+# from filebrowser.functions import handle_file_upload, convert_filename
 from django.conf import settings
 import os
-from filebrowser.settings import ADMIN_THUMBNAIL
+# from filebrowser.settings import ADMIN_THUMBNAIL
 from cyclope.utils import generate_fb_version
 from django.contrib import messages
 from django.http import HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
@@ -103,11 +103,11 @@ def pictures_create(request, article_id):
         if form.is_valid():
             image = form.cleaned_data['image']
             #normalize file name
-            image.name = convert_filename(image.name)
+#            image.name = convert_filename(image.name)
             #filesystem save
-            uploaded_path = handle_file_upload(settings.MEDIA_ROOT, image)
+#            uploaded_path = handle_file_upload(settings.MEDIA_ROOT, image)
             #thumbnails
-            generate_fb_version(uploaded_path, ADMIN_THUMBNAIL)
+#            generate_fb_version(uploaded_path, ADMIN_THUMBNAIL)
             #database save
             picture = Picture(
                 name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else image.name,
@@ -301,7 +301,7 @@ def embed_create(request):
                 klass = ContentType.objects.get(model=media_type).model_class()
                 instance = klass() # generic instance of media model
                 #filesystem save 
-                uploaded_path = handle_file_upload(settings.MEDIA_ROOT, multimedia)
+#                uploaded_path = handle_file_upload(settings.MEDIA_ROOT, multimedia)
                 #database save
                 instance.name = form.cleaned_data['name'] if form.cleaned_data['name']!='' else multimedia.name
                 instance.description = form.cleaned_data['description']

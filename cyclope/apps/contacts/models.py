@@ -35,7 +35,7 @@ from cyclope.core.collections.models import Collectible
 
 from cyclope.apps.locations.models import Location
 from autoslug.fields import AutoSlugField
-from filebrowser.fields import FileBrowseField
+# from filebrowser.fields import FileBrowseField
 
 from django.apps import apps
 
@@ -59,8 +59,7 @@ class Contact(BaseContent, Collectible):
     surname = models.CharField(_('surname'), blank=True, max_length=255)
     birth_date = models.DateField(_('birth date'), blank=True, null=True)
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, null=True, blank=True)
-    photo = FileBrowseField(_('photo'), max_length=100, format='Image',
-                            directory='contact_images/', blank=True)
+#    photo = FileBrowseField(_('photo'), max_length=100, format='Image', directory='contact_images/', blank=True)
     email = models.EmailField(_('e-mail'), blank=True)
     web = models.CharField(_('web site'), max_length=255, blank=True)
     mobile_phone_number = models.CharField(_('mobile phone number'), max_length=40, blank=True)

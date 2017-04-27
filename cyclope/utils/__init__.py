@@ -288,7 +288,7 @@ def get_or_set_cache(func, args, kwargs, key, timeout=None):
     return out
 
 def generate_fb_version(image_path, version_suffix):
-    from filebrowser.functions import get_version_path, version_generator
+#    from filebrowser.functions import get_version_path, version_generator
     version_path = get_version_path(image_path, version_suffix)
     if not os.path.isfile(version_path):
         version_path = version_generator(image_path, version_suffix)

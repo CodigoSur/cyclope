@@ -31,9 +31,9 @@ from cyclope.admin import BaseContentAdmin
 
 from models import *
 
-from filebrowser.fields import FileBrowseField
-from filebrowser.base import FileObject
-from filebrowser.functions import handle_file_upload, convert_filename
+#from filebrowser.fields import FileBrowseField
+#from filebrowser.base import FileObject
+#from filebrowser.functions import handle_file_upload, convert_filename
 
 # This is a standard ClearableFileInput.
 # We just need to "translate" some data from the FileBrowseField
@@ -103,8 +103,8 @@ def media_admin_factory(media_model):
                     )
                     if f_field in self.files.keys():
                         f = self.files[f_field]
-                        f.name = convert_filename(f.name)
-                        name = handle_file_upload(abs_paths[f_field], f)
+#                        f.name = convert_filename(f.name)
+#                        name = handle_file_upload(abs_paths[f_field], f)
                         setattr(instance, f_field, name)
                     else:
                         # TODO(nicoechaniz): this is ugly! refactor
