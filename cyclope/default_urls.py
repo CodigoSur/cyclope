@@ -37,7 +37,7 @@ from cyclope.forms import DateSearchForm, ModelSearchForm
 from cyclope.views import delete_regionview
 from django.conf.urls.static import static
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
         {'sitemaps': {"menus": MenuSitemap, "categories": CategorySitemap,
                       "collections": CollectionSitemap}}),
@@ -108,25 +108,25 @@ urlpatterns = patterns('',
     # django-generic-ratings
 #    (r'^ratings/', include('ratings.urls')),
     # django-activity-stream
-    ('^activity/', include('actstream.urls')),
-)
+    url('^activity/', include('actstream.urls')),
+]
 
 # staticfiles serves uploaded media, only when DEBUG is True 
 urlpatterns += static(django_settings.MEDIA_URL, document_root=django_settings.MEDIA_ROOT)
 
-if 'live' in django_settings.INSTALLED_APPS:
-    urlpatterns += patterns('',
-                            (r'^live/', include('live.urls')),
-                            )
+#if 'live' in django_settings.INSTALLED_APPS:
+#   urlpatterns += patterns('',
+#                            (r'^live/', include('live.urls')),
+#                            )
 
-if 'schedule' in django_settings.INSTALLED_APPS:
-    urlpatterns += patterns('',
-                            (r'^schedule/', include('schedule.urls')),
-                            )
+#if 'schedule' in django_settings.INSTALLED_APPS:
+#    urlpatterns += patterns('',
+#                            (r'^schedule/', include('schedule.urls')),
+#                            )
 
-if 'rosetta' in django_settings.INSTALLED_APPS:
-    urlpatterns += patterns('',
+#if 'rosetta' in django_settings.INSTALLED_APPS:
+#    urlpatterns += patterns('',
         ## url(r'^rosetta/translate/(?P<langid>[\w\-]+)/(?P<idx>\d+)/',
         ##     'cyclope.helper_views.rosetta_select_and_translate'),
-        url(r'^rosetta/', include('rosetta.urls')),
-    )
+#        url(r'^rosetta/', include('rosetta.urls')),
+#    )

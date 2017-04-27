@@ -92,7 +92,7 @@ class CyclopeSite(object):
         return self._registry.keys()
 
     def get_urls(self):
-        urlpatterns = patterns('',
+        urlpatterns = [
             url(r'^$', self.index, name='index'),
             #JSON views for AJAX updating of admin fields
             url(r'^collection_categories_json$', self.collection_categories_json),
@@ -103,7 +103,7 @@ class CyclopeSite(object):
             url(r'^menu_items_for_menu_json$', self.menu_items_for_menu_json),
             url(r'^options_view_widget_html$', self.options_view_widget_html),
             url(r'^api/create/$', self.api_create_content),
-        )
+        ]
 
         # url patterns for registered views
         for model, model_views in self._registry.items():
@@ -111,7 +111,7 @@ class CyclopeSite(object):
             for view in model_views:
                 url_pattern = self.get_url_pattern_for_view(view, model_name)
                 url_name = self.get_url_name_for_view(view, model_name)
-                urlpatterns += patterns('', url(url_pattern, view, name=url_name))
+                urlpatterns.append(url(url_pattern, view, name=url_name))
                 if view.is_default:
                     urlpatterns += patterns('', url(url_pattern, view, name=model_name))
 

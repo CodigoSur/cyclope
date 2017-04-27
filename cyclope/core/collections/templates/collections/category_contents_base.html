@@ -1,6 +1,6 @@
 {% extends host_template %}
 
-{% load i18n cyclope_utils fb_versions obj_perms %}
+{% load i18n cyclope_utils obj_perms %} 
 
 {% block content %}
 
@@ -34,14 +34,14 @@
         <div class="category_description">
         {% if view_options.show_title %}
                 <span class="category_title">
-                    <a href="{% url category-default category.slug %}">{{ category.name }}</a>
+                    <a href="{% url 'category-default' category.slug %}">{{ category.name }}</a>
                 </span>
             {% endif %}
 
             {% if category.description and view_options.show_description or category.image and view_options.show_image %}
             <div class="collection_teaser">
                 {% if category.image and view_options.show_image %}
-                <img class="image" src="{% version category.image.path 'fb_thumb' %}" border="0"/>
+                <img class="image" src="{{ category.image.path }}" border="0"/>
                 {% endif %}
                 {% if category.description and view_options.show_description %}
                 <div class="summary">{{ category.description|smart_style }}</div>
@@ -59,7 +59,7 @@
       {% if view_options.show_title %}
       <div class="category_title">
         <h1 class="title">
-          <a href="{% url category-default category.slug %}">{{ category.name }}</a>
+          <a href="{% url 'category-default' category.slug %}">{{ category.name }}</a>
         </h1>
       </div>
       {% endif %}
@@ -67,7 +67,7 @@
       {% if category.description and view_options.show_description or category.image and view_options.show_image %}
       <div class="collection_teaser">
         {% if category.image and view_options.show_image %}
-        <img class="image" src="{% version category.image.path 'small' %}" border="0"/>
+        <img class="image" src="{{ category.image.path }}" border="0"/>
         {% endif %}
         {% if category.description and view_options.show_description %}
         <div class="summary">{{ category.description|smart_style }}</div>
