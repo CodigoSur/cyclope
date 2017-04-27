@@ -1,4 +1,4 @@
-{% load comments i18n fb_versions cyclope_utils dbgettext_tags %}
+{% load i18n cyclope_utils dbgettext_tags %}
 
 {% block content %}
 <div class="content-view article inline_detail article-inline_detail">
@@ -10,7 +10,7 @@
     <span class="ToC_link"><a href="#ToC">{% trans "Return to Table of Contents" %}</a></span>
   {% endif %}
 
-  <a id="article-{{ article.slug }}" href="{% url article-detail article.slug %}">
+  <a id="article-{{ article.slug }}" href="{% url 'article-detail' article.slug %}">
     <h3 class="title">{% trans article.name  %}</h3>
   </a>
 
@@ -23,7 +23,7 @@
   <div class="article_content">
   {% if article.pictures.values %}
   {% with picture=article.pictures.values|first %}
-      <img src="{% version picture.image 'small' %}" alt="{{ picture.name }}" hspace="0" vspace="0" align="right" />
+      <img src="{{ picture.image }}" alt="{{ picture.name }}" hspace="0" vspace="0" align="right" />
   {% endwith %}
   {% endif %}
 
