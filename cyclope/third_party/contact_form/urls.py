@@ -11,8 +11,8 @@ hierarchy (for best results with the defaults, include it under
 """
 
 
-#from django.conf.urls.defaults import *
-from django.views.generic.simple import direct_to_template
+from django.conf.urls import patterns, include, url
+from django.views.generic import TemplateView
 
 from views import contact_form
 from forms import AdminSettingsContactForm
@@ -23,7 +23,7 @@ urlpatterns = patterns('',
                            {'form_class': AdminSettingsContactForm},
                            name='contact_form'),
                        url(r'^sent/$',
-                           direct_to_template,
+                           TemplateView,
                            { 'template': 'contact_form/contact_form_sent.html' },
                            name='contact_form_sent'),
                        )
