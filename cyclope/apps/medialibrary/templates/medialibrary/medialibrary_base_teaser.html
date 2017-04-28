@@ -6,7 +6,7 @@
   {% if current_object.image %}
       <div class="teaser_icon_container media-content">
       <a href="{% if current_object.skip_detail %}{{ current_object.content_url }}{% else %}{{ current_object.get_absolute_url }}{% endif%}" {% if current_object.new_window %}target="_blank"{% endif%}>
-        <img class="teaser_icon img-responsive" src="{% version current_object.image.path 'thumbnail' %}" border="0"/>
+        <img class="teaser_icon img-responsive" src="{{ current_object.image.path }}" border="0"/>
       </a>
     </div>
   {% endif %}

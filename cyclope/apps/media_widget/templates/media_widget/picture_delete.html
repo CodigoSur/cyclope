@@ -7,7 +7,7 @@
         <tr>
             <td>{{ picture.name }}</td>
             <td>
-                <a href="{{ picture.image }}" target="_blank"><img src="{% version picture.image.path 'fb_thumb' %}" title="{{picture.description}}" class="thumbnail"/></a>
+                <a href="{{ picture.image }}" target="_blank"><img src="{{ picture.image.path }}" title="{{picture.description}}" class="thumbnail"/></a>
             </td>
             <td>
                 <button class="btn btn-danger btn-xs" name="picture_id" value="{{picture.pk}}">Eliminar</button>

@@ -17,7 +17,7 @@
 
     {% if staticpage.pictures %}
      <div class="teaser_icon_container"><a href="{% url 'staticpage-detail' staticpage.slug %}">
-        <img class="teaser_icon img-responsive" src="{% version staticpage.pictures.0.image.path 'small' %}" alt="{{ staticpage.text|smart_style|striptags|truncatewords:40 }}" width="135" border="0"/>
+        <img class="teaser_icon img-responsive" src="{{ staticpage.pictures.0.image.path }}" alt="{{ staticpage.text|smart_style|striptags|truncatewords:40 }}" width="135" border="0"/>
       </a></div>
     {% endif %}
 
@@ -45,7 +45,7 @@
 
     {% if staticpage.pictures %}
      <div class="teaser_icon_container"><a href="{% url 'staticpage-detail' staticpage.slug %}">
-        <img class="teaser_icon" src="{% version staticpage.pictures.0.image.path 'small' %}" width="135" border="0"/>
+        <img class="teaser_icon" src="{{ staticpage.pictures.0.image.path }}" width="135" border="0"/>
       </a></div>
     {% endif %}
 

@@ -38,4 +38,4 @@ $(function() {
 
 {{ current_object.about|linebreaks }}
 
-{% if current_object.avatar %}<img src="{% version current_object.avatar.path 'croppedthumbnail' %}" alt="profile avatar" />{% endif %}
+{% if current_object.avatar %}<img src="{{ current_object.avatar.path }}" alt="profile avatar" />{% endif %}

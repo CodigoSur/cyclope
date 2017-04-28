@@ -4,7 +4,7 @@
 	 
   <a href="{% url 'staticpage-detail' staticpage.slug %}">
     {% if staticpage.pictures %}
-       <img src="{% version staticpage.pictures.0.image.path 'carrousel_bootstrap' %}" alt="{{ article.name }}" border="0"/>
+       <img src="{{ staticpage.pictures.0.image.path }}" alt="{{ article.name }}" border="0"/>
     {% else %} 
       <img src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" alt="" border="0"/>
     {% endif %}

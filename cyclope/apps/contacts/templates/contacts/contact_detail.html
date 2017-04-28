@@ -8,7 +8,7 @@
     <center>
         {% if contact.photo %}
         <div class="user-image">
-            <img class="contact_photo img-circle" src="{% version contact.photo 'small' %}" />
+            <img class="contact_photo img-circle" src="{{ contact.photo }}" />
         </div>
         {% endif %}
         <h2>{{contact}}</h2>
@@ -76,7 +76,7 @@
     </div>
     <!-- /herramientas -->
     {% if contact.photo %}
-        <img class="contact_photo" src="{% version contact.photo 'cropped' %}" />
+        <img class="contact_photo" src="{{ contact.photo }}" />
     {% endif %}
     <div class="contact_teaser_detail">
         <div class="details-list">

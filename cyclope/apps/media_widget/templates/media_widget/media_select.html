@@ -8,7 +8,7 @@
         <tr>
             {% if  media.media_file_field == "image" or media.image_file_field == "image" and media.image != None %}
                 <td style="vertical-align: middle;">
-                    <a href="{{ media.image }}" target="_blank"><img src="{% version media.image.path 'fb_thumb' %}" title="{{picture.description}}" class="thumbnail"/></a>
+                    <a href="{{ media.image }}" target="_blank"><img src="{{ media.image.path }}" title="{{picture.description}}" class="thumbnail"/></a>
                 </td>
             {% elif media.image_file_field == "image" and media.image == None %}
                 <td></td>

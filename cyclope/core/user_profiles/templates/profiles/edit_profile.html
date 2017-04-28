@@ -16,7 +16,7 @@
 {% crispy form %}
 
 {% if profile.avatar %}
-  <img src="{% version profile.avatar.path 'croppedthumbnail' %}" alt="profile avatar" />
+  <img src="{{ profile.avatar.path }}" alt="profile avatar" />
 {% endif %}
 </div>
 

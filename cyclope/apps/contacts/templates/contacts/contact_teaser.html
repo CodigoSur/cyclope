@@ -5,7 +5,7 @@
         {% if contact.photo %}
         <div class="media-left">
             <a href="#">
-                <img class="photo img-circle" src="{% version contact.photo 'cropped' %}" />
+                <img class="photo img-circle" src="{{ contact.photo }}" />
             </a>
         </div>
     {% else %}
@@ -35,7 +35,7 @@
 {% elif CYCLOPE_THEME_TYPE == 'classic' %}
     {% if contact.photo %}
     <div class="title">
-        <img class="photo" src="{% version contact.photo 'cropped' %}" />
+        <img class="photo" src="{{ contact.photo }}" />
         <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png" alt="contact" />
         <a  href="{% url 'contact-detail' contact.slug %}">{{ contact }}</a>
     </div>
