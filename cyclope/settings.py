@@ -61,7 +61,7 @@ from cyclope.core.frontend.sites import site
 
 CYCLOPE_PREFIX = getattr(settings, 'CYCLOPE_PREFIX', 'cyclope/')
 
-CYCLOPE_STATIC_URL = getattr(settings, 'CYCLOPE_STATIC_URL', '%scyclope/' % settings.STATIC_URL)
+CYCLOPE_STATIC_URL =  settings.STATIC_URL
 CYCLOPE_STATIC_ROOT = getattr(settings, 'CYCLOPE_STATIC_ROOT', '%scyclope/' % settings.STATIC_ROOT)
 
 # For backwards compatibility only!
@@ -145,6 +145,7 @@ def populate_from_site_settings(site_settings):
     else:
         CYCLOPE_THEME_MEDIA_URL = '%sthemes/%s/' % (CYCLOPE_STATIC_URL,
                                                     CYCLOPE_CURRENT_THEME)
+    import pdb; pdb.set_trace()
 
     CYCLOPE_THEME_PREFIX = 'cyclope/themes/%s/' % CYCLOPE_CURRENT_THEME
     CYCLOPE_THEME_BASE_TEMPLATE = 'cyclope/themes/%s/base.html' % CYCLOPE_CURRENT_THEME
