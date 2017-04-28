@@ -555,3 +555,14 @@ footer,
     }
 
 }
+
+/*navbar bootstrap muestra un color #080808 en active y open y lo deshabilitamos en cyclopecms para que sea más sencillo editarlo*/
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus,
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  color: inherit;
+  background-color: transparent;
+}
