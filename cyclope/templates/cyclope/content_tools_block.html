@@ -1,5 +1,7 @@
-{% load i18n threadedcomments_tags obj_perms cyclope_utils abuse %}
-  {% get_comment_count for current_object as comment_count %}
+{% load i18n obj_perms cyclope_utils abuse %}
+{# TODO desahabilitado threadedcomments_tags para update a 1.9 #}
+
+ {# {% get_comment_count for current_object as comment_count %} #}
 
   <div class="tools meta-content">
     {% if CYCLOPE_SITE_SETTINGS.enable_share_buttons %}
