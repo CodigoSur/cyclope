@@ -1,6 +1,7 @@
 {% extends host_template %}
 
-{% load comments i18n  cyclope_utils dbgettext_tags %}
+{% load i18n  cyclope_utils dbgettext_tags %}
+{# TODO desahabilitado comments para update a 1.9 #}
 
 {% block content %} 
 {% if not user.is_authenticated and not article.published %}
@@ -207,12 +208,12 @@
 
 {% include 'cyclope/related_contents_block.html' %}
 
-{% include 'ratings/rating_block.html' %}
+{# % include 'ratings/rating_block.html' % #}
 
 <div class="clear"></div>
 
 <!--COMENTARIOS -->
-  {% include 'comments/comments_block.html' %}
+{# % include 'comments/comments_block.html' % #}
 
 
 
