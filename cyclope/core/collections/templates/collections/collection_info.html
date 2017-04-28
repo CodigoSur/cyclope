@@ -1,4 +1,4 @@
-{% load i18n cyclope_utils fb_versions %}
+{% load i18n cyclope_utils  %}
 <div class="collection {{ collection.slug }}">
 	<div class="collection_header">
 		{% if collection.visible %}
@@ -7,7 +7,7 @@
 			<div class="collection_teaser">
 				{% if collection.image %}
 				<div class="collection_image">
-					<img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
+					<img class="image" src="{{ collection.image.path }}" border="0"/>
 				</div>
 				{% endif %}
 				<div class="summary">
@@ -17,7 +17,7 @@
 			{% else %}
 				{% if collection.image %}
 				<div class="collection_teaser">
-					<img class="image" src="{% version collection.image.path 'medium' %}" border="0"/>
+					<img class="image" src="{{ collection.image.path }}" border="0"/>
 				</div>
 				{% endif %}
 			{% endif %}

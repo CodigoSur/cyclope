@@ -1,6 +1,6 @@
 {% extends host_template %}
 
-{% load i18n comments cyclope_utils fb_versions %}
+{% load i18n comments cyclope_utils  %}
 
 {% block content %}
 
@@ -19,7 +19,7 @@
 		{% if current_object.image %}
 			<div class="media-content">
 				{% if current_object.content_url %}<a href="{{ current_object.content_url }}" {% if current_object.new_window %}target="_blank"{% endif%} >{% endif%}
-				<img align="center" src="{% version current_object.image.path 'big' %}"/>
+				<img align="center" src="{{ current_object.image.path }}"/>
 				{% if current_object.content_url %}</a>{% endif%}
 			</div>
 		{% endif %}

@@ -1,4 +1,4 @@
-{% load i18n fb_versions cyclope_utils dbgettext_tags %}
+{% load i18n  cyclope_utils dbgettext_tags %}
 
 <div class="content-view staticpage media">
 
@@ -11,9 +11,9 @@
     <a href="{% url 'staticpage-detail' staticpage.slug %}">
         {% if staticpage.pictures %}
             {% if not view_options.show_title and not view_options.show_description %}
-          <img class="icon big" src="{% version staticpage.pictures.0.image.path 'big' %}" border="0"/>
+          <img class="icon big" src="{{ staticpage.pictures.0.image.path }}" border="0"/>
             {% else %}
-          <img class="slideshow_picture" src="{% version staticpage.pictures.0.image.path view_options.visualization_mode %}" border="0"/>
+          <img class="slideshow_picture" src="{{ staticpage.pictures.0.image.path }}" border="0"/>
             {% endif %}
         {% else %}
           <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>

@@ -1,6 +1,6 @@
 {% extends host_template %}
 
-{% load i18n comments cyclope_utils fb_versions %}
+{% load i18n comments cyclope_utils  %}
 
 {% block content %}
 
@@ -36,7 +36,7 @@
 	{% if current_object.image %}
   <div class="movieclip_picture media-content">
     {% if current_object.content_url %}<a href="{{ current_object.content_url }}" {% if current_object.new_window %}target="_blank"{% endif%} >{% endif%}
-    <img class="center-block" src="{% version current_object.image.path 'medium' %}"/>
+    <img class="center-block" src="{{ current_object.image.path }}"/>
     {% if current_object.content_url %}</a>{% endif%}
   </div>
 	{% endif %}
@@ -64,7 +64,7 @@
 							{% if author.image %}
 							<div class="media-left">
 									<a href="#">
-											<img class="author img-circle" src="{% version author.image.path 'cropped' %}" border="0" title="Author"/>
+											<img class="author img-circle" src="{{ author.image.path }}" border="0" title="Author"/>
 									</a>
 							</div>
 									

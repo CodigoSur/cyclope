@@ -1,4 +1,4 @@
-{% load fb_versions %}
+{% load  %}
 
 {% include "media_widget/pagination_header.html" with widget='pictures' pagina=select_page %}
 
@@ -9,7 +9,7 @@
         <tr>
             <td>{{ picture.name }}</td>
             <td>
-                <a href="{{ picture.image }}" target="_blank"><img src="{% version picture.image.path 'fb_thumb' %}" title="{{picture.description}}" class="thumbnail"/></a>
+                <a href="{{ picture.image }}" target="_blank"><img src="{{ picture.image.path }}" title="{{picture.description}}" class="thumbnail"/></a>
             </td>
             <td>
                 <button class="btn btn-primary btn-xs" name="picture_id" value="{{picture.pk}}">Seleccionar</button>

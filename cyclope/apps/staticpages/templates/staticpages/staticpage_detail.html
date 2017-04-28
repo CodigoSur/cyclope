@@ -1,5 +1,5 @@
 {% extends host_template %}
-{% load i18n cyclope_utils fb_versions %}
+{% load i18n cyclope_utils  %}
 
 {% comment %}
 When inserted in a layout region the host template used is just a wrapper (see inline_view.html).
@@ -23,7 +23,7 @@ When showing the StaticPage as the main content of the view, the host_template i
   
   {% if staticpage.pictures %}
     <a href="{% url 'staticpage-detail' staticpage.slug %}">
-        <img class="img-responsive" src="{% version staticpage.pictures.0.image.path 'big' %}" border="0"/>
+        <img class="img-responsive" src="{{ staticpage.pictures.0.image.path }}" border="0"/>
     </a>
   {% endif %}
   

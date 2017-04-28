@@ -1,4 +1,4 @@
-{% load i18n cyclope_utils fb_versions dbgettext_tags %}
+{% load i18n cyclope_utils  dbgettext_tags %}
 
   <div class="newsletter_teaser">
 <table border="0" cellpadding="0" cellspacing="0">
@@ -13,7 +13,7 @@
       {% if current_object.pictures.values %}
       {% with picture=current_object.pictures.values|first %}
       <a href="{% url 'article-detail' article.slug %}">
-        <img class="newsletter_image" src="{% version picture.image 'newsletter_teaser' %}" alt="{{ picture.name }}"/>
+        <img class="newsletter_image" src="{{ picture.image }}" alt="{{ picture.name }}"/>
       </a>
       {% endwith %}
       {% endif %}

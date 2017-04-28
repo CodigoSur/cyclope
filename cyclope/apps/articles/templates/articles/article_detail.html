@@ -1,6 +1,6 @@
 {% extends host_template %}
 
-{% load comments i18n fb_versions cyclope_utils dbgettext_tags %}
+{% load comments i18n  cyclope_utils dbgettext_tags %}
 
 {% block content %} 
 {% if not user.is_authenticated and not article.published %}
@@ -49,7 +49,7 @@
 			{% with article.pictures.all|first as picture %}
 			<div class="{% inline_content_classes %}">
 					<div class="modals-picture" data-toggle="modal" data-target="#myModal">
-						<img class="center-block" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
+						<img class="center-block" src="{{ picture.image.path }}" alt="{{ picture.name }}"/>
 						<div class="carousel-caption">
 								<p>{{ picture.name|truncatechars:80 }}</p>
 						</div>
@@ -65,7 +65,7 @@
 								</h4>
 							</div>
 							<div class="modal-body">
-								<img class="img-responsive" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}"/>
+								<img class="img-responsive" src="{{ picture.image.path }}" alt="{{ picture.name }}"/>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
@@ -90,7 +90,7 @@
 							<div class="item {% if forloop.first %}active{% endif %}">
 								<!-- Div trigger modal -->
 								<div class="modals-picture" data-toggle="modal" data-target="#myModal{{forloop.counter}}">
-									<img class="center-block" src="{% version picture.image.path 'carrousel_bootstrap' %}" alt="{{ picture.name }}" />
+									<img class="center-block" src="{{ picture.image.path }}" alt="{{ picture.name }}" />
 									<div class="carousel-caption">
 											<p>{{ picture.name|truncatechars:80 }}</p>
 									</div>
@@ -105,7 +105,7 @@
 											<h4 class="modal-title" id="myModalLabel">{{ picture.name }}</h4>
 										</div>
 										<div class="modal-body">
-											<img class="img-responsive" src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
+											<img class="img-responsive" src="{{ picture.image.path }}" alt="{{ picture.name }}" />
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
@@ -133,8 +133,8 @@
 			<ul>
 			    {% for picture in article.pictures.all %}
 		        <li {% if not forloop.first %} style="display:none;" {% endif %} >
-		        <a href="{% version picture.image.path 'big' %}"  title="{{ picture.name }}">
-			        <img src="{% version picture.image.path 'big' %}" alt="{{ picture.name }}" />
+		        <a href="{{ picture.image.path }}"  title="{{ picture.name }}">
+			        <img src="{{ picture.image.path }}" alt="{{ picture.name }}" />
 			        <p>{{ picture.name }}
 				        {% if article.pictures.count >= 2 %}
 				            ({{ article.pictures.count }} {% trans "pictures" %})
@@ -181,7 +181,7 @@
 								{% if author.image %}
 								<div class="media-left">
 										<a href="#">
-												<img class="author img-circle" src="{% version author.image.path 'cropped' %}" border="0" title="Author"/>
+												<img class="author img-circle" src="{{ author.image.path }}" border="0" title="Author"/>
 										</a>
 								</div>
 										

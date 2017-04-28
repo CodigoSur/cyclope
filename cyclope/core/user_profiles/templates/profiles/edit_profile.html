@@ -1,5 +1,5 @@
 {% extends CYCLOPE_DEFAULT_TEMPLATE %}
-{% load i18n fb_versions crispy_forms_tags %}
+{% load i18n  crispy_forms_tags %}
 
 {% block content%}
 
@@ -16,7 +16,7 @@
 {% crispy form %}
 
 {% if profile.avatar %}
-  <img src="{% version profile.avatar.path 'croppedthumbnail' %}" alt="profile avatar" />
+  <img src="{{ profile.avatar.path }}" alt="profile avatar" />
 {% endif %}
 </div>
 

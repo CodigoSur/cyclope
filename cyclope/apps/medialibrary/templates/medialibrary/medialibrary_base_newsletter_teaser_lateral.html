@@ -1,4 +1,4 @@
-{% load i18n cyclope_utils fb_versions %}
+{% load i18n cyclope_utils  %}
 
 {% block content %}
 
@@ -17,7 +17,7 @@
         {% if current_object.image %}
 			<div class="teaser_icon_container media-content">
 				<a href="{% if current_object.skip_detail %}{{ current_object.content_url }}{% else %} {{ current_object.get_absolute_url }} {% endif%}" {% if current_object.new_window %}target="_blank"{% endif%}>
-					<img class="newsletter_image" src="{% version current_object.image.path 'newsletter_teaser' %}" border="0"/>
+					<img class="newsletter_image" src="{{ current_object.image.path }}" border="0"/>
 				</a>
 			</div>
 		{% endif %}

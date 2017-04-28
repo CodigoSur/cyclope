@@ -1,4 +1,4 @@
-{% load i18n fb_versions activity_tags social %}
+{% load i18n  activity_tags social %}
 {% load url from future %}
 
 <h1 class="title">{{ current_object.user.get_full_name|default:current_object.user.username }}</h1>
@@ -38,4 +38,4 @@ $(function() {
 
 {{ current_object.about|linebreaks }}
 
-{% if current_object.avatar %}<img src="{% version current_object.avatar.path 'croppedthumbnail' %}" alt="profile avatar" />{% endif %}
+{% if current_object.avatar %}<img src="{{ current_object.avatar.path }}" alt="profile avatar" />{% endif %}

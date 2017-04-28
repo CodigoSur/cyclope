@@ -1,4 +1,4 @@
-{% load i18n fb_versions dbgettext_tags cyclope_utils %}
+{% load i18n  dbgettext_tags cyclope_utils %}
 <div class="content-view article teaser article-teaser {% inline_content_classes %}">
 	{% if simplified_view %}
 		<div class="teaser_text_container_simplified">
@@ -12,7 +12,7 @@
 			{% with picture=article.pictures.values|first %}
 				<div class="teaser_icon_container">
 					<a href="{{ article.get_absolute_url }}" title="{{ picture.name }}">
-						<img class="teaser_icon img-responsive" src="{% version picture.image 'thumbnail' %}" alt="{{ picture.name }}" border="0"/>
+						<img class="teaser_icon img-responsive" src="{{ picture.image }}" alt="{{ picture.name }}" border="0"/>
 					</a>
 				</div>
 			{% endwith %}

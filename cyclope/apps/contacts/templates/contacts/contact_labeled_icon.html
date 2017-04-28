@@ -1,10 +1,10 @@
-{% load fb_versions cyclope_utils %}
+{% load  cyclope_utils %}
 
   <div class="content-view contact labeled_icon">
     <a href="{% url 'contact-detail' contact.slug %}">
       {% if contact.photo %}
       <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png"/>
-      <img class="icon" src="{% version contact.photo.path 'thumbnail' %}" />
+      <img class="icon" src="{{ contact.photo.path }}" />
       {% else %}
       <img class="type_icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/contact.png" border="0"/>
         <img class="icon" src="{{ CYCLOPE_THEME_MEDIA_URL }}images/icons/not-available.png" border="0"/>

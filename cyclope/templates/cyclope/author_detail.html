@@ -1,6 +1,6 @@
 {% extends host_template %}
 
-{% load i18n fb_versions cyclope_utils dbgettext_tags %}
+{% load i18n  cyclope_utils dbgettext_tags %}
 
 {% block content %}
 {% if CYCLOPE_THEME_TYPE == 'bootstrap' %}
@@ -8,7 +8,7 @@
         <center>
             {% if current_object.image %}
             <div class="media-content">
-                <img src="{% version current_object.image.path 'small' %}" name="aboutme" class="img-circle"/>
+                <img src="{{ current_object.image.path }}" name="aboutme" class="img-circle"/>
             </div>
             {% endif %}
             <h2>{{ current_object.name }}</h2>
@@ -25,7 +25,7 @@
     <h1 class="title">{{ current_object.name }}</h1>
     {% if current_object.image %}
     <div class="media-content">
-        <img src="{% version current_object.image.path 'croppedthumbnail' %}" />
+        <img src="{{ current_object.image.path }}" />
     </div>
     {% endif %}
     {% if current_object.origin %}

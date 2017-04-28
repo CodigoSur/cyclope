@@ -1,5 +1,5 @@
 {% extends host_template %}
-{% load i18n cyclope_utils fb_versions %}
+{% load i18n cyclope_utils  %}
 {% block content %}
   <div class="content-view collection">
       {% include 'collections/collection_info.html' %}
@@ -9,7 +9,7 @@
           {% if category.image %}
             <div class="teaser_icon_container">
               <a href="{% url 'category-default' category.slug %}">
-                <img class="icon" src="{% version category.image.path 'small' %}" border="0" alt="{{ category.name }}"/>
+                <img class="icon" src="{{ category.image.path }}" border="0" alt="{{ category.name }}"/>
               </a>
             </div>
           {% endif %}
