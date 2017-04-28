@@ -38,7 +38,7 @@
     {% compress css %}
     {% block displaycss %}
     {% block cyclopecss %}
-        {% bootstrap_skin_link %}
+        {% autoescape off %}{% bootstrap_skin_link %}{% endautoescape %}
         <!-- Custom CSS -->
         <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/cyclope.less" rel="stylesheet{% if not COMPRESS_ENABLED %}/less{% endif %}" type="text/less"/>
         <link href="{{ CYCLOPE_THEME_MEDIA_URL }}css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
