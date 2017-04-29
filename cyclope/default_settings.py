@@ -136,7 +136,7 @@ INSTALLED_APPS = [
     'compressor',
 #    'ratings', 
     'actstream',
-
+    'django_extensions',
 #   'cyclope.apps.post_init',
 ]
 

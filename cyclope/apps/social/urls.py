@@ -26,10 +26,9 @@
 
 """URLs module"""
 from django.conf.urls import patterns, url
+from cyclope.apps.social import views
 
-
-urlpatterns = patterns('cyclope.apps.social.views',
-    url(r'^followers/(?P<content_type_id>\d+)/(?P<object_id>\d+)/$', 'followers',
-        name='social-followers'),
-    url(r'^following/(?P<user_id>\d+)/', 'following', name="social-following"),
-)
+urlpatterns = [ # patterns('cyclope.apps.social.views',
+    url(r'^/followers/(?P<content_type_id>\d+)/(?P<object_id>\d+)/$', views.followers, name='social-followers'),
+    url(r'^/following/(?P<user_id>\d+)/', views.following, name="social-following"),
+]

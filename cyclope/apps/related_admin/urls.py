@@ -28,7 +28,7 @@
 from django.conf.urls import patterns, url
 from views import render_object
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^render_object/(?P<ct_id>\d+)/(?P<obj_id>\d+)/',
         render_object, name="render-object"),
-)
+]

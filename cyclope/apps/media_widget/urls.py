@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from views import pictures_new, pictures_upload, pictures_create, pictures_update, pictures_delete, embed_new, embed_create, library_fetch, pictures_widget, pictures_widget_new, delete_pictures_list, pictures_widget_select
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Article's pictures
     # Upload
     url(r'^pictures/new/(?P<article_id>\d+)$', pictures_upload, name="pictures-upload"), #existing article, MUST GO FIRST
@@ -20,4 +20,4 @@ urlpatterns = patterns('',
     url(r'^embed/create$', embed_create, name="embed-create"),
     # Ajax
     url(r'^library/(?P<media_type>\w+)$', library_fetch, name="library-fetch")
-)
+]

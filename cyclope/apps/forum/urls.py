@@ -22,7 +22,6 @@
 from django.conf.urls import patterns, url
 from cyclope.views import ContentDeleteView
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^(?P<content_type>topic)/(?P<slug>[\w-]+)/delete/$', ContentDeleteView.as_view(), {'app': 'forum'}, name='forum-delete'),
-)
+]

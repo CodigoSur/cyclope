@@ -28,7 +28,6 @@
 from django.conf.urls import patterns, url
 from views import abuse_report
 
-urlpatterns = patterns('',
-    url(r'^report/(?P<ct_id>\d+)/(?P<obj_id>\d+)/', abuse_report,
-        name="abuse-report"),
-)
+urlpatterns = [
+    url(r'^report/(?P<ct_id>\d+)/(?P<obj_id>\d+)/', abuse_report, name="abuse-report"),
+]

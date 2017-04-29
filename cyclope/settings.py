@@ -136,7 +136,9 @@ def populate_from_site_settings(site_settings):
     CYCLOPE_SITE_SETTINGS = site_settings
     CYCLOPE_BASE_URL = "http://" + CYCLOPE_SITE_SETTINGS.site.domain # FIXME: could be https
     CYCLOPE_CURRENT_THEME = CYCLOPE_SITE_SETTINGS.theme
-    CYCLOPE_THEME_TYPE = getattr(themes.get_theme(CYCLOPE_CURRENT_THEME), 'theme_type', 'classic')
+    
+    CYCLOPE_THEME_TYPE = 'bootstrap' # TODO getattr(themes.get_theme(CYCLOPE_CURRENT_THEME), 'theme_type', 'classic')
+    
     CYCLOPE_SEARCH_DATE = CYCLOPE_SITE_SETTINGS.enable_search_by_date
     
     if CYCLOPE_CURRENT_THEME in themes.get_local_themes():

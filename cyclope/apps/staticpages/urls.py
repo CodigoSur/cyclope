@@ -22,7 +22,6 @@
 from django.conf.urls import patterns, url
 from cyclope.views import ContentDeleteView
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^(?P<content_type>staticpage)/(?P<slug>[\w-]+)/delete/$', ContentDeleteView.as_view(), {'app': 'staticpages'}, name='staticpages-delete'),
-)
+]

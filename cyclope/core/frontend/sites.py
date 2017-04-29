@@ -113,7 +113,7 @@ class CyclopeSite(object):
                 url_name = self.get_url_name_for_view(view, model_name)
                 urlpatterns.append(url(url_pattern, view, name=url_name))
                 if view.is_default:
-                    urlpatterns += patterns('', url(url_pattern, view, name=model_name))
+                    urlpatterns.append(url(url_pattern, view, name=model_name))
 
         # url patterns for menu items
         urlpatterns.extend(self.get_menuitem_urls())
@@ -147,20 +147,16 @@ class CyclopeSite(object):
                 obj = item.content_object
                 view = self.get_view(obj, item.content_view)
                 view_options = item.view_options
-                urlpatterns += patterns('', url('^%s$' % item.url, view,
-                                                   {'slug': obj.slug,
-                                                    'view_options':view_options}))
+                urlpatterns.append( url('^%s$' % item.url, view, {'slug': obj.slug, 'view_options':view_options}))
             elif item.content_type is not None:
                 mdl = item.content_type.model_class()
                 view = self.get_view(mdl, item.content_view)
                 view_options = item.view_options
-                urlpatterns += patterns('', url('^%s$' % item.url, view,
-                                        {'view_options':view_options}))
+                urlpatterns.append(url('^%s$' % item.url, view, {'view_options':view_options}))
 
             # this menu item has no content so we will only display the layout
             else:
-                urlpatterns += patterns('', url(r'^%s$' % item.url,
-                                                   self.no_content_layout_view))
+                urlpatterns.append( url(r'^%s$' % item.url, self.no_content_layout_view))
         return urlpatterns
 
     def get_default_view_name(self, model):

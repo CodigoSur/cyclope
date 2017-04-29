@@ -22,7 +22,6 @@
 from django.conf.urls import patterns, url
 from cyclope.views import ContentDeleteView
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^(?P<content_type>feed)/(?P<slug>[\w-]+)/delete/$', ContentDeleteView.as_view(), {'app': 'feeds'}, name='feeds-delete'),
-)
+]
