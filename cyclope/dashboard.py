@@ -98,13 +98,13 @@ class CustomIndexDashboard(Dashboard):
                         'cyclope.models.Source',
                         ]),
 
-                modules.ModelList(
-                    title=_('Comments'),
-                    css_classes = ('dbmodule-comments'),
-                    #pre_content = _('Review and moderate user comments'),
-                    include_list=[
-                        'django_comments.models.Comment',
-                    ]),
+#                modules.ModelList( / issue 142
+#                    title=_('Comments'),
+#                    css_classes = ('dbmodule-comments'),
+#                    #pre_content = _('Review and moderate user comments'),
+#                    include_list=[
+#                        'django_comments.models.Comment',
+#                    ]),
                 )))
 
         self.children.append(modules.Group(
@@ -263,9 +263,9 @@ class CustomIndexDashboard(Dashboard):
             deletable = False,
             collapsible= False,
             children=[
-                {'title': _('Browse media files'),
-                 'url': reverse('fb_browse'),
-                 },
+#                {'title': _('Browse media files'), / issue 142
+#                 'url': reverse('fb_browse'),
+#                 },
                 {'title': _('Return to site'),
                  'url': '/',
                  'external': True,
@@ -273,21 +273,21 @@ class CustomIndexDashboard(Dashboard):
                 ]
         )
 
-        # Comments moderation link
-        from cyclope.apps.custom_comments import models as custom_comments_models
-        if custom_comments_models.moderation_enabled():
-            in_moderation = custom_comments_models.CustomComment.objects.in_moderation()
-            if in_moderation:
-                url = reverse('admin:comments_comment_changelist')
-                url +="?is_removed__exact=0&is_public__exact=0"
-                moderate_link = {
-                    'title': _('%d comments need moderation') % len(in_moderation),
-                    'url': url,
-                    'external': False,
-                }
-                quick_links.children.insert(0, moderate_link)
+        # Comments moderation link / issue 142
+#        from cyclope.apps.custom_comments import models as custom_comments_models
+#        if custom_comments_models.moderation_enabled():
+#            in_moderation = custom_comments_models.CustomComment.objects.in_moderation()
+#            if in_moderation:
+#                url = reverse('admin:comments_comment_changelist')
+#                url +="?is_removed__exact=0&is_public__exact=0"
+#                moderate_link = {
+#                    'title': _('%d comments need moderation') % len(in_moderation),
+#                    'url': url,
+#                    'external': False,
+#                }
+#                quick_links.children.insert(0, moderate_link)
 
-        self.children.append(quick_links)
+#        self.children.append(quick_links)
 
         # append a recent actions module
         self.children.append(modules.RecentActions(
