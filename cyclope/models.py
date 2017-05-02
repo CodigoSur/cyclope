@@ -497,9 +497,8 @@ class Author(Collectible, ThumbnailMixin):
                             unique=True)
     slug = AutoSlugField(populate_from='name', unique=True, db_index=True,
                          always_update=False, editable=True, blank=True)
-#    image = FileBrowseField(_('image'), max_length=100, format='Image',
-#                            directory='author_images/',
-#                            blank=True, default='')
+#    image = FileBrowseField(_('image'), max_length=100, format='Image', directory='author_images/', blank=True, default='') TODO issue 142
+    image = models.CharField(_('image'), max_length=100, blank=True)
     origin = models.CharField(_('origin'), max_length=250, db_index=True,
                                blank=True, default='')
     notes = models.TextField(_('notes'), blank=True, default='')
@@ -537,8 +536,8 @@ class Source(models.Model):
 class Image(models.Model, ThumbnailMixin):
     """A simple image model.
     """
-#    image =  FileBrowseField(_('image'), max_length=100, format='Image',
-#                             directory='pictures/')
+#    image =  FileBrowseField(_('image'), max_length=100, format='Image', directory='pictures/') issue #142
+    image = models.CharField(_('image'), max_length=100, blank=True)
 
     class Meta:
         verbose_name = _('image')
