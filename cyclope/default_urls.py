@@ -38,14 +38,13 @@ from cyclope.views import delete_regionview
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
-#import pdb; pdb.set_trace()
 
 urlpatterns = [
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
         {'sitemaps': {"menus": MenuSitemap, "categories": CategorySitemap,
                       "collections": CollectionSitemap}}),
     url(r'^robots\.txt$', TemplateView.as_view()),
-#        {'template': 'cyclope/robots.txt', 'mimetype': 'text/plain'}),
+#        {'template': 'cyclope/robots.txt', 'mimetype': 'text/plain'}), TODO chuko
 
     ## cyclope apps
     url(r'', include('cyclope.apps.articles.urls')),

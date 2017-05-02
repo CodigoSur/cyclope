@@ -328,10 +328,12 @@ class PermanentFilterMixin(object):
 class ThumbnailMixin(object):
 
     def get_thumbnail_src(self):
+        # TODO thumbnails deshabilitados, ver issue 142
+        return ""
         try:
             image = getattr(self, "image")
         except AttributeError:
-            raise NotImplemented
+            raise NotImplementedError(_("{} has no attribute image").format(self))
         # pictures without thumbnail throw
         # AttributeError ... 'NoneType' object has no attribute 'replace'
         # at url_thumbnail method
