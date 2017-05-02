@@ -2,7 +2,7 @@
 {% load i18n admin_static %}
 {% load url from future %}
 
-{% block extrastyle %}{% load adminmedia %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static 'admin/css/login.css' %}" />
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static 'admin/css/login.css' %}" />
 <style type="text/css">
  .login .form-row a { color: #fff; margin: -25px 0 0 0; position: absolute;}
  .login .form-row a:hover {text-decoration: underline;}
