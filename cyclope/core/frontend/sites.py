@@ -381,7 +381,7 @@ class CyclopeSite(object):
 
         content_type_name = request.GET.get("content_type_name")
         if content_type_name:
-            ct = ContentType.objects.get(name=content_type_name)
+            ct = ContentType.objects.get(model=content_type_name)
         else:
             ct = ContentType.objects.get(pk=request.GET['content_type_id'])
         model = ct.model_class()

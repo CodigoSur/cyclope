@@ -98,7 +98,7 @@ class Command(BaseCommand):
         #REGIONS
         default_layout = Layout.objects.get(slug='two-columns-right') # BLOG
         RegionView.objects.create(region='header', layout=default_layout, content_object=menu, weight=1, content_view='menuitems_hierarchy', view_options='{"align": "HORIZONTAL"}')
-        site_content_type =ContentType.objects.get(name='site')
+        site_content_type =ContentType.objects.get(model='site')
         RegionView.objects.create(region='right', layout=default_layout, content_type_id=site_content_type.pk, weight=1, content_view='search')
         # HOME (MENU ITEM)
         menu_item = MenuItem(menu=menu, name="Inicio", site_home=True, active=True, layout=default_layout)
