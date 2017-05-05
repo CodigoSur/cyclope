@@ -34,7 +34,7 @@ Installation
 
 To install in a virtualenv just ``pip install cyclope3``.
 
-For detailed instructions please visit https://github.com/CodigoSur/cyclope/wiki/Guia-de-instalacion
+For detailed instructions please visit https://github.com/CodigoSur/cyclope/wiki/Guía-de-instalación
 
 
 Contact and Support
