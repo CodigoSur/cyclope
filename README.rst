@@ -3,7 +3,7 @@ CyclopeCMS
 
 CyclopeCMS is a Content Management System developed by CódigoSur with organizations and social movements in Latin America since 2002. CyclopeCMS is a django based CMS for pythonistas who don't mind coding a bit and dislike overly-complex user interfaces. 
 
-:copyright: 2010-2017 by `Código Sur Sociedad Civil <http://www.codigosur.org>`_
+:copyright: 2010-2017 by `Código Sur Sociedad Civil <https://www.codigosur.org>`_
 :url: https://cyclope.codigosur.org
 :licence: GPL v3
 
@@ -34,7 +34,7 @@ Installation
 
 To install in a virtualenv just ``pip install cyclope3``.
 
-For detailed instructions please visit https://github.com/CodigoSur/cyclope/wiki/Guía-de-instalación
+For detailed instructions please visit to `Installation Guide <https://github.com/CodigoSur/cyclope/wiki/Gu%C3%ADa-de-instalaci%C3%B3n>`
 
 
 Contact and Support
