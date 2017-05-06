@@ -39,7 +39,7 @@
   {% endfor %}
   {% endif %}
   {% if options.show_rss %}
-    <a class="addthis_button_rss_follow" addthis:userid="/rss"></a>
+	<a class="button_rss_follow" target="_blank" href="/rss"><img class="follow {{ options.style }}" src="/static/themes/cyclope-bootstrap/images/social/rss.png" /></a>
   {% endif %}
 </div>
 {% endblock %}
