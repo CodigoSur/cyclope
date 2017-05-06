@@ -129,8 +129,13 @@ class CategorizationForm(forms.ModelForm):
     # We declare these fields and override their querysets later.
     collection = forms.ModelChoiceField(
         label=_('Collection'),
-        queryset=Collection.objects.all().order_by('-name'), required=False)
-    category = TreeNodeChoiceField(label=_('Category'), queryset=None, required=True)
+        queryset=Collection.objects.all().order_by('-name'), required=False
+    )
+    category = TreeNodeChoiceField(
+        label=_('Category'), 
+        queryset=Category.objects.none(), 
+        required=True
+    )
 
     def __init__(self, *args, **kwargs):
         super(CategorizationForm, self).__init__(*args, **kwargs)
