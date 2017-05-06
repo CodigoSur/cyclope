@@ -217,7 +217,10 @@
 <!--COMENTARIOS -->
   {% include 'comments/comments_block.html' %}
 
-
+<!--Share -->
+{% if CYCLOPE_SITE_SETTINGS.enable_share_buttons %}
+	{% include 'cyclope/sharing_content.html' %}
+{% endif %}
 
 
 </div> <!--termina article_detail -->

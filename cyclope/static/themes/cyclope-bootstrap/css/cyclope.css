@@ -539,6 +539,21 @@ footer,
 .brand{margin-bottom:20px;}
 .brand img {margin:0 auto;}
 
+/* Sharing Social */
+#share { display: inline-block;}
+.share-link { cursor: pointer; }
+.img-share { padding: 5px; float: left; }
+
+/* Follow Social */
+
+.follow-social { margin: 5px 0; }
+.follow-social.header { margin: 10px 15px 10px 0; float: right;}
+
+	/* Horizontal small */ .addthis_default_style { width: 16px;}
+	/* Horizontal large */ .addthis_32x32_style.addthis_default_style {width: 32px;margin: 0 2px;}
+	/* Vertical small */  .addthis_vertical_style {width: 16px; display: block; margin: 5px 0;}
+	/* Vertical large */ .addthis_32x32_style.addthis_vertical_style {display: block; margin: 5px 0;width: 32px;}
+
 /* media-query > xs */
 @media (min-width: 768px) {
 
@@ -555,6 +570,7 @@ footer,
     }
 
 }
+
 
 /*navbar bootstrap muestra un color #080808 en active y open y lo deshabilitamos en cyclopecms para que sea más sencillo editarlo*/
 .navbar-inverse .navbar-nav > .active > a,

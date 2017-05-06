@@ -1,0 +1,45 @@
+{% extends host_template %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="follow-social {% if region_name == 'header' %}header{% endif %}">
+  {% if CYCLOPE_SITE_SETTINGS.enable_follow_buttons and options.show_social_buttons %}
+
+  {% for service, username in CYCLOPE_SITE_SETTINGS.social_follow_services %}
+    {% if username != "USERNAME" %}
+		{% if service == "twitter" %}
+			<a class="button_twitter_follow" target="_blank" href="https://twitter.com/{{username}}"><img class="follow {{ options.style }} " src="/static/themes/cyclope-bootstrap/images/social/twitter.png" /></a>
+		{% endif %}
+		{% if service == "facebook" %}
+			<a class="button_facebook_follow" target="_blank" href="https://facebook.com/{{username}}"><img class="follow {{ options.style }} " src="/static/themes/cyclope-bootstrap/images/social/facebook.png" /></a>
+		{% endif %}
+		{% if service == "google" %}
+			<a class="button_google_follow" target="_blank" href="https://plus.google.com/{{username}}"><img class="follow {{ options.style }}" src="/static/themes/cyclope-bootstrap/images/social/google.png" /></a>
+		{% endif %}
+		{% if service == "flickr" %}
+			<a class="button_flickr_follow" target="_blank" href="https://www.flickr.com/photos/{{username}}"><img class="follow {{ options.style }}" src="/static/themes/cyclope-bootstrap/images/social/flickr.png" /></a>
+		{% endif %}
+		{% if service == "linkedin" %}
+			<a class="button_linkedin_follow" target="_blank" href="https://www.linkedin.com/in/{{username}}"><img class="follow {{ options.style }}" src="/static/themes/cyclope-bootstrap/images/social/linkedin.png" /></a>
+		{% endif %}
+		{% if service == "vimeo" %}
+			<a class="button_vimeo_follow" target="_blank" href="https://vimeo.com/{{username}}"><img class="follow {{ options.style }}" src="/static/themes/cyclope-bootstrap/images/social/vimeo.png" /></a>
+		{% endif %}
+		{% if service == "youtube" %}
+			<a class="button_youtube_follow" target="_blank" href="https://www.youtube.com/channel/{{username}}"><img class="follow {{ options.style }}" src="/static/themes/cyclope-bootstrap/images/social/youtube.png" /></a>
+		{% endif %}
+		{% if service == "gnusocial" %} 
+			<a class="button_gnusocial_follow" target="_blank" href="{{username}}"><img class="follow {{ options.style }}" src="/static/themes/cyclope-bootstrap/images/social/gnusocial.png" /></a>
+		{% endif %}
+		{% if service == "diaspora" %}
+			<a class="button_diaspora_follow" target="_blank" href="{{username}}"><img class="follow {{ options.style }}" src="/static/themes/cyclope-bootstrap/images/social/diaspora.png" /></a>
+		{% endif %}
+    {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% if options.show_rss %}
+    <a class="addthis_button_rss_follow" addthis:userid="/rss"></a>
+  {% endif %}
+</div>
+{% endblock %}

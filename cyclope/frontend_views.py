@@ -326,7 +326,7 @@ frontend.site.register_view(Author, AuthorTeaser)
 class SharingContentOptions(forms.Form):
     show_rss = forms.BooleanField(label=_('Show rss button'),
                                   initial=True, required=False)
-    show_social_buttons = forms.BooleanField(label=_('Show social buttons'),
+    show_social_buttons = forms.BooleanField(label=_('Show follow social buttons'),
                                              initial=True, required=False,
                                              help_text="Display social buttons that are configured in SiteSettings")
     style = forms.ChoiceField(label=_('Style'),
@@ -340,13 +340,13 @@ class SharingContent(frontend.FrontendView):
 
     """Display RSS and/or social network's follow buttons
     """
-    name='share-content'
+    name='follow-content'
     verbose_name=_('sharing buttons')
     is_instance_view = False
     is_region_view = True
     is_content_view = False
     options_form = SharingContentOptions
-    template = "cyclope/sharing_content.html"
+    template = "cyclope/follow_social.html"
 
     def get_response(self, request, req_context, options):
 

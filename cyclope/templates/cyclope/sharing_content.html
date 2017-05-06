@@ -1,17 +1,44 @@
-{% extends host_template %}
 {% load i18n %}
 
-{% block content %}
-<div class="addthis_toolbox {{ options.style }}">
-  {% if CYCLOPE_SITE_SETTINGS.enable_follow_buttons and options.show_social_buttons %}
-  {% for service, username in CYCLOPE_SITE_SETTINGS.social_follow_services %}
-    {% if username != "USERNAME" %}
-    <a class="addthis_button_{{service}}_follow" addthis:userid="{{username}}"></a>
-    {% endif %}
-  {% endfor %}
-  {% endif %}
-  {% if options.show_rss %}
-    <a class="addthis_button_rss_follow" addthis:userid="/rss"></a>
-  {% endif %}
-</div>
-{% endblock %}
+	<!-- Modal Share Content -->
+	<div id="Share" class="modal fade" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">{% trans 'Share in your Social Networks' %}</h4>
+				</div>
+				<div id="share" class="modal-body">
+					<!-- Share in Twitter -->
+					<a class="share_twitter" title="{% trans 'Share in Twitter' %}" target="_blank" 
+					href="https://twitter.com/intent/tweet?original_referer={{ CYCLOPE_BASE_URL|urlencode }}{{ current_object.get_absolute_url|urlencode }}&source=tweetbutton&text= {% trans 'By' %}{% for service, username in CYCLOPE_SITE_SETTINGS.social_follow_services %}{% if username != 'USERNAME' and service == 'twitter' %} @{{ username }}{% endif %}{% endfor %} {{ current_object.name|upper }} {% if current_object.summary %}{{ current_object.summary|truncatechars:80 }}{% elif current_object.description %}{{ current_object.description|truncatechars:80 }}{% else %}{{ current_object.text|truncatechars:80 }}{% endif %}&url={{ CYCLOPE_BASE_URL|urlencode }}{{ current_object.get_absolute_url|urlencode }}"><img class="img-share" title="{% trans 'Share in Twitter' %}" src="/static/themes/cyclope-bootstrap/images/social/twitter.png" /></a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+					
+					<!-- Share in Facebook -->
+					<a title="{% trans 'Share in Facebook' %}" target="_blank" 
+					href="https://www.facebook.com/sharer/sharer.php?u={{ CYCLOPE_BASE_URL|urlencode }}{{ current_object.get_absolute_url|urlencode }}&amp;src=sdkpreparse"
+					onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes');return false;"><img class="img-share" title="{% trans 'Share in Facebook' %}" src="/static/themes/cyclope-bootstrap/images/social/facebook.png" /></a>
+
+					<!-- Share in GNU Social -->
+					<a class="share_gnusocial" title="{% trans 'Share in GNU-Social' %}" target="_blank" 
+					href="http://quitter.is/?action=newnotice&status_textarea={% trans 'By' %}{% for service, username in CYCLOPE_SITE_SETTINGS.social_follow_services %}{% if username != 'USERNAME' and service == 'gnusocial' %} @{{ username }}{% endif %}{% endfor %} {{ current_object.name|upper }} - {% if current_object.summary %}{{ current_object.summary }}{% elif current_object.description %}{{ current_object.description|truncatechars:200 }}{% else %}{{ current_object.text }}{% endif %} - {{ CYCLOPE_BASE_URL }}{{ current_object.get_absolute_url }}"><img class="img-share" title="{% trans 'Share in GNU-Social' %}" src="/static/themes/cyclope-bootstrap/images/social/gnusocial.png" /></a>
+
+					<!-- Share in Diaspora -->
+					<a class="share_diaspora" title="{% trans 'Share in Diaspora' %}" target="_blank" 
+					href="http://d-share.github.com/?title={{ current_object.name|upper }}&url={{ CYCLOPE_BASE_URL }}{{ current_object.get_absolute_url }}"><img class="img-share" title="{% trans 'Share in Diaspora' %}" src="/static/themes/cyclope-bootstrap/images/social/diaspora.png" /></a>
+
+					<!-- Share in Whatsapp -->
+					<a class="share_whatsapp visible-xs " data-action="share/whatsapp/share" href="whatsapp://send?text={{ CYCLOPE_BASE_URL|urlencode }}{{ current_object.get_absolute_url }}" target="_blank" title="{% trans 'Share in Whatsapp' %}"><img class="visible-xs img-share" title="{% trans 'Share in Whatsapp' %}" src="/static/themes/cyclope-bootstrap/images/social/whatsapp.png" /></a>
+
+					<!-- Share in Telegram -->
+					<a class="share_telegram visible-xs " href="https://telegram.me/share/url?url{{ CYCLOPE_BASE_URL }}{{ current_object.get_absolute_url }}" target="_blank" title="{% trans 'Share in Telegram' %}"><img class="visible-xs img-share" title="{% trans 'Share in Telegram' %}" src="/static/themes/cyclope-bootstrap/images/social/telegram.png" /></a>
+
+					<!-- Share by Email -->
+					<a class="share_email" target="_blank" title="{% trans 'Share by email' %}" href="mailto:?subject={{ current_object.name|urlencode }}"><img class="img-share" title="{% trans 'Share by email' %}" src="/static/themes/cyclope-bootstrap/images/social/email.png" /></a>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
+				</div>
+			</div>
+		</div>
+	</div>
