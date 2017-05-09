@@ -7,8 +7,9 @@ from models import Series
 from frontend_views import SeriesDetail
 from django.test.client import RequestFactory
 
-class ConcreteSeries(Series):
-    pass
+# TODO da no such table cyclope_concreteseries, cual era la necesidad de esta clase?
+#class ConcreteSeries(Series):
+#    pass
 
 class SeriesTest(TestCase):
 
@@ -16,18 +17,18 @@ class SeriesTest(TestCase):
     
     def test_content_types(self):
 
-        ConcreteSeries.content_models = [ConcreteSeries]
-        ct = ContentType.objects.get_for_model(ConcreteSeries)
-        self.assertEqual(ConcreteSeries.get_content_types(), [ct])
+        Series.content_models = [Series]
+        ct = ContentType.objects.get_for_model(Series)
+        self.assertEqual(Series.get_content_types(), [ct])
 
-        self.assertEqual(ConcreteSeries.get_content_models(), [ConcreteSeries])
+        self.assertEqual(Series.get_content_models(), [Series])
 
-        self.assertEqual(ConcreteSeries.get_content_types_choices()[0], ("", '------'))
-        self.assertEqual(ConcreteSeries.get_content_types_choices()[1], (ct.id, "series"))
+        self.assertEqual(Series.get_content_types_choices()[0], ("", '------'))
+        self.assertEqual(Series.get_content_types_choices()[1], (ct.id, "series"))
 
     def test_detail_view(self):
         series_detail_view = SeriesDetail()
-        series = ConcreteSeries(name="some_series")
+        series = Series(name="some_series")
         request = RequestFactory().get('/series/some_series')
         request.session = {}
         response = series_detail_view(request=request, content_object=series)
