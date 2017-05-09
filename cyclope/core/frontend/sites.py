@@ -25,7 +25,7 @@ core.frontend.sites
 Frontend views' URL handling.
 """
 
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 from django.template import RequestContext, loader
 from django.conf.urls import patterns, url
 from django.utils.translation import ugettext_lazy as _, ugettext
@@ -275,7 +275,7 @@ class CyclopeSite(object):
         except ValueError:
             categories = []
         json_data = json.dumps(categories)
-        return HttpResponse(json_data, mimetype='application/json')
+        return HttpResponse(json_data, content_type='application/json')
 
 
     def layout_regions_json(self, request):
@@ -295,7 +295,7 @@ class CyclopeSite(object):
                             in sorted(regions.items(), key=lambda r: r[1])
                             if region_name != 'content' ])
         json_data = json.dumps(regions_data, cls=LazyJSONEncoder)
-        return HttpResponse(json_data, mimetype='application/json')
+        return HttpResponse(json_data, content_type='application/json')
 
     def _registered_views(self, request, region_views=False):
         #[1.9] moved import here because we cannot import models at app startup
@@ -320,11 +320,11 @@ class CyclopeSite(object):
 
     def registered_region_views_json(self, request):
         json_data = self._registered_views(request, region_views=True)
-        return HttpResponse(json_data, mimetype='application/json')
+        return HttpResponse(json_data, content_type='application/json')
 
     def registered_standard_views_json(self, request):
         json_data = self._registered_views(request)
-        return HttpResponse(json_data, mimetype='application/json')
+        return HttpResponse(json_data, content_type='application/json')
 
     def menu_items_for_menu_json(self, request):
         #[1.9] moved import here because we cannot import models at app startup
@@ -351,7 +351,7 @@ class CyclopeSite(object):
                            for item in menu_items if item.id != id_menu_item and
                                                      item not in descendants])
         json_data = json.dumps(choices)
-        return HttpResponse(json_data, mimetype='application/json')
+        return HttpResponse(json_data, content_type='application/json')
 
     def objects_for_ctype_json(self, request):
         #[1.9] moved import here because we cannot import models at app startup
@@ -370,7 +370,7 @@ class CyclopeSite(object):
             objects.extend([ {'object_id': obj.id,
                             'verbose_name': obj.name} for obj in objs ])
         json_data = json.dumps(objects)
-        return HttpResponse(json_data, mimetype='application/json')
+        return HttpResponse(json_data, content_type='application/json')
 
     def options_view_widget_html(self, request):
         """Returns the html with the options of a frontend view"""
@@ -413,7 +413,7 @@ class CyclopeSite(object):
                     obj = form.save()
                     ct_id = form.cleaned_data["ct_id"]
                     json_data = json.dumps({"ct_id": ct_id, "obj_id": obj.pk})
-                    return HttpResponse(json_data, mimetype='application/json')
+                    return HttpResponse(json_data, content_type='application/json')
 
             elif request.method == "GET" and request.GET.get('ct_id', False):
                 try:
