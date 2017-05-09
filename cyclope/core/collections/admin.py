@@ -331,7 +331,7 @@ class CollectibleAdmin(admin.ModelAdmin):
         return template
 
     categories_on.allow_tags = True
-    categories_on.short_description = "Categories"
+    categories_on.short_description = _("Categories")
 
     def lookup_allowed(self, lookup, value=None):
         if lookup.startswith(self.valid_lookups):
