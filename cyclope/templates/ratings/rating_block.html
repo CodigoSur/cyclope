@@ -1,7 +1,5 @@
 {% load i18n cyclope_utils %}
 {# TODO desahabilitado ratings_tags  para update a 1.9 #}
-{% load url from future %}
-
 
 {% if CYCLOPE_SITE_SETTINGS.enable_ratings %}
   {% get_rating_form for current_object as rating_form %}
