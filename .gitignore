@@ -35,3 +35,4 @@ cyclope/server_global_settings.py
 build/
 dist/
 .git*
+cyclope_project/
