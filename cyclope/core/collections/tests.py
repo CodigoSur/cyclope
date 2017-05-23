@@ -217,13 +217,12 @@ class CategorizationManagerTests(TestCase):
         self.assertEqual(len(cats), len(cats_random))
         
 class CollectionsFunctionalTests(LiveServerTestCase):
-    # TODO portable
-    EXEC_PATH = '/home/tico/cs/geckodriver'
+    fixtures = ['simplest_site.json']
     
     @classmethod
     def setUpClass(self):
         super(CollectionsFunctionalTests, self).setUpClass()
-        self.browser =  webdriver.Firefox(executable_path=self.EXEC_PATH)
+        self.browser =  webdriver.Firefox()
 #        self.c = Client()
         
     @classmethod
@@ -231,6 +230,26 @@ class CollectionsFunctionalTests(LiveServerTestCase):
         super(CollectionsFunctionalTests, self).tearDownClass()
         self.browser.quit()
 
+    def create_categories_and_populate(self):
+        colec = Collection(name="Col Test")
+        colec.save()
+        cat = Category(name="Cat Test", collection=colec)
+        cat.save()
+        ctipo = ContentType.objects.get(model='article')
+
+        for i in range(1000):
+            e = Article(name="Test Article num: {}".format(i))
+            e.save()
+
+        for o in Article.objects.iterator():
+            cato = Categorization(category=cat, content_type=ctipo, object_id=o.id)
+            cato.save()
+
+
     def test_order_categorizations_drag_drop(self):
+        self.create_categories_and_populate()
+        assert Article.objects.count() == Categorization.objects.count()
+        
+
         pass
     
