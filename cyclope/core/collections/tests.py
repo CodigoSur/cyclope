@@ -28,7 +28,8 @@ from cyclope.tests import ViewableTestCase
 from models import Collection, Category, Categorization
 from cyclope.apps.articles.models import Article
 from cyclope.apps.staticpages.models import StaticPage
-
+from django.test import LiveServerTestCase
+from selenium import webdriver
 
 class CategoryTestCase(ViewableTestCase):
     fixtures = ['default_users.json', 'default_groups.json', 'cyclope_demo.json']
@@ -214,3 +215,22 @@ class CategorizationManagerTests(TestCase):
 
         cats_random = Categorization.objects.get_for_category(category, sort_property="random")
         self.assertEqual(len(cats), len(cats_random))
+        
+class CollectionsFunctionalTests(LiveServerTestCase):
+    # TODO portable
+    EXEC_PATH = '/home/tico/cs/geckodriver'
+    
+    @classmethod
+    def setUpClass(self):
+        super(CollectionsFunctionalTests, self).setUpClass()
+        self.browser =  webdriver.Firefox(executable_path=self.EXEC_PATH)
+#        self.c = Client()
+        
+    @classmethod
+    def tearDownClass(self):
+        super(CollectionsFunctionalTests, self).tearDownClass()
+        self.browser.quit()
+
+    def test_order_categorizations_drag_drop(self):
+        pass
+    
