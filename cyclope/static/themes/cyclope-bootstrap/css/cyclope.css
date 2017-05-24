@@ -176,9 +176,14 @@ span.category_title a {
   float: none;
 }
 .player video {
-  width: 480px;
-  height: 360px;
+    width: 480px;
+    height: 360px;
 }
+
+video {
+    max-width:100%;
+}
+
 .player object {
   width: 480px;
   height: 360px;
