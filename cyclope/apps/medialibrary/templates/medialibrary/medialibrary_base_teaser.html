@@ -44,10 +44,11 @@
 
                 {% if current_object.description %}
                     <div class="html-content summary">{{ current_object.description|smart_style }}
-                    {% block player %}
-                    {% endblock player %}
                  </div>
                 {% endif %}
+
+                {% block player %}
+                {% endblock player %}
 
                 {% include "cyclope/author_block_teaser.html" with author=current_object.author %}
 

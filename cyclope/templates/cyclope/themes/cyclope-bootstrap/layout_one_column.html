@@ -1,13 +1,14 @@
 {% extends CYCLOPE_THEME_BASE_TEMPLATE %}
-
 {% load i18n layout%}
 {% block body_class %}one_column{% endblock %}
 
 {% block page_content %}
-    <div class="col-xs-12">
-        {% region 'top' %}
-        {% block content %}{% endblock %}
-        {% region 'bottom' %}
+    <div class="row">
+        <div class="col-xs-12">
+            {% region 'top' %}
+            {% block content %}{% endblock %}
+            {% region 'bottom' %}
+        </div>
     </div>
 {% endblock %}
 

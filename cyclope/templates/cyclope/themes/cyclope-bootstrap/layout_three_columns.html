@@ -1,18 +1,19 @@
 {% extends CYCLOPE_THEME_BASE_TEMPLATE %}
-
 {% load i18n layout%}
 {% block body_class %}three_columns{% endblock %}
-
 {% block page_content %}
     <div class="row">
-       <div class="col-xs-12 col-sm-4 col-md-3">{% region 'left' %}</div>
+       <div class="col-xs-12 col-sm-4 col-md-3">
+          {% region 'left' %}
+        </div>
         <div class="col-xs-12 col-sm-4 col-md-6 main-block">
             {% region 'top' %}
             {% block content %}{% endblock %}
             {% region 'bottom' %}
         </div>
-        <div class="col-xs-12 col-sm-4 col-md-3">{% region 'right'%}</div>
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            {% region 'right'%}
+        </div>
     </div>
-
 {% endblock %}
 

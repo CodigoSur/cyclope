@@ -50,6 +50,7 @@ import cyclope
 from cyclope.core.collections.models import Collection, Collectible
 from cyclope.utils import (ThumbnailMixin, get_singleton,
                             get_object_name, get_app_label)
+from cyclope.utils import slugify
 
 FONT_CHOICES = (
    (' ', _('- Default -')),
@@ -340,8 +341,16 @@ class Layout(models.Model):
     # template choices are set in the theme
     template = models.CharField(_('layout template'), max_length=100)
     # relative to theme media url, ex. cyclope/static/themes/cyclope-bootstrap/images/layout/main.png
-    image_path = models.CharField(_('layout representation'), max_length=100, default='main.png')
+    image_path = models.CharField(_('layout representation'), max_length=100) 
+        
+    def save(self, *args, **kwargs):
+        if not self.image_path and self.name:
+            name = slugify(self.name)
+            img_path = '{}.png'.format(name)
+            self.image_path = img_path
+        super(Layout, self).save(*args, **kwargs)
 
+ 
     def __unicode__(self):
         return self.name
 
