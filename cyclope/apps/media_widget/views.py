@@ -314,10 +314,12 @@ def embed_create(request):
             messages.error(request, msg)
             return render(request, 'media_widget/media_widget.html', {
                 'form': form,
+                'media_type': media_type,
             })
     else:
         return render(request, 'media_widget/media_widget.html', {
-            'form': form, 
+            'form': form,
+            'media_type': 'picture',
         })
 
 # GET /library/media_type?n=1&nRows=5
