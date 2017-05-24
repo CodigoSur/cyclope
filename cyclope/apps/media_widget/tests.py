@@ -162,6 +162,18 @@ class MediaWidgetTests(TestCase, FunctionalTestsMixin):
         # finally recover first file
         shutil.move(placeholder_file, first_file)
 
+    def test_embed_new_picture_redirect(self):
+        """ /media_widget/embed/new/None throws DoesNotExist: ContentType matching query does not exist. 
+            I have not been able to identify when/why this happens TODO"""
+        self.superuser_login()
+        wrong_uris = [
+            reverse('embed-new',  args=(None,)),
+            reverse('embed-new', args=('',))
+        ]
+        for uri in wrong_uris:
+            resp = self.c.get(uri)
+        assert True # TODO assertNotRaises...
+
 class MediaWidgetFunctionalTests(LiveServerTestCase, FunctionalTestsMixin):
     """Media Widget functional integration tests suite.
        https://docs.djangoproject.com/en/1.10/topics/testing/tools/#django.test.LiveServerTestCase
