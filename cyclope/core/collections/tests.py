@@ -28,8 +28,10 @@ from cyclope.tests import ViewableTestCase
 from models import Collection, Category, Categorization
 from cyclope.apps.articles.models import Article
 from cyclope.apps.staticpages.models import StaticPage
+from cyclope.utils import FunctionalTestsMixin
 from django.test import LiveServerTestCase
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 
 class CategoryTestCase(ViewableTestCase):
     fixtures = ['default_users.json', 'default_groups.json', 'cyclope_demo.json']
@@ -216,13 +218,15 @@ class CategorizationManagerTests(TestCase):
         cats_random = Categorization.objects.get_for_category(category, sort_property="random")
         self.assertEqual(len(cats), len(cats_random))
         
-class CollectionsFunctionalTests(LiveServerTestCase):
+class CollectionsFunctionalTests(LiveServerTestCase, FunctionalTestsMixin):
     fixtures = ['simplest_site.json']
     
     @classmethod
     def setUpClass(self):
         super(CollectionsFunctionalTests, self).setUpClass()
-        self.browser =  webdriver.Firefox()
+        # self.browser =  webdriver.Firefox()
+        self.browser =  webdriver.Chrome()
+        
 #        self.c = Client()
         
     @classmethod
@@ -244,12 +248,27 @@ class CollectionsFunctionalTests(LiveServerTestCase):
         for o in Article.objects.iterator():
             cato = Categorization(category=cat, content_type=ctipo, object_id=o.id)
             cato.save()
+            
+        return cat.pk
 
 
     def test_order_categorizations_drag_drop(self):
-        self.create_categories_and_populate()
-        assert Article.objects.count() == Categorization.objects.count()
+        import time
         
+        cat_id = self.create_categories_and_populate()
+        assert Article.objects.count() == Categorization.objects.count()
+        self.superuser_login_browser()
+        
+        self.browser.get("{}/admin/collections/categorization/?category__id__exact={}".format(self.live_server_url, cat_id))
+
+        action = ActionChains(self.browser)
+        source1 = self.browser.find_element_by_id('id_form-1-order')
+ 
+        #move element by x,y coordinates on the screen
+        action.drag_and_drop_by_offset(source1, 0, -50).perform()
+ 
+ 
+        time.sleep(15)
 
         pass
     
