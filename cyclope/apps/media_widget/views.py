@@ -361,21 +361,21 @@ def _validate_file_type(media_type, multimedia):
     Validate uploaded file MIME type matches intended Content Type.
     Allowed MIME types are different than FileBrowser's because they're the ones allowed by HTML5.
     """
+    top_level_mime, mime_type = tuple(multimedia.content_type.split('/'))
     if media_type == 'picture':
-        top_level_mime, mime_type = tuple(multimedia.content_type.split('/'))
-        return top_level_mime == 'image' # allow all image types FIXME?
+        return top_level_mime == 'image'
+    elif media_type == 'soundtrack':
+        return (top_level_mime == 'audio' or mime_type == 'ogg')
+    elif media_type == 'movieclip':
+        return top_level_mime == 'video'
+    elif media_type == 'document':
+        return multimedia.content_type = 'application/pdf'
+    elif media_type == 'flashmovie':
+        return multimedia.content_type in ['x-shockwave-flash', 'x-flv']
     else:
-        if media_type == 'soundtrack': #TODO(NumericA) relax checks
-            allowed_mime_types = ['audio/mpeg', 'audio/ogg', 'audio/wav']
-        elif media_type == 'movieclip':
-            allowed_mime_types = ['video/mp4', 'video/webm', 'video/ogg']
-        elif media_type == 'document':
-            allowed_mime_types = ['application/pdf']
-        elif media_type == 'flashmovie':
-            allowed_mime_types = ['x-shockwave-flash', 'x-flv']
-        else:
-            return False
-        return multimedia.content_type in allowed_mime_types
+        return False
+# TODO validate file itself
+
 
 def _validation_error_message(multimedia, media_type):
     """
