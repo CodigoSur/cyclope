@@ -568,3 +568,17 @@ footer,
   color: inherit;
   background-color: transparent;
 }
+/*estilos para rss*/
+#right .feed_teaser h2 {font-size:20px;}
+/* #right .feed_teaser p {font-size:18px;}*/
+#right .comments_length h3 {font-size:18px;}
+#right .feed h1  {font-size:24px; border-top: 1px solid #000; border-bottom: 1px solid #000; padding:8px;}
+
+#left .feed_teaser h2 {font-size:20px;}
+/*#left .feed_teaser p {font-size:18px;}*/
+#left .comments_length h3 {font-size:18px;}
+#left .feed h1  {font-size:24px; border-top: 1px solid #000; border-bottom: 1px solid #000; padding:8px;}
+
+
+
+
