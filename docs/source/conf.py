@@ -20,6 +20,10 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+import os, sys
+sys.path.insert(0, os.path.abspath('../../cyclope_project'))
+from django.conf import settings
+settings.configure()
 
 # -- General configuration ------------------------------------------------
 
@@ -181,7 +185,9 @@ epub_copyright = copyright
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
 
-autodoc_mock_imports = ["django"]
+autodoc_mock_imports = ["django", "filebrowser.fields"]
+autodoc_default_flags = ['members', 'undoc-members', 'private-members', 'special-members', 'inherited-members' ]
+# "cyclope.apps.medialibrary.models.DateFileBrowserField"
 
 
 # Example configuration for intersphinx: refer to the Python standard library.

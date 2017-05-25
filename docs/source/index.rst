@@ -7,14 +7,16 @@ Welcome to CyclopeCMS's documentation!
 ======================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
    
-.. automodule:: cyclope
+   modules/models
+   modules/views
+   
+   
+.. automodule:: cyclope.core
    :members:
 
-.. autoclass:: cyclope.core.collections.models.Collection
-   :members:
 
 
 Indices and tables
