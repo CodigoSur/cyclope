@@ -21,7 +21,7 @@
 # sys.path.insert(0, os.path.abspath('.'))
 
 import os, sys
-sys.path.insert(0, os.path.abspath('../../cyclope_project'))
+sys.path.insert(0, os.path.abspath('../cyclope'))
 from django.conf import settings
 settings.configure()
 
@@ -185,8 +185,8 @@ epub_copyright = copyright
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
 
-autodoc_mock_imports = ["django", "filebrowser.fields"]
-autodoc_default_flags = ['members', 'undoc-members', 'private-members', 'special-members', 'inherited-members' ]
+autodoc_mock_imports = ["django", "filebrowser"]
+autodoc_default_flags = ['members', 'undoc-members', 'private-members', 'special-members' ]
 # "cyclope.apps.medialibrary.models.DateFileBrowserField"
 
 
