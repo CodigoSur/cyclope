@@ -573,3 +573,12 @@ footer,
   color: inherit;
   background-color: transparent;
 }
+
+/*RSS*/
+#right .feed_teaser h2 {font-size:20px;}
+#right .comments_length h3 {font-size:18px;}
+#right .feed h1 {font-size:24px; border-top: solid 1px; border-bottom: solid 1px; padding:5px;}
+#left .feed_teaser h2 {font-size:20px;}
+#left .comments_length h3 {font-size:18px;}
+#left .feed h1 {font-size:24px; border-top: solid 1px; border-bottom: solid 1px; padding:5px;}
+
