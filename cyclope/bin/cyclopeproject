@@ -18,7 +18,7 @@ class Command(TemplateCommand):
 
     def handle(self, project_name=None, target=None, *args, **options):
         # use django startproject with our template
-        val = os.system("django-admin.py startproject %s --template=%s" % (project_name, self.template))
+        call_command('startproject', project_name, template=self.template)
         if options['verbosity'] != "0":
             print u"\nProject %s created successfully!\n" % project_name
 
