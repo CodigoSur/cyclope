@@ -35,6 +35,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django.template import Template, Context
 import cyclope
+from django.contrib.auth.models import User
 
 def get_object_name(model):
     return model._meta.object_name.lower()
@@ -477,3 +478,25 @@ class HyerarchyBuilderMixin(object):
 	        return [include, nested_list]
 	    else:
 	        return [include]
+	        
+class FunctionalTestsMixin(object):
+    """Mixin with common functions por functional tests."""
+
+    def superuser_create(self): # this could also be a fixture
+        if not hasattr(self, 'user'):
+            self.user = User.objects.create_superuser('john', 'lennon@thebeatles.com', 'johnpassword')
+
+    def superuser_login(self):
+        self.superuser_create()
+        self.c.login(username='john', password='johnpassword')
+    
+    def superuser_login_browser(self):
+        self.superuser_create()
+        self.browser.get('%s%s' % (self.live_server_url, '/accounts/login')) # TODO reverse
+        username = self.browser.find_elements_by_id('id_username')[0]
+        username.send_keys('john')
+        password = self.browser.find_elements_by_id('id_password')[0]
+        password.send_keys('johnpassword')
+        form = self.browser.find_elements_by_css_selector('form')[0]
+        form.submit()
+
