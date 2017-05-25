@@ -369,7 +369,7 @@ def _validate_file_type(media_type, multimedia):
     elif media_type == 'movieclip':
         return top_level_mime == 'video'
     elif media_type == 'document':
-        return multimedia.content_type = 'application/pdf'
+        return multimedia.content_type in ['application/pdf',]
     elif media_type == 'flashmovie':
         return multimedia.content_type in ['x-shockwave-flash', 'x-flv']
     else:
