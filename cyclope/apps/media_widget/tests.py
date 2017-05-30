@@ -45,7 +45,6 @@ class MediaWidgetTests(TestCase, FunctionalTestsMixin):
             #tf.close() x multiples post
             #                                          "media_widget_markitup('/media/pictures/2017/02/nunoa-comun.jpg', 'picture', '');"
             self.assertRegexpMatches(response.content, "(media_widget_markitup).+(/media/pictures/).+(nunoa-comun).+(.jpg)")
-            # TODO test responses context
     
     def test_media_widget_is_reserved_to_staff(self):
         """This is how it is actually used today, however if we used group permissions instead this would have to be expanded."""
@@ -161,6 +160,18 @@ class MediaWidgetTests(TestCase, FunctionalTestsMixin):
         
         # finally recover first file
         shutil.move(placeholder_file, first_file)
+
+    def test_embed_new_none(self):
+        """ /media_widget/embed/new/None throws DoesNotExist: ContentType matching query does not exist. 
+            I have not been able to identify when/why this happens"""
+        self.superuser_login()
+        wrong_uris = [
+            reverse('embed-new',  args=(None,)),
+            reverse('embed-new', args=('',))
+        ]
+        for uri in wrong_uris:
+            resp = self.c.get(uri)
+        assert(True) # no exception raised
 
 class MediaWidgetFunctionalTests(LiveServerTestCase, FunctionalTestsMixin):
     """Media Widget functional integration tests suite.
