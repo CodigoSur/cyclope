@@ -9,7 +9,6 @@ import os
 
 from django.core.urlresolvers import reverse
 
-from django.contrib.auth.models import User
 from cyclope.apps.articles.models import Article
 from cyclope.apps.medialibrary.models import Picture
 import shutil
@@ -22,28 +21,9 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from cyclope.utils import FunctionalTestsMixin
 
-class MediaWidgetMixin(object):
-
-    def superuser_create(self): # this could also be a fixture
-        if not hasattr(self, 'user'):
-            self.user = User.objects.create_superuser('john', 'lennon@thebeatles.com', 'johnpassword')
-
-    def superuser_login(self):
-        self.superuser_create()
-        self.c.login(username='john', password='johnpassword')
-    
-    def superuser_login_browser(self):
-        self.superuser_create()
-        self.browser.get('%s%s' % (self.live_server_url, '/accounts/login')) # TODO reverse
-        username = self.browser.find_elements_by_id('id_username')[0]
-        username.send_keys('john')
-        password = self.browser.find_elements_by_id('id_password')[0]
-        password.send_keys('johnpassword')
-        form = self.browser.find_elements_by_css_selector('form')[0]
-        form.submit()
-
-class MediaWidgetTests(TestCase, MediaWidgetMixin):
+class MediaWidgetTests(TestCase, FunctionalTestsMixin):
 
     fixtures = ['simplest_site.json']
 
@@ -65,7 +45,6 @@ class MediaWidgetTests(TestCase, MediaWidgetMixin):
             #tf.close() x multiples post
             #                                          "media_widget_markitup('/media/pictures/2017/02/nunoa-comun.jpg', 'picture', '');"
             self.assertRegexpMatches(response.content, "(media_widget_markitup).+(/media/pictures/).+(nunoa-comun).+(.jpg)")
-            # TODO test responses context
     
     def test_media_widget_is_reserved_to_staff(self):
         """This is how it is actually used today, however if we used group permissions instead this would have to be expanded."""
@@ -182,7 +161,19 @@ class MediaWidgetTests(TestCase, MediaWidgetMixin):
         # finally recover first file
         shutil.move(placeholder_file, first_file)
 
-class MediaWidgetFunctionalTests(LiveServerTestCase, MediaWidgetMixin):
+    def test_embed_new_none(self):
+        """ /media_widget/embed/new/None throws DoesNotExist: ContentType matching query does not exist. 
+            I have not been able to identify when/why this happens"""
+        self.superuser_login()
+        wrong_uris = [
+            reverse('embed-new',  args=(None,)),
+            reverse('embed-new', args=('',))
+        ]
+        for uri in wrong_uris:
+            resp = self.c.get(uri)
+        assert(True) # no exception raised
+
+class MediaWidgetFunctionalTests(LiveServerTestCase, FunctionalTestsMixin):
     """Media Widget functional integration tests suite.
        https://docs.djangoproject.com/en/1.10/topics/testing/tools/#django.test.LiveServerTestCase
        Download geckodriver from https://github.com/mozilla/geckodriver/releases
@@ -191,12 +182,10 @@ class MediaWidgetFunctionalTests(LiveServerTestCase, MediaWidgetMixin):
        """
     fixtures = ['simplest_site.json']       
 
-    EXEC_PATH = '/home/numerica/CS/geckodriver'
-    
     @classmethod
     def setUpClass(self):
         super(MediaWidgetFunctionalTests, self).setUpClass()
-        self.browser =  webdriver.Firefox(executable_path=self.EXEC_PATH)
+        self.browser =  webdriver.Firefox()
         self.browser.implicitly_wait(10)
         self.c = Client()
         self.PATH =  os.path.dirname(__file__)
