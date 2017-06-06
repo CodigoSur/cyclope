@@ -35,6 +35,10 @@ When showing the StaticPage as the main content of the view, the host_template i
             <div class="text">{{ staticpage.text|smart_style }}</div>
             <div class="meta-content">{% include 'collections/categories_navigation_block.html' %}</div>
             {% include 'cyclope/related_contents_block.html' %}
+            <!--Share -->
+			{% if CYCLOPE_SITE_SETTINGS.enable_share_buttons %}
+				{% include 'cyclope/sharing_content.html' %}
+			{% endif %}
         </div>
     {% endif %}
 {% endblock content%}

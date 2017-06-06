@@ -98,6 +98,10 @@
                     {% include 'comments/comments_block.html' %}
             {% endblock %}
 
+			<!--Share -->
+			{% if CYCLOPE_SITE_SETTINGS.enable_share_buttons %}
+				{% include 'cyclope/sharing_content.html' %}
+			{% endif %}
         </div> <!--end media_detail -->
     {% endif %}
 

@@ -8,7 +8,7 @@
 # (at your option) any later version.
  -->
 
-{% load layout i18n cyclope_utils compress staticfiles %}
+{% load layout i18n cyclope_utils compress staticfiles fb_versions %}
 
 {# TODO(sanhoerth): find best way to show lang-tag in multilang enviroment #}
 <html lang="es" {% if CYCLOPE_SITE_SETTINGS.head_image %}class="head_image"{% endif %}>
@@ -22,6 +22,33 @@
     <meta name="Keywords" content="{{ CYCLOPE_SITE_SETTINGS.keywords }}"/>
     <meta name="Description" content="{{ CYCLOPE_SITE_SETTINGS.description }}"/>
     <meta name="author" content="CyclopeCMS"/>
+	<!-- Special Meta for social sharing --->
+	{% if CYCLOPE_SITE_SETTINGS.enable_share_buttons %}
+		{% block opengraph %}
+			<!-- Special Meta for social sharing -->
+			<meta property="og:url" content="{{ CYCLOPE_BASE_URL }}{{ current_object.get_absolute_url }}" />
+			<meta property="og:type" content="{{ current_object.get_object_name }}" />
+			<meta property="og:title" content="{{ current_object.name|upper }}" />
+			<meta property="og:description" content="{% if current_object.summary %}{{ current_object.summary }}{% else %}{{ current_object.text|truncatechars:200 }}{% endif %}" />
+			<meta property="og:site_name" content="{{ CYCLOPE_SITE_SETTINGS.global_title }} - {{ CYCLOPE_BASE_URL }}" />
+			<!-- Twitter Card data -->
+			<meta name="twitter:title" content="{{ current_object.name|upper }}">
+			<meta name="twitter:url" content="{{ CYCLOPE_BASE_URL }}{{ current_object.get_absolute_url }}" />
+			<meta name="twitter:description" content="{% if current_object.summary %}{{ current_object.summary|truncatechars:80 }}{% elif current_object.description %}{{ current_object.description|truncatechars:80 }}{% else %}{{ current_object.text|truncatechars:80 }}{% endif %}" />
+			{% for service, username in CYCLOPE_SITE_SETTINGS.social_follow_services %}
+				{% if username != "USERNAME" and service == "twitter" %}
+					<meta name="twitter:creator" content="@{{ username }}">
+				{% endif %}
+			{% endfor %}
+			<!-- Open Graph Image -->
+			{% if current_object.pictures.count > 0 %} 
+				{% with current_object.pictures.all|first as picture %}
+					<meta property="og:image" content="{{ CYCLOPE_BASE_URL }}{% version picture.image.path 'carrousel_bootstrap' %}" />
+					<meta name="twitter:image" content="{{ CYCLOPE_BASE_URL }}{% version picture.image.path 'carrousel_bootstrap' %}">
+				{% endwith %}
+			{% endif %}
+		{% endblock opengraph %}
+	{% endif %}
     <!-- /Meta -->
     <!-- ### Extras ### -->
     <link rel="alternate" href="/rss" title="RSS" type="application/rss+xml"/>

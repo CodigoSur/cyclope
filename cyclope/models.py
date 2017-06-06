@@ -120,7 +120,9 @@ class SiteSettings(models.Model):
                                                '["youtube","USERNAME"]]',
                                        help_text=_("Change USERNAME by your username in each service you want to enable." \
                                                    " Eg for youtube: if your page is http://youtube.com/user/cyclope/" \
-                                                   " then replace the 'USERNAME' bellow youtube with 'cyclope'."))
+                                                   " then replace the 'USERNAME' bellow youtube with 'cyclope'." \
+                                                   " Only in GNU/Social and Diapora include complete URL in USERNAME," \
+                                                   " form example, https://quitter.is/my_username."))
     enable_search_by_date = models.BooleanField(_('Enable search by date.'), default=False)
 
     # theme customization
