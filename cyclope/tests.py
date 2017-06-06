@@ -872,7 +872,6 @@ class SocialNetworksTests(TestCase):
         response = self.client.get('/')
         self.assertContains(response, '<a class="button_rss_follow" target="_blank" href="/rss">')
         # habilito algunas redes sociales
-        self.site_settings.enable_follow_buttons = True # TODO ESTE PASO ES REDUNDANTE, OPTARIA POR ELIMINAR EL VIEW OPTION
         self.site_settings.social_follow_services = "[[\"twitter\", \"julianassange\"], [\"facebook\", \"USERNAME\"], [\"google\", \"USERNAME\"], [\"flickr\", \"USERNAME\"], [\"linkedin\", \"USERNAME\"], [\"vimeo\", \"USERNAME\"], [\"youtube\", \"telesurtv\"], [\"youtube\", \"telesurtv\"]]"
         self.site_settings.save()
         response = self.client.get('/')

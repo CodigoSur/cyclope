@@ -112,8 +112,7 @@ class SiteSettings(models.Model):
 
     enable_share_buttons = models.BooleanField(_('enable social sharing buttons (facebook, twitter, etc)'),
                                                default=True)
-    enable_follow_buttons = models.BooleanField(_('enable social follow buttons (facebook, twitter, etc)'),
-                                                default=False)
+    enable_follow_buttons = models.BooleanField(_('enable social follow buttons (facebook, twitter, etc)'), default=False) # TODO setting no se usa, eliminar en Django > 1.9
     social_follow_services = JSONField(default='[["twitter","USERNAME"],["facebook","USERNAME"],' \
                                                '["google","USERNAME"],["flickr","USERNAME"],' \
                                                '["linkedin","USERNAME"],["vimeo","USERNAME"],' \

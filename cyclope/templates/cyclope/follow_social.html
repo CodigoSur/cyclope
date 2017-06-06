@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="follow-social {% if region_name == 'header' %}header{% endif %}">
-  {% if CYCLOPE_SITE_SETTINGS.enable_follow_buttons and options.show_social_buttons %}
+  {% if options.show_social_buttons %}
 
   {% for service, username in CYCLOPE_SITE_SETTINGS.social_follow_services %}
     {% if username != "USERNAME" %}
