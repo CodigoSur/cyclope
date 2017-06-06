@@ -63,6 +63,8 @@ from cyclope import templatetags as cyclope_templatetags
 from cyclope.templatetags.cyclope_utils import smart_style
 from cyclope import settings as cyc_settings
 import os.path
+from cyclope.utils import get_singleton
+from urllib import quote
 
 DEFAULT_THEME = "cyclope-bootstrap"
 DEFAULT_THEME_REGION = "top"
@@ -757,15 +759,11 @@ class SimpleAdminTests(TestCase):
             status = self.client.get(page).status_code
             self.assertEqual(status, 200, "status: %d | page: %s" % (status, page))
 
-
-
-
 class GetSingletonTests(TestCase):
 
     fixtures = ['simplest_site.json']
 
     def test_get_singleton(self):
-        from cyclope.utils import get_singleton
         site_settings = get_singleton(SiteSettings)
         site_settings.allow_comments = "YES"
         site_settings.save()
@@ -815,3 +813,87 @@ class CreateContentApiTests(TestCase):
     def test_json_normal_user_forbiden(self):
         response = self.client.post("/api/create/")
         self.assertEqual(response.status_code, 403)
+
+class SocialNetworksTests(TestCase):
+    """testing with article, but staticpage and medialibrary use the same template"""
+    fixtures = ['simplest_site.json']
+    
+    def setUp(self):
+        self.site_settings = get_singleton(SiteSettings)
+        article = Article.objects.create(name="test share", text="Hola")
+        self.article_url = article.get_absolute_url()
+        self.BASE_URL = cyc_settings.CYCLOPE_BASE_URL
+    
+    def test_sharing_content_button(self):
+        response = self.client.get(self.article_url)
+        self.assertContains(response, 'id="Share')
+        self.site_settings.enable_share_buttons = False
+        self.site_settings.save()
+        response = self.client.get(self.article_url)
+        self.assertNotContains(response, 'id="Share')
+    
+    def test_sharing_content_modal(self):
+        """si esta habilitado compartir por redes sociales, siempre estan todos los botones
+           falto testear las URLs exactas de cada red"""
+        response = self.client.get(self.article_url)
+        self.assertContains(response, 'class="share_twitter')
+        self.assertContains(response, 'href="https://twitter.com/intent/tweet?original_referer={}{}'.format(quote(self.BASE_URL), self.article_url)) # &text= By TEST SHARE Hola&url=http%3A//mydomain.com/article/test-share/" TODO
+        self.assertContains(response, 'class="share_fachobook')
+        self.assertContains(response, 'class="share_gnusocial')
+        self.assertContains(response, 'class="share_diaspora')
+        self.assertContains(response, 'class="share_email')
+        self.assertContains(response, 'class="share_whatsapp')
+        self.assertContains(response, 'class="share_telegram')
+        self.site_settings.enable_share_buttons = False
+        self.site_settings.save()
+        response = self.client.get(self.article_url)
+        self.assertNotContains(response, 'class="share_twitter')
+        self.assertNotContains(response, 'class="share_fachobook')
+        self.assertNotContains(response, 'class="share_gnusocial')
+        self.assertNotContains(response, 'class="share_diaspora')
+        self.assertNotContains(response, 'class="share_email')
+        self.assertNotContains(response, 'class="share_whatsapp')
+        self.assertNotContains(response, 'class="share_telegram')
+
+    def test_follow_social_buttons(self):
+        self.site_settings.follow_social_buttons = True
+        self.site_settings.save()
+        home_layout = MenuItem.objects.get(site_home=True).layout
+        content_type = ContentType.objects.get(model='site')
+        content_view = 'follow-content'
+        view_options = '{"show_rss": false, "show_social_buttons": false, "style": "addthis_default_style"}'
+        region_view = RegionView(layout=home_layout, content_type=content_type, content_view=content_view, region=DEFAULT_THEME_REGION)
+        region_view.save()
+        response = self.client.get('/')
+        self.assertContains(response, 'class="follow-social')
+        # habilito rss
+        region_view.view_options = '{"show_rss": true, "show_social_buttons": true, "style": "addthis_default_style"}'
+        region_view.save()
+        response = self.client.get('/')
+        self.assertContains(response, '<a class="button_rss_follow" target="_blank" href="/rss">')
+        # habilito algunas redes sociales
+        self.site_settings.enable_follow_buttons = True # TODO ESTE PASO ES REDUNDANTE, OPTARIA POR ELIMINAR EL VIEW OPTION
+        self.site_settings.social_follow_services = "[[\"twitter\", \"julianassange\"], [\"facebook\", \"USERNAME\"], [\"google\", \"USERNAME\"], [\"flickr\", \"USERNAME\"], [\"linkedin\", \"USERNAME\"], [\"vimeo\", \"USERNAME\"], [\"youtube\", \"telesurtv\"], [\"youtube\", \"telesurtv\"]]"
+        self.site_settings.save()
+        response = self.client.get('/')
+        self.assertContains(response, 'class="button_twitter_follow')
+        self.assertContains(response, 'class="button_youtube_follow')
+        self.assertNotContains(response, 'class="button_fachobook_follow')
+        self.assertNotContains(response, 'class="button_google_follow')
+        self.assertNotContains(response, 'class="button_flickr_follow')
+        self.assertNotContains(response, 'class="button_linkedin_follow')
+        self.assertNotContains(response, 'class="button_vimeo_follow')
+        self.assertNotContains(response, 'class="button_gnusocial_follow')
+        self.assertNotContains(response, 'class="button_diaspora_follow')
+        self.site_settings.social_follow_services = "[[\"twitter\", \"julianassange\"], [\"facebook\", \"alguien\"], [\"google\", \"alguna\"], [\"flickr\", \"algunx\"], [\"linkedin\", \"lumpen\"], [\"vimeo\", \"telesurenglish\"], [\"youtube\", \"telesurtv\"], [\"diaspora\", \"https://somepod.io/wtf\"], [\"gnusocial\", \"mu\"]]" # FIXME usar datos reales si se quiere testear las URLs
+        self.site_settings.save()
+        response = self.client.get('/')
+        self.assertContains(response, 'class="button_twitter_follow')
+        self.assertContains(response, 'class="button_youtube_follow')
+        self.assertContains(response, 'class="button_facebook_follow')
+        self.assertContains(response, 'class="button_google_follow')
+        self.assertContains(response, 'class="button_flickr_follow')
+        self.assertContains(response, 'class="button_linkedin_follow')
+        self.assertContains(response, 'class="button_vimeo_follow')
+        self.assertContains(response, 'class="button_gnusocial_follow')
+        self.assertContains(response, 'class="button_diaspora_follow')
