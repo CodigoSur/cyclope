@@ -46,7 +46,7 @@ class CustomCaptchaField(CaptchaField):
 
 class CustomCommentForm(ThreadedCommentForm):
     url = forms.URLField(label=_("Website or Blog"), required=False)
-    captcha = CustomCaptchaField(label=_("Security code"))
+#    captcha = CustomCaptchaField(label=_("Security code"))
     subscribe = forms.BooleanField(help_text=_('I want to be notified by email ' \
                                                'when there is a new comment.'),
                                    required=False)
@@ -69,7 +69,7 @@ class CustomCommentForm(ThreadedCommentForm):
     def get_comment_model(self):
         return CustomComment
 
-    def get_comment_create_data(self):
-        d = super(CustomCommentForm, self).get_comment_create_data()
+    def get_comment_create_data(self, site_id=None):
+        d = super(CustomCommentForm, self).get_comment_create_data(site_id=site_id)
         d['subscribe'] = self.cleaned_data['subscribe']
         return d
