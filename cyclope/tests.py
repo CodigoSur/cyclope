@@ -93,7 +93,7 @@ class CyclopeTestSuiteRunner(DiscoverRunner):
     """
     def run_tests(self, test_labels, extra_tests=None, **kwargs):
         if not test_labels:
-            test_labels = ["cyclope"] + [c.split(".")[-1] for c in settings.INSTALLED_APPS if "cyclope." in c]
+            test_labels = ["cyclope"] + [c for c in settings.INSTALLED_APPS if "cyclope." in c]
         super(CyclopeTestSuiteRunner, self).run_tests(test_labels, extra_tests, **kwargs)
 
 class ViewableTestCase(TestCase):
