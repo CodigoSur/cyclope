@@ -74,7 +74,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin_tools/', include('admin_tools.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
-#    url(r'^comments/', include('django_comments.urls')), / issue #138
+    url(r'^comments/', include('django_comments.urls')),
     # custom layout's admin
     url(r'^regionview/([0-9]+)/delete', delete_regionview, name="delete_regionview"),
 
