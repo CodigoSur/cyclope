@@ -82,7 +82,7 @@ setup(
         'django-jsonfield',
         'feedparser',
         'django-forms-builder',
-#        'django-threadedcomments', deprecado en 1.9 ver issue 138
+        'django-threadedcomments',
         'django-crispy-forms',
         'django-compressor',
         'django-generic-ratings',
@@ -90,7 +90,7 @@ setup(
         'python-memcached',
         'pytz',
         'django_markwhat',
-#        'django_comments', deprecado en 1.9 ver issue 138
+        'django-contrib-comments',
     ],
 
     scripts=['cyclope/bin/cyclopeproject','cyclope/bin/cyclopedemo'],
