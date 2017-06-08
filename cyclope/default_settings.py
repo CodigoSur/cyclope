@@ -107,7 +107,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.admin',
-    'django_comments', #deprecado en 1.9 ver issue 138
+    'django_comments', 
     'django_markwhat',
     'django.contrib.messages',
     'django.contrib.sitemaps',
@@ -130,10 +130,10 @@ INSTALLED_APPS = [
     'cyclope.apps.dynamicforms',
     'cyclope.apps.abuse',
     'cyclope.apps.related_admin',
-    'cyclope.apps.custom_comments', #deprecado en 1.9 ver issue 138
+    'cyclope.apps.custom_comments', 
     'cyclope.apps.social',
     'cyclope.apps.media_widget',
-    'threadedcomments', #deprecado en 1.9 ver issue 138
+    'threadedcomments', 
 
     'autoslug',
     'mptt_tree_editor',
