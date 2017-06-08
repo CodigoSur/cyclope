@@ -169,7 +169,7 @@ TEST_RUNNER = 'cyclope.tests.CyclopeTestSuiteRunner'
 #DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False}
 
 # comments settings
-# COMMENTS_APP = 'cyclope.apps.custom_comments' // deprecado en 1.9 ver issue 138
+COMMENTS_APP = 'cyclope.apps.custom_comments'
 
 EMAIL_SUBJECT_PREFIX = '[Cyclope] '
 
