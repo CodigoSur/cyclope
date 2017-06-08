@@ -38,7 +38,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.template import TemplateSyntaxError, Template, Context
 from django import template
 from django.db import models
-#import django_comments issue #138
+import django_comments
 
 from cyclope.models import SiteSettings, Menu, MenuItem, RelatedContent
 from cyclope.models import Layout, RegionView, Author
@@ -93,7 +93,7 @@ class CyclopeTestSuiteRunner(DiscoverRunner):
     """
     def run_tests(self, test_labels, extra_tests=None, **kwargs):
         if not test_labels:
-            test_labels = ["cyclope"] + [c for c in settings.INSTALLED_APPS if "cyclope." in c]
+            test_labels = ["cyclope"] + [c.split(".")[-1] for c in settings.INSTALLED_APPS if "cyclope." in c]
         super(CyclopeTestSuiteRunner, self).run_tests(test_labels, extra_tests, **kwargs)
 
 class ViewableTestCase(TestCase):
@@ -474,16 +474,16 @@ class MultipleFieldTestCase(TestCase):
         self.assertContains(response, "view_options")
 
 
-#class CommentsViewsTestCase(ViewableTestCase):
-#    test_model = django_comments.get_model()
-# TODO issue #138
-#    def setUp(self):
-#        site = Site.objects.get_current()
-#        comment = self.test_model(name="SAn", email="san@test.com", parent=None,
-#                                  content_object=site, site=site, subscribe=True)
-#        comment.save()
-#        self.test_object = comment
-#        frontend.autodiscover()
+class CommentsViewsTestCase(ViewableTestCase):
+    test_model = django_comments.get_model()
+
+    def setUp(self):
+        site = Site.objects.get_current()
+        comment = self.test_model(name="SAn", email="san@test.com", parent=None,
+                                  content_object=site, site=site, subscribe=True)
+        comment.save()
+        self.test_object = comment
+        frontend.autodiscover()
 
 
 class UserProfileViewsTestCase(ViewableTestCase):
