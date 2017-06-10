@@ -676,7 +676,7 @@ class FrontendEditTestCase(TestCase):
         self.category.save()
         self.cat2 = Category(name='Another Category', collection=self.collection)
         self.cat2.save()
-        categorization = Categorization(category=self.category, content_object=self.article)
+        categorization = Categorization.objects.create(category=self.category, content_object=self.article)
         self.article.categories.add(categorization)
         perm = CategoryPermission(user=self.perm_user, category=self.category,
                                   can_edit_content=True, can_add_content=True)
