@@ -42,6 +42,6 @@ class FormDetail(frontend.FrontendView):
     is_content_view = True
 
     def get_response(self, request, req_context, options, content_object):
-        return form_detail(request, content_object.slug)
+        return form_detail(request, slug=content_object.slug)
 
 frontend.site.register_view(DynamicForm, FormDetail)
