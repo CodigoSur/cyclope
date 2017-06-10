@@ -2,7 +2,7 @@
 
 <div id="user_status">
 {% if user.is_authenticated %}
-  {% with profile=user.get_profile %}
+  {% with profile=user.profile %}
     {% if profile %}
       <a href="{{ profile.get_absolute_url }}">{{ user.get_full_name|default:user.username }}</a>
     {% else %}

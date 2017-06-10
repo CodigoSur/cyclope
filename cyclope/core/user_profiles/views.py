@@ -11,7 +11,7 @@ def me(request):
     Redirects to profile creation if it doesn't exist.
     """
     try:
-        profile_obj = request.user.get_profile()
+        profile_obj = request.user.profile
         return HttpResponseRedirect(profile_obj.get_absolute_url())
     except ObjectDoesNotExist:
         return HttpResponseRedirect(reverse('profiles_create_profile'))

@@ -493,7 +493,7 @@ class UserProfileViewsTestCase(ViewableTestCase):
         user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
         from registration import signals as registration_signals
         registration_signals.user_activated.send(sender=user, user=user)
-        self.test_object = user.get_profile()
+        self.test_object = user.profile
         frontend.autodiscover()
 
 

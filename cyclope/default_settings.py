@@ -240,9 +240,6 @@ CAPTCHA_LETTER_ROTATION=(-15,15)
 # django-registration settings
 ACCOUNT_ACTIVATION_DAYS = 7
 
-# profile settings
-AUTH_PROFILE_MODULE = "user_profiles.UserProfile"
-
 # admin-tools settings
 ADMIN_TOOLS_INDEX_DASHBOARD = 'cyclope.dashboard.CustomIndexDashboard'
 ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'cyclope.dashboard.CustomAppIndexDashboard'

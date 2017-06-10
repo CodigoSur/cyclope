@@ -49,7 +49,7 @@ class TopicDetail(frontend.FrontendView):
         avatar = None
         if content_object.user:
             try:
-                profile = content_object.user.get_profile()
+                profile = content_object.user.profile
                 avatar = profile.avatar
             except ObjectDoesNotExist:
                 pass

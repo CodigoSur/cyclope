@@ -30,7 +30,7 @@ def _slug_populate(obj):
 
 class UserProfile(models.Model):
 
-    user = models.ForeignKey(User, unique=True)
+    user = models.OneToOneField(User, related_name='profile')
     slug = AutoSlugField(populate_from=_slug_populate, unique=True,
                          null=False, db_index=True)
     avatar = models.ImageField(_('avatar'), max_length=100,
@@ -59,7 +59,7 @@ class UserProfile(models.Model):
             form.instance = self
             form.save()
 
-User.get_absolute_url = lambda self: self.get_profile().get_absolute_url()
+User.get_absolute_url = lambda self: self.profile.get_absolute_url()
 
 # Signal callbacks
 
