@@ -12,7 +12,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.views.generic.list_detail import object_list # FIXME
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
@@ -27,8 +26,6 @@ def me(request):
         return HttpResponseRedirect(profile_obj.get_absolute_url())
     except ObjectDoesNotExist:
         return HttpResponseRedirect(reverse('profiles_create_profile'))
-
-#################################################
 
 def create_profile(request, form_class=None, success_url=None,
                    template_name='profiles/create_profile.html',
@@ -281,50 +278,3 @@ def profile_detail(request, username, public_profile_field=None,
     return render_to_response(template_name,
                               { 'profile': profile_obj },
                               context_instance=context)
-
-def profile_list(request, public_profile_field=None,
-                 template_name='profiles/profile_list.html', **kwargs):
-    """
-    A list of user profiles.
-
-    **Optional arguments:**
-
-    ``public_profile_field``
-        The name of a ``BooleanField`` on the profile model; if the
-        value of that field on a user's profile is ``False``, that
-        profile will be excluded from the list. Use this feature to
-        allow users to mark their profiles as not being publicly
-        viewable.
-        
-        If this argument is not specified, it will be assumed that all
-        users' profiles are publicly viewable.
-    
-    ``template_name``
-        The name of the template to use for displaying the profiles. If
-        not specified, this will default to
-        :template:`profiles/profile_list.html`.
-
-    Additionally, all arguments accepted by the
-    :view:`django.views.generic.list_detail.object_list` generic view
-    will be accepted here, and applied in the same fashion, with one
-    exception: ``queryset`` will always be the ``QuerySet`` of the
-    model specified by the ``AUTH_PROFILE_MODULE`` setting, optionally
-    filtered to remove non-publicly-viewable proiles.
-    
-    **Context:**
-    
-    Same as the :view:`django.views.generic.list_detail.object_list`
-    generic view.
-    
-    **Template:**
-    
-    ``template_name`` keyword argument or
-    :template:`profiles/profile_list.html`.
-    
-    """
-    profile_model = utils.get_profile_model()
-    queryset = profile_model._default_manager.all()
-    if public_profile_field is not None:
-        queryset = queryset.filter(**{ public_profile_field: True })
-    kwargs['queryset'] = queryset
-    return object_list(request, template_name=template_name, **kwargs)
