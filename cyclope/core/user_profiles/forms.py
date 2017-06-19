@@ -1,32 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-#
-# Copyright 2010-2013 Código Sur Sociedad Civil.
-# All rights reserved.
-#
-# This file is part of Cyclope.
-#
-# Cyclope is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Cyclope is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
-
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, ButtonHolder
-
 from models import UserProfile
+from collections import OrderedDict
 
 class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -44,7 +25,10 @@ class UserProfileForm(forms.ModelForm):
         )
         super(UserProfileForm, self).__init__(*args, **kwargs)
         # Add User's fields first in the form
-        self.fields.keyOrder =  ['first_name', 'last_name', 'email'] + self.fields.keyOrder[:-3]
+        keys_order = ['first_name', 'last_name', 'email']
+        keys_order += [k for  k in self.fields.keys() if k not in keys_order]
+        ordered_fields = OrderedDict((key, self.fields[key]) for key in keys_order)
+        self.fields = ordered_fields
         try:
             self.fields['email'].initial = self.instance.user.email
             self.fields['first_name'].initial = self.instance.user.first_name
