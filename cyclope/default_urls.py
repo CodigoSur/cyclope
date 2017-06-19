@@ -89,15 +89,15 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
 
     # profiles (cyclope.core.user_profiles & django-profiles)
-#    url(r'^profiles/me/$', 'cyclope.core.user_profiles.views.me'), # to redirect to the proper url of user_profiles
-#    url(r'^profiles/create/$', 'profiles.views.create_profile',
-#        {'form_class': UserProfileForm, "success_url": "/profiles/me/"},
-#        name="profiles_create_profile"),
-#    url(r'^profiles/edit/$', 'profiles.views.edit_profile',
-#        {'form_class': UserProfileForm, "success_url": "/profiles/me/"},
-#        name="profiles_edit_profile"),
-#    url(r'^profiles/(?P<username>\w+)/$', "profiles.views.profile_detail",
-#        name='profiles_profile_detail'),
+    url(r'^profiles/me/$', 'cyclope.core.user_profiles.views.me'), # to redirect to the proper url of user_profiles
+    url(r'^profiles/create/$', 'cyclope.core.user_profiles.views.create_profile',
+        {'form_class': UserProfileForm, "success_url": "/profiles/me/"},
+        name="profiles_create_profile"),
+    url(r'^profiles/edit/$', 'cyclope.core.user_profiles.views.edit_profile',
+        {'form_class': UserProfileForm, "success_url": "/profiles/me/"},
+        name="profiles_edit_profile"),
+    url(r'^profiles/(?P<username>\w+)/$', "cyclope.core.user_profiles.views.profile_detail",
+        name='profiles_profile_detail'),
 
     # contact (django-contact-form)
     url(r'^contact/$', 'contact_form.views.contact_form',

@@ -21,7 +21,6 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
-# from profiles.utils import get_profile_model TODO issue 141
 
 from cyclope.core import frontend
 from cyclope.frontend_views import AuthoredMixin
