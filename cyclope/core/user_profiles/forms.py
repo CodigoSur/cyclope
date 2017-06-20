@@ -13,16 +13,6 @@ class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.add_input(Submit('submit', _('Submit')))
-        self.helper.layout = Layout(
-            Fieldset(
-                _('Personal information'),
-                'first_name',
-                'last_name',
-                'email',
-                'image',
-                'description',
-            )
-        )
         super(UserProfileForm, self).__init__(*args, **kwargs)
         # Add User's fields first in the form
         keys_order = ['first_name', 'last_name', 'email']
