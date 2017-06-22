@@ -148,7 +148,7 @@ INSTALLED_APPS = [
     'compressor',
 #    'ratings', 
     'actstream',
-#   'cyclope.apps.post_init',
+    'cyclope.apps.post_init',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -294,7 +294,6 @@ COMPRESS_PRECOMPILERS = (
 COMPRESS_DEBUG_TOGGLE = 'nocompress'
 
 ACTSTREAM_SETTINGS = {
-    'MODELS': ['auth.user', 'auth.group'],#, 'custom_comments.customcomment'],
     'FETCH_RELATIONS': True,
     'USE_PREFETCH': True,
     'USE_JSONFIELD': True,

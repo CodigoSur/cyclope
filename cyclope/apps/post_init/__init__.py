@@ -19,7 +19,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import ratings_registration
-import comments_moderator
-import abuse_registration
-import activity_stream_registration
+#import ratings_registration
+#import comments_moderator
+#import abuse_registration
+
+default_app_config = 'cyclope.apps.post_init.activity_stream_registration.ActivityStreamConfig'
