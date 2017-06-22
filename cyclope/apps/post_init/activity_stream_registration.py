@@ -37,16 +37,25 @@ class ActivityStreamConfig(AppConfig):
         from cyclope.signals import admin_post_create
         from django.conf import settings
         from django.db.models.signals import post_save
+        register_models = [Article] + medialibrary.models.actual_models
         # ACSTREAM REGISTRATION
         registry.register(User)
         registry.register(Group)  
         if settings.ACTSTREAM_SETTINGS_ENABLED:
             registry.register(CustomComment)
             # activities.add('ratings.vote') TODO # issue 143
-            models = [Article] + medialibrary.models.actual_models
-            for model in models:
+            for model in register_models:
                 registry.register(model)
-            # SIGNALS CONNECTION
+        # SIGNALS CONNECTION
                 admin_post_create.connect(creation_activity, sender=model, dispatch_uid="{}_creation_activity".format(model._meta.object_name.lower()))
             post_save.connect(comment_activity, sender=CustomComment, dispatch_uid="custom_comment_creation_activity")
             #post_save.connect(rating_activity, sender=Vote, dispatch_uid="vote_activity") TODO # issue 143
+        # ABUSE REGISTRATION
+        from cyclope.apps import abuse
+        for model in register_models:
+            abuse.register(model)
+        # TODO # issue 143
+#        from ratings.handlers import ratings
+#        from cyclope.apps.ratings.forms import LikeDislikeVoteForm
+#        for model in register_models:
+#            ratings.register(model, form_class=LikeDislikeVoteForm)        
