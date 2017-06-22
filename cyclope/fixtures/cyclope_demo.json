@@ -68,7 +68,7 @@
       "tree_id": 1, 
       "custom_url": "", 
       "object_id": 20, 
-      "view_options": "{\"limit_to_n_items\": 10, \"show_description\": false, \"sort_by\": \"DATE-\", \"items_per_page\": 10, \"traverse_children\": false, \"show_title\": true, \"show_image\": false, \"simplified\": false, \"navigation\": \"TOP\"}", 
+      "view_options": {"limit_to_n_items": 10, "show_description": false, "sort_by": "DATE-", "items_per_page": 10, "traverse_children": false, "show_title": true, "show_image": false, "simplified": false, "navigation": "TOP"}, 
       "lft": 1, 
       "content_type": [
         "collections", 
@@ -95,7 +95,7 @@
       "tree_id": 2, 
       "custom_url": "/contact/", 
       "object_id": null, 
-      "view_options": "{}", 
+      "view_options": {}, 
       "lft": 1, 
       "content_type": null, 
       "persistent_layout": false, 
@@ -119,7 +119,7 @@
       "tree_id": 3, 
       "custom_url": "http://cyclope.codigosur.org", 
       "object_id": null, 
-      "view_options": "{}", 
+      "view_options": {}, 
       "lft": 1, 
       "content_type": null, 
       "persistent_layout": false, 
@@ -143,7 +143,7 @@
       "tree_id": 4, 
       "custom_url": "", 
       "object_id": null, 
-      "view_options": "{}", 
+      "view_options": {}, 
       "lft": 1, 
       "content_type": [
         "sites", 
@@ -170,7 +170,7 @@
       "tree_id": 6, 
       "custom_url": "http://www.codigosur.net", 
       "object_id": null, 
-      "view_options": "{}", 
+      "view_options": {}, 
       "lft": 1, 
       "content_type": null, 
       "persistent_layout": false, 
@@ -194,7 +194,7 @@
       "tree_id": 7, 
       "custom_url": "http://www.pillku.com", 
       "object_id": null, 
-      "view_options": "{}", 
+      "view_options": {}, 
       "lft": 1, 
       "content_type": null, 
       "persistent_layout": false, 
@@ -218,7 +218,7 @@
       "tree_id": 5, 
       "custom_url": "http://www.youtube.com/user/sanhoerth", 
       "object_id": null, 
-      "view_options": "{}", 
+      "view_options": {}, 
       "lft": 1, 
       "content_type": null, 
       "persistent_layout": false, 
@@ -236,7 +236,7 @@
       "content_view": "menuitems_hierarchy", 
       "region": "air", 
       "object_id": 1, 
-      "view_options": "{\"align\": \"HORIZONTAL\"}", 
+      "view_options": {"align": "HORIZONTAL"}, 
       "content_type": [
         "cyclope", 
         "menu"
@@ -252,7 +252,7 @@
       "content_view": "search", 
       "region": "air", 
       "object_id": null, 
-      "view_options": "{}", 
+      "view_options": {}, 
       "content_type": [
         "sites", 
         "site"
@@ -268,7 +268,7 @@
       "content_view": "detail", 
       "region": "bottom", 
       "object_id": 3, 
-      "view_options": "{}", 
+      "view_options": {}, 
       "content_type": [
         "staticpages", 
         "staticpage"
@@ -284,7 +284,7 @@
       "content_view": "detail", 
       "region": "bottom", 
       "object_id": 3, 
-      "view_options": "{}", 
+      "view_options": {}, 
       "content_type": [
         "staticpages", 
         "staticpage"
@@ -300,7 +300,7 @@
       "content_view": "menuitems_hierarchy", 
       "region": "right", 
       "object_id": 3, 
-      "view_options": "{\"align\": \"ON_CLICK\"}", 
+      "view_options": {"align": "ON_CLICK"}, 
       "content_type": [
         "cyclope", 
         "menu"
@@ -316,7 +316,7 @@
       "content_view": "teaser_list", 
       "region": "left", 
       "object_id": 1, 
-      "view_options": "{\"limit_to_n_items\": 8, \"show_description\": false, \"sort_by\": \"DATE-\", \"items_per_page\": 8, \"traverse_children\": false, \"show_title\": true, \"show_image\": false, \"simplified\": false, \"navigation\": \"TOP\"}", 
+      "view_options": {"limit_to_n_items": 8, "show_description": false, "sort_by": "DATE-", "items_per_page": 8, "traverse_children": false, "show_title": true, "show_image": false, "simplified": false, "navigation": "TOP"}, 
       "content_type": [
         "collections", 
         "category"
@@ -332,7 +332,7 @@
       "content_view": "menuitems_hierarchy", 
       "region": "header", 
       "object_id": 1, 
-      "view_options": "{\"align\": \"ON_CLICK\"}", 
+      "view_options": {"align": "ON_CLICK"}, 
       "content_type": [
         "cyclope", 
         "menu"
@@ -348,7 +348,7 @@
       "content_view": "search", 
       "region": "header", 
       "object_id": null, 
-      "view_options": "{}", 
+      "view_options": {}, 
       "content_type": [
         "sites", 
         "site"
@@ -364,7 +364,7 @@
       "content_view": "menuitems_hierarchy", 
       "region": "right", 
       "object_id": 3, 
-      "view_options": "{\"align\": \"ON_CLICK\"}", 
+      "view_options": {"align": "ON_CLICK"}, 
       "content_type": [
         "cyclope", 
         "menu"
@@ -380,7 +380,7 @@
       "content_view": "slideshow", 
       "region": "top", 
       "object_id": 20, 
-      "view_options": "{\"auto_pause\": true, \"limit_to_n_items\": 0, \"visualization_mode\": \"slideshow-background\", \"navigation\": \"'circular'\", \"auto_play\": true, \"show_description\": true, \"sort_by\": \"DATE-\", \"delay\": 2, \"scroll_by\": 2, \"traverse_children\": false, \"show_title\": true, \"show_image\": true, \"speed\": 100, \"circular\": false}", 
+      "view_options": {"auto_pause": true, "limit_to_n_items": 0, "visualization_mode": "slideshow-background", "navigation": "'circular'", "auto_play": true, "show_description": true, "sort_by": "DATE-", "delay": 2, "scroll_by": 2, "traverse_children": false, "show_title": true, "show_image": true, "speed": 100, "circular": false}, 
       "content_type": [
         "collections", 
         "category"
@@ -396,7 +396,7 @@
       "content_view": "share-content", 
       "region": "header", 
       "object_id": null, 
-      "view_options": "{\"show_rss\": true, \"style\": \"addthis_default_style\", \"show_social_buttons\": true}", 
+      "view_options": {"show_rss": true, "style": "addthis_default_style", "show_social_buttons": true}, 
       "content_type": [
         "sites", 
         "site"
@@ -412,7 +412,7 @@
       "content_view": "share-content", 
       "region": "header", 
       "object_id": null, 
-      "view_options": "{\"show_rss\": true, \"style\": \"addthis_default_style\", \"show_social_buttons\": true}", 
+      "view_options": {"show_rss": true, "style": "addthis_default_style", "show_social_buttons": true}, 
       "content_type": [
         "sites", 
         "site"
@@ -546,7 +546,7 @@
       "description": "La Colecci\u00f3n Zonas agrupa los diferentes lugares de publicaci\u00f3n de la portada del sitio. ", 
       "default_list_view": "", 
       "image": "/media/wp_logo.png", 
-      "view_options": "{}", 
+      "view_options": {}, 
       "visible": true, 
       "navigation_root": false, 
       "slug": "zonas", 
@@ -566,7 +566,7 @@
       "description": "Hola esta es la descripci\u00f3n.", 
       "default_list_view": "contents", 
       "image": "/media/images/cyclope.png", 
-      "view_options": "{}", 
+      "view_options": {}, 
       "visible": true, 
       "navigation_root": false, 
       "slug": "boletin", 
@@ -626,7 +626,7 @@
       "description": "Aqu\u00ed ir\u00eda una descripci\u00f3n general de la colecci\u00f3n. ", 
       "default_list_view": "", 
       "image": "/media/images/cyclope.png", 
-      "view_options": "{}", 
+      "view_options": {}, 
       "visible": true, 
       "navigation_root": false, 
       "slug": "general", 
