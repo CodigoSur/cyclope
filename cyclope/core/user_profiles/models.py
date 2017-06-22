@@ -24,6 +24,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from autoslug.fields import AutoSlugField
 from registration import signals as registration_signals
+from django.core.urlresolvers import reverse
 
 def _slug_populate(obj):
     return obj.user.username
@@ -42,9 +43,8 @@ class UserProfile(models.Model):
         _('public'), default=True,
         help_text=_('Choose whether your profile info should be publicly visible or not'))
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('userprofile-detail', (), { 'slug': self.slug })
+        return reverse('userprofile-detail', args=(self.slug,))
 
     def __unicode__(self):
         return self.user.get_full_name() or self.user.username

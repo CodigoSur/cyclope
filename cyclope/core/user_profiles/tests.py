@@ -70,12 +70,12 @@ class UserProfilesTestCase(TestCase):
     # GET /profiles/me
     def test_get_me(self):
         # no profile yet
-        response = self.client.get('/profiles/me', follow=True)
-        self.assertIn(('/profiles/me/', 301), response.redirect_chain) # FIXME why this redirects?
+        response = self.client.get(self.success_url, follow=True)
+        self.assertIn((self.success_url, 301), response.redirect_chain) # FIXME why this redirects?
         self.assertIn(('/profiles/create/', 302), response.redirect_chain)
         # profile created
         UserProfile.objects.create(user=self.user)
-        response = self.client.get('/profiles/me', follow=True)
+        response = self.client.get(self.success_url, follow=True)
         profile_url = self.user.profile.get_absolute_url()
         self.assertIn((profile_url, 302), response.redirect_chain)
     
@@ -104,3 +104,4 @@ class UserProfilesTestCase(TestCase):
         # only profile detail is publicly available
         response = self.client.get(self.profile_detail_uri)
         self.assertEqual(response.status_code, 200)
+    
