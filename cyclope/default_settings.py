@@ -316,4 +316,8 @@ CYCLOPE_BOOTSTRAP_SKIN = 'bootstrap'
 
 # behind proxy traffic is http, so urls in redirects get blocked by browsers.
 # this works together with HTTP header 'X-Forwarded-Proto' set by Nginx
+# TODO this cannot be set unless we are actually behind https
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# instead of declaring each index a subclass of RealTimeSearchIndex, deprecated in Haystack>2
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
