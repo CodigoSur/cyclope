@@ -36,6 +36,7 @@ from cyclope.core import frontend
 from cyclope.models import SiteSettings
 from cyclope.utils import layout_for_request, LazyJSONEncoder
 from cyclope.themes import get_theme
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -138,7 +139,7 @@ def layout_regions_data():
         views_for_models[ctype.pk] = views
     out_dict["views_for_models"] = views_for_models
     json_data = json.dumps(out_dict, cls=LazyJSONEncoder)
-    return json_data
+    return mark_safe(json_data)
     
 @register.simple_tag
 def bootstrap_skin_link():
