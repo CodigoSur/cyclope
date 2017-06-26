@@ -45,6 +45,7 @@ from django.forms.widgets import RadioFieldRenderer
 from django.forms import RadioSelect
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
+from collections import OrderedDict
 
 class AjaxChoiceField(forms.ChoiceField):
     """ChoiceField that always returns true for validate().
@@ -375,8 +376,10 @@ class DateSearchForm(ModelSearchForm):
                            '%d-%m-%y',      # '25-12-06'
                            '%d/%m/%Y',      # '25/12/2006'
                            '%d/%m/%y']      # '25/12/06'
-            self.fields.insert(1, 'start_date', forms.DateField(label=_('Desde'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015')))
-            self.fields.insert(2, 'end_date', forms.DateField(label=_('Hasta'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015')))
+            fields_list=self.fields.items()
+            fields_list.insert(1, ('start_date', forms.DateField(label=_('Desde'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015'))))
+            fields_list.insert(2, ('end_date', forms.DateField(label=_('Hasta'), required=False, input_formats=date_format, help_text=_('ejemplo: 25/12/2015'))))
+            self.fields = OrderedDict(fields_list)
     
     # override search
     def search(self):
