@@ -789,7 +789,7 @@ class LayoutAndRegionsJsonTemplateTagTests(TestCase):
 
 
 class CreateContentApiTests(TestCase):
-    fixtures = ['default_users.json']
+    fixtures = ['simplest_site.json', 'default_users.json']
 
     def test_json_picture_form(self):
         from cyclope.apps.medialibrary.models import Picture
