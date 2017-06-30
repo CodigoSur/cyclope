@@ -71,7 +71,6 @@ class UserProfilesTestCase(TestCase):
     def test_get_me(self):
         # no profile yet
         response = self.client.get(self.success_url, follow=True)
-        self.assertIn((self.success_url, 301), response.redirect_chain) # FIXME why this redirects?
         self.assertIn(('/profiles/create/', 302), response.redirect_chain)
         # profile created
         UserProfile.objects.create(user=self.user)
