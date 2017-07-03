@@ -442,10 +442,10 @@ class HyerarchyBuilderMixin(object):
 	    #TODO(nicoechaniz): see if there's a more efficient way to build this recursive template data.
 	    link_template = Template(
 	        '{% if has_content %}'
-	        '<span><a href="{% url category-teaser_list slug %}">{{ name }}</a></span>'
+	        '<span><a href="{% url \'category-teaser_list\' slug %}">{{ name }}</a></span>'
 	        '{% else %} {{ name }}'
 	        '{% endif %}'
-	        ' <a href="{% url category_feed slug %}">'
+	        ' <a href="{% url \'category_feed\' slug %}">'
 	        '<img src="{{ media_url }}images/css/rss_logo.png"/></a>'
 	        )
 	    nested_list = []
