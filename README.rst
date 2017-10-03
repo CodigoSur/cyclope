@@ -1,5 +1,12 @@
-CyclopeCMS
+¡Good bye!
 ========
+
+The CyclopeCMS project is no longer under development. Thanks to everyone who has participated and supported this project over the years.
+
+________
+
+CyclopeCMS
+=======
 
 CyclopeCMS is a Content Management System developed by CódigoSur with organizations and social movements in Latin America since 2002. CyclopeCMS is a CMS, based on Django and made for pythonistas who don't mind coding a bit and dislike overly-complex user interfaces. 
 
@@ -26,7 +33,7 @@ Target audience
 
 3. Content editors:
 
-    Can create content and categories via a customized Django admin interface, integrating the different content types and collections available in the website.
+    Can create content and categories via a customized Django admin interface, integrating the different content types and https://github.com/CodigoSur/cyclope/edit/development/README.rstcollections available in the website.
 
 
 Installation
