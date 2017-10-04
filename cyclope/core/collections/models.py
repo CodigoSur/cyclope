@@ -260,7 +260,7 @@ class Categorization(models.Model):
                                      verbose_name=_('content type'))
     object_id = models.PositiveIntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
-    order = models.IntegerField(blank=True, null=True, db_index=True,
+    order = models.FloatField(blank=True, null=True, db_index=True,
                                 verbose_name=_('order'))
 
     objects = CategorizationManager()

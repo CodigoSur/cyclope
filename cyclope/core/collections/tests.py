@@ -28,7 +28,10 @@ from cyclope.tests import ViewableTestCase
 from models import Collection, Category, Categorization
 from cyclope.apps.articles.models import Article
 from cyclope.apps.staticpages.models import StaticPage
-
+from cyclope.utils import FunctionalTestsMixin
+from django.test import LiveServerTestCase
+from selenium import webdriver
+from selenium.webdriver import ActionChains
 
 class CategoryTestCase(ViewableTestCase):
     fixtures = ['default_users.json', 'default_groups.json', 'cyclope_demo.json']
@@ -214,3 +217,4 @@ class CategorizationManagerTests(TestCase):
 
         cats_random = Categorization.objects.get_for_category(category, sort_property="random")
         self.assertEqual(len(cats), len(cats_random))
+
