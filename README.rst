@@ -1,53 +1,33 @@
-¡Good bye!
+Adiós CyclopeCMS
 ========
 
-The CyclopeCMS project is no longer under development. Thanks to everyone who has participated and supported this project over the years.
+Luego de muchos años de desarrollo, aprendizajes y desafíos llegó el momento de decir adiós a CyclopeCMS. 
+
+Agradecemos mucho el apoyo de las organizaciones sociales que a lo largo de los años retroalimentaron el desarrollo del proyecto. Nos hemos divertido en un aprendizaje continuo. ¡Ha sido grandioso! ¡Gracias a todes! 
+
+Algunas razones por las que CyclopeCMS  no continuará su desarrollo:
+---------------
+
+1) Consumo de recursos excesivos (tiempo y dinero): El desarrollo de un proyecto de software libre actualizado y de vanguardia necesita muchos recursos económicos y humanos con los que el proyecto nunca contó.
+2) Falta de personal capacitado en la región con disponibilidad para desarrollar en Django/Python un proyecto social no lucrativo.
+3) Alta deuda técnica: el proyecto requiere de demasiado trabajo calificado para actualizarlo y carece de la documentación de desarrollo adecuada.
+4) Necesidades urgentes de las organizaciones sociales que no pueden seguir los ritmos lentos de desarrollo de un proyecto de software artesanal. 
+5) Existen otros proyectos de software libre que pueden hacer lo mismo, más y mejor.
+
+Aciertos del proyecto:
+---------------
+
+1) Haber identificado de forma temprana las necesidades de las organizaciones sociales de América Latina en materia de sitios web
+2) Generación y participación en un ecosistema de software libre amplio cuya continuidad no está sujeta al proyecto en sí
+3) La adopción de un framework de diseño responsive que permite continuidad a todos los proyectos-sitios actuales de manera precisa.
+4) La migración de datos de todos los proyectos-sitios a MariaDB en formatos estándares para ser usado por otro CMS
+5) No uso de plugins y manejo del código fuente: esta lógica será traslada para mejorar la experiencia de desarrollo con otros CMS. 
 
 ________
 
-CyclopeCMS
-=======
-
-CyclopeCMS is a Content Management System developed by CódigoSur with organizations and social movements in Latin America since 2002. CyclopeCMS is a CMS, based on Django and made for pythonistas who don't mind coding a bit and dislike overly-complex user interfaces. 
-
-:copyright: 2010-2017 by `Código Sur Sociedad Civil <https://www.codigosur.org>`_
-:url: https://cyclope.codigosur.org
-:licence: GPL v3
-
-Target audience
----------------
-
-``CyclopeCMS`` is developed with three different audiences in mind:
-
-1. Developers:
-
-    We created ``CyclopeCMS`` thinking of those developers that actually like to code in their language of choice: Python. They don't really look for a product that will let them accomplish even the most complex stuff from a web-based UI.
-
-    We aim at providing developers with the tools necessary to build sites quickly, exposing their content types and views for site managers to work with in the admin interface.
-
-    Custom created content types and views can easily be packed in modules for drop-in re-utilization.
-
-2. Site managers:
-
-    Use the Django admin interface to set up the website global settings, theme, layouts, menus, and categories.
-
-3. Content editors:
-
-    Can create content and categories via a customized Django admin interface, integrating the different content types and https://github.com/CodigoSur/cyclope/edit/development/README.rstcollections available in the website.
-
-
-Installation
+Otros CMS con mayor desarrollo:
 ------------
 
-To install in a virtualenv just ``pip install cyclope3``.
-Then, create a new Django project using ``cyclopeproject`` or start a project based on the basic template.
-
-For detailed instructions please visit our `Installation Guide in Spanish <https://github.com/CodigoSur/cyclope/wiki/Gu%C3%ADa-de-instalaci%C3%B3n>`_
-
-
-Contact and Support
--------------------
-
-If you need to contact the development team you can reach us by e-mail on our `mailing list <https://listas.codigosur.org/mailman/listinfo/cyclopegpl>`_.
-
-
+- Wordpress https://github.com/WordPress/WordPress (PHP)
+- Nikola https://github.com/getnikola/nikola (Estático)
+- Django-CMS https://github.com/divio/django-cms (Python)
